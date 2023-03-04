@@ -5,5 +5,3 @@ There are pipelines available for analysis of long-read data such as [nf-core/na
 ## Overview
 
 ![Pipeline Overview](docs/images/skierfe_concept.excalidraw.png "Pipeline Overview")
-
-## Documentation
