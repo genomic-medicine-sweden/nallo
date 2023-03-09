@@ -1,5 +1,20 @@
 # Documentation
 
+## Input samplesheet
+No header, 
+```
+pt_001,/path/to/pt_001.bam,/path/to/pt_001.bai
+```
+
+### Extra SNFs sample_sheet 
+If you have extra SNF files for Sniffles multi-calling, add an extra sheet with `--extra_snfs`
+
+No header (important last comma to have an empty third column - not ideal) 
+```
+pt_002,/path/to/pt_002.snf,
+```
+
+
 ## Example `samplesheet.csv`
 
 ```
