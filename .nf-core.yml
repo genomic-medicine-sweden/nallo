@@ -13,3 +13,4 @@ lint:
   - manifest.homePage
   multiqc_config:
   - report_comment
+  pipeline_name_conventions: fellen31
