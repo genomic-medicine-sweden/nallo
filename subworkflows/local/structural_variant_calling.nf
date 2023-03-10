@@ -16,8 +16,6 @@ workflow STRUCTURAL_VARIANT_CALLING {
   ch_sv_calls_vcf = Channel.empty()
 
   SNIFFLES_SINGLE_SAMPLE( ch_bam_bai )
-  
-  SNIFFLES_SINGLE_SAMPLE.out.sv_snf.map{it[1]}.collect().sort { it.name }.concat(ch_snfs.map{it[1]}).view()
   SNIFFLES_MULTI_SAMPLE( SNIFFLES_SINGLE_SAMPLE.out.sv_snf.map{it[1]}.collect().concat(ch_snfs.map{it[1]}).collect())
   
   ch_sv_calls_vcf = SNIFFLES_MULTI_SAMPLE.out.multisample_vcf

@@ -1,9 +1,13 @@
 process SNIFFLES_SINGLE_SAMPLE {
 
   tag "$sampleId"
-  container = 'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0'
+  container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+  'https://depot.galaxyproject.org/singularity/sniffles:2.0.7--pyhdfd78af_0' :
+  'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
+  
   publishDir 'data/interim/sv-calling/sniffles/', mode: 'copy'
-  cpus = 16
+  cpus = 8
+  time '1h'
 
   input:
     tuple val(sampleId), path(reads), path(index)
