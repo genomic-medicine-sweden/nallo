@@ -1,4 +1,4 @@
-// [![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
+<!-- [![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
 
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A522.10.1-23aa62.svg)](https://www.nextflow.io/)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
@@ -20,11 +20,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-1. Structural variant calling ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-  - Singe-sample calling
-  - Multi-sample joint genotyping 
-2. Short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
-  - Merging and joint variant calling with [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus)
+1. ...
+2. Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+3. Singe-sample short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
+4. Merge and joint variant short variant calling ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+5. ...
 
 ## Quick Start
 
@@ -32,10 +32,10 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 2. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
 
-3. Download the pipeline and test it on a minimal dataset with a single command:
+3. Download the pipeline ~~and test it on a minimal dataset~~ with a single command:
 
    ```bash
-   nextflow run fellen31/skierfe -profile test,YOURPROFILE --outdir <OUTDIR>
+   nextflow run fellen31/skierfe -profile YOURPROFILE --outdir <OUTDIR>
    ```
 
    Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
