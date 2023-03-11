@@ -15,7 +15,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 <!-- TODO nf-core: Add full-sized test dataset and amend the paragraph below if applicable -->
 
 
-// On release, automated continuous integration tests run the pipeline on a full-sized dataset on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources.
+<!-- On release, automated continuous integration tests run the pipeline on a full-sized dataset on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources.
+--> 
 
 ## Pipeline summary
 
@@ -50,11 +51,13 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
    nextflow run fellen31/skierfe --input samplesheet.csv -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
    ```
 
+<!--
 ## Credits
 
 fellen31/skierfe was originally written by Felix Lenner.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
+-->
 
 ## Contributions and Support
 
