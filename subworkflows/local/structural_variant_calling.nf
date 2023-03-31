@@ -4,33 +4,35 @@
 //               https://nf-co.re/join
 // TODO nf-core: A subworkflow SHOULD import at least two modules
 
-include { SAMTOOLS_SORT      } from '../../../modules/nf-core/samtools/sort/main'
-include { SAMTOOLS_INDEX     } from '../../../modules/nf-core/samtools/index/main'
+include { SNIFFLES_SINGLESAMPLE      } from '../../modules/local/sniffles/singlesample'
+include { SNIFFLES_MULTISAMPLE      } from '../../modules/local/sniffles/multisample'
 
 workflow STRUCTURAL_VARIANT_CALLING {
 
     take:
     // TODO nf-core: edit input (take) channels
-    ch_bam // channel: [ val(meta), [ bam ] ]
+    ch_bam_bai // channel: [ val(meta), [[ bam ], [bai]] ]
+    ch_snfs
+    ch_fasta
 
     main:
+    
+    ch_sv_calls_vcf = Channel.empty()
+    ch_versions     = Channel.empty()
+    
+    SNIFFLES_SINGLESAMPLE( ch_bam_bai.combine(ch_fasta.map {it [1] }) )
+    //SNIFFLES_SINGLESAMPLE.out.sv_snf.concat(ch_snfs).toSortedList({ a, b -> b[1] <=> a[1] }).view()
+    SNIFFLES_MULTISAMPLE( SNIFFLES_SINGLESAMPLE.out.sv_snf.map { it [1] }.concat(ch_snfs.map { it[1] }).collect().sort { it.name } )
 
-    ch_versions = Channel.empty()
+    ch_versions = ch_versions.mix(SNIFFLES_SINGLESAMPLE.out.versions)
+    ch_versions = ch_versions.mix(SNIFFLES_MULTISAMPLE.out.versions)
+    
+    ch_sv_calls_vcf = SNIFFLES_MULTISAMPLE.out.multisample_vcf
 
-    // TODO nf-core: substitute modules here for the modules of your subworkflow
-
-    SAMTOOLS_SORT ( ch_bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
-
-    SAMTOOLS_INDEX ( SAMTOOLS_SORT.out.bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
 
     emit:
-    // TODO nf-core: edit emitted channels
-    bam      = SAMTOOLS_SORT.out.bam           // channel: [ val(meta), [ bam ] ]
-    bai      = SAMTOOLS_INDEX.out.bai          // channel: [ val(meta), [ bai ] ]
-    csi      = SAMTOOLS_INDEX.out.csi          // channel: [ val(meta), [ csi ] ]
-
-    versions = ch_versions                     // channel: [ versions.yml ]
+    ch_sv_calls_vcf
+    
+    versions = ch_versions                  // channel: [ versions.yml ]
 }
 

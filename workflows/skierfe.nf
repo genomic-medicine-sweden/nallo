@@ -16,9 +16,28 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 
 // Check mandatory parameters
 if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
 
+ch_fasta = ch_fasta.map { it -> [it.simpleName, it] }
+         .groupTuple()
+
+params.extra_snfs = 'some_value'
+params.extra_gvcfs = 'some_value'
+
+if (params.extra_snfs) {
+    ch_input_snfs = file(params.extra_snfs)
+} else {
+    ch_input_snfs = Channel.empty()
+}
+
+if (params.extra_gvcfs) {
+    ch_input_gvcfs = file(params.extra_gvcfs)
+} else {
+    ch_input_gvcfs = Channel.empty()
+}
 /*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:w
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     CONFIG FILES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
@@ -38,6 +57,14 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 include { INPUT_CHECK } from '../subworkflows/local/input_check'
+include { SNFS_CHECK  } from '../subworkflows/local/snfs_check.nf'
+include { SNFS_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/snfs_check.nf'
+include { SNFS_CHECK as GVCFS_CHECK } from '../subworkflows/local/snfs_check.nf'
+
+include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome.nf'
+include { ALIGN_READS } from '../subworkflows/local/align_reads.nf'
+include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
+include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +75,6 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -64,22 +90,38 @@ def multiqc_report = []
 workflow SKIERFE {
 
     ch_versions = Channel.empty()
+    ch_sample = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK (
-        ch_input
-    )
-    ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
-    //
-    // MODULE: Run FastQC
-    //
-    FASTQC (
-        INPUT_CHECK.out.reads
-    )
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    INPUT_FASTQ_CHECK ( ch_input )
+        .ch_sample.set { ch_sample }
+
+    //INPUT_CHECK ( ch_input )
+    //    .ch_sample.set { ch_sample }
+    
+    SNFS_CHECK ( ch_input_snfs )
+        .ch_sample.set { ch_extra_snfs }
+       
+    GVCFS_CHECK ( ch_input_gvcfs )
+        .ch_sample.set { ch_extra_gvcfs }
+
+    //ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
+    ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
+    
+    PREPARE_GENOME ( ch_fasta )
+    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
+    
+    ALIGN_READS ( ch_sample, ch_fasta )
+    ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
+    
+    STRUCTURAL_VARIANT_CALLING ( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
+    ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
+    
+    SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai )
+    ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
@@ -98,7 +140,7 @@ workflow SKIERFE {
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+    //ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
     MULTIQC (
         ch_multiqc_files.collect(),

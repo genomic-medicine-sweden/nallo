@@ -11,25 +11,24 @@
 // TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
 //               list (`[]`) instead of a file can be used to work around this issue.
 
-process SNIFFLES_SINGLESAMPLE {
+process PBMM2_ALIGN {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_high'
 
-    conda "bioconda::sniffles=2.0.7"
+    conda "bioconda::pbmm2=1.10.0"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/sniffles:2.0.7--pyhdfd78af_0':
-        'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
+        'https://depot.galaxyproject.org/singularity/pbmm2:1.10.0--h9ee0642_0':
+        'quay.io/biocontainers/pbmm2:1.10.0--h9ee0642_0'}"
 
-    publishDir 'data/interim/sniffles/singlesample/'
+    publishDir 'data/interim/aligned_reads/pbmm2'
 
 
     input:
-    tuple val(meta), path(bam), path(bai), path(fasta)
+    tuple val(meta), path(fastq), path(mmi)
 
     output:
-    tuple val(meta), path("*_sniffles.vcf"), emit: sv_vcf
-    tuple val(meta), path("*_sniffles.snf"), emit: sv_snf
-    path "versions.yml"                    , emit: versions
+    tuple val(meta), path("*.bam"), path("*.bai"), emit: bam_bai
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -38,17 +37,11 @@ process SNIFFLES_SINGLESAMPLE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    sniffles \\
-        --input ${bam} \\
-        --vcf ${meta.id}_sniffles.vcf \\
-        --snf ${meta.id}_sniffles.snf \\
-        --reference ${fasta} \\
-        -t ${task.cpus} \\
-        $args
+    pbmm2 align ${mmi} ${fastq} ${meta.id}.bam --preset CCS --sort -j ${task.cpus} -J 4
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        sniffles: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version: //')
+        pbmm2: \$(pbmm2 --version 2>&1 | grep pbmm2 | head -n 1 | sed 's/^.*pbmm2 //; s/ .*\$//')
     END_VERSIONS
     """
 }

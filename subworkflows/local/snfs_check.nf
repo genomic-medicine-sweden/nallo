@@ -4,7 +4,7 @@
 
 include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check'
 
-workflow INPUT_CHECK {
+workflow SNFS_CHECK {
     take:
     samplesheet // file: /path/to/samplesheet.csv
 
@@ -28,14 +28,11 @@ def create_fastq_channel(LinkedHashMap row) {
 
     // add path(s) of the fastq file(s) to the meta map
     def fastq_meta = []
-    if (!file(row.bam).exists()) {
+    if (!file(row.snf).exists()) {
         exit 1, "ERROR: Please check input samplesheet -> BAM file does not exist!\n${row.bam}"
     }
-    if (!file(row.bai).exists()) {
-        exit 1, "ERROR: Please check input samplesheet -> BAI file does not exist!\n${row.bai}"
-    }
     
-    fastq_meta = [ meta, file(row.bam), file(row.bai) ]
+    fastq_meta = [ meta, file(row.snf) ]
     
     return fastq_meta
 }

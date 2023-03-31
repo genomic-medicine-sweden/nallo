@@ -19,9 +19,7 @@ process SAMPLESHEET_CHECK {
 
     script: // This script is bundled with the pipeline, in fellen31/skierfe/bin/
     """
-    check_samplesheet.py \\
-        $samplesheet \\
-        samplesheet.valid.csv
+    mv ${samplesheet} ${samplesheet}.unchecked.csv 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

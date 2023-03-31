@@ -11,8 +11,8 @@
 // TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
 //               list (`[]`) instead of a file can be used to work around this issue.
 
-process SNIFFLES_SINGLESAMPLE {
-    tag "$meta.id"
+process SNIFFLES_MULTISAMPLE {
+    tag "sniffles_multisample"
     label 'process_medium'
 
     conda "bioconda::sniffles=2.0.7"
@@ -20,29 +20,25 @@ process SNIFFLES_SINGLESAMPLE {
         'https://depot.galaxyproject.org/singularity/sniffles:2.0.7--pyhdfd78af_0':
         'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
-    publishDir 'data/interim/sniffles/singlesample/'
-
+    publishDir 'data/interim/sniffles/multisample'
 
     input:
-    tuple val(meta), path(bam), path(bai), path(fasta)
+    path(snfs)
 
     output:
-    tuple val(meta), path("*_sniffles.vcf"), emit: sv_vcf
-    tuple val(meta), path("*_sniffles.snf"), emit: sv_snf
+    path("multisample.sniffles.vcf"), emit: multisample_vcf
     path "versions.yml"                    , emit: versions
-
+    
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    //def prefix = task.ext.prefix ?: "${meta.id}"
     """
     sniffles \\
-        --input ${bam} \\
-        --vcf ${meta.id}_sniffles.vcf \\
-        --snf ${meta.id}_sniffles.snf \\
-        --reference ${fasta} \\
+        --input ${snfs} \\
+        --vcf multisample.sniffles.vcf \\
         -t ${task.cpus} \\
         $args
 
