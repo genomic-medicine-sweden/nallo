@@ -21,9 +21,11 @@ if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, '
 ch_fasta = ch_fasta.map { it -> [it.simpleName, it] }
          .groupTuple()
 
-params.extra_snfs = 'some_value'
-params.extra_gvcfs = 'some_value'
+// Not pretty but works for now...needs initializing?
+params.extra_snfs = ''
+params.extra_gvcfs = ''
 
+// Since they are not mandatory, populate channel only if the samplesheets are provided
 if (params.extra_snfs) {
     ch_input_snfs = file(params.extra_snfs)
 } else {
@@ -35,6 +37,7 @@ if (params.extra_gvcfs) {
 } else {
     ch_input_gvcfs = Channel.empty()
 }
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,6 +59,7 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
+
 include { INPUT_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/input_check'
 include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
 include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check.nf'
@@ -74,6 +78,7 @@ include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_call
 //
 // MODULE: Installed directly from nf-core/modules
 //
+
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -92,33 +97,33 @@ workflow SKIERFE {
     ch_sample = Channel.empty()
 
     //
-    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    // SUBWORKFLOW: Read in samplesheet(s), validate and stage input files
     //
 
     INPUT_FASTQ_CHECK ( ch_input )
         .ch_sample.set { ch_sample }
 
-    //INPUT_CHECK ( ch_input )
-    //    .ch_sample.set { ch_sample }
-    
     SNFS_CHECK ( ch_input_snfs )
         .ch_sample.set { ch_extra_snfs }
        
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
 
-    //ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
-    
+   
+    // Index the genome 
     PREPARE_GENOME ( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
     
+    // Align reads with pbmm2 
     ALIGN_READS ( ch_sample, ch_fasta )
     ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
     
+    // Call SVs with Sniffles2 
     STRUCTURAL_VARIANT_CALLING ( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
     ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
     
+    // Call SNVs with DeepVariant
     SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai )
     ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
@@ -129,6 +134,7 @@ workflow SKIERFE {
     //
     // MODULE: MultiQC
     //
+
     workflow_summary    = WorkflowSkierfe.paramsSummaryMultiqc(workflow, summary_params)
     ch_workflow_summary = Channel.value(workflow_summary)
 

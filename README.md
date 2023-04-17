@@ -20,11 +20,15 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-1. ...
+1. Align reads to reference genome ([`pbmm2`](https://github.com/PacificBiosciences/pbmm2)) 
 2. Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+3. Multi-sample joint genotyping of SVs ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+- With the option of adding previously run samples for quicker analysis (via `--extra_snfs`)
 3. Singe-sample short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
 4. Merge and joint variant short variant calling ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-5. ...
+- With the option of adding previously run samples for quicker analysis (via `--extra_gvcfs`)
+5. Filtering...
+6. ...
 
 ## Quick Start
 
@@ -32,23 +36,29 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 2. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
 
-3. Download the pipeline ~~and test it on a minimal dataset~~ with a single command:
+3. Download the pipeline and ~~test it on a minimal dataset run with a single command:~~
 
    ```bash
-   nextflow run fellen31/skierfe -profile YOURPROFILE --outdir <OUTDIR>
+   nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
    ```
+
+   To run in an offline environment, download the pipeline using [`nf-core download`] (https://nf-co.re/tools/#downloading-pipelines-for-offline-use)
+
+  ```
+  nf-core download fellen31/skierfe -r dev --container singularity
+  ```
 
    Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
 
-   > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` and `conda` which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
+   > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` ~~and `conda`~~ which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
    > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
    > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
-   > - If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
+   > ~~- If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.~~
 
 4. Start running your own analysis!
 
    ```bash
-   nextflow run fellen31/skierfe --input samplesheet.csv -profile <docker/singularity/podman/shifter/charliecloud/conda/institute>
+   nextflow run fellen31/skierfe -dev -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
    ```
 
 <!--
