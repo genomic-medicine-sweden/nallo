@@ -56,13 +56,12 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
-include { INPUT_CHECK } from '../subworkflows/local/input_check'
-include { SNFS_CHECK  } from '../subworkflows/local/snfs_check.nf'
-include { SNFS_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/snfs_check.nf'
-include { SNFS_CHECK as GVCFS_CHECK } from '../subworkflows/local/snfs_check.nf'
+include { INPUT_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/input_check'
+include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
+include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check.nf'
 
-include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome.nf'
-include { ALIGN_READS } from '../subworkflows/local/align_reads.nf'
+include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
+include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
 
