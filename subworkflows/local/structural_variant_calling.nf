@@ -10,7 +10,6 @@ include { SNIFFLES_MULTISAMPLE      } from '../../modules/local/sniffles/multisa
 workflow STRUCTURAL_VARIANT_CALLING {
 
     take:
-    // TODO nf-core: edit input (take) channels
     ch_bam_bai // channel: [ val(meta), [[ bam ], [bai]] ]
     ch_snfs
     ch_fasta

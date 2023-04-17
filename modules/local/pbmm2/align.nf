@@ -22,7 +22,6 @@ process PBMM2_ALIGN {
 
     publishDir 'data/interim/aligned_reads/pbmm2'
 
-
     input:
     tuple val(meta), path(fastq), path(mmi)
 

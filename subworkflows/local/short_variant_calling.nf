@@ -16,8 +16,11 @@ workflow SHORT_VARIANT_CALLING {
   ch_extra_gvcfs = Channel.empty()
 
   ch_versions = Channel.empty()
-
+  
+  // First run DeepVariant with the aligned reads
   DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
+  
+  // Then run GlNexus to join-call genotypes (+ add previously run samples)
   GLNEXUS ( DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name } )
   
   ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
