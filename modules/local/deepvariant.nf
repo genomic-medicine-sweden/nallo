@@ -1,6 +1,6 @@
 process DEEPVARIANT {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_high'
 
     container "google/deepvariant:1.5.0"
 
