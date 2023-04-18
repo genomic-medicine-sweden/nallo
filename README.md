@@ -20,15 +20,13 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-1. Align reads to reference genome ([`pbmm2`](https://github.com/PacificBiosciences/pbmm2)) 
-2. Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-3. Multi-sample joint genotyping of SVs ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-- With the option of adding previously run samples for quicker analysis (via `--extra_snfs`)
-3. Singe-sample short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
-4. Merge and joint variant short variant calling ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-- With the option of adding previously run samples for quicker analysis (via `--extra_gvcfs`)
-5. Filtering...
-6. ...
+- Align reads to reference ([`pbmm2`](https://github.com/PacificBiosciences/pbmm2)) 
+- Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+  * With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
+- Singe-sample short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
+- Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+  * With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
+- Filtering...
 
 ## Quick Start
 
@@ -42,11 +40,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
    nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
    ```
 
-   To run in an offline environment, download the pipeline using [`nf-core download`] (https://nf-co.re/tools/#downloading-pipelines-for-offline-use)
-
-  ```
-  nf-core download fellen31/skierfe -r dev --container singularity
-  ```
+   To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
+   
+   ```
+   nf-core download fellen31/skierfe -r dev --container singularity
+   ```
 
    Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
 
