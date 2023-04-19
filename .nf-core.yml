@@ -14,3 +14,5 @@ lint:
   multiqc_config:
   - report_comment
   pipeline_name_conventions: fellen31
+  files_unchanged:
+  - .github/CONTRIBUTING.md

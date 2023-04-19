@@ -1,6 +1,6 @@
 process GLNEXUS {
     tag "glnexus_mutlisample"
-    label 'process_medium'
+    label 'process_high'
 
     container 'quay.io/mlin/glnexus:v1.2.7'
     
