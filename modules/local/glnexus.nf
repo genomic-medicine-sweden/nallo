@@ -1,5 +1,5 @@
 process GLNEXUS {
-    tag "glnexus_mutlisample"
+    tag "glnexus_multisample"
     label 'process_high'
 
     container 'quay.io/mlin/glnexus:v1.2.7'
@@ -19,10 +19,12 @@ process GLNEXUS {
     path "versions.yml",  emit: versions
     
     """
-    glnexus_cli --config DeepVariant_unfiltered --threads ${task.cpus} ${gvcfs} | bcftools view - \\
+    glnexus_cli --config DeepVariant_unfiltered --threads ${task.cpus} ${gvcfs} |\\
+    bcftools view - \\
       | bgzip -@ ${task.cpus} -c \\
       > multisample.vcf.gz
-     cat <<-END_VERSIONS > versions.yml
+    
+    cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         glnexus: \$(echo \$(glnexus_cli 2>&1) |  head -n 1 | sed 's/^.*glnexus_cli release v//; s/ .*\$//' )
     END_VERSIONS
