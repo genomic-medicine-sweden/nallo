@@ -4,12 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-def mapp_join(channel_a, channel_b, key){
-    channel_a
-        .map{ it -> [it[key], it] }
-        .cross(channel_b.map{it -> [it[key], it]})
-        .map { it[0][1] + it[1][1] }
-    }
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 // Validate input parameters
@@ -17,40 +11,25 @@ WorkflowSkierfe.initialise(params, log)
 
 // TODO nf-core: Add all file path parameters for the pipeline to the list below
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.fasta ]
+def checkPathParamList = [ params.input, params.multiqc_config, params.fasta, params.ped, params.extra_snfs, params.extra_gvcfs ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
 if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
+if (params.trio) { if (params.ped) { ch_input_ped = file(params.ped) } else { exit 1, 'Input PED-file not specified!' } }
 
-ch_fasta = ch_fasta.map { it -> [it.simpleName, it] }
-         .groupTuple()
+ch_fasta = ch_fasta
+  .map { it -> [it.simpleName, it] }
+  .groupTuple()
 
 // Not pretty but works for now...needs initializing?
 params.extra_snfs = ''
 params.extra_gvcfs = ''
 
 // Since they are not mandatory, populate channel only if the samplesheets are provided
-if (params.extra_snfs) {
-    ch_input_snfs = file(params.extra_snfs)
-} else {
-    ch_input_snfs = Channel.empty()
-}
-
-if (params.trio) {
-  if (params.ped) { 
-    ch_input_ped = file(params.ped) 
-  } else { 
-    exit 1, 'Input PED-file not specified!' 
-  }
-}
-
-if (params.extra_gvcfs) {
-    ch_input_gvcfs = file(params.extra_gvcfs)
-} else {
-    ch_input_gvcfs = Channel.empty()
-}
+if (params.extra_snfs) { ch_input_snfs = file(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
+if (params.extra_gvcfs) { ch_input_gvcfs = file(params.extra_gvcfs) } else { ch_input_gvcfs = Channel.empty() }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:w
@@ -75,16 +54,14 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 
 include { INPUT_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/input_check'
-include { PED_CHECK } from '../subworkflows/local/ped_check'
 include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
 include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
+include { PED_CHECK } from '../subworkflows/local/ped_check'
 
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
-
-include { DEEPTRIO } from '../modules/local/deeptrio'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,11 +94,6 @@ workflow SKIERFE {
     //
     // SUBWORKFLOW: Read in samplesheet(s), validate and stage input files
     //
-    if(params.trio) { 
-      PED_CHECK(ch_input_ped)
-        .ch_ped_processed
-        .set{ch_ped}
-    }
 
     INPUT_FASTQ_CHECK ( ch_input )
         .ch_sample.set { ch_sample }
@@ -131,6 +103,12 @@ workflow SKIERFE {
        
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
+    
+    if(params.trio) { 
+      PED_CHECK(ch_input_ped)
+        .ch_ped_processed
+        .set{ch_ped}
+    }
 
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
    
@@ -146,8 +124,7 @@ workflow SKIERFE {
     STRUCTURAL_VARIANT_CALLING ( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
     ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
     
-
-    // Call SNVs with DeepVariant
+    // Call SNVs with DeepVariant/DeepTrio
     SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
     ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
