@@ -4,6 +4,12 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+def mapp_join(channel_a, channel_b, key){
+    channel_a
+        .map{ it -> [it[key], it] }
+        .cross(channel_b.map{it -> [it[key], it]})
+        .map { it[0][1] + it[1][1] }
+    }
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 // Validate input parameters
@@ -30,6 +36,14 @@ if (params.extra_snfs) {
     ch_input_snfs = file(params.extra_snfs)
 } else {
     ch_input_snfs = Channel.empty()
+}
+
+if (params.trio) {
+  if (params.ped) { 
+    ch_input_ped = file(params.ped) 
+  } else { 
+    exit 1, 'Input PED-file not specified!' 
+  }
 }
 
 if (params.extra_gvcfs) {
@@ -61,13 +75,16 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 
 include { INPUT_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/input_check'
+include { PED_CHECK } from '../subworkflows/local/ped_check'
 include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
-include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check.nf'
+include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
 
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
+
+include { DEEPTRIO } from '../modules/local/deeptrio'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,10 +112,16 @@ workflow SKIERFE {
 
     ch_versions = Channel.empty()
     ch_sample = Channel.empty()
+    ch_ped = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet(s), validate and stage input files
     //
+    if(params.trio) { 
+      PED_CHECK(ch_input_ped)
+        .ch_ped_processed
+        .set{ch_ped}
+    }
 
     INPUT_FASTQ_CHECK ( ch_input )
         .ch_sample.set { ch_sample }
@@ -123,8 +146,9 @@ workflow SKIERFE {
     STRUCTURAL_VARIANT_CALLING ( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
     ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
     
+
     // Call SNVs with DeepVariant
-    SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai )
+    SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
     ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
     CUSTOM_DUMPSOFTWAREVERSIONS (

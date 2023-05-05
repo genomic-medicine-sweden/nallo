@@ -20,7 +20,6 @@ workflow STRUCTURAL_VARIANT_CALLING {
     ch_versions     = Channel.empty()
     
     SNIFFLES_SINGLESAMPLE( ch_bam_bai.combine(ch_fasta.map {it [1] }) )
-    //SNIFFLES_SINGLESAMPLE.out.sv_snf.concat(ch_snfs).toSortedList({ a, b -> b[1] <=> a[1] }).view()
     SNIFFLES_MULTISAMPLE( SNIFFLES_SINGLESAMPLE.out.sv_snf.map { it [1] }.concat(ch_snfs.map { it[1] }).collect().sort { it.name } )
 
     ch_versions = ch_versions.mix(SNIFFLES_SINGLESAMPLE.out.versions)
