@@ -59,6 +59,9 @@ include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
 include { PED_CHECK } from '../subworkflows/local/ped_check'
 
 
+include { ASSEMBLY } from '../subworkflows/local/genome_assembly'
+include { VARIANT_CALLING_ASSEMBLY } from '../subworkflows/local/variant_calling_assembly'
+
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
@@ -112,6 +115,10 @@ workflow SKIERFE {
     }
 
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
+
+    //Hifiasm assembly
+    ASSEMBLY ( ch_sample )
+    ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
    
     //FASTQC
     FASTQC( ch_sample )
@@ -120,7 +127,11 @@ workflow SKIERFE {
     // Index the genome 
     PREPARE_GENOME ( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-    
+   
+    // Run dipcall
+    VARIANT_CALLING_ASSEMBLY ( ASSEMBLY.out.assembled_haplotypes, PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fai )
+    ch_versions = ch_versions.mix(VARIANT_CALLING_ASSEMBLY.out.versions)
+
     // Align reads with pbmm2 
     ALIGN_READS ( ch_sample, ch_fasta )
     ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
