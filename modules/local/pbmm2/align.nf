@@ -26,7 +26,7 @@ process PBMM2_ALIGN {
     tuple val(meta), path(fastq), path(mmi)
 
     output:
-    tuple val(meta), path("*.bam"), path("*.bai"), emit: bam_bai
+    tuple val(meta), path("${meta.id}.bam"), path("${meta.id}.bam.bai"), emit: bam_bai
     path "versions.yml"           , emit: versions
 
     when:
