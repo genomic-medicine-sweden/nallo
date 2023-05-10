@@ -4,7 +4,9 @@
 //               https://nf-co.re/join
 // TODO nf-core: A subworkflow SHOULD import at least two modules
 
-include { PBMM2_ALIGN } from '../../modules/local/pbmm2/align'
+include { MINIMAP2_INDEX } from '../../modules/nf-core/minimap2/index/main'
+include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_INDEX } from '../../modules/nf-core/samtools/index/main.nf'
 
 workflow ALIGN_READS {
 
@@ -16,17 +18,18 @@ workflow ALIGN_READS {
     main:
 
     ch_versions = Channel.empty()
-
-    // TODO nf-core: substitute modules here for the modules of your subworkflow
-
-    PBMM2_ALIGN ( ch_fastq.combine(ch_fasta.map { it[1] }) )
-    ch_versions = ch_versions.mix(PBMM2_ALIGN.out.versions.first())
-
     
-    emit:
-    // TODO nf-core: edit emitted channels
-    bam_bai = PBMM2_ALIGN.out.bam_bai
+    MINIMAP2_INDEX( ch_fasta )
+    ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions.first())
+    
+    MINIMAP2_ALIGN( ch_fastq.combine(MINIMAP2_INDEX.out.index.map{ it[1] }), true, false, false)
 
+    ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first())
+
+    SAMTOOLS_INDEX ( MINIMAP2_ALIGN.out.bam )
+
+    emit:
+    bam_bai = MINIMAP2_ALIGN.out.bam.concat(SAMTOOLS_INDEX.out.bai).groupTuple().flatten().collate(3) // channel: [ [meta], bam, bai]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
 
