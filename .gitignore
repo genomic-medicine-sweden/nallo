@@ -1,3 +1,4 @@
+.gitignore
 .nextflow*
 work/
 data/
@@ -6,3 +7,5 @@ results/
 testing/
 testing*
 *.pyc
+*.csv
+*.ped
