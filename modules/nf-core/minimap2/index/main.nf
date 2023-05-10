@@ -4,7 +4,7 @@ process MINIMAP2_INDEX {
     // Note: the versions here need to match the versions used in minimap2/align
     conda "bioconda::minimap2=2.26"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/2.26--h7132678_0' :
+        'https://depot.galaxyproject.org/singularity/minimap2:2.26--h7132678_0' :
         'quay.io/biocontainers/minimap2:2.26--h7132678_0' }"
 
     input:
