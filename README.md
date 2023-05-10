@@ -23,7 +23,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2)) 
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
   * With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
-- Singe-sample/Trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant))
+- Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant))
 - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
   * With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
 - Filtering...

@@ -11,7 +11,6 @@ workflow PREPARE_GENOME {
     ch_versions = Channel.empty()
 
     SAMTOOLS_FAIDX ( ch_fasta )
-    SAMTOOLS_FAIDX.out.fai.view()
     ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions.first())
 
     emit:
