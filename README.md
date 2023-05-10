@@ -20,7 +20,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-- Align reads to reference ([`pbmm2`](https://github.com/PacificBiosciences/pbmm2)) 
+- Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2)) 
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
   * With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
 - Singe-sample short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
