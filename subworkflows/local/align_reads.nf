@@ -28,8 +28,13 @@ workflow ALIGN_READS {
 
     SAMTOOLS_INDEX ( MINIMAP2_ALIGN.out.bam )
 
+    MINIMAP2_ALIGN.out.bam
+    .concat(SAMTOOLS_INDEX.out.bai)
+    .groupTuple().flatten().collate(3)
+    .set{ch_bam_bai}
+
     emit:
-    bam_bai = MINIMAP2_ALIGN.out.bam.concat(SAMTOOLS_INDEX.out.bai).groupTuple().flatten().collate(3) // channel: [ [meta], bam, bai]
+    bam_bai = ch_bam_bai // channel: [ [meta], bam, bai]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
 

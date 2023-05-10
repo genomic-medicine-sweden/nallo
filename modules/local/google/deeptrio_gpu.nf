@@ -1,8 +1,8 @@
-process DEEPTRIO {
+process DEEPTRIO_GPU {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_gpu'
     
-    container "google/deepvariant:deeptrio-1.4.0"
+    container "google/deepvariant:deeptrio-1.4.0-gpu"
 
     // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
@@ -17,8 +17,8 @@ process DEEPTRIO {
     output:
     tuple val(meta), path("*.{kid,dad,mom}.vcf.gz"),  emit: vcf
     tuple val(meta), path("*.{kid,dad,mom}.g.vcf.gz"),  emit: gvcf
-    path "versions.yml"                        ,  emit: versions
     path "*.html", emit: html
+    path "versions.yml"                        ,  emit: versions
 
     when:
     task.ext.when == null || task.ext.when

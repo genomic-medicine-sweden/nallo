@@ -58,6 +58,7 @@ include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
 include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
 include { PED_CHECK } from '../subworkflows/local/ped_check'
 
+
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
@@ -72,7 +73,7 @@ include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_call
 //
 // MODULE: Installed directly from nf-core/modules
 //
-
+include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -112,6 +113,10 @@ workflow SKIERFE {
 
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
    
+    //FASTQC
+    FASTQC( ch_sample )
+    ch_versions = ch_versions.mix(FASTQC.out.versions)
+
     // Index the genome 
     PREPARE_GENOME ( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -146,7 +151,7 @@ workflow SKIERFE {
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
-    //ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
     MULTIQC (
         ch_multiqc_files.collect(),

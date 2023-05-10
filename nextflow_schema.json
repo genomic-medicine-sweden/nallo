@@ -283,5 +283,11 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "gpu": {
+            "type": "boolean",
+            "description": "Deepvariant/Deeptrio should use GPU."
+        }
+    }
 }

@@ -1,8 +1,8 @@
-process DEEPVARIANT {
+process DEEPVARIANT_GPU {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_gpu'
 
-    container "google/deepvariant:1.5.0"
+    container "google/deepvariant:1.5.0-gpu"
 
     // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
