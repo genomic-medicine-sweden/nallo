@@ -20,7 +20,12 @@
                     "gfastats": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+<<<<<<< HEAD
                         "installed_by": ["modules"]
+=======
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/gfastats/gfastats.diff"
+>>>>>>> 0df6a28 (Add dipcall as process)
                     },
                     "hifiasm": {
                         "branch": "master",
@@ -58,6 +63,11 @@
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "samtools/sort": {
+                        "branch": "master",
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "installed_by": ["modules"]
+                    },
+                    "seqtk/seq": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
