@@ -17,8 +17,6 @@ body:
         to launch the pipeline and the output from your terminal.
       render: console
       placeholder: "$ nextflow run ...
-
-
         Some output where something broke
 
         "
