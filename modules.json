@@ -25,8 +25,9 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046",
-                        "installed_by": ["modules"]
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
                     "minimap2/align": {
                         "branch": "master",
@@ -59,11 +60,6 @@
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "samtools/sort": {
-                        "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
-                    },
-                    "seqtk/seq": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
