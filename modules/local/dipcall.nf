@@ -1,5 +1,4 @@
 //TODO: Mapper choice
-
 process DIPCALL {
     tag "$meta.id"
     label 'process_high'
@@ -88,7 +87,6 @@ process DIPCALL {
     END_VERSIONS
     """
     } else {
-        println meta.id
         error "Sex needs to be either '1' or '2'"
     }
 }

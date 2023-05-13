@@ -26,6 +26,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant))
 - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
   * With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
+- Assemble haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+- Call variants ([`dipcall`](https://github.com/lh3/dipcall)) (NOTE: Make sure chrY PAR is hard masked in reference)
+
 - Filtering...
 
 ## Quick Start

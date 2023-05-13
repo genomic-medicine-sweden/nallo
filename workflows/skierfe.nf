@@ -119,7 +119,8 @@ workflow SKIERFE {
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
 
     //Hifiasm assembly
-    ASSEMBLY ( ch_sample)
+    ASSEMBLY ( ch_sample, ch_ped )
+
     ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
    
     //FASTQC
