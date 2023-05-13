@@ -18,6 +18,8 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
 if (params.trio) { if (params.ped) { ch_input_ped = file(params.ped) } else { exit 1, 'Input PED-file not specified!' } }
+// TODO: Should be required only if running DIPCALL
+if (params.par) { ch_par = Channel.fromPath(params.par) } else { exit 1, 'Input PAR-file not specified!' }
 
 ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }
@@ -58,6 +60,9 @@ include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
 include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
 include { PED_CHECK } from '../subworkflows/local/ped_check'
 
+
+include { ASSEMBLY } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING } from '../subworkflows/local/assembly_variant_calling'
 
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
@@ -112,6 +117,11 @@ workflow SKIERFE {
     }
 
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
+
+    //Hifiasm assembly
+    ASSEMBLY ( ch_sample, ch_ped )
+
+    ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
    
     //FASTQC
     FASTQC( ch_sample )
@@ -120,9 +130,13 @@ workflow SKIERFE {
     // Index the genome 
     PREPARE_GENOME ( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-    
+   
+    // Run dipcall
+    ASSEMBLY_VARIANT_CALLING ( ASSEMBLY.out.assembled_haplotypes, PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fai, PREPARE_GENOME.out.mmi, ch_ped, ch_par )
+    ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+
     // Align reads with pbmm2 
-    ALIGN_READS ( ch_sample, ch_fasta )
+    ALIGN_READS ( ch_sample, PREPARE_GENOME.out.mmi )
     ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
     
     // Call SVs with Sniffles2 
