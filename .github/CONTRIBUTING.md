@@ -41,10 +41,10 @@ If any failures or warnings are encountered, please follow the listed URL for mo
 
 This is not an `nf-core` pipeline.
 
->~~Each `nf-core` pipeline should be set up with a minimal set of test-data.
->`GitHub Actions` then runs the pipeline on this data to ensure that it exits successfully.
->If there are any failures then the automated tests fail.
->These tests are run both with the latest available version of `Nextflow` and also the minimum required version that is stated in the pipeline code.~~
+> ~~Each `nf-core` pipeline should be set up with a minimal set of test-data.
+> `GitHub Actions` then runs the pipeline on this data to ensure that it exits successfully.
+> If there are any failures then the automated tests fail.
+> These tests are run both with the latest available version of `Nextflow` and also the minimum required version that is stated in the pipeline code.~~
 
 ## Patch
 

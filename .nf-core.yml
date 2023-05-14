@@ -1,24 +1,24 @@
 repository_type: pipeline
 lint:
   files_exist:
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-skierfe_logo_light.png
-  - docs/images/nf-core-skierfe_logo_light.png
-  - docs/images/nf-core-skierfe_logo_dark.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/awstest.yml
-  - .github/workflows/awsfulltest.yml
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
   nextflow_config:
-  - manifest.name
-  - manifest.homePage
+    - manifest.name
+    - manifest.homePage
   multiqc_config:
-  - report_comment
+    - report_comment
   pipeline_name_conventions: fellen31
   files_unchanged:
-  - .github/CONTRIBUTING.md
-  - .github/ISSUE_TEMPLATE/bug_report.yml
-  - .github/PULL_REQUEST_TEMPLATE.md
-  - assets/email_template.txt
-  - assets/sendmail_template.txt
-  - docs/README.md
-  - lib/NfcoreTemplate.groovy
+    - .github/CONTRIBUTING.md
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - assets/email_template.txt
+    - assets/sendmail_template.txt
+    - docs/README.md
+    - lib/NfcoreTemplate.groovy

@@ -6,7 +6,6 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Nextflow Tower](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Nextflow%20Tower-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/fellen31/skierfe)
 
-
 ## Introduction
 
 **fellen31/skierfe** is a bioinformatics analysis pipeline for long-read rare disease SV/SNV identification. Heavily influenced by best-practice analysis pipelines such as [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease) and the [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake).
@@ -15,18 +14,17 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 <!-- TODO nf-core: Add full-sized test dataset and amend the paragraph below if applicable -->
 
-
 <!-- On release, automated continuous integration tests run the pipeline on a full-sized dataset on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources.
---> 
+-->
 
 ## Pipeline summary
 
-- Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2)) 
+- Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2))
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-  * With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
+  - With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
 - Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant))
 - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-  * With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
+  - With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
 - Assemble haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
 - Call variants ([`dipcall`](https://github.com/lh3/dipcall)) (NOTE: Make sure chrY PAR is hard masked in reference)
 
@@ -49,7 +47,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
    ```
 
    To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
-   
+
    ```
    nf-core download fellen31/skierfe -r dev --container singularity
    ```
