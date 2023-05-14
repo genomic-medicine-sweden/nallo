@@ -30,7 +30,7 @@ input:
       type: string
       description: Output format (fasta, fastq, gfa)
   - genome_size:
-      type: number
+      type: float
       description: estimated genome size (bp) for NG* statistics (optional).
   - target:
       type: string

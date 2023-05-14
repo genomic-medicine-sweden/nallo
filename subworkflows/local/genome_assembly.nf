@@ -1,4 +1,4 @@
-include { HIFIASM                       } from '../../modules/nf-core/hifiasm/main'
+include { HIFIASM                       } from '../../modules/local/hifiasm'
 include { YAK as YAK_PATERNAL           } from '../../modules/local/yak'
 include { YAK as YAK_MATERNAL           } from '../../modules/local/yak'
 include { GFASTATS as GFASTATS_MATERNAL } from '../../modules/nf-core/gfastats/main'

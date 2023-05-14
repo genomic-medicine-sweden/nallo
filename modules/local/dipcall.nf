@@ -4,7 +4,7 @@ process DIPCALL {
     label 'process_high'
 
     conda "bioconda::dipcall=0.3"
-    container 'quay.io/biocontainers/dipcall:0.3--0'
+    container 'biocontainers/dipcall:0.3--0'
     
     // This is bad but I don't know where it's going wrong, a test dataset is really needed for this process
     // Could change to a subworkflow as well...
@@ -16,9 +16,10 @@ process DIPCALL {
     tuple val(meta), path(haplotype_1), path(haplotype_2), path(reference), path(fai), path(mmi), path(par), val(sex)
 
     output:
-    tuple val(meta), path("*.dip.vcf.gz")     , emit: variant_calls
-    tuple val(meta), path("*.dip.bed"), emit: confident_regions
-    path "versions.yml"                   , emit: versions
+    tuple val(meta), path("*.dip.vcf.gz"), emit: variant_calls
+    tuple val(meta), path("*.dip.bed")   , emit: confident_regions
+    path "versions.yml"                  , emit: versions
+    //TODO: Add all outputs
 
     when:
     task.ext.when == null || task.ext.when

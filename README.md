@@ -42,7 +42,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 <!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
      Explain what rows and columns represent. For instance (please edit as appropriate):
 
-<<<<<<< HEAD
 3. Download the pipeline and ~~test it on a minimal dataset run with a single command:~~
 
    ```bash
