@@ -11,7 +11,14 @@ WorkflowSkierfe.initialise(params, log)
 
 // TODO nf-core: Add all file path parameters for the pipeline to the list below
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.fasta, params.ped, params.extra_snfs, params.extra_gvcfs ]
+def checkPathParamList = [ params.input, 
+                           params.multiqc_config, 
+                           params.fasta, 
+                           params.ped, 
+                           params.extra_snfs, 
+                           params.extra_gvcfs,
+                           params.dipcall_par]
+
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
@@ -19,7 +26,7 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
 if (params.trio) { if (params.ped) { ch_input_ped = file(params.ped) } else { exit 1, 'Input PED-file not specified!' } }
 // TODO: Should be required only if running DIPCALL
-if (params.par) { ch_par = Channel.fromPath(params.par) } else { exit 1, 'Input PAR-file not specified!' }
+if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
 
 ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }

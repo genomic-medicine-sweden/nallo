@@ -1,11 +1,6 @@
 // Is this the best way?
-if(params.gpu) {
-  include { DEEPVARIANT_GPU as DEEPVARIANT } from '../../modules/local/google/deepvariant_gpu'
-  include { DEEPTRIO_GPU as DEEPTRIO } from '../../modules/local/google/deeptrio_gpu'
-} else {
-  include { DEEPVARIANT as DEEPVARIANT } from '../../modules/local/google/deepvariant'
-  include { DEEPTRIO as DEEPTRIO } from '../../modules/local/google/deeptrio'
-}
+include { DEEPVARIANT as DEEPVARIANT } from '../../modules/local/google/deepvariant'
+include { DEEPTRIO as DEEPTRIO } from '../../modules/local/google/deeptrio'
 
 include { FIX_TRIO } from '../../modules/local/fix_trio'
 include { GLNEXUS } from '../../modules/local/glnexus'

@@ -63,6 +63,11 @@
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
                     "fa_icon": "far fa-file-code"
                 },
+                "dipcall_par": {
+                    "type": "string",
+                    "description": "Provide a bed file of chrX PAR regions for dipcall",
+                    "format": "file-path"
+                },
                 "igenomes_base": {
                     "type": "string",
                     "format": "directory-path",
@@ -264,6 +269,27 @@
                     "description": "Show all params when using `--help`",
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
+                },
+                "trio": {
+                    "type": "boolean",
+                    "description": "Run Hifiasm and DeepVariant in trio mode"
+                },
+                "ped": {
+                    "type": "string",
+                    "description": "Privide a PED-file for trios",
+                    "format": "file-path"
+                },
+                "extra_gvcfs": {
+                    "type": "string",
+                    "default": "None",
+                    "format": "file-path",
+                    "description": "Extra input files for GLNexus"
+                },
+                "extra_snfs": {
+                    "type": "string",
+                    "default": "None",
+                    "format": "file-path",
+                    "description": "Extra input files for Sniffles"
                 }
             }
         }
@@ -284,11 +310,5 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ],
-    "properties": {
-        "gpu": {
-            "type": "boolean",
-            "description": "Deepvariant/Deeptrio should use GPU."
-        }
-    }
+    ]
 }

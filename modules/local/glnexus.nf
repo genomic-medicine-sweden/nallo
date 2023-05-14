@@ -2,21 +2,19 @@ process GLNEXUS {
     tag "glnexus_multisample"
     label 'process_high'
 
-    container 'mlin/glnexus:v1.2.7'
+    container 'quay.io/mlin/glnexus:v1.2.7'
     
      // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
         exit 1, "DEEPVARIANT module does not support Conda. Please use Docker / Singularity / Podman instead."
     }
-    
-    publishDir 'data/interim/short_variant_calling/glnexus'
-    
+ 
     input:
     path(gvcfs)
 
     output:
-    path("*.vcf.gz"),  emit: multisample_bcf
-    path "versions.yml",  emit: versions
+    path "*.vcf.gz"    , emit: multisample_bcf
+    path "versions.yml", emit: versions
     
     """
     glnexus_cli --config DeepVariant_unfiltered --threads ${task.cpus} ${gvcfs} |\\

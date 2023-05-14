@@ -7,7 +7,7 @@ report_section_order:
     order: -1000
   software_versions:
     order: -1001
-  "nf-core-skierfe-summary":
+  "fellen31-skierfe-summary":
     order: -1002
 
 export_plots: true
