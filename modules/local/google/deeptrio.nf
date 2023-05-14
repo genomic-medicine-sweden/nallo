@@ -9,14 +9,15 @@ process DEEPTRIO {
         exit 1, "DEEPVARIANT module does not support Conda. Please use Docker / Singularity / Podman instead."
     }
 
-    publishDir 'data/interim/short_variant_calling/deeptrio'
-
     input:
-    tuple val(meta), path(fasta), path(fai), path(files)
+    tuple val(meta), path(individual_bam), path(individual_bai), path(fasta), path(fai)
+    tuple val(meta), path(paternal_bam), path(paternal_bai)
+    tuple val(meta), path(maternal_bam), path(maternal_bai)
+    val model_type
 
     output:
-    tuple val(meta), path("*.{kid,dad,mom}.vcf.gz"),  emit: vcf
-    tuple val(meta), path("*.{kid,dad,mom}.g.vcf.gz"),  emit: gvcf
+    tuple val(meta), path("*.{kid,dad,mom}.vcf.gz"),   emit: vcf
+    tuple val(meta), path("*.{kid,dad,mom}.g.vcf.gz"), emit: gvcf
     path "versions.yml"                        ,  emit: versions
     path "*.html", emit: html
 
@@ -31,10 +32,10 @@ process DEEPTRIO {
     """
     /opt/deepvariant/bin/deeptrio/run_deeptrio \\
         --ref=${fasta} \\
-        --reads_child=${meta.id}.kid.trio.bam \\
-        --reads_parent1=${meta.paternal_id}.dad.trio.bam \\
-        --reads_parent2=${meta.maternal_id}.mom.trio.bam \\
-        --model_type=PACBIO \\
+        --reads_child=${individual_bam} \\
+        --reads_parent1=${paternal_bam} \\
+        --reads_parent2=${maternal_bam} \\
+        --model_type=${model_type} \\
         --output_vcf_child=${meta.id}.${meta.id}.kid.vcf.gz \\
         --output_vcf_parent1=${meta.id}.${meta.paternal_id}.dad.vcf.gz \\
         --output_vcf_parent2=${meta.id}.${meta.maternal_id}.mom.vcf.gz \\
