@@ -1,15 +1,18 @@
 Changes in module 'nf-core/gfastats'
+--- modules/nf-core/gfastats/meta.yml
++++ modules/nf-core/gfastats/meta.yml
+@@ -30,7 +30,7 @@
+       type: string
+       description: Output format (fasta, fastq, gfa)
+   - genome_size:
+-      type: number
++      type: float
+       description: estimated genome size (bp) for NG* statistics (optional).
+   - target:
+       type: string
+
 --- modules/nf-core/gfastats/main.nf
 +++ modules/nf-core/gfastats/main.nf
-@@ -5,7 +5,7 @@
-     conda "bioconda::gfastats=1.3.5"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-         'https://depot.galaxyproject.org/singularity/gfastats:1.3.5--hd03093a_0':
--        'biocontainers/gfastats:1.3.5--hd03093a_0' }"
-+        'quay.io/biocontainers/gfastats:1.3.5--hd03093a_0' }"
- 
-     input:
-     tuple val(meta), path(assembly)   // input.[fasta|fastq|gfa][.gz]
 @@ -40,11 +40,11 @@
          $ibed \\
          $ebed \\

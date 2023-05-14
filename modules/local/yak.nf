@@ -5,7 +5,7 @@ process YAK {
     conda "bioconda::yak=0.1"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/yak:0.1--h7132678_2':
-        'quay.io/biocontainers/yak:0.1--h7132678_2' }"
+        'biocontainers/yak:0.1--h7132678_2' }"
 
     input:
     tuple val(meta), path(fasta)

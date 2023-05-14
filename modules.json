@@ -7,7 +7,7 @@
                 "nf-core": {
                     "custom/dumpsoftwareversions": {
                         "branch": "master",
-                        "git_sha": "76cc4938c1f6ea5c7d83fed1eeffc146787f9543",
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
                     "fastqc": {
@@ -18,12 +18,8 @@
                     "gfastats": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"]
-                    },
-                    "hifiasm": {
-                        "branch": "master",
-                        "git_sha": "e20e57f90b6787ac9a010a980cf6ea98bd990046",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/gfastats/gfastats.diff"
                     },
                     "minimap2/align": {
                         "branch": "master",
@@ -42,12 +38,12 @@
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "371eff7748d769c2ddc8bd593773523a364a52fe",
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "371eff7748d769c2ddc8bd593773523a364a52fe",
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
                     "samtools/sort": {
