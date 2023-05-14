@@ -32,10 +32,6 @@ ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }
   .groupTuple()
 
-// Not pretty but works for now...needs initializing?
-params.extra_snfs = ''
-params.extra_gvcfs = ''
-
 // Since they are not mandatory, populate channel only if the samplesheets are provided
 if (params.extra_snfs) { ch_input_snfs = file(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
 if (params.extra_gvcfs) { ch_input_gvcfs = file(params.extra_gvcfs) } else { ch_input_gvcfs = Channel.empty() }
@@ -120,14 +116,13 @@ workflow SKIERFE {
     if(params.trio) { 
       PED_CHECK(ch_input_ped)
         .ch_ped_processed
-        .set{ch_ped}
+        .set{ ch_ped }
     }
 
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
 
     //Hifiasm assembly
-    ASSEMBLY ( ch_sample, ch_ped )
-
+    ASSEMBLY( ch_sample, ch_ped )
     ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
    
     //FASTQC
@@ -135,23 +130,23 @@ workflow SKIERFE {
     ch_versions = ch_versions.mix(FASTQC.out.versions)
 
     // Index the genome 
-    PREPARE_GENOME ( ch_fasta )
+    PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
    
     // Run dipcall
-    ASSEMBLY_VARIANT_CALLING ( ASSEMBLY.out.assembled_haplotypes, PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fai, PREPARE_GENOME.out.mmi, ch_ped, ch_par )
+    ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fai, PREPARE_GENOME.out.mmi, ch_ped, ch_par )
     ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
 
     // Align reads with pbmm2 
-    ALIGN_READS ( ch_sample, PREPARE_GENOME.out.mmi )
+    ALIGN_READS( ch_sample, PREPARE_GENOME.out.mmi )
     ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
     
     // Call SVs with Sniffles2 
-    STRUCTURAL_VARIANT_CALLING ( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
+    STRUCTURAL_VARIANT_CALLING( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
     ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
     
     // Call SNVs with DeepVariant/DeepTrio
-    SHORT_VARIANT_CALLING ( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
+    SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
     ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
     CUSTOM_DUMPSOFTWAREVERSIONS (

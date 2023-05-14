@@ -23,8 +23,7 @@ workflow ALIGN_READS {
         .set{ch_bam_bai}
 
     emit:
-    bam_bai  = ch_bam_bai    // channel: [ [meta], bam, bai]
-    
-    versions = ch_versions  // channel: [ versions.yml ]
+    bam_bai  = ch_bam_bai  // channel: [ val(meta), bam, bai]
+    versions = ch_versions // channel: [ versions.yml ]
 }
 
