@@ -37,13 +37,10 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 > to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline)
 > with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
-3. Download the pipeline and ~~test it on a minimal dataset run with a single command:~~
+Download the pipeline and ~~test it on a minimal dataset run with a single command:~~
 
    ```bash
-   nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
+   nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta --dipcall_par /path/to/hs38.PAR.bed [--trio --ped /path/to/family.ped] [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
    ```
 
    To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
@@ -56,10 +53,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
    > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
    > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
    > ~~- If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.~~
-
-```bash
-   nextflow run fellen31/skierfe -dev -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
-   ```
 
 > **Warning:**
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those
@@ -75,7 +68,6 @@ We thank the following people for their extensive assistance in the development 
 ## Contributions and Support
 
 If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
-
 
 ## Citations
 
