@@ -130,7 +130,7 @@ workflow SKIERFE {
     PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
     
-    if(!params.skip_assembly_calling) {
+    if(!params.skip_assembly_wf) {
 
         //Hifiasm assembly
         ASSEMBLY( ch_sample, ch_ped )
@@ -141,7 +141,7 @@ workflow SKIERFE {
     
     }
 
-    if(!params.skip_read_map_calling) {
+    if(!params.skip_mapping_wf) {
         
         // Align reads with pbmm2
         ALIGN_READS( ch_sample, PREPARE_GENOME.out.mmi )

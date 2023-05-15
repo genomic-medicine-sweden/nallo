@@ -310,14 +310,6 @@
         }
     ],
     "properties": {
-        "skip_assembly_calling": {
-            "type": "boolean",
-            "description": "Skip genome assembly and downstream processes"
-        },
-        "skip_read_map_calling": {
-            "type": "boolean",
-            "description": "Skip read_mapping and downstream processes"
-        },
         "tandem_repeats": {
             "type": "string",
             "default": "None",
@@ -327,6 +319,14 @@
         "skip_short_variant_calling": {
             "type": "boolean",
             "description": "Skip DeepVariant/Trio"
+        },
+        "skip_assembly_wf": {
+            "type": "boolean",
+            "description": "Skip assembly and downstream processes"
+        },
+        "skip_mapping_wf": {
+            "type": "boolean",
+            "description": "Skip read mapping and downstream processes"
         }
     }
 }
