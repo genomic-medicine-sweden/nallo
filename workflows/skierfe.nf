@@ -9,21 +9,21 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 // Validate input parameters
 WorkflowSkierfe.initialise(params, log)
 
-// TODO nf-core: Add all file path parameters for the pipeline to the list below
-// Check input path parameters to see if they exist
 def checkPathParamList = [ params.input, 
                            params.multiqc_config, 
                            params.fasta, 
                            params.ped, 
                            params.extra_snfs, 
                            params.extra_gvcfs,
-                           params.dipcall_par]
+                           params.dipcall_par,
+                           params.tandem_repeats]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
-if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
+if (!params.skip_read_map_calling) { if (params.tandem_repeats) { ch_tandem_repeats = Channel.fromPath(params.tandem_repeats) } else { exit 1, 'Input tandem repeats not specified!' } }
 if (params.trio) { if (params.ped) { ch_input_ped = file(params.ped) } else { exit 1, 'Input PED-file not specified!' } }
 // TODO: Should be required only if running DIPCALL
 if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
@@ -33,8 +33,8 @@ ch_fasta = ch_fasta
   .groupTuple()
 
 // Since they are not mandatory, populate channel only if the samplesheets are provided
-if (params.extra_snfs) { ch_input_snfs = file(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
-if (params.extra_gvcfs) { ch_input_gvcfs = file(params.extra_gvcfs) } else { ch_input_gvcfs = Channel.empty() }
+if (params.extra_snfs) { ch_input_snfs = Channel.fromPath(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
+if (params.extra_gvcfs) { ch_input_gvcfs = Channel.fromPath(params.extra_gvcfs) } else { ch_input_gvcfs = Channel.empty() }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:w
@@ -148,12 +148,14 @@ workflow SKIERFE {
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
         
         // Call SVs with Sniffles2 
-        STRUCTURAL_VARIANT_CALLING( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta )
+        STRUCTURAL_VARIANT_CALLING( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta, PREPARE_GENOME.out.fai, ch_tandem_repeats )
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
-    
-        // Call SNVs with DeepVariant/DeepTrio
-        SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
-        ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+        
+        if(!params.skip_short_variant_calling) {
+            // Call SNVs with DeepVariant/DeepTrio
+            SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
+            ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+        } 
     }
 
     CUSTOM_DUMPSOFTWAREVERSIONS (

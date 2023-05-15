@@ -282,13 +282,11 @@
                 "extra_gvcfs": {
                     "type": "string",
                     "default": "None",
-                    "format": "file-path",
                     "description": "Extra input files for GLNexus"
                 },
                 "extra_snfs": {
                     "type": "string",
                     "default": "None",
-                    "format": "file-path",
                     "description": "Extra input files for Sniffles"
                 }
             }
@@ -314,13 +312,21 @@
     "properties": {
         "skip_assembly_calling": {
             "type": "boolean",
-            "default": "false",
             "description": "Skip genome assembly and downstream processes"
         },
         "skip_read_map_calling": {
             "type": "boolean",
-            "default": "false",
             "description": "Skip read_mapping and downstream processes"
+        },
+        "tandem_repeats": {
+            "type": "string",
+            "default": "None",
+            "format": "file-path",
+            "description": "Tandem repeat BED-file for sniffles"
+        },
+        "skip_short_variant_calling": {
+            "type": "boolean",
+            "description": "Skip DeepVariant/Trio"
         }
     }
 }
