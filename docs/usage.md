@@ -1,6 +1,86 @@
 # fellen31/skierfe: Usage
 
-## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/skierfe/usage](https://nf-co.re/skierfe/usage)
+## :warning: This is information is incomplete
+
+# fellen31/skierfe pipeline parameters
+
+## Input/output options
+
+Define where the pipeline should find input data and save output data.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `input` | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about
+| `outdir` | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure. | `string` |  | True |  |
+| `email` | Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the w
+| `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified. | `string` |  |  |  |
+
+## Reference genome options
+
+Reference genome related files and options required for the workflow.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `genome` | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the referenc
+| `fasta` | Path to FASTA genome file. <details><summary>Help</summary><small>This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generate
+| `dipcall_par` | Provide a bed file of chrX PAR regions for dipcall | `string` |  |  |  |
+| `igenomes_base` | Directory / URL base for iGenomes references. | `string` | s3://ngi-igenomes/igenomes |  | True |
+| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may choose this option if you observ
+
+## Institutional config options
+
+Parameters used to describe centralised config profiles. These should not be edited.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `custom_config_version` | Git commit id for Institutional configs. | `string` | master |  | True |
+| `custom_config_base` | Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files fr
+| `config_profile_name` | Institutional config name. | `string` |  |  | True |
+| `config_profile_description` | Institutional config description. | `string` |  |  | True |
+| `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
+| `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
+
+## Max job request options
+
+Set the top limit for requested resources for any single job.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `max_cpus` | Maximum number of CPUs that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the CPU requirement for each process. Should be an i
+| `max_memory` | Maximum amount of memory that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the memory requirement for each process. Should
+| `max_time` | Maximum amount of time that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the time requirement for each process. Should be a s
+
+## Generic options
+
+Less common options for the pipeline, typically set in a config file.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `help` | Display help text. | `boolean` |  |  | True |
+| `version` | Display version and exit. | `boolean` |  |  | True |
+| `publish_dir_mode` | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be sav
+| `email_on_fail` | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when the pipeline is completed - O
+| `plaintext_email` | Send plain-text email instead of HTML. | `boolean` |  |  | True |
+| `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string` | 25.MB |  | True |
+| `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
+| `hook_url` | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>| `s
+| `multiqc_config` | Custom config file to supply to MultiQC. | `string` |  |  | True |
+| `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
+| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
+| `tracedir` | Directory to keep pipeline Nextflow logs and reports. | `string` | ${params.outdir}/pipeline_info |  | True |
+| `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
+| `show_hidden_params` | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not shown on the command line when a user ru
+| `trio` | Run Hifiasm and DeepVariant in trio mode | `boolean` |  |  |  |
+| `ped` | Privide a PED-file for trios | `string` |  |  |  |
+| `extra_gvcfs` | Extra input files for GLNexus | `string` | None |  |  |
+| `extra_snfs` | Extra input files for Sniffles | `string` | None |  |  |
+
+## Other parameters
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `skip_assembly_calling` | Skip genome assembly and downstream processes | `boolean` | false |  |  |
+| `skip_read_map_calling` | Skip read_mapping and downstream processes | `boolean` | false |  |  |
 
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
 
