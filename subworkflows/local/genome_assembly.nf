@@ -60,6 +60,9 @@ workflow ASSEMBLY {
         // TODO: How to be really sure dad/mom are inputed correctly? Since test dataset all have same parents this needs to be double checked..
         
         HIFIASM (all_kid_reads, paternal_yak_or_empty, maternal_yak_or_empty, [], [] ) 
+        
+        ch_versions = ch_versions.mix(YAK_PATERNAL.out.versions.first())
+        ch_versions = ch_versions.mix(YAK_MATERNAL.out.versions.first())
     }
     // Not the cleanest way, but better than to rely on hap_* in file names..
     GFASTATS_PATERNAL( HIFIASM.out.paternal_contigs,'fasta', '', '', [], [], [], [] )
@@ -67,8 +70,6 @@ workflow ASSEMBLY {
 
     GFASTATS_PATERNAL.out.assembly.combine(GFASTATS_MATERNAL.out.assembly, by: 0).set{ ch_dual_assembly_fa }
     
-    ch_versions = ch_versions.mix(YAK_PATERNAL.out.versions.first())
-    ch_versions = ch_versions.mix(YAK_MATERNAL.out.versions.first())
     ch_versions = ch_versions.mix(HIFIASM.out.versions.first())
     ch_versions = ch_versions.mix(GFASTATS_PATERNAL.out.versions.first())
     ch_versions = ch_versions.mix(GFASTATS_MATERNAL.out.versions.first())
