@@ -4,8 +4,6 @@
     fellen31/skierfe
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Github : https://github.com/fellen31/skierfe
-    Website: https://nf-co.re/skierfe
-    Slack  : https://nfcore.slack.com/channels/skierfe
 ----------------------------------------------------------------------------------------
 */
 
