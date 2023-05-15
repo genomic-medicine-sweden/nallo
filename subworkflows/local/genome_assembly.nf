@@ -14,7 +14,7 @@ workflow ASSEMBLY {
     ch_versions = Channel.empty()
 
     if(!params.trio) {
-        HIFIASM ( ch_reads, [], [], [], []) // [ [meta], fastq ]
+        HIFIASM ( ch_reads, [[],[]], [[],[]], [], []) // [ [meta], fastq ]
     } else {
         ch_ped
             .combine(ch_reads
