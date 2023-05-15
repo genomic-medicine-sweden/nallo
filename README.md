@@ -27,8 +27,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
   - With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
 - Assemble haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
 - Call variants ([`dipcall`](https://github.com/lh3/dipcall)) (NOTE: Make sure chrY PAR is hard masked in reference)
-
 - Filtering...
+
+![Pipeline summary](/docs/images/skierfe-concept-150523.png)
 
 ## Usage
 
