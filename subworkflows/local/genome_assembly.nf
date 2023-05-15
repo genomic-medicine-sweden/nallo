@@ -63,6 +63,7 @@ workflow ASSEMBLY {
         
         ch_versions = ch_versions.mix(YAK_PATERNAL.out.versions.first())
         ch_versions = ch_versions.mix(YAK_MATERNAL.out.versions.first())
+        
     }
     // Not the cleanest way, but better than to rely on hap_* in file names..
     GFASTATS_PATERNAL( HIFIASM.out.paternal_contigs,'fasta', '', '', [], [], [], [] )
