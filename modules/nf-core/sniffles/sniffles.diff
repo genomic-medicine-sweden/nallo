@@ -1,0 +1,33 @@
+Changes in module 'nf-core/sniffles'
+--- modules/nf-core/sniffles/main.nf
++++ modules/nf-core/sniffles/main.nf
+@@ -9,7 +9,8 @@
+ 
+     input:
+     tuple val(meta), path(bam), path(bai)
+-    tuple val(meta2), path(fasta)
++    tuple val(meta2), path(fasta) 
++    tuple val(meta3), path(tandem_file)
+ 
+ 
+     output:
+@@ -23,13 +24,15 @@
+     script:
+     def args = task.ext.args ?: ''
+     def prefix = task.ext.prefix ?: "${meta.id}"
++    def tandem_repeats = tandem_file ? "--tandem-repeats ${tandem_file}" : ''
+     """
+     sniffles \\
+         --input $bam \\
+-        --vcf ${prefix}.vcf \\
+-        --snf ${prefix}.snf \\
++        --vcf ${prefix}.sniffles.vcf \\
++        --snf ${prefix}.sniffles.snf \\
+         --reference $fasta \\
+         -t $task.cpus \\
++        $tandem_repeats
+         $args
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+************************************************************
