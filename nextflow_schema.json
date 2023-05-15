@@ -310,5 +310,17 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "skip_assembly_calling": {
+            "type": "boolean",
+            "default": "false",
+            "description": "Skip genome assembly and downstream processes"
+        },
+        "skip_read_map_calling": {
+            "type": "boolean",
+            "default": "false",
+            "description": "Skip read_mapping and downstream processes"
+        }
+    }
 }
