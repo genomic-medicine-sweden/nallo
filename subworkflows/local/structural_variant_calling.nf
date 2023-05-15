@@ -4,8 +4,8 @@
 //               https://nf-co.re/join
 // TODO nf-core: A subworkflow SHOULD import at least two modules
 
-include { SNIFFLES_SINGLESAMPLE      } from '../../modules/local/sniffles/singlesample'
-include { SNIFFLES_MULTISAMPLE      } from '../../modules/local/sniffles/multisample'
+include { SNIFFLES_MULTISAMPLE  } from '../../modules/local/sniffles/multisample'
+include { SNIFFLES              } from '../../modules/nf-core/sniffles/main'
 
 workflow STRUCTURAL_VARIANT_CALLING {
 
@@ -13,24 +13,37 @@ workflow STRUCTURAL_VARIANT_CALLING {
     ch_bam_bai // channel: [ val(meta), [[ bam ], [bai]] ]
     ch_snfs
     ch_fasta
+    ch_fai
+    ch_tandem_repeats
 
     main:
     
     ch_sv_calls_vcf = Channel.empty()
     ch_versions     = Channel.empty()
     
-    SNIFFLES_SINGLESAMPLE( ch_bam_bai.combine(ch_fasta.map {it [1] }) )
-    SNIFFLES_MULTISAMPLE( SNIFFLES_SINGLESAMPLE.out.sv_snf.map { it [1] }.concat(ch_snfs.map { it[1] }).collect().sort { it.name } )
+    meta           = ch_bam_bai.map{ it[0] }
+    reference      = ch_fasta.combine(meta).map{[it[2], it[1]]}
+    tandem_repeats = ch_tandem_repeats.combine(meta).map{[it[1], it[0]]}
+    
+    SNIFFLES (ch_bam_bai, reference, tandem_repeats)
 
-    ch_versions = ch_versions.mix(SNIFFLES_SINGLESAMPLE.out.versions)
+    snfs = SNIFFLES.out.snf.map{ it [1] }.concat(ch_snfs.map{ it[1] }).collect().sort{ it.name }.map{ [it] } 
+    
+    multisample_input = ch_fasta.map{ it[1] }
+                        .combine(ch_fai.map{ it[1] })
+                        .combine(ch_tandem_repeats)
+                        .combine(snfs)
+    
+    SNIFFLES_MULTISAMPLE( multisample_input )
+
+    ch_versions = ch_versions.mix(SNIFFLES.out.versions)
     ch_versions = ch_versions.mix(SNIFFLES_MULTISAMPLE.out.versions)
     
-    ch_sv_calls_vcf = SNIFFLES_MULTISAMPLE.out.multisample_vcf
-
+    ch_sv_calls_vcf = SNIFFLES_MULTISAMPLE.out.vcf
 
     emit:
-    ch_sv_calls_vcf
-    
-    versions = ch_versions                  // channel: [ versions.yml ]
+    ch_sv_calls_vcf = SNIFFLES.out.vcf             // channel: 
+    ch_multisample  = SNIFFLES_MULTISAMPLE.out.vcf //
+    versions        = ch_versions                  // channel: [ versions.yml ]
 }
 

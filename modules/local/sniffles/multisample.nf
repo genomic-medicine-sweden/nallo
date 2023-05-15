@@ -8,28 +8,30 @@ process SNIFFLES_MULTISAMPLE {
         'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
     input:
-    path(snfs)
+    tuple path(reference), path(fai), path(tandem_file), path(snfs)
 
     output:
-    path("multisample.sniffles.vcf"), emit: multisample_vcf
-    path "versions.yml"                    , emit: versions
+    path("multisample.sniffles.vcf"), emit: vcf
+    path "versions.yml"             , emit: versions
     
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    //def prefix = task.ext.prefix ?: "${meta.id}"
+    def tandem_repeats = tandem_file ? "--tandem-repeats ${tandem_file}" : ''
     """
     sniffles \\
         --input ${snfs} \\
         --vcf multisample.sniffles.vcf \\
         -t ${task.cpus} \\
+        --reference $reference \\
+        $tandem_repeats \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        sniffles: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version: //')
+        sniffles_multisample: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version: //')
     END_VERSIONS
     """
 }
