@@ -13,8 +13,18 @@ workflow ASSEMBLY_VARIANT_CALLING {
     main:
     ch_sv_calls_vcf = Channel.empty()
     ch_versions     = Channel.empty()
-    
-    dipcall_input = ch_haplotypes.flatten().collate(3).combine(ch_fasta.map{ it[1] }).combine( ch_fai.map{it[1]} ).combine(ch_mmi.map{it[1]}).combine(ch_par).combine(Channel.value(1))
+
+    // This should work both with and without --trio, but really should skip PED-file and just rely on samplesheet
+    dipcall_input = ch_haplotypes
+                    .flatten()
+                    .collate(3)
+                    .map{ [it[0]['id'], it[0], it[1], it[2] ]}
+                    .combine(ch_fasta.map{ it[1] })
+                    .combine( ch_fai.map{it[1]} )
+                    .combine(ch_mmi.map{it[1]})
+                    .combine(ch_par)
+                    .join(ch_ped.map{ [ it['id'], it['sex'] ] }, by: 0)
+                    .map{[it[1], it[2], it[3], it[4], it[5], it[6], it[7], it[8]]}
     
     // Make sure reference has chrY PARs hard masked
     DIPCALL ( dipcall_input )
