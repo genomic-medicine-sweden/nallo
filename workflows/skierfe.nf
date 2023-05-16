@@ -16,17 +16,19 @@ def checkPathParamList = [ params.input,
                            params.extra_snfs, 
                            params.extra_gvcfs,
                            params.dipcall_par,
-                           params.tandem_repeats]
+                           params.tandem_repeats
+                           ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
 if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
-if (!params.skip_read_map_calling) { if (params.tandem_repeats) { ch_tandem_repeats = Channel.fromPath(params.tandem_repeats) } else { exit 1, 'Input tandem repeats not specified!' } }
-if (params.trio) { if (params.ped) { ch_input_ped = file(params.ped) } else { exit 1, 'Input PED-file not specified!' } }
-// TODO: Should be required only if running DIPCALL
-if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
+if (!params.skip_mapping_wf) { if (params.tandem_repeats) { ch_tandem_repeats = Channel.fromPath(params.tandem_repeats) } else { exit 1, 'Input tandem repeats not specified!' } }
+if (!params.skip_assembly_wf) { 
+    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
+    if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
+}
 
 ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }
@@ -113,7 +115,7 @@ workflow SKIERFE {
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
     
-    if(params.trio) { 
+    if(params.trio || !params.skip_assembly_wf) { 
       PED_CHECK(ch_input_ped)
         .ch_ped_processed
         .set{ ch_ped }
