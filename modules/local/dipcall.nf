@@ -4,7 +4,7 @@ process DIPCALL {
     label 'process_high'
 
     conda "bioconda::dipcall=0.3"
-    container 'quay.io/biocontainers/dipcall:0.3--hdfd78af_0'
+    container "quay.io/biocontainers/dipcall:0.3--hdfd78af_0"
     
     // This is bad but I don't know where it's going wrong, a test dataset is really needed for this process
     // Could change to a subworkflow as well...

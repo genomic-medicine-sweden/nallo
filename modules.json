@@ -15,11 +15,6 @@
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
-                    "deepvariant": {
-                        "branch": "master",
-                        "git_sha": "b9829e1064382745d8dff7f1d74d2138d2864f71",
-                        "installed_by": ["modules"]
-                    },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",

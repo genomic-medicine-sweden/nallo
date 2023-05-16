@@ -2,7 +2,7 @@ process DEEPTRIO {
     tag "$meta.id"
     label 'process_high'
     
-    container 'docker.io/google/deepvariant:deeptrio-1.4.0'
+    container "docker.io/google/deepvariant:deeptrio-1.4.0"
 
     // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {

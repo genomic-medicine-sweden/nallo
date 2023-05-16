@@ -2,7 +2,7 @@ process GLNEXUS {
     tag "glnexus_multisample"
     label 'process_high'
 
-    container 'quay.io/mlin/glnexus:v1.2.7'
+    container "quay.io/mlin/glnexus:v1.2.7"
     
      // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
