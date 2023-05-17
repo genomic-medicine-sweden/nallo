@@ -83,6 +83,7 @@ include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_call
 //
 // MODULE: Installed directly from nf-core/modules
 //
+include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
@@ -148,6 +149,12 @@ workflow SKIERFE {
         // Align reads with pbmm2
         ALIGN_READS( ch_sample, PREPARE_GENOME.out.mmi )
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
+        
+        ALIGN_READS.out.bam_bai.map{ meta, bam, bai -> [meta, bam, bai, []]}.set{ch_mosdepth_in}
+        ALIGN_READS.out.bam_bai.combine(ch_fasta).map{ meta, bam, bai, fasta_name, fasta -> [meta, fasta]}.set{ch_mosdepth_fasta_in}
+        
+        MOSDEPTH(ch_mosdepth_in, ch_fasta)
+        ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
         
         // Call SVs with Sniffles2 
         STRUCTURAL_VARIANT_CALLING( ALIGN_READS.out.bam_bai , ch_extra_snfs, ch_fasta, PREPARE_GENOME.out.fai, ch_tandem_repeats )
