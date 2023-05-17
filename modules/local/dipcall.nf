@@ -16,17 +16,9 @@ process DIPCALL {
     tuple val(meta), path(haplotype_1), path(haplotype_2), path(reference), path(fai), path(mmi), path(par), val(sex)
 
     output:
-    tuple val(meta), path("*.dip.vcf.gz") , emit: variant_calls
-    tuple val(meta), path("*.dip.bed")    , emit: confident_regions
-    tuple val(meta), path("*.paf.gz")     , emit: paf
-    tuple val(meta), path("*.sam.gz")     , emit: sam
-    tuple val(meta), path("*.var.gz")     , emit: var
-    tuple val(meta), path("*.bam")        , emit: bam
-    tuple val(meta), path("*.hap1.bed")   , emit: hap1_bed
-    tuple val(meta), path("*.hap2.bed")   , emit: hap2_bed
-    tuple val(meta), path("*.pair.vcf.gz"), emit: pair
-    tuple val(meta), path("*.tmp")        , emit: tmp, optional: true
-    path "versions.yml"                   , emit: versions
+    tuple val(meta), path("*.dip.vcf.gz"), emit: variant_calls
+    tuple val(meta), path("*.dip.bed")   , emit: confident_regions
+    path "versions.yml"                  , emit: versions
     //TODO: Add all outputs
 
     when:
@@ -40,8 +32,8 @@ process DIPCALL {
     minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
     minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
     
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
+    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${prefix}.asm.bp.hap1.p_ctg.fa 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
+    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${prefix}.asm.bp.hap2.p_ctg.fa 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
     
     gzip -dc ${prefix}.hap1.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap1.var.gz.vst | gzip > ${prefix}.hap1.var.gz
     gzip -dc ${prefix}.hap2.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap2.var.gz.vst | gzip > ${prefix}.hap2.var.gz
@@ -68,8 +60,8 @@ process DIPCALL {
     minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
     minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
     
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
+    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${prefix}.asm.bp.hap1.p_ctg.fa 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
+    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${prefix}.asm.bp.hap2.p_ctg.fa 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
     
     gzip -dc ${prefix}.hap1.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap1.var.gz.vst | gzip > ${prefix}.hap1.var.gz
     gzip -dc ${prefix}.hap2.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap2.var.gz.vst | gzip > ${prefix}.hap2.var.gz
