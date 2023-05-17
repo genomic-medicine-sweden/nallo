@@ -50,7 +50,7 @@ process DIPCALL {
     k8 /usr/local/bin/dipcall-aux.js samflt ${prefix}.hap2.sam.gz | samtools sort -m4G --threads ${task.cpus/2} -o ${prefix}.hap2.bam -
 
     gzip -dc ${prefix}.hap1.var.gz | grep ^R | cut -f2- > ${prefix}.hap1.bed
-    gzip -dc ${prefix}.hap1.var.gz | grep ^R | cut -f2- > ${prefix}.hap2.bed
+    gzip -dc ${prefix}.hap2.var.gz | grep ^R | cut -f2- > ${prefix}.hap2.bed
      
     htsbox pileup -q5 -evcf ${reference} ${prefix}.hap1.bam ${prefix}.hap2.bam | htsbox bgzip > ${prefix}.pair.vcf.gz
     
@@ -78,7 +78,7 @@ process DIPCALL {
     k8 /usr/local/bin/dipcall-aux.js samflt ${prefix}.hap2.sam.gz | samtools sort -m4G --threads ${task.cpus} -o ${prefix}.hap2.bam -
 
     gzip -dc ${prefix}.hap1.var.gz | grep ^R | cut -f2- > ${prefix}.hap1.bed
-    gzip -dc ${prefix}.hap1.var.gz | grep ^R | cut -f2- > ${prefix}.hap2.bed
+    gzip -dc ${prefix}.hap2.var.gz | grep ^R | cut -f2- > ${prefix}.hap2.bed
     
     htsbox pileup -q5 -evcf ${reference} ${prefix}.hap1.bam ${prefix}.hap2.bam | htsbox bgzip > ${prefix}.pair.vcf.gz
     
