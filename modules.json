@@ -21,6 +21,12 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/gfastats/gfastats.diff"
                     },
+                    "hifiasm": {
+                        "branch": "master",
+                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hifiasm/hifiasm.diff"
+                    },
                     "minimap2/align": {
                         "branch": "master",
                         "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b",
