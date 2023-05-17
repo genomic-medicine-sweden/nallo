@@ -1,7 +1,7 @@
 // Is this the best way?
 include { DEEPVARIANT } from '../../modules/local/google/deepvariant'
 include { DEEPTRIO    } from '../../modules/local/google/deeptrio'
-include { GLNEXUS     } from '../../modules/local/glnexus'
+include { GLNEXUS     } from '../../modules/nf-core/glnexus'
 
 workflow SHORT_VARIANT_CALLING {
 
@@ -25,14 +25,14 @@ workflow SHORT_VARIANT_CALLING {
         DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
   
         // Then run GlNexus to join-call genotypes (+ add previously run samples)
-        GLNEXUS ( DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name } )
-  
+        GLNEXUS ( DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name }.map{ [[id:"multisample"], it]} )
+         
         ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
         ch_versions = ch_versions.mix(GLNEXUS.out.versions)
   
         ch_snp_calls_vcf = DEEPVARIANT.out.vcf
         ch_snp_calls_gvcf = DEEPVARIANT.out.gvcf
-        ch_combined_bcf = GLNEXUS.out.multisample_bcf
+        ch_combined_bcf = GLNEXUS.out.bcf
     
     } else {
         ch_ped
