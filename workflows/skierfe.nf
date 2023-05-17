@@ -24,7 +24,6 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters
 if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
-if (!params.skip_mapping_wf) { if (params.tandem_repeats) { ch_tandem_repeats = Channel.fromPath(params.tandem_repeats) } else { exit 1, 'Input tandem repeats not specified!' } }
 if (!params.skip_assembly_wf) { 
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
@@ -37,6 +36,7 @@ ch_fasta = ch_fasta
 // Since they are not mandatory, populate channel only if the samplesheets are provided
 if (params.extra_snfs) { ch_input_snfs = Channel.fromPath(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
 if (params.extra_gvcfs) { ch_input_gvcfs = Channel.fromPath(params.extra_gvcfs) } else { ch_input_gvcfs = Channel.empty() }
+if (params.tandem_repeats) { ch_tandem_repeats = Channel.fromPath(params.tandem_repeats) } else { ch_tandem_repeats = Channel.empty() }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:w

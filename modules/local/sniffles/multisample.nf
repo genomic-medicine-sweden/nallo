@@ -8,7 +8,8 @@ process SNIFFLES_MULTISAMPLE {
         'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
     input:
-    tuple path(reference), path(fai), path(tandem_file), path(snfs)
+    tuple path(reference), path(fai), path(snfs)
+    path(tandem_file)
 
     output:
     path("multisample.sniffles.vcf"), emit: vcf
