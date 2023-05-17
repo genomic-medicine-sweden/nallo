@@ -8,15 +8,15 @@ process SNIFFLES {
         'biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
     input:
-    tuple val(meta), path(bam), path(bai)
-    tuple val(meta2), path(fasta) 
-    tuple val(meta3), path(tandem_file)
+    tuple val(meta),  path(bam), path(bai)
+    tuple val(meta2), path(fasta)
+    path(tandem_file)
 
 
     output:
     tuple val(meta), path("*.vcf"), emit: vcf
     tuple val(meta), path("*.snf"), emit: snf
-    path "versions.yml"                    , emit: versions
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

@@ -17,24 +17,29 @@ workflow STRUCTURAL_VARIANT_CALLING {
     ch_tandem_repeats
 
     main:
-    
     ch_sv_calls_vcf = Channel.empty()
     ch_versions     = Channel.empty()
     
     meta           = ch_bam_bai.map{ it[0] }
     reference      = ch_fasta.combine(meta).map{[it[2], it[1]]}
-    tandem_repeats = ch_tandem_repeats.combine(meta).map{[it[1], it[0]]}
     
-    SNIFFLES (ch_bam_bai, reference, tandem_repeats)
+    if(params.tandem_repeats) {
+        SNIFFLES (ch_bam_bai, reference, ch_tandem_repeats)
+    } else {
+        SNIFFLES (ch_bam_bai, reference, [])
+    }
 
     snfs = SNIFFLES.out.snf.map{ it [1] }.concat(ch_snfs.map{ it[1] }).collect().sort{ it.name }.map{ [it] } 
-    
+        
     multisample_input = ch_fasta.map{ it[1] }
-                        .combine(ch_fai.map{ it[1] })
-                        .combine(ch_tandem_repeats)
-                        .combine(snfs)
-    
-    SNIFFLES_MULTISAMPLE( multisample_input )
+    .combine(ch_fai.map{ it[1] })
+    .combine(snfs)
+   
+    if(params.tandem_repeats) {
+        SNIFFLES_MULTISAMPLE( multisample_input, ch_tandem_repeats )
+    } else {
+        SNIFFLES_MULTISAMPLE( multisample_input, [] )
+    }
 
     ch_versions = ch_versions.mix(SNIFFLES.out.versions)
     ch_versions = ch_versions.mix(SNIFFLES_MULTISAMPLE.out.versions)
