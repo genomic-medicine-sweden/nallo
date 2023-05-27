@@ -32,8 +32,8 @@ workflow METHYLATION {
     
     WHATSHAP ( ch_whatshap_phase_in, ch_fasta, ch_fai)
 
-    fa = WHATSHAP.out.haplotagged_bam_bai.combine(ch_fasta.map{it[1]}).map{ [ it[0], it[3] ]}.view()
-    
+    fa = WHATSHAP.out.haplotagged_bam_bai.combine(ch_fasta.map{it[1]}).map{ [ it[0], it[3] ]}
+
     // Extract haplotagged reads into separate files 
     SAMTOOLS_VIEW_HP1( WHATSHAP.out.haplotagged_bam_bai, fa, [] )
     SAMTOOLS_VIEW_HP2( WHATSHAP.out.haplotagged_bam_bai, fa, [] )
