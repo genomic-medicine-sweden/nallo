@@ -5,11 +5,12 @@ process MODKIT_PILEUP {
     container "docker.io/fellen31/modkit-tabix:latest"
 
     input:
-    tuple val(meta), path(bam), path(bai)
-    tuple val(meta2), path(fasta), path(fai)
+    tuple val(meta), path(bam), path(bai), path(fasta), path(fai)
 
     output:
     tuple val(meta), path("*.bed.gz"), path("*.bed.gz.tbi"), emit: bed
+    path ".command.log", emit: log
+    path ".command.err", emit: err
     path "versions.yml", emit: versions
 
     when:
@@ -17,10 +18,12 @@ process MODKIT_PILEUP {
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     bgzip <(modkit pileup \\
         $args \\
+        $args2 \\
         --threads ${task.cpus} \\
         --ref $fasta \\
         --log-filepath ${bam.baseName}.modkit.log \\
