@@ -6,7 +6,7 @@ process WHATSHAP_STATS {
     container "docker.io/fellen31/whatshap-tabix:latest"
 
     input:
-    tuple val(meta),  path(vcf), path(tbi)
+    tuple val(meta), path(vcf), path(tbi)
 
     output:
     tuple val(meta), path("*.stats.tsv.gz"), emit: stats

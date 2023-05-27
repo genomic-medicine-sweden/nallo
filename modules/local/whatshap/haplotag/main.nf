@@ -8,9 +8,7 @@ process WHATSHAP_HAPLOTAG {
         'quay.io/biocontainers/whatshap:1.7--py310h30d9df9_0' }"
 
     input:
-    tuple val(meta), path(vcf), path(tbi)
-    tuple val(meta2), path(bam), path(bai)
-    tuple val(meta3), path(fasta), path(fai)
+    tuple val(meta),  path(vcf), path(tbi), path(bam), path(bai), path(fasta), path(fai)
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
