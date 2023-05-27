@@ -13,9 +13,9 @@ workflow ASSEMBLY {
     main:
     ch_versions = Channel.empty()
 
-    if(!params.trio) {
+    if(params.hifiasm_mode == 'hifi-only') {
         HIFIASM ( ch_reads, [[],[]], [[],[]], [], []) // [ [meta], fastq ]
-    } else {
+    } else if(params.hifiasm_mode == 'trio-binning') {
         ch_ped
             .combine(ch_reads
                 .map{ meta, reads -> [meta.id, reads]

@@ -1,8 +1,8 @@
-process DEEPVARIANT {
+process PEPPER_MARGIN_DEEPVARIANT {
     tag "$meta.id"
     label 'process_high'
 
-    container "docker.io/google/deepvariant:1.5.0"
+    container "docker.io/kishwars/pepper_deepvariant:r0.8"
 
     // Exit if running this module with -profile conda / -profile mamba
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
@@ -16,7 +16,7 @@ process DEEPVARIANT {
     tuple val(meta), path("${prefix}.vcf.gz")  ,  emit: vcf
     tuple val(meta), path("${prefix}.g.vcf.gz"),  emit: gvcf
     path "*.html", emit: html
-    path "versions.yml"                        ,  emit: versions
+    path "versions.yml"         ,  emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -28,14 +28,15 @@ process DEEPVARIANT {
     //def regions = intervals ? "--regions ${intervals}" : ""
 
     """
-    /opt/deepvariant/bin/run_deepvariant \\
-        --ref=${fasta} \\
-        --reads=${bam} \\
-        --output_vcf=${prefix}.vcf.gz \\
-        --output_gvcf=${prefix}.g.vcf.gz \\
-        --sample_name=${meta.id} \\
-        --num_shards=${task.cpus} \\
-        --model_type=$model_type \\
+    run_pepper_margin_deepvariant call_variant \\
+        -f ${fasta} \\
+        -b ${bam} \\
+        -o . \\
+        -p ${meta.id} \\
+        -s ${meta.id} \\
+        -t ${task.cpus} \\
+        $model_type \\
+        --gvcf \\
         ${args}
 
     cat <<-END_VERSIONS > versions.yml

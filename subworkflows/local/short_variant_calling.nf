@@ -1,5 +1,6 @@
 // Is this the best way?
 include { DEEPVARIANT } from '../../modules/local/google/deepvariant'
+include { PEPPER_MARGIN_DEEPVARIANT } from '../../modules/local/pepper_margin_deepvariant'
 include { DEEPTRIO    } from '../../modules/local/google/deeptrio'
 include { GLNEXUS     } from '../../modules/nf-core/glnexus'
 
@@ -20,7 +21,7 @@ workflow SHORT_VARIANT_CALLING {
 
     ch_versions = Channel.empty()
 
-    if(!params.trio) {
+    if(params.variant_caller == 'deepvariant') {
         // First run DeepVariant with the aligned reads
         DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
   
@@ -34,7 +35,21 @@ workflow SHORT_VARIANT_CALLING {
         ch_snp_calls_gvcf = DEEPVARIANT.out.gvcf
         ch_combined_bcf = GLNEXUS.out.bcf
     
-    } else {
+    } else if (params.variant_caller == 'pepper_margin_deepvariant') {
+        
+        // First run DeepVariant with the aligned reads
+        PEPPER_MARGIN_DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
+  
+        GLNEXUS ( PEPPER_MARGIN_DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name }.map{ [[id:"multisample"], it]} )
+         
+        ch_versions = ch_versions.mix(PEPPER_MARGIN_DEEPVARIANT.out.versions)
+        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
+  
+        ch_snp_calls_vcf = PEPPER_MARGIN_DEEPVARIANT.out.vcf
+        ch_snp_calls_gvcf = PEPPER_MARGIN_DEEPVARIANT.out.gvcf
+        ch_combined_bcf = GLNEXUS.out.bcf
+
+    } else if (params.variant_caller == 'deeptrio') {
         ch_ped
             .combine(ch_bam_bai
                 .map{ meta, bam, bai -> [meta.id, bam, bai]
