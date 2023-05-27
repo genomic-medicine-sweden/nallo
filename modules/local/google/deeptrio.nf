@@ -13,7 +13,6 @@ process DEEPTRIO {
     tuple val(meta), path(individual_bam), path(individual_bai), path(fasta), path(fai)
     tuple val(meta), path(paternal_bam), path(paternal_bai)
     tuple val(meta), path(maternal_bam), path(maternal_bai)
-    val model_type
 
     output:
     tuple val(meta), path("*.{kid,dad,mom}.vcf.gz"),   emit: vcf
@@ -26,6 +25,7 @@ process DEEPTRIO {
 
     script:
     def args    = task.ext.args ?: ''
+    def model_type = task.ext.model_type ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
     //def regions = intervals ? "--regions ${intervals}" : ""
 
@@ -35,7 +35,6 @@ process DEEPTRIO {
         --reads_child=${individual_bam} \\
         --reads_parent1=${paternal_bam} \\
         --reads_parent2=${maternal_bam} \\
-        --model_type=${model_type} \\
         --output_vcf_child=${meta.id}.${meta.id}.kid.vcf.gz \\
         --output_vcf_parent1=${meta.id}.${meta.paternal_id}.dad.vcf.gz \\
         --output_vcf_parent2=${meta.id}.${meta.maternal_id}.mom.vcf.gz \\
@@ -46,6 +45,7 @@ process DEEPTRIO {
         --sample_name_parent1="${meta.id}.${meta.paternal_id}" \\
         --sample_name_parent2="${meta.id}.${meta.maternal_id}" \\
         --num_shards=${task.cpus} \\
+        --model_type=$model_type \\
         ${args}
 
     cat <<-END_VERSIONS > versions.yml

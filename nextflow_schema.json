@@ -270,10 +270,6 @@
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
                 },
-                "trio": {
-                    "type": "boolean",
-                    "description": "Run Hifiasm and DeepVariant in trio mode"
-                },
                 "ped": {
                     "type": "string",
                     "description": "Privide a PED-file for trios",
@@ -327,6 +323,25 @@
         "skip_mapping_wf": {
             "type": "boolean",
             "description": "Skip read mapping and downstream processes"
+        },
+        "skip_methylation_wf": {
+            "type": "boolean",
+            "description": "Skip methylation workflow"
+        },
+        "preset": {
+            "type": "string",
+            "default": null
+        },
+        "variant_caller": {
+            "type": "string",
+            "default": "deepvariant",
+            "description": "Choose variant caller"
+        },
+        "hifiasm_mode": {
+            "type": "string",
+            "default": "hifi-only",
+            "description": "Run hifiasm in hifi-only or hifi-trio mode"
         }
-    }
+    },
+    "required": ["preset"]
 }

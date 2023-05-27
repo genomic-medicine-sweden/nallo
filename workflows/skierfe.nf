@@ -21,14 +21,52 @@ def checkPathParamList = [ params.input,
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
-// Check mandatory parameters
+// Check mandatory input files
 if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Input fasta not specified!' }
 if (!params.skip_assembly_wf) { 
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
 }
+if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning') {
+    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios!' }
+}
 
+validPresets = ["revio", "pacbio", "ONT_R9", "ONT_R10"]
+
+def getValidCallers(preset) {
+    switch(preset) {
+        case "revio":
+            return ["deepvariant"]
+        case "pacbio":
+            return ["deepvariant", "deeptrio", "pepper_margin_deepvariant"]
+        case "ONT_R9":
+            return ["pepper_margin_deepvariant"]
+        case "ONT_R10":
+            return ["deepvariant", "pepper_margin_deepvariant"]
+    }
+}
+
+def getValidWorkflows(preset) {
+    switch(preset) {
+        case "pacbio":
+            return ["skip_methylation_wf"]
+    }
+}
+
+// Validate presets
+if(params.preset !in validPresets) {
+    exit 1, "Valid presets are: $validPresets"
+} else if(params.preset == "pacbio" & !params.skip_methylation_wf) { 
+    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
+}
+
+// Validate variant callers
+if(params.variant_caller !in getValidCallers(params.preset)) { 
+    exit 1, "Valid callers for $params.preset are: " + getValidCallers(params.preset)
+}
+
+// Create fasta channel
 ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }
   .groupTuple()
@@ -61,19 +99,18 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 
 include { INPUT_CHECK as INPUT_FASTQ_CHECK } from '../subworkflows/local/input_check'
-include { INPUT_CHECK as SNFS_CHECK } from '../subworkflows/local/input_check'
-include { INPUT_CHECK as GVCFS_CHECK } from '../subworkflows/local/input_check'
-include { PED_CHECK } from '../subworkflows/local/ped_check'
+include { INPUT_CHECK as SNFS_CHECK        } from '../subworkflows/local/input_check'
+include { INPUT_CHECK as GVCFS_CHECK       } from '../subworkflows/local/input_check'
+include { PED_CHECK                        } from '../subworkflows/local/ped_check'
+include { PREPARE_GENOME                   } from '../subworkflows/local/prepare_genome'
 
+include { ASSEMBLY                         } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING         } from '../subworkflows/local/assembly_variant_calling'
 
-include { ASSEMBLY } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING } from '../subworkflows/local/assembly_variant_calling'
-
-include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
-include { ALIGN_READS } from '../subworkflows/local/align_reads'
-include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
-include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
-include { METHYLATION } from '../subworkflows/local/methylation'
+include { ALIGN_READS                      } from '../subworkflows/local/align_reads'
+include { STRUCTURAL_VARIANT_CALLING       } from '../subworkflows/local/structural_variant_calling'
+include { SHORT_VARIANT_CALLING            } from '../subworkflows/local/short_variant_calling'
+include { METHYLATION                      } from '../subworkflows/local/methylation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,7 +154,7 @@ workflow SKIERFE {
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
     
-    if(params.trio || !params.skip_assembly_wf) { 
+    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning') { 
       PED_CHECK(ch_input_ped)
         .ch_ped_processed
         .set{ ch_ped }
@@ -165,8 +202,11 @@ workflow SKIERFE {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
-
-            METHYLATION( ALIGN_READS.out.bam_bai, SHORT_VARIANT_CALLING.out.ch_snp_calls_vcf, ch_fasta, PREPARE_GENOME.out.fai )
+            
+            if(!params.skip_methylation_wf) {
+                METHYLATION( ALIGN_READS.out.bam_bai, SHORT_VARIANT_CALLING.out.ch_snp_calls_vcf, ch_fasta, PREPARE_GENOME.out.fai )
+                ch_versions = ch_versions.mix(METHYLATION.out.versions)
+            }
         } 
     }
 
@@ -214,6 +254,8 @@ workflow.onComplete {
         NfcoreTemplate.IM_notification(workflow, params, summary_params, projectDir, log)
     }
 }
+
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

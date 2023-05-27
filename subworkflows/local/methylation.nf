@@ -1,4 +1,5 @@
 include { WHATSHAP_PHASE                                   } from '../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                                   } from '../../modules/local/whatshap/stats/main'
 include { WHATSHAP_HAPLOTAG                                } from '../../modules/local/whatshap/haplotag/main'
 include { SAMTOOLS_INDEX                                   } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX    as SAMTOOLS_INDEX_HP1          } from '../../modules/nf-core/samtools/index/main'
@@ -31,6 +32,10 @@ workflow METHYLATION {
     // Phase SNPs-calls - move to SV-calling subworkflow? 
     WHATSHAP_PHASE ( ch_vcf, ch_bam_bai, fasta_fai)
     ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions.first())
+    
+    // Get stats
+    WHATSHAP_STATS ( WHATSHAP_PHASE.out.vcf_tbi )
+    ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions.first())
     
     // Haplotag reads
     WHATSHAP_HAPLOTAG( WHATSHAP_PHASE.out.vcf_tbi, ch_bam_bai, fasta_fai )
@@ -86,16 +91,14 @@ workflow METHYLATION {
 
     // Sometimes you may want per haplotype methylation
     MODKIT_PILEUP_PER_HAPLOTYPE ( ch_bam_bai_hp1.concat(ch_bam_bai_hp2) , modkit_fasta_fai)
-
+    
     ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
     ch_versions = ch_versions.mix(MODKIT_PILEUP_PER_HAPLOTYPE.out.versions)
-    
-    MODKIT_PILEUP.out.bed.view()
-    MODKIT_PILEUP_PER_HAPLOTYPE.out.bed.view()
     
     emit:
     ch_phased_vcf         = WHATSHAP_PHASE.out.vcf_tbi
     ch_haplotagged_reads  = ch_bam_bai_haplotagged
+    ch_combined_bedmethyl = MODKIT_PILEUP.out.bed
     ch_combined_bedmethyl = MODKIT_PILEUP.out.bed
     versions              = ch_versions                  // channel: [ versions.yml ]
 }
