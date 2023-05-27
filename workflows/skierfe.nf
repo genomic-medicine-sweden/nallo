@@ -191,7 +191,10 @@ workflow SKIERFE {
         ALIGN_READS.out.bam_bai.map{ meta, bam, bai -> [meta, bam, bai, []]}.set{ch_mosdepth_in}
         ALIGN_READS.out.bam_bai.combine(ch_fasta).map{ meta, bam, bai, fasta_name, fasta -> [meta, fasta]}.set{ch_mosdepth_fasta_in}
         
-        MOSDEPTH(ch_mosdepth_in, ch_fasta)
+        mosdepth_meta  = ch_mosdepth_in.map{ it[0]}
+        mosdepth_fasta = mosdepth_meta.combine(ch_fasta.map{ it[1]})
+
+        MOSDEPTH(ch_mosdepth_in, mosdepth_fasta)
         ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
         
         // Call SVs with Sniffles2 
