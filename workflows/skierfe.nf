@@ -10,12 +10,12 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 WorkflowSkierfe.initialise(params, log)
 
 def checkPathParamList = [ params.input, 
-                           params.multiqc_config, 
+        params.multiqc_config, 
                            params.fasta, 
                            params.ped, 
                            params.extra_snfs, 
                            params.extra_gvcfs,
-                           params.dipcall_par,
+        params.dipcall_par,
                            params.tandem_repeats
                            ]
 
@@ -28,9 +28,9 @@ if (!params.skip_assembly_wf) {
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
 }
-if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning') {
-    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios!' }
-}
+//if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | params.skip_assembly_wf) {
+    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios and dipcall!' }
+//}
 
 validPresets = ["revio", "pacbio", "ONT_R9", "ONT_R10"]
 
@@ -65,11 +65,12 @@ if(params.preset !in validPresets) {
 if(params.variant_caller !in getValidCallers(params.preset)) { 
     exit 1, "Valid callers for $params.preset are: " + getValidCallers(params.preset)
 }
-
 // Create fasta channel
 ch_fasta = ch_fasta
   .map { it -> [it.simpleName, it] }
   .groupTuple()
+
+ch_fasta_no_meta = Channel.fromPath(params.fasta)
 
 // Since they are not mandatory, populate channel only if the samplesheets are provided
 if (params.extra_snfs) { ch_input_snfs = Channel.fromPath(params.extra_snfs) } else { ch_input_snfs = Channel.empty() }
@@ -126,6 +127,7 @@ include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
+include { FQCRS                       } from '../modules/local/fqcrs'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -154,7 +156,7 @@ workflow SKIERFE {
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
     
-    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning') { 
+    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf) { 
       PED_CHECK(ch_input_ped)
         .ch_ped_processed
         .set{ ch_ped }
@@ -167,6 +169,9 @@ workflow SKIERFE {
     FASTQC( ch_sample )
     ch_versions = ch_versions.mix(FASTQC.out.versions)
 
+    FQCRS ( ch_sample )
+    ch_versions = ch_versions.mix(FQCRS.out.versions)
+    
     // Index the genome 
     PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -205,7 +210,6 @@ workflow SKIERFE {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
-            
             if(!params.skip_methylation_wf) {
                 METHYLATION( ALIGN_READS.out.bam_bai, SHORT_VARIANT_CALLING.out.ch_snp_calls_vcf, ch_fasta, PREPARE_GENOME.out.fai )
                 ch_versions = ch_versions.mix(METHYLATION.out.versions)
