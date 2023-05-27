@@ -10,14 +10,14 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 WorkflowSkierfe.initialise(params, log)
 
 def checkPathParamList = [ params.input, 
-        params.multiqc_config, 
+                           params.multiqc_config, 
                            params.fasta, 
                            params.ped, 
                            params.extra_snfs, 
                            params.extra_gvcfs,
-        params.dipcall_par,
+                           params.dipcall_par,
                            params.tandem_repeats
-                           ]
+                         ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
@@ -28,9 +28,9 @@ if (!params.skip_assembly_wf) {
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par) } else { exit 1, 'Input PAR-file not specified!' }
 }
-//if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | params.skip_assembly_wf) {
+if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf) {
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios and dipcall!' }
-//}
+}
 
 validPresets = ["revio", "pacbio", "ONT_R9", "ONT_R10"]
 
@@ -161,7 +161,7 @@ workflow SKIERFE {
         .ch_ped_processed
         .set{ ch_ped }
     }
-
+    
     ch_versions = ch_versions.mix(INPUT_FASTQ_CHECK.out.versions)
 
    
