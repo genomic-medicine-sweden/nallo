@@ -1,5 +1,6 @@
 include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_INDEX } from '../../modules/nf-core/samtools/index/main'
+include { CRAMINO        } from '../../modules/local/cramino'
 
 workflow ALIGN_READS {
 
@@ -21,6 +22,9 @@ workflow ALIGN_READS {
         .concat(SAMTOOLS_INDEX.out.bai)
         .groupTuple().flatten().collate(3)
         .set{ch_bam_bai}
+    
+    CRAMINO ( ch_bam_bai )
+    ch_versions = ch_versions.mix(CRAMINO.out.versions.first())
 
     emit:
     bam_bai  = ch_bam_bai  // channel: [ val(meta), bam, bai]
