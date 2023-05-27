@@ -73,6 +73,7 @@ include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_READS } from '../subworkflows/local/align_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING } from '../subworkflows/local/short_variant_calling'
+include { METHYLATION } from '../subworkflows/local/methylation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,6 +165,8 @@ workflow SKIERFE {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( ALIGN_READS.out.bam_bai, ch_input_gvcfs, ch_fasta, PREPARE_GENOME.out.fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+
+            METHYLATION( ALIGN_READS.out.bam_bai, SHORT_VARIANT_CALLING.out.ch_snp_calls_vcf, ch_fasta, PREPARE_GENOME.out.fai )
         } 
     }
 
