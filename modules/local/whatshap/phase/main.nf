@@ -6,7 +6,9 @@ process WHATSHAP_PHASE {
     container "docker.io/fellen31/whatshap-tabix:latest"
 
     input:
-    tuple val(meta), path(vcf), path(bam), path(bai), path(fasta), path(fai)
+    tuple val(meta), path(vcf), path(bam), path(bai)
+    tuple val(meta2), path(fasta)
+    tuple val(meta3), path(fai)
 
     output:
     tuple val(meta), path("*.vcf.gz"), path("*.vcf.gz.tbi"), emit: vcf_tbi

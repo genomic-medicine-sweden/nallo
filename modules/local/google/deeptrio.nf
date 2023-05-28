@@ -10,7 +10,9 @@ process DEEPTRIO {
     }
 
     input:
-    tuple val(meta), path(individual_bam), path(individual_bai), path(fasta), path(fai)
+    tuple val(meta), path(individual_bam), path(individual_bai)
+    tuple val(meta2), path(fasta)
+    tuple val(meta3), path(fai)
     tuple val(meta), path(paternal_bam), path(paternal_bai)
     tuple val(meta), path(maternal_bam), path(maternal_bai)
 

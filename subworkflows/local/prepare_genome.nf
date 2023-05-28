@@ -7,18 +7,19 @@ workflow PREPARE_GENOME {
     ch_fasta // channel: [ val(meta), fasta ]
     
     main:
+
     ch_versions = Channel.empty()
 
     SAMTOOLS_FAIDX ( ch_fasta )
-    ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions.first())
-
     MINIMAP2_INDEX ( ch_fasta )
+    
+    // Gather versions 
+    ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions.first())
     ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions.first())
     
     emit:
-    fasta = ch_fasta                  // channel: [ val(meta), fasta ]
-    fai   = SAMTOOLS_FAIDX.out.fai    // channel: [ val(meta), fai ]
-    mmi   = MINIMAP2_INDEX.out.index  // channel: [ val(meta), mmi ]
-
-    versions = ch_versions            // channel: [ versions.yml ]
+    fasta = ch_fasta                           // channel: [ val(meta), fasta ]
+    fai   = SAMTOOLS_FAIDX.out.fai.collect()   // channel: [ val(meta), fai ]
+    mmi   = MINIMAP2_INDEX.out.index.collect() // channel: [ val(meta), mmi ]
+    versions = ch_versions                     // channel: [ versions.yml ]
 }

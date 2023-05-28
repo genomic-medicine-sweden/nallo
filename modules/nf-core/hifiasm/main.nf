@@ -10,9 +10,7 @@ process HIFIASM {
         'biocontainers/hifiasm:0.19.5--h5b5514e_1' }"
 
     input:
-    tuple val(meta),  path(reads)
-    tuple val(meta2), path(paternal_kmer_dump)
-    tuple val(meta3), path(maternal_kmer_dump)
+    tuple val(meta),  path(reads), path(paternal_kmer_dump), path(maternal_kmer_dump)
     path  hic_read1
     path  hic_read2
 

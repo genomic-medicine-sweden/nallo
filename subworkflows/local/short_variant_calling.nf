@@ -1,8 +1,7 @@
-// Is this the best way?
-include { DEEPVARIANT } from '../../modules/local/google/deepvariant'
+include { DEEPVARIANT               } from '../../modules/local/google/deepvariant'
 include { PEPPER_MARGIN_DEEPVARIANT } from '../../modules/local/pepper_margin_deepvariant'
-include { DEEPTRIO    } from '../../modules/local/google/deeptrio'
-include { GLNEXUS     } from '../../modules/nf-core/glnexus'
+include { DEEPTRIO                  } from '../../modules/local/google/deeptrio'
+include { GLNEXUS                   } from '../../modules/nf-core/glnexus'
 
 workflow SHORT_VARIANT_CALLING {
 
@@ -14,42 +13,12 @@ workflow SHORT_VARIANT_CALLING {
     ch_ped
 
     main:
-    ch_snp_calls_vcf = Channel.empty()
+    ch_snp_calls_vcf  = Channel.empty()
     ch_snp_calls_gvcf = Channel.empty()
-    ch_combined_bcf = Channel.empty()
-    ch_extra_gvcfs = Channel.empty()
+    ch_combined_bcf   = Channel.empty()
+    ch_versions       = Channel.empty()
 
-    ch_versions = Channel.empty()
-
-    if(params.variant_caller == 'deepvariant') {
-        // First run DeepVariant with the aligned reads
-        DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
-  
-        // Then run GlNexus to join-call genotypes (+ add previously run samples)
-        GLNEXUS ( DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name }.map{ [[id:"multisample"], it]} )
-         
-        ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-  
-        ch_snp_calls_vcf = DEEPVARIANT.out.vcf
-        ch_snp_calls_gvcf = DEEPVARIANT.out.gvcf
-        ch_combined_bcf = GLNEXUS.out.bcf
-    
-    } else if (params.variant_caller == 'pepper_margin_deepvariant') {
-        
-        // First run DeepVariant with the aligned reads
-        PEPPER_MARGIN_DEEPVARIANT ( ch_bam_bai.combine(ch_fasta.map { it[1] }).combine(ch_fai.map { it[1] }) )
-  
-        GLNEXUS ( PEPPER_MARGIN_DEEPVARIANT.out.gvcf.map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name }.map{ [[id:"multisample"], it]} )
-         
-        ch_versions = ch_versions.mix(PEPPER_MARGIN_DEEPVARIANT.out.versions)
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-  
-        ch_snp_calls_vcf = PEPPER_MARGIN_DEEPVARIANT.out.vcf
-        ch_snp_calls_gvcf = PEPPER_MARGIN_DEEPVARIANT.out.gvcf
-        ch_combined_bcf = GLNEXUS.out.bcf
-
-    } else if (params.variant_caller == 'deeptrio') {
+    if (params.variant_caller == 'deeptrio') {
         ch_ped
             .combine(ch_bam_bai
                 .map{ meta, bam, bai -> [meta.id, bam, bai]
@@ -77,34 +46,60 @@ workflow SHORT_VARIANT_CALLING {
         
         trio_kids = ch_samples.is_trio.map{[it[0], it[1], it[2]]}
         trio_dads = ch_samples.is_trio.map{[it[0], it[3], it[4]]}
-        trio_moms = ch_samples.is_trio.map{[it[0], it[5], it[6]]}
+        trio_moms = ch_samples.is_trio.map{[it[0], it[5], it[6]]}  
 
         //non_trio_kids = ch_samples.no_trio.map{[it[0], it[1], it[2]]} // These can be someone elses mom or dad 
         //non_trio_dads = ch_samples.no_trio.map{[it[0], it[3], it[4]]} // These should all be empty
         //non_trio_moms = ch_samples.no_trio.map{[it[0], it[5], it[6]]} // These should all be empty
-        
-        DEEPTRIO( trio_kids.combine( ch_fasta.map{ it[1] } ).combine( ch_fai.map{ it[1] } ), trio_dads, trio_moms, 'PACBIO')
         
         // Get 3 vcf files back...we should collect all
         // Deal with multiple Parent VCFs in nextflow/GLNexus by naming them child.child/paternal/maternal 
         // and the person running multiple trios per family will have to deal with it later (me)
         // Do we even want to merge though?
         
-        GLNEXUS ( DEEPTRIO.out.gvcf.map { it [1] }.collect().concat(ch_extra_gvcfs.map{ it[1] } ).collect().sort { it.name } )
-    
         // Maaaybe do an is_parent check and if not, run DEEPVARIANT
 
-        ch_versions = ch_versions.mix(DEEPTRIO.out.versions)
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-  
-        ch_snp_calls_vcf = DEEPTRIO.out.vcf
-        ch_snp_calls_gvcf = DEEPTRIO.out.gvcf
-        ch_combined_bcf = GLNEXUS.out.multisample_bcf
+    } else {
+        trio_kids = Channel.empty()
+        trio_dads = Channel.empty()
+        trio_moms = Channel.empty()
     }
-  
-    emit:
-    ch_snp_calls_vcf
+    
+    // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
+    DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai )
+    PEPPER_MARGIN_DEEPVARIANT ( ch_bam_bai, ch_fasta, ch_fai )
+    DEEPTRIO                  ( trio_kids, ch_fasta, ch_fai, trio_dads, trio_moms)
+    
+    // Collect VCFs
+    ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPVARIANT.out.vcf)
+    ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(PEPPER_MARGIN_DEEPVARIANT.out.vcf)
+    ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPTRIO.out.vcf)
+    
+    // Collect GVCFs
+    ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(DEEPVARIANT.out.gvcf)
+    ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(PEPPER_MARGIN_DEEPVARIANT.out.gvcf)
+    ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(DEEPTRIO.out.gvcf)
+      
+    // Combine with extra gvcfs
     ch_snp_calls_gvcf
-    ch_combined_bcf
-    versions = ch_versions
+        .map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } )
+        .collect()
+        .sort { it.name }
+        .map{ [[id:"multisample"], it]}
+        .set{ ch_glnexus_in }
+        
+    // Then run GlNexus to join-call genotypes
+    GLNEXUS ( ch_glnexus_in )
+    
+    // Get versions 
+    ch_versions     = ch_versions.mix(DEEPVARIANT.out.versions)
+    ch_versions     = ch_versions.mix(PEPPER_MARGIN_DEEPVARIANT.out.versions)
+    ch_versions     = ch_versions.mix(DEEPTRIO.out.versions)
+    ch_versions     = ch_versions.mix(GLNEXUS.out.versions)
+    
+    emit:
+    snp_calls_vcf  = ch_snp_calls_vcf
+    snp_calls_gvcf = ch_snp_calls_gvcf
+    combined_bcf   = GLNEXUS.out.bcf
+    versions       = ch_versions
 }

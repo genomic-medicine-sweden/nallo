@@ -19,15 +19,13 @@ workflow ASSEMBLY_VARIANT_CALLING {
                     .flatten()
                     .collate(3)
                     .map{ [it[0]['id'], it[0], it[1], it[2] ]}
-                    .combine(ch_fasta.map{ it[1] })
-                    .combine(ch_fai.map{it[1]})
-                    .combine(ch_mmi.map{it[1]})
-                    .combine(ch_par)
                     .join(ch_ped.map{ [ it['id'], it['sex'] ] }, by: 0)
-                    .map{[it[1], it[2], it[3], it[4], it[5], it[6], it[7], it[8]]}
+                    .map{ [it[1], it[2], it[3], it[4]]}
     
-    // Make sure reference has chrY PARs hard masked
-    DIPCALL ( dipcall_input )
+    par = ch_par.collect()
+
+    //Make sure reference has chrY PARs hard masked
+    DIPCALL ( dipcall_input, ch_fasta, ch_fai, ch_mmi, par )
     ch_versions = ch_versions.mix(DIPCALL.out.versions)
     
     emit:

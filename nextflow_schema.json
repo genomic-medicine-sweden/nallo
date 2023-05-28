@@ -330,7 +330,7 @@
         },
         "preset": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "variant_caller": {
             "type": "string",
