@@ -13,7 +13,11 @@ process DIPCALL {
     // "To make proper calls on sex chromosomes, users should hard mask PARs on the reference chrY."
     
     input:
-    tuple val(meta), path(haplotype_1), path(haplotype_2), path(reference), path(fai), path(mmi), path(par), val(sex)
+    tuple val(meta), path(haplotype_1), path(haplotype_2), val(sex)
+    tuple val(meta2), path(reference)
+    tuple val(meta3), path(fai)
+    tuple val(meta4), path(mmi)
+    path(par)
 
     output:
     tuple val(meta), path("*.dip.vcf.gz") , emit: variant_calls

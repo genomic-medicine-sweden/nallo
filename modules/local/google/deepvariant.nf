@@ -10,7 +10,9 @@ process DEEPVARIANT {
     }
 
     input:
-    tuple val(meta), path(bam), path(bai), path(fasta), path(fai)
+    tuple val(meta), path(bam), path(bai)
+    tuple val(meta2), path(fasta)
+    tuple val(meta3), path(fai)
 
     output:
     tuple val(meta), path("${prefix}.vcf.gz")  ,  emit: vcf
@@ -22,9 +24,9 @@ process DEEPVARIANT {
     task.ext.when == null || task.ext.when
 
     script:
-    def args    = task.ext.args ?: ''
+    def args       = task.ext.args ?: ''
     def model_type = task.ext.model_type ?: ''
-    prefix      = task.ext.prefix ?: "${meta.id}"
+    prefix         = task.ext.prefix ?: "${meta.id}"
     //def regions = intervals ? "--regions ${intervals}" : ""
 
     """

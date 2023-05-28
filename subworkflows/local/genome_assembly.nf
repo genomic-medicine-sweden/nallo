@@ -14,8 +14,16 @@ workflow ASSEMBLY {
     ch_versions = Channel.empty()
 
     if(params.hifiasm_mode == 'hifi-only') {
-        HIFIASM ( ch_reads, [[],[]], [[],[]], [], []) // [ [meta], fastq ]
+        
+        // Why is this working?
+        x = Channel.of([]).toList()
+        y = ch_reads.combine(x).combine(x)
+
+        HIFIASM ( y, [], []) // [ [meta], fastq ]
     } else if(params.hifiasm_mode == 'trio-binning') {
+
+        // TODO: Multiple trios with different parents may not work! But this is not checked in PED either
+
         ch_ped
             .combine(ch_reads
                 .map{ meta, reads -> [meta.id, reads]
@@ -59,7 +67,7 @@ workflow ASSEMBLY {
         all_kid_reads = trio_kids.concat(non_trio_kids)
         // TODO: How to be really sure dad/mom are inputed correctly? Since test dataset all have same parents this needs to be double checked..
         
-        HIFIASM (all_kid_reads, paternal_yak_or_empty, maternal_yak_or_empty, [], [] ) 
+        HIFIASM (all_kid_reads.join(paternal_yak_or_empty).join(maternal_yak_or_empty), [], [] ) 
         
         ch_versions = ch_versions.mix(YAK_PATERNAL.out.versions.first())
         ch_versions = ch_versions.mix(YAK_MATERNAL.out.versions.first())

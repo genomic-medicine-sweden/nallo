@@ -8,7 +8,8 @@ process SNIFFLES_MULTISAMPLE {
         'quay.io/biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
     input:
-    tuple path(reference), path(fai), path(snfs)
+    path(snfs)
+    tuple val(meta), path(reference)
     path(tandem_file)
 
     output:

@@ -23,7 +23,11 @@ process CRAMINO {
     prefix      = task.ext.prefix ?: "${meta.id}"
 
     """
-    cramino $args --threads $task.cpus --arrow ${bam.baseName}.arrow ${bam} > ${bam.baseName}.cramino.txt 
+    cramino \\
+        $args \\
+        --threads $task.cpus \\
+        --arrow ${bam.baseName}.arrow \\
+        ${bam} > ${bam.baseName}.cramino.txt 
 
 
     cat <<-END_VERSIONS > versions.yml

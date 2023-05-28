@@ -1,6 +1,5 @@
 include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_INDEX } from '../../modules/nf-core/samtools/index/main'
-include { CRAMINO        } from '../../modules/local/cramino'
 
 workflow ALIGN_READS {
 
@@ -10,24 +9,26 @@ workflow ALIGN_READS {
 
     main:
     ch_versions = Channel.empty()
-    
-    MINIMAP2_ALIGN( ch_fastq.combine( ch_mmi.map{ it[1] } ), true, false, false )
-    ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first())
 
+    // Remap index
+    ch_mmi = ch_mmi.map{ it [1] }
+
+    
+    MINIMAP2_ALIGN( ch_fastq.combine( ch_mmi ), true, false, false )
     SAMTOOLS_INDEX ( MINIMAP2_ALIGN.out.bam )
+    
+    MINIMAP2_ALIGN.out.bam
+        .join(SAMTOOLS_INDEX.out.bai)
+        .set{ ch_bam_bai }
+
+    // Gather versions
+    ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first())
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
 
-    MINIMAP2_ALIGN
-        .out.bam
-        .concat(SAMTOOLS_INDEX.out.bai)
-        .groupTuple().flatten().collate(3)
-        .set{ch_bam_bai}
-    
-    CRAMINO ( ch_bam_bai )
-    ch_versions = ch_versions.mix(CRAMINO.out.versions.first())
-
     emit:
-    bam_bai  = ch_bam_bai  // channel: [ val(meta), bam, bai]
-    versions = ch_versions // channel: [ versions.yml ]
+    bam      = MINIMAP2_ALIGN.out.bam // channel: [ val(meta), bam ]
+    bai      = SAMTOOLS_INDEX.out.bai // channel: [ val(meta), bai ]
+    bam_bai  = ch_bam_bai             // channel: [ val(meta), bam, bai]
+    versions = ch_versions            // channel: [ versions.yml ]
 }
 

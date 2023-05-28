@@ -8,7 +8,7 @@
 
 ## Introduction
 
-**fellen31/skierfe** is a bioinformatics analysis pipeline for long-read rare disease SV/SNV identification. Heavily influenced by best-practice analysis pipelines such as [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease) and the [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake).
+**fellen31/skierfe** is a bioinformatics analysis pipeline for long-read rare disease SV/SNV identification. Heavily influenced by best-practice analysis pipelines such as [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease) and the [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake)...
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
@@ -19,16 +19,20 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-- Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2))
-- Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-  - With the option of adding previously run samples for quicker analysis (`--extra_snfs`)
-- Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant))
-- Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-  - With the option of adding previously run samples for quicker analysis (`--extra_gvcfs`)
-- Assemble haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
-- Call variants ([`dipcall`](https://github.com/lh3/dipcall)) 
-  > **Note** Make sure chrY PAR is hard masked in reference
-- Filtering...
+1. Raw read QC ([`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+2. Align reads to reference ([`minimap2`](https://github.com/PacificBiosciences/pbmm2))
+    - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
+    - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
+3. Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+4. Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
+    - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+    - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap))
+5. Create methylation pileups per haplotype, if Revio or ONT-data ([`modkit`](https://github.com/nanoporetech/modkit)) 
+6. Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+7. Call variants ([`dipcall`](https://github.com/lh3/dipcall)) 
+    > **Note** Make sure chrY PAR is hard masked in reference
+8. Annotation...
+9. Filtering... 
 
 ![Pipeline summary](/docs/images/skierfe-concept-150523.png)
 
@@ -42,7 +46,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 Download the pipeline and ~~test it on a minimal dataset run with a single command:~~
 
    ```bash
-   nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta --dipcall_par /path/to/hs38.PAR.bed [--trio --ped /path/to/family.ped] [--extra_snfs extra_snfs.csv --extra_gvcfs extra_gvcfs.csv]
+   nextflow run fellen31/skierfe -r dev -profile YOURPROFILE --outdir <OUTDIR> --input samplesheet.csv --fasta /path/to/GRCh38_no_alt_analysis_set.fasta --dipcall_par /path/to/hs38.PAR.bed --preset <revio/pacbio/ONT_R9/ONT_R10> [--ped /path/to/family.ped]
    ```
 
    To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
