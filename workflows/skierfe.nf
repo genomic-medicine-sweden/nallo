@@ -16,7 +16,8 @@ def checkPathParamList = [ params.input,
                            params.extra_snfs, 
                            params.extra_gvcfs,
                            params.dipcall_par,
-                           params.tandem_repeats
+                           params.tandem_repeats,
+                           params.trgt_repeats
                          ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
@@ -28,8 +29,16 @@ if (!params.skip_assembly_wf) {
     if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Input PAR-file not specified!' }
 }
-if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf) {
-    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios and dipcall!' }
+if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf | !params.skip_repeat_wf) {
+    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios, dipcall and repeats!' }
+}
+
+if (!params.skip_repeat_wf) {
+    if(!params.skip_short_variant_calling) {
+        if (params.trgt_repeats) { ch_trgt_bed = Channel.fromPath(params.trgt_repeats).collect() } else { exit 1, 'TGT repeat BED not specified.'}
+    } else {
+        exit 1, 'Short variant calling required for repeat analysis'
+    }
 }
 
 validPresets = ["revio", "pacbio", "ONT_R9", "ONT_R10"]
@@ -52,13 +61,21 @@ def getValidWorkflows(preset) {
     switch(preset) {
         case "pacbio":
             return ["skip_methylation_wf"]
-    }
+        case "ONT_R9":
+            return ["skip_repeat_wf"]
+        case "ONT_R10":
+            return ["skip_repeat_wf"]
+    } 
 }
 
 // Validate presets
 if(params.preset !in validPresets) {
     exit 1, "Valid presets are: $validPresets"
 } else if(params.preset == "pacbio" & !params.skip_methylation_wf) { 
+    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
+} else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) { 
+    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
+} else if(params.preset == "ONT_R10" & !params.skip_repeat_wf) { 
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 }
 // Validate hifiasm_modes 
@@ -115,8 +132,9 @@ include { ALIGN_READS                      } from '../subworkflows/local/align_r
 include { QC_ALIGNED_READS                 } from '../subworkflows/local/qc_aligned_reads'
 include { STRUCTURAL_VARIANT_CALLING       } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING            } from '../subworkflows/local/short_variant_calling'
+include { REPEAT_ANALYSIS                  } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                      } from '../subworkflows/local/methylation'
-
+include { WHATSHAP                         } from '../subworkflows/local/whatshap'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -160,7 +178,7 @@ workflow SKIERFE {
     GVCFS_CHECK ( ch_input_gvcfs )
         .ch_sample.set { ch_extra_gvcfs }
 
-    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf) { 
+    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf | !params.skip_repeat_wf) { 
       PED_CHECK(ch_input_ped)
         .ch_ped_processed
         .set{ ch_ped }
@@ -220,16 +238,27 @@ workflow SKIERFE {
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         
+        
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
             
+            WHATSHAP ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, bam_bai, fasta, fai)
+            ch_versions = ch_versions.mix(WHATSHAP.out.versions)
+            
             if(!params.skip_methylation_wf) {
-                METHYLATION( bam_bai, SHORT_VARIANT_CALLING.out.snp_calls_vcf, fasta, fai )
+                METHYLATION( WHATSHAP.out.haplotagged_bam_bai, SHORT_VARIANT_CALLING.out.snp_calls_vcf, fasta, fai )
                 ch_versions = ch_versions.mix(METHYLATION.out.versions)
             }
-        } 
+        
+            if(!params.skip_repeat_wf) {
+                REPEAT_ANALYSIS( WHATSHAP.out.haplotagged_bam_bai, fasta, ch_ped, ch_trgt_bed)
+            }
+        }
+        
+       
+
     }
 
     CUSTOM_DUMPSOFTWAREVERSIONS (

@@ -7,8 +7,6 @@ include { MODKIT_PILEUP                        } from '../../modules/local/modki
 include { MODKIT_PILEUP  as MODKIT_PILEUP_HP1  } from '../../modules/local/modkit/pileup/main'
 include { MODKIT_PILEUP  as MODKIT_PILEUP_HP2  } from '../../modules/local/modkit/pileup/main'
 
-include { WHATSHAP } from '../../subworkflows/local/whatshap'
-
 workflow METHYLATION {
 
     take:
@@ -23,11 +21,10 @@ workflow METHYLATION {
     // TODO: Allow PED for more accurate phasing 
     // TODO: Move haplotagging to its own workflow?
     // Phase SNPs-calls - move to SV-calling subworkflow? 
-    WHATSHAP ( ch_vcf, ch_bam_bai, ch_fasta, ch_fai)
 
     // Extract haplotagged reads into separate files 
-    SAMTOOLS_VIEW_HP1( WHATSHAP.out.haplotagged_bam_bai, ch_fasta, [] )
-    SAMTOOLS_VIEW_HP2( WHATSHAP.out.haplotagged_bam_bai, ch_fasta, [] )
+    SAMTOOLS_VIEW_HP1( ch_bam_bai, ch_fasta, [] )
+    SAMTOOLS_VIEW_HP2( ch_bam_bai, ch_fasta, [] )
 
     // Index new bams 
     SAMTOOLS_INDEX_HP1 ( SAMTOOLS_VIEW_HP1.out.bam )
@@ -49,7 +46,7 @@ workflow METHYLATION {
     // ...Maybe we could to this only on male chrX and chrY?
     // TODO: Fix inconsistent naming between hp1/2 and haplotagged bams?
     
-    MODKIT_PILEUP( WHATSHAP.out.haplotagged_bam_bai, ch_fasta, ch_fai)
+    MODKIT_PILEUP( ch_bam_bai, ch_fasta, ch_fai)
     
     // Sometimes you may want per haplotype methylation
     MODKIT_PILEUP_HP1 ( ch_bam_bai_hp1, ch_fasta, ch_fai)
