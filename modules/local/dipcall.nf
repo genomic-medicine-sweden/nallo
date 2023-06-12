@@ -60,7 +60,7 @@ process DIPCALL {
     
     bedtk isec -m ${prefix}.hap1.bed ${prefix}.hap2.bed > ${prefix}.dip.bed
 
-    k8 /usr/local/bin/dipcall-aux.js vcfpair ${prefix}.pair.vcf.gz | htsbox bgzip > ${prefix}.dip.vcf.gz
+    k8 /usr/local/bin/dipcall-aux.js vcfpair -s ${prefix} ${prefix}.pair.vcf.gz | htsbox bgzip > ${prefix}.dip.vcf.gz
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -92,7 +92,7 @@ process DIPCALL {
     bedtk sub ${prefix}.hap1.bed ${prefix}.hap2.bed | egrep '^(chr)?Y' >> ${prefix}.tmp.bed
     bedtk sort ${prefix}.tmp.bed > ${prefix}.dip.bed
     
-    k8 /usr/local/bin/dipcall-aux.js vcfpair -p ${par} ${prefix}.pair.vcf.gz | htsbox bgzip > ${prefix}.dip.vcf.gz
+    k8 /usr/local/bin/dipcall-aux.js vcfpair -s ${meta.id} -p ${par} ${prefix}.pair.vcf.gz | htsbox bgzip > ${prefix}.dip.vcf.gz
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
