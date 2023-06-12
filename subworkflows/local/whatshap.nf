@@ -1,7 +1,8 @@
-include { WHATSHAP_PHASE } from '../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS } from '../../modules/local/whatshap/stats/main'
-include { WHATSHAP_HAPLOTAG } from '../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                            } from '../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                            } from '../../modules/local/whatshap/stats/main'
+include { WHATSHAP_HAPLOTAG                         } from '../../modules/local/whatshap/haplotag/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP } from '../../modules/nf-core/samtools/index/main'
+include { CRAMINO as CRAMINO_PHASED                 } from '../../modules/local/cramino'
 
 workflow WHATSHAP {
     take:
@@ -32,12 +33,20 @@ workflow WHATSHAP {
             .out.bam
             .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
             .set{ch_bam_bai_haplotagged}
-        
+         
+         // Prepare inputs
+        ch_bam_bai_haplotagged
+            .map{ meta, bam, bai -> [ meta, bam, bai, [] ] }
+            .set{ ch_mosdepth_in }   
+    
+        CRAMINO_PHASED(ch_bam_bai_haplotagged)
+
         // Get versions
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions.first())
         ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions.first())
         ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions.first())
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions.first())
+        ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions.first())
 
     emit:
     haplotagged_bam_bai = ch_bam_bai_haplotagged // channel: [ val(meta), bam, bai ]
