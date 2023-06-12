@@ -341,6 +341,16 @@
             "type": "string",
             "default": "hifi-only",
             "description": "Run hifiasm in hifi-only or hifi-trio mode"
+        },
+        "trgt_repeats": {
+            "type": "string",
+            "default": "None",
+            "description": "BED-file for repeats to be genotyped",
+            "format": "file-path"
+        },
+        "skip_repeat_wf": {
+            "type": "boolean",
+            "description": "Skip repeat analysis workflow"
         }
     },
     "required": ["preset"]
