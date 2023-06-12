@@ -28,11 +28,12 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
     - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
     - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap))
 5. Create methylation pileups per haplotype, if Revio or ONT-data ([`modkit`](https://github.com/nanoporetech/modkit)) 
-6. Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
-7. Call variants ([`dipcall`](https://github.com/lh3/dipcall)) 
+6. Run tandem repeat analysis if Revio or PacBio data ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+7. Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+8. Call variants ([`dipcall`](https://github.com/lh3/dipcall)) 
     > **Note** Make sure chrY PAR is hard masked in reference
-8. Annotation...
-9. Filtering... 
+9. Annotation...
+10. Filtering... 
 
 ![Pipeline summary](/docs/images/skierfe-concept-150523.png)
 
