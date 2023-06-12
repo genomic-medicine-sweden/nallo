@@ -1,7 +1,7 @@
 include { WHATSHAP_PHASE } from '../../modules/local/whatshap/phase/main'
 include { WHATSHAP_STATS } from '../../modules/local/whatshap/stats/main'
 include { WHATSHAP_HAPLOTAG } from '../../modules/local/whatshap/haplotag/main'
-include { SAMTOOLS_INDEX } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP } from '../../modules/nf-core/samtools/index/main'
 
 workflow WHATSHAP {
     take:
@@ -25,19 +25,19 @@ workflow WHATSHAP {
         WHATSHAP_HAPLOTAG(ch_whatshap_haplotag_in, fasta, fai)
 
         // Index reads
-        SAMTOOLS_INDEX ( WHATSHAP_HAPLOTAG.out.bam )
+        SAMTOOLS_INDEX_WHATSHAP ( WHATSHAP_HAPLOTAG.out.bam )
         
         // Combine haplotagged bams with bai
         WHATSHAP_HAPLOTAG
             .out.bam
-            .join(SAMTOOLS_INDEX.out.bai)
+            .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
             .set{ch_bam_bai_haplotagged}
         
         // Get versions
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions.first())
         ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions.first())
         ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions.first())
-        ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
+        ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions.first())
 
     emit:
     haplotagged_bam_bai = ch_bam_bai_haplotagged // channel: [ val(meta), bam, bai ]
