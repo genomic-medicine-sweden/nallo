@@ -21,11 +21,6 @@
                         "git_sha": "0435e4eebc94e53721c194b2d5d06f455a79e407",
                         "installed_by": ["modules"]
                     },
-                    "bcftools/query": {
-                        "branch": "master",
-                        "git_sha": "4b67587330aa81ab2f3f3b5b709adf21c6f6f8b2",
-                        "installed_by": ["modules"]
-                    },
                     "bcftools/sort": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
@@ -40,12 +35,6 @@
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
-                    },
-                    "gawk": {
-                        "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/gawk/gawk.diff"
                     },
                     "gfastats": {
                         "branch": "master",

@@ -1,11 +1,8 @@
 include { TRGT                                  } from '../../modules/local/trgt.nf'
-include { TRVZ                                  } from '../../modules/local/trvz.nf'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT   } from '../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT   } from '../../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_TRGT } from '../../modules/nf-core/bcftools/index/main'
-include { BCFTOOLS_QUERY as BCFTOOLS_QUERY_TRGT } from '../../modules/nf-core/bcftools/query/main'
-include { GAWK                                  } from '../../modules/nf-core/gawk/main'
 include { BCFTOOLS_MERGE                        } from '../../modules/nf-core/bcftools/merge/main'
 
 workflow REPEAT_ANALYSIS {
