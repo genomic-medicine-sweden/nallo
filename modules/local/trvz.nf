@@ -2,7 +2,7 @@ process TRVZ {
     tag "$meta.id"
     label 'process_single'
     
-    container "docker.io/pacbio/trgt:0.4.0"
+    container "quay.io/pacbio/trgt:0.4.0"
 
     input:
     tuple val(meta), path(bam), path(bai), path(vcf), path(csi), path(single_repeat)
