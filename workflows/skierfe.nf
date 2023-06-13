@@ -253,7 +253,7 @@ workflow SKIERFE {
             }
         
             if(!params.skip_repeat_wf) {
-                REPEAT_ANALYSIS( WHATSHAP.out.haplotagged_bam_bai, fasta, ch_ped, ch_trgt_bed)
+                REPEAT_ANALYSIS( WHATSHAP.out.haplotagged_bam_bai, fasta, fai, ch_ped, ch_trgt_bed)
             }
         }
         

@@ -1,0 +1,14 @@
+Changes in module 'nf-core/bcftools/merge'
+--- modules/nf-core/bcftools/merge/main.nf
++++ modules/nf-core/bcftools/merge/main.nf
+@@ -36,7 +36,7 @@
+         --threads $task.cpus \\
+         --output ${prefix}.${extension} \\
+         $args \\
+-        *.vcf.gz
++        $vcfs
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+************************************************************
