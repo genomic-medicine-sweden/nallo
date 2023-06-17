@@ -55,8 +55,9 @@
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b",
-                        "installed_by": ["modules"]
+                        "git_sha": "603ecbd9f45300c9788f197d2a15a005685b4220",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/minimap2/align/minimap2-align.diff"
                     },
                     "minimap2/index": {
                         "branch": "master",

@@ -1,6 +1,7 @@
 process MINIMAP2_ALIGN {
     tag "$meta.id"
     label 'process_high'
+    label 'process_long'
 
     // Note: the versions here need to match the versions used in the mulled container below and minimap2/index
     conda "bioconda::minimap2=2.26 bioconda::samtools=1.17"
