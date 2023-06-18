@@ -208,7 +208,7 @@ workflow SKIERFE {
         //Hifiasm assembly
         ASSEMBLY( ch_sample, ch_ped )
         // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai, mmi, ch_ped, ch_par )
+        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai, ch_ped, ch_par )
         
         // Gather versions 
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
