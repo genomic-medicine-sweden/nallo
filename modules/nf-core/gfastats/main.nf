@@ -1,6 +1,6 @@
 process GFASTATS {
     tag "$meta.id"
-    label 'process_low'
+    label 'process_single'
 
     conda "bioconda::gfastats=1.3.5"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?

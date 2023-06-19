@@ -1,5 +1,5 @@
 process MINIMAP2_INDEX {
-    label 'process_small'
+    label 'process_low'
 
     // Note: the versions here need to match the versions used in minimap2/align
     conda "bioconda::minimap2=2.26"
