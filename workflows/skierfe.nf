@@ -134,7 +134,8 @@ include { STRUCTURAL_VARIANT_CALLING       } from '../subworkflows/local/structu
 include { SHORT_VARIANT_CALLING            } from '../subworkflows/local/short_variant_calling'
 include { REPEAT_ANALYSIS                  } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                      } from '../subworkflows/local/methylation'
-include { WHATSHAP                         } from '../subworkflows/local/whatshap'
+include { PHASING                          } from '../subworkflows/local/phasing'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -244,8 +245,8 @@ workflow SKIERFE {
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
             
-            WHATSHAP ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, bam_bai, fasta, fai)
-            ch_versions = ch_versions.mix(WHATSHAP.out.versions)
+            PHASING ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, bam_bai, fasta, fai)
+            ch_versions = ch_versions.mix(PHASING.out.versions)
             
             if(!params.skip_methylation_wf) {
                 METHYLATION( WHATSHAP.out.haplotagged_bam_bai, SHORT_VARIANT_CALLING.out.snp_calls_vcf, fasta, fai )
@@ -253,7 +254,7 @@ workflow SKIERFE {
             }
         
             if(!params.skip_repeat_wf) {
-                REPEAT_ANALYSIS( WHATSHAP.out.haplotagged_bam_bai, fasta, fai, ch_ped, ch_trgt_bed)
+                REPEAT_ANALYSIS( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_ped, ch_trgt_bed)
             }
         }
         
