@@ -1,6 +1,6 @@
 process FASTQC {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
 
     conda "bioconda::fastqc=0.11.9"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?

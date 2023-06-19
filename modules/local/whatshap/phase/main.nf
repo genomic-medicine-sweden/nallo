@@ -1,6 +1,6 @@
 process WHATSHAP_PHASE {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_low'
 
     conda "bioconda::whatshap=1.7 bioconda::tabix=1.11"
     container "docker.io/fellen31/whatshap-tabix:latest"
