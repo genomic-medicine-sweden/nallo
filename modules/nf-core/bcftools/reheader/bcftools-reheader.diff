@@ -1,0 +1,71 @@
+Changes in module 'nf-core/bcftools/reheader'
+--- modules/nf-core/bcftools/reheader/main.nf
++++ modules/nf-core/bcftools/reheader/main.nf
+@@ -8,12 +8,11 @@
+         'biocontainers/bcftools:1.17--haef29d1_0' }"
+ 
+     input:
+-    tuple val(meta), path(vcf), path(header)
+-    tuple val(meta2), path(fai)
++    tuple val(meta), path(vcf)
+ 
+     output:
+-    tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
+-    path "versions.yml"                               , emit: versions
++    tuple val(meta), path("*.vcf"), emit: vcf
++    path "versions.yml"           , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+@@ -21,26 +20,15 @@
+     script:
+     def args = task.ext.args ?: ''
+     def prefix = task.ext.prefix ?: "${meta.id}"
+-    def update_sequences = fai ? "-f $fai" : ""
+-    def new_header       = header ? "-h $header" : ""
++    """
+ 
+-    def args2 = task.ext.args2 ?: '--output-type z'
+-    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
+-                    args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
+-                    args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
+-                    args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
+-                    "vcf"
+-    """
++    echo ${meta.id} > samples
++
+     bcftools \\
+         reheader \\
+-        $update_sequences \\
+-        $new_header \\
+-        $args \\
+-        --threads $task.cpus \\
++        -s samples \\
+         $vcf \\
+-        | bcftools view \\
+-        $args2 \\
+-        --output ${prefix}.${extension}
++        > ${prefix}.vcf
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+@@ -49,16 +37,10 @@
+     """
+ 
+     stub:
+-    def args2 = task.ext.args2 ?: '--output-type z'
+     def prefix = task.ext.prefix ?: "${meta.id}"
+ 
+-    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
+-                    args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
+-                    args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
+-                    args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
+-                    "vcf"
+     """
+-    touch ${prefix}.${extension}
++    touch ${prefix}.vcf
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+************************************************************
