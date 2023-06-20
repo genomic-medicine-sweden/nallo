@@ -244,8 +244,8 @@ workflow SKIERFE {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai, ch_ped )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
-            
-            PHASING ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, bam_bai, fasta, fai)
+            // TODO: if !params.skip_structural_variant_calling
+            PHASING ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
             ch_versions = ch_versions.mix(PHASING.out.versions)
             
             if(!params.skip_methylation_wf) {
