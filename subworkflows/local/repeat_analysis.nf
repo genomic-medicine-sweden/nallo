@@ -1,4 +1,4 @@
-include { TRGT                                  } from '../../modules/local/trgt.nf'
+include { TRGT                                  } from '../../modules/local/trgt'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT   } from '../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT   } from '../../modules/nf-core/bcftools/sort/main'
@@ -11,22 +11,18 @@ workflow REPEAT_ANALYSIS {
     ch_bam_bai
     ch_fasta
     ch_fai
-    ch_ped
     ch_trgt_bed
 
     main:
     ch_repeat_calls_vcf = Channel.empty()
     ch_versions         = Channel.empty()
     
-    // Combine BAM/BAI with ped to get correct karyotype for TGRT
     ch_bam_bai
-        .map{ [it[0]['id'], it[0], it[1], it[2] ]}
-        .join(ch_ped.map{ [ it['id'], it['sex'] ] }, by: 0)
-        .map{ [it[1], it[2], it[3], it[4]]}
-        .set{ ch_tgrt_input } 
+        .map{ meta, bam, bai -> [meta, bam, bai, meta.sex] }
+        .set{ ch_trgt_input }
     
     // Run TGRT
-    TRGT ( ch_tgrt_input, ch_fasta, ch_trgt_bed )
+    TRGT ( ch_trgt_input, ch_fasta, ch_trgt_bed )
     
     // Sort and index bam
     SAMTOOLS_SORT_TRGT(TRGT.out.bam)
@@ -40,10 +36,20 @@ workflow REPEAT_ANALYSIS {
         .join(BCFTOOLS_INDEX_TRGT.out.csi)
         .set{ ch_bcftools_query_in }
     
-    vcfs = ch_bcftools_query_in.map{[['id':'multisample'],it[1]]}.groupTuple()
-    csis = ch_bcftools_query_in.map{[['id':'multisample'],it[2]]}.groupTuple()
+    ch_bcftools_query_in
+        .map{[['id':'multisample'],it[1]]}
+        .groupTuple()
+        .set{ vcfs }
+    
+    ch_bcftools_query_in
+        .map{[['id':'multisample'],it[2]]}
+        .groupTuple()
+        .set{ csis }
 
-    vcfs.cross(csis).map{[it[0][0], it[0][1], it[1][1]]}.set{ch_bcftools_merge_in}
+    vcfs
+        .cross(csis)
+        .map{[it[0][0], it[0][1], it[1][1]]}
+        .set{ch_bcftools_merge_in}
 
     BCFTOOLS_MERGE(ch_bcftools_merge_in, ch_fasta, ch_fai, [])
     

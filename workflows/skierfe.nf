@@ -16,7 +16,6 @@ WorkflowSkierfe.initialise(params, log)
 def checkPathParamList = [ params.input, 
                            params.multiqc_config, 
                            params.fasta, 
-                           params.ped, 
                            params.extra_snfs, 
                            params.extra_gvcfs,
                            params.dipcall_par,
@@ -27,7 +26,7 @@ def checkPathParamList = [ params.input,
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Chech mandatory input files
-ch_sample         = Channel.fromSamplesheet('input', immutable_meta: true)
+ch_sample         = Channel.fromSamplesheet('input', immutable_meta: false)
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
 // Check optional input files
@@ -38,12 +37,7 @@ ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repea
 
 // Check mandatory files if not skipping files
 if (!params.skip_assembly_wf) { 
-    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for dipcall!' }
     if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Input PAR-file not specified!' }
-}
-
-if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf | !params.skip_repeat_wf) {
-    if (params.ped) { ch_input_ped = Channel.fromPath(params.ped) } else { exit 1, 'Input PED-file not specified - needed for trios, dipcall and repeats!' }
 }
 
 if (!params.skip_repeat_wf) {
@@ -114,7 +108,6 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 
 include { FQCRS                            } from '../modules/local/fqcrs'
 
-include { PED_CHECK                        } from '../subworkflows/local/ped_check'
 include { PREPARE_GENOME                   } from '../subworkflows/local/prepare_genome'
 include { ASSEMBLY                         } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING         } from '../subworkflows/local/assembly_variant_calling'
@@ -156,14 +149,6 @@ workflow SKIERFE {
     //
     // SUBWORKFLOW: Read in samplesheet(s), validate and stage input files
     //
-    
-    if(params.variant_caller == 'deeptrio' | params.hifiasm_mode == 'trio-binning' | !params.skip_assembly_wf | !params.skip_repeat_wf) { 
-      PED_CHECK(ch_input_ped)
-        .ch_ped_processed
-        .set{ ch_ped }
-    } else {
-        ch_ped = Channel.empty()
-    }
    
     // Fastq QC 
     FASTQC( ch_sample )
@@ -185,9 +170,9 @@ workflow SKIERFE {
     if(!params.skip_assembly_wf) {
 
         //Hifiasm assembly
-        ASSEMBLY( ch_sample, ch_ped )
+        ASSEMBLY( ch_sample )
         // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai, ch_ped, ch_par )
+        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai, ch_par )
         
         // Gather versions 
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
@@ -219,7 +204,7 @@ workflow SKIERFE {
         
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai, ch_ped )
+            SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
             // TODO: if !params.skip_structural_variant_calling
             PHASING ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
@@ -231,7 +216,7 @@ workflow SKIERFE {
             }
         
             if(!params.skip_repeat_wf) {
-                REPEAT_ANALYSIS( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_ped, ch_trgt_bed)
+                REPEAT_ANALYSIS( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed)
             }
         }
         

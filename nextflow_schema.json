@@ -323,7 +323,7 @@
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode",
-                    "enum": ["hifi-only", "hifi-trio"],
+                    "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 }
             },
@@ -359,11 +359,6 @@
                     "type": "string",
                     "format": "file-path",
                     "description": "Tandem repeat BED-file for sniffles"
-                },
-                "ped": {
-                    "type": "string",
-                    "description": "Privide a PED-file for trios",
-                    "format": "file-path"
                 },
                 "trgt_repeats": {
                     "type": "string",
