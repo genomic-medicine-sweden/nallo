@@ -16,25 +16,25 @@ process HIFIASM {
     path  hic_read2
 
     output:
-    tuple val(meta), path("*.bp.r_utg.gfa")         , emit: raw_unitigs
-    tuple val(meta), path("*.bp.r_utg.lowQ.bed")    , emit: raw_unitigs_lowq        , optional: true
-    tuple val(meta), path("*.bp.r_utg.noseq.gfa")   , emit: raw_unitigs_noseq       , optional: true
-    tuple val(meta), path("*.ec.bin")               , emit: corrected_reads
-    tuple val(meta), path("*.ovlp.source.bin")      , emit: source_overlaps
-    tuple val(meta), path("*.ovlp.reverse.bin")     , emit: reverse_overlaps
-    tuple val(meta), path("*.bp.p_utg.gfa")         , emit: processed_unitigs       , optional: true
-    tuple val(meta), path("*.bp.p_utg.lowQ.bed")    , emit: processed_unitigs_lowq  , optional: true
-    tuple val(meta), path("*.bp.p_utg.noseq.gfa")   , emit: processed_unitigs_noseq , optional: true
-    tuple val(meta), path("*.bp.p_ctg.gfa")         , emit: primary_contigs         , optional: true
-    tuple val(meta), path("*.bp.p_ctg.lowQ.bed")    , emit: primary_contigs_lowq    , optional: true
-    tuple val(meta), path("*.bp.p_ctg.noseq.gfa")   , emit: primary_contigs_noseq   , optional: true
-    tuple val(meta), path("*.hap1.p_ctg.gfa")       , emit: paternal_contigs        , optional: true
-    tuple val(meta), path("*.hap2.p_ctg.gfa")       , emit: maternal_contigs        , optional: true
-    tuple val(meta), path("*.hap1.p_ctg.lowQ.bed")  , emit: paternal_lowq           , optional: true
-    tuple val(meta), path("*.hap2.p_ctg.lowQ.bed")  , emit: maternal_lowq           , optional: true
-    tuple val(meta), path("*.hap1.p_ctg.noseq.gfa") , emit: paternal_noseq          , optional: true
-    tuple val(meta), path("*.hap2.p_ctg.noseq.gfa") , emit: maternal_noseq          , optional: true
-    path  "versions.yml"                            , emit: versions
+    tuple val(meta), path("*.{dip,bp}.r_utg.gfa")      , emit: raw_unitigs
+    tuple val(meta), path("*.{dip,bp}.r_utg.lowQ.bed") , emit: raw_unitigs_lowq        , optional: true
+    tuple val(meta), path("*.{dip,bp}.r_utg.noseq.gfa"), emit: raw_unitigs_noseq       , optional: true
+    tuple val(meta), path("*.ec.bin")                  , emit: corrected_reads
+    tuple val(meta), path("*.ovlp.source.bin")         , emit: source_overlaps
+    tuple val(meta), path("*.ovlp.reverse.bin")        , emit: reverse_overlaps
+    tuple val(meta), path("*.{dip,bp}.p_utg.gfa")      , emit: processed_unitigs       , optional: true
+    tuple val(meta), path("*.{dip,bp}.p_utg.lowQ.bed") , emit: processed_unitigs_lowq  , optional: true
+    tuple val(meta), path("*.{dip,bp}.p_utg.noseq.gfa"), emit: processed_unitigs_noseq , optional: true
+    tuple val(meta), path("*.{dip,bp}.p_ctg.gfa")      , emit: primary_contigs         , optional: true
+    tuple val(meta), path("*.{dip,bp).p_ctg.lowQ.bed") , emit: primary_contigs_lowq    , optional: true
+    tuple val(meta), path("*.{dip,bp}.p_ctg.noseq.gfa"), emit: primary_contigs_noseq   , optional: true
+    tuple val(meta), path("*.hap1.p_ctg.gfa")          , emit: paternal_contigs        , optional: true
+    tuple val(meta), path("*.hap2.p_ctg.gfa")          , emit: maternal_contigs        , optional: true
+    tuple val(meta), path("*.hap1.p_ctg.lowQ.bed")     , emit: paternal_lowq           , optional: true
+    tuple val(meta), path("*.hap2.p_ctg.lowQ.bed")     , emit: maternal_lowq           , optional: true
+    tuple val(meta), path("*.hap1.p_ctg.noseq.gfa")    , emit: paternal_noseq          , optional: true
+    tuple val(meta), path("*.hap2.p_ctg.noseq.gfa")    , emit: maternal_noseq          , optional: true
+    path  "versions.yml"                               , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
