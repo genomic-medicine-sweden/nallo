@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/fellen31/skierfe/master/assets/schema_input.json",
-    "title": "fellen31/skierfe pipeline - params.input schema",
-    "description": "Schema for the file provided with params.input",
+    "$id": "https://raw.githubusercontent.com/fellen31/skierfe/master/assets/schema_snfs.json",
+    "title": "fellen31/skierfe pipeline - params.extra_snfs schema",
+    "description": "Schema for the file provided with params.extra_snfs",
     "type": "array",
     "items": {
         "type": "object",
@@ -14,10 +14,10 @@
                 "meta": ["id"]
             },
             "file": {
-                "format": "file-path",
                 "type": "string",
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "format": "file-path",
+                "pattern": "^\\S+\\.snf$",
+                "errorMessage": "SNF file must be provided, cannot contain spaces and must have extension '.snf'"
             }
         },
         "required": ["sample", "file"]

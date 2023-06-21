@@ -5,6 +5,40 @@
     "description": "Long-read rare disease SV/SNV-identification",
     "type": "object",
     "definitions": {
+        "workflow_skip_options": {
+            "title": "Workflow skip options",
+            "type": "object",
+            "description": "Options to skip various steps within the workflow",
+            "default": "",
+            "properties": {
+                "skip_short_variant_calling": {
+                    "type": "boolean",
+                    "description": "Skip short variant calling",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_assembly_wf": {
+                    "type": "boolean",
+                    "description": "Skip assembly and downstream processes",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_mapping_wf": {
+                    "type": "boolean",
+                    "description": "Skip read mapping and downstream processes",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_methylation_wf": {
+                    "type": "boolean",
+                    "description": "Skip methylation workflow",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_repeat_wf": {
+                    "type": "boolean",
+                    "description": "Skip repeat analysis workflow",
+                    "fa_icon": "fas fa-fast-forward"
+                }
+            },
+            "fa_icon": "fas fa-american-sign-language-interpreting"
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -52,7 +86,8 @@
                     "type": "string",
                     "description": "Name of iGenomes reference.",
                     "fa_icon": "fas fa-book",
-                    "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
+                    "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details.",
+                    "hidden": true
                 },
                 "fasta": {
                     "type": "string",
@@ -62,11 +97,6 @@
                     "description": "Path to FASTA genome file.",
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
                     "fa_icon": "far fa-file-code"
-                },
-                "dipcall_par": {
-                    "type": "string",
-                    "description": "Provide a bed file of chrX PAR regions for dipcall",
-                    "format": "file-path"
                 },
                 "igenomes_base": {
                     "type": "string",
@@ -81,7 +111,8 @@
                     "description": "Do not load the iGenomes reference config.",
                     "fa_icon": "fas fa-ban",
                     "hidden": true,
-                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
+                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`.",
+                    "default": true
                 }
             },
             "required": ["fasta"]
@@ -269,26 +300,83 @@
                     "description": "Show all params when using `--help`",
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
+                }
+            }
+        },
+        "workflow_options": {
+            "title": "Workflow options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "default": "revio",
+                    "description": "Choose a preset depending on data type",
+                    "enum": ["revio", "pacbio", "ONT_R9", "ONT_R10"]
+                },
+                "variant_caller": {
+                    "type": "string",
+                    "default": "deepvariant",
+                    "description": "Choose variant caller"
+                },
+                "hifiasm_mode": {
+                    "type": "string",
+                    "description": "Run hifiasm in hifi-only or hifi-trio mode",
+                    "enum": ["hifi-only", "hifi-trio"],
+                    "default": "hifi-only"
+                }
+            },
+            "required": ["preset"]
+        },
+        "extra_file_inputs": {
+            "title": "Extra file inputs",
+            "type": "object",
+            "description": "Different processes may need extra input files",
+            "default": "",
+            "fa_icon": "fas fa-copy",
+            "properties": {
+                "dipcall_par": {
+                    "type": "string",
+                    "description": "Provide a bed file of chrX PAR regions for dipcall",
+                    "format": "file-path"
+                },
+                "extra_gvcfs": {
+                    "type": "string",
+                    "description": "Extra input files for GLNexus",
+                    "pattern": "^\\S+\\.csv$",
+                    "format": "file-path",
+                    "schema": "assets/schema_gvcfs.json"
+                },
+                "extra_snfs": {
+                    "type": "string",
+                    "description": "Extra input files for Sniffles",
+                    "pattern": "^\\S+\\.csv$",
+                    "format": "file-path",
+                    "schema": "assets/schema_snfs.json"
+                },
+                "tandem_repeats": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Tandem repeat BED-file for sniffles"
                 },
                 "ped": {
                     "type": "string",
                     "description": "Privide a PED-file for trios",
                     "format": "file-path"
                 },
-                "extra_gvcfs": {
+                "trgt_repeats": {
                     "type": "string",
-                    "default": "None",
-                    "description": "Extra input files for GLNexus"
-                },
-                "extra_snfs": {
-                    "type": "string",
-                    "default": "None",
-                    "description": "Extra input files for Sniffles"
+                    "description": "BED-file for repeats to be genotyped",
+                    "format": "file-path"
                 }
             }
         }
     },
     "allOf": [
+        {
+            "$ref": "#/definitions/workflow_skip_options"
+        },
         {
             "$ref": "#/definitions/input_output_options"
         },
@@ -303,55 +391,12 @@
         },
         {
             "$ref": "#/definitions/generic_options"
+        },
+        {
+            "$ref": "#/definitions/workflow_options"
+        },
+        {
+            "$ref": "#/definitions/extra_file_inputs"
         }
-    ],
-    "properties": {
-        "tandem_repeats": {
-            "type": "string",
-            "default": "None",
-            "format": "file-path",
-            "description": "Tandem repeat BED-file for sniffles"
-        },
-        "skip_short_variant_calling": {
-            "type": "boolean",
-            "description": "Skip DeepVariant/Trio"
-        },
-        "skip_assembly_wf": {
-            "type": "boolean",
-            "description": "Skip assembly and downstream processes"
-        },
-        "skip_mapping_wf": {
-            "type": "boolean",
-            "description": "Skip read mapping and downstream processes"
-        },
-        "skip_methylation_wf": {
-            "type": "boolean",
-            "description": "Skip methylation workflow"
-        },
-        "preset": {
-            "type": "string",
-            "default": "None"
-        },
-        "variant_caller": {
-            "type": "string",
-            "default": "deepvariant",
-            "description": "Choose variant caller"
-        },
-        "hifiasm_mode": {
-            "type": "string",
-            "default": "hifi-only",
-            "description": "Run hifiasm in hifi-only or hifi-trio mode"
-        },
-        "trgt_repeats": {
-            "type": "string",
-            "default": "None",
-            "description": "BED-file for repeats to be genotyped",
-            "format": "file-path"
-        },
-        "skip_repeat_wf": {
-            "type": "boolean",
-            "description": "Skip repeat analysis workflow"
-        }
-    },
-    "required": ["preset"]
+    ]
 }
