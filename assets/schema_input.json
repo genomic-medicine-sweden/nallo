@@ -18,8 +18,38 @@
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "family_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Family ID must be provided and cannot contain spaces. If no family ID is available, use the same ID as the sample.",
+                "meta": ["family_id"]
+            },
+            "paternal_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use any ID not in sample column.",
+                "meta": ["paternal_id"]
+            },
+            "maternal_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use any ID not in sample column.",
+                "meta": ["maternal_id"]
+            },
+            "sex": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sex must be provided as 1 (male) or 2 (female)",
+                "meta": ["sex"]
+            },
+            "phenotype": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Phenoype must be provided as 1 (unaffected) or 2 (affected)",
+                "meta": ["phenotype"]
             }
         },
-        "required": ["sample", "file"]
+        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype"]
     }
 }

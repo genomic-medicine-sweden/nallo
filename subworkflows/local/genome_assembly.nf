@@ -8,7 +8,6 @@ workflow ASSEMBLY {
 
     take:
     ch_reads // channel: [ val(meta), fastq ]
-    ch_ped   // channel: [ val(metameta) ]
     
     main:
     ch_versions = Channel.empty()
@@ -24,7 +23,8 @@ workflow ASSEMBLY {
 
         // TODO: Multiple trios with different parents may not work! But this is not checked in PED either
 
-        ch_ped
+        ch_reads
+            .map{it[0]}
             .combine(ch_reads
                 .map{ meta, reads -> [meta.id, reads]
                 }
@@ -35,7 +35,7 @@ workflow ASSEMBLY {
                 dad: it[0]['paternal_id'] == it[1]
             }
             .set{branch_result}
-        
+            
         branch_result
             .kid
             .join(branch_result.dad, remainder: true)

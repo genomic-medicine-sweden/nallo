@@ -12,12 +12,6 @@
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
-            },
-            "file": {
-                "type": "string",
-                "format": "file-path",
-                "pattern": "^\\S+\\.snf$",
-                "errorMessage": "SNF file must be provided, cannot contain spaces and must have extension '.snf'"
             }
         },
         "required": ["sample", "file"]

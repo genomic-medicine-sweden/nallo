@@ -10,7 +10,6 @@ workflow SHORT_VARIANT_CALLING {
     ch_extra_gvcfs
     ch_fasta
     ch_fai
-    ch_ped
 
     main:
     ch_snp_calls_vcf  = Channel.empty()
@@ -19,7 +18,8 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions       = Channel.empty()
 
     if (params.variant_caller == 'deeptrio') {
-        ch_ped
+        ch_reads
+            .map{it[0]}
             .combine(ch_bam_bai
                 .map{ meta, bam, bai -> [meta.id, bam, bai]
                 }

@@ -57,25 +57,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 `samplesheet.csv`
 ```
-sample,file
-HG002,/path/to/HG002.fastq.gz
-HG005,/path/to/HG005.fastq.gz
+sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
+HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
-2. If applicable, prepare a PED-file for input data:
-
-> **Note** Individual ID (column 2) needs to match the sample column in `samplesheet.csv`.
-
-`samples.ped`
-```
-FAM001  HG002  0 0  1  2
-FAM001  HG005  0 0  1  2
-```
-3. If applicable, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) and a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+2. If applicable, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) and a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 
 > **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
 
-4. Download the pipeline and ~~test it on a minimal dataset run with a single command~~ run:
+3. Download the pipeline and ~~test it on a minimal dataset run with a single command~~ run:
 
    ```bash
    nextflow run fellen31/skierfe -r dev -profile YOURPROFILE \
