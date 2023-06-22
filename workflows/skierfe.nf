@@ -211,7 +211,7 @@ workflow SKIERFE {
             ch_versions = ch_versions.mix(PHASING.out.versions)
             
             if(!params.skip_methylation_wf) {
-                METHYLATION( WHATSHAP.out.haplotagged_bam_bai, SHORT_VARIANT_CALLING.out.snp_calls_vcf, fasta, fai )
+                METHYLATION( PHASING.out.haplotagged_bam_bai, SHORT_VARIANT_CALLING.out.snp_calls_vcf, fasta, fai )
                 ch_versions = ch_versions.mix(METHYLATION.out.versions)
             }
         
