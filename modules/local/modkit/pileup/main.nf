@@ -30,7 +30,6 @@ process MODKIT_PILEUP {
         --threads ${task.cpus} \\
         --ref $fasta \\
         --log-filepath ${bam.baseName}.modkit.log \\
-        --prefix 
         ${bam} \\
         ${meta.id}.${bam.baseName}.bed
     
