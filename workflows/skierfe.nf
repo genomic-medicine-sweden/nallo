@@ -32,25 +32,32 @@ ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, i
 // Check optional input files
 ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
-
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.empty()
 
-// Check mandatory files if not skipping files
-if (!params.skip_assembly_wf) { 
-    if (params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Input PAR-file not specified!' }
-}
-
-if (!params.skip_repeat_wf) {
-    if(!params.skip_short_variant_calling) {
-        if (params.trgt_repeats) { ch_trgt_bed = Channel.fromPath(params.trgt_repeats).collect() } else { exit 1, 'TGT repeat BED not specified.'}
-    } else {
-        exit 1, 'Short variant calling required for repeat analysis'
+def checkUnsupportedCombinations() {
+    if (params.skip_short_variant_calling) {
+        if (params.skip_phasing_wf & !params.skip_methylation_wf) {
+            exit 1, 'Cannot run methylation analysis without short variant calling and phasing'
+        } else if (params.skip_phasing_wf & !params.skip_repeat_wf) {
+            exit 1, 'Cannot run repeat analysis without short variant calling and phasing'
+        } else if (!params.skip_phasing_wf) {
+             exit 1, 'Cannot run phasing analysis without short variant calling'
+        } else if (!params.skip_repeat_wf ) {
+            exit 1, 'Cannot run repeat analysis without short variant calling'
+        }
+    }
+    if (!params.skip_assembly_wf) {
+        if(params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Input PAR-file not specified!' }
+    }
+    if (!params.skip_short_variant_calling & !params.skip_repeat_wf) {
+        if (params.trgt_repeats) { ch_trgt_bed = Channel.fromPath(params.trgt_repeats).collect() } else { exit 1, 'TGT repeat BED not specified.' }
     }
 }
 
-// Validate workflows for different presets
-validPresets = ["revio", "pacbio", "ONT_R9", "ONT_R10"]
+// Check and set input files that are mandatory for some analyses
+checkUnsupportedCombinations()
 
+// Validate workflows for different presets
 def getValidCallers(preset) {
     switch(preset) {
         case "revio":
@@ -72,12 +79,10 @@ def getValidWorkflows(preset) {
             return ["skip_repeat_wf"]
         case "ONT_R10":
             return ["skip_repeat_wf"]
-    } 
+    }
 }
 
-if(params.preset !in validPresets) {
-    exit 1, "Valid presets are: $validPresets"
-} else if(params.preset == "pacbio" & !params.skip_methylation_wf) { 
+if(params.preset == "pacbio" & !params.skip_methylation_wf) { 
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 } else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) { 
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
@@ -98,36 +103,31 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES/SUBWORKFLOWS
+    IMPORT LOCAL SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//
-// SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
-//
-
-include { FQCRS                            } from '../modules/local/fqcrs'
-
-include { PREPARE_GENOME                   } from '../subworkflows/local/prepare_genome'
-include { ASSEMBLY                         } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING         } from '../subworkflows/local/assembly_variant_calling'
-include { ALIGN_READS                      } from '../subworkflows/local/align_reads'
-include { QC_ALIGNED_READS                 } from '../subworkflows/local/qc_aligned_reads'
-include { STRUCTURAL_VARIANT_CALLING       } from '../subworkflows/local/structural_variant_calling'
-include { SHORT_VARIANT_CALLING            } from '../subworkflows/local/short_variant_calling'
-include { REPEAT_ANALYSIS                  } from '../subworkflows/local/repeat_analysis'
-include { METHYLATION                      } from '../subworkflows/local/methylation'
-include { PHASING                          } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
+include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
+include { ALIGN_READS                } from '../subworkflows/local/align_reads'
+include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
+include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
+include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
+include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
+include { METHYLATION                } from '../subworkflows/local/methylation'
+include { PHASING                    } from '../subworkflows/local/phasing'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT NF-CORE MODULES/SUBWORKFLOWS
+    IMPORT LOCAL/NF-CORE MODULES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//
-// MODULE: Installed directly from nf-core/modules
-//
+// local
+include { FQCRS                       } from '../modules/local/fqcrs'
+
+// nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
@@ -152,7 +152,7 @@ workflow SKIERFE {
    
     // Fastq QC 
     FASTQC( ch_sample )
-    FQCRS ( ch_sample )
+    FQCRS( ch_sample )
     
     ch_versions = ch_versions.mix(FASTQC.out.versions)
     ch_versions = ch_versions.mix(FQCRS.out.versions)
@@ -172,7 +172,7 @@ workflow SKIERFE {
         //Hifiasm assembly
         ASSEMBLY( ch_sample )
         // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai, ch_par )
+        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai )
         
         // Gather versions 
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
@@ -198,25 +198,38 @@ workflow SKIERFE {
         }
         
         // Gather versions 
-        ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
+        ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
         
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
-            // TODO: if !params.skip_structural_variant_calling
-            PHASING ( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
-            ch_versions = ch_versions.mix(PHASING.out.versions)
             
-            if(!params.skip_methylation_wf) {
-                METHYLATION( PHASING.out.haplotagged_bam_bai, fasta, fai )
-                ch_versions = ch_versions.mix(METHYLATION.out.versions)
-            }
-        
-            if(!params.skip_repeat_wf) {
-                REPEAT_ANALYSIS( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed)
+            if(!params.skip_phasing_wf) {
+                // Phase variants with WhatsHap
+                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
+                hap_bam_bai = PHASING.out.haplotagged_bam_bai
+                
+                // Gather versions
+                ch_versions = ch_versions.mix(PHASING.out.versions)
+                
+                if(!params.skip_methylation_wf) {
+                    // Pileup methylation with modkit
+                    METHYLATION( hap_bam_bai, fasta, fai )
+                    
+                    // Gather versions
+                    ch_versions = ch_versions.mix(METHYLATION.out.versions)
+                }
+            
+                if(!params.skip_repeat_wf) {
+                    // Repeat analysis with TRGT
+                    REPEAT_ANALYSIS( hap_bam_bai, fasta, fai, ch_trgt_bed)
+                    
+                    // Gather versions
+                    ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
+                }
             }
         }
         

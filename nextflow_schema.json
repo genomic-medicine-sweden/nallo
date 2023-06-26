@@ -35,6 +35,11 @@
                     "type": "boolean",
                     "description": "Skip repeat analysis workflow",
                     "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_phasing_wf": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip phasing workflow"
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
