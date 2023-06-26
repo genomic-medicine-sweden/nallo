@@ -8,7 +8,6 @@ workflow ASSEMBLY_VARIANT_CALLING {
     ch_haplotypes 
     ch_fasta
     ch_fai
-    ch_par
 
     main:
     ch_sv_calls_vcf = Channel.empty()
@@ -21,7 +20,7 @@ workflow ASSEMBLY_VARIANT_CALLING {
     //Make sure reference has chrY PARs hard masked
     MINIMAP2_INDEX_DIPCALL(ch_fasta)
     
-    DIPCALL( ch_dipcall_input, ch_fasta, ch_fai, MINIMAP2_INDEX_DIPCALL.out.index, ch_par )
+    DIPCALL( ch_dipcall_input, ch_fasta, ch_fai, MINIMAP2_INDEX_DIPCALL.out.index )
     
     SAMTOOLS_INDEX_DIPCALL ( DIPCALL.out.bam.transpose() )
     
