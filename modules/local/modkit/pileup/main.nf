@@ -12,9 +12,9 @@ process MODKIT_PILEUP {
     output:
     tuple val(meta), path("${meta.id}.bed"), emit: bed, optional: true
     // This will break if there are other tags than 1 and 2 I guess
-    tuple val(meta), path("${meta.id}.1.bed")        , emit: haplotype_1, optional: true
-    tuple val(meta), path("${meta.id}.2.bed")        , emit: haplotype_2, optional: true
-    tuple val(meta), path("${meta.id}.ungrouped.bed"), emit: ungrouped, optional: true
+    tuple val(meta), path("${meta.id}.1.bed")         , emit: haplotype_1, optional: true
+    tuple val(meta), path("${meta.id}.2.bed")         , emit: haplotype_2, optional: true
+    tuple val(meta), path("${meta.id}.ungrouped.bed") , emit: ungrouped  , optional: true
     path "*.log", emit: log
     path "versions.yml", emit: versions
 
@@ -30,6 +30,7 @@ process MODKIT_PILEUP {
         --threads ${task.cpus} \\
         --ref $fasta \\
         --log-filepath ${bam.baseName}.modkit.log \\
+        --prefix 
         ${bam} \\
         ${meta.id}.${bam.baseName}.bed
     
