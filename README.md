@@ -36,8 +36,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 
 ##### Phasing and methylation 
-- Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap))
-- Methylation pileups per haplotype, if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit)) 
+- Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
+- Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit)) 
 
 ##### Annotation
 - TBD
@@ -62,7 +62,7 @@ HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
 HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
-2. If applicable, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) and a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+2. If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) and if running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 
 > **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
 
