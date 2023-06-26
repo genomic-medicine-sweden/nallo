@@ -32,7 +32,7 @@ ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, i
 // Check optional input files
 ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
-ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.empty()
+ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
 
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
@@ -146,10 +146,6 @@ workflow SKIERFE {
 
     ch_versions = Channel.empty()
 
-    //
-    // SUBWORKFLOW: Read in samplesheet(s), validate and stage input files
-    //
-   
     // Fastq QC 
     FASTQC( ch_sample )
     FQCRS( ch_sample )
@@ -172,7 +168,7 @@ workflow SKIERFE {
         //Hifiasm assembly
         ASSEMBLY( ch_sample )
         // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai )
+        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai , ch_par)
         
         // Gather versions 
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
@@ -191,11 +187,7 @@ workflow SKIERFE {
         QC_ALIGNED_READS( bam, bai, fasta )
          
         // Call SVs with Sniffles2
-        if(params.tandem_repeats) {
             STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
-        } else {
-            STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, [] )
-        }
         
         // Gather versions 
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
