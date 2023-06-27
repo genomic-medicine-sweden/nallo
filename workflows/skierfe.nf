@@ -13,10 +13,10 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 WorkflowSkierfe.initialise(params, log)
 
-def checkPathParamList = [ params.input, 
-                           params.multiqc_config, 
-                           params.fasta, 
-                           params.extra_snfs, 
+def checkPathParamList = [ params.input,
+                           params.multiqc_config,
+                           params.fasta,
+                           params.extra_snfs,
                            params.extra_gvcfs,
                            params.dipcall_par,
                            params.tandem_repeats,
@@ -82,11 +82,11 @@ def getValidWorkflows(preset) {
     }
 }
 
-if(params.preset == "pacbio" & !params.skip_methylation_wf) { 
+if(params.preset == "pacbio" & !params.skip_methylation_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
-} else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) { 
+} else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
-} else if(params.preset == "ONT_R10" & !params.skip_repeat_wf) { 
+} else if(params.preset == "ONT_R10" & !params.skip_repeat_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 }
 
@@ -146,86 +146,90 @@ workflow SKIERFE {
 
     ch_versions = Channel.empty()
 
-    // Fastq QC 
-    FASTQC( ch_sample )
-    FQCRS( ch_sample )
-    
-    ch_versions = ch_versions.mix(FASTQC.out.versions)
-    ch_versions = ch_versions.mix(FQCRS.out.versions)
-    
-    // Index genome 
+    if(!params.skip_qc) {
+        // Fastq QC
+        FASTQC( ch_sample )
+        FQCRS( ch_sample )
+
+        // Gather versions
+        ch_versions = ch_versions.mix(FASTQC.out.versions)
+        ch_versions = ch_versions.mix(FQCRS.out.versions)
+    }
+
+
+    // Index genome
     PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-    
+
     // Gather indices
     fasta = ch_fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
-    
-    // Assembly workflow 
+
+    // Assembly workflow
     if(!params.skip_assembly_wf) {
 
         //Hifiasm assembly
         ASSEMBLY( ch_sample )
         // Run dipcall
         ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai , ch_par)
-        
-        // Gather versions 
+
+        // Gather versions
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
         ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
     }
 
     if(!params.skip_mapping_wf) {
-        
+
         // Align reads
         ALIGN_READS( ch_sample, mmi )
-        
+
         bam_bai = ALIGN_READS.out.bam_bai
         bam     = ALIGN_READS.out.bam
         bai     = ALIGN_READS.out.bai
-        
+
         QC_ALIGNED_READS( bam, bai, fasta )
-         
+
         // Call SVs with Sniffles2
             STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
-        
-        // Gather versions 
+
+        // Gather versions
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
-        
+
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
-            
+
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
                 PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
                 hap_bam_bai = PHASING.out.haplotagged_bam_bai
-                
+
                 // Gather versions
                 ch_versions = ch_versions.mix(PHASING.out.versions)
-                
+
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
                     METHYLATION( hap_bam_bai, fasta, fai )
-                    
+
                     // Gather versions
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
-            
+
                 if(!params.skip_repeat_wf) {
                     // Repeat analysis with TRGT
                     REPEAT_ANALYSIS( hap_bam_bai, fasta, fai, ch_trgt_bed)
-                    
+
                     // Gather versions
                     ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
                 }
             }
         }
-        
-       
+
+
 
     }
 
@@ -247,7 +251,7 @@ workflow SKIERFE {
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+    if(!params.skip_qc) { ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([])) }
 
     MULTIQC (
         ch_multiqc_files.collect(),
