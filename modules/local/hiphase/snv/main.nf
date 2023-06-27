@@ -11,8 +11,12 @@ process HIPHASE_SNV {
     tuple val(meta3), path(fai)
 
     output:
-    tuple val(meta), path("*.vcf.gz"), emit: vcf
-    path "versions.yml"              , emit: versions
+    tuple val(meta), path("*.haplotagged.bam"), emit: haplotagged_bam
+    tuple val(meta), path("*.phased.vcf.gz")  , emit: phased_vcf
+    tuple val(meta), path("*.stats.csv")      , emit: stats
+    tuple val(meta), path("*.blocks.tsv")     , emit: blocks
+    tuple val(meta), path("*.summary.tsv")    , emit: summary
+    path "versions.yml"                       , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -27,10 +31,11 @@ process HIPHASE_SNV {
         --reference ${fasta} \\
         --bam ${bam} \\
         --vcf ${snp_vcf} \\
+        --output-bam ${prefix}.haplotagged.bam \\
         --output-vcf ${snp_vcf.baseName}.phased.vcf.gz \\
-        --stats-file ${meta.id}.stats.csv \\
-        --blocks-file ${meta.id}.blocks.tsv \\
-        --summary-file ${meta.id}.summary.tsv
+        --stats-file ${prefix}.stats.csv \\
+        --blocks-file ${prefix}.blocks.tsv \\
+        --summary-file ${prefix}.summary.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
