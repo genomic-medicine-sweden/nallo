@@ -114,6 +114,7 @@ include { ALIGN_READS                } from '../subworkflows/local/align_reads'
 include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
+include { CNV                        } from '../subworkflows/local/cnv'
 include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
@@ -191,7 +192,8 @@ workflow SKIERFE {
         QC_ALIGNED_READS( bam, bai, fasta )
 
         // Call SVs with Sniffles2
-            STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
+        STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
+
 
         // Gather versions
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
@@ -210,6 +212,10 @@ workflow SKIERFE {
 
                 // Gather versions
                 ch_versions = ch_versions.mix(PHASING.out.versions)
+
+                // Call CNVs
+                CNV( hap_bam_bai, fasta)
+                ch_versions = ch_versions.mix(CNV.out.versions)
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
