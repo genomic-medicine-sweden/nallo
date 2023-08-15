@@ -3,7 +3,7 @@ process HIFICNV {
     label 'process_low'
 
     conda "bioconda::hificnv=0.1.6b"
-    container "biocontainers/hificnv:0.1.6b--h9ee0642_0"
+    container "quay.io/biocontainers/hificnv:0.1.6b--h9ee0642_0"
 
     input:
     tuple val(meta), path(bam), path(bai)
