@@ -71,7 +71,6 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
    ```bash
    nextflow run fellen31/skierfe -r dev -profile YOURPROFILE \
      --input samplesheet.csv \
-     --ped samples.ped \
      --outdir <OUTDIR> \
      --dipcall_par /path/to/hs38.PAR.bed \
      --fasta /path/to/GRCh38_no_alt_analysis_set.fasta \
