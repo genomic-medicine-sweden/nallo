@@ -9,7 +9,7 @@ process ECHTVAR_ANNO {
     path(databases)
 
     output:
-    tuple val(meta), path("${meta.id}.bcf.gz"), emit: bcf
+    tuple val(meta), path("${meta.id}.anno.bcf.gz"), emit: bcf
     path "versions.yml"                       , emit: versions
 
     when:
