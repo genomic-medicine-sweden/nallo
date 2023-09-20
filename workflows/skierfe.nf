@@ -34,6 +34,9 @@ ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs'
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
 
+// ch_databases should be able to be a list of databases - from samplesheet
+if(params.snp_db) { ch_databases = Channel.fromPath(params.snp_db).collect() } else { exit 1, 'echtvar db needed'}
+
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
         if (params.skip_phasing_wf & !params.skip_methylation_wf) {
@@ -117,6 +120,7 @@ include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant
 include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
+include { RARE_DISEASE               } from '../subworkflows/local/rare_disease'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,6 +206,8 @@ workflow SKIERFE {
             // Call SNVs with DeepVariant/DeepTrio
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+
+            RARE_DISEASE(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta)
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap

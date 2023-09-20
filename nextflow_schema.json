@@ -403,5 +403,11 @@
         {
             "$ref": "#/definitions/extra_file_inputs"
         }
-    ]
+    ],
+    "properties": {
+        "snp_db": {
+            "type": "string",
+            "default": null
+        }
+    }
 }
