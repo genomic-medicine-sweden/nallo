@@ -24,7 +24,6 @@ process ECHTVAR_ANNO {
         modifiedList.add("-e")
         modifiedList.add(element)
     }
-    println databases
     """
     echtvar anno ${modifiedList.join(" ")} ${vcf} ${meta.id}.bcf.gz
 

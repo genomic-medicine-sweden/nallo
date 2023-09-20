@@ -34,8 +34,10 @@ ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs'
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
 
-// ch_databases should be able to be a list of databases - from samplesheet
-if(params.snp_db) { ch_databases = Channel.fromPath(params.snp_db).collect() } else { exit 1, 'echtvar db needed'}
+// TODO: no duplicate dbs should be allowed, although echtvar gives pretty clear error
+if(params.snp_db) { ch_databases = Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() } else { exit 1, 'echtvar db needed'}
+
+
 
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {

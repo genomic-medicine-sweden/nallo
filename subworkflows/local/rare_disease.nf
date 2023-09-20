@@ -27,9 +27,10 @@ workflow RARE_DISEASE {
     ss = ch_single_sample_vcf.join(BCFTOOLS_INDEX_SINGLESAMPLE.out.csi)
     BCFTOOLS_NORM_SINGLESAMPLE(ss, ch_fasta)
 
-
+    // Make a cohort database
     ECHTVAR_ENCODE(BCFTOOLS_NORM.out.vcf)
 
+    // combine input databases with cohort database
     db = ch_databases.concat(ECHTVAR_ENCODE.out.db.map{it[1]}).collect()
 
     //CADD
