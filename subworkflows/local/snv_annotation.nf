@@ -7,14 +7,17 @@ include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_SINGLESAMPLE            } from '../..
 include { BCFTOOLS_VIEW  } from '../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_FILLTAGS  } from '../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO  } from '../../modules/local/bcftools/filltags/main'
+include { ENSEMBLVEP_VEP } from '../../modules/nf-core/ensemblvep/vep/main'
 
-workflow RARE_DISEASE {
+
+workflow SNV_ANNOTATION {
 
     take:
     ch_bcf
     ch_single_sample_vcf
     ch_databases
     ch_fasta
+    ch_vep_cache
 
     main:
     ch_versions       = Channel.empty()
@@ -33,12 +36,22 @@ workflow RARE_DISEASE {
     // combine input databases with cohort database
     db = ch_databases.concat(ECHTVAR_ENCODE.out.db.map{it[1]}).collect()
 
-    //CADD
+    // Annotate with chosen databases (GNOMAD,CADD + SAMPLES_DB)
 
     ECHTVAR_ANNO(BCFTOOLS_NORM_SINGLESAMPLE.out.vcf, db)
     BCFTOOLS_FILLTAGS_ANNO(ECHTVAR_ANNO.out.bcf)
 
+    vep_in = BCFTOOLS_FILLTAGS_ANNO.out.vcf.map{ meta, vcf -> return [meta, vcf, []]}
 
+    ENSEMBLVEP_VEP(
+        vep_in,
+        "GRCh38",
+        "homo_sapiens",
+        "110",
+        ch_vep_cache,
+        ch_fasta,
+        []
+    )
     // Get versions
     ch_versions     = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
     ch_versions     = ch_versions.mix(BCFTOOLS_INDEX.out.versions)

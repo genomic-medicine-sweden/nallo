@@ -11,21 +11,27 @@ process BCFTOOLS_FILLTAGS {
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("*.bcf.gz"), emit: vcf
+    tuple val(meta), path("*.ac.*"), emit: vcf
     path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
+    def args = task.ext.args ?: '--output-type z'
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
+                    args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
+                    args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
+                    args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
+                    "vcf"
+
     """
     bcftools \\
         +fill-tags \\
         $vcf \\
-        -Ob \\
-        -o ${prefix}.ac.bcf.gz \\
+        $args \\
+        -o ${prefix}.ac.${extension} \\
         -- \\
         -t AC
 

@@ -411,6 +411,10 @@
             "format": "file-path",
             "mimetype": "text/csv",
             "schema": "/assets/schema_snpdb.json"
+        },
+        "vep_cache": {
+            "type": "string",
+            "default": null
         }
     }
 }

@@ -20,7 +20,9 @@ def checkPathParamList = [ params.input,
                            params.extra_gvcfs,
                            params.dipcall_par,
                            params.tandem_repeats,
-                           params.trgt_repeats
+                           params.trgt_repeats,
+                           params.snp_db,
+                           params.vep_cache
                          ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
@@ -28,6 +30,7 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Chech mandatory input files
 ch_sample         = Channel.fromSamplesheet('input', immutable_meta: false)
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
+ch_vep_cache      = Channel.fromPath(params.vep_cache).collect()
 
 // Check optional input files
 ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
@@ -122,7 +125,7 @@ include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant
 include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
-include { RARE_DISEASE               } from '../subworkflows/local/rare_disease'
+include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -209,7 +212,7 @@ workflow SKIERFE {
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
-            RARE_DISEASE(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta)
+            SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
