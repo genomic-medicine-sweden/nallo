@@ -30,17 +30,11 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Chech mandatory input files
 ch_sample         = Channel.fromSamplesheet('input', immutable_meta: false)
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
-ch_vep_cache      = Channel.fromPath(params.vep_cache).collect()
 
 // Check optional input files
 ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
-
-// TODO: no duplicate dbs should be allowed, although echtvar gives pretty clear error
-if(params.snp_db) { ch_databases = Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() } else { exit 1, 'echtvar db needed'}
-
-
 
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
@@ -52,13 +46,21 @@ def checkUnsupportedCombinations() {
              exit 1, 'Cannot run phasing analysis without short variant calling'
         } else if (!params.skip_repeat_wf ) {
             exit 1, 'Cannot run repeat analysis without short variant calling'
+        } else if (!params.skip_snv_annotation ) {
+            exit 1, 'Cannot run snv annotation without short variant calling'
         }
     }
     if (!params.skip_assembly_wf) {
-        if(params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Input PAR-file not specified!' }
+        // TODO: should be one assembly wf, and one assembly variant calling wf
+        if(params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Not skipping genome assembly: missing input PAR-file (--dipcall_par)' }
     }
     if (!params.skip_short_variant_calling & !params.skip_repeat_wf) {
-        if (params.trgt_repeats) { ch_trgt_bed = Channel.fromPath(params.trgt_repeats).collect() } else { exit 1, 'TGT repeat BED not specified.' }
+        if (params.trgt_repeats) { ch_trgt_bed = Channel.fromPath(params.trgt_repeats).collect() } else { exit 1, 'Not skipping repeat calling: missing TGT repeat BED (--trgt_repeats)' }
+    }
+    if (!params.skip_short_variant_calling & !params.skip_snv_annotation) {
+        // TODO: no duplicate dbs should be allowed, although echtvar gives pretty clear error
+        if(params.snp_db) { ch_databases = Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() } else { exit 1, 'Not skipping SNV Annotation: Missing Echtvar-DB samplesheet (--snp_db)'}
+        if(params.vep_cache) { ch_vep_cache = Channel.fromPath(params.vep_cache).collect() } else { exit 1, 'Not skipping SNV Annotation: missing path to VEP cache-dir (--vep_cache)'}
     }
 }
 
@@ -212,7 +214,9 @@ workflow SKIERFE {
             SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
-            SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
+            if(!params.skip_snv_annotation) {
+                SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
+            }
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
