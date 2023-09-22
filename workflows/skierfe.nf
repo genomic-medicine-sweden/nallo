@@ -87,16 +87,12 @@ def getValidWorkflows(preset) {
             return ["skip_methylation_wf"]
         case "ONT_R9":
             return ["skip_repeat_wf"]
-        case "ONT_R10":
-            return ["skip_repeat_wf"]
     }
 }
 
 if(params.preset == "pacbio" & !params.skip_methylation_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 } else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) {
-    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
-} else if(params.preset == "ONT_R10" & !params.skip_repeat_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 }
 
@@ -137,6 +133,7 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 
 // local
 include { FQCRS                       } from '../modules/local/fqcrs'
+include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
@@ -236,7 +233,16 @@ workflow SKIERFE {
 
                 if(!params.skip_repeat_wf) {
                     // Repeat analysis with TRGT
-                    REPEAT_ANALYSIS( hap_bam_bai, fasta, fai, ch_trgt_bed)
+
+                    // Hack read names
+                    if (params.preset == "ONT_R10") {
+                        CONVERT_ONT_READ_NAMES(hap_bam_bai)
+                        ch_repeat_analysis_in = CONVERT_ONT_READ_NAMES.out.bam_bai
+                    } else {
+                        ch_repeat_analysis_in = hap_bam_bai
+                    }
+
+                    REPEAT_ANALYSIS( ch_repeat_analysis_in, fasta, fai, ch_trgt_bed)
 
                     // Gather versions
                     ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
