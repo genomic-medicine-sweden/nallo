@@ -32,7 +32,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
     - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
 - Assembly based variant calls ([`dipcall`](https://github.com/lh3/dipcall))
-- Tandem repeat analysis if Revio/PacBio ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+- Tandem repeat analysis ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 
 
 ##### Phasing and methylation
