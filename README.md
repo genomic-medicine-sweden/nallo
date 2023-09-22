@@ -27,7 +27,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
 - Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
 
-##### Variant calling 
+##### Variant calling
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
 - Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
     - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
@@ -35,14 +35,16 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Tandem repeat analysis if Revio/PacBio ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 
 
-##### Phasing and methylation 
+##### Phasing and methylation
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
-- Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit)) 
+- Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit))
 
-##### Annotation
-- TBD
-  
-##### Filtering 
+##### Annotation - SNV
+1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & AF/AC of all samples run ([`echtvar`](https://github.com/brentp/echtvar))
+2. Annotate variants with [VEP](https://github.com/Ensembl/ensembl-vep)
+
+
+##### Filtering
 
 - TBD
 

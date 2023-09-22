@@ -45,6 +45,10 @@
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
                     "description": "Skip phasing workflow"
+                },
+                "skip_snv_annotation": {
+                    "type": "boolean",
+                    "description": "Skip SNV annotation"
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -374,6 +378,20 @@
                     "type": "string",
                     "description": "BED-file for repeats to be genotyped",
                     "format": "file-path"
+                },
+                "snp_db": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.csv$",
+                    "format": "file-path",
+                    "mimetype": "text/csv",
+                    "schema": "/assets/schema_snpdb.json",
+                    "description": "Extra echtvar-databases to annotate SNVs with"
+                },
+                "vep_cache": {
+                    "type": "string",
+                    "default": "None",
+                    "description": "Path to directory of vep_cache",
+                    "format": "directory-path"
                 }
             }
         }
