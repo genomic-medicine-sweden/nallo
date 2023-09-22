@@ -23,10 +23,10 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
 - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
 
-##### Alignment/assembly (currently HiFi only)
+##### Alignment/assembly
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
-- Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
-- Assembly based variant calls ([`dipcall`](https://github.com/lh3/dipcall))
+- Assemble (trio-binned) haploid genomes (HiFi only) ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 
 ##### Variant calling
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
