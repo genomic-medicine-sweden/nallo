@@ -23,25 +23,24 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
 - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
 
-##### Alignment/assembly
+##### Alignment/assembly (currently HiFi only)
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
 - Assemble (trio-binned) haploid genomes ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+- Assembly based variant calls ([`dipcall`](https://github.com/lh3/dipcall))
 
 ##### Variant calling
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
 - Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
     - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-- Assembly based variant calls ([`dipcall`](https://github.com/lh3/dipcall))
 - Tandem repeat analysis ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
-
 
 ##### Phasing and methylation
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
 - Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit))
 
 ##### Annotation - SNV
-1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & AF/AC of all samples run ([`echtvar`](https://github.com/brentp/echtvar))
-2. Annotate variants with [VEP](https://github.com/Ensembl/ensembl-vep)
+1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & frequencies of samples in current run ([`echtvar`](https://github.com/brentp/echtvar))
+2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
 
 
 ##### Filtering
@@ -64,7 +63,39 @@ HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
 HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
-2. If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) and if running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+2. Optional input files:
+
+- If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
+- If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+- If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
+
+`snp_dbs.csv`
+```
+sample,file
+gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
+cadd,/path/to/cadd.v1.6.hg38.zip
+```
+<!---
+
+- If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
+
+`extra_snfs.csv`
+```
+sample,file
+HG01123,/path/to/HG01123_sniffles.snf
+HG01124,/path/to/HG01124_sniffles.snf
+```
+
+and for SNVs - prepare a samplesheet with gVCF files from DeepVariant:
+
+`extra_gvcfs.csv`
+```
+sample,file
+HG01123,/path/to/HG01123.g.vcf.gz
+HG01124,/path/to/HG01124.g.vcf.gz
+HG01125,/path/to/HG01125.g.vcf.gz
+```
+--->
 
 > **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
 
@@ -74,10 +105,12 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
    nextflow run fellen31/skierfe -r dev -profile YOURPROFILE \
      --input samplesheet.csv \
      --outdir <OUTDIR> \
-     --dipcall_par /path/to/hs38.PAR.bed \
-     --fasta /path/to/GRCh38_no_alt_analysis_set.fasta \
+     --dipcall_par hs38.PAR.bed \
+     --fasta GRCh38_no_alt_analysis_set.fasta \
      --trgt_repeats repeat_catalog_and_pathogenic.bed \
-     --preset < revio/pacbio/ONT_R9/ONT_R10 >
+     --snp_db snp_dbs.csv \
+     --vep_cache /path/to/vep/cache/dir/ \
+     --preset revio/pacbio/ONT_R9/ONT_R10
    ```
 
 To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
