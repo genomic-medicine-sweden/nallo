@@ -421,5 +421,11 @@
         {
             "$ref": "#/definitions/extra_file_inputs"
         }
-    ]
+    ],
+    "properties": {
+        "split_fastq": {
+            "type": "integer",
+            "default": 0
+        }
+    }
 }

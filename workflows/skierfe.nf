@@ -36,6 +36,8 @@ ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs'
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
 
+if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
         if (params.skip_phasing_wf & !params.skip_methylation_wf) {
@@ -134,10 +136,12 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 // local
 include { FQCRS                       } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
+include { SAMTOOLS_CAT_SORT_INDEX     } from '../modules/local/samtools_cat_sort_index'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
+include { FASTP                       } from '../modules/nf-core/fastp/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -155,6 +159,7 @@ workflow SKIERFE {
     ch_versions = Channel.empty()
 
     if(!params.skip_qc) {
+
         // Fastq QC
         FASTQC( ch_sample )
         FQCRS( ch_sample )
@@ -189,17 +194,62 @@ workflow SKIERFE {
 
     if(!params.skip_mapping_wf) {
 
-        // Align reads
-        ALIGN_READS( ch_sample, mmi )
+        // Split FASTQ
+        if (params.split_fastq >= 250) {
 
-        bam_bai = ALIGN_READS.out.bam_bai
-        bam     = ALIGN_READS.out.bam
-        bai     = ALIGN_READS.out.bai
+            /*
+                Preprocess workflow ?
+            */
+
+            // Add meta info for fastp
+            ch_sample
+                .map{ meta, fastq -> [ meta + ["single_end":true], fastq]}
+                .set{ ch_fastp_in }
+
+            // To run this params.split_fastq should be >= 250
+            FASTP( ch_fastp_in, [], [], [] )
+
+            ch_versions = ch_versions.mix(FASTP.out.versions)
+
+            // Transpose and remove single_end from meta - how to just remove one element?
+            FASTP.out.reads
+                .transpose()
+                .map{ meta, split_fastq -> [ [
+                    'id':meta['id'],
+                    'family_id':meta['family_id'],
+                    'paternal_id':meta['paternal_id'],
+                    'maternal_id':meta['maternal_id'],
+                    'sex':meta['sex'],
+                    'phenotype':meta['phenotype'],
+                    ], split_fastq ]}
+                .set { ch_reads }
+
+            ALIGN_READS( ch_reads, mmi )
+
+            ALIGN_READS.out.bam
+                .groupTuple() // Collect aligned files per sample
+                .set{ ch_samtools_cat_in }
+
+            // Make one BAM per sample
+            SAMTOOLS_CAT_SORT_INDEX(ch_samtools_cat_in)
+
+            bam     = SAMTOOLS_CAT_SORT_INDEX.out.bam
+            bai     = SAMTOOLS_CAT_SORT_INDEX.out.bai
+            bam_bai = SAMTOOLS_CAT_SORT_INDEX.out.bam_bai
+
+        } else {
+            // Run if no read splitting
+            ALIGN_READS( ch_sample, mmi)
+
+            bam     = ALIGN_READS.out.bam
+            bai     = ALIGN_READS.out.bai
+            bam_bai = ALIGN_READS.out.bam_bai
+        }
 
         QC_ALIGNED_READS( bam, bai, fasta )
 
         // Call SVs with Sniffles2
-            STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
+        STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
 
         // Gather versions
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
