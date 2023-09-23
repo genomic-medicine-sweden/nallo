@@ -8,7 +8,7 @@ process GLNEXUS {
         'biocontainers/glnexus:1.4.1--h40d77a6_0' }"
 
     input:
-    tuple val(meta), path(gvcfs)
+    tuple val(meta), path(gvcfs), val(region)
 
     output:
     tuple val(meta), path("*.bcf"), emit: bcf
@@ -30,9 +30,12 @@ process GLNEXUS {
         avail_mem = task.memory.giga
     }
     """
+    echo ${region} >> region.bed
+
     glnexus_cli \\
         --threads $task.cpus \\
         --mem-gbytes $avail_mem \\
+        --bed region.bed \\
         $args \\
         ${input.join(' ')} \\
         > ${prefix}.bcf

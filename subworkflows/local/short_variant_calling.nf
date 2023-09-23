@@ -105,22 +105,19 @@ workflow SHORT_VARIANT_CALLING {
     // For extra gVCFS from params.extra_gvfs:
     TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
 
-    // Take extra gVCFs, join with index and set a region for each file in meta
+    // Take extra gVCFs, join with DV-region gVCFs..
+    // Should send a BED file - but test this on slurm first
     ch_extra_gvcfs
-        .join(TABIX_EXTRA_GVCFS.out.tbi)
         .combine(ch_regions)
-        .map{ meta, gvcf, index, region -> [ meta + ['region':region], gvcf, index, region ]}
-        .set{ ch_bcftools_view_regions_in }
-
-    // Extract regions
-    BCFTOOLS_VIEW_REGIONS(ch_bcftools_view_regions_in)
-
-    // Comine per-region split extra gVCFs with samplesheet DeepVariant gVCFSs (already run by region)
-    BCFTOOLS_VIEW_REGIONS.out.vcf
-        .map{ meta, gvcf -> [['id':meta['region'].replaceAll(/[:-]/, "_")], gvcf] } // Here, set the region as id instead, sample ID is in gvcf file
-        .concat(glnexus_regions)
+        .map{meta, gvcf, region ->
+            [['id':region.replaceAll(/[:-]/, "_")], gvcf]
+            }
+        .concat(
+            glnexus_regions
+        )
         .transpose()
         .groupTuple()
+        .map{ meta, gvcfs -> [ meta, gvcfs, meta['id'].replaceAll(/_/, "\t") ] }
         .set{ch_glnexus_in}
 
     // Then run GlNexus to join-call genotypes (per-region)
@@ -166,7 +163,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions     = ch_versions.mix(PEPPER_MARGIN_DEEPVARIANT.out.versions)
     ch_versions     = ch_versions.mix(DEEPTRIO.out.versions)
     ch_versions     = ch_versions.mix(GLNEXUS.out.versions)
-    ch_versions     = ch_versions.mix(BCFTOOLS_VIEW_REGIONS.out.versions)
+    //ch_versions     = ch_versions.mix(BCFTOOLS_VIEW_REGIONS.out.versions)
     ch_versions     = ch_versions.mix(TABIX_EXTRA_GVCFS.out.versions)
     ch_versions     = ch_versions.mix(BCFTOOLS_CONCAT_SINGLESAMPLE.out.versions)
     ch_versions     = ch_versions.mix(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.versions)
