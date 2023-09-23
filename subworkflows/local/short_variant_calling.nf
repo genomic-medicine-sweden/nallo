@@ -1,7 +1,14 @@
-include { DEEPVARIANT               } from '../../modules/local/google/deepvariant'
-include { PEPPER_MARGIN_DEEPVARIANT } from '../../modules/local/pepper_margin_deepvariant'
-include { DEEPTRIO                  } from '../../modules/local/google/deeptrio'
-include { GLNEXUS                   } from '../../modules/nf-core/glnexus'
+include { DEEPVARIANT                      } from '../../modules/local/google/deepvariant'
+include { PEPPER_MARGIN_DEEPVARIANT        } from '../../modules/local/pepper_margin_deepvariant'
+include { DEEPTRIO                         } from '../../modules/local/google/deeptrio'
+include { GLNEXUS                          } from '../../modules/nf-core/glnexus'
+include { BCFTOOLS_VIEW_REGIONS            } from '../../modules/local/bcftools/view_regions'
+include { TABIX_TABIX as TABIX_EXTRA_GVCFS } from '../../modules/nf-core/tabix/tabix/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_SINGLESAMPLE } from '../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_CONCAT_SINGLESAMPLE } from '../../modules/nf-core/bcftools/sort/main'
+include { TABIX_TABIX as TABIX_CONCAT_UNMERGED_MULTISAMPLE } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_CONCAT_UNMERGED_SINGLESAMPLE } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_CONCAT_MERGED_SINGLESAMPLE } from '../../modules/nf-core/tabix/tabix/main'
 
 workflow SHORT_VARIANT_CALLING {
 
@@ -10,6 +17,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_extra_gvcfs
     ch_fasta
     ch_fai
+    ch_regions
 
     main:
     ch_snp_calls_vcf  = Channel.empty()
@@ -17,11 +25,13 @@ workflow SHORT_VARIANT_CALLING {
     ch_combined_bcf   = Channel.empty()
     ch_versions       = Channel.empty()
 
+    // Adding regions to ch_bam_bai surely messes up this below, therefore just remove it for now..?
+
     if (params.variant_caller == 'deeptrio') {
         ch_reads
             .map{it[0]}
             .combine(ch_bam_bai
-                .map{ meta, bam, bai -> [meta.id, bam, bai]
+                .map{ meta, bam, bai, region -> [meta.id, bam, bai]
                 }
             )
             .branch{
@@ -36,27 +46,27 @@ workflow SHORT_VARIANT_CALLING {
             .join(branch_result.dad, remainder: true)
             .join(branch_result.mom, remainder: true)
             .map{[it[0], it[2], it[3], it[5], it[6], it[8], it[9]]} // [meta, kid_bam, kid_bai, dad_bam, dad_bai, mom_bam, mom_bai]
-            .branch{ meta, kid_bam, kid_bai, dad_bam, dad_bai, mom_bam, mom_bai -> 
+            .branch{ meta, kid_bam, kid_bai, dad_bam, dad_bai, mom_bam, mom_bai ->
                 is_trio: (dad_bam != null && dad_bai != null) && (mom_bam != null && mom_bai != null)
-                    return tuple ( meta, kid_bam, kid_bai, dad_bam, dad_bai, mom_bam, mom_bai ) 
+                    return tuple ( meta, kid_bam, kid_bai, dad_bam, dad_bai, mom_bam, mom_bai )
                 no_trio: (dad_bam == null && dad_bai == null) || (mom_bam == null && mom_bai == null)
                     return tuple ( meta, kid_bam, kid_bai, [], [], [], [] )
             }
         .set{ch_samples}
-        
+
         trio_kids = ch_samples.is_trio.map{[it[0], it[1], it[2]]}
         trio_dads = ch_samples.is_trio.map{[it[0], it[3], it[4]]}
-        trio_moms = ch_samples.is_trio.map{[it[0], it[5], it[6]]}  
+        trio_moms = ch_samples.is_trio.map{[it[0], it[5], it[6]]}
 
-        //non_trio_kids = ch_samples.no_trio.map{[it[0], it[1], it[2]]} // These can be someone elses mom or dad 
+        //non_trio_kids = ch_samples.no_trio.map{[it[0], it[1], it[2]]} // These can be someone elses mom or dad
         //non_trio_dads = ch_samples.no_trio.map{[it[0], it[3], it[4]]} // These should all be empty
         //non_trio_moms = ch_samples.no_trio.map{[it[0], it[5], it[6]]} // These should all be empty
-        
+
         // Get 3 vcf files back...we should collect all
-        // Deal with multiple Parent VCFs in nextflow/GLNexus by naming them child.child/paternal/maternal 
+        // Deal with multiple Parent VCFs in nextflow/GLNexus by naming them child.child/paternal/maternal
         // and the person running multiple trios per family will have to deal with it later (me)
         // Do we even want to merge though?
-        
+
         // Maaaybe do an is_parent check and if not, run DEEPVARIANT
 
     } else {
@@ -64,42 +74,109 @@ workflow SHORT_VARIANT_CALLING {
         trio_dads = Channel.empty()
         trio_moms = Channel.empty()
     }
-    
+
     // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
     DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai )
     PEPPER_MARGIN_DEEPVARIANT ( ch_bam_bai, ch_fasta, ch_fai )
     DEEPTRIO                  ( trio_kids, ch_fasta, ch_fai, trio_dads, trio_moms)
-    
+
     // Collect VCFs
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPVARIANT.out.vcf)
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(PEPPER_MARGIN_DEEPVARIANT.out.vcf)
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPTRIO.out.vcf)
-    
+
     // Collect GVCFs
     ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(DEEPVARIANT.out.gvcf)
     ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(PEPPER_MARGIN_DEEPVARIANT.out.gvcf)
     ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(DEEPTRIO.out.gvcf)
-      
-    // Combine with extra gvcfs
-    ch_snp_calls_gvcf
-        .map { it [1] }.concat(ch_extra_gvcfs.map{ it[1] } )
-        .collect()
-        .sort { it.name }
-        .map{ [[id:"multisample"], it]}
-        .set{ ch_glnexus_in }
-        
-    // Then run GlNexus to join-call genotypes
-    GLNEXUS ( ch_glnexus_in )
-    
-    // Get versions 
+
+    // TODO: This only works with DeepVariant for now (remove PEPPER_MARGIN_DEEPVARIANT/Deeptrio?)
+    ch_snp_calls_gvcf_region = DEEPVARIANT.out.gvcf_region
+
+    // Group gVCFs from all samples per region for GLNexus
+    ch_snp_calls_gvcf_region
+        .map{
+            meta, gvcf, region ->
+            [['id':region.replaceAll(/[:-]/, "_")], gvcf] // meta.id = region
+            }
+        .groupTuple()           // size = number of samples (unknown)
+        .set{ glnexus_regions } // channel: [ val(meta.id), path(one_gvcf_per_sample) ]
+
+    // For extra gVCFS from params.extra_gvfs:
+    TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
+
+    // Take extra gVCFs, join with index and set a region for each file in meta
+    ch_extra_gvcfs
+        .join(TABIX_EXTRA_GVCFS.out.tbi)
+        .combine(ch_regions)
+        .map{ meta, gvcf, index, region -> [ meta + ['region':region], gvcf, index, region ]}
+        .set{ ch_bcftools_view_regions_in }
+
+    // Extract regions
+    BCFTOOLS_VIEW_REGIONS(ch_bcftools_view_regions_in)
+
+    // Comine per-region split extra gVCFs with samplesheet DeepVariant gVCFSs (already run by region)
+    BCFTOOLS_VIEW_REGIONS.out.vcf
+        .map{ meta, gvcf -> [['id':meta['region'].replaceAll(/[:-]/, "_")], gvcf] } // Here, set the region as id instead, sample ID is in gvcf file
+        .concat(glnexus_regions)
+        .transpose()
+        .groupTuple()
+        .set{ch_glnexus_in}
+
+    // Then run GlNexus to join-call genotypes (per-region)
+    GLNEXUS( ch_glnexus_in )
+
+    // Tabix the per-region GLNexus multisample bcfs
+    TABIX_CONCAT_UNMERGED_MULTISAMPLE(GLNEXUS.out.bcf)
+
+    // Join the channels, to concat the bcfs
+    GLNEXUS.out.bcf
+        .join(TABIX_CONCAT_UNMERGED_MULTISAMPLE.out.csi)
+        .map{ meta, bcf, tbi -> [['id':'multisample'], bcf, tbi]}
+        .groupTuple()
+        .set{ ch_bcftools_concat_multisample_in }
+
+    // Tabix Singlesample (Deepvariant vcfs) per region
+    TABIX_CONCAT_UNMERGED_SINGLESAMPLE(ch_snp_calls_vcf)
+
+    ch_snp_calls_vcf
+        .groupTuple() // size: number of regions - impossible
+        .join(TABIX_CONCAT_UNMERGED_SINGLESAMPLE.out.tbi.groupTuple())
+        .set{ch_bcftools_concat_singlesample_in}
+
+    // Combine multisample channel with singelsame channel
+    ch_bcftools_concat_singlesample_in
+        .concat(ch_bcftools_concat_multisample_in)
+        .set{ ch_bcftools_concat_all_in }
+
+    // Concat, sort, and index all samples + multisample
+    BCFTOOLS_CONCAT_SINGLESAMPLE(ch_bcftools_concat_all_in)
+    BCFTOOLS_SORT_CONCAT_SINGLESAMPLE(BCFTOOLS_CONCAT_SINGLESAMPLE.out.vcf)
+    TABIX_CONCAT_MERGED_SINGLESAMPLE(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.vcf)
+
+    BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.vcf
+        .branch {
+            multisample: it[0]['id'] == 'multisample'
+            singlesample: it[0]['id'] != 'multisample'
+        }
+        .set{ch_concat_vcf}
+
+    // Get versions
     ch_versions     = ch_versions.mix(DEEPVARIANT.out.versions)
     ch_versions     = ch_versions.mix(PEPPER_MARGIN_DEEPVARIANT.out.versions)
     ch_versions     = ch_versions.mix(DEEPTRIO.out.versions)
     ch_versions     = ch_versions.mix(GLNEXUS.out.versions)
-    
+    ch_versions     = ch_versions.mix(BCFTOOLS_VIEW_REGIONS.out.versions)
+    ch_versions     = ch_versions.mix(TABIX_EXTRA_GVCFS.out.versions)
+    ch_versions     = ch_versions.mix(BCFTOOLS_CONCAT_SINGLESAMPLE.out.versions)
+    ch_versions     = ch_versions.mix(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.versions)
+    ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_MULTISAMPLE.out.versions)
+    ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_SINGLESAMPLE.out.versions)
+    ch_versions     = ch_versions.mix(TABIX_CONCAT_MERGED_SINGLESAMPLE.out.versions)
+
+
     emit:
-    snp_calls_vcf  = ch_snp_calls_vcf
-    snp_calls_gvcf = ch_snp_calls_gvcf
-    combined_bcf   = GLNEXUS.out.bcf
+    snp_calls_vcf  = ch_concat_vcf.singlesample
+    combined_bcf   = ch_concat_vcf.multisample
     versions       = ch_versions
 }

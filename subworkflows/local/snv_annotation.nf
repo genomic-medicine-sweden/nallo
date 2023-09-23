@@ -5,7 +5,6 @@ include { BCFTOOLS_NORM                                 } from '../../modules/nf
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE   } from '../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_INDEX                                } from '../../modules/nf-core/bcftools/index/main'
 include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_SINGLESAMPLE } from '../../modules/nf-core/bcftools/index/main'
-include { BCFTOOLS_VIEW                                 } from '../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_FILLTAGS                             } from '../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO   } from '../../modules/local/bcftools/filltags/main'
 include { ENSEMBLVEP_VEP                                } from '../../modules/nf-core/ensemblvep/vep/main'

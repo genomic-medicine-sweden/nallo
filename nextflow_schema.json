@@ -426,6 +426,10 @@
         "split_fastq": {
             "type": "integer",
             "default": 0
+        },
+        "bed": {
+            "type": "string",
+            "default": null
         }
     }
 }

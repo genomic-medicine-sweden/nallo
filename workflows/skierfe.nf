@@ -22,7 +22,8 @@ def checkPathParamList = [ params.input,
                            params.tandem_repeats,
                            params.trgt_repeats,
                            params.snp_db,
-                           params.vep_cache
+                           params.vep_cache,
+                           params.bed
                          ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
@@ -35,6 +36,7 @@ ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, i
 ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
+ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}  : Channel.empty()
 
 if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
 
@@ -137,6 +139,7 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 include { FQCRS                       } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
 include { SAMTOOLS_CAT_SORT_INDEX     } from '../modules/local/samtools_cat_sort_index'
+include { BUILD_INTERVALS             } from '../modules/local/build_intervals/main'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
@@ -178,6 +181,21 @@ workflow SKIERFE {
     fasta = ch_fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
+
+    if(!params.bed) {
+        // If no bed file is provided, then splits jobs into contigs
+        // For hg38 this will be 195 ...
+        // Main bottleneck is DeepVariant
+
+        fai
+            .map{ name, fai -> [['id':name], fai] }
+            .set{ ch_build_intervals_in }
+
+        BUILD_INTERVALS( ch_build_intervals_in )
+
+        BUILD_INTERVALS.out.bed
+            .set{ ch_bed }
+    }
 
     // Assembly workflow
     if(!params.skip_assembly_wf) {
@@ -246,6 +264,22 @@ workflow SKIERFE {
             bam_bai = ALIGN_READS.out.bam_bai
         }
 
+        // Make regions from BED, combine with bam_bai files for each sample
+        // Split BAMs? Temp files vs. IO?
+
+        ch_bed
+            .splitText()
+            .map{ id, bed -> [ bed.split('\t')[0].trim() + ":" +
+                               bed.split('\t')[1].trim() + "-" +
+                               bed.split('\t')[2].trim()
+                               ]}
+            .set{ ch_regions }
+
+        ch_regions
+            .combine(bam_bai)
+            .map{ region, meta, bam, bai -> [ meta, bam, bai, region] }
+            .set{ ch_snv_calling_in }
+
         QC_ALIGNED_READS( bam, bai, fasta )
 
         // Call SVs with Sniffles2
@@ -258,7 +292,8 @@ workflow SKIERFE {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
+            //SHORT_VARIANT_CALLING( bam_bai.map{ meta, bam, bai -> [meta, bam, bai, ''] }, ch_extra_gvcfs, fasta, fai )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_regions )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {

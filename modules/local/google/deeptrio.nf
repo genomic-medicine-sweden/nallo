@@ -1,7 +1,7 @@
 process DEEPTRIO {
     tag "$meta.id"
     label 'process_high'
-    
+
     container "docker.io/google/deepvariant:deeptrio-1.4.0"
 
     // Exit if running this module with -profile conda / -profile mamba
@@ -10,7 +10,7 @@ process DEEPTRIO {
     }
 
     input:
-    tuple val(meta), path(individual_bam), path(individual_bai)
+    tuple val(meta), path(individual_bam), path(individual_bai), val(intervals)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     tuple val(meta), path(paternal_bam), path(paternal_bai)
