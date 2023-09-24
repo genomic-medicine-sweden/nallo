@@ -23,16 +23,22 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
 - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
 
-##### Alignment/assembly
+##### Alignment & assembly
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
 - Assemble (trio-binned) haploid genomes (HiFi only) ([`hifiasm`](https://github.com/chhylp123/hifiasm))
-- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 
-##### Variant calling
-- Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
+##### Variant calling - SNV
 - Short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
-    - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+- Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+
+#### Variant calling - SV
+- Singe-sample structural variant calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
+
+#### Variant calling - Repeats
 - Tandem repeat analysis ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+
+#### Variant calling - Assembly
+- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 
 ##### Phasing and methylation
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
@@ -41,7 +47,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 ##### Annotation - SNV
 1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & frequencies of samples in current run ([`echtvar`](https://github.com/brentp/echtvar))
 2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
-
 
 ##### Filtering
 
@@ -64,7 +69,7 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
 2. Optional input files:
-
+- Limit SNV calling to regions in BED file (`--bed`) 
 - If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
 - If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 - If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
