@@ -1,5 +1,5 @@
 process SPLIT_BED_CHUNKS {
-    tag "$intervals"
+    tag "$meta"
 
     container "quay.io/biocontainers/pandas:1.5.2"
 

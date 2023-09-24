@@ -33,12 +33,14 @@ ch_sample         = Channel.fromSamplesheet('input', immutable_meta: false)
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
 // Check optional input files
-ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
-ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
-ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
-ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}  : Channel.empty()
+ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false)           : Channel.empty()
+ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)           : Channel.empty()
+ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()                       : Channel.value([])
+ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.empty()
 
+// This should be able to in schema?
 if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
@@ -77,11 +79,9 @@ def getValidCallers(preset) {
         case "revio":
             return ["deepvariant"]
         case "pacbio":
-            return ["deepvariant", "deeptrio", "pepper_margin_deepvariant"]
-        case "ONT_R9":
-            return ["pepper_margin_deepvariant"]
+            return ["deepvariant"]
         case "ONT_R10":
-            return ["deepvariant", "pepper_margin_deepvariant"]
+            return ["deepvariant"]
     }
 }
 
@@ -89,14 +89,10 @@ def getValidWorkflows(preset) {
     switch(preset) {
         case "pacbio":
             return ["skip_methylation_wf"]
-        case "ONT_R9":
-            return ["skip_repeat_wf"]
     }
 }
 
 if(params.preset == "pacbio" & !params.skip_methylation_wf) {
-    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
-} else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 }
 
@@ -183,11 +179,8 @@ workflow SKIERFE {
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
 
+    // If no BED-file is provided then build intervals from reference
     if(!params.bed) {
-        // If no bed file is provided, then splits jobs into contigs
-        // For hg38 this will be 195 ...
-        // Main bottleneck is DeepVariant
-
         fai
             .map{ name, fai -> [['id':name], fai] }
             .set{ ch_build_intervals_in }
@@ -265,12 +258,13 @@ workflow SKIERFE {
             bam_bai = ALIGN_READS.out.bam_bai
         }
 
-        // Split BED/Genome into equal chunks, 13 is a good number since no bin is larger than chr1
-        // And it will not overload SLURM
-        SPLIT_BED_CHUNKS(ch_bed, '13')
+        // Split BED/Genome into equal chunks
+        // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
+
+        SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
 
         // Combine to create a bam_bai - chunk pair for each sample
-        // i.e. Split DeepVariant into 13 runs for each sample
+        // Do this here, pre-process or inside SNV-calling?
         bam_bai
             .combine(SPLIT_BED_CHUNKS.out
                     .split_beds
