@@ -45,8 +45,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 - TBD
 
-##### Assemlby
-
 ## Usage
 
 > **Note**
