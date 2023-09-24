@@ -293,7 +293,7 @@ workflow SKIERFE {
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
             //SHORT_VARIANT_CALLING( bam_bai.map{ meta, bam, bai -> [meta, bam, bai, ''] }, ch_extra_gvcfs, fasta, fai )
-            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_regions )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_regions, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {

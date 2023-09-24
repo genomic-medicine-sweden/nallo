@@ -4,8 +4,11 @@ include { DEEPTRIO                         } from '../../modules/local/google/de
 include { GLNEXUS                          } from '../../modules/nf-core/glnexus'
 include { BCFTOOLS_VIEW_REGIONS            } from '../../modules/local/bcftools/view_regions'
 include { TABIX_TABIX as TABIX_EXTRA_GVCFS } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_DV } from '../../modules/nf-core/tabix/tabix/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_SINGLESAMPLE } from '../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_CONCAT_SINGLESAMPLE } from '../../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV } from '../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV } from '../../modules/nf-core/bcftools/sort/main'
 include { TABIX_TABIX as TABIX_CONCAT_UNMERGED_MULTISAMPLE } from '../../modules/nf-core/tabix/tabix/main'
 include { TABIX_TABIX as TABIX_CONCAT_UNMERGED_SINGLESAMPLE } from '../../modules/nf-core/tabix/tabix/main'
 include { TABIX_TABIX as TABIX_CONCAT_MERGED_SINGLESAMPLE } from '../../modules/nf-core/tabix/tabix/main'
@@ -18,6 +21,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_fasta
     ch_fai
     ch_regions
+    ch_bed
 
     main:
     ch_snp_calls_vcf  = Channel.empty()
@@ -102,61 +106,37 @@ workflow SHORT_VARIANT_CALLING {
         .groupTuple()           // size = number of samples (unknown)
         .set{ glnexus_regions } // channel: [ val(meta.id), path(one_gvcf_per_sample) ]
 
-    // For extra gVCFS from params.extra_gvfs:
+    // GLNexus has to bulk load all gVCFS, providing a BED file does not help in this step
+    // So to make things a bit quicker, if we have a BED file, then we can cut out those regions...
+
     TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
+    BCFTOOLS_VIEW_REGIONS(ch_extra_gvcfs.join(TABIX_EXTRA_GVCFS.out.tbi), ch_bed.collect())
 
-    // Take extra gVCFs, join with DV-region gVCFs..
-    // Should send a BED file - but test this on slurm first
-    ch_extra_gvcfs
-        .combine(ch_regions)
-        .map{meta, gvcf, region ->
-            [['id':region.replaceAll(/[:-]/, "_")], gvcf]
-            }
-        .concat(
-            glnexus_regions
-        )
-        .transpose()
+    // This will add a "full" extra gVCF to all regions if not using a BED..
+    // So maybe we should just concat the DV gVCFs together for each sample,
+    // Then run GLNexus once...
+    // If merging an already merged file with DV-files is faster, we can merge extra gVCFs first one time
+
+
+    TABIX_DV(ch_snp_calls_gvcf)
+
+
+    BCFTOOLS_CONCAT_DV(ch_snp_calls_gvcf.groupTuple().join(TABIX_DV.out.tbi.groupTuple()))
+
+    BCFTOOLS_SORT_DV(BCFTOOLS_CONCAT_DV.out.vcf)
+    // Concat DV and extra gvCFs together -> send to glnexus
+    BCFTOOLS_SORT_DV.out.vcf
+        .concat(BCFTOOLS_VIEW_REGIONS.out.vcf)
+        .map { meta, gvcf -> [ ['id':'multisample'], gvcf ]}
         .groupTuple()
-        .map{ meta, gvcfs -> [ meta, gvcfs, meta['id'].replaceAll(/_/, "\t") ] }
-        .set{ch_glnexus_in}
+        .set{ ch_glnexus_in }
 
-    // Then run GlNexus to join-call genotypes (per-region)
-    GLNEXUS( ch_glnexus_in )
+    ch_glnexus_in.view()
+    // Then run GlNexus to join-call genotypes together
+    GLNEXUS( ch_glnexus_in, ch_bed.collect() )
 
-    // Tabix the per-region GLNexus multisample bcfs
+    // Tabix multisample bcf
     TABIX_CONCAT_UNMERGED_MULTISAMPLE(GLNEXUS.out.bcf)
-
-    // Join the channels, to concat the bcfs
-    GLNEXUS.out.bcf
-        .join(TABIX_CONCAT_UNMERGED_MULTISAMPLE.out.csi)
-        .map{ meta, bcf, tbi -> [['id':'multisample'], bcf, tbi]}
-        .groupTuple()
-        .set{ ch_bcftools_concat_multisample_in }
-
-    // Tabix Singlesample (Deepvariant vcfs) per region
-    TABIX_CONCAT_UNMERGED_SINGLESAMPLE(ch_snp_calls_vcf)
-
-    ch_snp_calls_vcf
-        .groupTuple() // size: number of regions - impossible
-        .join(TABIX_CONCAT_UNMERGED_SINGLESAMPLE.out.tbi.groupTuple())
-        .set{ch_bcftools_concat_singlesample_in}
-
-    // Combine multisample channel with singelsame channel
-    ch_bcftools_concat_singlesample_in
-        .concat(ch_bcftools_concat_multisample_in)
-        .set{ ch_bcftools_concat_all_in }
-
-    // Concat, sort, and index all samples + multisample
-    BCFTOOLS_CONCAT_SINGLESAMPLE(ch_bcftools_concat_all_in)
-    BCFTOOLS_SORT_CONCAT_SINGLESAMPLE(BCFTOOLS_CONCAT_SINGLESAMPLE.out.vcf)
-    TABIX_CONCAT_MERGED_SINGLESAMPLE(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.vcf)
-
-    BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.vcf
-        .branch {
-            multisample: it[0]['id'] == 'multisample'
-            singlesample: it[0]['id'] != 'multisample'
-        }
-        .set{ch_concat_vcf}
 
     // Get versions
     ch_versions     = ch_versions.mix(DEEPVARIANT.out.versions)
@@ -164,16 +144,16 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions     = ch_versions.mix(DEEPTRIO.out.versions)
     ch_versions     = ch_versions.mix(GLNEXUS.out.versions)
     //ch_versions     = ch_versions.mix(BCFTOOLS_VIEW_REGIONS.out.versions)
-    ch_versions     = ch_versions.mix(TABIX_EXTRA_GVCFS.out.versions)
-    ch_versions     = ch_versions.mix(BCFTOOLS_CONCAT_SINGLESAMPLE.out.versions)
-    ch_versions     = ch_versions.mix(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.versions)
-    ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_MULTISAMPLE.out.versions)
-    ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_SINGLESAMPLE.out.versions)
-    ch_versions     = ch_versions.mix(TABIX_CONCAT_MERGED_SINGLESAMPLE.out.versions)
+    //ch_versions     = ch_versions.mix(TABIX_EXTRA_GVCFS.out.versions)
+    //ch_versions     = ch_versions.mix(BCFTOOLS_CONCAT_SINGLESAMPLE.out.versions)
+    //ch_versions     = ch_versions.mix(BCFTOOLS_SORT_CONCAT_SINGLESAMPLE.out.versions)
+    //ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_MULTISAMPLE.out.versions)
+    //ch_versions     = ch_versions.mix(TABIX_CONCAT_UNMERGED_SINGLESAMPLE.out.versions)
+    //ch_versions     = ch_versions.mix(TABIX_CONCAT_MERGED_SINGLESAMPLE.out.versions)
 
 
     emit:
-    snp_calls_vcf  = ch_concat_vcf.singlesample
-    combined_bcf   = ch_concat_vcf.multisample
+    snp_calls_vcf  = BCFTOOLS_SORT_DV.out.vcf
+    combined_bcf   = GLNEXUS.out.bcf
     versions       = ch_versions
 }

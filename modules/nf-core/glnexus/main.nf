@@ -1,12 +1,13 @@
 process GLNEXUS {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_high'
 
     conda "bioconda::glnexus=1.4.1"
     container "ghcr.io/dnanexus-rnd/glnexus:v1.4.1" // Singularity version does not have jemalloc - 
 
     input:
-    tuple val(meta), path(gvcfs), val(region)
+    tuple val(meta), path(gvcfs)
+    tuple val(meta2), path(bed)
 
     output:
     tuple val(meta), path("*.bcf"), emit: bcf
@@ -18,6 +19,7 @@ process GLNEXUS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def regions = bed ? "--bed ${bed}" : ""
 
     // Make list of GVCFs to merge
     def input = gvcfs.collect { it.toString() }
@@ -28,12 +30,10 @@ process GLNEXUS {
         avail_mem = task.memory.giga
     }
     """
-    echo ${region} >> region.bed
-
     glnexus_cli \\
         --threads $task.cpus \\
         --mem-gbytes $avail_mem \\
-        --bed region.bed \\
+        $regions \\
         $args \\
         ${input.join(' ')} \\
         > ${prefix}.bcf

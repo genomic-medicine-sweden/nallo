@@ -8,7 +8,8 @@ process BCFTOOLS_VIEW_REGIONS {
         'biocontainers/bcftools:1.17--haef29d1_0' }"
 
     input:
-    tuple val(meta), path(vcf), path(index), val(region)
+    tuple val(meta), path(vcf), path(index)
+    tuple val(meta2), path(bed)
 
     output:
     tuple val(meta), path("*.gz") , emit: vcf
@@ -21,13 +22,13 @@ process BCFTOOLS_VIEW_REGIONS {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def underscore_regions = region.replaceAll(/[:-]/, "_")
-    def output_name = region ? "${prefix}" + "." + "${underscore_regions}" + ".g": "${prefix}" + ".g"
+    //def underscore_regions = region.replaceAll(/[:-]/, "_")
+    //def output_name = region ? "${prefix}" + "." + "${underscore_regions}" + ".g": "${prefix}" + ".g"
 
     """
     bcftools view \\
-        --output ${output_name}.vcf.gz \\
-        -r ${region} \\
+        --output ${prefix}.${bed}.vcf.gz \\
+        -R ${bed} \\
         $args \\
         --threads $task.cpus \\
         ${vcf}
