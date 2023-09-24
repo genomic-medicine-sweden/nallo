@@ -20,7 +20,6 @@ workflow SHORT_VARIANT_CALLING {
     ch_extra_gvcfs
     ch_fasta
     ch_fai
-    ch_regions
     ch_bed
 
     main:
@@ -79,6 +78,8 @@ workflow SHORT_VARIANT_CALLING {
         trio_moms = Channel.empty()
     }
 
+    // Does splitting BAMs and copying to node make sense to reduce IO?
+
     // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
     DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai )
     PEPPER_MARGIN_DEEPVARIANT ( ch_bam_bai, ch_fasta, ch_fai )
@@ -98,28 +99,33 @@ workflow SHORT_VARIANT_CALLING {
     ch_snp_calls_gvcf_region = DEEPVARIANT.out.gvcf_region
 
     // Group gVCFs from all samples per region for GLNexus
-    ch_snp_calls_gvcf_region
+    /*ch_snp_calls_gvcf_region
         .map{
             meta, gvcf, region ->
             [['id':region.replaceAll(/[:-]/, "_")], gvcf] // meta.id = region
             }
         .groupTuple()           // size = number of samples (unknown)
-        .set{ glnexus_regions } // channel: [ val(meta.id), path(one_gvcf_per_sample) ]
+        .set{ glnexus_regions } // channel: [ val(meta.id), path(one_gvcf_per_sample) ]*/
 
     // GLNexus has to bulk load all gVCFS, providing a BED file does not help in this step
     // So to make things a bit quicker, if we have a BED file, then we can cut out those regions...
 
-    TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
-    BCFTOOLS_VIEW_REGIONS(ch_extra_gvcfs.join(TABIX_EXTRA_GVCFS.out.tbi), ch_bed.collect())
+       TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
+
+    /*ch_extra_gvcfs
+        .join(TABIX_EXTRA_GVCFS.out.tbi)
+        .groupTuple()
+        .combine(SPLIT_BED_CHUNKS.out.split_beds)
+        .view()*/
+
+    BCFTOOLS_VIEW_REGIONS(ch_extra_gvcfs.join(TABIX_EXTRA_GVCFS.out.tbi).groupTuple(), ch_bed.collect())
 
     // This will add a "full" extra gVCF to all regions if not using a BED..
     // So maybe we should just concat the DV gVCFs together for each sample,
     // Then run GLNexus once...
     // If merging an already merged file with DV-files is faster, we can merge extra gVCFs first one time
 
-
     TABIX_DV(ch_snp_calls_gvcf)
-
 
     BCFTOOLS_CONCAT_DV(ch_snp_calls_gvcf.groupTuple().join(TABIX_DV.out.tbi.groupTuple()))
 
@@ -132,6 +138,7 @@ workflow SHORT_VARIANT_CALLING {
         .set{ ch_glnexus_in }
 
     ch_glnexus_in.view()
+
     // Then run GlNexus to join-call genotypes together
     GLNEXUS( ch_glnexus_in, ch_bed.collect() )
 
