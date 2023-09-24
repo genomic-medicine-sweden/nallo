@@ -50,7 +50,7 @@ workflow SHORT_VARIANT_CALLING {
     TABIX_DV(ch_snp_calls_gvcf)
 
     ch_snp_calls_gvcf
-        .groupTuple()
+        .groupTuple(size: params.parallel_snv)
         .join(TABIX_DV.out.tbi.groupTuple())
         .set{ bcftools_concat_dv_in }
 
