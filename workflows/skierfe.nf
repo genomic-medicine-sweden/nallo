@@ -134,14 +134,12 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 // local
 include { FQCRS                       } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
-include { SAMTOOLS_CAT_SORT_INDEX     } from '../modules/local/samtools_cat_sort_index'
 include { BUILD_INTERVALS             } from '../modules/local/build_intervals/main'
 include { SPLIT_BED_CHUNKS            } from '../modules/local/split_bed_chunks/main'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
-include { FASTP                       } from '../modules/nf-core/fastp/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -169,7 +167,6 @@ workflow SKIERFE {
         ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
-
     // Index genome
     PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -178,6 +175,8 @@ workflow SKIERFE {
     fasta = ch_fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
+
+    // Move this inside prepare genome?
 
     // If no BED-file is provided then build intervals from reference
     if(!params.bed) {
@@ -206,58 +205,15 @@ workflow SKIERFE {
 
     if(!params.skip_mapping_wf) {
 
-        // Split FASTQ
-        if (params.split_fastq >= 250) {
+        ALIGN_READS( ch_sample, mmi)
 
-            /*
-                Preprocess workflow ?
-            */
+        bam     = ALIGN_READS.out.bam
+        bai     = ALIGN_READS.out.bai
+        bam_bai = ALIGN_READS.out.bam_bai
 
-            // Add meta info for fastp
-            ch_sample
-                .map{ meta, fastq -> [ meta + ["single_end":true], fastq]}
-                .set{ ch_fastp_in }
 
-            // To run this params.split_fastq should be >= 250
-            FASTP( ch_fastp_in, [], [], [] )
-
-            ch_versions = ch_versions.mix(FASTP.out.versions)
-
-            // Transpose and remove single_end from meta - how to just remove one element?
-            FASTP.out.reads
-                .transpose()
-                .map{ meta, split_fastq -> [ [
-                    'id':meta['id'],
-                    'family_id':meta['family_id'],
-                    'paternal_id':meta['paternal_id'],
-                    'maternal_id':meta['maternal_id'],
-                    'sex':meta['sex'],
-                    'phenotype':meta['phenotype'],
-                    ], split_fastq ]}
-                .set { ch_reads }
-
-            ALIGN_READS( ch_reads, mmi )
-
-            ALIGN_READS.out.bam
-                .groupTuple() // Collect aligned files per sample
-                .set{ ch_samtools_cat_in }
-
-            // Make one BAM per sample
-            SAMTOOLS_CAT_SORT_INDEX(ch_samtools_cat_in)
-
-            bam     = SAMTOOLS_CAT_SORT_INDEX.out.bam
-            bai     = SAMTOOLS_CAT_SORT_INDEX.out.bai
-            bam_bai = SAMTOOLS_CAT_SORT_INDEX.out.bam_bai
-
-        } else {
-            // Run if no read splitting
-            ALIGN_READS( ch_sample, mmi)
-
-            bam     = ALIGN_READS.out.bam
-            bai     = ALIGN_READS.out.bai
-            bam_bai = ALIGN_READS.out.bam_bai
-        }
-
+        // TODO: parallel_snv should only be allowed when snv calling is active
+        // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
         // Split BED/Genome into equal chunks
         // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
 

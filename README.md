@@ -30,13 +30,13 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ##### Variant calling
 - Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-- Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
+- Short variant calling ([`deepvariant`](https://github.com/google/deepvariant))
     - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
 - Tandem repeat analysis ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 
 ##### Phasing and methylation
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
-- Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit))
+- Methylation pileups (Revio/ONT) ([`modkit`](https://github.com/nanoporetech/modkit))
 
 ##### Annotation - SNV
 1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & frequencies of samples in current run ([`echtvar`](https://github.com/brentp/echtvar))
@@ -110,7 +110,7 @@ HG01125,/path/to/HG01125.g.vcf.gz
      --trgt_repeats repeat_catalog_and_pathogenic.bed \
      --snp_db snp_dbs.csv \
      --vep_cache /path/to/vep/cache/dir/ \
-     --preset revio/pacbio/ONT_R9/ONT_R10
+     --preset revio/pacbio/ONT_R10
    ```
 
 To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
