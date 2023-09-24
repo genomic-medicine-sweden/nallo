@@ -3,7 +3,7 @@ process GLNEXUS {
     label 'process_medium'
 
     conda "bioconda::glnexus=1.4.1"
-    container "biocontainers/glnexus:1.4.1--h40d77a6_0" // Singularity version does not have jemalloc - 
+    container "ghcr.io/dnanexus-rnd/glnexus:v1.4.1" // Singularity version does not have jemalloc - 
 
     input:
     tuple val(meta), path(gvcfs), val(region)
