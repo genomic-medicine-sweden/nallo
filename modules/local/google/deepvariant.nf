@@ -10,7 +10,7 @@ process DEEPVARIANT {
     }
 
     input:
-    tuple val(meta), path(bam), path(bai), val(intervals)
+    tuple val(meta), path(bam), path(bai), path(intervals)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
 
@@ -30,8 +30,8 @@ process DEEPVARIANT {
     def prefix     = task.ext.prefix ?: "${meta.id}"
     def regions    = intervals ? "--regions ${intervals}" : ""
 
-    def underscore_regions = intervals.replaceAll(/[:-]/, "_")
-    def output_name = intervals ? "${prefix}" + "." + "${underscore_regions}" : "${prefix}"
+    //def underscore_regions = intervals.replaceAll(/[:-]/, "_")
+    def output_name = intervals ? "${prefix}" + "." + "${intervals.getSimpleName()}" : "${prefix}"
 
     """
     /opt/deepvariant/bin/run_deepvariant \\

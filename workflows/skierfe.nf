@@ -140,6 +140,7 @@ include { FQCRS                       } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
 include { SAMTOOLS_CAT_SORT_INDEX     } from '../modules/local/samtools_cat_sort_index'
 include { BUILD_INTERVALS             } from '../modules/local/build_intervals/main'
+include { SPLIT_BED_CHUNKS            } from '../modules/local/split_bed_chunks/main'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
@@ -264,20 +265,16 @@ workflow SKIERFE {
             bam_bai = ALIGN_READS.out.bam_bai
         }
 
-        // Make regions from BED, combine with bam_bai files for each sample
-        // Split BAMs? Temp files vs. IO?
+        // Split BED/Genome into equal chunks, 13 is a good number since no bin is larger than chr1
+        // And it will not overload SLURM
+        SPLIT_BED_CHUNKS(ch_bed, '13')
 
-        ch_bed
-            .splitText()
-            .map{ id, bed -> [ bed.split('\t')[0].trim() + ":" +
-                               bed.split('\t')[1].trim() + "-" +
-                               bed.split('\t')[2].trim()
-                               ]}
-            .set{ ch_regions }
-
-        ch_regions
-            .combine(bam_bai)
-            .map{ region, meta, bam, bai -> [ meta, bam, bai, region] }
+        // Combine to create a bam_bai - chunk pair for each sample
+        // i.e. Split DeepVariant into 13 runs for each sample
+        bam_bai
+            .combine(SPLIT_BED_CHUNKS.out
+                    .split_beds
+                    .flatten())
             .set{ ch_snv_calling_in }
 
         QC_ALIGNED_READS( bam, bai, fasta )
@@ -293,7 +290,7 @@ workflow SKIERFE {
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
             //SHORT_VARIANT_CALLING( bam_bai.map{ meta, bam, bai -> [meta, bam, bai, ''] }, ch_extra_gvcfs, fasta, fai )
-            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_regions, ch_bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
