@@ -126,7 +126,7 @@ To run in an offline environment, download the pipeline using [`nf-core download
 > provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
 
-For more information, see [usage](docs/usage.md)
+For more information about pipeline parameters, see [usage](docs/usage.md).
 
 ## Credits
 

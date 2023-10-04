@@ -1,7 +1,5 @@
 # fellen31/skierfe: Usage
 
-## :warning: This is information is incomplete
-
 # fellen31/skierfe pipeline parameters
 
 Long-read rare disease SV/SNV-identification
@@ -115,6 +113,8 @@ Different processes may need extra input files
 | `bed` | BED file with regions of interest | `string` |  |  |  |
 
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
+
+## :warning: This is information is incomplete
 
 ## Introduction
 
