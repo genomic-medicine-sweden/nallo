@@ -62,7 +62,7 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
 2. Optional inputs:
-- Limit SNV calling to regions in BED file (`--bed`) 
+- Limit SNV calling to regions in BED file (`--bed`)
 - If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
 - If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 - If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
@@ -125,6 +125,8 @@ To run in an offline environment, download the pipeline using [`nf-core download
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those
 > provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
+
+For more information, see [usage](docs/usage.md)
 
 ## Credits
 
