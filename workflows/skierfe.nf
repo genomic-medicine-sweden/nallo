@@ -22,7 +22,8 @@ def checkPathParamList = [ params.input,
                            params.tandem_repeats,
                            params.trgt_repeats,
                            params.snp_db,
-                           params.vep_cache
+                           params.vep_cache,
+                           params.bed
                          ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
@@ -32,11 +33,14 @@ ch_sample         = Channel.fromSamplesheet('input', immutable_meta: false)
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
 // Check optional input files
-ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false) : Channel.empty()
-ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false) : Channel.empty()
-ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()             : Channel.value([])
+ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false)           : Channel.empty()
+ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)           : Channel.empty()
+ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()                       : Channel.value([])
+ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.empty()
 
+// This should be able to in schema?
 if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
 def checkUnsupportedCombinations() {
     if (params.skip_short_variant_calling) {
@@ -75,11 +79,9 @@ def getValidCallers(preset) {
         case "revio":
             return ["deepvariant"]
         case "pacbio":
-            return ["deepvariant", "deeptrio", "pepper_margin_deepvariant"]
-        case "ONT_R9":
-            return ["pepper_margin_deepvariant"]
+            return ["deepvariant"]
         case "ONT_R10":
-            return ["deepvariant", "pepper_margin_deepvariant"]
+            return ["deepvariant"]
     }
 }
 
@@ -87,14 +89,10 @@ def getValidWorkflows(preset) {
     switch(preset) {
         case "pacbio":
             return ["skip_methylation_wf"]
-        case "ONT_R9":
-            return ["skip_repeat_wf"]
     }
 }
 
 if(params.preset == "pacbio" & !params.skip_methylation_wf) {
-    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
-} else if(params.preset == "ONT_R9" & !params.skip_repeat_wf) {
     exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
 }
 
@@ -136,12 +134,12 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 // local
 include { FQCRS                       } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES      } from '../modules/local/convert_ont_read_names'
-include { SAMTOOLS_CAT_SORT_INDEX     } from '../modules/local/samtools_cat_sort_index'
+include { BUILD_INTERVALS             } from '../modules/local/build_intervals/main'
+include { SPLIT_BED_CHUNKS            } from '../modules/local/split_bed_chunks/main'
 
 // nf-core
 include { MOSDEPTH                    } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
-include { FASTP                       } from '../modules/nf-core/fastp/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -169,7 +167,6 @@ workflow SKIERFE {
         ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
-
     // Index genome
     PREPARE_GENOME( ch_fasta )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
@@ -178,6 +175,20 @@ workflow SKIERFE {
     fasta = ch_fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
+
+    // Move this inside prepare genome?
+
+    // If no BED-file is provided then build intervals from reference
+    if(!params.bed) {
+        fai
+            .map{ name, fai -> [['id':name], fai] }
+            .set{ ch_build_intervals_in }
+
+        BUILD_INTERVALS( ch_build_intervals_in )
+
+        BUILD_INTERVALS.out.bed
+            .set{ ch_bed }
+    }
 
     // Assembly workflow
     if(!params.skip_assembly_wf) {
@@ -194,57 +205,27 @@ workflow SKIERFE {
 
     if(!params.skip_mapping_wf) {
 
-        // Split FASTQ
-        if (params.split_fastq >= 250) {
+        ALIGN_READS( ch_sample, mmi)
 
-            /*
-                Preprocess workflow ?
-            */
+        bam     = ALIGN_READS.out.bam
+        bai     = ALIGN_READS.out.bai
+        bam_bai = ALIGN_READS.out.bam_bai
 
-            // Add meta info for fastp
-            ch_sample
-                .map{ meta, fastq -> [ meta + ["single_end":true], fastq]}
-                .set{ ch_fastp_in }
 
-            // To run this params.split_fastq should be >= 250
-            FASTP( ch_fastp_in, [], [], [] )
+        // TODO: parallel_snv should only be allowed when snv calling is active
+        // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
+        // Split BED/Genome into equal chunks
+        // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
 
-            ch_versions = ch_versions.mix(FASTP.out.versions)
+        SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
 
-            // Transpose and remove single_end from meta - how to just remove one element?
-            FASTP.out.reads
-                .transpose()
-                .map{ meta, split_fastq -> [ [
-                    'id':meta['id'],
-                    'family_id':meta['family_id'],
-                    'paternal_id':meta['paternal_id'],
-                    'maternal_id':meta['maternal_id'],
-                    'sex':meta['sex'],
-                    'phenotype':meta['phenotype'],
-                    ], split_fastq ]}
-                .set { ch_reads }
-
-            ALIGN_READS( ch_reads, mmi )
-
-            ALIGN_READS.out.bam
-                .groupTuple() // Collect aligned files per sample
-                .set{ ch_samtools_cat_in }
-
-            // Make one BAM per sample
-            SAMTOOLS_CAT_SORT_INDEX(ch_samtools_cat_in)
-
-            bam     = SAMTOOLS_CAT_SORT_INDEX.out.bam
-            bai     = SAMTOOLS_CAT_SORT_INDEX.out.bai
-            bam_bai = SAMTOOLS_CAT_SORT_INDEX.out.bam_bai
-
-        } else {
-            // Run if no read splitting
-            ALIGN_READS( ch_sample, mmi)
-
-            bam     = ALIGN_READS.out.bam
-            bai     = ALIGN_READS.out.bai
-            bam_bai = ALIGN_READS.out.bam_bai
-        }
+        // Combine to create a bam_bai - chunk pair for each sample
+        // Do this here, pre-process or inside SNV-calling?
+        bam_bai
+            .combine(SPLIT_BED_CHUNKS.out
+                    .split_beds
+                    .flatten())
+            .set{ ch_snv_calling_in }
 
         QC_ALIGNED_READS( bam, bai, fasta )
 
@@ -258,7 +239,8 @@ workflow SKIERFE {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            SHORT_VARIANT_CALLING( bam_bai, ch_extra_gvcfs, fasta, fai )
+            //SHORT_VARIANT_CALLING( bam_bai.map{ meta, bam, bai -> [meta, bam, bai, ''] }, ch_extra_gvcfs, fasta, fai )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {

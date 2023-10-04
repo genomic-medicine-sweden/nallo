@@ -1,6 +1,6 @@
-process BCFTOOLS_VIEW {
+process BCFTOOLS_VIEW_REGIONS {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_low'
 
     conda "bioconda::bcftools=1.17"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -9,9 +9,7 @@ process BCFTOOLS_VIEW {
 
     input:
     tuple val(meta), path(vcf), path(index)
-    path(regions)
-    path(targets)
-    path(samples)
+    tuple val(meta2), path(bed)
 
     output:
     tuple val(meta), path("*.gz") , emit: vcf
@@ -23,15 +21,14 @@ process BCFTOOLS_VIEW {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def regions_file  = regions ? "--regions-file ${regions}" : ""
-    def targets_file = targets ? "--targets-file ${targets}" : ""
-    def samples_file =  samples ? "--samples-file ${samples}" : ""
+
+    //def underscore_regions = region.replaceAll(/[:-]/, "_")
+    //def output_name = region ? "${prefix}" + "." + "${underscore_regions}" + ".g": "${prefix}" + ".g"
+
     """
     bcftools view \\
-        --output ${prefix}.vcf.gz \\
-        ${regions_file} \\
-        ${targets_file} \\
-        ${samples_file} \\
+        --output ${prefix}.${bed}.vcf.gz \\
+        -R ${bed} \\
         $args \\
         --threads $task.cpus \\
         ${vcf}

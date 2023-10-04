@@ -327,18 +327,31 @@
                     "type": "string",
                     "default": "revio",
                     "description": "Choose a preset depending on data type",
-                    "enum": ["revio", "pacbio", "ONT_R9", "ONT_R10"]
+                    "enum": ["revio", "pacbio", "ONT_R10"]
                 },
                 "variant_caller": {
                     "type": "string",
                     "default": "deepvariant",
-                    "description": "Choose variant caller"
+                    "description": "Choose variant caller",
+                    "enum": ["deepvariant"]
                 },
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode",
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
+                },
+                "split_fastq": {
+                    "type": "integer",
+                    "default": 0,
+                    "minimum": 0,
+                    "description": "Split Alignment into n reads per job"
+                },
+                "parallel_snv": {
+                    "type": "integer",
+                    "default": 13,
+                    "description": "Split SNV calling into n chunks",
+                    "minimum": 1
                 }
             },
             "required": ["preset"]
@@ -372,7 +385,8 @@
                 "tandem_repeats": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "Tandem repeat BED-file for sniffles"
+                    "description": "Tandem repeat BED-file for sniffles",
+                    "pattern": "^\\S+\\.bed$"
                 },
                 "trgt_repeats": {
                     "type": "string",
@@ -392,6 +406,12 @@
                     "default": "None",
                     "description": "Path to directory of vep_cache",
                     "format": "directory-path"
+                },
+                "bed": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "BED file with regions of interest"
                 }
             }
         }
@@ -421,11 +441,5 @@
         {
             "$ref": "#/definitions/extra_file_inputs"
         }
-    ],
-    "properties": {
-        "split_fastq": {
-            "type": "integer",
-            "default": 0
-        }
-    }
+    ]
 }

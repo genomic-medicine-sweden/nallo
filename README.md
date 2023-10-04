@@ -23,25 +23,23 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
 - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
 
-##### Alignment/assembly
+##### Alignment & assembly
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
 - Assemble (trio-binned) haploid genomes (HiFi only) ([`hifiasm`](https://github.com/chhylp123/hifiasm))
-- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 
 ##### Variant calling
-- Singe-sample structural variant calling and joint genotyping ([`sniffles`](https://github.com/fritzsedlazeck/Sniffles))
-- Singe-sample/trio short variant calling ([`deepvariant/deeptrio`](https://github.com/google/deepvariant) or [`pepper_margin_deepvariant`](https://github.com/kishwarshafin/pepper))
-    - Merge and joint genotyping of SNVs ([`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-- Tandem repeat analysis ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+- Short variant calling & joint genotyping of SNVs ([`deepvariant`](https://github.com/google/deepvariant) + [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
+- SV calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
+- Tandem repeats ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 
 ##### Phasing and methylation
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
-- Methylation pileups (per haplotype), if Revio/ONT ([`modkit`](https://github.com/nanoporetech/modkit))
+- Methylation pileups (Revio/ONT) ([`modkit`](https://github.com/nanoporetech/modkit))
 
 ##### Annotation - SNV
-1. Annotate variants with database(s) of choice (i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu)) & frequencies of samples in current run ([`echtvar`](https://github.com/brentp/echtvar))
+1. Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar))
 2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
-
 
 ##### Filtering
 
@@ -63,8 +61,8 @@ HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
 HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
-2. Optional input files:
-
+2. Optional inputs:
+- Limit SNV calling to regions in BED file (`--bed`)
 - If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
 - If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 - If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
@@ -110,7 +108,7 @@ HG01125,/path/to/HG01125.g.vcf.gz
      --trgt_repeats repeat_catalog_and_pathogenic.bed \
      --snp_db snp_dbs.csv \
      --vep_cache /path/to/vep/cache/dir/ \
-     --preset revio/pacbio/ONT_R9/ONT_R10
+     --preset revio/pacbio/ONT_R10
    ```
 
 To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
@@ -127,6 +125,8 @@ To run in an offline environment, download the pipeline using [`nf-core download
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those
 > provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
+
+For more information about pipeline parameters, see [usage](docs/usage.md).
 
 ## Credits
 
