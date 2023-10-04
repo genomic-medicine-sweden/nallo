@@ -1,11 +1,16 @@
-include { DEEPVARIANT                           } from '../../modules/local/google/deepvariant'
-include { GLNEXUS                               } from '../../modules/nf-core/glnexus'
-include { BCFTOOLS_VIEW_REGIONS                 } from '../../modules/local/bcftools/view_regions'
-include { TABIX_TABIX as TABIX_EXTRA_GVCFS      } from '../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_DV               } from '../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_GLNEXUS          } from '../../modules/nf-core/tabix/tabix/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV } from '../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV     } from '../../modules/nf-core/bcftools/sort/main'
+include { DEEPVARIANT                               } from '../../modules/local/google/deepvariant'
+include { GLNEXUS                                   } from '../../modules/nf-core/glnexus'
+include { BCFTOOLS_VIEW_REGIONS                     } from '../../modules/local/bcftools/view_regions'
+include { TABIX_TABIX as TABIX_EXTRA_GVCFS          } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_DV                   } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_DV_VCF               } from '../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_GLNEXUS              } from '../../modules/nf-core/tabix/tabix/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV     } from '../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV_VCF } from '../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV         } from '../../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV_VCF     } from '../../modules/nf-core/bcftools/sort/main'
+
+// TODO: Fix DV_VCF output dir, and change DV to DV_GVCF for clarity
 
 workflow SHORT_VARIANT_CALLING {
 
@@ -50,13 +55,27 @@ workflow SHORT_VARIANT_CALLING {
     TABIX_DV(ch_snp_calls_gvcf)
 
     ch_snp_calls_gvcf
-        .groupTuple(size: params.parallel_snv)
+        .groupTuple() // size not working here if there are less than specifed regions..
         .join(TABIX_DV.out.tbi.groupTuple())
         .set{ bcftools_concat_dv_in }
+
 
     // Concat into one gVCF per sample & sort
     BCFTOOLS_CONCAT_DV ( bcftools_concat_dv_in )
     BCFTOOLS_SORT_DV   ( BCFTOOLS_CONCAT_DV.out.vcf )
+
+    // DV VCFs
+    TABIX_DV_VCF(ch_snp_calls_vcf)
+
+    ch_snp_calls_vcf
+        .groupTuple() // size not working here if there are less than specifed regions..
+        .join(TABIX_DV_VCF.out.tbi.groupTuple())
+        .set{ bcftools_concat_dv_vcf_in }
+
+
+    // Concat into one VCF per sample & sort
+    BCFTOOLS_CONCAT_DV_VCF ( bcftools_concat_dv_vcf_in )
+    BCFTOOLS_SORT_DV_VCF   ( BCFTOOLS_CONCAT_DV_VCF.out.vcf )
 
     // Put DV and extra gvCFs together -> send to glnexus
     BCFTOOLS_SORT_DV.out.vcf
@@ -81,7 +100,7 @@ workflow SHORT_VARIANT_CALLING {
 
 
     emit:
-    snp_calls_vcf = BCFTOOLS_SORT_DV.out.vcf
+    snp_calls_vcf = BCFTOOLS_SORT_DV_VCF.out.vcf
     combined_bcf  = GLNEXUS.out.bcf
     versions      = ch_versions
 }
