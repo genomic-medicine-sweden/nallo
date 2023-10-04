@@ -1,10 +1,14 @@
-include { MINIMAP2_ALIGN                                  } from '../../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_ALIGN as MINIMAP2_ALIGN_UNSPLIT        } from '../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_ALIGN as MINIMAP2_ALIGN_SPLIT          } from '../../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_MINIMAP2_ALIGN } from '../../modules/nf-core/samtools/index/main'
 include { FASTP                                           } from '../../modules/nf-core/fastp/main'
 include { SAMTOOLS_CAT_SORT_INDEX                         } from '../../modules/local/samtools_cat_sort_index'
 
 workflow ALIGN_READS {
+
+    // Maybe it's possible to do the preprocessing in a separate workflow,
+    // then specify in meta if the read that should be aligned is split or not
+    // for a cleaner workflow? - branch channel on meta."split"?
 
     take:
     ch_sample
@@ -64,28 +68,28 @@ workflow ALIGN_READS {
 
         } else {
 
-        MINIMAP2_ALIGN( ch_sample.combine( mmi ), true, false, false )
-        SAMTOOLS_INDEX_MINIMAP2_ALIGN ( MINIMAP2_ALIGN.out.bam )
+        MINIMAP2_ALIGN_UNSPLIT ( ch_sample.combine( mmi ), true, false, false )
+        SAMTOOLS_INDEX_MINIMAP2_ALIGN ( MINIMAP2_ALIGN_UNSPLIT.out.bam )
 
-        MINIMAP2_ALIGN.out.bam
+        MINIMAP2_ALIGN_UNSPLIT.out.bam
             .join(SAMTOOLS_INDEX_MINIMAP2_ALIGN.out.bai)
             .set{ ch_bam_bai_single }
 
         // Gather files
-        ch_bam = ch_bam.mix(MINIMAP2_ALIGN.out.bam)
+        ch_bam = ch_bam.mix(MINIMAP2_ALIGN_UNSPLIT.out.bam)
         ch_bai = ch_bai.mix(SAMTOOLS_INDEX_MINIMAP2_ALIGN.out.bai)
         ch_bam_bai = ch_bam_bai.mix(ch_bam_bai_single)
 
         // Gather versions
-        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
+        ch_versions = ch_versions.mix(MINIMAP2_ALIGN_UNSPLIT.out.versions)
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX_MINIMAP2_ALIGN.out.versions)
     }
 
 
     emit:
-    bam      = ch_bam              // channel: [ val(meta), bam ]
-    bai      = ch_bai // channel: [ val(meta), bai ]
-    bam_bai  = ch_bam_bai                            // channel: [ val(meta), bam, bai]
-    versions = ch_versions                           // channel: [ versions.yml ]
+    bam      = ch_bam       // channel: [ val(meta), bam ]
+    bai      = ch_bai       // channel: [ val(meta), bai ]
+    bam_bai  = ch_bam_bai   // channel: [ val(meta), bam, bai]
+    versions = ch_versions  // channel: [ versions.yml ]
 }
 
