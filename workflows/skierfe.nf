@@ -23,7 +23,10 @@ def checkPathParamList = [ params.input,
                            params.trgt_repeats,
                            params.snp_db,
                            params.vep_cache,
-                           params.bed
+                           params.bed,
+                           params.hificnv_exclude,
+                           params.hificnv_xx,
+                           params.hificnv_xy,
                          ]
 
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
@@ -54,6 +57,8 @@ def checkUnsupportedCombinations() {
             exit 1, 'Cannot run repeat analysis without short variant calling'
         } else if (!params.skip_snv_annotation ) {
             exit 1, 'Cannot run snv annotation without short variant calling'
+        } else if (!params.skip_cnv_calling) {
+            exit 1, 'Cannot run CNV-calling without short variant calling'
         }
     }
     if (!params.skip_assembly_wf) {
@@ -67,6 +72,11 @@ def checkUnsupportedCombinations() {
         // TODO: no duplicate dbs should be allowed, although echtvar gives pretty clear error
         if(params.snp_db) { ch_databases = Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() } else { exit 1, 'Not skipping SNV Annotation: Missing Echtvar-DB samplesheet (--snp_db)'}
         if(params.vep_cache) { ch_vep_cache = Channel.fromPath(params.vep_cache).collect() } else { exit 1, 'Not skipping SNV Annotation: missing path to VEP cache-dir (--vep_cache)'}
+    }
+    if (!params.skip_short_variant_calling & !params.skip_cnv_calling) {
+        if(params.hificnv_xy)      {  ch_expected_xy_bed = Channel.fromPath(params.hificnv_xy).collect()  } else { exit 1, 'Not skipping CNV-calling: Missing --hificnv_xy'}
+        if(params.hificnv_xx)      {  ch_expected_xx_bed = Channel.fromPath(params.hificnv_xx).collect()  } else { exit 1, 'Not skipping CNV-calling: Missing --hificnv_xx'}
+        if(params.hificnv_exclude) {  ch_exclude_bed = Channel.fromPath(params.hificnv_exclude).collect() } else { ch_exclude_bed = Channel.value([]) }
     }
 }
 
@@ -89,11 +99,14 @@ def getValidWorkflows(preset) {
     switch(preset) {
         case "pacbio":
             return ["skip_methylation_wf"]
+        case "ONT_R10":
+            return ["skip_cnv_calling", "skip_assembly_wf"]
     }
 }
 
-if(params.preset == "pacbio" & !params.skip_methylation_wf) {
-    exit 1, "Preset \'$params.preset\' cannot be run without: " + getValidWorkflows(params.preset)
+if( (params.preset == "pacbio" & !params.skip_methylation_wf) |
+    (params.preset == "ONT_R10" & (!params.skip_cnv_calling | !params.skip_assembly_wf))) {
+    exit 1, "Preset \'$params.preset\' cannot be run wih: " + getValidWorkflows(params.preset)
 }
 
 /*
@@ -120,6 +133,7 @@ include { ALIGN_READS                } from '../subworkflows/local/align_reads'
 include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
+include { CNV                        } from '../subworkflows/local/cnv'
 include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
@@ -239,13 +253,25 @@ workflow SKIERFE {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            //SHORT_VARIANT_CALLING( bam_bai.map{ meta, bam, bai -> [meta, bam, bai, ''] }, ch_extra_gvcfs, fasta, fai )
             SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
                 SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
             }
+
+            if(params.preset != 'ONT_R10') {
+
+                bam_bai
+                    .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
+                    .groupTuple()
+                    .set { cnv_workflow_in }
+
+                CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
+                ch_versions = ch_versions.mix(CNV.out.versions)
+            }
+
+
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
@@ -254,6 +280,7 @@ workflow SKIERFE {
 
                 // Gather versions
                 ch_versions = ch_versions.mix(PHASING.out.versions)
+
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
