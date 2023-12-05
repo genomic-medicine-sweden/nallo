@@ -25,8 +25,8 @@ process MINIMAP2_ALIGN {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def bam_output = bam_format ? "-a | samtools sort | samtools view -@ ${task.cpus} -b -h -o ${prefix}.bam" : "-o ${prefix}.paf"
+    def prefix = task.ext.prefix ?: "${meta.id}" // If outputing split reads to dir needs to be "${reads.getSimpleName()}" 
+    def bam_output = bam_format ? "-a | samtools sort -@ ${task.cpus} | samtools view -@ ${task.cpus} -b -h -o ${prefix}.bam" : "-o ${prefix}.paf"
     def cigar_paf = cigar_paf_format && !bam_format ? "-c" : ''
     def set_cigar_bam = cigar_bam && bam_format ? "-L" : ''
     """

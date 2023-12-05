@@ -1,6 +1,6 @@
-process BCFTOOLS_SORT {
+process BCFTOOLS_FILLTAGS {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_low'
 
     conda "bioconda::bcftools=1.17"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -11,8 +11,8 @@ process BCFTOOLS_SORT {
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}")  , emit: vcf
-    path "versions.yml"                                 , emit: versions
+    tuple val(meta), path("*.ac.*"), emit: vcf
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -28,10 +28,12 @@ process BCFTOOLS_SORT {
 
     """
     bcftools \\
-        sort \\
-        --output ${prefix}.sorted.${extension} \\
+        +fill-tags \\
+        $vcf \\
         $args \\
-        $vcf
+        -o ${prefix}.ac.${extension} \\
+        -- \\
+        -t AC
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -40,17 +42,10 @@ process BCFTOOLS_SORT {
     """
 
     stub:
-    def args = task.ext.args ?: '--output-type z'
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
-                    args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
-                    args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
-                    args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
-                    "vcf"
-
     """
-    touch ${prefix}.${extension}
+    touch ${prefix}.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
