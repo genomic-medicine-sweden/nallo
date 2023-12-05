@@ -49,6 +49,10 @@
                 "skip_snv_annotation": {
                     "type": "boolean",
                     "description": "Skip SNV annotation"
+                },
+                "skip_cnv_calling": {
+                    "type": "boolean",
+                    "description": "Skip CNV workflow"
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -112,6 +116,12 @@
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
                     "fa_icon": "far fa-file-code"
                 },
+                "config_profile_contact": {
+                    "type": "string",
+                    "description": "Institutional config contact information.",
+                    "hidden": true,
+                    "fa_icon": "fas fa-users-cog"
+                },
                 "igenomes_base": {
                     "type": "string",
                     "format": "directory-path",
@@ -162,12 +172,6 @@
                 "config_profile_description": {
                     "type": "string",
                     "description": "Institutional config description.",
-                    "hidden": true,
-                    "fa_icon": "fas fa-users-cog"
-                },
-                "config_profile_contact": {
-                    "type": "string",
-                    "description": "Institutional config contact information.",
                     "hidden": true,
                     "fa_icon": "fas fa-users-cog"
                 },
@@ -403,7 +407,6 @@
                 },
                 "vep_cache": {
                     "type": "string",
-                    "default": "None",
                     "description": "Path to directory of vep_cache",
                     "format": "directory-path"
                 },
@@ -412,6 +415,18 @@
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
                     "description": "BED file with regions of interest"
+                },
+                "hificnv_xy": {
+                    "type": "string",
+                    "format": "file-path"
+                },
+                "hificnv_xx": {
+                    "type": "string",
+                    "format": "file-path"
+                },
+                "hificnv_exclude": {
+                    "type": "string",
+                    "description": "HiFiCNV BED file specifying regions to exclude"
                 }
             }
         }

@@ -1,17 +1,15 @@
 process HIFICNV {
     tag "$meta.id"
-    label 'process_low'
+    label 'process_medium'
 
-    conda "bioconda::hificnv=0.1.6b"
-    container "quay.io/biocontainers/hificnv:0.1.6b--h9ee0642_0"
+    conda "bioconda::hificnv=0.1.7"
+    container "quay.io/biocontainers/hificnv:0.1.7--h9ee0642_0"
+
 
     input:
-    tuple val(meta), path(bam), path(bai)
+    tuple val(meta), path(bam), path(bai), path(maf_vcf), path(expected_cn_bed)
     tuple val(meta2), path(fasta)
-    // Take care of this later
-    tuple val(meta3), path(maf_vcf_gz)
     path(exclude_bed)
-    path(expected_cn)
 
     output:
     tuple val(meta), path("*.vcf.gz")  , emit: vcf
@@ -28,13 +26,19 @@ process HIFICNV {
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
 
-    // TODO: add exclude, expected
+    def expected_cn = expected_cn_bed ? "--expected-cn ${expected_cn_bed}" : ""
+    def exclude = exclude_bed ? "--exclude ${exclude_bed}" : ""
+    def maf = maf_vcf ? "--maf ${maf_vcf}" : ""
+
     """
     hificnv \\
         $args \\
         --bam ${bam} \\
+        $expected_cn \\
+        $exclude \\
+        $maf \\
         --ref ${fasta} \\
-        --threads $task.cpus \\
+        --threads ${task.cpus} \\
         --output-prefix ${prefix}
 
     cat <<-END_VERSIONS > versions.yml
