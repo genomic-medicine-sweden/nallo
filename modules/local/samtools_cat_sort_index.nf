@@ -23,7 +23,7 @@ process SAMTOOLS_CAT_SORT_INDEX {
     script:
     def args = task.ext.args   ?: ''
     def args2 = task.ext.args2   ?: ''
-    def args3 = task.ext.args2   ?: ''
+    def args3 = task.ext.args3   ?: ''
     prefix   = task.ext.prefix ?: "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
     """
