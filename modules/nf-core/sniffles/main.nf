@@ -32,7 +32,7 @@ process SNIFFLES {
         --snf ${prefix}.sniffles.snf \\
         --reference $fasta \\
         -t $task.cpus \\
-        $tandem_repeats
+        $tandem_repeats \\
         $args
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
