@@ -8,7 +8,8 @@ process MOSDEPTH {
         'biocontainers/mosdepth:0.3.3--hdfd78af_1'}"
 
     input:
-    tuple val(meta),  path(bam), path(bai), path(bed)
+    tuple val(meta),  path(bam), path(bai)
+    path(bed)
     tuple val(meta2), path(fasta)
 
     output:

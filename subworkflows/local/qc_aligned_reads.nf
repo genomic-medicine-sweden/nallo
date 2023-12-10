@@ -12,13 +12,9 @@ workflow QC_ALIGNED_READS {
     ch_versions = Channel.empty()
 
     // Prepare inputs
-    ch_bam_bai
-        .combine(ch_bed.map{ meta, bed -> bed })
-        //.map{ meta, bam, bai -> [ meta, bam, bai, [] ] }
-        .set{ ch_mosdepth_in }
 
     CRAMINO (ch_bam_bai)
-    MOSDEPTH(ch_mosdepth_in, ch_fasta)
+    MOSDEPTH(ch_bam_bai, ch_bed, ch_fasta)
 
     // Gather versions
     ch_versions = ch_versions.mix(CRAMINO.out.versions.first())
