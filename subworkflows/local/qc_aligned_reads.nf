@@ -14,7 +14,7 @@ workflow QC_ALIGNED_READS {
     // Prepare inputs
 
     CRAMINO (ch_bam_bai)
-    MOSDEPTH(ch_bam_bai, ch_bed.map{ it[1] }, ch_fasta)
+    MOSDEPTH(ch_bam_bai, ch_bed.map{it[1]}, ch_fasta)
 
     // Gather versions
     ch_versions = ch_versions.mix(CRAMINO.out.versions.first())
