@@ -268,8 +268,10 @@ workflow SKIERFE {
                     .groupTuple()
                     .set { cnv_workflow_in }
 
-                CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
-                ch_versions = ch_versions.mix(CNV.out.versions)
+                if(!params.skip_cnv_calling) {
+                    CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
+                    ch_versions = ch_versions.mix(CNV.out.versions)
+                }
             }
 
 
