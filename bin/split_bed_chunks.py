@@ -33,9 +33,9 @@ for index, row in sorted_data.iterrows():
 result_df = pd.DataFrame({
     'bin': [i + 1 for i in range(n) for _ in bins[i]],
     'chr': [chromosome['chr'] for bin_chromosomes in bins for chromosome in bin_chromosomes],
-    'start': [chromosome['start'] for bin_chromosomes in bins for chromosome in bin_chromosomes],
-    'stop': [chromosome['stop'] for bin_chromosomes in bins for chromosome in bin_chromosomes],
-    'size': [chromosome['size'] for bin_chromosomes in bins for chromosome in bin_chromosomes]
+    'start': int([chromosome['start']) for bin_chromosomes in bins for chromosome in bin_chromosomes],
+    'stop': int([chromosome['stop']) for bin_chromosomes in bins for chromosome in bin_chromosomes],
+    'size': int([chromosome['size']) for bin_chromosomes in bins for chromosome in bin_chromosomes]
 })
 
 # Print the result DataFrame, ordered by size within each bin
