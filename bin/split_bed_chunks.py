@@ -7,6 +7,20 @@
 
 import sys
 import pandas as pd
+import string
+
+def contains_whitespace_other_than_tab(filepath):
+    with open(filepath, 'r') as file:
+        for line_number, line in enumerate(file, start=1):
+            for char_number, char in enumerate(line, start=1):
+                if char.isspace() and char != '\t' and char != '\n':
+                    print(f"Error: File contains whitespace characters other than tab at line {line_number}, position {char_number}.")
+                    sys.exit(1)
+
+file_path = sys.argv[1]  # Replace with the path to your file
+
+contains_whitespace_other_than_tab(file_path)
+print("File does not contain whitespace characters other than tab and newline.")
 
 chromosome_data = pd.read_csv(sys.argv[1], names = ['chr', 'start', 'stop'], usecols=range(3), sep = '\t')
 
