@@ -116,7 +116,7 @@ HG01125,/path/to/HG01125.g.vcf.gz
 To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
    ```
-   nf-core download fellen31/skierfe -r dev --container singularity
+   nf-core download fellen31/skierfe -r dev
    ```
 
    > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter` and `charliecloud` and which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
