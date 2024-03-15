@@ -1,13 +1,13 @@
 Changes in module 'nf-core/fastqc'
 --- modules/nf-core/fastqc/main.nf
 +++ modules/nf-core/fastqc/main.nf
-@@ -1,6 +1,6 @@
- process FASTQC {
-     tag "$meta.id"
--    label 'process_medium'
-+    label 'process_single'
+@@ -33,6 +33,7 @@
+     fastqc \\
+         $args \\
+         --threads $task.cpus \\
++        --memory $task.memory \\
+         $renamed_files
  
-     conda "bioconda::fastqc=0.11.9"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+     cat <<-END_VERSIONS > versions.yml
 
 ************************************************************
