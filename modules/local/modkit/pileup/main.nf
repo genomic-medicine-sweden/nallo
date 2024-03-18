@@ -2,12 +2,13 @@ process MODKIT_PILEUP {
     tag "$meta.id"
     label 'process_high'
 
-    container "docker.io/fellen31/modkit:0.1.9"
+    container "docker.io/fellen31/modkit:0.2.5"
 
     input:
-    tuple val(meta), path(bam), path(bai) 
+    tuple val(meta), path(bam), path(bai)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
+    tuple val(meta4), path(bed)
 
     output:
     tuple val(meta), path("${meta.id}.bed"), emit: bed, optional: true
@@ -24,20 +25,23 @@ process MODKIT_PILEUP {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+
+    def include_bed = bed ? "--include-bed ${bed}" : ''
     """
     modkit pileup \\
         $args \\
+        $include_bed \\
         --threads ${task.cpus} \\
         --ref $fasta \\
         --log-filepath ${bam.baseName}.modkit.log \\
         ${bam} \\
         ${meta.id}.${bam.baseName}.bed
-    
+
     if test -d ${meta.id}.${bam.baseName}.bed; then
-        mv ${meta.id}.${bam.baseName}.bed/1.bed ${meta.id}.1.bed
-        mv ${meta.id}.${bam.baseName}.bed/2.bed ${meta.id}.2.bed
-        mv ${meta.id}.${bam.baseName}.bed/ungrouped.bed ${meta.id}.ungrouped.bed
-    else 
+        if test -f ${meta.id}.${bam.baseName}.bed/1.bed; then mv ${meta.id}.${bam.baseName}.bed/1.bed ${meta.id}.1.bed; fi
+        if test -f ${meta.id}.${bam.baseName}.bed/2.bed; then mv ${meta.id}.${bam.baseName}.bed/2.bed ${meta.id}.2.bed; fi
+        if test -f ${meta.id}.${bam.baseName}.bed/ungrouped.bed; then mv ${meta.id}.${bam.baseName}.bed/ungrouped.bed ${meta.id}.ungrouped.bed; fi
+    else
         mv ${meta.id}.${bam.baseName}.bed ${meta.id}.bed
     fi
 
