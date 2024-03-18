@@ -41,11 +41,11 @@ process DIPCALL {
     def prefix = task.ext.prefix ?: "${meta.id}"
     if(sex == '2') {
     """
-    minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
-    minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
+    minimap2 ${args} -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
+    minimap2 ${args} -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
 
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
+    minimap2 ${args} -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
+    minimap2 ${args} -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
 
     gzip -dc ${prefix}.hap1.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap1.var.gz.vst | gzip > ${prefix}.hap1.var.gz
     gzip -dc ${prefix}.hap2.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap2.var.gz.vst | gzip > ${prefix}.hap2.var.gz
@@ -69,11 +69,11 @@ process DIPCALL {
     """
     } else if (sex == '1') {
     """
-    minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
-    minimap2 -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
+    minimap2 ${args} -c --paf-no-hit -xasm5  -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
+    minimap2 ${args} -c --paf-no-hit -xasm5  -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
 
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
-    minimap2 -a -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
+    minimap2 ${args} -a -xasm5  -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.sam.gz.log | gzip > ${prefix}.hap1.sam.gz
+    minimap2 ${args} -a -xasm5  -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.sam.gz.log | gzip > ${prefix}.hap2.sam.gz
 
     gzip -dc ${prefix}.hap1.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap1.var.gz.vst | gzip > ${prefix}.hap1.var.gz
     gzip -dc ${prefix}.hap2.paf.gz | sort -k6,6 -k8,8n | k8 /usr/local/bin/paftools.js call - 2> ${prefix}.hap2.var.gz.vst | gzip > ${prefix}.hap2.var.gz
