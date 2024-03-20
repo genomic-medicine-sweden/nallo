@@ -187,7 +187,7 @@ workflow SKIERFE {
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     // Gather indices
-    fasta = ch_fasta
+    fasta = PREPARE_GENOME.out.fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
 
