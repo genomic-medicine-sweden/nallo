@@ -10,4 +10,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-Added test data and test profile [#33](https://github.com/genomic-medicine-sweden/skierfe/pull/33)
+- Added test data and test profile [#33](https://github.com/genomic-medicine-sweden/skierfe/pull/33)
