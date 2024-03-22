@@ -23,7 +23,8 @@ workflow PHASING {
 
         // Sniffles specific
         BCFTOOLS_REHEADER(
-            ch_sv_vcf,
+            ch_sv_vcf
+                .map { meta, vcf -> [meta, vcf, [], []] },
             [[],[]]
         )
 

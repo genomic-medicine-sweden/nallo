@@ -27,7 +27,7 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_skie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//params.fasta = WorkflowMain.getGenomeAttribute(params, 'fasta')
+params.fasta = WorkflowMain.getGenomeAttribute(params, 'fasta')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,7 +44,6 @@ workflow GENOMICMEDICINESWEDEN_SKIERFE {
     samplesheet // channel: samplesheet read in from --input
 
     main:
-
     //
     // WORKFLOW: Run pipeline
     //
@@ -53,7 +52,7 @@ workflow GENOMICMEDICINESWEDEN_SKIERFE {
     )
 
     emit:
-    multiqc_report = SKIERFE.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = Channel.empty()// SKIERFE.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -78,7 +77,6 @@ workflow {
         params.outdir,
         params.input
     )
-
     //
     // WORKFLOW: Run main workflow
     //

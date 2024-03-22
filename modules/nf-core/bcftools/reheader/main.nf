@@ -32,17 +32,14 @@ process BCFTOOLS_REHEADER {
                     args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
                     "vcf"
     """
+    echo "${meta.id}" > samples
+    
     bcftools \\
         reheader \\
-        $fai_argument \\
-        $header_argument \\
-        $samples_argument \\
-        $args \\
-        --threads $task.cpus \\
+        -s samples \\
         $vcf \\
-        | bcftools view \\
-        $args2 \\
-        --output ${prefix}.${extension}
+        > ${prefix}.reheader.vcf    
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
