@@ -5,7 +5,7 @@ process MODKIT_PILEUP {
     container "docker.io/fellen31/modkit:0.1.9"
 
     input:
-    tuple val(meta), path(bam), path(bai) 
+    tuple val(meta), path(bam), path(bai)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
 
@@ -32,12 +32,12 @@ process MODKIT_PILEUP {
         --log-filepath ${bam.baseName}.modkit.log \\
         ${bam} \\
         ${meta.id}.${bam.baseName}.bed
-    
+
     if test -d ${meta.id}.${bam.baseName}.bed; then
         mv ${meta.id}.${bam.baseName}.bed/1.bed ${meta.id}.1.bed
         mv ${meta.id}.${bam.baseName}.bed/2.bed ${meta.id}.2.bed
         mv ${meta.id}.${bam.baseName}.bed/ungrouped.bed ${meta.id}.ungrouped.bed
-    else 
+    else
         mv ${meta.id}.${bam.baseName}.bed ${meta.id}.bed
     fi
 

@@ -28,7 +28,7 @@ process YAK {
         $args \\
         -t $task.cpus \\
         -o ${fasta.baseName}.yak \\
-        ${fasta} 
+        ${fasta}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
