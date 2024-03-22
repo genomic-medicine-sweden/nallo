@@ -19,7 +19,6 @@
                 "pattern": "^\\S+\\.snf$",
                 "errorMessage": "SNF file must be provided, cannot contain spaces and must have extension '.snf"
             }
-
         },
         "required": ["sample", "file"]
     }
