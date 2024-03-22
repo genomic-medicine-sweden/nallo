@@ -19,7 +19,7 @@ process SAMPLESHEET_CHECK {
 
     script: // This script is bundled with the pipeline, in fellen31/skierfe/bin/
     """
-    mv ${samplesheet} ${samplesheet}.unchecked.csv 
+    mv ${samplesheet} ${samplesheet}.unchecked.csv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

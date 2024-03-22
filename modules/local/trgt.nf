@@ -1,7 +1,7 @@
 process TRGT {
     tag "$meta.id"
     label 'process_medium'
-    
+
     container "quay.io/pacbio/trgt:0.4.0"
 
     input:
@@ -20,7 +20,7 @@ process TRGT {
     script:
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
-    
+
     if (sex == '1') {
         karyotype = "XY"
     } else if (sex == '2') {
@@ -35,7 +35,7 @@ process TRGT {
         --repeats ${repeats} \\
         --reads ${bam} \\
         --threads ${task.cpus} \\
-        --output-prefix ${meta.id}  
+        --output-prefix ${meta.id}
 
 
     cat <<-END_VERSIONS > versions.yml
