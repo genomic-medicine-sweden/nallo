@@ -140,7 +140,6 @@ workflow SKIERFE {
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-
     if(!params.skip_qc) {
 
         // Fastq QC

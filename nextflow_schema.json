@@ -101,6 +101,12 @@
             "fa_icon": "fas fa-dna",
             "description": "Reference genome related files and options required for the workflow.",
             "properties": {
+                "fasta": {
+                    "type": "string",
+                    "description": "Reference genome",
+                    "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
+                    "format": "file-path"
+                },
                 "genome": {
                     "type": "string",
                     "description": "Name of iGenomes reference.",
@@ -422,12 +428,6 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/extra_file_inputs"
-        },
-        {
-            "$ref": "#/definitions/workflow_options"
-        },
-        {
             "$ref": "#/definitions/workflow_skip_options"
         },
         {
@@ -444,6 +444,12 @@
         },
         {
             "$ref": "#/definitions/generic_options"
+        },
+        {
+            "$ref": "#/definitions/workflow_options"
+        },
+        {
+            "$ref": "#/definitions/extra_file_inputs"
         }
     ]
 }
