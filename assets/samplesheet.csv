@@ -1,2 +1,2 @@
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-HG002_Revio,/media/ssd_4tb/felix/projects/skierfe/assets/test_data/HG002_PacBio_Revio.fastq.gz,FAM1,XXX,YYY,1,1
+HG002_Revio,https://raw.githubusercontent.com/genomic-medicine-sweden/skierfe/dev/assets/test_data/HG002_PacBio_Revio.fastq.gz,FAM,XXX,YYY,1,1
