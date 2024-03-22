@@ -1,7 +1,7 @@
 process CRAMINO {
     tag "$meta.id"
     label 'process_medium'
-    
+
     conda "bioconda::cramino=0.9.7"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/cramino:0.9.7--h5076881_2' :
@@ -27,7 +27,7 @@ process CRAMINO {
         $args \\
         --threads $task.cpus \\
         --arrow ${bam.baseName}.arrow \\
-        ${bam} > ${bam.baseName}.cramino.txt 
+        ${bam} > ${bam.baseName}.cramino.txt
 
 
     cat <<-END_VERSIONS > versions.yml

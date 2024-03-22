@@ -19,15 +19,18 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 ## Pipeline summary
 
 ##### QC
+
 - FastQC ([`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 - Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
 - Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
 
 ##### Alignment & assembly
+
 - Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
 - Assemble (trio-binned) haploid genomes (HiFi only) ([`hifiasm`](https://github.com/chhylp123/hifiasm))
 
 ##### Variant calling
+
 - Short variant calling & joint genotyping of SNVs ([`deepvariant`](https://github.com/google/deepvariant) + [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
 - SV calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
 - Tandem repeats ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
@@ -35,10 +38,12 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 - CNV-calling (HiFi only) ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
 
 ##### Phasing and methylation
+
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
 - Methylation pileups (Revio/ONT) ([`modkit`](https://github.com/nanoporetech/modkit))
 
 ##### Annotation - SNV
+
 1. Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar))
 2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
 
@@ -56,6 +61,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 1. Prepare a samplesheet with input data (gzipped fastq-files):
 
 `samplesheet.csv`
+
 ```
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
 HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
@@ -63,6 +69,7 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
 2. Optional inputs:
+
 - Limit SNV calling to regions in BED file (`--bed`)
 - If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
 - If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
@@ -70,11 +77,13 @@ HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 - If running CNV-calling, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions)
 
 `snp_dbs.csv`
+
 ```
 sample,file
 gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
+
 <!---
 
 - If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
@@ -115,13 +124,13 @@ HG01125,/path/to/HG01125.g.vcf.gz
 
 To run in an offline environment, download the pipeline using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
-   ```
-   nf-core download fellen31/skierfe -r dev
-   ```
+```
+nf-core download fellen31/skierfe -r dev
+```
 
-   > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter` and `charliecloud` and which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
-   > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
-   > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
+> - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter` and `charliecloud` and which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
+> - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
+> - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
 
 > **Warning:**
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those
