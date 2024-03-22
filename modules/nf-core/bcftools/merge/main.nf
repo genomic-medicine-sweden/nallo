@@ -12,6 +12,7 @@ process BCFTOOLS_MERGE {
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     path(bed)
+    tuple val(meta4), path(file_list)
 
     output:
     tuple val(meta), path("*.{bcf,vcf}{,.gz}"), emit: merged_variants
@@ -25,19 +26,20 @@ process BCFTOOLS_MERGE {
     def prefix   = task.ext.prefix ?: "${meta.id}"
 
     def regions = bed ? "--regions-file $bed" : ""
+    def files = file_list ? "--file-list $file_list" : $vcfs
     def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
                     args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
                     args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
                     "vcf"
-
     """
     bcftools merge \\
         $args \\
         $regions \\
         --threads $task.cpus \\
         --output ${prefix}.${extension} \\
-        $vcfs
+        $args \\
+        $files
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
