@@ -26,7 +26,9 @@ file_path = sys.argv[1]  # Replace with the path to your file
 contains_whitespace_other_than_tab(file_path)
 print("File does not contain whitespace characters other than tab and newline.")
 
-chromosome_data = pd.read_csv(sys.argv[1], names=["chr", "start", "stop"], usecols=range(3), sep="\t")
+chromosome_data = pd.read_csv(
+    sys.argv[1], names=["chr", "start", "stop"], usecols=range(3), sep="\t"
+)
 
 chromosome_data["size"] = chromosome_data["stop"] - chromosome_data["start"]
 
@@ -51,10 +53,26 @@ for index, row in sorted_data.iterrows():
 result_df = pd.DataFrame(
     {
         "bin": [i + 1 for i in range(n) for _ in bins[i]],
-        "chr": [chromosome["chr"] for bin_chromosomes in bins for chromosome in bin_chromosomes],
-        "start": [int(chromosome["start"]) for bin_chromosomes in bins for chromosome in bin_chromosomes],
-        "stop": [int(chromosome["stop"]) for bin_chromosomes in bins for chromosome in bin_chromosomes],
-        "size": [int(chromosome["size"]) for bin_chromosomes in bins for chromosome in bin_chromosomes],
+        "chr": [
+            chromosome["chr"]
+            for bin_chromosomes in bins
+            for chromosome in bin_chromosomes
+        ],
+        "start": [
+            int(chromosome["start"])
+            for bin_chromosomes in bins
+            for chromosome in bin_chromosomes
+        ],
+        "stop": [
+            int(chromosome["stop"])
+            for bin_chromosomes in bins
+            for chromosome in bin_chromosomes
+        ],
+        "size": [
+            int(chromosome["size"])
+            for bin_chromosomes in bins
+            for chromosome in bin_chromosomes
+        ],
     }
 )
 
@@ -62,4 +80,6 @@ result_df = pd.DataFrame(
 result_df = result_df.sort_values(by=["bin", "size"], ascending=[True, False])
 
 for id, group in result_df.groupby(["bin"]):
-    group[["chr", "start", "stop"]].to_csv(f"{id}.bed", index=False, header=False, sep="\t")
+    group[["chr", "start", "stop"]].to_csv(
+        f"{id}.bed", index=False, header=False, sep="\t"
+    )

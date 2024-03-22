@@ -1,3 +1,5 @@
+# genomic-medicine-sweden/skierfe: Contributing Guidelines
+
 Hi there!
 Many thanks for taking an interest in improving genomic-medicine-sweden/skierfe.
 
@@ -13,7 +15,6 @@ If you'd like to write some code for genomic-medicine-sweden/skierfe, the standa
 
 1. Check that there isn't already an issue about your idea in the [genomic-medicine-sweden/skierfe issues](https://github.com/genomic-medicine-sweden/skierfe/issues) to avoid duplicating work. If there isn't one already, please create one so that others know you're working on this
 2. [Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) the [genomic-medicine-sweden/skierfe repository](https://github.com/genomic-medicine-sweden/skierfe) to your GitHub account
->>>>>>> TEMPLATE
 3. Make the necessary changes / additions within your forked repository following [Pipeline conventions](#pipeline-contribution-conventions)
 4. Use `nf-core schema build` and add any new parameters to the pipeline JSON schema (requires [nf-core tools](https://github.com/nf-core/tools) >= 1.10).
 5. Submit a Pull Request against the `dev` branch and wait for the code to be reviewed and merged
@@ -42,7 +43,7 @@ If any failures or warnings are encountered, please follow the listed URL for mo
 
 ### Pipeline tests
 
-The`pipeline should be set up with a minimal set of test-data.
+Each `nf-core` pipeline should be set up with a minimal set of test-data.
 `GitHub Actions` then runs the pipeline on this data to ensure that it exits successfully.
 If there are any failures then the automated tests fail.
 These tests are run both with the latest available version of `Nextflow` and also the minimum required version that is stated in the pipeline code.
@@ -55,6 +56,9 @@ These tests are run both with the latest available version of `Nextflow` and als
 - Fix the bug, and bump version (X.Y.Z+1).
 - A PR should be made on `master` from patch to directly this particular bug.
 
+## Pipeline contribution conventions
+
+To make the genomic-medicine-sweden/skierfe code and processing logic more understandable for new contributors and to ensure quality, we semi-standardise the way the code and other contributions are written.
 
 ### Adding a new step
 

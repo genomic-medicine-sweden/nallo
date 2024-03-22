@@ -21,6 +21,75 @@ include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
 include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 
 /*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    DEFINE DEPENDENCIES (FILES AND WORKFLOWS) FOR OTHER WORKFLOWS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+// nf-validation does not support contitional file and params validation,
+// add these here.
+//
+// For example:
+// Workflow skip_cnv_calling can't be run _without_ any of skip_mapping_wf, skip_short_variant_calling
+// File dipcall_par has to be set _without_ skip_assembly_wf
+// Preset "pacbio" can't be run _without_ skip_methylation_wf
+//
+
+def parameterDependencies = [
+    "workflow": [
+        "skip_assembly_wf"          : [],
+        "skip_short_variant_calling": ["skip_mapping_wf"],
+        "skip_snv_annotation"       : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_cnv_calling"          : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_phasing_wf"           : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_repeat_wf"            : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+        "skip_methylation_wf"       : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+    ],
+    "files": [
+        "dipcall_par"    : ["skip_assembly_wf"],
+        "snp_db"         : ["skip_snv_annotation"],
+        "vep_cache"      : ["skip_snv_annotation"],
+        "hificnv_xy"     : ["skip_cnv_calling"],
+        "hificnv_xx"     : ["skip_cnv_calling"],
+        "hificnv_exclude": ["skip_cnv_calling"],
+        "trgt_repeats"   : ["skip_repeat_wf"],
+    ],
+    "preset": [
+        "pacbio" : ["skip_methylation_wf"],
+        "ONT_R10": ["skip_assembly_wf", "skip_cnv_calling"],
+        "revio"  : [],
+    ]
+]
+
+def parameterStatus = [
+    "workflow": [
+        skip_short_variant_calling: params.skip_short_variant_calling,
+        skip_phasing_wf:            params.skip_phasing_wf,
+        skip_methylation_wf:        params.skip_methylation_wf,
+        skip_repeat_wf:             params.skip_repeat_wf,
+        skip_snv_annotation:        params.skip_snv_annotation,
+        skip_cnv_calling:           params.skip_cnv_calling,
+        skip_mapping_wf:            params.skip_mapping_wf,
+        skip_qc:                    params.skip_qc,
+        skip_assembly_wf:           params.skip_assembly_wf,
+    ],
+    "files": [
+        dipcall_par    : params.dipcall_par,
+        snp_db         : params.snp_db,
+        vep_cache      : params.vep_cache,
+        hificnv_xy     : params.hificnv_xy,
+        hificnv_xx     : params.hificnv_xx,
+        hificnv_exclude: params.hificnv_exclude,
+        trgt_repeats   : params.trgt_repeats,
+    ],
+    "preset": [
+        pacbio : params.preset == "pacbio",
+        revio  : params.preset == "revio",
+        ONT_R10: params.preset == "ONT_R10",
+    ]
+]
+
+/*
 ========================================================================================
     SUBWORKFLOW TO INITIALISE PIPELINE
 ========================================================================================
@@ -38,7 +107,6 @@ workflow PIPELINE_INITIALISATION {
     input             //  string: Path to input samplesheet
 
     main:
-
     ch_versions = Channel.empty()
 
     //
@@ -65,7 +133,6 @@ workflow PIPELINE_INITIALISATION {
         validate_params,
         "nextflow_schema.json"
     )
-
     //
     // Check config provided to the pipeline
     //
@@ -75,7 +142,10 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(parameterDependencies, parameterStatus)
+    // Can't put this in schema, because it does not allow for 0 AND >= 250
+    if (params.split_fastq < 250 && params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+    // TODO: parallel_snv should only be allowed when snv calling is active
 
     //
     // Create channel from input file provided through params.input
@@ -112,7 +182,6 @@ workflow PIPELINE_COMPLETION {
     main:
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-
     //
     // Completion email and summary
     //
@@ -137,8 +206,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
+def validateInputParameters(map, params) {
     genomeExistsError()
+    validateParameterCombinations(map, params)
 }
 
 //
@@ -227,4 +297,115 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+//
+// Validate preset and workflow skip combinations
+//
+def validateParameterCombinations(combinationsMap, statusMap) {
+    // Array to store errors
+    def errors = []
+    // For each of the "workflow", "files", "preset"
+    statusMap.each { paramsType, allParams ->
+        // Go through all params and their status
+        statusMap[paramsType].each { param, paramStatus ->
+            switch (paramsType) {
+                case "files":
+                    checkFileDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                case "workflow":
+                    checkWorkflowDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                case "preset":
+                    checkPresetDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                default:
+                    break
+            }
+        }
+    }
+    // Give error if there are any
+    if(errors) {
+        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
+                           "  " + errors.join("\n  ") + "\n" +
+                           "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        error(error_string)
+    }
+}
+
+//
+// Lookup all other workflows that needs to be active for a certain workflow
+//
+def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, List errors) {
+    // Get the status of param
+    presetIsActive = statusMap["preset"][preset]
+    // If preset is not set give no error
+    if(!presetIsActive) {
+        return
+    }
+    // Get all required skips for a preset
+    def requiredSkips = combinationsMap[preset] as Set
+    // Collect the required --skips that are not active for the current preset
+    def dependencyString = findRequiredSkips("workflow", requiredSkips, statusMap)
+        .collect { "--$it" }
+        .join(" ")
+
+    errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
+    return errors
+}
+
+def checkWorkflowDependencies(String workflow, Map combinationsMap, Map statusMap, List errors) {
+    // Get the status of param
+    paramStatus = statusMap["workflow"][workflow]
+    // If skip-parameter is not set, then workflow is active
+    activeWorkflow = !paramStatus
+    // If workflow is active, give no error
+    if(!activeWorkflow) {
+        return
+    }
+    // Get all other worflows that need to be skipped when a certain workflow is skipped
+    def requiredWorkflows = combinationsMap.findAll { it.value.contains(workflow) }.keySet()
+    // If there are no required parameters, give no error
+    if(requiredWorkflows.size() == 0) {
+        return
+    }
+    // Collect the required --skips that are not active for the current workflow
+    def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap)
+        .collect { "--$it" }
+        .join(" ")
+
+    errors << "--$workflow is active, the pipeline has to be run with: $dependencyString"
+    return errors
+}
+//
+// Lookup if a file is required by any workflows, and add to errors
+//
+def checkFileDependencies(String fileParam, Map combinationsMap, Map statusMap, List errors) {
+    // Get the the workflow required by file (a file should only be required by one workflow)
+    def workflowThatRequiresFile = combinationsMap[fileParam][0]
+    // Get status of that workflow
+    def WorkflowIsOff = statusMap["workflow"][workflowThatRequiresFile]
+    def WorkflowIsActive = !WorkflowIsOff
+    // Get the file path
+    def FilePath = statusMap["files"][fileParam]
+    // If the workflow that requires the file is active & theres no file available
+    if(WorkflowIsActive && FilePath == null) {
+        errors << "--$workflowThatRequiresFile is NOT active, the following files are required: --$fileParam"
+    }
+    return errors
+}
+//
+// Find the workflow skips that are not active
+//
+def findRequiredSkips(presetType, Set<String> requiredWorkflows, Map statusMap) {
+    // Define a list to hold which additional parameters that need to be set
+    def skipsNeededToBeActive = []
+    // For all required workflows, check which are not skipped
+    for (requiredWorkflow in requiredWorkflows) {
+        // Get the status of the required workflow
+        requiredWorkflowIsSkipped = statusMap[presetType][requiredWorkflow]
+        // If that workflow is not skipped
+        if(!requiredWorkflowIsSkipped) {
+            // Add it to list of workflows that need to be skipped
+            skipsNeededToBeActive << requiredWorkflow
+        }
+    }
+    return skipsNeededToBeActive
 }
