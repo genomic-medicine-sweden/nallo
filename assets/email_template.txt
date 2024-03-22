@@ -1,18 +1,10 @@
-----------------------------------------------------
-                                        ,--./,-.
-        ___     __   __   __   ___     /,-._.--~\\
-  |\\ | |__  __ /  ` /  \\ |__) |__         }  {
-  | \\| |       \\__, \\__/ |  \\ |___     \\`-._,-`-,
-                                        `._,._,'
-  fellen31/skierfe v${version}
-----------------------------------------------------
 Run Name: $runName
 
 <% if (success){
-    out << "## fellen31/skierfe execution completed successfully! ##"
+    out << "## genomic-medicine-sweden/skierfe execution completed successfully! ##"
 } else {
     out << """####################################################
-## fellen31/skierfe execution completed unsuccessfully! ##
+## genomic-medicine-sweden/skierfe execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -35,5 +27,5 @@ Pipeline Configuration:
 <% out << summary.collect{ k,v -> " - $k: $v" }.join("\n") %>
 
 --
-fellen31/skierfe
-https://github.com/fellen31/skierfe
+genomic-medicine-sweden/skierfe
+https://github.com/genomic-medicine-sweden/skierfe

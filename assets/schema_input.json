@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/fellen31/skierfe/master/assets/schema_input.json",
-    "title": "fellen31/skierfe pipeline - params.input schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/skierfe/master/assets/schema_input.json",
+    "title": "genomic-medicine-sweden/skierfe pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {

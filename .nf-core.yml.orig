@@ -1,0 +1,45 @@
+<<<<<<< HEAD
+repository_type: pipeline
+=======
+>>>>>>> TEMPLATE
+lint:
+  files_exist:
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+<<<<<<< HEAD
+  nextflow_config:
+    - manifest.name
+    - manifest.homePage
+  multiqc_config:
+    - report_comment
+  pipeline_name_conventions: fellen31
+  files_unchanged:
+    - .github/CONTRIBUTING.md
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - assets/email_template.txt
+    - assets/sendmail_template.txt
+    - docs/README.md
+    - lib/NfcoreTemplate.groovy
+=======
+  files_unchanged:
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_light.png
+    - docs/images/nf-core-skierfe_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+  multiqc_config:
+    - report_comment
+  nextflow_config:
+    - manifest.name
+    - manifest.homePage
+repository_type: pipeline
+template:
+  prefix: genomic-medicine-sweden
+  skip: []
+>>>>>>> TEMPLATE

@@ -1,9 +1,7 @@
-# fellen31/skierfe: Contributing Guidelines
-
 Hi there!
-Many thanks for taking an interest in improving fellen31/skierfe.
+Many thanks for taking an interest in improving genomic-medicine-sweden/skierfe.
 
-We try to manage the required tasks for fellen31/skierfe using GitHub issues, you probably came to this page when creating one.
+We try to manage the required tasks for genomic-medicine-sweden/skierfe using GitHub issues, you probably came to this page when creating one.
 Please use the pre-filled template to save time.
 
 However, don't be put off by this template - other more general issues and suggestions are welcome!
@@ -11,10 +9,11 @@ Contributions to the code are even more welcome ;)
 
 ## Contribution workflow
 
-If you'd like to write some code for fellen31/skierfe, the standard workflow is as follows:
+If you'd like to write some code for genomic-medicine-sweden/skierfe, the standard workflow is as follows:
 
-1. Check that there isn't already an issue about your idea in the [fellen31/skierfe issues](https://github.com/fellen31/skierfe/issues) to avoid duplicating work. If there isn't one already, please create one so that others know you're working on this
-2. [Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) the [fellen31/skierfe repository](https://github.com/fellen31/skierfe) to your GitHub account
+1. Check that there isn't already an issue about your idea in the [genomic-medicine-sweden/skierfe issues](https://github.com/genomic-medicine-sweden/skierfe/issues) to avoid duplicating work. If there isn't one already, please create one so that others know you're working on this
+2. [Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) the [genomic-medicine-sweden/skierfe repository](https://github.com/genomic-medicine-sweden/skierfe) to your GitHub account
+>>>>>>> TEMPLATE
 3. Make the necessary changes / additions within your forked repository following [Pipeline conventions](#pipeline-contribution-conventions)
 4. Use `nf-core schema build` and add any new parameters to the pipeline JSON schema (requires [nf-core tools](https://github.com/nf-core/tools) >= 1.10).
 5. Submit a Pull Request against the `dev` branch and wait for the code to be reviewed and merged
@@ -23,8 +22,14 @@ If you're not used to this workflow with git, you can start with some [docs from
 
 ## Tests
 
-~~When you create a pull request with changes, [GitHub Actions](https://github.com/features/actions) will run automatic tests.
-Typically, pull-requests are only fully reviewed when these tests are passing, though of course we can help out before then.~~
+You have the option to test your changes locally by running the pipeline. For receiving warnings about process selectors and other `debug` information, it is recommended to use the debug profile. Execute all the tests with the following command:
+
+```bash
+nf-test test --profile debug,test,docker --verbose
+```
+
+When you create a pull request with changes, [GitHub Actions](https://github.com/features/actions) will run automatic tests.
+Typically, pull-requests are only fully reviewed when these tests are passing, though of course we can help out before then.
 
 There are typically two types of tests that run:
 
@@ -37,12 +42,10 @@ If any failures or warnings are encountered, please follow the listed URL for mo
 
 ### Pipeline tests
 
-This is not an `nf-core` pipeline.
-
-> ~~Each `nf-core` pipeline should be set up with a minimal set of test-data.
-> `GitHub Actions` then runs the pipeline on this data to ensure that it exits successfully.
-> If there are any failures then the automated tests fail.
-> These tests are run both with the latest available version of `Nextflow` and also the minimum required version that is stated in the pipeline code.~~
+The`pipeline should be set up with a minimal set of test-data.
+`GitHub Actions` then runs the pipeline on this data to ensure that it exits successfully.
+If there are any failures then the automated tests fail.
+These tests are run both with the latest available version of `Nextflow` and also the minimum required version that is stated in the pipeline code.
 
 ## Patch
 
@@ -52,11 +55,6 @@ This is not an `nf-core` pipeline.
 - Fix the bug, and bump version (X.Y.Z+1).
 - A PR should be made on `master` from patch to directly this particular bug.
 
-## Getting help
-
-## Pipeline contribution conventions
-
-To make the fellen31/skierfe code and processing logic more understandable for new contributors and to ensure quality, we semi-standardise the way the code and other contributions are written.
 
 ### Adding a new step
 
@@ -83,7 +81,7 @@ Once there, use `nf-core schema build` to add to `nextflow_schema.json`.
 
 Sensible defaults for process resource requirements (CPUs / memory / time) for a process should be defined in `conf/base.config`. These should generally be specified generic with `withLabel:` selectors so they can be shared across multiple processes/steps of the pipeline. A nf-core standard set of labels that should be followed where possible can be seen in the [nf-core pipeline template](https://github.com/nf-core/tools/blob/master/nf_core/pipeline-template/conf/base.config), which has the default process as a single core-process, and then different levels of multi-core configurations for increasingly large memory requirements defined with standardised labels.
 
-The process resources can be passed on to the tool dynamically within the process with the `${task.cpu}` and `${task.memory}` variables in the `script:` block.
+The process resources can be passed on to the tool dynamically within the process with the `${task.cpus}` and `${task.memory}` variables in the `script:` block.
 
 ### Naming schemes
 
@@ -106,7 +104,7 @@ This repo includes a devcontainer configuration which will create a GitHub Codes
 
 To get started:
 
-- Open the repo in [Codespaces](https://github.com/fellen31/skierfe/codespaces)
+- Open the repo in [Codespaces](https://github.com/genomic-medicine-sweden/skierfe/codespaces)
 - Tools installed
   - nf-core
   - Nextflow
@@ -114,4 +112,3 @@ To get started:
 Devcontainer specs:
 
 - [DevContainer config](.devcontainer/devcontainer.json)
-- [Dockerfile](.devcontainer/Dockerfile)

@@ -1,0 +1,15 @@
+name: Feature request
+<<<<<<< HEAD
+description: Suggest an idea for the fellen31/skierfe pipeline
+=======
+description: Suggest an idea for the genomic-medicine-sweden/skierfe pipeline
+>>>>>>> TEMPLATE
+labels: enhancement
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of feature
+      description: Please describe your suggestion for a new feature. It might help to describe a problem or use case, plus any alternatives that you have considered.
+    validations:
+      required: true
