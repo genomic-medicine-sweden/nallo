@@ -67,8 +67,6 @@ HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
 HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
-Download a [reference genome](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use).
-
 Now, you can run the pipeline using:
 
 ```bash
@@ -83,48 +81,11 @@ nextflow run genomic-medicine-sweden/skierfe -r dev -profile YOURPROFILE \
     --skip_cnv_calling
 ```
 
+For more details and further functionality, please refer to the [usage documentation](https://github.com/genomic-medicine-sweden/skierfe/blob/dev/docs/usage.md).
+
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
-
-<!-- Optional inputs:
-
-- Limit SNV calling to regions in BED file (`--bed`)
-- If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
-- If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
-- If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
-- If running CNV-calling, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions)
-
-`snp_dbs.csv`
-
-```
-sample,file
-gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
-cadd,/path/to/cadd.v1.6.hg38.zip
-```
-If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
-
-`extra_snfs.csv`
-```
-sample,file
-HG01123,/path/to/HG01123_sniffles.snf
-HG01124,/path/to/HG01124_sniffles.snf
-```
-
-and for SNVs - prepare a samplesheet with gVCF files from DeepVariant:
-
-`extra_gvcfs.csv`
-```
-sample,file
-HG01123,/path/to/HG01123.g.vcf.gz
-HG01124,/path/to/HG01124.g.vcf.gz
-HG01125,/path/to/HG01125.g.vcf.gz
-```
-
-
-> **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
-
--->
 
 To run in an offline environment, download the pipeline and singularity images using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
