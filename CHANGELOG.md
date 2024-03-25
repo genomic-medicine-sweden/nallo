@@ -10,4 +10,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Update pipeline to run with a small test dataset [#35](https://github.com/genomic-medicine-sweden/skierfe/pull/35)
 - Added test data and test profile [#33](https://github.com/genomic-medicine-sweden/skierfe/pull/33)

@@ -40,7 +40,7 @@ ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs'
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)           : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()                       : Channel.value([])
 ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.empty()
-ch_input_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.value([])
+ch_input_bed      = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.value([])
 
 // This should be able to in schema?
 if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
@@ -187,7 +187,7 @@ workflow SKIERFE {
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     // Gather indices
-    fasta = ch_fasta
+    fasta = PREPARE_GENOME.out.fasta
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
 
@@ -287,7 +287,7 @@ workflow SKIERFE {
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
-                    METHYLATION( hap_bam_bai, fasta, fai )
+                    METHYLATION( hap_bam_bai, fasta, fai, ch_bed )
 
                     // Gather versions
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
