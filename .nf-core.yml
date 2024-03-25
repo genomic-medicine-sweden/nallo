@@ -7,6 +7,7 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
+    - conf/modules.config
   files_unchanged:
     - CODE_OF_CONDUCT.md
     - assets/nf-core-skierfe_logo_light.png
