@@ -9,6 +9,7 @@
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/genomic-medicine-sweden/skierfe)
 
 ## Introduction
+
 **genomic-medicine-sweden/skierfe** is a bioinformatics analysis pipeline for long-read rare disease SV/SNV identification using both PacBio and (targeted) ONT-data. Heavily influenced by best-practice pipelines such as [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
 
 <!-- TODO nf-core: Add full-sized test dataset and amend the paragraph below if applicable -->
@@ -53,7 +54,6 @@
 
 ## Usage
 
-
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
@@ -67,6 +67,8 @@ HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
 HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
 ```
 
+Download a [reference genome](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use).
+
 Now, you can run the pipeline using:
 
 ```bash
@@ -74,11 +76,12 @@ nextflow run genomic-medicine-sweden/skierfe -r dev -profile YOURPROFILE \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
-    --fasta GRCh38_no_alt_analysis_set.fasta \
+    --fasta <reference.fasta> \
     --skip_assembly_wf \
     --skip_repeat_wf \
-    --skip_snv_annotation
-   ```
+    --skip_snv_annotation \
+    --skip_cnv_calling
+```
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
@@ -121,13 +124,14 @@ HG01125,/path/to/HG01125.g.vcf.gz
 
 > **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
 
---> 
+-->
 
 To run in an offline environment, download the pipeline and singularity images using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
 ```
 nf-core download fellen31/skierfe -r dev
 ```
+
 ## Credits
 
 genomic-medicine-sweden/skierfe was originally written by Felix Lenner.
