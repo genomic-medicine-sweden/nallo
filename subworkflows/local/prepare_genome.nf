@@ -13,18 +13,6 @@ workflow PREPARE_GENOME {
 
     fasta_file = fasta_in.map{meta, file -> file}
 
-    // Only run GUNZIP of fasta ends with .gz,
-    // will not catch cases where fasta is bgzipped
-    if (fasta_file.name.endsWith(".gz")) {
-        GUNZIP_FASTA(fasta_in)
-        GUNZIP_FASTA.out.gunzip
-            .collect()
-            .set{ch_fasta}
-    } else {
-        fasta_in
-            .set{ch_fasta}
-    }
-
     // Will not catch cases where fasta is bgzipped
     if ( params.fasta.endsWith('.gz') ) {
         GUNZIP_FASTA(fasta_in)
