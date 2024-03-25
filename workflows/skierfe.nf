@@ -27,7 +27,7 @@ def checkUnsupportedCombinations() {
         } else if (params.skip_phasing_wf & !params.skip_repeat_wf) {
             exit 1, 'Cannot run repeat analysis without short variant calling and phasing'
         } else if (!params.skip_phasing_wf) {
-             exit 1, 'Cannot run phasing analysis without short variant calling'
+            exit 1, 'Cannot run phasing analysis without short variant calling'
         } else if (!params.skip_repeat_wf ) {
             exit 1, 'Cannot run repeat analysis without short variant calling'
         } else if (!params.skip_snv_annotation ) {
