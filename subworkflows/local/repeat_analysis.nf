@@ -51,16 +51,15 @@ workflow REPEAT_ANALYSIS {
         .map{[it[0][0], it[0][1], it[1][1]]}
         .set{ch_bcftools_merge_in}
 
-    // BCFTools merge fails if only one file is provided in arguments,
-    // therefore make a list of all files to be merged and provide it
+    ch_bcftools_query_in
+        .toList()
+        .filter { it.size() > 1 }
+        .flatMap()
+        .map { meta, bcf, csi -> [ [ id : 'multisample' ], bcf, csi ] }
+        .groupTuple()
+        .set{ ch_bcftools_merge_in }
 
-    ch_bcftools_merge_in
-        .map{ meta, vcf, index -> vcf.name.toString().replaceAll("[\\[\\]]", "") }
-        .collectFile(name: 'bcftools_merge_samples.txt', newLine: true)
-        .map{ file_list -> [ [:], file_list ] }
-        .set{ ch_bcftools_file_list }
-
-    BCFTOOLS_MERGE(ch_bcftools_merge_in, ch_fasta, ch_fai, [], ch_bcftools_file_list )
+    BCFTOOLS_MERGE(ch_bcftools_merge_in, ch_fasta, ch_fai, [], [[],[]])
 
     ch_versions = ch_versions.mix(TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_SORT_TRGT.out.versions)
