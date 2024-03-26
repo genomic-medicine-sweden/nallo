@@ -20,12 +20,17 @@ workflow PHASING {
         fai
     main:
         ch_versions = Channel.empty()
-        
-        // Sniffles specific 
-        BCFTOOLS_REHEADER(ch_sv_vcf)
+
+        // Sniffles specific
+        BCFTOOLS_REHEADER(
+            ch_sv_vcf
+                .map { meta, vcf -> [meta, vcf, [], []] },
+            [[],[]]
+        )
+
         BCFTOOLS_FILLFROMFASTA(BCFTOOLS_REHEADER.out.vcf, fasta)
         TABIX_BGZIPTABIX(BCFTOOLS_FILLFROMFASTA.out.vcf)
-        // Sniffles out 
+        // Sniffles out
 
         TABIX_TABIX(ch_vcf)
 
@@ -41,36 +46,36 @@ workflow PHASING {
             .set{ ch_hiphase_snv_in}
 
         HIPHASE_SV( ch_hiphase_sv_in, fasta, fai )
-        
+
         HIPHASE_SNV( ch_hiphase_snv_in, fasta, fai )
 
-    
+
         // Phase VCF
         WHATSHAP_PHASE ( ch_vcf.join(ch_bam_bai), fasta, fai )
-        // Get phased stats 
+        // Get phased stats
         WHATSHAP_STATS ( WHATSHAP_PHASE.out.vcf_tbi )
-         
+
         WHATSHAP_PHASE.out.vcf_tbi
             .join(ch_bam_bai)
             .set{ ch_whatshap_haplotag_in }
-        
+
         // Haplotag reads
         WHATSHAP_HAPLOTAG(ch_whatshap_haplotag_in, fasta, fai)
 
         // Index reads
         SAMTOOLS_INDEX_WHATSHAP ( WHATSHAP_HAPLOTAG.out.bam )
-        
+
         // Combine haplotagged bams with bai
         WHATSHAP_HAPLOTAG
             .out.bam
             .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
             .set{ch_bam_bai_haplotagged}
-         
-         // Prepare inputs
+
+        // Prepare inputs
         ch_bam_bai_haplotagged
             .map{ meta, bam, bai -> [ meta, bam, bai, [] ] }
-            .set{ ch_mosdepth_in }   
-    
+            .set{ ch_mosdepth_in }
+
         CRAMINO_PHASED(ch_bam_bai_haplotagged)
 
         // Get versions

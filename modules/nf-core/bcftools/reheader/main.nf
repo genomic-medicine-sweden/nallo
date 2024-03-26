@@ -2,17 +2,18 @@ process BCFTOOLS_REHEADER {
     tag "$meta.id"
     label 'process_low'
 
-    conda "bioconda::bcftools=1.17"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bcftools:1.17--haef29d1_0':
-        'biocontainers/bcftools:1.17--haef29d1_0' }"
+        'https://depot.galaxyproject.org/singularity/bcftools:1.18--h8b25389_0':
+        'biocontainers/bcftools:1.18--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(vcf)
+    tuple val(meta), path(vcf), path(header), path(samples)
+    tuple val(meta2), path(fai)
 
     output:
-    tuple val(meta), path("*.vcf"), emit: vcf
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
+    path "versions.yml"                               , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,15 +21,25 @@ process BCFTOOLS_REHEADER {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def fai_argument      = fai ? "--fai $fai" : ""
+    def header_argument   = header ? "--header $header" : ""
+    def samples_argument  = samples ? "--samples $samples" : ""
+
+    def args2 = task.ext.args2 ?: '--output-type z'
+    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
+                    args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
+                    args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
+                    args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
+                    "vcf"
     """
-
     echo "${meta.id}" > samples
-
+    
     bcftools \\
         reheader \\
         -s samples \\
         $vcf \\
-        > ${prefix}.reheader.vcf
+        > ${prefix}.reheader.vcf    
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -37,10 +48,16 @@ process BCFTOOLS_REHEADER {
     """
 
     stub:
+    def args2 = task.ext.args2 ?: '--output-type z'
     def prefix = task.ext.prefix ?: "${meta.id}"
 
+    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
+                    args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
+                    args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
+                    args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
+                    "vcf"
     """
-    touch ${prefix}.vcf
+    touch ${prefix}.${extension}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

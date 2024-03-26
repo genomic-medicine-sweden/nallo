@@ -2,10 +2,10 @@ process BCFTOOLS_MERGE {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::bcftools=1.17"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bcftools:1.17--haef29d1_0':
-        'biocontainers/bcftools:1.17--haef29d1_0' }"
+        'https://depot.galaxyproject.org/singularity/bcftools:1.18--h8b25389_0':
+        'biocontainers/bcftools:1.18--h8b25389_0' }"
 
     input:
     tuple val(meta), path(vcfs), path(tbis)
@@ -29,11 +29,13 @@ process BCFTOOLS_MERGE {
     def files = file_list ? "--file-list $file_list" : $vcfs
     def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
                     args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
+                    args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
                     "vcf.gz"
   
     """
     bcftools merge \\
+        $args \\
         $regions \\
         --threads $task.cpus \\
         --output ${prefix}.${extension} \\
@@ -51,8 +53,9 @@ process BCFTOOLS_MERGE {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
                     args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
+                    args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
-                    "vcf.gz"
+                    "vcf"
     """
     touch ${prefix}.${extension}
 

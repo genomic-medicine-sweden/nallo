@@ -1,6 +1,6 @@
 {
-    "name": "fellen31/skierfe",
-    "homePage": "https://github.com/fellen31/skierfe",
+    "name": "genomic-medicine-sweden/skierfe",
+    "homePage": "https://github.com/genomic-medicine-sweden/skierfe",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
@@ -17,7 +17,7 @@
                     },
                     "bcftools/merge": {
                         "branch": "master",
-                        "git_sha": "0435e4eebc94e53721c194b2d5d06f455a79e407",
+                        "git_sha": "44096c08ffdbc694f5f92ae174ea0f7ba0f37e09",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/bcftools/merge/bcftools-merge.diff"
                     },
@@ -28,22 +28,16 @@
                     },
                     "bcftools/reheader": {
                         "branch": "master",
-                        "git_sha": "0435e4eebc94e53721c194b2d5d06f455a79e407",
+                        "git_sha": "44096c08ffdbc694f5f92ae174ea0f7ba0f37e09",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/bcftools/reheader/bcftools-reheader.diff"
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/bcftools/sort/bcftools-sort.diff"
-                    },
-                    "bcftools/view": {
-                        "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "682f789f93070bd047868300dd018faf3d434e7c",
                         "installed_by": ["modules"]
                     },
-                    "custom/dumpsoftwareversions": {
+                    "bcftools/view": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
@@ -55,7 +49,7 @@
                     },
                     "fastp": {
                         "branch": "master",
-                        "git_sha": "d497a4868ace3302016ea8ed4b395072d5e833cd",
+                        "git_sha": "451d49b70f1801a9e5835f111c927104af64481e",
                         "installed_by": ["modules"]
                     },
                     "fastqc": {
@@ -67,12 +61,11 @@
                     "gfastats": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/gfastats/gfastats.diff"
+                        "installed_by": ["modules"]
                     },
                     "glnexus": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "49b18b1639f4f7104187058866a8fab33332bdfe",
                         "installed_by": ["modules"]
                     },
                     "gunzip": {
@@ -83,30 +76,26 @@
                     "hifiasm": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/hifiasm/hifiasm.diff"
+                        "installed_by": ["modules"]
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "603ecbd9f45300c9788f197d2a15a005685b4220",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/minimap2/align/minimap2-align.diff"
+                        "git_sha": "1a5a9e7b4009dcf34e6867dd1a5a1d9a718b027b",
+                        "installed_by": ["modules"]
                     },
                     "minimap2/index": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/minimap2/index/minimap2-index.diff"
+                        "git_sha": "73e062cf5e0ef346f65d73009b1b656299359fc5",
+                        "installed_by": ["modules"]
                     },
                     "mosdepth": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/mosdepth/mosdepth.diff"
+                        "installed_by": ["modules"]
                     },
                     "multiqc": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
@@ -131,15 +120,14 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "cfd937a668919d948f6fcbf4218e79de50c2f36f",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sniffles/sniffles.diff"
                     },
                     "tabix/bgziptabix": {
                         "branch": "master",
-                        "git_sha": "591b71642820933dcb3c954c934b397bd00d8e5e",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/tabix/bgziptabix/tabix-bgziptabix.diff"
+                        "git_sha": "5e7b1ef9a5a2d9258635bcbf70fcf37dacd1b247",
+                        "installed_by": ["modules"]
                     },
                     "tabix/tabix": {
                         "branch": "master",
@@ -149,7 +137,23 @@
                 }
             },
             "subworkflows": {
-                "nf-core": {}
+                "nf-core": {
+                    "utils_nextflow_pipeline": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": ["subworkflows"]
+                    },
+                    "utils_nfcore_pipeline": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": ["subworkflows"]
+                    },
+                    "utils_nfvalidation_plugin": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": ["subworkflows"]
+                    }
+                }
             }
         }
     }

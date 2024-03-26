@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for the fellen31/skierfe pipeline
+description: Suggest an idea for the genomic-medicine-sweden/skierfe pipeline
 labels: enhancement
 body:
   - type: textarea

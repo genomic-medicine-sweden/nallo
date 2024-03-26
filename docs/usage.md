@@ -1,8 +1,49 @@
-# fellen31/skierfe: Usage
+# genomic-medicine-sweden/skierfe: Usage
 
-# fellen31/skierfe pipeline parameters
+## Optional inputs:
 
-Long-read rare disease SV/SNV-identification
+- Limit SNV calling to regions in BED file (`--bed`)
+- If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
+- If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+- If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
+- If running CNV-calling, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions)
+
+`snp_dbs.csv`
+
+```
+sample,file
+gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
+cadd,/path/to/cadd.v1.6.hg38.zip
+```
+
+If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
+
+`extra_snfs.csv`
+
+```
+sample,file
+HG01123,/path/to/HG01123_sniffles.snf
+HG01124,/path/to/HG01124_sniffles.snf
+```
+
+and for SNVs - prepare a samplesheet with gVCF files from DeepVariant:
+
+`extra_gvcfs.csv`
+
+```
+sample,file
+HG01123,/path/to/HG01123.g.vcf.gz
+HG01124,/path/to/HG01124.g.vcf.gz
+HG01125,/path/to/HG01125.g.vcf.gz
+```
+
+> **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
+
+-->
+
+# genomic-medicine-sweden/skierfe pipeline parameters
+
+Long-read variant calling pipeline
 
 ## Workflow skip options
 
@@ -18,6 +59,7 @@ Options to skip various steps within the workflow
 | `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
 | `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
 | `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
 
 ## Input/output options
 
@@ -34,12 +76,10 @@ Define where the pipeline should find input data and save output data.
 
 Reference genome related files and options required for the workflow.
 
-| Parameter         | Description                                                                                                                                                     | Type     | Default                    | Required | Hidden |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------- | -------- | ------ |
-| `genome`          | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter t  |
-| `fasta`           | Path to FASTA genome file. <details><summary>Help</summary><small>This parameter is _mandatory_ if `--genome` is not specified. If you don't have a BWA index a |
-| `igenomes_base`   | Directory / URL base for iGenomes references.                                                                                                                   | `string` | s3://ngi-igenomes/igenomes |          | True   |
-| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may ch           |
+| Parameter         | Description                                                                                                                                                    | Type | Default | Required | Hidden |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- | -------- | ------ |
+| `genome`          | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter t |
+| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may ch          |
 
 ## Institutional config options
 
@@ -68,22 +108,21 @@ Set the top limit for requested resources for any single job.
 
 Less common options for the pipeline, typically set in a config file.
 
-| Parameter                     | Description                                                                                                                                                  | Type      | Default                        | Required | Hidden |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ------------------------------ | -------- | ------ |
-| `help`                        | Display help text.                                                                                                                                           | `boolean` |                                |          | True   |
-| `version`                     | Display version and exit.                                                                                                                                    | `boolean` |                                |          | True   |
+| Parameter                     | Description                                                                                                                                                  | Type      | Default | Required | Hidden |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ------- | -------- | ------ |
+| `help`                        | Display help text.                                                                                                                                           | `boolean` |         |          | True   |
+| `version`                     | Display version and exit.                                                                                                                                    | `boolean` |         |          | True   |
 | `publish_dir_mode`            | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which in         |
 | `email_on_fail`               | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when      |
-| `plaintext_email`             | Send plain-text email instead of HTML.                                                                                                                       | `boolean` |                                |          | True   |
-| `max_multiqc_email_size`      | File size limit when attaching MultiQC reports to summary emails.                                                                                            | `string`  | 25.MB                          |          | True   |
-| `monochrome_logs`             | Do not use coloured log outputs.                                                                                                                             | `boolean` |                                |          | True   |
+| `plaintext_email`             | Send plain-text email instead of HTML.                                                                                                                       | `boolean` |         |          | True   |
+| `max_multiqc_email_size`      | File size limit when attaching MultiQC reports to summary emails.                                                                                            | `string`  | 25.MB   |          | True   |
+| `monochrome_logs`             | Do not use coloured log outputs.                                                                                                                             | `boolean` |         |          | True   |
 | `hook_url`                    | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are su |
-| `multiqc_config`              | Custom config file to supply to MultiQC.                                                                                                                     | `string`  |                                |          | True   |
-| `multiqc_logo`                | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file                                                                 | `string`  |                                |          | True   |
-| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description.                                                                                    | `string`  |                                |          |        |
-| `tracedir`                    | Directory to keep pipeline Nextflow logs and reports.                                                                                                        | `string`  | ${params.outdir}/pipeline_info |          | True   |
-| `validate_params`             | Boolean whether to validate parameters against the schema at runtime                                                                                         | `boolean` | True                           |          | True   |
-| `show_hidden_params`          | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not shown on t           |
+| `multiqc_config`              | Custom config file to supply to MultiQC.                                                                                                                     | `string`  |         |          | True   |
+| `multiqc_logo`                | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file                                                                 | `string`  |         |          | True   |
+| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description.                                                                                    | `string`  |         |          |        |
+| `validate_params`             | Boolean whether to validate parameters against the schema at runtime                                                                                         | `boolean` | True    |          | True   |
+| `validationShowHiddenParams`  | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not sh                   |
 
 ## Workflow options
 
@@ -99,16 +138,21 @@ Less common options for the pipeline, typically set in a config file.
 
 Different processes may need extra input files
 
-| Parameter        | Description                                        | Type     | Default | Required | Hidden |
-| ---------------- | -------------------------------------------------- | -------- | ------- | -------- | ------ |
-| `dipcall_par`    | Provide a bed file of chrX PAR regions for dipcall | `string` |         |          |        |
-| `extra_gvcfs`    | Extra input files for GLNexus                      | `string` |         |          |        |
-| `extra_snfs`     | Extra input files for Sniffles                     | `string` |         |          |        |
-| `tandem_repeats` | Tandem repeat BED-file for sniffles                | `string` |         |          |        |
-| `trgt_repeats`   | BED-file for repeats to be genotyped               | `string` |         |          |        |
-| `snp_db`         | Extra echtvar-databases to annotate SNVs with      | `string` |         |          |        |
-| `vep_cache`      | Path to directory of vep_cache                     | `string` | None    |          |        |
-| `bed`            | BED file with regions of interest                  | `string` |         |          |        |
+| Parameter                          | Description                                                                                                                                     | Type     | Default | Required | Hidden |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
+| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                              | `string` |         |          |        |
+| `extra_gvcfs`                      | Extra input files for GLNexus                                                                                                                   | `string` |         |          |        |
+| `extra_snfs`                       | Extra input files for Sniffles                                                                                                                  | `string` |         |          |        |
+| `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                             | `string` |         |          |        |
+| `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                            | `string` |         |          |        |
+| `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                   | `string` |         |          |        |
+| `vep_cache`                        | Path to directory of vep_cache                                                                                                                  | `string` |         |          |        |
+| `bed`                              | BED file with regions of interest                                                                                                               | `string` |         |          |        |
+| `hificnv_xy`                       |                                                                                                                                                 | `string` |         |          |        |
+| `hificnv_xx`                       |                                                                                                                                                 | `string` |         |          |        |
+| `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                  | `string` |         |          |        |
+| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an u            |
+| `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans |
 
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
 
@@ -126,12 +170,11 @@ You will need to create a samplesheet with information about the samples you wou
 --input '[path to samplesheet file]'
 ```
 
-<!--
 ### Multiple runs of the same sample
 
 The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
 
-```console
+```csv title="samplesheet.csv"
 sample,fastq_1,fastq_2
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
@@ -144,7 +187,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end using th
 
 A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
 
-```console
+```csv title="samplesheet.csv"
 sample,fastq_1,fastq_2
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
@@ -168,7 +211,7 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run fellen31/skierfe --input samplesheet.csv --outdir <OUTDIR> --genome GRCh37 -profile docker
+nextflow run genomic-medicine-sweden/skierfe --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -186,11 +229,14 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-> ⚠️ Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-> The above pipeline run specified with a params file in yaml format:
+:::warning
+Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+:::
+
+The above pipeline run specified with a params file in yaml format:
 
 ```bash
-nextflow run fellen31/skierfe -profile docker -params-file params.yaml
+nextflow run genomic-medicine-sweden/skierfe -profile docker -params-file params.yaml
 ```
 
 with `params.yaml` containing:
@@ -199,7 +245,6 @@ with `params.yaml` containing:
 input: './samplesheet.csv'
 outdir: './results/'
 genome: 'GRCh37'
-input: 'data'
 <...>
 ```
 
@@ -210,25 +255,28 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
 
 ```bash
-nextflow pull fellen31/skierfe
+nextflow pull genomic-medicine-sweden/skierfe
 ```
--->
 
 ### Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
-First, go to the [fellen31/skierfe releases page](https://github.com/fellen31/skierfe/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
+First, go to the [genomic-medicine-sweden/skierfe releases page](https://github.com/genomic-medicine-sweden/skierfe/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
 To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-> 💡 If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+:::tip
+If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+:::
 
 ## Core Nextflow arguments
 
-> **NB:** These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+:::note
+These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+:::
 
 ### `-profile`
 
@@ -236,7 +284,9 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+:::info
+We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+:::
 
 The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 

@@ -9,24 +9,27 @@ Changes in module 'nf-core/bcftools/merge'
  
      output:
      tuple val(meta), path("*.{bcf,vcf}{,.gz}"), emit: merged_variants
-@@ -25,18 +26,19 @@
+@@ -25,19 +26,21 @@
      def prefix   = task.ext.prefix ?: "${meta.id}"
  
      def regions = bed ? "--regions-file $bed" : ""
 +    def files = file_list ? "--file-list $file_list" : $vcfs
      def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
                      args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
+                     args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                      args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
-                     "vcf.gz"
+-                    "vcf"
 -
++                    "vcf.gz"
 +  
      """
      bcftools merge \\
+         $args \\
          $regions \\
          --threads $task.cpus \\
          --output ${prefix}.${extension} \\
-         $args \\
--        *.vcf.gz
+-        $vcfs
++        $args \\
 +        $files
  
      cat <<-END_VERSIONS > versions.yml
