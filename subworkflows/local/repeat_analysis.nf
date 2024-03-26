@@ -34,24 +34,6 @@ workflow REPEAT_ANALYSIS {
 
     BCFTOOLS_SORT_TRGT.out.vcf
         .join(BCFTOOLS_INDEX_TRGT.out.csi)
-        .set{ ch_bcftools_query_in }
-
-    ch_bcftools_query_in
-        .map{[['id':'multisample'],it[1]]}
-        .groupTuple()
-        .set{ vcfs }
-
-    ch_bcftools_query_in
-        .map{[['id':'multisample'],it[2]]}
-        .groupTuple()
-        .set{ csis }
-
-    vcfs
-        .cross(csis)
-        .map{[it[0][0], it[0][1], it[1][1]]}
-        .set{ch_bcftools_merge_in}
-
-    ch_bcftools_query_in
         .toList()
         .filter { it.size() > 1 }
         .flatMap()
