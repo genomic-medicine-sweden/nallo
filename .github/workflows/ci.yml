@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        parameters: ["", "--input assets/samplesheet_multisample.csv --split_fastq 250 --parallel_snv 1"]
+        parameters:
+          - ""
+          - "--input assets/samplesheet_multisample.csv --split_fastq 250 --parallel_snv 1"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
