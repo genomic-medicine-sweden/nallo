@@ -59,7 +59,7 @@ workflow REPEAT_ANALYSIS {
         .groupTuple()
         .set{ ch_bcftools_merge_in }
 
-    BCFTOOLS_MERGE(ch_bcftools_merge_in, ch_fasta, ch_fai, [], [[],[]])
+    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [] )
 
     ch_versions = ch_versions.mix(TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_SORT_TRGT.out.versions)
