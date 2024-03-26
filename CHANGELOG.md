@@ -15,7 +15,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 
 ### `Fixed`
 
-- Fix BCFTools merge module inputs [#43](https://github.com/genomic-medicine-sweden/skierfe/pull/43))
+- Fix BCFTools merge module inputs [#43](https://github.com/genomic-medicine-sweden/skierfe/pull/43)
 
 ### `Dependencies`
 
