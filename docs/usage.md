@@ -1,12 +1,169 @@
 # genomic-medicine-sweden/skierfe: Usage
 
-## Optional inputs:
+## Introduction
 
-- Limit SNV calling to regions in BED file (`--bed`)
-- If running dipcall, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
-- If running TRGT, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
-- If running SNV annotation, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
-- If running CNV-calling, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions)
+genomic-medicine-sweden/skierfe is a bioinformatics analysis pipeline to analyse long-read data.
+
+## Prerequisites
+
+1. Install Nextflow (>=22.10.1) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
+2. Install one of the following technologies for full pipeline reproducibility: Docker, Singularity, Podman, Shifter or Charliecloud.
+   > Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in the skierfe pipeline do not have a conda package so we do not support conda at the moment.
+
+## Run genomic-medicine-sweden/skierfe with test data
+
+Before running the pipeline with your data, we recommend running it with the test dataset available in the `assets/test_data` folder provided with the pipeline. You do not need to download any of the data as part of it came directly with the pipeline and the other part will be fetched automatically for you when you use the test profile.
+
+Run the following command, where YOURPROFILE is the package manager you installed on your machine. For example, `-profile test,docker` or `-profile test,singularity`:
+
+```
+nextflow run genomic-medicine-sweden/skierfe \
+    -revision dev -profile test,<YOURPROFILE> \
+    --outdir <OUTDIR>
+```
+
+> Check [nf-core/configs](https://github.com/nf-core/configs/tree/master/conf) to see if a custom config file to run nf-core pipelines already exists for your institute. If so, you can simply use `-profile test,<institute>` in your command. This enables the appropriate package manager and sets the appropriate execution settings for your machine.
+> NB: The order of profiles is important! They are loaded in sequence, so later profiles can overwrite earlier profiles.
+
+Running the command creates the following files in your working directory:
+
+```
+work                # Directory containing the Nextflow working files
+<OUTDIR>            # Finished results in specified location (defined with --outdir)
+.nextflow_log       # Log file from Nextflow
+# Other Nextflow hidden files, like history of pipeline logs.
+```
+
+> [!NOTE]
+> The default cpu and memory configurations used in skierfe are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
+
+### Updating the pipeline
+
+The above command downloads the pipeline from GitHub, caches it, and tests it on the test dataset. When you run the command again, it will fetch the pipeline from cache even if a more recent version of the pipeline is available. To make sure that you're running the latest version of the pipeline, update the cached version of the pipeline by including `-latest` in the command.
+
+## Run genomic-medicine-sweden/skierfe with your data
+
+Running the pipeline involves three steps:
+
+1. Prepare a samplesheet
+2. Gather all required references
+3. Supply samplesheet and references, and run the command
+
+## Samplesheet input
+
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
+
+```bash
+--input '[path to samplesheet file]'
+```
+
+It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below. `file` can either be a gzipped-fastq file or a BAM file. `phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
+
+```console
+sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
+HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
+```
+
+<!--
+### Full samplesheet
+
+```console
+sample,fastq_1,fastq_2
+CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
+CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
+TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
+TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
+TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
+TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
+```
+
+| Column    | Description                                                                                                                                                                            |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
+| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+
+-->
+
+An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+The typical command for running the pipeline is as follows:
+
+```bash
+nextflow run genomic-medicine-sweden/skierfe -r dev -profile docker \
+    --input samplesheet.csv \
+    --preset <revio/pacbio/ONT_R10> \
+    --outdir <OUTDIR> \
+    --fasta <reference.fasta> \
+    --skip_assembly_wf \
+    --skip_repeat_wf \
+    --skip_snv_annotation \
+    --skip_cnv_calling
+```
+
+This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
+
+Note that the pipeline will create the following files in your working directory:
+
+```
+work                # Directory containing the Nextflow working files
+<OUTDIR>            # Finished results in specified location (defined with --outdir)
+.nextflow_log       # Log file from Nextflow
+# Other Nextflow hidden files, like history of pipeline logs.
+```
+
+<!--
+If you wish to repeatedly use the same parameters for multiple runs, rather than specifying each flag in the command, you can specify these in a params file.
+
+Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
+
+> ⚠️ Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+> The above pipeline run specified with a params file in yaml format:
+
+```bash
+nextflow run fellen31/skierfe -profile docker -params-file params.yaml
+```
+
+with `params.yaml` containing:
+
+```yaml
+input: './samplesheet.csv'
+outdir: './results/'
+genome: 'GRCh37'
+input: 'data'
+<...>
+```
+
+You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch). -->
+
+## Reference files and parameters
+
+The typical command example above requires no additional files except the reference genome. Skierfe has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
+
+| Parameter                    | Description                                | Type      | Default | Required | Hidden |
+| ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
+| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
+
+However, certain workflows require additional files:
+
+If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
+
+> [!NOTE]
+> Make sure chrY PAR is hard masked in reference.
+
+If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
+
+If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
 
 `snp_dbs.csv`
 
@@ -15,6 +172,8 @@ sample,file
 gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
+
+If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions) to supply to `--hificnv_xy`, `--hificnv_xx` and `--hificnv_exclude`.
 
 If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
 
@@ -28,6 +187,9 @@ HG01124,/path/to/HG01124_sniffles.snf
 
 and for SNVs - prepare a samplesheet with gVCF files from DeepVariant:
 
+> [!NOTE]
+> These has to have been generated with the same version of reference genome.
+
 `extra_gvcfs.csv`
 
 ```
@@ -37,29 +199,15 @@ HG01124,/path/to/HG01124.g.vcf.gz
 HG01125,/path/to/HG01125.g.vcf.gz
 ```
 
-> **Note** If running dipcall, make sure chrY PAR is hard masked in reference.
+#### Highlighted parameters:
 
--->
+- You can choose to limit SNV calling to regions in BED file (`--bed`).
 
-# genomic-medicine-sweden/skierfe pipeline parameters
+- By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
 
-Long-read variant calling pipeline
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split alignment into N reads per process.
 
-## Workflow skip options
-
-Options to skip various steps within the workflow
-
-| Parameter                    | Description                                | Type      | Default | Required | Hidden |
-| ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
-| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
-| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
-| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
-| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
-| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
-| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
-| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
+All parameters are listed below:
 
 ## Input/output options
 
@@ -154,129 +302,25 @@ Different processes may need extra input files
 | `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an u            |
 | `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans |
 
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
-
-## :warning: This is information is incomplete
-
-## Introduction
-
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
-
-## Samplesheet input
-
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
-
-```bash
---input '[path to samplesheet file]'
-```
-
-### Multiple runs of the same sample
-
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
-```
-
-### Full samplesheet
-
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
-
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
-```
-
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
-
-## Running the pipeline
-
-The typical command for running the pipeline is as follows:
-
-```bash
-nextflow run genomic-medicine-sweden/skierfe --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
-```
-
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
-
-Note that the pipeline will create the following files in your working directory:
-
-```bash
-work                # Directory containing the nextflow working files
-<OUTDIR>            # Finished results in specified location (defined with --outdir)
-.nextflow_log       # Log file from Nextflow
-# Other nextflow hidden files, eg. history of pipeline runs and old logs.
-```
-
-If you wish to repeatedly use the same parameters for multiple runs, rather than specifying each flag in the command, you can specify these in a params file.
-
-Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
-
-:::warning
-Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-:::
-
-The above pipeline run specified with a params file in yaml format:
-
-```bash
-nextflow run genomic-medicine-sweden/skierfe -profile docker -params-file params.yaml
-```
-
-with `params.yaml` containing:
-
-```yaml
-input: './samplesheet.csv'
-outdir: './results/'
-genome: 'GRCh37'
-<...>
-```
-
-You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
-
-### Updating the pipeline
-
-When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
-
-```bash
-nextflow pull genomic-medicine-sweden/skierfe
-```
-
 ### Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
+However, there has been no releases of this pipeline.
+
+<!--
 First, go to the [genomic-medicine-sweden/skierfe releases page](https://github.com/genomic-medicine-sweden/skierfe/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
+-->
 
 To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-:::tip
-If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
-:::
+> 💡 If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
-:::note
-These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
-:::
+> **NB:** These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
 
 ### `-profile`
 
@@ -284,9 +328,7 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-:::info
-We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
-:::
+> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
 
 The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
