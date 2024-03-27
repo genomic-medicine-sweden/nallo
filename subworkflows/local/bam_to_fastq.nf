@@ -3,7 +3,7 @@ include { SAMTOOLS_FASTQ } from '../../modules/nf-core/samtools/fastq/main'
 workflow BAM_TO_FASTQ {
 
     take:
-    ch_sample   // channel: [ val(meta), reads ]
+    ch_sample // channel: [ val(meta), reads ]
 
     main:
     ch_versions = Channel.empty()
