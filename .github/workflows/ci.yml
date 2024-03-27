@@ -25,7 +25,7 @@ jobs:
       matrix:
         parameters:
           - ""
-          - "--input assets/samplesheet_multisample.csv --split_fastq 250 --parallel_snv 1"
+          - "--input assets/samplesheet_multisample_bam.csv --split_fastq 250 --parallel_snv 1"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
