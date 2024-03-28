@@ -65,6 +65,19 @@ HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
 HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
 ```
 
+| Fields                                     | Description                                                                                                |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `sample`                                   | Custom sample name, cannot contain spaces.                                                                 |
+| `file`                                     | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam". |
+| `family_id`                                | "Family ID must be provided and cannot contain spaces. If no family ID is avail                            |
+| able, use the same ID as the sample.       |
+| `paternal_id`                              | Paternal ID must be provided and cannot contain spaces. If no paternal ID is a                             |
+| vailable, use any ID not in sample column. |
+| `maternal_id`                              | Maternal ID must be provided and cannot contain spaces. If no maternal ID is a                             |
+| vailable, use any ID not in sample column. |
+| `sex`                                      | Sex (1=male; 2=female).                                                                                    |
+| `phenotype`                                | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                        |
+
 <!--
 ### Full samplesheet
 
