@@ -57,7 +57,9 @@ You will need to create a samplesheet with information about the samples you wou
 --input '[path to samplesheet file]'
 ```
 
-It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below. `file` can either be a gzipped-fastq file or a BAM file. `phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
+It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
+`file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
+`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
 
 ```console
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
