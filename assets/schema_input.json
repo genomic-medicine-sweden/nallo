@@ -16,8 +16,8 @@
             "file": {
                 "format": "file-path",
                 "type": "string",
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
+                "errorMessage": "FastQ or BAM file must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
             },
             "family_id": {
                 "type": "string",

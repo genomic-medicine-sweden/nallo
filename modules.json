@@ -102,6 +102,11 @@
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
+                    "samtools/fastq": {
+                        "branch": "master",
+                        "git_sha": "897c33d5da084b61109500ee44c01da2d3e4e773",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
