@@ -64,7 +64,7 @@ Prepare a samplesheet with input data:
 ```
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
 HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
-HG005,/path/to/HG005.fastq.gz,FAM1,HG003,HG004,2,1
+HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
 ```
 
 Now, you can run the pipeline using:
