@@ -2,8 +2,10 @@ process GLNEXUS {
     tag "$meta.id"
     label 'process_high'
 
-    conda "bioconda::glnexus=1.4.1"
-    container "ghcr.io/dnanexus-rnd/glnexus:v1.4.1" // Singularity version does not have jemalloc - 
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/glnexus:1.4.1--h40d77a6_0' :
+        'biocontainers/glnexus:1.4.1--h40d77a6_0' }"
 
     input:
     tuple val(meta), path(gvcfs)
