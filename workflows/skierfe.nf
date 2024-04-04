@@ -12,7 +12,7 @@ ch_extra_snfs     = params.extra_snfs     ? Channel.fromSamplesheet('extra_snfs'
 ch_extra_gvcfs    = params.extra_gvcfs    ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)           : Channel.empty()
 ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repeats).collect()                       : Channel.value([])
 ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.empty()
-ch_input_bed      = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.value([])
+ch_input_bed      = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.value([[],[]])
 
 // This should be able to in schema?
 if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
