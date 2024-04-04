@@ -301,6 +301,21 @@
                     "description": "Show all params when using `--help`",
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
+                },
+                "validationSkipDuplicateCheck": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "nf-validation related parameter"
+                },
+                "validationS3PathCheck": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "Boolean whether to validate validate AWS S3 paths"
+                },
+                "monochromeLogs": {
+                    "type": "boolean",
+                    "hidden": true,
+                    "description": "Boolean whether to color nf-validation logs"
                 }
             }
         },
