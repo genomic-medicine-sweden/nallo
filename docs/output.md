@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document roughly describes the output structure produced by the pipeline. The directories listed below will be created in the results directory after the pipeline has finished. 
+This document roughly describes the output structure produced by the pipeline. The directories listed below will be created in the results directory after the pipeline has finished.
 
 > [!WARNING]
 > The following information may not be complete.
