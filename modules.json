@@ -64,8 +64,9 @@
                     },
                     "glnexus": {
                         "branch": "master",
-                        "git_sha": "49b18b1639f4f7104187058866a8fab33332bdfe",
-                        "installed_by": ["modules"]
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/glnexus/glnexus.diff"
                     },
                     "gunzip": {
                         "branch": "master",
