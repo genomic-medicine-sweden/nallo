@@ -10,6 +10,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 ### `Added`
 
 - Update and rename output directories [#65](https://github.com/genomic-medicine-sweden/skierfe/pull/65)
+- Update GLNexus version [#58](https://github.com/genomic-medicine-sweden/skierfe/pull/58)
 - Added uBAM support and multisample test [#51](https://github.com/genomic-medicine-sweden/skierfe/pull/51)
 - Added Revio BAM test data [#50](https://github.com/genomic-medicine-sweden/skierfe/pull/50)
 - Update template to 2.13.1 [#38](https://github.com/genomic-medicine-sweden/skierfe/pull/38)
