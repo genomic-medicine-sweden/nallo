@@ -105,7 +105,8 @@
                     "type": "string",
                     "description": "Reference genome",
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "genome": {
                     "type": "string",
@@ -273,7 +274,8 @@
                     "format": "file-path",
                     "description": "Custom config file to supply to MultiQC.",
                     "fa_icon": "fas fa-cog",
-                    "hidden": true
+                    "hidden": true,
+                    "exists": true
                 },
                 "multiqc_logo": {
                     "type": "string",
@@ -351,32 +353,37 @@
                 "dipcall_par": {
                     "type": "string",
                     "description": "Provide a bed file of chrX PAR regions for dipcall",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "extra_gvcfs": {
                     "type": "string",
                     "description": "Extra input files for GLNexus",
                     "pattern": "^\\S+\\.csv$",
                     "format": "file-path",
-                    "schema": "assets/schema_gvcfs.json"
+                    "schema": "assets/schema_gvcfs.json",
+                    "exists": true
                 },
                 "extra_snfs": {
                     "type": "string",
                     "description": "Extra input files for Sniffles",
                     "pattern": "^\\S+\\.csv$",
                     "format": "file-path",
-                    "schema": "assets/schema_snfs.json"
+                    "schema": "assets/schema_snfs.json",
+                    "exists": true
                 },
                 "tandem_repeats": {
                     "type": "string",
                     "format": "file-path",
                     "description": "Tandem repeat BED-file for sniffles",
-                    "pattern": "^\\S+\\.bed$"
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true
                 },
                 "trgt_repeats": {
                     "type": "string",
                     "description": "BED-file for repeats to be genotyped",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "snp_db": {
                     "type": "string",
@@ -384,30 +391,37 @@
                     "format": "file-path",
                     "mimetype": "text/csv",
                     "schema": "/assets/schema_snpdb.json",
-                    "description": "Extra echtvar-databases to annotate SNVs with"
+                    "description": "Extra echtvar-databases to annotate SNVs with",
+                    "exists": true
                 },
                 "vep_cache": {
                     "type": "string",
                     "description": "Path to directory of vep_cache",
-                    "format": "directory-path"
+                    "format": "directory-path",
+                    "exists": true
                 },
                 "bed": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
-                    "description": "BED file with regions of interest"
+                    "description": "BED file with regions of interest",
+                    "exists": true
                 },
                 "hificnv_xy": {
                     "type": "string",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "hificnv_xx": {
                     "type": "string",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "hificnv_exclude": {
                     "type": "string",
-                    "description": "HiFiCNV BED file specifying regions to exclude"
+                    "format": "file-path",
+                    "description": "HiFiCNV BED file specifying regions to exclude",
+                    "exists": true
                 },
                 "validationFailUnrecognisedParams": {
                     "type": "boolean",
