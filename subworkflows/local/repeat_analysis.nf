@@ -34,6 +34,8 @@ workflow REPEAT_ANALYSIS {
 
     BCFTOOLS_SORT_TRGT.out.vcf
         .join(BCFTOOLS_INDEX_TRGT.out.csi)
+        .toList()
+        .filter { it.size() > 1 }
         .flatMap()
         .map { meta, bcf, csi -> [ [ id : 'multisample' ], bcf, csi ] }
         .groupTuple()

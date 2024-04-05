@@ -41,11 +41,6 @@
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
                         "installed_by": ["modules"]
                     },
-                    "bedtools/split": {
-                        "branch": "master",
-                        "git_sha": "90aef30f432332bdf0ce9f4b9004aa5d5c4960bb",
-                        "installed_by": ["modules"]
-                    },
                     "ensemblvep/vep": {
                         "branch": "master",
                         "git_sha": "9f9e1fc31cb35876922070c0e601ae05abae5cae",

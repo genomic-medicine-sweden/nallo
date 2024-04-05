@@ -145,7 +145,6 @@ workflow SKIERFE {
         bai     = ALIGN_READS.out.bai
         bam_bai = ALIGN_READS.out.bam_bai
 
-
         // TODO: parallel_snv should only be allowed when snv calling is active
         // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
         // Split BED/Genome into equal chunks
