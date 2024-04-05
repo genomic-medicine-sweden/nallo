@@ -210,10 +210,6 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters(map, params) {
     genomeExistsError()
     validateParameterCombinations(map, params)
-
-    if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
-    if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
-
 }
 
 //

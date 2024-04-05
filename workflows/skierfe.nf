@@ -50,7 +50,6 @@ workflow SKIERFE {
     ch_input
 
     main:
-
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
@@ -76,7 +75,7 @@ workflow SKIERFE {
                                                 : ''
     ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect()
                                                 : ''
-    ch_vep_cache       = params.ch_vep_cache    ? Channel.fromPath(params.vep_cache).collect()
+    ch_vep_cache       = params.vep_cache       ? Channel.fromPath(params.vep_cache).collect()
                                                 : ''
     ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
                                                 : ''
@@ -84,6 +83,13 @@ workflow SKIERFE {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
+    // Check parameter that doens't conform to schema validation here
+    if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+    if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
+
+    //
+    // Main workflow
+    //
     BAM_TO_FASTQ ( ch_input )
     ch_versions = ch_versions.mix(BAM_TO_FASTQ.out.versions)
 
