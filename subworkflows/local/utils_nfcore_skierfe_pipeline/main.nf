@@ -338,17 +338,21 @@ def validateParameterCombinations(combinationsMap, statusMap) {
 def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, List errors) {
     // Get the status of param
     presetIsActive = statusMap["preset"][preset]
-    // If preset is not set give no error
+    // If preset is not active, then give no error
     if(!presetIsActive) {
         return
     }
     // Get all required skips for a preset
     def requiredSkips = combinationsMap[preset] as Set
+    // If there are no required skips, give no error
+    if(requiredSkips.size() == 0) {
+        return
+    }
     // Collect the required --skips that are not active for the current preset
     def dependencyString = findRequiredSkips("workflow", requiredSkips, statusMap)
         .collect { "--$it" }
         .join(" ")
-
+    println(dependencyString)
     errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
@@ -359,7 +363,7 @@ def checkWorkflowDependencies(String workflow, Map combinationsMap, Map statusMa
     // If skip-parameter is not set, then workflow is active
     activeWorkflow = !paramStatus
     // If workflow is active, give no error
-    if(!activeWorkflow) {
+    if(activeWorkflow) {
         return
     }
     // Get all other worflows that need to be skipped when a certain workflow is skipped

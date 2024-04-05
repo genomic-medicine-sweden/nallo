@@ -26,19 +26,6 @@ workflow PREPARE_GENOME {
             .set{ch_fasta}
     }
 
-    // Will not catch cases where fasta is bgzipped
-    if ( params.fasta.endsWith('.gz') ) {
-        GUNZIP_FASTA(fasta_in)
-            .gunzip
-            .collect()
-            .set{ch_fasta}
-
-        ch_versions = ch_versions.mix(GUNZIP_FASTA.out.versions.first())
-    } else {
-        fasta_in
-            .set{ch_fasta}
-    }
-
     SAMTOOLS_FAIDX ( ch_fasta )
     MINIMAP2_INDEX ( ch_fasta )
 
