@@ -4,6 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { fromSamplesheet } from 'plugin/nf-validation'
+
 // Check mandatory input files
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
