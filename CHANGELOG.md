@@ -9,6 +9,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 
 ### `Added`
 
+- Added CNV workflow to test profile [#68](https://github.com/genomic-medicine-sweden/skierfe/pull/68)
 - Update and rename output directories [#65](https://github.com/genomic-medicine-sweden/skierfe/pull/65)
 - Update GLNexus version [#58](https://github.com/genomic-medicine-sweden/skierfe/pull/58)
 - Added uBAM support and multisample test [#51](https://github.com/genomic-medicine-sweden/skierfe/pull/51)
