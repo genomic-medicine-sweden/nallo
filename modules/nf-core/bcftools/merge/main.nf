@@ -32,14 +32,14 @@ process BCFTOOLS_MERGE {
                     args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
                     "vcf"
+
     """
     bcftools merge \\
         $args \\
         $regions \\
         --threads $task.cpus \\
         --output ${prefix}.${extension} \\
-        $args \\
-        $files
+        $vcfs
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

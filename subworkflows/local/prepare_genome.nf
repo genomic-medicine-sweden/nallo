@@ -8,8 +8,23 @@ workflow PREPARE_GENOME {
     fasta_in // channel: [ val(meta), fasta ]
 
     main:
-
     ch_versions = Channel.empty()
+    ch_fasta = Channel.empty()
+
+    fasta_file = fasta_in.map{meta, file -> file}
+
+    // Will not catch cases where fasta is bgzipped
+    if ( params.fasta.endsWith('.gz') ) {
+        GUNZIP_FASTA(fasta_in)
+            .gunzip
+            .collect()
+            .set{ch_fasta}
+
+        ch_versions = ch_versions.mix(GUNZIP_FASTA.out.versions.first())
+    } else {
+        fasta_in
+            .set{ch_fasta}
+    }
 
     // Will not catch cases where fasta is bgzipped
     if ( params.fasta.endsWith('.gz') ) {

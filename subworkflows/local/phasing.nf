@@ -71,7 +71,7 @@ workflow PHASING {
             .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
             .set{ch_bam_bai_haplotagged}
 
-         // Prepare inputs
+        // Prepare inputs
         ch_bam_bai_haplotagged
             .map{ meta, bam, bai -> [ meta, bam, bai, [] ] }
             .set{ ch_mosdepth_in }

@@ -107,6 +107,7 @@ workflow PIPELINE_INITIALISATION {
     input             //  string: Path to input samplesheet
 
     main:
+
     ch_versions = Channel.empty()
 
     //
@@ -133,6 +134,7 @@ workflow PIPELINE_INITIALISATION {
         validate_params,
         "nextflow_schema.json"
     )
+
     //
     // Check config provided to the pipeline
     //
@@ -143,9 +145,6 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterDependencies, parameterStatus)
-    // Can't put this in schema, because it does not allow for 0 AND >= 250
-    if (params.split_fastq < 250 && params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
-    // TODO: parallel_snv should only be allowed when snv calling is active
 
     //
     // Create channel from input file provided through params.input
@@ -182,6 +181,7 @@ workflow PIPELINE_COMPLETION {
     main:
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+
     //
     // Completion email and summary
     //
@@ -206,6 +206,7 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
+
 def validateInputParameters(map, params) {
     genomeExistsError()
     validateParameterCombinations(map, params)
@@ -323,9 +324,10 @@ def validateParameterCombinations(combinationsMap, statusMap) {
     }
     // Give error if there are any
     if(errors) {
-        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-                           "  " + errors.join("\n  ") + "\n" +
-                           "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        def error_string =
+            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
+            "  " + errors.join("\n  ") + "\n" +
+            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
 }

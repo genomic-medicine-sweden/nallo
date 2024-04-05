@@ -5,6 +5,7 @@
 */
 
 include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
+include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
 include { ALIGN_READS                } from '../subworkflows/local/align_reads'
@@ -30,7 +31,6 @@ include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
 include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 
 // nf-core
-include { MOSDEPTH               } from '../modules/nf-core/mosdepth/main'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
@@ -47,7 +47,7 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_skie
 workflow SKIERFE {
 
     take:
-    ch_sample
+    ch_input
 
     main:
 
@@ -84,6 +84,11 @@ workflow SKIERFE {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
+    BAM_TO_FASTQ ( ch_input )
+    ch_versions = ch_versions.mix(BAM_TO_FASTQ.out.versions)
+
+    BAM_TO_FASTQ.out.fastq
+        .set { ch_sample }
 
     if(!params.skip_qc) {
 

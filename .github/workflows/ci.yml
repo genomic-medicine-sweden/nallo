@@ -23,6 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        parameters:
+          - ""
+          - "--input assets/samplesheet_multisample_bam.csv --split_fastq 250 --parallel_snv 1"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
@@ -43,4 +46,4 @@ jobs:
         # For example: adding multiple test runs with different parameters
         # Remember that you can parallelise this by using strategy.matrix
         run: |
-          nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results
+          nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results ${{ matrix.parameters }}

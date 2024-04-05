@@ -1,7 +1,11 @@
 Changes in module 'nf-core/fastqc'
 --- modules/nf-core/fastqc/main.nf
 +++ modules/nf-core/fastqc/main.nf
+<<<<<<< HEAD
 @@ -25,6 +25,10 @@
+=======
+@@ -25,6 +25,11 @@
+>>>>>>> dev
      def old_new_pairs = reads instanceof Path || reads.size() == 1 ? [[ reads, "${prefix}.${reads.extension}" ]] : reads.withIndex().collect { entry, index -> [ entry, "${prefix}_${index + 1}.${entry.extension}" ] }
      def rename_to = old_new_pairs*.join(' ').join(' ')
      def renamed_files = old_new_pairs.collect{ old_name, new_name -> new_name }.join(' ')
@@ -9,10 +13,18 @@ Changes in module 'nf-core/fastqc'
 +    def memory_in_mb = MemoryUnit.of("${task.memory}").toUnit('MB') 
 +    // FastQC memory value allowed range (100 - 10000)
 +    def fastqc_memory = memory_in_mb > 10000 ? 10000 : (memory_in_mb < 100 ? 100 : memory_in_mb)
+<<<<<<< HEAD
      """
      printf "%s %s\\n" $rename_to | while read old_name new_name; do
          [ -f "\${new_name}" ] || ln -s \$old_name \$new_name
 @@ -33,6 +37,7 @@
+=======
++    
+     """
+     printf "%s %s\\n" $rename_to | while read old_name new_name; do
+         [ -f "\${new_name}" ] || ln -s \$old_name \$new_name
+@@ -33,6 +38,7 @@
+>>>>>>> dev
      fastqc \\
          $args \\
          --threads $task.cpus \\
