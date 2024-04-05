@@ -29,10 +29,16 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 // nf-validation does not support contitional file and params validation,
 // add these here.
 //
-// For example:
-// Workflow skip_cnv_calling can't be run _without_ any of skip_mapping_wf, skip_short_variant_calling
-// File dipcall_par has to be set _without_ skip_assembly_wf
-// Preset "pacbio" can't be run _without_ skip_methylation_wf
+// For workflows:
+// - The cnv_calling workflow depends on the mapping and short_variant_calling workflows.
+//   It can't be run if either of --skip_mapping_wf or --skip_short_variant_calling is active.
+//
+// For files:
+// - Since the assembly workflow relies on the dipcall dipcall_par file,
+//   dipcall_par has to be set whenever --skip_assembly_wf is not active.
+//
+// For presets:
+// - Preset "pacbio" can't be run without --skip_methylation_wf.
 //
 
 def parameterDependencies = [
