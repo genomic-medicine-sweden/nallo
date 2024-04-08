@@ -85,7 +85,7 @@ workflow SKIERFE {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
-    // Check parameter that doens't conform to schema validation here
+    // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
