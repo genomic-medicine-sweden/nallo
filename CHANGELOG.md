@@ -9,7 +9,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 
 ### `Added`
 
-- Refactored conditionally prequired parameters validation [#69](https://github.com/genomic-medicine-sweden/skierfe/pull/69)
+- Refactored conditionally required parameters validation [#69](https://github.com/genomic-medicine-sweden/skierfe/pull/69)
 - Added CNV workflow to test profile [#68](https://github.com/genomic-medicine-sweden/skierfe/pull/68)
 - Updated and rename output directories [#65](https://github.com/genomic-medicine-sweden/skierfe/pull/65)
 - Updated GLNexus version [#58](https://github.com/genomic-medicine-sweden/skierfe/pull/58)
