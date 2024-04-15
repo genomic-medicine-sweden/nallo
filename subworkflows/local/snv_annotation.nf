@@ -17,6 +17,8 @@ workflow SNV_ANNOTATION {
     ch_databases
     ch_fasta
     ch_vep_cache
+    val_vep_cache_version // string: [mandatory] default: 110
+
 
     main:
     ch_versions       = Channel.empty()
@@ -51,7 +53,7 @@ workflow SNV_ANNOTATION {
         vep_in,
         "GRCh38",
         "homo_sapiens",
-        "110",
+        val_vep_cache_version,
         ch_vep_cache,
         ch_fasta,
         []

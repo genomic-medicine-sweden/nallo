@@ -354,6 +354,11 @@
                     "default": 13,
                     "description": "Split SNV calling into n chunks",
                     "minimum": 1
+                },
+                "vep_cache_version": {
+                    "type": "integer",
+                    "default": 110,
+                    "description": "VEP cache version"
                 }
             },
             "required": ["preset"]
@@ -412,7 +417,7 @@
                 "vep_cache": {
                     "type": "string",
                     "description": "Path to directory of vep_cache",
-                    "format": "directory-path",
+                    "format": "path",
                     "exists": true
                 },
                 "bed": {

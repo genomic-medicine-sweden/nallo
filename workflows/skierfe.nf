@@ -1,3 +1,5 @@
+include { fromSamplesheet } from 'plugin/nf-validation'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     VALIDATE INPUTS
@@ -84,6 +86,8 @@ if( (params.preset == "pacbio" & !params.skip_methylation_wf) |
     exit 1, "Preset \'$params.preset\' cannot be run wih: " + getValidWorkflows(params.preset)
 }
 
+ch_vep_cache_unprocessed    = params.vep_cache      ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
+                                                        : Channel.value([[],[]])
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL SUBWORKFLOWS
@@ -159,7 +163,7 @@ workflow SKIERFE {
     }
 
     // Index genome
-    PREPARE_GENOME( ch_fasta )
+    PREPARE_GENOME( ch_fasta, ch_vep_cache_unprocessed )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     // Gather indices
@@ -234,7 +238,14 @@ workflow SKIERFE {
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
-                SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
+                SNV_ANNOTATION(
+                    SHORT_VARIANT_CALLING.out.combined_bcf,
+                    SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+                    ch_databases,
+                    fasta,
+                    PREPARE_GENOME.out.vep_resources,
+                    params.vep_cache_version
+                )
             }
 
             if(params.preset != 'ONT_R10') {
