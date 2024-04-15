@@ -42,44 +42,44 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 
 def parameterDependencies = [
-    "workflow": [
-        "skip_assembly_wf"          : [],
-        "skip_short_variant_calling": ["skip_mapping_wf"],
-        "skip_snv_annotation"       : ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_cnv_calling"          : ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_phasing_wf"           : ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_repeat_wf"            : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
-        "skip_methylation_wf"       : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+    workflow: [
+        skip_assembly_wf          : [],
+        skip_short_variant_calling: ["skip_mapping_wf"],
+        skip_snv_annotation       : ["skip_mapping_wf", "skip_short_variant_calling"],
+        skip_cnv_calling          : ["skip_mapping_wf", "skip_short_variant_calling"],
+        skip_phasing_wf           : ["skip_mapping_wf", "skip_short_variant_calling"],
+        skip_repeat_wf            : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+        skip_methylation_wf       : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
     ],
-    "files": [
-        "dipcall_par"    : ["skip_assembly_wf"],
-        "snp_db"         : ["skip_snv_annotation"],
-        "vep_cache"      : ["skip_snv_annotation"],
-        "hificnv_xy"     : ["skip_cnv_calling"],
-        "hificnv_xx"     : ["skip_cnv_calling"],
-        "hificnv_exclude": ["skip_cnv_calling"],
-        "trgt_repeats"   : ["skip_repeat_wf"],
+    files: [
+        dipcall_par    : ["skip_assembly_wf"],
+        snp_db         : ["skip_snv_annotation"],
+        vep_cache      : ["skip_snv_annotation"],
+        hificnv_xy     : ["skip_cnv_calling"],
+        hificnv_xx     : ["skip_cnv_calling"],
+        hificnv_exclude: ["skip_cnv_calling"],
+        trgt_repeats   : ["skip_repeat_wf"],
     ],
-    "preset": [
-        "pacbio" : ["skip_methylation_wf"],
-        "ONT_R10": ["skip_assembly_wf", "skip_cnv_calling"],
-        "revio"  : [],
+    preset: [
+        pacbio : ["skip_methylation_wf"],
+        ONT_R10: ["skip_assembly_wf", "skip_cnv_calling"],
+        revio  : [],
     ]
 ]
 
 def parameterStatus = [
-    "workflow": [
+    workflow: [
         skip_short_variant_calling: params.skip_short_variant_calling,
-        skip_phasing_wf:            params.skip_phasing_wf,
-        skip_methylation_wf:        params.skip_methylation_wf,
-        skip_repeat_wf:             params.skip_repeat_wf,
-        skip_snv_annotation:        params.skip_snv_annotation,
-        skip_cnv_calling:           params.skip_cnv_calling,
-        skip_mapping_wf:            params.skip_mapping_wf,
-        skip_qc:                    params.skip_qc,
-        skip_assembly_wf:           params.skip_assembly_wf,
+        skip_phasing_wf           : params.skip_phasing_wf,
+        skip_methylation_wf       : params.skip_methylation_wf,
+        skip_repeat_wf            : params.skip_repeat_wf,
+        skip_snv_annotation       : params.skip_snv_annotation,
+        skip_cnv_calling          : params.skip_cnv_calling,
+        skip_mapping_wf           : params.skip_mapping_wf,
+        skip_qc                   : params.skip_qc,
+        skip_assembly_wf          : params.skip_assembly_wf,
     ],
-    "files": [
+    files: [
         dipcall_par    : params.dipcall_par,
         snp_db         : params.snp_db,
         vep_cache      : params.vep_cache,
@@ -88,7 +88,7 @@ def parameterStatus = [
         hificnv_exclude: params.hificnv_exclude,
         trgt_repeats   : params.trgt_repeats,
     ],
-    "preset": [
+    preset: [
         pacbio : params.preset == "pacbio",
         revio  : params.preset == "revio",
         ONT_R10: params.preset == "ONT_R10",
@@ -213,9 +213,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 
-def validateInputParameters(map, params) {
+def validateInputParameters(statusMap, paramsMap) {
     genomeExistsError()
-    validateParameterCombinations(map, params)
+    validateParameterCombinations(statusMap, paramsMap)
 }
 
 //
@@ -358,7 +358,6 @@ def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, L
     def dependencyString = findRequiredSkips("workflow", requiredSkips, statusMap)
         .collect { "--$it" }
         .join(" ")
-    println(dependencyString)
     errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
