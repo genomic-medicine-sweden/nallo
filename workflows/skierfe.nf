@@ -48,7 +48,12 @@ def checkUnsupportedCombinations() {
     if (!params.skip_short_variant_calling & !params.skip_snv_annotation) {
         // TODO: no duplicate dbs should be allowed, although echtvar gives pretty clear error
         if(params.snp_db) { ch_databases = Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() } else { exit 1, 'Not skipping SNV Annotation: Missing Echtvar-DB samplesheet (--snp_db)'}
-        if(params.vep_cache) { ch_vep_cache = Channel.fromPath(params.vep_cache).collect() } else { exit 1, 'Not skipping SNV Annotation: missing path to VEP cache-dir (--vep_cache)'}
+        if(params.vep_cache) {
+            ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
+                                                        : Channel.value([[],[]])
+        } else {
+            exit 1, 'Not skipping SNV Annotation: missing path to VEP cache-dir (--vep_cache)'
+        }
     }
     if (!params.skip_short_variant_calling & !params.skip_cnv_calling) {
         if(params.hificnv_xy)      {  ch_expected_xy_bed = Channel.fromPath(params.hificnv_xy).collect()  } else { exit 1, 'Not skipping CNV-calling: Missing --hificnv_xy'}
@@ -86,8 +91,6 @@ if( (params.preset == "pacbio" & !params.skip_methylation_wf) |
     exit 1, "Preset \'$params.preset\' cannot be run wih: " + getValidWorkflows(params.preset)
 }
 
-ch_vep_cache_unprocessed    = params.vep_cache      ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
-                                                        : Channel.value([[],[]])
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL SUBWORKFLOWS
@@ -171,6 +174,8 @@ workflow SKIERFE {
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
 
+    ch_vep_cache = ( params.vep_cache && params.vep_cache.endsWith("tar.gz") )  ? PREPARE_GENOME.out.vep_resources
+                                                                                : ( params.vep_cache    ? Channel.fromPath(params.vep_cache).collect() : Channel.value([]) )
     // Move this inside prepare genome?
 
     // If no BED-file is provided then build intervals from reference
@@ -243,7 +248,7 @@ workflow SKIERFE {
                     SHORT_VARIANT_CALLING.out.snp_calls_vcf,
                     ch_databases,
                     fasta,
-                    PREPARE_GENOME.out.vep_resources,
+                    ch_vep_cache,
                     params.vep_cache_version
                 )
             }
