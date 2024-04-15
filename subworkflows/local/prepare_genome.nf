@@ -6,9 +6,8 @@ include { UNTAR as UNTAR_VEP_CACHE } from '../../modules/nf-core/untar/main'
 workflow PREPARE_GENOME {
 
     take:
-    fasta_in // channel: [ val(meta), fasta ]
-    ch_vep_cache       // channel: [mandatory for annotation] [ path(cache) ]
-
+    fasta_in     // channel: [ val(meta), fasta ]
+    ch_vep_cache // channel: [mandatory for annotation] [ path(cache) ]
 
     main:
     ch_versions = Channel.empty()
@@ -35,7 +34,7 @@ workflow PREPARE_GENOME {
     UNTAR_VEP_CACHE (ch_vep_cache)
 
     UNTAR_VEP_CACHE.out.untar
-        .map{meta, files -> [files]}
+        .map { meta, files -> [files] }
         .collect()
         .set { untarred_vep }
 

@@ -19,7 +19,6 @@ workflow SNV_ANNOTATION {
     ch_vep_cache
     val_vep_cache_version // string: [mandatory] default: 110
 
-
     main:
     ch_versions       = Channel.empty()
 
