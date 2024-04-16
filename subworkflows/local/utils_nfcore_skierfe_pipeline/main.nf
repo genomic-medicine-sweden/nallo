@@ -26,45 +26,54 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+//
 // nf-validation does not support contitional file and params validation,
 // add these here.
 //
-// For workflows:
-// - The cnv_calling workflow depends on the mapping and short_variant_calling workflows.
-//   It can't be run if either of --skip_mapping_wf or --skip_short_variant_calling is active.
-//
-// For files:
-// - Since the assembly workflow relies on the dipcall dipcall_par file,
-//   dipcall_par has to be set whenever --skip_assembly_wf is not active.
-//
-// For presets:
-// - Preset "pacbio" can't be run without --skip_methylation_wf.
-//
 
-def parameterDependencies = [
-    workflow: [
-        skip_assembly_wf          : [],
-        skip_short_variant_calling: ["skip_mapping_wf"],
-        skip_snv_annotation       : ["skip_mapping_wf", "skip_short_variant_calling"],
-        skip_cnv_calling          : ["skip_mapping_wf", "skip_short_variant_calling"],
-        skip_phasing_wf           : ["skip_mapping_wf", "skip_short_variant_calling"],
-        skip_repeat_wf            : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
-        skip_methylation_wf       : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
-    ],
-    files: [
-        dipcall_par    : ["skip_assembly_wf"],
-        snp_db         : ["skip_snv_annotation"],
-        vep_cache      : ["skip_snv_annotation"],
-        hificnv_xy     : ["skip_cnv_calling"],
-        hificnv_xx     : ["skip_cnv_calling"],
-        hificnv_exclude: ["skip_cnv_calling"],
-        trgt_repeats   : ["skip_repeat_wf"],
-    ],
-    preset: [
-        pacbio : ["skip_methylation_wf"],
-        ONT_R10: ["skip_assembly_wf", "skip_cnv_calling"],
-        revio  : [],
-    ]
+//
+// Define subworkflows and their associated "--skip"
+//
+def workflowSkips = [
+    assembly      : "skip_assembly_wf",
+    qc            : "skip_qc",
+    mapping       : "skip_mapping_wf",
+    snv_calling   : "skip_short_variant_calling",
+    snv_annotation: "skip_snv_annotation",
+    cnv_calling   : "skip_cnv_calling",
+    phasing       : "skip_phasing_wf",
+    repeat_calling: "skip_repeat_wf",
+    methylation   : "skip_methylation_wf",
+]
+
+//
+//  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
+//
+def workflowDependencies = [
+    snv_calling    : ["mapping"],
+    snv_annotation : ["mapping", "snv_calling"],
+    cnv_calling    : ["mapping", "snv_calling"],
+    phasing        : ["mapping", "snv_calling"],
+    repeat_calling : ["mapping", "snv_calling", "phasing"],
+    methylation    : ["mapping", "snv_calling", "phasing"],
+]
+
+//
+// E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
+//
+def fileDependencies = [
+    assembly: ["dipcall_par"],
+    snv_annotation: ["snp_db", "vep_cache"],
+    cnv_calling: ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
+    repeat_calling: ["trgt_repeats"]
+]
+
+//
+// E.g., pacbio can't run with the methylation workflow
+//
+def presetIncompatibilities = [
+    pacbio : ["methylation"],
+    ONT_R10: ["assembly", "cnv_calling"],
 ]
 
 def parameterStatus = [
@@ -103,68 +112,68 @@ def parameterStatus = [
 
 workflow PIPELINE_INITIALISATION {
 
-    take:
-    version           // boolean: Display version and exit
-    help              // boolean: Display help text
-    validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
-    nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+take:
+version           // boolean: Display version and exit
+help              // boolean: Display help text
+validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
+monochrome_logs   // boolean: Do not use coloured log outputs
+nextflow_cli_args //   array: List of positional nextflow CLI args
+outdir            //  string: The output directory where the results will be saved
+input             //  string: Path to input samplesheet
 
-    main:
+main:
 
-    ch_versions = Channel.empty()
+ch_versions = Channel.empty()
 
-    //
-    // Print version and exit if required and dump pipeline parameters to JSON file
-    //
-    UTILS_NEXTFLOW_PIPELINE (
-        version,
-        true,
-        outdir,
-        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
-    )
+//
+// Print version and exit if required and dump pipeline parameters to JSON file
+//
+UTILS_NEXTFLOW_PIPELINE (
+    version,
+    true,
+    outdir,
+    workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
+)
 
-    //
-    // Validate parameters and generate parameter summary to stdout
-    //
-    pre_help_text = nfCoreLogo(monochrome_logs)
-    post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
-    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
-    UTILS_NFVALIDATION_PLUGIN (
-        help,
-        workflow_command,
-        pre_help_text,
-        post_help_text,
-        validate_params,
-        "nextflow_schema.json"
-    )
+//
+// Validate parameters and generate parameter summary to stdout
+//
+pre_help_text = nfCoreLogo(monochrome_logs)
+post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
+def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+UTILS_NFVALIDATION_PLUGIN (
+    help,
+    workflow_command,
+    pre_help_text,
+    post_help_text,
+    validate_params,
+    "nextflow_schema.json"
+)
 
-    //
-    // Check config provided to the pipeline
-    //
-    UTILS_NFCORE_PIPELINE (
-        nextflow_cli_args
-    )
-    //
-    // Custom validation for pipeline parameters
-    //
-    validateInputParameters(parameterDependencies, parameterStatus)
+//
+// Check config provided to the pipeline
+//
+UTILS_NFCORE_PIPELINE (
+    nextflow_cli_args
+)
+//
+// Custom validation for pipeline parameters
+//
+validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, presetIncompatibilities)
 
-    //
-    // Create channel from input file provided through params.input
-    //
-    Channel
-        .fromSamplesheet("input")
-        .map {
-            validateInputSamplesheet(it)
-        }
-        .set { ch_samplesheet }
+//
+// Create channel from input file provided through params.input
+//
+Channel
+    .fromSamplesheet("input")
+    .map {
+        validateInputSamplesheet(it)
+    }
+    .set { ch_samplesheet }
 
-    emit:
-    samplesheet = ch_samplesheet
-    versions    = ch_versions
+emit:
+samplesheet = ch_samplesheet
+versions    = ch_versions
 }
 
 /*
@@ -213,9 +222,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 
-def validateInputParameters(statusMap, paramsMap) {
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, presetDependencies) {
     genomeExistsError()
-    validateParameterCombinations(statusMap, paramsMap)
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, presetDependencies)
 }
 
 //
@@ -309,7 +318,7 @@ def methodsDescriptionText(mqc_methods_yaml) {
 //
 // Validate preset and workflow skip combinations
 //
-def validateParameterCombinations(combinationsMap, statusMap) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, presetIncompatibilities) {
     // Array to store errors
     def errors = []
     // For each of the "workflow", "files", "preset"
@@ -318,11 +327,14 @@ def validateParameterCombinations(combinationsMap, statusMap) {
         statusMap[paramsType].each { param, paramStatus ->
             switch (paramsType) {
                 case "files":
-                    checkFileDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                    checkFileDependencies(param, fileDependencies, statusMap, workflowMap, errors)
+                    break
                 case "workflow":
-                    checkWorkflowDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                    checkWorkflowDependencies(param, workflowDependencies, statusMap, workflowMap, errors)
+                    break
                 case "preset":
-                    checkPresetDependencies(param, combinationsMap[paramsType], statusMap, errors)
+                    checkPresetDependencies(param, presetIncompatibilities, statusMap, workflowMap, errors)
+                    break
                 default:
                     break
             }
@@ -339,84 +351,116 @@ def validateParameterCombinations(combinationsMap, statusMap) {
 }
 
 //
-// Lookup all other workflows that needs to be active for a certain workflow
+// Lookup all workflows that needs to be active for a certain preset
 //
-def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, List errors) {
-    // Get the status of param
-    presetIsActive = statusMap["preset"][preset]
+def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+
     // If preset is not active, then give no error
+    presetIsActive = statusMap["preset"][preset]
     if(!presetIsActive) {
         return
     }
-    // Get all required skips for a preset
-    def requiredSkips = combinationsMap[preset] as Set
-    // If there are no required skips, give no error
-    if(requiredSkips.size() == 0) {
-        return
+
+    // Get all required workflows for a preset
+    def requiredWorkflows = combinationsMap[preset] as Set
+    // If no direct dependencies are found, return an emput list
+    if (!requiredWorkflows) {
+        return []
     }
+    println(requiredWorkflows)
     // Collect the required --skips that are not active for the current preset
-    def dependencyString = findRequiredSkips("workflow", requiredSkips, statusMap)
-        .collect { "--$it" }
+    def dependencyString = findRequiredSkips("preset", requiredWorkflows, statusMap, workflowMap)
+        .collect { [ '--', it ].join('') }
         .join(" ")
     errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
 
-def checkWorkflowDependencies(String workflow, Map combinationsMap, Map statusMap, List errors) {
-    // Get the status of param
-    paramStatus = statusMap["workflow"][workflow]
-    // If skip-parameter is not set, then workflow is active
-    activeWorkflow = !paramStatus
-    // If workflow is active, give no error
-    if(activeWorkflow) {
+//
+// Lookup all workflows that needs to be active for another workflow
+//
+def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+
+    // Lookup the workflow associated with the --skip_xxx parameter
+    workflow = workflowMap.find { key, mapValue -> mapValue == skip }?.key
+
+    // If the --skip is not set, then the workflow is active, give no error
+    workflowIsActive = !statusMap["workflow"][skip]
+    if(workflowIsActive) {
         return
     }
-    // Get all other worflows that need to be skipped when a certain workflow is skipped
+
+    // Get all other worflows that are required for a certain workflow
     def requiredWorkflows = combinationsMap.findAll { it.value.contains(workflow) }.keySet()
-    // If there are no required parameters, give no error
-    if(requiredWorkflows.size() == 0) {
-        return
+    // If no direct dependencies are found or combinationsMap does not contain the workflow, return an empty list
+    if (!requiredWorkflows) {
+        return []
     }
     // Collect the required --skips that are not active for the current workflow
-    def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap)
-        .collect { "--$it" }
+    def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
+        .collect { [ '--', it ].join('') }
         .join(" ")
 
-    errors << "--$workflow is active, the pipeline has to be run with: $dependencyString"
+    errors << "--$skip is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
+
 //
 // Lookup if a file is required by any workflows, and add to errors
 //
-def checkFileDependencies(String fileParam, Map combinationsMap, Map statusMap, List errors) {
-    // Get the the workflow required by file (a file should only be required by one workflow)
-    def workflowThatRequiresFile = combinationsMap[fileParam][0]
-    // Get status of that workflow
-    def WorkflowIsOff = statusMap["workflow"][workflowThatRequiresFile]
-    def WorkflowIsActive = !WorkflowIsOff
+def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+    // Get the the workflow required by file
+    def workflowThatRequiresFile = findKeyForValue(file, combinationsMap)
+    // Get the "--skip" for that workflow
+    def workflowSkip = workflowMap[workflowThatRequiresFile]
+    // Get the status of the "--skip", if false then workflow is active
+    def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
     // Get the file path
-    def FilePath = statusMap["files"][fileParam]
+    def FilePath = statusMap["files"][file]
     // If the workflow that requires the file is active & theres no file available
     if(WorkflowIsActive && FilePath == null) {
-        errors << "--$workflowThatRequiresFile is NOT active, the following files are required: --$fileParam"
+        errors << "--$workflowSkip is NOT active, the following files are required: --$file"
     }
     return errors
 }
+
 //
-// Find the workflow skips that are not active
+// Find the workflow skips that are not currently active
 //
-def findRequiredSkips(presetType, Set<String> requiredWorkflows, Map statusMap) {
-    // Define a list to hold which additional parameters that need to be set
-    def skipsNeededToBeActive = []
-    // For all required workflows, check which are not skipped
-    for (requiredWorkflow in requiredWorkflows) {
-        // Get the status of the required workflow
-        requiredWorkflowIsSkipped = statusMap[presetType][requiredWorkflow]
-        // If that workflow is not skipped
-        if(!requiredWorkflowIsSkipped) {
-            // Add it to list of workflows that need to be skipped
-            skipsNeededToBeActive << requiredWorkflow
+def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, Map workflowMap) {
+
+    def requiredSkips = []
+    if(paramType == "preset") {
+        println(requiredWorkflows)
+    }
+    for (workflow in requiredWorkflows) {
+        // Get the skip associated with the workflow
+        skip = workflowMap[workflow]
+
+        workflowIsActive = !statusMap[paramType][skip]
+
+        if(workflowIsActive) {
+            requiredSkips << skip
         }
     }
-    return skipsNeededToBeActive
+    return requiredSkips
 }
+
+def findKeyForValue(def valueToFind, Map map) {
+    for (entry in map) {
+        def key = entry.key
+        def value = entry.value
+
+        if (value instanceof List) {
+            if (value.contains(valueToFind)) {
+                return key
+            }
+        } else {
+            if (value == valueToFind) {
+                return key
+            }
+        }
+    }
+    return null // Value not found
+}
+
