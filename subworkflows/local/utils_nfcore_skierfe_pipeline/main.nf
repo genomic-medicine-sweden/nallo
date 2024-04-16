@@ -62,9 +62,9 @@ def workflowDependencies = [
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
-    assembly: ["dipcall_par"],
+    assembly      : ["dipcall_par"],
     snv_annotation: ["snp_db", "vep_cache"],
-    cnv_calling: ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
+    cnv_calling   : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
     repeat_calling: ["trgt_repeats"]
 ]
 
@@ -363,15 +363,18 @@ def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, M
 
     // Get all required workflows for a preset
     def requiredWorkflows = combinationsMap[preset] as Set
-    // If no direct dependencies are found, return an emput list
+    // If no direct dependencies are found, return an empty list
     if (!requiredWorkflows) {
         return []
     }
-    println(requiredWorkflows)
     // Collect the required --skips that are not active for the current preset
     def dependencyString = findRequiredSkips("preset", requiredWorkflows, statusMap, workflowMap)
         .collect { [ '--', it ].join('') }
         .join(" ")
+    // If all reqired sets are set, give no error
+    if (!dependencyString) {
+        return
+    }
     errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
@@ -382,7 +385,7 @@ def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, M
 def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
 
     // Lookup the workflow associated with the --skip_xxx parameter
-    workflow = workflowMap.find { key, mapValue -> mapValue == skip }?.key
+    currentWorkflow = workflowMap.find { key, mapValue -> mapValue == skip }?.key
 
     // If the --skip is not set, then the workflow is active, give no error
     workflowIsActive = !statusMap["workflow"][skip]
@@ -391,7 +394,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     }
 
     // Get all other worflows that are required for a certain workflow
-    def requiredWorkflows = combinationsMap.findAll { it.value.contains(workflow) }.keySet()
+    def requiredWorkflows = combinationsMap.findAll { it.value.contains(currentWorkflow) }.keySet()
     // If no direct dependencies are found or combinationsMap does not contain the workflow, return an empty list
     if (!requiredWorkflows) {
         return []
@@ -400,7 +403,10 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
         .collect { [ '--', it ].join('') }
         .join(" ")
-
+    // If all reqired sets are set, give no error
+    if (!dependencyString) {
+        return
+    }
     errors << "--$skip is active, the pipeline has to be run with: $dependencyString"
     return errors
 }
@@ -430,17 +436,23 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
 def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, Map workflowMap) {
 
     def requiredSkips = []
-    if(paramType == "preset") {
-        println(requiredWorkflows)
-    }
-    for (workflow in requiredWorkflows) {
+
+    for (currentWorkflow in requiredWorkflows) {
         // Get the skip associated with the workflow
-        skip = workflowMap[workflow]
+        skip = workflowMap[currentWorkflow]
 
-        workflowIsActive = !statusMap[paramType][skip]
+        workflowIsSkipped = !statusMap[paramType][skip]
 
-        if(workflowIsActive) {
-            requiredSkips << skip
+        println("$requiredWorkflows $skip $workflowIsActive")
+
+        if(paramType == "workflow") {
+            if(workflowIsSkipped) {
+                requiredSkips << skip
+            }
+        } else if(paramType == "preset") {
+            if(!workflowIsSkipped) {
+                requiredSkips << skip
+            }
         }
     }
     return requiredSkips
