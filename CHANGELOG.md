@@ -9,6 +9,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 
 ### `Added`
 
+- Added a switch to choose phasing software [#83](https://github.com/genomic-medicine-sweden/skierfe/pull/83)
 - Added SNV annotation subworkflow to test profile [#75](https://github.com/genomic-medicine-sweden/skierfe/pull/75)
 - Refactored conditionally required parameters validation [#69](https://github.com/genomic-medicine-sweden/skierfe/pull/69)
 - Added CNV workflow to test profile [#68](https://github.com/genomic-medicine-sweden/skierfe/pull/68)
