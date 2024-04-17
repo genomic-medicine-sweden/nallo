@@ -184,8 +184,18 @@ workflow SKIERFE {
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
-                ch_vep_cache = ( params.vep_cache && params.vep_cache.endsWith("tar.gz") )  ? PREPARE_GENOME.out.vep_resources
-                                                                                            : ( params.vep_cache    ? Channel.fromPath(params.vep_cache).collect() : Channel.value([]) )
+
+                def ch_vep_cache
+
+                if (params.vep_cache) {
+                    if (params.vep_cache.endsWith("tar.gz")) {
+                        ch_vep_cache = PREPARE_GENOME.out.vep_resources
+                    } else {
+                        ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
+                    }
+                } else {
+                        ch_vep_cache = Channel.value([])
+                }
 
                 SNV_ANNOTATION(
                     SHORT_VARIANT_CALLING.out.combined_bcf,
