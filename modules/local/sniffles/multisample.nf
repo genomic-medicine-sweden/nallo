@@ -33,7 +33,7 @@ process SNIFFLES_MULTISAMPLE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        sniffles_multisample: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version: //')
+        sniffles_multisample: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version //')
     END_VERSIONS
     """
 }
