@@ -57,9 +57,6 @@ workflow PHASING {
             HIPHASE_SNV( ch_hiphase_snv_in, fasta, fai, true )
             ch_versions = ch_versions.mix(HIPHASE_SNV.out.versions)
 
-            SAMTOOLS_INDEX_HIPHASE_SNV( HIPHASE_SNV.out.bams )
-            ch_versions = ch_versions.mix(SAMTOOLS_INDEX_HIPHASE_SNV.out.versions)
-
             HIPHASE_SNV.out.bams
                 .join(HIPHASE_SNV.out.bais)
                 .set { ch_bam_bai_haplotagged }
@@ -102,9 +99,6 @@ workflow PHASING {
 
             HIPHASE_SV( ch_hiphase_in, fasta, fai, true )
             ch_versions = ch_versions.mix(HIPHASE_SV.out.versions)
-
-            SAMTOOLS_INDEX_HIPHASE_SV( HIPHASE_SV.out.bams )
-            ch_versions = ch_versions.mix(SAMTOOLS_INDEX_HIPHASE_SV.out.versions)
 
             HIPHASE_SV.out.bams
                 .join(HIPHASE_SV.out.bais)
