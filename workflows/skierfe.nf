@@ -77,7 +77,7 @@ workflow SKIERFE {
                                                 : ''
     ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect()
                                                 : ''
-    ch_vep_cache       = params.vep_cache       ? Channel.fromPath(params.vep_cache).collect()
+    ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
                                                 : ''
     ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
                                                 : ''
@@ -110,7 +110,7 @@ workflow SKIERFE {
     }
 
     // Index genome
-    PREPARE_GENOME( ch_fasta )
+    PREPARE_GENOME( ch_fasta, ch_vep_cache_unprocessed )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     // Gather indices
@@ -184,7 +184,27 @@ workflow SKIERFE {
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
-                SNV_ANNOTATION(SHORT_VARIANT_CALLING.out.combined_bcf, SHORT_VARIANT_CALLING.out.snp_calls_vcf, ch_databases, fasta, ch_vep_cache)
+
+                def ch_vep_cache
+
+                if (params.vep_cache) {
+                    if (params.vep_cache.endsWith("tar.gz")) {
+                        ch_vep_cache = PREPARE_GENOME.out.vep_resources
+                    } else {
+                        ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
+                    }
+                } else {
+                        ch_vep_cache = Channel.value([])
+                }
+
+                SNV_ANNOTATION(
+                    SHORT_VARIANT_CALLING.out.combined_bcf,
+                    SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+                    ch_databases,
+                    fasta,
+                    ch_vep_cache,
+                    params.vep_cache_version
+                )
             }
 
             if(params.preset != 'ONT_R10') {
