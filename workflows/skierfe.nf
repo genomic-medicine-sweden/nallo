@@ -118,6 +118,8 @@ workflow SKIERFE {
     fai   = PREPARE_GENOME.out.fai
     mmi   = PREPARE_GENOME.out.mmi
 
+    // Move this inside prepare genome?
+
     // If no BED-file is provided then build intervals from reference
     if(!params.bed) {
         fai
