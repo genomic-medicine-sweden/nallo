@@ -35,12 +35,6 @@ process HIPHASE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-/*
-    if (bams.unique().size() != bams.size() && !(bams instanceof Collection)) {
-        println("Name collisions found in input bams.")
-        exit 1
-    }*/
-
     def vcfInputs = []
     def vcfOutputs = []
     def vcfNames = []

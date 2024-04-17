@@ -156,7 +156,7 @@ If running without `--skip_assembly_wf`, download a BED file with PAR regions ([
 
 If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome.
 
-If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)):
+If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply to --vep_cache and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply to `--snp_db`:
 
 `snp_dbs.csv`
 
@@ -168,7 +168,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions) to supply to `--hificnv_xy`, `--hificnv_xx` and `--hificnv_exclude`.
 
-If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2:
+If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2 to supply with `--extra_snfs`:
 
 `extra_snfs.csv`
 
@@ -178,7 +178,7 @@ HG01123,/path/to/HG01123_sniffles.snf
 HG01124,/path/to/HG01124_sniffles.snf
 ```
 
-and for SNVs - prepare a samplesheet with gVCF files from DeepVariant:
+and for SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
 
 > [!NOTE]
 > These has to have been generated with the same version of reference genome.
@@ -202,68 +202,88 @@ HG01125,/path/to/HG01125.g.vcf.gz
 
 All parameters are listed below:
 
+## Workflow skip options
+
+Options to skip various steps within the workflow
+
+| Parameter                    | Description                                | Type      | Default | Required | Hidden |
+| ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
+| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
+
 ## Input/output options
 
 Define where the pipeline should find input data and save output data.
 
-| Parameter       | Description                                                                                                                                                     | Type     | Default | Required | Hidden |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
-| `input`         | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a desig |
-| `outdir`        | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.                                        | `string` |         | True     |        |
-| `email`         | Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of  |
-| `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified.                                                                     | `string` |         |          |        |
+| Parameter       | Description                                                                                                                                                            | Type     | Default | Required | Hidden |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
+| `input`         | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file  |
+| `outdir`        | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.                                               | `string` |         | True     |        |
+| `email`         | Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run |
+| `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified.                                                                            | `string` |         |          |        |
 
 ## Reference genome options
 
 Reference genome related files and options required for the workflow.
 
-| Parameter         | Description                                                                                                                                                    | Type | Default | Required | Hidden |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- | -------- | ------ |
-| `genome`          | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter t |
-| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may ch          |
+| Parameter         | Description                                                                                                                                                          | Type     | Default | Required | Hidden |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
+| `fasta`           | Reference genome                                                                                                                                                     | `string` |         |          |        |
+| `genome`          | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter to give |
+| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may choose th         |
 
 ## Institutional config options
 
 Parameters used to describe centralised config profiles. These should not be edited.
 
-| Parameter                    | Description                                                                                                                                        | Type     | Default | Required | Hidden |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
-| `custom_config_version`      | Git commit id for Institutional configs.                                                                                                           | `string` | master  |          | True   |
-| `custom_config_base`         | Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the |
-| `config_profile_name`        | Institutional config name.                                                                                                                         | `string` |         |          | True   |
-| `config_profile_description` | Institutional config description.                                                                                                                  | `string` |         |          | True   |
-| `config_profile_contact`     | Institutional config contact information.                                                                                                          | `string` |         |          | True   |
-| `config_profile_url`         | Institutional config URL link.                                                                                                                     | `string` |         |          | True   |
+| Parameter                    | Description                                                                                                                                               | Type     | Default | Required | Hidden |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
+| `custom_config_version`      | Git commit id for Institutional configs.                                                                                                                  | `string` | master  |          | True   |
+| `custom_config_base`         | Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the instit |
+| `config_profile_name`        | Institutional config name.                                                                                                                                | `string` |         |          | True   |
+| `config_profile_description` | Institutional config description.                                                                                                                         | `string` |         |          | True   |
+| `config_profile_contact`     | Institutional config contact information.                                                                                                                 | `string` |         |          | True   |
+| `config_profile_url`         | Institutional config URL link.                                                                                                                            | `string` |         |          | True   |
 
 ## Max job request options
 
 Set the top limit for requested resources for any single job.
 
-| Parameter    | Description                                                                                                                                                  | Type | Default | Required | Hidden |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---- | ------- | -------- | ------ |
-| `max_cpus`   | Maximum number of CPUs that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the CPU requirement fo |
-| `max_memory` | Maximum amount of memory that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the memory require   |
-| `max_time`   | Maximum amount of time that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the time requirement f |
+| Parameter    | Description                                                                                                                                                         | Type | Default | Required | Hidden |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- | -------- | ------ |
+| `max_cpus`   | Maximum number of CPUs that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the CPU requirement for each  |
+| `max_memory` | Maximum amount of memory that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the memory requirement fo   |
+| `max_time`   | Maximum amount of time that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the time requirement for each |
 
 ## Generic options
 
 Less common options for the pipeline, typically set in a config file.
 
-| Parameter                     | Description                                                                                                                                                  | Type      | Default | Required | Hidden |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ------- | -------- | ------ |
-| `help`                        | Display help text.                                                                                                                                           | `boolean` |         |          | True   |
-| `version`                     | Display version and exit.                                                                                                                                    | `boolean` |         |          | True   |
-| `publish_dir_mode`            | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which in         |
-| `email_on_fail`               | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when      |
-| `plaintext_email`             | Send plain-text email instead of HTML.                                                                                                                       | `boolean` |         |          | True   |
-| `max_multiqc_email_size`      | File size limit when attaching MultiQC reports to summary emails.                                                                                            | `string`  | 25.MB   |          | True   |
-| `monochrome_logs`             | Do not use coloured log outputs.                                                                                                                             | `boolean` |         |          | True   |
-| `hook_url`                    | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are su |
-| `multiqc_config`              | Custom config file to supply to MultiQC.                                                                                                                     | `string`  |         |          | True   |
-| `multiqc_logo`                | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file                                                                 | `string`  |         |          | True   |
-| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description.                                                                                    | `string`  |         |          |        |
-| `validate_params`             | Boolean whether to validate parameters against the schema at runtime                                                                                         | `boolean` | True    |          | True   |
-| `validationShowHiddenParams`  | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not sh                   |
+| Parameter                      | Description                                                                                                                                                         | Type      | Default | Required | Hidden |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `help`                         | Display help text.                                                                                                                                                  | `boolean` |         |          | True   |
+| `version`                      | Display version and exit.                                                                                                                                           | `boolean` |         |          | True   |
+| `publish_dir_mode`             | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermedi         |
+| `email_on_fail`                | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when the pi      |
+| `plaintext_email`              | Send plain-text email instead of HTML.                                                                                                                              | `boolean` |         |          | True   |
+| `max_multiqc_email_size`       | File size limit when attaching MultiQC reports to summary emails.                                                                                                   | `string`  | 25.MB   |          | True   |
+| `monochrome_logs`              | Do not use coloured log outputs.                                                                                                                                    | `boolean` |         |          | True   |
+| `hook_url`                     | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported |
+| `multiqc_config`               | Custom config file to supply to MultiQC.                                                                                                                            | `string`  |         |          | True   |
+| `multiqc_logo`                 | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file                                                                        | `string`  |         |          | True   |
+| `multiqc_methods_description`  | Custom MultiQC yaml file containing HTML including a methods description.                                                                                           | `string`  |         |          |        |
+| `validate_params`              | Boolean whether to validate parameters against the schema at runtime                                                                                                | `boolean` | True    |          | True   |
+| `validationShowHiddenParams`   | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not shown on                    |
+| `validationSkipDuplicateCheck` | nf-validation related parameter                                                                                                                                     | `boolean` |         |          | True   |
+| `validationS3PathCheck`        | Boolean whether to validate validate AWS S3 paths                                                                                                                   | `boolean` |         |          | True   |
+| `monochromeLogs`               | Boolean whether to color nf-validation logs                                                                                                                         | `boolean` |         |          | True   |
 
 ## Workflow options
 
@@ -271,6 +291,7 @@ Less common options for the pipeline, typically set in a config file.
 | ---------------- | ------------------------------------------ | --------- | ----------- | -------- | ------ |
 | `preset`         | Choose a preset depending on data type     | `string`  | revio       | True     |        |
 | `variant_caller` | Choose variant caller                      | `string`  | deepvariant |          |        |
+| `phaser`         | Choose phasing software                    | `string`  | whatshap    |          |        |
 | `hifiasm_mode`   | Run hifiasm in hifi-only or hifi-trio mode | `string`  | hifi-only   |          |        |
 | `split_fastq`    | Split Alignment into n reads per job       | `integer` | 0           |          |        |
 | `parallel_snv`   | Split SNV calling into n chunks            | `integer` | 13          |          |        |
@@ -279,21 +300,21 @@ Less common options for the pipeline, typically set in a config file.
 
 Different processes may need extra input files
 
-| Parameter                          | Description                                                                                                                                     | Type     | Default | Required | Hidden |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
-| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                              | `string` |         |          |        |
-| `extra_gvcfs`                      | Extra input files for GLNexus                                                                                                                   | `string` |         |          |        |
-| `extra_snfs`                       | Extra input files for Sniffles                                                                                                                  | `string` |         |          |        |
-| `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                             | `string` |         |          |        |
-| `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                            | `string` |         |          |        |
-| `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                   | `string` |         |          |        |
-| `vep_cache`                        | Path to directory of vep_cache                                                                                                                  | `string` |         |          |        |
-| `bed`                              | BED file with regions of interest                                                                                                               | `string` |         |          |        |
-| `hificnv_xy`                       |                                                                                                                                                 | `string` |         |          |        |
-| `hificnv_xx`                       |                                                                                                                                                 | `string` |         |          |        |
-| `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                  | `string` |         |          |        |
-| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an u            |
-| `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans |
+| Parameter                          | Description                                                                                                                                            | Type     | Default | Required | Hidden |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------- | -------- | ------ |
+| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                     | `string` |         |          |        |
+| `extra_gvcfs`                      | Extra input files for GLNexus                                                                                                                          | `string` |         |          |        |
+| `extra_snfs`                       | Extra input files for Sniffles                                                                                                                         | `string` |         |          |        |
+| `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                    | `string` |         |          |        |
+| `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                   | `string` |         |          |        |
+| `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                          | `string` |         |          |        |
+| `vep_cache`                        | Path to directory of vep_cache                                                                                                                         | `string` |         |          |        |
+| `bed`                              | BED file with regions of interest                                                                                                                      | `string` |         |          |        |
+| `hificnv_xy`                       |                                                                                                                                                        | `string` |         |          |        |
+| `hificnv_xx`                       |                                                                                                                                                        | `string` |         |          |        |
+| `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                         | `string` |         |          |        |
+| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecogn            |
+| `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For f |
 
 ### Reproducibility
 

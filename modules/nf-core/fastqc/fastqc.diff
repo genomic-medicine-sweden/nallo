@@ -1,6 +1,14 @@
 Changes in module 'nf-core/fastqc'
 --- modules/nf-core/fastqc/main.nf
 +++ modules/nf-core/fastqc/main.nf
+@@ -1,6 +1,6 @@
+ process FASTQC {
+     tag "$meta.id"
+-    label 'process_medium'
++    label 'process_low'
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
 @@ -25,6 +25,11 @@
      def old_new_pairs = reads instanceof Path || reads.size() == 1 ? [[ reads, "${prefix}.${reads.extension}" ]] : reads.withIndex().collect { entry, index -> [ entry, "${prefix}_${index + 1}.${entry.extension}" ] }
      def rename_to = old_new_pairs*.join(' ').join(' ')
