@@ -3,8 +3,6 @@ include { BCFTOOLS_REHEADER                            } from '../../modules/nf-
 include { CRAMINO as CRAMINO_PHASED                    } from '../../modules/local/cramino'
 include { HIPHASE as HIPHASE_SNV                       } from '../../modules/local/hiphase/main'
 include { HIPHASE as HIPHASE_SV                        } from '../../modules/local/hiphase/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_HIPHASE_SNV } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_HIPHASE_SV  } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP    } from '../../modules/nf-core/samtools/index/main'
 include { TABIX_BGZIPTABIX                             } from '../../modules/nf-core/tabix/bgziptabix/main'
 include { TABIX_TABIX                                  } from '../../modules/nf-core/tabix/tabix/main'
@@ -63,7 +61,7 @@ workflow PHASING {
             ch_versions = ch_versions.mix(SAMTOOLS_INDEX_HIPHASE_SNV.out.versions)
 
             HIPHASE_SNV.out.bams
-                .join(SAMTOOLS_INDEX_HIPHASE_SNV.out.bai)
+                .join(HIPHASE_SNV.out.bais)
                 .set { ch_bam_bai_haplotagged }
 
         } else if (params.phaser.equals("hiphase_sv")) {
@@ -109,7 +107,7 @@ workflow PHASING {
             ch_versions = ch_versions.mix(SAMTOOLS_INDEX_HIPHASE_SV.out.versions)
 
             HIPHASE_SV.out.bams
-                .join(SAMTOOLS_INDEX_HIPHASE_SV.out.bai)
+                .join(HIPHASE_SV.out.bais)
                 .set { ch_bam_bai_haplotagged }
         }
 
