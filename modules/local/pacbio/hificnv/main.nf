@@ -43,7 +43,7 @@ process HIFICNV {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        hificnv: \$(echo \$(cramino -V) | sed 's/cramino //' )
+        hificnv: \$(echo \$(hificnv -V) | sed 's/hificnv //' )
     END_VERSIONS
     """
 }
