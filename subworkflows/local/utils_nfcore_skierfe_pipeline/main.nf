@@ -443,8 +443,6 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
 
         workflowIsSkipped = !statusMap[paramType][skip]
 
-        println("$requiredWorkflows $skip $workflowIsActive")
-
         if(paramType == "workflow") {
             if(workflowIsSkipped) {
                 requiredSkips << skip
