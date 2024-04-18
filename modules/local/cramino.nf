@@ -2,10 +2,10 @@ process CRAMINO {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::cramino=0.9.7"
+    conda "bioconda::cramino=0.14.5"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/cramino:0.9.7--h5076881_2' :
-        'biocontainers/cramino:0.9.7--h5076881_2' }"
+        'https://depot.galaxyproject.org/singularity/cramino:0.14.5--h5076881_0' :
+        'biocontainers/cramino:0.14.5--h5076881_0' }"
 
     input:
     tuple val(meta), path(bam), path(bai)

@@ -337,6 +337,12 @@
                     "description": "Choose variant caller",
                     "enum": ["deepvariant"]
                 },
+                "phaser": {
+                    "type": "string",
+                    "default": "whatshap",
+                    "description": "Choose phasing software",
+                    "enum": ["whatshap", "hiphase_snv", "hiphase_sv"]
+                },
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode",
