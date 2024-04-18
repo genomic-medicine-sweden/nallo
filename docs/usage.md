@@ -133,7 +133,7 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 
 ## Reference files and parameters
 
-The typical command example above requires no additional files except the reference genome. Skierfe has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
+The typical command example above requires no additional files except the reference genome. Nallo has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
