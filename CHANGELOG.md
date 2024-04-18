@@ -6,3 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v0.1.0 - [date]
 
 Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](https://nf-co.re/) template.
+
+### `Added`
+
+- Raw read QC with FastQC and FQCRS
+- Align reads to reference with minimap2
+- Aligned read QC with cramino and mosdepth
+- Call SNVs with deepvariant and merge with GLNexus
+- Annotate SNVs with echtvar and VEP
+- Call SVs with Sniffles, tandem repeats with TRGT and CNVs with HiFiCNV
+- Phase and haplotag reads with whatshap or hiphase
+- Create methylation pileups with modkit
+- Assemble genomes with hifiasm
+- Align assemly to reference and call variants with dipcall
