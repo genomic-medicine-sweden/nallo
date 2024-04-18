@@ -10,7 +10,7 @@ on:
 jobs:
   run-tower:
     name: Run AWS full tests
-    if: github.repository == 'fellen31/skierfe'
+    if: github.repository == 'fellen31/nallo'
     runs-on: ubuntu-latest
     steps:
       - name: Launch workflow via tower
@@ -22,10 +22,10 @@ jobs:
           workspace_id: ${{ secrets.TOWER_WORKSPACE_ID }}
           access_token: ${{ secrets.TOWER_ACCESS_TOKEN }}
           compute_env: ${{ secrets.TOWER_COMPUTE_ENV }}
-          workdir: s3://${{ secrets.AWS_S3_BUCKET }}/work/skierfe/work-${{ github.sha }}
+          workdir: s3://${{ secrets.AWS_S3_BUCKET }}/work/nallo/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/skierfe/results-${{ github.sha }}"
+              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/nallo/results-${{ github.sha }}"
             }
           profiles: test_full,aws_tower
       - uses: actions/upload-artifact@v3
