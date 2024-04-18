@@ -3,30 +3,6 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.0dev - [date]
+## v0.1.0 - [date]
 
 Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](https://nf-co.re/) template.
-
-### `Added`
-
-- Added a switch to choose phasing software [#83](https://github.com/genomic-medicine-sweden/skierfe/pull/83)
-- Added SNV annotation subworkflow to test profile [#75](https://github.com/genomic-medicine-sweden/skierfe/pull/75)
-- Refactored conditionally required parameters validation [#69](https://github.com/genomic-medicine-sweden/skierfe/pull/69)
-- Added CNV workflow to test profile [#68](https://github.com/genomic-medicine-sweden/skierfe/pull/68)
-- Updated and rename output directories [#65](https://github.com/genomic-medicine-sweden/skierfe/pull/65)
-- Updated GLNexus version [#58](https://github.com/genomic-medicine-sweden/skierfe/pull/58)
-- Added uBAM support and multisample test [#51](https://github.com/genomic-medicine-sweden/skierfe/pull/51)
-- Added Revio BAM test data [#50](https://github.com/genomic-medicine-sweden/skierfe/pull/50)
-- Updated template to 2.13.1 [#38](https://github.com/genomic-medicine-sweden/skierfe/pull/38)
-- Updated pipeline to run with a small test dataset [#35](https://github.com/genomic-medicine-sweden/skierfe/pull/35)
-- Added test data and test profile [#33](https://github.com/genomic-medicine-sweden/skierfe/pull/33)
-
-### `Fixed`
-
-- Fix input file validation [#67](https://github.com/genomic-medicine-sweden/skierfe/pull/67)
-- Fix BCFTools merge module inputs [#43](https://github.com/genomic-medicine-sweden/skierfe/pull/43)
-- Fix Mosdepth input channel when run without a bed file [#66](https://github.com/genomic-medicine-sweden/skierfe/pull/66)
-
-### `Dependencies`
-
-### `Deprecated`
