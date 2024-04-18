@@ -1,6 +1,6 @@
 {
-    "name": "genomic-medicine-sweden/skierfe",
-    "homePage": "https://github.com/genomic-medicine-sweden/skierfe",
+    "name": "genomic-medicine-sweden/nallo",
+    "homePage": "https://github.com/genomic-medicine-sweden/nallo",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
