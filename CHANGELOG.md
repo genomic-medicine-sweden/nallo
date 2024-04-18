@@ -15,7 +15,7 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 - Call SNVs with DeepVariant and merge with GLNexus
 - Annotate SNVs with echtvar and VEP
 - Call SVs with Sniffles, tandem repeats with TRGT and CNVs with HiFiCNV
-- Phase and haplotag reads with whatshap or HiPhase
+- Phase variants and haplotag reads with whatshap or HiPhase
 - Create methylation pileups with modkit
 - Assemble genomes with hifiasm
 - Align assemly to reference and call variants with dipcall
