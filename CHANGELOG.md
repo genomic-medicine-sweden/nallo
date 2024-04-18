@@ -12,10 +12,10 @@ Initial release of genomic-medicine-sweden/skierfe, created with the [nf-core](h
 - Raw read QC with FastQC and FQCRS
 - Align reads to reference with minimap2
 - Aligned read QC with cramino and mosdepth
-- Call SNVs with deepvariant and merge with GLNexus
+- Call SNVs with DeepVariant and merge with GLNexus
 - Annotate SNVs with echtvar and VEP
 - Call SVs with Sniffles, tandem repeats with TRGT and CNVs with HiFiCNV
-- Phase and haplotag reads with whatshap or hiphase
+- Phase and haplotag reads with whatshap or HiPhase
 - Create methylation pileups with modkit
 - Assemble genomes with hifiasm
 - Align assemly to reference and call variants with dipcall
