@@ -11,8 +11,6 @@ process WHATSHAP_STATS {
     output:
     tuple val(meta), path("*.stats.tsv.gz"), emit: stats
     tuple val(meta), path("*.blocks.tsv")  , emit: blocks
-    tuple val(meta), path(".command.err")  , emit: err
-    tuple val(meta), path(".command.log")  , emit: log
     path "versions.yml"                    , emit: versions
 
     when:
@@ -25,9 +23,21 @@ process WHATSHAP_STATS {
     whatshap stats \\
         $args \\
         --sample ${meta.id} \\
-        --tsv ${vcf}.stats.tsv.gz \\
-        --block-list ${vcf}.blocks.tsv \\
+        --tsv ${prefix}.stats.tsv.gz \\
+        --block-list ${prefix}.blocks.tsv \\
         $vcf
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        whatshap: \$( whatshap --version )
+    END_VERSIONS
+    """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.stats.tsv.gz
+    touch ${prefix}.blocks.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

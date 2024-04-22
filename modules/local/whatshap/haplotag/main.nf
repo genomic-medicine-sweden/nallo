@@ -27,7 +27,7 @@ process WHATSHAP_HAPLOTAG {
     """
     whatshap haplotag \\
         $args \\
-        -o ${bam.baseName}.haplotagged.bam \\
+        -o ${prefix}.bam \\
         --reference $fasta \\
         --output-threads $task.cpus \\
         ${vcf} \\
@@ -38,4 +38,17 @@ process WHATSHAP_HAPLOTAG {
         whatshap: \$( whatshap --version )
     END_VERSIONS
     """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.bam
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        whatshap: \$( whatshap --version )
+    END_VERSIONS
+    """
+
 }
