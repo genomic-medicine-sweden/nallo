@@ -46,5 +46,20 @@ process HIFICNV {
         hificnv: \$(echo \$(hificnv -V) | sed 's/hificnv //' )
     END_VERSIONS
     """
+
+    stub:
+    prefix      = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.vcf.gz
+    touch ${prefix}.depth.bw
+    touch ${prefix}.bedgraph
+    touch ${prefix}.log
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        hificnv: \$(echo \$(hificnv -V) | sed 's/hificnv //' )
+    END_VERSIONS
+    """
 }
 
