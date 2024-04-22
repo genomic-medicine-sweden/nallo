@@ -1,4 +1,4 @@
-# genomic-medicine-sweden/skierfe: Output
+# genomic-medicine-sweden/nallo: Output
 
 ## Introduction
 

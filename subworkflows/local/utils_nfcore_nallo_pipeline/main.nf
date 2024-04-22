@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the genomic-medicine-sweden/skierfe pipeline
+// Subworkflow with functionality specific to the genomic-medicine-sweden/nallo pipeline
 //
 
 /*

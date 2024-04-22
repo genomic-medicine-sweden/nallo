@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/skierfe/master/nextflow_schema.json",
-    "title": "genomic-medicine-sweden/skierfe pipeline parameters",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/nextflow_schema.json",
+    "title": "genomic-medicine-sweden/nallo pipeline parameters",
     "description": "Long-read variant calling pipeline",
     "type": "object",
     "definitions": {

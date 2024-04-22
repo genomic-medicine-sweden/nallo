@@ -1,23 +1,23 @@
-# genomic-medicine-sweden/skierfe: Usage
+# genomic-medicine-sweden/nallo: Usage
 
 ## Introduction
 
-genomic-medicine-sweden/skierfe is a bioinformatics analysis pipeline to analyse long-read data.
+genomic-medicine-sweden/nallo is a bioinformatics analysis pipeline to analyse long-read data.
 
 ## Prerequisites
 
 1. Install Nextflow (>=22.10.1) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
 2. Install one of the following technologies for full pipeline reproducibility: Docker, Singularity, Podman, Shifter or Charliecloud.
-   > Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in the skierfe pipeline do not have a conda package so we do not support conda at the moment.
+   > Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in the nallo pipeline do not have a conda package so we do not support conda at the moment.
 
-## Run genomic-medicine-sweden/skierfe with test data
+## Run genomic-medicine-sweden/nallo with test data
 
 Before running the pipeline with your data, we recommend running it with the test dataset available in the `assets/test_data` folder provided with the pipeline. You do not need to download any of the data as part of it came directly with the pipeline and the other part will be fetched automatically for you when you use the test profile.
 
 Run the following command, where YOURPROFILE is the package manager you installed on your machine. For example, `-profile test,docker` or `-profile test,singularity`:
 
 ```
-nextflow run genomic-medicine-sweden/skierfe \
+nextflow run genomic-medicine-sweden/nallo \
     -revision dev -profile test,<YOURPROFILE> \
     --outdir <OUTDIR>
 ```
@@ -35,13 +35,13 @@ work                # Directory containing the Nextflow working files
 ```
 
 > [!NOTE]
-> The default cpu and memory configurations used in skierfe are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
+> The default cpu and memory configurations used in nallo are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
 
 ### Updating the pipeline
 
 The above command downloads the pipeline from GitHub, caches it, and tests it on the test dataset. When you run the command again, it will fetch the pipeline from cache even if a more recent version of the pipeline is available. To make sure that you're running the latest version of the pipeline, update the cached version of the pipeline by including `-latest` in the command.
 
-## Run genomic-medicine-sweden/skierfe with your data
+## Run genomic-medicine-sweden/nallo with your data
 
 Running the pipeline involves three steps:
 
@@ -85,7 +85,7 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run genomic-medicine-sweden/skierfe -r dev -profile docker \
+nextflow run genomic-medicine-sweden/nallo -r dev -profile docker \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
@@ -116,7 +116,7 @@ Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <
 > The above pipeline run specified with a params file in yaml format:
 
 ```bash
-nextflow run fellen31/skierfe -profile docker -params-file params.yaml
+nextflow run genomic-medicine-sweden/nallo -profile docker -params-file params.yaml
 ```
 
 with `params.yaml` containing:
@@ -133,7 +133,7 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 
 ## Reference files and parameters
 
-The typical command example above requires no additional files except the reference genome. Skierfe has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
+The typical command example above requires no additional files except the reference genome. Nallo has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
@@ -323,7 +323,7 @@ It is a good idea to specify a pipeline version when running the pipeline on you
 However, there has been no releases of this pipeline. A workaround is to supply a commit ID, e.g. `-revision 6ff95ff`, in order to ensure that the same version of the pipeline is being executed.
 
 <!--
-First, go to the [genomic-medicine-sweden/skierfe releases page](https://github.com/genomic-medicine-sweden/skierfe/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
+First, go to the [genomic-medicine-sweden/nallo releases page](https://github.com/genomic-medicine-sweden/nallo/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 -->
