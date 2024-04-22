@@ -24,7 +24,7 @@ workflow STRUCTURAL_VARIANT_CALLING {
         .map { snfs -> [ [id:'multisample'], snfs, [] ] }
         .set{ ch_multisample_input }
 
-    SNIFFLES_MULTISAMPLE( ch_multisample_input, ch_fasta, ch_tandem_repeats, true, false)
+    SNIFFLES_MULTISAMPLE( ch_multisample_input, ch_fasta, ch_tandem_repeats, true, false )
 
     ch_versions = ch_versions.mix(SNIFFLES.out.versions)
     ch_versions = ch_versions.mix(SNIFFLES_MULTISAMPLE.out.versions)
