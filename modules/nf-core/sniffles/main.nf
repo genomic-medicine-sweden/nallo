@@ -8,7 +8,7 @@ process SNIFFLES {
         'biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
 
     input:
-    tuple val(meta), path(input), path(index)
+    tuple val(meta), path(input), path(bai)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(tandem_file)
     val(vcf_output)

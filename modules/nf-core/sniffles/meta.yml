@@ -34,6 +34,15 @@ input:
       type: file
       description: |
         Reference database in FASTA format
+  - meta3:
+      type: map
+      description: |
+        Groovy Map containing tandem repeat file information
+        e.g. [ id:'tandem_repeats' ]
+  - tandem_file:
+      type: file
+      description: |
+        Tandem repeats file in BED format
 output:
   - meta:
       type: map

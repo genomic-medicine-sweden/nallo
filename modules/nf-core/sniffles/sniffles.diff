@@ -23,7 +23,23 @@ Changes in module 'nf-core/sniffles'
    - bai:
        type: file
        description: Index of BAM file
-@@ -45,8 +46,8 @@
+@@ -33,6 +34,15 @@
+       type: file
+       description: |
+         Reference database in FASTA format
++  - meta3:
++      type: map
++      description: |
++        Groovy Map containing tandem repeat file information
++        e.g. [ id:'tandem_repeats' ]
++  - tandem_file:
++      type: file
++      description: |
++        Tandem repeats file in BED format
+ output:
+   - meta:
+       type: map
+@@ -45,8 +55,8 @@
        pattern: "*.vcf.gz"
    - snf:
        type: file
@@ -42,7 +58,7 @@ Changes in module 'nf-core/sniffles'
  
      input:
 -    tuple val(meta), path(bam), path(bai)
-+    tuple val(meta), path(input), path(index)
++    tuple val(meta), path(input), path(bai)
      tuple val(meta2), path(fasta)
 -
 +    tuple val(meta3), path(tandem_file)
