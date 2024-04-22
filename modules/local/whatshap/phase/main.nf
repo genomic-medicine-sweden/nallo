@@ -24,18 +24,33 @@ process WHATSHAP_PHASE {
     """
     whatshap phase \\
         $args \\
-        -o ${vcf}.phased.vcf \\
+        -o ${prefix}.vcf \\
         --reference $fasta \\
         ${vcf} \\
         ${bam}
 
     bgzip \\
         -@ $task.cpus \\
-        ${vcf}.phased.vcf
+        ${prefix}.vcf
 
     tabix \\
         -p vcf \\
-        ${vcf}.phased.vcf.gz
+        ${prefix}.vcf.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        whatshap: \$( whatshap --version )
+        bgzip: \$( bgzip --version | head -n 1 | sed 's/bgzip (htslib) //g')
+        tabix: \$( tabix --version | head -n 1 | sed 's/tabix (htslib) //g')
+    END_VERSIONS
+    """
+    stub:
+
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.vcf.gz
+    touch ${prefix}.vcf.gz.tbi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

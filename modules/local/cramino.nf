@@ -19,8 +19,8 @@ process CRAMINO {
     task.ext.when == null || task.ext.when
 
     script:
-    def args    = task.ext.args ?: ''
-    prefix      = task.ext.prefix ?: "${meta.id}"
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     cramino \\
@@ -28,6 +28,20 @@ process CRAMINO {
         --threads $task.cpus \\
         --arrow ${bam.baseName}.arrow \\
         ${bam} > ${bam.baseName}.cramino.txt
+
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cramino: \$(echo \$(cramino -V) | sed 's/cramino //' )
+    END_VERSIONS
+    """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${bam.baseName}.arrow
+    touch ${bam.baseName}.cramino.txt
 
 
     cat <<-END_VERSIONS > versions.yml

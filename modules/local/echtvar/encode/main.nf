@@ -19,7 +19,7 @@ process ECHTVAR_ENCODE {
     prefix      = task.ext.prefix ?: "${meta.id}"
 
     """
-    cat <<-JSON > ${meta.id}.json
+    cat <<-JSON > ${prefix}.json
     [
         {
             "field": "AF",
@@ -35,12 +35,24 @@ process ECHTVAR_ENCODE {
     ]
     JSON
 
-    echtvar encode ${meta.id}.zip ${meta.id}.json ${bcf}
+    echtvar encode ${prefix}.zip ${prefix}.json ${bcf}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         echtvar: \$(echo \$(echtvar -V) | sed 's/echtvar //' )
     END_VERSIONS
     """
+
+    stub:
+    prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.zip
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        echtvar: \$(echo \$(echtvar -V) | sed 's/echtvar //' )
+    END_VERSIONS
+    """
+
 }
 
