@@ -1,79 +1,124 @@
 Changes in module 'nf-core/sniffles'
 --- modules/nf-core/sniffles/meta.yml
 +++ modules/nf-core/sniffles/meta.yml
-@@ -10,6 +10,7 @@
-       documentation: https://github.com/fritzsedlazeck/Sniffles#readme
-       tool_dev_url: https://github.com/fritzsedlazeck/Sniffles
-       licence: ["MIT"]
-+
- input:
-   - meta:
-       type: map
-@@ -33,6 +34,7 @@
+@@ -3,6 +3,7 @@
+ keywords:
+   - sniffles
+   - structural-variant calling
++  - long-read sequencing
+ tools:
+   - sniffles:
+       description: a fast structural variant caller for long-read sequencing
+@@ -16,10 +17,10 @@
+       description: |
+         Groovy Map containing sample information
+         e.g. [ id:'test' ]
+-  - bam:
++  - input:
+       type: file
+-      description: BAM file
+-      pattern: "*.bam"
++      description: BAM or SNF file
++      pattern: "*.{bam, snf}"
+   - bai:
+       type: file
+       description: Index of BAM file
+@@ -33,6 +34,15 @@
        type: file
        description: |
          Reference database in FASTA format
-+
++  - meta3:
++      type: map
++      description: |
++        Groovy Map containing tandem repeat file information
++        e.g. [ id:'tandem_repeats' ]
++  - tandem_file:
++      type: file
++      description: |
++        Tandem repeats file in BED format
  output:
    - meta:
        type: map
-@@ -51,9 +53,7 @@
+@@ -45,8 +55,8 @@
+       pattern: "*.vcf.gz"
+   - snf:
+       type: file
+-      description: Compressed SNF file
+-      pattern: "*.snf.gz"
++      description: SNF file
++      pattern: "*.snf"
+   - versions:
        type: file
        description: File containing software versions
-       pattern: "versions.yml"
-+
- authors:
-   - "@christopher-hakkaart"
-   - "@yuukiiwa"
--maintainers:
--  - "@christopher-hakkaart"
--  - "@yuukiiwa"
 
 --- modules/nf-core/sniffles/main.nf
 +++ modules/nf-core/sniffles/main.nf
-@@ -1,6 +1,6 @@
- process SNIFFLES {
-     tag "$meta.id"
--    label 'process_high'
-+    label 'process_medium'
- 
-     conda "bioconda::sniffles=2.0.7"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-@@ -8,14 +8,15 @@
+@@ -8,14 +8,17 @@
          'biocontainers/sniffles:2.0.7--pyhdfd78af_0' }"
  
      input:
 -    tuple val(meta), path(bam), path(bai)
-+    tuple val(meta),  path(bam), path(bai)
++    tuple val(meta), path(input), path(bai)
      tuple val(meta2), path(fasta)
-+    path(tandem_file)
- 
+-
++    tuple val(meta3), path(tandem_file)
++    val(vcf_output)
++    val(snf_output)
  
      output:
-     tuple val(meta), path("*.vcf"), emit: vcf
-     tuple val(meta), path("*.snf"), emit: snf
+-    tuple val(meta), path("*.vcf"), emit: vcf
+-    tuple val(meta), path("*.snf"), emit: snf
 -    path "versions.yml"                    , emit: versions
-+    path "versions.yml"           , emit: versions
++    tuple val(meta), path("*.vcf.gz")    , emit: vcf, optional: true
++    tuple val(meta), path("*.vcf.gz.tbi"), emit: tbi, optional: true
++    tuple val(meta), path("*.snf")       , emit: snf, optional: true
++    path "versions.yml"                  , emit: versions
  
      when:
      task.ext.when == null || task.ext.when
-@@ -23,13 +24,15 @@
+@@ -23,18 +26,39 @@
      script:
      def args = task.ext.args ?: ''
      def prefix = task.ext.prefix ?: "${meta.id}"
++    def reference = fasta ? "--reference ${fasta}" : ""
 +    def tandem_repeats = tandem_file ? "--tandem-repeats ${tandem_file}" : ''
++    def vcf = vcf_output ? "--vcf ${prefix}.vcf.gz": ''
++    def snf = snf_output ? "--snf ${prefix}.snf": ''
++    
      """
      sniffles \\
-         --input $bam \\
+-        --input $bam \\
 -        --vcf ${prefix}.vcf \\
 -        --snf ${prefix}.snf \\
-+        --vcf ${prefix}.sniffles.vcf \\
-+        --snf ${prefix}.sniffles.snf \\
-         --reference $fasta \\
+-        --reference $fasta \\
++        --input $input \\
++        $reference \\
          -t $task.cpus \\
 +        $tandem_repeats \\
++        $vcf \\
++        $snf \\
          $args
++    
      cat <<-END_VERSIONS > versions.yml
      "${task.process}":
+         sniffles: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version //')
+     END_VERSIONS
+     """
++    
++    stub:
++    def prefix = task.ext.prefix ?: "${meta.id}"
++    
++    """
++    touch ${prefix}.vcf.gz
++    touch ${prefix}.snf
++
++    cat <<-END_VERSIONS > versions.yml
++    "${task.process}":
++        sniffles: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version //')
++    END_VERSIONS
++    """
++    
+ }
+ 
 
 ************************************************************
