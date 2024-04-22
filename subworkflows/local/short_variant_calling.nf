@@ -1,4 +1,4 @@
-include { DEEPVARIANT                               } from '../../modules/local/google/deepvariant'
+include { DEEPVARIANT                               } from '../../modules/nf-core/deepvariant'
 include { GLNEXUS                                   } from '../../modules/nf-core/glnexus'
 include { BCFTOOLS_VIEW_REGIONS                     } from '../../modules/local/bcftools/view_regions'
 include { TABIX_TABIX as TABIX_EXTRA_GVCFS          } from '../../modules/nf-core/tabix/tabix/main'
@@ -30,7 +30,7 @@ workflow SHORT_VARIANT_CALLING {
     // Does splitting BAMs and copying to node make sense to reduce IO?
 
     // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
-    DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai )
+    DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai, [[],[]] )
 
     // Collect VCFs
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPVARIANT.out.vcf)
