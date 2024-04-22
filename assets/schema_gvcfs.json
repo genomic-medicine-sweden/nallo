@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/fellen31/nallo/master/assets/schema_gvcfs.json",
-    "title": "fellen31/nallo pipeline - params.extra_gvcfs schema",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.extra_gvcfs schema",
     "description": "Schema for the file provided with params.extra_gvcfs",
     "type": "array",
     "items": {
