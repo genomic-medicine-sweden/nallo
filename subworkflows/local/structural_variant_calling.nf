@@ -1,5 +1,5 @@
-include { SNIFFLES_MULTISAMPLE  } from '../../modules/local/sniffles/multisample'
-include { SNIFFLES              } from '../../modules/nf-core/sniffles/main'
+include { SNIFFLES as SNIFFLES_MULTISAMPLE } from '../../modules/nf-core/sniffles/main'
+include { SNIFFLES                         } from '../../modules/nf-core/sniffles/main'
 
 workflow STRUCTURAL_VARIANT_CALLING {
 
@@ -13,7 +13,7 @@ workflow STRUCTURAL_VARIANT_CALLING {
     main:
     ch_versions     = Channel.empty()
 
-    SNIFFLES (ch_bam_bai, ch_fasta, ch_tandem_repeats)
+    SNIFFLES (ch_bam_bai, ch_fasta, ch_tandem_repeats, true, true)
 
     // Combine sniffles output with supplied extra snfs
     SNIFFLES.out.snf
@@ -21,9 +21,10 @@ workflow STRUCTURAL_VARIANT_CALLING {
         .concat(ch_snfs.map{ it[1] })
         .collect()
         .sort{ it.name }
+        .map { snfs -> [ [id:'multisample'], snfs, [] ] }
         .set{ ch_multisample_input }
 
-    SNIFFLES_MULTISAMPLE( ch_multisample_input, ch_fasta, ch_tandem_repeats )
+    SNIFFLES_MULTISAMPLE( ch_multisample_input, ch_fasta, ch_tandem_repeats, true, false)
 
     ch_versions = ch_versions.mix(SNIFFLES.out.versions)
     ch_versions = ch_versions.mix(SNIFFLES_MULTISAMPLE.out.versions)
