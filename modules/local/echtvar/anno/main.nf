@@ -9,8 +9,8 @@ process ECHTVAR_ANNO {
     path(databases)
 
     output:
-    tuple val(meta), path("${meta.id}.anno.bcf.gz"), emit: bcf
-    path "versions.yml"                       , emit: versions
+    tuple val(meta), path("*.bcf.gz"), emit: bcf
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -25,7 +25,19 @@ process ECHTVAR_ANNO {
         modifiedList.add(element)
     }
     """
-    echtvar anno ${modifiedList.join(" ")} ${vcf} ${meta.id}.anno.bcf.gz
+    echtvar anno ${modifiedList.join(" ")} ${vcf} ${prefix}.bcf.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        echtvar: \$(echo \$(echtvar -V) | sed 's/echtvar //' )
+    END_VERSIONS
+    """
+
+    stub:
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.bcf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
