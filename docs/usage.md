@@ -149,7 +149,7 @@ The typical command example above requires no additional files except the refere
 
 However, certain workflows require additional files:
 
-If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed))
+If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
