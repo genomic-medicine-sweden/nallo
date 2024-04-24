@@ -168,7 +168,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions) to supply to `--hificnv_xy`, `--hificnv_xx` and `--hificnv_exclude`.
 
-If you want to give more samples to filter variants against, for SVs - prepare a samplesheet with .snf files from Sniffles2 to supply with `--extra_snfs`:
+If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
 
 `extra_snfs.csv`
 
