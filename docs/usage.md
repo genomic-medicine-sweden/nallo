@@ -166,7 +166,7 @@ gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
 
-If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data/excluded_regions) to supply to `--hificnv_xy`, `--hificnv_xx` and `--hificnv_exclude`.
+If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
 
 If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
 
