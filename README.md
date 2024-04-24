@@ -90,7 +90,7 @@ For more details and further functionality, please refer to the [usage documenta
 To run in an offline environment, download the pipeline and singularity images using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
 ```
-nf-core download genomic-medicine-sweden/nallo -r dev
+nf-core download genomic-medicine-sweden/nallo
 ```
 
 ## Credits
