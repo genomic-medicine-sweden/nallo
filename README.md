@@ -70,7 +70,7 @@ HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
 Now, you can run the pipeline using:
 
 ```bash
-nextflow run genomic-medicine-sweden/nallo -r dev -profile YOURPROFILE \
+nextflow run genomic-medicine-sweden/nallo -profile YOURPROFILE \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
