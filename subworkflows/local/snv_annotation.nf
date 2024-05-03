@@ -34,7 +34,7 @@ workflow SNV_ANNOTATION {
     BCFTOOLS_NORM_SINGLESAMPLE(
         ch_single_sample_vcf.join(BCFTOOLS_INDEX_SINGLESAMPLE.out.csi),
         ch_fasta
-        )
+    )
 
     // Make a cohort database using mutisample vcf
     ECHTVAR_ENCODE(BCFTOOLS_NORM.out.vcf)
