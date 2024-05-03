@@ -10,8 +10,6 @@ include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV_VCF } from '../../modules/nf-cor
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV         } from '../../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV_VCF     } from '../../modules/nf-core/bcftools/sort/main'
 
-// TODO: Fix DV_VCF output dir, and change DV to DV_GVCF for clarity
-
 workflow SHORT_VARIANT_CALLING {
 
     take:
@@ -37,8 +35,6 @@ workflow SHORT_VARIANT_CALLING {
 
     // Collect GVCFs
     ch_snp_calls_gvcf = ch_snp_calls_gvcf.mix(DEEPVARIANT.out.gvcf)
-
-    // TODO: This only works with DeepVariant for now (remove PEPPER_MARGIN_DEEPVARIANT/Deeptrio?)
 
     // Extra gVCFs
     TABIX_EXTRA_GVCFS(ch_extra_gvcfs)
@@ -97,7 +93,6 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_DV.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV.out.versions)
     ch_versions = ch_versions.mix(TABIX_GLNEXUS.out.versions)
-
 
     emit:
     snp_calls_vcf = BCFTOOLS_SORT_DV_VCF.out.vcf

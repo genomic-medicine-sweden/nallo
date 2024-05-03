@@ -59,9 +59,9 @@ workflow NALLO {
     ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
     // Optional input files
-    ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false)
+    ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs')
                                                 : Channel.empty()
-    ch_extra_gvcfs     = params.extra_gvcfs     ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)
+    ch_extra_gvcfs     = params.extra_gvcfs     ? Channel.fromSamplesheet('extra_gvcfs')
                                                 : Channel.empty()
     ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.getSimpleName(), it]}.collect()
                                                 : Channel.value([[],[]])

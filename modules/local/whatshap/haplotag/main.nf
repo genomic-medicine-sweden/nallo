@@ -2,10 +2,10 @@ process WHATSHAP_HAPLOTAG {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::whatshap=1.7"
+    conda "bioconda::whatshap=2.2"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/whatshap:1.7--py310h30d9df9_0' :
-        'quay.io/biocontainers/whatshap:1.7--py310h30d9df9_0' }"
+        'https://depot.galaxyproject.org/singularity/whatshap:2.2--py39h1f90b4d_1' :
+        'quay.io/biocontainers/whatshap:2.2--py39h1f90b4d_1' }"
 
     input:
     tuple val(meta),  path(vcf), path(tbi), path(bam), path(bai)

@@ -38,15 +38,15 @@
                 "meta": ["maternal_id"]
             },
             "sex": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Sex must be provided as 1 (male) or 2 (female)",
+                "type": "integer",
+                "enum": [1, 2],
+                "errorMessage": "Sex must be provided and cannot contain spaces",
                 "meta": ["sex"]
             },
             "phenotype": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Phenoype must be provided as 1 (unaffected) or 2 (affected)",
+                "type": "integer",
+                "enum": [0, 1, 2],
+                "errorMessage": "Phenoype must be provided as 0 (missing), 1 (unaffected) or 2 (affected)",
                 "meta": ["phenotype"]
             }
         },

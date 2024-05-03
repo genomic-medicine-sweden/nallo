@@ -25,6 +25,18 @@ process CONVERT_ONT_READ_NAMES {
                     args.contains("--output-fmt cram") ? "cram" :
                     input.getExtension()
     if ("$input" == "${prefix}.${file_type}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
+
+    // The SED looks for readnames in a BAM file
+    // and replaces all hyphens - with underscores _,
+    // then it adds /77923358/ccs/ to the read name
+    // to make ONT read names look like they come from PacBio.
+    //
+    // The first part of the sed command: '/^[^@]/s/-/_/g
+    // Matches lines that do not start with @ (matches the reads) and replaces all occurrences of - with _.
+    //
+    // The second part: ;/^[^@]/s/^([^[:space:]]+)/\\1\\/77923358\\/ccs/'
+    // Also matches lines that do not start with @,
+    // and replaces the first sequence of non-space characters (readname) with itself (\\1), followed by /77923358/ccs/.
     """
     samtools view -x MM,ML --threads ${(task.cpus-1)/2} -h $input |\\
     sed -E '/^[^@]/s/-/_/g;/^[^@]/s/^([^[:space:]]+)/\\1\\/77923358\\/ccs/' |\\
