@@ -133,21 +133,9 @@ You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-c
 
 ## Reference files and parameters
 
-The typical command example above requires no additional files except the reference genome. Nallo has the ability to skip certrain parts of the pipeline by specifying one or more of the following parameters:
-
-| Parameter                    | Description                                | Type      | Default | Required | Hidden |
-| ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
-| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
-| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
-| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
-| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
-| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
-| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
-| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
-
-However, certain workflows require additional files:
+The typical command example above requires no additional files except the reference genome.
+Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
+Some workflows require additional files:
 
 If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
 
@@ -208,15 +196,15 @@ Options to skip various steps within the workflow
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
-| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
-| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
-| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
-| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
-| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
-| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
-| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
+| `skip_qc`                    | Skip QC                                    | `boolean` | False   |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` | False   |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | False   |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | False   |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | False   |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | False   |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | False   |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | False   |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | False   |          |        |
 
 ## Input/output options
 

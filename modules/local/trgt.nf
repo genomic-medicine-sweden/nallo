@@ -21,9 +21,9 @@ process TRGT {
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
 
-    if (sex == '1') {
+    if (sex == 1) {
         karyotype = "XY"
-    } else if (sex == '2') {
+    } else if (sex == 2) {
         karyotype = "XX"
     }
 

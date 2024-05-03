@@ -30,8 +30,11 @@ workflow SNV_ANNOTATION {
 
     // Index and normalize single sample vcfs
     BCFTOOLS_INDEX_SINGLESAMPLE(ch_single_sample_vcf)
-    ss = ch_single_sample_vcf.join(BCFTOOLS_INDEX_SINGLESAMPLE.out.csi)
-    BCFTOOLS_NORM_SINGLESAMPLE(ss, ch_fasta)
+
+    BCFTOOLS_NORM_SINGLESAMPLE(
+        ch_single_sample_vcf.join(BCFTOOLS_INDEX_SINGLESAMPLE.out.csi),
+        ch_fasta
+    )
 
     // Make a cohort database using mutisample vcf
     ECHTVAR_ENCODE(BCFTOOLS_NORM.out.vcf)

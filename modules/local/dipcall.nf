@@ -39,7 +39,7 @@ process DIPCALL {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    if(sex == '2') {
+    if(sex == 2) {
     """
     minimap2 ${args} -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
     minimap2 ${args} -c --paf-no-hit -xasm5 --cs -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
@@ -67,7 +67,7 @@ process DIPCALL {
         dipcall: \$(dipcall-aux.js version)
     END_VERSIONS
     """
-    } else if (sex == '1') {
+    } else if (sex == 1) {
     """
     minimap2 ${args} -c --paf-no-hit -xasm5  -t ${task.cpus} ${mmi} ${haplotype_1} 2> ${prefix}.hap1.paf.gz.log | gzip > ${prefix}.hap1.paf.gz
     minimap2 ${args} -c --paf-no-hit -xasm5  -t ${task.cpus} ${mmi} ${haplotype_2} 2> ${prefix}.hap2.paf.gz.log | gzip > ${prefix}.hap2.paf.gz
