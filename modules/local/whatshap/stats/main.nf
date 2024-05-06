@@ -2,8 +2,8 @@ process WHATSHAP_STATS {
     tag "$meta.id"
     label 'process_single'
 
-    conda "bioconda::whatshap=1.7 bioconda::tabix=1.11"
-    container "docker.io/fellen31/whatshap-tabix:latest"
+    conda "bioconda::whatshap=2.2 bioconda::tabix=1.11"
+    container "docker.io/fellen31/whatshap-tabix:2.2"
 
     input:
     tuple val(meta), path(vcf), path(tbi)
