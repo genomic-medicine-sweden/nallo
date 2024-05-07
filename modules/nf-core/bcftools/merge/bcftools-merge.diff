@@ -1,0 +1,11 @@
+Changes in module 'nf-core/bcftools/merge'
+--- modules/nf-core/bcftools/merge/environment.yml
++++ modules/nf-core/bcftools/merge/environment.yml
+@@ -4,4 +4,4 @@
+   - bioconda
+   - defaults
+ dependencies:
+-  - bioconda::bcftools=1.18
++  - bioconda::bcftools=1.20
+
+************************************************************
