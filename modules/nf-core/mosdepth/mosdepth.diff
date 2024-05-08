@@ -1,0 +1,23 @@
+Changes in module 'nf-core/mosdepth'
+--- modules/nf-core/mosdepth/main.nf
++++ modules/nf-core/mosdepth/main.nf
+@@ -1,6 +1,6 @@
+ process MOSDEPTH {
+     tag "$meta.id"
+-    label 'process_medium'
++    label 'process_low'
+ 
+     conda "bioconda::mosdepth=0.3.3"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+@@ -8,7 +8,8 @@
+         'biocontainers/mosdepth:0.3.3--hdfd78af_1'}"
+ 
+     input:
+-    tuple val(meta),  path(bam), path(bai), path(bed)
++    tuple val(meta),  path(bam), path(bai)
++    path(bed)
+     tuple val(meta2), path(fasta)
+ 
+     output:
+
+************************************************************

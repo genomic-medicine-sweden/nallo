@@ -1,0 +1,69 @@
+name: sniffles
+description: structural-variant calling with sniffles
+keywords:
+  - sniffles
+  - structural-variant calling
+  - long-read sequencing
+tools:
+  - sniffles:
+      description: a fast structural variant caller for long-read sequencing
+      homepage: https://github.com/fritzsedlazeck/Sniffles
+      documentation: https://github.com/fritzsedlazeck/Sniffles#readme
+      tool_dev_url: https://github.com/fritzsedlazeck/Sniffles
+      licence: ["MIT"]
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test' ]
+  - input:
+      type: file
+      description: BAM or SNF file
+      pattern: "*.{bam, snf}"
+  - bai:
+      type: file
+      description: Index of BAM file
+      pattern: "*.bai"
+  - meta2:
+      type: map
+      description: |
+        Groovy Map containing reference information
+        e.g. [ id:'fasta' ]
+  - fasta:
+      type: file
+      description: |
+        Reference database in FASTA format
+  - meta3:
+      type: map
+      description: |
+        Groovy Map containing tandem repeat file information
+        e.g. [ id:'tandem_repeats' ]
+  - tandem_file:
+      type: file
+      description: |
+        Tandem repeats file in BED format
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test' ]
+  - vcf:
+      type: file
+      description: Compressed VCF file
+      pattern: "*.vcf.gz"
+  - snf:
+      type: file
+      description: SNF file
+      pattern: "*.snf"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@christopher-hakkaart"
+  - "@yuukiiwa"
+maintainers:
+  - "@christopher-hakkaart"
+  - "@yuukiiwa"

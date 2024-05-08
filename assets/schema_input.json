@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/fellen31/skierfe/master/assets/schema_input.json",
-    "title": "fellen31/skierfe pipeline - params.input schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_input.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
@@ -10,27 +10,46 @@
             "sample": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces"
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["id"]
             },
-            "fastq_1": {
+            "file": {
+                "format": "file-path",
                 "type": "string",
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
+                "errorMessage": "FastQ or BAM file must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
             },
-            "fastq_2": {
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",
-                "anyOf": [
-                    {
-                        "type": "string",
-                        "pattern": "^\\S+\\.f(ast)?q\\.gz$"
-                    },
-                    {
-                        "type": "string",
-                        "maxLength": 0
-                    }
-                ]
+            "family_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Family ID must be provided and cannot contain spaces. If no family ID is available, use the same ID as the sample.",
+                "meta": ["family_id"]
+            },
+            "paternal_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use any ID not in sample column.",
+                "meta": ["paternal_id"]
+            },
+            "maternal_id": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use any ID not in sample column.",
+                "meta": ["maternal_id"]
+            },
+            "sex": {
+                "type": "integer",
+                "enum": [1, 2],
+                "errorMessage": "Sex must be provided and cannot contain spaces",
+                "meta": ["sex"]
+            },
+            "phenotype": {
+                "type": "integer",
+                "enum": [0, 1, 2],
+                "errorMessage": "Phenoype must be provided as 0 (missing), 1 (unaffected) or 2 (affected)",
+                "meta": ["phenotype"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype"]
     }
 }

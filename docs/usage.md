@@ -1,89 +1,324 @@
-# fellen31/skierfe: Usage
-
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
+# genomic-medicine-sweden/nallo: Usage
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+genomic-medicine-sweden/nallo is a bioinformatics analysis pipeline to analyse long-read data.
+
+## Prerequisites
+
+1. Install Nextflow (>=22.10.1) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
+2. Install one of the following technologies for full pipeline reproducibility: Docker, Singularity, Podman, Shifter or Charliecloud.
+   > Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in the nallo pipeline do not have a conda package so we do not support conda at the moment.
+
+## Run genomic-medicine-sweden/nallo with test data
+
+Before running the pipeline with your data, we recommend running it with the test dataset available in the `assets/test_data` folder provided with the pipeline. You do not need to download any of the data as part of it came directly with the pipeline and the other part will be fetched automatically for you when you use the test profile.
+
+Run the following command, where YOURPROFILE is the package manager you installed on your machine. For example, `-profile test,docker` or `-profile test,singularity`:
+
+```
+nextflow run genomic-medicine-sweden/nallo \
+    -revision dev -profile test,<YOURPROFILE> \
+    --outdir <OUTDIR>
+```
+
+> Check [nf-core/configs](https://github.com/nf-core/configs/tree/master/conf) to see if a custom config file to run nf-core pipelines already exists for your institute. If so, you can simply use `-profile test,<institute>` in your command. This enables the appropriate package manager and sets the appropriate execution settings for your machine.
+> NB: The order of profiles is important! They are loaded in sequence, so later profiles can overwrite earlier profiles.
+
+Running the command creates the following files in your working directory:
+
+```
+work                # Directory containing the Nextflow working files
+<OUTDIR>            # Finished results in specified location (defined with --outdir)
+.nextflow_log       # Log file from Nextflow
+# Other Nextflow hidden files, like history of pipeline logs.
+```
+
+> [!NOTE]
+> The default cpu and memory configurations used in nallo are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
+
+### Updating the pipeline
+
+The above command downloads the pipeline from GitHub, caches it, and tests it on the test dataset. When you run the command again, it will fetch the pipeline from cache even if a more recent version of the pipeline is available. To make sure that you're running the latest version of the pipeline, update the cached version of the pipeline by including `-latest` in the command.
+
+## Run genomic-medicine-sweden/nallo with your data
+
+Running the pipeline involves three steps:
+
+1. Prepare a samplesheet
+2. Gather all required references
+3. Supply samplesheet and references, and run the command
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-### Multiple runs of the same sample
-
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
-
-```console
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
-```
-
-### Full samplesheet
-
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
-
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
+It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
+`file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
+`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
 
 ```console
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
+sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
+HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
 ```
 
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| Fields                                     | Description                                                                                                |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `sample`                                   | Custom sample name, cannot contain spaces.                                                                 |
+| `file`                                     | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam". |
+| `family_id`                                | "Family ID must be provided and cannot contain spaces. If no family ID is avail                            |
+| able, use the same ID as the sample.       |
+| `paternal_id`                              | Paternal ID must be provided and cannot contain spaces. If no paternal ID is a                             |
+| vailable, use any ID not in sample column. |
+| `maternal_id`                              | Maternal ID must be provided and cannot contain spaces. If no maternal ID is a                             |
+| vailable, use any ID not in sample column. |
+| `sex`                                      | Sex (1=male; 2=female).                                                                                    |
+| `phenotype`                                | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                        |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
-
-## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run fellen31/skierfe --input samplesheet.csv --outdir <OUTDIR> --genome GRCh37 -profile docker
+nextflow run genomic-medicine-sweden/nallo -r dev -profile docker \
+    --input samplesheet.csv \
+    --preset <revio/pacbio/ONT_R10> \
+    --outdir <OUTDIR> \
+    --fasta <reference.fasta> \
+    --skip_assembly_wf \
+    --skip_repeat_wf \
+    --skip_snv_annotation \
+    --skip_cnv_calling
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
 
 Note that the pipeline will create the following files in your working directory:
 
-```bash
-work                # Directory containing the nextflow working files
+```
+work                # Directory containing the Nextflow working files
 <OUTDIR>            # Finished results in specified location (defined with --outdir)
 .nextflow_log       # Log file from Nextflow
-# Other nextflow hidden files, eg. history of pipeline runs and old logs.
+# Other Nextflow hidden files, like history of pipeline logs.
 ```
 
-### Updating the pipeline
+<!--
+If you wish to repeatedly use the same parameters for multiple runs, rather than specifying each flag in the command, you can specify these in a params file.
 
-When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
+Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
+
+> ⚠️ Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
+> The above pipeline run specified with a params file in yaml format:
 
 ```bash
-nextflow pull fellen31/skierfe
+nextflow run genomic-medicine-sweden/nallo -profile docker -params-file params.yaml
 ```
+
+with `params.yaml` containing:
+
+```yaml
+input: './samplesheet.csv'
+outdir: './results/'
+genome: 'GRCh37'
+input: 'data'
+<...>
+```
+
+You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch). -->
+
+## Reference files and parameters
+
+The typical command example above requires no additional files except the reference genome.
+Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
+Some workflows require additional files:
+
+If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
+
+> [!NOTE]
+> Make sure chrY PAR is hard masked in reference.
+
+If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
+
+If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
+
+`snp_dbs.csv`
+
+```
+sample,file
+gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
+cadd,/path/to/cadd.v1.6.hg38.zip
+```
+
+If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
+
+If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
+
+`extra_snfs.csv`
+
+```
+sample,file
+HG01123,/path/to/HG01123_sniffles.snf
+HG01124,/path/to/HG01124_sniffles.snf
+```
+
+and for SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
+
+> [!NOTE]
+> These has to have been generated with the same version of reference genome.
+
+`extra_gvcfs.csv`
+
+```
+sample,file
+HG01123,/path/to/HG01123.g.vcf.gz
+HG01124,/path/to/HG01124.g.vcf.gz
+HG01125,/path/to/HG01125.g.vcf.gz
+```
+
+#### Highlighted parameters:
+
+- You can choose to limit SNV calling to regions in BED file (`--bed`).
+
+- By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
+
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split alignment into N reads per process.
+
+All parameters are listed below:
+
+## Workflow skip options
+
+Options to skip various steps within the workflow
+
+| Parameter                    | Description                                | Type      | Default | Required | Hidden |
+| ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
+| `skip_qc`                    | Skip QC                                    | `boolean` | False   |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` | False   |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | False   |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | False   |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | False   |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | False   |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | False   |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | False   |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | False   |          |        |
+
+## Input/output options
+
+Define where the pipeline should find input data and save output data.
+
+| Parameter       | Description                                                                                                                                                                                                                                                                                                                                                                                  | Type     | Default | Required | Hidden |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | -------- | ------ |
+| `input`         | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.</small></details> | `string` |         | True     |        |
+| `outdir`        | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.                                                                                                                                                                                                                                                                     | `string` |         | True     |        |
+| `email`         | Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.</small></details>                                  | `string` |         |          |        |
+| `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified.                                                                                                                                                                                                                                                                                                  | `string` |         |          |        |
+
+## Reference genome options
+
+Reference genome related files and options required for the workflow.
+
+| Parameter         | Description                                                                                                                                                                                                                                                                                                                                                                                                                   | Type      | Default | Required | Hidden |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `fasta`           | Reference genome                                                                                                                                                                                                                                                                                                                                                                                                              | `string`  |         |          |        |
+| `genome`          | Name of iGenomes reference. <details><summary>Help</summary><small>If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. <br><br>See the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details.</small></details> | `string`  |         |          |        |
+| `igenomes_ignore` | Do not load the iGenomes reference config. <details><summary>Help</summary><small>Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`.</small></details>                                                                                                                                             | `boolean` | True    |          | True   |
+
+## Institutional config options
+
+Parameters used to describe centralised config profiles. These should not be edited.
+
+| Parameter                    | Description                                                                                                                                                                                                                                                                                                                                                                                       | Type     | Default                                                  | Required | Hidden |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------- | -------- | ------ |
+| `custom_config_version`      | Git commit id for Institutional configs.                                                                                                                                                                                                                                                                                                                                                          | `string` | master                                                   |          | True   |
+| `custom_config_base`         | Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the internet. If you don't need them, then this is not a problem. If you do need them, you should download the files from the repo and tell Nextflow where to find them with this parameter.</small></details> | `string` | https://raw.githubusercontent.com/nf-core/configs/master |          | True   |
+| `config_profile_name`        | Institutional config name.                                                                                                                                                                                                                                                                                                                                                                        | `string` |                                                          |          | True   |
+| `config_profile_description` | Institutional config description.                                                                                                                                                                                                                                                                                                                                                                 | `string` |                                                          |          | True   |
+| `config_profile_contact`     | Institutional config contact information.                                                                                                                                                                                                                                                                                                                                                         | `string` |                                                          |          | True   |
+| `config_profile_url`         | Institutional config URL link.                                                                                                                                                                                                                                                                                                                                                                    | `string` |                                                          |          | True   |
+
+## Max job request options
+
+Set the top limit for requested resources for any single job.
+
+| Parameter    | Description                                                                                                                                                                                                                                                                 | Type      | Default | Required | Hidden |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `max_cpus`   | Maximum number of CPUs that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the CPU requirement for each process. Should be an integer e.g. `--max_cpus 1`</small></details>                                      | `integer` | 16      |          | True   |
+| `max_memory` | Maximum amount of memory that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the memory requirement for each process. Should be a string in the format integer-unit e.g. `--max_memory '8.GB'`</small></details> | `string`  | 128.GB  |          | True   |
+| `max_time`   | Maximum amount of time that can be requested for any single job. <details><summary>Help</summary><small>Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`</small></details>        | `string`  | 240.h   |          | True   |
+
+## Generic options
+
+Less common options for the pipeline, typically set in a config file.
+
+| Parameter                      | Description                                                                                                                                                                                                                                                                                                                                                                                                  | Type      | Default | Required | Hidden |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ------- | -------- | ------ |
+| `help`                         | Display help text.                                                                                                                                                                                                                                                                                                                                                                                           | `boolean` |         |          | True   |
+| `version`                      | Display version and exit.                                                                                                                                                                                                                                                                                                                                                                                    | `boolean` |         |          | True   |
+| `publish_dir_mode`             | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details> | `string`  | copy    |          | True   |
+| `email_on_fail`                | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when the pipeline is completed - ONLY sent if the pipeline does not exit successfully.</small></details>                                                                                                                                                  | `string`  |         |          | True   |
+| `plaintext_email`              | Send plain-text email instead of HTML.                                                                                                                                                                                                                                                                                                                                                                       | `boolean` |         |          | True   |
+| `max_multiqc_email_size`       | File size limit when attaching MultiQC reports to summary emails.                                                                                                                                                                                                                                                                                                                                            | `string`  | 25.MB   |          | True   |
+| `monochrome_logs`              | Do not use coloured log outputs.                                                                                                                                                                                                                                                                                                                                                                             | `boolean` |         |          | True   |
+| `hook_url`                     | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>                                                                                                                                                                                                                       | `string`  |         |          | True   |
+| `multiqc_config`               | Custom config file to supply to MultiQC.                                                                                                                                                                                                                                                                                                                                                                     | `string`  |         |          | True   |
+| `multiqc_logo`                 | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file                                                                                                                                                                                                                                                                                                                 | `string`  |         |          | True   |
+| `multiqc_methods_description`  | Custom MultiQC yaml file containing HTML including a methods description.                                                                                                                                                                                                                                                                                                                                    | `string`  |         |          |        |
+| `validate_params`              | Boolean whether to validate parameters against the schema at runtime                                                                                                                                                                                                                                                                                                                                         | `boolean` | True    |          | True   |
+| `validationShowHiddenParams`   | Show all params when using `--help` <details><summary>Help</summary><small>By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters.</small></details>                                                                                                                    | `boolean` |         |          | True   |
+| `validationSkipDuplicateCheck` | nf-validation related parameter                                                                                                                                                                                                                                                                                                                                                                              | `boolean` |         |          | True   |
+| `validationS3PathCheck`        | Boolean whether to validate validate AWS S3 paths                                                                                                                                                                                                                                                                                                                                                            | `boolean` |         |          | True   |
+| `monochromeLogs`               | Boolean whether to color nf-validation logs                                                                                                                                                                                                                                                                                                                                                                  | `boolean` |         |          | True   |
+
+## Workflow options
+
+| Parameter        | Description                                | Type      | Default     | Required | Hidden |
+| ---------------- | ------------------------------------------ | --------- | ----------- | -------- | ------ |
+| `preset`         | Choose a preset depending on data type     | `string`  | revio       | True     |        |
+| `variant_caller` | Choose variant caller                      | `string`  | deepvariant |          |        |
+| `phaser`         | Choose phasing software                    | `string`  | whatshap    |          |        |
+| `hifiasm_mode`   | Run hifiasm in hifi-only or hifi-trio mode | `string`  | hifi-only   |          |        |
+| `split_fastq`    | Split Alignment into n reads per job       | `integer` | 0           |          |        |
+| `parallel_snv`   | Split SNV calling into n chunks            | `integer` | 13          |          |        |
+
+## Extra file inputs
+
+Different processes may need extra input files
+
+| Parameter                          | Description                                                                                                                                                                                                                                                               | Type      | Default | Required | Hidden |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
+| `extra_gvcfs`                      | Extra input files for GLNexus                                                                                                                                                                                                                                             | `string`  |         |          |        |
+| `extra_snfs`                       | Extra input files for Sniffles                                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                                                                                                                                       | `string`  |         |          |        |
+| `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                                                                                                                                      | `string`  |         |          |        |
+| `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                                                                                                                                             | `string`  |         |          |        |
+| `vep_cache`                        | Path to directory of vep_cache                                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `bed`                              | BED file with regions of interest                                                                                                                                                                                                                                         | `string`  |         |          |        |
+| `hificnv_xy`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
+| `hificnv_xx`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
+| `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>                                                               | `boolean` |         |          | True   |
+| `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details> | `boolean` |         |          | True   |
 
 ### Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
-First, go to the [fellen31/skierfe releases page](https://github.com/fellen31/skierfe/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
+However, there has been no releases of this pipeline. A workaround is to supply a commit ID, e.g. `-revision 6ff95ff`, in order to ensure that the same version of the pipeline is being executed.
+
+<!--
+First, go to the [genomic-medicine-sweden/nallo releases page](https://github.com/genomic-medicine-sweden/nallo/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
+-->
+
+To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
+
+> 💡 If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
@@ -93,9 +328,7 @@ This version number will be logged in reports when you run the pipeline, so that
 
 Use this parameter to choose a configuration profile. Profiles can give configuration presets for different compute environments.
 
-Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Conda) - see below.
-
-> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
 The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
@@ -117,8 +350,8 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
   - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
 - `charliecloud`
   - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
-- `conda`
-  - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter or Charliecloud.
+- `apptainer`
+  - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 
 ### `-resume`
 
@@ -136,102 +369,19 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher requests (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
-For example, if the nf-core/rnaseq pipeline is failing after multiple re-submissions of the `STAR_ALIGN` process due to an exit code of `137` this would indicate that there is an out of memory issue:
+To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
 
-```console
-[62/149eb0] NOTE: Process `NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN (WT_REP1)` terminated with an error exit status (137) -- Execution is retried (1)
-Error executing process > 'NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN (WT_REP1)'
+### Custom Containers
 
-Caused by:
-    Process `NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN (WT_REP1)` terminated with an error exit status (137)
+In some cases you may wish to change which container a step of the pipeline uses for a particular tool. By default nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However in some cases the pipeline specified version maybe out of date.
 
-Command executed:
-    STAR \
-        --genomeDir star \
-        --readFilesIn WT_REP1_trimmed.fq.gz  \
-        --runThreadN 2 \
-        --outFileNamePrefix WT_REP1. \
-        <TRUNCATED>
+To use a different container from the default container specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
 
-Command exit status:
-    137
+### Custom Tool Arguments
 
-Command output:
-    (empty)
+A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
 
-Command error:
-    .command.sh: line 9:  30 Killed    STAR --genomeDir star --readFilesIn WT_REP1_trimmed.fq.gz --runThreadN 2 --outFileNamePrefix WT_REP1. <TRUNCATED>
-Work dir:
-    /home/pipelinetest/work/9d/172ca5881234073e8d76f2a19c88fb
-
-Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-```
-
-#### For beginners
-
-A first step to bypass this error, you could try to increase the amount of CPUs, memory, and time for the whole pipeline. Therefor you can try to increase the resource for the parameters `--max_cpus`, `--max_memory`, and `--max_time`. Based on the error above, you have to increase the amount of memory. Therefore you can go to the [parameter documentation of rnaseq](https://nf-co.re/rnaseq/3.9/parameters) and scroll down to the `show hidden parameter` button to get the default value for `--max_memory`. In this case 128GB, you than can try to run your pipeline again with `--max_memory 200GB -resume` to skip all process, that were already calculated. If you can not increase the resource of the complete pipeline, you can try to adapt the resource for a single process as mentioned below.
-
-#### Advanced option on process level
-
-To bypass this error you would need to find exactly which resources are set by the `STAR_ALIGN` process. The quickest way is to search for `process STAR_ALIGN` in the [nf-core/rnaseq Github repo](https://github.com/nf-core/rnaseq/search?q=process+STAR_ALIGN).
-We have standardised the structure of Nextflow DSL2 pipelines such that all module files will be present in the `modules/` directory and so, based on the search results, the file we want is `modules/nf-core/star/align/main.nf`.
-If you click on the link to that file you will notice that there is a `label` directive at the top of the module that is set to [`label process_high`](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/modules/nf-core/software/star/align/main.nf#L9).
-The [Nextflow `label`](https://www.nextflow.io/docs/latest/process.html#label) directive allows us to organise workflow processes in separate groups which can be referenced in a configuration file to select and configure subset of processes having similar computing requirements.
-The default values for the `process_high` label are set in the pipeline's [`base.config`](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L33-L37) which in this case is defined as 72GB.
-Providing you haven't set any other standard nf-core parameters to **cap** the [maximum resources](https://nf-co.re/usage/configuration#max-resources) used by the pipeline then we can try and bypass the `STAR_ALIGN` process failure by creating a custom config file that sets at least 72GB of memory, in this case increased to 100GB.
-The custom config below can then be provided to the pipeline via the [`-c`](#-c) parameter as highlighted in previous sections.
-
-```nextflow
-process {
-    withName: 'NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN' {
-        memory = 100.GB
-    }
-}
-```
-
-> **NB:** We specify the full process name i.e. `NFCORE_RNASEQ:RNASEQ:ALIGN_STAR:STAR_ALIGN` in the config file because this takes priority over the short name (`STAR_ALIGN`) and allows existing configuration using the full process name to be correctly overridden.
->
-> If you get a warning suggesting that the process selector isn't recognised check that the process name has been specified correctly.
-
-### Updating containers (advanced users)
-
-The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. If for some reason you need to use a different version of a particular tool with the pipeline then you just need to identify the `process` name and override the Nextflow `container` definition for that process using the `withName` declaration. For example, in the [nf-core/viralrecon](https://nf-co.re/viralrecon) pipeline a tool called [Pangolin](https://github.com/cov-lineages/pangolin) has been used during the COVID-19 pandemic to assign lineages to SARS-CoV-2 genome sequenced samples. Given that the lineage assignments change quite frequently it doesn't make sense to re-release the nf-core/viralrecon everytime a new version of Pangolin has been released. However, you can override the default container used by the pipeline by creating a custom config file and passing it as a command-line argument via `-c custom.config`.
-
-1. Check the default version used by the pipeline in the module file for [Pangolin](https://github.com/nf-core/viralrecon/blob/a85d5969f9025409e3618d6c280ef15ce417df65/modules/nf-core/software/pangolin/main.nf#L14-L19)
-2. Find the latest version of the Biocontainer available on [Quay.io](https://quay.io/repository/biocontainers/pangolin?tag=latest&tab=tags)
-3. Create the custom config accordingly:
-
-   - For Docker:
-
-     ```nextflow
-     process {
-         withName: PANGOLIN {
-             container = 'quay.io/biocontainers/pangolin:3.0.5--pyhdfd78af_0'
-         }
-     }
-     ```
-
-   - For Singularity:
-
-     ```nextflow
-     process {
-         withName: PANGOLIN {
-             container = 'https://depot.galaxyproject.org/singularity/pangolin:3.0.5--pyhdfd78af_0'
-         }
-     }
-     ```
-
-   - For Conda:
-
-     ```nextflow
-     process {
-         withName: PANGOLIN {
-             conda = 'bioconda::pangolin=3.0.5'
-         }
-     }
-     ```
-
-> **NB:** If you wish to periodically update individual tool-specific results (e.g. Pangolin) generated by the pipeline then you must ensure to keep the `work/` directory otherwise the `-resume` ability of the pipeline will be compromised and it will restart from scratch.
+To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
 
 ### nf-core/configs
 
@@ -266,3 +416,24 @@ We recommend adding the following line to your environment to limit this (typica
 ```bash
 NXF_OPTS='-Xms1g -Xmx4g'
 ```
+
+## Running the pipeline without internet access
+
+The pipeline and container images can be downloaded using [nf-core tools](https://nf-co.re/docs/usage/offline). For running offline, you of course have to make all the reference data available locally, and specify `--fasta`, etc., see [above](#reference-files-and-parameters).
+
+Contrary to the paragraph about [Nextflow](https://nf-co.re/docs/usage/offline#nextflow) on the page linked above, it is not possible to use the "-all" packaged version of Nextflow for this pipeline. The online version of Nextflow is necessary to support the necessary nextflow plugins. Download instead the file called just `nextflow`. Nextflow will download its dependencies when it is run. Additionally, you need to download the nf-validation plugin explicitly:
+
+```
+./nextflow plugin install nf-validation
+```
+
+Now you can transfer the `nextflow` binary as well as its directory `$HOME/.nextflow` to the system without Internet access, and use it there. It is necessary to use an explicit version of `nf-validation` offline, or Nextflow will check for the most recent version online. Find the version of nf-validation you downloaded in `$HOME/.nextflow/plugins`, then specify this version for `nf-validation` in your configuration file:
+
+```
+plugins {
+        // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
+        id 'nf-validation@1.1.3'
+}
+```
+
+This should go in your Nextflow confgiguration file, specified with `-c <YOURCONFIG>` when running the pipeline.
