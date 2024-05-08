@@ -15,8 +15,8 @@ workflow CNV {
     // Split samples if male or female
     ch_bam_bai_vcf
         .branch{ meta, bam, bai, vcf ->
-            male:   meta.sex == '1'
-            female: meta.sex == '2'
+            male:   meta.sex == 1
+            female: meta.sex == 2
         }
         .set{branched_bam}
 
