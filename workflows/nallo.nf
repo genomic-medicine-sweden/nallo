@@ -68,7 +68,7 @@ workflow NALLO {
     ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
                                                 : Channel.empty()
     ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
-                                                : Channel.value([])
+                                                : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
     ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()
