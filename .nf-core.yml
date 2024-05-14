@@ -1,23 +1,24 @@
 lint:
   files_exist:
     - CODE_OF_CONDUCT.md
-    - assets/nf-core-skierfe_logo_light.png
-    - docs/images/nf-core-skierfe_logo_light.png
-    - docs/images/nf-core-skierfe_logo_dark.png
+    - assets/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
   files_unchanged:
     - CODE_OF_CONDUCT.md
-    - assets/nf-core-skierfe_logo_light.png
-    - docs/images/nf-core-skierfe_logo_light.png
-    - docs/images/nf-core-skierfe_logo_dark.png
+    - assets/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
     - .github/ISSUE_TEMPLATE/bug_report.yml
   multiqc_config:
     - report_comment
   nextflow_config:
     - manifest.name
     - manifest.homePage
+nf_core_version: 2.14.1
 repository_type: pipeline
 template:
   prefix: genomic-medicine-sweden
