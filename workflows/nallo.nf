@@ -8,6 +8,7 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 
 include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
 include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
+include { BAM_ASSIGN_SEX             } from '../subworkflows/local/bam_assign_sex'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
 include { ALIGN_READS                } from '../subworkflows/local/align_reads'
@@ -89,6 +90,11 @@ workflow NALLO {
     if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
+    // Create PED from samplesheet
+    ch_pedfile   = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
+
+
+    ch_somalier_sites = Channel.empty()
     //
     // Main workflow
     //
@@ -152,6 +158,8 @@ workflow NALLO {
         bam     = ALIGN_READS.out.bam
         bai     = ALIGN_READS.out.bai
         bam_bai = ALIGN_READS.out.bam_bai
+
+        BAM_ASSIGN_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile)
 
         // TODO: parallel_snv should only be allowed when snv calling is active
         // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
