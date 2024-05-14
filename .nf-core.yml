@@ -9,7 +9,6 @@ lint:
     - .github/workflows/awsfulltest.yml
     - conf/modules.config
   files_unchanged:
-    - nextflow.config
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
     - docs/images/nf-core-nallo_logo_light.png
@@ -21,6 +20,7 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
+  modules_config: false
 nf_core_version: 2.14.1
 repository_type: pipeline
 template:
