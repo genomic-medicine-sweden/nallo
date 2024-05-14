@@ -7,8 +7,8 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
-    - conf/modules.config
   files_unchanged:
+    - nextflow.config
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
     - docs/images/nf-core-nallo_logo_light.png
