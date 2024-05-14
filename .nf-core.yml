@@ -7,7 +7,6 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
-    - conf/modules.config
   files_unchanged:
     - nextflow.config
     - CODE_OF_CONDUCT.md
