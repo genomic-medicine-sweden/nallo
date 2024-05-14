@@ -282,8 +282,10 @@ Different processes may need extra input files
 | `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                                                                                                                                            | `string`  |         |          |        |
 | `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>                                                               | `boolean` |         |          | True   |
 | `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details> | `boolean` |         |          | True   |
+
 <...>
-```
+
+````
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
@@ -293,7 +295,7 @@ When you run the above command, Nextflow automatically pulls the pipeline code f
 
 ```bash
 nextflow pull genomic-medicine-sweden/nallo
-```
+````
 
 ### Reproducibility
 
