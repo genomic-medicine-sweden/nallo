@@ -3,37 +3,37 @@ description: A user story for Nallo
 title: "[User Story] <title>"
 labels: ["user story"]
 body:
-- type: textarea
-  attributes:
-    label: Need
-    description: Describe the need for the perspective of the user
-    placeholder: As a ROLE, I want FUNCTIONALITY beacause of REASON
-  validations:
-    required: false
-- type: textarea
-  attributes:
-    label: Suggested approach
-    description: A few sentences about the intended solution
-  validations:
-    required: false
-- type: textarea
-  attributes:
-    label: Can be closed when
-    description: Link the issues/PRs needed to be closed for this to be implemented
-  validations:
-    required: false
-- type: textarea
-  attributes:
-    label: Blockers
-    description: Anything preventing this from happening?
-  validations:
-    required: false
-- type: textarea
-  attributes:
-    label: Anything else?
-    description: |
-      Links? References? Anything that will give us more context about the issue you are encountering!
+  - type: textarea
+    attributes:
+      label: Need
+      description: Describe the need for the perspective of the user
+      placeholder: As a ROLE, I want FUNCTIONALITY beacause of REASON
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Suggested approach
+      description: A few sentences about the intended solution
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Can be closed when
+      description: Link the issues/PRs needed to be closed for this to be implemented
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Blockers
+      description: Anything preventing this from happening?
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering!
 
-      Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
-  validations:
-    required: false
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
