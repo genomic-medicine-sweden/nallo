@@ -97,10 +97,6 @@
                     "mosdepth": {
                         "branch": "master",
                         "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
-=======
-                    "fastqc": {
-                        "branch": "master",
-                        "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
