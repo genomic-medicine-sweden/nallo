@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    genomic-medicine-sweden/skierfe
+    genomic-medicine-sweden/nallo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/genomic-medicine-sweden/skierfe
+    Github : https://github.com/genomic-medicine-sweden/nallo
 ----------------------------------------------------------------------------------------
 */
 
@@ -15,11 +15,11 @@ nextflow.enable.dsl = 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { SKIERFE  } from './workflows/skierfe'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_skierfe_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_skierfe_pipeline'
+include { NALLO  } from './workflows/nallo'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_skierfe_pipeline'
+include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,7 +41,7 @@ params.fasta = getGenomeAttribute('fasta')
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow GENOMICMEDICINESWEDEN_SKIERFE {
+workflow GENOMICMEDICINESWEDEN_NALLO {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -51,12 +51,12 @@ workflow GENOMICMEDICINESWEDEN_SKIERFE {
     //
     // WORKFLOW: Run pipeline
     //
-    SKIERFE (
+    NALLO (
         samplesheet
     )
 
     emit:
-    multiqc_report = SKIERFE.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -85,7 +85,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    GENOMICMEDICINESWEDEN_SKIERFE (
+    GENOMICMEDICINESWEDEN_NALLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
 
@@ -99,7 +99,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        GENOMICMEDICINESWEDEN_SKIERFE.out.multiqc_report
+        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
     )
 }
 
