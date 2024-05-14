@@ -23,7 +23,18 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nall
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOW FOR PIPELINE
+    GENOME PARAMETER VALUES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+// TODO nf-core: Remove this line if you don't need a FASTA file
+//   This is an example of how to use getGenomeAttribute() to fetch parameters
+//   from igenomes.config using `--genome`
+// params.fasta = getGenomeAttribute('fasta')
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
@@ -44,7 +55,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     )
 
     emit:
-    multiqc_report = Channel.empty()// NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -69,6 +80,7 @@ workflow {
         params.outdir,
         params.input
     )
+
     //
     // WORKFLOW: Run main workflow
     //
