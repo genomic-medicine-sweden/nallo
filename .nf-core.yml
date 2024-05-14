@@ -8,6 +8,7 @@ lint:
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
   files_unchanged:
+    - conf/modules.config
     - nextflow.config
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
