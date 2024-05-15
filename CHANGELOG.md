@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- Automatically assign sex if unknown [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148)
+- Automatically infer sex if unknown [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148)
+- Add read group tag to aligned BAM [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148)
 
 ### `Changed`
 

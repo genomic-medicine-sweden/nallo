@@ -8,7 +8,7 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 
 include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
 include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
-include { BAM_ASSIGN_SEX             } from '../subworkflows/local/bam_assign_sex'
+include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
 include { ALIGN_READS                } from '../subworkflows/local/align_reads'
@@ -143,11 +143,11 @@ workflow NALLO {
 
         ALIGN_READS( ch_sample, mmi)
 
-        BAM_ASSIGN_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
+        BAM_INFER_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
 
-        bam     = BAM_ASSIGN_SEX.out.bam
-        bai     = BAM_ASSIGN_SEX.out.bai
-        bam_bai = BAM_ASSIGN_SEX.out.bam_bai
+        bam     = BAM_INFER_SEX.out.bam
+        bai     = BAM_INFER_SEX.out.bai
+        bam_bai = BAM_INFER_SEX.out.bam_bai
 
         // Assembly workflow
         if(!params.skip_assembly_wf) {
@@ -279,8 +279,8 @@ workflow NALLO {
     }
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
-    ch_multiqc_files = ch_multiqc_files.mix(BAM_ASSIGN_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
-    ch_multiqc_files = ch_multiqc_files.mix(BAM_ASSIGN_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
     //
     // Collate and save software versions

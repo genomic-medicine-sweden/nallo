@@ -459,8 +459,10 @@
                 },
                 "somalier_sites": {
                     "type": "string",
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
                     "description": "A VCF of known polymorphic sites",
-                    "format": "file-path"
+                    "format": "file-path",
+                    "exists": true
                 },
                 "validationFailUnrecognisedParams": {
                     "type": "boolean",
