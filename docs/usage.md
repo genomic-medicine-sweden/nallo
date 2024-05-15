@@ -61,6 +61,8 @@ It has to be a comma-separated file with 6 columns, and a header row as shown in
 `file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
 `phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
 
+If sex is unknown, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from wich sex will be inferred if possible.
+
 ```console
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
 HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
@@ -77,7 +79,7 @@ HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
 | vailable, use any ID not in sample column. |
 | `maternal_id`                              | Maternal ID must be provided and cannot contain spaces. If no maternal ID is a                             |
 | vailable, use any ID not in sample column. |
-| `sex`                                      | Sex (1=male; 2=female).                                                                                    |
+| `sex`                                      | Sex (0=unknown; 1=male; 2=female).                                                                         |
 | `phenotype`                                | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                        |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
@@ -102,14 +104,14 @@ The typical command example above requires no additional files except the refere
 Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
 Some workflows require additional files:
 
-If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
+- If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
 
-If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
+- If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
 
-If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
+- If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
 
 `snp_dbs.csv`
 
@@ -119,9 +121,9 @@ gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
 
-If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
+- If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
 
-If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
+- If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
 
 `extra_snfs.csv`
 
@@ -131,7 +133,7 @@ HG01123,/path/to/HG01123_sniffles.snf
 HG01124,/path/to/HG01124_sniffles.snf
 ```
 
-and for SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
+- For SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
 
 > [!NOTE]
 > These has to have been generated with the same version of reference genome.
@@ -266,6 +268,7 @@ Different processes may need extra input files
 | `hificnv_xy`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_xx`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `somalier_sites`                   | A VCF of known polymorphic sites                                                                                                                                                                                                                                          | `string`  |         |          |        |
 | `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>                                                               | `boolean` |         |          | True   |
 | `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details> | `boolean` |         |          | True   |
 

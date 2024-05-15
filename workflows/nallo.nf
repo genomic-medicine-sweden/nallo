@@ -86,15 +86,16 @@ workflow NALLO {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
+    ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.getSimpleName(), it ] }.collect()
+                                                : Channel.value([[],[]])
+
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
     // Create PED from samplesheet
-    ch_pedfile   = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
+    ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
 
-
-    ch_somalier_sites = Channel.empty()
     //
     // Main workflow
     //
@@ -155,11 +156,11 @@ workflow NALLO {
 
         ALIGN_READS( ch_sample, mmi)
 
-        bam     = ALIGN_READS.out.bam
-        bai     = ALIGN_READS.out.bai
-        bam_bai = ALIGN_READS.out.bam_bai
+        BAM_ASSIGN_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
 
-        BAM_ASSIGN_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile)
+        bam     = BAM_ASSIGN_SEX.out.bam
+        bai     = BAM_ASSIGN_SEX.out.bai
+        bam_bai = BAM_ASSIGN_SEX.out.bam_bai
 
         // TODO: parallel_snv should only be allowed when snv calling is active
         // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
@@ -266,8 +267,10 @@ workflow NALLO {
             }
         }
     }
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_ASSIGN_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_ASSIGN_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
     //
     // Collate and save software versions

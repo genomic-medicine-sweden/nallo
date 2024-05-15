@@ -14,54 +14,45 @@
                 "skip_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC",
-                    "default": false
+                    "description": "Skip QC"
                 },
                 "skip_short_variant_calling": {
                     "type": "boolean",
                     "description": "Skip short variant calling",
-                    "fa_icon": "fas fa-fast-forward",
-                    "default": false
+                    "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_assembly_wf": {
                     "type": "boolean",
                     "description": "Skip assembly and downstream processes",
-                    "fa_icon": "fas fa-fast-forward",
-                    "default": false
+                    "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_mapping_wf": {
                     "type": "boolean",
                     "description": "Skip read mapping and downstream processes",
-                    "fa_icon": "fas fa-fast-forward",
-                    "default": false
+                    "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_methylation_wf": {
                     "type": "boolean",
                     "description": "Skip methylation workflow",
-                    "fa_icon": "fas fa-fast-forward",
-                    "default": false
+                    "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_repeat_wf": {
                     "type": "boolean",
                     "description": "Skip repeat analysis workflow",
-                    "fa_icon": "fas fa-fast-forward",
-                    "default": false
+                    "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_phasing_wf": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip phasing workflow",
-                    "default": false
+                    "description": "Skip phasing workflow"
                 },
                 "skip_snv_annotation": {
                     "type": "boolean",
-                    "description": "Skip SNV annotation",
-                    "default": false
+                    "description": "Skip SNV annotation"
                 },
                 "skip_cnv_calling": {
                     "type": "boolean",
-                    "description": "Skip CNV workflow",
-                    "default": false
+                    "description": "Skip CNV workflow"
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -456,6 +447,11 @@
                     "format": "file-path",
                     "description": "HiFiCNV BED file specifying regions to exclude",
                     "exists": true
+                },
+                "somalier_sites": {
+                    "type": "string",
+                    "description": "A VCF of known polymorphic sites",
+                    "format": "file-path"
                 },
                 "validationFailUnrecognisedParams": {
                     "type": "boolean",
