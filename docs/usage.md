@@ -61,7 +61,7 @@ It has to be a comma-separated file with 6 columns, and a header row as shown in
 `file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
 `phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
 
-If sex is unknown, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from wich sex will be inferred if possible.
+If sex is unknown, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from which sex will be inferred if possible.
 
 ```console
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
