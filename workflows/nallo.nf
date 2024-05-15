@@ -139,19 +139,6 @@ workflow NALLO {
             .set{ ch_bed }
     }
 
-    // Assembly workflow
-    if(!params.skip_assembly_wf) {
-
-        //Hifiasm assembly
-        ASSEMBLY( ch_sample )
-        // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai , ch_par)
-
-        // Gather versions
-        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
-        ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
-    }
-
     if(!params.skip_mapping_wf) {
 
         ALIGN_READS( ch_sample, mmi)
@@ -161,6 +148,29 @@ workflow NALLO {
         bam     = BAM_ASSIGN_SEX.out.bam
         bai     = BAM_ASSIGN_SEX.out.bai
         bam_bai = BAM_ASSIGN_SEX.out.bam_bai
+
+        // Assembly workflow
+        if(!params.skip_assembly_wf) {
+
+            //Hifiasm assembly
+            ASSEMBLY( ch_sample )
+            ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+            // Update assembly variant calling meta with sex from somalier
+            ASSEMBLY.out.assembled_haplotypes
+                .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
+                .set { haplotypes }
+
+            bam
+                .map { meta, bam -> [ meta.id, meta ] }
+                .join( haplotypes )
+                .map { id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
+                .set { ch_assembly_variant_calling_in }
+
+            // Run dipcall
+            ASSEMBLY_VARIANT_CALLING( ch_assembly_variant_calling_in, fasta, fai , ch_par)
+            ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+        }
 
         // TODO: parallel_snv should only be allowed when snv calling is active
         // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)

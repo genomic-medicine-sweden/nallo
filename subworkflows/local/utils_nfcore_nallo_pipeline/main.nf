@@ -50,6 +50,7 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
+    assembly       : ["mapping"],
     snv_calling    : ["mapping"],
     snv_annotation : ["mapping", "snv_calling"],
     cnv_calling    : ["mapping", "snv_calling"],
