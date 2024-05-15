@@ -59,7 +59,7 @@ You will need to create a samplesheet with information about the samples you wou
 
 It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
 `file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
-`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
+`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, `family_id` could be set to sample name, and `paternal_id` and `maternal_id` to a value that is not another `sample` name.
 
 If sex is unknown, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from which sex will be inferred if possible.
 
@@ -69,18 +69,15 @@ HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
 HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
 ```
 
-| Fields                                     | Description                                                                                                |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `sample`                                   | Custom sample name, cannot contain spaces.                                                                 |
-| `file`                                     | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam". |
-| `family_id`                                | "Family ID must be provided and cannot contain spaces. If no family ID is avail                            |
-| able, use the same ID as the sample.       |
-| `paternal_id`                              | Paternal ID must be provided and cannot contain spaces. If no paternal ID is a                             |
-| vailable, use any ID not in sample column. |
-| `maternal_id`                              | Maternal ID must be provided and cannot contain spaces. If no maternal ID is a                             |
-| vailable, use any ID not in sample column. |
-| `sex`                                      | Sex (0=unknown; 1=male; 2=female).                                                                         |
-| `phenotype`                                | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                        |
+| Fields        | Description                                                                                                               |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `sample`      | Custom sample name, cannot contain spaces.                                                                                |
+| `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                |
+| `family_id`   | "Family ID must be provided and cannot contain spaces. If no family ID is available you can use the same ID as the sample |
+| `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use any ID not in sample column.  |
+| `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use any ID not in sample column.  |
+| `sex`         | Sex (0=unknown; 1=male; 2=female).                                                                                        |
+| `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                       |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
