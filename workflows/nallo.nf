@@ -8,6 +8,7 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 
 include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
 include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
+include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
 include { ALIGN_READS                } from '../subworkflows/local/align_reads'
@@ -85,9 +86,15 @@ workflow NALLO {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
+    ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.getSimpleName(), it ] }.collect()
+                                                : Channel.value([[],[]])
+
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
+
+    // Create PED from samplesheet
+    ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
 
     //
     // Main workflow
@@ -132,26 +139,38 @@ workflow NALLO {
             .set{ ch_bed }
     }
 
-    // Assembly workflow
-    if(!params.skip_assembly_wf) {
-
-        //Hifiasm assembly
-        ASSEMBLY( ch_sample )
-        // Run dipcall
-        ASSEMBLY_VARIANT_CALLING( ASSEMBLY.out.assembled_haplotypes, fasta, fai , ch_par)
-
-        // Gather versions
-        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
-        ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
-    }
-
     if(!params.skip_mapping_wf) {
 
         ALIGN_READS( ch_sample, mmi)
 
-        bam     = ALIGN_READS.out.bam
-        bai     = ALIGN_READS.out.bai
-        bam_bai = ALIGN_READS.out.bam_bai
+        BAM_INFER_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
+
+        bam     = BAM_INFER_SEX.out.bam
+        bai     = BAM_INFER_SEX.out.bai
+        bam_bai = BAM_INFER_SEX.out.bam_bai
+
+        // Assembly workflow
+        if(!params.skip_assembly_wf) {
+
+            //Hifiasm assembly
+            ASSEMBLY( ch_sample )
+            ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+            // Update assembly variant calling meta with sex from somalier
+            ASSEMBLY.out.assembled_haplotypes
+                .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
+                .set { haplotypes }
+
+            bam
+                .map { meta, bam -> [ meta.id, meta ] }
+                .join( haplotypes )
+                .map { id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
+                .set { ch_assembly_variant_calling_in }
+
+            // Run dipcall
+            ASSEMBLY_VARIANT_CALLING( ch_assembly_variant_calling_in, fasta, fai , ch_par)
+            ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+        }
 
         // TODO: parallel_snv should only be allowed when snv calling is active
         // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
@@ -258,8 +277,10 @@ workflow NALLO {
             }
         }
     }
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
     //
     // Collate and save software versions

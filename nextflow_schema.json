@@ -457,6 +457,13 @@
                     "description": "HiFiCNV BED file specifying regions to exclude",
                     "exists": true
                 },
+                "somalier_sites": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                    "description": "A VCF of known polymorphic sites",
+                    "format": "file-path",
+                    "exists": true
+                },
                 "validationFailUnrecognisedParams": {
                     "type": "boolean",
                     "fa_icon": "far fa-check-circle",

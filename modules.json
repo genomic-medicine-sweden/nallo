@@ -135,6 +135,16 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sniffles/sniffles.diff"
                     },
+                    "somalier/extract": {
+                        "branch": "master",
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": ["modules"]
+                    },
+                    "somalier/relate": {
+                        "branch": "master",
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "installed_by": ["modules"]
+                    },
                     "tabix/bgziptabix": {
                         "branch": "master",
                         "git_sha": "5e7b1ef9a5a2d9258635bcbf70fcf37dacd1b247",

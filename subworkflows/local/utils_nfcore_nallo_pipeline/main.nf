@@ -50,6 +50,7 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
+    assembly       : ["mapping"],
     snv_calling    : ["mapping"],
     snv_annotation : ["mapping", "snv_calling"],
     cnv_calling    : ["mapping", "snv_calling"],
@@ -233,6 +234,12 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(input) {
+
+    // Check if any of the samples have unknown (0) sex
+    if (input[0]['sex'] == 0 & !params.somalier_sites) {
+        exit 1, '--somalier_sites is required when any sample sex is unknown'
+    }
+
     return input
 }
 //

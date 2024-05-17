@@ -32,6 +32,7 @@ This document roughly describes the output structure produced by the pipeline. T
 | &emsp;└── stats           | Directory containing statistics related to phased reads.                      |
 | pipeline_info             | Directory containing information and reports about the pipeline.              |
 | qc_aligned_reads          | Directory for quality control results of aligned reads.                       |
+| ├── somalier              | Directory containing sample control, relatedness etc. from somalier.          |
 | ├── cramino               | Directory containing QC results using the cramino tool.                       |
 | &nbsp;│&emsp;└── unphased | Directory containing unphased QC results.                                     |
 | └── mosdepth              | Directory containing QC results using the mosdepth tool.                      |
