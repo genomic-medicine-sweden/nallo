@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Template merge for nf-core/tools v2.14.1 [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146)
 - Bump to new dev version [#145](https://github.com/genomic-medicine-sweden/nallo/pull/145)
+- Output modkit to separate directories for phased/unphased pileups []()
 
 ### `Fixed`
 
