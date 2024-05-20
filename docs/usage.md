@@ -18,7 +18,7 @@ Run the following command, where YOURPROFILE is the package manager you installe
 
 ```
 nextflow run genomic-medicine-sweden/nallo \
-    -revision dev -profile test,<YOURPROFILE> \
+    -profile test,<YOURPROFILE> \
     --outdir <OUTDIR>
 ```
 
@@ -84,7 +84,7 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run genomic-medicine-sweden/nallo -r dev -profile docker \
+nextflow run genomic-medicine-sweden/nallo -profile docker \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
