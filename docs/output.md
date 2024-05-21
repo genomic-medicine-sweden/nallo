@@ -56,5 +56,5 @@ This document roughly describes the output structure produced by the pipeline. T
 | &emsp;└── single_sample   | Directory containing single-sample SV calling results.                        |
 | repeat_calling            | Directory for calling tandem repeats.                                         |
 | └── trgt                  | Directory containing processed and raw data related to TRGT.                  |
-| &emsp;├── processed       | Directory containing processed TRGT output.                                   |
-| &emsp;└── raw             | Directory containing raw TRGT output.                                         |
+| &emsp;├── single_sample   | Directory containing single-sample TRGT variants and spanning reads.          |
+| &emsp;└── multi_sample    | Directory containing merged TRGT variants for all samples.                    |
