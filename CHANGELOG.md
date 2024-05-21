@@ -12,8 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- Template merge for nf-core/tools v2.14.1 [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146)
-- Bump to new dev version [#145](https://github.com/genomic-medicine-sweden/nallo/pull/145)
 - [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146) - Template merge for nf-core/tools v2.14.1
 - [#145](https://github.com/genomic-medicine-sweden/nallo/pull/145) - Bump to new dev version
 - [#151](https://github.com/genomic-medicine-sweden/nallo/pull/151) - Cleaned up TRGT output directory
