@@ -7,15 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- Automatically infer sex if unknown [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148)
-- Add read group tag to aligned BAM [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148)
+- [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Automatically infer sex if unknown
+- [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added read group tag to aligned BAM
 
 ### `Changed`
 
 - Template merge for nf-core/tools v2.14.1 [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146)
 - Bump to new dev version [#145](https://github.com/genomic-medicine-sweden/nallo/pull/145)
-- Output modkit to separate directories for phased/unphased pileups []()
-
+- [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146) - Template merge for nf-core/tools v2.14.1
+- [#145](https://github.com/genomic-medicine-sweden/nallo/pull/145) - Bump to new dev version
+- [#151](https://github.com/genomic-medicine-sweden/nallo/pull/151) - Cleaned up TRGT output directory
+- [#152](https://github.com/genomic-medicine-sweden/nallo/pull/152)  - Output modkit to separate directories for phased/unphased pileups
+- 
 ### `Fixed`
 
 ### Parameters
