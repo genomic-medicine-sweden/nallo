@@ -2,6 +2,7 @@ include { MODKIT_PILEUP                                      } from '../../modul
 include { MODKIT_PILEUP as MODKIT_PILEUP_HAPLOTYPES          } from '../../modules/local/modkit/pileup/main'
 include { TABIX_BGZIPTABIX as BGZIP_MODKIT_PILEUP            } from '../../modules/nf-core/tabix/bgziptabix/main'
 include { TABIX_BGZIPTABIX as BGZIP_MODKIT_PILEUP_HAPLOTYPES } from '../../modules/nf-core/tabix/bgziptabix/main'
+
 workflow METHYLATION {
 
     take:
