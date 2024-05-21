@@ -13,13 +13,16 @@ workflow METHYLATION {
     main:
     ch_versions = Channel.empty()
 
+    // Run modkit pileup once without dividing by HP-tag and once with
     MODKIT_PILEUP(ch_haplotagged_bam_bai, ch_fasta, ch_fai, ch_bed)
     ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
 
     MODKIT_PILEUP_HAPLOTYPES(ch_haplotagged_bam_bai, ch_fasta, ch_fai, ch_bed)
     ch_versions = ch_versions.mix(MODKIT_PILEUP_HAPLOTYPES.out.versions)
 
+    // Bgzip and index output "BED"
     BGZIP_MODKIT_PILEUP ( MODKIT_PILEUP.out.bed )
+    ch_versions = ch_versions.mix(BGZIP_MODKIT_PILEUP.out.versions)
 
     MODKIT_PILEUP_HAPLOTYPES.out.haplotype_1
         .concat ( MODKIT_PILEUP_HAPLOTYPES.out.haplotype_2 )
@@ -27,6 +30,7 @@ workflow METHYLATION {
         .set { ch_bgzip_modkit_haplotypes_in }
 
     BGZIP_MODKIT_PILEUP_HAPLOTYPES ( ch_bgzip_modkit_haplotypes_in )
+    ch_versions = ch_versions.mix(BGZIP_MODKIT_PILEUP_HAPLOTYPES.out.versions)
 
     emit:
     versions = ch_versions // channel: [ versions.yml ]
