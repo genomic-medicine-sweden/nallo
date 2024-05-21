@@ -17,7 +17,7 @@ This document roughly describes the output structure produced by the pipeline. T
 | ├── dipcall                      | Directory containing results from dipcall variant caller.                     |
 | cnv_calling                      | Directory for calling copy number variants.                                   |
 | ├── hificnv                      | Directory containing results from HiFiCNV CNV caller.                         |
-| methylation_pileups              | Directory for methylation pileup data                                         |
+| methylation                      | Directory for methylation pileup data                                         |
 | ├── modkit                       | Directory containing methylation data processed with modkit.                  |
 | &nbsp;│&emsp;└── pileup/unphased | Directory containing ungrouped modkit methylation pileup data.                |
 | &nbsp;│&emsp;└── pileup/phased   | Directory containing modkit methylation pileup data grouped per haplotype.    |     |
