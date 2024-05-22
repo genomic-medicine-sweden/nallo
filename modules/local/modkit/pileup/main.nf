@@ -11,11 +11,11 @@ process MODKIT_PILEUP {
     tuple val(meta4), path(bed)
 
     output:
-    tuple val(meta), path("${meta.id}.bed"), emit: bed, optional: true
+    tuple val(meta), path("${prefix}.bed"), emit: bed, optional: true
     // This will break if there are other tags than 1 and 2 I guess
-    tuple val(meta), path("${meta.id}.1.bed")         , emit: haplotype_1, optional: true
-    tuple val(meta), path("${meta.id}.2.bed")         , emit: haplotype_2, optional: true
-    tuple val(meta), path("${meta.id}.ungrouped.bed") , emit: ungrouped  , optional: true
+    tuple val(meta), path("${prefix}.1.bed")         , emit: haplotype_1, optional: true
+    tuple val(meta), path("${prefix}.2.bed")         , emit: haplotype_2, optional: true
+    tuple val(meta), path("${prefix}.ungrouped.bed") , emit: ungrouped  , optional: true
     path "*.log", emit: log
     path "versions.yml", emit: versions
 
@@ -24,7 +24,7 @@ process MODKIT_PILEUP {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = task.ext.prefix ?: "${meta.id}"
 
     def include_bed = bed ? "--include-bed ${bed}" : ''
     """
@@ -35,14 +35,14 @@ process MODKIT_PILEUP {
         --ref $fasta \\
         --log-filepath ${bam.baseName}.modkit.log \\
         ${bam} \\
-        ${meta.id}.${bam.baseName}.bed
+        ${prefix}.${bam.baseName}.bed
 
-    if test -d ${meta.id}.${bam.baseName}.bed; then
-        if test -f ${meta.id}.${bam.baseName}.bed/1.bed; then mv ${meta.id}.${bam.baseName}.bed/1.bed ${meta.id}.1.bed; fi
-        if test -f ${meta.id}.${bam.baseName}.bed/2.bed; then mv ${meta.id}.${bam.baseName}.bed/2.bed ${meta.id}.2.bed; fi
-        if test -f ${meta.id}.${bam.baseName}.bed/ungrouped.bed; then mv ${meta.id}.${bam.baseName}.bed/ungrouped.bed ${meta.id}.ungrouped.bed; fi
+    if test -d ${prefix}.${bam.baseName}.bed; then
+        if test -f ${prefix}.${bam.baseName}.bed/1.bed; then mv ${prefix}.${bam.baseName}.bed/1.bed ${prefix}.1.bed; fi
+        if test -f ${prefix}.${bam.baseName}.bed/2.bed; then mv ${prefix}.${bam.baseName}.bed/2.bed ${prefix}.2.bed; fi
+        if test -f ${prefix}.${bam.baseName}.bed/ungrouped.bed; then mv ${prefix}.${bam.baseName}.bed/ungrouped.bed ${prefix}.ungrouped.bed; fi
     else
-        mv ${meta.id}.${bam.baseName}.bed ${meta.id}.bed
+        mv ${prefix}.${bam.baseName}.bed ${prefix}.bed
     fi
 
     cat <<-END_VERSIONS > versions.yml
