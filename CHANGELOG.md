@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- []() - Fixed program versions missing in reports/output
+
 ### Parameters
 
 | Old parameter | New parameter      |
