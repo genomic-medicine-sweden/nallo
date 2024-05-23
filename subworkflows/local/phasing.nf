@@ -23,6 +23,7 @@ workflow PHASING {
         ch_bam_bai_haplotagged = Channel.empty()
 
         TABIX_TABIX(ch_vcf)
+        ch_versions = ch_versions.mix(TABIX_TABIX.out.versions)
 
         if (params.phaser.equals("whatshap")) {
 
@@ -68,11 +69,15 @@ workflow PHASING {
                     .map { meta, vcf -> [meta, vcf, [], []] },
                 [[],[]]
             )
+            ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
             // Might be that newer versions of HiPhase ignores certain SVs
             // if BCFTOOLS_FILLFROMFASTA is not run, instead of craching
             BCFTOOLS_FILLFROMFASTA(BCFTOOLS_REHEADER.out.vcf, fasta)
+            ch_versions = ch_versions.mix(BCFTOOLS_FILLFROMFASTA.out.versions)
+
             TABIX_BGZIPTABIX(BCFTOOLS_FILLFROMFASTA.out.vcf)
+            ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
             TABIX_BGZIPTABIX.out.gz_tbi
                 .map { meta, gz, tbi -> [ meta, gz ] }

@@ -5,6 +5,8 @@
 # Split regions in BED into n files with approximately equal region sizes.
 # A region is never split. 13 is a good number.
 
+# Version 1.0
+
 import sys
 import pandas as pd
 import string

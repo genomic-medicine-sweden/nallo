@@ -134,6 +134,7 @@ workflow NALLO {
             .set{ ch_build_intervals_in }
 
         BUILD_INTERVALS( ch_build_intervals_in )
+        ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
 
         BUILD_INTERVALS.out.bed
             .set{ ch_bed }
@@ -142,8 +143,10 @@ workflow NALLO {
     if(!params.skip_mapping_wf) {
 
         ALIGN_READS( ch_sample, mmi)
+        ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
 
         BAM_INFER_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
+        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
 
         bam     = BAM_INFER_SEX.out.bam
         bai     = BAM_INFER_SEX.out.bai
@@ -178,6 +181,7 @@ workflow NALLO {
         // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
 
         SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
+        ch_versions = ch_versions.mix(SPLIT_BED_CHUNKS.out.versions)
 
         // Combine to create a bam_bai - chunk pair for each sample
         // Do this here, pre-process or inside SNV-calling?
@@ -188,13 +192,10 @@ workflow NALLO {
             .set{ ch_snv_calling_in }
 
         QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
+        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
 
         // Call SVs with Sniffles2
         STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
-
-        // Gather versions
-        ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
-        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         if(!params.skip_short_variant_calling) {
@@ -224,6 +225,7 @@ workflow NALLO {
                     ch_vep_cache,
                     params.vep_cache_version
                 )
+                ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
             }
 
             if(params.preset != 'ONT_R10') {
@@ -244,17 +246,13 @@ workflow NALLO {
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
                 PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
-                hap_bam_bai = PHASING.out.haplotagged_bam_bai
-
-                // Gather versions
                 ch_versions = ch_versions.mix(PHASING.out.versions)
 
+                hap_bam_bai = PHASING.out.haplotagged_bam_bai
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
                     METHYLATION( hap_bam_bai, fasta, fai, ch_bed )
-
-                    // Gather versions
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
 
@@ -264,14 +262,14 @@ workflow NALLO {
                     // Hack read names
                     if (params.preset == "ONT_R10") {
                         CONVERT_ONT_READ_NAMES(hap_bam_bai)
+                        ch_versions = ch_versions.mix(CONVERT_ONT_READ_NAMES.out.versions)
+
                         ch_repeat_analysis_in = CONVERT_ONT_READ_NAMES.out.bam_bai
                     } else {
                         ch_repeat_analysis_in = hap_bam_bai
                     }
 
                     REPEAT_ANALYSIS( ch_repeat_analysis_in, fasta, fai, ch_trgt_bed )
-
-                    // Gather versions
                     ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
                 }
             }
