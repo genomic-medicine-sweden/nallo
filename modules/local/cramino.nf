@@ -26,8 +26,8 @@ process CRAMINO {
     cramino \\
         $args \\
         --threads $task.cpus \\
-        --arrow ${bam.baseName}.arrow \\
-        ${bam} > ${bam.baseName}.cramino.txt
+        --arrow ${prefix}.arrow \\
+        ${bam} > ${prefix}.txt
 
 
     cat <<-END_VERSIONS > versions.yml
@@ -40,8 +40,8 @@ process CRAMINO {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${bam.baseName}.arrow
-    touch ${bam.baseName}.cramino.txt
+    touch ${prefix}.arrow
+    touch ${prefix}.cramino.txt
 
 
     cat <<-END_VERSIONS > versions.yml
