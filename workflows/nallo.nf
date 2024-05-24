@@ -11,7 +11,6 @@ include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
 include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
-include { ALIGN_READS                } from '../subworkflows/local/align_reads'
 include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
@@ -37,6 +36,7 @@ include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 // nf-core
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { FASTP                  } from '../modules/nf-core/fastp/main'
+include { MINIMAP2_ALIGN         } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -111,12 +111,11 @@ workflow NALLO {
     if(!params.skip_qc) {
 
         // Fastq QC
-        //FASTQC( ch_sample )
-        //FQCRS( ch_sample )
+        FASTQC( ch_sample )
+        ch_versions = ch_versions.mix(FASTQC.out.versions)
 
-        // Gather versions
-        //ch_versions = ch_versions.mix(FASTQC.out.versions)
-        //ch_versions = ch_versions.mix(FQCRS.out.versions)
+        FQCRS( ch_sample )
+        ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
     // Index genome
@@ -158,11 +157,12 @@ workflow NALLO {
         }
 
         // Align (split) reads
-        ALIGN_READS( reads_for_alignment, mmi )
-        ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
+        MINIMAP2_ALIGN ( reads_for_alignment, mmi, true, false, false )
+        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
         // Split channel into cases where we have multiple files or single files
-        ALIGN_READS.out.bam_bai
+        MINIMAP2_ALIGN.out.bam
+            .join(MINIMAP2_ALIGN.out.csi)
             .map {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
@@ -317,7 +317,7 @@ workflow NALLO {
         }
     }
 
-    //ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 

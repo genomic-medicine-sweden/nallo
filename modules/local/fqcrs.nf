@@ -12,10 +12,10 @@ process FQCRS {
     }
 
     input:
-    tuple val(meta), path(fastq)
+    tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("${fastq}.tsv.zst"), emit: fqc
+    tuple val(meta), path("${prefix}.tsv.zst"), emit: fqc
     path "versions.yml"                      , emit: versions
 
     when:
@@ -26,7 +26,7 @@ process FQCRS {
     prefix      = task.ext.prefix ?: "${meta.id}"
 
     """
-    zcat ${fastq} | fqcrs | zstd -c > ${fastq}.tsv.zst
+    zcat ${reads} | fqcrs | zstd -c > ${prefix}.tsv.zst
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

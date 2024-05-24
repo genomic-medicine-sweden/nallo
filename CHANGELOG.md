@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#151](https://github.com/genomic-medicine-sweden/nallo/pull/151) - Cleaned up TRGT output directory
 - [#152](https://github.com/genomic-medicine-sweden/nallo/pull/152) - Use prefix in modkit module. Bgzip, index and split outputs into phased/unphased directories
 - [#153](https://github.com/genomic-medicine-sweden/nallo/pull/153) - Changed cramino module to use prefix, renamed and moved all cramino outputs into `qc_alinged_reads/cramino/`
+- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Clarify the genome assembly workflow
+- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - `split_fastq` now splits on files instead of lines
+- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Use groupKey to remove bottleneck where waiting for all samples to finish alignment was needed
 
 ### `Fixed`
 
@@ -25,9 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter      |
-| ------------- | ------------------ |
-|               | `--somalier_sites` |
+| Old parameter   | New parameter      |
+| --------------- | ------------------ |
+|                 | `--somalier_sites` |
+| `--split_fastq` | `--split_fastq`\*  |
+
+- `split_fastq` now splits the input files into _n_ files (range 2-999)
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
