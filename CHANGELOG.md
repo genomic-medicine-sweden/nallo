@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Old parameter   | New parameter      |
 | --------------- | ------------------ |
 |                 | `--somalier_sites` |
-| `--split_fastq` | `--split_fastq` \*  |
+| `--split_fastq` | `--split_fastq` \* |
 
 `split_fastq` now splits the input files into _n_ files (range 2-999)
 
