@@ -32,9 +32,11 @@ include { FQCRS                  } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES } from '../modules/local/convert_ont_read_names'
 include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
 include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
+include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { FASTP                  } from '../modules/nf-core/fastp/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -90,7 +92,7 @@ workflow NALLO {
                                                 : Channel.value([[],[]])
 
     // Check parameter that doesn't conform to schema validation here
-    if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+    if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { exit 1, '--split_fastq must be 0, or between 2 and 999'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
 
     // Create PED from samplesheet
@@ -105,15 +107,16 @@ workflow NALLO {
     BAM_TO_FASTQ.out.fastq
         .set { ch_sample }
 
+    // Now this will be done per file and not per sample, not ideal
     if(!params.skip_qc) {
 
         // Fastq QC
-        FASTQC( ch_sample )
-        FQCRS( ch_sample )
+        //FASTQC( ch_sample )
+        //FQCRS( ch_sample )
 
         // Gather versions
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
-        ch_versions = ch_versions.mix(FQCRS.out.versions)
+        //ch_versions = ch_versions.mix(FASTQC.out.versions)
+        //ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
     // Index genome
@@ -142,10 +145,48 @@ workflow NALLO {
 
     if(!params.skip_mapping_wf) {
 
-        ALIGN_READS( ch_sample, mmi)
+        // Split fastq
+        if (params.split_fastq > 0) {
+
+            FASTP( ch_sample, [], [], [] )
+            ch_versions = ch_versions.mix(FASTP.out.versions)
+
+            reads_for_alignment = FASTP.out.reads.transpose()
+
+        } else {
+            reads_for_alignment = ch_sample
+        }
+
+        // Align (split) reads
+        ALIGN_READS( reads_for_alignment, mmi )
         ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
 
-        BAM_INFER_SEX ( ALIGN_READS.out.bam_bai, fasta, fai, ch_somalier_sites, ch_pedfile )
+        // Split channel into cases where we have multiple files or single files
+        ALIGN_READS.out.bam_bai
+            .map {
+                meta, bam, bai ->
+                    [ groupKey(meta, meta.n_files), bam, bai ]
+            }
+            .groupTuple()
+            .branch { meta, bam, bai ->
+                single:   meta.n_files <= 1
+                    return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM
+                multiple: meta.n_files > 1
+            }
+            .set { bam_to_merge }
+
+        // Merge files if we have mutiple files per sample
+        SAMTOOLS_MERGE( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]] )
+        ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
+
+        // Combine merged with unmerged bams
+        SAMTOOLS_MERGE.out.bam
+            .join(SAMTOOLS_MERGE.out.csi)
+            .concat( bam_to_merge.single )
+            .set { bam_infer_sex_in }
+
+        // Infer sex if sex unknown
+        BAM_INFER_SEX ( bam_infer_sex_in, fasta, fai, ch_somalier_sites, ch_pedfile )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
 
         bam     = BAM_INFER_SEX.out.bam
@@ -276,7 +317,7 @@ workflow NALLO {
         }
     }
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+    //ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 

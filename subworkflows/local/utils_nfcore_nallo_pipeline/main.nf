@@ -165,8 +165,21 @@ workflow PIPELINE_INITIALISATION {
     //
     Channel
         .fromSamplesheet("input")
+        .map { meta, reads ->
+            [ meta.id, meta, reads ] // add sample as groupTuple key
+        }
         .map {
             validateInputSamplesheet(it)
+        }
+        .groupTuple() // group by sample
+        .map { sample, metas, reads ->
+            // Add number of files per sample _after_ splitting to meta
+            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.split_fastq - 1), single_end:true ], reads ]
+        }
+        // Convert back to [ meta, reads ]
+        .flatMap {
+            sample, meta, reads ->
+                reads.collect { return [ meta, it ] }
         }
         .set { ch_samplesheet }
 
@@ -236,12 +249,13 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 def validateInputSamplesheet(input) {
 
     // Check if any of the samples have unknown (0) sex
-    if (input[0]['sex'] == 0 & !params.somalier_sites) {
+    if (input[1]['sex'] == 0 & !params.somalier_sites) {
         exit 1, '--somalier_sites is required when any sample sex is unknown'
     }
 
     return input
 }
+
 //
 // Get attribute from genome config file e.g. fasta
 //

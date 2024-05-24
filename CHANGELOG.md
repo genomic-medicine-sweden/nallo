@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Automatically infer sex if unknown
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added read group tag to aligned BAM
+- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Allow files with from the same sample to be merged
 
 ### `Changed`
 
