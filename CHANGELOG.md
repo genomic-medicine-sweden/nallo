@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Automatically infer sex if unknown
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added read group tag to aligned BAM
-- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Allow files with from the same sample to be merged
+- [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Allow files with from the same sample to be merged
 
 ### `Changed`
 
@@ -18,9 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#151](https://github.com/genomic-medicine-sweden/nallo/pull/151) - Cleaned up TRGT output directory
 - [#152](https://github.com/genomic-medicine-sweden/nallo/pull/152) - Use prefix in modkit module. Bgzip, index and split outputs into phased/unphased directories
 - [#153](https://github.com/genomic-medicine-sweden/nallo/pull/153) - Changed cramino module to use prefix, renamed and moved all cramino outputs into `qc_alinged_reads/cramino/`
-- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Clarify the genome assembly workflow
-- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - `split_fastq` now splits on files instead of lines
-- [](https://github.com/genomic-medicine-sweden/nallo/pull/) - Use groupKey to remove bottleneck where waiting for all samples to finish alignment was needed
+- [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Clarify the trio-binning genome assembly workflow
+- [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - `split_fastq` now splits on files instead of lines
+- [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Use groupKey to remove bottleneck, where previously all samples had to wait before progressing after alignment
 
 ### `Fixed`
 
