@@ -2,6 +2,7 @@ process SPLIT_BED_CHUNKS {
     tag "$meta"
 
     container "quay.io/biocontainers/pandas:1.5.2"
+    def split_bed_chunks_version = "1.0"
 
     input:
     tuple val(meta), path(bed)
@@ -9,7 +10,7 @@ process SPLIT_BED_CHUNKS {
 
     output:
     path("*.bed")       , emit: split_beds
-    //path "versions.yml" , emit: versions
+    path "versions.yml" , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -19,5 +20,10 @@ process SPLIT_BED_CHUNKS {
     script:
     """
     split_bed_chunks.py ${bed} $chunk_size
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        split_bed_chunks: \$(echo "$split_bed_chunks_version" )
+    END_VERSIONS
     """
 }
