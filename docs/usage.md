@@ -150,7 +150,7 @@ HG01125,/path/to/HG01125.g.vcf.gz
 
 - By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
 
-- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split alignment into N reads per process.
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split the input and alignment into N files/processes.
 
 All parameters are listed below:
 
@@ -245,7 +245,7 @@ Less common options for the pipeline, typically set in a config file.
 | `variant_caller` | Choose variant caller                      | `string`  | deepvariant |          |        |
 | `phaser`         | Choose phasing software                    | `string`  | whatshap    |          |        |
 | `hifiasm_mode`   | Run hifiasm in hifi-only or hifi-trio mode | `string`  | hifi-only   |          |        |
-| `split_fastq`    | Split Alignment into n reads per job       | `integer` | 0           |          |        |
+| `split_fastq`    | Split alignment into n jobs                | `integer` | 0           |          |        |
 | `parallel_snv`   | Split SNV calling into n chunks            | `integer` | 13          |          |        |
 
 ## Extra file inputs

@@ -1,19 +1,22 @@
-process SAMTOOLS_CAT_SORT_INDEX {
+process SAMTOOLS_MERGE {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_low'
 
-    conda "bioconda::samtools=1.17"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.17--h00cdaf9_0' :
-        'biocontainers/samtools:1.17--h00cdaf9_0' }"
+        'https://depot.galaxyproject.org/singularity/samtools:1.19.2--h50ea8bc_0' :
+        'biocontainers/samtools:1.19.2--h50ea8bc_0' }"
 
     input:
-    tuple val(meta),  path(input_files, stageAs: "?/*")
+    tuple val(meta), path(input_files, stageAs: "?/*")
+    tuple val(meta2), path(fasta)
+    tuple val(meta3), path(fai)
 
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
-    tuple val(meta), path("${prefix}.bam.bai") , optional:true, emit: bai
-    tuple val(meta), path("${prefix}.bam"), path("${prefix}.bam.bai") , optional:true, emit: bam_bai
+    tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
+    tuple val(meta), path("*.csi")         , optional:true, emit: csi
+    tuple val(meta), path("*.crai")        , optional:true, emit: crai
     path  "versions.yml"                                  , emit: versions
 
 
@@ -22,28 +25,17 @@ process SAMTOOLS_CAT_SORT_INDEX {
 
     script:
     def args = task.ext.args   ?: ''
-    def args2 = task.ext.args2   ?: ''
-    def args3 = task.ext.args3   ?: ''
     prefix   = task.ext.prefix ?: "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
+    def reference = fasta ? "--reference ${fasta}" : ""
     """
     samtools \\
-        cat \\
+        merge \\
         --threads ${task.cpus-1} \\
         $args \\
-        $input_files |\\
-    samtools \\
-        sort \\
-        --threads ${task.cpus-1} \\
-        $args2 \\
-        -O BAM \\
-        -o ${prefix}.${file_type} \\
-
-    samtools \\
-        index \\
-        -@ ${task.cpus-1} \\
+        ${reference} \\
         ${prefix}.${file_type} \\
-        $args3
+        $input_files
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -52,10 +44,14 @@ process SAMTOOLS_CAT_SORT_INDEX {
     """
 
     stub:
+    def args = task.ext.args   ?: ''
     prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
+    def index_type = file_type == "bam" ? "csi" : "crai"
+    def index = args.contains("--write-index") ? "touch ${prefix}.${index_type}" : ""
     """
     touch ${prefix}.${file_type}
+    ${index}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

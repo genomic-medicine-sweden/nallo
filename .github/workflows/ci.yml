@@ -25,7 +25,7 @@ jobs:
       matrix:
         parameters:
           - ""
-          - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 250 --parallel_snv 1 --phaser hiphase_sv"
+          - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 2 --parallel_snv 1 --phaser hiphase_sv"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
