@@ -82,7 +82,7 @@ workflow ASSEMBLY {
         CAT_FASTQ_PATERNAL ( trio_dads )
         ch_versions = ch_versions.mix(CAT_FASTQ_PATERNAL.out.versions)
         CAT_FASTQ_MATERNAL ( trio_moms )
-        ch_versions = ch_versions.mix(CAT_FASTQ_PATERNAL.out.versions)
+        ch_versions = ch_versions.mix(CAT_FASTQ_MATERNAL.out.versions)
 
         // Then run YAK
         YAK_PATERNAL( CAT_FASTQ_PATERNAL.out.reads )

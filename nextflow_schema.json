@@ -361,7 +361,7 @@
                     "type": "integer",
                     "default": 0,
                     "minimum": 0,
-                    "description": "Split Alignment into n reads per job"
+                    "description": "Split alignment into n processes"
                 },
                 "parallel_snv": {
                     "type": "integer",
