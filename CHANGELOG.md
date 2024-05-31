@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Automatically infer sex if unknown
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added read group tag to aligned BAM
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Allow files with from the same sample to be merged
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added paraphase
 
 ### `Changed`
 
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - `split_fastq` now splits on files instead of lines
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Use groupKey to remove bottleneck, where previously all samples had to wait before progressing after alignment
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed `--skip...` default parameters from schema
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Use `pipelines_testdata_base_path` in config
 
 ### `Fixed`
 
