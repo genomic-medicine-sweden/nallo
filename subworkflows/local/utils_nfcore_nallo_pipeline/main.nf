@@ -40,6 +40,7 @@ def workflowSkips = [
     mapping       : "skip_mapping_wf",
     snv_calling   : "skip_short_variant_calling",
     snv_annotation: "skip_snv_annotation",
+    call_paralogs : "skip_call_paralogs",
     cnv_calling   : "skip_cnv_calling",
     phasing       : "skip_phasing_wf",
     repeat_calling: "skip_repeat_wf",
@@ -51,6 +52,7 @@ def workflowSkips = [
 //
 def workflowDependencies = [
     assembly       : ["mapping"],
+    call_paralogs  : ["mapping"],
     snv_calling    : ["mapping"],
     snv_annotation : ["mapping", "snv_calling"],
     cnv_calling    : ["mapping", "snv_calling"],
@@ -84,6 +86,7 @@ def parameterStatus = [
         skip_methylation_wf       : params.skip_methylation_wf,
         skip_repeat_wf            : params.skip_repeat_wf,
         skip_snv_annotation       : params.skip_snv_annotation,
+        skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
         skip_mapping_wf           : params.skip_mapping_wf,
         skip_qc                   : params.skip_qc,
