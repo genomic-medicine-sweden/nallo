@@ -38,9 +38,7 @@ process MODKIT_PILEUP {
         ${prefix}.${bam.baseName}.bed
 
     if test -d ${prefix}.${bam.baseName}.bed; then
-        if test -f ${prefix}.${bam.baseName}.bed/1.bed; then mv ${prefix}.${bam.baseName}.bed/1.bed ${prefix}.1.bed; fi
-        if test -f ${prefix}.${bam.baseName}.bed/2.bed; then mv ${prefix}.${bam.baseName}.bed/2.bed ${prefix}.2.bed; fi
-        if test -f ${prefix}.${bam.baseName}.bed/ungrouped.bed; then mv ${prefix}.${bam.baseName}.bed/ungrouped.bed ${prefix}.ungrouped.bed; fi
+        for f in ${prefix}.${bam.baseName}.bed/*; do mv \$f \$(basename \$f); done
     else
         mv ${prefix}.${bam.baseName}.bed ${prefix}.bed
     fi

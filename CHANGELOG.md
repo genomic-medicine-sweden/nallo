@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Clarify the trio-binning genome assembly workflow
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - `split_fastq` now splits on files instead of lines
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Use groupKey to remove bottleneck, where previously all samples had to wait before progressing after alignment
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Update modules
 
 ### `Fixed`
 
@@ -39,6 +40,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| samtools | various     | 1.20        |
+| bcftools | various     | 1.20        |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
 
 ## v0.1.0 - [2024-05-08]
 

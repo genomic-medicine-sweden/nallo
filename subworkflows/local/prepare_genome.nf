@@ -28,7 +28,7 @@ workflow PREPARE_GENOME {
             .set{ch_fasta}
     }
 
-    SAMTOOLS_FAIDX ( ch_fasta )
+    SAMTOOLS_FAIDX ( ch_fasta, [[],[]] )
     MINIMAP2_INDEX ( ch_fasta )
 
     UNTAR_VEP_CACHE (ch_vep_cache)

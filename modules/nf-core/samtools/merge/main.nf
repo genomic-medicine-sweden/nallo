@@ -4,18 +4,19 @@ process SAMTOOLS_MERGE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.19.2--h50ea8bc_0' :
-        'biocontainers/samtools:1.19.2--h50ea8bc_0' }"
+        'https://depot.galaxyproject.org/singularity/samtools:1.20--h50ea8bc_0' :
+        'biocontainers/samtools:1.20--h50ea8bc_0' }"
 
     input:
     tuple val(meta), path(input_files, stageAs: "?/*")
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
-
+    val(index_type)
+    
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
     tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
-    tuple val(meta), path("*.csi")         , optional:true, emit: csi
+    tuple val(meta), path("*.${index}")    , optional:true, emit: index
     tuple val(meta), path("*.crai")        , optional:true, emit: crai
     path  "versions.yml"                                  , emit: versions
 
@@ -34,7 +35,7 @@ process SAMTOOLS_MERGE {
         --threads ${task.cpus-1} \\
         $args \\
         ${reference} \\
-        ${prefix}.${file_type} \\
+        ${prefix}.${file_type}##idx##${prefix}.${file_type}.${index_type} \\
         $input_files
 
     cat <<-END_VERSIONS > versions.yml
@@ -47,10 +48,9 @@ process SAMTOOLS_MERGE {
     def args = task.ext.args   ?: ''
     prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
-    def index_type = file_type == "bam" ? "csi" : "crai"
-    def index = args.contains("--write-index") ? "touch ${prefix}.${index_type}" : ""
+    def index = args.contains("--write-index") ? "touch ${prefix}.${file_type}.${index_type}" : ""
     """
-    touch ${prefix}.${file_type}
+    touch ${prefix}.${file_type}.${index_type}
     ${index}
 
     cat <<-END_VERSIONS > versions.yml
