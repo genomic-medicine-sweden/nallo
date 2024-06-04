@@ -1,4 +1,4 @@
-name: bcftools_reheader
+name: bcftools_norm
 channels:
   - conda-forge
   - bioconda

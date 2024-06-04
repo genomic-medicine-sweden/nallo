@@ -14,12 +14,11 @@ process SAMTOOLS_MERGE {
     val(index_type)
     
     output:
-    tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
-    tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
-    tuple val(meta), path("*.${index}")    , optional:true, emit: index
-    tuple val(meta), path("*.crai")        , optional:true, emit: crai
-    path  "versions.yml"                                  , emit: versions
-
+    tuple val(meta), path("${prefix}.bam")  , optional:true, emit: bam
+    tuple val(meta), path("${prefix}.cram") , optional:true, emit: cram
+    tuple val(meta), path("*.${index_type}"), optional:true, emit: index
+    tuple val(meta), path("*.crai")         , optional:true, emit: crai
+    path  "versions.yml"                                   , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

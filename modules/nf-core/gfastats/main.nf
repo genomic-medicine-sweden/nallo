@@ -1,11 +1,11 @@
 process GFASTATS {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_low'
 
-    conda "bioconda::gfastats=1.3.5"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/gfastats:1.3.5--hd03093a_0':
-        'biocontainers/gfastats:1.3.5--hd03093a_0' }"
+        'https://depot.galaxyproject.org/singularity/gfastats:1.3.6--hdcf5f25_3':
+        'biocontainers/gfastats:1.3.6--hdcf5f25_3' }"
 
     input:
     tuple val(meta), path(assembly)   // input.[fasta|fastq|gfa][.gz]
@@ -40,11 +40,23 @@ process GFASTATS {
         $ibed \\
         $ebed \\
         $sak \\
-        --out-format ${assembly.baseName}.${out_fmt}.gz \\
+        --out-format ${prefix}.${out_fmt}.gz \\
         $assembly \\
         $genome_size \\
         $target \\
-        > ${assembly.baseName}.assembly_summary
+        > ${prefix}.assembly_summary
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        gfastats: \$( gfastats -v | sed '1!d;s/.*v//' )
+    END_VERSIONS
+    """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.${out_fmt}.gz
+    touch ${prefix}.assembly_summary
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -109,7 +109,9 @@ workflow ASSEMBLY {
     GFASTATS_MATERNAL( HIFIASM.out.maternal_contigs,'fasta', '', '', [], [], [], [] )
     ch_versions = ch_versions.mix(GFASTATS_MATERNAL.out.versions)
 
-    GFASTATS_PATERNAL.out.assembly.combine(GFASTATS_MATERNAL.out.assembly, by: 0).set{ ch_dual_assembly_fa }
+    GFASTATS_PATERNAL.out.assembly
+        .join(GFASTATS_MATERNAL.out.assembly)
+        .set{ ch_dual_assembly_fa }
 
     emit:
     assembled_haplotypes = ch_dual_assembly_fa // channel: [ val(meta), path(paternal_fasta), path(maternal_fasta) ]

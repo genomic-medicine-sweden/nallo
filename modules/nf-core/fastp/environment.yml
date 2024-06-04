@@ -1,7 +1,7 @@
-name: bcftools_reheader
+name: fastp
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - bioconda::bcftools=1.20
+  - bioconda::fastp=0.23.4

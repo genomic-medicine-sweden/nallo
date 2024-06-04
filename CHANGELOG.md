@@ -47,6 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | -------- | ----------- | ----------- |
 | samtools | various     | 1.20        |
 | bcftools | various     | 1.20        |
+| gfastats |  1.3.5      | 1.3.6       |
+| mosdepth | 0.3.3       | 0.3.8       |
+| bgzip    | 1.11        | 1.19.1      |
+| tabix    | 1.11        | 1.19.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
