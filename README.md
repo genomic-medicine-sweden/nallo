@@ -37,6 +37,7 @@
 - Tandem repeats ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 - Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 - CNV-calling (HiFi only) ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
+- Call paralogous genes ([`Paraphase`](https://github.com/PacificBiosciences/paraphase))
 
 ##### Phasing and methylation
 

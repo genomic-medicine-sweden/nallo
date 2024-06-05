@@ -11,6 +11,7 @@ include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
 include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
+include { CALL_PARALOGS              } from '../subworkflows/local/call_paralogs'
 include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
@@ -192,6 +193,11 @@ workflow NALLO {
         bam     = BAM_INFER_SEX.out.bam
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
+
+        // Only compatible with hg38 (and a few hg19 genes)
+        if(!params.skip_paralogs) {
+            CALL_PARALOGS ( bam, fasta )
+        }
 
         // Assembly workflow
         if(!params.skip_assembly_wf) {
