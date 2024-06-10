@@ -24,8 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Use groupKey to remove bottleneck, where previously all samples had to wait before progressing after alignment
 - [#162](https://github.com/genomic-medicine-sweden/nallo/pull/162) - Removed `--skip...` default parameters from schema
 - [#162](https://github.com/genomic-medicine-sweden/nallo/pull/162) - Use `pipelines_testdata_base_path` in config
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Updated versions and changed modkit from local to nf-core module
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed RAM limitations from small test profile
+- [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Updated versions and changed modkit from local to nf-core module
+- [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Removed RAM limitations from small test profile
 
 ### `Fixed`
 
