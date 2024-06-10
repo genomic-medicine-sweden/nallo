@@ -25,7 +25,7 @@ workflow REPEAT_ANALYSIS {
     TRGT ( ch_trgt_input, ch_fasta, ch_trgt_bed )
 
     // Sort and index bam
-    SAMTOOLS_SORT_TRGT(TRGT.out.bam)
+    SAMTOOLS_SORT_TRGT ( TRGT.out.bam, [[],[]] )
     SAMTOOLS_INDEX_TRGT(SAMTOOLS_SORT_TRGT.out.bam)
 
     // Sort and index bcf

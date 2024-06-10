@@ -158,12 +158,12 @@ workflow NALLO {
         }
 
         // Align (split) reads
-        MINIMAP2_ALIGN ( reads_for_alignment, mmi, true, false, false )
+        MINIMAP2_ALIGN ( reads_for_alignment, mmi, true, 'bai', false, false )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.csi)
+            .join(MINIMAP2_ALIGN.out.index)
             .map {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
@@ -177,12 +177,12 @@ workflow NALLO {
             .set { bam_to_merge }
 
         // Merge files if we have mutiple files per sample
-        SAMTOOLS_MERGE( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]] )
+        SAMTOOLS_MERGE( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]], 'bai' )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bams
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.csi)
+            .join(SAMTOOLS_MERGE.out.index)
             .concat( bam_to_merge.single )
             .set { bam_infer_sex_in }
 
