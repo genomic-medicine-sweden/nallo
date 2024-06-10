@@ -7,7 +7,7 @@
                 "nf-core": {
                     "bcftools/concat": {
                         "branch": "master",
-                        "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
+                        "git_sha": "33ef773a7ea36e88323902f63662aa53c9b88988",
                         "installed_by": ["modules"]
                     },
                     "bcftools/index": {
@@ -23,7 +23,7 @@
                     },
                     "bcftools/norm": {
                         "branch": "master",
-                        "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
+                        "git_sha": "33ef773a7ea36e88323902f63662aa53c9b88988",
                         "installed_by": ["modules"]
                     },
                     "bcftools/reheader": {
@@ -34,12 +34,12 @@
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
+                        "git_sha": "33ef773a7ea36e88323902f63662aa53c9b88988",
                         "installed_by": ["modules"]
                     },
                     "bcftools/view": {
                         "branch": "master",
-                        "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
+                        "git_sha": "33ef773a7ea36e88323902f63662aa53c9b88988",
                         "installed_by": ["modules"]
                     },
                     "cat/fastq": {
@@ -98,6 +98,11 @@
                     "minimap2/index": {
                         "branch": "master",
                         "git_sha": "72e277acfd9e61a9f1368eafb4a9e83f5bcaa9f5",
+                        "installed_by": ["modules"]
+                    },
+                    "modkit/pileup": {
+                        "branch": "master",
+                        "git_sha": "e29c9dda946de3c4d310d0b3f75664f0f3d5a842",
                         "installed_by": ["modules"]
                     },
                     "mosdepth": {
