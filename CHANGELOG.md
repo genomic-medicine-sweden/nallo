@@ -13,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#162](https://github.com/genomic-medicine-sweden/nallo/pull/162) - Added paraphase
 - [#179](https://github.com/genomic-medicine-sweden/nallo/pull/179) - Allow the pipeline to run without --fasta when applicable
 
-
 ### `Changed`
 
 - [#146](https://github.com/genomic-medicine-sweden/nallo/pull/146) - Template merge for nf-core/tools v2.14.1
