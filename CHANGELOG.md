@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Changed modkit from local to nf-core module
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Removed RAM limitations from small test profile
 - [#173](https://github.com/genomic-medicine-sweden/nallo/pull/173) - Rename methylation outputs to prevent it being overwritten
+- [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Renamed whatshap output files and remove output .err file
+- [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Made skip_call_paralogs usable
+- [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Rename and fix raw read qc parameter
+- [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Mosdepth can be run without bed
+- [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Require somalier sites when mapping workflow is run
 
 ### `Fixed`
 
@@ -35,10 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter   | New parameter      |
-| --------------- | ------------------ |
-|                 | `--somalier_sites` |
-| `--split_fastq` | `--split_fastq` \* |
+| Old parameter   | New parameter          |
+| --------------- | ---------------------- |
+|                 | `--somalier_sites`     |
+| `--split_fastq` | `--split_fastq` \*     |
+|                 | `--skip_call_paralogs` |
+| `--skip_qc`     | `--skip_raw_read_qc`   |
 
 `split_fastq` now splits the input files into _n_ files (range 2-999)
 
