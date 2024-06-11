@@ -90,7 +90,7 @@ workflow NALLO {
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
     ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.getSimpleName(), it ] }.collect()
-                                                : Channel.value([[],[]])
+                                                : ''
 
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { exit 1, '--split_fastq must be 0, or between 2 and 999'}
@@ -109,11 +109,12 @@ workflow NALLO {
         .set { ch_sample }
 
     // Now this will be done per file and not per sample, not ideal
-    if(!params.skip_qc) {
+    if(!params.skip_raw_read_qc) {
 
         // Fastq QC
         FASTQC( ch_sample )
         ch_versions = ch_versions.mix(FASTQC.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
 
         FQCRS( ch_sample )
         ch_versions = ch_versions.mix(FQCRS.out.versions)
@@ -195,7 +196,7 @@ workflow NALLO {
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
         // Only compatible with hg38 (and a few hg19 genes)
-        if(!params.skip_paralogs) {
+        if(!params.skip_call_paralogs) {
             CALL_PARALOGS ( bam, fasta )
         }
 
@@ -323,7 +324,6 @@ workflow NALLO {
         }
     }
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 

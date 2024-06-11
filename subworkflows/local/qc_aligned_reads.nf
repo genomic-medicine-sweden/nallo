@@ -17,7 +17,7 @@ workflow QC_ALIGNED_READS {
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     ch_bam_bai
-        .combine( ch_bed.map { it[1] } )
+        .combine( ch_bed.map { it[1] }.toList() ) // toList() enables passing [] if ch_bed is empty
         .set { mosdepth_in }
 
     MOSDEPTH ( mosdepth_in, ch_fasta )
