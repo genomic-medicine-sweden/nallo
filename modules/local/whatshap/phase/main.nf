@@ -12,8 +12,7 @@ process WHATSHAP_PHASE {
 
     output:
     tuple val(meta), path("*.vcf.gz"), path("*.vcf.gz.tbi"), emit: vcf_tbi
-    tuple val(meta), path(".command.err"), emit: log
-    path "versions.yml"           , emit: versions
+    path "versions.yml"                                    , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

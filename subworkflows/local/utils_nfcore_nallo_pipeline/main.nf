@@ -36,7 +36,7 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 def workflowSkips = [
     assembly      : "skip_assembly_wf",
-    qc            : "skip_qc",
+    qc            : "skip_raw_read_qc",
     mapping       : "skip_mapping_wf",
     snv_calling   : "skip_short_variant_calling",
     snv_annotation: "skip_snv_annotation",
@@ -65,7 +65,7 @@ def workflowDependencies = [
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
-    mapping       : ["fasta"],
+    mapping       : ["fasta", "somalier_sites"],
     assembly      : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     assembly      : ["dipcall_par"],
     snv_annotation: ["snp_db", "vep_cache"],
@@ -97,6 +97,7 @@ def parameterStatus = [
     files: [
         dipcall_par    : params.dipcall_par,
         snp_db         : params.snp_db,
+        somalier_sites : params.somalier_sites,
         vep_cache      : params.vep_cache,
         hificnv_xy     : params.hificnv_xy,
         hificnv_xx     : params.hificnv_xx,
@@ -253,11 +254,6 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(input) {
-
-    // Check if any of the samples have unknown (0) sex
-    if (input[1]['sex'] == 0 & !params.somalier_sites) {
-        exit 1, '--somalier_sites is required when any sample sex is unknown'
-    }
 
     return input
 }
