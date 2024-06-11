@@ -109,11 +109,12 @@ workflow NALLO {
         .set { ch_sample }
 
     // Now this will be done per file and not per sample, not ideal
-    if(!params.skip_qc) {
+    if(!params.skip_raw_read_qc) {
 
         // Fastq QC
         FASTQC( ch_sample )
         ch_versions = ch_versions.mix(FASTQC.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
 
         FQCRS( ch_sample )
         ch_versions = ch_versions.mix(FQCRS.out.versions)
@@ -323,7 +324,6 @@ workflow NALLO {
         }
     }
 
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 

@@ -162,7 +162,7 @@ Options to skip various steps within the workflow
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_qc`                    | Skip QC                                    | `boolean` |         |          |        |
+| `skip_raw_read_qc`           | Skip raw read QC                           | `boolean` |         |          |        |
 | `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
 | `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
 | `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |

@@ -11,10 +11,10 @@
             "description": "Options to skip various steps within the workflow",
             "default": "",
             "properties": {
-                "skip_qc": {
+                "skip_raw_read_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC"
+                    "description": "Skip raw_read QC"
                 },
                 "skip_short_variant_calling": {
                     "type": "boolean",

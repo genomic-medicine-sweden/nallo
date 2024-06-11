@@ -36,7 +36,7 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 def workflowSkips = [
     assembly      : "skip_assembly_wf",
-    qc            : "skip_qc",
+    qc            : "skip_raw_read_qc",
     mapping       : "skip_mapping_wf",
     snv_calling   : "skip_short_variant_calling",
     snv_annotation: "skip_snv_annotation",
