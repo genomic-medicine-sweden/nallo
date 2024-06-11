@@ -90,7 +90,7 @@ workflow NALLO {
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
     ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.getSimpleName(), it ] }.collect()
-                                                : Channel.value([[],[]])
+                                                : ''
 
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { exit 1, '--split_fastq must be 0, or between 2 and 999'}

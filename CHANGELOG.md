@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Made skip_call_paralogs usable
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Rename and fix raw read qc parameter
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Mosdepth can be run without bed
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Require somalier sites when mapping workflow is run
 
 ### `Fixed`
 
