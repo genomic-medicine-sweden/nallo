@@ -27,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Updated multiple module versions
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Changed modkit from local to nf-core module
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Removed RAM limitations from small test profile
-- [#173](https://github.com/genomic-medicine-sweden/nallo/pull/173) - Renamed methylation outputs to prevent it being overwritten
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Renamed whatshap output files and remove output .err file
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Made skip_call_paralogs usable
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Rename and fix raw read qc parameter
