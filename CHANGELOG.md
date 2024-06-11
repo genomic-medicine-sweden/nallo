@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Renamed whatshap output files and remove output .err file
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Made skip_call_paralogs usable
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Rename and fix raw read qc parameter
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Mosdepth can be run without bed
 
 ### `Fixed`
 
