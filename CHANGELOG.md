@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added read group tag to aligned BAM
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Allow files with from the same sample to be merged
 - [#162](https://github.com/genomic-medicine-sweden/nallo/pull/162) - Added paraphase
+- [#179](https://github.com/genomic-medicine-sweden/nallo/pull/179) - Allow the pipeline to run without --fasta when applicable
+
 
 ### `Changed`
 
@@ -27,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Updated multiple module versions
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Changed modkit from local to nf-core module
 - [#163](https://github.com/genomic-medicine-sweden/nallo/pull/163) - Removed RAM limitations from small test profile
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Allow the pipeline to run without fasta where applicable
 
 ### `Fixed`
 
