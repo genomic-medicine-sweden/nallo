@@ -14,7 +14,7 @@
                 "skip_raw_read_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip raw_read QC"
+                    "description": "Skip raw read QC"
                 },
                 "skip_short_variant_calling": {
                     "type": "boolean",
