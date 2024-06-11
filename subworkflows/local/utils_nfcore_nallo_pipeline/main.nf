@@ -65,6 +65,8 @@ def workflowDependencies = [
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
+    mapping       : ["fasta"],
+    assembly      : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     assembly      : ["dipcall_par"],
     snv_annotation: ["snp_db", "vep_cache"],
     cnv_calling   : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
@@ -99,6 +101,7 @@ def parameterStatus = [
         hificnv_xy     : params.hificnv_xy,
         hificnv_xx     : params.hificnv_xx,
         hificnv_exclude: params.hificnv_exclude,
+        fasta          : params.fasta,
         trgt_repeats   : params.trgt_repeats,
     ],
     preset: [
