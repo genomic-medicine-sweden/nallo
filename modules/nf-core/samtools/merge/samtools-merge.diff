@@ -1,14 +1,6 @@
 Changes in module 'nf-core/samtools/merge'
 --- modules/nf-core/samtools/merge/main.nf
 +++ modules/nf-core/samtools/merge/main.nf
-@@ -1,6 +1,6 @@
- process SAMTOOLS_MERGE {
-     tag "$meta.id"
--    label 'process_low'
-+    label 'process_medium'
- 
-     conda "${moduleDir}/environment.yml"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
 @@ -11,14 +11,14 @@
      tuple val(meta), path(input_files, stageAs: "?/*")
      tuple val(meta2), path(fasta)
