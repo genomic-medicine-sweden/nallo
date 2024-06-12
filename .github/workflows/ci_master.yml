@@ -1,12 +1,26 @@
-name: nf-core CI
-# This workflow runs the pipeline with the minimal test dataset to check that it completes without any syntax errors
+name: nf-core CI for master
+
+# Run the workflow when:
+#  - dispatched manually
+#  - when a PR is opened or reopened to master branch
+#  - the head branch of the pull request is updated, i.e. if fixes for a release are pushed last minute to dev.
 on:
-  push:
-    branches:
-      - dev
+  workflow_dispatch:
+    inputs:
+      testbranch:
+        description: "The specific branch you wish to utilize for the test execution."
+        required: true
+        default: "dev"
   pull_request:
-  release:
-    types: [published]
+    types:
+      - opened
+      - edited
+      - synchronize
+    branches:
+      - master
+  pull_request_target:
+    branches:
+      - master
 
 env:
   NXF_ANSI_LOG: false
@@ -16,16 +30,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: Run pipeline with test data
+  test-no-bed:
+    name: Run pipeline with test data with no BED
     # Only run on push if this is the nf-core dev branch (merged PRs)
-    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'genomic-medicine-sweden/nallo') }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
         parameters:
-          - ""
-          - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 2 --parallel_snv 1 --phaser hiphase_sv"
+          - "--bed=`null`"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
