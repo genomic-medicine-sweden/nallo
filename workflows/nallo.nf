@@ -82,7 +82,7 @@ workflow NALLO {
     ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect()
                                                 : ''
     ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
-                                                : ''
+                                                : Channel.value([[],[]])
     ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
                                                 : ''
     ch_expected_xx_bed = params.hificnv_xx      ? Channel.fromPath(params.hificnv_xx).collect()
