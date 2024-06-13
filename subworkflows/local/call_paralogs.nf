@@ -4,7 +4,7 @@ include { TABIX_BGZIPTABIX } from '../../modules/nf-core/tabix/bgziptabix/main'
 workflow CALL_PARALOGS {
 
     take:
-    bam_bai // channel: [ val(meta), bam ]
+    bam_bai // channel: [ val(meta), bam, bai ]
     fasta   // channel: [ val(meta), fasta ]
 
     main:
