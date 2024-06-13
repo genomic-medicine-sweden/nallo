@@ -36,9 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Require somalier sites when mapping workflow is run
 - [#177](https://github.com/genomic-medicine-sweden/nallo/pull/177) - Increased samtools merge resources
 - [#183](https://github.com/genomic-medicine-sweden/nallo/pull/183) - Allows paraphase outputs to be bgzipped when calling multiple genes
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Harmonize, index and fix naming of more variant files to vcf.gz + tbi
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed samtools index from repeat calling workflow, as bai is now used in pipeline
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Remove versions.yml output from minimap2 align
+- [#185](https://github.com/genomic-medicine-sweden/nallo/pull/185) - Harmonized, indexed and fixed naming of more variant files to vcf.gz + tbi
+- [#185](https://github.com/genomic-medicine-sweden/nallo/pull/185) - Removed samtools index from repeat calling workflow, as bai is now used in pipeline
+- [#185](https://github.com/genomic-medicine-sweden/nallo/pull/185) - Removed versions.yml output from minimap2 align
+- [#185](https://github.com/genomic-medicine-sweden/nallo/pull/185) - Removed echtvar anno output
 
 ### `Fixed`
 
