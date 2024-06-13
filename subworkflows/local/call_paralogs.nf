@@ -23,7 +23,11 @@ workflow CALL_PARALOGS {
     PARAPHASE ( paraphase_in, ch_fasta, [[],[]] )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
-    TABIX_BGZIPTABIX ( PARAPHASE.out.vcf )
+    PARAPHASE.out.vcf
+        .transpose() // Does create ~160 jobs per sample by default in hg38
+        .set { bgzip_paraphase_vcfs }
+
+    TABIX_BGZIPTABIX ( bgzip_paraphase_vcfs )
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     emit:

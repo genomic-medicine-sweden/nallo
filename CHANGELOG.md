@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Mosdepth can be run without bed
 - [#176](https://github.com/genomic-medicine-sweden/nallo/pull/176) - Require somalier sites when mapping workflow is run
 - [#177](https://github.com/genomic-medicine-sweden/nallo/pull/177) - Increased samtools merge resources
+- [#183](https://github.com/genomic-medicine-sweden/nallo/pull/183) - Allows paraphase outputs to be bgzipped when calling multiple genes
 
 ### `Fixed`
 
