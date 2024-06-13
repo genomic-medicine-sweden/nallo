@@ -200,7 +200,7 @@ workflow NALLO {
 
         // Only compatible with hg38 (and a few hg19 genes)
         if(!params.skip_call_paralogs) {
-            CALL_PARALOGS ( bam, fasta )
+            CALL_PARALOGS ( bam_bai, fasta )
         }
 
         // Assembly workflow

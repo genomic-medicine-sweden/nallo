@@ -8,6 +8,7 @@ include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_SINGLESAMPLE } from '../../modules/nf
 include { BCFTOOLS_FILLTAGS                             } from '../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO   } from '../../modules/local/bcftools/filltags/main'
 include { ENSEMBLVEP_VEP                                } from '../../modules/nf-core/ensemblvep/vep/main'
+include { TABIX_TABIX as TABIX_VEP                      } from '../../modules/nf-core/tabix/tabix/main'
 
 workflow SNV_ANNOTATION {
 
@@ -61,6 +62,8 @@ workflow SNV_ANNOTATION {
         []
     )
 
+    TABIX_VEP ( ENSEMBLVEP_VEP.out.vcf )
+
     // Get versions
     ch_versions     = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
     ch_versions     = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
@@ -71,6 +74,7 @@ workflow SNV_ANNOTATION {
     ch_versions     = ch_versions.mix(ECHTVAR_ANNO.out.versions)
     ch_versions     = ch_versions.mix(BCFTOOLS_FILLTAGS_ANNO.out.versions)
     ch_versions     = ch_versions.mix(ENSEMBLVEP_VEP.out.versions)
+    ch_versions     = ch_versions.mix(TABIX_VEP.out.versions)
 
     emit:
     versions       = ch_versions
