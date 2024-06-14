@@ -129,7 +129,7 @@ workflow NALLO {
 
         FASTQC( raw_read_qc_in )
         ch_versions = ch_versions.mix(FASTQC.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
         FQCRS( raw_read_qc_in )
         ch_versions = ch_versions.mix(FQCRS.out.versions)
