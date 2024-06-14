@@ -1,9 +1,9 @@
-include { TRGT                                  } from '../../modules/local/trgt'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT   } from '../../modules/nf-core/samtools/sort/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT   } from '../../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_TRGT } from '../../modules/nf-core/bcftools/index/main'
-include { BCFTOOLS_MERGE                        } from '../../modules/nf-core/bcftools/merge/main'
+include { TRGT                                   } from '../../modules/local/trgt'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../modules/nf-core/samtools/sort/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_MERGE } from '../../modules/nf-core/bcftools/index/main'
+include { BCFTOOLS_MERGE                         } from '../../modules/nf-core/bcftools/merge/main'
 
 workflow REPEAT_ANALYSIS {
 
@@ -30,10 +30,9 @@ workflow REPEAT_ANALYSIS {
 
     // Sort and index bcf
     BCFTOOLS_SORT_TRGT(TRGT.out.vcf)
-    BCFTOOLS_INDEX_TRGT(BCFTOOLS_SORT_TRGT.out.vcf)
 
     BCFTOOLS_SORT_TRGT.out.vcf
-        .join(BCFTOOLS_INDEX_TRGT.out.csi)
+        .join( BCFTOOLS_SORT_TRGT.out.tbi )
         .toList()
         .filter { it.size() > 1 }
         .flatMap()
@@ -43,12 +42,14 @@ workflow REPEAT_ANALYSIS {
 
     BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [] )
 
+    BCFTOOLS_INDEX_MERGE ( BCFTOOLS_MERGE.out.merged_variants )
+
     ch_versions = ch_versions.mix(TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_SORT_TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX_TRGT.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_TRGT.out.versions)
-    ch_versions = ch_versions.mix(BCFTOOLS_INDEX_TRGT.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
+    ch_versions = ch_versions.mix(BCFTOOLS_INDEX_MERGE.out.versions)
 
     emit:
     versions = ch_versions // channel: [ versions.yml ]
