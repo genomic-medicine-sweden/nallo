@@ -35,6 +35,7 @@ include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
+include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { FASTP                  } from '../modules/nf-core/fastp/main'
 include { MINIMAP2_ALIGN         } from '../modules/nf-core/minimap2/align/main'
@@ -107,15 +108,30 @@ workflow NALLO {
     BAM_TO_FASTQ.out.fastq
         .set { ch_sample }
 
-    // Now this will be done per file and not per sample, not ideal
     if(!params.skip_raw_read_qc) {
 
-        // Fastq QC
-        FASTQC( ch_sample )
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
+        // Cat samples with multiple input files before QC - still not ideal
+        ch_sample
+            .groupTuple()
+            .branch { meta, reads ->
+                single: reads.size() == 1
+                    return [ meta, reads[0] ]
+                multiple: reads.size() > 1
+            }
+            .set { ch_sample_reads }
 
-        FQCRS( ch_sample )
+        CAT_FASTQ ( ch_sample_reads.multiple )
+        ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
+
+        ch_sample_reads.single
+            .concat ( CAT_FASTQ.out.reads )
+            .set { raw_read_qc_in }
+
+        FASTQC( raw_read_qc_in )
+        ch_versions = ch_versions.mix(FASTQC.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+
+        FQCRS( raw_read_qc_in )
         ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
