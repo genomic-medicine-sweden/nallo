@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Old parameter   | New parameter          |
 | --------------- | ---------------------- |
 |                 | `--somalier_sites`     |
-| `--split_fastq` | `--split_fastq` \*     |
+| `--split_fastq` | `--split_fastq`     |
 |                 | `--skip_call_paralogs` |
 | `--skip_qc`     | `--skip_raw_read_qc`   |
 
