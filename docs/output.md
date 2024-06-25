@@ -84,8 +84,9 @@ A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is used to 
 
 <details markdown="1">
 <summary>Output files from Methylation</summary>
-  
+
 - `{outputdir}/methylation/modkit/pileup/phased/{sample}/`
+
   - `*.modkit_pileup_phased_*.bed.gz`: bedMethyl file containing summary counts from reads with haplotags, e.g. 1 or 2
   - `*.modkit_pileup_phased_ungrouped.bed.gz`: bedMethyl file containing summary counts for ungrouped reads
   - `*.bed.gz.tbi`: Index of the corresponding bedMethyl file
