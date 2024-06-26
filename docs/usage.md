@@ -162,16 +162,16 @@ Options to skip various steps within the workflow
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_raw_read_qc`           | Skip raw read QC                           | `boolean` |         |          |        |
-| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` |         |          |        |
-| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` |         |          |        |
-| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` |         |          |        |
-| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` |         |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` |         |          |        |
-| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` |         |          |        |
-| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` |         |          |        |
-| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` |         |          |        |
-| `skip_call_paralogs`         | Skip call paralogs (Paraphase)             | `boolean` |         |          |        |
+| `skip_raw_read_qc`           | Skip raw read QC                           | `boolean` | `False` |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` | `False` |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | `False` |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | `False` |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | `False` |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | `False` |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | `False` |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | `False` |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | `False` |          |        |
+| `skip_call_paralogs`         | Skip call paralogs (Paraphase)             | `boolean` | `False` |          |        |
 
 ## Input/output options
 
