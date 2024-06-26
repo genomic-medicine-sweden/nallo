@@ -2,7 +2,7 @@
 
 ## Table of contents
 
-- [genomic-medicine-sweden/nallo: Output](#genomic-medicine-sweden-nallo--output)
+- [genomic-medicine-sweden/nallo: Output](#genomic-medicine-sweden-nallo-output)
   * [Table of contents](#table-of-contents)
   * [Pipeline overview](#pipeline-overview)
     + [Alignment](#alignment)
