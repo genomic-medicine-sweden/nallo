@@ -33,11 +33,11 @@ workflow ASSEMBLY {
             // combine to create all possible combinations of [ meta, meta ]
             // but keep only the id of the second meta [ meta, meta.id ]
             .combine(ch_reads.groupTuple().map{ meta, reads -> [meta.id, reads] })
-            // This creates [ meta, meta.id, reads ], where
+            // This creates [ meta, [ meta.id, reads] ], where
             // meta.id comes from the meta of the reads, and a combination between these
             // and every other sample meta in the samplesheet is created
             //
-            // From this we can extract kids, moms, and dads:
+            // From this we can extract kids (or rather the primary patient), moms, and dads:
             //
             // If any sample has the id of another sample as paternal_id, then that is a dad
             // If any sample has the id of another sample as maternal_id, then that is a mom
