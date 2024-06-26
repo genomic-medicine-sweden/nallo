@@ -58,10 +58,14 @@ workflow SHORT_VARIANT_CALLING {
 
     // Concat into one gVCF per sample & sort
     BCFTOOLS_CONCAT_DV ( bcftools_concat_dv_in )
+    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_DV.out.versions)
+
     BCFTOOLS_SORT_DV   ( BCFTOOLS_CONCAT_DV.out.vcf )
+    ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV.out.versions)
 
     // DV VCFs
     TABIX_DV_VCF(ch_snp_calls_vcf)
+    ch_versions = ch_versions.mix(TABIX_DV_VCF.out.versions)
 
     ch_snp_calls_vcf
         .groupTuple() // size not working here if there are less than specifed regions..
@@ -71,7 +75,10 @@ workflow SHORT_VARIANT_CALLING {
 
     // Concat into one VCF per sample & sort
     BCFTOOLS_CONCAT_DV_VCF ( bcftools_concat_dv_vcf_in )
+    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_DV_VCF.out.versions)
+
     BCFTOOLS_SORT_DV_VCF   ( BCFTOOLS_CONCAT_DV_VCF.out.vcf )
+    ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV_VCF.out.versions)
 
     // Put DV and extra gvCFs together -> send to glnexus
     BCFTOOLS_SORT_DV.out.vcf

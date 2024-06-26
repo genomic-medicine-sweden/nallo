@@ -18,7 +18,7 @@ Run the following command, where YOURPROFILE is the package manager you installe
 
 ```
 nextflow run genomic-medicine-sweden/nallo \
-    -revision dev -profile test,<YOURPROFILE> \
+    -profile test,<YOURPROFILE> \
     --outdir <OUTDIR>
 ```
 
@@ -59,7 +59,7 @@ You will need to create a samplesheet with information about the samples you wou
 
 It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
 `file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
-`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, set `family_id`, `paternal_id` and `maternal_id` to something of your liking which is not a `sample` name.
+`phenotype` is not used at the moment but still required, set it to `1`. If you don't have related samples, `family_id` could be set to sample name, and `paternal_id` and `maternal_id` to a value that is not another `sample` name.
 
 ```console
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
@@ -67,25 +67,22 @@ HG002,/path/to/HG002.fastq.gz,FAM,HG003,HG004,1,1
 HG005,/path/to/HG005.bam,FAM,HG003,HG004,2,1
 ```
 
-| Fields                                     | Description                                                                                                |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `sample`                                   | Custom sample name, cannot contain spaces.                                                                 |
-| `file`                                     | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam". |
-| `family_id`                                | "Family ID must be provided and cannot contain spaces. If no family ID is avail                            |
-| able, use the same ID as the sample.       |
-| `paternal_id`                              | Paternal ID must be provided and cannot contain spaces. If no paternal ID is a                             |
-| vailable, use any ID not in sample column. |
-| `maternal_id`                              | Maternal ID must be provided and cannot contain spaces. If no maternal ID is a                             |
-| vailable, use any ID not in sample column. |
-| `sex`                                      | Sex (1=male; 2=female).                                                                                    |
-| `phenotype`                                | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                        |
+| Fields        | Description                                                                                                               |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `sample`      | Custom sample name, cannot contain spaces.                                                                                |
+| `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                |
+| `family_id`   | "Family ID must be provided and cannot contain spaces. If no family ID is available you can use the same ID as the sample |
+| `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use any ID not in sample column.  |
+| `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use any ID not in sample column.  |
+| `sex`         | Sex (0=unknown; 1=male; 2=female).                                                                                        |
+| `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                       |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run genomic-medicine-sweden/nallo -r dev -profile docker \
+nextflow run genomic-medicine-sweden/nallo -profile docker \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
@@ -96,55 +93,20 @@ nextflow run genomic-medicine-sweden/nallo -r dev -profile docker \
     --skip_cnv_calling
 ```
 
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
-
-Note that the pipeline will create the following files in your working directory:
-
-```
-work                # Directory containing the Nextflow working files
-<OUTDIR>            # Finished results in specified location (defined with --outdir)
-.nextflow_log       # Log file from Nextflow
-# Other Nextflow hidden files, like history of pipeline logs.
-```
-
-<!--
-If you wish to repeatedly use the same parameters for multiple runs, rather than specifying each flag in the command, you can specify these in a params file.
-
-Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
-
-> ⚠️ Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-> The above pipeline run specified with a params file in yaml format:
-
-```bash
-nextflow run genomic-medicine-sweden/nallo -profile docker -params-file params.yaml
-```
-
-with `params.yaml` containing:
-
-```yaml
-input: './samplesheet.csv'
-outdir: './results/'
-genome: 'GRCh37'
-input: 'data'
-<...>
-```
-
-You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch). -->
-
 ## Reference files and parameters
 
 The typical command example above requires no additional files except the reference genome.
 Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
 Some workflows require additional files:
 
-If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
+- If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
 
-If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
+- If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
 
-If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
+- If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
 
 `snp_dbs.csv`
 
@@ -154,9 +116,9 @@ gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
 
-If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
+- If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
 
-If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
+- If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
 
 `extra_snfs.csv`
 
@@ -166,7 +128,7 @@ HG01123,/path/to/HG01123_sniffles.snf
 HG01124,/path/to/HG01124_sniffles.snf
 ```
 
-and for SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
+- For SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
 
 > [!NOTE]
 > These has to have been generated with the same version of reference genome.
@@ -180,13 +142,17 @@ HG01124,/path/to/HG01124.g.vcf.gz
 HG01125,/path/to/HG01125.g.vcf.gz
 ```
 
+- If running without `--skip_call_paralogs`, the reference genome needs to be hg38
+
+- If running without `--skip_mapping_wf`, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from which sex will be inferred if possible.
+
 #### Highlighted parameters:
 
 - You can choose to limit SNV calling to regions in BED file (`--bed`).
 
 - By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
 
-- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split alignment into N reads per process.
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split the input and alignment into N files/processes.
 
 All parameters are listed below:
 
@@ -196,15 +162,16 @@ Options to skip various steps within the workflow
 
 | Parameter                    | Description                                | Type      | Default | Required | Hidden |
 | ---------------------------- | ------------------------------------------ | --------- | ------- | -------- | ------ |
-| `skip_qc`                    | Skip QC                                    | `boolean` | False   |          |        |
-| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` | False   |          |        |
-| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | False   |          |        |
-| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | False   |          |        |
-| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | False   |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | False   |          |        |
-| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | False   |          |        |
-| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | False   |          |        |
-| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | False   |          |        |
+| `skip_raw_read_qc`           | Skip raw read QC                           | `boolean` | `False` |          |        |
+| `skip_short_variant_calling` | Skip short variant calling                 | `boolean` | `False` |          |        |
+| `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | `False` |          |        |
+| `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | `False` |          |        |
+| `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | `False` |          |        |
+| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | `False` |          |        |
+| `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | `False` |          |        |
+| `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | `False` |          |        |
+| `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | `False` |          |        |
+| `skip_call_paralogs`         | Skip call paralogs (Paraphase)             | `boolean` | `False` |          |        |
 
 ## Input/output options
 
@@ -281,7 +248,7 @@ Less common options for the pipeline, typically set in a config file.
 | `variant_caller` | Choose variant caller                      | `string`  | deepvariant |          |        |
 | `phaser`         | Choose phasing software                    | `string`  | whatshap    |          |        |
 | `hifiasm_mode`   | Run hifiasm in hifi-only or hifi-trio mode | `string`  | hifi-only   |          |        |
-| `split_fastq`    | Split Alignment into n reads per job       | `integer` | 0           |          |        |
+| `split_fastq`    | Split alignment into n jobs                | `integer` | 0           |          |        |
 | `parallel_snv`   | Split SNV calling into n chunks            | `integer` | 13          |          |        |
 
 ## Extra file inputs
@@ -301,28 +268,35 @@ Different processes may need extra input files
 | `hificnv_xy`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_xx`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `somalier_sites`                   | A VCF of known polymorphic sites                                                                                                                                                                                                                                          | `string`  |         |          |        |
 | `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>                                                               | `boolean` |         |          | True   |
 | `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details> | `boolean` |         |          | True   |
+
+### Updating the pipeline
+
+```bash
+nextflow pull genomic-medicine-sweden/nallo
+```
+
+When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
 
 ### Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
-However, there has been no releases of this pipeline. A workaround is to supply a commit ID, e.g. `-revision 6ff95ff`, in order to ensure that the same version of the pipeline is being executed.
-
-<!--
-First, go to the [genomic-medicine-sweden/nallo releases page](https://github.com/genomic-medicine-sweden/nallo/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
+First, go to the [genomic-medicine-sweden/nallo releases page](https://github.com/genomic-medicine-sweden/nallo/releases) and find the latest pipeline version - numeric only (eg. `0.1.0`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 0.1.0`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
--->
 
 To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-> 💡 If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+> [!TIP]
+> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
-> **NB:** These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+> [!NOTE]
+> These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
 
 ### `-profile`
 
@@ -352,6 +326,10 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
   - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
+- `wave`
+  - A generic configuration profile to enable [Wave](https://seqera.io/wave/) containers. Use together with one of the above (requires Nextflow ` 24.03.0-edge` or later).
+- `conda`
+  - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
 
 ### `-resume`
 

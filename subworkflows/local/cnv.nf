@@ -1,4 +1,5 @@
-include { HIFICNV } from '../../modules/local/pacbio/hificnv'
+include { HIFICNV                      } from '../../modules/local/pacbio/hificnv'
+include { TABIX_TABIX as TABIX_HIFICNV } from '../../modules/nf-core/tabix/tabix/'
 
 workflow CNV {
 
@@ -39,8 +40,10 @@ workflow CNV {
 
     // Run HiFiCNV
     HIFICNV(ch_hificnv_in, ch_fasta, ch_exclude_bed)
-
     ch_versions = ch_versions.mix(HIFICNV.out.versions)
+
+    TABIX_HIFICNV(HIFICNV.out.vcf)
+    ch_versions = ch_versions.mix(TABIX_HIFICNV.out.versions)
 
     emit:
     versions = ch_versions                  // channel: [ versions.yml ]

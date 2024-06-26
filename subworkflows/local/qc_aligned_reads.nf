@@ -14,11 +14,14 @@ workflow QC_ALIGNED_READS {
     // Prepare inputs
 
     CRAMINO (ch_bam_bai)
-    MOSDEPTH(ch_bam_bai, ch_bed.map{it[1]}, ch_fasta)
+    ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
-    // Gather versions
-    ch_versions = ch_versions.mix(CRAMINO.out.versions.first())
-    ch_versions = ch_versions.mix(MOSDEPTH.out.versions.first())
+    ch_bam_bai
+        .combine( ch_bed.map { it[1] }.toList() ) // toList() enables passing [] if ch_bed is empty
+        .set { mosdepth_in }
+
+    MOSDEPTH ( mosdepth_in, ch_fasta )
+    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     emit:
     versions = ch_versions // channel: [ versions.yml ]

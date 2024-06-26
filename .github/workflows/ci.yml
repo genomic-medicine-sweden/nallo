@@ -25,16 +25,16 @@ jobs:
       matrix:
         parameters:
           - ""
-          - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 250 --parallel_snv 1 --phaser hiphase_sv"
+          - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 2 --parallel_snv 1 --phaser hiphase_sv"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
     steps:
       - name: Check out pipeline code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
       - name: Install Nextflow
-        uses: nf-core/setup-nextflow@v1
+        uses: nf-core/setup-nextflow@v2
         with:
           version: "${{ matrix.NXF_VER }}"
 
@@ -42,8 +42,5 @@ jobs:
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
 
       - name: Run pipeline with test data
-        # TODO nf-core: You can customise CI pipeline run tests as required
-        # For example: adding multiple test runs with different parameters
-        # Remember that you can parallelise this by using strategy.matrix
         run: |
           nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results ${{ matrix.parameters }}

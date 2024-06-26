@@ -27,4 +27,19 @@ Changes in module 'nf-core/samtools/fastq'
  
      cat <<-END_VERSIONS > versions.yml
 
+--- modules/nf-core/samtools/fastq/environment.yml
++++ modules/nf-core/samtools/fastq/environment.yml
+@@ -1,8 +1,10 @@
+ name: samtools_fastq
++
+ channels:
+   - conda-forge
+   - bioconda
+   - defaults
++
+ dependencies:
++  - bioconda::htslib=1.20
+   - bioconda::samtools=1.20
+-  - bioconda::htslib=1.20
+
 ************************************************************

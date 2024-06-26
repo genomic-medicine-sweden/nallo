@@ -36,10 +36,11 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 def workflowSkips = [
     assembly      : "skip_assembly_wf",
-    qc            : "skip_qc",
+    qc            : "skip_raw_read_qc",
     mapping       : "skip_mapping_wf",
     snv_calling   : "skip_short_variant_calling",
     snv_annotation: "skip_snv_annotation",
+    call_paralogs : "skip_call_paralogs",
     cnv_calling   : "skip_cnv_calling",
     phasing       : "skip_phasing_wf",
     repeat_calling: "skip_repeat_wf",
@@ -50,6 +51,8 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
+    assembly       : ["mapping"],
+    call_paralogs  : ["mapping"],
     snv_calling    : ["mapping"],
     snv_annotation : ["mapping", "snv_calling"],
     cnv_calling    : ["mapping", "snv_calling"],
@@ -62,6 +65,8 @@ def workflowDependencies = [
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
+    mapping       : ["fasta", "somalier_sites"],
+    assembly      : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     assembly      : ["dipcall_par"],
     snv_annotation: ["snp_db", "vep_cache"],
     cnv_calling   : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
@@ -83,6 +88,7 @@ def parameterStatus = [
         skip_methylation_wf       : params.skip_methylation_wf,
         skip_repeat_wf            : params.skip_repeat_wf,
         skip_snv_annotation       : params.skip_snv_annotation,
+        skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
         skip_mapping_wf           : params.skip_mapping_wf,
         skip_qc                   : params.skip_qc,
@@ -91,10 +97,12 @@ def parameterStatus = [
     files: [
         dipcall_par    : params.dipcall_par,
         snp_db         : params.snp_db,
+        somalier_sites : params.somalier_sites,
         vep_cache      : params.vep_cache,
         hificnv_xy     : params.hificnv_xy,
         hificnv_xx     : params.hificnv_xx,
         hificnv_exclude: params.hificnv_exclude,
+        fasta          : params.fasta,
         trgt_repeats   : params.trgt_repeats,
     ],
     preset: [
@@ -105,9 +113,7 @@ def parameterStatus = [
 ]
 
 /*
-========================================================================================
     SUBWORKFLOW TO INITIALISE PIPELINE
-========================================================================================
 */
 
 workflow PIPELINE_INITIALISATION {
@@ -166,8 +172,21 @@ workflow PIPELINE_INITIALISATION {
     //
     Channel
         .fromSamplesheet("input")
+        .map { meta, reads ->
+            [ meta.id, meta, reads ] // add sample as groupTuple key
+        }
         .map {
             validateInputSamplesheet(it)
+        }
+        .groupTuple() // group by sample
+        .map { sample, metas, reads ->
+            // Add number of files per sample _after_ splitting to meta
+            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.split_fastq - 1), single_end:true ], reads ]
+        }
+        // Convert back to [ meta, reads ]
+        .flatMap {
+            sample, meta, reads ->
+                reads.collect { return [ meta, it ] }
         }
         .set { ch_samplesheet }
 
@@ -211,6 +230,10 @@ workflow PIPELINE_COMPLETION {
             imNotification(summary_params, hook_url)
         }
     }
+
+    workflow.onError {
+        log.error "Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting"
+    }
 }
 
 /*
@@ -231,8 +254,10 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(input) {
+
     return input
 }
+
 //
 // Get attribute from genome config file e.g. fasta
 //
@@ -295,8 +320,16 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["manifest_map"] = workflow.manifest.toMap()
 
     // Pipeline DOI
-    meta["doi_text"] = meta.manifest_map.doi ? "(doi: <a href=\'https://doi.org/${meta.manifest_map.doi}\'>${meta.manifest_map.doi}</a>)" : ""
-    meta["nodoi_text"] = meta.manifest_map.doi ? "": "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
+    if (meta.manifest_map.doi) {
+        // Using a loop to handle multiple DOIs
+        // Removing `https://doi.org/` to handle pipelines using DOIs vs DOI resolvers
+        // Removing ` ` since the manifest.doi is a string and not a proper list
+        def temp_doi_ref = ""
+        String[] manifest_doi = meta.manifest_map.doi.tokenize(",")
+        for (String doi_ref: manifest_doi) temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
+        meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
+    } else meta["doi_text"] = ""
+    meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
     meta["tool_citations"] = ""

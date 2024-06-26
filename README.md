@@ -6,7 +6,7 @@
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-[![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
+[![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
 
 ## Introduction
 
@@ -37,6 +37,7 @@
 - Tandem repeats ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 - Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 - CNV-calling (HiFi only) ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
+- Call paralogous genes ([`Paraphase`](https://github.com/PacificBiosciences/paraphase))
 
 ##### Phasing and methylation
 

@@ -23,7 +23,7 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nall
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOW FOR PIPELINE
+    NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
@@ -44,7 +44,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     )
 
     emit:
-    multiqc_report = Channel.empty()// NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -69,6 +69,7 @@ workflow {
         params.outdir,
         params.input
     )
+
     //
     // WORKFLOW: Run main workflow
     //
