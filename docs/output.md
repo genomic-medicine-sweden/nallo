@@ -1,5 +1,29 @@
 # genomic-medicine-sweden/nallo: Output
 
+## Table of contents
+
+- [genomic-medicine-sweden/nallo: Output](#genomic-medicine-sweden-nallo--output)
+  * [Table of contents](#table-of-contents)
+  * [Pipeline overview](#pipeline-overview)
+    + [Alignment](#alignment)
+    + [Assembly](#assembly)
+    + [Assembly variant calling](#assembly-variant-calling)
+    + [CNV calling](#cnv-calling)
+    + [Methylation](#methylation)
+    + [MultiQC](#multiqc)
+    + [Paraphase](#paraphase)
+    + [Phasing](#phasing)
+    + [Pipeline information](#pipeline-information)
+    + [Aligned read QC](#aligned-read-qc)
+        * [Mosdepth](#mosdepth)
+        * [Cramino](#cramino)
+        * [Somalier](#somalier)
+    + [Raw read QC](#raw-read-qc)
+        * [FastQC](#fastqc)
+    + [Repeat calling](#repeat-calling)
+    + [SNV Annotation](#snv-annotation)
+    + [SNV Calling](#snv-calling)
+
 ## Pipeline overview
 
 The directories listed below will be created in the results directory after the pipeline has finished:
