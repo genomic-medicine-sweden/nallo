@@ -24,9 +24,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_snp_calls_gvcf = Channel.empty()
     ch_combined_bcf   = Channel.empty()
     ch_versions       = Channel.empty()
-    // Does splitting BAMs and copying to node make sense to reduce IO?
 
-    // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
     DEEPVARIANT               ( ch_bam_bai_bed, ch_fasta, ch_fai, [[],[]] )
 
     // Collect VCFs
