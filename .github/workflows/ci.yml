@@ -46,8 +46,6 @@ jobs:
           nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results ${{ matrix.parameters }}
   nftest:
     name: ${{ matrix.tags }} ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
-    needs: [changes]
-    if: needs.changes.outputs.changes
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
