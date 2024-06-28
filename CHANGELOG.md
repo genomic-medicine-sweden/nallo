@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed to softer `--preset` requirements, non-supported subworkflows can now be explicitly enabled if necessary
+- [#232](https://github.com/genomic-medicine-sweden/nallo/pull/232) - Changed to softer `--preset` requirements, non-supported subworkflows can now be explicitly enabled if necessary
 
 ### `Removed`
 
