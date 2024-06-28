@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- [#231](https://github.com/genomic-medicine-sweden/nallo/pull/231) - HP-tags in input BAM files being transfered over to (re)aligned BAM
+
 ## v0.2.0 - [2024-06-26]
 
 ### `Added`
