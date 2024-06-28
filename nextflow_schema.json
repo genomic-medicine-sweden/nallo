@@ -368,6 +368,13 @@
                     "type": "integer",
                     "default": 110,
                     "description": "VEP cache version"
+                },
+                "deepvariant_model_type": {
+                    "type": "string",
+                    "default": "PACBIO",
+                    "description": "Sets the model type for DeepVariant",
+                    "hidden": true,
+                    "enum": ["WGS", "WES", "PACBIO", "ONT_R104", "HYBRID_PACBIO_ILLUMINA"]
                 }
             },
             "required": ["preset"]
