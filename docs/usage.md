@@ -96,7 +96,7 @@ nextflow run genomic-medicine-sweden/nallo -profile docker \
 ## Presets
 
 This pipeline comes with three different presets that can be set with the `--preset` parameter, "revio", "pacbio" and "ONT_R10" (defaults to "revio").
-By default, `--skip_assembly_wf and --skip_repeat_wf` is set to true for `ONT_R10` and `--skip_methylation_wf` is set to true for "pacbio", which means these workflows are not run.
+By default, `--skip_assembly_wf` and `--skip_repeat_wf` is set to true for `ONT_R10` and `--skip_methylation_wf` is set to true for "pacbio", which means these workflows are not run.
 
 ## Reference files and parameters
 
