@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed the `--extra_gvcfs` parameter
+
 ### `Fixed`
 
 ### Parameters
@@ -25,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Old parameter | New parameter              |
 | ------------- | -------------------------- |
 |               | `--deepvariant_model_type` |
+| `--extra_gvcfs` |               |
 
 ## v0.2.0 - [2024-06-26]
 

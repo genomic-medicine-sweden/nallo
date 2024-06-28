@@ -392,14 +392,6 @@
                     "format": "file-path",
                     "exists": true
                 },
-                "extra_gvcfs": {
-                    "type": "string",
-                    "description": "Extra input files for GLNexus",
-                    "pattern": "^\\S+\\.csv$",
-                    "format": "file-path",
-                    "schema": "assets/schema_gvcfs.json",
-                    "exists": true
-                },
                 "extra_snfs": {
                     "type": "string",
                     "description": "Extra input files for Sniffles",
