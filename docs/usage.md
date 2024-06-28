@@ -93,6 +93,11 @@ nextflow run genomic-medicine-sweden/nallo -profile docker \
     --skip_cnv_calling
 ```
 
+## Presets
+
+This pipeline comes with three different presets that can be set with the `--preset` parameter, "revio", "pacbio" and "ONT_R10" (defaults to "revio").
+By default, `--skip_assembly_wf` is set to true for `ONT_R10` and `--skip_methylation_wf` is set to true for "pacbio". The assembly workflow is not recommended for ONT_R10, but can explicitly be turned on by `--skip_assembly_wf false`.
+
 ## Reference files and parameters
 
 The typical command example above requires no additional files except the reference genome.
