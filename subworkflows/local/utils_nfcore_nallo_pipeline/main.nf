@@ -73,14 +73,6 @@ def fileDependencies = [
     repeat_calling: ["trgt_repeats"]
 ]
 
-//
-// E.g., pacbio can't run with the methylation workflow
-//
-def presetIncompatibilities = [
-    pacbio : ["methylation"],
-    ONT_R10: ["assembly", "cnv_calling"],
-]
-
 def parameterStatus = [
     workflow: [
         skip_short_variant_calling: params.skip_short_variant_calling,
@@ -104,11 +96,6 @@ def parameterStatus = [
         hificnv_exclude: params.hificnv_exclude,
         fasta          : params.fasta,
         trgt_repeats   : params.trgt_repeats,
-    ],
-    preset: [
-        pacbio : params.preset == "pacbio",
-        revio  : params.preset == "revio",
-        ONT_R10: params.preset == "ONT_R10",
     ]
 ]
 
@@ -165,7 +152,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, presetIncompatibilities)
+    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
 
     //
     // Create channel from input file provided through params.input
@@ -245,9 +232,9 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 
-def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, presetDependencies) {
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     genomeExistsError()
-    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, presetDependencies)
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 }
 
 //
@@ -349,12 +336,12 @@ def methodsDescriptionText(mqc_methods_yaml) {
 }
 
 //
-// Validate preset and workflow skip combinations
+// Validate  workflow skip combinations
 //
-def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, presetIncompatibilities) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
-    // For each of the "workflow", "files", "preset"
+    // For each of the "workflow", "files"
     statusMap.each { paramsType, allParams ->
         // Go through all params and their status
         statusMap[paramsType].each { param, paramStatus ->
@@ -364,9 +351,6 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
                     break
                 case "workflow":
                     checkWorkflowDependencies(param, workflowDependencies, statusMap, workflowMap, errors)
-                    break
-                case "preset":
-                    checkPresetDependencies(param, presetIncompatibilities, statusMap, workflowMap, errors)
                     break
                 default:
                     break
@@ -381,35 +365,6 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
-}
-
-//
-// Lookup all workflows that needs to be active for a certain preset
-//
-def checkPresetDependencies(String preset, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
-
-    // If preset is not active, then give no error
-    presetIsActive = statusMap["preset"][preset]
-    if(!presetIsActive) {
-        return
-    }
-
-    // Get all required workflows for a preset
-    def requiredWorkflows = combinationsMap[preset] as Set
-    // If no direct dependencies are found, return an empty list
-    if (!requiredWorkflows) {
-        return []
-    }
-    // Collect the required --skips that are not active for the current preset
-    def dependencyString = findRequiredSkips("preset", requiredWorkflows, statusMap, workflowMap)
-        .collect { [ '--', it ].join('') }
-        .join(" ")
-    // If all reqired sets are set, give no error
-    if (!dependencyString) {
-        return
-    }
-    errors << "--preset $preset is active, the pipeline has to be run with: $dependencyString"
-    return errors
 }
 
 //
@@ -478,10 +433,6 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
 
         if(paramType == "workflow") {
             if(workflowIsSkipped) {
-                requiredSkips << skip
-            }
-        } else if(paramType == "preset") {
-            if(!workflowIsSkipped) {
                 requiredSkips << skip
             }
         }
