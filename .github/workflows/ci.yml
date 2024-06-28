@@ -25,7 +25,9 @@ jobs:
       matrix:
         parameters:
           - ""
+          - "--preset ONT_R10 --input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam_ont.csv"
           - "--input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam.csv --split_fastq 2 --parallel_snv 1 --phaser hiphase_sv"
+          - "--preset ONT_R10 --input https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/samplesheet_multisample_bam_ont.csv --split_fastq 2 --parallel_snv 1 --phaser hiphase_sv"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"
