@@ -2,9 +2,10 @@ include { DEEPVARIANT                               } from '../../../modules/nf-
 include { GLNEXUS                                   } from '../../../modules/nf-core/glnexus'
 include { TABIX_TABIX as TABIX_DV                   } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_TABIX as TABIX_DV_VCF               } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_GLNEXUS              } from '../../../modules/nf-core/tabix/tabix/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV     } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_DV_VCF } from '../../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_FILLTAGS                         } from '../../../modules/local/bcftools/filltags/main'
+include { BCFTOOLS_NORM                             } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV         } from '../../../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV_VCF     } from '../../../modules/nf-core/bcftools/sort/main'
 
@@ -70,7 +71,14 @@ workflow SHORT_VARIANT_CALLING {
 
     // Multisample
     GLNEXUS( ch_glnexus_in, ch_bed )
-    TABIX_GLNEXUS(GLNEXUS.out.bcf)
+
+    // Add allele count tag to multisample bcf
+    BCFTOOLS_FILLTAGS ( GLNEXUS.out.bcf )
+    ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
+
+    // Decompose and normalize variants
+    BCFTOOLS_NORM ( BCFTOOLS_FILLTAGS.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
+    ch_versions = ch_versions.mix(BCFTOOLS_NORM.out.versions)
 
     // Get versions
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
@@ -78,10 +86,9 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(TABIX_DV.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_DV.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV.out.versions)
-    ch_versions = ch_versions.mix(TABIX_GLNEXUS.out.versions)
 
     emit:
     snp_calls_vcf = BCFTOOLS_SORT_DV_VCF.out.vcf // channel: [ val(meta), path(vcf) ]
-    combined_bcf  = GLNEXUS.out.bcf              // channel: [ val(meta), path(bcf) ]
+    combined_bcf  = BCFTOOLS_NORM.out.vcf        // channel: [ val(meta), path(bcf) ]
     versions      = ch_versions                  // channel: [ path(versions.yml) ]
 }
