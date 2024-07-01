@@ -294,20 +294,15 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
             }
 
-            if(params.preset != 'ONT_R10') {
-
+            if(!params.skip_cnv_calling) {
                 bam_bai
                     .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
                     .groupTuple()
                     .set { cnv_workflow_in }
 
-                if(!params.skip_cnv_calling) {
-                    CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
-                    ch_versions = ch_versions.mix(CNV.out.versions)
-                }
+                CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
+                ch_versions = ch_versions.mix(CNV.out.versions)
             }
-
-
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
