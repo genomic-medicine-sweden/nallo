@@ -55,6 +55,8 @@ jobs:
           - "23.04"
         tags:
           - "SHORT_VARIANT_CALLING"
+          - "samplesheet"
+          - "samplesheet_multisample_bam"
         profile:
           - "docker"
 
