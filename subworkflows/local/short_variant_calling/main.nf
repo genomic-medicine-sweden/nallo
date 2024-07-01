@@ -12,10 +12,10 @@ include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV_VCF     } from '../../../modules/nf-
 workflow SHORT_VARIANT_CALLING {
 
     take:
-    ch_bam_bai_bed // channel: [ val(meta), path(bam), path(bai), path(call_region_bed) ]
-    ch_fasta       // channel: [ val(meta), path(fasta) ]
-    ch_fai         // channel: [ val(meta), path(fai) ]
-    ch_bed         // channel: [ val(meta), path(input_bed) ]
+    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_region_bed) ]
+    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai         // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed         // channel: [optional] [ val(meta), path(input_bed) ]
 
     main:
     ch_snp_calls_vcf  = Channel.empty()
@@ -77,8 +77,21 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
 
     // Decompose and normalize variants
-    BCFTOOLS_NORM ( BCFTOOLS_FILLTAGS.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
+    BCFTOOLS_FILLTAGS.out.vcf
+        .concat( BCFTOOLS_SORT_DV_VCF.out.vcf)
+        .map { meta, vcf -> [ meta, vcf, [] ] }
+        .set { bcftools_norm_in }
+
+    BCFTOOLS_NORM ( bcftools_norm_in, ch_fasta )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM.out.versions)
+
+    // Temporary solution while this workflow still outputs two types of vcfs
+    BCFTOOLS_NORM.out.vcf
+        .branch { meta, vcf ->
+            multisample: meta.id == "multisample"
+            singlesample: meta.id != "multisample"
+        }
+        .set { vcf_out }
 
     // Get versions
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
@@ -88,7 +101,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV.out.versions)
 
     emit:
-    snp_calls_vcf = BCFTOOLS_SORT_DV_VCF.out.vcf // channel: [ val(meta), path(vcf) ]
-    combined_bcf  = BCFTOOLS_NORM.out.vcf        // channel: [ val(meta), path(bcf) ]
-    versions      = ch_versions                  // channel: [ path(versions.yml) ]
+    snp_calls_vcf = vcf_out.singlesample // channel: [ val(meta), path(vcf) ]
+    combined_bcf  = vcf_out.multisample  // channel: [ val(meta), path(bcf) ]
+    versions      = ch_versions          // channel: [ path(versions.yml) ]
 }

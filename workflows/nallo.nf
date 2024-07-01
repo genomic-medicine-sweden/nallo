@@ -265,7 +265,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         if(!params.skip_short_variant_calling) {
-            // Call SNVs with DeepVariant/DeepTrio
+            // Call SNVs with DeepVariant
             SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
