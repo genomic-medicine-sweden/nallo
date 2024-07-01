@@ -170,6 +170,7 @@ nextflow_pipeline {
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt"),
                     // Assert with snapshot HG002_Revio_A
+                    bam("$outputDir/aligned_reads/minimap2/HG002_Revio_A/HG002_Revio_A.bam").getReads(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary"),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary"),
                     file("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.dip.bed"),
@@ -250,7 +251,6 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_A
-                { assert new File("$outputDir/aligned_reads/minimap2/HG002_Revio_A/HG002_Revio_A.bam").exists() },
                 { assert new File("$outputDir/aligned_reads/minimap2/HG002_Revio_A/HG002_Revio_A.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam.bai").exists() },
