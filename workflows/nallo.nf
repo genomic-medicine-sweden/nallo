@@ -64,8 +64,6 @@ workflow NALLO {
                                                 : ''
     ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs')
                                                 : Channel.empty()
-    ch_extra_gvcfs     = params.extra_gvcfs     ? Channel.fromSamplesheet('extra_gvcfs')
-                                                : Channel.empty()
     ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.getSimpleName(), it]}.collect()
                                                 : Channel.value([[],[]])
     ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
@@ -267,7 +265,7 @@ workflow NALLO {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
@@ -295,20 +293,15 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
             }
 
-            if(params.preset != 'ONT_R10') {
-
+            if(!params.skip_cnv_calling) {
                 bam_bai
                     .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
                     .groupTuple()
                     .set { cnv_workflow_in }
 
-                if(!params.skip_cnv_calling) {
-                    CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
-                    ch_versions = ch_versions.mix(CNV.out.versions)
-                }
+                CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
+                ch_versions = ch_versions.mix(CNV.out.versions)
             }
-
-
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
