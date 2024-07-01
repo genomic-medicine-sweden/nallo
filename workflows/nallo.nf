@@ -95,7 +95,7 @@ workflow NALLO {
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { exit 1, '--split_fastq must be 0, or between 2 and 999'}
     if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
-    if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { exit 1, 'HiPhase is not allowed with ONT data' }
+    if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { exit 1, 'The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md' }
 
     // Create PED from samplesheet
     ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
