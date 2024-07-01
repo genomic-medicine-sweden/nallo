@@ -16,7 +16,11 @@
                         {
                             "id": "multisample"
                         },
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f8cbcd1ec17e4d503c48d37a339ce108"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "2": [
@@ -32,7 +36,11 @@
                         {
                             "id": "multisample"
                         },
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f8cbcd1ec17e4d503c48d37a339ce108"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -58,7 +66,11 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:50:57.492903992"
+=======
+        "timestamp": "2024-07-01T14:59:13.265469878"
+>>>>>>> 862a6f5 (update snap)
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -84,7 +96,11 @@
                         {
                             "id": "multisample"
                         },
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,2f159ef7c0fe5e65740b3c5fd5bc8d4b"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "2": [
@@ -119,7 +135,11 @@
                         {
                             "id": "multisample"
                         },
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,2f159ef7c0fe5e65740b3c5fd5bc8d4b"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -171,7 +191,11 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:51:59.30475498"
+=======
+        "timestamp": "2024-07-01T15:00:14.537381205"
+>>>>>>> 862a6f5 (update snap)
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -326,10 +350,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,56a8db967108675890068fc11b6b37cf"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,c4c7c34c47c114fa20ad447bcef3011e"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "2": [
@@ -361,10 +389,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,56a8db967108675890068fc11b6b37cf"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,c4c7c34c47c114fa20ad447bcef3011e"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -410,10 +442,14 @@
             "nextflow": "24.04.2"
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:50:29.222706874"
 =======
         "timestamp": "2024-06-29T18:40:05.937923626"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+        "timestamp": "2024-07-01T14:58:44.689873017"
+>>>>>>> 862a6f5 (update snap)
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -433,10 +469,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4902250be429170f3f19cc0dc2438814"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,ce541247f4b3f6a4f5b874f35a5aa988"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "2": [
@@ -465,10 +505,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4902250be429170f3f19cc0dc2438814"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,ce541247f4b3f6a4f5b874f35a5aa988"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -507,10 +551,14 @@
             "nextflow": "24.04.2"
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:50:00.719651374"
 =======
         "timestamp": "2024-06-29T18:39:37.34572771"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+        "timestamp": "2024-07-01T14:58:16.509620772"
+>>>>>>> 862a6f5 (update snap)
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -910,10 +958,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f2233d7be1c75e3efee007c7873ac6a7"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4686980b4c853149385c46b43e6f069b"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "2": [
@@ -945,10 +997,14 @@
                             "id": "multisample"
                         },
 <<<<<<< HEAD
+<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
 =======
                         "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f2233d7be1c75e3efee007c7873ac6a7"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4686980b4c853149385c46b43e6f069b"
+>>>>>>> 862a6f5 (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -990,9 +1046,13 @@
             "nextflow": "24.04.2"
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:51:26.864584923"
 =======
         "timestamp": "2024-06-29T18:41:04.388773124"
 >>>>>>> 3a55bd0 (reorganise processes)
+=======
+        "timestamp": "2024-07-01T14:59:42.863909944"
+>>>>>>> 862a6f5 (update snap)
     }
 }
