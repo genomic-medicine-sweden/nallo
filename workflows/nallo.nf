@@ -298,7 +298,6 @@ workflow NALLO {
                 // Short variant annotation
                 //
                 SNV_ANNOTATION(
-                    SHORT_VARIANT_CALLING.out.combined_bcf,
                     SHORT_VARIANT_CALLING.out.snp_calls_vcf,
                     snv_annotation_dbs,
                     fasta,

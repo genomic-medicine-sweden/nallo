@@ -9,7 +9,6 @@ include { TABIX_TABIX as TABIX_VEP                      } from '../../modules/nf
 workflow SNV_ANNOTATION {
 
     take:
-    ch_bcf
     ch_single_sample_vcf
     ch_databases
     ch_fasta
