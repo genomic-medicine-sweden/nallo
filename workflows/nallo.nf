@@ -29,7 +29,6 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 
 // local
 include { FQCRS                  } from '../modules/local/fqcrs'
-include { CONVERT_ONT_READ_NAMES } from '../modules/local/convert_ont_read_names'
 include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
 include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
@@ -318,19 +317,8 @@ workflow NALLO {
                 }
 
                 if(!params.skip_repeat_wf) {
-                    // Repeat analysis with TRGT
-
-                    // Hack read names
-                    if (params.preset == "ONT_R10") {
-                        CONVERT_ONT_READ_NAMES(hap_bam_bai)
-                        ch_versions = ch_versions.mix(CONVERT_ONT_READ_NAMES.out.versions)
-
-                        ch_repeat_analysis_in = CONVERT_ONT_READ_NAMES.out.bam_bai
-                    } else {
-                        ch_repeat_analysis_in = hap_bam_bai
-                    }
-
-                    REPEAT_ANALYSIS( ch_repeat_analysis_in, fasta, fai, ch_trgt_bed )
+                    // Call repeats with TRGT
+                    REPEAT_ANALYSIS( hap_bam_bai, fasta, fai, ch_trgt_bed )
                     ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
                 }
             }
