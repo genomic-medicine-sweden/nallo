@@ -28,6 +28,7 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 */
 
 // local
+include { ECHTVAR_ENCODE         } from '../modules/local/echtvar/encode/main'
 include { FQCRS                  } from '../modules/local/fqcrs'
 include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
 include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
@@ -264,7 +265,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         if(!params.skip_short_variant_calling) {
-            // Call SNVs with DeepVariant/DeepTrio
+            // Call SNVs with DeepVariant
             SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, ch_bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
@@ -282,10 +283,23 @@ workflow NALLO {
                         ch_vep_cache = Channel.value([])
                 }
 
+                //
+                // Make a echtvar file of all samples, and combine with input databases
+                //
+                ECHTVAR_ENCODE ( SHORT_VARIANT_CALLING.out.combined_bcf )
+                ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
+
+                ch_databases
+                    .concat ( ECHTVAR_ENCODE.out.db.map { it[1] } )
+                    .collect()
+                    .set { snv_annotation_dbs }
+
+                //
+                // Short variant annotation
+                //
                 SNV_ANNOTATION(
-                    SHORT_VARIANT_CALLING.out.combined_bcf,
                     SHORT_VARIANT_CALLING.out.snp_calls_vcf,
-                    ch_databases,
+                    snv_annotation_dbs,
                     fasta,
                     ch_vep_cache,
                     params.vep_cache_version
