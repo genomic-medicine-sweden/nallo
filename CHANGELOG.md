@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Added`
 
 - [#230](https://github.com/genomic-medicine-sweden/nallo/pull/230) - Added nf-test to the short variant calling workflow
+- [#234](https://github.com/genomic-medicine-sweden/nallo/pull/234) - Added a `--deepvariant_model_type` parameter to override the model type set by `--preset`
 
 ### `Changed`
 
@@ -17,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Removed`
 
 ### `Fixed`
+
+### Parameters
+
+| Old parameter | New parameter              |
+| ------------- | -------------------------- |
+|               | `--deepvariant_model_type` |
 
 ## v0.2.0 - [2024-06-26]
 
