@@ -133,20 +133,6 @@ HG01123,/path/to/HG01123_sniffles.snf
 HG01124,/path/to/HG01124_sniffles.snf
 ```
 
-- For SNVs - prepare a samplesheet with gVCF files from DeepVariant to supply with `--extra_gvcfs`:
-
-> [!NOTE]
-> These has to have been generated with the same version of reference genome.
-
-`extra_gvcfs.csv`
-
-```
-sample,file
-HG01123,/path/to/HG01123.g.vcf.gz
-HG01124,/path/to/HG01124.g.vcf.gz
-HG01125,/path/to/HG01125.g.vcf.gz
-```
-
 - If running without `--skip_call_paralogs`, the reference genome needs to be hg38
 
 - If running without `--skip_mapping_wf`, a VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) needs to be supplied with `--somalier_sites`, from which sex will be inferred if possible.
@@ -263,7 +249,6 @@ Different processes may need extra input files
 | Parameter                          | Description                                                                                                                                                                                                                                                               | Type      | Default | Required | Hidden |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
 | `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
-| `extra_gvcfs`                      | Extra input files for GLNexus                                                                                                                                                                                                                                             | `string`  |         |          |        |
 | `extra_snfs`                       | Extra input files for Sniffles                                                                                                                                                                                                                                            | `string`  |         |          |        |
 | `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                                                                                                                                       | `string`  |         |          |        |
 | `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                                                                                                                                      | `string`  |         |          |        |

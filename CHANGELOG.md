@@ -19,15 +19,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#238](https://github.com/genomic-medicine-sweden/nallo/pull/238) - Removed the `--extra_gvcfs` parameter
+
 ### `Fixed`
 
 - [#231](https://github.com/genomic-medicine-sweden/nallo/pull/231) - Fixed certain tags in input BAM files being transfered over to (re)aligned BAM
 
 ### Parameters
 
-| Old parameter | New parameter              |
-| ------------- | -------------------------- |
-|               | `--deepvariant_model_type` |
+| Old parameter   | New parameter              |
+| --------------- | -------------------------- |
+|                 | `--deepvariant_model_type` |
+| `--extra_gvcfs` |                            |
 
 ## v0.2.0 - [2024-06-26]
 
