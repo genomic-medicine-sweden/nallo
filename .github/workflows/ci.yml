@@ -15,6 +15,9 @@ concurrency:
   group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
   cancel-in-progress: true
 
+permissions:
+  checks: write
+
 jobs:
   test:
     name: Run pipeline with test data
@@ -55,6 +58,8 @@ jobs:
           - "23.04"
         tags:
           - "SHORT_VARIANT_CALLING"
+          - "samplesheet"
+          - "samplesheet_multisample_bam"
         profile:
           - "docker"
 
