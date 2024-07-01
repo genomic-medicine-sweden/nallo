@@ -95,6 +95,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:50:57.492903992"
 =======
         "timestamp": "2024-07-01T14:59:13.265469878"
@@ -105,6 +106,9 @@
 =======
         "timestamp": "2024-07-01T17:02:08.226058239"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:18:41.804890298"
+>>>>>>> db448f5 (update snap)
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -236,6 +240,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:51:59.30475498"
 =======
         "timestamp": "2024-07-01T15:00:14.537381205"
@@ -246,6 +251,9 @@
 =======
         "timestamp": "2024-07-01T17:03:10.644971581"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:19:44.483824054"
+>>>>>>> db448f5 (update snap)
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -390,6 +398,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -558,6 +567,9 @@
 =======
         "timestamp": "2024-07-01T16:56:30.766596049"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:21:01.236676383"
+>>>>>>> db448f5 (update snap)
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -678,6 +690,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:50:00.719651374"
 =======
         "timestamp": "2024-06-29T18:39:37.34572771"
@@ -691,6 +704,84 @@
 =======
         "timestamp": "2024-07-01T16:56:02.212161978"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:17:44.641677076"
+    },
+    "1 sample - 1 bed, fasta, fai, []": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "multisample"
+                        },
+                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
+                    "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
+                ],
+                "combined_bcf": [
+                    [
+                        {
+                            "id": "multisample"
+                        },
+                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
+                    ]
+                ],
+                "snp_calls_vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
+                    "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-02T07:18:13.482860088"
+>>>>>>> db448f5 (update snap)
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -794,6 +885,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:52:28.082605906"
 =======
         "timestamp": "2024-06-29T18:42:05.185171472"
@@ -804,6 +896,9 @@
 =======
         "timestamp": "2024-07-01T17:03:39.36522112"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:20:13.503061791"
+>>>>>>> db448f5 (update snap)
     },
     "1 sample - 1 bed, fasta, fai, bed - stub": {
         "content": [
@@ -907,6 +1002,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:52:42.349313096"
 =======
         "timestamp": "2024-06-29T18:42:19.236068467"
@@ -917,6 +1013,9 @@
 =======
         "timestamp": "2024-07-01T17:03:53.726549563"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:20:27.902280886"
+>>>>>>> db448f5 (update snap)
     },
     "1 sample - no bed, fasta, fai, [] - stub": {
         "content": [
@@ -1017,6 +1116,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1175,6 +1275,9 @@
 =======
         "timestamp": "2024-07-01T17:04:08.877580323"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:19:58.952701926"
+>>>>>>> db448f5 (update snap)
     },
     "1 sample - 2 bed, fasta, fai, bed": {
         "content": [
@@ -1301,6 +1404,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-07-03T11:51:26.864584923"
 =======
         "timestamp": "2024-06-29T18:41:04.388773124"
@@ -1314,5 +1418,89 @@
 =======
         "timestamp": "2024-07-01T17:02:37.487949552"
 >>>>>>> 04b67af (fix more stuff)
+=======
+        "timestamp": "2024-07-02T07:19:11.756736791"
+    },
+    "1 sample - 2 bed, fasta, fai, bed - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "multisample"
+                        },
+                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
+                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
+                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
+                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
+                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
+                ],
+                "combined_bcf": [
+                    [
+                        {
+                            "id": "multisample"
+                        },
+                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "snp_calls_vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
+                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
+                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
+                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
+                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
+                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
+                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
+                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-02T07:20:43.118845928"
+>>>>>>> db448f5 (update snap)
     }
 }
