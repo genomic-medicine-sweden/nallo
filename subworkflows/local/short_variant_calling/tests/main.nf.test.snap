@@ -16,30 +16,18 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f8cbcd1ec17e4d503c48d37a339ce108"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-=======
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
@@ -49,15 +37,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f8cbcd1ec17e4d503c48d37a339ce108"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -73,15 +53,11 @@
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-=======
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
@@ -92,23 +68,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:50:57.492903992"
-=======
-        "timestamp": "2024-07-01T14:59:13.265469878"
->>>>>>> 862a6f5 (update snap)
-=======
-        "timestamp": "2024-07-01T15:46:10.811358055"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:02:08.226058239"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:18:41.804890298"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:41:20.027643753"
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -134,15 +94,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,2f159ef7c0fe5e65740b3c5fd5bc8d4b"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
@@ -177,15 +129,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,2f159ef7c0fe5e65740b3c5fd5bc8d4b"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -237,23 +181,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:51:59.30475498"
-=======
-        "timestamp": "2024-07-01T15:00:14.537381205"
->>>>>>> 862a6f5 (update snap)
-=======
-        "timestamp": "2024-07-01T15:47:12.606904969"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:03:10.644971581"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:19:44.483824054"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:42:22.183527397"
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -279,30 +207,14 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
@@ -330,15 +242,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -360,16 +264,8 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
@@ -398,178 +294,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:53:15.100600881"
-=======
-        "timestamp": "2024-06-29T18:42:51.509732161"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T15:48:26.986104639"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:04:28.067852548"
->>>>>>> 04b67af (fix more stuff)
-    },
-    "1 sample - 1 bed, fasta, fai, []": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
->>>>>>> 04b67af (fix more stuff)
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "multisample"
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,56a8db967108675890068fc11b6b37cf"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,c4c7c34c47c114fa20ad447bcef3011e"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
-                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
-                    "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
->>>>>>> 3a55bd0 (reorganise processes)
-                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
-                ],
-                "combined_bcf": [
-                    [
-                        {
-                            "id": "multisample"
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,56a8db967108675890068fc11b6b37cf"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,c4c7c34c47c114fa20ad447bcef3011e"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
-                    ]
-                ],
-                "snp_calls_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
->>>>>>> 04b67af (fix more stuff)
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
-                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
-                    "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
->>>>>>> 3a55bd0 (reorganise processes)
-                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:50:29.222706874"
-=======
-        "timestamp": "2024-06-29T18:40:05.937923626"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T14:58:44.689873017"
->>>>>>> 862a6f5 (update snap)
-=======
-        "timestamp": "2024-07-01T15:45:42.645834337"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T16:56:30.766596049"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:21:01.236676383"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:43:38.957482791"
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -588,41 +313,18 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4902250be429170f3f19cc0dc2438814"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,ce541247f4b3f6a4f5b874f35a5aa988"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 3a55bd0 (reorganise processes)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
@@ -632,19 +334,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4902250be429170f3f19cc0dc2438814"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,ce541247f4b3f6a4f5b874f35a5aa988"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -659,23 +349,12 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 3a55bd0 (reorganise processes)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
@@ -686,26 +365,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:50:00.719651374"
-=======
-        "timestamp": "2024-06-29T18:39:37.34572771"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T14:58:16.509620772"
->>>>>>> 862a6f5 (update snap)
-=======
-        "timestamp": "2024-07-01T15:45:14.276640682"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T16:56:02.212161978"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:17:44.641677076"
+        "timestamp": "2024-07-03T12:40:22.832958947"
     },
     "1 sample - 1 bed, fasta, fai, []": {
         "content": [
@@ -736,9 +396,7 @@
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -768,9 +426,7 @@
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -780,8 +436,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-02T07:18:13.482860088"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:40:51.53847355"
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -800,28 +455,13 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -836,15 +476,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -859,14 +491,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -882,23 +507,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:52:28.082605906"
-=======
-        "timestamp": "2024-06-29T18:42:05.185171472"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T15:47:40.991870559"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:03:39.36522112"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:20:13.503061791"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:42:51.473839447"
     },
     "1 sample - 1 bed, fasta, fai, bed - stub": {
         "content": [
@@ -917,28 +526,13 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -953,15 +547,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -976,14 +562,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -999,23 +578,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:52:42.349313096"
-=======
-        "timestamp": "2024-06-29T18:42:19.236068467"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T15:47:55.19889892"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:03:53.726549563"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:20:27.902280886"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:43:05.931862541"
     },
     "1 sample - no bed, fasta, fai, [] - stub": {
         "content": [
@@ -1034,28 +597,13 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -1070,15 +618,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -1093,14 +633,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
@@ -1116,168 +649,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:52:13.615582399"
-=======
-        "timestamp": "2024-06-29T18:41:51.395685603"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T15:47:26.771443926"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:03:24.936676287"
->>>>>>> 04b67af (fix more stuff)
-    },
-    "1 sample - 2 bed, fasta, fai, bed - stub": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 04b67af (fix more stuff)
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "multisample"
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
-                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
-                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
-                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
-                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
-                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
->>>>>>> 3a55bd0 (reorganise processes)
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
-                ],
-                "combined_bcf": [
-                    [
-                        {
-                            "id": "multisample"
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> d83de8d (update snap)
-                    ]
-                ],
-                "snp_calls_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "concat_dv_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
->>>>>>> 04b67af (fix more stuff)
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
-                    "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
-                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
-                    "versions.yml:md5,7cb036286d153d15eea690e9a10a5ce4",
-                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
-                    "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
-                    "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
->>>>>>> 3a55bd0 (reorganise processes)
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
-                    "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:52:57.424886778"
-=======
-        "timestamp": "2024-06-29T18:42:33.812003721"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T15:48:09.962183831"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:04:08.877580323"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:19:58.952701926"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:42:37.03998813"
     },
     "1 sample - 2 bed, fasta, fai, bed": {
         "content": [
@@ -1296,32 +668,13 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f2233d7be1c75e3efee007c7873ac6a7"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4686980b4c853149385c46b43e6f069b"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
@@ -1329,10 +682,6 @@
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 3a55bd0 (reorganise processes)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
@@ -1343,19 +692,7 @@
                         {
                             "id": "multisample"
                         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,f2233d7be1c75e3efee007c7873ac6a7"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                        "multisample.bcf_filltags.vcf.gz_norm.vcf.gz:md5,4686980b4c853149385c46b43e6f069b"
->>>>>>> 862a6f5 (update snap)
-=======
-                        "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
->>>>>>> d83de8d (update snap)
                     ]
                 ],
                 "snp_calls_vcf": [
@@ -1370,14 +707,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
-=======
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-                    "versions.yml:md5,24d51016afc8125a2ef4f5ba42a07bab",
->>>>>>> 04b67af (fix more stuff)
                     "versions.yml:md5,38a1582fc609ee8377f3886a5ebca2d5",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
                     "versions.yml:md5,38fcec4389d89d9ebbdaa63f369600f6",
@@ -1385,10 +715,6 @@
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bde7cbe90248255755f0b32582174a9e",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-<<<<<<< HEAD
-=======
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
->>>>>>> 3a55bd0 (reorganise processes)
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,c69d0d4be6b316a859ac77cf0f38e0b0",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
@@ -1400,26 +726,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "timestamp": "2024-07-03T11:51:26.864584923"
-=======
-        "timestamp": "2024-06-29T18:41:04.388773124"
->>>>>>> 3a55bd0 (reorganise processes)
-=======
-        "timestamp": "2024-07-01T14:59:42.863909944"
->>>>>>> 862a6f5 (update snap)
-=======
-        "timestamp": "2024-07-01T15:46:40.15239515"
->>>>>>> d83de8d (update snap)
-=======
-        "timestamp": "2024-07-01T17:02:37.487949552"
->>>>>>> 04b67af (fix more stuff)
-=======
-        "timestamp": "2024-07-02T07:19:11.756736791"
+        "timestamp": "2024-07-03T12:41:49.414532083"
     },
     "1 sample - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -1454,8 +761,6 @@
                     "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -1489,8 +794,6 @@
                     "versions.yml:md5,9745bff5dc75d55770369e32bc8f3ceb",
                     "versions.yml:md5,9fc1f49f5f53c7632a62df4cc241fe87",
                     "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,bf43ab2e9ad507743150a308745a1eff",
-                    "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,da8068d97833cacf511ffe498131adaa",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -1500,7 +803,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-02T07:20:43.118845928"
->>>>>>> db448f5 (update snap)
+        "timestamp": "2024-07-03T12:43:20.959188794"
     }
 }
