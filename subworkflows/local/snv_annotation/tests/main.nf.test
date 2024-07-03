@@ -1,0 +1,102 @@
+nextflow_workflow {
+
+    name "Test Workflow SNV_ANNOTATION"
+    script "../"
+    workflow "SNV_ANNOTATION"
+    config "./nextflow.config"
+
+    test("Should run without failures") {
+
+        setup {
+            run("GUNZIP") {
+                script "../../../../modules/nf-core/gunzip/main.nf"
+                process {
+                    """
+                    input[0] = [
+                        [ id:'hg38' ],
+                        file(params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz', checkIfExists: true)
+                    ]
+                    """
+                }
+            }
+            run("SAMTOOLS_FAIDX") {
+                script "../../../../modules/nf-core/samtools/faidx/main.nf"
+                process {
+                    """
+                    input[0] = GUNZIP.out.gunzip
+                    input[1] = [[],[]]
+                    """
+                }
+            }
+            run("MINIMAP2_ALIGN") {
+                script "../../../../modules/nf-core/minimap2/align/main.nf"
+                process {
+                    """
+                    input[0] = [
+                        [ id:'test' ], // meta map
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    ]
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = true
+                    input[3] = 'csi'
+                    input[4] = false
+                    input[5] = false
+                    """
+                }
+            }
+            run("SHORT_VARIANT_CALLING") {
+                script "../../short_variant_calling/main.nf"
+                process {
+                    """
+                    input[0] = MINIMAP2_ALIGN.out.bam
+                                .join(MINIMAP2_ALIGN.out.index)
+                                .join(Channel.of([
+                                    [ id: 'test' ],
+                                    file(params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed', checkifexists: true)
+                                ]))
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = SAMTOOLS_FAIDX.out.fai
+                    input[3] = [
+                        [],[]
+                    ]
+                """
+                }
+            }
+            run("UNTAR") {
+                script "../../../../modules/nf-core/untar/main.nf"
+                process {
+                    """
+                    input[0] = [
+                        [ id: 'vep_cache' ],
+                        file(params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                    ]
+                    """
+                }
+            }
+
+        }
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                ]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = '110'
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
+        }
+
+    }
+
+}
