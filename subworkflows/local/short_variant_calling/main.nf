@@ -23,7 +23,8 @@ workflow SHORT_VARIANT_CALLING {
     ch_combined_bcf   = Channel.empty()
     ch_versions       = Channel.empty()
 
-    DEEPVARIANT               ( ch_bam_bai_bed, ch_fasta, ch_fai, [[],[]] )
+    DEEPVARIANT ( ch_bam_bai_bed, ch_fasta, ch_fai, [[],[]] )
+    ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
 
     // Collect VCFs
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPVARIANT.out.vcf)
@@ -33,6 +34,7 @@ workflow SHORT_VARIANT_CALLING {
 
     // DV gVCFs
     TABIX_DV(ch_snp_calls_gvcf)
+    ch_versions = ch_versions.mix(TABIX_DV.out.versions)
 
     ch_snp_calls_gvcf
         .groupTuple() // size not working here if there are less than specifed regions..
@@ -71,6 +73,7 @@ workflow SHORT_VARIANT_CALLING {
 
     // Multisample
     GLNEXUS( ch_glnexus_in, ch_bed )
+    ch_versions = ch_versions.mix(GLNEXUS.out.versions)
 
     // Add allele count tag to multisample bcf
     BCFTOOLS_FILLTAGS ( GLNEXUS.out.bcf )
@@ -92,13 +95,6 @@ workflow SHORT_VARIANT_CALLING {
             singlesample: meta.id != "multisample"
         }
         .set { vcf_out }
-
-    // Get versions
-    ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
-    ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-    ch_versions = ch_versions.mix(TABIX_DV.out.versions)
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_DV.out.versions)
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT_DV.out.versions)
 
     emit:
     snp_calls_vcf = vcf_out.singlesample // channel: [ val(meta), path(vcf) ]
