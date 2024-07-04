@@ -36,9 +36,14 @@
                     "description": "Skip methylation workflow",
                     "fa_icon": "fas fa-fast-forward"
                 },
-                "skip_repeat_wf": {
+                "skip_repeat_calling": {
                     "type": "boolean",
-                    "description": "Skip repeat analysis workflow",
+                    "description": "Skip repeat calling workflow",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_repeat_annotation": {
+                    "type": "boolean",
+                    "description": "Skip repeat annotation workflow",
                     "fa_icon": "fas fa-fast-forward"
                 },
                 "skip_phasing_wf": {
@@ -420,6 +425,12 @@
                     "mimetype": "text/csv",
                     "schema": "/assets/schema_snpdb.json",
                     "description": "Extra echtvar-databases to annotate SNVs with",
+                    "exists": true
+                },
+                "variant_catalog": {
+                    "type": "string",
+                    "description": "Variant catalog json-file for Stranger",
+                    "format": "file-path",
                     "exists": true
                 },
                 "vep_cache": {

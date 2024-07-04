@@ -35,42 +35,44 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 // Define subworkflows and their associated "--skip"
 //
 def workflowSkips = [
-    assembly      : "skip_assembly_wf",
-    qc            : "skip_raw_read_qc",
-    mapping       : "skip_mapping_wf",
-    snv_calling   : "skip_short_variant_calling",
-    snv_annotation: "skip_snv_annotation",
-    call_paralogs : "skip_call_paralogs",
-    cnv_calling   : "skip_cnv_calling",
-    phasing       : "skip_phasing_wf",
-    repeat_calling: "skip_repeat_wf",
-    methylation   : "skip_methylation_wf",
+    assembly         : "skip_assembly_wf",
+    qc               : "skip_raw_read_qc",
+    mapping          : "skip_mapping_wf",
+    snv_calling      : "skip_short_variant_calling",
+    snv_annotation   : "skip_snv_annotation",
+    call_paralogs    : "skip_call_paralogs",
+    cnv_calling      : "skip_cnv_calling",
+    phasing          : "skip_phasing_wf",
+    repeat_calling   : "skip_repeat_calling",
+    repeat_annotation: "skip_repeat_annotation",
+    methylation      : "skip_methylation_wf",
 ]
 
 //
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
-    assembly       : ["mapping"],
-    call_paralogs  : ["mapping"],
-    snv_calling    : ["mapping"],
-    snv_annotation : ["mapping", "snv_calling"],
-    cnv_calling    : ["mapping", "snv_calling"],
-    phasing        : ["mapping", "snv_calling"],
-    repeat_calling : ["mapping", "snv_calling", "phasing"],
-    methylation    : ["mapping", "snv_calling", "phasing"],
+    assembly         : ["mapping"],
+    call_paralogs    : ["mapping"],
+    snv_calling      : ["mapping"],
+    snv_annotation   : ["mapping", "snv_calling"],
+    cnv_calling      : ["mapping", "snv_calling"],
+    phasing          : ["mapping", "snv_calling"],
+    repeat_calling   : ["mapping", "snv_calling", "phasing"],
+    repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+    methylation      : ["mapping", "snv_calling", "phasing"],
 ]
 
 //
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
-    mapping       : ["fasta", "somalier_sites"],
-    assembly      : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
-    assembly      : ["dipcall_par"],
-    snv_annotation: ["snp_db", "vep_cache"],
-    cnv_calling   : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
-    repeat_calling: ["trgt_repeats"]
+    mapping          : ["fasta", "somalier_sites"],
+    assembly         : ["fasta", "dipcall_par"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    snv_annotation   : ["snp_db", "vep_cache"],
+    cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
+    repeat_calling   : ["trgt_repeats"],
+    repeat_annotation: ["variant_catalog"],
 ]
 
 def parameterStatus = [
@@ -78,7 +80,8 @@ def parameterStatus = [
         skip_short_variant_calling: params.skip_short_variant_calling,
         skip_phasing_wf           : params.skip_phasing_wf,
         skip_methylation_wf       : params.skip_methylation_wf,
-        skip_repeat_wf            : params.skip_repeat_wf,
+        skip_repeat_calling       : params.skip_repeat_calling,
+        skip_repeat_annotation    : params.skip_repeat_annotation,
         skip_snv_annotation       : params.skip_snv_annotation,
         skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
@@ -96,6 +99,7 @@ def parameterStatus = [
         hificnv_exclude: params.hificnv_exclude,
         fasta          : params.fasta,
         trgt_repeats   : params.trgt_repeats,
+        variant_catalog: params.variant_catalog,
     ]
 ]
 
