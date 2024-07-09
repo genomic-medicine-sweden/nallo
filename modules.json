@@ -67,6 +67,11 @@
                         "git_sha": "199ba086a259e1933d6e0ab7596e4a977bbd483a",
                         "installed_by": ["modules"]
                     },
+                    "ensemblvep/filtervep": {
+                        "branch": "master",
+                        "git_sha": "c60c14b285b89bdd0607e371417dadb80385ad6e",
+                        "installed_by": ["modules"]
+                    },
                     "ensemblvep/vep": {
                         "branch": "master",
                         "git_sha": "e1938f8ecb13b9b82ff488d4b35269c84aa965e8",
@@ -83,6 +88,26 @@
                         "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
+                    },
+                    "genmod/annotate": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/compound": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/models": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/score": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
                     },
                     "gfastats": {
                         "branch": "master",
@@ -187,6 +212,11 @@
                     "stranger": {
                         "branch": "master",
                         "git_sha": "4806239588f35d27a95b187b4000d80e15152022",
+                        "installed_by": ["modules"]
+                    },
+                    "tabix/bgzip": {
+                        "branch": "master",
+                        "git_sha": "09d3c8c29b31a2dfd610305b10550f0e1dbcd4a9",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {
