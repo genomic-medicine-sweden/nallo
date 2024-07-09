@@ -35,8 +35,17 @@
             "HG002_Revio.HG002_Revio.vcf.gz.tbi:md5,fea091460d39f1cf3ef6e4e4822193c6",
             "HG002_Revio_modkit_pileup.bed.gz:md5,85fd0a5875800893e97e1ba5a2834b8f",
             "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,9ce7dcca51bc936cce03e5945372f0d9",
+<<<<<<< HEAD
             "fcc3f220bb09d3264f97e7f620779be0",
             "bb6e2fb0828114f50f9f0f7c397ec5e4",
+=======
+            {
+                "fileType": "BAM"
+            },
+            {
+                "fileType": "BAM"
+            },
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
             "HG002_Revio_cramino_aligned_phased.arrow:md5,f6a852216331b5643a63712a2e791ef0",
             "HG002_Revio_cramino_aligned.arrow:md5,f6a852216331b5643a63712a2e791ef0",
             "HG002_Revio.regions.bed.gz:md5,92eb0c696588a1bad2c44c572fd4f230",
@@ -44,7 +53,13 @@
             "HG002_PacBio_Revio.fastq.gz.tsv.zst:md5,79e6810a2744c48572a16404c1bf94c4",
             "HG002_Revio_sorted.vcf.gz:md5,c09b950e5dbb84edce01cf439913cf55",
             "HG002_Revio_sorted.vcf.gz.tbi:md5,545a5c9f8fb539c2e1d73ce3018a3783",
+<<<<<<< HEAD
             "6a1fdfa3aefe53de3b54b97b56289cbf"
+=======
+            {
+                "fileType": "BAM"
+            }
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
         ],
         "meta": {
             "nf-test": "0.8.4",
@@ -70,18 +85,28 @@
             "multiqc_fastqc.txt:md5,8c71be7a806652f2da6899683b5e5cbc",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             "multiqc_general_stats.txt:md5,1741f3bde1247f75d7b2a987ec2d586f",
 =======
             "multiqc_general_stats.txt:md5,a7897d06a8fb2c20b329bc7dc2e15af3",
             "bb6e2fb0828114f50f9f0f7c397ec5e4",
 >>>>>>> 594c80d (change ont preset and snapshot bam reads md5)
 =======
+=======
+>>>>>>> 0309ea3 (change ont preset and snapshot bam reads md5)
             "multiqc_general_stats.txt:md5,a7897d06a8fb2c20b329bc7dc2e15af3",
             "bb6e2fb0828114f50f9f0f7c397ec5e4",
 =======
             "multiqc_general_stats.txt:md5,1741f3bde1247f75d7b2a987ec2d586f",
 >>>>>>> d8faba6 (Run mosdepth in fast mode (#250))
+<<<<<<< HEAD
 >>>>>>> 0c35dc4 (Run mosdepth in fast mode (#250))
+=======
+=======
+            "multiqc_general_stats.txt:md5,a7897d06a8fb2c20b329bc7dc2e15af3",
+            "bb6e2fb0828114f50f9f0f7c397ec5e4",
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
+>>>>>>> 0309ea3 (change ont preset and snapshot bam reads md5)
             "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,60fc37725ef4a6d0fe6a4be826ad8314",
             "HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary:md5,907e237bd58e4903a326ef6d854401ac",
             "8008c1a98a1f409910519d1d86337ed0",
@@ -107,8 +132,17 @@
             "HG002_Revio_A.HG002_Revio_A.vcf.gz.tbi:md5,bbdc85240ba9d68d9b25273ff9f04bfb",
             "HG002_Revio_A_modkit_pileup.bed.gz:md5,85fd0a5875800893e97e1ba5a2834b8f",
             "HG002_Revio_A_modkit_pileup.bed.gz.tbi:md5,9ce7dcca51bc936cce03e5945372f0d9",
+<<<<<<< HEAD
             "fcc3f220bb09d3264f97e7f620779be0",
             "bb6e2fb0828114f50f9f0f7c397ec5e4",
+=======
+            {
+                "fileType": "BAM"
+            },
+            {
+                "fileType": "BAM"
+            },
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
             "HG002_Revio_A_cramino_aligned_phased.arrow:md5,f6a852216331b5643a63712a2e791ef0",
             "HG002_Revio_A_cramino_aligned.arrow:md5,f6a852216331b5643a63712a2e791ef0",
             "HG002_Revio_A.regions.bed.gz:md5,92eb0c696588a1bad2c44c572fd4f230",
@@ -116,7 +150,13 @@
             "HG002_PacBio_Revio.bam_other.fastq.gz.tsv.zst:md5,79e6810a2744c48572a16404c1bf94c4",
             "HG002_Revio_A_sorted.vcf.gz:md5,b1bfe90b94a351415108d615903e57c3",
             "HG002_Revio_A_sorted.vcf.gz.tbi:md5,f292edbfc8feabd09e42643793fdb71d",
+<<<<<<< HEAD
             "6a1fdfa3aefe53de3b54b97b56289cbf",
+=======
+            {
+                "fileType": "BAM"
+            },
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
             "c6d416a15d472b2ab2e96db5c647cd16",
             "HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary:md5,64899dc16a53249ac2e18e37b281ab63",
             "HG002_Revio_B.asm.bp.hap2.p_ctg.assembly_summary:md5,e6450c164e64d83170c7969435ac307e",
@@ -143,8 +183,17 @@
             "HG002_Revio_B.HG002_Revio_B.vcf.gz.tbi:md5,a3d378be20ac564aa730b4cfd9e8b198",
             "HG002_Revio_B_modkit_pileup.bed.gz:md5,37c59cd052a7377064b3eca1e2986cf0",
             "HG002_Revio_B_modkit_pileup.bed.gz.tbi:md5,8ccca2657121cc3fc8f1f6caaece2dbe",
+<<<<<<< HEAD
             "a8a1403ba192f971638c870a2be35700",
             "c6d416a15d472b2ab2e96db5c647cd16",
+=======
+            {
+                "fileType": "BAM"
+            },
+            {
+                "fileType": "BAM"
+            },
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
             "HG002_Revio_B_cramino_aligned_phased.arrow:md5,b3bc70ac4764a3c2bef94fc82051c5de",
             "HG002_Revio_B_cramino_aligned.arrow:md5,b3bc70ac4764a3c2bef94fc82051c5de",
             "HG002_Revio_B.regions.bed.gz:md5,895530d4602f2eb0fe9788fbd1d71f0e",
@@ -152,7 +201,13 @@
             "HG002_Revio_B.merged.fastq.gz.tsv.zst:md5,f403475e97e4c0e51753d38580265ba7",
             "HG002_Revio_B_sorted.vcf.gz:md5,76e67ec4aa52c3c036249805f71a2981",
             "HG002_Revio_B_sorted.vcf.gz.tbi:md5,182c10e426efb5bde34663a87dc9b41b",
+<<<<<<< HEAD
             "2373a6e78595b24d584be49f5abd4bb7"
+=======
+            {
+                "fileType": "BAM"
+            }
+>>>>>>> 42af32d (change ont preset and snapshot bam reads md5)
         ],
         "meta": {
             "nf-test": "0.8.4",
