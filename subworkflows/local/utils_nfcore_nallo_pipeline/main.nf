@@ -35,42 +35,44 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 // Define subworkflows and their associated "--skip"
 //
 def workflowSkips = [
-    assembly      : "skip_assembly_wf",
-    qc            : "skip_raw_read_qc",
-    mapping       : "skip_mapping_wf",
-    snv_calling   : "skip_short_variant_calling",
-    snv_annotation: "skip_snv_annotation",
-    call_paralogs : "skip_call_paralogs",
-    cnv_calling   : "skip_cnv_calling",
-    phasing       : "skip_phasing_wf",
-    repeat_calling: "skip_repeat_wf",
-    methylation   : "skip_methylation_wf",
+    assembly         : "skip_assembly_wf",
+    qc               : "skip_raw_read_qc",
+    mapping          : "skip_mapping_wf",
+    snv_calling      : "skip_short_variant_calling",
+    snv_annotation   : "skip_snv_annotation",
+    call_paralogs    : "skip_call_paralogs",
+    cnv_calling      : "skip_cnv_calling",
+    phasing          : "skip_phasing_wf",
+    repeat_calling   : "skip_repeat_calling",
+    repeat_annotation: "skip_repeat_annotation",
+    methylation      : "skip_methylation_wf",
 ]
 
 //
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
-    assembly       : ["mapping"],
-    call_paralogs  : ["mapping"],
-    snv_calling    : ["mapping"],
-    snv_annotation : ["mapping", "snv_calling"],
-    cnv_calling    : ["mapping", "snv_calling"],
-    phasing        : ["mapping", "snv_calling"],
-    repeat_calling : ["mapping", "snv_calling", "phasing"],
-    methylation    : ["mapping", "snv_calling", "phasing"],
+    assembly         : ["mapping"],
+    call_paralogs    : ["mapping"],
+    snv_calling      : ["mapping"],
+    snv_annotation   : ["mapping", "snv_calling"],
+    cnv_calling      : ["mapping", "snv_calling"],
+    phasing          : ["mapping", "snv_calling"],
+    repeat_calling   : ["mapping", "snv_calling", "phasing"],
+    repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+    methylation      : ["mapping", "snv_calling", "phasing"],
 ]
 
 //
 // E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
 //
 def fileDependencies = [
-    mapping       : ["fasta", "somalier_sites"],
-    assembly      : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
-    assembly      : ["dipcall_par"],
-    snv_annotation: ["snp_db", "vep_cache"],
-    cnv_calling   : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
-    repeat_calling: ["trgt_repeats"]
+    mapping          : ["fasta", "somalier_sites"],
+    assembly         : ["fasta", "dipcall_par"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    snv_annotation   : ["snp_db", "vep_cache"],
+    cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
+    repeat_calling   : ["trgt_repeats"],
+    repeat_annotation: ["variant_catalog"],
 ]
 
 def parameterStatus = [
@@ -78,7 +80,8 @@ def parameterStatus = [
         skip_short_variant_calling: params.skip_short_variant_calling,
         skip_phasing_wf           : params.skip_phasing_wf,
         skip_methylation_wf       : params.skip_methylation_wf,
-        skip_repeat_wf            : params.skip_repeat_wf,
+        skip_repeat_calling       : params.skip_repeat_calling,
+        skip_repeat_annotation    : params.skip_repeat_annotation,
         skip_snv_annotation       : params.skip_snv_annotation,
         skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
@@ -96,6 +99,7 @@ def parameterStatus = [
         hificnv_exclude: params.hificnv_exclude,
         fasta          : params.fasta,
         trgt_repeats   : params.trgt_repeats,
+        variant_catalog: params.variant_catalog,
     ]
 ]
 
@@ -275,29 +279,56 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
-    def citation_text = [
-            "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
-            "."
-        ].join(' ').trim()
 
-    return citation_text
+    def repeat_annotation_text = []
+    def preprocessing_text     = []
+    def other_citation_text    = []
+
+    if (!params.skip_repeat_annotation) {
+        repeat_annotation_text = [
+            "stranger (Nilsson & Magnusson, 2021),"
+        ]
+    }
+    preprocessing_text = [
+        "FastQC (Andrews 2010),",
+    ]
+    other_citation_text = [
+        "MultiQC (Ewels et al. 2016),",
+        "."
+    ]
+    def concat_text = repeat_annotation_text +
+        preprocessing_text +
+        other_citation_text
+
+    def citation_text = [ "Tools used in the workflow included:" ] + concat_text.unique(false) { a, b -> a <=> b } - ""
+    return citation_text.join(' ').trim()
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
-    def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
-        ].join(' ').trim()
+    def repeat_annotation_text = []
+    def preprocessing_text     = []
+    def other_citation_text    = []
 
-    return reference_text
+    if (!params.skip_repeat_annotation) {
+        repeat_annotation_text = [
+            "<li>Nilsson, D., & Magnusson, M. (2021). Moonso/stranger v0.9.1 (v0.9.1) [Computer software]. Zenodo. https://zenodo.org/doi/10.5281/zenodo.3841097</li>"
+        ]
+    }
+
+    preprocessing_text = [
+        "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</li>",
+    ]
+
+    other_citation_text = [
+        "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+    ].join(' ').trim()
+
+    def concat_text = repeat_annotation_text +
+        preprocessing_text +
+        other_citation_text
+
+    def reference_text = concat_text.unique(false) { a, b -> a <=> b } - ""
+    return reference_text.join(' ').trim()
 }
 
 def methodsDescriptionText(mqc_methods_yaml) {
@@ -322,10 +353,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["tool_citations"] = ""
     meta["tool_bibliography"] = ""
 
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
-
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
     def methods_text = mqc_methods_yaml.text
 

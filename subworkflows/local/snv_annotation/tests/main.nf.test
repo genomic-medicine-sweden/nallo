@@ -100,7 +100,7 @@ nextflow_workflow {
                     workflow.out.versions,
                     workflow.out.tbi,
                     path(workflow.out.vcf.get(0).get(1)).linesGzip[4], // Version
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[9..749] // Stable
+                    path(workflow.out.vcf.get(0).get(1)).linesGzip[9..762] // Stable
                 ).match() }
             )
         }

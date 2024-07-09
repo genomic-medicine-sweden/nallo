@@ -29,6 +29,9 @@ workflow SHORT_VARIANT_CALLING {
             .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
             .groupTuple()
         )
+        .map { meta, vcf, tbi ->
+            [ meta - meta.subMap('num_intervals'), vcf, tbi ]
+        }
         .set{ bcftools_concat_gvcf_in }
 
     // Concat into one gVCF per sample & sort
@@ -46,6 +49,9 @@ workflow SHORT_VARIANT_CALLING {
             .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
             .groupTuple()
         )
+        .map { meta, vcf, tbi ->
+            [ meta - meta.subMap('num_intervals'), vcf, tbi ]
+        }
         .set{ bcftools_concat_vcf_in }
 
     // Concat into one VCF per sample & sort

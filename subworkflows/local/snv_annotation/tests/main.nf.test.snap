@@ -17,19 +17,19 @@
             ],
             "## Using API version 110, DB version 110",
             [
-                "## assembly version GRCh38.p14",
-                "## genebuild version 2014-07",
-                "## HGMD-PUBLIC version 20204",
                 "## 1000genomes version phase3",
-                "## polyphen version 2.2.3",
-                "## gencode version GENCODE 44",
-                "## dbSNP version 154",
-                "## gnomADe version r2.1.1",
                 "## gnomADg version v3.1.2",
                 "## COSMIC version 97",
-                "## ClinVar version 202301",
+                "## gencode version GENCODE 44",
                 "## sift version 6.2.1",
+                "## genebuild version 2014-07",
+                "## assembly version GRCh38.p14",
+                "## dbSNP version 154",
+                "## ClinVar version 202301",
+                "## polyphen version 2.2.3",
+                "## gnomADe version r2.1.1",
                 "## regbuild version 1.0",
+                "## HGMD-PUBLIC version 20204",
                 "## Column descriptions:",
                 "## Uploaded_variation : Identifier of uploaded variant",
                 "## Location : Location of variant in standard coordinate format (chr:start or chr:start-end)",
@@ -757,14 +757,27 @@
                 "chr16_1324817_A_G\tchr16:1324817\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
                 "chrX_2917996_G_C\tchrX:2917996\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
                 "chrX_3024068_T_C\tchrX:3024068\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
-                "chrX_3084646_A_G\tchrX:3084646\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER"
+                "chrX_3084646_A_G\tchrX:3084646\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_7057741_C_G\tchrX:7057741\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_9946907_G_C\tchrX:9946907\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_11139415_G_C\tchrX:11139415\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_11182140_G_C\tchrX:11182140\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_11760352_G_T\tchrX:11760352\tT\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_12609930_T_C\tchrX:12609930\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_12791542_G_A\tchrX:12791542\tA\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_12820815_A_G\tchrX:12820815\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_13785841_C_T\tchrX:13785841\tT\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_14581450_A_G\tchrX:14581450\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_14609022_T_C\tchrX:14609022\tC\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_14850684_A_G\tchrX:14850684\tG\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER",
+                "chrX_15397461_C_T\tchrX:15397461\tT\t-\t-\t-\tintergenic_variant\t-\t-\t-\t-\t-\t-\tIMPACT=MODIFIER"
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:37:46.994399925"
+        "timestamp": "2024-07-09T12:10:41.029300809"
     },
     "bcf, db, vep_cache, '110', -stub": {
         "content": [

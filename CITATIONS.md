@@ -22,6 +22,10 @@
 
   > Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294
 
+- [stranger](https://github.com/Clinical-Genomics/stranger)
+
+  > Nilsson D, Magnusson M. moonso/stranger v0.7.1. https://zenodo.org/doi/10.5281/zenodo.3841097
+
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)

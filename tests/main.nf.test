@@ -21,6 +21,7 @@ nextflow_pipeline {
                 hificnv_exclude = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
                 dipcall_par     = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
                 trgt_repeats    = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
+                variant_catalog = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
                 vep_cache       = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
                 snp_db          = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
                 somalier_sites  = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
@@ -82,6 +83,10 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
+                { assert new File("$outputDir/repeat_annotation/stranger/multisample/multisample_repeat_expansion_stranger.vcf.gz").exists() },
+                { assert new File("$outputDir/repeat_annotation/stranger/multisample/multisample_repeat_expansion_stranger.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/snv_annotation/echtvar/encode/multisample/multisample.zip").exists() },
                 { assert new File("$outputDir/snv_calling/multi_sample/glnexus/multisample/multisample.bcf.gz").exists() },
                 { assert new File("$outputDir/snv_calling/multi_sample/glnexus/multisample/multisample.bcf.gz.csi").exists() },
@@ -149,6 +154,7 @@ nextflow_pipeline {
                 hificnv_exclude = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
                 dipcall_par     = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
                 trgt_repeats    = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
+                variant_catalog = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
                 vep_cache       = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
                 snp_db          = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
                 somalier_sites  = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
@@ -246,6 +252,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/snv_calling/multi_sample/glnexus/multisample/multisample.bcf.gz.csi").exists() },
                 { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz").exists() },
                 { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/repeat_annotation/stranger/multisample/multisample_repeat_expansion_stranger.vcf.gz").exists() },
+                { assert new File("$outputDir/repeat_annotation/stranger/multisample/multisample_repeat_expansion_stranger.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_A

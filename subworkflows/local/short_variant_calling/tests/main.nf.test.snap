@@ -5,12 +5,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -45,12 +41,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -72,7 +64,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:29:10.729557028"
+        "timestamp": "2024-07-09T11:59:06.873173703"
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -80,23 +72,15 @@
                 "0": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ],
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test2",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test2",
+                            "single_end": false
                         },
                         "test2_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,0ce965213b3c4fa10f5e855e0254cc0e"
                     ]
@@ -139,23 +123,15 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ],
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test2",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test2",
+                            "single_end": false
                         },
                         "test2_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,0ce965213b3c4fa10f5e855e0254cc0e"
                     ]
@@ -185,7 +161,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:30:10.877500719"
+        "timestamp": "2024-07-09T12:00:06.733280923"
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -193,23 +169,15 @@
                 "0": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test2",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test2",
+                            "single_end": false
                         },
                         "test2_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -252,23 +220,15 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test2",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test2",
+                            "single_end": false
                         },
                         "test2_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -298,7 +258,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:31:21.98395322"
+        "timestamp": "2024-07-09T12:01:17.865011558"
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -306,12 +266,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -346,12 +302,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -373,7 +325,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:28:14.653170339"
+        "timestamp": "2024-07-09T11:58:11.914343709"
     },
     "1 sample - 1 bed, fasta, fai, []": {
         "content": [
@@ -381,12 +333,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -421,12 +369,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -448,7 +392,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:28:42.40137919"
+        "timestamp": "2024-07-09T11:58:39.573530566"
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -456,12 +400,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -496,12 +436,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -523,7 +459,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:30:38.524691442"
+        "timestamp": "2024-07-09T12:00:33.980507128"
     },
     "1 sample - 1 bed, fasta, fai, bed - stub": {
         "content": [
@@ -531,12 +467,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -571,12 +503,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -598,7 +526,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:30:52.165160713"
+        "timestamp": "2024-07-09T12:00:47.655880789"
     },
     "1 sample - no bed, fasta, fai, [] - stub": {
         "content": [
@@ -606,12 +534,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -646,12 +570,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 1,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 1
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -673,7 +593,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:30:24.798419501"
+        "timestamp": "2024-07-09T12:00:20.154541832"
     },
     "1 sample - 2 bed, fasta, fai, bed": {
         "content": [
@@ -681,12 +601,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -722,12 +638,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,d8a35574801cfec345629770bfae2de7"
                     ]
@@ -750,7 +662,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:29:39.514444102"
+        "timestamp": "2024-07-09T11:59:35.482195945"
     },
     "1 sample - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -758,12 +670,8 @@
                 "0": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -799,12 +707,8 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "groupSize": 2,
-                            "groupTarget": {
-                                "id": "test",
-                                "single_end": false,
-                                "num_intervals": 2
-                            }
+                            "id": "test",
+                            "single_end": false
                         },
                         "test_concat_vcf.vcf.gz_sorted.vcf.gz_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -827,6 +731,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T10:31:06.329803329"
+        "timestamp": "2024-07-09T12:01:02.557411667"
     }
 }
