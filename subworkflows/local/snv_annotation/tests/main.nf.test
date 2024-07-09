@@ -32,7 +32,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id:'test' ], // meta map
+                    [ id: 'test', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = GUNZIP.out.gunzip
@@ -50,7 +50,7 @@ nextflow_workflow {
                 input[0] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
                             .join(Channel.of([
-                                [ id: 'test' ],
+                                [ id: 'test', num_intervals:1 ],
                                 file(params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed', checkifexists: true)
                             ]))
                 input[1] = GUNZIP.out.gunzip
@@ -100,7 +100,7 @@ nextflow_workflow {
                     workflow.out.versions,
                     workflow.out.tbi,
                     path(workflow.out.vcf.get(0).get(1)).linesGzip[4], // Version
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[9..749] // Stable
+                    path(workflow.out.vcf.get(0).get(1)).linesGzip[9..762] // Stable
                 ).match() }
             )
         }

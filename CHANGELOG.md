@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#240](https://github.com/genomic-medicine-sweden/nallo/pull/240) - GLNexus multisample output is now decomposed and normalized
 - [#245](https://github.com/genomic-medicine-sweden/nallo/pull/245) - Merged (multisample) repeats from TRGT is now output even if there's only one sample
 - [#245](https://github.com/genomic-medicine-sweden/nallo/pull/245) - Split the repeat analysis workflow into one calling and one annotation workflow, `--skip_repeat_wf` becomes `--skip_repeat_calling` and `--skip_repeat_annotation`
+- [#246](https://github.com/genomic-medicine-sweden/nallo/pull/246) - Renamed processes and light refactoring of the short variant calling workflow
+- [#246](https://github.com/genomic-medicine-sweden/nallo/pull/246) - Use groupKey to remove bottleneck in the short variant calling workflow
 
 ### `Removed`
 
