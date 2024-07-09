@@ -23,8 +23,12 @@ workflow SHORT_VARIANT_CALLING {
 
     // gVCF
     DEEPVARIANT.out.gvcf
+        .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
         .groupTuple()
-        .join( DEEPVARIANT.out.gvcf_tbi.groupTuple() )
+        .join( DEEPVARIANT.out.gvcf_tbi
+            .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
+            .groupTuple()
+        )
         .set{ bcftools_concat_gvcf_in }
 
     // Concat into one gVCF per sample & sort
@@ -36,8 +40,12 @@ workflow SHORT_VARIANT_CALLING {
 
     // VCF
     DEEPVARIANT.out.vcf
+        .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
         .groupTuple()
-        .join( DEEPVARIANT.out.vcf_tbi.groupTuple() )
+        .join( DEEPVARIANT.out.vcf_tbi
+            .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
+            .groupTuple()
+        )
         .set{ bcftools_concat_vcf_in }
 
     // Concat into one VCF per sample & sort

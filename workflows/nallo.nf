@@ -241,20 +241,23 @@ workflow NALLO {
             ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
         }
 
-        // TODO: parallel_snv should only be allowed when snv calling is active
-        // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
         // Split BED/Genome into equal chunks
-        // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
-
         SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
         ch_versions = ch_versions.mix(SPLIT_BED_CHUNKS.out.versions)
 
-        // Combine to create a bam_bai - chunk pair for each sample
-        // Do this here, pre-process or inside SNV-calling?
+        // Create a channel with the bed file and the total number of intervals (for groupKey)
+        SPLIT_BED_CHUNKS.out.split_beds
+            .collect()
+            .map{ it -> [ it, it.size() ] }
+            .transpose()
+            .set { ch_bed_intervals }
+
+        // Combine to create a bam_bai - interval pair for each sample
         bam_bai
-            .combine(SPLIT_BED_CHUNKS.out
-                    .split_beds
-                    .flatten())
+            .combine( ch_bed_intervals )
+            .map { meta, bam, bai, bed, intervals ->
+                [ meta + [ num_intervals: intervals ], bam, bai, bed ]
+            }
             .set{ ch_snv_calling_in }
 
         QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
