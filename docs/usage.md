@@ -109,7 +109,9 @@ Some workflows require additional files:
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
 
-- If running without `--skip_repeat_wf`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
+- If running without `--skip_repeat_calling`, download a BED file with tandem repeats ([TRGT](https://github.com/PacificBiosciences/trgt/tree/main/repeats)) matching your reference genome to supply with `--trgt_repeats`.
+
+- If running without `--skip_repeat_annotation`, download a json variant catalog, (e.g. [variant_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/variant_catalog_grch38.json)) matching your reference genome to supply with `--variant_catalog`.
 
 - If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
 
@@ -158,7 +160,8 @@ Options to skip various steps within the workflow
 | `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | `False` |          |        |
 | `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | `False` |          |        |
 | `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | `False` |          |        |
-| `skip_repeat_wf`             | Skip repeat analysis workflow              | `boolean` | `False` |          |        |
+| `skip_repeat_calling         | Skip repeat calling workflow               | `boolean` | `False` |          |        |
+| `skip_repeat_annotation`     | Skip repeat annotation workflow            | `boolean` | `False` |          |        |
 | `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | `False` |          |        |
 | `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | `False` |          |        |
 | `skip_cnv_calling`           | Skip CNV workflow                          | `boolean` | `False` |          |        |
@@ -259,6 +262,7 @@ Different processes may need extra input files
 | `hificnv_xx`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_exclude`                  | HiFiCNV BED file specifying regions to exclude                                                                                                                                                                                                                            | `string`  |         |          |        |
 | `somalier_sites`                   | A VCF of known polymorphic sites                                                                                                                                                                                                                                          | `string`  |         |          |        |
+| `variant_catalog`                  | Variant catalog json-file for Stranger                                                                                                                                                                                                                                    | `string`  |         |          |        |
 | `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>                                                               | `boolean` |         |          | True   |
 | `validationLenientMode`            | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details> | `boolean` |         |          | True   |
 

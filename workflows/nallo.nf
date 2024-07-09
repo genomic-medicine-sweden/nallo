@@ -6,20 +6,21 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
-include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
-include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
+include { ANNOTATE_REPEAT_EXPANSIONS } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
+include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
+include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
 include { CALL_PARALOGS              } from '../subworkflows/local/call_paralogs'
-include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
-include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
-include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
+include { CALL_REPEAT_EXPANSIONS     } from '../subworkflows/local/call_repeat_expansions'
 include { CNV                        } from '../subworkflows/local/cnv'
-include { REPEAT_ANALYSIS            } from '../subworkflows/local/repeat_analysis'
 include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
+include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
+include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
 include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotation'
+include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,21 +66,23 @@ workflow NALLO {
                                                 : ''
     ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs')
                                                 : Channel.empty()
-    ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.getSimpleName(), it]}.collect()
+    ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it] }.collect()
                                                 : Channel.value([[],[]])
-    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
+    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.simpleName, it] }.collect()
                                                 : Channel.empty()
-    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
+    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.simpleName, it] }.collect()
                                                 : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
     ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()
                                                 : ''
-    ch_trgt_bed        = params.trgt_repeats    ? Channel.fromPath(params.trgt_repeats).collect()
+    ch_trgt_bed        = params.trgt_repeats    ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
                                                 : ''
-    ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect()
+    ch_variant_catalog = params.variant_catalog ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
                                                 : ''
-    ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [[id:'vep_cache'], it] }.collect()
+    ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
+                                                : ''
+    ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [ [id:'vep_cache'], it ] }.collect()
                                                 : Channel.value([[],[]])
     ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
                                                 : ''
@@ -87,7 +90,7 @@ workflow NALLO {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
-    ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.getSimpleName(), it ] }.collect()
+    ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.simpleName, it ] }.collect()
                                                 : ''
 
     // Check parameter that doesn't conform to schema validation here
@@ -330,10 +333,15 @@ workflow NALLO {
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
 
-                if(!params.skip_repeat_wf) {
+                if(!params.skip_repeat_calling) {
                     // Call repeats with TRGT
-                    REPEAT_ANALYSIS( hap_bam_bai, fasta, fai, ch_trgt_bed )
-                    ch_versions = ch_versions.mix(REPEAT_ANALYSIS.out.versions)
+                    CALL_REPEAT_EXPANSIONS ( hap_bam_bai, fasta, fai, ch_trgt_bed )
+                    ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
+
+                    if(!params.skip_repeat_annotation) {
+                        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.vcf )
+                        ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
+                    }
                 }
             }
         }
