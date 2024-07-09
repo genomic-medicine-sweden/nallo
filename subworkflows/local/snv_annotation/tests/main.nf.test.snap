@@ -17,19 +17,6 @@
             ],
             "## Using API version 110, DB version 110",
             [
-                "## 1000genomes version phase3",
-                "## gnomADg version v3.1.2",
-                "## COSMIC version 97",
-                "## gencode version GENCODE 44",
-                "## sift version 6.2.1",
-                "## genebuild version 2014-07",
-                "## assembly version GRCh38.p14",
-                "## dbSNP version 154",
-                "## ClinVar version 202301",
-                "## polyphen version 2.2.3",
-                "## gnomADe version r2.1.1",
-                "## regbuild version 1.0",
-                "## HGMD-PUBLIC version 20204",
                 "## Column descriptions:",
                 "## Uploaded_variation : Identifier of uploaded variant",
                 "## Location : Location of variant in standard coordinate format (chr:start or chr:start-end)",
@@ -777,7 +764,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:10:41.029300809"
+        "timestamp": "2024-07-09T13:44:39.916237658"
     },
     "bcf, db, vep_cache, '110', -stub": {
         "content": [
