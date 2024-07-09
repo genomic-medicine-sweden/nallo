@@ -279,29 +279,56 @@ def genomeExistsError() {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
-    def citation_text = [
-            "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
-            "."
-        ].join(' ').trim()
 
-    return citation_text
+    def repeat_annotation_text = []
+    def preprocessing_text     = []
+    def other_citation_text    = []
+
+    if (!params.skip_repeat_annotation) {
+        repeat_annotation_text = [
+            "stranger (Nilsson & Magnusson, 2021),"
+        ]
+    }
+    preprocessing_text = [
+        "FastQC (Andrews 2010),",
+    ]
+    other_citation_text = [
+        "MultiQC (Ewels et al. 2016),",
+        "."
+    ]
+    def concat_text = repeat_annotation_text +
+        preprocessing_text +
+        other_citation_text
+
+    def citation_text = [ "Tools used in the workflow included:" ] + concat_text.unique(false) { a, b -> a <=> b } - ""
+    return citation_text.join(' ').trim()
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
-    def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
-        ].join(' ').trim()
+    def repeat_annotation_text = []
+    def preprocessing_text     = []
+    def other_citation_text    = []
 
-    return reference_text
+    if (!params.skip_repeat_annotation) {
+        repeat_annotation_text = [
+            "<li>Nilsson, D., & Magnusson, M. (2021). Moonso/stranger v0.9.1 (v0.9.1) [Computer software]. Zenodo. https://zenodo.org/doi/10.5281/zenodo.3841097</li>"
+        ]
+    }
+
+    preprocessing_text = [
+        "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</li>",
+    ]
+
+    other_citation_text = [
+        "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+    ].join(' ').trim()
+
+    def concat_text = repeat_annotation_text +
+        preprocessing_text +
+        other_citation_text
+
+    def reference_text = concat_text.unique(false) { a, b -> a <=> b } - ""
+    return reference_text.join(' ').trim()
 }
 
 def methodsDescriptionText(mqc_methods_yaml) {
@@ -326,10 +353,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["tool_citations"] = ""
     meta["tool_bibliography"] = ""
 
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
-
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
     def methods_text = mqc_methods_yaml.text
 
