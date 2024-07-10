@@ -31,8 +31,6 @@ include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_va
 // local
 include { ECHTVAR_ENCODE         } from '../modules/local/echtvar/encode/main'
 include { FQCRS                  } from '../modules/local/fqcrs'
-include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
-include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
@@ -68,9 +66,7 @@ workflow NALLO {
                                                 : Channel.empty()
     ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it] }.collect()
                                                 : Channel.value([[],[]])
-    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.simpleName, it] }.collect()
-                                                : Channel.empty()
-    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.simpleName, it] }.collect()
+    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it] }.collect()
                                                 : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
@@ -138,29 +134,18 @@ workflow NALLO {
     }
 
     if(!params.skip_mapping_wf | !params.skip_assembly_wf ) {
-        // Index genome
-        PREPARE_GENOME( ch_fasta, ch_vep_cache_unprocessed )
+        // Prepare references
+        PREPARE_GENOME (
+            ch_fasta,
+            ch_vep_cache_unprocessed,
+            ch_input_bed
+        )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
         // Gather indices
         fasta = PREPARE_GENOME.out.fasta
         fai   = PREPARE_GENOME.out.fai
         mmi   = PREPARE_GENOME.out.mmi
-    }
-
-    // Move this inside prepare genome?
-
-    // If no BED-file is provided then build intervals from reference
-    if(!params.bed) {
-        fai
-            .map{ name, fai -> [['id':name], fai] }
-            .set{ ch_build_intervals_in }
-
-        BUILD_INTERVALS( ch_build_intervals_in )
-        ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
-
-        BUILD_INTERVALS.out.bed
-            .set{ ch_bed }
     }
 
     if(!params.skip_mapping_wf) {
@@ -252,20 +237,9 @@ workflow NALLO {
             ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
         }
 
-        // Split BED/Genome into equal chunks
-        SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
-        ch_versions = ch_versions.mix(SPLIT_BED_CHUNKS.out.versions)
-
-        // Create a channel with the bed file and the total number of intervals (for groupKey)
-        SPLIT_BED_CHUNKS.out.split_beds
-            .collect()
-            .map{ it -> [ it, it.size() ] }
-            .transpose()
-            .set { ch_bed_intervals }
-
         // Combine to create a bam_bai - interval pair for each sample
         bam_bai
-            .combine( ch_bed_intervals )
+            .combine( PREPARE_GENOME.out.bed_intervals )
             .map { meta, bam, bai, bed, intervals ->
                 [ meta + [ num_intervals: intervals ], bam, bai, bed ]
             }
@@ -277,7 +251,7 @@ workflow NALLO {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant
-            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, ch_bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, PREPARE_GENOME.out.bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
@@ -337,7 +311,7 @@ workflow NALLO {
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
-                    METHYLATION( hap_bam_bai, fasta, fai, ch_bed )
+                    METHYLATION( hap_bam_bai, fasta, fai, ch_input_bed )
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
 
