@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#245](https://github.com/genomic-medicine-sweden/nallo/pull/245) - Split the repeat analysis workflow into one calling and one annotation workflow, `--skip_repeat_wf` becomes `--skip_repeat_calling` and `--skip_repeat_annotation`
 - [#246](https://github.com/genomic-medicine-sweden/nallo/pull/246) - Renamed processes and light refactoring of the short variant calling workflow
 - [#246](https://github.com/genomic-medicine-sweden/nallo/pull/246) - Use groupKey to remove bottleneck in the short variant calling workflow
+- [#247](https://github.com/genomic-medicine-sweden/nallo/pull/247) - Updated nft-bam to 0.3.0 and added BAM reads to snapshot
+- [#247](https://github.com/genomic-medicine-sweden/nallo/pull/247) - Changed minimap2 preset from `map-ont` to `lr:hq` for `--preset ONT_R10`
 - [#250](https://github.com/genomic-medicine-sweden/nallo/pull/250) - Run mosdepth with `--fast-mode` and add to MultiQC report
 
 ### `Removed`
