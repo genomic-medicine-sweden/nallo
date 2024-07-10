@@ -58,6 +58,7 @@ jobs:
           - "23.04.0"
         tags:
           - "SHORT_VARIANT_CALLING"
+          - "SNV_ANNOTATION"
           - "samplesheet"
           - "samplesheet_multisample_bam"
         profile:
