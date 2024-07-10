@@ -11,8 +11,6 @@ workflow QC_ALIGNED_READS {
     main:
     ch_versions = Channel.empty()
 
-    // Prepare inputs
-
     CRAMINO (ch_bam_bai)
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
@@ -24,6 +22,9 @@ workflow QC_ALIGNED_READS {
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     emit:
-    versions = ch_versions // channel: [ versions.yml ]
+    mosdepth_summary     = MOSDEPTH.out.summary_txt // channel: [ val(meta), path(txt) ]
+    mosdepth_global_dist = MOSDEPTH.out.global_txt  // channel: [ val(meta), path(txt) ]
+    mosdepth_region_dist = MOSDEPTH.out.regions_txt // channel: [ val(meta), path(txt) ]
+    versions             = ch_versions              // channel: [ versions.yml ]
 }
 

@@ -216,6 +216,14 @@ workflow NALLO {
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
+        QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
+        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
+
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+
+
         // Only compatible with hg38 (and a few hg19 genes)
         if(!params.skip_call_paralogs) {
             CALL_PARALOGS ( bam_bai, fasta )
@@ -262,9 +270,6 @@ workflow NALLO {
                 [ meta + [ num_intervals: intervals ], bam, bai, bed ]
             }
             .set{ ch_snv_calling_in }
-
-        QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
-        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
 
         // Call SVs with Sniffles2
         STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
@@ -349,8 +354,6 @@ workflow NALLO {
             }
         }
     }
-
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}ifEmpty([]))
 
     //
     // Collate and save software versions
