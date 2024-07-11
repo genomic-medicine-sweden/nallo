@@ -18,6 +18,7 @@ include { METHYLATION                } from '../subworkflows/local/methylation'
 include { PHASING                    } from '../subworkflows/local/phasing'
 include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
 include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
+include { SCATTER_GENOME             } from '../subworkflows/local/scatter_genome'
 include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
 include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotation'
 include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
@@ -138,7 +139,6 @@ workflow NALLO {
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
-            ch_input_bed
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
@@ -237,9 +237,19 @@ workflow NALLO {
             ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
         }
 
+        // Make BED intervals
+        SCATTER_GENOME (
+            fai,
+            ch_input_bed,
+            !params.bed,
+            !params.skip_short_variant_calling,
+            params.parallel_snv
+        )
+        ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
+
         // Combine to create a bam_bai - interval pair for each sample
         bam_bai
-            .combine( PREPARE_GENOME.out.bed_intervals )
+            .combine( SCATTER_GENOME.out.bed_intervals )
             .map { meta, bam, bai, bed, intervals ->
                 [ meta + [ num_intervals: intervals ], bam, bai, bed ]
             }
@@ -251,7 +261,7 @@ workflow NALLO {
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant
-            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, PREPARE_GENOME.out.bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
