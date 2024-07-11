@@ -36,7 +36,8 @@ include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
-include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/'
+include { BCFTOOLS_PLUGINSPLIT   } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { FASTP                  } from '../modules/nf-core/fastp/main'
 include { MINIMAP2_ALIGN         } from '../modules/nf-core/minimap2/align/main'
@@ -306,16 +307,25 @@ workflow NALLO {
                     .set { snv_annotation_dbs }
 
                 //
-                // Short variant annotation
+                // Annotate a multisample VCF
                 //
                 SNV_ANNOTATION(
-                    SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+                    SHORT_VARIANT_CALLING.out.combined_bcf,
                     snv_annotation_dbs,
                     fasta,
                     ch_vep_cache,
                     params.vep_cache_version
                 )
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
+
+                // Split multisample VCF to also publish a VCF per sample
+                BCFTOOLS_PLUGINSPLIT (
+                    SNV_ANNOTATION.out.vcf.join( SNV_ANNOTATION.out.tbi ),
+                    [],
+                    [],
+                    [],
+                    []
+                )
             }
 
             if(!params.skip_cnv_calling) {
