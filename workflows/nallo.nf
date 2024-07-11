@@ -37,7 +37,7 @@ include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
 include { BCFTOOLS_PLUGINSPLIT   } from '../modules/nf-core/bcftools/pluginsplit/main'
-include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/'
+include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { FASTP                  } from '../modules/nf-core/fastp/main'
 include { MINIMAP2_ALIGN         } from '../modules/nf-core/minimap2/align/main'
