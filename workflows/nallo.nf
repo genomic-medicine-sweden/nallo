@@ -15,7 +15,6 @@ include { BAM_INFER_SEX                                      } from '../subworkf
 include { CALL_PARALOGS                                      } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS                             } from '../subworkflows/local/call_repeat_expansions'
 include { CNV                                                } from '../subworkflows/local/cnv'
-include { GENERATE_CLINICAL_SET as GENERATE_CLINICAL_SET_SNV } from '../subworkflows/local/generate_clinical_set'
 include { METHYLATION                                        } from '../subworkflows/local/methylation'
 include { PHASING                                            } from '../subworkflows/local/phasing'
 include { PREPARE_GENOME                                     } from '../subworkflows/local/prepare_genome'
@@ -33,7 +32,6 @@ include { STRUCTURAL_VARIANT_CALLING                         } from '../subworkf
 */
 
 // local
-include { CREATE_HGNCIDS_FILE    } from '../modules/local/create_hgncids_file'
 include { ECHTVAR_ENCODE         } from '../modules/local/echtvar/encode/main'
 include { FQCRS                  } from '../modules/local/fqcrs'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
@@ -83,10 +81,6 @@ workflow NALLO {
     ch_variant_catalog       = params.variant_catalog               ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
     // TODO: Add all missing parameters to schema
-    ch_vep_filters_std_fmt   = params.vep_filters                   ? Channel.fromPath(params.vep_filters).map { it -> [ [id:'standard'], it ] }.collect()
-                                                                    : Channel.empty()
-    ch_vep_filters_scout_fmt = params.vep_filters_scout_fmt         ? Channel.fromPath(params.vep_filters).map { it -> [ [id:'scout'], it ] }.collect()
-                                                                    : Channel.empty()
     ch_databases             = params.snp_db                        ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
@@ -110,7 +104,6 @@ workflow NALLO {
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { error "--split_fastq must be 0, or between 2 and 999."}
     if (params.parallel_snv == 0 ) { error "--parallel_snv must be > 0." }
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
-    if (!params.vep_filters && !params.vep_filters_scout_fmt) { error "--vep_filters or --vep_filters_scout_fmt should be set." }
 
     // Create PED from samplesheet
     ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
@@ -327,39 +320,24 @@ workflow NALLO {
                     []
                 )
 
-                // Read and store hgnc ids in a channel
-                ch_vep_filters_std_fmt
-                    .mix ( ch_vep_filters_std_fmt )
-                    .set { ch_vep_filters }
-
-                CREATE_HGNCIDS_FILE ( ch_vep_filters )
-                    .txt
-                    .set { ch_hgnc_ids }
-
-                ch_versions = ch_versions.mix(CREATE_HGNCIDS_FILE.out.versions)
-
-                GENERATE_CLINICAL_SET_SNV(
-                    SNV_ANNOTATION.out.vcf,
-                    ch_hgnc_ids
-                )
-                ch_versions = ch_versions.mix(GENERATE_CLINICAL_SET_SNV.out.versions)
-
                 ANN_CSQ_PLI_SNV (
-                    //SNV_ANNOTATION.out.vcf,
-                    GENERATE_CLINICAL_SET_SNV.out.vcf,
+                    SNV_ANNOTATION.out.vcf,
                     ch_variant_consequences_snv
                 )
                 ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
-                // TODO: Can only be run if there is a parent in the family? or is it enough that
-                // parental ids are 0?
-                // TODO: Needs affected individuals to run
+                ANN_CSQ_PLI_SNV.out.vcf_ann
+                    .filter { meta, vcf -> meta.contains_affected }
+                    .set { ch_rank_variants_in }
+
+                // Only run on if we have affected individuals
                 RANK_VARIANTS_SNV (
-                    ANN_CSQ_PLI_SNV.out.vcf_ann,
+                    ch_rank_variants_in,
                     ch_pedfile,
                     ch_reduced_penetrance,
                     ch_score_config_snv
                 )
+                ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
             }
 
             if(!params.skip_cnv_calling) {

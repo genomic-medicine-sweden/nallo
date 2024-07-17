@@ -63,8 +63,17 @@ workflow SHORT_VARIANT_CALLING {
 
     // Multisample
     BCFTOOLS_SORT_GVCF.out.vcf
-        .map { meta, gvcf -> [ ['id':'multisample'], gvcf ] }
-        .groupTuple()
+        .map { meta, gvcf -> [ 'multisample', meta.phenotype == 2, gvcf ] }
+        .groupTuple() // Group all files together
+        // If any of the samples in the VCF have an affected phenotype (2)
+        // add this to the meta of the multisample VCF to know if we should run RANK_VARIANTS or not
+        .map { id, affected, gvcfs ->
+            new_meta = [
+                'id': id,
+                'contains_affected': affected.any(),
+            ]
+            [ new_meta, gvcfs ]
+        }
         .set{ glnexus_in }
 
     GLNEXUS( glnexus_in, ch_bed )

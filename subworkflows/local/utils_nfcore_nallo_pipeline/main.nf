@@ -69,7 +69,7 @@ def workflowDependencies = [
 def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
     assembly         : ["fasta", "dipcall_par"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
-    snv_annotation   : ["snp_db", "vep_cache", "score_config_snv", "variant_consequences_snv"],
+    snv_annotation   : ["snp_db", "vep_cache", "reduced_penetrance", "score_config_snv", "variant_consequences_snv"],
     cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
     repeat_calling   : ["trgt_repeats"],
     repeat_annotation: ["variant_catalog"],
@@ -100,6 +100,8 @@ def parameterStatus = [
         fasta                   : params.fasta,
         trgt_repeats            : params.trgt_repeats,
         variant_catalog         : params.variant_catalog,
+        score_config_snv        : params.score_config_snv,
+        reduced_penetrance      : params.reduced_penetrance,
         score_config_snv        : params.score_config_snv,
         variant_consequences_snv: params.variant_consequences_snv,
     ]

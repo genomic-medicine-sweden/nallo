@@ -13,18 +13,22 @@ nextflow_pipeline {
                 // Base directory for genomic-medicine-sweden/nallo test data
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
                 // Test files
-                fasta           = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input           = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet.csv'
-                bed             = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
-                hificnv_xy      = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
-                hificnv_xx      = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
-                hificnv_exclude = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
-                dipcall_par     = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
-                trgt_repeats    = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
-                variant_catalog = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
-                vep_cache       = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
-                snp_db          = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
-                somalier_sites  = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
+                fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
+                input                    = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet.csv'
+                bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
+                hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
+                hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
+                hificnv_exclude          = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
+                dipcall_par              = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
+                trgt_repeats             = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
+                variant_catalog          = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
+                vep_cache                = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
+                snp_db                   = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
+                somalier_sites           = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
+                reduced_penetrance       = params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv'
+                score_config_snv         = params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini'
+                variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
+
                 // Parameters
                 parallel_snv    = 3
                 preset          = "revio"
@@ -89,6 +93,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
+                { assert new File("$outputDir/ranked_variants/multisample_snv_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/ranked_variants/multisample_snv_ranked.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/snv_annotation/echtvar/encode/multisample/multisample.zip").exists() },
@@ -148,18 +154,22 @@ nextflow_pipeline {
                 // Base directory for genomic-medicine-sweden/nallo test data
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
                 // Test files
-                fasta           = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input           = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet_multisample_bam.csv'
-                bed             = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
-                hificnv_xy      = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
-                hificnv_xx      = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
-                hificnv_exclude = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
-                dipcall_par     = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
-                trgt_repeats    = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
-                variant_catalog = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
-                vep_cache       = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
-                snp_db          = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
-                somalier_sites  = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
+                fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
+                input                    = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet_multisample_bam.csv'
+                bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
+                hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
+                hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
+                hificnv_exclude          = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
+                dipcall_par              = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
+                trgt_repeats             = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
+                variant_catalog          = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
+                vep_cache                = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
+                snp_db                   = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
+                somalier_sites           = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
+                reduced_penetrance       = params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv'
+                score_config_snv         = params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini'
+                variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
+
                 // Parameters
                 parallel_snv    = 3
                 preset          = "revio"
@@ -261,6 +271,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
+                { assert new File("$outputDir/ranked_variants/multisample_snv_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/ranked_variants/multisample_snv_ranked.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/snv_annotation/echtvar/encode/multisample/multisample.zip").exists() },
                 { assert new File("$outputDir/snv_annotation/vep/multi_sample/multisample/multisample_vep.vcf.gz").exists() },
                 { assert new File("$outputDir/snv_annotation/vep/multi_sample/multisample/multisample_vep.vcf.gz.tbi").exists() },
