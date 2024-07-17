@@ -23,7 +23,6 @@ process WHATSHAP_HAPLOTAG {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    // TODO: Include samtools in container and pipe to samtools view instead
     """
     whatshap haplotag \\
         $args \\
