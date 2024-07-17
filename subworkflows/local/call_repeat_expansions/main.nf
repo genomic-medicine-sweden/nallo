@@ -18,8 +18,8 @@ workflow CALL_REPEAT_EXPANSIONS {
     ch_versions         = Channel.empty()
 
     ch_bam_bai
-        .map{ meta, bam, bai -> [meta, bam, bai, meta.sex] }
-        .set{ ch_trgt_input }
+        .map { meta, bam, bai -> [meta, bam, bai, meta.sex] }
+        .set { ch_trgt_input }
 
     // Run TGRT
     TRGT ( ch_trgt_input, ch_fasta, ch_trgt_bed.map { it[1] } )
@@ -49,7 +49,7 @@ workflow CALL_REPEAT_EXPANSIONS {
     ch_versions = ch_versions.mix(BCFTOOLS_INDEX_MERGE.out.versions)
 
     emit:
-    vcf      = BCFTOOLS_MERGE.out.merged_variants // channel: [ val(meta), path(vcf) ]
-    versions = ch_versions                        // channel: [ versions.yml ]
+    vcf      = BCFTOOLS_SORT_TRGT.out.vcf  // channel: [ val(meta), path(vcf) ]
+    versions = ch_versions                 // channel: [ versions.yml ]
 }
 

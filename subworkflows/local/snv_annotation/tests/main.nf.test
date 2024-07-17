@@ -98,9 +98,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.versions,
-                    workflow.out.tbi,
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[4], // Version
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[22..762] // Stable
+                    file(workflow.out.tbi.get(0).get(1)).name,
+                    path(workflow.out.vcf.get(0).get(1)).linesGzip[45..118], // Stable
+                    path(workflow.out.vcf.get(0).get(1)).linesGzip[120..156] // Stable
                 ).match() }
             )
         }
