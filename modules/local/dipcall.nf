@@ -1,4 +1,3 @@
-//TODO: Mapper choice
 process DIPCALL {
     tag "$meta.id"
     label 'process_high'
@@ -31,7 +30,6 @@ process DIPCALL {
     tuple val(meta), path("*.pair.vcf.gz"), emit: pair
     tuple val(meta), path("*.tmp")        , emit: tmp, optional: true
     path "versions.yml"                   , emit: versions
-    //TODO: Add all outputs
 
     when:
     task.ext.when == null || task.ext.when
