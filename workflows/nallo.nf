@@ -6,22 +6,24 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ANNOTATE_REPEAT_EXPANSIONS } from '../subworkflows/local/annotate_repeat_expansions'
-include { ASSEMBLY                   } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING   } from '../subworkflows/local/assembly_variant_calling'
-include { BAM_TO_FASTQ               } from '../subworkflows/local/bam_to_fastq'
-include { BAM_INFER_SEX              } from '../subworkflows/local/bam_infer_sex'
-include { CALL_PARALOGS              } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS     } from '../subworkflows/local/call_repeat_expansions'
-include { CNV                        } from '../subworkflows/local/cnv'
-include { METHYLATION                } from '../subworkflows/local/methylation'
-include { PHASING                    } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME             } from '../subworkflows/local/prepare_genome'
-include { QC_ALIGNED_READS           } from '../subworkflows/local/qc_aligned_reads'
-include { SCATTER_GENOME             } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING      } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotation'
-include { STRUCTURAL_VARIANT_CALLING } from '../subworkflows/local/structural_variant_calling'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_REPEAT_EXPANSIONS                         } from '../subworkflows/local/annotate_repeat_expansions'
+include { ASSEMBLY                                           } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING                           } from '../subworkflows/local/assembly_variant_calling'
+include { BAM_TO_FASTQ                                       } from '../subworkflows/local/bam_to_fastq'
+include { BAM_INFER_SEX                                      } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                                      } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS                             } from '../subworkflows/local/call_repeat_expansions'
+include { CNV                                                } from '../subworkflows/local/cnv'
+include { METHYLATION                                        } from '../subworkflows/local/methylation'
+include { PHASING                                            } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME                                     } from '../subworkflows/local/prepare_genome'
+include { QC_ALIGNED_READS                                   } from '../subworkflows/local/qc_aligned_reads'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV                 } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                                     } from '../subworkflows/local/scatter_genome'
+include { SHORT_VARIANT_CALLING                              } from '../subworkflows/local/short_variant_calling'
+include { SNV_ANNOTATION                                     } from '../subworkflows/local/snv_annotation'
+include { STRUCTURAL_VARIANT_CALLING                         } from '../subworkflows/local/structural_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,29 +74,36 @@ workflow NALLO {
                                                 : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
-    ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()
-                                                : ''
-    ch_trgt_bed        = params.trgt_repeats    ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
-                                                : ''
-    ch_variant_catalog = params.variant_catalog ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
-                                                : ''
-    ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
-                                                : ''
-    ch_vep_cache_unprocessed = params.vep_cache ? Channel.fromPath(params.vep_cache).map { it -> [ [id:'vep_cache'], it ] }.collect()
-                                                : Channel.value([[],[]])
-    ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
-                                                : ''
-    ch_expected_xx_bed = params.hificnv_xx      ? Channel.fromPath(params.hificnv_xx).collect()
-                                                : ''
-    ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
-                                                : ''
-    ch_somalier_sites  = params.somalier_sites  ? Channel.fromPath(params.somalier_sites).map { [it.simpleName, it ] }.collect()
-                                                : ''
+    ch_par                   = params.dipcall_par                   ? Channel.fromPath(params.dipcall_par).collect()
+                                                                    : ''
+    ch_trgt_bed              = params.trgt_repeats                  ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
+                                                                    : ''
+    ch_variant_catalog       = params.variant_catalog               ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
+                                                                    : ''
+    // TODO: Add all missing parameters to schema
+    ch_databases             = params.snp_db                        ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
+                                                                    : ''
+    ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
+                                                                    : Channel.value([])
+    ch_vep_cache_unprocessed = params.vep_cache                     ? Channel.fromPath(params.vep_cache).map { it -> [ [id:'vep_cache'], it ] }.collect()
+                                                                    : Channel.value([[],[]])
+    ch_expected_xy_bed       = params.hificnv_xy                    ? Channel.fromPath(params.hificnv_xy).collect()
+                                                                    : ''
+    ch_expected_xx_bed       = params.hificnv_xx                    ? Channel.fromPath(params.hificnv_xx).collect()
+                                                                    : ''
+    ch_exclude_bed           = params.hificnv_exclude               ? Channel.fromPath(params.hificnv_exclude).collect()
+                                                                    : ''
+    ch_reduced_penetrance    = params.reduced_penetrance            ? Channel.fromPath(params.reduced_penetrance).collect()
+                                                                    : Channel.value([])
+    ch_score_config_snv      = params.score_config_snv              ? Channel.fromPath(params.score_config_snv).collect()
+                                                                    : Channel.value([])
+    ch_somalier_sites        = params.somalier_sites                ? Channel.fromPath(params.somalier_sites).map { [it.simpleName, it ] }.collect()
+                                                                    : ''
 
     // Check parameter that doesn't conform to schema validation here
-    if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { exit 1, '--split_fastq must be 0, or between 2 and 999'}
-    if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
-    if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { exit 1, 'The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md' }
+    if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { error "--split_fastq must be 0, or between 2 and 999."}
+    if (params.parallel_snv == 0 ) { error "--parallel_snv must be > 0." }
+    if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
 
     // Create PED from samplesheet
     ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
@@ -310,6 +319,25 @@ workflow NALLO {
                     [],
                     []
                 )
+
+                ANN_CSQ_PLI_SNV (
+                    SNV_ANNOTATION.out.vcf,
+                    ch_variant_consequences_snv
+                )
+                ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
+
+                ANN_CSQ_PLI_SNV.out.vcf_ann
+                    .filter { meta, vcf -> meta.contains_affected }
+                    .set { ch_rank_variants_in }
+
+                // Only run on if we have affected individuals
+                RANK_VARIANTS_SNV (
+                    ch_rank_variants_in,
+                    ch_pedfile,
+                    ch_reduced_penetrance,
+                    ch_score_config_snv
+                )
+                ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
             }
 
             if(!params.skip_cnv_calling) {

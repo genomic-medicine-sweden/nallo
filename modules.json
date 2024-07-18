@@ -84,6 +84,26 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
                     },
+                    "genmod/annotate": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/compound": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/models": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
+                    "genmod/score": {
+                        "branch": "master",
+                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "installed_by": ["modules"]
+                    },
                     "gfastats": {
                         "branch": "master",
                         "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
@@ -187,6 +207,11 @@
                     "stranger": {
                         "branch": "master",
                         "git_sha": "4806239588f35d27a95b187b4000d80e15152022",
+                        "installed_by": ["modules"]
+                    },
+                    "tabix/bgzip": {
+                        "branch": "master",
+                        "git_sha": "09d3c8c29b31a2dfd610305b10550f0e1dbcd4a9",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {

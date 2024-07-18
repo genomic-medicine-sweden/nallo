@@ -14,7 +14,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -33,7 +34,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -64,7 +66,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T11:59:06.873173703"
+        "timestamp": "2024-07-17T15:31:23.096622148"
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -88,7 +90,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
                     ]
@@ -115,7 +118,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,7533ee89ae115f8f78ac26d29efc78d3"
                     ]
@@ -161,7 +165,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:00:06.733280923"
+        "timestamp": "2024-07-17T15:32:23.136568046"
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -185,7 +189,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -212,7 +217,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -258,7 +264,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:01:17.865011558"
+        "timestamp": "2024-07-17T15:33:33.799209289"
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -275,7 +281,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -294,7 +301,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -325,7 +333,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T11:58:11.914343709"
+        "timestamp": "2024-07-17T15:30:27.757141768"
     },
     "1 sample - 1 bed, fasta, fai, []": {
         "content": [
@@ -342,7 +350,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -361,7 +370,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -392,7 +402,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T11:58:39.573530566"
+        "timestamp": "2024-07-17T15:30:55.576093313"
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -409,7 +419,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -428,7 +439,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -459,7 +471,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:00:33.980507128"
+        "timestamp": "2024-07-17T15:32:50.513361746"
     },
     "1 sample - 1 bed, fasta, fai, bed - stub": {
         "content": [
@@ -476,7 +488,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -495,7 +508,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -526,7 +540,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:00:47.655880789"
+        "timestamp": "2024-07-17T15:33:04.262079116"
     },
     "1 sample - no bed, fasta, fai, [] - stub": {
         "content": [
@@ -543,7 +557,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -562,7 +577,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -593,7 +609,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:00:20.154541832"
+        "timestamp": "2024-07-17T15:32:36.6951779"
     },
     "1 sample - 2 bed, fasta, fai, bed": {
         "content": [
@@ -610,7 +626,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -630,7 +647,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,e6dd7f56772c154750e937d9a56baa6d"
                     ]
@@ -662,7 +680,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T11:59:35.482195945"
+        "timestamp": "2024-07-17T15:31:51.744004194"
     },
     "1 sample - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -679,7 +697,8 @@
                 "1": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -699,7 +718,8 @@
                 "combined_bcf": [
                     [
                         {
-                            "id": "multisample"
+                            "id": "multisample",
+                            "contains_affected": false
                         },
                         "multisample.bcf_filltags.vcf_norm.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -731,6 +751,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-09T12:01:02.557411667"
+        "timestamp": "2024-07-17T15:33:18.116317115"
     }
 }

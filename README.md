@@ -44,9 +44,9 @@
 1. Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar))
 2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
 
-##### Filtering
+##### Filtering and ranking
 
-- TBD
+- Rank variants [GENMOD](https://github.com/Clinical-Genomics/genmod)
 
 ## Usage
 

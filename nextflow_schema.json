@@ -433,6 +433,12 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "variant_consequences_snv": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
+                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
                 "vep_cache": {
                     "type": "string",
                     "description": "Path to directory of vep_cache",
@@ -449,11 +455,13 @@
                 "hificnv_xy": {
                     "type": "string",
                     "format": "file-path",
+                    "description": "HiFiCNV BED file specifying expected copy number regions for XY samples.",
                     "exists": true
                 },
                 "hificnv_xx": {
                     "type": "string",
                     "format": "file-path",
+                    "description": "HiFiCNV BED file specifying expected copy number regions for XX samples.",
                     "exists": true
                 },
                 "hificnv_exclude": {
@@ -461,6 +469,20 @@
                     "format": "file-path",
                     "description": "HiFiCNV BED file specifying regions to exclude",
                     "exists": true
+                },
+                "reduced_penetrance": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file-csv",
+                    "description": "File with gene ids that have reduced penetrance. For use with genmod."
+                },
+                "score_config_snv": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "SNV rank model config file for genmod."
                 },
                 "somalier_sites": {
                     "type": "string",
