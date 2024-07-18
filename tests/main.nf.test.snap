@@ -3,7 +3,6 @@
         "content": [
             "multisample.ped:md5,f52b1fb9647cb255313b9602841481fd",
             "multisample.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595",
-<<<<<<< HEAD
             "multisample.samples.tsv:md5,1685dc6cb8c6b9806ca636662980d686",
             "multisample.html:md5,d05e0eceb70ada3a0c25f99a16ad1889",
             "multiqc_citations.txt:md5,188f1da6b674c7cb9995d09558071ba7",
@@ -36,40 +35,6 @@
             "HG002_Revio.HG002_Revio.vcf.gz.tbi:md5,65d6930f79e626a5542091b7a419dc2b",
             "HG002_Revio_modkit_pileup.bed.gz:md5,8850d8414ecefc2341452f23ce5e6870",
             "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,af7e0b1699351d6df3d93d223d5c3da9",
-=======
-            "multisample.samples.tsv:md5,9bbe6eb1d1db50e2e82bc6cfe1c22221",
-            "multisample.html:md5,283136428a33b326e2820776e2c5168e",
-            "multiqc_citations.txt:md5,188f1da6b674c7cb9995d09558071ba7",
-            "multiqc_fastqc.txt:md5,cc4dd5a796128775203e619d4fa55e77",
-            "multiqc_general_stats.txt:md5,ebc94a4f611d392f955331bef833d1c6",
-            "multiqc_somalier.txt:md5,b309df18a8580d87234e49b81ca370ee",
-            "bb6e2fb0828114f50f9f0f7c397ec5e4",
-            "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,60fc37725ef4a6d0fe6a4be826ad8314",
-            "HG002_Revio.asm.bp.hap2.p_ctg.assembly_summary:md5,907e237bd58e4903a326ef6d854401ac",
-            "8008c1a98a1f409910519d1d86337ed0",
-            "f62cb4e015b441eee74fca51da49a7a",
-            "HG002_Revio.dip.bed:md5,aab7c32940c81b37492444810d9e1ac4",
-            "HG002_Revio.hap1.bed:md5,22a179ba02f3af4e7e7ed06c878af4e5",
-            "HG002_Revio.hap2.bed:md5,c598102dd5f533c9b0f90a15b5c81551",
-            "HG002_Revio.HG002_Revio.copynum.bedgraph:md5,74d704412c35025a9cd83e36fcf2e829",
-            "HG002_Revio.HG002_Revio.depth.bw:md5,aaca682b1e6c5edb88fe9c5973d5648e",
-            "HG002_Revio.HG002_Revio.maf.bw:md5,13c988306f922649d2327e4ca2843d75",
-            "HG002_Revio.mosdepth.global.dist.txt:md5,110caf3501dbaa16b7181eb89f475340",
-            "HG002_Revio.mosdepth.region.dist.txt:md5,f5469b9627304ffdfc80ecb771c41bd1",
-            "HG002_Revio.mosdepth.summary.txt:md5,068c6f9873b111d6060162b6e20603f4",
-            "HG002_Revio.asm.bp.hap1.p_ctg.fasta.gz:md5,16cf17fadb46969ba50c94010e12f103",
-            "HG002_Revio.asm.bp.hap2.p_ctg.fasta.gz:md5,08a5f8d9b50fceadac7fc8429915e9c2",
-            "HG002_Revio.dip.vcf.gz:md5,bc35668a993d696cd7bfc3c3bc968abb",
-            "HG002_Revio.hap1.paf.gz:md5,f5f6fa0328c468eec5829c9b61a97ea4",
-            "HG002_Revio.hap1.var.gz:md5,05cecf3a103693d4939c66ee2224ae0a",
-            "HG002_Revio.hap2.paf.gz:md5,79ae3e1ef38ceb72d2bf350551b39559",
-            "HG002_Revio.hap2.var.gz:md5,4a58554f451354cf6dab4d14a6a97439",
-            "HG002_Revio.pair.vcf.gz:md5,610a8c3d6a0c99fcffa9cc0d6f6fecd1",
-            "HG002_Revio.HG002_Revio.vcf.gz:md5,bf0eaa42b0f83a25f8a60d6c0f3db750",
-            "HG002_Revio.HG002_Revio.vcf.gz.tbi:md5,fea091460d39f1cf3ef6e4e4822193c6",
-            "HG002_Revio_modkit_pileup.bed.gz:md5,85fd0a5875800893e97e1ba5a2834b8f",
-            "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,9ce7dcca51bc936cce03e5945372f0d9",
->>>>>>> f1ab2e5 (no clinical set before filtervep is working)
             "fcc3f220bb09d3264f97e7f620779be0",
             "74b4822241bd8d1bc42f494f1f3e326c",
             "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
@@ -85,11 +50,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-        "timestamp": "2024-07-17T19:59:10.02085362"
-=======
-        "timestamp": "2024-07-17T15:27:24.824349784"
->>>>>>> f1ab2e5 (no clinical set before filtervep is working)
+        "timestamp": "2024-07-18T11:31:11.633360548"
     },
     "test profile - multisample": {
         "content": [
@@ -174,10 +135,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-<<<<<<< HEAD
-        "timestamp": "2024-07-17T20:03:09.938862526"
-=======
-        "timestamp": "2024-07-17T15:54:11.739855591"
->>>>>>> f1ab2e5 (no clinical set before filtervep is working)
+        "timestamp": "2024-07-18T11:35:11.131546288"
     }
 }

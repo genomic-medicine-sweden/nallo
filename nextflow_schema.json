@@ -436,7 +436,7 @@
                 "variant_consequences_snv": {
                     "type": "string",
                     "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
-                    "help_text": "For more information check https://grch37.ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
                     "fa_icon": "fas fa-file-csv"
                 },
                 "vep_cache": {
