@@ -62,6 +62,10 @@
                 "skip_call_paralogs": {
                     "type": "boolean",
                     "description": "Skip call paralogs (Paraphase)"
+                },
+                "skip_rank_variants": {
+                    "type": "boolean",
+                    "description": "Skip rank variants workflow"
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"

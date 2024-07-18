@@ -46,6 +46,7 @@ workflow RANK_VARIANTS {
         ch_versions = ch_versions.mix(TABIX_TABIX.out.versions)
 
     emit:
-        vcf      = ch_vcf       // channel: [ val(meta), path(vcf) ]
-        versions = ch_versions  // channel: [ path(versions.yml) ]
+        vcf      = ch_vcf              // channel: [ val(meta), path(vcf) ]
+        tbi      = TABIX_TABIX.out.tbi // channel: [ val(meta), path(tbi) ]
+        versions = ch_versions         // channel: [ path(versions.yml) ]
 }

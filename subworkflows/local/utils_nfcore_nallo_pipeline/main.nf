@@ -43,6 +43,7 @@ def workflowSkips = [
     call_paralogs    : "skip_call_paralogs",
     cnv_calling      : "skip_cnv_calling",
     phasing          : "skip_phasing_wf",
+    rank_variants    : "skip_rank_variants",
     repeat_calling   : "skip_repeat_calling",
     repeat_annotation: "skip_repeat_annotation",
     methylation      : "skip_methylation_wf",
@@ -58,6 +59,7 @@ def workflowDependencies = [
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
+    rank_variants    : ["mapping", "snv_calling", "snv_annotation"],
     repeat_calling   : ["mapping", "snv_calling", "phasing"],
     repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
     methylation      : ["mapping", "snv_calling", "phasing"],
@@ -80,6 +82,7 @@ def parameterStatus = [
         skip_short_variant_calling: params.skip_short_variant_calling,
         skip_phasing_wf           : params.skip_phasing_wf,
         skip_methylation_wf       : params.skip_methylation_wf,
+        skip_rank_variants        : params.skip_rank_variants,
         skip_repeat_calling       : params.skip_repeat_calling,
         skip_repeat_annotation    : params.skip_repeat_annotation,
         skip_snv_annotation       : params.skip_snv_annotation,
@@ -184,6 +187,16 @@ workflow PIPELINE_INITIALISATION {
                 reads.collect { return [ meta, it ] }
         }
         .set { ch_samplesheet }
+
+        // Check that there's samples with affected phenotype if we are ranking variants
+        ch_samplesheet
+            .filter { meta, reads -> meta.phenotype == 2 }
+            .ifEmpty {
+                if(!params.skip_rank_variants) {
+                    error("No samples in samplesheet has affected phenotype (=2), --skip_rank_variants has to be active.")
+                }
+            }
+
 
     emit:
     samplesheet = ch_samplesheet

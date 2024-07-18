@@ -301,11 +301,11 @@ In case of affected samples, [echtvar](https://github.com/brentp/echtvar) and [V
 <details markdown="1">
 <summary>Output files from SNV Annotation</summary>
 
-- `{outputdir}/snv_annotation/echtvar/encode/multisample/`
+- `{outputdir}/databases/echtvar/encode/multisample/`
   - `*.zip`: Database with AF and AC for all samples run
-- `{outputdir}/snv_annotation/vep/{single_sample,multi_sample/multisample}/`
-  - `*.vcf.gz`: VCF with annotated variants
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
+- `{outputdir}/snvs/{single_sample,multi_sample/multisample}/`
+  - `*_snvs_annotated*.vcf.gz`: VCF with annotated variants
+  - `*_snvs_annotated*.vcf.gz.tbi`: Index of the corresponding VCF file
   </details>
 
 ### Ranked variants
@@ -321,9 +321,10 @@ In case of affected samples, [echtvar](https://github.com/brentp/echtvar) and [V
 <details markdown="1">
 <summary>Output files</summary>
 
-- `{outputdir}ranked_variants/`
-  - `*_snv_ranked.vcf.gz`: file containing SNV annotations with their rank scores (does not include mitochondrial variants).
-  - `*_snv_ranked.vcf.gz.tbi`: index of the file containing SNV annotations with their rank scores.
+- `{outputdir}/snvs/{single_sample,multi_sample/multisample}/`
+  - `*_snvs_annotated_ranked.vcf.gz`: VCF with annotated and ranked variants
+  - `*_snvs_annotated_ranked.vcf.gz.tbi`: Index of the corresponding VCF file
+  </details>
 
 ### SNV Calling
 
