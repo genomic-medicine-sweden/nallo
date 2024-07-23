@@ -5,8 +5,8 @@ include { BCFTOOLS_CONCAT                             } from '../../../modules/n
 include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
-include { DEEPVARIANT                                 } from '../../../modules/nf-core/deepvariant'
-include { GLNEXUS                                     } from '../../../modules/nf-core/glnexus'
+include { DEEPVARIANT                                 } from '../../../modules/nf-core/deepvariant/main'
+include { GLNEXUS                                     } from '../../../modules/nf-core/glnexus/main'
 
 workflow SHORT_VARIANT_CALLING {
 
