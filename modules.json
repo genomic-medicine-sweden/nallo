@@ -190,7 +190,7 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
+                        "git_sha": "b50aa17b1b604c7b3cfe58a2472d1e7b990ae8bf",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sniffles/sniffles.diff"
                     },

@@ -37,6 +37,7 @@ include { FQCRS                  } from '../modules/local/fqcrs'
 include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
+include { BCFTOOLS_CONCAT        } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
@@ -60,6 +61,7 @@ workflow NALLO {
     ch_input
 
     main:
+    ch_vep_cache     = Channel.value([])
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
@@ -80,7 +82,6 @@ workflow NALLO {
                                                                     : ''
     ch_variant_catalog       = params.variant_catalog               ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
-    // TODO: Add all missing parameters to schema
     ch_databases             = params.snp_db                        ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
@@ -102,9 +103,7 @@ workflow NALLO {
 
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { error "--split_fastq must be 0, or between 2 and 999."}
-    if (params.parallel_snv == 0 ) { error "--parallel_snv must be > 0." }
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
-
     // Create PED from samplesheet
     ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
 
@@ -151,6 +150,17 @@ workflow NALLO {
             ch_vep_cache_unprocessed,
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
+
+        if(!params.skip_snv_annotation) {
+
+            if (params.vep_cache) {
+                if (params.vep_cache.endsWith("tar.gz")) {
+                    ch_vep_cache = PREPARE_GENOME.out.vep_resources
+                } else {
+                    ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
+                }
+            }
+        }
 
         // Gather indices
         fasta = PREPARE_GENOME.out.fasta
@@ -270,55 +280,27 @@ workflow NALLO {
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         if(!params.skip_short_variant_calling) {
-            // Call SNVs with DeepVariant
+
+            //
+            // This calls and outputs a merged and normalised VCF per sample,
+            // to be used in downstream subworkflows requiring SNVs.
+            // This also outputs a merged multisample VCFs _per region_, to be used in annotation and ranking
             SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
 
-                def ch_vep_cache
-
-                if (params.vep_cache) {
-                    if (params.vep_cache.endsWith("tar.gz")) {
-                        ch_vep_cache = PREPARE_GENOME.out.vep_resources
-                    } else {
-                        ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
-                    }
-                } else {
-                        ch_vep_cache = Channel.value([])
-                }
-
                 //
-                // Make a echtvar file of all samples, and combine with input databases
-                //
-                ECHTVAR_ENCODE ( SHORT_VARIANT_CALLING.out.combined_bcf )
-                ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
-
-                ch_databases
-                    .concat ( ECHTVAR_ENCODE.out.db.map { it[1] } )
-                    .collect()
-                    .set { snv_annotation_dbs }
-
-                //
-                // Annotate a multisample VCF
+                // Annotate one multisample VCF per variant call region
                 //
                 SNV_ANNOTATION(
                     SHORT_VARIANT_CALLING.out.combined_bcf,
-                    snv_annotation_dbs,
+                    ch_databases,
                     fasta,
                     ch_vep_cache,
                     params.vep_cache_version
                 )
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
-
-                // Split multisample VCF to also publish a VCF per sample
-                BCFTOOLS_PLUGINSPLIT (
-                    SNV_ANNOTATION.out.vcf.join( SNV_ANNOTATION.out.tbi ),
-                    [],
-                    [],
-                    [],
-                    []
-                )
 
                 ANN_CSQ_PLI_SNV (
                     SNV_ANNOTATION.out.vcf,
@@ -327,18 +309,67 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
                 ANN_CSQ_PLI_SNV.out.vcf_ann
-                    .filter { meta, vcf -> meta.contains_affected }
-                    .set { ch_rank_variants_in }
+                    .join( ANN_CSQ_PLI_SNV.out.tbi_ann )
+                    .set { ch_vcf_tbi }
+            } else {
+                SHORT_VARIANT_CALLING.out.combined_bcf
+                    .join( SHORT_VARIANT_CALLING.out.combined_csi )
+                    .set { ch_vcf_tbi }
+            }
 
-                // Only run on if we have affected individuals
+            ch_vcf_tbi
+                .map { meta, vcf, tbi ->
+                    new_meta = [
+                        id:'multisample',
+                        contains_affected: meta.contains_affected.any()
+                    ]
+                    [ new_meta, vcf, tbi ]
+                }
+                .groupTuple()
+                .set { ch_bcftools_concat_in }
+
+            // Concat into a mutlisample VCF with all regions
+            // Pubish from here if we don't run rank variants
+            BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
+            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+
+            // Make an echtvar database of all samples
+            ECHTVAR_ENCODE ( BCFTOOLS_CONCAT.out.vcf )
+            ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
+
+            if(!params.skip_snv_annotation && !params.skip_rank_variants) {
+                // Only run if we have affected individuals
+                // Publish from here if we have affected individuals
+                // Not sure if this could be run in parallel or not
                 RANK_VARIANTS_SNV (
-                    ch_rank_variants_in,
+                    BCFTOOLS_CONCAT.out.vcf.filter { meta, vcf -> meta.contains_affected },
                     ch_pedfile,
                     ch_reduced_penetrance,
                     ch_score_config_snv
                 )
                 ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
+
+                split_multisample_in = Channel.empty()
+
+                // If there are affected individuals and RANK_VARIANTS has been run,
+                // split that, otherwise grab the VCF that should have gone into RANK_VARIANTS
+                split_multisample_in = split_multisample_in
+                    .mix(
+                        RANK_VARIANTS_SNV.out.vcf
+                            .join( RANK_VARIANTS_SNV.out.tbi )
+                            .filter { meta, vcf, tbi -> meta.contains_affected }
+                    )
+                    .mix( BCFTOOLS_CONCAT.out.vcf
+                        .join( BCFTOOLS_CONCAT.out.tbi )
+                        .filter { meta, vcf, tbi -> !meta.contains_affected }
+                    )
+            } else {
+                BCFTOOLS_CONCAT.out.vcf
+                    .join( BCFTOOLS_CONCAT.out.tbi )
+                    .set { split_multisample_in }
             }
+            // Split multisample VCF to also publish a VCF per sample
+            BCFTOOLS_PLUGINSPLIT ( split_multisample_in, [], [], [], [] )
 
             if(!params.skip_cnv_calling) {
                 bam_bai
@@ -356,7 +387,6 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(PHASING.out.versions)
 
                 hap_bam_bai = PHASING.out.haplotagged_bam_bai
-
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
                     METHYLATION( hap_bam_bai, fasta, fai, ch_input_bed )

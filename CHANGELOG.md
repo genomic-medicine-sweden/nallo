@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#245](https://github.com/genomic-medicine-sweden/nallo/pull/245) - Added repeat annotation with Stranger
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Added a new `SCATTER_GENOME` subworkflow
 - [#255](https://github.com/genomic-medicine-sweden/nallo/pull/255) - Added a new `RANK_VARIANTS` subworkflow to rank SNVs using genmod
+- [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Added a `--skip_rank_variants` parameter to skip the rank_variants subworkflow
 
 ### `Changed`
 
@@ -35,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#251](https://github.com/genomic-medicine-sweden/nallo/pull/251) - Switched from annotating single sample VCFs to annotating a multisample VCF, splitting the VCF per sample afterwards to keep outputs almost consistent
 - [#256](https://github.com/genomic-medicine-sweden/nallo/pull/256) - Changed Stranger to annotate single-sample VCFs instead of a multi-sample VCF
 - [#258](https://github.com/genomic-medicine-sweden/nallo/pull/258) - Updated test profile parameters to speed up tests
+- [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV annotation to run in parallel
+- [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV output file names and directory structure
 
 ### `Removed`
 
@@ -57,6 +60,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--extra_gvcfs`    |                            |
 | `--skip_repeat_wf` | `--skip_repeat_calling`    |
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
+|                    | `--skip_rank_variants`     |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
 
 ## v0.2.0 - [2024-06-26]
 

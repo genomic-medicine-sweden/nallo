@@ -1,11 +1,12 @@
-include { DEEPVARIANT                             } from '../../../modules/nf-core/deepvariant'
-include { GLNEXUS                                 } from '../../../modules/nf-core/glnexus'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_GVCF } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_VCF  } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_FILLTAGS                       } from '../../../modules/local/bcftools/filltags/main'
-include { BCFTOOLS_NORM                           } from '../../../modules/nf-core/bcftools/norm/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_GVCF     } from '../../../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_VCF      } from '../../../modules/nf-core/bcftools/sort/main'
+//
+// Workflow to call and merge SNVs
+//
+include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
+include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
+include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
+include { DEEPVARIANT                                 } from '../../../modules/nf-core/deepvariant/main'
+include { GLNEXUS                                     } from '../../../modules/nf-core/glnexus/main'
 
 workflow SHORT_VARIANT_CALLING {
 
@@ -18,58 +19,54 @@ workflow SHORT_VARIANT_CALLING {
     main:
     ch_versions = Channel.empty()
 
-    DEEPVARIANT ( ch_bam_bai_bed, ch_fasta, ch_fai, [[],[]] )
+    ch_bam_bai_bed
+        // Add call region to meta so we can group by it later
+        .map { meta, bam, bai, bed ->
+            [ meta + [ 'region': bed ], bam, bai, bed ]
+        }
+        .set { ch_deepvariant_in }
+
+    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]] )
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
 
-    // gVCF
-    DEEPVARIANT.out.gvcf
-        .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
-        .groupTuple()
-        .join( DEEPVARIANT.out.gvcf_tbi
-            .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
-            .groupTuple()
-        )
-        .map { meta, vcf, tbi ->
-            [ meta - meta.subMap('num_intervals'), vcf, tbi ]
-        }
-        .set{ bcftools_concat_gvcf_in }
-
-    // Concat into one gVCF per sample & sort
-    BCFTOOLS_CONCAT_GVCF ( bcftools_concat_gvcf_in )
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_GVCF.out.versions)
-
-    BCFTOOLS_SORT_GVCF ( BCFTOOLS_CONCAT_GVCF.out.vcf )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT_GVCF.out.versions)
-
-    // VCF
+    // First remove region so we can group per sample
+    // Then after grouping remove num_intervals since to match the meta of other workflows
     DEEPVARIANT.out.vcf
-        .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
+        .map { meta, vcf ->
+            new_meta = meta - meta.subMap('region')
+            [ groupKey(new_meta, new_meta.num_intervals ), vcf ]
+        }
         .groupTuple()
         .join( DEEPVARIANT.out.vcf_tbi
-            .map { meta, vcf -> [ groupKey(meta, meta.num_intervals ), vcf ] }
+            .map{ meta, tbi ->
+                new_meta = meta - meta.subMap('region')
+                [ groupKey(new_meta, new_meta.num_intervals ), tbi ]
+            }
             .groupTuple()
         )
         .map { meta, vcf, tbi ->
             [ meta - meta.subMap('num_intervals'), vcf, tbi ]
         }
-        .set{ bcftools_concat_vcf_in }
+        .set{ ch_concat_singlesample_in }
 
-    // Concat into one VCF per sample & sort
-    BCFTOOLS_CONCAT_VCF ( bcftools_concat_vcf_in )
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_VCF.out.versions)
+    // This creates a singlesample VCF containing ALL regions
+    BCFTOOLS_CONCAT ( ch_concat_singlesample_in )
+    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
-    BCFTOOLS_SORT_VCF ( BCFTOOLS_CONCAT_VCF.out.vcf )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT_VCF.out.versions)
+    // Which is then normalized, and ready to be used
+    // in processes that require SNVs, but not annotated SNVs
+    BCFTOOLS_NORM_SINGLESAMPLE ( BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
+    ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
-    // Multisample
-    BCFTOOLS_SORT_GVCF.out.vcf
-        .map { meta, gvcf -> [ 'multisample', meta.phenotype == 2, gvcf ] }
-        .groupTuple() // Group all files together
+    // This creates a multisample VCF, with regions from ONE bed file
+    DEEPVARIANT.out.gvcf
+        .map { meta, gvcf -> [ meta.region.name, meta.phenotype == 2, gvcf ] }
+        .groupTuple() // Group all files together per region
         // If any of the samples in the VCF have an affected phenotype (2)
         // add this to the meta of the multisample VCF to know if we should run RANK_VARIANTS or not
-        .map { id, affected, gvcfs ->
+        .map { region, affected, gvcfs ->
             new_meta = [
-                'id': id,
+                'id': region,
                 'contains_affected': affected.any(),
             ]
             [ new_meta, gvcfs ]
@@ -83,25 +80,17 @@ workflow SHORT_VARIANT_CALLING {
     BCFTOOLS_FILLTAGS ( GLNEXUS.out.bcf )
     ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
 
-    // Decompose and normalize variants
     BCFTOOLS_FILLTAGS.out.vcf
-        .concat( BCFTOOLS_SORT_VCF.out.vcf)
         .map { meta, vcf -> [ meta, vcf, [] ] }
         .set { bcftools_norm_in }
 
-    BCFTOOLS_NORM ( bcftools_norm_in, ch_fasta )
-    ch_versions = ch_versions.mix(BCFTOOLS_NORM.out.versions)
-
-    // Temporary solution while this workflow still outputs two types of vcfs
-    BCFTOOLS_NORM.out.vcf
-        .branch { meta, vcf ->
-            multisample: meta.id == "multisample"
-            singlesample: meta.id != "multisample"
-        }
-        .set { vcf_out }
+    // Decompose and normalize variants
+    BCFTOOLS_NORM_MULTISAMPLE ( bcftools_norm_in, ch_fasta )
+    ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
     emit:
-    snp_calls_vcf = vcf_out.singlesample // channel: [ val(meta), path(vcf) ]
-    combined_bcf  = vcf_out.multisample  // channel: [ val(meta), path(bcf) ]
-    versions      = ch_versions          // channel: [ path(versions.yml) ]
+    snp_calls_vcf = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf // channel: [ val(meta), path(bcf) ]
+    combined_bcf  = BCFTOOLS_NORM_MULTISAMPLE.out.vcf  // channel: [ val(meta), path(bcf) ]
+    combined_csi  = BCFTOOLS_NORM_MULTISAMPLE.out.csi  // channel: [ val(meta), path(csi) ]
+    versions      = ch_versions                        // channel: [ path(versions.yml) ]
 }
