@@ -75,10 +75,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:07:01.955811332"
+        "timestamp": "2024-08-09T12:33:33.642550865"
     },
     "2 samples - 2 bed, fasta, fai, bed": {
         "content": [
@@ -214,10 +214,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:08:56.682263691"
+        "timestamp": "2024-08-09T12:34:36.087668576"
     },
     "2 samples - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -353,10 +353,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:09:52.997168986"
+        "timestamp": "2024-08-09T12:35:27.910838148"
     },
     "1 sample - no bed, fasta, fai, []": {
         "content": [
@@ -442,10 +442,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:06:05.618203586"
+        "timestamp": "2024-08-09T12:32:38.562683632"
     },
     "1 sample - 1 bed, fasta, fai, []": {
         "content": [
@@ -523,10 +523,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:06:33.975664464"
+        "timestamp": "2024-08-09T12:33:06.128266568"
     },
     "1 sample - 1 bed, fasta, fai, [] - stub": {
         "content": [
@@ -604,10 +604,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:09:16.393719634"
+        "timestamp": "2024-08-09T12:34:56.051878451"
     },
     "1 sample - 1 bed, fasta, fai, bed - stub": {
         "content": [
@@ -685,10 +685,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:09:26.530459549"
+        "timestamp": "2024-08-09T12:35:05.660557092"
     },
     "1 sample - no bed, fasta, fai, [] - stub": {
         "content": [
@@ -774,10 +774,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:09:06.541104295"
+        "timestamp": "2024-08-09T12:34:45.861028555"
     },
     "1 sample - 2 bed, fasta, fai, bed": {
         "content": [
@@ -891,10 +891,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:07:43.362545869"
+        "timestamp": "2024-08-09T12:34:03.458045229"
     },
     "1 sample - 2 bed, fasta, fai, bed - stub": {
         "content": [
@@ -1008,9 +1008,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
+            "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:09:38.575037214"
+        "timestamp": "2024-08-09T12:35:16.395171025"
     }
 }

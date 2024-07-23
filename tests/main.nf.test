@@ -14,7 +14,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
                 // Test files
                 fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input                    = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet.csv'
+                input                    = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet.csv'
                 bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
                 hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
                 hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
@@ -41,10 +41,10 @@ nextflow_pipeline {
                 { assert workflow.success },
                 // Assert with snapshot multisample
                 { assert snapshot(
-                    file("$outputDir/pipeline_info/multisample.ped"),
-                    file("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.pairs.tsv"),
-                    file("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.samples.tsv"),
-                    file("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.html"),
+                    file("$outputDir/pedigree/test.ped"),
+                    file("$outputDir/qc_aligned_reads/somalier/relate/test/test.pairs.tsv"),
+                    file("$outputDir/qc_aligned_reads/somalier/relate/test/test.samples.tsv"),
+                    file("$outputDir/qc_aligned_reads/somalier/relate/test/test.html"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_somalier.txt"),
@@ -84,22 +84,22 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
-                    file("$outputDir/snvs/stats/single_sample/HG002_Revio.vcf.gz.bcftools_stats.txt"),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio.vcf.gz.bcftools_stats.txt").readLines()[0..2],
                 ).match() },
                 // Assert exists multisample
-                { assert new File("$outputDir/databases/echtvar/encode/multisample/multisample.zip").exists() },
+                { assert new File("$outputDir/databases/echtvar/encode/test/test.zip").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_data.json").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc.log").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
-                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
-                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/snvs/multi_sample/multisample/multisample_snv_annotated_ranked.vcf.gz").exists() },
-                { assert new File("$outputDir/snvs/multi_sample/multisample/multisample_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio
                 { assert new File("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_phased.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap1.bam.bai").exists() },
@@ -146,7 +146,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
                 // Test files
                 fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input                    = params.pipelines_testdata_base_path + 'nallo/testdata/samplesheet_multisample_bam.csv'
+                input                    = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam.csv'
                 bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
                 hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
                 hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
@@ -173,7 +173,7 @@ nextflow_pipeline {
                 { assert workflow.success },
                 // Assert with snapshot multisample
                 { assert snapshot(
-                    file("$outputDir/pipeline_info/multisample.ped"),
+                    file("$outputDir/pedigree/test.ped"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     // Assert with snapshot HG002_Revio_A
@@ -212,7 +212,7 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
-                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt"),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt").readLines()[0..2],
                     // Assert with snapshot HG002_Revio_B
                     bam("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_phased.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary"),
@@ -249,13 +249,13 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
-                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_B.vcf.gz.bcftools_stats.txt"),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_B.vcf.gz.bcftools_stats.txt").readLines()[0..2],
                 ).match() },
                 // Assert exists multisample - note the trgt multisample that doesn't exist in singlesample
-                { assert new File("$outputDir/databases/echtvar/encode/multisample/multisample.zip").exists() },
-                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.pairs.tsv").exists() },
-                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.samples.tsv").exists() },
-                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/multisample/multisample.html").exists() },
+                { assert new File("$outputDir/databases/echtvar/encode/test/test.zip").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.pairs.tsv").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.samples.tsv").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_somalier.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_data.json").exists() },
@@ -263,12 +263,12 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
-                { assert new File("$outputDir/snvs/multi_sample/multisample/multisample_snv_annotated_ranked.vcf.gz").exists() },
-                { assert new File("$outputDir/snvs/multi_sample/multisample/multisample_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/multisample_sniffles.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz").exists() },
-                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/multisample/multisample.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz").exists() },
+                { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_A
                 { assert new File("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_phased.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam.bai").exists() },

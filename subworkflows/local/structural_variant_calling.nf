@@ -5,7 +5,6 @@ workflow STRUCTURAL_VARIANT_CALLING {
 
     take:
     ch_bam_bai // channel: [ val(meta), [[ bam ], [bai]] ]
-    ch_snfs
     ch_fasta
     ch_fai
     ch_tandem_repeats
@@ -15,13 +14,10 @@ workflow STRUCTURAL_VARIANT_CALLING {
 
     SNIFFLES (ch_bam_bai, ch_fasta, ch_tandem_repeats, true, true)
 
-    // Combine sniffles output with supplied extra snfs
     SNIFFLES.out.snf
-        .map{ it [1] }
-        .concat(ch_snfs.map{ it[1] })
-        .collect()
-        .sort{ it.name }
-        .map { snfs -> [ [id:'multisample'], snfs, [] ] }
+        .map { meta, snf -> [ [ 'id': meta.project ], snf ] }
+        .groupTuple()
+        .map { meta, snfs -> [ meta, snfs, [] ] }
         .set{ ch_multisample_input }
 
     SNIFFLES_MULTISAMPLE( ch_multisample_input, ch_fasta, ch_tandem_repeats, true, false )

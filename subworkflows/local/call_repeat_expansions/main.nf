@@ -33,7 +33,7 @@ workflow CALL_REPEAT_EXPANSIONS {
 
     BCFTOOLS_SORT_TRGT.out.vcf
         .join( BCFTOOLS_SORT_TRGT.out.tbi )
-        .map { meta, bcf, csi -> [ [ id : 'multisample' ], bcf, csi ] }
+        .map { meta, bcf, csi -> [ [ id : meta.project ], bcf, csi ] }
         .groupTuple()
         .set{ ch_bcftools_merge_in }
 

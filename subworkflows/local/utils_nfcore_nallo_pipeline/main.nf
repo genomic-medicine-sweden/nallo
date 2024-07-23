@@ -200,7 +200,16 @@ workflow PIPELINE_INITIALISATION {
                 }
             }
 
-
+        // Check that there's no more than one project
+        // TODO: Try to do this in nf-schema
+        ch_samplesheet
+            .map { meta, reads -> meta.project }
+            .unique()
+            .collect()
+            .filter{ it.size() == 1 }
+            .ifEmpty {
+                error("Only one project may be specified per run")
+            }
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions

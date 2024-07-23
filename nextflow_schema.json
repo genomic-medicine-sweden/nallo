@@ -422,14 +422,6 @@
                     "format": "file-path",
                     "exists": true
                 },
-                "extra_snfs": {
-                    "type": "string",
-                    "description": "Extra input files for Sniffles",
-                    "pattern": "^\\S+\\.csv$",
-                    "format": "file-path",
-                    "schema": "assets/schema_snfs.json",
-                    "exists": true
-                },
                 "tandem_repeats": {
                     "type": "string",
                     "format": "file-path",
