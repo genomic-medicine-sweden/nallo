@@ -86,7 +86,10 @@ nextflow_workflow {
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[4] = '110'
+                input[4] = Channel.value('110')
+                input[5] = false
+                input[6] = Channel.value([])
+                input[7] = Channel.value([])
                 """
             }
         }
@@ -121,6 +124,9 @@ nextflow_workflow {
                 input[2] = GUNZIP.out.gunzip
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[4] = '110'
+                input[5] = false
+                input[6] = false
+                input[7] = Channel.value([])
                 """
             }
         }

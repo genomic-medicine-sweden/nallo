@@ -77,6 +77,9 @@ workflow NALLO {
                                                 : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
+    ch_cadd_header           = Channel.fromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true).collect()
+    ch_cadd_resources        = params.cadd_resources                ? Channel.fromPath(params.cadd_resources).collect()
+                                                                    : Channel.value([])
     ch_par                   = params.dipcall_par                   ? Channel.fromPath(params.dipcall_par).collect()
                                                                     : ''
     ch_trgt_bed              = params.trgt_repeats                  ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
@@ -300,7 +303,10 @@ workflow NALLO {
                     ch_databases,
                     fasta,
                     ch_vep_cache,
-                    params.vep_cache_version
+                    params.vep_cache_version,
+                    params.cadd_resources,
+                    ch_cadd_header,
+                    ch_cadd_resources,
                 )
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
 

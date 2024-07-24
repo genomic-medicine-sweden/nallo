@@ -400,6 +400,14 @@
             "default": "",
             "fa_icon": "fas fa-copy",
             "properties": {
+                "cadd_resources": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to the directory containing cadd annotations.",
+                    "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
+                },
                 "dipcall_par": {
                     "type": "string",
                     "description": "Provide a bed file of chrX PAR regions for dipcall",

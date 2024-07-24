@@ -1,4 +1,37 @@
 {
+    "bcf, db, vep_cache, '110', -stub": {
+        "content": [
+            [
+                "versions.yml:md5,797275193dd19766e99030e63c23bd5f",
+                "versions.yml:md5,992301857689684643c42695c032a7f2",
+                "versions.yml:md5,a07924ee4ebc2d4de5bb7ef897ddc30c",
+                "versions.yml:md5,c0e55e36a31ed71acf25702b7d059533"
+            ],
+            [
+                [
+                    {
+                        "id": "test_data.bed",
+                        "contains_affected": false
+                    },
+                    "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test_data.bed",
+                        "contains_affected": false
+                    },
+                    "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-05T11:10:44.520214699"
+    },
     "bcf, db, vep_cache, '110'": {
         "content": [
             [
@@ -120,39 +153,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-24T11:34:38.047081158"
-    },
-    "bcf, db, vep_cache, '110', -stub": {
-        "content": [
-            [
-                "versions.yml:md5,797275193dd19766e99030e63c23bd5f",
-                "versions.yml:md5,992301857689684643c42695c032a7f2",
-                "versions.yml:md5,a07924ee4ebc2d4de5bb7ef897ddc30c",
-                "versions.yml:md5,c0e55e36a31ed71acf25702b7d059533"
-            ],
-            [
-                [
-                    {
-                        "id": "test_data.bed",
-                        "contains_affected": false
-                    },
-                    "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_data.bed",
-                        "contains_affected": false
-                    },
-                    "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                ]
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.3"
-        },
-        "timestamp": "2024-07-24T11:10:50.889591301"
+        "timestamp": "2024-08-05T11:12:17.324211719"
     }
 }
