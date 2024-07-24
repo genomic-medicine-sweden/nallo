@@ -11,6 +11,11 @@
             "description": "Options to skip various steps within the workflow",
             "default": "",
             "properties": {
+                "skip_aligned_read_qc": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip aligned read QC"
+                },
                 "skip_raw_read_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",

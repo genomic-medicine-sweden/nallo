@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Added a new `SCATTER_GENOME` subworkflow
 - [#255](https://github.com/genomic-medicine-sweden/nallo/pull/255) - Added a new `RANK_VARIANTS` subworkflow to rank SNVs using genmod
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Added a `--skip_rank_variants` parameter to skip the rank_variants subworkflow
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added a `--skip_aligned_read_qc` parameter to skip the qc aligned reads subworkflow
 
 ### `Changed`
 
@@ -62,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--skip_repeat_wf` | `--skip_repeat_calling`    |
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
 |                    | `--skip_rank_variants`     |
+|                    | `--skip_aligned_read_qc`   |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
