@@ -19,8 +19,9 @@ workflow PHASING {
         fai        // channel: [ val(meta), fai ]
 
     main:
-        ch_versions = Channel.empty()
+        ch_versions            = Channel.empty()
         ch_bam_bai_haplotagged = Channel.empty()
+        ch_vcf_index           = Channel.empty()
 
         TABIX_TABIX(ch_vcf)
         ch_versions = ch_versions.mix(TABIX_TABIX.out.versions)
@@ -29,9 +30,6 @@ workflow PHASING {
 
             WHATSHAP_PHASE( ch_vcf.join(ch_bam_bai), fasta, fai )
             ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
-
-            WHATSHAP_STATS( WHATSHAP_PHASE.out.vcf_tbi )
-            ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
 
             WHATSHAP_PHASE.out.vcf_tbi
                 .join(ch_bam_bai)
@@ -48,6 +46,8 @@ workflow PHASING {
                 .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
                 .set { ch_bam_bai_haplotagged }
 
+            ch_vcf_index = ch_vcf_index.mix( WHATSHAP_PHASE.out.vcf_tbi )
+
         } else if (params.phaser.equals("hiphase_snv")) {
             ch_vcf
                 .join(TABIX_TABIX.out.csi)
@@ -60,6 +60,8 @@ workflow PHASING {
             HIPHASE_SNV.out.bams
                 .join(HIPHASE_SNV.out.bais)
                 .set { ch_bam_bai_haplotagged }
+
+            ch_vcf_index = ch_vcf_index.mix( HIPHASE_SNV.out.vcfs.join(HIPHASE_SNV.out.vcfs_tbi) )
 
         } else if (params.phaser.equals("hiphase_sv")) {
             // Sniffles specific...
@@ -107,12 +109,18 @@ workflow PHASING {
             HIPHASE_SV.out.bams
                 .join(HIPHASE_SV.out.bais)
                 .set { ch_bam_bai_haplotagged }
+
+            ch_vcf_index = ch_vcf_index.mix( HIPHASE_SV.out.vcfs.join(HIPHASE_SV.out.vcfs_tbi) )
         }
+
+        WHATSHAP_STATS( ch_vcf_index )
+        ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
 
         CRAMINO_PHASED( ch_bam_bai_haplotagged )
         ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions)
 
     emit:
-    haplotagged_bam_bai = ch_bam_bai_haplotagged // channel: [ val(meta), bam, bai ]
-    versions            = ch_versions            // channel: [ versions.yml ]
+    haplotagged_bam_bai = ch_bam_bai_haplotagged   // channel: [ val(meta), bam, bai ]
+    stats               = WHATSHAP_STATS.out.stats // channel: [ val(meta), txt ]
+    versions            = ch_versions              // channel: [ versions.yml ]
 }
