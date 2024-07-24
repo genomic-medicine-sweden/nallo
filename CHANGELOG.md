@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#231](https://github.com/genomic-medicine-sweden/nallo/pull/231) - Fixed certain tags in input BAM files being transfered over to (re)aligned BAM
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Fixed duplicate SNVs in outputs when providing a BED-regions with overlapping regions
+- [#267](https://github.com/genomic-medicine-sweden/nallo/pull/267) - Fixed warning where `MODKIT_PILEUP_HAPLOTYPES` would be defined more than once
 
 ### Parameters
 
