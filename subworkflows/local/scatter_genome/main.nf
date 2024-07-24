@@ -1,3 +1,4 @@
+include { BEDTOOLS_MAKEWINDOWS     } from '../../../modules/nf-core/bedtools/makewindows/main'
 include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
 include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
 include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
@@ -23,7 +24,7 @@ workflow SCATTER_GENOME {
     if( make_bed_from_fai ) {
 
 
-        BUILD_INTERVALS ( ch_fai )
+        BUILD_INTERVALS ( ch_fai.map { id, fai -> [ [ 'id': id ], fai ] } )
         ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
 
         BUILD_INTERVALS.out.bed
@@ -47,7 +48,10 @@ workflow SCATTER_GENOME {
         BEDTOOLS_MERGE ( BEDTOOLS_SORT.out.sorted )
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
-        SPLIT_BED_CHUNKS( BEDTOOLS_MERGE.out.bed, split_n )
+        BEDTOOLS_MAKEWINDOWS ( BEDTOOLS_MERGE.out.bed )
+        ch_versions = ch_versions.mix(BEDTOOLS_MAKEWINDOWS.out.versions)
+
+        SPLIT_BED_CHUNKS( BEDTOOLS_MAKEWINDOWS.out.bed, split_n )
         ch_versions = ch_versions.mix(SPLIT_BED_CHUNKS.out.versions)
 
         // Create a channel with the bed file and the total number of intervals (for groupKey)

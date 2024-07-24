@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#255](https://github.com/genomic-medicine-sweden/nallo/pull/255) - Added a new `RANK_VARIANTS` subworkflow to rank SNVs using genmod
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Added a `--skip_rank_variants` parameter to skip the rank_variants subworkflow
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added a `--skip_aligned_read_qc` parameter to skip the qc aligned reads subworkflow
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added bedtools makewindows to (sub)divide variant calling regions into 1Mb windows
 
 ### `Changed`
 
