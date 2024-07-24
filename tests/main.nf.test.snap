@@ -19,7 +19,7 @@
             "HG002_Revio.hap2.bed:md5,8b9a998402277ef043718f95a5410fe1",
             "HG002_Revio.HG002_Revio.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
             "HG002_Revio.HG002_Revio.depth.bw:md5,20757c985f4713b8568dee05765db701",
-            "HG002_Revio.HG002_Revio.maf.bw:md5,0fe9af2b70623412e1f9fe1cff60a4ea",
+            "HG002_Revio.HG002_Revio.maf.bw:md5,4699d7a664277863f06eb48c3cba3c41",
             "HG002_Revio.mosdepth.global.dist.txt:md5,6186315d4d65eda85553af82a98829d1",
             "HG002_Revio.mosdepth.region.dist.txt:md5,c6c7ee8f056b8b2b92c97ec472b1db16",
             "HG002_Revio.mosdepth.summary.txt:md5,35c51f1ad9d2856d1e6446205f19a8e3",
@@ -47,10 +47,10 @@
             "110181f29066158df34abbad9e3becc8"
         ],
         "meta": {
-            "nf-test": "0.8.4",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-18T11:31:11.633360548"
+        "timestamp": "2024-07-22T10:26:20.575005467"
     },
     "test profile - multisample": {
         "content": [
@@ -68,7 +68,7 @@
             "HG002_Revio_A.hap2.bed:md5,8b9a998402277ef043718f95a5410fe1",
             "HG002_Revio_A.HG002_Revio_A.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
             "HG002_Revio_A.HG002_Revio_A.depth.bw:md5,20757c985f4713b8568dee05765db701",
-            "HG002_Revio_A.HG002_Revio_A.maf.bw:md5,0fe9af2b70623412e1f9fe1cff60a4ea",
+            "HG002_Revio_A.HG002_Revio_A.maf.bw:md5,4699d7a664277863f06eb48c3cba3c41",
             "HG002_Revio_A.mosdepth.global.dist.txt:md5,6186315d4d65eda85553af82a98829d1",
             "HG002_Revio_A.mosdepth.region.dist.txt:md5,c6c7ee8f056b8b2b92c97ec472b1db16",
             "HG002_Revio_A.mosdepth.summary.txt:md5,35c51f1ad9d2856d1e6446205f19a8e3",
@@ -104,7 +104,7 @@
             "HG002_Revio_B.hap2.bed:md5,865338ef4e621ca1e8efcc0a8a6c64d0",
             "HG002_Revio_B.HG002_Revio_B.copynum.bedgraph:md5,22b040fce6bdf6b2e323f1cc1658128d",
             "HG002_Revio_B.HG002_Revio_B.depth.bw:md5,26bc36669ae0b066c2462e3c9307860f",
-            "HG002_Revio_B.HG002_Revio_B.maf.bw:md5,68c3bf5b018e8cc0aab5f875724a669d",
+            "HG002_Revio_B.HG002_Revio_B.maf.bw:md5,6c5691dbaf6e526f4b8fa0f7147bfc8b",
             "HG002_Revio_B.mosdepth.global.dist.txt:md5,c3449580a34c495f537635c3bde4699d",
             "HG002_Revio_B.mosdepth.region.dist.txt:md5,98a20c6295a956932c21534cbf5e889c",
             "HG002_Revio_B.mosdepth.summary.txt:md5,d4fa8aeabc3b348255e7a2fa0135b1a4",
@@ -132,9 +132,9 @@
             "18e3bd1fe43fc17ace2f57db5861498c"
         ],
         "meta": {
-            "nf-test": "0.8.4",
+            "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-18T11:35:11.131546288"
+        "timestamp": "2024-07-22T10:30:36.222066052"
     }
 }
