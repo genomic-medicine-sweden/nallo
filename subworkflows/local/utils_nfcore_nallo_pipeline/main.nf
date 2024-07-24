@@ -36,7 +36,8 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 def workflowSkips = [
     assembly         : "skip_assembly_wf",
-    qc               : "skip_raw_read_qc",
+    raw_read_qc      : "skip_raw_read_qc",
+    aligned_read_qc  : "skip_aligned_read_qc",
     mapping          : "skip_mapping_wf",
     snv_calling      : "skip_short_variant_calling",
     snv_annotation   : "skip_snv_annotation",
@@ -53,6 +54,7 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
+    alinged_read_qc  : ["mapping"],
     assembly         : ["mapping"],
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
@@ -89,7 +91,8 @@ def parameterStatus = [
         skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
         skip_mapping_wf           : params.skip_mapping_wf,
-        skip_qc                   : params.skip_qc,
+        skip_aligned_read_qc      : params.skip_aligned_read_qc,
+        skip_raw_read_qc          : params.skip_raw_read_qc,
         skip_assembly_wf          : params.skip_assembly_wf,
     ],
     files: [
