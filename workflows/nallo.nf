@@ -39,6 +39,7 @@ include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
 // nf-core
 include { BCFTOOLS_CONCAT        } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT   } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_STATS         } from '../modules/nf-core/bcftools/stats/main'
 include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { FASTP                  } from '../modules/nf-core/fastp/main'
@@ -370,6 +371,16 @@ workflow NALLO {
             }
             // Split multisample VCF to also publish a VCF per sample
             BCFTOOLS_PLUGINSPLIT ( split_multisample_in, [], [], [], [] )
+            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+
+            BCFTOOLS_PLUGINSPLIT.out.vcf
+                .transpose()
+                .map { meta, vcf -> [ meta, vcf, [] ] }
+                .set { ch_bcftools_stats_snv_in }
+
+            BCFTOOLS_STATS ( ch_bcftools_stats_snv_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
+            ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
             if(!params.skip_cnv_calling) {
                 bam_bai

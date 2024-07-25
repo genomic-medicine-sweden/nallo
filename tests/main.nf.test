@@ -86,6 +86,7 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio.vcf.gz.bcftools_stats.txt"),
                 ).match() },
                 // Assert exists multisample
                 { assert new File("$outputDir/databases/echtvar/encode/multisample/multisample.zip").exists() },
@@ -215,6 +216,7 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt"),
                     // Assert with snapshot HG002_Revio_B
                     bam("$outputDir/aligned_reads/minimap2/HG002_Revio_B/HG002_Revio_B.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary"),
@@ -252,6 +254,7 @@ nextflow_pipeline {
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz"),
                     file("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz.tbi"),
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/snvs/stats/single_sample/HG002_Revio_B.vcf.gz.bcftools_stats.txt"),
                 ).match() },
                 // Assert exists multisample - note the trgt multisample that doesn't exist in singlesample
                 { assert new File("$outputDir/databases/echtvar/encode/multisample/multisample.zip").exists() },
