@@ -385,7 +385,6 @@ workflow NALLO {
             if(!params.skip_cnv_calling) {
                 bam_bai
                     .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
-                    .groupTuple()
                     .set { cnv_workflow_in }
 
                 CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
