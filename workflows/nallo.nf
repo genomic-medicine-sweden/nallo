@@ -292,7 +292,7 @@ workflow NALLO {
             if(!params.skip_snv_annotation) {
 
                 //
-                // Annotate one multisample VCF per variant call region
+                // Annotates one multisample VCF per variant call region
                 //
                 SNV_ANNOTATION(
                     SHORT_VARIANT_CALLING.out.combined_bcf,
@@ -309,28 +309,44 @@ workflow NALLO {
                 )
                 ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
-                ANN_CSQ_PLI_SNV.out.vcf_ann
-                    .join( ANN_CSQ_PLI_SNV.out.tbi_ann )
-                    .set { ch_vcf_tbi }
+                //
+                // Ranks one multisample VCF per variant call region
+                //
+                if(!params.skip_rank_variants) {
+                    // Only run if we have affected individuals
+                    RANK_VARIANTS_SNV (
+                        ANN_CSQ_PLI_SNV.out.vcf_ann.filter { meta, vcf -> meta.contains_affected },
+                        ch_pedfile,
+                        ch_reduced_penetrance,
+                        ch_score_config_snv
+                    )
+                    ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
+
+                    // If there are affected individuals and RANK_VARIANTS has been run,
+                    // input that to VCF concatenation
+                    RANK_VARIANTS_SNV.out.vcf
+                        .join( RANK_VARIANTS_SNV.out.tbi )
+                        .set { ch_vcf_tbi_per_region }
+                } else {
+                    // otherwise grab the VCF that should have gone into RANK_VARIANTS
+                    ANN_CSQ_PLI_SNV.out.vcf_ann
+                        .join( ANN_CSQ_PLI_SNV.out.tbi_ann )
+                        .set { ch_vcf_tbi_per_region }
+                }
             } else {
+                // If neither snv_annotation nor rank_variants was run, take the output from
+                // SHORT_VARIANT_CALLING
                 SHORT_VARIANT_CALLING.out.combined_bcf
                     .join( SHORT_VARIANT_CALLING.out.combined_csi )
-                    .set { ch_vcf_tbi }
+                    .set { ch_vcf_tbi_per_region }
             }
 
-            ch_vcf_tbi
-                .map { meta, vcf, tbi ->
-                    new_meta = [
-                        id:'multisample',
-                        contains_affected: meta.contains_affected.any()
-                    ]
-                    [ new_meta, vcf, tbi ]
-                }
+            ch_vcf_tbi_per_region
+                .map { meta, vcf, tbi -> [ [ id: 'multisample' ], vcf, tbi ] }
                 .groupTuple()
                 .set { ch_bcftools_concat_in }
 
-            // Concat into a mutlisample VCF with all regions
-            // Pubish from here if we don't run rank variants
+            // Concat into a multisample VCF with all regions and publish
             BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
             ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
@@ -338,39 +354,8 @@ workflow NALLO {
             ECHTVAR_ENCODE ( BCFTOOLS_CONCAT.out.vcf )
             ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
 
-            if(!params.skip_snv_annotation && !params.skip_rank_variants) {
-                // Only run if we have affected individuals
-                // Publish from here if we have affected individuals
-                // Not sure if this could be run in parallel or not
-                RANK_VARIANTS_SNV (
-                    BCFTOOLS_CONCAT.out.vcf.filter { meta, vcf -> meta.contains_affected },
-                    ch_pedfile,
-                    ch_reduced_penetrance,
-                    ch_score_config_snv
-                )
-                ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
-
-                split_multisample_in = Channel.empty()
-
-                // If there are affected individuals and RANK_VARIANTS has been run,
-                // split that, otherwise grab the VCF that should have gone into RANK_VARIANTS
-                split_multisample_in = split_multisample_in
-                    .mix(
-                        RANK_VARIANTS_SNV.out.vcf
-                            .join( RANK_VARIANTS_SNV.out.tbi )
-                            .filter { meta, vcf, tbi -> meta.contains_affected }
-                    )
-                    .mix( BCFTOOLS_CONCAT.out.vcf
-                        .join( BCFTOOLS_CONCAT.out.tbi )
-                        .filter { meta, vcf, tbi -> !meta.contains_affected }
-                    )
-            } else {
-                BCFTOOLS_CONCAT.out.vcf
-                    .join( BCFTOOLS_CONCAT.out.tbi )
-                    .set { split_multisample_in }
-            }
             // Split multisample VCF to also publish a VCF per sample
-            BCFTOOLS_PLUGINSPLIT ( split_multisample_in, [], [], [], [] )
+            BCFTOOLS_PLUGINSPLIT ( BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi ), [], [], [], [] )
             ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
 
             BCFTOOLS_PLUGINSPLIT.out.vcf
