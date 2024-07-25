@@ -49,9 +49,8 @@ workflow PHASING {
                 .set { ch_bam_bai_haplotagged }
 
         } else if (params.phaser.equals("hiphase_snv")) {
-
             ch_vcf
-                .join(TABIX_TABIX.out.tbi)
+                .join(TABIX_TABIX.out.csi)
                 .join(ch_bam_bai)
                 .set { ch_hiphase_snv_in }
 
@@ -92,7 +91,7 @@ workflow PHASING {
                 .groupTuple()
                 .set { ch_hiphase_vcf }
 
-            TABIX_TABIX.out.tbi
+            TABIX_TABIX.out.csi
                 .concat(ch_sv_tbi)
                 .groupTuple()
                 .set { ch_hiphase_tbi }
