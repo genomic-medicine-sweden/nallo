@@ -30,7 +30,7 @@ nextflow_pipeline {
                 variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
 
                 // Parameters
-                parallel_snv    = 3
+                parallel_snv    = 2
                 preset          = "revio"
                 outdir          = "$outputDir"
             }
@@ -162,7 +162,7 @@ nextflow_pipeline {
                 variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
 
                 // Parameters
-                parallel_snv    = 3
+                parallel_snv    = 2
                 preset          = "revio"
                 outdir          = "$outputDir"
             }

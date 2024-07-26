@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#268](https://github.com/genomic-medicine-sweden/nallo/pull/268) - Changed alignment output file names and directory structure
 - [#270](https://github.com/genomic-medicine-sweden/nallo/pull/270) - Changed whatshap stats to always run, regardless of phasing software, and changed the output from `*.stats.tsv.gz` to `*.stats.tsv` to allow being picked up by MultiQC
 - [#277](https://github.com/genomic-medicine-sweden/nallo/pull/277) - Allowed CNV calling as soon as SNV calling for a sample is finished
+- [#278](https://github.com/genomic-medicine-sweden/nallo/pull/278) - Changed the SNV ranking to run in parallel per region
 
 ### `Removed`
 
