@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#260](https://github.com/genomic-medicine-sweden/nallo/pull/260) - Updated DeepVariant to 1.6.1 and htslib (tabix) to 1.20
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV annotation to run in parallel
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV output file names and directory structure
+- [#262](https://github.com/genomic-medicine-sweden/nallo/pull/262) - Updated README
 - [#268](https://github.com/genomic-medicine-sweden/nallo/pull/268) - Only output unphased alignments when phasing is off
 - [#268](https://github.com/genomic-medicine-sweden/nallo/pull/268) - Changed alignment output file names and directory structure
 - [#277](https://github.com/genomic-medicine-sweden/nallo/pull/277) - Allowed CNV calling as soon as SNV calling for a sample is finished

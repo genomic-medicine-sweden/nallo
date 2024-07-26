@@ -29,7 +29,7 @@
 
 - Short variant calling & joint genotyping of SNVs ([`deepvariant`](https://github.com/google/deepvariant) + [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
 - SV calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
-- Tandem repeats ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
+- Tandem repeats (HiFi only) ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 - Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 - CNV-calling (HiFi only) ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
 - Call paralogous genes ([`Paraphase`](https://github.com/PacificBiosciences/paraphase))
@@ -37,16 +37,15 @@
 ##### Phasing and methylation
 
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
-- Methylation pileups (Revio/ONT) ([`modkit`](https://github.com/nanoporetech/modkit))
+- Methylation pileups ([`modkit`](https://github.com/nanoporetech/modkit))
 
 ##### Annotation - SNV
 
-1. Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar))
-2. Annotate variants ([`VEP`](https://github.com/Ensembl/ensembl-vep))
+- Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar) and [`VEP`](https://github.com/Ensembl/ensembl-vep))
 
 ##### Filtering and ranking
 
-- Rank variants [GENMOD](https://github.com/Clinical-Genomics/genmod)
+- Rank variants ([`GENMOD`](https://github.com/Clinical-Genomics/genmod))
 
 ## Usage
 
@@ -59,7 +58,7 @@ Prepare a samplesheet with input data:
 
 ```
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,1
+HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
 HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
 ```
 
@@ -69,12 +68,8 @@ Now, you can run the pipeline using:
 nextflow run genomic-medicine-sweden/nallo -profile YOURPROFILE \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
-    --outdir <OUTDIR> \
     --fasta <reference.fasta> \
-    --skip_assembly_wf \
-    --skip_repeat_wf \
-    --skip_snv_annotation \
-    --skip_cnv_calling
+    --outdir <OUTDIR>
 ```
 
 For more details and further functionality, please refer to the [usage documentation](https://github.com/genomic-medicine-sweden/nallo/blob/dev/docs/usage.md).
