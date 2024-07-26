@@ -9,9 +9,9 @@ process WHATSHAP_STATS {
     tuple val(meta), path(vcf), path(tbi)
 
     output:
-    tuple val(meta), path("*.stats.tsv.gz"), emit: stats
-    tuple val(meta), path("*.blocks.tsv")  , emit: blocks
-    path "versions.yml"                    , emit: versions
+    tuple val(meta), path("*.stats.tsv") , emit: stats
+    tuple val(meta), path("*.blocks.tsv"), emit: blocks
+    path "versions.yml"                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,7 +23,7 @@ process WHATSHAP_STATS {
     whatshap stats \\
         $args \\
         --sample ${meta.id} \\
-        --tsv ${prefix}.stats.tsv.gz \\
+        --tsv ${prefix}.stats.tsv \\
         --block-list ${prefix}.blocks.tsv \\
         $vcf
 

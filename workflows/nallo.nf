@@ -396,6 +396,7 @@ workflow NALLO {
                 // Phase variants with WhatsHap
                 PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
                 ch_versions = ch_versions.mix(PHASING.out.versions)
+                ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
 
                 hap_bam_bai = PHASING.out.haplotagged_bam_bai
                 if(!params.skip_methylation_wf) {
