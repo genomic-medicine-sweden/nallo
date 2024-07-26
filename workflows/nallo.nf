@@ -222,13 +222,14 @@ workflow NALLO {
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
-        QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
-        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
+        if (!params.skip_aligned_read_qc) {
+            QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
+            ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
 
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
-
+            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
+            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
+            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+        }
 
         // Only compatible with hg38 (and a few hg19 genes)
         if(!params.skip_call_paralogs) {
