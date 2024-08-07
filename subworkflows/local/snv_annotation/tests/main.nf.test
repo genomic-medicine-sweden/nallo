@@ -85,11 +85,13 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
-                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[4] = Channel.value('110')
-                input[5] = false
-                input[6] = Channel.value([])
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = false
                 input[7] = Channel.value([])
+                input[8] = null
+                input[9] = null
                 """
             }
         }
@@ -122,11 +124,13 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
-                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[4] = '110'
-                input[5] = false
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
                 input[6] = false
                 input[7] = Channel.value([])
+                input[8] = null
+                input[9] = null
                 """
             }
         }

@@ -7,13 +7,14 @@ process CADD {
 
     containerOptions {
         (workflow.containerEngine == 'singularity') ?
-            "-B ${annotation_dir}:/opt/CADD-scripts-1.6.post1/data/annotations" :
-            "-v ${annotation_dir}:/opt/CADD-scripts-1.6.post1/data/annotations"
+            "-B ${annotation_dir}:/opt/CADD-scripts-1.6.post1/data/annotations -B ${prescored_dir}:/opt/CADD-scripts-1.6.post1/data/prescored" :
+            "-v ${annotation_dir}:/opt/CADD-scripts-1.6.post1/data/annotations -v ${prescored_dir}:/opt/CADD-scripts-1.6.post1/data/prescored"
         }
 
     input:
     tuple val(meta), path(vcf)
     path(annotation_dir)
+    path(prescored_dir)
 
     output:
     tuple val(meta), path("*.tsv.gz"), emit: tsv

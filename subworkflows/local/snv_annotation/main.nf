@@ -10,12 +10,13 @@ workflow SNV_ANNOTATION {
     ch_vcf                // channel [mandatory] [ val(meta), path(vcf) ]
     ch_databases          // channel: [mandatory] [ val(meta), path(db) ]
     ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache          // channel: [mandatory] [ path(cache) ]
     val_vep_cache_version // string: [mandatory] default: 110
     val_annotate_cadd     // bool: [mandatory]
     ch_cadd_header        // channel: [mandatory] [ path(txt) ]
     ch_cadd_resources     // channel: [mandatory] [ path(annotation) ]
-
+    ch_cadd_prescored     // channel: [mandatory] [ path(prescored) ]
     main:
     ch_versions = Channel.empty()
     ch_vep_in   = Channel.empty()
@@ -30,10 +31,12 @@ workflow SNV_ANNOTATION {
     // Annotating with CADD
     if (val_annotate_cadd) {
         ANNOTATE_CADD (
+            ch_fai,
             BCFTOOLS_FILLTAGS_ANNO.out.vcf,
             BCFTOOLS_FILLTAGS_ANNO.out.tbi,
             ch_cadd_header,
-            ch_cadd_resources
+            ch_cadd_resources,
+            ch_cadd_prescored
         )
         ch_versions = ch_versions.mix(ANNOTATE_CADD.out.versions)
 

@@ -34,6 +34,9 @@ input:
   - header_lines:
       type: file
       description: Contains lines to append to the output VCF header
+  - rename_chrs:
+      type: file
+      description: Contains new and old chromosome names
 output:
   - meta:
       type: map
