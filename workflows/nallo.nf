@@ -6,24 +6,24 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_REPEAT_EXPANSIONS                         } from '../subworkflows/local/annotate_repeat_expansions'
-include { ASSEMBLY                                           } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING                           } from '../subworkflows/local/assembly_variant_calling'
-include { BAM_TO_FASTQ                                       } from '../subworkflows/local/bam_to_fastq'
-include { BAM_INFER_SEX                                      } from '../subworkflows/local/bam_infer_sex'
-include { CALL_PARALOGS                                      } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS                             } from '../subworkflows/local/call_repeat_expansions'
-include { CNV                                                } from '../subworkflows/local/cnv'
-include { METHYLATION                                        } from '../subworkflows/local/methylation'
-include { PHASING                                            } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                                     } from '../subworkflows/local/prepare_genome'
-include { QC_ALIGNED_READS                                   } from '../subworkflows/local/qc_aligned_reads'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV                 } from '../subworkflows/local/rank_variants'
-include { SCATTER_GENOME                                     } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING                              } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION                                     } from '../subworkflows/local/snv_annotation'
-include { STRUCTURAL_VARIANT_CALLING                         } from '../subworkflows/local/structural_variant_calling'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_REPEAT_EXPANSIONS          } from '../subworkflows/local/annotate_repeat_expansions'
+include { ASSEMBLY                            } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING            } from '../subworkflows/local/assembly_variant_calling'
+include { BAM_TO_FASTQ                        } from '../subworkflows/local/bam_to_fastq'
+include { BAM_INFER_SEX                       } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                       } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS              } from '../subworkflows/local/call_repeat_expansions'
+include { CNV                                 } from '../subworkflows/local/cnv'
+include { METHYLATION                         } from '../subworkflows/local/methylation'
+include { PHASING                             } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME                      } from '../subworkflows/local/prepare_genome'
+include { QC_ALIGNED_READS                    } from '../subworkflows/local/qc_aligned_reads'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV  } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                      } from '../subworkflows/local/scatter_genome'
+include { SHORT_VARIANT_CALLING               } from '../subworkflows/local/short_variant_calling'
+include { SNV_ANNOTATION                      } from '../subworkflows/local/snv_annotation'
+include { STRUCTURAL_VARIANT_CALLING          } from '../subworkflows/local/structural_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,23 +32,23 @@ include { STRUCTURAL_VARIANT_CALLING                         } from '../subworkf
 */
 
 // local
-include { ECHTVAR_ENCODE         } from '../modules/local/echtvar/encode/main'
-include { FQCRS                  } from '../modules/local/fqcrs'
-include { SAMTOOLS_MERGE         } from '../modules/nf-core/samtools/merge/main'
+include { ECHTVAR_ENCODE                      } from '../modules/local/echtvar/encode/main'
+include { FQCRS                               } from '../modules/local/fqcrs'
+include { SAMTOOLS_MERGE                      } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT   } from '../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_STATS         } from '../modules/nf-core/bcftools/stats/main'
-include { CAT_FASTQ              } from '../modules/nf-core/cat/fastq/main'
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
-include { FASTP                  } from '../modules/nf-core/fastp/main'
-include { MINIMAP2_ALIGN         } from '../modules/nf-core/minimap2/align/main'
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
-include { paramsSummaryMap       } from 'plugin/nf-validation'
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                     } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT                } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_STATS                      } from '../modules/nf-core/bcftools/stats/main'
+include { CAT_FASTQ                           } from '../modules/nf-core/cat/fastq/main'
+include { FASTQC                              } from '../modules/nf-core/fastqc/main'
+include { FASTP                               } from '../modules/nf-core/fastp/main'
+include { MINIMAP2_ALIGN                      } from '../modules/nf-core/minimap2/align/main'
+include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
+include { paramsSummaryMap                    } from 'plugin/nf-validation'
+include { paramsSummaryMultiqc                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText              } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,50 +66,49 @@ workflow NALLO {
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Optional input files
-    ch_fasta           = params.fasta           ? Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
-                                                : ''
-    ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs')
-                                                : Channel.empty()
-    ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it] }.collect()
-                                                : Channel.value([[],[]])
-    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it] }.collect()
-                                                : Channel.value([[],[]])
-
-    // Conditional input files that has to be set depending on which workflow is run
-    ch_par                   = params.dipcall_par                   ? Channel.fromPath(params.dipcall_par).collect()
+    // Optional input files that has to be set depending on which workflow is run
+    ch_fasta                    = params.fasta                      ? Channel.fromPath(params.fasta).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
-    ch_trgt_bed              = params.trgt_repeats                  ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
+    ch_extra_snfs               = params.extra_snfs                 ? Channel.fromSamplesheet('extra_snfs')
+                                                                    : Channel.empty()
+    ch_tandem_repeats           = params.tandem_repeats             ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it ] }.collect()
+                                                                    : Channel.value([[],[]])
+    ch_input_bed                = params.bed                        ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it ] }.collect()
+                                                                    : Channel.value([[],[]])
+    ch_par                      = params.dipcall_par                ? Channel.fromPath(params.dipcall_par).collect()
                                                                     : ''
-    ch_variant_catalog       = params.variant_catalog               ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
+    ch_trgt_bed                 = params.trgt_repeats               ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
-    ch_databases             = params.snp_db                        ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
+    ch_variant_catalog          = params.variant_catalog            ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
+                                                                    : ''
+    ch_databases                = params.snp_db                     ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{ it[1] }.collect()
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
                                                                     : Channel.value([])
-    ch_vep_cache_unprocessed = params.vep_cache                     ? Channel.fromPath(params.vep_cache).map { it -> [ [id:'vep_cache'], it ] }.collect()
+    ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
-    ch_expected_xy_bed       = params.hificnv_xy                    ? Channel.fromPath(params.hificnv_xy).collect()
+    ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).collect()
                                                                     : ''
-    ch_expected_xx_bed       = params.hificnv_xx                    ? Channel.fromPath(params.hificnv_xx).collect()
+    ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).collect()
                                                                     : ''
-    ch_exclude_bed           = params.hificnv_exclude               ? Channel.fromPath(params.hificnv_exclude).collect()
+    ch_exclude_bed              = params.hificnv_exclude            ? Channel.fromPath(params.hificnv_exclude).collect()
                                                                     : ''
-    ch_reduced_penetrance    = params.reduced_penetrance            ? Channel.fromPath(params.reduced_penetrance).collect()
+    ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).collect()
                                                                     : Channel.value([])
-    ch_score_config_snv      = params.score_config_snv              ? Channel.fromPath(params.score_config_snv).collect()
+    ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).collect()
                                                                     : Channel.value([])
-    ch_somalier_sites        = params.somalier_sites                ? Channel.fromPath(params.somalier_sites).map { [it.simpleName, it ] }.collect()
+    ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
 
     // Check parameter that doesn't conform to schema validation here
     if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { error "--split_fastq must be 0, or between 2 and 999."}
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
+
     // Create PED from samplesheet
     ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
 
     //
-    // Main workflow
+    // Convert BAM files to FASTQ
     //
     BAM_TO_FASTQ ( ch_input )
     ch_versions = ch_versions.mix(BAM_TO_FASTQ.out.versions)
@@ -117,9 +116,12 @@ workflow NALLO {
     BAM_TO_FASTQ.out.fastq
         .set { ch_sample }
 
+    //
+    // Run raw (unaligned) read QC with FastQC and fqcrs
+    //
     if(!params.skip_raw_read_qc) {
 
-        // Cat samples with multiple input files before QC - still not ideal
+        // Combine samples with multiple input files before QC - not ideal
         ch_sample
             .groupTuple()
             .branch { meta, reads ->
@@ -136,16 +138,19 @@ workflow NALLO {
             .concat ( CAT_FASTQ.out.reads )
             .set { raw_read_qc_in }
 
-        FASTQC( raw_read_qc_in )
+        FASTQC ( raw_read_qc_in )
         ch_versions = ch_versions.mix(FASTQC.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
-        FQCRS( raw_read_qc_in )
+        FQCRS ( raw_read_qc_in )
         ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
+    //
+    // Prepare references
+    //
     if(!params.skip_mapping_wf | !params.skip_assembly_wf ) {
-        // Prepare references
+
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
@@ -153,7 +158,6 @@ workflow NALLO {
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
         if(!params.skip_snv_annotation) {
-
             if (params.vep_cache) {
                 if (params.vep_cache.endsWith("tar.gz")) {
                     ch_vep_cache = PREPARE_GENOME.out.vep_resources
@@ -169,12 +173,15 @@ workflow NALLO {
         mmi   = PREPARE_GENOME.out.mmi
     }
 
+    //
+    // (Split input files and), map reads to reference and merge into a single BAM per sample
+    //
     if(!params.skip_mapping_wf) {
 
         // Split fastq
         if (params.split_fastq > 0) {
 
-            FASTP( ch_sample, [], [], [] )
+            FASTP ( ch_sample, [], [], [] )
             ch_versions = ch_versions.mix(FASTP.out.versions)
 
             reads_for_alignment = FASTP.out.reads.transpose()
@@ -202,26 +209,32 @@ workflow NALLO {
             }
             .set { bam_to_merge }
 
-        // Merge files if we have mutiple files per sample
-        SAMTOOLS_MERGE( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]], 'bai' )
+        // Merge files if we have multiple files per sample
+        SAMTOOLS_MERGE ( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]], 'bai' )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bams
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index)
-            .concat( bam_to_merge.single )
+            .concat(bam_to_merge.single)
             .set { bam_infer_sex_in }
 
-        // Infer sex if sex unknown
+        //
+        // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
+        //
         BAM_INFER_SEX ( bam_infer_sex_in, fasta, fai, ch_somalier_sites, ch_pedfile )
+        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
+
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
 
         bam     = BAM_INFER_SEX.out.bam
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
+        //
+        // Run aligned read QC with mosdepth and cramino
+        //
         if (!params.skip_aligned_read_qc) {
             QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
             ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
@@ -231,12 +244,17 @@ workflow NALLO {
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
         }
 
-        // Only compatible with hg38 (and a few hg19 genes)
+        //
+        // Call paralogous genes with paraphase
+        //
         if(!params.skip_call_paralogs) {
             CALL_PARALOGS ( bam_bai, fasta )
+            ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
         }
 
-        // Assembly workflow
+        //
+        // Hifiasm assembly and assembly variant calling
+        //
         if(!params.skip_assembly_wf) {
 
             //Hifiasm assembly
@@ -259,37 +277,48 @@ workflow NALLO {
             ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
         }
 
-        // Make BED intervals
-        SCATTER_GENOME (
-            fai,
-            ch_input_bed,
-            !params.bed,
-            !params.skip_short_variant_calling,
-            params.parallel_snv
-        )
-        ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
-
-        // Combine to create a bam_bai - interval pair for each sample
-        bam_bai
-            .combine( SCATTER_GENOME.out.bed_intervals )
-            .map { meta, bam, bai, bed, intervals ->
-                [ meta + [ num_intervals: intervals ], bam, bai, bed ]
-            }
-            .set{ ch_snv_calling_in }
-
+        //
         // Call SVs with Sniffles2
+        //
         STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
+        //
+        // Call (and annotate and rank) SNVs
+        //
         if(!params.skip_short_variant_calling) {
 
             //
-            // This calls and outputs a merged and normalised VCF per sample,
-            // to be used in downstream subworkflows requiring SNVs.
-            // This also outputs a merged multisample VCFs _per region_, to be used in annotation and ranking
+            // Make BED intervals, to be used for parallel SNV calling
+            //
+            SCATTER_GENOME (
+                fai,
+                ch_input_bed,
+                !params.bed,
+                !params.skip_short_variant_calling,
+                params.parallel_snv
+            )
+            ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
+
+            // Combine to create a bam_bai - interval pair for each sample
+            bam_bai
+                .combine( SCATTER_GENOME.out.bed_intervals )
+                .map { meta, bam, bai, bed, intervals ->
+                    [ meta + [ num_intervals: intervals ], bam, bai, bed ]
+                }
+                .set{ ch_snv_calling_in }
+
+            //
+            // This subworkflow calls SNVs with DeepVariant and outputs:
+            // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
+            // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
+            //
             SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
+            //
+            // Annotate SNVs
+            //
             if(!params.skip_snv_annotation) {
 
                 //
@@ -368,6 +397,9 @@ workflow NALLO {
             ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
             ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
+            //
+            // Call CNVs with HiFiCNV
+            //
             if(!params.skip_cnv_calling) {
                 bam_bai
                     .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
@@ -377,24 +409,36 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(CNV.out.versions)
             }
 
+            //
+            // Phase SNVs and INDELs
+            //
             if(!params.skip_phasing_wf) {
-                // Phase variants with WhatsHap
+
                 PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
                 ch_versions = ch_versions.mix(PHASING.out.versions)
+
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
 
-                hap_bam_bai = PHASING.out.haplotagged_bam_bai
+                //
+                // Create methylation pileups with modkit
+                //
                 if(!params.skip_methylation_wf) {
-                    // Pileup methylation with modkit
-                    METHYLATION( hap_bam_bai, fasta, fai, ch_input_bed )
+
+                    METHYLATION( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_input_bed )
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
 
+                //
+                // Call repeat expansions with TRGT
+                //
                 if(!params.skip_repeat_calling) {
-                    // Call repeats with TRGT
-                    CALL_REPEAT_EXPANSIONS ( hap_bam_bai, fasta, fai, ch_trgt_bed )
+
+                    CALL_REPEAT_EXPANSIONS ( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed )
                     ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
 
+                    //
+                    // Annotate repeat expansions with stranger
+                    //
                     if(!params.skip_repeat_annotation) {
                         ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.vcf )
                         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
