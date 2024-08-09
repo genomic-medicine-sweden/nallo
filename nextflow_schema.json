@@ -405,7 +405,7 @@
                     "exists": true,
                     "format": "directory-path",
                     "fa_icon": "fas fa-file",
-                    "description": "Path to the directory containing cadd prescored files.",
+                    "description": "Path to the directory containing cadd prescored indels.",
                     "help_text": "This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
                 },
                 "cadd_resources": {

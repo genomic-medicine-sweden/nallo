@@ -336,7 +336,7 @@ workflow NALLO {
                     fai.map { name, fai -> [ [ id: name ], fai ] },
                     ch_vep_cache,
                     params.vep_cache_version,
-                    params.cadd_resources,
+                    (params.cadd_resources && params.cadd_prescored),
                     ch_cadd_header,
                     ch_cadd_resources,
                     ch_cadd_prescored
