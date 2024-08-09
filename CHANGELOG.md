@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Added a new `SCATTER_GENOME` subworkflow
 - [#255](https://github.com/genomic-medicine-sweden/nallo/pull/255) - Added a new `RANK_VARIANTS` subworkflow to rank SNVs using genmod
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Added a `--skip_rank_variants` parameter to skip the rank_variants subworkflow
+- [#264](https://github.com/genomic-medicine-sweden/nallo/pull/264) - Added a `project` column to the sampleheet
 - [#266](https://github.com/genomic-medicine-sweden/nallo/pull/266) - Added CADD to dynamically calculate indel CADD-scores
 - [#270](https://github.com/genomic-medicine-sweden/nallo/pull/270) - Added SNV phasing stats to MultiQC
 - [#271](https://github.com/genomic-medicine-sweden/nallo/pull/271) - Added a `--skip_aligned_read_qc` parameter to skip the qc aligned reads subworkflow
@@ -43,6 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV annotation to run in parallel
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Changed SNV output file names and directory structure
 - [#262](https://github.com/genomic-medicine-sweden/nallo/pull/262) - Updated README
+- [#264](https://github.com/genomic-medicine-sweden/nallo/pull/264) - Changed PED file creation from groovy script to process
+- [#264](https://github.com/genomic-medicine-sweden/nallo/pull/264) - Changed all `multisample` filenames to `{project}` from samplesheet
 - [#268](https://github.com/genomic-medicine-sweden/nallo/pull/268) - Only output unphased alignments when phasing is off
 - [#268](https://github.com/genomic-medicine-sweden/nallo/pull/268) - Changed alignment output file names and directory structure
 - [#270](https://github.com/genomic-medicine-sweden/nallo/pull/270) - Changed whatshap stats to always run, regardless of phasing software, and changed the output from `*.stats.tsv.gz` to `*.stats.tsv` to allow being picked up by MultiQC
@@ -57,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#243](https://github.com/genomic-medicine-sweden/nallo/pull/243) - Removed VEP report from output files
 - [#257](https://github.com/genomic-medicine-sweden/nallo/pull/257) - Removed obsolete TODO statements
 - [#258](https://github.com/genomic-medicine-sweden/nallo/pull/258) - Removed VCF report from DeepVariant output
+- [#264](https://github.com/genomic-medicine-sweden/nallo/pull/264) - Removed the option to provide extra SNF files to Sniffles with `--extra_snfs`
 
 ### `Fixed`
 
@@ -69,14 +73,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Old parameter      | New parameter              |
 | ------------------ | -------------------------- |
-|                    | `--deepvariant_model_type` |
-| `--extra_gvcfs`    |                            |
 | `--skip_repeat_wf` | `--skip_repeat_calling`    |
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
+|                    | `--deepvariant_model_type` |
 |                    | `--skip_rank_variants`     |
 |                    | `--skip_aligned_read_qc`   |
 |                    | `--cadd_resources`         |
 |                    | `--cadd_prescored`         |
+| `--extra_gvcfs`    |                            |
+| `--extra_snfs`     |                            |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

@@ -60,13 +60,16 @@ workflow SHORT_VARIANT_CALLING {
 
     // This creates a multisample VCF, with regions from ONE bed file
     DEEPVARIANT.out.gvcf
-        .map { meta, gvcf -> [ meta.region.name, meta.phenotype == 2, gvcf ] }
+        .map { meta, gvcf ->
+            [ meta.region.name, meta.project, meta.phenotype == 2, gvcf ]
+        }
         .groupTuple() // Group all files together per region
         // If any of the samples in the VCF have an affected phenotype (2)
         // add this to the meta of the multisample VCF to know if we should run RANK_VARIANTS or not
-        .map { region, affected, gvcfs ->
+        .map { meta, project, affected, gvcfs ->
             new_meta = [
-                'id': region,
+                'id': meta,
+                'project': project.first(), // Works only because only one project per run is allowed
                 'contains_affected': affected.any(),
             ]
             [ new_meta, gvcfs ]

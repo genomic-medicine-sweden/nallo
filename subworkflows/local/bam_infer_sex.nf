@@ -11,7 +11,6 @@ workflow BAM_INFER_SEX {
     ch_ped            // channel: [ val(meta), path(ped) ]
 
     main:
-
     ch_versions = Channel.empty()
 
     // Extract sites
@@ -24,9 +23,9 @@ workflow BAM_INFER_SEX {
     ch_versions = ch_versions.mix(SOMALIER_EXTRACT.out.versions)
 
     SOMALIER_EXTRACT.out.extract
-        .map { meta, extract -> [ [ id: 'multisample' ], extract ] }
+        .map { meta, extract -> [ [ id: meta.project ], extract ] }
         .groupTuple()
-        .join( ch_ped.map { ped -> [ [ id:'multisample'], ped ] } )
+        .join( ch_ped )
         .set { ch_somalier_relate_in }
 
     // Infer sex
@@ -59,7 +58,8 @@ workflow BAM_INFER_SEX {
                 maternal_id : meta.maternal_id,
                 sex         : meta.sex == 0 ? somalier.sex.toInteger() : meta.sex,
                 phenotype   : meta.phenotype,
-                single_end  : meta.single_end
+                single_end  : meta.single_end,
+                project     : meta.project
             ]
             [ new_meta, bam, bai ]
         }

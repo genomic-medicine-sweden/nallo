@@ -32,6 +32,7 @@ include { STRUCTURAL_VARIANT_CALLING          } from '../subworkflows/local/stru
 */
 
 // local
+include { CREATE_PEDIGREE_FILE                } from '../modules/local/create_pedigree_file'
 include { ECHTVAR_ENCODE                      } from '../modules/local/echtvar/encode/main'
 include { FQCRS                               } from '../modules/local/fqcrs'
 include { SAMTOOLS_MERGE                      } from '../modules/nf-core/samtools/merge/main'
@@ -110,7 +111,17 @@ workflow NALLO {
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
 
     // Create PED from samplesheet
-    ch_pedfile = ch_input.toList().map { file(CustomFunctions.makePed(it, params.outdir)) }
+    ch_input
+        .map { meta, files -> [ meta.project, meta ] }
+        .groupTuple()
+        .set { ch_ped_in }
+
+    ch_pedfile = CREATE_PEDIGREE_FILE ( ch_ped_in )
+    ch_versions = ch_versions.mix(CREATE_PEDIGREE_FILE.out.versions)
+
+    CREATE_PEDIGREE_FILE.out.ped
+        .map { project, ped -> [ [ 'id': project ], ped ] }
+        .set { ch_pedfile }
 
     //
     // Convert BAM files to FASTQ
@@ -284,8 +295,7 @@ workflow NALLO {
 
         //
         // Call SVs with Sniffles2
-        //
-        STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
+        STRUCTURAL_VARIANT_CALLING( bam_bai, fasta, fai, ch_tandem_repeats )
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         //
@@ -356,7 +366,7 @@ workflow NALLO {
                     // Only run if we have affected individuals
                     RANK_VARIANTS_SNV (
                         ANN_CSQ_PLI_SNV.out.vcf_ann.filter { meta, vcf -> meta.contains_affected },
-                        ch_pedfile,
+                        ch_pedfile.map { meta, ped -> ped },
                         ch_reduced_penetrance,
                         ch_score_config_snv
                     )
@@ -382,7 +392,7 @@ workflow NALLO {
             }
 
             ch_vcf_tbi_per_region
-                .map { meta, vcf, tbi -> [ [ id: 'multisample' ], vcf, tbi ] }
+                .map { meta, vcf, tbi -> [ [ id: meta.project ], vcf, tbi ] }
                 .groupTuple()
                 .set { ch_bcftools_concat_in }
 

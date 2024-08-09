@@ -57,18 +57,20 @@ You will need to create a samplesheet with information about the samples you wou
 --input '[path to samplesheet file]'
 ```
 
-It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
+It has to be a comma-separated file with 7 columns, and a header row as shown in the examples below.
 `file` can either be a gzipped-fastq file or an aligned or unalinged BAM file (BAM files will be converted to FASTQ and aligned again).
+`project` needs to be the same for all samples in a run.
 If you don't have related samples, `family_id` could be set to sample name, and `paternal_id` and `maternal_id` should be set to 0.
 
 ```console
-sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-HG002,/path/to/HG002.fastq.gz,FAM,HG003,0,1,2
-HG003,/path/to/HG003.bam,FAM,0,0,2,1
+project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+testrun,HG002,/path/to/HG002.fastq.gz,FAM,HG003,0,1,2
+testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
 ```
 
 | Fields        | Description                                                                                                               |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples."                           |
 | `sample`      | Custom sample name, cannot contain spaces.                                                                                |
 | `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                |
 | `family_id`   | "Family ID must be provided and cannot contain spaces. If no family ID is available you can use the same ID as the sample |
@@ -126,16 +128,6 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 - Optionally, if running without `--skip_snv_annotation`, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the data/annotations/ and data/prescored/ folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation), and it is used to calculate CADD scores for small indels.
 
 - If running without `--skip_cnv_calling`, expected CN regions for your reference genome can be downloaded from [HiFiCNV GitHub](https://github.com/PacificBiosciences/HiFiCNV/tree/main/data) to supply with `--hificnv_xy`, `--hificnv_xx` (expected_cn) and `--hificnv_exclude` (excluded_regions).
-
-- If you want to include extra samples for mili-sample calling of SVs - prepare a samplesheet with .snf files from Sniffles to supply with `--extra_snfs`:
-
-`extra_snfs.csv`
-
-```
-sample,file
-HG01123,/path/to/HG01123_sniffles.snf
-HG01124,/path/to/HG01124_sniffles.snf
-```
 
 - If running without `--skip_call_paralogs`, the reference genome needs to be hg38
 
@@ -255,7 +247,6 @@ Different processes may need extra input files
 | Parameter                          | Description                                                                                                                                                                                                                                                               | Type      | Default | Required | Hidden |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
 | `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
-| `extra_snfs`                       | Extra input files for Sniffles                                                                                                                                                                                                                                            | `string`  |         |          |        |
 | `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                                                                                                                                       | `string`  |         |          |        |
 | `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                                                                                                                                      | `string`  |         |          |        |
 | `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                                                                                                                                             | `string`  |         |          |        |
