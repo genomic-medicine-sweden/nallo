@@ -366,7 +366,7 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "split_fastq": {
+                "split_input": {
                     "type": "integer",
                     "default": 0,
                     "minimum": 0,
