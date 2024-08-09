@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Added a new `SCATTER_GENOME` subworkflow
 - [#255](https://github.com/genomic-medicine-sweden/nallo/pull/255) - Added a new `RANK_VARIANTS` subworkflow to rank SNVs using genmod
 - [#261](https://github.com/genomic-medicine-sweden/nallo/pull/261) - Added a `--skip_rank_variants` parameter to skip the rank_variants subworkflow
+- [#266](https://github.com/genomic-medicine-sweden/nallo/pull/266) - Added CADD to dynamically calculate indel CADD-scores
 - [#270](https://github.com/genomic-medicine-sweden/nallo/pull/270) - Added SNV phasing stats to MultiQC
 - [#271](https://github.com/genomic-medicine-sweden/nallo/pull/271) - Added a `--skip_aligned_read_qc` parameter to skip the qc aligned reads subworkflow
 
@@ -74,6 +75,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
 |                    | `--skip_rank_variants`     |
 |                    | `--skip_aligned_read_qc`   |
+|                    | `--cadd_resources`         |
+|                    | `--cadd_prescored`         |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -86,6 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ----------- | ----------- | ----------- |
 | deepvariant | 1.5.0       | 1.6.1       |
 | htslib      | 1.19.1      | 1.20        |
+| cadd        |             | 1.6.post1   |
+| gawk        |             | 5.3.0       |
 
 ## v0.2.0 - [2024-06-26]
 

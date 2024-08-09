@@ -5,6 +5,12 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "bcftools/annotate": {
+                        "branch": "master",
+                        "git_sha": "c1a7fa1c038061b344f2a41be71942061ec40d2e",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bcftools/annotate/bcftools-annotate.diff"
+                    },
                     "bcftools/concat": {
                         "branch": "master",
                         "git_sha": "33ef773a7ea36e88323902f63662aa53c9b88988",
@@ -62,6 +68,12 @@
                         "git_sha": "571a5feac4c9ce0a8df0bc15b94230e7f3e8db47",
                         "installed_by": ["modules"]
                     },
+                    "cadd": {
+                        "branch": "master",
+                        "git_sha": "cf3ed075695639b0a0924eb0901146df1996dc08",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/cadd/cadd.diff"
+                    },
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "4fc983ad0b30e6e32696fa7d980c76c7bfe1c03e",
@@ -88,6 +100,11 @@
                         "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/fastqc/fastqc.diff"
+                    },
+                    "gawk": {
+                        "branch": "master",
+                        "git_sha": "cf3ed075695639b0a0924eb0901146df1996dc08",
+                        "installed_by": ["modules"]
                     },
                     "genmod/annotate": {
                         "branch": "master",

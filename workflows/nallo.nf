@@ -67,6 +67,11 @@ workflow NALLO {
     ch_multiqc_files = Channel.empty()
 
     // Optional input files that has to be set depending on which workflow is run
+    ch_cadd_header              = Channel.fromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true).collect()
+    ch_cadd_resources           = params.cadd_resources             ? Channel.fromPath(params.cadd_resources).collect()
+                                                                    : ''
+    ch_cadd_prescored           = params.cadd_prescored             ? Channel.fromPath(params.cadd_prescored).collect()
+                                                                    : ''
     ch_fasta                    = params.fasta                      ? Channel.fromPath(params.fasta).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
     ch_extra_snfs               = params.extra_snfs                 ? Channel.fromSamplesheet('extra_snfs')
@@ -328,8 +333,13 @@ workflow NALLO {
                     SHORT_VARIANT_CALLING.out.combined_bcf,
                     ch_databases,
                     fasta,
+                    fai.map { name, fai -> [ [ id: name ], fai ] },
                     ch_vep_cache,
-                    params.vep_cache_version
+                    params.vep_cache_version,
+                    (params.cadd_resources && params.cadd_prescored),
+                    ch_cadd_header,
+                    ch_cadd_resources,
+                    ch_cadd_prescored
                 )
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
 
