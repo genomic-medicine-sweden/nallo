@@ -17,6 +17,7 @@ workflow SNV_ANNOTATION {
     ch_cadd_header        // channel: [mandatory] [ path(txt) ]
     ch_cadd_resources     // channel: [mandatory] [ path(annotation) ]
     ch_cadd_prescored     // channel: [mandatory] [ path(prescored) ]
+    
     main:
     ch_versions = Channel.empty()
     ch_vep_in   = Channel.empty()
