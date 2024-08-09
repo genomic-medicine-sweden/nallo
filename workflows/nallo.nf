@@ -10,7 +10,7 @@ include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV } from '../subworkflows/local/anno
 include { ANNOTATE_REPEAT_EXPANSIONS          } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                            } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING            } from '../subworkflows/local/assembly_variant_calling'
-include { BAM_TO_FASTQ                        } from '../subworkflows/local/bam_to_fastq'
+include { CONVERT_INPUT_FILES                 } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                       } from '../subworkflows/local/bam_infer_sex'
 include { CALL_PARALOGS                       } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS              } from '../subworkflows/local/call_repeat_expansions'
@@ -43,9 +43,9 @@ include { BCFTOOLS_PLUGINSPLIT                } from '../modules/nf-core/bcftool
 include { BCFTOOLS_STATS                      } from '../modules/nf-core/bcftools/stats/main'
 include { CAT_FASTQ                           } from '../modules/nf-core/cat/fastq/main'
 include { FASTQC                              } from '../modules/nf-core/fastqc/main'
-include { FASTP                               } from '../modules/nf-core/fastp/main'
 include { MINIMAP2_ALIGN                      } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
+include { SPLITUBAM                           } from '../modules/nf-core/splitubam/main'
 include { paramsSummaryMap                    } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -75,8 +75,6 @@ workflow NALLO {
                                                                     : ''
     ch_fasta                    = params.fasta                      ? Channel.fromPath(params.fasta).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
-    ch_extra_snfs               = params.extra_snfs                 ? Channel.fromSamplesheet('extra_snfs')
-                                                                    : Channel.empty()
     ch_tandem_repeats           = params.tandem_repeats             ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([[],[]])
     ch_input_bed                = params.bed                        ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it ] }.collect()
@@ -107,7 +105,6 @@ workflow NALLO {
                                                                     : ''
 
     // Check parameter that doesn't conform to schema validation here
-    if (params.split_fastq != 0 && (params.split_fastq < 2 || params.split_fastq > 999 )) { error "--split_fastq must be 0, or between 2 and 999."}
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
 
     // Create PED from samplesheet
@@ -121,16 +118,14 @@ workflow NALLO {
 
     CREATE_PEDIGREE_FILE.out.ped
         .map { project, ped -> [ [ 'id': project ], ped ] }
+        .collect()
         .set { ch_pedfile }
 
     //
-    // Convert BAM files to FASTQ
+    // Convert BAM files to FASTQ and vice versa
     //
-    BAM_TO_FASTQ ( ch_input )
-    ch_versions = ch_versions.mix(BAM_TO_FASTQ.out.versions)
-
-    BAM_TO_FASTQ.out.fastq
-        .set { ch_sample }
+    CONVERT_INPUT_FILES ( ch_input )
+    ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
 
     //
     // Run raw (unaligned) read QC with FastQC and fqcrs
@@ -138,19 +133,19 @@ workflow NALLO {
     if(!params.skip_raw_read_qc) {
 
         // Combine samples with multiple input files before QC - not ideal
-        ch_sample
+        CONVERT_INPUT_FILES.out.fastq
             .groupTuple()
             .branch { meta, reads ->
                 single: reads.size() == 1
                     return [ meta, reads[0] ]
                 multiple: reads.size() > 1
             }
-            .set { ch_sample_reads }
+            .set { ch_fastq }
 
-        CAT_FASTQ ( ch_sample_reads.multiple )
+        CAT_FASTQ ( ch_fastq.multiple )
         ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
 
-        ch_sample_reads.single
+        ch_fastq.single
             .concat ( CAT_FASTQ.out.reads )
             .set { raw_read_qc_in }
 
@@ -194,18 +189,17 @@ workflow NALLO {
     //
     if(!params.skip_mapping_wf) {
 
-        // Split fastq
-        if (params.split_fastq > 0) {
+        // Split input files for alignment
+        if (params.parallel_alignment > 1) {
 
-            FASTP ( ch_sample, [], [], [] )
-            ch_versions = ch_versions.mix(FASTP.out.versions)
+            SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
+            ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
 
-            reads_for_alignment = FASTP.out.reads.transpose()
+            reads_for_alignment = SPLITUBAM.out.bam.transpose()
 
         } else {
-            reads_for_alignment = ch_sample
+            reads_for_alignment = CONVERT_INPUT_FILES.out.bam
         }
-
         // Align (split) reads
         MINIMAP2_ALIGN ( reads_for_alignment, mmi, true, 'bai', false, false )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
@@ -275,7 +269,7 @@ workflow NALLO {
         if(!params.skip_assembly_wf) {
 
             //Hifiasm assembly
-            ASSEMBLY( ch_sample )
+            ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
             ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
             // Update assembly variant calling meta with sex from somalier

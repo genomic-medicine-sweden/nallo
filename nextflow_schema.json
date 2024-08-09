@@ -366,11 +366,11 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "split_input": {
+                "parallel_alignment": {
                     "type": "integer",
-                    "default": 0,
-                    "minimum": 0,
-                    "description": "Split alignment into n processes"
+                    "minimum": 1,
+                    "default": 1,
+                    "description": "Split alignment into n processes per sample"
                 },
                 "parallel_snv": {
                     "type": "integer",

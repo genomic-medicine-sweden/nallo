@@ -85,11 +85,6 @@
                         "git_sha": "e1938f8ecb13b9b82ff488d4b35269c84aa965e8",
                         "installed_by": ["modules"]
                     },
-                    "fastp": {
-                        "branch": "master",
-                        "git_sha": "95cf5fe0194c7bf5cb0e3027a2eb7e7c89385080",
-                        "installed_by": ["modules"]
-                    },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
@@ -180,6 +175,11 @@
                         "git_sha": "897c33d5da084b61109500ee44c01da2d3e4e773",
                         "installed_by": ["modules"]
                     },
+                    "samtools/import": {
+                        "branch": "master",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
@@ -216,6 +216,11 @@
                         "git_sha": "458c882987320e27fc90723ec96c127a243a5497",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/somalier/relate/somalier-relate.diff"
+                    },
+                    "splitubam": {
+                        "branch": "master",
+                        "git_sha": "d12bb6cdcd22ef8f26803a6a55e918ac017176e8",
+                        "installed_by": ["modules"]
                     },
                     "stranger": {
                         "branch": "master",

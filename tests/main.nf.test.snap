@@ -6,7 +6,7 @@
             "test.samples.tsv:md5,1685dc6cb8c6b9806ca636662980d686",
             "test.html:md5,d05e0eceb70ada3a0c25f99a16ad1889",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
-            "multiqc_fastqc.txt:md5,055c2c156136798feeb1658adf905e95",
+            "multiqc_fastqc.txt:md5,c60b523b5f11c07c9149043bf68f92ad",
             "multiqc_somalier.txt:md5,20b4c5b2d5b94b77fb800548e07a874e",
             "74b4822241bd8d1bc42f494f1f3e326c",
             "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,ccaad2690abccadc4ec3b2c5d8fa4b05",
@@ -53,13 +53,13 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-08-09T13:23:09.224424657"
+        "timestamp": "2024-08-12T09:45:54.652442138"
     },
     "test profile - multisample": {
         "content": [
             "test.ped:md5,a1e82af069bce823564e204c316d5500",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
-            "multiqc_fastqc.txt:md5,234f2958710c30f62446a9406cbfcaae",
+            "multiqc_fastqc.txt:md5,b74145ef9fbf8addcc2997ca26b3aa45",
             "74b4822241bd8d1bc42f494f1f3e326c",
             "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,ccaad2690abccadc4ec3b2c5d8fa4b05",
             "HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary:md5,c5bbeabb571453186a39cf6e487dbcc5",
@@ -145,6 +145,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-08-09T13:26:52.566315569"
+        "timestamp": "2024-08-12T09:49:33.754269424"
     }
 }
