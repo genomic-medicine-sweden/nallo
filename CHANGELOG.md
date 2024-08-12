@@ -101,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | cadd        |             | 1.6.post1   |
 | gawk        |             | 5.3.0       |
 | echtvar     | 0.1.7       | 0.2.0       |
+| somalier    | 0.2.15      | 0.2.19      |
 
 ## v0.2.0 - [2024-06-26]
 
