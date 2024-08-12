@@ -233,6 +233,7 @@ workflow NALLO {
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index)
             .concat(bam_to_merge.single)
+            .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { bam_infer_sex_in }
 
         //
