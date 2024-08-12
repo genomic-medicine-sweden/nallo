@@ -1,7 +1,7 @@
-name: somalier_relate
+name: dipcall
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - bioconda::somalier=0.2.18
+  - bioconda::dipcall=0.3

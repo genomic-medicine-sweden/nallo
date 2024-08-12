@@ -77,7 +77,7 @@
                     },
                     "deepvariant": {
                         "branch": "master",
-                        "git_sha": "ccf06a896339d2a4ed8594daa9f9adb827cb8189",
+                        "git_sha": "a7e8b8afd4fa82f20d745fa778bfdbf39c1f7efb",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/vep": {
@@ -102,22 +102,22 @@
                     },
                     "genmod/annotate": {
                         "branch": "master",
-                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "git_sha": "043f1164b94bcaf7b9810db243a8c37c66298077",
                         "installed_by": ["modules"]
                     },
                     "genmod/compound": {
                         "branch": "master",
-                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "git_sha": "89fe39b745da3dca14ad1a361784812ea3aa3a43",
                         "installed_by": ["modules"]
                     },
                     "genmod/models": {
                         "branch": "master",
-                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "git_sha": "043f1164b94bcaf7b9810db243a8c37c66298077",
                         "installed_by": ["modules"]
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "1aba459a6f3528bee806403ae47bea304de26603",
+                        "git_sha": "043f1164b94bcaf7b9810db243a8c37c66298077",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
@@ -208,12 +208,14 @@
                     "somalier/extract": {
                         "branch": "master",
                         "git_sha": "458c882987320e27fc90723ec96c127a243a5497",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/somalier/extract/somalier-extract.diff"
                     },
                     "somalier/relate": {
                         "branch": "master",
                         "git_sha": "458c882987320e27fc90723ec96c127a243a5497",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/somalier/relate/somalier-relate.diff"
                     },
                     "stranger": {
                         "branch": "master",

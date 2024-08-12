@@ -5,8 +5,8 @@ process SOMALIER_RELATE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/somalier:0.2.19--h0c29559_0':
-        'biocontainers/somalier:0.2.19--h0c29559_0' }"
+        'https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0':
+        'biocontainers/somalier:0.2.18--hb57907c_0' }"
 
     input:
     tuple val(meta), path(extract), path(ped)
