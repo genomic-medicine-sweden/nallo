@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#277](https://github.com/genomic-medicine-sweden/nallo/pull/277) - Allowed CNV calling as soon as SNV calling for a sample is finished
 - [#278](https://github.com/genomic-medicine-sweden/nallo/pull/278) - Changed the SNV ranking to run in parallel per region
 - [#300](https://github.com/genomic-medicine-sweden/nallo/pull/300) - Clarified and formatted nallo.nf
+- [#306](https://github.com/genomic-medicine-sweden/nallo/pull/306) - Updated echtvar version
 
 ### `Removed`
 
@@ -97,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | htslib      | 1.19.1      | 1.20        |
 | cadd        |             | 1.6.post1   |
 | gawk        |             | 5.3.0       |
+| echtvar     | 0.1.7       | 0.2.0       |
 
 ## v0.2.0 - [2024-06-26]
 
