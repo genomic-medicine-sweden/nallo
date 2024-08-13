@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#306](https://github.com/genomic-medicine-sweden/nallo/pull/306) - Updated echtvar version
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed somalier relate to also run per sample on sampes with unknown sex, removing the need to wait on all samples to finish aligment before starting variant calling
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed the removal of n_files from meta from bam_infer_sex to nallo.nf
+- [#312](https://github.com/genomic-medicine-sweden/nallo/pull/312) - Changed echtvar encode database creation to use dynamic `${project}` from samplesheet
 
 ### `Removed`
 
