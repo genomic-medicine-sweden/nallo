@@ -28,7 +28,7 @@ jobs:
       matrix:
         parameters:
           - ""
-          - "--preset ONT_R10 --input https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv --split_fastq 2 --parallel_snv 1"
+          - "--preset ONT_R10 --input https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv --parallel_alignment 2 --parallel_snv 1"
         NXF_VER:
           - "23.04.0"
           - "latest-everything"

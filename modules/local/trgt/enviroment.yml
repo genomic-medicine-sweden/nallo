@@ -1,0 +1,7 @@
+name: trgt
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bioconda::trgt=0.4.0

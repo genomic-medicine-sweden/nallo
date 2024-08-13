@@ -17,9 +17,9 @@ workflow BAM_INFER_SEX {
     // Extract sites
     SOMALIER_EXTRACT (
         ch_bam_bai,
-        ch_fasta.map { it[1] },
-        ch_fai.map { it[1] },
-        ch_somalier_sites.map { it[1] }
+        ch_fasta,
+        ch_fai,
+        ch_somalier_sites
     )
     ch_versions = ch_versions.mix(SOMALIER_EXTRACT.out.versions)
 

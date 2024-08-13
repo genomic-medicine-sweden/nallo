@@ -88,11 +88,7 @@ nextflow run genomic-medicine-sweden/nallo -profile docker \
     --input samplesheet.csv \
     --preset <revio/pacbio/ONT_R10> \
     --outdir <OUTDIR> \
-    --fasta <reference.fasta> \
-    --skip_assembly_wf \
-    --skip_repeat_wf \
-    --skip_snv_annotation \
-    --skip_cnv_calling
+    --fasta <reference.fasta>
 ```
 
 ## Presets
@@ -139,7 +135,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 - By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
 
-- By default the pipeline does not perform parallel alignment, but this can be set by setting `--split_fastq` to split the input and alignment into N files/processes.
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--parallel_alignmentss` to split the input and alignment into N files/processes.
 
 All parameters are listed below:
 
@@ -155,7 +151,7 @@ Options to skip various steps within the workflow
 | `skip_assembly_wf`           | Skip assembly and downstream processes     | `boolean` | `False` |          |        |
 | `skip_mapping_wf`            | Skip read mapping and downstream processes | `boolean` | `False` |          |        |
 | `skip_methylation_wf`        | Skip methylation workflow                  | `boolean` | `False` |          |        |
-| `skip_repeat_calling         | Skip repeat calling workflow               | `boolean` | `False` |          |        |
+| `skip_repeat_calling`        | Skip repeat calling workflow               | `boolean` | `False` |          |        |
 | `skip_repeat_annotation`     | Skip repeat annotation workflow            | `boolean` | `False` |          |        |
 | `skip_phasing_wf`            | Skip phasing workflow                      | `boolean` | `False` |          |        |
 | `skip_snv_annotation`        | Skip SNV annotation                        | `boolean` | `False` |          |        |
@@ -231,14 +227,14 @@ Less common options for the pipeline, typically set in a config file.
 
 ## Workflow options
 
-| Parameter        | Description                                | Type      | Default     | Required | Hidden |
-| ---------------- | ------------------------------------------ | --------- | ----------- | -------- | ------ |
-| `preset`         | Choose a preset depending on data type     | `string`  | revio       | True     |        |
-| `variant_caller` | Choose variant caller                      | `string`  | deepvariant |          |        |
-| `phaser`         | Choose phasing software                    | `string`  | whatshap    |          |        |
-| `hifiasm_mode`   | Run hifiasm in hifi-only or hifi-trio mode | `string`  | hifi-only   |          |        |
-| `split_fastq`    | Split alignment into n jobs                | `integer` | 0           |          |        |
-| `parallel_snv`   | Split SNV calling into n chunks            | `integer` | 13          |          |        |
+| Parameter              | Description                                 | Type      | Default     | Required | Hidden |
+| ---------------------- | ------------------------------------------- | --------- | ----------- | -------- | ------ |
+| `preset`               | Choose a preset depending on data type      | `string`  | revio       | True     |        |
+| `variant_caller`       | Choose variant caller                       | `string`  | deepvariant |          |        |
+| `phaser`               | Choose phasing software                     | `string`  | whatshap    |          |        |
+| `hifiasm_mode`         | Run hifiasm in hifi-only or hifi-trio mode  | `string`  | hifi-only   |          |        |
+| `parallel_alignmentss` | Split alignment into n processes per sample | `integer` | 1           |          |        |
+| `parallel_snv`         | Split SNV calling into n chunks             | `integer` | 13          |          |        |
 
 ## Extra file inputs
 
