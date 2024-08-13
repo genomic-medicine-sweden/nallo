@@ -86,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                    | `--skip_aligned_read_qc`   |
 |                    | `--cadd_resources`         |
 |                    | `--cadd_prescored`         |
-| `--split_fastq`    | `--parallel_alignment`     |
+| `--split_fastq`    | `--parallel_alignments`     |
 | `--extra_gvcfs`    |                            |
 | `--extra_snfs`     |                            |
 

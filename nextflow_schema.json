@@ -366,7 +366,7 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "parallel_alignment": {
+                "parallel_alignments": {
                     "type": "integer",
                     "minimum": 1,
                     "default": 1,

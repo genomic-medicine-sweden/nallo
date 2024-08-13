@@ -190,7 +190,7 @@ workflow NALLO {
     if(!params.skip_mapping_wf) {
 
         // Split input files for alignment
-        if (params.parallel_alignment > 1) {
+        if (params.parallel_alignments > 1) {
 
             SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
             ch_versions = ch_versions.mix(SPLITUBAM.out.versions)

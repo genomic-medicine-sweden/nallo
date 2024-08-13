@@ -135,7 +135,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 - By default SNV-calling is split into 13 parallel processes, limit this by setting `--parallel_snv` to a different number.
 
-- By default the pipeline does not perform parallel alignment, but this can be set by setting `--parallel_alignment` to split the input and alignment into N files/processes.
+- By default the pipeline does not perform parallel alignment, but this can be set by setting `--parallel_alignmentss` to split the input and alignment into N files/processes.
 
 All parameters are listed below:
 
@@ -233,7 +233,7 @@ Less common options for the pipeline, typically set in a config file.
 | `variant_caller`     | Choose variant caller                       | `string`  | deepvariant |          |        |
 | `phaser`             | Choose phasing software                     | `string`  | whatshap    |          |        |
 | `hifiasm_mode`       | Run hifiasm in hifi-only or hifi-trio mode  | `string`  | hifi-only   |          |        |
-| `parallel_alignment` | Split alignment into n processes per sample | `integer` | 1           |          |        |
+| `parallel_alignmentss` | Split alignment into n processes per sample | `integer` | 1           |          |        |
 | `parallel_snv`       | Split SNV calling into n chunks             | `integer` | 13          |          |        |
 
 ## Extra file inputs
