@@ -95,14 +95,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool        | Old version | New version |
-| ----------- | ----------- | ----------- |
-| deepvariant | 1.5.0       | 1.6.1       |
-| htslib      | 1.19.1      | 1.20        |
-| cadd        |             | 1.6.post1   |
-| gawk        |             | 5.3.0       |
-| echtvar     | 0.1.7       | 0.2.0       |
-| somalier    | 0.2.15      | 0.2.18      |
+| Tool                        | Old version | New version |
+| --------------------------- | ----------- | ----------- |
+| deepvariant                 | 1.5.0       | 1.6.1       |
+| tabix                       | 1.19.1      | 1.20        |
+| echtvar                     | 0.1.7       | 0.2.0       |
+| somalier                    | 0.2.15      | 0.2.18      |
+| cadd                        |             | 1.6.post1   |
+| gawk                        |             | 5.3.0       |
+| add_most_severe_consequence |             | v1.0        |
+| add_most_severe_pli         |             | v1.0        |
+| create_pedigree_file        |             | v1.0        |
+| genmod                      |             | 3.8.2       |
+| stranger                    |             | 0.9.1       |
 
 ## v0.2.0 - [2024-06-26]
 
