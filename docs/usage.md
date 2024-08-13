@@ -115,6 +115,8 @@ Some workflows require additional files:
 
 - If running without `--skip_snv_annotation`, you will also need to download VEP plugin files to supply with `--vep_plugin_files` see [example](https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files.csv). PLI and LoFtool.
 
+- If running without `--skip_snv_annotation`, `--variant_consequences_snv` is also required (File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://grch37.ensembl.org/info/genome/variation/prediction/predicted_data.html)).
+
 ```
 vep_files
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/SpliceAI.pm
@@ -137,7 +139,7 @@ gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
 
-- If your samplesheet contains at least one affected sample (phenotype = 2), `--reduced_penetrance` (Used by GENMOD while modeling the variants. Contains a list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)), `--score_config_snv` (Used by GENMOD for ranking the variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)) and `--variant_consequences_snv` (File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://grch37.ensembl.org/info/genome/variation/prediction/predicted_data.html)) is also required.
+- If running wihtout `--skip_rank_variants` and your samplesheet contains at least one affected sample (phenotype = 2), `--reduced_penetrance` (Used by GENMOD while modeling the variants. Contains a list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)), `--score_config_snv` (Used by GENMOD for ranking the variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)).
 
 - Optionally, if running without `--skip_snv_annotation`, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the data/annotations/ and data/prescored/ folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation), and it is used to calculate CADD scores for small indels.
 

@@ -74,8 +74,9 @@ def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
-    snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "reduced_penetrance", "score_config_snv", "variant_consequences_snv"],
+    snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "variant_consequences_snv"],
     cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
+    rank_variants    : ["reduced_penetrance", "score_config_snv"],
     repeat_calling   : ["trgt_repeats"],
     repeat_annotation: ["variant_catalog"],
 ]
