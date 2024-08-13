@@ -5,7 +5,7 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "SHORT_VARIANT_CALLING"
 
-    test("1 sample - no bed, fasta, fai, []") {
+    test("1 sample - no bed, fasta, fai, [], []") {
 
         when {
             workflow {
@@ -25,6 +25,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -38,7 +39,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 1 bed, fasta, fai, []") {
+    test("1 sample - 1 bed, fasta, fai, [], []") {
 
         when {
             workflow {
@@ -58,6 +59,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -72,7 +74,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 1 bed, fasta, fai, bed") {
+    test("1 sample - 1 bed, fasta, fai, bed, []") {
 
         when {
             workflow {
@@ -95,6 +97,7 @@ nextflow_workflow {
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
                 ]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -109,7 +112,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 2 bed, fasta, fai, bed") {
+    test("1 sample - 2 bed, fasta, fai, bed, []") {
 
         when {
             workflow {
@@ -125,7 +128,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ]
                 )
                 input[1] = [
@@ -140,6 +143,7 @@ nextflow_workflow {
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
                 ]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -154,7 +158,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples - 2 bed, fasta, fai, bed") {
+    test("2 samples - 2 bed, fasta, fai, bed, []") {
 
         when {
             workflow {
@@ -170,7 +174,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ],
                     [
                         [ id:'test2', single_end:false, num_intervals:2 ], // meta map
@@ -182,7 +186,7 @@ nextflow_workflow {
                         [ id:'test2', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ]
                 )
                 input[1] = [
@@ -197,6 +201,7 @@ nextflow_workflow {
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
                 ]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -211,7 +216,67 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - no bed, fasta, fai, [] - stub") {
+    test("2 samples - 2 bed, fasta, fai, bed, par_bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
+                    ]
+                )
+                input[1] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'bed'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                ]
+                input[4] = [
+                    [ id:'par_bed'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()
+                }
+            )
+        }
+    }
+
+    test("1 sample - no bed, fasta, fai, [], [] - stub") {
 
         options "-stub"
 
@@ -233,6 +298,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -247,7 +313,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 1 bed, fasta, fai, [] - stub") {
+    test("1 sample - 1 bed, fasta, fai, [], [] - stub") {
 
         options "-stub"
 
@@ -269,6 +335,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -283,7 +350,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 1 bed, fasta, fai, bed - stub") {
+    test("1 sample - 1 bed, fasta, fai, bed, [] - stub") {
 
         options "-stub"
 
@@ -308,6 +375,7 @@ nextflow_workflow {
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
                 ]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -322,7 +390,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - 2 bed, fasta, fai, bed - stub") {
+    test("1 sample - 2 bed, fasta, fai, bed, [] - stub") {
 
         options "-stub"
 
@@ -340,7 +408,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ]
                 )
                 input[1] = [
@@ -355,6 +423,7 @@ nextflow_workflow {
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
                 ]
+                input[4] = [[],[]]
                 """
             }
         }
@@ -369,7 +438,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples - 2 bed, fasta, fai, bed - stub") {
+    test("2 samples - 2 bed, fasta, fai, bed, [] - stub") {
 
         options "-stub"
 
@@ -387,7 +456,7 @@ nextflow_workflow {
                         [ id:'test', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ],
                     [
                         [ id:'test2', single_end:false, num_intervals:2 ], // meta map
@@ -399,7 +468,7 @@ nextflow_workflow {
                         [ id:'test2', single_end:false, num_intervals:2 ], // meta map
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
-                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
                     ]
                 )
                 input[1] = [
@@ -413,6 +482,70 @@ nextflow_workflow {
                 input[3] = [
                     [ id:'bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                ]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()
+                }
+            )
+        }
+
+    }
+
+    test("2 samples - 2 bed, fasta, fai, bed, par_bed - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', single_end:false, num_intervals:2 ], // meta map
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                        file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
+                    ]
+                )
+                input[1] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'bed'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                ]
+                input[4] = [
+                    [ id:'par_bed'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ]
                 """
             }

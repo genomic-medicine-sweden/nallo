@@ -102,7 +102,7 @@ The typical command example above requires no additional files except the refere
 Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
 Some workflows require additional files:
 
-- If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
+- If running without `--skip_assembly_wf` or `--skip_short_variant_calling`, download a BED file with PAR regions ([hg38](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) to supply with `--par_regions`.
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
@@ -242,7 +242,7 @@ Different processes may need extra input files
 
 | Parameter                          | Description                                                                                                                                                                                                                                                               | Type      | Default | Required | Hidden |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
-| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
+| `par_regions`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
 | `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                                                                                                                                       | `string`  |         |          |        |
 | `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                                                                                                                                      | `string`  |         |          |        |
 | `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                                                                                                                                             | `string`  |         |          |        |

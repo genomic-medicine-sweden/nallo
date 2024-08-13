@@ -416,9 +416,9 @@
                     "description": "Path to the directory containing cadd annotations.",
                     "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
                 },
-                "dipcall_par": {
+                "par_regions": {
                     "type": "string",
-                    "description": "Provide a bed file of chrX PAR regions for dipcall",
+                    "description": "Provide a bed file of chrX an PAR regions for dipcall and DeepVariant",
                     "format": "file-path",
                     "exists": true
                 },

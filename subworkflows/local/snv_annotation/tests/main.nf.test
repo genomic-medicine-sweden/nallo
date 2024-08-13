@@ -58,6 +58,9 @@ nextflow_workflow {
                 input[3] = [
                     [],[]
                 ]
+                input[4] = [
+                    [],[]
+                ]
             """
             }
         }

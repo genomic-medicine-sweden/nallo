@@ -79,7 +79,7 @@ workflow NALLO {
                                                                     : Channel.value([[],[]])
     ch_input_bed                = params.bed                        ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it ] }.collect()
                                                                     : Channel.value([[],[]])
-    ch_par                      = params.dipcall_par                ? Channel.fromPath(params.dipcall_par).collect()
+    ch_par                      = params.par_regions                ? Channel.fromPath(params.par_regions).map { [ [ id: it.simpleName ], it ] }.collect()
                                                                     : ''
     ch_trgt_bed                 = params.trgt_repeats               ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
@@ -323,7 +323,7 @@ workflow NALLO {
             // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
             // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
             //
-            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed, ch_par )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             //
