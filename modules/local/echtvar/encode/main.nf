@@ -23,12 +23,12 @@ process ECHTVAR_ENCODE {
     [
         {
             "field": "AF",
-            "alias": "COHORT_AF",
+            "alias": "${meta.id}_af",
             "multiplier": 1000000
         },
         {
             "field": "AC",
-            "alias": "COHORT_AC",
+            "alias": "${meta.id}_ac",
             "multiplier": 1000000
         },
 
