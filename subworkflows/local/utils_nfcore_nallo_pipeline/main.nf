@@ -182,7 +182,7 @@ workflow PIPELINE_INITIALISATION {
         .groupTuple() // group by sample
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
-            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.split_fastq - 1), single_end:true ], reads ]
+            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.parallel_alignments - 1), single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap {

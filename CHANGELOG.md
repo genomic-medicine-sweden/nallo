@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#277](https://github.com/genomic-medicine-sweden/nallo/pull/277) - Allowed CNV calling as soon as SNV calling for a sample is finished
 - [#278](https://github.com/genomic-medicine-sweden/nallo/pull/278) - Changed the SNV ranking to run in parallel per region
 - [#300](https://github.com/genomic-medicine-sweden/nallo/pull/300) - Clarified and formatted nallo.nf
+- [#304](https://github.com/genomic-medicine-sweden/nallo/pull/304) - Changed to treat (u)BAM as the primary input by skipping fastq conversion before aligning
 - [#306](https://github.com/genomic-medicine-sweden/nallo/pull/306) - Updated echtvar version
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed somalier relate to also run per sample on sampes with unknown sex, removing the need to wait on all samples to finish aligment before starting variant calling
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed the removal of n_files from meta from bam_infer_sex to nallo.nf
@@ -85,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                    | `--skip_aligned_read_qc`   |
 |                    | `--cadd_resources`         |
 |                    | `--cadd_prescored`         |
+| `--split_fastq`    | `--parallel_alignments`    |
 | `--extra_gvcfs`    |                            |
 | `--extra_snfs`     |                            |
 
@@ -108,6 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | create_pedigree_file        |             | v1.0        |
 | genmod                      |             | 3.8.2       |
 | stranger                    |             | 0.9.1       |
+| splitubam                   |             | 0.1.1       |
+| fastp                       | 0.23.4      |             |
 
 ## v0.2.0 - [2024-06-26]
 
