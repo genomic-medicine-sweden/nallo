@@ -172,7 +172,7 @@
                     },
                     "samtools/fastq": {
                         "branch": "master",
-                        "git_sha": "897c33d5da084b61109500ee44c01da2d3e4e773",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/import": {
