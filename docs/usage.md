@@ -227,14 +227,14 @@ Less common options for the pipeline, typically set in a config file.
 
 ## Workflow options
 
-| Parameter            | Description                                 | Type      | Default     | Required | Hidden |
-| -------------------- | ------------------------------------------- | --------- | ----------- | -------- | ------ |
-| `preset`             | Choose a preset depending on data type      | `string`  | revio       | True     |        |
-| `variant_caller`     | Choose variant caller                       | `string`  | deepvariant |          |        |
-| `phaser`             | Choose phasing software                     | `string`  | whatshap    |          |        |
-| `hifiasm_mode`       | Run hifiasm in hifi-only or hifi-trio mode  | `string`  | hifi-only   |          |        |
+| Parameter              | Description                                 | Type      | Default     | Required | Hidden |
+| ---------------------- | ------------------------------------------- | --------- | ----------- | -------- | ------ |
+| `preset`               | Choose a preset depending on data type      | `string`  | revio       | True     |        |
+| `variant_caller`       | Choose variant caller                       | `string`  | deepvariant |          |        |
+| `phaser`               | Choose phasing software                     | `string`  | whatshap    |          |        |
+| `hifiasm_mode`         | Run hifiasm in hifi-only or hifi-trio mode  | `string`  | hifi-only   |          |        |
 | `parallel_alignmentss` | Split alignment into n processes per sample | `integer` | 1           |          |        |
-| `parallel_snv`       | Split SNV calling into n chunks             | `integer` | 13          |          |        |
+| `parallel_snv`         | Split SNV calling into n chunks             | `integer` | 13          |          |        |
 
 ## Extra file inputs
 
