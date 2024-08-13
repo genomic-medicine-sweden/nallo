@@ -91,6 +91,8 @@ workflow NALLO {
                                                                     : Channel.value([])
     ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
+    ch_vep_extra_files_unsplit  = params.vep_plugin_files           ? Channel.fromPath(params.vep_plugin_files).collect()
+                                                                    : ''
     ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).collect()
                                                                     : ''
     ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).collect()
@@ -120,6 +122,21 @@ workflow NALLO {
         .map { project, ped -> [ [ 'id': project ], ped ] }
         .collect()
         .set { ch_pedfile }
+
+    // Read and store paths in the vep_plugin_files file
+    if (params.vep_plugin_files) {
+        ch_vep_extra_files_unsplit.splitCsv ( header:true )
+            .map { row ->
+                f = file(row.vep_files[0])
+                if(f.isFile() || f.isDirectory()){
+                    return [f]
+                } else {
+                    error("\nVep database file ${f} does not exist.")
+                }
+            }
+            .collect()
+            .set {ch_vep_extra_files}
+    }
 
     //
     // Convert BAM files to FASTQ and vice versa
@@ -341,6 +358,7 @@ workflow NALLO {
                     fai.map { name, fai -> [ [ id: name ], fai ] },
                     ch_vep_cache,
                     params.vep_cache_version,
+                    ch_vep_extra_files,
                     (params.cadd_resources && params.cadd_prescored),
                     ch_cadd_header,
                     ch_cadd_resources,

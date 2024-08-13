@@ -383,6 +383,12 @@
                     "default": 110,
                     "description": "VEP cache version"
                 },
+                "vep_plugin_files": {
+                    "type": "string",
+                    "mimetype": "text/csv",
+                    "description": "A csv file with paths to vep plugin files, pLI, LoFtool and SpliceAI is required.",
+                    "schema": "assets/vep_plugin_files_schema.json"
+                },
                 "deepvariant_model_type": {
                     "type": "string",
                     "default": "PACBIO",
