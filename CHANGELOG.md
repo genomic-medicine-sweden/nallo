@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#306](https://github.com/genomic-medicine-sweden/nallo/pull/306) - Updated echtvar version
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed somalier relate to also run per sample on sampes with unknown sex, removing the need to wait on all samples to finish aligment before starting variant calling
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed the removal of n_files from meta from bam_infer_sex to nallo.nf
+- [#308](https://github.com/genomic-medicine-sweden/nallo/pull/308) - Updated nf-core modules, fixed warnings in local modules, added Dockerfile to fqcrs
 
 ### `Removed`
 
@@ -94,13 +95,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool        | Old version | New version |
-| ----------- | ----------- | ----------- |
-| deepvariant | 1.5.0       | 1.6.1       |
-| htslib      | 1.19.1      | 1.20        |
-| cadd        |             | 1.6.post1   |
-| gawk        |             | 5.3.0       |
-| echtvar     | 0.1.7       | 0.2.0       |
+| Tool                        | Old version | New version |
+| --------------------------- | ----------- | ----------- |
+| deepvariant                 | 1.5.0       | 1.6.1       |
+| tabix                       | 1.19.1      | 1.20        |
+| echtvar                     | 0.1.7       | 0.2.0       |
+| somalier                    | 0.2.15      | 0.2.18      |
+| cadd                        |             | 1.6.post1   |
+| gawk                        |             | 5.3.0       |
+| add_most_severe_consequence |             | v1.0        |
+| add_most_severe_pli         |             | v1.0        |
+| create_pedigree_file        |             | v1.0        |
+| genmod                      |             | 3.8.2       |
+| stranger                    |             | 0.9.1       |
 
 ## v0.2.0 - [2024-06-26]
 

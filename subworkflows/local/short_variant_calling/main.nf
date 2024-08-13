@@ -26,7 +26,7 @@ workflow SHORT_VARIANT_CALLING {
         }
         .set { ch_deepvariant_in }
 
-    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]] )
+    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], [[],[]] )
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
 
     // First remove region so we can group per sample
