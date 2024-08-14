@@ -23,21 +23,17 @@ process SAMTOOLS_FASTQ {
 
     script:
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def output = ( interleave && ! meta.single_end ) ? "> ${prefix}_interleaved.fastq" :
         meta.single_end ? "-1 ${prefix}_1.fastq.gz -s ${prefix}_singleton.fastq.gz" :
         "-1 ${prefix}_1.fastq.gz -2 ${prefix}_2.fastq.gz -s ${prefix}_singleton.fastq.gz"
     """
-    samtools reset \\
-        --threads ${task.cpus-1} \\
+    samtools \\
+        fastq \\
         $args \\
-        $input \\
-    | \\
-    samtools fastq \\
-        $args2 \\
         --threads ${task.cpus-1} \\
         -0 ${prefix}_other.fastq.gz \\
+        $input \\
         $output
 
     cat <<-END_VERSIONS > versions.yml
