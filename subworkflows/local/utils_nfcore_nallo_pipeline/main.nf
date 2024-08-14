@@ -309,8 +309,120 @@ def genomeExistsError() {
 //
 def toolCitationText() {
 
-    def citation_text = []
-    def return_text = "" + citation_text.unique(false) { a, b -> a <=> b }.join(', ') - "" + ""
+    def citation_text = [
+        "SAMtools (Danecek et al. 2021)",
+    ]
+    if (!params.skip_raw_read_qc) {
+        citation_text = citation_text + [
+            "FastQC (Andrews 2010)",
+            "fcqrs",
+        ]
+    }
+    if (!params.skip_mapping_wf) {
+        if (params.parallel_alignments > 1) {
+            citation_text = citation_text + [
+                "splitubam",
+            ]
+        }
+        citation_text = citation_text + [
+            "SAMtools (Danecek et al. 2021)",
+            "Minimap2 (Li 2018)",
+            "Somalier (Pedersen et al. 2020)",
+            "Sniffles2 (Smolka et al. 2024)",
+        ]
+        if (!params.skip_aligned_read_qc) {
+            citation_text = citation_text + [
+                "cramino (De Coster & Rademakers 2023)",
+                "mosdepth (Pedersen & Quinlan 2018)",
+            ]
+        }
+        if (!params.skip_call_paralogs) {
+            citation_text = citation_text + [
+                "paraphase",
+            ]
+        }
+        if (!params.skip_assembly_wf) {
+            if (params.hifiasm_mode == 'trio-binning') {
+                citation_text = citation_text + [
+                    "yak",
+                ]
+            }
+            citation_text = citation_text + [
+                "Hifiasm (Cheng et al. 2021)",
+                "Gfastats (Formenti et al. 2022)",
+                "dipcall (Li et al. 2018)",
+                "SAMtools (Danecek et al. 2021)",
+                "Minimap2 (Li 2018)",
+            ]
+        }
+        if (!params.skip_short_variant_calling) {
+            citation_text = citation_text + [
+                "BEDTools (Quinlan & Hall 2010)",
+                "BCFtools (Danecek et al. 2021)",
+                "DeepVariant (Poplin et al. 2018)",
+                "GLnexus (Yun et al. 2021)",
+            ]
+        }
+        if (!params.skip_snv_annotation) {
+            citation_text = citation_text + [
+                "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)",
+                "BCFtools (Danecek et al. 2021)",
+                "VEP (McLaren et al. 2016)",
+                "Tabix (Li 2011)",
+                "Echtvar (Pedersen & de Ridder 2023)",
+            ]
+            if (!params.skip_rank_variants) {
+                citation_text = citation_text + [
+                    "Genmod (Magnusson et al. 2018)",
+                    "Tabix (Li 2011)",
+                ]
+            }
+        }
+        if (!params.skip_cnv_calling) {
+            citation_text = citation_text + [
+                "HiFiCNV",
+            ]
+        }
+        if (!params.skip_phasing_wf) {
+            citation_text = citation_text + [
+                "SAMtools (Danecek et al. 2021)",
+                "cramino (De Coster & Rademakers 2023)",
+            ]
+            if(params.phaser == 'whatshap') {
+                citation_text = citation_text + [
+                    "WhatsHap (Martin et al. 2016)",
+                ]
+            }
+            if(params.phaser == 'hiphase_sv') {
+                citation_text = citation_text + [
+                    "HiPhase (Holt et al. 2024)",
+                ]
+            }
+            if(params.phaser == 'hiphase_snv') {
+                citation_text = citation_text + [
+                    "HiPhase (Holt et al. 2024)",
+                ]
+            }
+            if (!params.skip_methylation_wf) {
+                citation_text = citation_text + [
+                    "modkit",
+                    "Tabix (Li 2011)",
+                ]
+            }
+            if (!params.skip_repeat_calling) {
+                citation_text = citation_text + [
+                    "TRGT (Dolzhenko et al. 2024)",
+                ]
+                if (!params.skip_repeat_annotation) {
+                    citation_text = citation_text + [
+                        "Stranger (Nilsson & Magnusson 2021)",
+                    ]
+                }
+            }
+        }
+    }
+
+    def return_text = "Tools used in the workflow included: " + citation_text.unique(false) { a, b -> a <=> b }.join(', ') - "" + "."
     return return_text
 }
 
