@@ -112,7 +112,7 @@ Some workflows require additional files:
 - If running without `--skip_repeat_annotation`, download a json variant catalog, (e.g. [variant_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/variant_catalog_grch38.json)) matching your reference genome to supply with `--variant_catalog`.
 
 - If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
-- If running without `--skip_snv_annotation`, you will also need to download VEP plugin files to supply with `--vep_plugin_files` see [example](https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files.csv). PLI, LoFtool and SpliceAI are required.
+- If running without `--skip_snv_annotation`, you will also need to download VEP plugin files to supply with `--vep_plugin_files` see [example](https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files.csv). PLI and LoFtool.
 
 ```
 vep_files

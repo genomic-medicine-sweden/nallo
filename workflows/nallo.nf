@@ -127,11 +127,11 @@ workflow NALLO {
     if (params.vep_plugin_files) {
         ch_vep_extra_files_unsplit.splitCsv ( header:true )
             .map { row ->
-                f = file(row.vep_files[0])
-                if(f.isFile() || f.isDirectory()){
-                    return [f]
+                path = file(row.vep_files[0])
+                if(path.isFile() || path.isDirectory()){
+                    return [path]
                 } else {
-                    error("\nVep database file ${f} does not exist.")
+                    error("\nVep database file ${path} does not exist.")
                 }
             }
             .collect()
