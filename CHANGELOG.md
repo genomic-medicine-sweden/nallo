@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#266](https://github.com/genomic-medicine-sweden/nallo/pull/266) - Added CADD to dynamically calculate indel CADD-scores
 - [#270](https://github.com/genomic-medicine-sweden/nallo/pull/270) - Added SNV phasing stats to MultiQC
 - [#271](https://github.com/genomic-medicine-sweden/nallo/pull/271) - Added a `--skip_aligned_read_qc` parameter to skip the qc aligned reads subworkflow
+- [#314](https://github.com/genomic-medicine-sweden/nallo/pull/314) - Added a `--vep_plugin_files` parameter to separate VEP plugins from cache
 - [#320](https://github.com/genomic-medicine-sweden/nallo/pull/320) - Added complete citations to CITATIONS.md and MultiQC report
 
 ### `Changed`
@@ -59,6 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#307](https://github.com/genomic-medicine-sweden/nallo/pull/307) - Changed the removal of n_files from meta from bam_infer_sex to nallo.nf
 - [#308](https://github.com/genomic-medicine-sweden/nallo/pull/308) - Updated nf-core modules, fixed warnings in local modules, added Dockerfile to fqcrs
 - [#312](https://github.com/genomic-medicine-sweden/nallo/pull/312) - Changed echtvar encode database creation to use dynamic `${project}` from samplesheet
+- [#313](https://github.com/genomic-medicine-sweden/nallo/pull/313) - Updated calling of variants in non-autosomal contigs for DeepVariant
+- [#313](https://github.com/genomic-medicine-sweden/nallo/pull/313) - Changed VEP annotation added in #244 to not include SpliceAI
 
 ### `Removed`
 
@@ -69,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#258](https://github.com/genomic-medicine-sweden/nallo/pull/258) - Removed VCF report from DeepVariant output
 - [#264](https://github.com/genomic-medicine-sweden/nallo/pull/264) - Removed the option to provide extra SNF files to Sniffles with `--extra_snfs`
 - [#305](https://github.com/genomic-medicine-sweden/nallo/pull/305) - Removed unused local module bcftools view regions
+- [#319](https://github.com/genomic-medicine-sweden/nallo/pull/319) - Removed samtools reset before samtools fastq when converting BAM to FASTQ
 
 ### `Fixed`
 
@@ -91,6 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--split_fastq`    | `--parallel_alignments`    |
 | `--extra_gvcfs`    |                            |
 | `--extra_snfs`     |                            |
+| `--dipcall_par`    | `--par_regions`            |
+|                    | `--vep_plugin_files`       |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

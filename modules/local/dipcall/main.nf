@@ -16,7 +16,7 @@ process DIPCALL {
     tuple val(meta2), path(reference)
     tuple val(meta3), path(fai)
     tuple val(meta4), path(mmi)
-    path(par)
+    tuple val(meta5), path(par)
 
     output:
     tuple val(meta), path("*.dip.vcf.gz") , emit: variant_calls

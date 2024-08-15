@@ -383,6 +383,12 @@
                     "default": 110,
                     "description": "VEP cache version"
                 },
+                "vep_plugin_files": {
+                    "type": "string",
+                    "mimetype": "text/csv",
+                    "description": "A csv file with paths to vep plugin files, pLI, LoFtool and SpliceAI is required.",
+                    "schema": "assets/vep_plugin_files_schema.json"
+                },
                 "deepvariant_model_type": {
                     "type": "string",
                     "default": "PACBIO",
@@ -416,9 +422,9 @@
                     "description": "Path to the directory containing cadd annotations.",
                     "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
                 },
-                "dipcall_par": {
+                "par_regions": {
                     "type": "string",
-                    "description": "Provide a bed file of chrX PAR regions for dipcall",
+                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
                     "format": "file-path",
                     "exists": true
                 },

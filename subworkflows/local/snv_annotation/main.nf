@@ -13,6 +13,7 @@ workflow SNV_ANNOTATION {
     ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache          // channel: [mandatory] [ path(cache) ]
     val_vep_cache_version // string: [mandatory] default: 110
+    ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
     val_annotate_cadd     // bool: [mandatory]
     ch_cadd_header        // channel: [mandatory] [ path(txt) ]
     ch_cadd_resources     // channel: [mandatory] [ path(annotation) ]
@@ -59,7 +60,7 @@ workflow SNV_ANNOTATION {
         val_vep_cache_version,
         ch_vep_cache,
         ch_fasta,
-        []
+        ch_vep_extra_files
     )
     ch_versions = ch_versions.mix(ENSEMBLVEP_VEP.out.versions)
 

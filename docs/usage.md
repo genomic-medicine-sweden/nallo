@@ -102,7 +102,7 @@ The typical command example above requires no additional files except the refere
 Nallo has the ability to skip certain parts of the pipeline, for example `--skip_repeat_wf`.
 Some workflows require additional files:
 
-- If running without `--skip_assembly_wf`, download a BED file with PAR regions ([hg38](https://raw.githubusercontent.com/lh3/dipcall/master/data/hs38.PAR.bed)) to supply with `--dipcall_par`.
+- If running without `--skip_assembly_wf` or `--skip_short_variant_calling`, download a BED file with PAR regions ([hg38](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) to supply with `--par_regions`.
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference.
@@ -112,6 +112,23 @@ Some workflows require additional files:
 - If running without `--skip_repeat_annotation`, download a json variant catalog, (e.g. [variant_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/variant_catalog_grch38.json)) matching your reference genome to supply with `--variant_catalog`.
 
 - If running without `--skip_snv_annotation`, download [VEP cache](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz) to supply with `--vep_cache` and prepare a samplesheet with annotation databases ([`echtvar encode`](https://github.com/brentp/echtvar)) to supply with `--snp_db`:
+- If running without `--skip_snv_annotation`, you will also need to download VEP plugin files to supply with `--vep_plugin_files` see [example](https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files.csv). PLI and LoFtool.
+
+```
+vep_files
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/SpliceAI.pm
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool.pm
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/dbNSFP.pm
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/plugin_config.txt
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI.pm
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/MaxEntScan.pm
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
+```
 
 ```
 sample,file
@@ -242,11 +259,12 @@ Different processes may need extra input files
 
 | Parameter                          | Description                                                                                                                                                                                                                                                               | Type      | Default | Required | Hidden |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
-| `dipcall_par`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
+| `par_regions`                      | Provide a bed file of chrX PAR regions for dipcall                                                                                                                                                                                                                        | `string`  |         |          |        |
 | `tandem_repeats`                   | Tandem repeat BED-file for sniffles                                                                                                                                                                                                                                       | `string`  |         |          |        |
 | `trgt_repeats`                     | BED-file for repeats to be genotyped                                                                                                                                                                                                                                      | `string`  |         |          |        |
 | `snp_db`                           | Extra echtvar-databases to annotate SNVs with                                                                                                                                                                                                                             | `string`  |         |          |        |
 | `vep_cache`                        | Path to directory of vep_cache                                                                                                                                                                                                                                            | `string`  |         |          |        |
+| `vep_plugin_files`                 | A csv file with paths to vep plugin files, pLI, LoFtool and SpliceAI is required.                                                                                                                                                                                         | `string`  |         |          |        |
 | `bed`                              | BED file with regions of interest                                                                                                                                                                                                                                         | `string`  |         |          |        |
 | `hificnv_xy`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |
 | `hificnv_xx`                       |                                                                                                                                                                                                                                                                           | `string`  |         |          |        |

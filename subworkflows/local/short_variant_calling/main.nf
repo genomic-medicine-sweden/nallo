@@ -15,6 +15,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai         // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed         // channel: [optional] [ val(meta), path(input_bed) ]
+    ch_par_bed     // channel: [mandatory] [ val(meta), path(par_bed) ]
 
     main:
     ch_versions = Channel.empty()
@@ -26,7 +27,7 @@ workflow SHORT_VARIANT_CALLING {
         }
         .set { ch_deepvariant_in }
 
-    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], [[],[]] )
+    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], ch_par_bed )
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
 
     // First remove region so we can group per sample

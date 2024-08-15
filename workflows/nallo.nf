@@ -79,7 +79,7 @@ workflow NALLO {
                                                                     : Channel.value([[],[]])
     ch_input_bed                = params.bed                        ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it ] }.collect()
                                                                     : Channel.value([[],[]])
-    ch_par                      = params.dipcall_par                ? Channel.fromPath(params.dipcall_par).collect()
+    ch_par                      = params.par_regions                ? Channel.fromPath(params.par_regions).map { [ [ id: it.simpleName ], it ] }.collect()
                                                                     : ''
     ch_trgt_bed                 = params.trgt_repeats               ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
@@ -91,6 +91,8 @@ workflow NALLO {
                                                                     : Channel.value([])
     ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
+    ch_vep_extra_files_unsplit  = params.vep_plugin_files           ? Channel.fromPath(params.vep_plugin_files).collect()
+                                                                    : ''
     ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).collect()
                                                                     : ''
     ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).collect()
@@ -120,6 +122,21 @@ workflow NALLO {
         .map { project, ped -> [ [ 'id': project ], ped ] }
         .collect()
         .set { ch_pedfile }
+
+    // Read and store paths in the vep_plugin_files file
+    if (params.vep_plugin_files) {
+        ch_vep_extra_files_unsplit.splitCsv ( header:true )
+            .map { row ->
+                path = file(row.vep_files[0])
+                if(path.isFile() || path.isDirectory()){
+                    return [path]
+                } else {
+                    error("\nVep database file ${path} does not exist.")
+                }
+            }
+            .collect()
+            .set {ch_vep_extra_files}
+    }
 
     //
     // Convert BAM files to FASTQ and vice versa
@@ -323,7 +340,7 @@ workflow NALLO {
             // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
             // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
             //
-            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed, ch_par )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             //
@@ -341,6 +358,7 @@ workflow NALLO {
                     fai.map { name, fai -> [ [ id: name ], fai ] },
                     ch_vep_cache,
                     params.vep_cache_version,
+                    ch_vep_extra_files,
                     (params.cadd_resources && params.cadd_prescored),
                     ch_cadd_header,
                     ch_cadd_resources,

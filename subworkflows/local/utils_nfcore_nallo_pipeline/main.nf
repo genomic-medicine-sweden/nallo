@@ -68,12 +68,13 @@ def workflowDependencies = [
 ]
 
 //
-// E.g., the dipcall_par file is required by the assembly workflow and the assembly workflow can't run without dipcall_par
+// E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
 //
 def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
-    assembly         : ["fasta", "dipcall_par"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
-    snv_annotation   : ["snp_db", "vep_cache", "reduced_penetrance", "score_config_snv", "variant_consequences_snv"],
+    assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    snv_calling      : ["fasta", "par_regions"],
+    snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "reduced_penetrance", "score_config_snv", "variant_consequences_snv"],
     cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
     repeat_calling   : ["trgt_repeats"],
     repeat_annotation: ["variant_catalog"],
@@ -96,7 +97,7 @@ def parameterStatus = [
         skip_assembly_wf          : params.skip_assembly_wf,
     ],
     files: [
-        dipcall_par             : params.dipcall_par,
+        par_regions             : params.par_regions,
         snp_db                  : params.snp_db,
         somalier_sites          : params.somalier_sites,
         vep_cache               : params.vep_cache,
