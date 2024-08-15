@@ -22,8 +22,7 @@ workflow SCATTER_GENOME {
     //
     if( make_bed_from_fai ) {
 
-
-        BUILD_INTERVALS ( ch_fai )
+        BUILD_INTERVALS ( ch_fai.map { name, fai -> [ [ id: name ], fai ] } )
         ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
 
         BUILD_INTERVALS.out.bed
