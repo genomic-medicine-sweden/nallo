@@ -9,7 +9,6 @@ lint:
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
     - conf/modules.config
-    - .prettierignore
   files_unchanged:
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
