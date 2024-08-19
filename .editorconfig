@@ -31,3 +31,8 @@ indent_size = unset
 # ignore python and markdown
 [*.{py,md}]
 indent_style = unset
+
+# ignore parameters.md
+[parameters.md]
+trim_trailing_whitespace = false
+indent_style = unset

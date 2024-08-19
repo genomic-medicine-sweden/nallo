@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#313](https://github.com/genomic-medicine-sweden/nallo/pull/313) - Updated calling of variants in non-autosomal contigs for DeepVariant
 - [#314](https://github.com/genomic-medicine-sweden/nallo/pull/314) - Changed VEP annotation added in #244 to not include SpliceAI
 - [#317](https://github.com/genomic-medicine-sweden/nallo/pull/317) - Changed so that `--reduced_penetrance` and `--score_config_snv` is required by rank variants and not SNV annotation
+- [#318](https://github.com/genomic-medicine-sweden/nallo/pull/318) - Updated docs and schema to clarify pipeline usage
 - [#321](https://github.com/genomic-medicine-sweden/nallo/pull/321) - Changed the input to BUILD_INTERVALS to have `meta.id` when building intervals from reference
 - [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `parallel_alignments` in CI tests as well
 
