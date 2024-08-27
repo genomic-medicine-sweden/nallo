@@ -31,7 +31,7 @@
 - SV calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
 - Tandem repeats (HiFi only) ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 - Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
-- CNV-calling (HiFi only) ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
+- CNV-calling ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
 - Call paralogous genes ([`Paraphase`](https://github.com/PacificBiosciences/paraphase))
 
 ##### Phasing and methylation
@@ -39,9 +39,10 @@
 - Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
 - Methylation pileups ([`modkit`](https://github.com/nanoporetech/modkit))
 
-##### Annotation - SNV
+##### Annotation
 
-- Annotate variants with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar) and [`VEP`](https://github.com/Ensembl/ensembl-vep))
+- Annotate SNVs and INDELs with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar) and [`VEP`](https://github.com/Ensembl/ensembl-vep))
+- Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
 
 ##### Filtering and ranking
 
