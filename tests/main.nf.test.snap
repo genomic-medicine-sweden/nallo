@@ -57,7 +57,7 @@
     },
     "test profile - multisample": {
         "content": [
-            "test.ped:md5,a1e82af069bce823564e204c316d5500",
+            "test.ped:md5,db74c6787a92a70ffaab766fa4d7a873",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
             "multiqc_fastqc.txt:md5,b74145ef9fbf8addcc2997ca26b3aa45",
             "74b4822241bd8d1bc42f494f1f3e326c",
@@ -145,6 +145,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-08-12T09:49:33.754269424"
+        "timestamp": "2024-08-28T13:37:54.494547598"
     }
 }

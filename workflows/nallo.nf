@@ -6,24 +6,24 @@ include { fromSamplesheet } from 'plugin/nf-validation'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_REPEAT_EXPANSIONS          } from '../subworkflows/local/annotate_repeat_expansions'
-include { ASSEMBLY                            } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING            } from '../subworkflows/local/assembly_variant_calling'
-include { CONVERT_INPUT_FILES                 } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                       } from '../subworkflows/local/bam_infer_sex'
-include { CALL_PARALOGS                       } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS              } from '../subworkflows/local/call_repeat_expansions'
-include { CNV                                 } from '../subworkflows/local/cnv'
-include { METHYLATION                         } from '../subworkflows/local/methylation'
-include { PHASING                             } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                      } from '../subworkflows/local/prepare_genome'
-include { QC_ALIGNED_READS                    } from '../subworkflows/local/qc_aligned_reads'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV  } from '../subworkflows/local/rank_variants'
-include { SCATTER_GENOME                      } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING               } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION                      } from '../subworkflows/local/snv_annotation'
-include { STRUCTURAL_VARIANT_CALLING          } from '../subworkflows/local/structural_variant_calling'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
+include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
+include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
+include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
+include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
+include { CNV                                     } from '../subworkflows/local/cnv'
+include { METHYLATION                             } from '../subworkflows/local/methylation'
+include { PHASING                                 } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
+include { QC_ALIGNED_READS                        } from '../subworkflows/local/qc_aligned_reads'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
+include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
+include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
+include { STRUCTURAL_VARIANT_CALLING              } from '../subworkflows/local/structural_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,24 +32,25 @@ include { STRUCTURAL_VARIANT_CALLING          } from '../subworkflows/local/stru
 */
 
 // local
-include { CREATE_PEDIGREE_FILE                } from '../modules/local/create_pedigree_file'
-include { ECHTVAR_ENCODE                      } from '../modules/local/echtvar/encode/main'
-include { FQCRS                               } from '../modules/local/fqcrs'
-include { SAMTOOLS_MERGE                      } from '../modules/nf-core/samtools/merge/main'
+include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED } from '../modules/local/create_pedigree_file'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED    } from '../modules/local/create_pedigree_file'
+include { ECHTVAR_ENCODE                          } from '../modules/local/echtvar/encode/main'
+include { FQCRS                                   } from '../modules/local/fqcrs'
+include { SAMTOOLS_MERGE                          } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                     } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT                } from '../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_STATS                      } from '../modules/nf-core/bcftools/stats/main'
-include { CAT_FASTQ                           } from '../modules/nf-core/cat/fastq/main'
-include { FASTQC                              } from '../modules/nf-core/fastqc/main'
-include { MINIMAP2_ALIGN                      } from '../modules/nf-core/minimap2/align/main'
-include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
-include { SPLITUBAM                           } from '../modules/nf-core/splitubam/main'
-include { paramsSummaryMap                    } from 'plugin/nf-validation'
-include { paramsSummaryMultiqc                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText              } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
+include { CAT_FASTQ                               } from '../modules/nf-core/cat/fastq/main'
+include { FASTQC                                  } from '../modules/nf-core/fastqc/main'
+include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
+include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
+include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
+include { paramsSummaryMap                        } from 'plugin/nf-validation'
+include { paramsSummaryMultiqc                    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                  } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                  } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,20 +109,6 @@ workflow NALLO {
 
     // Check parameter that doesn't conform to schema validation here
     if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
-
-    // Create PED from samplesheet
-    ch_input
-        .map { meta, files -> [ meta.project, meta ] }
-        .groupTuple()
-        .set { ch_ped_in }
-
-    ch_pedfile = CREATE_PEDIGREE_FILE ( ch_ped_in )
-    ch_versions = ch_versions.mix(CREATE_PEDIGREE_FILE.out.versions)
-
-    CREATE_PEDIGREE_FILE.out.ped
-        .map { project, ped -> [ [ 'id': project ], ped ] }
-        .collect()
-        .set { ch_pedfile }
 
     // Read and store paths in the vep_plugin_files file
     if (params.vep_plugin_files) {
@@ -248,9 +235,25 @@ workflow NALLO {
             .set { bam_infer_sex_in }
 
         //
+        // Create PED from samplesheet
+        //
+        ch_input
+            .map { meta, files -> [ meta.project, meta ] }
+            .groupTuple()
+            .set { ch_samplesheet_ped_in }
+
+        SAMPLESHEET_PED ( ch_samplesheet_ped_in )
+        ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
+
+        SAMPLESHEET_PED.out.ped
+            .map { project, ped -> [ [ 'id': project ], ped ] }
+            .collect()
+            .set { ch_samplesheet_pedfile }
+
+        //
         // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
         //
-        BAM_INFER_SEX ( bam_infer_sex_in, fasta, fai, ch_somalier_sites, ch_pedfile )
+        BAM_INFER_SEX ( bam_infer_sex_in, fasta, fai, ch_somalier_sites, ch_samplesheet_pedfile )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
 
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
@@ -259,6 +262,22 @@ workflow NALLO {
         bam     = BAM_INFER_SEX.out.bam
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
+
+        //
+        // Create PED with updated sex
+        //
+        bam
+            .map { meta, files -> [ meta.project, meta ] }
+            .groupTuple()
+            .set { ch_somalier_ped_in }
+
+        SOMALIER_PED ( ch_somalier_ped_in )
+        ch_versions = ch_versions.mix(SOMALIER_PED.out.versions)
+
+        SOMALIER_PED.out.ped
+            .map { project, ped -> [ [ 'id': project ], ped ] }
+            .collect()
+            .set { ch_updated_pedfile }
 
         //
         // Run aligned read QC with mosdepth and cramino
@@ -379,7 +398,7 @@ workflow NALLO {
                     // Only run if we have affected individuals
                     RANK_VARIANTS_SNV (
                         ANN_CSQ_PLI_SNV.out.vcf_ann.filter { meta, vcf -> meta.contains_affected },
-                        ch_pedfile.map { meta, ped -> ped },
+                        ch_updated_pedfile.map { meta, ped -> ped },
                         ch_reduced_penetrance,
                         ch_score_config_snv
                     )
