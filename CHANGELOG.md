@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.3.0 - [2024-08-28]
+## v0.3.0 - [2024-08-29]
 
 ### `Added`
 
@@ -68,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `parallel_alignments` in CI tests as well
 - [#330](https://github.com/genomic-medicine-sweden/nallo/pull/330) - Updated README and version bump
 - [#332](https://github.com/genomic-medicine-sweden/nallo/pull/332) - Changed the PED file input to genmod to include inferred sex from somalier
+- [#333](https://github.com/genomic-medicine-sweden/nallo/pull/333) - Updated TRGT to 0.7.0 and added `meta.id` as output sample name
 
 ### `Removed`
 
@@ -117,6 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | tabix                       | 1.19.1      | 1.20        |
 | echtvar                     | 0.1.7       | 0.2.0       |
 | somalier                    | 0.2.15      | 0.2.18      |
+| TRGT                        | 0.4.0       | 0.7.0       |
 | cadd                        |             | 1.6.post1   |
 | gawk                        |             | 5.3.0       |
 | add_most_severe_consequence |             | v1.0        |
