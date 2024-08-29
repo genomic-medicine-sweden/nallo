@@ -22,7 +22,7 @@ workflow CALL_REPEAT_EXPANSIONS {
         .set { ch_trgt_input }
 
     // Run TGRT
-    TRGT ( ch_trgt_input, ch_fasta, ch_trgt_bed.map { it[1] } )
+    TRGT ( ch_trgt_input, ch_fasta, ch_fai, ch_trgt_bed.map { it[1] } )
 
     // Sort and index bam
     SAMTOOLS_SORT_TRGT ( TRGT.out.bam, [[],[]] )

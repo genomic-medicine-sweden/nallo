@@ -40,9 +40,9 @@
             "HG002_Revio.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
             "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
             "HG002_PacBio_Revio.fastq.gz.tsv.zst:md5,4b073293b3e771d19b4cfdb07909571b",
-            "HG002_Revio_sorted.vcf.gz:md5,bc06de08b8e36b3b48e0d7b9e21df389",
-            "HG002_Revio_sorted.vcf.gz.tbi:md5,08a5c82838264c558eb30726906f47e0",
-            "110181f29066158df34abbad9e3becc8",
+            "HG002_Revio_sorted.vcf.gz:md5,fbb5699b8f74fc105fb154e8fac7bfea",
+            "HG002_Revio_sorted.vcf.gz.tbi:md5,0466518ee265ba63160ed27cee0dec88",
+            "65999ab8f2bc7841de8172468bf23ab6",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
                 "# The command line was:\tbcftools stats  HG002_Revio.vcf.gz",
@@ -53,7 +53,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-08-12T09:45:54.652442138"
+        "timestamp": "2024-08-29T10:42:09.011660883"
     },
     "test profile - multisample": {
         "content": [
@@ -92,9 +92,9 @@
             "HG002_Revio_A.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
             "HG002_Revio_A.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
             "HG002_PacBio_Revio.bam_other.fastq.gz.tsv.zst:md5,4b073293b3e771d19b4cfdb07909571b",
-            "HG002_Revio_A_sorted.vcf.gz:md5,b95e709a27fe1df9ee1487b99f396bf4",
-            "HG002_Revio_A_sorted.vcf.gz.tbi:md5,b1eb1f21f36782089b8e0bb0a54105ed",
-            "110181f29066158df34abbad9e3becc8",
+            "HG002_Revio_A_sorted.vcf.gz:md5,680938d6ebeafe73d8df0b21c0310276",
+            "HG002_Revio_A_sorted.vcf.gz.tbi:md5,a6554ab817e7c232a1554ea85fa00151",
+            "65999ab8f2bc7841de8172468bf23ab6",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
                 "# The command line was:\tbcftools stats  HG002_Revio_A.vcf.gz",
@@ -132,9 +132,9 @@
             "HG002_Revio_B.regions.bed.gz:md5,deaca22783bd058cdc8756efa25b5f53",
             "HG002_Revio_B.regions.bed.gz.csi:md5,dd9a0d36d71da0d274d1c9ca6f8571ae",
             "HG002_Revio_B.merged.fastq.gz.tsv.zst:md5,0641e175a07429b61710329a2eeef450",
-            "HG002_Revio_B_sorted.vcf.gz:md5,05ae66b46d2f87a2133fcdf93d30f38c",
-            "HG002_Revio_B_sorted.vcf.gz.tbi:md5,244a3f966e3434220cd69fcb04b08d01",
-            "18e3bd1fe43fc17ace2f57db5861498c",
+            "HG002_Revio_B_sorted.vcf.gz:md5,ce617741468f4bc7f504f8f488332098",
+            "HG002_Revio_B_sorted.vcf.gz.tbi:md5,e255a5ea92885967f0c126bddc8ea3b2",
+            "6b0cf3f492ce898398835d1102afd369",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
                 "# The command line was:\tbcftools stats  HG002_Revio_B.vcf.gz",
@@ -145,6 +145,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-08-28T13:37:54.494547598"
+        "timestamp": "2024-08-29T10:45:44.41793623"
     }
 }

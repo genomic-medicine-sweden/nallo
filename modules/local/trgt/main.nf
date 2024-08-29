@@ -3,11 +3,12 @@ process TRGT {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "pacbio/trgt:0.4.0"
+    container "biocontainers/trgt:0.7.0--hdfd78af_0"
 
     input:
     tuple val(meta), path(bam), path(bai), val(sex)
     tuple val(meta2), path(fasta)
+    tuple val(meta3), path(fai)
     path(repeats)
 
     output:
