@@ -1,0 +1,188 @@
+nextflow_workflow {
+
+    name "Test Workflow SCATTER_GENOME"
+    script "../main.nf"
+    workflow "SCATTER_GENOME"
+    config "./nextflow.config"
+
+    setup {
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[1] = [[],[]]
+                """
+            }
+        }
+    }
+
+    test("fai, [], true, false, []") {
+
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FAIDX.out.fai
+                input[1] = [[],[]]
+                input[2] = true
+                input[3] = false
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    path(workflow.out.bed.get(0).get(1)).readLines(),
+                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                ).match() }
+            )
+        }
+
+    }
+
+    test("fai, [], true, true, 3") {
+
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FAIDX.out.fai
+                input[1] = [[],[]]
+                input[2] = true
+                input[3] = true
+                input[4] = 3
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    path(workflow.out.bed.get(0).get(1)).readLines(),
+                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                ).match() }
+            )
+        }
+
+    }
+
+    test("fai, [], bed, true, 3") {
+
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FAIDX.out.fai
+                input[1] = [[],[]]
+                input[2] = Channel.of('chr22\t0\t1000')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[3] = true
+                input[4] = 3
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    path(workflow.out.bed.get(0).get(1)).readLines(),
+                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                ).match() }
+            )
+        }
+
+    }
+
+    test("[], bed, false, false, 3") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = Channel.of('chr22\t0\t1000')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = false
+                input[4] = 3
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    path(workflow.out.bed.get(0).get(1)).readLines(),
+                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                ).match() }
+            )
+        }
+
+    }
+
+    test("[], bed, false, true, 3") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = true
+                input[4] = 3
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    path(workflow.out.bed.get(0).get(1)).readLines(),
+                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                ).match() }
+            )
+        }
+
+    }
+
+    test("[], bed, false, true, 0 - should fail") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = true
+                input[4] = 0
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.failed },
+            )
+        }
+
+    }
+
+}

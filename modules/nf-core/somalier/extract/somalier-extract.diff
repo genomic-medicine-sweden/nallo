@@ -1,0 +1,25 @@
+Changes in module 'nf-core/somalier/extract'
+--- modules/nf-core/somalier/extract/main.nf
++++ modules/nf-core/somalier/extract/main.nf
+@@ -5,8 +5,8 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/somalier:0.2.19--h0c29559_0':
+-        'biocontainers/somalier:0.2.19--h0c29559_0' }"
++        'https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0':
++        'biocontainers/somalier:0.2.18--hb57907c_0' }"
+ 
+     input:
+     tuple val(meta), path(input), path(input_index)
+
+--- modules/nf-core/somalier/extract/environment.yml
++++ modules/nf-core/somalier/extract/environment.yml
+@@ -4,4 +4,4 @@
+   - bioconda
+   - defaults
+ dependencies:
+-  - bioconda::somalier=0.2.19
++  - bioconda::somalier=0.2.18
+
+************************************************************

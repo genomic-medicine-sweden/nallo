@@ -4,6 +4,7 @@ slackreport.json
 .nextflow*
 work/
 data/
+docs/parameters.md
 results/
 .DS_Store
 testing/

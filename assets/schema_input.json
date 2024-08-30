@@ -28,13 +28,13 @@
             "paternal_id": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use any ID not in sample column.",
+                "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.",
                 "meta": ["paternal_id"]
             },
             "maternal_id": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use any ID not in sample column.",
+                "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.",
                 "meta": ["maternal_id"]
             },
             "sex": {
@@ -48,8 +48,14 @@
                 "enum": [0, 1, 2],
                 "errorMessage": "Phenoype must be provided as 0 (missing), 1 (unaffected) or 2 (affected)",
                 "meta": ["phenotype"]
+            },
+            "project": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Project name must be provided and cannot contain spaces, needs to be the same for all samples",
+                "meta": ["project"]
             }
         },
-        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype"]
+        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype", "project"]
     }
 }

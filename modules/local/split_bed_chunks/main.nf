@@ -1,5 +1,5 @@
 process SPLIT_BED_CHUNKS {
-    tag "$meta"
+    tag "$meta.id"
 
     container "quay.io/biocontainers/pandas:1.5.2"
     def split_bed_chunks_version = "1.0"

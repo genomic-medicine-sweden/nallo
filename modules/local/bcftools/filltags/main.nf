@@ -12,6 +12,8 @@ process BCFTOOLS_FILLTAGS {
 
     output:
     tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
+    tuple val(meta), path("*.csi")                    , emit: csi, optional: true
+    tuple val(meta), path("*.tbi")                    , emit: tbi, optional: true
     path "versions.yml"                               , emit: versions
 
     when:

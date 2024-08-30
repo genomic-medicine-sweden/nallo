@@ -49,7 +49,6 @@ process SNIFFLES {
     
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    
     """
     touch ${prefix}.vcf.gz
     touch ${prefix}.snf
@@ -59,6 +58,4 @@ process SNIFFLES {
         sniffles: \$(sniffles --help 2>&1 | grep Version |sed 's/^.*Version //')
     END_VERSIONS
     """
-    
 }
-

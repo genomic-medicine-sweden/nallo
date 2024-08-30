@@ -1,3 +1,3 @@
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-sample_1,/path/to/fastq_or_bam/files/sample_1.fastq.gz,FAM,PAT,MAT,0,1
-sample_2,/path/to/fastq_or_bam/files/sample_2.bam,FAM,PAT,MAT,1,1
+sample_1,/path/to/fastq_or_bam/files/sample_1.fastq.gz,FAM,0,0,0,2
+sample_2,/path/to/fastq_or_bam/files/sample_2.bam,FAM,0,0,1,1

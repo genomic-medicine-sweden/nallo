@@ -1,0 +1,25 @@
+Changes in module 'nf-core/ensemblvep/vep'
+--- modules/nf-core/ensemblvep/vep/main.nf
++++ modules/nf-core/ensemblvep/vep/main.nf
+@@ -4,8 +4,8 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/ensembl-vep:111.0--pl5321h2a3209d_0' :
+-        'biocontainers/ensembl-vep:111.0--pl5321h2a3209d_0' }"
++        'https://depot.galaxyproject.org/singularity/ensembl-vep:110.0--pl5321h2a3209d_0' :
++        'biocontainers/ensembl-vep:110.0--pl5321h2a3209d_0' }"
+ 
+     input:
+     tuple val(meta), path(vcf), path(custom_extra_files)
+
+--- modules/nf-core/ensemblvep/vep/environment.yml
++++ modules/nf-core/ensemblvep/vep/environment.yml
+@@ -4,4 +4,4 @@
+   - bioconda
+   - defaults
+ dependencies:
+-  - bioconda::ensembl-vep=111.0
++  - bioconda::ensembl-vep=110.0
+
+************************************************************

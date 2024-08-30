@@ -8,55 +8,82 @@
         "workflow_skip_options": {
             "title": "Workflow skip options",
             "type": "object",
-            "description": "Options to skip various steps within the workflow",
+            "description": "Allows skipping certain parts of the pipeline",
             "default": "",
             "properties": {
+                "skip_aligned_read_qc": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip QC of aligned reads",
+                    "default": false
+                },
                 "skip_raw_read_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip raw read QC"
+                    "description": "Skip QC of unaligned (raw) reads",
+                    "default": false
                 },
                 "skip_short_variant_calling": {
                     "type": "boolean",
                     "description": "Skip short variant calling",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_assembly_wf": {
                     "type": "boolean",
-                    "description": "Skip assembly and downstream processes",
-                    "fa_icon": "fas fa-fast-forward"
+                    "description": "Skip genome assembly and assembly variant calling",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_mapping_wf": {
                     "type": "boolean",
-                    "description": "Skip read mapping and downstream processes",
-                    "fa_icon": "fas fa-fast-forward"
+                    "description": "Skip read mapping (alignment)",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_methylation_wf": {
                     "type": "boolean",
-                    "description": "Skip methylation workflow",
-                    "fa_icon": "fas fa-fast-forward"
+                    "description": "Skip generation of methylation pileups",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
-                "skip_repeat_wf": {
+                "skip_repeat_calling": {
                     "type": "boolean",
-                    "description": "Skip repeat analysis workflow",
-                    "fa_icon": "fas fa-fast-forward"
+                    "description": "Skip tandem repeat calling",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
+                "skip_repeat_annotation": {
+                    "type": "boolean",
+                    "description": "Skip tandem repeat annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_phasing_wf": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip phasing workflow"
+                    "description": "Skip phasing of variants and haplotagging of reads",
+                    "default": false
                 },
                 "skip_snv_annotation": {
                     "type": "boolean",
-                    "description": "Skip SNV annotation"
+                    "description": "Skip short variant annotation",
+                    "default": false
                 },
                 "skip_cnv_calling": {
                     "type": "boolean",
-                    "description": "Skip CNV workflow"
+                    "description": "Skip CNV calling",
+                    "default": false
                 },
                 "skip_call_paralogs": {
                     "type": "boolean",
-                    "description": "Skip call paralogs (Paraphase)"
+                    "description": "Skip the calling of specific paralogous genes",
+                    "default": false
+                },
+                "skip_rank_variants": {
+                    "type": "boolean",
+                    "description": "Skip ranking of short variants",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -325,92 +352,105 @@
         "workflow_options": {
             "title": "Workflow options",
             "type": "object",
-            "description": "",
+            "description": "Workflow options specific to genomic-medicine-sweden/nallo",
             "default": "",
             "properties": {
                 "preset": {
                     "type": "string",
                     "default": "revio",
-                    "description": "Choose a preset depending on data type",
+                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
                     "enum": ["revio", "pacbio", "ONT_R10"]
                 },
                 "variant_caller": {
                     "type": "string",
                     "default": "deepvariant",
-                    "description": "Choose variant caller",
+                    "description": "Which short variant software to use (`deepvariant`)",
                     "enum": ["deepvariant"]
                 },
                 "phaser": {
                     "type": "string",
                     "default": "whatshap",
-                    "description": "Choose phasing software",
+                    "description": "Which phasing software to use (`whatshap`, `hiphase_snv`, `hiphase_sv`)",
                     "enum": ["whatshap", "hiphase_snv", "hiphase_sv"]
                 },
                 "hifiasm_mode": {
                     "type": "string",
-                    "description": "Run hifiasm in hifi-only or hifi-trio mode",
+                    "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "split_fastq": {
+                "parallel_alignments": {
                     "type": "integer",
-                    "default": 0,
-                    "minimum": 0,
-                    "description": "Split alignment into n processes"
+                    "minimum": 1,
+                    "default": 1,
+                    "description": "If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
                 },
                 "parallel_snv": {
                     "type": "integer",
                     "default": 13,
-                    "description": "Split SNV calling into n chunks",
+                    "description": "If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
                     "minimum": 1
                 },
                 "vep_cache_version": {
                     "type": "integer",
                     "default": 110,
                     "description": "VEP cache version"
+                },
+                "vep_plugin_files": {
+                    "type": "string",
+                    "mimetype": "text/csv",
+                    "description": "A csv file with paths to vep plugin files. pLI and LoFtool are required.",
+                    "schema": "assets/vep_plugin_files_schema.json"
+                },
+                "deepvariant_model_type": {
+                    "type": "string",
+                    "default": "PACBIO",
+                    "description": "Sets the model type used for DeepVariant. This is set automatically using `--preset` by default.",
+                    "hidden": true,
+                    "enum": ["PACBIO", "ONT_R104"]
                 }
             },
             "required": ["preset"]
         },
-        "extra_file_inputs": {
-            "title": "Extra file inputs",
+        "file_inputs": {
+            "title": "File inputs",
             "type": "object",
-            "description": "Different processes may need extra input files",
+            "description": "The different files that are required. Some are only required by certain workflows, see the usage documentation.",
             "default": "",
             "fa_icon": "fas fa-copy",
             "properties": {
-                "dipcall_par": {
+                "cadd_prescored": {
                     "type": "string",
-                    "description": "Provide a bed file of chrX PAR regions for dipcall",
-                    "format": "file-path",
-                    "exists": true
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing prescored indels for CADD.",
+                    "help_text": "This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
                 },
-                "extra_gvcfs": {
+                "cadd_resources": {
                     "type": "string",
-                    "description": "Extra input files for GLNexus",
-                    "pattern": "^\\S+\\.csv$",
-                    "format": "file-path",
-                    "schema": "assets/schema_gvcfs.json",
-                    "exists": true
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing CADD annotations.",
+                    "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
                 },
-                "extra_snfs": {
+                "par_regions": {
                     "type": "string",
-                    "description": "Extra input files for Sniffles",
-                    "pattern": "^\\S+\\.csv$",
+                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
                     "format": "file-path",
-                    "schema": "assets/schema_snfs.json",
                     "exists": true
                 },
                 "tandem_repeats": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "Tandem repeat BED-file for sniffles",
+                    "description": "A tandem repeat BED file for sniffles",
                     "pattern": "^\\S+\\.bed$",
                     "exists": true
                 },
                 "trgt_repeats": {
                     "type": "string",
-                    "description": "BED-file for repeats to be genotyped",
+                    "description": "A BED file with repeats to be genotyped with TRGT",
                     "format": "file-path",
                     "exists": true
                 },
@@ -420,12 +460,24 @@
                     "format": "file-path",
                     "mimetype": "text/csv",
                     "schema": "/assets/schema_snpdb.json",
-                    "description": "Extra echtvar-databases to annotate SNVs with",
+                    "description": "A csv file with echtvar databases to annotate SNVs with",
                     "exists": true
+                },
+                "variant_catalog": {
+                    "type": "string",
+                    "description": "A variant catalog json-file for stranger",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "variant_consequences_snv": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
+                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
                 },
                 "vep_cache": {
                     "type": "string",
-                    "description": "Path to directory of vep_cache",
+                    "description": "A path to the VEP cache location",
                     "format": "path",
                     "exists": true
                 },
@@ -433,29 +485,45 @@
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
-                    "description": "BED file with regions of interest",
+                    "description": "A BED file with regions of interest, used to limit short variant calling.",
                     "exists": true
                 },
                 "hificnv_xy": {
                     "type": "string",
                     "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XY samples.",
                     "exists": true
                 },
                 "hificnv_xx": {
                     "type": "string",
                     "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XX samples.",
                     "exists": true
                 },
                 "hificnv_exclude": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "HiFiCNV BED file specifying regions to exclude",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
                     "exists": true
+                },
+                "reduced_penetrance": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file-csv",
+                    "description": "A file with gene ids that have reduced penetrance. For use with genmod."
+                },
+                "score_config_snv": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A SNV rank model config file for genmod."
                 },
                 "somalier_sites": {
                     "type": "string",
                     "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                    "description": "A VCF of known polymorphic sites",
+                    "description": "A VCF of known polymorphic sites for somalier",
                     "format": "file-path",
                     "exists": true
                 },
@@ -464,7 +532,7 @@
                     "fa_icon": "far fa-check-circle",
                     "description": "Validation of parameters fails when an unrecognised parameter is found.",
                     "hidden": true,
-                    "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
+                    "help_text": "By default, when an unrecognised parameter is found, it returns a warning."
                 },
                 "validationLenientMode": {
                     "type": "boolean",
@@ -506,7 +574,7 @@
             "$ref": "#/definitions/workflow_options"
         },
         {
-            "$ref": "#/definitions/extra_file_inputs"
+            "$ref": "#/definitions/file_inputs"
         }
     ]
 }

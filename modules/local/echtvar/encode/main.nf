@@ -2,7 +2,7 @@ process ECHTVAR_ENCODE {
     tag "$meta.id"
     label 'process_single'
 
-    container "docker.io/fellen31/echtvar:latest"
+    container "docker.io/fellen31/echtvar:0.2.0"
 
     input:
     tuple val(meta), path(bcf)
@@ -23,12 +23,12 @@ process ECHTVAR_ENCODE {
     [
         {
             "field": "AF",
-            "alias": "COHORT_AF",
+            "alias": "${meta.id}_af",
             "multiplier": 1000000
         },
         {
             "field": "AC",
-            "alias": "COHORT_AC",
+            "alias": "${meta.id}_ac",
             "multiplier": 1000000
         },
 
