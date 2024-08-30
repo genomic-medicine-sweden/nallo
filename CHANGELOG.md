@@ -3,7 +3,39 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.3.0 - [2024-08-29]
+## 0.4.0dev - [XXXX-XX-XX]
+
+### `Added`
+
+### `Changed`
+
+- [#344](https://github.com/genomic-medicine-sweden/nallo/pull/344) - Changed version to 0.4.0dev
+
+### `Removed`
+
+### `Fixed`
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool | Old version | New version |
+| ---- | ----------- | ----------- |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.3.0 - [2024-08-29]
 
 ### `Added`
 
@@ -129,7 +161,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | splitubam                   |             | 0.1.1       |
 | fastp                       | 0.23.4      |             |
 
-## v0.2.0 - [2024-06-26]
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.2.0 - [2024-06-26]
 
 ### `Added`
 
@@ -216,7 +253,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
-## v0.1.0 - [2024-05-08]
+## 0.1.0 - [2024-05-08]
 
 Initial release of genomic-medicine-sweden/nallo, created with the [nf-core](https://nf-co.re/) template.
 
