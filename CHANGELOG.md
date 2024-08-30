@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#345](https://github.com/genomic-medicine-sweden/nallo/pull/345) - Added first version of a metro map
+- [#346](https://github.com/genomic-medicine-sweden/nallo/pull/#346) - Added nf-test to call_svs
+
 ### `Changed`
 
 - [#344](https://github.com/genomic-medicine-sweden/nallo/pull/344) - Changed version to 0.4.0dev
+- [#346](https://github.com/genomic-medicine-sweden/nallo/pull/346) - Renamed structural_variant_calling to call_svs
 
 ### `Removed`
 

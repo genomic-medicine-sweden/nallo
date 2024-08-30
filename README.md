@@ -14,6 +14,10 @@
 
 ## Pipeline summary
 
+<picture align="center">
+    <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
+  </picture>
+
 ##### QC
 
 - FastQC ([`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/))

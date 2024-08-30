@@ -59,6 +59,7 @@ jobs:
         tags:
           - "SHORT_VARIANT_CALLING"
           - "SNV_ANNOTATION"
+          - "CALL_SVS"
           - "samplesheet"
           - "samplesheet_multisample_bam"
         profile:
