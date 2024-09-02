@@ -23,7 +23,8 @@
                     "bcftools/merge": {
                         "branch": "master",
                         "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bcftools/merge/bcftools-merge.diff"
                     },
                     "bcftools/norm": {
                         "branch": "master",
@@ -37,8 +38,9 @@
                     },
                     "bcftools/reheader": {
                         "branch": "master",
-                        "git_sha": "682f789f93070bd047868300dd018faf3d434e7c",
-                        "installed_by": ["modules"]
+                        "git_sha": "c32611ac6813055b9321d2827678e2f8aebcb394",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bcftools/reheader/bcftools-reheader.diff"
                     },
                     "bcftools/sort": {
                         "branch": "master",

@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Workflow CALL_SVS"
     script "../main.nf"
     workflow "CALL_SVS"
+    config "./nextflow.config"
 
     setup {
             run("GUNZIP") {
@@ -51,10 +52,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..327],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..299],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..299],
+                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
+                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
                     workflow.out.versions,
                 ).match() }
             )
@@ -86,10 +89,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..316],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..299],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..299],
+                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
+                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
                     workflow.out.versions,
                 ).match() }
             )
@@ -125,12 +130,15 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Sample 1, line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..326],
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[0..2], // Sample 2, line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[4..353],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Multisample, line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..317],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[241..353],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..317],
+                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
+                    file(workflow.out.ch_sv_calls_tbi.get(1).get(1)).name,
+                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
                     workflow.out.versions,
                 ).match() }
             )
