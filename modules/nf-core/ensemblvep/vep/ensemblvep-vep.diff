@@ -5,8 +5,8 @@ Changes in module 'nf-core/ensemblvep/vep'
  
      conda "${moduleDir}/environment.yml"
      container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://depot.galaxyproject.org/singularity/ensembl-vep:111.0--pl5321h2a3209d_0' :
--        'biocontainers/ensembl-vep:111.0--pl5321h2a3209d_0' }"
+-        'https://depot.galaxyproject.org/singularity/ensembl-vep:112.0--pl5321h2a3209d_0' :
+-        'biocontainers/ensembl-vep:112.0--pl5321h2a3209d_0' }"
 +        'https://depot.galaxyproject.org/singularity/ensembl-vep:110.0--pl5321h2a3209d_0' :
 +        'biocontainers/ensembl-vep:110.0--pl5321h2a3209d_0' }"
  
@@ -19,7 +19,7 @@ Changes in module 'nf-core/ensemblvep/vep'
    - bioconda
    - defaults
  dependencies:
--  - bioconda::ensembl-vep=111.0
+-  - bioconda::ensembl-vep=112.0
 +  - bioconda::ensembl-vep=110.0
 
 ************************************************************

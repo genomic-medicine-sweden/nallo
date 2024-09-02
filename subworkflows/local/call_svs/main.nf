@@ -31,17 +31,17 @@ workflow CALL_SVS {
     REHEADER_SNIFFLES.out.vcf
         .join(REHEADER_SNIFFLES.out.index)
         .map { meta, vcf, tbi -> [ [ 'id': meta.project ], vcf, tbi ] }
-        .groupTuple(sort: true)
+        .groupTuple()
         .set{ ch_bcftools_merge_in }
 
-    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [] )
+    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [[],[]] )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
-    ch_sv_calls_vcf     = REHEADER_SNIFFLES.out.vcf          // channel: [ val(meta), path(vcf) ]
-    ch_sv_calls_tbi     = REHEADER_SNIFFLES.out.index        // channel: [ val(meta), path(tbi) ]
-    ch_multisample_vcf  = BCFTOOLS_MERGE.out.merged_variants // channel: [ val(meta), path(vcf) ]
-    ch_multisample_tbi  = BCFTOOLS_MERGE.out.index           // channel: [ val(meta), path(tbi) ]
-    versions            = ch_versions                        // channel: [ path(versions.yml) ]
+    ch_sv_calls_vcf     = REHEADER_SNIFFLES.out.vcf   // channel: [ val(meta), path(vcf) ]
+    ch_sv_calls_tbi     = REHEADER_SNIFFLES.out.index // channel: [ val(meta), path(tbi) ]
+    ch_multisample_vcf  = BCFTOOLS_MERGE.out.vcf      // channel: [ val(meta), path(vcf) ]
+    ch_multisample_tbi  = BCFTOOLS_MERGE.out.index    // channel: [ val(meta), path(tbi) ]
+    versions            = ch_versions                 // channel: [ path(versions.yml) ]
 }
 

@@ -51,13 +51,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..299],
-                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
-                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -88,13 +88,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..299],
-                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
-                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -129,16 +129,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[241..316],
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
                     path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[241..353],
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[241..317],
-                    file(workflow.out.ch_sv_calls_tbi.get(0).get(1)).name,
-                    file(workflow.out.ch_sv_calls_tbi.get(1).get(1)).name,
-                    file(workflow.out.ch_multisample_tbi.get(0).get(1)).name,
                     workflow.out.versions,
                 ).match() }
             )
@@ -234,7 +232,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    workflow.out.ch_sv_calls_tbi,
+                    workflow.out.ch_multisample_vcf,
+                    workflow.out.ch_multisample_tbi,
+                    workflow.out.versions,
+                ).match() }
             )
         }
 
