@@ -10,6 +10,7 @@ include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
+include { CALL_SVS                                } from '../subworkflows/local/call_svs'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
@@ -23,7 +24,6 @@ include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/
 include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
 include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
 include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
-include { STRUCTURAL_VARIANT_CALLING              } from '../subworkflows/local/structural_variant_calling'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -325,9 +325,10 @@ workflow NALLO {
         }
 
         //
-        // Call SVs with Sniffles2
-        STRUCTURAL_VARIANT_CALLING( bam_bai, fasta, fai, ch_tandem_repeats )
-        ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
+        // Call structural variants
+        //
+        CALL_SVS ( bam_bai, fasta, fai, ch_tandem_repeats )
+        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
         //
         // Call (and annotate and rank) SNVs
@@ -466,7 +467,7 @@ workflow NALLO {
             //
             if(!params.skip_phasing_wf) {
 
-                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
+                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, CALL_SVS.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
                 ch_versions = ch_versions.mix(PHASING.out.versions)
 
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
