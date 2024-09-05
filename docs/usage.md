@@ -110,22 +110,16 @@ Additionally, if you want to skip a subworkflow, you will need to explicitly sta
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_mapping_wf is active, the pipeline has to be run with: --skip_aligned_read_qc --skip_assembly_wf --skip_call_paralogs --skip_short_variant_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing_wf --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_wf
+  --skip_mapping_wf is active, the pipeline has to be run with: --skip_qc --skip_assembly_wf --skip_call_paralogs --skip_short_variant_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing_wf --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_wf
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 Because almost all other subworkflows relies on the mapping subworkflow.
 
-If you want to run the pipeline without any other input files than `--input samplesheet.csv`, all of the above skips will need to be active, and the pipeline will run only unaligned read QC.
-
 ## Reference files and parameters
 
 As descibed above, the files required depend on the active subworkflows. All parameters are listed [here](parameters.md), but the most useful parameters needed to run the pipeline described in more detail below.
-
-### Raw read QC (`--skip_raw_read_qc`)
-
-This subworkflow requires no additional files.
 
 ### Mapping (`--skip_mapping_wf`)
 
@@ -136,7 +130,7 @@ The majority of subworkflows depend on the mapping (alignment) subworkflow which
 | `fasta`          | Reference genome, either gzipped or uncompressed FASTA (e.g. [GRCh38_no_alt_analysis_set.fna.gz](ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz)) |
 | `somalier_sites` | A VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)), from which sex will be inferred if possible.                                                                                              |
 
-### Aligned read QC (`--skip_aligned_read_qc`)
+### QC (`--skip_qc`)
 
 This subworkflow depends on the mapping subworkflow, but requires no additional files.
 

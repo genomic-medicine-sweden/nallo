@@ -10,8 +10,7 @@ Allows skipping certain parts of the pipeline
                                                                                                                                                     
 | Parameter | Description | Type | Default | Required | Hidden |                                                                                    
 |-----------|-----------|-----------|-----------|-----------|-----------|                                                                           
-| `skip_aligned_read_qc` | Skip QC of aligned reads | `boolean` | False |  |  |                                                                     
-| `skip_raw_read_qc` | Skip QC of unaligned (raw) reads | `boolean` | False |  |  |                                                                 
+| `skip_qc` | Skip QC of reads | `boolean` | False |  |  |                                                                     
 | `skip_short_variant_calling` | Skip short variant calling | `boolean` | False |  |  |                                                             
 | `skip_assembly_wf` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |                                                
 | `skip_mapping_wf` | Skip read mapping (alignment) | `boolean` | False |  |  |                                                                     

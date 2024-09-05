@@ -6,7 +6,7 @@
             "test.samples.tsv:md5,1685dc6cb8c6b9806ca636662980d686",
             "test.html:md5,d05e0eceb70ada3a0c25f99a16ad1889",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
-            "multiqc_fastqc.txt:md5,c60b523b5f11c07c9149043bf68f92ad",
+            "multiqc_fastqc.txt:md5,f0717ca13d848aa8f5eaa5d0dba92178",
             "multiqc_somalier.txt:md5,20b4c5b2d5b94b77fb800548e07a874e",
             "74b4822241bd8d1bc42f494f1f3e326c",
             "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,ccaad2690abccadc4ec3b2c5d8fa4b05",
@@ -32,14 +32,13 @@
             "HG002_Revio.pair.vcf.gz:md5,977d60dfdf18e27c06574ec8297e49e4",
             "HG002_Revio.HG002_Revio.vcf.gz:md5,771f7d9ecbd161dedfbdd053ceff0d52",
             "HG002_Revio.HG002_Revio.vcf.gz.tbi:md5,65d6930f79e626a5542091b7a419dc2b",
-            "HG002_Revio_modkit_pileup.bed.gz:md5,8850d8414ecefc2341452f23ce5e6870",
-            "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,af7e0b1699351d6df3d93d223d5c3da9",
+            "HG002_Revio_modkit_pileup.bed.gz:md5,a52bb9ab393e682d0b7118ef2efe5c15",
+            "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,08312c13316ed9b4b582897c210ecb58",
             "fcc3f220bb09d3264f97e7f620779be0",
             "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
             "HG002_Revio_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
             "HG002_Revio.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
             "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
-            "HG002_PacBio_Revio.fastq.gz.tsv.zst:md5,4b073293b3e771d19b4cfdb07909571b",
             "HG002_Revio_sorted.vcf.gz:md5,fbb5699b8f74fc105fb154e8fac7bfea",
             "HG002_Revio_sorted.vcf.gz.tbi:md5,0466518ee265ba63160ed27cee0dec88",
             "65999ab8f2bc7841de8172468bf23ab6",
@@ -53,13 +52,13 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-03T15:03:43.310119902"
+        "timestamp": "2024-09-05T16:07:01.083877858"
     },
     "test profile - multisample": {
         "content": [
             "test.ped:md5,db74c6787a92a70ffaab766fa4d7a873",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
-            "multiqc_fastqc.txt:md5,b74145ef9fbf8addcc2997ca26b3aa45",
+            "multiqc_fastqc.txt:md5,79973e3ad49ae1f84c50db83edaa8bbc",
             "74b4822241bd8d1bc42f494f1f3e326c",
             "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,ccaad2690abccadc4ec3b2c5d8fa4b05",
             "HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary:md5,c5bbeabb571453186a39cf6e487dbcc5",
@@ -84,14 +83,13 @@
             "HG002_Revio_A.pair.vcf.gz:md5,8fd0eb40954ed6d829d0632d0cf54414",
             "HG002_Revio_A.HG002_Revio_A.vcf.gz:md5,e575fbadcd826243561192310f234c82",
             "HG002_Revio_A.HG002_Revio_A.vcf.gz.tbi:md5,e27fe63e51a2cfaec020ad0a1aec4a7f",
-            "HG002_Revio_A_modkit_pileup.bed.gz:md5,8850d8414ecefc2341452f23ce5e6870",
-            "HG002_Revio_A_modkit_pileup.bed.gz.tbi:md5,af7e0b1699351d6df3d93d223d5c3da9",
+            "HG002_Revio_A_modkit_pileup.bed.gz:md5,a52bb9ab393e682d0b7118ef2efe5c15",
+            "HG002_Revio_A_modkit_pileup.bed.gz.tbi:md5,08312c13316ed9b4b582897c210ecb58",
             "fcc3f220bb09d3264f97e7f620779be0",
             "HG002_Revio_A_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
             "HG002_Revio_A_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
             "HG002_Revio_A.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
             "HG002_Revio_A.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
-            "HG002_PacBio_Revio.bam_other.fastq.gz.tsv.zst:md5,4b073293b3e771d19b4cfdb07909571b",
             "HG002_Revio_A_sorted.vcf.gz:md5,680938d6ebeafe73d8df0b21c0310276",
             "HG002_Revio_A_sorted.vcf.gz.tbi:md5,a6554ab817e7c232a1554ea85fa00151",
             "65999ab8f2bc7841de8172468bf23ab6",
@@ -124,14 +122,13 @@
             "HG002_Revio_B.pair.vcf.gz:md5,987d192995729f82247dffdcea2dd60f",
             "HG002_Revio_B.HG002_Revio_B.vcf.gz:md5,59773d5836f76b36dc1bf75e32186898",
             "HG002_Revio_B.HG002_Revio_B.vcf.gz.tbi:md5,1408aeaca23a00eee979101eb45d887d",
-            "HG002_Revio_B_modkit_pileup.bed.gz:md5,e50e61d644ad3219b3088b1c0d701862",
-            "HG002_Revio_B_modkit_pileup.bed.gz.tbi:md5,ae29296657f0d2c7451d285ec49f8675",
+            "HG002_Revio_B_modkit_pileup.bed.gz:md5,1042d7c0ae2098f1ab94835c9e286ce0",
+            "HG002_Revio_B_modkit_pileup.bed.gz.tbi:md5,67e81f6cdeedd6e2e79141a7cac0108b",
             "a8a1403ba192f971638c870a2be35700",
             "HG002_Revio_B_cramino_aligned_phased.arrow:md5,bdd385c0b007ffc30c6cfdd98b15ed82",
             "HG002_Revio_B_cramino_aligned.arrow:md5,bdd385c0b007ffc30c6cfdd98b15ed82",
             "HG002_Revio_B.regions.bed.gz:md5,deaca22783bd058cdc8756efa25b5f53",
             "HG002_Revio_B.regions.bed.gz.csi:md5,dd9a0d36d71da0d274d1c9ca6f8571ae",
-            "HG002_Revio_B.merged.fastq.gz.tsv.zst:md5,0641e175a07429b61710329a2eeef450",
             "HG002_Revio_B_sorted.vcf.gz:md5,ce617741468f4bc7f504f8f488332098",
             "HG002_Revio_B_sorted.vcf.gz.tbi:md5,e255a5ea92885967f0c126bddc8ea3b2",
             "6b0cf3f492ce898398835d1102afd369",
@@ -145,6 +142,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-03T15:07:20.976381275"
+        "timestamp": "2024-09-05T16:11:25.725227966"
     }
 }

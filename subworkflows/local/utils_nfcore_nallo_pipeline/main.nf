@@ -36,8 +36,6 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 //
 def workflowSkips = [
     assembly         : "skip_assembly_wf",
-    raw_read_qc      : "skip_raw_read_qc",
-    aligned_read_qc  : "skip_aligned_read_qc",
     mapping          : "skip_mapping_wf",
     snv_calling      : "skip_short_variant_calling",
     snv_annotation   : "skip_snv_annotation",
@@ -48,16 +46,17 @@ def workflowSkips = [
     repeat_calling   : "skip_repeat_calling",
     repeat_annotation: "skip_repeat_annotation",
     methylation      : "skip_methylation_wf",
+    qc               : "skip_qc",
 ]
 
 //
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
-    aligned_read_qc  : ["mapping"],
     assembly         : ["mapping"],
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
+    qc               : ["mapping"],
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
@@ -93,8 +92,7 @@ def parameterStatus = [
         skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
         skip_mapping_wf           : params.skip_mapping_wf,
-        skip_aligned_read_qc      : params.skip_aligned_read_qc,
-        skip_raw_read_qc          : params.skip_raw_read_qc,
+        skip_qc                   : params.skip_qc,
         skip_assembly_wf          : params.skip_assembly_wf,
     ],
     files: [
@@ -315,12 +313,6 @@ def toolCitationText() {
         "MultiQC (Ewels et al. 2016)",
         "SAMtools (Danecek et al. 2021)",
     ]
-    if (!params.skip_raw_read_qc) {
-        citation_text = citation_text + [
-            "FastQC (Andrews 2010)",
-            "fcqrs",
-        ]
-    }
     if (!params.skip_mapping_wf) {
         if (params.parallel_alignments > 1) {
             citation_text = citation_text + [
@@ -333,8 +325,9 @@ def toolCitationText() {
             "Somalier (Pedersen et al. 2020)",
             "Sniffles2 (Smolka et al. 2024)",
         ]
-        if (!params.skip_aligned_read_qc) {
+        if (!params.skip_qc) {
             citation_text = citation_text + [
+                "FastQC (Andrews 2010)",
                 "cramino (De Coster & Rademakers 2023)",
                 "mosdepth (Pedersen & Quinlan 2018)",
             ]

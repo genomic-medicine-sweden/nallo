@@ -11,16 +11,10 @@
             "description": "Allows skipping certain parts of the pipeline",
             "default": "",
             "properties": {
-                "skip_aligned_read_qc": {
+                "skip_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC of aligned reads",
-                    "default": false
-                },
-                "skip_raw_read_qc": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC of unaligned (raw) reads",
+                    "description": "Skip QC of reads",
                     "default": false
                 },
                 "skip_short_variant_calling": {
