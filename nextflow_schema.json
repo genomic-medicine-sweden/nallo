@@ -570,5 +570,27 @@
         {
             "$ref": "#/definitions/file_inputs"
         }
-    ]
+    ],
+    "properties": {
+        "extra_modkit_phased_options": {
+            "type": "string",
+            "hidden": true
+        },
+        "extra_modkit_unphased_options": {
+            "type": "string",
+            "hidden": true
+        },
+        "extra_vep_options": {
+            "type": "string",
+            "hidden": true
+        },
+        "extra_paraphase_options": {
+            "type": "string",
+            "hidden": true
+        },
+        "extra_hifiasm_options": {
+            "type": "string",
+            "hidden": true
+        }
+    }
 }

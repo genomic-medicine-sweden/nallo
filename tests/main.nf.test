@@ -34,6 +34,13 @@ nextflow_pipeline {
                 parallel_snv    = 2
                 preset          = "revio"
                 outdir          = "$outputDir"
+
+                // Test specific options
+                extra_modkit_phased_options   = '--seed 1 --sampling-frac 0.1'
+                extra_modkit_unphased_options = '--seed 1 --sampling-frac 0.1'
+                extra_vep_options             = '--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz'
+                extra_paraphase_options       = '--gene hba'
+                extra_hifiasm_options         = '-f0 -k30 -w30 -D10 -r1 -N1'
             }
         }
 
@@ -165,6 +172,13 @@ nextflow_pipeline {
                 parallel_snv    = 2
                 preset          = "revio"
                 outdir          = "$outputDir"
+
+                // Test specific options
+                extra_modkit_phased_options   = '--seed 1 --sampling-frac 0.1'
+                extra_modkit_unphased_options = '--seed 1 --sampling-frac 0.1'
+                extra_vep_options             = '--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz'
+                extra_paraphase_options       = '--gene hba'
+                extra_hifiasm_options         = '-f0 -k30 -w30 -D10 -r1 -N1'
             }
         }
 
