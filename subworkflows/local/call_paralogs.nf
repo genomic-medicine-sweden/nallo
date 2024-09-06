@@ -1,5 +1,4 @@
-include { PARAPHASE        } from '../../modules/nf-core/paraphase/main'
-include { TABIX_BGZIPTABIX } from '../../modules/nf-core/tabix/bgziptabix/main'
+include { PARAPHASE } from '../../modules/nf-core/paraphase/main'
 
 workflow CALL_PARALOGS {
 
@@ -13,19 +12,12 @@ workflow CALL_PARALOGS {
     PARAPHASE ( bam_bai, fasta, [[],[]] )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
-    PARAPHASE.out.vcf
-        .transpose() // Does create ~160 jobs per sample by default in hg38
-        .set { bgzip_paraphase_vcfs }
-
-    TABIX_BGZIPTABIX ( bgzip_paraphase_vcfs )
-    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
-
     emit:
-    bam      = PARAPHASE.out.bam           // channel: [ val(meta), bam ]
-    bai      = PARAPHASE.out.bai           // channel: [ val(meta), bai ]
-    json     = PARAPHASE.out.json          // channel: [ val(meta), json ]
-    vcf      = TABIX_BGZIPTABIX.out.gz_tbi // channel: [ val(meta), gz, tbi ]
-
+    bam      = PARAPHASE.out.bam           // channel: [ val(meta), path(bam) ]
+    bai      = PARAPHASE.out.bai           // channel: [ val(meta), path(bai) ]
+    json     = PARAPHASE.out.json          // channel: [ val(meta), path(json) ]
+    vcf      = PARAPHASE.out.vcf           // channel: [ val(meta), path(vcfs) ]
+    tbi      = PARAPHASE.out.vcf_index     // channel: [ val(meta), path(tbis) ]
     versions = ch_versions                 // channel: [ versions.yml ]
 }
 
