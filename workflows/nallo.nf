@@ -41,7 +41,6 @@ include { SAMTOOLS_MERGE                          } from '../modules/nf-core/sam
 include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
-include { FASTQC                                  } from '../modules/nf-core/fastqc/main'
 include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
 include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
@@ -255,16 +254,14 @@ workflow NALLO {
         //
         if (!params.skip_qc) {
 
-            FASTQC ( bam )
-            ch_versions = ch_versions.mix(FASTQC.out.versions)
-            ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
-
             QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
             ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
 
+            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+
         }
 
         //

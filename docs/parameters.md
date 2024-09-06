@@ -160,8 +160,7 @@ https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ |  | Tr
                                                                                                                                                                                 
 | Parameter | Description | Type | Default | Required | Hidden |                                                                                                                
 |-----------|-----------|-----------|-----------|-----------|-----------|                                                                                                       
-| `extra_modkit_phased_options` |  | `string` |  |  | True |                                                                                                                    
-| `extra_modkit_unphased_options` |  | `string` |  |  | True |                                                                                                                  
+| `extra_modkit_options` |  | `string` |  |  | True |                                                                                                                           
 | `extra_vep_options` |  | `string` |  |  | True |                                                                                                                              
 | `extra_paraphase_options` |  | `string` |  |  | True |                                                                                                                        
 | `extra_hifiasm_options` |  | `string` |  |  | True |                                                                                                                          
