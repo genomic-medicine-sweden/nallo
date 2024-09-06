@@ -15,9 +15,9 @@ Changes in module 'nf-core/ensemblvep/vep'
 
 --- modules/nf-core/ensemblvep/vep/environment.yml
 +++ modules/nf-core/ensemblvep/vep/environment.yml
-@@ -4,4 +4,4 @@
+@@ -2,4 +2,4 @@
+   - conda-forge
    - bioconda
-   - defaults
  dependencies:
 -  - bioconda::ensembl-vep=112.0
 +  - bioconda::ensembl-vep=110.0
