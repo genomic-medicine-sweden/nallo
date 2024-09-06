@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#345](https://github.com/genomic-medicine-sweden/nallo/pull/345) - Added first version of a metro map
 - [#346](https://github.com/genomic-medicine-sweden/nallo/pull/#346) - Added nf-test to call_svs
+- [#351](https://github.com/genomic-medicine-sweden/nallo/pull/#351) - Added sample name to sniffles2 VCF
 
 ### `Changed`
 
 - [#344](https://github.com/genomic-medicine-sweden/nallo/pull/344) - Changed version to 0.4.0dev
 - [#346](https://github.com/genomic-medicine-sweden/nallo/pull/346) - Renamed structural_variant_calling to call_svs
+- [#351](https://github.com/genomic-medicine-sweden/nallo/pull/351) - Changed from using sniffles to bcftools to merge SV calls from multiple samples
+- [#351](https://github.com/genomic-medicine-sweden/nallo/pull/351) - Renamed the structural variant output files and directories
 - [#355](https://github.com/genomic-medicine-sweden/nallo/pull/355) - Updated paraphase to compress and index VCFs within the module
 - [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Added SNV and PED file to output documentation
 

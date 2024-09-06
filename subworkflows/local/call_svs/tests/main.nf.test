@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Workflow CALL_SVS"
     script "../main.nf"
     workflow "CALL_SVS"
+    config "./nextflow.config"
 
     setup {
             run("GUNZIP") {
@@ -50,11 +51,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..327],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..299],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -85,11 +88,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..316],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..299],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -124,13 +129,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[0..2], // Sample 1, line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[4..326],
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[0..2], // Sample 2, line 3 is timestamp
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[4..353],
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[0..2],  // Multisample, line 3 is timestamp
-                    path(workflow.out.ch_multisample.get(0).get(1)).linesGzip[4..317],
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
                     workflow.out.versions,
                 ).match() }
             )
@@ -226,7 +232,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    workflow.out.ch_sv_calls_tbi,
+                    workflow.out.ch_multisample_vcf,
+                    workflow.out.ch_multisample_tbi,
+                    workflow.out.versions,
+                ).match() }
             )
         }
 

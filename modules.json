@@ -22,7 +22,7 @@
                     },
                     "bcftools/merge": {
                         "branch": "master",
-                        "git_sha": "a5ba4d59c2b248c0379b0f8aeb4e7e754566cd1f",
+                        "git_sha": "99a7e61b359f7b7b379cee49259879942d2d2533",
                         "installed_by": ["modules"]
                     },
                     "bcftools/norm": {
@@ -37,7 +37,7 @@
                     },
                     "bcftools/reheader": {
                         "branch": "master",
-                        "git_sha": "682f789f93070bd047868300dd018faf3d434e7c",
+                        "git_sha": "c32611ac6813055b9321d2827678e2f8aebcb394",
                         "installed_by": ["modules"]
                     },
                     "bcftools/sort": {
@@ -82,8 +82,9 @@
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
-                        "git_sha": "e1938f8ecb13b9b82ff488d4b35269c84aa965e8",
-                        "installed_by": ["modules"]
+                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/ensemblvep/vep/ensemblvep-vep.diff"
                     },
                     "fastqc": {
                         "branch": "master",
@@ -177,7 +178,7 @@
                     },
                     "samtools/import": {
                         "branch": "master",
-                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
+                        "git_sha": "90b63cde0f838ca4da3a88a37a5309888cae97b9",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
