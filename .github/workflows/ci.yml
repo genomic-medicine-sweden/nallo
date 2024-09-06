@@ -19,34 +19,6 @@ permissions:
   checks: write
 
 jobs:
-  test:
-    name: Run pipeline with test data
-    # Only run on push if this is the nf-core dev branch (merged PRs)
-    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'genomic-medicine-sweden/nallo') }}"
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        parameters:
-          - ""
-          - "--preset ONT_R10 --input https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv --parallel_alignments 2 --parallel_snv 1"
-        NXF_VER:
-          - "23.04.0"
-          - "latest-everything"
-    steps:
-      - name: Check out pipeline code
-        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-
-      - name: Install Nextflow
-        uses: nf-core/setup-nextflow@v2
-        with:
-          version: "${{ matrix.NXF_VER }}"
-
-      - name: Disk space cleanup
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
-
-      - name: Run pipeline with test data
-        run: |
-          nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results ${{ matrix.parameters }}
   nftest:
     name: ${{ matrix.tags }} ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
     runs-on: ubuntu-latest
@@ -57,11 +29,12 @@ jobs:
           - "latest-everything"
           - "23.04.0"
         tags:
+          - "samplesheet"
+          - "samplesheet_multisample_bam"
+          - "samplesheet_multisample_ont_bam"
           - "SHORT_VARIANT_CALLING"
           - "SNV_ANNOTATION"
           - "CALL_SVS"
-          - "samplesheet"
-          - "samplesheet_multisample_bam"
         profile:
           - "docker"
 

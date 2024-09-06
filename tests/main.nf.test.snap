@@ -142,6 +142,62 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-05T18:50:33.30035723"
+        "timestamp": "2024-08-29T10:45:44.41793623"
+    },
+    "test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1": {
+        "content": [
+            "test.ped:md5,0fba88239edcb5bff3c7cf8867dd6ae3",
+            "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
+            "multiqc_fastqc.txt:md5,50c594d94f3c96a64b2a9d5b3529a2ff",
+            "34f94d8ea8bcbab685c51eab364d8e7f",
+            "HG002_ONT_A.HG002_ONT_A.copynum.bedgraph:md5,4c5517c1783afa11ff93c8d8627fbe42",
+            "HG002_ONT_A.HG002_ONT_A.depth.bw:md5,7fc75ebffd8433e8bcfe9726ff97f023",
+            "HG002_ONT_A.HG002_ONT_A.maf.bw:md5,c3e4244bb52fb1decbf608db5a3ff322",
+            "HG002_ONT_A.mosdepth.global.dist.txt:md5,0370c56a598e397700218ffc74ce59fe",
+            "HG002_ONT_A.mosdepth.region.dist.txt:md5,190d4e34336c81cc652e84953a08b71f",
+            "HG002_ONT_A.mosdepth.summary.txt:md5,234b4084f2ed119bc2106f2fd148a81f",
+            "HG002_ONT_A.HG002_ONT_A.vcf.gz:md5,4814c13b0127f88bfa7857bf19e17875",
+            "HG002_ONT_A.HG002_ONT_A.vcf.gz.tbi:md5,0a5ace7b099fbe88ba3806e7ce83d653",
+            "HG002_ONT_A_modkit_pileup.bed.gz:md5,a8b3308ca1c460be36c666a1bd76a551",
+            "HG002_ONT_A_modkit_pileup.bed.gz.tbi:md5,8c1e6dc2bcc889b4b5c92ef8de6a0291",
+            "7b8dc04d36dc2290fd031da73e8c8553",
+            "HG002_ONT_A_cramino_aligned_phased.arrow:md5,99a4580cc8b89e3678091e975627821f",
+            "HG002_ONT_A_cramino_aligned.arrow:md5,99a4580cc8b89e3678091e975627821f",
+            "HG002_ONT_A.regions.bed.gz:md5,533fce5065e12a67be44665c7273daf1",
+            "HG002_ONT_A.regions.bed.gz.csi:md5,11db27a464f8996bae5521ee7d71c1ce",
+            "HG002_ONT.bam_other.fastq.gz.tsv.zst:md5,eb2726337f805002f768236eee5da460",
+            [
+                "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
+                "# The command line was:\tbcftools stats  HG002_ONT_A.vcf.gz",
+                "#"
+            ],
+            "60fee683fe79dab18de64fd026e73696",
+            "HG002_ONT_B.HG002_ONT_B.copynum.bedgraph:md5,c7ae176dfb3339f8f7f935f1021a9e46",
+            "HG002_ONT_B.HG002_ONT_B.depth.bw:md5,29f47f09dcb564ffda3de5258a244d9c",
+            "HG002_ONT_B.HG002_ONT_B.maf.bw:md5,f5a277813f06a45f9d156227bedbea7f",
+            "HG002_ONT_B.mosdepth.global.dist.txt:md5,adc44aa185f5c7032fcf96c1a41a98b2",
+            "HG002_ONT_B.mosdepth.region.dist.txt:md5,eb15dbfd540c96218c72cb5903d4a03d",
+            "HG002_ONT_B.mosdepth.summary.txt:md5,daa85bd5d830a8e388f348992420271a",
+            "HG002_ONT_B.HG002_ONT_B.vcf.gz:md5,abf20157c1460bdb41fd80b412358fd9",
+            "HG002_ONT_B.HG002_ONT_B.vcf.gz.tbi:md5,c026fdb2c0711486963df37dcc6ba050",
+            "HG002_ONT_B_modkit_pileup.bed.gz:md5,4e13502ad1c81f26ee1dae7cffa18264",
+            "HG002_ONT_B_modkit_pileup.bed.gz.tbi:md5,62ded2a4fbb983fcf439d94964c7d3b0",
+            "5600163a609e93dfb2546d1eacd30a07",
+            "HG002_ONT_B_cramino_aligned_phased.arrow:md5,6cff826e945e44dee20b0efcee1ea6fb",
+            "HG002_ONT_B_cramino_aligned.arrow:md5,6cff826e945e44dee20b0efcee1ea6fb",
+            "HG002_ONT_B.regions.bed.gz:md5,4f3ff59edd8afae966f152661757b1e5",
+            "HG002_ONT_B.regions.bed.gz.csi:md5,fd265daef0567a7aef24374918a126d0",
+            "HG002_ONT_B.merged.fastq.gz.tsv.zst:md5,3b56e723cda807491476465c4dc59e65",
+            [
+                "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
+                "# The command line was:\tbcftools stats  HG002_ONT_B.vcf.gz",
+                "#"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-09-05T21:01:38.389389168"
     }
 }

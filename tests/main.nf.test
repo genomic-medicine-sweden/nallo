@@ -10,36 +10,8 @@ nextflow_pipeline {
 
         when {
             params {
-                // Base directory for genomic-medicine-sweden/nallo test data
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
-                // Test files
-                fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input                    = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet.csv'
-                bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
-                hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
-                hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
-                hificnv_exclude          = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
-                par_regions              = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
-                trgt_repeats             = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
-                variant_catalog          = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
-                vep_cache                = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
-                vep_plugin_files         = params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv'
-                snp_db                   = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
-                somalier_sites           = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
-                reduced_penetrance       = params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv'
-                score_config_snv         = params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini'
-                variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
-
-                // Parameters
-                parallel_snv    = 2
-                preset          = "revio"
-                outdir          = "$outputDir"
-
-                // Test specific options
-                extra_modkit_options    = '--seed 1 --sampling-frac 0.1'
-                extra_vep_options       = '--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz'
-                extra_paraphase_options = '--gene hba'
-                extra_hifiasm_options   = '-f0 -k30 -w30 -D10 -r1 -N1'
+                input  = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet.csv'
+                outdir = "$outputDir"
             }
         }
 
@@ -147,36 +119,8 @@ nextflow_pipeline {
 
         when {
             params {
-                // Base directory for genomic-medicine-sweden/nallo test data
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/'
-                // Test files
-                fasta                    = params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz'
-                input                    = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam.csv'
-                bed                      = params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed'
-                hificnv_xy               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XY.bed'
-                hificnv_xx               = params.pipelines_testdata_base_path + 'nallo/reference/expected_cn.hg38.XX.bed'
-                hificnv_exclude          = params.pipelines_testdata_base_path + 'nallo/reference/empty.bed'
-                par_regions              = params.pipelines_testdata_base_path + 'nallo/reference/hs38.PAR.bed'
-                trgt_repeats             = params.pipelines_testdata_base_path + 'nallo/reference/pathogenic_repeats.hg38.bed'
-                variant_catalog          = params.pipelines_testdata_base_path + 'nallo/reference/variant_catalog_grch38.json'
-                vep_cache                = params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz'
-                vep_plugin_files         = params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv'
-                snp_db                   = params.pipelines_testdata_base_path + 'nallo/testdata/snp_dbs.csv'
-                somalier_sites           = params.pipelines_testdata_base_path + 'nallo/reference/somalier_sites.vcf.gz'
-                reduced_penetrance       = params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv'
-                score_config_snv         = params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini'
-                variant_consequences_snv = params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt'
-
-                // Parameters
-                parallel_snv    = 2
-                preset          = "revio"
-                outdir          = "$outputDir"
-
-                // Test specific options
-                extra_modkit_options    = '--seed 1 --sampling-frac 0.1'
-                extra_vep_options       = '--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz'
-                extra_paraphase_options = '--gene hba'
-                extra_hifiasm_options   = '-f0 -k30 -w30 -D10 -r1 -N1'
+                input  = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam.csv'
+                outdir = "$outputDir"
             }
         }
 
@@ -345,6 +289,140 @@ nextflow_pipeline {
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_sniffles.vcf.gz").exists() },
                 { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_sniffles.vcf.gz.tbi").exists() }
+            )
+        }
+    }
+
+    test("test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1") {
+        tag "samplesheet_multisample_ont_bam"
+
+        when {
+            params {
+                input               = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv'
+                preset              = 'ONT_R10'
+                parallel_alignments = 2
+                parallel_snv        = 1
+                outdir              = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                // Assert with snapshot multisample
+                { assert snapshot(
+                    file("$outputDir/pedigree/test.ped"),
+                    file("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
+                    file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
+                    // Assert with snapshot HG002_ONT_A
+                    bam("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.copynum.bedgraph"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.depth.bw"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.maf.bw"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.global.dist.txt"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.region.dist.txt"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.summary.txt"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.vcf.gz"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.vcf.gz.tbi"),
+                    file("$outputDir/methylation/modkit/pileup/unphased/HG002_ONT_A/HG002_ONT_A_modkit_pileup.bed.gz"),
+                    file("$outputDir/methylation/modkit/pileup/unphased/HG002_ONT_A/HG002_ONT_A_modkit_pileup.bed.gz.tbi"),
+                    bam("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/qc_aligned_reads/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.arrow"),
+                    file("$outputDir/qc_aligned_reads/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.arrow"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz.csi"),
+                    file("$outputDir/qc_raw_reads/fqcrs/HG002_ONT_A/HG002_ONT.bam_other.fastq.gz.tsv.zst"),
+                    file("$outputDir/snvs/stats/single_sample/HG002_ONT_A.vcf.gz.bcftools_stats.txt").readLines()[0..2],
+                    // Assert with snapshot HG002_ONT_B
+                    bam("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.copynum.bedgraph"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.depth.bw"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.maf.bw"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.global.dist.txt"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.region.dist.txt"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.summary.txt"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.vcf.gz"),
+                    file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.vcf.gz.tbi"),
+                    file("$outputDir/methylation/modkit/pileup/unphased/HG002_ONT_B/HG002_ONT_B_modkit_pileup.bed.gz"),
+                    file("$outputDir/methylation/modkit/pileup/unphased/HG002_ONT_B/HG002_ONT_B_modkit_pileup.bed.gz.tbi"),
+                    bam("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam", stringency: 'silent').getReadsMD5(),
+                    file("$outputDir/qc_aligned_reads/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.arrow"),
+                    file("$outputDir/qc_aligned_reads/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.arrow"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz"),
+                    file("$outputDir/qc_aligned_reads/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz.csi"),
+                    file("$outputDir/qc_raw_reads/fqcrs/HG002_ONT_B/HG002_ONT_B.merged.fastq.gz.tsv.zst"),
+                    file("$outputDir/snvs/stats/single_sample/HG002_ONT_B.vcf.gz.bcftools_stats.txt").readLines()[0..2],
+                ).match() },
+                // Assert exists multisample - note the trgt multisample that doesn't exist in singlesample
+                { assert new File("$outputDir/databases/echtvar/encode/test/test.zip").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.pairs.tsv").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.samples.tsv").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/somalier/relate/test/test.html").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc_general_stats.txt").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc_somalier.txt").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc_data.json").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc.log").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_report.html").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc_sources.txt").exists() },
+                { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/multi_sample/test/test_sniffles.vcf.gz.tbi").exists() },
+                // Assert exists HG002_ONT_A
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam.bai").exists() },
+                { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.log").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam.bai").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.json").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.txt").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.txt").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam.bai").exists() },
+                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/qc_raw_reads/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.html").exists() },
+                { assert new File("$outputDir/qc_raw_reads/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.zip").exists() },
+                { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_A/HG002_ONT_A_sniffles.snf").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_A/HG002_ONT_A_sniffles.vcf.gz").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_A/HG002_ONT_A_sniffles.vcf.gz.tbi").exists() },
+                // Assert exists HG002_ONT_B
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam.bai").exists() },
+                { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.log").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz").exists() },
+                { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam.bai").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.json").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.txt").exists() },
+                { assert new File("$outputDir/qc_aligned_reads/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.txt").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam.bai").exists() },
+                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/qc_raw_reads/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.html").exists() },
+                { assert new File("$outputDir/qc_raw_reads/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.zip").exists() },
+                { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz").exists() },
+                { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_B/HG002_ONT_B_sniffles.snf").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_B/HG002_ONT_B_sniffles.vcf.gz").exists() },
+                { assert new File("$outputDir/sv_calling/sniffles/single_sample/HG002_ONT_B/HG002_ONT_B_sniffles.vcf.gz.tbi").exists() }
             )
         }
     }
