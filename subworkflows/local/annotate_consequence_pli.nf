@@ -9,7 +9,7 @@ include { TABIX_BGZIPTABIX    } from '../../modules/nf-core/tabix/bgziptabix/mai
 workflow ANNOTATE_CSQ_PLI {
     take:
     ch_vcf                  // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_variant_consequences // channel: [mandatory] [ path(consequences) ]
+    ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
     ch_versions = Channel.empty()
@@ -24,7 +24,7 @@ workflow ANNOTATE_CSQ_PLI {
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     emit:
-    vcf_ann  = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> return [ meta, vcf ] } // channel: [ val(meta), path(vcf) ]
-    tbi_ann  = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> return [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions                                                                // channel: [ path(versions.yml) ]
+    vcf      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> [ meta, vcf ] } // channel: [ val(meta), path(vcf) ]
+    tbi      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
+    versions = ch_versions                                                         // channel: [ path(versions.yml) ]
 }

@@ -38,6 +38,7 @@ jobs:
           - "SNV_ANNOTATION"
           - "CALL_SVS"
           - "ANNOTATE_SVS"
+          - "RANK_VARIANTS"
         profile:
           - "docker"
 
