@@ -14,58 +14,70 @@
                 "skip_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC of reads"
+                    "description": "Skip QC of reads",
+                    "default": false
                 },
                 "skip_short_variant_calling": {
                     "type": "boolean",
                     "description": "Skip short variant calling",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_assembly_wf": {
                     "type": "boolean",
                     "description": "Skip genome assembly and assembly variant calling",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_mapping_wf": {
                     "type": "boolean",
                     "description": "Skip read mapping (alignment)",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_methylation_wf": {
                     "type": "boolean",
                     "description": "Skip generation of methylation pileups",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_repeat_calling": {
                     "type": "boolean",
                     "description": "Skip tandem repeat calling",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_repeat_annotation": {
                     "type": "boolean",
                     "description": "Skip tandem repeat annotation",
-                    "fa_icon": "fas fa-fast-forward"
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "skip_phasing_wf": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip phasing of variants and haplotagging of reads"
+                    "description": "Skip phasing of variants and haplotagging of reads",
+                    "default": false
                 },
                 "skip_snv_annotation": {
                     "type": "boolean",
-                    "description": "Skip short variant annotation"
+                    "description": "Skip short variant annotation",
+                    "default": false
                 },
                 "skip_cnv_calling": {
                     "type": "boolean",
-                    "description": "Skip CNV calling"
+                    "description": "Skip CNV calling",
+                    "default": false
                 },
                 "skip_call_paralogs": {
                     "type": "boolean",
-                    "description": "Skip the calling of specific paralogous genes"
+                    "description": "Skip the calling of specific paralogous genes",
+                    "default": false
                 },
                 "skip_rank_variants": {
                     "type": "boolean",
-                    "description": "Skip ranking of short variants"
+                    "description": "Skip ranking of short variants",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
