@@ -48,8 +48,6 @@
 
   > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
 
-- [fqcrs](https://github.com/fellen31/fqcrs)
-
 - [Genmod](https://github.com/Clinical-Genomics/genmod)
 
   > Magnusson M, Hughes T, Glabilloy, Bitdeli Chef. genmod: Version 3.7.3. Published online November 15, 2018. doi:10.5281/ZENODO.3841142

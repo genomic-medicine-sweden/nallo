@@ -35,15 +35,12 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED } from '../modules/local/create_pedigree_file'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED    } from '../modules/local/create_pedigree_file'
 include { ECHTVAR_ENCODE                          } from '../modules/local/echtvar/encode/main'
-include { FQCRS                                   } from '../modules/local/fqcrs'
 include { SAMTOOLS_MERGE                          } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
-include { CAT_FASTQ                               } from '../modules/nf-core/cat/fastq/main'
-include { FASTQC                                  } from '../modules/nf-core/fastqc/main'
 include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
 include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
@@ -126,40 +123,13 @@ workflow NALLO {
     }
 
     //
-    // Convert BAM files to FASTQ and vice versa
+    // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
     //
-    CONVERT_INPUT_FILES ( ch_input )
+    CONVERT_INPUT_FILES (
+        ch_input,
+        !params.skip_assembly_wf
+    )
     ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
-
-    //
-    // Run raw (unaligned) read QC with FastQC and fqcrs
-    //
-    if(!params.skip_raw_read_qc) {
-
-        // Combine samples with multiple input files before QC - not ideal
-        CONVERT_INPUT_FILES.out.fastq
-            .groupTuple()
-            .branch { meta, reads ->
-                single: reads.size() == 1
-                    return [ meta, reads[0] ]
-                multiple: reads.size() > 1
-            }
-            .set { ch_fastq }
-
-        CAT_FASTQ ( ch_fastq.multiple )
-        ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
-
-        ch_fastq.single
-            .concat ( CAT_FASTQ.out.reads )
-            .set { raw_read_qc_in }
-
-        FASTQC ( raw_read_qc_in )
-        ch_versions = ch_versions.mix(FASTQC.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
-
-        FQCRS ( raw_read_qc_in )
-        ch_versions = ch_versions.mix(FQCRS.out.versions)
-    }
 
     //
     // Prepare references
@@ -280,15 +250,18 @@ workflow NALLO {
             .set { ch_updated_pedfile }
 
         //
-        // Run aligned read QC with mosdepth and cramino
+        // Run read QC with FastQC, mosdepth and cramino
         //
-        if (!params.skip_aligned_read_qc) {
+        if (!params.skip_qc) {
+
             QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
             ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
 
+            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
             ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+
         }
 
         //

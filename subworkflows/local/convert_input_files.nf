@@ -4,7 +4,8 @@ include { SAMTOOLS_FASTQ } from '../../modules/nf-core/samtools/fastq/main'
 workflow CONVERT_INPUT_FILES {
 
     take:
-    ch_sample // channel: [ val(meta), reads ]
+    ch_sample     // channel: [ val(meta), reads ]
+    convert_fastq // bool
 
     main:
     ch_versions = Channel.empty()
@@ -19,15 +20,19 @@ workflow CONVERT_INPUT_FILES {
     ch_bam   = ch_filetypes.bam
     ch_fastq = ch_filetypes.fastq
 
-    SAMTOOLS_FASTQ ( ch_filetypes.bam, false )
-    ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions)
+    if(convert_fastq) {
+        SAMTOOLS_FASTQ ( ch_filetypes.bam, false )
+        ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions)
+
+        // Mix converted files back in
+        ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
+    }
 
     SAMTOOLS_IMPORT ( ch_filetypes.fastq )
     ch_versions = ch_versions.mix(SAMTOOLS_IMPORT.out.versions)
 
     // Mix converted files back in
     ch_bam   = ch_bam.mix(SAMTOOLS_IMPORT.out.bam)
-    ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
 
     emit:
     bam      = ch_bam      // channel: [ val(meta), bam ]
