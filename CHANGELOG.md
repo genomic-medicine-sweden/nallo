@@ -29,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Removed the fqcrs module
 - [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Removed filter_vep section from output documentation since it is not in the pipeline
-- [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Combined `--skip_raw_read_qc` and `--skip_aligned_read_qc` parameters into `--skip_qc`
 
 ### `Fixed`
 
