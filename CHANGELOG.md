@@ -8,9 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Added`
 
 - [#345](https://github.com/genomic-medicine-sweden/nallo/pull/345) - Added first version of a metro map
-- [#346](https://github.com/genomic-medicine-sweden/nallo/pull/#346) - Added nf-test to call_svs
-- [#351](https://github.com/genomic-medicine-sweden/nallo/pull/#351) - Added sample name to sniffles2 VCF
+- [#346](https://github.com/genomic-medicine-sweden/nallo/pull/346) - Added nf-test to call_svs
+- [#351](https://github.com/genomic-medicine-sweden/nallo/pull/351) - Added sample name to sniffles2 VCF
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Added (hidden) `params.extra_<tool>_options` for the test profile to modkit, vep, paraphase and hifiasm
+- [#363](https://github.com/genomic-medicine-sweden/nallo/pull/363) - Added Zenodo link
 
 ### `Changed`
 
