@@ -55,6 +55,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.3.1 - [2024-09-11]
+
+### `Fixed`
+
+- [#359](https://github.com/genomic-medicine-sweden/nallo/pull/359) - Fixed single sample SNV VCFs containing variants from all samples, resuling in a large number of empty GT calls
+
 ## 0.3.0 - [2024-08-29]
 
 ### `Added`
