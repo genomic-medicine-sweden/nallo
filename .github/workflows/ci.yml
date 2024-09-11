@@ -19,7 +19,7 @@ permissions:
   checks: write
 
 jobs:
-  nftest:
+  test:
     name: ${{ matrix.tags }} ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
     runs-on: ubuntu-latest
     strategy:
