@@ -10,6 +10,7 @@ on:
 
 env:
   NXF_ANSI_LOG: false
+  NFTEST_VER: "0.9.0"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
@@ -28,26 +29,30 @@ jobs:
         NXF_VER:
           - "latest-everything"
           - "23.04.0"
-        tags:
-          - "samplesheet"
-          - "samplesheet_multisample_bam"
-          - "samplesheet_multisample_ont_bam"
-          - "SHORT_VARIANT_CALLING"
-          - "SNV_ANNOTATION"
-          - "CALL_SVS"
+        shards:
+          - 1
+          - 2
+          - 3
         profile:
           - "docker"
 
     steps:
       - name: Check out pipeline code
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
+        with:
+          fetch-depth: 0
+      - name: Fetch ${{ github.event.pull_request.base.ref }} branch
+        run: |
+          git remote add upstream ${{ github.event.repository.clone_url }}
+          git fetch upstream ${{ github.event.pull_request.base.ref }}
       - name: Install Nextflow
-        uses: nf-core/setup-nextflow@b9f764e8ba5c76b712ace14ecbfcef0e40ae2dd8 # v1
+        uses: nf-core/setup-nextflow@v2
         with:
           version: "${{ matrix.NXF_VER }}"
 
       - uses: nf-core/setup-nf-test@v1
+        with:
+          version: ${{ env.NFTEST_VER }}
 
       - uses: actions/setup-python@v4
         with:
@@ -61,21 +66,4 @@ jobs:
 
       - name: Run nf-test
         run: |
-          nf-test test --verbose --tag ${{ matrix.tags }} --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap
-
-      - uses: pcolby/tap-summary@v1
-        with:
-          path: >-
-            test.tap
-
-      - name: Output log on failure
-        if: failure()
-        run: |
-          sudo apt install bat > /dev/null
-          batcat --decorations=always --color=always ${{ github.workspace }}/.nf-test/tests/*/meta/nextflow.log
-
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v3
-        if: always() # always run even if the previous step fails
-        with:
-          report_paths: test.xml
+          nf-test test --verbose --changed-since upstream/${{ github.event.pull_request.base.ref }} --shard=${{ matrix.shards }}/3 --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap

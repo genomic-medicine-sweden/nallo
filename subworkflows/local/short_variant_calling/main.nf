@@ -11,7 +11,7 @@ include { GLNEXUS                                     } from '../../../modules/n
 workflow SHORT_VARIANT_CALLING {
 
     take:
-    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_region_bed) ]
+    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_legion_bed) ]
     ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai         // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed         // channel: [optional] [ val(meta), path(input_bed) ]
@@ -21,26 +21,26 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = Channel.empty()
 
     ch_bam_bai_bed
-        // Add call region to meta so we can group by it later
+        // Add call legion to meta so we can group by it later
         .map { meta, bam, bai, bed ->
-            [ meta + [ 'region': bed ], bam, bai, bed ]
+            [ meta + [ 'legion': bed ], bam, bai, bed ]
         }
         .set { ch_deepvariant_in }
 
     DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], ch_par_bed )
     ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
 
-    // First remove region so we can group per sample
+    // First remove legion so we can group per sample
     // Then after grouping remove num_intervals since to match the meta of other workflows
     DEEPVARIANT.out.vcf
         .map { meta, vcf ->
-            new_meta = meta - meta.subMap('region')
+            new_meta = meta - meta.subMap('legion')
             [ groupKey(new_meta, new_meta.num_intervals ), vcf ]
         }
         .groupTuple()
         .join( DEEPVARIANT.out.vcf_tbi
             .map{ meta, tbi ->
-                new_meta = meta - meta.subMap('region')
+                new_meta = meta - meta.subMap('legion')
                 [ groupKey(new_meta, new_meta.num_intervals ), tbi ]
             }
             .groupTuple()
@@ -50,7 +50,7 @@ workflow SHORT_VARIANT_CALLING {
         }
         .set{ ch_concat_singlesample_in }
 
-    // This creates a singlesample VCF containing ALL regions
+    // This creates a singlesample VCF containing ALL legions
     BCFTOOLS_CONCAT ( ch_concat_singlesample_in )
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
@@ -59,12 +59,12 @@ workflow SHORT_VARIANT_CALLING {
     BCFTOOLS_NORM_SINGLESAMPLE ( BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
-    // This creates a multisample VCF, with regions from ONE bed file
+    // This creates a multisample VCF, with legions from ONE bed file
     DEEPVARIANT.out.gvcf
         .map { meta, gvcf ->
-            [ meta.region.name, meta.project, meta.phenotype == 2, gvcf ]
+            [ meta.legion.name, meta.project, meta.phenotype == 2, gvcf ]
         }
-        .groupTuple() // Group all files together per region
+        .groupTuple() // Group all files together per legion
         // If any of the samples in the VCF have an affected phenotype (2)
         // add this to the meta of the multisample VCF to know if we should run RANK_VARIANTS or not
         .map { meta, project, affected, gvcfs ->
