@@ -2,8 +2,8 @@ nextflow_workflow {
 
     name "Test Workflow CALL_SVS"
     script "../main.nf"
-    workflow "CALL_SVS"
     config "./nextflow.config"
+    workflow "CALL_SVS"
 
     setup {
             run("GUNZIP") {

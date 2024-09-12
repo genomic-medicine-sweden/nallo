@@ -29,10 +29,11 @@ jobs:
         NXF_VER:
           - "latest-everything"
           - "23.04.0"
-        shards:
-          - 1
-          - 2
-          - 3
+        tags:
+          - "modules_local" # Local modules
+          - "samplesheet" # Pipeline test 1
+          - "samplesheet_multisample_bam" # Pipeline test 2
+          - "samplesheet_multisample_ont_bam" # Pipeline test 3
         profile:
           - "docker"
 
@@ -64,6 +65,50 @@ jobs:
           python -m pip install --upgrade pip
           pip install pdiff
 
-      - name: Run nf-test
+      - name: Run nf-test pipeline tests if changed
         run: |
-          nf-test test --verbose --changed-since upstream/${{ github.event.pull_request.base.ref }} --shard=${{ matrix.shards }}/3 --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap
+          nf-test test --verbose --changed-since upstream/${{ github.event.pull_request.base.ref }} --tag ${{ matrix.tags }} --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap
+
+  test-workflow:
+    name: workflow ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        NXF_VER:
+          - "latest-everything"
+          - "23.04.0"
+        profile:
+          - "docker"
+
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+      - name: Fetch ${{ github.event.pull_request.base.ref }} branch
+        run: |
+          git remote add upstream ${{ github.event.repository.clone_url }}
+          git fetch upstream ${{ github.event.pull_request.base.ref }}
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v2
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - uses: nf-core/setup-nf-test@v1
+        with:
+          version: ${{ env.NFTEST_VER }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          architecture: "x64"
+
+      - name: Install pdiff to see diff between nf-test snapshots
+        run: |
+          python -m pip install --upgrade pip
+          pip install pdiff
+
+      - name: Run nf-test workflow tests if changed
+        run: |
+          nf-test test --verbose --changed-since upstream/${{ github.event.pull_request.base.ref }} --filter workflow --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap

@@ -8,7 +8,7 @@ process CREATE_PEDIGREE_FILE {
         'biocontainers/python:3.8.3' }"
 
     input:
-    tuple val(project), val(samples)
+    tuple val(project), val(meta)
 
     output:
     tuple val(project), path("*.ped"), emit: ped
@@ -19,6 +19,9 @@ process CREATE_PEDIGREE_FILE {
 
     script:
     def out   = new File(project + ".ped")
+    def samples = (meta.collect().size() > 1) ? meta.sort{ a, b ->
+        // First sort on family_id, then on sample id
+        a.family_id <=> b.family_id ?: a.id <=> b.id } : meta
     outfile_text = ['#family_id', 'sample_id', 'father', 'mother', 'sex', 'phenotype'].join('\\t')
     def samples_list = []
     for(int i = 0; i<samples.size(); i++) {
