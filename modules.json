@@ -35,6 +35,11 @@
                         "git_sha": "c5abf7acbb2943bf09f4025cacbbcc2bc2292637",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/query": {
+                        "branch": "master",
+                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/reheader": {
                         "branch": "master",
                         "git_sha": "c32611ac6813055b9321d2827678e2f8aebcb394",
@@ -199,6 +204,11 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "6c2309aaec566c0d44a6cf14d4b2d0c51afe2e91",
+                        "installed_by": ["modules"]
+                    },
+                    "severus": {
+                        "branch": "master",
+                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
                         "installed_by": ["modules"]
                     },
                     "sniffles": {

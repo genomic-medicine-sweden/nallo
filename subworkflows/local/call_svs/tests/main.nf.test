@@ -31,19 +31,20 @@ nextflow_workflow {
             }
     }
 
-    test("1 sample - [bam, bai], fasta, fai, []") {
+    test("1 sample - [bam, bai], fasta, fai, [] - sniffles") {
 
         when {
             workflow {
                 """
-                input[0] = [
+                input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ]
+                ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [[],[]]
+                input[3] = "sniffles"
+                input[4] = [[],[]]
                 """
             }
         }
@@ -54,9 +55,7 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -65,19 +64,20 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - [bam, bai], fasta, fai, bed") {
+    test("1 sample - [bam, bai], fasta, fai, bed - sniffles") {
 
         when {
             workflow {
                 """
-                input[0] = [
+                input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ]
+                ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [
+                input[3] = "sniffles"
+                input[4] = [
                     [ id:'trf' ],
                     file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
                 ]
@@ -91,9 +91,7 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -102,7 +100,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples - [bam, bai], fasta, fai, []") {
+    test("2 samples - [bam, bai], fasta, fai, [] - sniffles") {
 
         when {
             workflow {
@@ -121,7 +119,8 @@ nextflow_workflow {
                 )
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [[],[]]
+                input[3] = "sniffles"
+                input[4] = [[],[]]
                 """
             }
         }
@@ -133,10 +132,8 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).linesGzip[5..239],
                     workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).linesGzip[5..239],
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip[5..239],
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -144,21 +141,132 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - [bam, bai], fasta, fai, [] -stub") {
+    test("1 sample - [bam, bai], fasta, fai, [] - severus") {
+        tag "x"
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - [bam, bai], fasta, fai, bed - severus") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 samples - [bam, bai], fasta, fai, [] - severus") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
+                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - [bam, bai], fasta, fai, [] - sniffles -stub") {
 
         options "-stub"
 
         when {
             workflow {
                 """
-                input[0] = [
+                input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ]
+                ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [[],[]]
+                input[3] = "sniffles"
+                input[4] = [[],[]]
                 """
             }
         }
@@ -172,21 +280,22 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - [bam, bai], fasta, fai, bed -stub") {
+    test("1 sample - [bam, bai], fasta, fai, bed - sniffles -stub") {
 
         options "-stub"
 
         when {
             workflow {
                 """
-                input[0] = [
+                input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ]
+                ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [
+                input[3] = "sniffles"
+                input[4] = [
                     [ id:'trf' ],
                     file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
                 ]
@@ -203,7 +312,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples - [bam, bai], fasta, fai, [] -stub") {
+    test("2 samples - [bam, bai], fasta, fai, [] - sniffles -stub") {
 
         options "-stub"
 
@@ -224,7 +333,111 @@ nextflow_workflow {
                 )
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [[],[]]
+                input[3] = "sniffles"
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    workflow.out.ch_sv_calls_tbi,
+                    workflow.out.ch_multisample_vcf,
+                    workflow.out.ch_multisample_tbi,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - [bam, bai], fasta, fai, [] - severus -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - [bam, bai], fasta, fai, bed - severus -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("2 samples - [bam, bai], fasta, fai, [] - severus -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = "severus"
+                input[4] = [[],[]]
                 """
             }
         }

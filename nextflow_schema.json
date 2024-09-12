@@ -361,6 +361,12 @@
                     "description": "Which short variant software to use (`deepvariant`)",
                     "enum": ["deepvariant"]
                 },
+                "sv_caller": {
+                    "type": "string",
+                    "default": "severus",
+                    "description": "Which structural variant caller to use (`severus`, `sniffles`)",
+                    "enum": ["severus", "sniffles"]
+                },
                 "phaser": {
                     "type": "string",
                     "default": "whatshap",

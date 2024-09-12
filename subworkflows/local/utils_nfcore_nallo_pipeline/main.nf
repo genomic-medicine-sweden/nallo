@@ -323,6 +323,7 @@ def toolCitationText() {
             "SAMtools (Danecek et al. 2021)",
             "Minimap2 (Li 2018)",
             "Somalier (Pedersen et al. 2020)",
+            "Severus (Keskus et al. 2024)",
             "Sniffles2 (Smolka et al. 2024)",
         ]
         if (!params.skip_qc) {
@@ -447,6 +448,7 @@ def toolBibliographyText() {
         "<li>Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191</li>",
         "<li>Pedersen BS, Quinlan AR. Mosdepth: quick coverage calculation for genomes and exomes. Hancock J, ed. Bioinformatics. 2018;34(5):867-868. doi:10.1093/bioinformatics/btx699</li>",
         "<li>Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294</li>",
+        "<li>Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756",
         "<li>Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02024-y</li>",
         "<li>Pedersen, B.S., Bhetariya, P.J., Brown, J. et al. Somalier: rapid relatedness estimation for cancer and germline studies using efficient genome sketches. Genome Med 12, 62 (2020). https://doi.org/10.1186/s13073-020-00761-2</li>",
         "<li>Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873</li>",

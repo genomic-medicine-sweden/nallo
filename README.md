@@ -32,7 +32,7 @@
 ##### Variant calling
 
 - Short variant calling & joint genotyping of SNVs ([`deepvariant`](https://github.com/google/deepvariant) + [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-- SV calling and joint genotyping ([`sniffles2`](https://github.com/fritzsedlazeck/Sniffles))
+- SV calling with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
 - Tandem repeats (HiFi only) ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
 - Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
 - CNV-calling ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
