@@ -32,8 +32,8 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 */
 
 // local
-include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED } from '../modules/local/create_pedigree_file'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED    } from '../modules/local/create_pedigree_file'
+include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED    } from '../modules/local/create_pedigree_file/main'
 include { ECHTVAR_ENCODE                          } from '../modules/local/echtvar/encode/main'
 include { SAMTOOLS_MERGE                          } from '../modules/nf-core/samtools/merge/main'
 

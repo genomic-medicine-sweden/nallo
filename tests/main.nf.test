@@ -4,6 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     profile "test"
     tag "PIPELINE"
+    config "../conf/test.config"
 
     test("test profile") {
         tag "samplesheet"

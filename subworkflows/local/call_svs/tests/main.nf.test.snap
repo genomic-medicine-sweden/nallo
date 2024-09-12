@@ -727,7 +727,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-06T11:29:28.671005178"
+        "timestamp": "2024-09-12T12:13:14.38085716"
     },
     "1 sample - [bam, bai], fasta, fai, [] -stub": {
         "content": [
@@ -822,7 +822,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-05T19:07:34.521780648"
+        "timestamp": "2024-09-12T12:37:08.560198215"
     },
     "1 sample - [bam, bai], fasta, fai, bed -stub": {
         "content": [
@@ -917,7 +917,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-05T19:07:45.413681853"
+        "timestamp": "2024-09-12T12:37:19.687620805"
     },
     "1 sample - [bam, bai], fasta, fai, bed": {
         "content": [
@@ -1158,7 +1158,7 @@
                 "##INFO=<ID=PHASE,Number=.,Type=String,Description=\"Phasing information derived from supporting reads, represented as list of: HAPLOTYPE,PHASESET,HAPLOTYPE_SUPPORT,PHASESET_SUPPORT,HAPLOTYPE_FILTER,PHASESET_FILTER\">",
                 "##bcftools_viewVersion=1.20+htslib-1.20"
             ],
-            "13d352d7a4dd922085f653a3da950bce",
+            "5924013e8c1835d7bb0502ee85f2128d",
             [
                 "##contig=<ID=chr1,length=248956422>",
                 "##contig=<ID=chr2,length=242193529>",
@@ -1396,7 +1396,7 @@
                 "##INFO=<ID=PHASE,Number=.,Type=String,Description=\"Phasing information derived from supporting reads, represented as list of: HAPLOTYPE,PHASESET,HAPLOTYPE_SUPPORT,PHASESET_SUPPORT,HAPLOTYPE_FILTER,PHASESET_FILTER\">",
                 "##bcftools_viewVersion=1.20+htslib-1.20"
             ],
-            "28ed9eefcf5bb27fed8c55f615219f33",
+            "8df5ad12540b4e0982bb74d5b268795d",
             [
                 "versions.yml:md5,2188f00d20a376929f9f35f824e94667",
                 "versions.yml:md5,572bfd042014333af194207291d12b95",
@@ -1408,7 +1408,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-05T14:17:59.191541065"
+        "timestamp": "2024-09-12T12:12:58.045416708"
     },
     "2 samples - [bam, bai], fasta, fai, [] -stub": {
         "content": [
@@ -1461,7 +1461,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-06T11:30:02.189652169"
+        "timestamp": "2024-09-12T12:13:55.632583291"
     },
     "1 sample - [bam, bai], fasta, fai, []": {
         "content": [
@@ -1702,7 +1702,7 @@
                 "##INFO=<ID=PHASE,Number=.,Type=String,Description=\"Phasing information derived from supporting reads, represented as list of: HAPLOTYPE,PHASESET,HAPLOTYPE_SUPPORT,PHASESET_SUPPORT,HAPLOTYPE_FILTER,PHASESET_FILTER\">",
                 "##bcftools_viewVersion=1.20+htslib-1.20"
             ],
-            "5cdf920b1f44a66de3a28ead8d3efb24",
+            "79676a9dd690e37560b5841b67dfa28",
             [
                 "##contig=<ID=chr1,length=248956422>",
                 "##contig=<ID=chr2,length=242193529>",
@@ -1940,7 +1940,7 @@
                 "##INFO=<ID=PHASE,Number=.,Type=String,Description=\"Phasing information derived from supporting reads, represented as list of: HAPLOTYPE,PHASESET,HAPLOTYPE_SUPPORT,PHASESET_SUPPORT,HAPLOTYPE_FILTER,PHASESET_FILTER\">",
                 "##bcftools_viewVersion=1.20+htslib-1.20"
             ],
-            "fe2e9b5e8f54e993c262331759006346",
+            "bd51c062a29bbb8823a17b95f8162f44",
             [
                 "versions.yml:md5,2188f00d20a376929f9f35f824e94667",
                 "versions.yml:md5,572bfd042014333af194207291d12b95",
@@ -1952,6 +1952,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-09-05T14:17:46.151263963"
+        "timestamp": "2024-09-12T12:12:44.978644444"
     }
 }
