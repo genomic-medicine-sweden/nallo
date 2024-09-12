@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#346](https://github.com/genomic-medicine-sweden/nallo/pull/346) - Added nf-test to call_svs
 - [#351](https://github.com/genomic-medicine-sweden/nallo/pull/351) - Added sample name to sniffles2 VCF
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Added (hidden) `params.extra_<tool>_options` for the test profile to modkit, vep, paraphase and hifiasm
+- [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Added missing SNV and PED file to output documentation
 - [#363](https://github.com/genomic-medicine-sweden/nallo/pull/363) - Added Zenodo link
 
 ### `Changed`
@@ -24,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Changed FastQC from the main workflow to QC_ALIGNED_READS, updated output directories and documentation
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Combined `--skip_raw_read_qc` and `--skip_aligned_read_qc` parameters into `--skip_qc`
 - [#355](https://github.com/genomic-medicine-sweden/nallo/pull/355) - Updated paraphase to compress and index VCFs within the module
-- [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Added SNV and PED file to output documentation
+- [#365](https://github.com/genomic-medicine-sweden/nallo/pull/365) - Changed CI to only use nf-test for pipeline tests
 
 ### `Removed`
 
