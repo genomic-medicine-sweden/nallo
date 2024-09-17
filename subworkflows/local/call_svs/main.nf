@@ -1,3 +1,4 @@
+include { ADD_FOUND_IN_TAG    } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_MERGE      } from '../../../modules/nf-core/bcftools/merge/main'
 include { BCFTOOLS_QUERY      } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER   } from '../../../modules/nf-core/bcftools/reheader/main'
@@ -44,10 +45,17 @@ workflow CALL_SVS {
             .set { ch_vcf }
     }
 
+    // Annotate with FOUND_IN tag
+    ADD_FOUND_IN_TAG (
+        ch_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        sv_caller
+    )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
+
     // Get the sample name from the VCF
     // For Sniffles this is hardcoded as SAMPLE and for Severus it's based on the filename
     BCFTOOLS_QUERY (
-        ch_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        ADD_FOUND_IN_TAG.out.vcf.join(ADD_FOUND_IN_TAG.out.csi),
         [],
         [],
         []
@@ -58,7 +66,7 @@ workflow CALL_SVS {
     CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
     ch_versions = ch_versions.mix(CREATE_SAMPLES_FILE.out.versions)
 
-    ch_vcf
+    ADD_FOUND_IN_TAG.out.vcf
         .join( CREATE_SAMPLES_FILE.out.samples )
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
