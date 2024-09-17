@@ -142,7 +142,7 @@ nextflow_workflow {
     }
 
     test("1 sample - [bam, bai], fasta, fai, [] - severus") {
-        tag "x"
+
         when {
             workflow {
                 """
