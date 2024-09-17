@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- [#370](https://github.com/genomic-medicine-sweden/nallo/pull/370) - Fixed unsorted SNV outputs (#362)
+
 ### Parameters
 
 | Old parameter            | New parameter |
