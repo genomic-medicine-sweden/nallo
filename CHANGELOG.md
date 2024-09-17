@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Added missing SNV and PED file to output documentation
 - [#363](https://github.com/genomic-medicine-sweden/nallo/pull/363) - Added Zenodo link
 - [#366](https://github.com/genomic-medicine-sweden/nallo/pull/366) - Added sorting of samples when creating PED files, so the output is always the same
+- [#367](https://github.com/genomic-medicine-sweden/nallo/pull/367) - Added Severus as the default SV caller, together with a `--sv_caller` parameter to choose caller
 
 ### `Changed`
 
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ------------------------ | ------------- |
 | `--skip_aligned_read_qc` | `--skip_qc`   |
 | `--skip_raw_read_qc`     | `--skip_qc`   |
+|                          | `--sv_caller` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -49,9 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool  | Old version | New version |
-| ----- | ----------- | ----------- |
-| fqcrs | 0.1.0       |
+| Tool    | Old version | New version |
+| ------- | ----------- | ----------- |
+| fqcrs   | 0.1.0       |
+| severus |             | 1.1         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

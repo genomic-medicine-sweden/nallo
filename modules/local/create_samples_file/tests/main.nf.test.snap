@@ -1,0 +1,68 @@
+{
+    "create_samples_file -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "samples_file.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ef72b0fd7e245e40b0ce6d409e218689"
+                ],
+                "samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "samples_file.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ef72b0fd7e245e40b0ce6d409e218689"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-09-11T18:56:06.026507892"
+    },
+    "create_samples_file": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "samples_file.txt:md5,41e40eee31c3003c213685c180f52c25"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ef72b0fd7e245e40b0ce6d409e218689"
+                ],
+                "samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "samples_file.txt:md5,41e40eee31c3003c213685c180f52c25"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ef72b0fd7e245e40b0ce6d409e218689"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-09-11T18:55:18.906428667"
+    }
+}

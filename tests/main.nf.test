@@ -109,8 +109,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio/HG002_Revio_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio/HG002_Revio_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_sniffles.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_severus.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_severus.vcf.gz.tbi").exists() }
             )
         }
     }
@@ -255,8 +255,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_sniffles.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_B
                 { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_phased.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam.bai").exists() },
@@ -288,8 +288,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_sniffles.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_severus.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_severus.vcf.gz.tbi").exists() }
             )
         }
     }
@@ -392,8 +392,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_sniffles.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz.tbi").exists() },
                 // Assert exists HG002_ONT_B
                 { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam.bai").exists() },
                 { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.log").exists() },
@@ -418,8 +418,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_sniffles.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_sniffles.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_severus.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_severus.vcf.gz.tbi").exists() }
             )
         }
     }

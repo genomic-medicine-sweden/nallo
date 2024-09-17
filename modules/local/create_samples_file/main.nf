@@ -8,7 +8,7 @@ process CREATE_SAMPLES_FILE {
         'biocontainers/gawk:5.1.0' }"
 
     input:
-    val(meta)
+    tuple val(meta), path(txt)
 
     output:
     tuple val(meta), path("*.txt"), emit: samples
@@ -18,22 +18,27 @@ process CREATE_SAMPLES_FILE {
     task.ext.when == null || task.ext.when
 
     script:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    if ("$txt" == "${prefix}.txt") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+
     """
-    echo SAMPLE "${meta.id}" > ${meta.id}.txt
+    awk '{print \$1,"${meta.id}"}' ${txt} > ${prefix}.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        create_samples_file: v1.0
+        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
     END_VERSIONS
     """
 
     stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
     """
-    touch ${meta.id}.txt
+    touch ${prefix}.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        create_samples_file: v1.0
+        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
     END_VERSIONS
     """
 }

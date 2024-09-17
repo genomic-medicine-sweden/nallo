@@ -300,7 +300,13 @@ workflow NALLO {
         //
         // Call structural variants
         //
-        CALL_SVS ( bam_bai, fasta, fai, ch_tandem_repeats )
+        CALL_SVS (
+            bam_bai,
+            fasta,
+            fai,
+            params.sv_caller,
+            ch_tandem_repeats
+        )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
         //
