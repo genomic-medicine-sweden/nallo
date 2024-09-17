@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#366](https://github.com/genomic-medicine-sweden/nallo/pull/366) - Added sorting of samples when creating PED files, so the output is always the same
 - [#367](https://github.com/genomic-medicine-sweden/nallo/pull/367) - Added Severus as the default SV caller, together with a `--sv_caller` parameter to choose caller
 - [#371](https://github.com/genomic-medicine-sweden/nallo/pull/371) - Added `FOUND_IN=caller` tags to SV output
+- [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added longphase as the default phaser
+- [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added single-sample tbi output to the short variant calling subworkflow
 
 ### `Changed`
 
@@ -31,12 +33,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#365](https://github.com/genomic-medicine-sweden/nallo/pull/365) - Changed CI to only use nf-test for pipeline tests
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Updated CI nf-test version to 0.9.0
 - [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Changed vep_plugin_files description in schema and docs
+- [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Changed phasing output structure and naming, and updated docs
 
 ### `Removed`
 
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Removed the fqcrs module
 - [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Removed filter_vep section from output documentation since it is not in the pipeline
 - [#379](https://github.com/genomic-medicine-sweden/nallo/pull/379) - Removed VEP Plugins from testdata ([genomic-medicine-sweden/test-datasets#16](https://github.com/genomic-medicine-sweden/test-datasets/pull/16))
+- [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Removed support for co-phasing SVs with HiPhase, as the officially supported caller (pbsv) is not in the pipeline
 
 ### `Fixed`
 

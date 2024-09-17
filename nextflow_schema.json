@@ -369,9 +369,9 @@
                 },
                 "phaser": {
                     "type": "string",
-                    "default": "whatshap",
-                    "description": "Which phasing software to use (`whatshap`, `hiphase_snv`, `hiphase_sv`)",
-                    "enum": ["whatshap", "hiphase_snv", "hiphase_sv"]
+                    "default": "longphase",
+                    "description": "Which phasing software to use (`longphase`, `whatshap`, `hiphase`)",
+                    "enum": ["longphase", "whatshap", "hiphase"]
                 },
                 "hifiasm_mode": {
                     "type": "string",

@@ -3,54 +3,53 @@
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13748210.svg)](https://doi.org/10.5281/zenodo.13748210)
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)](https://www.nextflow.io/)
-[![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
 
 ## Introduction
 
-**genomic-medicine-sweden/nallo** is a bioinformatics analysis pipeline for long-read rare disease SV/SNV identification using both PacBio and (targeted) ONT-data. Heavily influenced by best-practice pipelines such as [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
+**genomic-medicine-sweden/nallo** is a bioinformatics analysis pipeline for long-reads from both PacBio and (targeted) ONT-data, focused on rare-disease. Heavily influenced by best-practice pipelines such as [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
 
-## Pipeline summary
+## Overview
 
 <picture align="center">
     <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
   </picture>
 
+## Pipeline summary
+
 ##### QC
 
-- FastQC ([`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-- Aligned read QC ([`cramino`](https://github.com/wdecoster/cramino))
-- Depth information ([`mosdepth`](https://github.com/brentp/mosdepth))
+- Read QC with [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino) and [mosdepth](https://github.com/brentp/mosdepth)
 
 ##### Alignment & assembly
 
-- Align reads to reference ([`minimap2`](https://github.com/lh3/minimap2))
-- Assemble (trio-binned) haploid genomes (HiFi only) ([`hifiasm`](https://github.com/chhylp123/hifiasm))
+- Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
+- Assemble (trio-binned) haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
 
 ##### Variant calling
 
-- Short variant calling & joint genotyping of SNVs ([`deepvariant`](https://github.com/google/deepvariant) + [`GLNexus`](https://github.com/dnanexus-rnd/GLnexus))
-- SV calling with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
-- Tandem repeats (HiFi only) ([`TRGT`](https://github.com/PacificBiosciences/trgt/tree/main))
-- Assembly based variant calls (HiFi only) ([`dipcall`](https://github.com/lh3/dipcall))
-- CNV-calling ([`HiFiCNV`](https://github.com/PacificBiosciences/HiFiCNV))
-- Call paralogous genes ([`Paraphase`](https://github.com/PacificBiosciences/paraphase))
+- Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
+- Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
+- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
+- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
+- Call variants from assembly with [dipcall](https://github.com/lh3/dipcall) (HiFi only)
 
 ##### Phasing and methylation
 
-- Phase and haplotag reads ([`whatshap`](https://github.com/whatshap/whatshap) + [`hiphase`](https://github.com/PacificBiosciences/HiPhase))
-- Methylation pileups ([`modkit`](https://github.com/nanoporetech/modkit))
+- Phase and haplotag reads with [LongPhase](https://github.com/twolinin/longphase), [whatshap](https://github.com/whatshap/whatshap) or [HiPhase](https://github.com/PacificBiosciences/HiPhase)
+- Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit)
 
 ##### Annotation
 
-- Annotate SNVs and INDELs with database(s) of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. ([`echtvar`](https://github.com/brentp/echtvar) and [`VEP`](https://github.com/Ensembl/ensembl-vep))
+- Annotate SNVs and INDELs with databases of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
 - Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
 
-##### Filtering and ranking
+##### Ranking
 
-- Rank variants ([`GENMOD`](https://github.com/Clinical-Genomics/genmod))
+- Rank SNVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
 
 ## Usage
 
@@ -63,18 +62,18 @@ Prepare a samplesheet with input data:
 
 ```
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-testrun,HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
-testrun,HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
+NIST,HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
+NIST,HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
 ```
 
-Now, you can run the pipeline using:
+Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline, e.g:
 
 ```bash
 nextflow run genomic-medicine-sweden/nallo -profile YOURPROFILE \
     --input samplesheet.csv \
-    --preset <revio/pacbio/ONT_R10> \
-    --fasta <reference.fasta> \
-    --outdir <OUTDIR>
+    --preset revio \
+    --fasta  reference.fasta \
+    --outdir results
 ```
 
 For more details and further functionality, please refer to the [usage documentation](https://github.com/genomic-medicine-sweden/nallo/blob/dev/docs/usage.md).

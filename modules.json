@@ -141,6 +141,16 @@
                         "git_sha": "aecb06fcdb995ff3e3df7c7a1fd119367d6d1996",
                         "installed_by": ["modules"]
                     },
+                    "longphase/haplotag": {
+                        "branch": "master",
+                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "installed_by": ["modules"]
+                    },
+                    "longphase/phase": {
+                        "branch": "master",
+                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "installed_by": ["modules"]
+                    },
                     "minimap2/align": {
                         "branch": "master",
                         "git_sha": "a33ef9475558c6b8da08c5f522ddaca1ec810306",
