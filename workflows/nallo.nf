@@ -40,6 +40,7 @@ include { SAMTOOLS_MERGE                          } from '../modules/nf-core/sam
 // nf-core
 include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_SORT                           } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
@@ -408,16 +409,20 @@ workflow NALLO {
                 .groupTuple()
                 .set { ch_bcftools_concat_in }
 
-            // Concat into a multisample VCF with all regions and publish
+            // Concat into a multisample VCF with all regions
             BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
             ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
+            // Sort and publish
+            BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
+            ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
+
             // Make an echtvar database of all samples
-            ECHTVAR_ENCODE ( BCFTOOLS_CONCAT.out.vcf )
+            ECHTVAR_ENCODE ( BCFTOOLS_SORT.out.vcf )
             ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
 
             // Split multisample VCF to also publish a VCF per sample
-            BCFTOOLS_PLUGINSPLIT ( BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi ), [], [], [], [] )
+            BCFTOOLS_PLUGINSPLIT ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
             ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
 
             BCFTOOLS_PLUGINSPLIT.out.vcf
