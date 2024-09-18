@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#363](https://github.com/genomic-medicine-sweden/nallo/pull/363) - Added Zenodo link
 - [#366](https://github.com/genomic-medicine-sweden/nallo/pull/366) - Added sorting of samples when creating PED files, so the output is always the same
 - [#367](https://github.com/genomic-medicine-sweden/nallo/pull/367) - Added Severus as the default SV caller, together with a `--sv_caller` parameter to choose caller
+- [#371](https://github.com/genomic-medicine-sweden/nallo/pull/371) - Added `FOUND_IN=caller` tags to SV output
 
 ### `Changed`
 
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Combined `--skip_raw_read_qc` and `--skip_aligned_read_qc` parameters into `--skip_qc`
 - [#355](https://github.com/genomic-medicine-sweden/nallo/pull/355) - Updated paraphase to compress and index VCFs within the module
 - [#365](https://github.com/genomic-medicine-sweden/nallo/pull/365) - Changed CI to only use nf-test for pipeline tests
+- [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Updated CI nf-test version to 0.9.0
 
 ### `Removed`
 
@@ -36,7 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Fixed `--vep_cache` not working as expected with tar.gz cache downloaded from VEP, updated testdata in [genomic-medicine-sweden/test-datasets#17](https://github.com/genomic-medicine-sweden/test-datasets/pull/17)
+- [#370](https://github.com/genomic-medicine-sweden/nallo/pull/370) - Fixed unsorted variants in SNV outputs ([#362](https://github.com/genomic-medicine-sweden/nallo/issues/362))
+- [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Fixed `--vep_cache` not working as expected with tar.gz cache downloaded from VEP, updated testdata in [genomic-medicine-sweden/test-datasets#17](https://github.com/genomic-medicine-sweden/test-datasets/pull/17)
 
 ### Parameters
 

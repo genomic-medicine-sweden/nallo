@@ -4,7 +4,6 @@ nextflow_workflow {
     script "../"
     workflow "SNV_ANNOTATION"
     config "./nextflow.config"
-    tag "SNV_ANNOTATION"
 
     setup {
         run("GUNZIP") {
