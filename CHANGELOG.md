@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#352](https://github.com/genomic-medicine-sweden/nallo/pull/352) - Removed the fqcrs module
 - [#356](https://github.com/genomic-medicine-sweden/nallo/pull/356) - Removed filter_vep section from output documentation since it is not in the pipeline
+- [#379](https://github.com/genomic-medicine-sweden/nallo/pull/379) - Removed VEP Plugins from testdata ([genomic-medicine-sweden/test-datasets#16](https://github.com/genomic-medicine-sweden/test-datasets/pull/16))
 
 ### `Fixed`
 
