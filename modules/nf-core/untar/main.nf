@@ -11,8 +11,8 @@ process UNTAR {
     tuple val(meta), path(archive)
 
     output:
-    tuple val(meta), path("$prefix"), emit: untar
-    path "versions.yml"             , emit: versions
+    tuple val(meta), path("$dir"), emit: untar
+    path "versions.yml"          , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -21,9 +21,9 @@ process UNTAR {
     def args  = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     prefix    = task.ext.prefix ?: ( meta.id ? "${meta.id}" : archive.baseName.toString().replaceFirst(/\.tar$/, ""))
-
+    dir = prefix.split('/')[1]
     """
-    mkdir $prefix
+    mkdir -p $prefix
 
     ## Ensures --strip-components only applied when top level of tar contents is a directory
     ## If just files or multiple directories, place all in prefix
@@ -51,8 +51,9 @@ process UNTAR {
 
     stub:
     prefix    = task.ext.prefix ?: ( meta.id ? "${meta.id}" : archive.toString().replaceFirst(/\.[^\.]+(.gz)?$/, ""))
+    dir = prefix.split('/')[1]
     """
-    mkdir ${prefix}
+    mkdir -p ${prefix}
     ## Dry-run untaring the archive to get the files and place all in prefix
     if [[ \$(tar -taf ${archive} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
         for i in `tar -tf ${archive}`;
