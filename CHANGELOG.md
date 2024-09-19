@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#355](https://github.com/genomic-medicine-sweden/nallo/pull/355) - Updated paraphase to compress and index VCFs within the module
 - [#365](https://github.com/genomic-medicine-sweden/nallo/pull/365) - Changed CI to only use nf-test for pipeline tests
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Updated CI nf-test version to 0.9.0
+- [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Changed vep_plugin_files description in schema and docs
 
 ### `Removed`
 
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#370](https://github.com/genomic-medicine-sweden/nallo/pull/370) - Fixed unsorted variants in SNV outputs ([#362](https://github.com/genomic-medicine-sweden/nallo/issues/362))
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Fixed `--vep_cache` not working as expected with tar.gz cache downloaded from VEP, updated testdata in [genomic-medicine-sweden/test-datasets#17](https://github.com/genomic-medicine-sweden/test-datasets/pull/17)
+- [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Fixed broken links and formatting in documentation
 
 ### Parameters
 
