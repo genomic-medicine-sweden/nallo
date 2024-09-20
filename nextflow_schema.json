@@ -399,7 +399,7 @@
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
-                    "description": "A csv file with paths to vep plugin files. pLI and LoFtool are required.",
+                    "description": "A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "deepvariant_model_type": {
@@ -491,8 +491,7 @@
                 },
                 "variant_consequences_snv": {
                     "type": "string",
-                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
-                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
                     "fa_icon": "fas fa-file-csv"
                 },
                 "vep_cache": {

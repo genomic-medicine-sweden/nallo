@@ -125,10 +125,10 @@ As descibed above, the files required depend on the active subworkflows. All par
 
 The majority of subworkflows depend on the mapping (alignment) subworkflow which requires `--fasta` and `--somalier_sites`.
 
-| Parameter        | Description                                                                                                                                                                                                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fasta`          | Reference genome, either gzipped or uncompressed FASTA (e.g. [GRCh38_no_alt_analysis_set.fna.gz](ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz)) |
-| `somalier_sites` | A VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)), from which sex will be inferred if possible.                                                                                              |
+| Parameter        | Description                                                                                                                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fasta`          | Reference genome, either gzipped or uncompressed FASTA (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
+| `somalier_sites` | A VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)), from which sex will be inferred if possible.            |
 
 ### QC (`--skip_qc`)
 
@@ -140,9 +140,9 @@ This subworkflow contains both genome assembly and assembly variant calling. The
 
 It requires a BED file with PAR regions.
 
-| Parameter     | Description                                                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](ttps://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
+| Parameter     | Description                                                                                                                        |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
 
 > [!NOTE]
 > Make sure chrY PAR is hard masked in reference genome you are using.
@@ -184,9 +184,9 @@ This subworkflow relies on mapping, short variant calling and phasing subworkflo
 
 This subworkflow requires haplotagged BAM files, and such relies on the mapping, short variant calling and phasing subworkflows, and requires the following additional files:
 
-| Parameter      | Description                                                                                                                                                                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](<[https://github.com/PacificBiosciences/trgt/tree/main/repeats](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)>)) |
+| Parameter      | Description                                                                                                                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)>)) |
 
 ### Repeat annotation (`--skip_repeat_annotation`)
 
@@ -215,20 +215,14 @@ This subworkflow relies on the mapping and short variant calling, and requires t
 
 ```
 vep_files
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool.pm
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/dbNSFP.pm
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/plugin_config.txt
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI.pm
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/MaxEntScan.pm
 https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
 ```
 
-<sup>2</sup> Example file for input with `--vep_plugins`:
+<sup>2</sup> Example file for input with `--snp_db`:
 
 ```
 sample,file
@@ -243,10 +237,10 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 This subworkflow relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
 
-| Parameter            | Description                                                                                                                                                                                                                                                  |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `score_config_snv`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                           |
-| `reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)) |
+| Parameter            | Description                                                                                                                                                                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `score_config_snv`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
+| `reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
 
 ### Other highlighted parameters
 
