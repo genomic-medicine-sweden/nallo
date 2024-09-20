@@ -49,11 +49,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter            | New parameter                   |
-| ------------------------ | ------------------------------- |
-| `--skip_aligned_read_qc` | `--skip_qc`                     |
-| `--skip_raw_read_qc`     | `--skip_qc`                     |
-|                          | `--sv_caller`                   |
+| Old parameter            | New parameter                     |
+| ------------------------ | --------------------------------- |
+| `--skip_aligned_read_qc` | `--skip_qc`                       |
+| `--skip_raw_read_qc`     | `--skip_qc`                       |
+|                          | `--sv_caller`                     |
 |                          |  `--minimap2_read_mapping_preset` |
 
 > [!NOTE]
