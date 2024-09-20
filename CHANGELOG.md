@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--skip_aligned_read_qc` | `--skip_qc`                     |
 | `--skip_raw_read_qc`     | `--skip_qc`                     |
 |                          | `--sv_caller`                   |
-|                          |  `minimap2_read_mapping_preset` |
+|                          |  `--minimap2_read_mapping_preset` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
