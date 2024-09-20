@@ -13,7 +13,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'hg38' ],
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -33,7 +33,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id: 'test', num_intervals:1 ],
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = GUNZIP.out.gunzip
                 input[2] = true
@@ -51,7 +51,7 @@ nextflow_workflow {
                             .join(MINIMAP2_ALIGN.out.index)
                             .join(Channel.of([
                                 [ id: 'test', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'nallo/reference/test_data.bed', checkifexists: true)
+                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkifexists: true)
                             ]))
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -70,7 +70,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id: 'vep_cache' ],
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
                 ]
                 """
             }
@@ -85,14 +85,14 @@ nextflow_workflow {
                 """
                 input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
                 input[1] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]
                 input[7] = false
                 input[8] = Channel.value([])
@@ -127,14 +127,14 @@ nextflow_workflow {
                 """
                 input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
                 input[1] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]
                 input[7] = false
                 input[8] = Channel.value([])
