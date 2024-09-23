@@ -564,7 +564,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo-0.3.2/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/",
                     "hidden": true
                 }
             }
