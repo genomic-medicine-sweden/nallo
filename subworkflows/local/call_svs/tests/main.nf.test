@@ -12,7 +12,7 @@ nextflow_workflow {
                     """
                     input[0] = [
                         [ id:'test' ],
-                        file(params.pipelines_testdata_base_path + 'nallo/reference/hg38.test.fa.gz', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                     ]
                     """
                 }
@@ -38,8 +38,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -71,8 +71,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -108,13 +108,13 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [
                         [ id:'test_1', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
                         [ id:'test_2', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
@@ -148,8 +148,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -181,8 +181,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -218,13 +218,13 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [
                         [ id:'test_1', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
                         [ id:'test_2', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
@@ -260,8 +260,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -289,8 +289,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -322,13 +322,13 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [
                         [ id:'test_1', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
                         [ id:'test_2', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
@@ -363,8 +363,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -392,8 +392,8 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
@@ -425,13 +425,13 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [
                         [ id:'test_1', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
                         [ id:'test_2', single_end:false, project: 'project' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'nallo/testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
