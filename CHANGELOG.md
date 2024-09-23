@@ -69,6 +69,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.3.2 - [2024-09-20]
+
+### `Fixed`
+
+- [#396](https://github.com/genomic-medicine-sweden/nallo/pull/396) - Fixed the release test profile not working, by pinning the testdata used [#395](https://github.com/genomic-medicine-sweden/nallo/issues/395)
+
 ## 0.3.1 - [2024-09-11]
 
 ### `Fixed`

@@ -11,8 +11,9 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet.csv'
-                outdir = "$outputDir"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
+                outdir                       = "$outputDir"
             }
         }
 
@@ -120,8 +121,11 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam.csv'
-                outdir = "$outputDir"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam.csv'
+                outdir                       = "$outputDir"
+                parallel_snv                 = 2
+                preset                       = "revio"
             }
         }
 
@@ -299,11 +303,12 @@ nextflow_pipeline {
 
         when {
             params {
-                input               = 'https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv'
-                preset              = 'ONT_R10'
-                parallel_alignments = 2
-                parallel_snv        = 1
-                outdir              = "$outputDir"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
+                outdir                       = "$outputDir"
+                preset                       = 'ONT_R10'
+                parallel_alignments          = 2
+                parallel_snv                 = 1
             }
         }
 
