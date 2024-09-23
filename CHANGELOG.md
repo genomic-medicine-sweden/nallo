@@ -72,7 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ---------- | ----------- | ----------- |
 | fqcrs      | 0.1.0       |
 | severus    |             | 1.1         |
-| longphase  |             |  1.7.3      |
+| longphase  |             | 1.7.3       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
