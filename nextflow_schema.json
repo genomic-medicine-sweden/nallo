@@ -409,6 +409,12 @@
                     "hidden": true,
                     "enum": ["PACBIO", "ONT_R104"]
                 },
+                "minimap2_read_mapping_preset": {
+                    "type": "string",
+                    "description": "Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default.",
+                    "hidden": true,
+                    "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"]
+                },
                 "extra_modkit_options": {
                     "type": "string",
                     "hidden": true,

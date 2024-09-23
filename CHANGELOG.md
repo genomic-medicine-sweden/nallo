@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#366](https://github.com/genomic-medicine-sweden/nallo/pull/366) - Added sorting of samples when creating PED files, so the output is always the same
 - [#367](https://github.com/genomic-medicine-sweden/nallo/pull/367) - Added Severus as the default SV caller, together with a `--sv_caller` parameter to choose caller
 - [#371](https://github.com/genomic-medicine-sweden/nallo/pull/371) - Added `FOUND_IN=caller` tags to SV output
+- [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Added a new `--minimap2_read_mapping_preset` parameter
 
 ### `Changed`
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#365](https://github.com/genomic-medicine-sweden/nallo/pull/365) - Changed CI to only use nf-test for pipeline tests
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Updated CI nf-test version to 0.9.0
 - [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Changed vep_plugin_files description in schema and docs
+- [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Changed the default minimap2 preset for PacBio data from `map-hifi` to `lr:hqae`
 
 ### `Removed`
 
@@ -43,14 +45,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#370](https://github.com/genomic-medicine-sweden/nallo/pull/370) - Fixed unsorted variants in SNV outputs ([#362](https://github.com/genomic-medicine-sweden/nallo/issues/362))
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Fixed `--vep_cache` not working as expected with tar.gz cache downloaded from VEP, updated testdata in [genomic-medicine-sweden/test-datasets#17](https://github.com/genomic-medicine-sweden/test-datasets/pull/17)
 - [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Fixed broken links and formatting in documentation
+- [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Fixed minimap2 preset for ONT data being overwritten to `map-ont` when it should have been `lr:hq`, due to different settings in index and alignment processes [#392](https://github.com/genomic-medicine-sweden/nallo/issues/392)
 
 ### Parameters
 
-| Old parameter            | New parameter |
-| ------------------------ | ------------- |
-| `--skip_aligned_read_qc` | `--skip_qc`   |
-| `--skip_raw_read_qc`     | `--skip_qc`   |
-|                          | `--sv_caller` |
+| Old parameter            | New parameter                     |
+| ------------------------ | --------------------------------- |
+| `--skip_aligned_read_qc` | `--skip_qc`                       |
+| `--skip_raw_read_qc`     | `--skip_qc`                       |
+|                          | `--sv_caller`                     |
+|                          |  `--minimap2_read_mapping_preset` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
