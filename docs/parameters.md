@@ -97,7 +97,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
 | `variant_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
 | `sv_caller` | Which structural variant caller to use (`severus`, `sniffles`) | `string` | severus |  |  |
-| `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase_snv |  |  |
+| `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
 | `parallel_alignments` | If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 1 |  |  |
 | `parallel_snv` | If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
