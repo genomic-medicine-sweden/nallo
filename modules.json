@@ -244,6 +244,16 @@
                         "git_sha": "4806239588f35d27a95b187b4000d80e15152022",
                         "installed_by": ["modules"]
                     },
+                    "svdb/build": {
+                        "branch": "master",
+                        "git_sha": "ba8aac9d0b2f34811800bafab168b638cf2ff3cc",
+                        "installed_by": ["modules"]
+                    },
+                    "svdb/query": {
+                        "branch": "master",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "installed_by": ["modules"]
+                    },
                     "tabix/bgzip": {
                         "branch": "master",
                         "git_sha": "b20be35facfc5acdc1259f132ed79339d79e989f",

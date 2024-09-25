@@ -64,6 +64,11 @@
                     "description": "Skip short variant annotation",
                     "default": false
                 },
+                "skip_sv_annotation": {
+                    "type": "boolean",
+                    "description": "Skip structural variant annotation",
+                    "default": false
+                },
                 "skip_cnv_calling": {
                     "type": "boolean",
                     "description": "Skip CNV calling",
@@ -161,6 +166,17 @@
                     "schema": "/assets/schema_snpdb.json",
                     "description": "A csv file with echtvar databases to annotate SNVs with",
                     "exists": true
+                },
+                "svdb_dbs": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "file-path",
+                    "description": "Databases used for structural variant annotation in vcf format.",
+                    "fa_icon": "fas fa-file-csv",
+                    "help_text": "Path to comma-separated file containing information about the databases used for structural variant annotation.",
+                    "pattern": "^\\S+\\.csv$",
+                    "mimetype": "text/csv",
+                    "schema": "assets/svdb_query_vcf_schema.json"
                 },
                 "variant_catalog": {
                     "type": "string",

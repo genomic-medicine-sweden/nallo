@@ -37,6 +37,7 @@ jobs:
           - "SHORT_VARIANT_CALLING"
           - "SNV_ANNOTATION"
           - "CALL_SVS"
+          - "ANNOTATE_SVS"
         profile:
           - "docker"
 

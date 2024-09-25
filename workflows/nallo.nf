@@ -7,6 +7,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 */
 
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
@@ -103,6 +104,8 @@ workflow NALLO {
     ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).collect()
                                                                     : Channel.value([])
     ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
+                                                                    : ''
+    ch_svdb_dbs                 = params.svdb_dbs                   ? Channel.fromPath(params.svdb_dbs).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
 
     // Check parameter that doesn't conform to schema validation here
@@ -309,6 +312,21 @@ workflow NALLO {
             ch_tandem_repeats
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
+
+
+        //
+        // Annotate structural variants
+        //
+        if(!params.skip_sv_annotation) {
+            ANNOTATE_SVS (
+                CALL_SVS.out.ch_multisample_vcf,
+                fasta,
+                ch_svdb_dbs,
+                ch_vep_cache,
+                params.vep_cache_version,
+                ch_vep_extra_files
+            )
+        }
 
         //
         // Call (and annotate and rank) SNVs
