@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#381](https://github.com/genomic-medicine-sweden/nallo/pull/381) - Fixed `--vep_cache` not working as expected with tar.gz cache downloaded from VEP, updated testdata in [genomic-medicine-sweden/test-datasets#17](https://github.com/genomic-medicine-sweden/test-datasets/pull/17)
 - [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Fixed broken links and formatting in documentation
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Fixed minimap2 preset for ONT data being overwritten to `map-ont` when it should have been `lr:hq`, due to different settings in index and alignment processes [#392](https://github.com/genomic-medicine-sweden/nallo/issues/392)
+- [#402](https://github.com/genomic-medicine-sweden/nallo/pull/402) - Fixed double sample names in HiFiCNV output
 
 ### Parameters
 

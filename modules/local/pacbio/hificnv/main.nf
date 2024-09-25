@@ -38,8 +38,11 @@ process HIFICNV {
         $exclude \\
         $maf \\
         --ref ${fasta} \\
-        --threads ${task.cpus} \\
-        --output-prefix ${prefix}
+        --threads ${task.cpus}
+
+    mv *.vcf.gz ${prefix}.vcf.gz
+    mv *.depth.bw ${prefix}.depth.bw
+    mv *.bedgraph ${prefix}.depth.bw
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
