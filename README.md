@@ -66,14 +66,15 @@ NIST,HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
 NIST,HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
 ```
 
-Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline, e.g:
+Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline using:
 
 ```bash
-nextflow run genomic-medicine-sweden/nallo -profile YOURPROFILE \
+nextflow run genomic-medicine-sweden/nallo \
+    -profile <docker/singularity/.../institute> \
     --input samplesheet.csv \
-    --preset revio \
-    --fasta  reference.fasta \
-    --outdir results
+    --preset <revio/pacbio/ONT_R10> \
+    --fasta <reference.fasta> \
+    --outdir <OUTDIR>
 ```
 
 For more details and further functionality, please refer to the [usage documentation](https://github.com/genomic-medicine-sweden/nallo/blob/dev/docs/usage.md).
