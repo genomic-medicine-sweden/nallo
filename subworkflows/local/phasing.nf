@@ -1,126 +1,138 @@
-include { BCFTOOLS_FILLFROMFASTA                       } from '../../modules/local/bcftools/fillfromfasta/main'
-include { BCFTOOLS_REHEADER                            } from '../../modules/nf-core/bcftools/reheader/main'
-include { CRAMINO as CRAMINO_PHASED                    } from '../../modules/local/cramino'
-include { HIPHASE as HIPHASE_SNV                       } from '../../modules/local/hiphase/main'
-include { HIPHASE as HIPHASE_SV                        } from '../../modules/local/hiphase/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP    } from '../../modules/nf-core/samtools/index/main'
-include { TABIX_BGZIPTABIX                             } from '../../modules/nf-core/tabix/bgziptabix/main'
-include { TABIX_TABIX                                  } from '../../modules/nf-core/tabix/tabix/main'
-include { WHATSHAP_HAPLOTAG                            } from '../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                               } from '../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                               } from '../../modules/local/whatshap/stats/main'
+include { CRAMINO as CRAMINO_PHASED                  } from '../../modules/local/cramino'
+include { HIPHASE                                    } from '../../modules/local/hiphase/main'
+include { LONGPHASE_HAPLOTAG                         } from '../../modules/nf-core/longphase/haplotag/main'
+include { LONGPHASE_PHASE                            } from '../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../modules/nf-core/samtools/index/main'
+include { TABIX_TABIX as TABIX_LONGPHASE_PHASE       } from '../../modules/nf-core/tabix/tabix/main'
+include { WHATSHAP_HAPLOTAG                          } from '../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                             } from '../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                             } from '../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
-        ch_vcf     // channel: [ val(meta), vcf ]
-        ch_sv_vcf  // channel: [ val(meta), vcf ]
-        ch_bam_bai // channel: [ val(meta), bam, bai ]
-        fasta      // channel: [ val(meta), fasta ]
-        fai        // channel: [ val(meta), fai ]
+    ch_vcf       // channel: [ val(meta), path(vcf) ]
+    ch_vcf_index // channel: [ val(meta), path(tbi) ]
+    ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
+    fasta        // channel: [ val(meta), path(fasta) ]
+    fai          // channel: [ val(meta), path(fai) ]
 
     main:
-        ch_versions            = Channel.empty()
-        ch_bam_bai_haplotagged = Channel.empty()
-        ch_vcf_index           = Channel.empty()
+    ch_versions            = Channel.empty()
 
-        TABIX_TABIX(ch_vcf)
-        ch_versions = ch_versions.mix(TABIX_TABIX.out.versions)
+    // Phase variants and haplotag reads with Longphase
+    if (params.phaser.equals("longphase")) {
 
-        if (params.phaser.equals("whatshap")) {
+        ch_bam_bai
+            .join( ch_vcf )
+            .map { meta, bam, bai, snvs -> [ meta, bam, bai, snvs, [], [] ] }
+            .set { ch_longphase_phase_in }
 
-            WHATSHAP_PHASE( ch_vcf.join(ch_bam_bai), fasta, fai )
-            ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
+        LONGPHASE_PHASE (
+            ch_longphase_phase_in,
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
-            WHATSHAP_PHASE.out.vcf_tbi
-                .join(ch_bam_bai)
-                .set { ch_whatshap_haplotag_in }
+        TABIX_LONGPHASE_PHASE (
+            LONGPHASE_PHASE.out.vcf
+        )
+        ch_versions = ch_versions.mix(TABIX_LONGPHASE_PHASE.out.versions)
 
-            WHATSHAP_HAPLOTAG(ch_whatshap_haplotag_in, fasta, fai)
-            ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions)
+        LONGPHASE_PHASE.out.vcf
+            .join( TABIX_LONGPHASE_PHASE.out.tbi )
+            .set { ch_phased_vcf_index }
 
-            SAMTOOLS_INDEX_WHATSHAP( WHATSHAP_HAPLOTAG.out.bam )
-            ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions)
+        ch_bam_bai
+            .join( LONGPHASE_PHASE.out.vcf )
+            .map { meta, bam, bai, vcf -> [ meta, bam, bai, vcf, [], [] ] }
+            .set { ch_longphase_haplotag_in }
 
-            WHATSHAP_HAPLOTAG
-                .out.bam
-                .join(SAMTOOLS_INDEX_WHATSHAP.out.bai)
-                .set { ch_bam_bai_haplotagged }
+        LONGPHASE_HAPLOTAG (
+            ch_longphase_haplotag_in,
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(LONGPHASE_HAPLOTAG.out.versions)
 
-            ch_vcf_index = ch_vcf_index.mix( WHATSHAP_PHASE.out.vcf_tbi )
+        SAMTOOLS_INDEX_LONGPHASE (
+            LONGPHASE_HAPLOTAG.out.bam
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_INDEX_LONGPHASE.out.versions)
 
-        } else if (params.phaser.equals("hiphase_snv")) {
-            ch_vcf
-                .join(TABIX_TABIX.out.csi)
-                .join(ch_bam_bai)
-                .set { ch_hiphase_snv_in }
+        LONGPHASE_HAPLOTAG.out.bam
+            .join( SAMTOOLS_INDEX_LONGPHASE.out.bai )
+            .set { ch_bam_bai_haplotagged }
 
-            HIPHASE_SNV( ch_hiphase_snv_in, fasta, fai, true )
-            ch_versions = ch_versions.mix(HIPHASE_SNV.out.versions)
+    // Phase variants and haplotag reads with whatshap
+    } else if (params.phaser.equals("whatshap")) {
 
-            HIPHASE_SNV.out.bams
-                .join(HIPHASE_SNV.out.bais)
-                .set { ch_bam_bai_haplotagged }
+        WHATSHAP_PHASE(
+            ch_vcf.join( ch_bam_bai ),
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
-            ch_vcf_index = ch_vcf_index.mix( HIPHASE_SNV.out.vcfs.join(HIPHASE_SNV.out.vcfs_tbi) )
+        WHATSHAP_PHASE.out.vcf_tbi
+            .join( ch_bam_bai )
+            .set { ch_whatshap_haplotag_in }
 
-        } else if (params.phaser.equals("hiphase_sv")) {
-            // Sniffles specific...
-            BCFTOOLS_REHEADER(
-                ch_sv_vcf
-                    .map { meta, vcf -> [meta, vcf, [], []] },
-                [[],[]]
-            )
-            ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
+        WHATSHAP_HAPLOTAG (
+            ch_whatshap_haplotag_in,
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions)
 
-            // Might be that newer versions of HiPhase ignores certain SVs
-            // if BCFTOOLS_FILLFROMFASTA is not run, instead of craching
-            BCFTOOLS_FILLFROMFASTA(BCFTOOLS_REHEADER.out.vcf, fasta)
-            ch_versions = ch_versions.mix(BCFTOOLS_FILLFROMFASTA.out.versions)
+        SAMTOOLS_INDEX_WHATSHAP (
+            WHATSHAP_HAPLOTAG.out.bam
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions)
 
-            TABIX_BGZIPTABIX(BCFTOOLS_FILLFROMFASTA.out.vcf)
-            ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
+        WHATSHAP_HAPLOTAG.out.bam
+            .join( SAMTOOLS_INDEX_WHATSHAP.out.bai )
+            .set { ch_bam_bai_haplotagged }
 
-            TABIX_BGZIPTABIX.out.gz_tbi
-                .map { meta, gz, tbi -> [ meta, gz ] }
-                .set { ch_sv_vcf }
+        WHATSHAP_PHASE.out.vcf_tbi
+            .set { ch_phased_vcf_index }
 
-            TABIX_BGZIPTABIX.out.gz_tbi
-                .map { meta, gz, tbi -> [ meta, tbi ] }
-                .set { ch_sv_tbi }
+    // Phase variants and haplotag reads with HiPhase
+    } else if (params.phaser.equals("hiphase")) {
+        ch_vcf
+            .join( ch_vcf_index )
+            .join( ch_bam_bai )
+            .set { ch_hiphase_snv_in }
 
-            ch_vcf
-                .concat(ch_sv_vcf)
-                .groupTuple()
-                .set { ch_hiphase_vcf }
+        HIPHASE (
+            ch_hiphase_snv_in,
+            fasta,
+            fai,
+            true
+        )
+        ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
-            TABIX_TABIX.out.csi
-                .concat(ch_sv_tbi)
-                .groupTuple()
-                .set { ch_hiphase_tbi }
+        HIPHASE.out.bams
+            .join( HIPHASE.out.bais )
+            .set { ch_bam_bai_haplotagged }
 
-            ch_hiphase_vcf
-                .join(ch_hiphase_tbi)
-                .join(ch_bam_bai)
-                .set { ch_hiphase_in }
+        HIPHASE.out.vcfs
+            .join( HIPHASE.out.vcfs_tbi )
+            .set { ch_phased_vcf_index }
 
-            HIPHASE_SV( ch_hiphase_in, fasta, fai, true )
-            ch_versions = ch_versions.mix(HIPHASE_SV.out.versions)
+    }
 
-            HIPHASE_SV.out.bams
-                .join(HIPHASE_SV.out.bais)
-                .set { ch_bam_bai_haplotagged }
+    // Phasing stats
+    WHATSHAP_STATS ( ch_phased_vcf_index )
+    ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
 
-            ch_vcf_index = ch_vcf_index.mix( HIPHASE_SV.out.vcfs.join(HIPHASE_SV.out.vcfs_tbi) )
-        }
-
-        WHATSHAP_STATS( ch_vcf_index )
-        ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
-
-        CRAMINO_PHASED( ch_bam_bai_haplotagged )
-        ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions)
+    // Phasing QC
+    CRAMINO_PHASED ( ch_bam_bai_haplotagged )
+    ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions)
 
     emit:
-    haplotagged_bam_bai = ch_bam_bai_haplotagged   // channel: [ val(meta), bam, bai ]
-    stats               = WHATSHAP_STATS.out.stats // channel: [ val(meta), txt ]
-    versions            = ch_versions              // channel: [ versions.yml ]
+    haplotagged_bam_bai = ch_bam_bai_haplotagged   // channel: [ val(meta), path(bam), path(bai) ]
+    stats               = WHATSHAP_STATS.out.stats // channel: [ val(meta), path(txt) ]
+    versions            = ch_versions              // channel: [ path(versions.yml) ]
 }

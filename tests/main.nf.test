@@ -30,7 +30,7 @@ nextflow_pipeline {
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_somalier.txt"),
                     // Assert with snapshot HG002_Revio
-                    bam("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_phased.bam", stringency: 'silent').getReadsMD5(),
+                    bam("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio/HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary"),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio/HG002_Revio.asm.bp.hap2.p_ctg.assembly_summary"),
                     bam("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap1.bam", stringency: 'silent').getReadsMD5(),
@@ -81,7 +81,7 @@ nextflow_pipeline {
                 { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz").exists() },
                 { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio
-                { assert new File("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_phased.bam.bai").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap1.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap1.sam.gz").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap2.bam.bai").exists() },
@@ -99,10 +99,10 @@ nextflow_pipeline {
                 { assert new File("$outputDir/paraphase/HG002_Revio/HG002_Revio.paraphase.json").exists() },
                 { assert new File("$outputDir/qc/cramino/phased/HG002_Revio/HG002_Revio_cramino_aligned_phased.txt").exists() },
                 { assert new File("$outputDir/qc/cramino/unphased/HG002_Revio/HG002_Revio_cramino_aligned.txt").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio/HG002_Revio_phased.vcf.gz").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio/HG002_Revio_stats.stats.tsv").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio/HG002_Revio_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.tsv").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio/HG002_Revio_fastqc.html").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio/HG002_Revio_fastqc.zip").exists() },
                 { assert new File("$outputDir/repeat_annotation/stranger/HG002_Revio/HG002_Revio_repeat_expansion_stranger.vcf.gz").exists() },
@@ -126,6 +126,8 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 parallel_snv                 = 2
                 preset                       = "revio"
+                phaser                       = "hiphase"
+
             }
         }
 
@@ -138,7 +140,7 @@ nextflow_pipeline {
                     file("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     // Assert with snapshot HG002_Revio_A
-                    bam("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_phased.bam", stringency: 'silent').getReadsMD5(),
+                    bam("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_haplotagged.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary"),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary"),
                     bam("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam", stringency: 'silent').getReadsMD5(),
@@ -174,7 +176,7 @@ nextflow_pipeline {
                     bam("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/snvs/stats/single_sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt").readLines()[0..2],
                     // Assert with snapshot HG002_Revio_B
-                    bam("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_phased.bam", stringency: 'silent').getReadsMD5(),
+                    bam("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary"),
                     file("$outputDir/assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap2.p_ctg.assembly_summary"),
                     bam("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam", stringency: 'silent').getReadsMD5(),
@@ -229,7 +231,7 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_A
-                { assert new File("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_phased.bam.bai").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.sam.gz").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.bam.bai").exists() },
@@ -247,11 +249,11 @@ nextflow_pipeline {
                 { assert new File("$outputDir/paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.json").exists() },
                 { assert new File("$outputDir/qc/cramino/phased/HG002_Revio_A/HG002_Revio_A_cramino_aligned_phased.txt").exists() },
                 { assert new File("$outputDir/qc/cramino/unphased/HG002_Revio_A/HG002_Revio_A_cramino_aligned.txt").exists() },
-                { assert new File("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_phased.bam.bai").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio_A/HG002_Revio_A_phased.vcf.gz").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio_A/HG002_Revio_A_phased.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio_A/HG002_Revio_A_stats.stats.tsv").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio_A/HG002_Revio_A_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_Revio_A/HG002_Revio_A_haplotagged.bam.bai").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio_A/HG002_Revio_A_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio_A/HG002_Revio_A_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.blocks.tsv").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio_A/HG002_Revio_A_fastqc.html").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio_A/HG002_Revio_A_fastqc.zip").exists() },
                 { assert new File("$outputDir/repeat_annotation/stranger/HG002_Revio_A/HG002_Revio_A_repeat_expansion_stranger.vcf.gz").exists() },
@@ -262,7 +264,7 @@ nextflow_pipeline {
                 { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz").exists() },
                 { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_B
-                { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_phased.bam.bai").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.sam.gz").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.bam.bai").exists() },
@@ -280,11 +282,11 @@ nextflow_pipeline {
                 { assert new File("$outputDir/paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.json").exists() },
                 { assert new File("$outputDir/qc/cramino/phased/HG002_Revio_B/HG002_Revio_B_cramino_aligned_phased.txt").exists() },
                 { assert new File("$outputDir/qc/cramino/unphased/HG002_Revio_B/HG002_Revio_B_cramino_aligned.txt").exists() },
-                { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_phased.bam.bai").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio_B/HG002_Revio_B_phased.vcf.gz").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_Revio_B/HG002_Revio_B_phased.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio_B/HG002_Revio_B_stats.stats.tsv").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_Revio_B/HG002_Revio_B_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam.bai").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio_B/HG002_Revio_B_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_Revio_B/HG002_Revio_B_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.blocks.tsv").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio_B/HG002_Revio_B_fastqc.html").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_Revio_B/HG002_Revio_B_fastqc.zip").exists() },
                 { assert new File("$outputDir/repeat_annotation/stranger/HG002_Revio_B/HG002_Revio_B_repeat_expansion_stranger.vcf.gz").exists() },
@@ -309,6 +311,7 @@ nextflow_pipeline {
                 preset                       = 'ONT_R10'
                 parallel_alignments          = 2
                 parallel_snv                 = 1
+                phaser                       = "whatshap"
             }
         }
 
@@ -321,7 +324,7 @@ nextflow_pipeline {
                     file("$outputDir/multiqc/multiqc_data/multiqc_citations.txt"),
                     file("$outputDir/multiqc/multiqc_data/multiqc_fastqc.txt"),
                     // Assert with snapshot HG002_ONT_A
-                    bam("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam", stringency: 'silent').getReadsMD5(),
+                    bam("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.copynum.bedgraph"),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.depth.bw"),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.HG002_ONT_A.maf.bw"),
@@ -339,7 +342,7 @@ nextflow_pipeline {
                     file("$outputDir/qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz.csi"),
                     file("$outputDir/snvs/stats/single_sample/HG002_ONT_A.vcf.gz.bcftools_stats.txt").readLines()[0..2],
                     // Assert with snapshot HG002_ONT_B
-                    bam("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam", stringency: 'silent').getReadsMD5(),
+                    bam("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam", stringency: 'silent').getReadsMD5(),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.copynum.bedgraph"),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.depth.bw"),
                     file("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.HG002_ONT_B.maf.bw"),
@@ -374,7 +377,7 @@ nextflow_pipeline {
                 { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz").exists() },
                 { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz.tbi").exists() },
                 // Assert exists HG002_ONT_A
-                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam.bai").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.log").exists() },
                 { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz").exists() },
                 { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi").exists() },
@@ -388,11 +391,11 @@ nextflow_pipeline {
                 { assert new File("$outputDir/paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.json").exists() },
                 { assert new File("$outputDir/qc/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.txt").exists() },
                 { assert new File("$outputDir/qc/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.txt").exists() },
-                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_phased.bam.bai").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.tsv").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.html").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz").exists() },
@@ -400,7 +403,7 @@ nextflow_pipeline {
                 { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz").exists() },
                 { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz.tbi").exists() },
                 // Assert exists HG002_ONT_B
-                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam.bai").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.log").exists() },
                 { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz").exists() },
                 { assert new File("$outputDir/methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi").exists() },
@@ -414,11 +417,11 @@ nextflow_pipeline {
                 { assert new File("$outputDir/paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.json").exists() },
                 { assert new File("$outputDir/qc/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.txt").exists() },
                 { assert new File("$outputDir/qc/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.txt").exists() },
-                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_phased.bam.bai").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz").exists() },
-                { assert new File("$outputDir/phasing/whatshap/phase/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv").exists() },
-                { assert new File("$outputDir/phasing/whatshap/stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.tsv").exists() },
+                { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz").exists() },
+                { assert new File("$outputDir/phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv").exists() },
+                { assert new File("$outputDir/qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.tsv").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.html").exists() },
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz").exists() },

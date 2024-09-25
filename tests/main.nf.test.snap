@@ -39,8 +39,8 @@
             "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
             "HG002_Revio.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
             "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
-            "HG002_Revio_sorted.vcf.gz:md5,fbb5699b8f74fc105fb154e8fac7bfea",
-            "HG002_Revio_sorted.vcf.gz.tbi:md5,0466518ee265ba63160ed27cee0dec88",
+            "HG002_Revio_sorted.vcf.gz:md5,735d8ba586b01fb27e009e3964112ce9",
+            "HG002_Revio_sorted.vcf.gz.tbi:md5,d4c7838d72a4200e790227ba4d7b25d5",
             "65999ab8f2bc7841de8172468bf23ab6",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
@@ -52,7 +52,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T12:30:55.088135056"
+        "timestamp": "2024-09-20T11:17:02.410377719"
     },
     "test profile - multisample": {
         "content": [
@@ -90,8 +90,8 @@
             "HG002_Revio_A_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
             "HG002_Revio_A.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
             "HG002_Revio_A.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
-            "HG002_Revio_A_sorted.vcf.gz:md5,680938d6ebeafe73d8df0b21c0310276",
-            "HG002_Revio_A_sorted.vcf.gz.tbi:md5,a6554ab817e7c232a1554ea85fa00151",
+            "HG002_Revio_A_sorted.vcf.gz:md5,e7f53d86c027a7778e0e642cb2da8884",
+            "HG002_Revio_A_sorted.vcf.gz.tbi:md5,d4c7838d72a4200e790227ba4d7b25d5",
             "65999ab8f2bc7841de8172468bf23ab6",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
@@ -129,8 +129,8 @@
             "HG002_Revio_B_cramino_aligned.arrow:md5,3bb08ac5958c6cb0801f319066c3a1b2",
             "HG002_Revio_B.regions.bed.gz:md5,837978e7b90ef81cb5aa015fbe7bb4a6",
             "HG002_Revio_B.regions.bed.gz.csi:md5,d0640255d527e36655281f64e184b02c",
-            "HG002_Revio_B_sorted.vcf.gz:md5,a8aaec5870a60a4fabf6aff849ba1e61",
-            "HG002_Revio_B_sorted.vcf.gz.tbi:md5,e255a5ea92885967f0c126bddc8ea3b2",
+            "HG002_Revio_B_sorted.vcf.gz:md5,8703d5602d79e9fe4d70aced838f518f",
+            "HG002_Revio_B_sorted.vcf.gz.tbi:md5,01f65612542a83475217568bd50d4efd",
             "65999ab8f2bc7841de8172468bf23ab6",
             [
                 "# This file was produced by bcftools stats (1.20+htslib-1.20) and can be plotted using plot-vcfstats.",
@@ -142,7 +142,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T12:32:28.96463908"
+        "timestamp": "2024-09-20T09:48:22.654535823"
     },
     "test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1": {
         "content": [

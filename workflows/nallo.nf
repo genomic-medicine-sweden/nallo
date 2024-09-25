@@ -106,7 +106,7 @@ workflow NALLO {
                                                                     : ''
 
     // Check parameter that doesn't conform to schema validation here
-    if (params.phaser.matches('hiphase_sv|hiphase_snv') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
+    if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
 
     // Read and store paths in the vep_plugin_files file
     if (params.vep_plugin_files) {
@@ -451,7 +451,13 @@ workflow NALLO {
             //
             if(!params.skip_phasing_wf) {
 
-                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, CALL_SVS.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
+                PHASING (
+                    SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+                    SHORT_VARIANT_CALLING.out.snp_calls_tbi,
+                    bam_bai,
+                    fasta,
+                    fai
+                )
                 ch_versions = ch_versions.mix(PHASING.out.versions)
 
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))

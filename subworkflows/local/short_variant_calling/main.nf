@@ -93,7 +93,8 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
     emit:
-    snp_calls_vcf = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf // channel: [ val(meta), path(bcf) ]
+    snp_calls_vcf = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
+    snp_calls_tbi = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi // channel: [ val(meta), path(tbi) ]
     combined_bcf  = BCFTOOLS_NORM_MULTISAMPLE.out.vcf  // channel: [ val(meta), path(bcf) ]
     combined_csi  = BCFTOOLS_NORM_MULTISAMPLE.out.csi  // channel: [ val(meta), path(csi) ]
     versions      = ch_versions                        // channel: [ path(versions.yml) ]

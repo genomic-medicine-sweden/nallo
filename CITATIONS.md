@@ -70,6 +70,10 @@
 
 - [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 
+- [LongPhase](https://github.com/twolinin/longphase)
+
+  > Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058
+
 - [minimap2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)
 
   > Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191
