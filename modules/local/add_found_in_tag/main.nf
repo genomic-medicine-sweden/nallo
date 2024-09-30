@@ -8,7 +8,7 @@ process ADD_FOUND_IN_TAG {
         'biocontainers/bcftools:1.20--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(vcf), path(index)
+    tuple val(meta), path(vcf, stageAs: "?/*"), path(index, stageAs: "?/*")
     val(variant_caller)
 
     output:
@@ -28,6 +28,7 @@ process ADD_FOUND_IN_TAG {
                     args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
                     "vcf"
+
     """
     bcftools view \\
         --threads $task.cpus \\
