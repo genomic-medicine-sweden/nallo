@@ -30,8 +30,8 @@
             "HG002_Revio.hap2.paf.gz:md5,a99e451e4af96a7ab120cedd49eea618",
             "HG002_Revio.hap2.var.gz:md5,53dc16fc893a529a95067da161b4dad6",
             "HG002_Revio.pair.vcf.gz:md5,a390558ab50ce0dc9efec070b1c70c22",
-            "HG002_Revio.vcf.gz:md5,e790fd716d526b4fb2683a5064590e30",
-            "HG002_Revio.vcf.gz.tbi:md5,930be7eb79286a615f965962f44a3e18",
+            "ab9044066c7bd041966eed43e0d00f13",
+            "HG002_Revio.vcf.gz.tbi:md5,5e42ce281f81b7fdb5fa6e42ec4c7f8b",
             "HG002_Revio_modkit_pileup.bed.gz:md5,55496cdcd7e4ccad86adee3cb819da56",
             "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,b217c5e971ecb0b8c874b0038f0d2ae4",
             "fcc3f220bb09d3264f97e7f620779be0",
@@ -52,7 +52,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-30T16:41:22.321880678"
+        "timestamp": "2024-10-01T10:14:44.272116791"
     },
     "test profile - multisample": {
         "content": [
@@ -81,8 +81,8 @@
             "HG002_Revio_A.hap2.paf.gz:md5,a99e451e4af96a7ab120cedd49eea618",
             "HG002_Revio_A.hap2.var.gz:md5,53dc16fc893a529a95067da161b4dad6",
             "HG002_Revio_A.pair.vcf.gz:md5,233375a4067362bb6799d5ade46db537",
-            "HG002_Revio_A.vcf.gz:md5,901c55b4db621e15fd752e029da2a30b",
-            "HG002_Revio_A.vcf.gz.tbi:md5,eab1874c171f8fa91dfcc948bc1fb872",
+            "ab9044066c7bd041966eed43e0d00f13",
+            "HG002_Revio_A.vcf.gz.tbi:md5,38117ec4d71c688a6f43c53946908acd",
             "HG002_Revio_A_modkit_pileup.bed.gz:md5,55496cdcd7e4ccad86adee3cb819da56",
             "HG002_Revio_A_modkit_pileup.bed.gz.tbi:md5,b217c5e971ecb0b8c874b0038f0d2ae4",
             "fcc3f220bb09d3264f97e7f620779be0",
@@ -120,8 +120,8 @@
             "HG002_Revio_B.hap2.paf.gz:md5,14e230db02f0fefcacdd45949743d80c",
             "HG002_Revio_B.hap2.var.gz:md5,5ed54d6881aac6c54245bb8c5ed77d44",
             "HG002_Revio_B.pair.vcf.gz:md5,62c75ce4450a5fde9fdc6e552f5c2cd9",
-            "HG002_Revio_B.vcf.gz:md5,a49a55ab1f5bdd2c7d36bd23da56db0c",
-            "HG002_Revio_B.vcf.gz.tbi:md5,6667ae233f4bdd2df9406eea8b7d2249",
+            "7db8959b4b1f46316bb7d5908a8b9f26",
+            "HG002_Revio_B.vcf.gz.tbi:md5,7a72aa048fe8389233a2cf94d843cd1e",
             "HG002_Revio_B_modkit_pileup.bed.gz:md5,c217ccd3e8514a6a5eca0e163dee9f20",
             "HG002_Revio_B_modkit_pileup.bed.gz.tbi:md5,383b647625175e59420c5d8044ba711f",
             "fcc3f220bb09d3264f97e7f620779be0",
@@ -142,7 +142,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-30T16:42:53.500697246"
+        "timestamp": "2024-10-01T10:16:16.493512263"
     },
     "test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1": {
         "content": [
@@ -156,8 +156,8 @@
             "HG002_ONT_A.mosdepth.global.dist.txt:md5,5ae0972357f99aa481a0bf12fb9e0b0b",
             "HG002_ONT_A.mosdepth.region.dist.txt:md5,023b1c6aeaf8fa5ededd6b711a5cd012",
             "HG002_ONT_A.mosdepth.summary.txt:md5,c3b664b0983213f73edf3c0d5a0b04a2",
-            "HG002_ONT_A.vcf.gz:md5,58061e208274d75853c159f4626190d5",
-            "HG002_ONT_A.vcf.gz.tbi:md5,4f03375bf2b6cff5f746936a71676add",
+            "7d27e8af63075fc17b4e6935e6397e9f",
+            "HG002_ONT_A.vcf.gz.tbi:md5,0abf55893512d2546a3f3231bb990f5d",
             "HG002_ONT_A_modkit_pileup.bed.gz:md5,e04d51deb9019e67e7ddd7f1bd82a580",
             "HG002_ONT_A_modkit_pileup.bed.gz.tbi:md5,1e198df01c63afea13ef9d04e2d03684",
             "7b8dc04d36dc2290fd031da73e8c8553",
@@ -177,8 +177,8 @@
             "HG002_ONT_B.mosdepth.global.dist.txt:md5,e551c7a9d1a26cecc99d15ac93a4a924",
             "HG002_ONT_B.mosdepth.region.dist.txt:md5,11154f617f447f4c59dc192d9af4249f",
             "HG002_ONT_B.mosdepth.summary.txt:md5,bcb06b29c22cb6ad200f283e72c29653",
-            "HG002_ONT_B.vcf.gz:md5,d7a9976c874dae7b62ec3498c0986747",
-            "HG002_ONT_B.vcf.gz.tbi:md5,9dc5e9553e5937ea7b34b973a64076ff",
+            "ab11a22397e05e4b7f7c5c809e9407bf",
+            "HG002_ONT_B.vcf.gz.tbi:md5,418164cae69148cd90545a56728340c5",
             "HG002_ONT_B_modkit_pileup.bed.gz:md5,95a96ceddc795c9c5c4a8d9e6f9d3b5b",
             "HG002_ONT_B_modkit_pileup.bed.gz.tbi:md5,8276c6feeac0be16274198831c75023d",
             "7b8dc04d36dc2290fd031da73e8c8553",
@@ -196,6 +196,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-30T16:44:18.189450874"
+        "timestamp": "2024-10-01T10:17:40.930172057"
     }
 }
