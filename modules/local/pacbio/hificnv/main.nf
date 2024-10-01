@@ -30,6 +30,7 @@ process HIFICNV {
     def exclude = exclude_bed ? "--exclude ${exclude_bed}" : ""
     def maf = maf_vcf ? "--maf ${maf_vcf}" : ""
 
+    if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
     hificnv \\
         $args \\
@@ -38,8 +39,13 @@ process HIFICNV {
         $exclude \\
         $maf \\
         --ref ${fasta} \\
-        --threads ${task.cpus} \\
-        --output-prefix ${prefix}
+        --threads ${task.cpus}
+
+    mv hificnv.*.vcf.gz ${prefix}.vcf.gz
+    mv hificnv.*.depth.bw ${prefix}.depth.bw
+    mv hificnv.*.maf.bw ${prefix}.maf.bw
+    mv hificnv.*.copynum.bedgraph ${prefix}.copynum.bedgraph
+    mv *.log ${prefix}.log
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -50,9 +56,11 @@ process HIFICNV {
     stub:
     prefix      = task.ext.prefix ?: "${meta.id}"
 
+    if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
     touch ${prefix}.vcf.gz
     touch ${prefix}.depth.bw
+    touch ${prefix}.maf.bw
     touch ${prefix}.bedgraph
     touch ${prefix}.log
 
