@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#397](https://github.com/genomic-medicine-sweden/nallo/pull/397) - Changed `pipelines_testdata_base_path` to pin a specific commit
 - [#402](https://github.com/genomic-medicine-sweden/nallo/pull/402) - Updated broken test profile link added in [#397](https://github.com/genomic-medicine-sweden/nallo/pull/397)
 - [#404](https://github.com/genomic-medicine-sweden/nallo/pull/404) - Changed to only run nf-tests where files have changes compared to the base branch
+- [#407](https://github.com/genomic-medicine-sweden/nallo/pull/407) - Changed echtvar example file in docs
 
 ### `Removed`
 
