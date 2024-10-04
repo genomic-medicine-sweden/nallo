@@ -206,12 +206,10 @@ This subworkflow relies on the mapping and short variant calling, and requires t
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `vep_cache`                | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
 | `vep_plugins` <sup>1</sup> | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
-| `snp_db` <sup>2</sup>      |  A csv file with annotation databases from ([`echtvar encode`](https://github.com/brentp/echtvar)) (e.g. [gnomad.v3.1.2.echtvar.popmax.v2.zip](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                                         |
+| `snp_db` <sup>2</sup>      |  A csv file with annotation databases from ([`echtvar encode`](https://github.com/brentp/echtvar))                                                                                                                                                                                                                                                                            |
 | `variant_consequences_snv` | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugins`
-
-- If running without `--skip_snv_annotation`, `--variant_consequences_snv` is also required (File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://grch37.ensembl.org/info/genome/variation/prediction/predicted_data.html)).
 
 ```
 vep_files
@@ -229,6 +227,11 @@ sample,file
 gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
+
+> [!WARNING]
+> Generating an echtvar database from a VCF-file is a fairly straightforward process described on the [echtvar GitHub](https://github.com/brentp/echtvar). However, the pre-made `gnomad.v3.1.2.echtvar.v2.zip` provided by them results in malformed INFO lines that are not compatible with genmod (run in the subsequent ranking subworkflow).
+>
+> For a very small test database that only overlaps the coordinates of the pipeline test data set, you could use [`cadd.v1.6.hg38.test_data.zip`](https://github.com/genomic-medicine-sweden/test-datasets/raw/refs/heads/nallo/reference/cadd.v1.6.hg38.test_data.zip) to get started.
 
 > [!NOTE]
 > Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--snp_db`.
