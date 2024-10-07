@@ -143,12 +143,12 @@
                     },
                     "longphase/haplotag": {
                         "branch": "master",
-                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "git_sha": "22fc6d90be8eca2cf6afe5d10b3c5cffcdbcb19c",
                         "installed_by": ["modules"]
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
+                        "git_sha": "22fc6d90be8eca2cf6afe5d10b3c5cffcdbcb19c",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
