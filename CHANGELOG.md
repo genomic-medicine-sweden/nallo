@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Revert [#404](https://github.com/genomic-medicine-sweden/nallo/pull/404)
 - [#404](https://github.com/genomic-medicine-sweden/nallo/pull/404) - Changed to only run nf-tests where files have changes compared to the base branch
 - [#407](https://github.com/genomic-medicine-sweden/nallo/pull/407) - Changed echtvar example file in docs
+- [#406](https://github.com/genomic-medicine-sweden/nallo/issues/406) - Updated genmod to version 3.8.3
 
 ### `Removed`
 
@@ -80,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | fqcrs      | 0.1.0       |
 | severus    |             | 1.1         |
 | longphase  |             | 1.7.3       |
+| genmod     | 3.8.2       | 3.8.3       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
