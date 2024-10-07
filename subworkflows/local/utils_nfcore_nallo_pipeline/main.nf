@@ -365,6 +365,12 @@ def toolCitationText() {
                 "GLnexus (Yun et al. 2021)",
             ]
         }
+        if (!params.skip_sv_annotation) {
+            citation_text = citation_text + [
+                "VEP (McLaren et al. 2016)",
+                "SVDB (Eisfeldt et al. 2017)",
+            ]
+        }
         if (!params.skip_snv_annotation) {
             citation_text = citation_text + [
                 "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)",

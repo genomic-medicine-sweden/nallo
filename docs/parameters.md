@@ -17,6 +17,7 @@ Allows skipping certain parts of the pipeline
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_phasing_wf` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
+| `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_cnv_calling` | Skip CNV calling | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
@@ -109,3 +110,31 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
+
+## File inputs
+
+The different files that are required. Some are only required by certain workflows, see the usage documentation.
+
+| Parameter | Description | Type | Default | Required | Hidden |
+|-----------|-----------|-----------|-----------|-----------|-----------|
+| `cadd_prescored` | Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
+| `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
+| `par_regions` | Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant | `string` |  |  |  |
+| `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
+| `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
+| `snp_db` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
+| `svdb_dbs` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
+| `variant_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
+| `variant_consequences_snv` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
+| `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
+| `bed` | A BED file with regions of interest, used to limit short variant calling. | `string` |  |  |  |
+| `hificnv_xy` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
+| `hificnv_xx` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
+| `hificnv_exclude` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
+| `reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
+| `score_config_snv` | A SNV rank model config file for genmod. | `string` |  |  |  |
+| `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
+| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. <details><summary>Help</summary><small>By default, when an unrecognised parameter is found, it returns a warning.</small></details>| `boolean` |  |  | True |
+| `validationLenientMode` | Validation of parameters in lenient more. <details><summary>Help</summary><small>Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode).</small></details>| `boolean` |  |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/ |  | True |
+>>>>>>> d3a25c2 (docs and split)

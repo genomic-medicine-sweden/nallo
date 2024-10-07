@@ -236,9 +236,17 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 > [!NOTE]
 > Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--snp_db`.
 
+### SV annotation (`--skip_sv_annotation`)
+
+This subworkflow relies on the mapping subworkflow, and requires the following additional files:
+
+| Parameter  | Description                                                                                                                                                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `svdb_dbs` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details> |
+
 ### Rank variants (`--skip_rank_variants`)
 
-This subworkflow relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
+This subworkflow ranks SNVs and INDELs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
 
 | Parameter            | Description                                                                                                                                                                                                                                                 |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
