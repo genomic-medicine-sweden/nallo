@@ -1,5 +1,5 @@
+include { ADD_FOUND_IN_TAG             } from '../../modules/local/add_found_in_tag'
 include { HIFICNV                      } from '../../modules/local/pacbio/hificnv'
-include { TABIX_TABIX as TABIX_HIFICNV } from '../../modules/nf-core/tabix/tabix/'
 
 workflow CNV {
 
@@ -42,10 +42,16 @@ workflow CNV {
     HIFICNV(ch_hificnv_in, ch_fasta, ch_exclude_bed)
     ch_versions = ch_versions.mix(HIFICNV.out.versions)
 
-    TABIX_HIFICNV(HIFICNV.out.vcf)
-    ch_versions = ch_versions.mix(TABIX_HIFICNV.out.versions)
+    // Add FOUND_IN=hificnv to VCF
+    ADD_FOUND_IN_TAG (
+        HIFICNV.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        "hificnv"
+    )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     emit:
-    versions = ch_versions                  // channel: [ versions.yml ]
+    vcf = ADD_FOUND_IN_TAG.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = ADD_FOUND_IN_TAG.out.tbi // channel: [ val(meta), path(tbi) ]
+    versions = ch_versions         // channel: [ versions.yml ]
 }
 
