@@ -2,8 +2,10 @@ process WHATSHAP_PHASE {
     tag "$meta.id"
     label 'process_low'
 
-    conda "bioconda::whatshap=2.2 bioconda::tabix=1.11"
-    container "docker.io/fellen31/whatshap-tabix:2.2"
+    conda "bioconda::whatshap=2.3"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/whatshap:2.3--py38h2494328_0' :
+        'quay.io/biocontainers/whatshap:2.3--py38h2494328_0' }"
 
     input:
     tuple val(meta), path(vcf), path(bam), path(bai)
