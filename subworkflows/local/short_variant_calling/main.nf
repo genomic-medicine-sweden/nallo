@@ -1,6 +1,7 @@
 //
 // Workflow to call and merge SNVs
 //
+include { ADD_FOUND_IN_TAG                            } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
@@ -84,12 +85,18 @@ workflow SHORT_VARIANT_CALLING {
     BCFTOOLS_FILLTAGS ( GLNEXUS.out.bcf )
     ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
 
-    BCFTOOLS_FILLTAGS.out.vcf
-        .map { meta, vcf -> [ meta, vcf, [] ] }
-        .set { bcftools_norm_in }
+    // Annotate with FOUND_IN tag
+    ADD_FOUND_IN_TAG (
+        BCFTOOLS_FILLTAGS.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        "deepvariant"
+    )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Decompose and normalize variants
-    BCFTOOLS_NORM_MULTISAMPLE ( bcftools_norm_in, ch_fasta )
+    BCFTOOLS_NORM_MULTISAMPLE (
+        ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        ch_fasta
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
     emit:
