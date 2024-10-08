@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#407](https://github.com/genomic-medicine-sweden/nallo/pull/407) - Changed echtvar example file in docs
 - [#406](https://github.com/genomic-medicine-sweden/nallo/issues/406) - Updated genmod to version 3.8.3
 - [#411](https://github.com/genomic-medicine-sweden/nallo/pull/411) - Updated longphase module to most recent version. ([#409](https://github.com/genomic-medicine-sweden/nallo/issues/409)).
+- [#416](https://github.com/genomic-medicine-sweden/nallo/pull/416) - Updated WhatsHap to 2.3. Changed modules to use biocontainers instead of custom containers. ([#296](https://github.com/genomic-medicine-sweden/nallo/issues/296))
 
 ### `Removed`
 
@@ -83,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | severus    |             | 1.1         |
 | longphase  |             | 1.7.3       |
 | genmod     | 3.8.2       | 3.8.3       |
+| WhatsHap   | 2.2         | 2.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
