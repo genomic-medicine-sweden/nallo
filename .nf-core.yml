@@ -1,30 +1,30 @@
 bump_version: null
 lint:
   files_exist:
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-nallo_logo_light.png
-  - docs/README.md
-  - docs/images/nf-core-nallo_logo_light.png
-  - docs/images/nf-core-nallo_logo_dark.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/awstest.yml
-  - .github/workflows/awsfulltest.yml
-  - conf/modules.config
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+    - conf/modules.config
   files_unchanged:
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-nallo_logo_light.png
-  - docs/README.md
-  - docs/images/nf-core-nallo_logo_light.png
-  - docs/images/nf-core-nallo_logo_dark.png
-  - .github/ISSUE_TEMPLATE/bug_report.yml
-  - .github/CONTRIBUTING.md
-  - .prettierignore
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/CONTRIBUTING.md
+    - .prettierignore
   modules_config: false
   multiqc_config:
-  - report_comment
+    - report_comment
   nextflow_config:
-  - manifest.name
-  - manifest.homePage
+    - manifest.name
+    - manifest.homePage
 nf_core_version: 3.0.0
 org_path: null
 repository_type: pipeline

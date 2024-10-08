@@ -117,4 +117,3 @@ jobs:
           else
             echo "The pipeline can be downloaded successfully!"
           fi
-          
