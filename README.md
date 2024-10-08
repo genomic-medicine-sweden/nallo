@@ -46,6 +46,7 @@
 
 - Annotate SNVs and INDELs with databases of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
 - Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
+- Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
 ##### Ranking
 
