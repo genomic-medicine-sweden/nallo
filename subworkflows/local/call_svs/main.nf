@@ -14,7 +14,7 @@ workflow CALL_SVS {
     ch_fai            // channel [mandatory]: [ val(meta), path(fai) ]
     sv_caller         //     val [mandatory]: Which caller to use
     ch_tandem_repeats // channel  [optional]: [ val(meta), path(bed) ]
-    ch_bed
+    ch_bed            // channel  [optional]: [ val(meta), path(bed) ]
 
     main:
     ch_versions     = Channel.empty()
