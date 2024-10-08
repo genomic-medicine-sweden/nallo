@@ -2,7 +2,6 @@ include { TRGT                                   } from '../../../modules/local/
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_MERGE } from '../../../modules/nf-core/bcftools/index/main'
 include { BCFTOOLS_MERGE                         } from '../../../modules/nf-core/bcftools/merge/main'
 
 workflow CALL_REPEAT_EXPANSIONS {
@@ -39,14 +38,12 @@ workflow CALL_REPEAT_EXPANSIONS {
 
     BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [[],[]] )
 
-    BCFTOOLS_INDEX_MERGE ( BCFTOOLS_MERGE.out.vcf )
 
     ch_versions = ch_versions.mix(TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_SORT_TRGT.out.versions)
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX_TRGT.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_TRGT.out.versions)
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
-    ch_versions = ch_versions.mix(BCFTOOLS_INDEX_MERGE.out.versions)
 
     emit:
     vcf      = BCFTOOLS_SORT_TRGT.out.vcf  // channel: [ val(meta), path(vcf) ]
