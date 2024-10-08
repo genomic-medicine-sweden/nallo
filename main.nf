@@ -7,8 +7,6 @@
 ----------------------------------------------------------------------------------------
 */
 
-nextflow.enable.dsl = 2
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -18,7 +16,6 @@ nextflow.enable.dsl = 2
 include { NALLO  } from './workflows/nallo'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
@@ -54,10 +51,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     NALLO (
         samplesheet
     )
-
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
-
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,27 +63,24 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 workflow {
 
     main:
-
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION (
         params.version,
-        params.help,
         params.validate_params,
         params.monochrome_logs,
         args,
         params.outdir,
         params.input
     )
-
+    
     //
     // WORKFLOW: Run main workflow
     //
     GENOMICMEDICINESWEDEN_NALLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
-
     //
     // SUBWORKFLOW: Run completion tasks
     //
