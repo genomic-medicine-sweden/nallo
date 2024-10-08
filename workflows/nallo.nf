@@ -306,7 +306,8 @@ workflow NALLO {
             fasta,
             fai,
             params.sv_caller,
-            ch_tandem_repeats
+            ch_tandem_repeats,
+            ch_input_bed
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
