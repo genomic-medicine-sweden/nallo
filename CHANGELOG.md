@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added longphase as the default phaser
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added single-sample tbi output to the short variant calling subworkflow
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Added a new `--minimap2_read_mapping_preset` parameter
-- [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Added `FOUND_IN=hificnv` tags to CNV output
+- [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Added `FOUND_IN=hificnv` tags to CNV calling output
+- [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Added `FOUND_IN=deepvariant` tags to SNV calling output
 
 ### `Changed`
 
@@ -43,8 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Revert [#404](https://github.com/genomic-medicine-sweden/nallo/pull/404)
 - [#404](https://github.com/genomic-medicine-sweden/nallo/pull/404) - Changed to only run nf-tests where files have changes compared to the base branch
 - [#407](https://github.com/genomic-medicine-sweden/nallo/pull/407) - Changed echtvar example file in docs
-- [#406](https://github.com/genomic-medicine-sweden/nallo/issues/406) - Updated genmod to version 3.8.3
+- [#410](https://github.com/genomic-medicine-sweden/nallo/pull/410) - Updated genmod to version 3.8.3
 - [#411](https://github.com/genomic-medicine-sweden/nallo/pull/411) - Updated longphase module to most recent version. ([#409](https://github.com/genomic-medicine-sweden/nallo/issues/409)).
+- [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Updated SNV annotation tests to use correct configuration, and snapshot the md5sum of the variants
 
 ### `Removed`
 
