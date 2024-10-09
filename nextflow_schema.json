@@ -518,25 +518,22 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/workflow_skip_options"
+            "$ref": "#/$defs/workflow_skip_options"
         },
         {
-            "$ref": "#/definitions/input_output_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/reference_genome_options"
+            "$ref": "#/$defs/reference_genome_options"
         },
         {
-            "$ref": "#/definitions/institutional_config_options"
+            "$ref": "#/$defs/institutional_config_options"
         },
         {
-            "$ref": "#/definitions/max_job_request_options"
+            "$ref": "#/$defs/generic_options"
         },
         {
-            "$ref": "#/definitions/generic_options"
-        },
-        {
-            "$ref": "#/definitions/workflow_options"
+            "$ref": "#/$defs/workflow_options"
         },
         {
             "$ref": "#/$defs/input_output_options"

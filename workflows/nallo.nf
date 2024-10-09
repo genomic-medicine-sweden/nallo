@@ -45,7 +45,7 @@ include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcf
 include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
 include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
-include { paramsSummaryMap                        } from 'plugin/nf-validation'
+include { paramsSummaryMap                        } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                  } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                  } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
@@ -84,7 +84,7 @@ workflow NALLO {
                                                                     : ''
     ch_variant_catalog          = params.variant_catalog            ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : ''
-    ch_databases                = params.snp_db                     ? Channel.fromList(samplesheetToList('snp_db', 'assets/schema_snpdb.json')).map{ it[1] }.collect()
+    ch_databases                = params.snp_db                     ? Channel.fromList(samplesheetToList(params.snp_db, 'assets/schema_snpdb.json')).map{ it[1] }.collect()
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
                                                                     : Channel.value([])

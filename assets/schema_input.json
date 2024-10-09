@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_input.json",
     "title": "genomic-medicine-sweden/nallo pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
@@ -26,14 +26,30 @@
                 "meta": ["family_id"]
             },
             "paternal_id": {
-                "type": "string",
-                "pattern": "^\\S+$",
+                "oneOf": [
+                    {
+                      "type": "integer",
+                      "enum": [0]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(\\S+)$"
+                    }
+                  ],
                 "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.",
                 "meta": ["paternal_id"]
             },
             "maternal_id": {
-                "type": "string",
-                "pattern": "^\\S+$",
+                "oneOf": [
+                    {
+                      "type": "integer",
+                      "enum": [0]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(\\S+)$"
+                    }
+                  ],
                 "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.",
                 "meta": ["maternal_id"]
             },
