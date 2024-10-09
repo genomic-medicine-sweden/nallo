@@ -28,28 +28,28 @@
             "paternal_id": {
                 "oneOf": [
                     {
-                      "type": "integer",
-                      "enum": [0]
+                        "type": "integer",
+                        "enum": [0]
                     },
                     {
-                      "type": "string",
-                      "pattern": "^(\\S+)$"
+                        "type": "string",
+                        "pattern": "^(\\S+)$"
                     }
-                  ],
+                ],
                 "errorMessage": "Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.",
                 "meta": ["paternal_id"]
             },
             "maternal_id": {
                 "oneOf": [
                     {
-                      "type": "integer",
-                      "enum": [0]
+                        "type": "integer",
+                        "enum": [0]
                     },
                     {
-                      "type": "string",
-                      "pattern": "^(\\S+)$"
+                        "type": "string",
+                        "pattern": "^(\\S+)$"
                     }
-                  ],
+                ],
                 "errorMessage": "Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.",
                 "meta": ["maternal_id"]
             },
