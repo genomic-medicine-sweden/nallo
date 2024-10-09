@@ -6,9 +6,6 @@
     Github : https://github.com/genomic-medicine-sweden/nallo
 ----------------------------------------------------------------------------------------
 */
-
-nextflow.enable.dsl = 2
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -18,7 +15,6 @@ nextflow.enable.dsl = 2
 include { NALLO  } from './workflows/nallo'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
@@ -36,6 +32,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     samplesheet // channel: samplesheet read in from --input
 
     main:
+
     //
     // WORKFLOW: Run pipeline
     //
@@ -56,13 +53,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 workflow {
 
     main:
-
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION (
         params.version,
-        params.help,
         params.validate_params,
         params.monochrome_logs,
         args,
