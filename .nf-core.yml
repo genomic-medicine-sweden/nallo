@@ -25,7 +25,7 @@ lint:
   nextflow_config:
   - manifest.name
   - manifest.homePage
-nf_core_version: 3.0.0
+nf_core_version: 3.0.1
 org_path: null
 repository_type: pipeline
 template:
