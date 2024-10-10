@@ -7,6 +7,7 @@ on:
   pull_request:
   release:
     types: [published]
+  workflow_dispatch:
 
 env:
   NXF_ANSI_LOG: false
@@ -27,8 +28,8 @@ jobs:
       fail-fast: false
       matrix:
         NXF_VER:
+          - "24.04.2"
           - "latest-everything"
-          - "23.04.0"
         tags:
           - "samplesheet"
           - "samplesheet_multisample_bam"
@@ -44,7 +45,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Install Nextflow
-        uses: nf-core/setup-nextflow@b9f764e8ba5c76b712ace14ecbfcef0e40ae2dd8 # v1
+        uses: nf-core/setup-nextflow@v2
         with:
           version: "${{ matrix.NXF_VER }}"
 
