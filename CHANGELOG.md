@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#416](https://github.com/genomic-medicine-sweden/nallo/pull/416) - Updated WhatsHap to 2.3 and added the `--use-supplementary` flag to use supplementary reads for phasing by default. Changed modules to use biocontainers instead of custom containers. ([#296](https://github.com/genomic-medicine-sweden/nallo/issues/296))
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Updated SNV annotation tests to use correct configuration, and snapshot the md5sum, and summary of the variants
 - [#422](https://github.com/genomic-medicine-sweden/nallo/pull/422) - Updated nf-core/tools template to v3.0.1
+- [#423](https://github.com/genomic-medicine-sweden/nallo/pull/423) - Updated metro map
 
 ### `Removed`
 
