@@ -375,7 +375,7 @@
     "1 sample - [bam, bai], fasta, fai, [], bed - severus": {
         "content": [
             "1294e2ab468789a0bd56e8bcaf578a4",
-            "d41d8cd98f00b204e9800998ecf8427e",
+            "fd275f8c8db24a1c5b7de7c0c3970830",
             [
                 "versions.yml:md5,110bc7290a8aa06aea1c1fd2bad26324",
                 "versions.yml:md5,572bfd042014333af194207291d12b95",
@@ -387,9 +387,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "23.04.3"
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T16:05:14.78320496"
+        "timestamp": "2024-10-11T08:18:00.661332838"
     },
     "2 samples - [bam, bai], fasta, fai, [], [] - sniffles": {
         "content": [
@@ -654,7 +654,7 @@
     "1 sample - [bam, bai], fasta, fai, [], bed - sniffles": {
         "content": [
             "7cd0730159250c8945e2007da414651e",
-            "d41d8cd98f00b204e9800998ecf8427e",
+            "5e618571d8fb55add84e7857a204114c",
             [
                 "versions.yml:md5,110bc7290a8aa06aea1c1fd2bad26324",
                 "versions.yml:md5,572bfd042014333af194207291d12b95",
@@ -666,9 +666,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "23.04.3"
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T16:01:30.574971385"
+        "timestamp": "2024-10-11T08:14:03.160440845"
     },
     "2 samples - [bam, bai], fasta, fai, [], [] - severus -stub": {
         "content": [

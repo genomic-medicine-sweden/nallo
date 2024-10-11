@@ -158,10 +158,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = "sniffles"
                 input[4] = [[],[]]
-                input[5] = [
-                    [id: 'test'],
-                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
-                ]
+            input[5] = Channel.of('chr20\t2650000\t2660000')
+                .collectFile(name: 'chr20.bed', newLine: true)
+                .map{ file -> [ [ id:'chr20'], file ] }
                 """
             }
         }
@@ -266,10 +265,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = "severus"
                 input[4] = [[],[]]
-                input[5] = [
-                    [id: 'test'],
-                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
-                ]
+                input[5] = Channel.of('chr20\t2650000\t2660000')
+                    .collectFile(name: 'chr20.bed', newLine: true)
+                    .map{ file -> [ [ id:'chr20'], file ] }
                 """
             }
         }
@@ -410,10 +408,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = "sniffles"
                 input[4] = [[],[]]
-                input[5] = [
-                    [id: 'test'],
-                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
-                ]
+                input[5] = Channel.of('chr20\t2650000\t2660000')
+                    .collectFile(name: 'chr20.bed', newLine: true)
+                    .map{ file -> [ [ id:'chr20'], file ] }
                 """
             }
         }
@@ -516,7 +513,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = "severus"
                 input[4] = [[],[]]
-                input[5] = [[],[]]
+                input[5] = Channel.of('chr20\t2650000\t2660000')
+                    .collectFile(name: 'chr20.bed', newLine: true)
+                    .map{ file -> [ [ id:'chr20'], file ] }
                 """
             }
         }
