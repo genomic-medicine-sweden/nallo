@@ -36,7 +36,8 @@ workflow ANNOTATE_SVS {
         ch_svdb_in.out_frqs.toList(),
         ch_svdb_in.vcf_dbs.toList(),
         []
-    )
+        )
+        ch_versions = ch_versions.mix(SVDB_QUERY.out.versions)
 
     ENSEMBLVEP_SV (
         SVDB_QUERY.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
