@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Added a new `--minimap2_read_mapping_preset` parameter
 - [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Added `FOUND_IN=hificnv` tags to CNV calling output
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Added `FOUND_IN=deepvariant` tags to SNV calling output
+- [#419](https://github.com/genomic-medicine-sweden/nallo/pull/419) - Added support for SV filtering using input BED file ([#348](https://github.com/genomic-medicine-sweden/nallo/issues/348))
 
 ### `Changed`
 

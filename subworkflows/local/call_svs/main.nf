@@ -14,6 +14,7 @@ workflow CALL_SVS {
     ch_fai            // channel [mandatory]: [ val(meta), path(fai) ]
     sv_caller         //     val [mandatory]: Which caller to use
     ch_tandem_repeats // channel  [optional]: [ val(meta), path(bed) ]
+    ch_bed            // channel  [optional]: [ val(meta), path(bed) ]
 
     main:
     ch_versions     = Channel.empty()
@@ -82,7 +83,7 @@ workflow CALL_SVS {
         .set { ch_bcftools_merge_in }
 
     // Merge the files with new sample names
-    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, [[],[]] )
+    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, ch_bed )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
