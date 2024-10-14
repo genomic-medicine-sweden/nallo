@@ -14,6 +14,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
+                parallel_alignments          = 2
             }
         }
 
@@ -124,6 +125,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam.csv'
                 outdir                       = "$outputDir"
+                parallel_alignments          = 2
                 parallel_snv                 = 2
                 preset                       = "revio"
                 phaser                       = "hiphase"
