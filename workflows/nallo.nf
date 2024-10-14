@@ -7,6 +7,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 */
 
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
@@ -32,23 +33,24 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 */
 
 // local
-include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED    } from '../modules/local/create_pedigree_file/main'
-include { ECHTVAR_ENCODE                          } from '../modules/local/echtvar/encode/main'
-include { SAMTOOLS_MERGE                          } from '../modules/nf-core/samtools/merge/main'
+include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
+include { ECHTVAR_ENCODE                                    } from '../modules/local/echtvar/encode/main'
+include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_SORT                           } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
-include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
-include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
-include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
-include { paramsSummaryMap                        } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                  } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                  } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SVS  } from '../modules/nf-core/bcftools/pluginsplit/main'
+include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
+include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
+include { paramsSummaryMap                                  } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,6 +105,8 @@ workflow NALLO {
     ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).collect()
                                                                     : Channel.value([])
     ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
+                                                                    : ''
+    ch_svdb_dbs                 = params.svdb_dbs                   ? Channel.fromPath(params.svdb_dbs).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
 
     // Check parameter that doesn't conform to schema validation here
@@ -311,6 +315,37 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
+        CALL_SVS.out.ch_multisample_vcf
+            .join( CALL_SVS.out.ch_multisample_tbi )
+            .set { ch_split_svs_in }
+        //
+        // Annotate structural variants
+        //
+        if(!params.skip_sv_annotation) {
+            ANNOTATE_SVS (
+                CALL_SVS.out.ch_multisample_vcf,
+                fasta,
+                ch_svdb_dbs,
+                ch_vep_cache,
+                params.vep_cache_version,
+                ch_vep_extra_files
+            )
+
+            ANNOTATE_SVS.out.vcf
+                .join( ANNOTATE_SVS.out.tbi )
+                .set { ch_split_svs_in }
+        }
+
+        // Split the multisample SV VCF to also publish an (annotated) VCF per sample
+        BCFTOOLS_PLUGINSPLIT_SVS (
+            ch_split_svs_in,
+            [],
+            [],
+            [],
+            []
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SVS.out.versions)
+
         //
         // Call (and annotate and rank) SNVs
         //
@@ -423,10 +458,10 @@ workflow NALLO {
             ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
 
             // Split multisample VCF to also publish a VCF per sample
-            BCFTOOLS_PLUGINSPLIT ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
-            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+            BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
+            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
 
-            BCFTOOLS_PLUGINSPLIT.out.vcf
+            BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
                 .transpose()
                 .map { meta, vcf -> [ meta, vcf, [] ] }
                 .set { ch_bcftools_stats_snv_in }

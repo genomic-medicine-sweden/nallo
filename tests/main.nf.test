@@ -11,7 +11,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
             }
@@ -78,8 +78,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio
                 { assert new File("$outputDir/aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap1.bam.bai").exists() },
@@ -110,8 +110,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio/HG002_Revio_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio/HG002_Revio_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_severus.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_severus.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio/HG002_Revio_svs_annotated.vcf.gz.tbi").exists() }
             )
         }
     }
@@ -121,7 +121,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam.csv'
                 outdir                       = "$outputDir"
                 parallel_snv                 = 2
@@ -226,8 +226,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz.tbi").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz").exists() },
                 { assert new File("$outputDir/repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_A
@@ -261,8 +261,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_severus.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs_annotated.vcf.gz.tbi").exists() },
                 // Assert exists HG002_Revio_B
                 { assert new File("$outputDir/aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam.bai").exists() },
@@ -294,8 +294,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/repeat_calling/trgt/single_sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam.bai").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_severus.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_severus.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs_annotated.vcf.gz.tbi").exists() }
             )
         }
     }
@@ -305,7 +305,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                       = "$outputDir"
                 preset                       = 'ONT_R10'
@@ -374,8 +374,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/multiqc/multiqc_data/multiqc_software_versions.txt").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/multi_sample/test/test_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/multi_sample/test/test_svs.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/multi_sample/test/test_svs_annotated.vcf.gz.tbi").exists() },
                 // Assert exists HG002_ONT_A
                 { assert new File("$outputDir/aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_A/HG002_ONT_A.log").exists() },
@@ -400,8 +400,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_A/HG002_ONT_A_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_severus.vcf.gz.tbi").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_A/HG002_ONT_A_svs_annotated.vcf.gz.tbi").exists() },
                 // Assert exists HG002_ONT_B
                 { assert new File("$outputDir/aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai").exists() },
                 { assert new File("$outputDir/cnv_calling/hificnv/HG002_ONT_B/HG002_ONT_B.log").exists() },
@@ -426,8 +426,8 @@ nextflow_pipeline {
                 { assert new File("$outputDir/qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.zip").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz").exists() },
                 { assert new File("$outputDir/snvs/single_sample/HG002_ONT_B/HG002_ONT_B_snv_annotated_ranked.vcf.gz.tbi").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_severus.vcf.gz").exists() },
-                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_severus.vcf.gz.tbi").exists() }
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_svs_annotated.vcf.gz").exists() },
+                { assert new File("$outputDir/svs/single_sample/HG002_ONT_B/HG002_ONT_B_svs_annotated.vcf.gz.tbi").exists() }
             )
         }
     }

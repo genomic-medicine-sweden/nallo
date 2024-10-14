@@ -17,6 +17,7 @@ Allows skipping certain parts of the pipeline
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_phasing_wf` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
+| `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_cnv_calling` | Skip CNV calling | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
@@ -37,6 +38,7 @@ Define where the pipeline should find input data and save output data.
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
 | `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `snp_db` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
+| `svdb_dbs` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `variant_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
 | `variant_consequences_snv` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
@@ -47,7 +49,7 @@ Define where the pipeline should find input data and save output data.
 | `reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
 | `score_config_snv` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/ |  | True |
 
 ## Reference genome options
 

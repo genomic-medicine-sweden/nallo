@@ -236,9 +236,26 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 > [!NOTE]
 > Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--snp_db`.
 
+### SV annotation (`--skip_sv_annotation`)
+
+This subworkflow relies on the mapping subworkflow, and requires the following additional files:
+
+| Parameter               | Description                                                                                                                                                                                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `svdb_dbs` <sup>1</sup> | Csv file with databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details> |
+
+<sup>1</sup> Example file for input with `--svdb_dbs`:
+
+```
+filename,in_freq_info_key,in_allele_count_info_key,out_freq_info_key,out_allele_count_info_key
+https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz,AF,AC,colorsdb_af,colorsdb_ac
+```
+
+These databases could for example come from [CoLoRSdb](https://zenodo.org/records/13145123).
+
 ### Rank variants (`--skip_rank_variants`)
 
-This subworkflow relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
+This subworkflow ranks SNVs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
 
 | Parameter            | Description                                                                                                                                                                                                                                                 |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

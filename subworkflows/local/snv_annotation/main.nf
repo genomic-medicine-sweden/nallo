@@ -1,8 +1,8 @@
 include { ANNOTATE_CADD                               } from '../annotate_cadd/main'
 include { ECHTVAR_ANNO                                } from '../../../modules/local/echtvar/anno/main'
 include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO } from '../../../modules/local/bcftools/filltags/main'
-include { ENSEMBLVEP_VEP                              } from '../../../modules/nf-core/ensemblvep/vep/main'
-include { TABIX_TABIX as TABIX_VEP                    } from '../../../modules/nf-core/tabix/tabix/main'
+include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV            } from '../../../modules/nf-core/ensemblvep/vep/main'
+include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV         } from '../../../modules/nf-core/tabix/tabix/main'
 
 workflow SNV_ANNOTATION {
 
@@ -53,7 +53,7 @@ workflow SNV_ANNOTATION {
 
     }
 
-    ENSEMBLVEP_VEP (
+    ENSEMBLVEP_SNV (
         ch_vep_in,
         "GRCh38",
         "homo_sapiens",
@@ -62,13 +62,13 @@ workflow SNV_ANNOTATION {
         ch_fasta,
         ch_vep_extra_files
     )
-    ch_versions = ch_versions.mix(ENSEMBLVEP_VEP.out.versions)
+    ch_versions = ch_versions.mix(ENSEMBLVEP_SNV.out.versions)
 
-    TABIX_VEP ( ENSEMBLVEP_VEP.out.vcf )
-    ch_versions = ch_versions.mix(TABIX_VEP.out.versions)
+    TABIX_ENSEMBLVEP_SNV ( ENSEMBLVEP_SNV.out.vcf )
+    ch_versions = ch_versions.mix(TABIX_ENSEMBLVEP_SNV.out.versions)
 
     emit:
-    vcf      = ENSEMBLVEP_VEP.out.vcf
-    tbi      = TABIX_VEP.out.tbi
+    vcf      = ENSEMBLVEP_SNV.out.vcf
+    tbi      = TABIX_ENSEMBLVEP_SNV.out.tbi
     versions = ch_versions
 }

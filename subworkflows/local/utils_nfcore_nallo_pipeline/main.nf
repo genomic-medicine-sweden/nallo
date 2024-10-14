@@ -36,6 +36,7 @@ def workflowSkips = [
     mapping          : "skip_mapping_wf",
     snv_calling      : "skip_short_variant_calling",
     snv_annotation   : "skip_snv_annotation",
+    sv_annotation    : "skip_sv_annotation",
     call_paralogs    : "skip_call_paralogs",
     cnv_calling      : "skip_cnv_calling",
     phasing          : "skip_phasing_wf",
@@ -54,6 +55,7 @@ def workflowDependencies = [
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
     qc               : ["mapping"],
+    sv_annotation    : ["mapping"],
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
@@ -71,6 +73,7 @@ def fileDependencies = [
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "variant_consequences_snv"],
+    sv_annotation    : ["svdb_dbs", "vep_cache", "vep_plugin_files"],
     cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
     rank_variants    : ["reduced_penetrance", "score_config_snv"],
     repeat_calling   : ["trgt_repeats"],
@@ -86,6 +89,7 @@ def parameterStatus = [
         skip_repeat_calling       : params.skip_repeat_calling,
         skip_repeat_annotation    : params.skip_repeat_annotation,
         skip_snv_annotation       : params.skip_snv_annotation,
+        skip_sv_annotation        : params.skip_sv_annotation,
         skip_call_paralogs        : params.skip_call_paralogs,
         skip_cnv_calling          : params.skip_cnv_calling,
         skip_mapping_wf           : params.skip_mapping_wf,
@@ -95,6 +99,7 @@ def parameterStatus = [
     files: [
         par_regions             : params.par_regions,
         snp_db                  : params.snp_db,
+        svdb_dbs                : params.svdb_dbs,
         somalier_sites          : params.somalier_sites,
         vep_cache               : params.vep_cache,
         hificnv_xy              : params.hificnv_xy,
@@ -358,6 +363,12 @@ def toolCitationText() {
                 "BCFtools (Danecek et al. 2021)",
                 "DeepVariant (Poplin et al. 2018)",
                 "GLnexus (Yun et al. 2021)",
+            ]
+        }
+        if (!params.skip_sv_annotation) {
+            citation_text = citation_text + [
+                "VEP (McLaren et al. 2016)",
+                "SVDB (Eisfeldt et al. 2017)",
             ]
         }
         if (!params.skip_snv_annotation) {

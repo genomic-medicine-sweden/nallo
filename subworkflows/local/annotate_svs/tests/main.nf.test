@@ -1,0 +1,115 @@
+nextflow_workflow {
+
+    name "Test Workflow ANNOTATE_SVS"
+    script "../"
+    workflow "ANNOTATE_SVS"
+    config "./nextflow.config"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        run("SEVERUS") {
+            script "../../../../modules/nf-core/severus/main"
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                    [],
+                    [],
+                    []
+                ]
+                input[1] = [[],[]]
+                """
+            }
+        }
+
+        run("UNTAR") {
+            script "../../../../modules/nf-core/untar/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ]
+                """
+            }
+        }
+
+    }
+
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugins") {
+
+        when {
+            workflow {
+                """
+                input[0] = SEVERUS.out.all_vcf
+                input[1] = GUNZIP.out.gunzip
+                input[2] = Channel.of([
+                    [ id: 'svdb_dbs' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
+                ])
+                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = Channel.value('110')
+                input[5] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.versions,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    file(workflow.out.tbi.get(0).get(1)).name
+                ).match() }
+            )
+        }
+
+    }
+
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugins -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = SEVERUS.out.all_vcf
+                input[1] = GUNZIP.out.gunzip
+                input[2] = Channel.of([
+                    [ id: 'svdb_dbs' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
+                ])
+                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = Channel.value('110')
+                input[5] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out.versions).match() }
+            )
+        }
+
+    }
+}

@@ -110,6 +110,10 @@
 
   > Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873
 
+- [SVDB](https://github.com/J35P312/SVDB)
+
+  > Eisfeldt et al., 2017.
+
 - [Tabix](https://academic.oup.com/bioinformatics/article/27/5/718/262743)
 
   > Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011;27(5):718-719. doi:10.1093/bioinformatics/btq671

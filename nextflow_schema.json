@@ -64,6 +64,11 @@
                     "description": "Skip short variant annotation",
                     "default": false
                 },
+                "skip_sv_annotation": {
+                    "type": "boolean",
+                    "description": "Skip structural variant annotation",
+                    "default": false
+                },
                 "skip_cnv_calling": {
                     "type": "boolean",
                     "description": "Skip CNV calling",
@@ -162,6 +167,17 @@
                     "description": "A csv file with echtvar databases to annotate SNVs with",
                     "exists": true
                 },
+                "svdb_dbs": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "file-path",
+                    "description": "Databases used for structural variant annotation in vcf format.",
+                    "fa_icon": "fas fa-file-csv",
+                    "help_text": "Path to comma-separated file containing information about the databases used for structural variant annotation.",
+                    "pattern": "^\\S+\\.csv$",
+                    "mimetype": "text/csv",
+                    "schema": "assets/svdb_query_vcf_schema.json"
+                },
                 "variant_catalog": {
                     "type": "string",
                     "description": "A variant catalog json-file for stranger",
@@ -229,7 +245,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1f4e062926fc10f70a38e917e5771edb333e89bf/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/",
                     "hidden": true
                 }
             }
