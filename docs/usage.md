@@ -266,7 +266,7 @@ This subworkflow ranks SNVs, and relies on the mapping, short variant calling an
 
 - Limit SNV calling to regions in BED file (`--bed`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting `--parallel_snv` to a different number.
-- By default the pipeline does not perform parallel alignment, but this can be changed by setting `--parallel_alignments` to split the alignment into multiple processes. This comes with some additional overhead, but speeds up the alignment significantly.
+- By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--parallel_alignments`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 
 ### Reproducibility
 

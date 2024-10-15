@@ -190,7 +190,9 @@ workflow NALLO {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
             }
+            .view()
             .groupTuple()
+            .view() // Needs to be 16 files, but split_bam only produced 8 - needs error in split_ubam
             .branch { meta, bam, bai ->
                 single:   meta.n_files <= 1
                     return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM

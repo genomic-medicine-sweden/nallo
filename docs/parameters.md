@@ -101,7 +101,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sv_caller` | Which structural variant caller to use (`severus`, `sniffles`) | `string` | severus |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
-| `parallel_alignments` | If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 1 |  |  |
+| `parallel_alignments` | If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `parallel_snv` | If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_plugin_files` | A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |

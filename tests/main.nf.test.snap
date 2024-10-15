@@ -8,7 +8,7 @@
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
             "multiqc_fastqc.txt:md5,6168de97dd0d63807f925487735bdb60",
             "multiqc_somalier.txt:md5,20b4c5b2d5b94b77fb800548e07a874e",
-            "5df05408bd4f18a4ef1555bc5800601a",
+            "e14be0cb250fdb518d334f652235209",
             "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,e4da3107f2421d42c6e2f59bff4e47d9",
             "HG002_Revio.asm.bp.hap2.p_ctg.assembly_summary:md5,bf908610472e602fd986b9d4a4d58b9e",
             "514d30ef8ff2c0a3d9a19ebc702ba883",
@@ -35,8 +35,8 @@
             "HG002_Revio_modkit_pileup.bed.gz:md5,55496cdcd7e4ccad86adee3cb819da56",
             "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,b217c5e971ecb0b8c874b0038f0d2ae4",
             "fcc3f220bb09d3264f97e7f620779be0",
-            "HG002_Revio_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-            "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
+            "HG002_Revio_cramino_aligned_phased.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
+            "HG002_Revio_cramino_aligned.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
             "HG002_Revio.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
             "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
             "HG002_Revio_sorted.vcf.gz:md5,735d8ba586b01fb27e009e3964112ce9",
@@ -52,7 +52,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-01T10:14:44.272116791"
+        "timestamp": "2024-10-14T10:31:48.075320084"
     },
     "test profile - multisample": {
         "content": [
@@ -142,9 +142,9 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-01T10:16:16.493512263"
+        "timestamp": "2024-10-14T11:01:47.29087513"
     },
-    "test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1": {
+    "test profile - multisample - ont - parallel_alignments 1 - parallel_snv 1": {
         "content": [
             "test.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
@@ -196,6 +196,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-01T10:17:40.930172057"
+        "timestamp": "2024-10-08T13:23:01.729509117"
     }
 }
