@@ -203,6 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Fixed duplicate SNVs in outputs when providing a BED-regions with overlapping regions
 - [#267](https://github.com/genomic-medicine-sweden/nallo/pull/267) - Fixed warning where `MODKIT_PILEUP_HAPLOTYPES` would be defined more than once
 - [#300](https://github.com/genomic-medicine-sweden/nallo/pull/300) - Fixed missing paraphase version
+- [#427](https://github.com/genomic-medicine-sweden/nallo/pull/427) - Fixed duplicate RG tags in BAM files after mapping from uBAMs ([#426](https://github.com/genomic-medicine-sweden/nallo/issues/426)).
 
 ### Parameters
 
