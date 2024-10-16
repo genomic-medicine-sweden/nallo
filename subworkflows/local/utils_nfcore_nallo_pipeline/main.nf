@@ -330,6 +330,7 @@ def toolCitationText() {
             "Somalier (Pedersen et al. 2020)",
             "Severus (Keskus et al. 2024)",
             "Sniffles2 (Smolka et al. 2024)",
+            "SVDB (Eisfeldt et al. 2017)",
         ]
         if (!params.skip_qc) {
             citation_text = citation_text + [
