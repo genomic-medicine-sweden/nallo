@@ -36,7 +36,6 @@ The directories listed below will be created in the results directory after the 
 - `aligned_reads`
 - `assembly_haplotypes`
 - `assembly_variant_calling`
-- `cnv_calling`
 - `databases`
 - `methylation`
 - `multiqc`
@@ -48,6 +47,7 @@ The directories listed below will be created in the results directory after the 
 - `repeat_calling`
 - `snvs`
 - `svs`
+- `visualization_tracks`
 
 ### Alignment
 
@@ -94,17 +94,21 @@ A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is used to 
 
 ### CNV calling
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. It also produces copynumber, depth and MAF tracks loadable in IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) and [SVDB](https://github.com/J35P312/SVDB) are used to call and merge CNVs. It also produces copynumber, depth and MAF tracks loadable in IGV.
 
 <details markdown="1">
 <summary>Output files from CNV calling</summary>
 
-- `{outputdir}/cnv_calling/hificnv/{sample}/`
+- `{outputdir}/visualization_tracks/{sample}/`
   - `*.copynum.bedgraph`: Copy number in bedgraph format
   - `*.depth.bw`: Depth track in BigWig format
   - `*.maf.bw`: Minor allele frequencies in BigWig format
-  - `*.vcf.gz`: VCF file containing CNV variants
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
+- `{outputdir}/svs/single_sample/{sample}/`
+  - `*_cnvs.vcf.gz`: VCF file containing CNV variants directly from HiFiCNV
+  - `*_cnvs.vcf.gz.tbi`: Index of the corresponding VCF file
+- `{outputdir}/svs/multi_sample/{sample}/`
+  - `*_cnvs.vcf.gz`: VCF file containing SVDB merged CNV variants
+  - `*_cnvs.vcf.gz.tbi`: Index of the corresponding VCF file
   </details>
 
 ### Methylation
