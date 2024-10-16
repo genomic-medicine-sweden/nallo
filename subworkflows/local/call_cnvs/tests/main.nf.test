@@ -1,0 +1,253 @@
+nextflow_workflow {
+
+    name "Test Workflow CALL_CNVS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "CALL_CNVS"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                input[1] = [[],[]]
+                """
+            }
+        }
+        run("MINIMAP2_ALIGN") {
+            script "../../../../modules/nf-core/minimap2/align/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: 'test', project: 'test', sex: 1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ]
+                input[1] = GUNZIP.out.gunzip
+                input[2] = true
+                input[3] = 'bai'
+                input[4] = false
+                input[5] = false
+                """
+            }
+        }
+        run("DEEPVARIANT") {
+            script "../../../../modules/nf-core/deepvariant/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .map { meta, bam, bai -> [ meta, bam, bai, file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true) ] }
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+    }
+
+    test("1 sample - [bam, bai, [] ], fasta, [], [], [], []") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .map { meta, bam, bai -> [ meta, bam, bai, [] ] }
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [[],[]]
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - [bam, bai, vcf ], fasta, [], [], [], []") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .join(DEEPVARIANT.out.vcf)
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [[],[]]
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - [bam, bai, vcf ], fasta, xy_bed, xx_bed, exclude_bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .join(DEEPVARIANT.out.vcf)
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]
+                input[4] = [
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - [bam, bai, [] ], fasta, [], [], [], [] - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .map { meta, bam, bai -> [ meta, bam, bai, [] ] }
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [[],[]]
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [bam, bai, vcf ], fasta, [], [], [], [] - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .join(DEEPVARIANT.out.vcf)
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [[],[]]
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [bam, bai, vcf ], fasta, xy_bed, xx_bed, exclude_bed - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .join(DEEPVARIANT.out.vcf)
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]
+                input[4] = [
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]
+                """
+            }
+            then {
+                assertAll(
+                    { assert workflow.success },
+                    { assert snapshot(workflow.out).match() }
+                )
+            }
+        }
+    }
+}

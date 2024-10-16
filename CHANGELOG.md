@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Added `FOUND_IN=deepvariant` tags to SNV calling output
 - [#418](https://github.com/genomic-medicine-sweden/nallo/pull/418) - Added a check for unique input filenames for each sample
 - [#419](https://github.com/genomic-medicine-sweden/nallo/pull/419) - Added support for SV filtering using input BED file ([#348](https://github.com/genomic-medicine-sweden/nallo/issues/348))
+- [#429](https://github.com/genomic-medicine-sweden/nallo/pull/429) - Added nf-test to CNV calling
+- [#429](https://github.com/genomic-medicine-sweden/nallo/pull/429) - Added SVDB to merge CNV calling results
 - [#430](https://github.com/genomic-medicine-sweden/nallo/pull/430) - Added a GitHub action to build and publish docs to GitHub Pages
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Added files needed to automatically build and publish docs to GitHub Pages
 - [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Added nf-test to rank variants
@@ -58,6 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#422](https://github.com/genomic-medicine-sweden/nallo/pull/422) - Updated nf-core/tools template to v3.0.1
 - [#423](https://github.com/genomic-medicine-sweden/nallo/pull/423) - Updated metro map
 - [#428](https://github.com/genomic-medicine-sweden/nallo/pull/428) - Changed from using bcftools to SVDB for SV merging
+- [#429](https://github.com/genomic-medicine-sweden/nallo/pull/429) - Updated HiFiCNV to 1.0.0
+- [#429](https://github.com/genomic-medicine-sweden/nallo/pull/429) - Refactored CNV calling and changed output structure
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Changed `CITATIONS.md` to `docs/CITATIONS.md`,
 - [#433](https://github.com/genomic-medicine-sweden/nallo/pull/433) - Updated docs and README.
 - [#434](https://github.com/genomic-medicine-sweden/nallo/pull/434) - Updated the SVDB merge module to fix unstable CALL_SVS tests
@@ -116,6 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | WhatsHap   | 2.2         | 2.3         |
 | SVDB       |             | 2.8.1       |
 | hifiasm    | 0.19.8      | 0.20.0      |
+| HiFiCNV    | 0.1.7       | 1.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

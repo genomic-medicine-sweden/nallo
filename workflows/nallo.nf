@@ -11,12 +11,12 @@ include { ANNOTATE_SVS                            } from '../subworkflows/local/
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
-include { CALL_SVS                                } from '../subworkflows/local/call_svs'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
+include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
-include { CNV                                     } from '../subworkflows/local/cnv'
+include { CALL_SVS                                } from '../subworkflows/local/call_svs'
 include { METHYLATION                             } from '../subworkflows/local/methylation'
 include { PHASING                                 } from '../subworkflows/local/phasing'
 include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
@@ -94,11 +94,11 @@ workflow NALLO {
                                                                     : Channel.value([[],[]])
     ch_vep_extra_files_unsplit  = params.vep_plugin_files           ? Channel.fromPath(params.vep_plugin_files).collect()
                                                                     : ''
-    ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).collect()
+    ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).map { it -> [ [ id: it.simpleName ], it ] }.collect()
                                                                     : ''
-    ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).collect()
+    ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).map { it -> [ [ id: it.simpleName ], it ] }.collect()
                                                                     : ''
-    ch_exclude_bed              = params.hificnv_exclude            ? Channel.fromPath(params.hificnv_exclude).collect()
+    ch_exclude_bed              = params.hificnv_exclude            ? Channel.fromPath(params.hificnv_exclude).map { it -> [ [ id: it.simpleName ], it ] }.collect()
                                                                     : ''
     ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
@@ -462,12 +462,15 @@ workflow NALLO {
             // Call CNVs with HiFiCNV
             //
             if(!params.skip_cnv_calling) {
-                bam_bai
-                    .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
-                    .set { cnv_workflow_in }
 
-                CNV(cnv_workflow_in, fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed)
-                ch_versions = ch_versions.mix(CNV.out.versions)
+                CALL_CNVS (
+                    bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
+                    fasta,
+                    ch_expected_xy_bed,
+                    ch_expected_xx_bed,
+                    ch_exclude_bed
+                )
+                ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
             }
 
             //
