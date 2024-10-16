@@ -104,7 +104,7 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - [bam, bai], fasta, fai, [], [] - sniffles") {
+    test("2 samples - [bam, bai], fasta, fai, [], [] - sniffles") {
 
         when {
             workflow {

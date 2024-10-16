@@ -27,7 +27,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/b69a139642391f13d1f678a9ce223e89/work/d2/74aa3965e47a0c600c1eaf32bfeafb/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -60,7 +60,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/b69a139642391f13d1f678a9ce223e89/work/d2/74aa3965e47a0c600c1eaf32bfeafb/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -98,7 +98,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:24:42.966974136"
+        "timestamp": "2024-10-16T13:44:23.698467142"
     },
     "2 samples - [bam, bai], fasta, fai, [], [] - sniffles -stub": {
         "content": [
@@ -126,7 +126,7 @@
                     {
                         "id": "project"
                     },
-                    "/workspace/skierfe/.nf-test/tests/7e56e8748869c6e4d5033cf7ab7bae7e/work/6c/c0ee2bf715223b228b323da45516f6/project_svs.vcf.gz"
+                    "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                 ]
             ],
             [
@@ -156,7 +156,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:25:25.735786954"
+        "timestamp": "2024-10-16T13:44:53.455933848"
     },
     "1 sample - [bam, bai], fasta, fai, [], [] - sniffles -stub": {
         "content": [
@@ -186,7 +186,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/a7d2b50001feb36cab0e4d3625772b27/work/d9/d2daed697218a920d32298348e63d7/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -219,7 +219,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/a7d2b50001feb36cab0e4d3625772b27/work/d9/d2daed697218a920d32298348e63d7/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -257,7 +257,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:24:20.554808981"
+        "timestamp": "2024-10-16T13:44:09.06083732"
     },
     "1 sample - [bam, bai], fasta, fai, [], [] - severus": {
         "content": [
@@ -309,7 +309,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/5a0d05fc85248e1cc1dc601818eb5623/work/ad/3845992b08a077b1a9ababc41a0852/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -342,7 +342,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/5a0d05fc85248e1cc1dc601818eb5623/work/ad/3845992b08a077b1a9ababc41a0852/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -380,7 +380,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:26:10.031296761"
+        "timestamp": "2024-10-16T13:45:21.860327776"
     },
     "1 sample - [bam, bai], fasta, fai, [], bed - severus": {
         "content": [
@@ -461,7 +461,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/a41e864f5a2f89cb9789da453846c87/work/13/5879d5b17b8798c4a49bac4c1a910c/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -494,7 +494,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/a41e864f5a2f89cb9789da453846c87/work/13/5879d5b17b8798c4a49bac4c1a910c/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -532,7 +532,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:25:03.375325696"
+        "timestamp": "2024-10-16T13:44:38.364811814"
     },
     "1 sample - [bam, bai], fasta, fai, [], [] - severus -stub": {
         "content": [
@@ -562,7 +562,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/f268a3bdc666390d7a319ee3a64591c/work/d9/6b96a3ede6d2d1820f25e0288e06bf/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -595,7 +595,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/f268a3bdc666390d7a319ee3a64591c/work/d9/6b96a3ede6d2d1820f25e0288e06bf/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -633,7 +633,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:25:48.546337833"
+        "timestamp": "2024-10-16T13:45:07.510780167"
     },
     "1 sample - [bam, bai], fasta, fai, [], [] - sniffles": {
         "content": [
@@ -723,7 +723,7 @@
                     {
                         "id": "project"
                     },
-                    "/workspace/skierfe/.nf-test/tests/6f4b8f3578a756cc1a329f94b2b94b8a/work/c2/23ee1ffb1ce0037d76dad1223d2a36/project_svs.vcf.gz"
+                    "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                 ]
             ],
             [
@@ -753,7 +753,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:27:02.142631715"
+        "timestamp": "2024-10-16T13:45:51.452818836"
     },
     "1 sample - [bam, bai], fasta, fai, bed, [] - severus -stub": {
         "content": [
@@ -783,7 +783,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/4308d0a2a3fcf45a8db0cecdde4ea982/work/5d/711033607e5dce61fd15c9c19986d5/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -816,7 +816,7 @@
                         {
                             "id": "project"
                         },
-                        "/workspace/skierfe/.nf-test/tests/4308d0a2a3fcf45a8db0cecdde4ea982/work/5d/711033607e5dce61fd15c9c19986d5/project_svs.vcf.gz"
+                        "project_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "ch_sv_calls_tbi": [
@@ -854,7 +854,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-15T14:26:35.743851646"
+        "timestamp": "2024-10-16T13:45:36.486860378"
     },
     "2 samples - [bam, bai], fasta, fai, [], [] - severus": {
         "content": [
