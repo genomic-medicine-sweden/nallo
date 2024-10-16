@@ -93,7 +93,9 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -103,7 +105,7 @@ nextflow_workflow {
     }
 
     test("2 samples - [bam, bai], fasta, fai, [], [] - sniffles") {
-
+        tag "x"
         when {
             workflow {
                 """
@@ -135,8 +137,13 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.summary,
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip,
                     workflow.out.versions,
                 ).match() }
             )
@@ -205,7 +212,9 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -242,7 +251,9 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -278,7 +289,9 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
@@ -320,7 +333,11 @@ nextflow_workflow {
                 { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
                 { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.summary,
+                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }

@@ -1,10 +1,11 @@
-include { ADD_FOUND_IN_TAG    } from '../../../modules/local/add_found_in_tag/main'
-include { BCFTOOLS_MERGE      } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_QUERY      } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER   } from '../../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_FILE } from '../../../modules/local/create_samples_file/main'
-include { SEVERUS             } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES            } from '../../../modules/nf-core/sniffles/main'
+include { ADD_FOUND_IN_TAG                } from '../../../modules/local/add_found_in_tag/main'
+include { SVDB_MERGE                      } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_QUERY                  } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER               } from '../../../modules/nf-core/bcftools/reheader/main'
+include { CREATE_SAMPLES_FILE             } from '../../../modules/local/create_samples_file/main'
+include { SEVERUS                         } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                        } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_SVDB_MERGE } from '../../../modules/nf-core/tabix/tabix/main'
 
 workflow CALL_SVS {
 
@@ -77,20 +78,22 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     BCFTOOLS_REHEADER.out.vcf
-        .join(BCFTOOLS_REHEADER.out.index)
-        .map { meta, vcf, tbi -> [ [ 'id': meta.project ], vcf, tbi ] }
+        .map { meta, vcf -> [ [ 'id': meta.project ], vcf ] }
         .groupTuple()
-        .set { ch_bcftools_merge_in }
+        .set { ch_svdb_merge_in }
 
     // Merge the files with new sample names
-    BCFTOOLS_MERGE ( ch_bcftools_merge_in, ch_fasta, ch_fai, ch_bed )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
+    SVDB_MERGE ( ch_svdb_merge_in, [])
+    ch_versions = ch_versions.mix(SVDB_MERGE.out.versions)
+
+    TABIX_SVDB_MERGE ( SVDB_MERGE.out.vcf )
+    ch_versions = ch_versions.mix(TABIX_SVDB_MERGE.out.versions)
 
     emit:
     ch_sv_calls_vcf     = BCFTOOLS_REHEADER.out.vcf   // channel: [ val(meta), path(vcf) ]
     ch_sv_calls_tbi     = BCFTOOLS_REHEADER.out.index // channel: [ val(meta), path(tbi) ]
-    ch_multisample_vcf  = BCFTOOLS_MERGE.out.vcf      // channel: [ val(meta), path(vcf) ]
-    ch_multisample_tbi  = BCFTOOLS_MERGE.out.index    // channel: [ val(meta), path(tbi) ]
+    ch_multisample_vcf  = SVDB_MERGE.out.vcf          // channel: [ val(meta), path(vcf) ]
+    ch_multisample_tbi  = TABIX_SVDB_MERGE.out.tbi    // channel: [ val(meta), path(tbi) ]
     versions            = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
