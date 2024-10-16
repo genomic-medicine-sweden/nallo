@@ -105,7 +105,7 @@ nextflow_workflow {
     }
 
     test("2 samples - [bam, bai], fasta, fai, [], [] - sniffles") {
-
+        tag "x"
         when {
             workflow {
                 """
@@ -143,6 +143,7 @@ nextflow_workflow {
                     path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.variantsMD5,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip,
                     workflow.out.versions,
                 ).match() }
             )
