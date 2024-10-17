@@ -1,0 +1,43 @@
+name: build docs
+# https://github.com/nf-cmgg/structural/blob/master/.github/workflows/build-docs.yml
+on:
+  push:
+    branches:
+      - master
+      - main
+      - dev
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # fetch all commits/branches
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - name: Obtain version from nextflow config
+        run: |
+          version=$(grep "version" nextflow.config | tail -1 | sed -e s'/[^=]*= //' | cut -d "'" -f 2)
+          [[ $version == *"dev"* ]] && pipeline_version="dev" || pipeline_version=$version
+          echo "pipeline_version=$pipeline_version" >> $GITHUB_ENV
+      - name: Setup git user
+        run: |
+          git config --global user.name "${{github.actor}}"
+          git config --global user.email "${{github.actor}}@users.noreply.github.com"
+      - uses: actions/cache@v3
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - name: Install dependencies
+        run: pip install mkdocs-material pymdown-extensions pillow cairosvg mike
+      - name: Build docs
+        run: |
+          [[ ${{ env.pipeline_version }} == "dev" ]] && mike deploy --push ${{ env.pipeline_version }} || mike deploy --push --update-aliases ${{ env.pipeline_version }} latest
+      - name: Set default docs
+        run: mike set-default --push latest
