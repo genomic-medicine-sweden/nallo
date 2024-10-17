@@ -7,24 +7,22 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 
 **genomic-medicine-sweden/nallo** is a bioinformatics analysis pipeline for long-reads from both PacBio and (targeted) ONT-data, focused on rare-disease. Heavily influenced by best-practice pipelines such as [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
 
-## Overview
-
 <picture align="center">
-    <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
+    <img alt="genomic-medicine-sweden/nallo workflow" src="images/nallo_metromap.png">
   </picture>
 
 ## Pipeline summary
 
-##### QC
+### QC
 
 - Read QC with [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino) and [mosdepth](https://github.com/brentp/mosdepth)
 
-##### Alignment & assembly
+### Alignment & assembly
 
 - Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
 - Assemble (trio-binned) haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
 
-##### Variant calling
+### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
 - Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
@@ -33,25 +31,26 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
 - Call variants from assembly with [dipcall](https://github.com/lh3/dipcall) (HiFi only)
 
-##### Phasing and methylation
+### Phasing and methylation
 
 - Phase and haplotag reads with [LongPhase](https://github.com/twolinin/longphase), [whatshap](https://github.com/whatshap/whatshap) or [HiPhase](https://github.com/PacificBiosciences/HiPhase)
 - Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit)
 
-##### Annotation
+### Annotation
 
 - Annotate SNVs and INDELs with databases of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
 - Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
-##### Ranking
+### Ranking
 
 - Rank SNVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
 
 ## Usage
 
-> [!NOTE]
-> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+!!! note
+
+    If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
 Prepare a samplesheet with input data:
 
@@ -74,17 +73,17 @@ nextflow run genomic-medicine-sweden/nallo \
     --outdir <OUTDIR>
 ```
 
-For more details and further functionality, please refer to the [usage documentation](https://github.com/genomic-medicine-sweden/nallo/blob/dev/docs/usage.md).
+!!!warning
 
-> [!WARNING]
-> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
-> see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
+    Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
 
 To run in an offline environment, download the pipeline and singularity images using [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use):
 
 ```
 nf-core download genomic-medicine-sweden/nallo
 ```
+
+For more details and further functionality, please refer to the [usage documentation](usage.md).
 
 ## Credits
 
@@ -94,7 +93,7 @@ We thank the following people for their extensive assistance in the development 
 
 ## Contributions and Support
 
-If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
+If you would like to contribute to this pipeline, please see the [contributing guidelines](https://github.com/genomic-medicine-sweden/nallo/blob/dev/.github/CONTRIBUTING.md).
 
 ## Citations
 
