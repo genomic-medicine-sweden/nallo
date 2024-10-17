@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#408](https://github.com/genomic-medicine-sweden/nallo/pull/408) - Added a new subworkflow to annotate SVs
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Added `FOUND_IN=deepvariant` tags to SNV calling output
 - [#419](https://github.com/genomic-medicine-sweden/nallo/pull/419) - Added support for SV filtering using input BED file ([#348](https://github.com/genomic-medicine-sweden/nallo/issues/348))
+- [#430](https://github.com/genomic-medicine-sweden/nallo/pull/430) - Added a GitHub action to build and publish docs to GitHub Pages
+- [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Added files needed to automatically build and publish docs to GitHub Pages
 
 ### `Changed`
 
@@ -53,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#422](https://github.com/genomic-medicine-sweden/nallo/pull/422) - Updated nf-core/tools template to v3.0.1
 - [#423](https://github.com/genomic-medicine-sweden/nallo/pull/423) - Updated metro map
 - [#428](https://github.com/genomic-medicine-sweden/nallo/pull/428) - Changed from using bcftools to SVDB for SV merging
+- [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Changed `CITATIONS.md` to `docs/CITATIONS.md`,
 
 ### `Removed`
 
