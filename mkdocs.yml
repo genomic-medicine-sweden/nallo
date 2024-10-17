@@ -1,0 +1,66 @@
+# based on: https://github.com/nf-cmgg/structural/blob/master/mkdocs.yml
+site_name: genomic-medicine-sweden/nallo
+repo_name: genomic-medicine-sweden/nallo
+repo_url: https://github.com/genomic-medicine-sweden/nallo
+site_url: https://genomic-medicine-sweden.github.io/nallo
+
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - Output: output.md
+  - Parameters: parameters.md
+  - Citations: CITATIONS.md
+
+theme:
+  name: material
+  icon:
+    logo: octicons/checklist-16
+    repo: fontawesome/brands/github
+  palette:
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Inter
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - navigation.instant
+    - navigation.top
+    - navigation.tracking
+    - navigation.sections
+    - navigation.footer
+    - search.share
+    - toc.follow
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra:
+  version:
+    provider: mike
