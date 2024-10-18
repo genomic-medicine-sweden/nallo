@@ -132,7 +132,7 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 ### CNVs
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, producing copy number, depth, and MAF tracks for IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) and [SVDB](https://github.com/J35P312/SVDB) are used to call and merge CNVs. HiFiCNV also produces copynumber, depth and MAF [visualization tracks](#visualization-tracks) loadable in IGV.
 
 | Path                                              | Description                               |
 | ------------------------------------------------- | ----------------------------------------- |
@@ -236,3 +236,13 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                    |
 | `svs/single_sample/{sample}/*.vcf_annotated.gz`                 | VCF file with annotated structural variants for a single sample    |
 | `svs/single_sample/{sample}/*.vcf_annotated.gz.tbi`             | Index of the annotated VCF file                                    |
+
+## Visualization tracks
+
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) can produce copynumber, depth and MAF visualization tracks, that are loadable in for example IGV.
+
+| Path                                               | Description                                 |
+| -------------------------------------------------- | ------------------------------------------- |
+| `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number information in bedgraph format  |
+| `visualization_tracks/{sample}/*.depth.bw`         | Depth track in BigWig format                |
+| `visualization_tracks/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format   |
