@@ -83,7 +83,11 @@ workflow CALL_SVS {
         .set { ch_svdb_merge_in }
 
     // Merge the files with new sample names
-    SVDB_MERGE ( ch_svdb_merge_in, [])
+    SVDB_MERGE (
+        ch_svdb_merge_in,
+        [],
+        true
+    )
     ch_versions = ch_versions.mix(SVDB_MERGE.out.versions)
 
     TABIX_SVDB_MERGE ( SVDB_MERGE.out.vcf )
