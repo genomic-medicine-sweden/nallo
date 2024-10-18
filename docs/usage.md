@@ -1,14 +1,13 @@
 # genomic-medicine-sweden/nallo: Usage
 
-## Introduction
-
-genomic-medicine-sweden/nallo is a bioinformatics analysis pipeline to analyse long-read data.
-
 ## Prerequisites
 
 1. Install Nextflow (>=24.04.2) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
 2. Install one of the following technologies for full pipeline reproducibility: Docker, Singularity, Podman, Shifter or Charliecloud.
-   > Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in genomic-medicine-sweden/nallo do not have a conda package so we do not support conda at the moment.
+
+!!!warning
+
+    Almost all nf-core pipelines give you the option to use conda as well. However, some tools used in genomic-medicine-sweden/nallo do not have a conda package so we do not support conda at the moment.
 
 ## Getting started
 
@@ -22,8 +21,10 @@ nextflow run genomic-medicine-sweden/nallo \
     --outdir <OUTDIR>
 ```
 
-> Check [nf-core/configs](https://github.com/nf-core/configs/tree/master/conf) to see if a custom config file to run nf-core pipelines already exists for your institute. If so, you can simply use `-profile test,<institute>` in your command. This enables the appropriate package manager and sets the appropriate execution settings for your machine.
-> NB: The order of profiles is important! They are loaded in sequence, so later profiles can overwrite earlier profiles.
+!!!note
+
+    Check [nf-core/configs](https://github.com/nf-core/configs/tree/master/conf) to see if a custom config file to run nf-core pipelines already exists for your institute. If so, you can simply use `-profile test,<institute>` in your command. This enables the appropriate package manager and sets the appropriate execution settings for your machine.
+    NB: The order of profiles is important! They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
 Running the command creates the following files in your working directory
 
@@ -34,8 +35,9 @@ work                # Directory containing the Nextflow working files
 # Other Nextflow hidden files, like history of pipeline logs.
 ```
 
-> [!NOTE]
-> The default cpu and memory configurations used in nallo are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
+!!!note
+
+    The default cpu and memory configurations used in nallo are written keeping the test profile (and dataset, which is tiny) in mind. You should override these values in configs to get it to work on larger datasets. Check the section `custom-configuration` below to know more about how to configure resources for your platform.
 
 ### Updating the pipeline
 
@@ -78,21 +80,24 @@ testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
-## Preset
+## Presets
 
-This pipeline comes with three different presets that should be set with the `--preset` parameter
+This pipeline comes with three different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio` or `ONT_R10`.
 
-- `revio` (default)
-- `pacbio`
-- `ONT_R10`
+!!!note "Effect of preset on subworkflows"
 
-`--skip_assembly_wf` and `--skip_repeat_wf` will be set to true for `ONT_R10` and `--skip_methylation_wf` will be set to true for `pacbio`, meaning these subworkflows are not run.
+    The selected preset will turn off subworkflows:
+
+    - `--skip_assembly_wf` and `--skip_repeat_wf` will be set to `true` for `ONT_R10`
+    - `--skip_methylation_wf` will be set to `true` for `pacbio`
 
 ## Subworkflows
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with its own input requirements and outputs. By default, all subworklows are active, and thus all mandatory input files are required.
 
-The only parameter mandatory for all subworkflows is the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows. If you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`
+The only mandatory parameters for all subworkflows is the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
+
+For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`, the pipeline will try to guide you through which files are required:
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -104,9 +109,11 @@ The only parameter mandatory for all subworkflows is the `--input` and `--outdir
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-The pipeline will try to guide you through which files are required, but a thorough description is provided below.
+A thorough description of required files are provided below.
 
-Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworklow that relies on it. For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_mapping_wf` will tell you
+Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
+
+For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_mapping_wf` will tell you
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,7 +128,7 @@ Because almost all other subworkflows relies on the mapping subworkflow.
 
 As descibed above, the files required depend on the active subworkflows. All parameters are listed [here](parameters.md), but the most useful parameters needed to run the pipeline described in more detail below.
 
-### Mapping (`--skip_mapping_wf`)
+### Mapping
 
 The majority of subworkflows depend on the mapping (alignment) subworkflow which requires `--fasta` and `--somalier_sites`.
 
@@ -130,11 +137,15 @@ The majority of subworkflows depend on the mapping (alignment) subworkflow which
 | `fasta`          | Reference genome, either gzipped or uncompressed FASTA (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
 | `somalier_sites` | A VCF of known polymorphic sites (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)), from which sex will be inferred if possible.            |
 
-### QC (`--skip_qc`)
+Turned off with `--skip_mapping_wf`.
+
+### QC
 
 This subworkflow depends on the mapping subworkflow, but requires no additional files.
 
-### Assembly (`--skip_assembly_wf`)
+Turned off with `--skip_qc`.
+
+### Assembly
 
 This subworkflow contains both genome assembly and assembly variant calling. The assemblyt variant calling needs the sex of samples and for samples with unknown sex this is inferred from aligned reads, therefore it depends on the mapping subworkflow.
 
@@ -144,17 +155,22 @@ It requires a BED file with PAR regions.
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
 
-> [!NOTE]
-> Make sure chrY PAR is hard masked in reference genome you are using.
+!!!warning
 
-### Call paralogs (`--skip_call_paralogs`)
+    Make sure chrY PAR is hard masked in reference genome you are using.
+
+Turned off with `--skip_assembly_wf`.
+
+### Call paralogs
 
 This subworkflow depends on the mapping subworkflow, but requires no additional files.
 
-> [!NOTE]
-> Only GRCh38 is supported.
+!!warning
+Only GRCh38 is supported.
 
-### Short variant calling (`--skip_short_variant_calling`)
+Turned off with `--skip_call_paralogs`.
+
+### Short variant calling
 
 This subworkflow depends on the mapping subworkflow, and required the same PAR regions file as the assembly workflow.
 
@@ -162,7 +178,9 @@ This subworkflow depends on the mapping subworkflow, and required the same PAR r
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](ttps://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
 
-### CNV calling (`--skip_cnv_calling`)
+Turned off with `--skip_short_variant_calling`.
+
+### CNV calling
 
 This subworkflow depends on the mapping and short variant calling subworkflows, and requires the following additional files:
 
@@ -172,15 +190,21 @@ This subworkflow depends on the mapping and short variant calling subworkflows, 
 | `hificnv_xx`      | expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_exclude` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
-### Phasing (`--skip_phasing_wf`)
+Turned off with `--skip_cnv_calling`.
+
+### Phasing
 
 This subworkflow phases variants and haplotags aligned BAM files, and such relies on the mapping and short variant calling subworkflows, but requires no additional files.
 
-### Methylation (`--skip_methylation_wf`)
+Turned off with `--skip_phasing_wf`.
+
+### Methylation
 
 This subworkflow relies on mapping, short variant calling and phasing subworkflows, but requires no additional files.
 
-### Repeat calling (`--skip_repeat_calling`)
+Turned off with `--skip_methylation_wf`.
+
+### Repeat calling
 
 This subworkflow requires haplotagged BAM files, and such relies on the mapping, short variant calling and phasing subworkflows, and requires the following additional files:
 
@@ -188,7 +212,9 @@ This subworkflow requires haplotagged BAM files, and such relies on the mapping,
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)>)) |
 
-### Repeat annotation (`--skip_repeat_annotation`)
+Turned off with `--skip_repeat_calling`.
+
+### Repeat annotation
 
 This subworkflow relies on the mapping, short variant calling, phasing and repeat calling subworkflows, and requires the following additional files:
 
@@ -196,7 +222,9 @@ This subworkflow relies on the mapping, short variant calling, phasing and repea
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `variant_catalog` | a variant catalog matching your reference (e.g. [variant_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/variant_catalog_grch38.json)) |
 
-### SNV annotation (`--skip_snv_annotation`)
+Turned off with `--skip_repeat_annotation`.
+
+### SNV annotation
 
 This subworkflow relies on the mapping and short variant calling, and requires the following additional files:
 
@@ -228,21 +256,36 @@ gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 cadd,/path/to/cadd.v1.6.hg38.zip
 ```
 
-> [!WARNING]
-> Generating an echtvar database from a VCF-file is a fairly straightforward process described on the [echtvar GitHub](https://github.com/brentp/echtvar). However, the pre-made `gnomad.v3.1.2.echtvar.v2.zip` provided by them results in malformed INFO lines that are not compatible with genmod (run in the subsequent ranking subworkflow).
->
-> For a very small test database that only overlaps the coordinates of the pipeline test data set, you could use [`cadd.v1.6.hg38.test_data.zip`](https://github.com/genomic-medicine-sweden/test-datasets/raw/refs/heads/nallo/reference/cadd.v1.6.hg38.test_data.zip) to get started.
+!!!warning
 
-> [!NOTE]
-> Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--snp_db`.
+    Generating an echtvar database from a VCF-file is a fairly straightforward process described on the [echtvar GitHub](https://github.com/brentp/echtvar). However, the pre-made `gnomad.v3.1.2.echtvar.v2.zip` provided by them results in malformed INFO lines that are not compatible with genmod (run in the subsequent ranking subworkflow).
 
-### SV annotation (`--skip_sv_annotation`)
+    For a very small test database that only overlaps the coordinates of the pipeline test data set, you could use [`cadd.v1.6.hg38.test_data.zip`](https://github.com/genomic-medicine-sweden/test-datasets/raw/refs/heads/nallo/reference/cadd.v1.6.hg38.test_data.zip) to get started.
+
+!!!tip
+
+    Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--snp_db`.
+
+Turned off with `--skip_snv_annotation`.
+
+### Rank SNVs and INDELs
+
+This subworkflow ranks SNVs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
+
+| Parameter            | Description                                                                                                                                                                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `score_config_snv`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
+| `reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
+
+`--skip_rank_variants`.
+
+### SV annotation
 
 This subworkflow relies on the mapping subworkflow, and requires the following additional files:
 
-| Parameter               | Description                                                                                                                                                                                                                                            |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `svdb_dbs` <sup>1</sup> | Csv file with databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details> |
+| Parameter               | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `svdb_dbs` <sup>1</sup> | Csv file with databases used for structural variant annotation in vcf format. |
 
 <sup>1</sup> Example file for input with `--svdb_dbs`:
 
@@ -253,22 +296,15 @@ https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6
 
 These databases could for example come from [CoLoRSdb](https://zenodo.org/records/13145123).
 
-### Rank variants (`--skip_rank_variants`)
+Turned off with `--skip_sv_annotation`.
 
-This subworkflow ranks SNVs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
-
-| Parameter            | Description                                                                                                                                                                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `score_config_snv`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
-| `reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
-
-### Other highlighted parameters
+## Other highlighted parameters
 
 - Limit SNV calling to regions in BED file (`--bed`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting `--parallel_snv` to a different number.
 - By default the pipeline does not perform parallel alignment, but this can be changed by setting `--parallel_alignments` to split the alignment into multiple processes. This comes with some additional overhead, but speeds up the alignment significantly.
 
-### Reproducibility
+## Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
@@ -278,13 +314,15 @@ This version number will be logged in reports when you run the pipeline, so that
 
 To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
-> [!TIP]
-> If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
+!!!tip
+
+    If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
 
 ## Core Nextflow arguments
 
-> [!NOTE]
-> These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
+!!!note
+
+    These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
 
 ### `-profile`
 
@@ -377,21 +415,31 @@ NXF_OPTS='-Xms1g -Xmx4g'
 
 ## Running the pipeline without internet access
 
-The pipeline and container images can be downloaded using [nf-core tools](https://nf-co.re/docs/usage/offline). For running offline, you of course have to make all the reference data available locally, and specify `--fasta`, etc., see [above](#reference-files-and-parameters).
+### Download pipeline and containers
 
-Contrary to the paragraph about [Nextflow](https://nf-co.re/docs/usage/offline#nextflow) on the page linked above, it is not possible to use the "-all" packaged version of Nextflow for this pipeline. The online version of Nextflow is necessary to support the necessary nextflow plugins. Download instead the file called just `nextflow`. Nextflow will download its dependencies when it is run. Additionally, you need to download the nf-validation plugin explicitly:
+The pipeline and container images can be downloaded using `nf-core download`, e.g.:
 
+```bash
+nf-core download genomic-medicine-sweden/nallo -r 0.3.2
 ```
-./nextflow plugin install nf-validation
-```
 
-Now you can transfer the `nextflow` binary as well as its directory `$HOME/.nextflow` to the system without Internet access, and use it there. It is necessary to use an explicit version of `nf-validation` offline, or Nextflow will check for the most recent version online. Find the version of nf-validation you downloaded in `$HOME/.nextflow/plugins`, then specify this version for `nf-validation` in your configuration file:
+### Download references
+
+When running offline, you will have to make all the reference data available locally. The test profile will not be able to fetch data automatically.
+
+### Download plugins
+
+[This](https://nf-co.re/docs/usage/offline#nextflow) section from the nf-core docs should be followed to download and transfer nextflow plugins from a computer connected to the internet to the offline environment.
+
+It is necessary to use an explicit version of `nf-validation` offline, or Nextflow will check for the most recent version online.
+
+Find the version of nf-validation you downloaded in `$HOME/.nextflow/plugins`, then specify this version for `nf-validation` in your configuration file:
 
 ```
 plugins {
         // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
-        id 'nf-validation@1.1.3'
+        id 'nf-schema@2.1.1'
 }
 ```
 
-This should go in your Nextflow confgiguration file, specified with `-c <YOURCONFIG>` when running the pipeline.
+This should go in your Nextflow configuration file, specified with `-c <YOURCONFIG>` when running the pipeline.

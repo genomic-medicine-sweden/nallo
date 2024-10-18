@@ -1,366 +1,238 @@
 # genomic-medicine-sweden/nallo: Output
 
-## Table of contents
-
-- [genomic-medicine-sweden/nallo: Output](#genomic-medicine-swedennallo-output)
-  - [Table of contents](#table-of-contents)
-  - [Pipeline overview](#pipeline-overview)
-    - [Alignment](#alignment)
-    - [Assembly](#assembly)
-    - [Assembly variant calling](#assembly-variant-calling)
-    - [CNV calling](#cnv-calling)
-    - [Methylation](#methylation)
-    - [MultiQC](#multiqc)
-    - [Paraphase](#paraphase)
-    - [Phasing](#phasing)
-    - [Pipeline information](#pipeline-information)
-    - [QC](#qc)
-      - [FastQC](#fastqc)
-      - [Mosdepth](#mosdepth)
-      - [Cramino](#cramino)
-      - [Somalier](#somalier)
-    - [Repeat calling](#repeat-calling)
-    - [Repeat annotation](#repeat-annotation)
-    - [SNVs](#snvs)
-      - [Calling](#calling)
-      - [Annotation](#annotation)
-      - [Ranking](#ranking)
-    - [Ranked Variants](#ranked-variants)
-    - [SV Calling](#sv-calling)
-    - [SV Annotation](#sv-annotation)
-
-## Pipeline overview
-
-The directories listed below will be created in the results directory after the pipeline has finished:
+## Aligned reads
 
-- `aligned_reads`
-- `assembly_haplotypes`
-- `assembly_variant_calling`
-- `cnv_calling`
-- `databases`
-- `methylation`
-- `multiqc`
-- `paraphase`
-- `pedigree`
-- `phasing`
-- `pipeline_info`
-- `qc`
-- `repeat_calling`
-- `snvs`
-- `svs`
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, (merged) and indexed using [samtools](https://github.com/samtools/samtools).
 
-### Alignment
+| Path                                    | Description                         |
+| --------------------------------------- | ----------------------------------- |
+| `aligned_reads/minimap2/{sample}/*.bam` | Alignment file in bam format        |
+| `aligned_reads/minimap2/{sample}/*.bai` | Index of the corresponding bam file |
 
-[minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, (merged) and indexed using [samtools](https://github.com/samtools/samtools).
+If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.
 
-<details markdown="1">
-<summary>Output files from Alignment</summary>
-
-- `{outputdir}/aligned_reads/minimap2/{sample}/`
-  - `*.bam`: Alignment file in bam format
-  - `*.bai`: Index of the corresponding bam file
-  </details>
+| Path                                                              | Description             |
+| ----------------------------------------------------------------- | ----------------------- |
+| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags |
+| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   |
 
-### Assembly
+!!!note
 
-[hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then comverted to fasta files using [gfastats](https://github.com/vgl-hub/gfastats).
+    Alignments will only be output without haplotags if phasing is off.
 
-<details markdown="1">
-<summary>Output files from Assembly</summary>
+## Assembly
 
-- `{outputdir}/assembly_haplotypes/gfastats/{sample}/`
-  - `*hap1.p_ctg.fasta.gz`: Assembled haplotype 1
-  - `*hap2.p_ctg.fasta.gz`: Assembled haplotype 2
-  - `*.assembly_summary`: Summary statistics
-  </details>
-
-### Assembly variant calling
-
-A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is used to call variants from the assembled haplotypes. They are also mapped back to the reference genome.
-
-<details markdown="1">
-<summary>Output files from Assembly variant calling</summary>
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then comverted to fasta files using [gfastats](https://github.com/vgl-hub/gfastats). A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is to map the assembled haplotypes back to the reference genome.
 
-> Dipcall produces several files, a full expanation is available [here](https://github.com/lh3/dipcall).
+| Path                                                         | Description                                          |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| `assembly_haplotypes/gfastats/{sample}/*hap1.p_ctg.fasta.gz` | Assembled haplotype 1                                |
+| `assembly_haplotypes/gfastats/{sample}/*hap2.p_ctg.fasta.gz` | Assembled haplotype 2                                |
+| `assembly_haplotypes/gfastats/{sample}/*.assembly_summary`   | Summary statistics                                   |
+| `assembly_variant_calling/dipcall/{sample}/*hap1.bam`        | Assembled haplotype 1 mapped to the reference genome |
+| `assembly_variant_calling/dipcall/{sample}/*hap1.bai`        | Index of the corresponding BAM file for haplotype 1  |
+| `assembly_variant_calling/dipcall/{sample}/*hap2.bam`        | Assembled haplotype 2 mapped to the reference genome |
+| `assembly_variant_calling/dipcall/{sample}/*hap2.bai`        | Index of the corresponding BAM file for haplotype 2  |
 
-- `{outputdir}/assembly_variant_calling/dipcall/{sample}/`
+## Methylation pileups
 
-  - `*hap1.bam`: Assembled haplotype 1 mapped to the reference genome
-  - `*hap1.bai`: Index of the corresponding bam file.
-  - `*hap2.bam`: Assembled haplotype 2 mapped to the reference genome
-  - `*hap2.bai`: Index of the corresponding bam file.
+[Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionaly, methylation information can be viewed in the BAM files, for example in IGV.
 
-  </details>
+| Path                                                                                | Description                                               |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads |
+| `methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        |
+| `methylation/modkit/pileup/unphased/{sample}/*.modkit_pileup.bed.gz`                | bedMethyl file with summary counts from all reads         |
+| `methylation/modkit/pileup/unphased/{sample}/*.bed.gz.tbi`                          | Index of the corresponding bedMethyl file                 |
 
-### CNV calling
+## MultiQC
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. It also produces copynumber, depth and MAF tracks loadable in IGV.
+[MultiQC](http://multiqc.info) generates an HTML report summarizing all samples' QC results and pipeline statistics.
 
-<details markdown="1">
-<summary>Output files from CNV calling</summary>
+| Path                          | Description                               |
+| ----------------------------- | ----------------------------------------- |
+| `multiqc/multiqc_report.html` | HTML report summarizing QC results        |
+| `multiqc/multiqc_data/`       | Directory containing parsed statistics    |
+| `multiqc/multiqc_plots/`      | Directory containing static report images |
 
-- `{outputdir}/cnv_calling/hificnv/{sample}/`
-  - `*.copynum.bedgraph`: Copy number in bedgraph format
-  - `*.depth.bw`: Depth track in BigWig format
-  - `*.maf.bw`: Minor allele frequencies in BigWig format
-  - `*.vcf.gz`: VCF file containing CNV variants
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-  </details>
+## Pipeline Information
 
-### Methylation
+[Nextflow](https://www.nextflow.io/docs/latest/tracing.html) generates reports for troubleshooting, performance, and traceability.
 
-[modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups. bedMethyl files are stored both one file with summary counts from reads per haplotag (e.g. HP1, HP2 and ungrouped) and one file with summary counts from all reads. The methylation is also stored in the BAM files and can be viewed directly in IGV.
+| Path                                    | Description                       |
+| --------------------------------------- | --------------------------------- |
+| `pipeline_info/execution_report.html`   | Execution report                  |
+| `pipeline_info/execution_timeline.html` | Timeline report                   |
+| `pipeline_info/execution_trace.txt`     | Execution trace                   |
+| `pipeline_info/pipeline_dag.dot`        | Pipeline DAG in DOT format        |
+| `pipeline_info/pipeline_report.html`    | Pipeline report                   |
+| `pipeline_info/software_versions.yml`   | Software versions used in the run |
 
-<details markdown="1">
-<summary>Output files from Methylation</summary>
+## Phasing
 
-- `{outputdir}/methylation/modkit/pileup/phased/{sample}/`
+[LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/), or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used for phasing.
 
-  - `*.modkit_pileup_phased_*.bed.gz`: bedMethyl file containing summary counts from reads with haplotags, e.g. 1 or 2
-  - `*.modkit_pileup_phased_ungrouped.bed.gz`: bedMethyl file containing summary counts for ungrouped reads
-  - `*.bed.gz.tbi`: Index of the corresponding bedMethyl file
+| Path                                                              | Description                   |
+| ----------------------------------------------------------------- | ----------------------------- |
+| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags       |
+| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file         |
+| `{outputdir}/phased_variants/{sample}/*.vcf.gz`                   | VCF file with phased variants |
+| `{outputdir}/phased_variants/{sample}/*.vcf.gz.tbi`               | Index of the VCF file         |
+| `{outputdir}/qc/phasing_stats/{sample}/*.blocks.tsv`              | Phase block file              |
+| `{outputdir}/qc/phasing_stats/{sample}/*.stats.tsv`               | Phasing statistics file       |
 
-- `{outputdir}/methylation/modkit/pileup/unphased/{sample}/`
-  - `*.modkit_pileup.bed.gz`: bedMethyl file containing summary counts from all reads
-  - `*.bed.gz.tbi`: Index of the corresponding bedMethyl file
-  </details>
+## QC
 
-### MultiQC
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth), and [somalier](https://github.com/brentp/somalier) are used for read quality control.
 
-[MultiQC](http://multiqc.info) is a visualization tool that generates a single HTML report summarising all samples in your project. Most of the pipeline QC results are visualised in the report and further statistics are available in the report data directory.
+### FastQC
 
-Results generated by MultiQC collate pipeline QC from supported tools e.g. FastQC. The pipeline has special steps which also allow the software versions to be reported in the MultiQC output for future traceability. For more information about how to use MultiQC reports, see <http://multiqc.info>.
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides general quality metrics for sequenced reads, including information on quality score distribution, per-base sequence content (%A/T/G/C), adapter contamination, and overrepresented sequences. For more details, refer to the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
-<details markdown="1">
-<summary>Output files</summary>
+| Path                                           | Description                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------- |
+| `{outputdir}/qc/fastqc/{sample}/*_fastqc.html` | FastQC report containing quality metrics                        |
+| `{outputdir}/qc/fastqc/{sample}/*_fastqc.zip`  | Zip archive with the FastQC report, data files, and plot images |
 
-- `{outputdir}/multiqc/`
-  - `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
-  - `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
-  - `multiqc_plots/`: directory containing static images from the report in various formats.
-  </details>
+### Mosdepth
 
-### Paraphase
+[Mosdepth](https://github.com/brentp/mosdepth) is used to report quality control metrics such as coverage and GC content from alignment files.
 
-[Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes. For interpreting the output, see <https://github.com/PacificBiosciences/paraphase>.
-
-<details markdown="1">
-<summary>Output files from Paraphase</summary>
-
-- `{outputdir}/paraphase/{sample}/`
-  - `*.bam`: BAM file with haplotypes grouped by HP and colored by YC
-  - `*.bai`: Index of the corresponding bam file.
-  - `*.json`: Output file summarizing haplotypes and variant calls
-  - `{sample}_paraphase_vcfs/`:
-    - `{sample}_{gene}_vcf`: VCF file per gene
-    - `{sample}_{gene}_vcf.tbi`: Index of the corresponding VCF file
-    </details>
-
-### Phasing
-
-[LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/) or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used to phase variants and haplotag reads.
-
-<details markdown="1">
-<summary>Output files from phasing</summary>
-
-- `{outputdir}/aligned_reads/{sample}/`
-  - `{sample}_haplotagged.bam`: BAM file with haplotags
-  - `{sample}_haplotagged.bam.bai`: Index of the corresponding bam file
-- `{outputdir}/phased_variants/{sample}/`
-  - `*.vcf.gz`: VCF file with phased variants
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/qc/phasing_stats/{sample}/`
-  - `*.blocks.tsv`: File with phase blocks
-  - `*.stats.tsv`: File with phasing statistics
-  </details>
-
-### Pipeline information
-
-[Nextflow](https://www.nextflow.io/docs/latest/tracing.html) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline. This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `pipeline_info/`
-  - Reports generated by Nextflow: `execution_report.html`, `execution_timeline.html`, `execution_trace.txt` and `pipeline_dag.dot`/`pipeline_dag.svg`.
-  - Reports generated by the pipeline: `pipeline_report.html`, `pipeline_report.txt` and `software_versions.yml`. The `pipeline_report*` files will only be present if the `--email` / `--email_on_fail` parameter's are used when running the pipeline.
-  - Reformatted samplesheet files used as input to the pipeline: `samplesheet.valid.csv`.
-  - Parameters used by the pipeline run: `params.json`.
-
-</details>
-
-### QC
-
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth) and [somalier](https://github.com/brentp/somalier) are used for read QC.
-
-##### FastQC
-
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `{outputdir}/qc/fastqc/{sample}/`
-  - `*_fastqc.html`: FastQC report containing quality metrics.
-  - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
-  </details>
-
-##### Mosdepth
-
-[Mosdepth](https://github.com/brentp/mosdepth) is used to report quality control metrics such as coverage, and GC content from alignment files.
-
-<details markdown="1">
-<summary>Output files from Mosdepth</summary>
-
-- `{outputdir}/qc/mosdepth/{sample}`
-  - `*.mosdepth.global.dist.txt`: This file contains a cumulative distribution indicating the proportion of total bases that were covered for at least a given coverage value across each chromosome and the whole genome
-  - `*.mosdepth.region.dist.txt`: This file contains a cumulative distribution indicating the proportion of total bases that were covered for at least a given coverage value across each region, is output if running the pipeline with a BED-file
-  - `*.mosdepth.summary.txt`: Mosdepth ummary file
-  - `*.regions.bed.gz`: Depth per region, is output if running the pipeline with a BED-file
-  - `*.regions.bed.gz.csi`: Index of regions.bed.gz
-  </details>
-
-##### Cramino
-
-[cramino](https://github.com/wdecoster/cramino) is run on both phased and unphased reads.
-
-<details markdown="1">
-<summary>Output files from Cramino</summary>
-
-- `{outputdir}/qc/cramino/phased/{sample}`
-  - `*.arrow`: Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format
-  - `*.txt`: Summary information in text format
-- `{outputdir}/qc/cramino/unphased/{sample}`
-  - `*.arrow`: Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format
-  - `*.txt`: Summary information in text format
-  </details>
-
-##### Somalier
-
-[somalier](https://github.com/brentp/somalier) is used to check relatedness and sex.
-
-<details markdown="1">
-<summary>Output files from Somalier</summary>
-
-- `{outputdir}/predigree/{project}.ped`: A PED file with updated from somalier sex
-- `{outputdir}/qc/somalier/relate/{project}/`
-  - `{project}.html`: HTML report
-  - `{project}.pairs.tsv`: Output information in sample pairs
-  - `{project}.samples.tsv`: Output information per sample
-  </details>
-
-### Repeat calling
-
-[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
-
-<details markdown="1">
-<summary>Output files from TRGT</summary>
-
-- `{outputdir}/repeat_calling/trgt/multi_sample/{project}/`
-  - `*.vcf.gz`: Merged VCF for all samples
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/repeat_calling/trgt/single_sample/{sample}/`
-  - `*.vcf.gz`: VCF with called repeats
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-  - `*.bam`: BAM file with sorted spanning reads
-  - `*.bai`: Index of the corresponding bam file
-  </details>
-
-### Repeat annotation
-
-[Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
-
-<details markdown="1">
-<summary>Output files from Stranger</summary>
-
-- `{outputdir}/repeat_annotation/stranger/{sample}`
-  - `*.vcf.gz`: Annotated VCF
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-  </details>
+| Path                                                          | Description                                                                                                           |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome |
+| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions (if a BED file is used)  |
+| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 |
+| `{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region (if a BED file is used)                                                                              |
+| `{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      |
+
+### Cramino
+
+[cramino](https://github.com/wdecoster/cramino) is used to analyze both phased and unphased reads.
+
+| Path                                               | Description                                                                                          |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `{outputdir}/qc/cramino/phased/{sample}/*.arrow`   | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
+| `{outputdir}/qc/cramino/phased/{sample}/*.txt`     | Summary information in text format                                                                   |
+| `{outputdir}/qc/cramino/unphased/{sample}/*.arrow` | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
+| `{outputdir}/qc/cramino/unphased/{sample}/*.txt`   | Summary information in text format                                                                   |
+
+### Somalier
+
+[somalier](https://github.com/brentp/somalier) checks relatedness and sex.
+
+| Path                                                             | Description                                 |
+| ---------------------------------------------------------------- | ------------------------------------------- |
+| `{outputdir}/predigree/{project}.ped`                            | PED file updated with somalier-inferred sex |
+| `{outputdir}/qc/somalier/relate/{project}/{project}.html`        | HTML report                                 |
+| `{outputdir}/qc/somalier/relate/{project}/{project}.pairs.tsv`   | Information about sample pairs              |
+| `{outputdir}/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples        |
+
+## Variants
+
+### CNVs
+
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, producing copy number, depth, and MAF tracks for IGV.
+
+| Path                                              | Description                               |
+| ------------------------------------------------- | ----------------------------------------- |
+| `cnv_calling/hificnv/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
+| `cnv_calling/hificnv/{sample}/*.depth.bw`         | Depth track in BigWig format              |
+| `cnv_calling/hificnv/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
+| `cnv_calling/hificnv/{sample}/*.vcf.gz`           | VCF file containing CNV variants          |
+| `cnv_calling/hificnv/{sample}/*.vcf.gz.tbi`       | Index of the corresponding VCF file       |
+
+### Paralogous genes
+
+[Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
+
+| Path                                                        | Description                             |
+| ----------------------------------------------------------- | --------------------------------------- |
+| `paraphase/{sample}/*.bam`                                  | BAM file with haplotypes grouped by HP  |
+| `paraphase/{sample}/*.bai`                                  | Index of the BAM file                   |
+| `paraphase/{sample}/*.json`                                 | Summary of haplotypes and variant calls |
+| `paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                       |
+| `paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                   |
+
+### Repeats
+
+[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats:
+
+| Path                                                                  | Description                               |
+| --------------------------------------------------------------------- | ----------------------------------------- |
+| `{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz`     | Merged VCF file for all samples           |
+| `{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi` | Index of the VCF file                     |
+| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz`     | VCF file with called repeats for a sample |
+| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi` | Index of the VCF file                     |
+| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bam`        | BAM file with sorted spanning reads       |
+| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bai`        | Index of the BAM file                     |
+
+[Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate them:
+
+| Path                                                           | Description                     |
+| -------------------------------------------------------------- | ------------------------------- |
+| `{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz`     | Annotated VCF file              |
+| `{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz.tbi` | Index of the annotated VCF file |
 
 ### SNVs
 
-#### Calling
+[DeepVariant](https://github.com/google/deepvariant) is used to call variants, while [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [GLnexus](https://github.com/dnanexus-rnd/GLnexus) are used for merging variants.
 
-[DeepVariant](https://github.com/google/deepvariant) is used to call variants, [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [GLnexus](https://github.com/dnanexus-rnd/GLnexus) are used to merge variants.
+!!!note
 
-<details markdown="1">
-<summary>Output files from SNV calling</summary>
+    Variants are only output without annotation and ranking if these subworkflows are turned off.
 
-> [!NOTE]
-> Variants are only output without annotation and ranking if these subworkflows are turned off.
+| Path                                                   | Description                                                                 |
+| ------------------------------------------------------ | --------------------------------------------------------------------------- |
+| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz`      | VCF file containing called variants with alternative genotypes for a sample |
+| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz.tbi`  | Index of the corresponding VCF file                                         |
+| `snvs/multi_sample/{project}/{project}_snv.vcf.gz`     | VCF file containing called variants for all samples                         |
+| `snvs/multi_sample/{project}/{project}_snv.vcf.gz.tbi` | Index of the corresponding VCF file                                         |
+| `snvs/stats/single_sample/*.stats.txt`                 | Variant statistics                                                          |
 
-- `{outputdir}/snvs/single_sample/{sample}/`
-  - `{sample}_snv.vcf.gz`: VCF with called variants with alternative genotypes from a certain sample
-  - `{sample}_snv.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/snvs/multi_sample/{project}/`
-  - `{project}_snv.vcf.gz`: VCF with called variants from all samples
-  - `{project}_snv.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/snvs/stats/single_sample/`
-  - `*.stats.txt`: Variant statistics
-  </details>
+[echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
-#### Annotation
+!!!note
 
-[echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used to annotate SNVs. [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
+    Variants are only output without ranking if that subworkflows are turned off.
 
-<details markdown="1">
-<summary>Output files from SNV Annotation</summary>
+| Path                                                             | Description                                                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `databases/echtvar/encode/{project}/*.zip`                       | Database with allele frequency (AF) and allele count (AC) for all samples      |
+| `snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz`      | VCF file containing annotated variants with alternative genotypes for a sample |
+| `snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi`  | Index of the annotated VCF file                                                |
+| `snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz`     | VCF file containing annotated variants for all samples                         |
+| `snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |
 
-> [!NOTE]
-> Variants are only output without ranking if that subworkflows are turned off.
+[GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
-- `{outputdir}/databases/echtvar/encode/{project}/`
-  - `*.zip`: Database with AF and AC for all samples run
-- `{outputdir}/snvs/single_sample/{sample}/`
-  - `{sample}_snv_annotated.vcf.gz`: VCF with annotated variants with alternative genotypes from a certain sample
-  - `{sample}_snv_annotated.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/snvs/multi_sample/{project}/`
-  - `{project}_snv_annotated.vcf.gz`: VCF with annotated variants from all samples
-  - `{project}_snv_annotated.vcf.gz.tbi`: Index of the corresponding VCF file
-  </details>
+| Path                                                                    | Description                                                 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`      | VCF file with annotated and ranked variants for a sample    |
+| `snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi`  | Index of the ranked VCF file                                |
+| `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for all samples |
+| `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                                |
 
-#### Ranking
+### SVs
 
-[GENMOD](https://github.com/Clinical-Genomics/genmod) is a simple to use command line tool for annotating and analyzing genomic variations in the VCF file format. GENMOD can annotate genetic patterns of inheritance in vcf files with single or multiple families of arbitrary size. Each variant will be assigned a predicted pathogenicity score. The score will be given both as a raw score and a normalized score with values between 0 and 1. The tags in the INFO field are `RankScore` and `RankScoreNormalized`. The score can be configured to fit your annotations and preferences by modifying the score config file.
+[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants, and [SVDB](https://github.com/J35P312/SVDB) is used to merge variants within and between samples.
 
-<details markdown="1">
-<summary>Output files from SNV ranking</summary>
+!!!note
 
-- `{outputdir}/snvs/single_sample/{sample}/`
-  - `{sample}_snv_annotated_ranked.vcf.gz`: VCF with annotated and ranked variants with alternative genotypes from a certain sample
-  - `{sample}_snv_annotated_ranked.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/snvs/multi_sample/{project}/`
-  - `{project}_snv_annotated_ranked.vcf.gz`: VCF with annotated and ranked variants from all samples
-  - `{project}_snv_annotated_ranked.vcf.gz.tbi`: Index of the corresponding VCF file
-  </details>
+    Variants are only output without annotation if that subworkflow is turned off.
 
-### SV Calling
+| Path                                                  | Description                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| `svs/multi_sample/{project}/{project}_svs.vcf.gz`     | VCF file with merged structural variants for all samples     |
+| `svs/multi_sample/{project}/{project}_svs.vcf.gz.tbi` | Index of the merged VCF file                                 |
+| `svs/single_sample/{sample}/*.vcf.gz`                 | VCF file with merged structural variants for a single sample |
+| `svs/single_sample/{sample}/*.vcf.gz.tbi`             | Index of the VCF file                                        |
 
-[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants, after wich [SVDB](https://github.com/J35P312/SVDB) is used to merge variants, within and between samples.
+[SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
 
-<details markdown="1">
-<summary>Output files from SV Calling</summary>
-
-- `{outputdir}/svs/multi_sample/{project}`
-  - `{project}_svs.vcf.gz`: VCF file with SVDB merged variants
-  - `{project}_svs.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/svs/single_sample/{sample}`
-  - `*.vcf.gz`: VCF with SVDB merged variants, divided per sample
-  - `*.vcf.gz.tbi`: Index of the corresponding VCF file
-  </details>
-
-### SV Annotation
-
-[SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate SVs.
-
-<details markdown="1">
-<summary>Output files from SV Annotation</summary>
-
-- `{outputdir}/svs/multi_sample/{project}`
-  - `{project}_svs_annotated.vcf.gz`: VCF file with annotated merged variants
-  - `{project}_svs_annotated.vcf.gz.tbi`: Index of the corresponding VCF file
-- `{outputdir}/svs/single_sample/{sample}`
-  - `*.vcf_annotated.gz`: VCF with annotated variants per sample
-  - `*.vcf_annotated.gz.tbi`: Index of the corresponding VCF file
-  </details>
+| Path                                                            | Description                                                        |
+| --------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz`     | VCF file with annotated merged structural variants for all samples |
+| `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                    |
+| `svs/single_sample/{sample}/*.vcf_annotated.gz`                 | VCF file with annotated structural variants for a single sample    |
+| `svs/single_sample/{sample}/*.vcf_annotated.gz.tbi`             | Index of the annotated VCF file                                    |

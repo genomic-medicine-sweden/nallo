@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#423](https://github.com/genomic-medicine-sweden/nallo/pull/423) - Updated metro map
 - [#428](https://github.com/genomic-medicine-sweden/nallo/pull/428) - Changed from using bcftools to SVDB for SV merging
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Changed `CITATIONS.md` to `docs/CITATIONS.md`,
+- [#433](https://github.com/genomic-medicine-sweden/nallo/pull/433) - Updated docs and README.
 - [#434](https://github.com/genomic-medicine-sweden/nallo/pull/434) - Updated the SVDB merge module to fix unstable CALL_SVS tests
 
 ### `Removed`
