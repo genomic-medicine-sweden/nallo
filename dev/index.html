@@ -313,15 +313,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#pipeline-summary" class="md-nav__link">
     <span class="md-ellipsis">
       Pipeline summary
@@ -548,15 +539,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#pipeline-summary" class="md-nav__link">
     <span class="md-ellipsis">
       Pipeline summary
@@ -683,21 +665,20 @@
 
 <h2 id="introduction">Introduction</h2>
 <p><strong>genomic-medicine-sweden/nallo</strong> is a bioinformatics analysis pipeline for long-reads from both PacBio and (targeted) ONT-data, focused on rare-disease. Heavily influenced by best-practice pipelines such as <a href="https://nf-co.re/sarek">nf-core/sarek</a>, <a href="https://nf-co.re/raredisease">nf-core/raredisease</a>, <a href="https://github.com/nf-core/nanoseq">nf-core/nanoseq</a>, <a href="https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake">PacBio Human WGS Workflow</a>, <a href="https://github.com/epi2me-labs/wf-human-variation">epi2me-labs/wf-human-variation</a> and <a href="https://github.com/brentp/rare-disease-wf">brentp/rare-disease-wf</a>.</p>
-<h2 id="overview">Overview</h2>
 <p><picture align="center">
-    <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
+    <img alt="genomic-medicine-sweden/nallo workflow" src="images/nallo_metromap.png">
   </picture></p>
 <h2 id="pipeline-summary">Pipeline summary</h2>
-<h5 id="qc">QC</h5>
+<h3 id="qc">QC</h3>
 <ul>
 <li>Read QC with <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, <a href="https://github.com/wdecoster/cramino">cramino</a> and <a href="https://github.com/brentp/mosdepth">mosdepth</a></li>
 </ul>
-<h5 id="alignment-assembly">Alignment &amp; assembly</h5>
+<h3 id="alignment-assembly">Alignment &amp; assembly</h3>
 <ul>
 <li>Align reads to reference with <a href="https://github.com/lh3/minimap2">minimap2</a></li>
 <li>Assemble (trio-binned) haploid genomes with <a href="https://github.com/chhylp123/hifiasm">hifiasm</a> (HiFi only)</li>
 </ul>
-<h5 id="variant-calling">Variant calling</h5>
+<h3 id="variant-calling">Variant calling</h3>
 <ul>
 <li>Call SNVs &amp; joint genotyping with <a href="https://github.com/google/deepvariant">deepvariant</a> and <a href="https://github.com/dnanexus-rnd/GLnexus">GLNexus</a></li>
 <li>Call SVs with <a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles2</a></li>
@@ -706,26 +687,26 @@
 <li>Call paralogous genes with <a href="https://github.com/PacificBiosciences/paraphase">Paraphase</a></li>
 <li>Call variants from assembly with <a href="https://github.com/lh3/dipcall">dipcall</a> (HiFi only)</li>
 </ul>
-<h5 id="phasing-and-methylation">Phasing and methylation</h5>
+<h3 id="phasing-and-methylation">Phasing and methylation</h3>
 <ul>
 <li>Phase and haplotag reads with <a href="https://github.com/twolinin/longphase">LongPhase</a>, <a href="https://github.com/whatshap/whatshap">whatshap</a> or <a href="https://github.com/PacificBiosciences/HiPhase">HiPhase</a></li>
 <li>Create methylation pileups with <a href="https://github.com/nanoporetech/modkit">modkit</a></li>
 </ul>
-<h5 id="annotation">Annotation</h5>
+<h3 id="annotation">Annotation</h3>
 <ul>
 <li>Annotate SNVs and INDELs with databases of choice, i.e. <a href="https://gnomad.broadinstitute.org">gnomAD</a>, <a href="https://cadd.gs.washington.edu">CADD</a> etc. with <a href="https://github.com/brentp/echtvar">echtvar</a> and <a href="https://github.com/Ensembl/ensembl-vep">VEP</a></li>
 <li>Annotate repeat expansions with <a href="https://github.com/Clinical-Genomics/stranger">stranger</a></li>
 <li>Annotate SVs with <a href="https://github.com/J35P312/SVDB">SVDB</a> and <a href="https://github.com/Ensembl/ensembl-vep">VEP</a></li>
 </ul>
-<h5 id="ranking">Ranking</h5>
+<h3 id="ranking">Ranking</h3>
 <ul>
 <li>Rank SNVs with <a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a></li>
 </ul>
 <h2 id="usage">Usage</h2>
-<blockquote>
-<p>[!NOTE]
-If you are new to Nextflow and nf-core, please refer to <a href="https://nf-co.re/docs/usage/installation">this page</a> on how to set-up Nextflow. Make sure to <a href="https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline">test your setup</a> with <code>-profile test</code> before running the workflow on actual data.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are new to Nextflow and nf-core, please refer to <a href="https://nf-co.re/docs/usage/installation">this page</a> on how to set-up Nextflow. Make sure to <a href="https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline">test your setup</a> with <code>-profile test</code> before running the workflow on actual data.</p>
+</div>
 <p>Prepare a samplesheet with input data:</p>
 <p><code>samplesheet.csv</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
@@ -740,20 +721,19 @@ If you are new to Nextflow and nf-core, please refer to <a href="https://nf-co.r
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>--fasta<span class="w"> </span>&lt;reference.fasta&gt;<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span>--outdir<span class="w"> </span>&lt;OUTDIR&gt;
 </span></code></pre></div>
-<p>For more details and further functionality, please refer to the <a href="https://github.com/genomic-medicine-sweden/nallo/blob/dev/docs/usage.md">usage documentation</a>.</p>
-<blockquote>
-<p>[!WARNING]
-Please provide pipeline parameters via the CLI or Nextflow <code>-params-file</code> option. Custom config files including those provided by the <code>-c</code> Nextflow option can be used to provide any configuration <em><strong>except for parameters</strong></em>;
-see <a href="https://nf-co.re/usage/configuration#custom-configuration-files">docs</a>.</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please provide pipeline parameters via the CLI or Nextflow <code>-params-file</code> option. Custom config files including those provided by the <code>-c</code> Nextflow option can be used to provide any configuration <em><strong>except for parameters</strong></em>;see <a href="https://nf-co.re/usage/configuration#custom-configuration-files">docs</a>.</p>
+</div>
 <p>To run in an offline environment, download the pipeline and singularity images using <a href="https://nf-co.re/tools/#downloading-pipelines-for-offline-use"><code>nf-core download</code></a>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nf-core download genomic-medicine-sweden/nallo
 </span></code></pre></div>
+<p>For more details and further functionality, please refer to the <a href="usage/">usage documentation</a>.</p>
 <h2 id="credits">Credits</h2>
 <p>genomic-medicine-sweden/nallo was originally written by Felix Lenner.</p>
 <p>We thank the following people for their extensive assistance in the development of this pipeline:</p>
 <h2 id="contributions-and-support">Contributions and Support</h2>
-<p>If you would like to contribute to this pipeline, please see the <a href=".github/CONTRIBUTING.md">contributing guidelines</a>.</p>
+<p>If you would like to contribute to this pipeline, please see the <a href="https://github.com/genomic-medicine-sweden/nallo/blob/dev/.github/CONTRIBUTING.md">contributing guidelines</a>.</p>
 <h2 id="citations">Citations</h2>
 <p>If you use genomic-medicine-sweden/nallo for your analysis, please cite it using the following doi: <a href="https://doi.org/10.5281/zenodo.13748210">10.5281/zenodo.13748210</a>.</p>
 <p>This pipeline uses code and infrastructure developed and maintained by the <a href="https://nf-co.re">nf-core</a> community, reused here under the <a href="https://github.com/nf-core/tools/blob/main/LICENSE">MIT license</a>.</p>
