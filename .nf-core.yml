@@ -1,6 +1,7 @@
 bump_version: null
 lint:
   files_exist:
+    - CITATIONS.md
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
     - docs/README.md
