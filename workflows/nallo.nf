@@ -88,7 +88,7 @@ workflow NALLO {
                                                                     : ''
     ch_databases                = params.snp_db                     ? Channel.fromList(samplesheetToList(params.snp_db, 'assets/schema_snpdb.json')).map{ it[1] }.collect()
                                                                     : ''
-    ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).collect()
+    ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
     ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
@@ -100,9 +100,9 @@ workflow NALLO {
                                                                     : ''
     ch_exclude_bed              = params.hificnv_exclude            ? Channel.fromPath(params.hificnv_exclude).collect()
                                                                     : ''
-    ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).collect()
+    ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
-    ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).collect()
+    ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
     ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
@@ -111,21 +111,6 @@ workflow NALLO {
 
     // Check parameter that doesn't conform to schema validation here
     if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
-
-    // Read and store paths in the vep_plugin_files file
-    if (params.vep_plugin_files) {
-        ch_vep_extra_files_unsplit.splitCsv ( header:true )
-            .map { row ->
-                path = file(row.vep_files[0])
-                if(path.isFile() || path.isDirectory()){
-                    return [path]
-                } else {
-                    error("\nVep database file ${path} does not exist.")
-                }
-            }
-            .collect()
-            .set {ch_vep_extra_files}
-    }
 
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
@@ -143,7 +128,10 @@ workflow NALLO {
 
         PREPARE_GENOME (
             ch_fasta,
+            params.fasta.endsWith('.gz'),
             ch_vep_cache_unprocessed,
+            params.vep_plugin_files,
+            ch_vep_extra_files_unsplit
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
@@ -328,7 +316,7 @@ workflow NALLO {
                 ch_svdb_dbs,
                 ch_vep_cache,
                 params.vep_cache_version,
-                ch_vep_extra_files
+                PREPARE_GENOME.out.vep_extra_files
             )
 
             ANNOTATE_SVS.out.vcf
@@ -394,7 +382,7 @@ workflow NALLO {
                     fai.map { name, fai -> [ [ id: name ], fai ] },
                     ch_vep_cache,
                     params.vep_cache_version,
-                    ch_vep_extra_files,
+                    PREPARE_GENOME.out.vep_extra_files,
                     (params.cadd_resources && params.cadd_prescored),
                     ch_cadd_header,
                     ch_cadd_resources,
@@ -410,19 +398,19 @@ workflow NALLO {
 
                 //
                 // Ranks one multisample VCF per variant call region
+                // Can only run if samplesheet has affected samples
                 //
                 if(!params.skip_rank_variants) {
                     // Only run if we have affected individuals
                     RANK_VARIANTS_SNV (
-                        ANN_CSQ_PLI_SNV.out.vcf_ann.filter { meta, vcf -> meta.contains_affected },
-                        ch_updated_pedfile.map { meta, ped -> ped },
+                        ANN_CSQ_PLI_SNV.out.vcf,
+                        ch_updated_pedfile,
                         ch_reduced_penetrance,
                         ch_score_config_snv
                     )
                     ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
-                    // If there are affected individuals and RANK_VARIANTS has been run,
-                    // input that to VCF concatenation
+                    // If RANK_VARIANTS has been run input that to VCF concatenation
                     RANK_VARIANTS_SNV.out.vcf
                         .join( RANK_VARIANTS_SNV.out.tbi )
                         .set { ch_vcf_tbi_per_region }

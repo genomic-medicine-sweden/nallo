@@ -1,0 +1,77 @@
+{
+    "1 sample": {
+        "content": [
+            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=121, phased=false, phasedAutodetect=false]"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-18T13:47:43.144635306"
+    },
+    "1 sample - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_data.bed",
+                            "project": null,
+                            "contains_affected": false
+                        },
+                        "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_data.bed",
+                            "project": null,
+                            "contains_affected": false
+                        },
+                        "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,58de7735498cf84a4284050260b6f929",
+                    "versions.yml:md5,789b8f834c7851ecd93b3488aa0236da",
+                    "versions.yml:md5,a1990357a1ce026de4ba955c877c2430",
+                    "versions.yml:md5,f56d4e953de59ea23842d33c16e914cf",
+                    "versions.yml:md5,f9b69655d279838966e636810ae15f5a"
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "test_data.bed",
+                            "project": null,
+                            "contains_affected": false
+                        },
+                        "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test_data.bed",
+                            "project": null,
+                            "contains_affected": false
+                        },
+                        "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,58de7735498cf84a4284050260b6f929",
+                    "versions.yml:md5,789b8f834c7851ecd93b3488aa0236da",
+                    "versions.yml:md5,a1990357a1ce026de4ba955c877c2430",
+                    "versions.yml:md5,f56d4e953de59ea23842d33c16e914cf",
+                    "versions.yml:md5,f9b69655d279838966e636810ae15f5a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-18T13:48:10.616656902"
+    }
+}
