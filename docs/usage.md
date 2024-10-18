@@ -111,7 +111,7 @@ For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profi
 
 A thorough description of required files are provided below.
 
-Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworklow that relies on it.
+Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
 
 For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_mapping_wf` will tell you
 
