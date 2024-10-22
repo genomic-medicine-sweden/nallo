@@ -436,7 +436,7 @@
                 "parallel_alignments": {
                     "type": "integer",
                     "minimum": 1,
-                    "default": 1,
+                    "default": 8,
                     "description": "If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
                 },
                 "parallel_snv": {
