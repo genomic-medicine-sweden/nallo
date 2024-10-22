@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#419](https://github.com/genomic-medicine-sweden/nallo/pull/419) - Added support for SV filtering using input BED file ([#348](https://github.com/genomic-medicine-sweden/nallo/issues/348))
 - [#430](https://github.com/genomic-medicine-sweden/nallo/pull/430) - Added a GitHub action to build and publish docs to GitHub Pages
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Added files needed to automatically build and publish docs to GitHub Pages
+- [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Added nf-test to rank variants
 
 ### `Changed`
 
@@ -57,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#428](https://github.com/genomic-medicine-sweden/nallo/pull/428) - Changed from using bcftools to SVDB for SV merging
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Changed `CITATIONS.md` to `docs/CITATIONS.md`,
 - [#433](https://github.com/genomic-medicine-sweden/nallo/pull/433) - Updated docs and README.
+- [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Updated and refactored processes and workflows related to variant ranking
 
 ### `Removed`
 
