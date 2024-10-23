@@ -7,6 +7,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 */
 
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
@@ -22,6 +23,7 @@ include { PHASING                                 } from '../subworkflows/local/
 include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
 include { QC_ALIGNED_READS                        } from '../subworkflows/local/qc_aligned_reads'
 include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS as RANK_VARIANTS_SVS      } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
 include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
 include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
@@ -91,6 +93,8 @@ workflow NALLO {
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
+    ch_variant_consequences_svs = params.variant_consequences_svs   ? Channel.fromPath(params.variant_consequences_svs).collect()
+                                                                    : Channel.value([])
     ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
     ch_vep_extra_files_unsplit  = params.vep_plugin_files           ? Channel.fromPath(params.vep_plugin_files).collect()
@@ -104,6 +108,8 @@ workflow NALLO {
     ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
     ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).map { it -> [ it.simpleName, it ] }.collect()
+                                                                    : Channel.value([])
+    ch_score_config_svs         = params.score_config_svs           ? Channel.fromPath(params.score_config_svs).collect()
                                                                     : Channel.value([])
     ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
@@ -532,6 +538,23 @@ workflow NALLO {
                 params.vep_cache_version,
                 PREPARE_GENOME.out.vep_extra_files
             )
+
+            ANN_CSQ_PLI_SVS (
+                ANNOTATE_SVS.out.vcf,
+                ch_variant_consequences_svs
+            )
+            ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
+
+            if (!params.skip_rank_variants) {
+                RANK_VARIANTS_SVS (
+                    ANN_CSQ_PLI_SVS.out.vcf_ann,
+                    ch_updated_pedfile.map { meta, ped -> ped },
+                    ch_reduced_penetrance,
+                    ch_score_config_svs
+                )
+                ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
+            }
+
         }
     }
 
