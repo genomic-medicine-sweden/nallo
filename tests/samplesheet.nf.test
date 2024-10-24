@@ -1,0 +1,52 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    script "../main.nf"
+    profile "test"
+    tag "PIPELINE"
+
+    test("test profile") {
+        tag "samplesheet"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/'
+                input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
+                outdir                       = "$outputDir"
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            // bam_files: All bam files
+            def bam_files        = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            // all_vcf_files: All vcf files
+            def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
+            // stable_vcf_files: Vcf files whose variants are stable
+            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore', include: ['**/*.vcf.gz'])
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // Number of successful tasks
+                    workflow.trace.succeeded().size(),
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml"),
+                    // All stable path name, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path,
+                    // All bam files
+                    bam_files.collect{ file -> [ file.getName(), bam(file.toString(), stringency: 'silent').getReadsMD5() ] },
+                    // All vcf files
+                    all_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.summary ] },
+                    // Stable vcf files
+                    stable_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.variantsMD5 ] }
+                ).match() }
+            )
+        }
+    }
+
+}
