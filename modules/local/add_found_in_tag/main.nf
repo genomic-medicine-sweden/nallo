@@ -90,7 +90,7 @@ process ADD_FOUND_IN_TAG {
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
-        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
+        busybox-awk: \$(awk -Wversion | sed -n 's/.*v\\([^ ]*\\) (.*/\\1/p')
     END_VERSIONS
     """
 }

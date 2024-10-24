@@ -42,7 +42,7 @@ process TRGT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        trgt: \$(echo \$(trgt -V) | sed 's/TRGT //' )
+        trgt: \$(echo \$(trgt -V) | sed 's/trgt //' )
     END_VERSIONS
     """
 }
