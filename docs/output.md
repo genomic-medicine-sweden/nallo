@@ -132,15 +132,12 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 ### CNVs
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, producing copy number, depth, and MAF tracks for IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. It also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 
 | Path                                              | Description                               |
 | ------------------------------------------------- | ----------------------------------------- |
-| `cnv_calling/hificnv/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
-| `cnv_calling/hificnv/{sample}/*.depth.bw`         | Depth track in BigWig format              |
-| `cnv_calling/hificnv/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
-| `cnv_calling/hificnv/{sample}/*.vcf.gz`           | VCF file containing CNV variants          |
-| `cnv_calling/hificnv/{sample}/*.vcf.gz.tbi`       | Index of the corresponding VCF file       |
+| `svs/family/{family_id}/${family_id_cnvs_merged..vcf.gz`           | VCF file containing CNV variants          |
+| `svs/family/{family_id}/{family_id}_cnvs_merged.vcf.gz.tbi`       | Index of the corresponding VCF file       |
 
 ### Paralogous genes
 
@@ -236,3 +233,11 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                    |
 | `svs/single_sample/{sample}/*.vcf_annotated.gz`                 | VCF file with annotated structural variants for a single sample    |
 | `svs/single_sample/{sample}/*.vcf_annotated.gz.tbi`             | Index of the annotated VCF file                                    |
+
+## Visualization Tracks
+
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
+
+| `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
+| `visualization_tracks/{sample}/*.depth.bw`         | Depth track in BigWig format              |
+| `visualization_tracks/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |

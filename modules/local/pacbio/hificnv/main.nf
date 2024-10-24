@@ -2,14 +2,15 @@ process HIFICNV {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::hificnv=0.1.7"
-    container "quay.io/biocontainers/hificnv:0.1.7--h9ee0642_0"
-
+    conda "bioconda::hificnv=1.0.0"
+    container "quay.io/biocontainers/hificnv:1.0.0--h9ee0642_0"
 
     input:
-    tuple val(meta), path(bam), path(bai), path(maf_vcf), path(expected_cn_bed)
+    tuple val(meta), path(bam), path(bai), path(maf_vcf), val(sex)
     tuple val(meta2), path(fasta)
-    path(exclude_bed)
+    tuple val(meta3), path(expected_xy_bed)
+    tuple val(meta4), path(expected_xx_bed)
+    tuple val(meta5), path(exclude_bed)
 
     output:
     tuple val(meta), path("*.vcf.gz")  , emit: vcf
@@ -26,11 +27,14 @@ process HIFICNV {
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
 
-    def expected_cn = expected_cn_bed ? "--expected-cn ${expected_cn_bed}" : ""
+    def expected_cn = sex == 1 ? "--expected-cn ${expected_xy_bed}" : sex == 2 ? "--expected-cn ${expected_xx_bed}" : ""
     def exclude = exclude_bed ? "--exclude ${exclude_bed}" : ""
     def maf = maf_vcf ? "--maf ${maf_vcf}" : ""
 
     if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+
+    mv_maf = maf ? "mv hificnv.*.maf.bw ${prefix}.maf.bw" : ''
+
     """
     hificnv \\
         $args \\
@@ -43,7 +47,7 @@ process HIFICNV {
 
     mv hificnv.*.vcf.gz ${prefix}.vcf.gz
     mv hificnv.*.depth.bw ${prefix}.depth.bw
-    mv hificnv.*.maf.bw ${prefix}.maf.bw
+    $mv_maf
     mv hificnv.*.copynum.bedgraph ${prefix}.copynum.bedgraph
     mv *.log ${prefix}.log
 
@@ -57,10 +61,11 @@ process HIFICNV {
     prefix      = task.ext.prefix ?: "${meta.id}"
 
     if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    def maf = maf_vcf ? "touch ${prefix}.maf.bw" : ""
     """
-    touch ${prefix}.vcf.gz
+    echo "" | gzip > ${prefix}.vcf.gz
     touch ${prefix}.depth.bw
-    touch ${prefix}.maf.bw
+    $maf
     touch ${prefix}.bedgraph
     touch ${prefix}.log
 

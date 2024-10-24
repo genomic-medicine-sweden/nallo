@@ -33,7 +33,7 @@ process SVDB_MERGE {
             def pairs = vcfs.indices.collect { [vcfs[it], priority[it]] }
             pairs = pairs.sort { a, b -> a[0].name <=> b[0].name }
             vcfs = pairs.collect { it[0] }
-            priority = pairs.collect { it[1] }
+            sorted_priority = pairs.collect { it[1] }
         } else {
             // if there's no priority input just sort the vcfs by name
             vcfs = vcfs.sort { it.name }
@@ -48,7 +48,7 @@ process SVDB_MERGE {
         prio = "--priority ${priority.join(',')}"
         input = ""
         for (int index = 0; index < vcfs.collect().size(); index++) {
-            input += "${vcfs[index]}:${priority[index]} "
+            input += "${vcfs[index]}:${sorted_priority[index]} "
         }
     }
 
