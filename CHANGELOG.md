@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#433](https://github.com/genomic-medicine-sweden/nallo/pull/433) - Updated docs and README.
 - [#434](https://github.com/genomic-medicine-sweden/nallo/pull/434) - Updated the SVDB merge module to fix unstable CALL_SVS tests
 - [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Updated and refactored processes and workflows related to variant ranking
-- [#440](https://github.com/genomic-medicine-sweden/nallo/pull/440) - Updated HiFiAsm to 0.20 with new default parameters for telomeres and scaffolding ([#295](https://github.com/genomic-medicine-sweden/nallo/issues/295))
+- [#440](https://github.com/genomic-medicine-sweden/nallo/pull/440) - Updated hifiasm to 0.20 with new default parameters for telomeres and scaffolding ([#295](https://github.com/genomic-medicine-sweden/nallo/issues/295))
 
 ### `Removed`
 
