@@ -2,9 +2,10 @@ nextflow_pipeline {
 
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
+    profile "test"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1") {
+    test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 2 --parallel_snv 1") {
         tag "samplesheet_multisample_ont_bam"
 
         when {
@@ -13,23 +14,23 @@ nextflow_pipeline {
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                       = "$outputDir"
                 preset                       = 'ONT_R10'
-                parallel_alignments          = 1
+                parallel_alignments          = 2
                 parallel_snv                 = 1
                 phaser                       = "whatshap"
             }
         }
 
-        then {
+                then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
             // bam_files: All bam files
             def bam_files        = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
-            // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
+            // all_vcf_files: All vcf files
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
-            // stable_vcf_files: Vcf files with stable variants - can be snapshot unsing variantsMD5
-            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
+            // stable_vcf_files: Vcf files whose variants are stable
+            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore', include: ['**/*.vcf.gz'])
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(

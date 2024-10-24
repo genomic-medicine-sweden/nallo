@@ -1,18 +1,18 @@
 {
-    "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
+    "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 2 --parallel_snv 1": {
         "content": [
-            95,
+            102,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
-                    "busybox-awk": "1.36.1"
+                    "gawk": null
                 },
                 "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.0,
+                    "add_most_severe_consequence": "v1.0",
                     "python": "3.8.3"
                 },
                 "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.0,
+                    "add_most_severe_pli": "v1.0",
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
@@ -130,7 +130,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
+                    "create_pedigree_file": "v1.0",
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -149,8 +149,11 @@
                     "somalier": "0.2.18"
                 },
                 "SOMALIER_PED": {
-                    "create_pedigree_file": 1.0,
+                    "create_pedigree_file": "v1.0",
                     "python": "3.8.3"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
                 },
                 "SPLIT_BED_CHUNKS": {
                     "split_bed_chunks": 1.0
@@ -402,8 +405,8 @@
                 "HG002_ONT_B_cramino_aligned_phased.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
                 "HG002_ONT_A_cramino_aligned.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
                 "HG002_ONT_B_cramino_aligned.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
-                "HG002_ONT_A_fastqc.html:md5,94d86b38a30f846de64b840656663d18",
-                "HG002_ONT_B_fastqc.html:md5,2ec692ee5acf69717811be481d38f775",
+                "HG002_ONT_A_fastqc.html:md5,5ca53367c0bd704dc5b734a20d09b47e",
+                "HG002_ONT_B_fastqc.html:md5,3ef02653552c688abb908e30c99e20e2",
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,5ae0972357f99aa481a0bf12fb9e0b0b",
                 "HG002_ONT_A.mosdepth.region.dist.txt:md5,023b1c6aeaf8fa5ededd6b711a5cd012",
                 "HG002_ONT_A.mosdepth.summary.txt:md5,c3b664b0983213f73edf3c0d5a0b04a2",
@@ -502,6 +505,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T13:10:46.10939576"
+        "timestamp": "2024-10-24T15:31:37.115400489"
     }
 }
