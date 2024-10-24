@@ -47,7 +47,7 @@ process CREATE_PEDIGREE_FILE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        create_pedigree_file: v1.0
+        create_pedigree_file: 1.0
         python: \$(python --version | sed 's/Python //g')
     END_VERSIONS
     """
