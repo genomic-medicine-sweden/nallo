@@ -146,17 +146,17 @@
                 "versions.yml:md5,589fd8607c7131f786d565deb2846f0c",
                 "versions.yml:md5,7090d52a64ab671fdb51c6af429628f4",
                 "versions.yml:md5,7090d52a64ab671fdb51c6af429628f4",
-                "versions.yml:md5,a41129f62453d49bc1979c1a20551d7c",
-                "versions.yml:md5,a41129f62453d49bc1979c1a20551d7c",
                 "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff"
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,e3d7bb4a6f78fefdab18f93069e7db81",
+                "versions.yml:md5,e3d7bb4a6f78fefdab18f93069e7db81"
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-16T13:44:53.455933848"
+        "timestamp": "2024-10-24T16:44:35.404645294"
     },
     "1 sample - [bam, bai], fasta, fai, [], [] - sniffles -stub": {
         "content": [
