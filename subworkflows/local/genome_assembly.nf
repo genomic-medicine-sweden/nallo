@@ -13,17 +13,15 @@ workflow ASSEMBLY {
 
     main:
     ch_versions = Channel.empty()
+    ch_hifiasm_empty = Channel.value([ [], [], [] ])
 
     if(params.hifiasm_mode == 'hifi-only') {
 
         ch_reads
             .groupTuple()
-            .map{ meta, reads ->
-                [ meta, reads, [], [] ]
-            }
             .set { hifiasm_in }
 
-        HIFIASM ( hifiasm_in, [], [] )
+        HIFIASM ( hifiasm_in, ch_hifiasm_empty, ch_hifiasm_empty )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
     } else if(params.hifiasm_mode == 'trio-binning') {
@@ -98,7 +96,13 @@ workflow ASSEMBLY {
 
         hifiasm_trio_in = all_kid_reads.join(paternal_yak_or_empty).join(maternal_yak_or_empty)
 
-        HIFIASM ( hifiasm_trio_in, [], [] )
+        hifiasm_trio_in
+            .multiMap { meta, reads, paternal_yak, maternal_yak ->
+                reads : [meta, reads                     ]
+                yak   : [meta, paternal_yak, maternal_yak]
+            }
+            .set { ch_hifiasm_in }
+        HIFIASM ( ch_hifiasm_in.reads, ch_hifiasm_in.yak, ch_hifiasm_empty )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
     }
 

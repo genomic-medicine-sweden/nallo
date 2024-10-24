@@ -133,7 +133,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "aecb06fcdb995ff3e3df7c7a1fd119367d6d1996",
+                        "git_sha": "daa15d5226111e10ca95c0d4a85fa6bd11a08a01",
                         "installed_by": ["modules"]
                     },
                     "longphase/haplotag": {
