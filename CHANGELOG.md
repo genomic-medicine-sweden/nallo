@@ -111,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod     | 3.8.2       | 3.8.3       |
 | WhatsHap   | 2.2         | 2.3         |
 | SVDB       |             | 2.8.1       |
-| HiFiAsm    | 0.19.8      | 0.20.0      |
+| hifiasm    | 0.19.8      | 0.20.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
