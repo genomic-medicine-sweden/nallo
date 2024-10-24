@@ -6,47 +6,44 @@ include { GENMOD_ANNOTATE  } from '../../../modules/nf-core/genmod/annotate/main
 include { GENMOD_MODELS    } from '../../../modules/nf-core/genmod/models/main'
 include { GENMOD_SCORE     } from '../../../modules/nf-core/genmod/score/main'
 include { GENMOD_COMPOUND  } from '../../../modules/nf-core/genmod/compound/main'
-include { BCFTOOLS_SORT    } from '../../../modules/nf-core/bcftools/sort/main'
-include { TABIX_BGZIP      } from '../../../modules/nf-core/tabix/bgzip/main'
-include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow RANK_VARIANTS {
 
     take:
-        ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
-        ch_pedfile            // channel: [mandatory] [ path(ped) ]
-        ch_reduced_penetrance // channel: [mandatory] [ path(pentrance) ]
-        ch_score_config       // channel: [mandatory] [ path(ini) ]
+    ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_pedfile            // channel: [mandatory] [ val(meta), path(ped) ]
+    ch_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
+    ch_score_config       // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
-        ch_versions = Channel.empty()
+    ch_versions = Channel.empty()
 
-        GENMOD_ANNOTATE(ch_vcf)
+    GENMOD_ANNOTATE ( ch_vcf )
+    ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)
 
-        GENMOD_MODELS(GENMOD_ANNOTATE.out.vcf, ch_pedfile, ch_reduced_penetrance)
+    GENMOD_MODELS (
+        GENMOD_ANNOTATE.out.vcf,
+        ch_pedfile.map { meta, ped -> ped },
+        ch_reduced_penetrance.map { meta, file -> file }
+    )
+    ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 
-        GENMOD_SCORE(GENMOD_MODELS.out.vcf, ch_pedfile, ch_score_config)
+    GENMOD_SCORE (
+        GENMOD_MODELS.out.vcf,
+        ch_pedfile.map { meta, ped -> ped },
+        ch_score_config.map { meta, file -> file }
+    )
+    ch_versions = ch_versions.mix(GENMOD_SCORE.out.versions)
 
-        GENMOD_COMPOUND(GENMOD_SCORE.out.vcf)
+    GENMOD_COMPOUND ( GENMOD_SCORE.out.vcf )
+    ch_versions = ch_versions.mix(GENMOD_COMPOUND.out.versions)
 
-        BCFTOOLS_SORT(GENMOD_COMPOUND.out.vcf) // SV file needs to be sorted before indexing
-
-        TABIX_BGZIP(GENMOD_COMPOUND.out.vcf) //run only for SNVs
-
-        ch_vcf = TABIX_BGZIP.out.output.mix(BCFTOOLS_SORT.out.vcf)
-
-        TABIX_TABIX (ch_vcf)
-
-        ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)
-        ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
-        ch_versions = ch_versions.mix(GENMOD_SCORE.out.versions)
-        ch_versions = ch_versions.mix(GENMOD_COMPOUND.out.versions)
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-        ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
-        ch_versions = ch_versions.mix(TABIX_TABIX.out.versions)
+    TABIX_BGZIPTABIX ( GENMOD_COMPOUND.out.vcf )
+    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     emit:
-        vcf      = ch_vcf              // channel: [ val(meta), path(vcf) ]
-        tbi      = TABIX_TABIX.out.tbi // channel: [ val(meta), path(tbi) ]
-        versions = ch_versions         // channel: [ path(versions.yml) ]
+    vcf      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> [ meta, vcf ] } // channel: [ val(meta), path(vcf) ]
+    tbi      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
+    versions = ch_versions                                                         // channel: [ path(versions.yml) ]
 }
