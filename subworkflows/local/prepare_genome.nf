@@ -58,6 +58,8 @@ workflow PREPARE_GENOME {
             }
             .collect()
             .set { ch_vep_extra_files }
+    } else {
+        ch_vep_extra_files = Channel.value([])
     }
 
     emit:
