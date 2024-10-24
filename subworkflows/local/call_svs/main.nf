@@ -78,7 +78,7 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     BCFTOOLS_REHEADER.out.vcf
-        .map { meta, vcf -> [ [ 'id': meta.project ], vcf ] }
+        .map { meta, vcf -> [ [ 'id': meta.family_id ], vcf ] }
         .groupTuple()
         .set { ch_svdb_merge_in }
 

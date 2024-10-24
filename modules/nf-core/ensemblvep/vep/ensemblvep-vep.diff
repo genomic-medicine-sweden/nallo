@@ -1,25 +1,278 @@
 Changes in module 'nf-core/ensemblvep/vep'
+Changes in 'ensemblvep/vep/meta.yml':
+--- modules/nf-core/ensemblvep/vep/meta.yml
++++ modules/nf-core/ensemblvep/vep/meta.yml
+@@ -1,6 +1,5 @@
+ name: ensemblvep_vep
+-description: Ensembl Variant Effect Predictor (VEP). The output-file-format is controlled
+-  through `task.ext.args`.
++description: Ensembl Variant Effect Predictor (VEP). The output-file-format is controlled through `task.ext.args`.
+ keywords:
+   - annotation
+   - vcf
+@@ -14,96 +13,75 @@
+       homepage: https://www.ensembl.org/info/docs/tools/vep/index.html
+       documentation: https://www.ensembl.org/info/docs/tools/vep/script/index.html
+       licence: ["Apache-2.0"]
+-      identifier: ""
+ input:
+-  - - meta:
+-        type: map
+-        description: |
+-          Groovy Map containing sample information
+-          e.g. [ id:'test', single_end:false ]
+-    - vcf:
+-        type: file
+-        description: |
+-          vcf to annotate
+-    - custom_extra_files:
+-        type: file
+-        description: |
+-          extra sample-specific files to be used with the `--custom` flag to be configured with ext.args
+-          (optional)
+-  - - genome:
+-        type: string
+-        description: |
+-          which genome to annotate with
+-  - - species:
+-        type: string
+-        description: |
+-          which species to annotate with
+-  - - cache_version:
+-        type: integer
+-        description: |
+-          which version of the cache to annotate with
+-  - - cache:
+-        type: file
+-        description: |
+-          path to VEP cache (optional)
+-  - - meta2:
+-        type: map
+-        description: |
+-          Groovy Map containing fasta reference information
+-          e.g. [ id:'test' ]
+-    - fasta:
+-        type: file
+-        description: |
+-          reference FASTA file (optional)
+-        pattern: "*.{fasta,fa}"
+-  - - extra_files:
+-        type: file
+-        description: |
+-          path to file(s) needed for plugins  (optional)
++  - meta:
++      type: map
++      description: |
++        Groovy Map containing sample information
++        e.g. [ id:'test', single_end:false ]
++  - vcf:
++      type: file
++      description: |
++        vcf to annotate
++  - custom_extra_files:
++      type: file
++      description: |
++        extra sample-specific files to be used with the `--custom` flag to be configured with ext.args
++        (optional)
++  - genome:
++      type: string
++      description: |
++        which genome to annotate with
++  - species:
++      type: string
++      description: |
++        which species to annotate with
++  - cache_version:
++      type: integer
++      description: |
++        which version of the cache to annotate with
++  - cache:
++      type: file
++      description: |
++        path to VEP cache (optional)
++  - meta2:
++      type: map
++      description: |
++        Groovy Map containing fasta reference information
++        e.g. [ id:'test' ]
++  - fasta:
++      type: file
++      description: |
++        reference FASTA file (optional)
++      pattern: "*.{fasta,fa}"
++  - extra_files:
++      type: file
++      description: |
++        path to file(s) needed for plugins  (optional)
+ output:
+   - vcf:
+-      - meta:
+-          type: file
+-          description: |
+-            annotated vcf (optional)
+-          pattern: "*.ann.vcf.gz"
+-      - "*.vcf.gz":
+-          type: file
+-          description: |
+-            annotated vcf (optional)
+-          pattern: "*.ann.vcf.gz"
++      type: file
++      description: |
++        annotated vcf (optional)
++      pattern: "*.ann.vcf.gz"
+   - tab:
+-      - meta:
+-          type: file
+-          description: |
+-            tab file with annotated variants (optional)
+-          pattern: "*.ann.tab.gz"
+-      - "*.tab.gz":
+-          type: file
+-          description: |
+-            tab file with annotated variants (optional)
+-          pattern: "*.ann.tab.gz"
++      type: file
++      description: |
++        tab file with annotated variants (optional)
++      pattern: "*.ann.tab.gz"
+   - json:
+-      - meta:
+-          type: file
+-          description: |
+-            json file with annotated variants (optional)
+-          pattern: "*.ann.json.gz"
+-      - "*.json.gz":
+-          type: file
+-          description: |
+-            json file with annotated variants (optional)
+-          pattern: "*.ann.json.gz"
++      type: file
++      description: |
++        json file with annotated variants (optional)
++      pattern: "*.ann.json.gz"
+   - report:
+-      - "*.html":
+-          type: file
+-          description: VEP report file
+-          pattern: "*.html"
++      type: file
++      description: VEP report file
++      pattern: "*.html"
+   - versions:
+-      - versions.yml:
+-          type: file
+-          description: File containing software versions
+-          pattern: "versions.yml"
++      type: file
++      description: File containing software versions
++      pattern: "versions.yml"
+ authors:
+   - "@maxulysse"
+   - "@matthdsm"
+
+Changes in 'ensemblvep/vep/main.nf':
 --- modules/nf-core/ensemblvep/vep/main.nf
 +++ modules/nf-core/ensemblvep/vep/main.nf
 @@ -4,8 +4,8 @@
  
      conda "${moduleDir}/environment.yml"
      container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://depot.galaxyproject.org/singularity/ensembl-vep:112.0--pl5321h2a3209d_0' :
--        'biocontainers/ensembl-vep:112.0--pl5321h2a3209d_0' }"
+-        'https://depot.galaxyproject.org/singularity/ensembl-vep:113.0--pl5321h2a3209d_0' :
+-        'biocontainers/ensembl-vep:113.0--pl5321h2a3209d_0' }"
 +        'https://depot.galaxyproject.org/singularity/ensembl-vep:110.0--pl5321h2a3209d_0' :
 +        'biocontainers/ensembl-vep:110.0--pl5321h2a3209d_0' }"
  
      input:
      tuple val(meta), path(vcf), path(custom_extra_files)
 
+Changes in 'ensemblvep/vep/environment.yml':
 --- modules/nf-core/ensemblvep/vep/environment.yml
 +++ modules/nf-core/ensemblvep/vep/environment.yml
 @@ -2,4 +2,4 @@
    - conda-forge
    - bioconda
  dependencies:
--  - bioconda::ensembl-vep=112.0
+-  - bioconda::ensembl-vep=113.0
 +  - bioconda::ensembl-vep=110.0
 
+'modules/nf-core/ensemblvep/vep/tests/tags.yml' is unchanged
+Changes in 'ensemblvep/vep/tests/main.nf.test.snap':
+--- modules/nf-core/ensemblvep/vep/tests/main.nf.test.snap
++++ modules/nf-core/ensemblvep/vep/tests/main.nf.test.snap
+@@ -2,25 +2,25 @@
+     "test_ensemblvep_vep_fasta_tab_gz": {
+         "content": [
+             [
+-                "versions.yml:md5,4fbfeb73f0d4b4aa039f17be8ba9e1f2"
++                "versions.yml:md5,d06f1eb60f534489026d682eb3aa5559"
+             ]
+         ],
+         "meta": {
+-            "nf-test": "0.9.0",
++            "nf-test": "0.8.4",
+             "nextflow": "24.04.4"
+         },
+-        "timestamp": "2024-10-21T09:12:23.474703494"
++        "timestamp": "2024-09-02T10:15:18.228927"
+     },
+     "test_ensemblvep_vep_fasta_vcf": {
+         "content": [
+             [
+-                "versions.yml:md5,4fbfeb73f0d4b4aa039f17be8ba9e1f2"
++                "versions.yml:md5,d06f1eb60f534489026d682eb3aa5559"
+             ]
+         ],
+         "meta": {
+-            "nf-test": "0.9.0",
++            "nf-test": "0.8.4",
+             "nextflow": "24.04.4"
+         },
+-        "timestamp": "2024-10-21T09:11:54.343590485"
++        "timestamp": "2024-09-02T10:14:50.193861"
+     }
+ }
+Changes in 'ensemblvep/vep/tests/nextflow.config':
+--- modules/nf-core/ensemblvep/vep/tests/nextflow.config
++++ modules/nf-core/ensemblvep/vep/tests/nextflow.config
+@@ -1,5 +1,5 @@
+ params {
+-    vep_cache_version   = "113"
++    vep_cache_version   = "112"
+     vep_genome          = "WBcel235"
+     vep_species         = "caenorhabditis_elegans"
+ }
+
+'modules/nf-core/ensemblvep/vep/tests/tab.gz.config' is unchanged
+Changes in 'ensemblvep/vep/tests/main.nf.test':
+--- modules/nf-core/ensemblvep/vep/tests/main.nf.test
++++ modules/nf-core/ensemblvep/vep/tests/main.nf.test
+@@ -21,7 +21,7 @@
+                 process {
+                     """
+                     input[0] = Channel.of([
+-                        [id:"113_WBcel235"],
++                        [id:"112_WBcel235"],
+                         params.vep_genome,
+                         params.vep_species,
+                         params.vep_cache_version
+@@ -72,7 +72,7 @@
+                 process {
+                     """
+                     input[0] = Channel.of([
+-                        [id:"113_WBcel235"],
++                        [id:"112_WBcel235"],
+                         params.vep_genome,
+                         params.vep_species,
+                         params.vep_cache_version
+@@ -107,7 +107,7 @@
+             assertAll(
+                 { assert process.success },
+                 { assert snapshot(process.out.versions).match() },
+-                { assert path(process.out.tab.get(0).get(1)).linesGzip.contains("## ENSEMBL VARIANT EFFECT PREDICTOR v113.0") }
++                { assert path(process.out.tab.get(0).get(1)).linesGzip.contains("## ENSEMBL VARIANT EFFECT PREDICTOR v112.0") }
+             )
+         }
+     }
+
+'modules/nf-core/ensemblvep/vep/tests/vcf.config' is unchanged
 ************************************************************

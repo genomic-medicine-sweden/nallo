@@ -37,7 +37,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -71,7 +71,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -111,12 +111,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -157,7 +157,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -193,7 +193,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -229,7 +229,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -268,7 +268,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -307,12 +307,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -354,7 +354,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -384,7 +384,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -417,7 +417,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -450,12 +450,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -492,7 +492,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -522,7 +522,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -554,7 +554,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -588,12 +588,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]

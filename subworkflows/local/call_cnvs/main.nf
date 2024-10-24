@@ -37,14 +37,15 @@ workflow CALL_CNVS {
     ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     ADD_FOUND_IN_TAG.out.vcf
-        .map { meta, vcf -> [ [ 'id': meta.project ], vcf ] }
+        .map { meta, vcf -> [ [ 'id': meta.family_id ], vcf ] }
         .groupTuple()
         .set { svdb_merge_in }
 
     // Merge the files
     SVDB_MERGE (
         svdb_merge_in,
-        []
+        [],
+        true
     )
     ch_versions = ch_versions.mix(SVDB_MERGE.out.versions)
 
@@ -54,8 +55,8 @@ workflow CALL_CNVS {
     emit:
     sample_vcf  = ADD_FOUND_IN_TAG.out.vcf // channel: [ val(meta), path(vcf) ]
     sample_tbi  = ADD_FOUND_IN_TAG.out.tbi // channel: [ val(meta), path(tbi) ]
-    project_vcf = SVDB_MERGE.out.vcf       // channel: [ val(meta), path(vcf) ]
-    project_tbi = TABIX_TABIX.out.tbi      // channel: [ val(meta), path(tbi) ]
+    family_vcf  = SVDB_MERGE.out.vcf       // channel: [ val(meta), path(vcf) ]
+    family_tbi  = TABIX_TABIX.out.tbi      // channel: [ val(meta), path(tbi) ]
     versions = ch_versions                 // channel: [ versions.yml ]
 }
 

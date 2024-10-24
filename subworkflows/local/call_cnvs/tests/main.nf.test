@@ -32,7 +32,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'test', project: 'test', sex: 1 ],
+                    [ id: 'test', family_id: 'test', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ]
                 input[1] = GUNZIP.out.gunzip
@@ -80,12 +80,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -112,12 +112,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -153,12 +153,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.project_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )

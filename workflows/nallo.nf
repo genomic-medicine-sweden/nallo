@@ -41,12 +41,13 @@ include { SAMTOOLS_MERGE                                    } from '../modules/n
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SVS  } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
+include { TABIX_TABIX as TABIX_SVDB_MERGE_SVS_CNVS          } from '../modules/nf-core/tabix/tabix/main'
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -293,6 +294,8 @@ workflow NALLO {
         //
         // Call structural variants
         //
+
+        // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
             bam_bai,
             fasta,
@@ -302,37 +305,6 @@ workflow NALLO {
             ch_input_bed
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
-        CALL_SVS.out.ch_multisample_vcf
-            .join( CALL_SVS.out.ch_multisample_tbi )
-            .set { ch_split_svs_in }
-        //
-        // Annotate structural variants
-        //
-        if(!params.skip_sv_annotation) {
-            ANNOTATE_SVS (
-                CALL_SVS.out.ch_multisample_vcf,
-                fasta,
-                ch_svdb_dbs,
-                ch_vep_cache,
-                params.vep_cache_version,
-                PREPARE_GENOME.out.vep_extra_files
-            )
-
-            ANNOTATE_SVS.out.vcf
-                .join( ANNOTATE_SVS.out.tbi )
-                .set { ch_split_svs_in }
-        }
-
-        // Split the multisample SV VCF to also publish an (annotated) VCF per sample
-        BCFTOOLS_PLUGINSPLIT_SVS (
-            ch_split_svs_in,
-            [],
-            [],
-            [],
-            []
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SVS.out.versions)
 
         //
         // Call (and annotate and rank) SNVs
@@ -471,6 +443,7 @@ workflow NALLO {
                     ch_exclude_bed
                 )
                 ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
+
             }
 
             //
@@ -515,6 +488,50 @@ workflow NALLO {
                     }
                 }
             }
+        }
+
+        // Merge SVs and CNVs if we've called both SVs and CNVs
+        if (!params.skip_cnv_calling) {
+            CALL_SVS.out.ch_multisample_vcf
+            .join(CALL_CNVS.out.family_vcf)
+            .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
+            .set { svdb_merge_svs_cnvs_in }
+
+            // If SV annotation is off, merged variants are output from here
+            SVDB_MERGE_SVS_CNVS (
+                svdb_merge_svs_cnvs_in,
+                ['svs', 'cnvs'], // Because SVs have better breakpoint resolution, give them priority
+                true
+            )
+            ch_versions = ch_versions.mix(SVDB_MERGE_SVS_CNVS.out.versions)
+
+            if (params.skip_sv_annotation) {
+                // And tabixed here
+                TABIX_SVDB_MERGE_SVS_CNVS ( SVDB_MERGE_SVS_CNVS.out.vcf )
+                ch_versions = ch_versions.mix(TABIX_SVDB_MERGE_SVS_CNVS.out.versions)
+            }
+
+            SVDB_MERGE_SVS_CNVS.out.vcf
+                .set { annotate_svs_in }
+
+        } else {
+            CALL_SVS.out.ch_multisample_vcf
+                .set { annotate_svs_in }
+        }
+
+        //
+        // Annotate structural variants
+        //
+        if(!params.skip_sv_annotation) {
+            // If annotation is on, then merged variants are output from here
+            ANNOTATE_SVS (
+                annotate_svs_in,
+                fasta,
+                ch_svdb_dbs,
+                ch_vep_cache,
+                params.vep_cache_version,
+                PREPARE_GENOME.out.vep_extra_files
+            )
         }
     }
 

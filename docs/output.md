@@ -130,18 +130,6 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 ## Variants
 
-### CNVs
-
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, producing copy number, depth, and MAF tracks for IGV.
-
-| Path                                              | Description                               |
-| ------------------------------------------------- | ----------------------------------------- |
-| `cnv_calling/hificnv/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
-| `cnv_calling/hificnv/{sample}/*.depth.bw`         | Depth track in BigWig format              |
-| `cnv_calling/hificnv/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
-| `cnv_calling/hificnv/{sample}/*.vcf.gz`           | VCF file containing CNV variants          |
-| `cnv_calling/hificnv/{sample}/*.vcf.gz.tbi`       | Index of the corresponding VCF file       |
-
 ### Paralogous genes
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
@@ -213,26 +201,48 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for all samples |
 | `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                                |
 
-### SVs
+### SVs (and CNVs)
 
-[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants, and [SVDB](https://github.com/J35P312/SVDB) is used to merge variants within and between samples.
+[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. It also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
+[SVDB](https://github.com/J35P312/SVDB) is used to combine and merge SVs and CNVs within and between samples.
 
 !!!note
 
     Variants are only output without annotation if that subworkflow is turned off.
 
-| Path                                                  | Description                                                  |
-| ----------------------------------------------------- | ------------------------------------------------------------ |
-| `svs/multi_sample/{project}/{project}_svs.vcf.gz`     | VCF file with merged structural variants for all samples     |
-| `svs/multi_sample/{project}/{project}_svs.vcf.gz.tbi` | Index of the merged VCF file                                 |
-| `svs/single_sample/{sample}/*.vcf.gz`                 | VCF file with merged structural variants for a single sample |
-| `svs/single_sample/{sample}/*.vcf.gz.tbi`             | Index of the VCF file                                        |
+!!!note
 
-[SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
+    Due to the complexity of SV merging strategies, SVs and CNVs are reported per family rather than per project.
+    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately,
+    then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
 | Path                                                            | Description                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz`     | VCF file with annotated merged structural variants for all samples |
-| `svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                    |
-| `svs/single_sample/{sample}/*.vcf_annotated.gz`                 | VCF file with annotated structural variants for a single sample    |
-| `svs/single_sample/{sample}/*.vcf_annotated.gz.tbi`             | Index of the annotated VCF file                                    |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family                       |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                                       |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family (output if CNV-calling is off) |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                                       |
+| `svs/single_sample/{sample}/{sample}_cnvs.vcf.gz`               | VCF file with CNVs per sample                                      |
+| `svs/single_sample/{sample}/{sample}_cnvs.vcf.gz.tbi`           | VCF file with CNVs per sample                                      |
+| `svs/single_sample/{sample}/{sample}_svs.vcf.gz`                | VCF file with SVs per sample                                       |
+| `svs/single_sample/{sample}/{sample}_svs.vcf.gz.tbi`            | VCF file with SVs per sample                                       |
+
+[SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
+
+| Path                                                                      | Description                                                                      |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz`     | VCF file with merged and annotated CNVs and SVs per family                       |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi` | Index of the merged VCF file                                                     |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz`          | VCF file with merged and annotated SVs per family (output if CNV-calling is off) |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi`      | Index of the merged VCF file                                                     |
+
+## Visualization Tracks
+
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
+
+| Path                                                | Description                               |
+| --------------------------------------------------- | ----------------------------------------- |
+|  `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
+| `visualization_tracks/{sample}/*.depth.bw`          | Depth track in BigWig format              |
+| `visualization_tracks/{sample}/*.maf.bw`            | Minor allele frequencies in BigWig format |

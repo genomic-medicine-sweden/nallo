@@ -1,18 +1,18 @@
 {
     "test profile": {
         "content": [
-            98,
+            103,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
-                    "gawk": null
+                    "busybox-awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": "v1.0",
+                    "add_most_severe_consequence": 1.0,
                     "python": "3.8.3"
                 },
                 "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": "v1.0",
+                    "add_most_severe_pli": 1.0,
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
@@ -34,9 +34,6 @@
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_PLUGINSPLIT_SNVS": {
-                    "bcftools": 1.2
-                },
-                "BCFTOOLS_PLUGINSPLIT_SVS": {
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_QUERY": {
@@ -121,10 +118,10 @@
                     "gunzip": 1.1
                 },
                 "HIFIASM": {
-                    "hifiasm": "0.19.8-r603"
+                    "hifiasm": "0.20.0-r639"
                 },
                 "HIFICNV": {
-                    "hificnv": "0.1.7-70e9988"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "1.7.3"
@@ -160,7 +157,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": "v1.0",
+                    "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -178,6 +175,9 @@
                 "SAMTOOLS_INDEX_TRGT": {
                     "samtools": 1.2
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.2
+                },
                 "SAMTOOLS_SORT_TRGT": {
                     "samtools": 1.2
                 },
@@ -188,8 +188,11 @@
                     "somalier": "0.2.18"
                 },
                 "SOMALIER_PED": {
-                    "create_pedigree_file": "v1.0",
+                    "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
                 },
                 "SPLIT_BED_CHUNKS": {
                     "split_bed_chunks": 1.0
@@ -198,8 +201,12 @@
                     "stranger": "0.9.1"
                 },
                 "SVDB_MERGE": {
-                    "svdb": "2.8.1",
-                    "samtools": "1.19.2"
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
+                },
+                "SVDB_MERGE_SVS_CNVS": {
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
                 },
                 "TABIX_BGZIPTABIX": {
                     "tabix": 1.2
@@ -213,8 +220,11 @@
                 "TABIX_SVDB_MERGE": {
                     "tabix": 1.2
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.2
+                },
                 "TRGT": {
-                    "trgt": "trgt 0.7.0-4941fbb"
+                    "trgt": "0.7.0-4941fbb"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -256,15 +266,6 @@
                 "assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap2.sam.gz",
                 "assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.hap2.var.gz",
                 "assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.pair.vcf.gz",
-                "cnv_calling",
-                "cnv_calling/hificnv",
-                "cnv_calling/hificnv/HG002_Revio",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.copynum.bedgraph",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.depth.bw",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.log",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.maf.bw",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.vcf.gz",
-                "cnv_calling/hificnv/HG002_Revio/HG002_Revio.vcf.gz.tbi",
                 "databases",
                 "databases/echtvar",
                 "databases/echtvar/encode",
@@ -379,40 +380,42 @@
                 "snvs/stats/single_sample",
                 "snvs/stats/single_sample/HG002_Revio.vcf.gz.bcftools_stats.txt",
                 "svs",
-                "svs/multi_sample",
-                "svs/multi_sample/test",
-                "svs/multi_sample/test/test_svs_annotated.vcf.gz",
-                "svs/multi_sample/test/test_svs_annotated.vcf.gz.tbi",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz.tbi",
                 "svs/single_sample",
                 "svs/single_sample/HG002_Revio",
-                "svs/single_sample/HG002_Revio/HG002_Revio_svs_annotated.vcf.gz",
-                "svs/single_sample/HG002_Revio/HG002_Revio_svs_annotated.vcf.gz.tbi"
+                "svs/single_sample/HG002_Revio/HG002_Revio_cnvs.vcf.gz",
+                "svs/single_sample/HG002_Revio/HG002_Revio_cnvs.vcf.gz.tbi",
+                "svs/single_sample/HG002_Revio/HG002_Revio_svs.vcf.gz",
+                "svs/single_sample/HG002_Revio/HG002_Revio_svs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002_Revio",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ],
             [
-                "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,e4da3107f2421d42c6e2f59bff4e47d9",
-                "HG002_Revio.asm.bp.hap1.p_ctg.fasta.gz:md5,eff16bf92abff02c36cceb2eb5a9871c",
-                "HG002_Revio.asm.bp.hap2.p_ctg.assembly_summary:md5,bf908610472e602fd986b9d4a4d58b9e",
-                "HG002_Revio.asm.bp.hap2.p_ctg.fasta.gz:md5,e28c886baffe24c1a2972a1d95b1b250",
-                "HG002_Revio.dip.bed:md5,4e3cde029bceaa9363402e997f12f280",
-                "HG002_Revio.dip.vcf.gz:md5,9259613d7b01347b2d817d4e547c4203",
-                "HG002_Revio.hap1.bam:md5,5c739e8b3c2f659c3847498848280bbf",
-                "HG002_Revio.hap1.bam.bai:md5,a57472fa9365470db09f5ea8c7a7420a",
-                "HG002_Revio.hap1.bed:md5,3d75c9538e748a7672b934bdbde90df3",
-                "HG002_Revio.hap1.paf.gz:md5,46a3056ecd833d9a932c53fc46a3cafc",
-                "HG002_Revio.hap1.sam.gz:md5,0a161b44c29c0581ada87fee50be38c2",
-                "HG002_Revio.hap1.var.gz:md5,173218f6c3f5f067e0932a8331f12e3d",
-                "HG002_Revio.hap2.bam:md5,df63e7bb5dcee6ca5e731272dad0eb99",
-                "HG002_Revio.hap2.bam.bai:md5,ed8184223edea0297c7f9283ea7927bf",
-                "HG002_Revio.hap2.bed:md5,9ac411d49f08a8ec70e4792890e9faf9",
-                "HG002_Revio.hap2.paf.gz:md5,a99e451e4af96a7ab120cedd49eea618",
-                "HG002_Revio.hap2.sam.gz:md5,410acad899eda2f0a4a3e1eb4acf81cb",
-                "HG002_Revio.hap2.var.gz:md5,53dc16fc893a529a95067da161b4dad6",
-                "HG002_Revio.pair.vcf.gz:md5,a390558ab50ce0dc9efec070b1c70c22",
-                "HG002_Revio.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
-                "HG002_Revio.depth.bw:md5,0b9cae1d0646fdd2f690d4255282ee8f",
-                "HG002_Revio.maf.bw:md5,bacc69449af34efe8576245ae8188719",
-                "HG002_Revio.vcf.gz:md5,c5f77b97b9ef6d543171792074eb1322",
-                "HG002_Revio.vcf.gz.tbi:md5,5e42ce281f81b7fdb5fa6e42ec4c7f8b",
+                "HG002_Revio.asm.bp.hap1.p_ctg.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
+                "HG002_Revio.asm.bp.hap1.p_ctg.fasta.gz:md5,380ed173f8d50419a86c229dd81a20c2",
+                "HG002_Revio.asm.bp.hap2.p_ctg.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
+                "HG002_Revio.asm.bp.hap2.p_ctg.fasta.gz:md5,6ca4cd66b46b2bf7b1ed1ee959fba6ab",
+                "HG002_Revio.dip.bed:md5,8230ffcc5539eef359ab5128fa60e765",
+                "HG002_Revio.dip.vcf.gz:md5,747ea6c9532679ae7eb5ce06f511c4c2",
+                "HG002_Revio.hap1.bam:md5,91467717def7554e5ed667a103b52ebb",
+                "HG002_Revio.hap1.bam.bai:md5,3d7137693801619c4afb4cb493c35d40",
+                "HG002_Revio.hap1.bed:md5,44dcedabe0edb29af441df1f0b55210a",
+                "HG002_Revio.hap1.paf.gz:md5,680a7278a2d492ed6ee5c7b19dd5d80f",
+                "HG002_Revio.hap1.sam.gz:md5,87781cea76b064c23d1b63a34423b23f",
+                "HG002_Revio.hap1.var.gz:md5,bd714e935825d8c665445d93c7d82206",
+                "HG002_Revio.hap2.bam:md5,f1da738bd01db5c6e5e8b18906fe30f2",
+                "HG002_Revio.hap2.bam.bai:md5,04a41250610872ae3bf86108be610883",
+                "HG002_Revio.hap2.bed:md5,6b4b879d4ebe97f778921252469a029c",
+                "HG002_Revio.hap2.paf.gz:md5,77ff9e7c1b0ed8454f7a10beba01cbf9",
+                "HG002_Revio.hap2.sam.gz:md5,6d512a060c74428f7758aa51a99ae8c8",
+                "HG002_Revio.hap2.var.gz:md5,9ba9303b30730e419138e177c7d1e0c2",
+                "HG002_Revio.pair.vcf.gz:md5,1909dffa43850282fe7e5ae2b2d273a7",
                 "test.zip:md5,2042de439a4cb1b37825169a773cf24a",
                 "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,00b5d207be5dc8a6605698d6139afc48",
                 "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,58e7b0a9ddaad5be350eec78b338c1e6",
@@ -433,14 +436,16 @@
                 "test.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
                 "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-                "HG002_Revio_fastqc.html:md5,cf0b867d310438dd34bd9cdabab7d639",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,6b46396518979ff9d9771cb8a8fbbab0",
                 "HG002_Revio.mosdepth.summary.txt:md5,311aad293c6d8a646b6dd4edc337845c",
                 "HG002_Revio.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
                 "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
                 "HG002_Revio_stats.blocks.tsv:md5,d6e8baec71914acb176c4edc11a4ff15",
-                "HG002_Revio_stats.stats.tsv:md5,743288d0efd441904359474b9de892fb"
+                "HG002_Revio_stats.stats.tsv:md5,743288d0efd441904359474b9de892fb",
+                "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
+                "HG002_Revio_hificnv.depth.bw:md5,0d8b56722cc24331be98a2ca5effa3a1",
+                "HG002_Revio_hificnv.maf.bw:md5,3ad9a690c0b66a6e5ad0ef4f23d7e197"
             ],
             [
                 [
@@ -449,11 +454,11 @@
                 ],
                 [
                     "HG002_Revio.hap1.bam",
-                    "514d30ef8ff2c0a3d9a19ebc702ba883"
+                    "da103c401cf854a00aa75a57cda0f34d"
                 ],
                 [
                     "HG002_Revio.hap2.bam",
-                    "2f245ef6c8405acc80bc9df75553f276"
+                    "e8599cef23fc88e2fe09d2bda5ea372f"
                 ],
                 [
                     "HG002_Revio.paraphase.bam",
@@ -467,15 +472,11 @@
             [
                 [
                     "HG002_Revio.dip.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2175, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=1917, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio.pair.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2175, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=1917, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_hba.vcf.gz",
@@ -506,26 +507,38 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=106, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "test_svs_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=51, phased=false, phasedAutodetect=false]"
+                    "FAM_svs_cnvs_merged_annotated.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_svs_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=49, phased=false, phasedAutodetect=false]"
+                    "HG002_Revio_cnvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=53, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 [
                     "HG002_Revio.dip.vcf.gz",
-                    "4c6e0d636226da4518af943966ca67ef"
+                    "db10cdb233cb09a46c1694536c2e79e7"
                 ],
                 [
                     "HG002_Revio.pair.vcf.gz",
-                    "7eecef7377b98744cacaae36201c67e2"
+                    "fa3bfacdab5449526d29d642340d6708"
                 ],
                 [
-                    "HG002_Revio.vcf.gz",
-                    "ab9044066c7bd041966eed43e0d00f13"
+                    "HG002_Revio_repeat_expansion_stranger.vcf.gz",
+                    "492a5d1a0f1656e1f7fc1b97c922cab4"
+                ],
+                [
+                    "test.vcf.gz",
+                    "4ab22ba6012b9f579f1831248bb95da"
+                ],
+                [
+                    "HG002_Revio_sorted.vcf.gz",
+                    "43b909ba9628b92f5062be6c413e560d"
                 ]
             ]
         ],
@@ -533,6 +546,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T15:28:34.301281866"
+        "timestamp": "2024-10-29T08:06:35.225026148"
     }
 }

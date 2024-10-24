@@ -27,7 +27,7 @@ process HIFICNV {
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
 
-    def expected_cn = sex == 1 ? "--expected-cn ${expected_xy_bed}" : sex == 2 ? "--expected-cn ${expected_xx_bed}" : ""
+    def expected_cn = (sex == 1 && expected_xy_bed) ? "--expected-cn ${expected_xy_bed}" : (sex == 2 && expected_xx_bed) ? "--expected-cn ${expected_xx_bed}" : ""
     def exclude = exclude_bed ? "--exclude ${exclude_bed}" : ""
     def maf = maf_vcf ? "--maf ${maf_vcf}" : ""
 
