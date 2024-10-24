@@ -43,10 +43,10 @@
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -90,10 +90,10 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -102,7 +102,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:02:44.856891805"
+        "timestamp": "2024-10-25T09:40:03.879250426"
     },
     "1 sample - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -168,10 +168,10 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -236,10 +236,10 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -249,7 +249,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T16:45:29.476459024"
+        "timestamp": "2024-10-25T09:42:56.764594137"
     },
     "1 sample - 1 bed, fasta, fai, bed, []": {
         "content": [
@@ -295,10 +295,10 @@
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -342,10 +342,10 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -354,7 +354,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:03:15.564996428"
+        "timestamp": "2024-10-25T09:40:32.794032818"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed": {
         "content": [
@@ -434,14 +434,14 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -520,14 +520,14 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -537,7 +537,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:04:56.502337737"
+        "timestamp": "2024-10-25T09:42:10.61904887"
     },
     "2 samples - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -621,10 +621,10 @@
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -707,10 +707,10 @@
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -720,7 +720,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T17:29:06.951556756"
+        "timestamp": "2024-10-25T09:43:09.654620289"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed - stub": {
         "content": [
@@ -804,10 +804,10 @@
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -890,10 +890,10 @@
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -903,7 +903,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T17:29:20.425210338"
+        "timestamp": "2024-10-25T09:43:22.844047056"
     },
     "1 sample - 1 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -951,8 +951,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -998,8 +998,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -1008,7 +1008,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T16:45:43.343271078"
+        "timestamp": "2024-10-25T09:42:44.538312054"
     },
     "1 sample - no bed, fasta, fai, [], []": {
         "content": [
@@ -1058,10 +1058,10 @@
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -1109,10 +1109,10 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -1121,7 +1121,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:02:14.428633443"
+        "timestamp": "2024-10-25T09:39:34.803782002"
     },
     "1 sample - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1185,12 +1185,12 @@
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -1253,12 +1253,12 @@
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -1268,7 +1268,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:03:47.115482891"
+        "timestamp": "2024-10-25T09:41:03.437551855"
     },
     "2 samples - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1348,14 +1348,14 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
@@ -1434,14 +1434,14 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
-                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
@@ -1451,7 +1451,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-08T13:04:21.670883764"
+        "timestamp": "2024-10-25T09:41:37.132064291"
     },
     "1 sample - no bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1503,8 +1503,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -1554,8 +1554,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -1564,7 +1564,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T16:45:39.518278904"
+        "timestamp": "2024-10-25T09:42:22.040964953"
     },
     "1 sample - 1 bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1612,8 +1612,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ],
                 "combined_bcf": [
@@ -1659,8 +1659,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
-                    "versions.yml:md5,a942827df377a5077fe916c5b4a509b8",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
+                    "versions.yml:md5,b461c4ef2d44da4047b74239461bdff6",
                     "versions.yml:md5,dce103ef6b2f37c6844db8191418b9e6"
                 ]
             }
@@ -1669,6 +1669,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-24T16:45:46.276348003"
+        "timestamp": "2024-10-25T09:42:33.197137178"
     }
 }

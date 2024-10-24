@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   test:
-    name: ${{ matrix.tags }} ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
+    name: ${{ matrix.tags }} | ${{ matrix.profile }} | NF-${{ matrix.NXF_VER }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
