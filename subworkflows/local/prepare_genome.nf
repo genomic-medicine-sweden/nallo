@@ -50,7 +50,7 @@ workflow PREPARE_GENOME {
             .splitCsv ( header:true )
             .map { row ->
                 path = file(row.vep_files[0])
-                if(path.isFile() || path.isDirectory()){
+                if(path.exists()) {
                     return [path]
                 } else {
                     error("\nVep database file ${path} does not exist.")
