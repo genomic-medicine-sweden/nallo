@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            139,
+            146,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -190,6 +190,9 @@
                 "SOMALIER_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
                 },
                 "SPLIT_BED_CHUNKS": {
                     "split_bed_chunks": 1.0
@@ -556,10 +559,10 @@
                 "HG002_Revio_B_phased.blocks.tsv:md5,1a8b683f4d2f930758e4af3fe8eccd7f",
                 "HG002_Revio_B_phased.stats.tsv:md5,4c8866c1a6e5340af08f7a7ee7465b6a",
                 "HG002_Revio_B_phased.summary.tsv:md5,b8814ea318106ad2a3d4a83853c7e8d2",
-                "HG002_Revio_A_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-                "HG002_Revio_B_cramino_aligned_phased.arrow:md5,3bb08ac5958c6cb0801f319066c3a1b2",
-                "HG002_Revio_A_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-                "HG002_Revio_B_cramino_aligned.arrow:md5,3bb08ac5958c6cb0801f319066c3a1b2",
+                "HG002_Revio_A_cramino_aligned_phased.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
+                "HG002_Revio_B_cramino_aligned_phased.arrow:md5,0bfe9d9443b9ed57feb37bf9d1e97af5",
+                "HG002_Revio_A_cramino_aligned.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
+                "HG002_Revio_B_cramino_aligned.arrow:md5,0bfe9d9443b9ed57feb37bf9d1e97af5",
                 "HG002_Revio_A_fastqc.html:md5,25f875c3a542ff8590655685bc152658",
                 "HG002_Revio_B_fastqc.html:md5,4b7d698cbe79dbfb4a74e8e7f84891d5",
                 "HG002_Revio_A.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
@@ -580,11 +583,11 @@
             [
                 [
                     "HG002_Revio_A_haplotagged.bam",
-                    "5df05408bd4f18a4ef1555bc5800601a"
+                    "e14be0cb250fdb518d334f652235209"
                 ],
                 [
                     "HG002_Revio_B_haplotagged.bam",
-                    "e9aea8a85ecd1b9dde90e1a08e4a390d"
+                    "a21a2902aaafba53a91367b083fa8659"
                 ],
                 [
                     "HG002_Revio_A.hap1.bam",
@@ -756,6 +759,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T11:11:02.811874333"
+        "timestamp": "2024-10-25T11:58:04.220738871"
     }
 }
