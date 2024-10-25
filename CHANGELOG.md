@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#403](https://github.com/genomic-medicine-sweden/nallo/pull/403) - Added `FOUND_IN=hificnv` tags to CNV calling output
 - [#408](https://github.com/genomic-medicine-sweden/nallo/pull/408) - Added a new subworkflow to annotate SVs
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Added `FOUND_IN=deepvariant` tags to SNV calling output
-- [#418](https://github.com/genomic-medicine-sweden/nallo/pull/418) - Added a check for uniue input filenames for each sample
+- [#418](https://github.com/genomic-medicine-sweden/nallo/pull/418) - Added a check for unique input filenames for each sample
 - [#419](https://github.com/genomic-medicine-sweden/nallo/pull/419) - Added support for SV filtering using input BED file ([#348](https://github.com/genomic-medicine-sweden/nallo/issues/348))
 - [#430](https://github.com/genomic-medicine-sweden/nallo/pull/430) - Added a GitHub action to build and publish docs to GitHub Pages
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Added files needed to automatically build and publish docs to GitHub Pages
