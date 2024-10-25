@@ -1542,7 +1542,7 @@ Only GRCh38 is supported.</p>
 <ul>
 <li>Limit SNV calling to regions in BED file (<code>--bed</code>).</li>
 <li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting <code>--parallel_snv</code> to a different number.</li>
-<li>By default the pipeline does not perform parallel alignment, but this can be changed by setting <code>--parallel_alignments</code> to split the alignment into multiple processes. This comes with some additional overhead, but speeds up the alignment significantly.</li>
+<li>By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--parallel_alignments</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
 </ul>
 <h2 id="reproducibility">Reproducibility</h2>
 <p>It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.</p>
