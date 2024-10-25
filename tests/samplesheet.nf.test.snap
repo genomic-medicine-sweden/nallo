@@ -8,11 +8,11 @@
                     "busybox-awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": "v1.0",
+                    "add_most_severe_consequence": 1.0,
                     "python": "3.8.3"
                 },
                 "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": "v1.0",
+                    "add_most_severe_pli": 1.0,
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
@@ -160,7 +160,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": "v1.0",
+                    "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -188,7 +188,7 @@
                     "somalier": "0.2.18"
                 },
                 "SOMALIER_PED": {
-                    "create_pedigree_file": "v1.0",
+                    "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
                 "SPLIT_BED_CHUNKS": {
@@ -528,6 +528,10 @@
                     "ab9044066c7bd041966eed43e0d00f13"
                 ],
                 [
+                    "HG002_Revio_phased.vcf.gz",
+                    "dfb1409ffb74988cbbc104e3ec133af6"
+                ],
+                [
                     "HG002_Revio_repeat_expansion_stranger.vcf.gz",
                     "492a5d1a0f1656e1f7fc1b97c922cab4"
                 ],
@@ -545,6 +549,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T10:03:49.447736111"
+        "timestamp": "2024-10-25T10:48:32.422786647"
     }
 }

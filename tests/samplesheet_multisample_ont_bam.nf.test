@@ -20,17 +20,17 @@ nextflow_pipeline {
             }
         }
 
-                then {
+        then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
             // bam_files: All bam files
             def bam_files        = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
-            // all_vcf_files: All vcf files
+            // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
-            // stable_vcf_files: Vcf files whose variants are stable
-            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore', include: ['**/*.vcf.gz'])
+            // stable_vcf_files: Vcf files with stable variants - can be snapshot unsing variantsMD5
+            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(

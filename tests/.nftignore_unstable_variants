@@ -1,4 +1,3 @@
 paraphase/**/*.vcf.gz
-phased_variants/**/*.vcf.gz
 snvs/**/*.vcf.gz
 svs/**/*.vcf.gz
