@@ -437,8 +437,8 @@
                 "multiqc_general_stats.txt:md5,e60e67616f5ed60b6807f7aac236e3ab",
                 "multiqc_whatshap_stats.txt:md5,bf958293f6f56167c9a45ad07d84249c",
                 "test.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
-                "HG002_Revio_cramino_aligned.arrow:md5,88a1a7805a163f9a006e3c46d0bdd492",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
+                "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
                 "HG002_Revio_fastqc.html:md5,1080b519dbbb66f45eee74e311d4922c",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,6b46396518979ff9d9771cb8a8fbbab0",
@@ -451,7 +451,7 @@
             [
                 [
                     "HG002_Revio_haplotagged.bam",
-                    "e14be0cb250fdb518d334f652235209"
+                    "5df05408bd4f18a4ef1555bc5800601a"
                 ],
                 [
                     "HG002_Revio.hap1.bam",
@@ -551,6 +551,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T11:56:30.945982179"
+        "timestamp": "2024-10-25T13:00:09.69999597"
     }
 }
