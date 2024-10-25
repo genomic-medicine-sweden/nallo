@@ -731,14 +731,6 @@
                     "7db8959b4b1f46316bb7d5908a8b9f26"
                 ],
                 [
-                    "HG002_Revio_A_phased.vcf.gz",
-                    "4a142f28581af98c85c04283fb83ed3a"
-                ],
-                [
-                    "HG002_Revio_B_phased.vcf.gz",
-                    "ca1d09bd793f5d9797385a61885e3b47"
-                ],
-                [
                     "HG002_Revio_A_repeat_expansion_stranger.vcf.gz",
                     "492a5d1a0f1656e1f7fc1b97c922cab4"
                 ],
@@ -764,6 +756,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T10:50:05.7313058"
+        "timestamp": "2024-10-25T11:11:02.811874333"
     }
 }

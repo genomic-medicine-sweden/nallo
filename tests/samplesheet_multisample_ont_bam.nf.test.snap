@@ -498,14 +498,6 @@
                 [
                     "HG002_ONT_B.vcf.gz",
                     "ab11a22397e05e4b7f7c5c809e9407bf"
-                ],
-                [
-                    "HG002_ONT_A_phased.vcf.gz",
-                    "88e75782c0d692d4e6050408ee97b24a"
-                ],
-                [
-                    "HG002_ONT_B_phased.vcf.gz",
-                    "bd70f385e5e36e88c080b1a79c9e21b7"
                 ]
             ]
         ],
@@ -513,6 +505,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T10:51:36.082304561"
+        "timestamp": "2024-10-25T11:12:30.270856551"
     }
 }

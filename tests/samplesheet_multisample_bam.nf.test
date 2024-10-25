@@ -2,7 +2,6 @@ nextflow_pipeline {
 
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
-    profile "test"
     tag "PIPELINE"
 
     test("samplesheet_multisample_bam | --phaser hiphase") {

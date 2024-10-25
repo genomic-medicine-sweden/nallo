@@ -2,7 +2,6 @@ nextflow_pipeline {
 
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
-    profile "test"
     tag "PIPELINE"
 
     test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 2 --parallel_snv 1") {
