@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            98,
+            101,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -178,6 +178,9 @@
                 "SAMTOOLS_INDEX_TRGT": {
                     "samtools": 1.2
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.2
+                },
                 "SAMTOOLS_SORT_TRGT": {
                     "samtools": 1.2
                 },
@@ -190,6 +193,9 @@
                 "SOMALIER_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
                 },
                 "SPLIT_BED_CHUNKS": {
                     "split_bed_chunks": 1.0
@@ -545,6 +551,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T11:09:29.282904011"
+        "timestamp": "2024-10-25T13:00:09.69999597"
     }
 }

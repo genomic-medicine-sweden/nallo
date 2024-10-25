@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 2 --parallel_snv 1") {
+    test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1") {
         tag "samplesheet_multisample_ont_bam"
 
         when {
@@ -13,7 +13,7 @@ nextflow_pipeline {
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                       = "$outputDir"
                 preset                       = 'ONT_R10'
-                parallel_alignments          = 2
+                parallel_alignments          = 1
                 parallel_snv                 = 1
                 phaser                       = "whatshap"
             }
