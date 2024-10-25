@@ -199,8 +199,9 @@
                     },
                     "samtools/merge": {
                         "branch": "master",
-                        "git_sha": "e9bc33485e420b51cfbed3cf63ac7463cd5739d3",
-                        "installed_by": ["modules"]
+                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/merge/samtools-merge.diff"
                     },
                     "samtools/sort": {
                         "branch": "master",

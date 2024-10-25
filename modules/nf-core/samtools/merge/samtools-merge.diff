@@ -1,7 +1,18 @@
 Changes in module 'nf-core/samtools/merge'
+'modules/nf-core/samtools/merge/meta.yml' is unchanged
+Changes in 'samtools/merge/main.nf':
 --- modules/nf-core/samtools/merge/main.nf
 +++ modules/nf-core/samtools/merge/main.nf
-@@ -11,14 +11,14 @@
+@@ -4,21 +4,21 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
+-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
++        'https://depot.galaxyproject.org/singularity/samtools:1.20--h50ea8bc_0' :
++        'biocontainers/samtools:1.20--h50ea8bc_0' }"
+ 
+     input:
      tuple val(meta), path(input_files, stageAs: "?/*")
      tuple val(meta2), path(fasta)
      tuple val(meta3), path(fai)
@@ -23,16 +34,25 @@ Changes in module 'nf-core/samtools/merge'
  
      when:
      task.ext.when == null || task.ext.when
-@@ -34,7 +34,7 @@
+@@ -28,14 +28,15 @@
+     prefix   = task.ext.prefix ?: "${meta.id}"
+     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
+     def reference = fasta ? "--reference ${fasta}" : ""
++    def input = (input_files.collect().size() > 1) ? input_files.sort{ it.name } : input_files
+     """
+     samtools \\
+         merge \\
          --threads ${task.cpus-1} \\
          $args \\
          ${reference} \\
 -        ${prefix}.${file_type} \\
+-        $input_files
 +        ${prefix}.${file_type}##idx##${prefix}.${file_type}.${index_type} \\
-         $input_files
++        $input
  
      cat <<-END_VERSIONS > versions.yml
-@@ -47,10 +47,9 @@
+     "${task.process}":
+@@ -47,10 +48,9 @@
      def args = task.ext.args   ?: ''
      prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
      def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
@@ -46,19 +66,9 @@ Changes in module 'nf-core/samtools/merge'
  
      cat <<-END_VERSIONS > versions.yml
 
---- modules/nf-core/samtools/merge/environment.yml
-+++ modules/nf-core/samtools/merge/environment.yml
-@@ -1,8 +1,10 @@
- name: samtools_merge
-+
- channels:
-   - conda-forge
-   - bioconda
-   - defaults
-+
- dependencies:
-+  - bioconda::htslib=1.20
-   - bioconda::samtools=1.20
--  - bioconda::htslib=1.20
-
+'modules/nf-core/samtools/merge/environment.yml' is unchanged
+'modules/nf-core/samtools/merge/tests/tags.yml' is unchanged
+'modules/nf-core/samtools/merge/tests/index.config' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test' is unchanged
 ************************************************************
