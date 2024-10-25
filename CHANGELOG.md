@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Updated and refactored processes and workflows related to variant ranking
 - [#438](https://github.com/genomic-medicine-sweden/nallo/pull/438) - Updated pipeline tests to use functions in nft-utils instead of checking hardcoded paths
 - [#440](https://github.com/genomic-medicine-sweden/nallo/pull/440) - Updated hifiasm to 0.20 with new default parameters for telomeres and scaffolding ([#295](https://github.com/genomic-medicine-sweden/nallo/issues/295))
+- [#441](https://github.com/genomic-medicine-sweden/nallo/pull/441) - Changed the minimap2 preset for hifi reads back to `map-hifi`
 
 ### `Removed`
 

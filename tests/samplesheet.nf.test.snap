@@ -416,41 +416,41 @@
                 "HG002_Revio.hap2.sam.gz:md5,6d512a060c74428f7758aa51a99ae8c8",
                 "HG002_Revio.hap2.var.gz:md5,9ba9303b30730e419138e177c7d1e0c2",
                 "HG002_Revio.pair.vcf.gz:md5,1909dffa43850282fe7e5ae2b2d273a7",
-                "test.zip:md5,2042de439a4cb1b37825169a773cf24a",
-                "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,00b5d207be5dc8a6605698d6139afc48",
-                "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,58e7b0a9ddaad5be350eec78b338c1e6",
-                "HG002_Revio_modkit_pileup_phased_2.bed.gz:md5,bb881b1838f17235e1dc295b29f2d473",
-                "HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi:md5,e76d65f68af11d673eda080b522d81c2",
-                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz:md5,df6d44c55925a894aa5fe838f9dd449e",
-                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,8348f75c0ce6fec18b57739fc36b3011",
-                "HG002_Revio_modkit_pileup.bed.gz:md5,55496cdcd7e4ccad86adee3cb819da56",
-                "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,b217c5e971ecb0b8c874b0038f0d2ae4",
-                "mosdepth_cov_dist.txt:md5,1ab27c6267c491c1a2ccf0ac988f61a0",
-                "mosdepth_cumcov_dist.txt:md5,ccca5d9ba66b884b83cf982958485948",
-                "mosdepth_perchrom.txt:md5,12bf09d8a371ca77f525c88190f2e07d",
-                "multiqc_bcftools_stats.txt:md5,6f68bd58414b016e5a0f7310e876a181",
+                "test.zip:md5,a0abe28a72b11b68126040dd38fa8e37",
+                "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,ac9bfc455d0b697a4bd565b510c155e0",
+                "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,5a9ac375a0ce33af002e0073635a3425",
+                "HG002_Revio_modkit_pileup_phased_2.bed.gz:md5,b2c6c3fc27d34b7c588a4a4b3e9611b0",
+                "HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi:md5,2ad55c2f604cbdf6a784b2dd99b25cb1",
+                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz:md5,04ee840c02e04238b9432bc374a1afe1",
+                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,e1418c8075da8831a52e0cd56ceb910e",
+                "HG002_Revio_modkit_pileup.bed.gz:md5,a52bb9ab393e682d0b7118ef2efe5c15",
+                "HG002_Revio_modkit_pileup.bed.gz.tbi:md5,08312c13316ed9b4b582897c210ecb58",
+                "mosdepth_cov_dist.txt:md5,62011d1135dafcf05d7f6d5750d20c9f",
+                "mosdepth_cumcov_dist.txt:md5,eeb7f82eb03344d26a99b6596a1c7413",
+                "mosdepth_perchrom.txt:md5,53806d793d5627e60648daebb6606723",
+                "multiqc_bcftools_stats.txt:md5,09a616618fb506994ce178d32325159f",
                 "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
-                "multiqc_fastqc.txt:md5,6168de97dd0d63807f925487735bdb60",
-                "multiqc_general_stats.txt:md5,e60e67616f5ed60b6807f7aac236e3ab",
-                "multiqc_whatshap_stats.txt:md5,bf958293f6f56167c9a45ad07d84249c",
+                "multiqc_fastqc.txt:md5,f0717ca13d848aa8f5eaa5d0dba92178",
+                "multiqc_general_stats.txt:md5,c82b773e9d5ab3251280f3f03f35193a",
+                "multiqc_whatshap_stats.txt:md5,c8c212ecc6fbf6803f8de87f2395363f",
                 "test.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-                "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
-                "HG002_Revio.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
-                "HG002_Revio.mosdepth.region.dist.txt:md5,6b46396518979ff9d9771cb8a8fbbab0",
-                "HG002_Revio.mosdepth.summary.txt:md5,311aad293c6d8a646b6dd4edc337845c",
-                "HG002_Revio.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
+                "HG002_Revio_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
+                "HG002_Revio.mosdepth.global.dist.txt:md5,6186315d4d65eda85553af82a98829d1",
+                "HG002_Revio.mosdepth.region.dist.txt:md5,c6c7ee8f056b8b2b92c97ec472b1db16",
+                "HG002_Revio.mosdepth.summary.txt:md5,35c51f1ad9d2856d1e6446205f19a8e3",
+                "HG002_Revio.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
                 "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
-                "HG002_Revio_stats.blocks.tsv:md5,d6e8baec71914acb176c4edc11a4ff15",
-                "HG002_Revio_stats.stats.tsv:md5,743288d0efd441904359474b9de892fb",
+                "HG002_Revio_stats.blocks.tsv:md5,e73960d863a78848498499480ea9937f",
+                "HG002_Revio_stats.stats.tsv:md5,cffa4a500350b2227ab40bbbe428e9ef",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
-                "HG002_Revio_hificnv.depth.bw:md5,0d8b56722cc24331be98a2ca5effa3a1",
-                "HG002_Revio_hificnv.maf.bw:md5,3ad9a690c0b66a6e5ad0ef4f23d7e197"
+                "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
+                "HG002_Revio_hificnv.maf.bw:md5,8340a82b7b3da36383511631ed21066c"
             ],
             [
                 [
                     "HG002_Revio_haplotagged.bam",
-                    "5df05408bd4f18a4ef1555bc5800601a"
+                    "3367d07489e728a2a99d9abb618841ec"
                 ],
                 [
                     "HG002_Revio.hap1.bam",
@@ -484,7 +484,7 @@
                 ],
                 [
                     "HG002_Revio_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=252, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=191, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_repeat_expansion_stranger.vcf.gz",
@@ -500,15 +500,15 @@
                 ],
                 [
                     "test_snv_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=106, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=103, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_snv_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=106, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=85, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=87, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_cnvs.vcf.gz",
@@ -516,7 +516,7 @@
                 ],
                 [
                     "HG002_Revio_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=53, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -546,6 +546,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-29T08:06:35.225026148"
+        "timestamp": "2024-10-30T08:28:49.483885889"
     }
 }
