@@ -60,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#433](https://github.com/genomic-medicine-sweden/nallo/pull/433) - Updated docs and README.
 - [#434](https://github.com/genomic-medicine-sweden/nallo/pull/434) - Updated the SVDB merge module to fix unstable CALL_SVS tests
 - [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Updated and refactored processes and workflows related to variant ranking
+- [#438](https://github.com/genomic-medicine-sweden/nallo/pull/438) - Updated pipeline tests to use functions in nft-utils instead of checking hardcoded paths
 - [#440](https://github.com/genomic-medicine-sweden/nallo/pull/440) - Updated hifiasm to 0.20 with new default parameters for telomeres and scaffolding ([#295](https://github.com/genomic-medicine-sweden/nallo/issues/295))
 
 ### `Removed`
@@ -77,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#382](https://github.com/genomic-medicine-sweden/nallo/pull/382) - Fixed broken links and formatting in documentation
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Fixed minimap2 preset for ONT data being overwritten to `map-ont` when it should have been `lr:hq`, due to different settings in index and alignment processes [#392](https://github.com/genomic-medicine-sweden/nallo/issues/392)
 - [#402](https://github.com/genomic-medicine-sweden/nallo/pull/402) - Fixed double sample names in HiFiCNV output
+- [#438](https://github.com/genomic-medicine-sweden/nallo/pull/438) - Fixed missing/malformed software versions in `ADD_FOUND_IN_TAG`, `ADD_MOST_SEVERE_CSQ`, `ADD_MOST_SEVERE_PLI`, `SAMPLESHEET_PED`, `SOMALIER_PED` and `TRGT`
 
 ### Parameters
 

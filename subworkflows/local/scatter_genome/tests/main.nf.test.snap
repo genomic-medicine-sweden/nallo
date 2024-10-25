@@ -1,108 +1,4 @@
 {
-    "fai, [], bed, true, 3": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
-                    ]
-                ],
-                "1": [
-                    [
-                        "1.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
-                        1
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
-                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
-                    "versions.yml:md5,d69b1c1fc4e665c357d541ea3b0a0240",
-                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
-                ],
-                "bed": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
-                    ]
-                ],
-                "bed_intervals": [
-                    [
-                        "1.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
-                        1
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
-                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
-                    "versions.yml:md5,d69b1c1fc4e665c357d541ea3b0a0240",
-                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
-                ]
-            },
-            [
-                "chr22\t0\t40001"
-            ],
-            [
-                [
-                    "chr22\t0\t40001"
-                ]
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-07-11T13:03:46.414904212"
-    },
-    "[], bed, false, false, 3": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "chr22"
-                        },
-                        "chr22.bed:md5,3b0b598acca89a84aa414e4c95abec1f"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "bed": [
-                    [
-                        {
-                            "id": "chr22"
-                        },
-                        "chr22.bed:md5,3b0b598acca89a84aa414e4c95abec1f"
-                    ]
-                ],
-                "bed_intervals": [
-                    
-                ],
-                "versions": [
-                    
-                ]
-            },
-            [
-                "chr22\t0\t1000"
-            ],
-            [
-                
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-07-11T12:53:03.541050122"
-    },
     "[], bed, false, true, 3": {
         "content": [
             {
@@ -173,13 +69,15 @@
         },
         "timestamp": "2024-07-11T13:06:34.382235567"
     },
-    "fai, [], true, true, 3": {
+    "fai, [], bed, true, 3": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": {
+                                "id": "test"
+                            }
                         },
                         "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
@@ -199,7 +97,9 @@
                 "bed": [
                     [
                         {
-                            "id": "test"
+                            "id": {
+                                "id": "test"
+                            }
                         },
                         "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
@@ -227,10 +127,118 @@
             ]
         ],
         "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-24T16:45:01.511512303"
+    },
+    "fai, [], true, true, 3": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": {
+                                "id": "test"
+                            }
+                        },
+                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                    ]
+                ],
+                "1": [
+                    [
+                        "1.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        1
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,d69b1c1fc4e665c357d541ea3b0a0240",
+                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": {
+                                "id": "test"
+                            }
+                        },
+                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                    ]
+                ],
+                "bed_intervals": [
+                    [
+                        "1.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        1
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,d69b1c1fc4e665c357d541ea3b0a0240",
+                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
+                ]
+            },
+            [
+                "chr22\t0\t40001"
+            ],
+            [
+                [
+                    "chr22\t0\t40001"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-24T16:44:33.772383165"
+    },
+    "[], bed, false, false, 3": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22.bed:md5,3b0b598acca89a84aa414e4c95abec1f"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22.bed:md5,3b0b598acca89a84aa414e4c95abec1f"
+                    ]
+                ],
+                "bed_intervals": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            },
+            [
+                "chr22\t0\t1000"
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-11T13:03:35.848426979"
+        "timestamp": "2024-07-11T12:53:03.541050122"
     },
     "fai, [], true, false, []": {
         "content": [
@@ -238,7 +246,9 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": {
+                                "id": "test"
+                            }
                         },
                         "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
@@ -252,7 +262,9 @@
                 "bed": [
                     [
                         {
-                            "id": "test"
+                            "id": {
+                                "id": "test"
+                            }
                         },
                         "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
@@ -272,9 +284,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-07-11T13:03:25.327078297"
+        "timestamp": "2024-10-24T16:44:24.76494349"
     }
 }
