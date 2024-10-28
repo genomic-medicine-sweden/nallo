@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_snp_db.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.snp_db schema",
+    "description": "Schema for the file provided with params.snp_db",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "sample": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample must be provided and cannot contain spaces."
+            },
+            "file": {
+                "format": "file-path",
+                "type": "string",
+                "pattern": "^\\S+\\.zip$",
+                "errorMessage": "Echtvar database must be provided, cannot contain spaces and must have extension '.zip'"
+            }
+        },
+        "required": ["sample", "file"]
+    }
+}

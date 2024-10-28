@@ -640,3 +640,15 @@ def findKeyForValue(def valueToFind, Map map) {
     }
     return null // Value not found
 }
+
+// Utility function to create channels from references
+def createReferenceChannelFromPath(param, defaultValue = '') {
+    return param ? Channel.fromPath(param, checkIfExists: true)
+        .map { [ [ id: it.simpleName ], it ] }
+        .collect() : defaultValue
+}
+// Utility function to create channels from samplesheets
+def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
+    return param ? Channel.fromList(samplesheetToList(param, schema)) : defaultValue
+}
+

@@ -20,9 +20,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
                 ]
                 input[3] = true
-                input[4] = Channel.of([
-                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
-                ])
                 """
             }
         }
@@ -69,9 +66,11 @@ nextflow_workflow {
                 ]
                 input[2] = PREPARE_GENOME.out.fasta
                 input[3] = PREPARE_GENOME.out.fai
-                input[4] = PREPARE_GENOME.out.vep_resources
+                input[4] = PREPARE_GENOME.out.vep_resources.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
-                input[6] = PREPARE_GENOME.out.vep_extra_files
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
                 input[8] = Channel.value([])
                 input[9] = null
