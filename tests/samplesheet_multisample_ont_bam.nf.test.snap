@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
         "content": [
-            97,
+            99,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -67,6 +67,9 @@
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT": {
+                    "deepvariant": "1.6.1"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.6.1"
                 },
                 "ECHTVAR_ANNO": {
@@ -287,6 +290,11 @@
                 "qc/cramino/unphased/HG002_ONT_B",
                 "qc/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.arrow",
                 "qc/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_A",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_A/HG002_ONT_A.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_B",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_B/HG002_ONT_B.visual_report.html",
                 "qc/fastqc",
                 "qc/fastqc/HG002_ONT_A",
                 "qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.html",
@@ -490,6 +498,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T08:37:01.633018038"
+        "timestamp": "2024-10-30T12:46:58.003996257"
     }
 }

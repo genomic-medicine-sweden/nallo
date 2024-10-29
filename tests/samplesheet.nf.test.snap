@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            104,
+            105,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -76,6 +76,9 @@
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT": {
+                    "deepvariant": "1.6.1"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.6.1"
                 },
                 "DIPCALL": {
@@ -329,6 +332,9 @@
                 "qc/cramino/unphased/HG002_Revio",
                 "qc/cramino/unphased/HG002_Revio/HG002_Revio_cramino_aligned.arrow",
                 "qc/cramino/unphased/HG002_Revio/HG002_Revio_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
                 "qc/fastqc",
                 "qc/fastqc/HG002_Revio",
                 "qc/fastqc/HG002_Revio/HG002_Revio_fastqc.html",
@@ -546,6 +552,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T10:27:37.120618269"
+        "timestamp": "2024-10-30T12:43:47.288899831"
     }
 }

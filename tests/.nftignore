@@ -12,6 +12,7 @@ pipeline_info/*.{html,json,txt,yml}
 qc/cramino/**/*.txt
 qc/fastqc/**/*.{zip,html}
 qc/somalier/**/*.{html,tsv}
+qc/deepvariant_vcfstatsreport/**/*.html
 repeat_annotation/**/*.{vcf.gz,tbi}
 repeat_calling/**/*.{vcf.gz,tbi,bam,bai}
 snvs/**/*.{vcf.gz,tbi,txt}
