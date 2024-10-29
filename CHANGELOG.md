@@ -87,7 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Fixed minimap2 preset for ONT data being overwritten to `map-ont` when it should have been `lr:hq`, due to different settings in index and alignment processes [#392](https://github.com/genomic-medicine-sweden/nallo/issues/392)
 - [#402](https://github.com/genomic-medicine-sweden/nallo/pull/402) - Fixed double sample names in HiFiCNV output
 - [#438](https://github.com/genomic-medicine-sweden/nallo/pull/438) - Fixed missing/malformed software versions in `ADD_FOUND_IN_TAG`, `ADD_MOST_SEVERE_CSQ`, `ADD_MOST_SEVERE_PLI`, `SAMPLESHEET_PED`, `SOMALIER_PED` and `TRGT`
-- [#444](https://github.com/genomic-medicine-sweden/nallo/pull/444) - Fixed genmod assigning wrong models on chromosome X when named `chrX` ([#343](https://github.com/genomic-medicine-sweden/nallo/issues/343)))
+- [#444](https://github.com/genomic-medicine-sweden/nallo/pull/444) - Fixed genmod assigning wrong models on chromosome X when named `chrX` ([#343](https://github.com/genomic-medicine-sweden/nallo/issues/343))
 
 ### Parameters
 
