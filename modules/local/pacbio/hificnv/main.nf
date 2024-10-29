@@ -3,7 +3,9 @@ process HIFICNV {
     label 'process_medium'
 
     conda "bioconda::hificnv=1.0.0"
-    container "quay.io/biocontainers/hificnv:1.0.0--h9ee0642_0"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/hificnv:1.0.0--h9ee0642_0' :
+        'quay.io/biocontainers/hificnv:1.0.0--h9ee0642_0' }"
 
     input:
     tuple val(meta), path(bam), path(bai), path(maf_vcf), val(sex)
