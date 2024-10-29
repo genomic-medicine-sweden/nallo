@@ -463,15 +463,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cnvs" class="md-nav__link">
-    <span class="md-ellipsis">
-      CNVs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#paralogous-genes" class="md-nav__link">
     <span class="md-ellipsis">
       Paralogous genes
@@ -499,9 +490,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#svs" class="md-nav__link">
+  <a href="#svs-and-cnvs" class="md-nav__link">
     <span class="md-ellipsis">
-      SVs
+      SVs (and CNVs)
     </span>
   </a>
   
@@ -509,6 +500,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization Tracks
+    </span>
+  </a>
   
 </li>
       
@@ -702,15 +702,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cnvs" class="md-nav__link">
-    <span class="md-ellipsis">
-      CNVs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#paralogous-genes" class="md-nav__link">
     <span class="md-ellipsis">
       Paralogous genes
@@ -738,9 +729,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#svs" class="md-nav__link">
+  <a href="#svs-and-cnvs" class="md-nav__link">
     <span class="md-ellipsis">
-      SVs
+      SVs (and CNVs)
     </span>
   </a>
   
@@ -748,6 +739,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization Tracks
+    </span>
+  </a>
   
 </li>
       
@@ -1088,38 +1088,6 @@
 </tbody>
 </table>
 <h2 id="variants">Variants</h2>
-<h3 id="cnvs">CNVs</h3>
-<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, producing copy number, depth, and MAF tracks for IGV.</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cnv_calling/hificnv/{sample}/*.copynum.bedgraph</code></td>
-<td>Copy number in bedgraph format</td>
-</tr>
-<tr>
-<td><code>cnv_calling/hificnv/{sample}/*.depth.bw</code></td>
-<td>Depth track in BigWig format</td>
-</tr>
-<tr>
-<td><code>cnv_calling/hificnv/{sample}/*.maf.bw</code></td>
-<td>Minor allele frequencies in BigWig format</td>
-</tr>
-<tr>
-<td><code>cnv_calling/hificnv/{sample}/*.vcf.gz</code></td>
-<td>VCF file containing CNV variants</td>
-</tr>
-<tr>
-<td><code>cnv_calling/hificnv/{sample}/*.vcf.gz.tbi</code></td>
-<td>Index of the corresponding VCF file</td>
-</tr>
-</tbody>
-</table>
 <h3 id="paralogous-genes">Paralogous genes</h3>
 <p><a href="https://github.com/PacificBiosciences/paraphase">Paraphase</a> is used to call paralogous genes.</p>
 <table>
@@ -1305,11 +1273,19 @@
 </tr>
 </tbody>
 </table>
-<h3 id="svs">SVs</h3>
-<p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> is used to call structural variants, and <a href="https://github.com/J35P312/SVDB">SVDB</a> is used to merge variants within and between samples.</p>
+<h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
+<p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> is used to call structural variants.
+<a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. It also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.
+<a href="https://github.com/J35P312/SVDB">SVDB</a> is used to combine and merge SVs and CNVs within and between samples.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Variants are only output without annotation if that subworkflow is turned off.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to the complexity of SV merging strategies, SVs and CNVs are reported per family rather than per project.
+SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately,
+then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
 </div>
 <table>
 <thead>
@@ -1320,20 +1296,36 @@
 </thead>
 <tbody>
 <tr>
-<td><code>svs/multi_sample/{project}/{project}_svs.vcf.gz</code></td>
-<td>VCF file with merged structural variants for all samples</td>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz</code></td>
+<td>VCF file with merged CNVs and SVs per family</td>
 </tr>
 <tr>
-<td><code>svs/multi_sample/{project}/{project}_svs.vcf.gz.tbi</code></td>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/*.vcf.gz</code></td>
-<td>VCF file with merged structural variants for a single sample</td>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz</code></td>
+<td>VCF file with merged SVs per family (output if CNV-calling is off)</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/*.vcf.gz.tbi</code></td>
-<td>Index of the VCF file</td>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+</tr>
+<tr>
+<td><code>svs/single_sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
+<td>VCF file with CNVs per sample</td>
+</tr>
+<tr>
+<td><code>svs/single_sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
+<td>VCF file with CNVs per sample</td>
+</tr>
+<tr>
+<td><code>svs/single_sample/{sample}/{sample}_svs.vcf.gz</code></td>
+<td>VCF file with SVs per sample</td>
+</tr>
+<tr>
+<td><code>svs/single_sample/{sample}/{sample}_svs.vcf.gz.tbi</code></td>
+<td>VCF file with SVs per sample</td>
 </tr>
 </tbody>
 </table>
@@ -1347,20 +1339,44 @@
 </thead>
 <tbody>
 <tr>
-<td><code>svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz</code></td>
-<td>VCF file with annotated merged structural variants for all samples</td>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz</code></td>
+<td>VCF file with merged and annotated CNVs and SVs per family</td>
 </tr>
 <tr>
-<td><code>svs/multi_sample/{project}/{project}_svs_annotated.vcf.gz.tbi</code></td>
-<td>Index of the annotated VCF file</td>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/*.vcf_annotated.gz</code></td>
-<td>VCF file with annotated structural variants for a single sample</td>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz</code></td>
+<td>VCF file with merged and annotated SVs per family (output if CNV-calling is off)</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/*.vcf_annotated.gz.tbi</code></td>
-<td>Index of the annotated VCF file</td>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+</tr>
+</tbody>
+</table>
+<h2 id="visualization-tracks">Visualization Tracks</h2>
+<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <code>visualization_tracks/{sample}/*.copynum.bedgraph</code></td>
+<td>Copy number in bedgraph format</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/*.depth.bw</code></td>
+<td>Depth track in BigWig format</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/*.maf.bw</code></td>
+<td>Minor allele frequencies in BigWig format</td>
 </tr>
 </tbody>
 </table>
