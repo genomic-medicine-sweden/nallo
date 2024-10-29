@@ -94,10 +94,10 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(TABIX_SVDB_MERGE.out.versions)
 
     emit:
-    ch_sv_calls_vcf     = BCFTOOLS_REHEADER.out.vcf   // channel: [ val(meta), path(vcf) ]
-    ch_sv_calls_tbi     = BCFTOOLS_REHEADER.out.index // channel: [ val(meta), path(tbi) ]
-    ch_multisample_vcf  = SVDB_MERGE.out.vcf          // channel: [ val(meta), path(vcf) ]
-    ch_multisample_tbi  = TABIX_SVDB_MERGE.out.tbi    // channel: [ val(meta), path(tbi) ]
+    sample_vcf     = BCFTOOLS_REHEADER.out.vcf   // channel: [ val(meta), path(vcf) ]
+    sample_tbi     = BCFTOOLS_REHEADER.out.index // channel: [ val(meta), path(tbi) ]
+    family_vcf  = SVDB_MERGE.out.vcf          // channel: [ val(meta), path(vcf) ]
+    family_tbi  = TABIX_SVDB_MERGE.out.tbi    // channel: [ val(meta), path(tbi) ]
     versions            = ch_versions                 // channel: [ path(versions.yml) ]
 }
 

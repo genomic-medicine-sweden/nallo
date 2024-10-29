@@ -492,7 +492,7 @@ workflow NALLO {
 
         // Merge SVs and CNVs if we've called both SVs and CNVs
         if (!params.skip_cnv_calling) {
-            CALL_SVS.out.ch_multisample_vcf
+            CALL_SVS.out.family_vcf
             .join(CALL_CNVS.out.family_vcf)
             .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
             .set { svdb_merge_svs_cnvs_in }
@@ -515,7 +515,7 @@ workflow NALLO {
                 .set { annotate_svs_in }
 
         } else {
-            CALL_SVS.out.ch_multisample_vcf
+            CALL_SVS.out.family_vcf
                 .set { annotate_svs_in }
         }
 

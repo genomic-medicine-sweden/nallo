@@ -47,7 +47,7 @@
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -55,7 +55,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -63,7 +63,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -73,7 +73,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
@@ -206,7 +206,7 @@
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -214,7 +214,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -222,7 +222,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -232,7 +232,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
@@ -329,7 +329,7 @@
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
                     "versions.yml:md5,dab46ec91d22db3eee78879773b88f1f"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -337,7 +337,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -345,7 +345,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -355,7 +355,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
@@ -871,7 +871,7 @@
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -879,7 +879,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -887,7 +887,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -897,7 +897,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
@@ -972,7 +972,7 @@
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
                     "versions.yml:md5,dab46ec91d22db3eee78879773b88f1f"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -980,7 +980,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -988,7 +988,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -998,7 +998,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
@@ -1193,7 +1193,7 @@
                     "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
                     "versions.yml:md5,dab46ec91d22db3eee78879773b88f1f"
                 ],
-                "ch_multisample_tbi": [
+                "family_tbi": [
                     [
                         {
                             "id": "family"
@@ -1201,7 +1201,7 @@
                         "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_multisample_vcf": [
+                "family_vcf": [
                     [
                         {
                             "id": "family"
@@ -1209,7 +1209,7 @@
                         "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "ch_sv_calls_tbi": [
+                "sample_tbi": [
                     [
                         {
                             "id": "test",
@@ -1219,7 +1219,7 @@
                         "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "ch_sv_calls_vcf": [
+                "sample_vcf": [
                     [
                         {
                             "id": "test",
