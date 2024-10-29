@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            146,
+            148,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -34,9 +34,6 @@
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_PLUGINSPLIT_SNVS": {
-                    "bcftools": 1.2
-                },
-                "BCFTOOLS_PLUGINSPLIT_SVS": {
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_QUERY": {
@@ -124,7 +121,7 @@
                     "hifiasm": "0.20.0-r639"
                 },
                 "HIFICNV": {
-                    "hificnv": "0.1.7-70e9988"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "HIPHASE": {
                     "hiphase": "1.4.0-7bf2743"
@@ -201,8 +198,12 @@
                     "stranger": "0.9.1"
                 },
                 "SVDB_MERGE": {
-                    "svdb": "2.8.1",
-                    "samtools": "1.19.2"
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
+                },
+                "SVDB_MERGE_SVS_CNVS": {
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
                 },
                 "TABIX_BGZIPTABIX": {
                     "tabix": 1.2
@@ -211,6 +212,9 @@
                     "tabix": 1.2
                 },
                 "TABIX_SVDB_MERGE": {
+                    "tabix": 1.2
+                },
+                "TABIX_TABIX": {
                     "tabix": 1.2
                 },
                 "TRGT": {
@@ -280,22 +284,6 @@
                 "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.sam.gz",
                 "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.var.gz",
                 "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.pair.vcf.gz",
-                "cnv_calling",
-                "cnv_calling/hificnv",
-                "cnv_calling/hificnv/HG002_Revio_A",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.copynum.bedgraph",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.depth.bw",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.log",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.maf.bw",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.vcf.gz",
-                "cnv_calling/hificnv/HG002_Revio_A/HG002_Revio_A.vcf.gz.tbi",
-                "cnv_calling/hificnv/HG002_Revio_B",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.copynum.bedgraph",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.depth.bw",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.log",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.maf.bw",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.vcf.gz",
-                "cnv_calling/hificnv/HG002_Revio_B/HG002_Revio_B.vcf.gz.tbi",
                 "databases",
                 "databases/echtvar",
                 "databases/echtvar/encode",
@@ -466,17 +454,30 @@
                 "snvs/stats/single_sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt",
                 "snvs/stats/single_sample/HG002_Revio_B.vcf.gz.bcftools_stats.txt",
                 "svs",
-                "svs/multi_sample",
-                "svs/multi_sample/test",
-                "svs/multi_sample/test/test_svs_annotated.vcf.gz",
-                "svs/multi_sample/test/test_svs_annotated.vcf.gz.tbi",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz.tbi",
                 "svs/single_sample",
                 "svs/single_sample/HG002_Revio_A",
-                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs_annotated.vcf.gz",
-                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs_annotated.vcf.gz.tbi",
+                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_cnvs.vcf.gz",
+                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_cnvs.vcf.gz.tbi",
+                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs.vcf.gz",
+                "svs/single_sample/HG002_Revio_A/HG002_Revio_A_svs.vcf.gz.tbi",
                 "svs/single_sample/HG002_Revio_B",
-                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs_annotated.vcf.gz",
-                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs_annotated.vcf.gz.tbi"
+                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_cnvs.vcf.gz",
+                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_cnvs.vcf.gz.tbi",
+                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs.vcf.gz",
+                "svs/single_sample/HG002_Revio_B/HG002_Revio_B_svs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002_Revio_A",
+                "visualization_tracks/HG002_Revio_A/HG002_Revio_A_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_Revio_A/HG002_Revio_A_hificnv.depth.bw",
+                "visualization_tracks/HG002_Revio_A/HG002_Revio_A_hificnv.maf.bw",
+                "visualization_tracks/HG002_Revio_B",
+                "visualization_tracks/HG002_Revio_B/HG002_Revio_B_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_Revio_B/HG002_Revio_B_hificnv.depth.bw",
+                "visualization_tracks/HG002_Revio_B/HG002_Revio_B_hificnv.maf.bw"
             ],
             [
                 "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
@@ -517,16 +518,6 @@
                 "HG002_Revio_B.hap2.sam.gz:md5,ecdf9b9d50b54776d0555c71a194af7e",
                 "HG002_Revio_B.hap2.var.gz:md5,f09b01fcb43bf64f92ca7ec8a2380c25",
                 "HG002_Revio_B.pair.vcf.gz:md5,676492865a9d4765835638d52651af73",
-                "HG002_Revio_A.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
-                "HG002_Revio_A.depth.bw:md5,0b9cae1d0646fdd2f690d4255282ee8f",
-                "HG002_Revio_A.maf.bw:md5,bacc69449af34efe8576245ae8188719",
-                "HG002_Revio_A.vcf.gz:md5,05551e6dee47321f8b03219f308106cc",
-                "HG002_Revio_A.vcf.gz.tbi:md5,38117ec4d71c688a6f43c53946908acd",
-                "HG002_Revio_B.copynum.bedgraph:md5,42095da173e46804977bbbecc2fda3aa",
-                "HG002_Revio_B.depth.bw:md5,45c82491b7119b2d427c5bf2167811c5",
-                "HG002_Revio_B.maf.bw:md5,b27799b62d65661b384aa61944bd0590",
-                "HG002_Revio_B.vcf.gz:md5,d99e7a7335ab5f3d1fcb4cf8eac48cca",
-                "HG002_Revio_B.vcf.gz.tbi:md5,7a72aa048fe8389233a2cf94d843cd1e",
                 "test.zip:md5,9d58b608c94252a8a754f1f67149bd78",
                 "HG002_Revio_A_modkit_pileup_phased_1.bed.gz:md5,4de5a7d9c533afb54191eb3ac3f74887",
                 "HG002_Revio_A_modkit_pileup_phased_1.bed.gz.tbi:md5,f4ccf8810eda0a5d232e1b5c09da0fdc",
@@ -563,8 +554,6 @@
                 "HG002_Revio_B_cramino_aligned_phased.arrow:md5,3bb08ac5958c6cb0801f319066c3a1b2",
                 "HG002_Revio_A_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
                 "HG002_Revio_B_cramino_aligned.arrow:md5,3bb08ac5958c6cb0801f319066c3a1b2",
-                "HG002_Revio_A_fastqc.html:md5,25f875c3a542ff8590655685bc152658",
-                "HG002_Revio_B_fastqc.html:md5,4b7d698cbe79dbfb4a74e8e7f84891d5",
                 "HG002_Revio_A.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
                 "HG002_Revio_A.mosdepth.region.dist.txt:md5,6b46396518979ff9d9771cb8a8fbbab0",
                 "HG002_Revio_A.mosdepth.summary.txt:md5,311aad293c6d8a646b6dd4edc337845c",
@@ -578,7 +567,13 @@
                 "HG002_Revio_A_stats.blocks.tsv:md5,8d898e3d4544dd4bd6a9a3b8221a71cd",
                 "HG002_Revio_A_stats.stats.tsv:md5,b09849fda8d36260d5e56dd8df175675",
                 "HG002_Revio_B_stats.blocks.tsv:md5,c3155cb1cc119aea4214f43325c2583f",
-                "HG002_Revio_B_stats.stats.tsv:md5,5a60b5d1541fc6210834f03370f88160"
+                "HG002_Revio_B_stats.stats.tsv:md5,5a60b5d1541fc6210834f03370f88160",
+                "HG002_Revio_A_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
+                "HG002_Revio_A_hificnv.depth.bw:md5,0d8b56722cc24331be98a2ca5effa3a1",
+                "HG002_Revio_A_hificnv.maf.bw:md5,3ad9a690c0b66a6e5ad0ef4f23d7e197",
+                "HG002_Revio_B_hificnv.copynum.bedgraph:md5,42095da173e46804977bbbecc2fda3aa",
+                "HG002_Revio_B_hificnv.depth.bw:md5,d196df40f045597b28826bd090757d3a",
+                "HG002_Revio_B_hificnv.maf.bw:md5,87214af821c75080a20a8fa716176013"
             ],
             [
                 [
@@ -640,14 +635,6 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=1862, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_A.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_B.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_Revio_A_hba.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2121, phased=true, phasedAutodetect=false]"
                 ],
@@ -696,16 +683,24 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=105, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "test_svs_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=51, phased=false, phasedAutodetect=false]"
+                    "FAM_svs_cnvs_merged_annotated.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_A_svs_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=49, phased=false, phasedAutodetect=false]"
+                    "HG002_Revio_A_cnvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_B_svs_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=49, phased=false, phasedAutodetect=false]"
+                    "HG002_Revio_A_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=53, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_B_cnvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_B_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=53, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -724,14 +719,6 @@
                 [
                     "HG002_Revio_B.pair.vcf.gz",
                     "83dc2bb5d8f46bf3daf99f27e4d3b022"
-                ],
-                [
-                    "HG002_Revio_A.vcf.gz",
-                    "ab9044066c7bd041966eed43e0d00f13"
-                ],
-                [
-                    "HG002_Revio_B.vcf.gz",
-                    "7db8959b4b1f46316bb7d5908a8b9f26"
                 ],
                 [
                     "HG002_Revio_A_repeat_expansion_stranger.vcf.gz",
@@ -759,6 +746,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-25T13:01:47.642764093"
+        "timestamp": "2024-10-29T08:05:02.617396332"
     }
 }

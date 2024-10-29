@@ -1,9 +1,9 @@
 process GLNEXUS {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc 
+    container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc
 
     input:
     tuple val(meta), path(gvcfs)

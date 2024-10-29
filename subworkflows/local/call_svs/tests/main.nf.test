@@ -37,7 +37,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -53,11 +53,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -71,7 +71,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -90,13 +90,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -111,12 +111,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -133,17 +133,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(1).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).linesGzip,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).linesGzip,
                     workflow.out.versions,
                 ).match() }
             )
@@ -157,7 +157,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -175,11 +175,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -193,7 +193,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -209,13 +209,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -229,7 +229,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -248,13 +248,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -268,7 +268,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -286,13 +286,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -307,12 +307,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -329,16 +329,16 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.ch_sv_calls_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_sv_calls_tbi.get(1).get(1).endsWith("tbi") },
-                { assert workflow.out.ch_multisample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.sample_tbi.get(1).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.summary,
-                    path(workflow.out.ch_sv_calls_vcf.get(1).get(1)).vcf.variantsMD5,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.ch_multisample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -354,7 +354,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -384,7 +384,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -417,7 +417,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -450,12 +450,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -473,10 +473,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
-                    workflow.out.ch_sv_calls_tbi,
-                    workflow.out.ch_multisample_vcf,
-                    workflow.out.ch_multisample_tbi,
+                    workflow.out.sample_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    workflow.out.sample_tbi,
+                    workflow.out.family_vcf,
+                    workflow.out.family_tbi,
                     workflow.out.versions,
                 ).match() }
             )
@@ -492,7 +492,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -522,7 +522,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -554,7 +554,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project' ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -588,12 +588,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, project: 'project' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
@@ -611,10 +611,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.ch_sv_calls_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
-                    workflow.out.ch_sv_calls_tbi,
-                    workflow.out.ch_multisample_vcf,
-                    workflow.out.ch_multisample_tbi,
+                    workflow.out.sample_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
+                    workflow.out.sample_tbi,
+                    workflow.out.family_vcf,
+                    workflow.out.family_tbi,
                     workflow.out.versions,
                 ).match() }
             )

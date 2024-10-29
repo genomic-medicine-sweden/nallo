@@ -1,4 +1,6 @@
 Changes in module 'nf-core/untar'
+'modules/nf-core/untar/meta.yml' is unchanged
+Changes in 'untar/main.nf':
 --- modules/nf-core/untar/main.nf
 +++ modules/nf-core/untar/main.nf
 @@ -11,8 +11,8 @@
@@ -36,4 +38,8 @@ Changes in module 'nf-core/untar'
      if [[ \$(tar -taf ${archive} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
          for i in `tar -tf ${archive}`;
 
+'modules/nf-core/untar/environment.yml' is unchanged
+'modules/nf-core/untar/tests/tags.yml' is unchanged
+'modules/nf-core/untar/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/untar/tests/main.nf.test' is unchanged
 ************************************************************
