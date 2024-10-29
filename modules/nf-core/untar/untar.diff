@@ -1,62 +1,5 @@
 Changes in module 'nf-core/untar'
-Changes in 'untar/meta.yml':
---- modules/nf-core/untar/meta.yml
-+++ modules/nf-core/untar/meta.yml
-@@ -10,33 +10,30 @@
-         Extract tar.gz files.
-       documentation: https://www.gnu.org/software/tar/manual/
-       licence: ["GPL-3.0-or-later"]
--      identifier: ""
- input:
--  - - meta:
--        type: map
--        description: |
--          Groovy Map containing sample information
--          e.g. [ id:'test', single_end:false ]
--    - archive:
--        type: file
--        description: File to be untar
--        pattern: "*.{tar}.{gz}"
-+  - meta:
-+      type: map
-+      description: |
-+        Groovy Map containing sample information
-+        e.g. [ id:'test', single_end:false ]
-+  - archive:
-+      type: file
-+      description: File to be untar
-+      pattern: "*.{tar}.{gz}"
- output:
-+  - meta:
-+      type: map
-+      description: |
-+        Groovy Map containing sample information
-+        e.g. [ id:'test', single_end:false ]
-   - untar:
--      - meta:
--          type: map
--          description: |
--            Groovy Map containing sample information
--            e.g. [ id:'test', single_end:false ]
--      - $prefix:
--          type: directory
--          description: Directory containing contents of archive
--          pattern: "*/"
-+      type: directory
-+      description: Directory containing contents of archive
-+      pattern: "*/"
-   - versions:
--      - versions.yml:
--          type: file
--          description: File containing software versions
--          pattern: "versions.yml"
-+      type: file
-+      description: File containing software versions
-+      pattern: "versions.yml"
- authors:
-   - "@joseespinosa"
-   - "@drpatelh"
-
+'modules/nf-core/untar/meta.yml' is unchanged
 Changes in 'untar/main.nf':
 --- modules/nf-core/untar/main.nf
 +++ modules/nf-core/untar/main.nf
@@ -95,19 +38,7 @@ Changes in 'untar/main.nf':
      if [[ \$(tar -taf ${archive} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
          for i in `tar -tf ${archive}`;
 
-Changes in 'untar/environment.yml':
---- modules/nf-core/untar/environment.yml
-+++ modules/nf-core/untar/environment.yml
-@@ -1,6 +1,8 @@
-+name: untar
- channels:
-   - conda-forge
-   - bioconda
-+  - defaults
- dependencies:
-   - conda-forge::grep=3.11
-   - conda-forge::sed=4.8
-
+'modules/nf-core/untar/environment.yml' is unchanged
 'modules/nf-core/untar/tests/tags.yml' is unchanged
 'modules/nf-core/untar/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/untar/tests/main.nf.test' is unchanged
