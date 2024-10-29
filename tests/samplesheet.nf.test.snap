@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            103,
+            104,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -530,15 +530,15 @@
                 ],
                 [
                     "HG002_Revio_repeat_expansion_stranger.vcf.gz",
-                    "492a5d1a0f1656e1f7fc1b97c922cab4"
+                    "73c6c1d07ff96ef44569b5534aa90174"
                 ],
                 [
                     "test.vcf.gz",
-                    "4ab22ba6012b9f579f1831248bb95da"
+                    "1de84bd070a82b37e6fac25d19ae604e"
                 ],
                 [
                     "HG002_Revio_sorted.vcf.gz",
-                    "43b909ba9628b92f5062be6c413e560d"
+                    "502b7befd528ce70b8269a8e4b9281df"
                 ]
             ]
         ],
@@ -546,6 +546,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T08:33:56.258093996"
+        "timestamp": "2024-10-30T10:27:37.120618269"
     }
 }

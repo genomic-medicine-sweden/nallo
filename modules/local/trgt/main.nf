@@ -9,7 +9,7 @@ process TRGT {
     tuple val(meta), path(bam), path(bai), val(sex)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
-    path(repeats)
+    tuple val(meta4), path(repeats)
 
     output:
     tuple val(meta), path("${meta.id}.spanning.bam"), emit: bam
@@ -39,6 +39,19 @@ process TRGT {
         --threads ${task.cpus} \\
         --output-prefix ${meta.id}
 
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        trgt: \$(echo \$(trgt -V) | sed 's/trgt //' )
+    END_VERSIONS
+    """
+
+    stub:
+    prefix      = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo | gzip > ${prefix}.vcf.gz
+    touch ${prefix}.spanning.bam
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
