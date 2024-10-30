@@ -10,7 +10,6 @@ paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
 phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
 qc/cramino/**/*.txt
-qc/deepvariant_vcfstatsreport/**/*.html
 qc/fastqc/**/*.{zip,html}
 qc/somalier/**/*.{html,tsv}
 repeat_annotation/**/*.{vcf.gz,tbi}
