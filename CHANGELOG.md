@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#431](https://github.com/genomic-medicine-sweden/nallo/pull/431) - Added files needed to automatically build and publish docs to GitHub Pages
 - [#435](https://github.com/genomic-medicine-sweden/nallo/pull/435) - Added nf-test to rank variants
 - [#445](https://github.com/genomic-medicine-sweden/nallo/pull/445) - Added FOUND_IN tag and nf-test to rank variants
+- [#450](https://github.com/genomic-medicine-sweden/nallo/pull/450) - Added ranking of SVs
 
 ### `Changed`
 
