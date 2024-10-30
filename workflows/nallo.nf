@@ -451,21 +451,6 @@ workflow NALLO {
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
 
                 //
-                // Create methylation pileups with modkit
-                //
-                if(!params.skip_methylation_wf) {
-
-                    METHYLATION (
-                        PHASING.out.haplotagged_bam_bai,
-                        fasta,
-                        fai,
-                        ch_input_bed,
-                        !params.skip_phasing_wf
-                    )
-                    ch_versions = ch_versions.mix(METHYLATION.out.versions)
-                }
-
-                //
                 // Call repeat expansions with TRGT
                 //
                 if(!params.skip_repeat_calling) {
@@ -482,18 +467,21 @@ workflow NALLO {
                     }
                 }
             }
-            if (params.skip_phasing_wf) {
-                if (!params.skip_methylation_wf) {
-                    ch_methylation_in = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
-                    METHYLATION (
-                        ch_methylation_in,
-                        fasta,
-                        fai,
-                        ch_input_bed,
-                        !params.skip_phasing_wf
-                    )
-                    ch_versions = ch_versions.mix(METHYLATION.out.versions)
-                }
+
+            //
+            // Create methylation pileups with modkit
+            //
+            if (!params.skip_methylation_wf) {
+                ch_methylation_in = !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai
+                                                            : bam_bai
+                METHYLATION (
+                    ch_methylation_in,
+                    fasta,
+                    fai,
+                    ch_input_bed,
+                    !params.skip_phasing_wf
+                )
+                ch_versions = ch_versions.mix(METHYLATION.out.versions)
             }
         }
 
