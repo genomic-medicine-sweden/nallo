@@ -1,7 +1,11 @@
 {
     "test profile": {
         "content": [
-            113,
+<<<<<<< HEAD
+            104,
+=======
+            99,
+>>>>>>> 759cb56 (Updated pipeline test snapshot)
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -56,12 +60,6 @@
                 },
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
-                },
-                "BGZIP_MODKIT_PILEUP_PHASED": {
-                    "tabix": 1.2
-                },
-                "BGZIP_MODKIT_PILEUP_UNPHASED": {
-                    "tabix": 1.2
                 },
                 "COMPRESS_STRANGER": {
                     "bcftools": 1.2
@@ -143,9 +141,6 @@
                     "minimap2": "2.28-r1209"
                 },
                 "MODKIT_PILEUP_PHASED": {
-                    "modkit": "0.3.0"
-                },
-                "MODKIT_PILEUP_UNPHASED": {
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
@@ -277,18 +272,13 @@
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
-                "methylation/modkit/pileup/phased",
-                "methylation/modkit/pileup/phased/HG002_Revio",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/unphased",
-                "methylation/modkit/pileup/unphased/HG002_Revio",
-                "methylation/modkit/pileup/unphased/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/unphased/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/mosdepth_cov_dist.txt",
@@ -422,6 +412,7 @@
                 "HG002_Revio.hap2.sam.gz:md5,6d512a060c74428f7758aa51a99ae8c8",
                 "HG002_Revio.hap2.var.gz:md5,9ba9303b30730e419138e177c7d1e0c2",
                 "HG002_Revio.pair.vcf.gz:md5,1909dffa43850282fe7e5ae2b2d273a7",
+<<<<<<< HEAD
                 "test.zip:md5,a0abe28a72b11b68126040dd38fa8e37",
                 "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,ac9bfc455d0b697a4bd565b510c155e0",
                 "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,5a9ac375a0ce33af002e0073635a3425",
@@ -435,17 +426,45 @@
                 "mosdepth_cumcov_dist.txt:md5,eeb7f82eb03344d26a99b6596a1c7413",
                 "mosdepth_perchrom.txt:md5,53806d793d5627e60648daebb6606723",
                 "multiqc_bcftools_stats.txt:md5,09a616618fb506994ce178d32325159f",
+=======
+                "HG002_Revio.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
+                "HG002_Revio.depth.bw:md5,0b9cae1d0646fdd2f690d4255282ee8f",
+                "HG002_Revio.maf.bw:md5,bacc69449af34efe8576245ae8188719",
+                "HG002_Revio.vcf.gz:md5,c5f77b97b9ef6d543171792074eb1322",
+                "HG002_Revio.vcf.gz.tbi:md5,5e42ce281f81b7fdb5fa6e42ec4c7f8b",
+                "test.zip:md5,2042de439a4cb1b37825169a773cf24a",
+                "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,00b5d207be5dc8a6605698d6139afc48",
+                "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,58e7b0a9ddaad5be350eec78b338c1e6",
+                "HG002_Revio_modkit_pileup_phased_2.bed.gz:md5,bb881b1838f17235e1dc295b29f2d473",
+                "HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi:md5,e76d65f68af11d673eda080b522d81c2",
+                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz:md5,df6d44c55925a894aa5fe838f9dd449e",
+                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,8348f75c0ce6fec18b57739fc36b3011",
+                "mosdepth_cov_dist.txt:md5,1ab27c6267c491c1a2ccf0ac988f61a0",
+                "mosdepth_cumcov_dist.txt:md5,ccca5d9ba66b884b83cf982958485948",
+                "mosdepth_perchrom.txt:md5,12bf09d8a371ca77f525c88190f2e07d",
+                "multiqc_bcftools_stats.txt:md5,6f68bd58414b016e5a0f7310e876a181",
+>>>>>>> 759cb56 (Updated pipeline test snapshot)
                 "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
                 "multiqc_fastqc.txt:md5,f0717ca13d848aa8f5eaa5d0dba92178",
                 "multiqc_general_stats.txt:md5,c82b773e9d5ab3251280f3f03f35193a",
                 "multiqc_whatshap_stats.txt:md5,c8c212ecc6fbf6803f8de87f2395363f",
                 "test.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
+<<<<<<< HEAD
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
                 "HG002_Revio_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,6186315d4d65eda85553af82a98829d1",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,c6c7ee8f056b8b2b92c97ec472b1db16",
                 "HG002_Revio.mosdepth.summary.txt:md5,35c51f1ad9d2856d1e6446205f19a8e3",
                 "HG002_Revio.regions.bed.gz:md5,e051f64c7a780d67ea6727a327dd4281",
+=======
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
+                "HG002_Revio_cramino_aligned.arrow:md5,a76219e9046db32c4b3d6d78425c5d78",
+                "HG002_Revio_fastqc.html:md5,9bc24a268fad2e25e385dc9e108f8605",
+                "HG002_Revio.mosdepth.global.dist.txt:md5,63701e857361046628f89cb84988ea1d",
+                "HG002_Revio.mosdepth.region.dist.txt:md5,6b46396518979ff9d9771cb8a8fbbab0",
+                "HG002_Revio.mosdepth.summary.txt:md5,311aad293c6d8a646b6dd4edc337845c",
+                "HG002_Revio.regions.bed.gz:md5,31db0f14146b65e339b54b963c304947",
+>>>>>>> 759cb56 (Updated pipeline test snapshot)
                 "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
                 "HG002_Revio_stats.blocks.tsv:md5,e73960d863a78848498499480ea9937f",
                 "HG002_Revio_stats.stats.tsv:md5,cffa4a500350b2227ab40bbbe428e9ef",
@@ -552,6 +571,10 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T17:17:40.017945721"
+<<<<<<< HEAD
+        "timestamp": "2024-10-30T10:27:37.120618269"
+=======
+        "timestamp": "2024-10-30T12:42:09.943202485"
+>>>>>>> 759cb56 (Updated pipeline test snapshot)
     }
 }

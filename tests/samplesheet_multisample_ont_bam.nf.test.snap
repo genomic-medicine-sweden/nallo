@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
         "content": [
-            107,
+            93,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -50,12 +50,6 @@
                 },
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
-                },
-                "BGZIP_MODKIT_PILEUP_PHASED": {
-                    "tabix": 1.2
-                },
-                "BGZIP_MODKIT_PILEUP_UNPHASED": {
-                    "tabix": 1.2
                 },
                 "CRAMINO": {
                     "cramino": "0.14.5"
@@ -113,9 +107,6 @@
                     "minimap2": "2.28-r1209"
                 },
                 "MODKIT_PILEUP_PHASED": {
-                    "modkit": "0.3.0"
-                },
-                "MODKIT_PILEUP_UNPHASED": {
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
@@ -209,28 +200,20 @@
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
-                "methylation/modkit/pileup/phased",
-                "methylation/modkit/pileup/phased/HG002_ONT_A",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_ONT_B",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/unphased",
-                "methylation/modkit/pileup/unphased/HG002_ONT_A",
-                "methylation/modkit/pileup/unphased/HG002_ONT_A/HG002_ONT_A_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/unphased/HG002_ONT_A/HG002_ONT_A_modkit_pileup.bed.gz.tbi",
-                "methylation/modkit/pileup/unphased/HG002_ONT_B",
-                "methylation/modkit/pileup/unphased/HG002_ONT_B/HG002_ONT_B_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/unphased/HG002_ONT_B/HG002_ONT_B_modkit_pileup.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/mosdepth_cov_dist.txt",
@@ -384,10 +367,6 @@
                 "HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
                 "HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz:md5,42dcaedf8c379a4e5dee0822d5e8aca4",
                 "HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,3d97d016882c99e4e21112fc76ceb2a2",
-                "HG002_ONT_A_modkit_pileup.bed.gz:md5,e04d51deb9019e67e7ddd7f1bd82a580",
-                "HG002_ONT_A_modkit_pileup.bed.gz.tbi:md5,1e198df01c63afea13ef9d04e2d03684",
-                "HG002_ONT_B_modkit_pileup.bed.gz:md5,95a96ceddc795c9c5c4a8d9e6f9d3b5b",
-                "HG002_ONT_B_modkit_pileup.bed.gz.tbi:md5,8276c6feeac0be16274198831c75023d",
                 "mosdepth_cov_dist.txt:md5,1eb2a5c39fd4b8dd814049b65b007037",
                 "mosdepth_cumcov_dist.txt:md5,5ad1d589df3fa7fe5d21fc95001573a9",
                 "mosdepth_perchrom.txt:md5,86a907217d64d4c2717885403058580f",
@@ -491,13 +470,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T17:20:47.644972969"
+        "timestamp": "2024-10-30T14:18:03.947789989"
     }
 }
