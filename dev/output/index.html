@@ -1276,10 +1276,11 @@
 <h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
 <p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> is used to call structural variants.
 <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. It also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.
-<a href="https://github.com/J35P312/SVDB">SVDB</a> is used to combine and merge SVs and CNVs within and between samples.</p>
+<a href="https://github.com/J35P312/SVDB">SVDB</a> is used to combine and merge SVs and CNVs within and between samples.
+<a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a> is used to rank the annotated SVs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Variants are only output without annotation if that subworkflow is turned off.</p>
+<p>Variants are only output without annotation and/or ranking if these subworkflow is turned off.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1352,6 +1353,33 @@ then the merged SV and CNV files are merged again, with priority given to coordi
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a> is used to rank the annotated SVs.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz</code></td>
+<td>VCF file with merged, annotated and ranked CNVs and SVs per family</td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz</code></td>
+<td>VCF file with merged, annotated and ranked SVs per family (output if CNV-calling is off)</td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
 </tr>
 </tbody>

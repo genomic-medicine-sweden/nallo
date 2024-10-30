@@ -788,6 +788,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>variant_consequences_svs</code></td>
+<td>File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>vep_cache</code></td>
 <td>A path to the VEP cache location</td>
 <td><code>string</code></td>
@@ -844,6 +852,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>score_config_svs</code></td>
+<td>A SV rank model config file for genmod.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>somalier_sites</code></td>
 <td>A VCF of known polymorphic sites for somalier</td>
 <td><code>string</code></td>
@@ -855,7 +871,7 @@
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/</td>
 <td></td>
 <td>True</td>
 </tr>
@@ -1151,7 +1167,7 @@
 <td><code>minimap2_read_mapping_preset</code></td>
 <td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default.</td>
 <td><code>string</code></td>
-<td></td>
+<td>map-hifi</td>
 <td></td>
 <td>True</td>
 </tr>

@@ -523,6 +523,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rank-svs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank SVs
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -984,6 +993,15 @@
   <a href="#sv-annotation" class="md-nav__link">
     <span class="md-ellipsis">
       SV annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-svs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank SVs
     </span>
   </a>
   
@@ -1538,6 +1556,27 @@ Only GRCh38 is supported.</p>
 </span></code></pre></div>
 <p>These databases could for example come from <a href="https://zenodo.org/records/13145123">CoLoRSdb</a>.</p>
 <p>Turned off with <code>--skip_sv_annotation</code>.</p>
+<h3 id="rank-svs">Rank SVs</h3>
+<p>This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>score_config_svs</code></td>
+<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a>.</td>
+</tr>
+<tr>
+<td><code>reduced_penetrance</code></td>
+<td>A list of loci that show <a href="https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/">reduced penetrance</a> in people. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv">here</a></td>
+</tr>
+</tbody>
+</table>
+<p><code>--skip_rank_variants</code>.</p>
 <h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
 <ul>
 <li>Limit SNV calling to regions in BED file (<code>--bed</code>).</li>
