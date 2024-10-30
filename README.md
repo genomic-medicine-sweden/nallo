@@ -48,7 +48,7 @@
 
 ##### Ranking
 
-- Rank SNVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
+- Rank SNVs, INDELs and SVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
 
 ## Usage
 

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
         "content": [
-            99,
+            107,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -347,8 +347,8 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
                 "svs/single_sample",
                 "svs/single_sample/HG002_ONT_A",
                 "svs/single_sample/HG002_ONT_A/HG002_ONT_A_cnvs.vcf.gz",
@@ -470,7 +470,7 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=99, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated.vcf.gz",
+                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=98, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -498,6 +498,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T12:46:58.003996257"
+        "timestamp": "2024-10-30T16:37:34.127632366"
     }
 }
