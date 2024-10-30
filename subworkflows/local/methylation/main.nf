@@ -5,7 +5,7 @@ include { TABIX_BGZIPTABIX                        } from '../../../modules/nf-co
 workflow METHYLATION {
 
     take:
-    ch_haplotagged_bam_bai // channel: [ val(meta), bam, bai ]
+    ch_bam_bai // channel: [ val(meta), bam, bai ]
     ch_fasta               // channel: [ val(meta), fasta ]
     ch_fai                 // channel: [ val(meta), fai ]
     ch_bed                 // channel: [ val(meta), bed ]
@@ -15,14 +15,14 @@ workflow METHYLATION {
     ch_versions = Channel.empty()
 
     if (phased) {
-        MODKIT_PILEUP_PHASED (ch_haplotagged_bam_bai, ch_fasta, ch_bed)
+        MODKIT_PILEUP_PHASED (ch_bam_bai, ch_fasta, ch_bed)
         ch_versions = ch_versions.mix(MODKIT_PILEUP_PHASED.out.versions)
 
         MODKIT_PILEUP_PHASED.out.bed
             .transpose()
             .set { ch_bgzip_modkit_pileup_in }
     } else {
-        MODKIT_PILEUP_UNPHASED (ch_haplotagged_bam_bai, ch_fasta, ch_bed)
+        MODKIT_PILEUP_UNPHASED (ch_bam_bai, ch_fasta, ch_bed)
         ch_versions = ch_versions.mix(MODKIT_PILEUP_UNPHASED.out.versions)
 
         ch_bgzip_modkit_pileup_in = MODKIT_PILEUP_UNPHASED.out.bed
