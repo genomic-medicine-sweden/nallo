@@ -1,0 +1,180 @@
+{
+    "1 sample - [] phased": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:39:07.385745142"
+    },
+    "1 sample unphased": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T08:05:36.813265068"
+    },
+    "1 sample - bed unphased - stub": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ],
+                "versions": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:58:27.747951134"
+    },
+    "1 sample - [] unphased - stub": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ],
+                "versions": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:57:59.713393081"
+    },
+    "1 sample - [] phased - stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:57:03.115497959"
+    },
+    "1 sample phased": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T08:05:27.642281784"
+    },
+    "1 sample - [] unphased": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ],
+                "versions": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:54:36.976181732"
+    },
+    "1 sample - bed phased": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:41:09.188597025"
+    },
+    "1 sample - bed phased - stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:57:31.537108515"
+    },
+    "1 sample - bed unphased": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ],
+                "versions": [
+                    "versions.yml:md5,664849c44cfe3db58d74fde9fdb2b3b2",
+                    "versions.yml:md5,dc8e3f1d4b20b910f5148d89337e5711"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-30T09:56:33.526596429"
+    }
+}

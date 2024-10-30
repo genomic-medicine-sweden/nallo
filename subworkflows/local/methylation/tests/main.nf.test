@@ -68,7 +68,7 @@ nextflow_workflow {
         }
     }
 
-    test("1 sample phased") {
+    test("1 sample - [] phased") {
         when {
             workflow {
                 """
@@ -88,11 +88,11 @@ nextflow_workflow {
         }
     }
 
-    test("1 sample unphased") {
+    test("1 sample - [] unphased") {
         when {
             workflow {
                 """
-                input[0] = PHASING.out.haplotagged_bam_bai
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
                 input[3] = [[],[]]
@@ -108,4 +108,135 @@ nextflow_workflow {
         }
     }
 
+    test("1 sample - bed phased") {
+        when {
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed unphased") {
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] phased - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                input[4] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed phased - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] unphased - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                input[4] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed unphased - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
 }
