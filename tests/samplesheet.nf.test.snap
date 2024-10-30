@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            104,
+            112,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -382,8 +382,8 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
                 "svs/single_sample",
                 "svs/single_sample/HG002_Revio",
                 "svs/single_sample/HG002_Revio/HG002_Revio_cnvs.vcf.gz",
@@ -507,7 +507,7 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated.vcf.gz",
+                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=87, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -546,6 +546,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T10:27:37.120618269"
+        "timestamp": "2024-10-30T11:26:11.367381989"
     }
 }

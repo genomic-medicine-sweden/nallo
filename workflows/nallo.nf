@@ -93,7 +93,7 @@ workflow NALLO {
                                                                     : ''
     ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
-    ch_variant_consequences_svs = params.variant_consequences_svs   ? Channel.fromPath(params.variant_consequences_svs).collect()
+    ch_variant_consequences_svs = params.variant_consequences_svs   ? Channel.fromPath(params.variant_consequences_svs).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
     ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
                                                                     : Channel.value([[],[]])
@@ -109,7 +109,7 @@ workflow NALLO {
                                                                     : Channel.value([])
     ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
-    ch_score_config_svs         = params.score_config_svs           ? Channel.fromPath(params.score_config_svs).collect()
+    ch_score_config_svs         = params.score_config_svs           ? Channel.fromPath(params.score_config_svs).map { it -> [ it.simpleName, it ] }.collect()
                                                                     : Channel.value([])
     ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
                                                                     : ''
@@ -394,8 +394,8 @@ workflow NALLO {
                         .set { ch_vcf_tbi_per_region }
                 } else {
                     // otherwise grab the VCF that should have gone into RANK_VARIANTS
-                    ANN_CSQ_PLI_SNV.out.vcf_ann
-                        .join( ANN_CSQ_PLI_SNV.out.tbi_ann )
+                    ANN_CSQ_PLI_SNV.out.vcf
+                        .join( ANN_CSQ_PLI_SNV.out.tbi )
                         .set { ch_vcf_tbi_per_region }
                 }
             } else {
@@ -547,8 +547,8 @@ workflow NALLO {
 
             if (!params.skip_rank_variants) {
                 RANK_VARIANTS_SVS (
-                    ANN_CSQ_PLI_SVS.out.vcf_ann,
-                    ch_updated_pedfile.map { meta, ped -> ped },
+                    ANN_CSQ_PLI_SVS.out.vcf,
+                    ch_updated_pedfile,
                     ch_reduced_penetrance,
                     ch_score_config_svs
                 )
