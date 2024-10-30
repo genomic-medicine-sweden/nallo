@@ -455,7 +455,13 @@ workflow NALLO {
                 //
                 if(!params.skip_methylation_wf) {
 
-                    METHYLATION( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_input_bed )
+                    METHYLATION (
+                        PHASING.out.haplotagged_bam_bai,
+                        fasta,
+                        fai,
+                        ch_input_bed,
+                        !params.skip_phasing_wf
+                    )
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)
                 }
 
