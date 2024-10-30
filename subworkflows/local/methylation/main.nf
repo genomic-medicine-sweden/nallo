@@ -5,7 +5,7 @@ include { TABIX_BGZIPTABIX                        } from '../../../modules/nf-co
 workflow METHYLATION {
 
     take:
-    ch_bam_bai // channel: [ val(meta), bam, bai ]
+    ch_bam_bai             // channel: [ val(meta), bam, bai ]
     ch_fasta               // channel: [ val(meta), fasta ]
     ch_fai                 // channel: [ val(meta), fai ]
     ch_bed                 // channel: [ val(meta), bed ]
