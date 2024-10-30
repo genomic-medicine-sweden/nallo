@@ -447,6 +447,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#deepvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeepVariant
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -686,6 +695,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#deepvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeepVariant
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -800,11 +818,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
 <td>BAM file with haplotags</td>
 </tr>
 <tr>
-<td><code>{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
 <td>Index of the BAM file</td>
 </tr>
 </tbody>
@@ -952,27 +970,27 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
 <td>BAM file with haplotags</td>
 </tr>
 <tr>
-<td><code>{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
 <td>Index of the BAM file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/phased_variants/{sample}/*.vcf.gz</code></td>
+<td><code>phased_variants/{sample}/*.vcf.gz</code></td>
 <td>VCF file with phased variants</td>
 </tr>
 <tr>
-<td><code>{outputdir}/phased_variants/{sample}/*.vcf.gz.tbi</code></td>
+<td><code>phased_variants/{sample}/*.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/phasing_stats/{sample}/*.blocks.tsv</code></td>
+<td><code>qc/phasing_stats/{sample}/*.blocks.tsv</code></td>
 <td>Phase block file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/phasing_stats/{sample}/*.stats.tsv</code></td>
+<td><code>qc/phasing_stats/{sample}/*.stats.tsv</code></td>
 <td>Phasing statistics file</td>
 </tr>
 </tbody>
@@ -990,11 +1008,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/qc/fastqc/{sample}/*_fastqc.html</code></td>
+<td><code>qc/fastqc/{sample}/*_fastqc.html</code></td>
 <td>FastQC report containing quality metrics</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/fastqc/{sample}/*_fastqc.zip</code></td>
+<td><code>qc/fastqc/{sample}/*_fastqc.zip</code></td>
 <td>Zip archive with the FastQC report, data files, and plot images</td>
 </tr>
 </tbody>
@@ -1010,23 +1028,23 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/qc/mosdepth/{sample}/*.mosdepth.global.dist.txt</code></td>
+<td><code>qc/mosdepth/{sample}/*.mosdepth.global.dist.txt</code></td>
 <td>Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/mosdepth/{sample}/*.mosdepth.region.dist.txt</code></td>
+<td><code>qc/mosdepth/{sample}/*.mosdepth.region.dist.txt</code></td>
 <td>Cumulative distribution of bases covered for at least a given coverage value, across regions (if a BED file is used)</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/mosdepth/{sample}/*.mosdepth.summary.txt</code></td>
+<td><code>qc/mosdepth/{sample}/*.mosdepth.summary.txt</code></td>
 <td>Mosdepth summary file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz</code></td>
+<td><code>qc/mosdepth/{sample}/*.regions.bed.gz</code></td>
 <td>Depth per region (if a BED file is used)</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz.csi</code></td>
+<td><code>qc/mosdepth/{sample}/*.regions.bed.gz.csi</code></td>
 <td>Index of the regions.bed.gz file</td>
 </tr>
 </tbody>
@@ -1042,19 +1060,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/qc/cramino/phased/{sample}/*.arrow</code></td>
+<td><code>qc/cramino/phased/{sample}/*.arrow</code></td>
 <td>Read length and quality in <a href="https://arrow.apache.org/docs/format/Columnar.html">Apache Arrow</a> format</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/cramino/phased/{sample}/*.txt</code></td>
+<td><code>qc/cramino/phased/{sample}/*.txt</code></td>
 <td>Summary information in text format</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/cramino/unphased/{sample}/*.arrow</code></td>
+<td><code>qc/cramino/unphased/{sample}/*.arrow</code></td>
 <td>Read length and quality in <a href="https://arrow.apache.org/docs/format/Columnar.html">Apache Arrow</a> format</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/cramino/unphased/{sample}/*.txt</code></td>
+<td><code>qc/cramino/unphased/{sample}/*.txt</code></td>
 <td>Summary information in text format</td>
 </tr>
 </tbody>
@@ -1070,20 +1088,50 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/predigree/{project}.ped</code></td>
+<td><code>pedigree/{project}.ped</code></td>
 <td>PED file updated with somalier-inferred sex</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/somalier/relate/{project}/{project}.html</code></td>
+<td><code>qc/somalier/relate/{project}/{project}.html</code></td>
 <td>HTML report</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/somalier/relate/{project}/{project}.pairs.tsv</code></td>
+<td><code>qc/somalier/relate/{project}/{project}.pairs.tsv</code></td>
 <td>Information about sample pairs</td>
 </tr>
 <tr>
-<td><code>{outputdir}/qc/somalier/relate/{project}/{project}.samples.tsv</code></td>
+<td><code>/qc/somalier/relate/{project}/{project}.samples.tsv</code></td>
 <td>Information about individual samples</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>predigree/{project}.ped</code></td>
+<td>PED file updated with somalier-inferred sex</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deepvariant">DeepVariant</h3>
+<p><code>vcf_stats_report.py</code> from <a href="https://github.com/google/deepvariant">DeepVariant</a> is used to generate a html report per sample.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html</code></td>
+<td>Visual report of SNV calls from DeepVariant</td>
 </tr>
 </tbody>
 </table>
@@ -1131,27 +1179,27 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz</code></td>
+<td><code>repeat_calling/trgt/multi_sample/{project}/*.vcf.gz</code></td>
 <td>Merged VCF file for all samples</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi</code></td>
+<td><code>repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz</code></td>
+<td><code>repeat_calling/trgt/single_sample/{sample}/*.vcf.gz</code></td>
 <td>VCF file with called repeats for a sample</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi</code></td>
+<td><code>repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bam</code></td>
+<td><code>repeat_calling/trgt/single_sample/{sample}/*.bam</code></td>
 <td>BAM file with sorted spanning reads</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bai</code></td>
+<td><code>repeat_calling/trgt/single_sample/{sample}/*.bai</code></td>
 <td>Index of the BAM file</td>
 </tr>
 </tbody>
@@ -1166,11 +1214,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz</code></td>
+<td><code>repeat_annotation/stranger/{sample}/*.vcf.gz</code></td>
 <td>Annotated VCF file</td>
 </tr>
 <tr>
-<td><code>{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz.tbi</code></td>
+<td><code>repeat_annotation/stranger/{sample}/*.vcf.gz.tbi</code></td>
 <td>Index of the annotated VCF file</td>
 </tr>
 </tbody>
@@ -1208,6 +1256,10 @@
 <tr>
 <td><code>snvs/stats/single_sample/*.stats.txt</code></td>
 <td>Variant statistics</td>
+</tr>
+<tr>
+<td><code>qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html</code></td>
+<td>Visual report of SNV calls from DeepVariant</td>
 </tr>
 </tbody>
 </table>
