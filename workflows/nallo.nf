@@ -1,5 +1,8 @@
 include { samplesheetToList } from 'plugin/nf-schema'
-
+include {
+    createReferenceChannelFromPath
+    createReferenceChannelFromSamplesheet
+} from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL SUBWORKFLOWS
@@ -71,50 +74,32 @@ workflow NALLO {
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Optional input files that has to be set depending on which workflow is run
-    ch_cadd_header              = Channel.fromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true).collect()
-    ch_cadd_resources           = params.cadd_resources             ? Channel.fromPath(params.cadd_resources).collect()
-                                                                    : ''
-    ch_cadd_prescored           = params.cadd_prescored             ? Channel.fromPath(params.cadd_prescored).collect()
-                                                                    : ''
-    ch_fasta                    = params.fasta                      ? Channel.fromPath(params.fasta).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : ''
-    ch_tandem_repeats           = params.tandem_repeats             ? Channel.fromPath(params.tandem_repeats).map{ [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([[],[]])
-    ch_input_bed                = params.bed                        ? Channel.fromPath(params.bed).map{ [ [ id:it.simpleName ] , it ] }.collect()
-                                                                    : Channel.value([[],[]])
-    ch_par                      = params.par_regions                ? Channel.fromPath(params.par_regions).map { [ [ id: it.simpleName ], it ] }.collect()
-                                                                    : ''
-    ch_trgt_bed                 = params.trgt_repeats               ? Channel.fromPath(params.trgt_repeats).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : ''
-    ch_variant_catalog          = params.variant_catalog            ? Channel.fromPath(params.variant_catalog).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : ''
-    ch_databases                = params.snp_db                     ? Channel.fromList(samplesheetToList(params.snp_db, 'assets/schema_snpdb.json')).map{ it[1] }.collect()
-                                                                    : ''
-    ch_variant_consequences_snv = params.variant_consequences_snv   ? Channel.fromPath(params.variant_consequences_snv).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([])
-    ch_variant_consequences_svs = params.variant_consequences_svs   ? Channel.fromPath(params.variant_consequences_svs).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([])
-    ch_vep_cache_unprocessed    = params.vep_cache                  ? Channel.fromPath(params.vep_cache).map { it -> [ [ id:'vep_cache' ], it ] }.collect()
-                                                                    : Channel.value([[],[]])
-    ch_vep_extra_files_unsplit  = params.vep_plugin_files           ? Channel.fromPath(params.vep_plugin_files).collect()
-                                                                    : ''
-    ch_expected_xy_bed          = params.hificnv_xy                 ? Channel.fromPath(params.hificnv_xy).map { it -> [ [ id: it.simpleName ], it ] }.collect()
-                                                                    : ''
-    ch_expected_xx_bed          = params.hificnv_xx                 ? Channel.fromPath(params.hificnv_xx).map { it -> [ [ id: it.simpleName ], it ] }.collect()
-                                                                    : ''
-    ch_exclude_bed              = params.hificnv_exclude            ? Channel.fromPath(params.hificnv_exclude).map { it -> [ [ id: it.simpleName ], it ] }.collect()
-                                                                    : ''
-    ch_reduced_penetrance       = params.reduced_penetrance         ? Channel.fromPath(params.reduced_penetrance).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([])
-    ch_score_config_snv         = params.score_config_snv           ? Channel.fromPath(params.score_config_snv).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([])
-    ch_score_config_svs         = params.score_config_svs           ? Channel.fromPath(params.score_config_svs).map { it -> [ it.simpleName, it ] }.collect()
-                                                                    : Channel.value([])
-    ch_somalier_sites           = params.somalier_sites             ? Channel.fromPath(params.somalier_sites).map { [ it.simpleName, it ] }.collect()
-                                                                    : ''
-    ch_svdb_dbs                 = params.svdb_dbs                   ? Channel.fromPath(params.svdb_dbs).map { [ it.simpleName, it ] }.collect()
-                                                                    : ''
+    // Channels from (optional) input files
+    // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
+    ch_cadd_header              = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
+    ch_cadd_resources           = createReferenceChannelFromPath(params.cadd_resouces)
+    ch_cadd_prescored           = createReferenceChannelFromPath(params.cadd_prescored)
+    ch_fasta                    = createReferenceChannelFromPath(params.fasta)
+    ch_tandem_repeats           = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
+    ch_input_bed                = createReferenceChannelFromPath(params.bed, Channel.value([[],[]]))
+    ch_par                      = createReferenceChannelFromPath(params.par_regions)
+    ch_trgt_bed                 = createReferenceChannelFromPath(params.trgt_repeats)
+    ch_variant_catalog          = createReferenceChannelFromPath(params.variant_catalog)
+    ch_variant_consequences_snv = createReferenceChannelFromPath(params.variant_consequences_snv)
+    ch_variant_consequences_svs = createReferenceChannelFromPath(params.variant_consequences_svs)
+    ch_vep_cache_unprocessed    = createReferenceChannelFromPath(params.vep_cache, Channel.value([]))
+    ch_expected_xy_bed          = createReferenceChannelFromPath(params.hificnv_xy)
+    ch_expected_xx_bed          = createReferenceChannelFromPath(params.hificnv_xx)
+    ch_exclude_bed              = createReferenceChannelFromPath(params.hificnv_exclude)
+    ch_reduced_penetrance       = createReferenceChannelFromPath(params.reduced_penetrance)
+    ch_score_config_snv         = createReferenceChannelFromPath(params.score_config_snv)
+    ch_score_config_svs         = createReferenceChannelFromPath(params.score_config_svs)
+    ch_somalier_sites           = createReferenceChannelFromPath(params.somalier_sites)
+    ch_svdb_dbs                 = createReferenceChannelFromPath(params.svdb_dbs)
+
+    // Channels from (optional) input samplesheets validated by schema
+    ch_databases                = createReferenceChannelFromSamplesheet(params.snp_db, 'assets/schema_snp_db.json')
+    ch_vep_plugin_files         = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
 
     // Check parameter that doesn't conform to schema validation here
     if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
@@ -131,24 +116,21 @@ workflow NALLO {
     //
     // Prepare references
     //
-    if(!params.skip_mapping_wf | !params.skip_assembly_wf ) {
+    if(!params.skip_mapping_wf || !params.skip_assembly_wf ) {
 
         PREPARE_GENOME (
             ch_fasta,
             params.fasta.endsWith('.gz'),
             ch_vep_cache_unprocessed,
             params.vep_plugin_files,
-            ch_vep_extra_files_unsplit
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
-        if(!params.skip_snv_annotation) {
-            if (params.vep_cache) {
-                if (params.vep_cache.endsWith("tar.gz")) {
-                    ch_vep_cache = PREPARE_GENOME.out.vep_resources
-                } else {
-                    ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
-                }
+        if(!params.skip_snv_annotation && params.vep_cache) {
+            if (params.vep_cache.endsWith("tar.gz")) {
+                ch_vep_cache = PREPARE_GENOME.out.vep_resources
+            } else {
+                ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
             }
         }
 
@@ -355,12 +337,12 @@ workflow NALLO {
                 //
                 SNV_ANNOTATION(
                     SHORT_VARIANT_CALLING.out.combined_bcf,
-                    ch_databases,
+                    ch_databases.map { meta, databases -> databases }.collect(),
                     fasta,
                     fai.map { name, fai -> [ [ id: name ], fai ] },
-                    ch_vep_cache,
+                    ch_vep_cache.map { meta, cache -> cache },
                     params.vep_cache_version,
-                    PREPARE_GENOME.out.vep_extra_files,
+                    ch_vep_plugin_files.collect(),
                     (params.cadd_resources && params.cadd_prescored),
                     ch_cadd_header,
                     ch_cadd_resources,
@@ -534,9 +516,9 @@ workflow NALLO {
                 annotate_svs_in,
                 fasta,
                 ch_svdb_dbs,
-                ch_vep_cache,
+                ch_vep_cache.map { meta, cache -> cache },
                 params.vep_cache_version,
-                PREPARE_GENOME.out.vep_extra_files
+                ch_vep_plugin_files.collect()
             )
 
             ANN_CSQ_PLI_SVS (

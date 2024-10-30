@@ -449,7 +449,7 @@ Find the version of nf-validation you downloaded in `$HOME/.nextflow/plugins`, t
 ```
 plugins {
         // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
-        id 'nf-schema@2.1.1'
+        id 'nf-schema@2.2.0'
 }
 ```
 

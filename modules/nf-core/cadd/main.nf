@@ -13,8 +13,8 @@ process CADD {
 
     input:
     tuple val(meta), path(vcf)
-    path(annotation_dir)
-    path(prescored_dir)
+    tuple val(meta2), path(annotation_dir)
+    tuple val(meta3), path(prescored_dir)
 
     output:
     tuple val(meta), path("*.tsv.gz"), emit: tsv
