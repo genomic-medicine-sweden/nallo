@@ -15,14 +15,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[1] = true
-                input[2] = [
-                    [ id: 'vep_cache' ],
-                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
-                ]
-                input[3] = true
-                input[4] = Channel.of([
-                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
-                ])
+                input[2] = Channel.empty()
+                input[3] = false
+                input[4] = [ [],[] ]
                 """
             }
         }
@@ -80,7 +75,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]],
+                input[3] = [[],[]]
                 input[4] = true
                 """
             }
@@ -100,7 +95,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]],
+                input[3] = [[],[]]
                 input[4] = false
                 """
             }

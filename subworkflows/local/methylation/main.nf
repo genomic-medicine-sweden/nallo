@@ -1,6 +1,6 @@
-include { MODKIT_PILEUP as MODKIT_PILEUP_UNPHASED } from '../../modules/nf-core/modkit/pileup/main'
-include { MODKIT_PILEUP as MODKIT_PILEUP_PHASED   } from '../../modules/nf-core/modkit/pileup/main'
-include { TABIX_BGZIPTABIX                        } from '../../modules/nf-core/tabix/bgziptabix/main'
+include { MODKIT_PILEUP as MODKIT_PILEUP_UNPHASED } from '../../../modules/nf-core/modkit/pileup/main'
+include { MODKIT_PILEUP as MODKIT_PILEUP_PHASED   } from '../../../modules/nf-core/modkit/pileup/main'
+include { TABIX_BGZIPTABIX                        } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow METHYLATION {
 
@@ -29,7 +29,7 @@ workflow METHYLATION {
     }
 
     TABIX_BGZIPTABIX ( ch_bgzip_modkit_pileup_in )
-    ch_versions = ch_versions.mix(BGZIP_MODKIT_PILEUP_PHASED.out.versions)
+    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     emit:
     versions = ch_versions // channel: [ versions.yml ]
