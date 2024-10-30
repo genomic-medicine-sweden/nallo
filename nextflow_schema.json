@@ -189,6 +189,11 @@
                     "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "variant_consequences_svs": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
                 "vep_cache": {
                     "type": "string",
                     "description": "A path to the VEP cache location",
@@ -234,6 +239,13 @@
                     "fa_icon": "fas fa-file",
                     "description": "A SNV rank model config file for genmod."
                 },
+                "score_config_svs": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A SV rank model config file for genmod."
+                },
                 "somalier_sites": {
                     "type": "string",
                     "pattern": "^\\S+\\.vcf(\\.gz)?$",
@@ -245,7 +257,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/",
                     "hidden": true
                 }
             }
@@ -467,7 +479,8 @@
                     "type": "string",
                     "description": "Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default.",
                     "hidden": true,
-                    "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"]
+                    "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
+                    "default": "map-hifi"
                 },
                 "extra_modkit_options": {
                     "type": "string",

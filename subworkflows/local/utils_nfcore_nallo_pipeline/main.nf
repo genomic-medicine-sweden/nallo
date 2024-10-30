@@ -73,9 +73,9 @@ def fileDependencies = [
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "variant_consequences_snv"],
-    sv_annotation    : ["svdb_dbs", "vep_cache", "vep_plugin_files"],
+    sv_annotation    : ["svdb_dbs", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
     cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
-    rank_variants    : ["reduced_penetrance", "score_config_snv"],
+    rank_variants    : ["reduced_penetrance", "score_config_snv", "score_config_svs"],
     repeat_calling   : ["trgt_repeats"],
     repeat_annotation: ["variant_catalog"],
 ]
@@ -108,10 +108,11 @@ def parameterStatus = [
         fasta                   : params.fasta,
         trgt_repeats            : params.trgt_repeats,
         variant_catalog         : params.variant_catalog,
-        score_config_snv        : params.score_config_snv,
         reduced_penetrance      : params.reduced_penetrance,
         score_config_snv        : params.score_config_snv,
+        score_config_svs        : params.score_config_svs,
         variant_consequences_snv: params.variant_consequences_snv,
+        variant_consequences_svs: params.variant_consequences_svs,
     ]
 ]
 

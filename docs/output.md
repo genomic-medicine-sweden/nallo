@@ -206,10 +206,11 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants.
 [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. It also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 [SVDB](https://github.com/J35P312/SVDB) is used to combine and merge SVs and CNVs within and between samples.
+[GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SVs.
 
 !!!note
 
-    Variants are only output without annotation if that subworkflow is turned off.
+    Variants are only output without annotation and/or ranking if these subworkflow is turned off.
 
 !!!note
 
@@ -236,6 +237,15 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi` | Index of the merged VCF file                                                     |
 | `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz`          | VCF file with merged and annotated SVs per family (output if CNV-calling is off) |
 | `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi`      | Index of the merged VCF file                                                     |
+
+[GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SVs.
+
+| Path                                                                             | Description                                                                              |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz`     | VCF file with merged, annotated and ranked CNVs and SVs per family                       |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi` | Index of the merged VCF file                                                             |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family (output if CNV-calling is off) |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi`      | Index of the merged VCF file                                                             |
 
 ## Visualization Tracks
 
