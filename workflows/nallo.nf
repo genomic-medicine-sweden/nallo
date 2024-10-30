@@ -482,6 +482,19 @@ workflow NALLO {
                     }
                 }
             }
+            if (params.skip_phasing_wf) {
+                if (!params.skip_methylation_wf) {
+                    ch_methylation_in = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                    METHYLATION (
+                        ch_methylation_in,
+                        fasta,
+                        fai,
+                        ch_input_bed,
+                        !params.skip_phasing_wf
+                    )
+                    ch_versions = ch_versions.mix(METHYLATION.out.versions)
+                }
+            }
         }
 
         // Merge SVs and CNVs if we've called both SVs and CNVs
