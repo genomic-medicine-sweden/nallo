@@ -1,6 +1,5 @@
-include { MODKIT_PILEUP as MODKIT_PILEUP_UNPHASED } from '../../../modules/nf-core/modkit/pileup/main'
-include { MODKIT_PILEUP as MODKIT_PILEUP_PHASED   } from '../../../modules/nf-core/modkit/pileup/main'
-include { TABIX_BGZIPTABIX                        } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { MODKIT_PILEUP    } from '../../../modules/nf-core/modkit/pileup/main'
+include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow METHYLATION {
 
@@ -14,17 +13,17 @@ workflow METHYLATION {
     main:
     ch_versions = Channel.empty()
 
-    if (phased) {
-        MODKIT_PILEUP_PHASED (ch_bam_bai, ch_fasta, ch_bed)
-        ch_versions = ch_versions.mix(MODKIT_PILEUP_PHASED.out.versions)
+    // Arguments to modkit are set according to whether phasing was performed in config
+    MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)
+    ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
 
+    // Output is different between phased and unphased modes.
+    // We must deal with that here to get consistent subworkflow output
+    if (phased) {
         MODKIT_PILEUP_PHASED.out.bed
             .transpose()
             .set { ch_bgzip_modkit_pileup_in }
     } else {
-        MODKIT_PILEUP_UNPHASED (ch_bam_bai, ch_fasta, ch_bed)
-        ch_versions = ch_versions.mix(MODKIT_PILEUP_UNPHASED.out.versions)
-
         ch_bgzip_modkit_pileup_in = MODKIT_PILEUP_UNPHASED.out.bed
     }
 
