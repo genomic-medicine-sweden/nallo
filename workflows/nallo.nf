@@ -483,7 +483,7 @@ workflow NALLO {
                     // Annotate repeat expansions with stranger
                     //
                     if(!params.skip_repeat_annotation) {
-                        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.vcf )
+                        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.sample_vcf )
                         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
                     }
                 }

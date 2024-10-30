@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            148,
+            150,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -722,23 +722,23 @@
                 ],
                 [
                     "HG002_Revio_A_repeat_expansion_stranger.vcf.gz",
-                    "492a5d1a0f1656e1f7fc1b97c922cab4"
+                    "73c6c1d07ff96ef44569b5534aa90174"
                 ],
                 [
                     "HG002_Revio_B_repeat_expansion_stranger.vcf.gz",
-                    "492a5d1a0f1656e1f7fc1b97c922cab4"
+                    "73c6c1d07ff96ef44569b5534aa90174"
                 ],
                 [
                     "test.vcf.gz",
-                    "7fcabf1cb86be8e3e5ad35d91e8897f9"
+                    "9f54e9a4fed49a36e1ca3d4cbac049fe"
                 ],
                 [
                     "HG002_Revio_A_sorted.vcf.gz",
-                    "43b909ba9628b92f5062be6c413e560d"
+                    "502b7befd528ce70b8269a8e4b9281df"
                 ],
                 [
                     "HG002_Revio_B_sorted.vcf.gz",
-                    "43b909ba9628b92f5062be6c413e560d"
+                    "502b7befd528ce70b8269a8e4b9281df"
                 ]
             ]
         ],
@@ -746,6 +746,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T08:35:33.241655745"
+        "timestamp": "2024-10-30T10:29:12.353783346"
     }
 }
