@@ -11,10 +11,10 @@
 
 If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.
 
-| Path                                                              | Description             |
-| ----------------------------------------------------------------- | ----------------------- |
-| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags |
-| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   |
+| Path                                                  | Description             |
+| ----------------------------------------------------- | ----------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   |
 
 !!!note
 
@@ -72,14 +72,14 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/), or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used for phasing.
 
-| Path                                                              | Description                   |
-| ----------------------------------------------------------------- | ----------------------------- |
-| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags       |
-| `{outputdir}/aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file         |
-| `{outputdir}/phased_variants/{sample}/*.vcf.gz`                   | VCF file with phased variants |
-| `{outputdir}/phased_variants/{sample}/*.vcf.gz.tbi`               | Index of the VCF file         |
-| `{outputdir}/qc/phasing_stats/{sample}/*.blocks.tsv`              | Phase block file              |
-| `{outputdir}/qc/phasing_stats/{sample}/*.stats.tsv`               | Phasing statistics file       |
+| Path                                                  | Description                   |
+| ----------------------------------------------------- | ----------------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags       |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file         |
+| `phased_variants/{sample}/*.vcf.gz`                   | VCF file with phased variants |
+| `phased_variants/{sample}/*.vcf.gz.tbi`               | Index of the VCF file         |
+| `qc/phasing_stats/{sample}/*.blocks.tsv`              | Phase block file              |
+| `qc/phasing_stats/{sample}/*.stats.tsv`               | Phasing statistics file       |
 
 ## QC
 
@@ -89,44 +89,56 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides general quality metrics for sequenced reads, including information on quality score distribution, per-base sequence content (%A/T/G/C), adapter contamination, and overrepresented sequences. For more details, refer to the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
-| Path                                           | Description                                                     |
-| ---------------------------------------------- | --------------------------------------------------------------- |
-| `{outputdir}/qc/fastqc/{sample}/*_fastqc.html` | FastQC report containing quality metrics                        |
-| `{outputdir}/qc/fastqc/{sample}/*_fastqc.zip`  | Zip archive with the FastQC report, data files, and plot images |
+| Path                               | Description                                                     |
+| ---------------------------------- | --------------------------------------------------------------- |
+| `qc/fastqc/{sample}/*_fastqc.html` | FastQC report containing quality metrics                        |
+| `qc/fastqc/{sample}/*_fastqc.zip`  | Zip archive with the FastQC report, data files, and plot images |
 
 ### Mosdepth
 
 [Mosdepth](https://github.com/brentp/mosdepth) is used to report quality control metrics such as coverage and GC content from alignment files.
 
-| Path                                                          | Description                                                                                                           |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome |
-| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions (if a BED file is used)  |
-| `{outputdir}/qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 |
-| `{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region (if a BED file is used)                                                                              |
-| `{outputdir}/qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      |
+| Path                                              | Description                                                                                                           |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome |
+| `qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions (if a BED file is used)  |
+| `qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 |
+| `qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region (if a BED file is used)                                                                              |
+| `qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      |
 
 ### Cramino
 
 [cramino](https://github.com/wdecoster/cramino) is used to analyze both phased and unphased reads.
 
-| Path                                               | Description                                                                                          |
-| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `{outputdir}/qc/cramino/phased/{sample}/*.arrow`   | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
-| `{outputdir}/qc/cramino/phased/{sample}/*.txt`     | Summary information in text format                                                                   |
-| `{outputdir}/qc/cramino/unphased/{sample}/*.arrow` | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
-| `{outputdir}/qc/cramino/unphased/{sample}/*.txt`   | Summary information in text format                                                                   |
+| Path                                   | Description                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `qc/cramino/phased/{sample}/*.arrow`   | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
+| `qc/cramino/phased/{sample}/*.txt`     | Summary information in text format                                                                   |
+| `qc/cramino/unphased/{sample}/*.arrow` | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
+| `qc/cramino/unphased/{sample}/*.txt`   | Summary information in text format                                                                   |
 
 ### Somalier
 
 [somalier](https://github.com/brentp/somalier) checks relatedness and sex.
 
-| Path                                                             | Description                                 |
-| ---------------------------------------------------------------- | ------------------------------------------- |
-| `{outputdir}/predigree/{project}.ped`                            | PED file updated with somalier-inferred sex |
-| `{outputdir}/qc/somalier/relate/{project}/{project}.html`        | HTML report                                 |
-| `{outputdir}/qc/somalier/relate/{project}/{project}.pairs.tsv`   | Information about sample pairs              |
-| `{outputdir}/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples        |
+| Path                                                  | Description                                 |
+| ----------------------------------------------------- | ------------------------------------------- |
+| `pedigree/{project}.ped`                              | PED file updated with somalier-inferred sex |
+| `qc/somalier/relate/{project}/{project}.html`         | HTML report                                 |
+| `qc/somalier/relate/{project}/{project}.pairs.tsv`    | Information about sample pairs              |
+| `/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples        |
+
+| Path                      | Description                                 |
+| ------------------------- | ------------------------------------------- |
+| `predigree/{project}.ped` | PED file updated with somalier-inferred sex |
+
+### DeepVariant
+
+`vcf_stats_report.py` from [DeepVariant](https://github.com/google/deepvariant) is used to generate a html report per sample.
+
+| Path                                                                  | Description                                 |
+| --------------------------------------------------------------------- | ------------------------------------------- |
+| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant |
 
 ## Variants
 
@@ -146,21 +158,21 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats:
 
-| Path                                                                  | Description                               |
-| --------------------------------------------------------------------- | ----------------------------------------- |
-| `{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz`     | Merged VCF file for all samples           |
-| `{outputdir}/repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi` | Index of the VCF file                     |
-| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz`     | VCF file with called repeats for a sample |
-| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi` | Index of the VCF file                     |
-| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bam`        | BAM file with sorted spanning reads       |
-| `{outputdir}/repeat_calling/trgt/single_sample/{sample}/*.bai`        | Index of the BAM file                     |
+| Path                                                      | Description                               |
+| --------------------------------------------------------- | ----------------------------------------- |
+| `repeat_calling/trgt/multi_sample/{project}/*.vcf.gz`     | Merged VCF file for all samples           |
+| `repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi` | Index of the VCF file                     |
+| `repeat_calling/trgt/single_sample/{sample}/*.vcf.gz`     | VCF file with called repeats for a sample |
+| `repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi` | Index of the VCF file                     |
+| `repeat_calling/trgt/single_sample/{sample}/*.bam`        | BAM file with sorted spanning reads       |
+| `repeat_calling/trgt/single_sample/{sample}/*.bai`        | Index of the BAM file                     |
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate them:
 
-| Path                                                           | Description                     |
-| -------------------------------------------------------------- | ------------------------------- |
-| `{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz`     | Annotated VCF file              |
-| `{outputdir}/repeat_annotation/stranger/{sample}/*.vcf.gz.tbi` | Index of the annotated VCF file |
+| Path                                               | Description                     |
+| -------------------------------------------------- | ------------------------------- |
+| `repeat_annotation/stranger/{sample}/*.vcf.gz`     | Annotated VCF file              |
+| `repeat_annotation/stranger/{sample}/*.vcf.gz.tbi` | Index of the annotated VCF file |
 
 ### SNVs
 
@@ -170,13 +182,14 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
     Variants are only output without annotation and ranking if these subworkflows are turned off.
 
-| Path                                                   | Description                                                                 |
-| ------------------------------------------------------ | --------------------------------------------------------------------------- |
-| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz`      | VCF file containing called variants with alternative genotypes for a sample |
-| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz.tbi`  | Index of the corresponding VCF file                                         |
-| `snvs/multi_sample/{project}/{project}_snv.vcf.gz`     | VCF file containing called variants for all samples                         |
-| `snvs/multi_sample/{project}/{project}_snv.vcf.gz.tbi` | Index of the corresponding VCF file                                         |
-| `snvs/stats/single_sample/*.stats.txt`                 | Variant statistics                                                          |
+| Path                                                                  | Description                                                                 |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz`                     | VCF file containing called variants with alternative genotypes for a sample |
+| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz.tbi`                 | Index of the corresponding VCF file                                         |
+| `snvs/multi_sample/{project}/{project}_snv.vcf.gz`                    | VCF file containing called variants for all samples                         |
+| `snvs/multi_sample/{project}/{project}_snv.vcf.gz.tbi`                | Index of the corresponding VCF file                                         |
+| `snvs/stats/single_sample/*.stats.txt`                                | Variant statistics                                                          |
+| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 |
 
 [echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 

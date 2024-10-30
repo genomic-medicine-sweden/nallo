@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            158,
+            160,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -76,6 +76,9 @@
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT": {
+                    "deepvariant": "1.6.1"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.6.1"
                 },
                 "DIPCALL": {
@@ -379,6 +382,11 @@
                 "qc/cramino/unphased/HG002_Revio_B",
                 "qc/cramino/unphased/HG002_Revio_B/HG002_Revio_B_cramino_aligned.arrow",
                 "qc/cramino/unphased/HG002_Revio_B/HG002_Revio_B_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_A",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_A/HG002_Revio_A.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_B",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_B/HG002_Revio_B.visual_report.html",
                 "qc/fastqc",
                 "qc/fastqc/HG002_Revio_A",
                 "qc/fastqc/HG002_Revio_A/HG002_Revio_A_fastqc.html",
@@ -746,6 +754,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T11:27:50.204023027"
+        "timestamp": "2024-10-30T16:36:03.651732371"
     }
 }
