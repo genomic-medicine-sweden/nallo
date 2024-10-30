@@ -41,6 +41,7 @@ Define where the pipeline should find input data and save output data.
 | `svdb_dbs` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `variant_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
 | `variant_consequences_snv` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
+| `variant_consequences_svs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `bed` | A BED file with regions of interest, used to limit short variant calling. | `string` |  |  |  |
 | `hificnv_xy` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
@@ -48,8 +49,9 @@ Define where the pipeline should find input data and save output data.
 | `hificnv_exclude` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
 | `reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
 | `score_config_snv` | A SNV rank model config file for genmod. | `string` |  |  |  |
+| `score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/7be7114cb132be8cae9343f225bcf42ec11ecc1b/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/ |  | True |
 
 ## Reference genome options
 
@@ -106,7 +108,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_plugin_files` | A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. | `string` | PACBIO |  | True |
-| `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. | `string` |  |  | True |
+| `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. | `string` | map-hifi |  | True |
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |

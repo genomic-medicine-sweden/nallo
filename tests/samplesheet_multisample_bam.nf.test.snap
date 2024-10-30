@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            150,
+            160,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -76,6 +76,9 @@
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT": {
+                    "deepvariant": "1.6.1"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.6.1"
                 },
                 "DIPCALL": {
@@ -379,6 +382,11 @@
                 "qc/cramino/unphased/HG002_Revio_B",
                 "qc/cramino/unphased/HG002_Revio_B/HG002_Revio_B_cramino_aligned.arrow",
                 "qc/cramino/unphased/HG002_Revio_B/HG002_Revio_B_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_A",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_A/HG002_Revio_A.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_B",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio_B/HG002_Revio_B.visual_report.html",
                 "qc/fastqc",
                 "qc/fastqc/HG002_Revio_A",
                 "qc/fastqc/HG002_Revio_A/HG002_Revio_A_fastqc.html",
@@ -456,8 +464,8 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
                 "svs/single_sample",
                 "svs/single_sample/HG002_Revio_A",
                 "svs/single_sample/HG002_Revio_A/HG002_Revio_A_cnvs.vcf.gz",
@@ -683,7 +691,7 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated.vcf.gz",
+                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=87, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -746,6 +754,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T11:42:12.581768636"
+        "timestamp": "2024-10-30T17:19:17.8692492"
     }
 }

@@ -10,6 +10,7 @@ include {
 */
 
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
@@ -25,6 +26,7 @@ include { PHASING                                 } from '../subworkflows/local/
 include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
 include { QC_ALIGNED_READS                        } from '../subworkflows/local/qc_aligned_reads'
 include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS as RANK_VARIANTS_SVS      } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
 include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
 include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
@@ -84,12 +86,14 @@ workflow NALLO {
     ch_trgt_bed                 = createReferenceChannelFromPath(params.trgt_repeats)
     ch_variant_catalog          = createReferenceChannelFromPath(params.variant_catalog)
     ch_variant_consequences_snv = createReferenceChannelFromPath(params.variant_consequences_snv)
+    ch_variant_consequences_svs = createReferenceChannelFromPath(params.variant_consequences_svs)
     ch_vep_cache_unprocessed    = createReferenceChannelFromPath(params.vep_cache, Channel.value([]))
     ch_expected_xy_bed          = createReferenceChannelFromPath(params.hificnv_xy)
     ch_expected_xx_bed          = createReferenceChannelFromPath(params.hificnv_xx)
     ch_exclude_bed              = createReferenceChannelFromPath(params.hificnv_exclude)
     ch_reduced_penetrance       = createReferenceChannelFromPath(params.reduced_penetrance)
     ch_score_config_snv         = createReferenceChannelFromPath(params.score_config_snv)
+    ch_score_config_svs         = createReferenceChannelFromPath(params.score_config_svs)
     ch_somalier_sites           = createReferenceChannelFromPath(params.somalier_sites)
     ch_svdb_dbs                 = createReferenceChannelFromPath(params.svdb_dbs)
 
@@ -372,8 +376,8 @@ workflow NALLO {
                         .set { ch_vcf_tbi_per_region }
                 } else {
                     // otherwise grab the VCF that should have gone into RANK_VARIANTS
-                    ANN_CSQ_PLI_SNV.out.vcf_ann
-                        .join( ANN_CSQ_PLI_SNV.out.tbi_ann )
+                    ANN_CSQ_PLI_SNV.out.vcf
+                        .join( ANN_CSQ_PLI_SNV.out.tbi )
                         .set { ch_vcf_tbi_per_region }
                 }
             } else {
@@ -516,6 +520,23 @@ workflow NALLO {
                 params.vep_cache_version,
                 ch_vep_plugin_files.collect()
             )
+
+            ANN_CSQ_PLI_SVS (
+                ANNOTATE_SVS.out.vcf,
+                ch_variant_consequences_svs
+            )
+            ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
+
+            if (!params.skip_rank_variants) {
+                RANK_VARIANTS_SVS (
+                    ANN_CSQ_PLI_SVS.out.vcf,
+                    ch_updated_pedfile,
+                    ch_reduced_penetrance,
+                    ch_score_config_svs
+                )
+                ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
+            }
+
         }
     }
 

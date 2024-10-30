@@ -298,6 +298,17 @@ These databases could for example come from [CoLoRSdb](https://zenodo.org/record
 
 Turned off with `--skip_sv_annotation`.
 
+### Rank SVs
+
+This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:
+
+| Parameter            | Description                                                                                                                                                                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `score_config_svs`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
+| `reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
+
+`--skip_rank_variants`.
+
 ## Other highlighted parameters
 
 - Limit SNV calling to regions in BED file (`--bed`).
