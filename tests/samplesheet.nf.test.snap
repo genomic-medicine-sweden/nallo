@@ -140,7 +140,7 @@
                 "MINIMAP2_INDEX_DIPCALL": {
                     "minimap2": "2.28-r1209"
                 },
-                "MODKIT_PILEUP_PHASED": {
+                "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
@@ -273,12 +273,12 @@
                 "methylation/modkit",
                 "methylation/modkit/pileup",
                 "methylation/modkit/pileup/HG002_Revio",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/mosdepth_cov_dist.txt",
@@ -433,12 +433,12 @@
                 "HG002_Revio.vcf.gz:md5,c5f77b97b9ef6d543171792074eb1322",
                 "HG002_Revio.vcf.gz.tbi:md5,5e42ce281f81b7fdb5fa6e42ec4c7f8b",
                 "test.zip:md5,2042de439a4cb1b37825169a773cf24a",
-                "HG002_Revio_modkit_pileup_phased_1.bed.gz:md5,00b5d207be5dc8a6605698d6139afc48",
-                "HG002_Revio_modkit_pileup_phased_1.bed.gz.tbi:md5,58e7b0a9ddaad5be350eec78b338c1e6",
-                "HG002_Revio_modkit_pileup_phased_2.bed.gz:md5,bb881b1838f17235e1dc295b29f2d473",
-                "HG002_Revio_modkit_pileup_phased_2.bed.gz.tbi:md5,e76d65f68af11d673eda080b522d81c2",
-                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz:md5,df6d44c55925a894aa5fe838f9dd449e",
-                "HG002_Revio_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,8348f75c0ce6fec18b57739fc36b3011",
+                "HG002_Revio_modkit_pileup_1.bed.gz:md5,00b5d207be5dc8a6605698d6139afc48",
+                "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,58e7b0a9ddaad5be350eec78b338c1e6",
+                "HG002_Revio_modkit_pileup_2.bed.gz:md5,bb881b1838f17235e1dc295b29f2d473",
+                "HG002_Revio_modkit_pileup_2.bed.gz.tbi:md5,e76d65f68af11d673eda080b522d81c2",
+                "HG002_Revio_modkit_pileup_ungrouped.bed.gz:md5,df6d44c55925a894aa5fe838f9dd449e",
+                "HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi:md5,8348f75c0ce6fec18b57739fc36b3011",
                 "mosdepth_cov_dist.txt:md5,1ab27c6267c491c1a2ccf0ac988f61a0",
                 "mosdepth_cumcov_dist.txt:md5,ccca5d9ba66b884b83cf982958485948",
                 "mosdepth_perchrom.txt:md5,12bf09d8a371ca77f525c88190f2e07d",
@@ -572,9 +572,13 @@
             "nextflow": "24.04.4"
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
         "timestamp": "2024-10-30T10:27:37.120618269"
 =======
         "timestamp": "2024-10-30T12:42:09.943202485"
 >>>>>>> 759cb56 (Updated pipeline test snapshot)
+=======
+        "timestamp": "2024-10-30T13:30:22.182884377"
+>>>>>>> fb6422b (Corrected process names)
     }
 }

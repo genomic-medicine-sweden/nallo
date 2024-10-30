@@ -20,11 +20,11 @@ workflow METHYLATION {
     // Output is different between phased and unphased modes.
     // We must deal with that here to get consistent subworkflow output
     if (phased) {
-        MODKIT_PILEUP_PHASED.out.bed
+        MODKIT_PILEUP.out.bed
             .transpose()
             .set { ch_bgzip_modkit_pileup_in }
     } else {
-        ch_bgzip_modkit_pileup_in = MODKIT_PILEUP_UNPHASED.out.bed
+        ch_bgzip_modkit_pileup_in = MODKIT_PILEUP.out.bed
     }
 
     TABIX_BGZIPTABIX ( ch_bgzip_modkit_pileup_in )
