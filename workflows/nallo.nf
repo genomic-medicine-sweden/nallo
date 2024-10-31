@@ -475,7 +475,8 @@ workflow NALLO {
                 ch_methylation_in = !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai
                                                             : bam_bai
                 METHYLATION (
-                    ch_methylation_in,
+                    !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai
+                                            : bam_bai,
                     fasta,
                     fai,
                     ch_input_bed,
