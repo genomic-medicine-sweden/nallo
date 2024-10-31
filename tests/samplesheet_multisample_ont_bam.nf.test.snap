@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
         "content": [
-            93,
+            103,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -106,7 +106,7 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.28-r1209"
                 },
-                "MODKIT_PILEUP_PHASED": {
+                "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
@@ -201,19 +201,19 @@
                 "methylation/modkit",
                 "methylation/modkit/pileup",
                 "methylation/modkit/pileup/HG002_ONT_A",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi",
                 "methylation/modkit/pileup/HG002_ONT_B",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/mosdepth_cov_dist.txt",
@@ -355,18 +355,18 @@
             ],
             [
                 "test.zip:md5,779efd29ec2cc66bef05c173c44e4168",
-                "HG002_ONT_A_modkit_pileup_phased_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
-                "HG002_ONT_A_modkit_pileup_phased_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
-                "HG002_ONT_A_modkit_pileup_phased_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
-                "HG002_ONT_A_modkit_pileup_phased_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
-                "HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz:md5,b42b812e1dced6242ed206754c7b3f3e",
-                "HG002_ONT_A_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,0c232dffb9651d934b179f95365931db",
-                "HG002_ONT_B_modkit_pileup_phased_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
-                "HG002_ONT_B_modkit_pileup_phased_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
-                "HG002_ONT_B_modkit_pileup_phased_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
-                "HG002_ONT_B_modkit_pileup_phased_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
-                "HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz:md5,42dcaedf8c379a4e5dee0822d5e8aca4",
-                "HG002_ONT_B_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,3d97d016882c99e4e21112fc76ceb2a2",
+                "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
+                "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
+                "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
+                "HG002_ONT_A_modkit_pileup_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
+                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz:md5,b42b812e1dced6242ed206754c7b3f3e",
+                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi:md5,0c232dffb9651d934b179f95365931db",
+                "HG002_ONT_B_modkit_pileup_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
+                "HG002_ONT_B_modkit_pileup_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
+                "HG002_ONT_B_modkit_pileup_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
+                "HG002_ONT_B_modkit_pileup_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
+                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz:md5,42dcaedf8c379a4e5dee0822d5e8aca4",
+                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi:md5,3d97d016882c99e4e21112fc76ceb2a2",
                 "mosdepth_cov_dist.txt:md5,1eb2a5c39fd4b8dd814049b65b007037",
                 "mosdepth_cumcov_dist.txt:md5,5ad1d589df3fa7fe5d21fc95001573a9",
                 "mosdepth_perchrom.txt:md5,86a907217d64d4c2717885403058580f",
@@ -470,13 +470,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T14:18:03.947789989"
+        "timestamp": "2024-10-31T16:16:52.848104929"
     }
 }
