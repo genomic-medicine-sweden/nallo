@@ -79,7 +79,6 @@ nextflow_workflow {
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
                 input[3] = [[],[]]
-                input[4] = true
                 """
             }
         }
@@ -102,7 +101,6 @@ nextflow_workflow {
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
                 input[3] = [[],[]]
-                input[4] = false
                 """
             }
         }
@@ -127,7 +125,6 @@ nextflow_workflow {
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
-                input[4] = true
                 """
             }
         }
@@ -152,7 +149,6 @@ nextflow_workflow {
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
-                input[4] = false
                 """
             }
         }
@@ -176,7 +172,6 @@ nextflow_workflow {
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
                 input[3] = [[],[]]
-                input[4] = true
                 """
             }
         }
@@ -202,7 +197,6 @@ nextflow_workflow {
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
-                input[4] = true
                 """
             }
         }
@@ -226,7 +220,6 @@ nextflow_workflow {
                 input[1] = PREPARE_GENOME.out.fasta
                 input[2] = PREPARE_GENOME.out.fai
                 input[3] = [[],[]]
-                input[4] = false
                 """
             }
         }
@@ -252,7 +245,6 @@ nextflow_workflow {
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
-                input[4] = false
                 """
             }
         }

@@ -8,7 +8,6 @@ workflow METHYLATION {
     ch_fasta               // channel: [ val(meta), fasta ]
     ch_fai                 // channel: [ val(meta), fai ]
     ch_bed                 // channel: [ val(meta), bed ]
-    phased                 // bool
 
     main:
     ch_versions = Channel.empty()
@@ -17,16 +16,9 @@ workflow METHYLATION {
     MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)
     ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
 
-    // Output is different between phased and unphased modes.
-    // We must deal with that here to get consistent subworkflow output
-    if (phased) {
-        MODKIT_PILEUP.out.bed
-            .transpose()
-            .set { ch_bgzip_modkit_pileup_in }
-    } else {
-        ch_bgzip_modkit_pileup_in = MODKIT_PILEUP.out.bed
-    }
-
+    MODKIT_PILEUP.out.bed
+        .transpose()
+        .set { ch_bgzip_modkit_pileup_in }
     TABIX_BGZIPTABIX ( ch_bgzip_modkit_pileup_in )
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
