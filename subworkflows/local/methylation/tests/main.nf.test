@@ -70,6 +70,9 @@ nextflow_workflow {
 
     test("1 sample - [] phased") {
         when {
+            params {
+                skip_phasing_wf = false
+            }
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
@@ -90,6 +93,9 @@ nextflow_workflow {
 
     test("1 sample - [] unphased") {
         when {
+            params {
+                skip_phasing_wf = true
+            }
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
@@ -110,6 +116,9 @@ nextflow_workflow {
 
     test("1 sample - bed phased") {
         when {
+            params {
+                skip_phasing_wf = false
+            }
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
@@ -132,6 +141,9 @@ nextflow_workflow {
 
     test("1 sample - bed unphased") {
         when {
+            params {
+                skip_phasing_wf = true
+            }
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
@@ -155,6 +167,9 @@ nextflow_workflow {
     test("1 sample - [] phased - stub") {
         options "-stub"
         when {
+            params {
+                skip_phasing_wf = false
+            }
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
@@ -176,6 +191,9 @@ nextflow_workflow {
     test("1 sample - bed phased - stub") {
         options "-stub"
         when {
+            params {
+                skip_phasing_wf = false
+            }
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
@@ -199,6 +217,9 @@ nextflow_workflow {
     test("1 sample - [] unphased - stub") {
         options "-stub"
         when {
+            params {
+                skip_phasing_wf = true
+            }
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
@@ -220,6 +241,9 @@ nextflow_workflow {
     test("1 sample - bed unphased - stub") {
         options "-stub"
         when {
+            params {
+                skip_phasing_wf = true
+            }
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
