@@ -60,7 +60,11 @@ nextflow_workflow {
                 """
                 input[0] = SHORT_VARIANT_CALLING.out.snp_calls_vcf
                 input[1] = SHORT_VARIANT_CALLING.out.snp_calls_tbi
-                input[2] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[2] = MINIMAP2_ALIGN.out.bam
+                            .join(MINIMAP2_ALIGN.out.index)
+                            .map { meta, bam, bai ->
+                                [ [ id : meta.id ], bam, bai ]
+                            }
                 input[3] = PREPARE_GENOME.out.fasta
                 input[4] = PREPARE_GENOME.out.fai
                 """
