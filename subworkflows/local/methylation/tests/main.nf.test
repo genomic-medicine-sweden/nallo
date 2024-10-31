@@ -17,7 +17,6 @@ nextflow_workflow {
                 input[1] = true
                 input[2] = Channel.empty()
                 input[3] = false
-                input[4] = [ [],[] ]
                 """
             }
         }
