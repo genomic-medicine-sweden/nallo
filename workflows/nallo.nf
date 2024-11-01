@@ -472,8 +472,6 @@ workflow NALLO {
             // Create methylation pileups with modkit
             //
             if (!params.skip_methylation_wf) {
-                ch_methylation_in = !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai
-                                                            : bam_bai
                 METHYLATION (
                     !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
                     fasta,
