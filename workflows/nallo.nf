@@ -40,6 +40,7 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/local/create_pedigree_file/main'
 include { ECHTVAR_ENCODE                                    } from '../modules/local/echtvar/encode/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 
@@ -190,7 +191,7 @@ workflow NALLO {
         // Create PED from samplesheet
         //
         ch_input
-            .map { meta, files -> [ meta.project, meta ] }
+            .map { meta, files -> [ [ id: meta.project ], meta ] }
             .groupTuple()
             .set { ch_samplesheet_ped_in }
 
@@ -198,7 +199,6 @@ workflow NALLO {
         ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
 
         SAMPLESHEET_PED.out.ped
-            .map { project, ped -> [ [ 'id': project ], ped ] }
             .collect()
             .set { ch_samplesheet_pedfile }
 
@@ -216,10 +216,10 @@ workflow NALLO {
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
         //
-        // Create PED with updated sex
+        // Create PED with updated sex per project (should perphaps be per SNV-calling region)
         //
         bam
-            .map { meta, files -> [ meta.project, meta ] }
+            .map { meta, files -> [ [ id: meta.project ], meta ] }
             .groupTuple()
             .set { ch_somalier_ped_in }
 
@@ -227,9 +227,22 @@ workflow NALLO {
         ch_versions = ch_versions.mix(SOMALIER_PED.out.versions)
 
         SOMALIER_PED.out.ped
-            .map { project, ped -> [ [ 'id': project ], ped ] }
             .collect()
             .set { ch_updated_pedfile }
+
+        //
+        // Create PED with updated sex - per family
+        //
+        bam
+            .map { meta, files -> [ [ id: meta.family_id ], meta ] }
+            .groupTuple()
+            .set { ch_somalier_ped_family_in }
+
+        SOMALIER_PED_FAMILY ( ch_somalier_ped_family_in )
+        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
+
+        SOMALIER_PED_FAMILY.out.ped
+            .set { ch_updated_pedfile_family }
 
         //
         // Run read QC with FastQC, mosdepth and cramino
@@ -356,6 +369,12 @@ workflow NALLO {
                 )
                 ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
+                // Give pedfile meta from
+                ANN_CSQ_PLI_SNV.out.vcf
+                    .combine(ch_updated_pedfile.map { meta, ped -> ped } )
+                    .map { meta, vcf, ped -> [ meta, ped ] }
+                    .set { rank_snvs_ped_in }
+
                 //
                 // Ranks one multisample VCF per variant call region
                 // Can only run if samplesheet has affected samples
@@ -364,7 +383,7 @@ workflow NALLO {
                     // Only run if we have affected individuals
                     RANK_VARIANTS_SNV (
                         ANN_CSQ_PLI_SNV.out.vcf,
-                        ch_updated_pedfile,
+                        rank_snvs_ped_in,
                         ch_reduced_penetrance,
                         ch_score_config_snv
                     )
@@ -530,7 +549,7 @@ workflow NALLO {
             if (!params.skip_rank_variants) {
                 RANK_VARIANTS_SVS (
                     ANN_CSQ_PLI_SVS.out.vcf,
-                    ch_updated_pedfile,
+                    ch_updated_pedfile_family,
                     ch_reduced_penetrance,
                     ch_score_config_svs
                 )

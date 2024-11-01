@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            160,
+            161,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -191,6 +191,10 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
@@ -350,7 +354,10 @@
                 "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz",
                 "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz.tbi",
                 "pedigree",
-                "pedigree/test.ped",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
+                "pedigree/project",
+                "pedigree/project/test.ped",
                 "phased_variants",
                 "phased_variants/HG002_Revio_A",
                 "phased_variants/HG002_Revio_A/HG002_Revio_A_phased.blocks.tsv",
@@ -551,6 +558,7 @@
                 "multiqc_fastqc.txt:md5,18ca1a3fb2afa8988dc5d604c049cd9c",
                 "multiqc_general_stats.txt:md5,4a2c114e57d5581b606012d1604d51fa",
                 "multiqc_whatshap_stats.txt:md5,96447de4e14a9b4a570c24513de64970",
+                "FAM.ped:md5,24d8694d580f782ed77d4d1b5c6f6fb4",
                 "test.ped:md5,24d8694d580f782ed77d4d1b5c6f6fb4",
                 "HG002_Revio_A_phased.blocks.tsv:md5,27ce044ba581da15ef838cbb343a64cf",
                 "HG002_Revio_A_phased.stats.tsv:md5,58ae1b01d01b922d022ad025a81f1026",
@@ -754,6 +762,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T17:19:17.8692492"
+        "timestamp": "2024-11-04T15:40:30.243930413"
     }
 }

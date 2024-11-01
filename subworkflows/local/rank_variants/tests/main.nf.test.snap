@@ -15,21 +15,17 @@
                 "0": [
                     [
                         {
-                            "id": "test_data.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "id": "test"
                         },
-                        "test_data.bed_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
                     [
                         {
-                            "id": "test_data.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "id": "test"
                         },
-                        "test_data.bed_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -42,21 +38,17 @@
                 "tbi": [
                     [
                         {
-                            "id": "test_data.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "id": "test"
                         },
-                        "test_data.bed_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
                     [
                         {
-                            "id": "test_data.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "id": "test"
                         },
-                        "test_data.bed_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
@@ -72,6 +64,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-01T13:03:00.102392544"
+        "timestamp": "2024-11-04T14:34:36.22073696"
     }
 }

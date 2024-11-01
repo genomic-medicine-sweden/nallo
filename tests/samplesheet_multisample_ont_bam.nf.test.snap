@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --parallel_alignments 1 --parallel_snv 1": {
         "content": [
-            107,
+            108,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -152,6 +152,10 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "SPLIT_BED_CHUNKS": {
                     "split_bed_chunks": 1.0
                 },
@@ -264,7 +268,10 @@
                 "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz",
                 "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi",
                 "pedigree",
-                "pedigree/test.ped",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
+                "pedigree/project",
+                "pedigree/project/test.ped",
                 "phased_variants",
                 "phased_variants/HG002_ONT_A",
                 "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz",
@@ -396,6 +403,7 @@
                 "multiqc_fastqc.txt:md5,5254c5d578af3a24182ccf3248183ac6",
                 "multiqc_general_stats.txt:md5,0722f1462d3502d5383eb86a484192c6",
                 "multiqc_whatshap_stats.txt:md5,5c4b972c8d52b3d997f117b39ba3ad5d",
+                "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "test.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
                 "HG002_ONT_B_cramino_aligned_phased.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
@@ -498,6 +506,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T17:20:47.644972969"
+        "timestamp": "2024-11-04T15:42:02.101988431"
     }
 }

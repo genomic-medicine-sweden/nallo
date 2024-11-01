@@ -12,7 +12,7 @@ workflow RANK_VARIANTS {
 
     take:
     ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_pedfile            // channel: [mandatory] [ val(meta), path(ped) ]
+    ch_ped                // channel: [mandatory] [ val(meta), path(ped) ]
     ch_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
     ch_score_config       // channel: [mandatory] [ val(meta), path(ini) ]
 
@@ -22,16 +22,32 @@ workflow RANK_VARIANTS {
     GENMOD_ANNOTATE ( ch_vcf )
     ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)
 
+    GENMOD_ANNOTATE.out.vcf
+        .join( ch_ped, failOnMismatch: true )
+        .multiMap { meta, vcf, ped ->
+            vcf: [ meta, vcf ]
+            ped: ped
+        }
+        .set { genmod_models_in }
+
     GENMOD_MODELS (
-        GENMOD_ANNOTATE.out.vcf,
-        ch_pedfile.map { meta, ped -> ped },
+        genmod_models_in.vcf,
+        genmod_models_in.ped,
         ch_reduced_penetrance.map { meta, file -> file }
     )
     ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 
+    GENMOD_MODELS.out.vcf
+        .join( ch_ped, failOnMismatch: true )
+        .multiMap { meta, vcf, ped ->
+            vcf: [ meta, vcf ]
+            ped: ped
+        }
+        .set { genmod_score_in }
+
     GENMOD_SCORE (
-        GENMOD_MODELS.out.vcf,
-        ch_pedfile.map { meta, ped -> ped },
+        genmod_score_in.vcf,
+        genmod_score_in.ped,
         ch_score_config.map { meta, file -> file }
     )
     ch_versions = ch_versions.mix(GENMOD_SCORE.out.versions)

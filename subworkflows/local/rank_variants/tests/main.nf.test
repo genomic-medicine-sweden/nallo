@@ -28,7 +28,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'test', num_intervals:1 ],
+                    [ id: 'project', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = PREPARE_GENOME.out.fasta
@@ -46,7 +46,7 @@ nextflow_workflow {
                 input[0] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
                             .join(Channel.of([
-                                [ id: 'test', num_intervals:1 ],
+                                [ id: 'project', num_intervals:1 ],
                                 file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                             ]))
                 input[1] = PREPARE_GENOME.out.fasta
@@ -95,9 +95,9 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    'project',
+                    [id:'project'],
                     [
-                        [ id: 'test', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
+                        [ id: 'project', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
                     ]
                 ]
                 """
@@ -110,8 +110,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = ANNOTATE_CSQ_PLI.out.vcf
-                input[1] = CREATE_PEDIGREE_FILE.out.ped
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
                     [ id: 'reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
@@ -142,8 +142,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = ANNOTATE_CSQ_PLI.out.vcf
-                input[1] = CREATE_PEDIGREE_FILE.out.ped
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
                     [ id: 'reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
