@@ -40,6 +40,7 @@ jobs:
           - "ANNOTATE_SVS"
           - "RANK_VARIANTS"
           - "CALL_REPEAT_EXPANSIONS"
+          - "METHYLATION"
         profile:
           - "docker"
 
