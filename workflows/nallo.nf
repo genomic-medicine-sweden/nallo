@@ -77,7 +77,7 @@ workflow NALLO {
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
     ch_cadd_header              = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
-    ch_cadd_resources           = createReferenceChannelFromPath(params.cadd_resouces)
+    ch_cadd_resources           = createReferenceChannelFromPath(params.cadd_resources)
     ch_cadd_prescored           = createReferenceChannelFromPath(params.cadd_prescored)
     ch_fasta                    = createReferenceChannelFromPath(params.fasta)
     ch_tandem_repeats           = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
@@ -130,7 +130,7 @@ workflow NALLO {
             if (params.vep_cache.endsWith("tar.gz")) {
                 ch_vep_cache = PREPARE_GENOME.out.vep_resources
             } else {
-                ch_vep_cache = Channel.fromPath(params.vep_cache).collect()
+                ch_vep_cache = createReferenceChannelFromPath(params.vep_cache)
             }
         }
 
