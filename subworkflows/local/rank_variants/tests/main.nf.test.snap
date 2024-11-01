@@ -19,7 +19,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_data.bed_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -29,15 +29,15 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_data.bed_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
                     "versions.yml:md5,7089dd9c4bcb1dc87f15d3b1a9d5e89d",
+                    "versions.yml:md5,90ddd1e5113e3c0c61c403c53029d0f1",
                     "versions.yml:md5,c9446a89a358fa2126b666399c2c804e",
                     "versions.yml:md5,cc68e7d53d2d24006094e28d37db20a8",
-                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce",
-                    "versions.yml:md5,f56d4e953de59ea23842d33c16e914cf"
+                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce"
                 ],
                 "tbi": [
                     [
@@ -46,7 +46,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "test_data.bed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_data.bed_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -56,15 +56,15 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "test_data.bed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_data.bed_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,7089dd9c4bcb1dc87f15d3b1a9d5e89d",
+                    "versions.yml:md5,90ddd1e5113e3c0c61c403c53029d0f1",
                     "versions.yml:md5,c9446a89a358fa2126b666399c2c804e",
                     "versions.yml:md5,cc68e7d53d2d24006094e28d37db20a8",
-                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce",
-                    "versions.yml:md5,f56d4e953de59ea23842d33c16e914cf"
+                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce"
                 ]
             }
         ],
@@ -72,6 +72,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-29T09:06:31.363029566"
+        "timestamp": "2024-11-01T13:03:00.102392544"
     }
 }
