@@ -38,12 +38,12 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionaly, methylation information can be viewed in the BAM files, for example in IGV.
 
-| Path                                                                                | Description                                               |
-| ----------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads |
-| `methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        |
-| `methylation/modkit/pileup/unphased/{sample}/*.modkit_pileup.bed.gz`                | bedMethyl file with summary counts from all reads         |
-| `methylation/modkit/pileup/unphased/{sample}/*.bed.gz.tbi`                          | Index of the corresponding bedMethyl file                 |
+| Path                                                                         | Description                                                                          |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (if phasing is turned on)  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        (if phasing is turned on)  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`                  | bedMethyl file with summary counts from all reads         (if phasing is turned off) |
+| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bedMethyl file                                            |
 
 ## MultiQC
 
