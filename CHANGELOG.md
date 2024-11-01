@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#441](https://github.com/genomic-medicine-sweden/nallo/pull/441) - Changed the minimap2 preset for hifi reads back to `map-hifi`
 - [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443) - Refactored reference channel assignments
 - [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443) - Updated schemas for `vep_plugin_files` and `snp_db`
+- [#474](https://github.com/genomic-medicine-sweden/nallo/pull/474) - Updated VEP and CADD channels to fix bugs introduced in [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 
 ### `Removed`
 
