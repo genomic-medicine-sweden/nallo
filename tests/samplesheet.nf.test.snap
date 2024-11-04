@@ -435,12 +435,6 @@
                 "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
                 "HG002_Revio_stats.blocks.tsv:md5,e73960d863a78848498499480ea9937f",
                 "HG002_Revio_stats.stats.tsv:md5,cffa4a500350b2227ab40bbbe428e9ef",
-                "FAM_repeats_annotated.vcf.gz:md5,eefc76d462d032dca899530c9b5d28e3",
-                "FAM_repeats_annotated.vcf.gz.tbi:md5,fc30f983abc683359d12dbfb3e45497d",
-                "HG002_Revio_sorted.vcf.gz:md5,a44d6d7fa3ff96fe1c77f0b045cfb46f",
-                "HG002_Revio_sorted.vcf.gz.tbi:md5,60d7a65d9a296bde30aefa38918feb88",
-                "HG002_Revio_spanning_sorted.bam:md5,468a86260e36702416d8ee01317eda1c",
-                "HG002_Revio_spanning_sorted.bam.bai:md5,6733ea2585a20aaa93aa40b1437e7440",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_hificnv.maf.bw:md5,8340a82b7b3da36383511631ed21066c"

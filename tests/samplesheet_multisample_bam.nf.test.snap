@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            158,
+            155,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -554,16 +554,6 @@
                 "HG002_Revio_A_stats.stats.tsv:md5,1504949804b510cc57d20e2c78fb7294",
                 "HG002_Revio_B_stats.blocks.tsv:md5,df646f43e67f37df5a9ec148e431d4c3",
                 "HG002_Revio_B_stats.stats.tsv:md5,40994b57e7c0bafee411bc2ad6ffb79d",
-                "FAM_repeats_annotated.vcf.gz:md5,73f3582df9154e936eb523c0b3ea8edb",
-                "FAM_repeats_annotated.vcf.gz.tbi:md5,ef6bee507dcb164cea090fa5d8903dad",
-                "HG002_Revio_A_sorted.vcf.gz:md5,105ece371d6751f331c56734ee1a6b1f",
-                "HG002_Revio_A_sorted.vcf.gz.tbi:md5,7d8c345b22657d134a02d5a450815f99",
-                "HG002_Revio_A_spanning_sorted.bam:md5,7c823225e5598dcb6eef92d6953cdd6f",
-                "HG002_Revio_A_spanning_sorted.bam.bai:md5,1b407bbf2ee1627219e3b251ae385817",
-                "HG002_Revio_B_sorted.vcf.gz:md5,79317b06924078e48f9e69f2ad596351",
-                "HG002_Revio_B_sorted.vcf.gz.tbi:md5,7d8c345b22657d134a02d5a450815f99",
-                "HG002_Revio_B_spanning_sorted.bam:md5,152e46b8c76b5e3ecd01ec3323a83474",
-                "HG002_Revio_B_spanning_sorted.bam.bai:md5,1899c77316d90521e2d28967f35fabf6",
                 "HG002_Revio_A_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_A_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_A_hificnv.maf.bw:md5,8340a82b7b3da36383511631ed21066c",
