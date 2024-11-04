@@ -82,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#479](https://github.com/genomic-medicine-sweden/nallo/pull/479) - Replaced bgzip tabix with bcftools sort in rank variants to fix [#457](https://github.com/genomic-medicine-sweden/nallo/issues/457)
 - [#480](https://github.com/genomic-medicine-sweden/nallo/pull/480) - Updated ranking of SVs to work with multiple families per project
 - [#484](https://github.com/genomic-medicine-sweden/nallo/pull/484) - Updated metro map and added SVG version
+- [#485](https://github.com/genomic-medicine-sweden/nallo/pull/485) - Updated repeat expansion annotation to annotate per family instead of per sample
 - [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
 
 ### `Removed`

@@ -246,7 +246,8 @@
                     "stranger": {
                         "branch": "master",
                         "git_sha": "06c8865e36741e05ad32ef70ab3fac127486af48",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/stranger/stranger.diff"
                     },
                     "svdb/merge": {
                         "branch": "master",

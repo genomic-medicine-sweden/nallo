@@ -26,7 +26,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -35,9 +35,9 @@
                 "1": [
                     [
                         {
-                            "id": "project"
+                            "id": "family"
                         },
-                        "project.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "2": [
@@ -45,7 +45,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -56,7 +56,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -69,12 +69,12 @@
                     "versions.yml:md5,8a4b29c3089d4b00cfe6c5c39b88d1ab",
                     "versions.yml:md5,b9424dde80b33e84164cc956a14aa459"
                 ],
-                "project_vcf": [
+                "family_vcf": [
                     [
                         {
-                            "id": "project"
+                            "id": "family"
                         },
-                        "project.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "sample_bai": [
@@ -82,7 +82,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -93,7 +93,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -104,7 +104,7 @@
                         {
                             "id": "test",
                             "single_end": false,
-                            "project": "project",
+                            "family_id": "family",
                             "sex": 1
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -123,6 +123,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T11:00:04.845039812"
+        "timestamp": "2024-11-04T16:43:06.104050126"
     }
 }

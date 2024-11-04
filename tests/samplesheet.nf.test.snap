@@ -196,7 +196,7 @@
                     "split_bed_chunks": 1.0
                 },
                 "STRANGER": {
-                    "stranger": "0.9.1"
+                    "stranger": "0.9.2"
                 },
                 "SVDB_MERGE": {
                     "svdb": "2.8.2",
@@ -349,23 +349,17 @@
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
                 "qc/somalier/relate/test/test.samples.tsv",
-                "repeat_annotation",
-                "repeat_annotation/stranger",
-                "repeat_annotation/stranger/HG002_Revio",
-                "repeat_annotation/stranger/HG002_Revio/HG002_Revio_repeat_expansion_stranger.vcf.gz",
-                "repeat_annotation/stranger/HG002_Revio/HG002_Revio_repeat_expansion_stranger.vcf.gz.tbi",
-                "repeat_calling",
-                "repeat_calling/trgt",
-                "repeat_calling/trgt/multi_sample",
-                "repeat_calling/trgt/multi_sample/test",
-                "repeat_calling/trgt/multi_sample/test/test.vcf.gz",
-                "repeat_calling/trgt/multi_sample/test/test.vcf.gz.tbi",
-                "repeat_calling/trgt/single_sample",
-                "repeat_calling/trgt/single_sample/HG002_Revio",
-                "repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz",
-                "repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi",
-                "repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam",
-                "repeat_calling/trgt/single_sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai",
+                "repeats",
+                "repeats/family",
+                "repeats/family/FAM",
+                "repeats/family/FAM/FAM_repeats_annotated.vcf.gz",
+                "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
+                "repeats/sample",
+                "repeats/sample/HG002_Revio",
+                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz",
+                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai",
                 "snvs",
                 "snvs/multi_sample",
                 "snvs/multi_sample/test",
@@ -441,6 +435,12 @@
                 "HG002_Revio.regions.bed.gz.csi:md5,026eef1c69fb4aa3a1687463fe2088ab",
                 "HG002_Revio_stats.blocks.tsv:md5,e73960d863a78848498499480ea9937f",
                 "HG002_Revio_stats.stats.tsv:md5,cffa4a500350b2227ab40bbbe428e9ef",
+                "FAM_repeats_annotated.vcf.gz:md5,eefc76d462d032dca899530c9b5d28e3",
+                "FAM_repeats_annotated.vcf.gz.tbi:md5,fc30f983abc683359d12dbfb3e45497d",
+                "HG002_Revio_sorted.vcf.gz:md5,a44d6d7fa3ff96fe1c77f0b045cfb46f",
+                "HG002_Revio_sorted.vcf.gz.tbi:md5,60d7a65d9a296bde30aefa38918feb88",
+                "HG002_Revio_spanning_sorted.bam:md5,468a86260e36702416d8ee01317eda1c",
+                "HG002_Revio_spanning_sorted.bam.bai:md5,6733ea2585a20aaa93aa40b1437e7440",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_hificnv.maf.bw:md5,8340a82b7b3da36383511631ed21066c"
@@ -485,12 +485,8 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=191, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_repeat_expansion_stranger.vcf.gz",
+                    "FAM_repeats_annotated.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=2, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_sorted.vcf.gz",
@@ -527,12 +523,8 @@
                     "fa3bfacdab5449526d29d642340d6708"
                 ],
                 [
-                    "HG002_Revio_repeat_expansion_stranger.vcf.gz",
-                    "73c6c1d07ff96ef44569b5534aa90174"
-                ],
-                [
-                    "test.vcf.gz",
-                    "1de84bd070a82b37e6fac25d19ae604e"
+                    "FAM_repeats_annotated.vcf.gz",
+                    "7358cfc448a3f679765ec9acc19e3214"
                 ],
                 [
                     "HG002_Revio_sorted.vcf.gz",
