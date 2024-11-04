@@ -43,8 +43,8 @@ nextflow_workflow {
                 """
             }
         }
-        run("DEEPVARIANT") {
-            script "../../../../modules/nf-core/deepvariant/main.nf"
+        run("DEEPVARIANT_RUNDEEPVARIANT") {
+            script "../../../../modules/nf-core/deepvariant/rundeepvariant/main.nf"
             process {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
@@ -99,7 +99,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                    .join(DEEPVARIANT.out.vcf)
+                    .join(DEEPVARIANT_RUNDEEPVARIANT.out.vcf)
                 input[1] = GUNZIP.out.gunzip
                 input[2] = [[],[]]
                 input[3] = [[],[]]
@@ -131,7 +131,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                    .join(DEEPVARIANT.out.vcf)
+                    .join(DEEPVARIANT_RUNDEEPVARIANT.out.vcf)
                 input[1] = GUNZIP.out.gunzip
                 input[2] = [
                     [ id: 'xy_bed' ],
@@ -200,7 +200,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                    .join(DEEPVARIANT.out.vcf)
+                    .join(DEEPVARIANT_RUNDEEPVARIANT.out.vcf)
                 input[1] = GUNZIP.out.gunzip
                 input[2] = [[],[]]
                 input[3] = [[],[]]
@@ -226,7 +226,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                    .join(DEEPVARIANT.out.vcf)
+                    .join(DEEPVARIANT_RUNDEEPVARIANT.out.vcf)
                 input[1] = GUNZIP.out.gunzip
                 input[2] = [
                     [ id: 'xy_bed' ],

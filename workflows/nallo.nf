@@ -177,12 +177,12 @@ workflow NALLO {
             .set { bam_to_merge }
 
         // Merge files if we have multiple files per sample
-        SAMTOOLS_MERGE ( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]], 'bai' )
+        SAMTOOLS_MERGE ( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]])
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bams
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index)
+            .join(SAMTOOLS_MERGE.out.bai)
             .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { bam_infer_sex_in }
@@ -610,7 +610,9 @@ workflow NALLO {
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
         ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        [],
+        []
     )
 
     emit:
