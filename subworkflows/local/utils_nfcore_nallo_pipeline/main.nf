@@ -62,7 +62,7 @@ def workflowDependencies = [
     rank_variants    : ["mapping", "snv_calling", "snv_annotation"],
     repeat_calling   : ["mapping", "snv_calling", "phasing"],
     repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
-    methylation      : ["mapping", "snv_calling", "phasing"],
+    methylation      : ["mapping", "snv_calling"]
 ]
 
 //

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            160,
+            156,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -56,12 +56,6 @@
                 },
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
-                },
-                "BGZIP_MODKIT_PILEUP_PHASED": {
-                    "tabix": 1.2
-                },
-                "BGZIP_MODKIT_PILEUP_UNPHASED": {
-                    "tabix": 1.2
                 },
                 "COMPRESS_STRANGER": {
                     "bcftools": 1.2
@@ -139,10 +133,7 @@
                 "MINIMAP2_INDEX_DIPCALL": {
                     "minimap2": "2.28-r1209"
                 },
-                "MODKIT_PILEUP_PHASED": {
-                    "modkit": "0.3.0"
-                },
-                "MODKIT_PILEUP_UNPHASED": {
+                "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
@@ -295,28 +286,20 @@
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
-                "methylation/modkit/pileup/phased",
-                "methylation/modkit/pileup/phased/HG002_Revio_A",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_A/HG002_Revio_A_modkit_pileup_phased_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio_B",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_1.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_1.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_2.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_2.bed.gz.tbi",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_ungrouped.bed.gz",
-                "methylation/modkit/pileup/phased/HG002_Revio_B/HG002_Revio_B_modkit_pileup_phased_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/unphased",
-                "methylation/modkit/pileup/unphased/HG002_Revio_A",
-                "methylation/modkit/pileup/unphased/HG002_Revio_A/HG002_Revio_A_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/unphased/HG002_Revio_A/HG002_Revio_A_modkit_pileup.bed.gz.tbi",
-                "methylation/modkit/pileup/unphased/HG002_Revio_B",
-                "methylation/modkit/pileup/unphased/HG002_Revio_B/HG002_Revio_B_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/unphased/HG002_Revio_B/HG002_Revio_B_modkit_pileup.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_A",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_A/HG002_Revio_A_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_B",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_Revio_B/HG002_Revio_B_modkit_pileup_ungrouped.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/mosdepth_cov_dist.txt",
@@ -527,22 +510,18 @@
                 "HG002_Revio_B.hap2.var.gz:md5,f09b01fcb43bf64f92ca7ec8a2380c25",
                 "HG002_Revio_B.pair.vcf.gz:md5,676492865a9d4765835638d52651af73",
                 "test.zip:md5,d3fc0769a4c707953cdb3fade9450660",
-                "HG002_Revio_A_modkit_pileup_phased_1.bed.gz:md5,7af3b6246d0c007aec686714b96a0f7f",
-                "HG002_Revio_A_modkit_pileup_phased_1.bed.gz.tbi:md5,b7083ebf6ba176ed5a472ad653c5be27",
-                "HG002_Revio_A_modkit_pileup_phased_2.bed.gz:md5,a2e1291b468361412899cf811022fe72",
-                "HG002_Revio_A_modkit_pileup_phased_2.bed.gz.tbi:md5,d1c192d65d8fa8cbb8ffa2e545282fde",
-                "HG002_Revio_A_modkit_pileup_phased_ungrouped.bed.gz:md5,9a077eb24b17d6511e849c5b533cda64",
-                "HG002_Revio_A_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,f569a923cc5204df5dc495354ab83a13",
-                "HG002_Revio_B_modkit_pileup_phased_1.bed.gz:md5,d8c15e30192ce878d17dffcc0981658a",
-                "HG002_Revio_B_modkit_pileup_phased_1.bed.gz.tbi:md5,2d400d38de3f45871bffac0ca0d3d7d3",
-                "HG002_Revio_B_modkit_pileup_phased_2.bed.gz:md5,a2e1291b468361412899cf811022fe72",
-                "HG002_Revio_B_modkit_pileup_phased_2.bed.gz.tbi:md5,d1c192d65d8fa8cbb8ffa2e545282fde",
-                "HG002_Revio_B_modkit_pileup_phased_ungrouped.bed.gz:md5,49d9380eb739081b7a0b4dfa7756d09c",
-                "HG002_Revio_B_modkit_pileup_phased_ungrouped.bed.gz.tbi:md5,f569a923cc5204df5dc495354ab83a13",
-                "HG002_Revio_A_modkit_pileup.bed.gz:md5,a52bb9ab393e682d0b7118ef2efe5c15",
-                "HG002_Revio_A_modkit_pileup.bed.gz.tbi:md5,08312c13316ed9b4b582897c210ecb58",
-                "HG002_Revio_B_modkit_pileup.bed.gz:md5,60f856e145343697ff581e91fda288ff",
-                "HG002_Revio_B_modkit_pileup.bed.gz.tbi:md5,d04e7a6fb67e9b5a8342ae979bc0e5cd",
+                "HG002_Revio_A_modkit_pileup_1.bed.gz:md5,7af3b6246d0c007aec686714b96a0f7f",
+                "HG002_Revio_A_modkit_pileup_1.bed.gz.tbi:md5,b7083ebf6ba176ed5a472ad653c5be27",
+                "HG002_Revio_A_modkit_pileup_2.bed.gz:md5,a2e1291b468361412899cf811022fe72",
+                "HG002_Revio_A_modkit_pileup_2.bed.gz.tbi:md5,d1c192d65d8fa8cbb8ffa2e545282fde",
+                "HG002_Revio_A_modkit_pileup_ungrouped.bed.gz:md5,9a077eb24b17d6511e849c5b533cda64",
+                "HG002_Revio_A_modkit_pileup_ungrouped.bed.gz.tbi:md5,f569a923cc5204df5dc495354ab83a13",
+                "HG002_Revio_B_modkit_pileup_1.bed.gz:md5,d8c15e30192ce878d17dffcc0981658a",
+                "HG002_Revio_B_modkit_pileup_1.bed.gz.tbi:md5,2d400d38de3f45871bffac0ca0d3d7d3",
+                "HG002_Revio_B_modkit_pileup_2.bed.gz:md5,a2e1291b468361412899cf811022fe72",
+                "HG002_Revio_B_modkit_pileup_2.bed.gz.tbi:md5,d1c192d65d8fa8cbb8ffa2e545282fde",
+                "HG002_Revio_B_modkit_pileup_ungrouped.bed.gz:md5,49d9380eb739081b7a0b4dfa7756d09c",
+                "HG002_Revio_B_modkit_pileup_ungrouped.bed.gz.tbi:md5,f569a923cc5204df5dc495354ab83a13",
                 "mosdepth_cov_dist.txt:md5,41793745406425cfa02d558875df8d16",
                 "mosdepth_cumcov_dist.txt:md5,c53933e0b572d115ecd35a5adb3e0a04",
                 "mosdepth_perchrom.txt:md5,9fd9c40c7a6be06a338f2039a5d91fb8",
@@ -754,6 +733,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-30T17:19:17.8692492"
+        "timestamp": "2024-10-31T16:14:41.962593731"
     }
 }

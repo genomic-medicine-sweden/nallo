@@ -200,7 +200,7 @@ Turned off with `--skip_phasing_wf`.
 
 ### Methylation
 
-This subworkflow relies on mapping, short variant calling and phasing subworkflows, but requires no additional files.
+This subworkflow relies on mapping and short variant calling subworkflows, but requires no additional files.
 
 Turned off with `--skip_methylation_wf`.
 

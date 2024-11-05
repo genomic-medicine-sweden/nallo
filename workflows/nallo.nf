@@ -451,15 +451,6 @@ workflow NALLO {
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
 
                 //
-                // Create methylation pileups with modkit
-                //
-                if(!params.skip_methylation_wf) {
-
-                    METHYLATION( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_input_bed )
-                    ch_versions = ch_versions.mix(METHYLATION.out.versions)
-                }
-
-                //
                 // Call repeat expansions with TRGT
                 //
                 if(!params.skip_repeat_calling) {
@@ -475,6 +466,19 @@ workflow NALLO {
                         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
                     }
                 }
+            }
+
+            //
+            // Create methylation pileups with modkit
+            //
+            if (!params.skip_methylation_wf) {
+                METHYLATION (
+                    !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
+                    fasta,
+                    fai,
+                    ch_input_bed,
+                )
+                ch_versions = ch_versions.mix(METHYLATION.out.versions)
             }
         }
 
