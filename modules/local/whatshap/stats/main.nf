@@ -38,7 +38,7 @@ process WHATSHAP_STATS {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.stats.tsv.gz
+    touch ${prefix}.stats.tsv
     touch ${prefix}.blocks.tsv
 
     cat <<-END_VERSIONS > versions.yml

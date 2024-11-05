@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#445](https://github.com/genomic-medicine-sweden/nallo/pull/445) - Added FOUND_IN tag and nf-test to rank variants
 - [#446](https://github.com/genomic-medicine-sweden/nallo/pull/446) - Added the vcfstatsreport from DeepVariant to snv calling
 - [#450](https://github.com/genomic-medicine-sweden/nallo/pull/450) - Added ranking of SVs (and CNVs)
+- [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added support for running methylation subworkflow without phasing
+- [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added nf-test to methylation
 
 ### `Changed`
 
@@ -75,10 +77,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#441](https://github.com/genomic-medicine-sweden/nallo/pull/441) - Changed the minimap2 preset for hifi reads back to `map-hifi`
 - [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443) - Refactored reference channel assignments
 - [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443) - Updated schemas for `vep_plugin_files` and `snp_db`
+- [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Simplified methylation subworkflow
 - [#474](https://github.com/genomic-medicine-sweden/nallo/pull/474) - Updated VEP and CADD channels to fix bugs introduced in [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 - [#479](https://github.com/genomic-medicine-sweden/nallo/pull/479) - Replaced bgzip tabix with bcftools sort in rank variants to fix [#457](https://github.com/genomic-medicine-sweden/nallo/issues/457)
 - [#480](https://github.com/genomic-medicine-sweden/nallo/pull/480) - Updated ranking of SVs to work with multiple families per project
 - [#484](https://github.com/genomic-medicine-sweden/nallo/pull/484) - Updated metro map and added SVG version
+- [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
 
 ### `Removed`
 
