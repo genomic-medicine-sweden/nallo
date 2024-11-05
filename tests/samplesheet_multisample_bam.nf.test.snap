@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            161,
+            157,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -741,6 +741,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T15:40:30.243930413"
+        "timestamp": "2024-11-05T13:42:51.526893089"
     }
 }
