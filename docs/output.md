@@ -121,12 +121,13 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [somalier](https://github.com/brentp/somalier) checks relatedness and sex.
 
-| Path                                                  | Description                                 |
-| ----------------------------------------------------- | ------------------------------------------- |
-| `pedigree/{project}.ped`                              | PED file updated with somalier-inferred sex |
-| `qc/somalier/relate/{project}/{project}.html`         | HTML report                                 |
-| `qc/somalier/relate/{project}/{project}.pairs.tsv`    | Information about sample pairs              |
-| `/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples        |
+| Path                                                  | Description                                             |
+| ----------------------------------------------------- | ------------------------------------------------------- |
+| `pedigree/{project}/{project}.ped`                    | PED file updated with somalier-inferred sex per project |
+| `pedigree/{family}/{family).ped`                      | PED file updated with somalier-inferred sex per family  |
+| `qc/somalier/relate/{project}/{project}.html`         | HTML report                                             |
+| `qc/somalier/relate/{project}/{project}.pairs.tsv`    | Information about sample pairs                          |
+| `/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples                    |
 
 | Path                      | Description                                 |
 | ------------------------- | ------------------------------------------- |

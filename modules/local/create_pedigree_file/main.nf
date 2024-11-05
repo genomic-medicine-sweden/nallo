@@ -1,5 +1,5 @@
 process CREATE_PEDIGREE_FILE {
-    tag "${project}"
+    tag "${meta.id}"
     label 'process_single'
 
     conda "conda-forge::python=3.8.3"
@@ -8,20 +8,20 @@ process CREATE_PEDIGREE_FILE {
         'biocontainers/python:3.8.3' }"
 
     input:
-    tuple val(project), val(meta)
+    tuple val(meta), val(metas)
 
     output:
-    tuple val(project), path("*.ped"), emit: ped
-    path "versions.yml"              , emit: versions
+    tuple val(meta), path("*.ped"), emit: ped
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def out   = new File(project + ".ped")
-    def samples = (meta.collect().size() > 1) ? meta.sort{ a, b ->
+    def prefix   = task.ext.prefix ?: "${meta.id}"
+    def samples = (metas.collect().size() > 1) ? metas.sort{ a, b ->
         // First sort on family_id, then on sample id
-        a.family_id <=> b.family_id ?: a.id <=> b.id } : meta
+        a.family_id <=> b.family_id ?: a.id <=> b.id } : metas
     outfile_text = ['#family_id', 'sample_id', 'father', 'mother', 'sex', 'phenotype'].join('\\t')
     def samples_list = []
     for(int i = 0; i<samples.size(); i++) {
@@ -32,7 +32,7 @@ process CREATE_PEDIGREE_FILE {
         }
     }
     """
-    echo -e "$outfile_text" >${project}.ped
+    echo -e "$outfile_text" > ${prefix}.ped
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -42,8 +42,9 @@ process CREATE_PEDIGREE_FILE {
     """
 
     stub:
+    def prefix   = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${project}.ped
+    touch ${prefix}.ped
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
