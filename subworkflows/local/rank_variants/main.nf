@@ -24,30 +24,20 @@ workflow RANK_VARIANTS {
 
     GENMOD_ANNOTATE.out.vcf
         .join( ch_ped, failOnMismatch: true )
-        .multiMap { meta, vcf, ped ->
-            vcf: [ meta, vcf ]
-            ped: ped
-        }
         .set { genmod_models_in }
 
     GENMOD_MODELS (
-        genmod_models_in.vcf,
-        genmod_models_in.ped,
+        genmod_models_in,
         ch_reduced_penetrance.map { meta, file -> file }
     )
     ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 
     GENMOD_MODELS.out.vcf
         .join( ch_ped, failOnMismatch: true )
-        .multiMap { meta, vcf, ped ->
-            vcf: [ meta, vcf ]
-            ped: ped
-        }
         .set { genmod_score_in }
 
     GENMOD_SCORE (
-        genmod_score_in.vcf,
-        genmod_score_in.ped,
+        genmod_score_in,
         ch_score_config.map { meta, file -> file }
     )
     ch_versions = ch_versions.mix(GENMOD_SCORE.out.versions)
