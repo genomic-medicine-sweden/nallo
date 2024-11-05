@@ -78,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#474](https://github.com/genomic-medicine-sweden/nallo/pull/474) - Updated VEP and CADD channels to fix bugs introduced in [#443](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 - [#479](https://github.com/genomic-medicine-sweden/nallo/pull/479) - Replaced bgzip tabix with bcftools sort in rank variants to fix [#457](https://github.com/genomic-medicine-sweden/nallo/issues/457)
 - [#484](https://github.com/genomic-medicine-sweden/nallo/pull/484) - Updated metro map and added SVG version
+- [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
 
 ### `Removed`
 
