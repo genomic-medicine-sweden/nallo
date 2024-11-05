@@ -872,7 +872,7 @@
 </tbody>
 </table>
 <h2 id="methylation-pileups">Methylation pileups</h2>
-<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionaly, methylation information can be viewed in the BAM files, for example in IGV.</p>
+<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV.</p>
 <table>
 <thead>
 <tr>
@@ -882,19 +882,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_*.bed.gz</code></td>
-<td>bedMethyl file with summary counts from haplotagged reads</td>
+<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz</code></td>
+<td>bedMethyl file with summary counts from haplotagged reads (if phasing is turned on)</td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/phased/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz</code></td>
-<td>bedMethyl file for ungrouped reads</td>
+<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz</code></td>
+<td>bedMethyl file for ungrouped reads (if phasing is turned on)</td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/unphased/{sample}/*.modkit_pileup.bed.gz</code></td>
-<td>bedMethyl file with summary counts from all reads</td>
+<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz</code></td>
+<td>bedMethyl file with summary counts from all reads (if phasing is turned off)</td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/unphased/{sample}/*.bed.gz.tbi</code></td>
+<td><code>methylation/modkit/pileup/{sample}/*.bed.gz.tbi</code></td>
 <td>Index of the corresponding bedMethyl file</td>
 </tr>
 </tbody>
