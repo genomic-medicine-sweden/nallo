@@ -251,12 +251,12 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "26cdbf29e76695c7fd85e42e0015c7e96f979fe9",
                         "installed_by": ["modules"]
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "4ac2ef5c1ceba6bb28a73033802643093fe923b3",
+                        "git_sha": "a8ad84b7ee0cda0b001490e95d9ed277e687e368",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
