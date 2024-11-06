@@ -58,7 +58,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = Channel.of([
                     [ id: 'svdb_sv_databases' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/svdb_sv_databases.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[4] = Channel.value('110')
@@ -93,7 +93,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = Channel.of([
                     [ id: 'svdb_sv_databases' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/svdb_sv_databases.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[4] = Channel.value('110')

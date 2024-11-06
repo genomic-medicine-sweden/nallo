@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_echtvar_snv_databases.json",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_snp_db.json",
     "title": "genomic-medicine-sweden/nallo pipeline - params.echtvar_snv_databases schema",
     "description": "Schema for the file provided with params.echtvar_snv_databases",
     "type": "array",

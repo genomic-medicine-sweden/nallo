@@ -114,7 +114,7 @@ nextflow_workflow {
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
-                    file(params.pipelines_testdata_base_path + 'reference/genmod_reduced_penetrance.tsv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = Channel.of([
                     [ id: 'genmod_score_config_snvs' ],
@@ -146,7 +146,7 @@ nextflow_workflow {
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
-                    file(params.pipelines_testdata_base_path + 'reference/genmod_reduced_penetrance.tsv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = Channel.of([
                     [ id: 'genmod_score_config_snvs' ],
