@@ -6,7 +6,7 @@ include { BCFTOOLS_CONCAT                             } from '../../../modules/n
 include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
-include { DEEPVARIANT                                 } from '../../../modules/nf-core/deepvariant/main'
+include { DEEPVARIANT_RUNDEEPVARIANT                  } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DEEPVARIANT_VCFSTATSREPORT                  } from '../../../modules/nf-core/deepvariant/vcfstatsreport/main'
 include { GLNEXUS                                     } from '../../../modules/nf-core/glnexus/main'
 
@@ -29,18 +29,18 @@ workflow SHORT_VARIANT_CALLING {
         }
         .set { ch_deepvariant_in }
 
-    DEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], ch_par_bed )
-    ch_versions = ch_versions.mix(DEEPVARIANT.out.versions)
+    DEEPVARIANT_RUNDEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], ch_par_bed )
+    ch_versions = ch_versions.mix(DEEPVARIANT_RUNDEEPVARIANT.out.versions)
 
     // First remove region so we can group per sample
     // Then after grouping remove num_intervals since to match the meta of other workflows
-    DEEPVARIANT.out.vcf
+    DEEPVARIANT_RUNDEEPVARIANT.out.vcf
         .map { meta, vcf ->
             new_meta = meta - meta.subMap('region')
             [ groupKey(new_meta, new_meta.num_intervals ), vcf ]
         }
         .groupTuple()
-        .join( DEEPVARIANT.out.vcf_tbi
+        .join( DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
             .map{ meta, tbi ->
                 new_meta = meta - meta.subMap('region')
                 [ groupKey(new_meta, new_meta.num_intervals ), tbi ]
@@ -62,7 +62,7 @@ workflow SHORT_VARIANT_CALLING {
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
     // This creates a multisample VCF, with regions from ONE bed file
-    DEEPVARIANT.out.gvcf
+    DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
         .map { meta, gvcf ->
             [ meta.region.name, meta.project, meta.phenotype == 2, gvcf ]
         }
