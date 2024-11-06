@@ -140,6 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/faidx | 1.2         | 1.21        |
 | samtools/index | 1.2         | 1.21        |
 | samtools/merge | 1.2         | 1.21        |
+| stranger       | 0.9.1       | 0.9.2       |
 | multiqc        | 1.21        | 1.25.1      |
 
 > [!NOTE]
