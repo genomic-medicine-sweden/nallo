@@ -1,5 +1,5 @@
 {
-    "severus, fasta, svdb, vep_cache, '110', vep_plugins -stub": {
+    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
             [
                 "versions.yml:md5,84c59e3a0a183b01a21620b16ee9ca4d",
@@ -13,7 +13,7 @@
         },
         "timestamp": "2024-10-11T10:47:43.954466231"
     },
-    "severus, fasta, svdb, vep_cache, '110', vep_plugins": {
+    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
             [
                 "versions.yml:md5,84c59e3a0a183b01a21620b16ee9ca4d",

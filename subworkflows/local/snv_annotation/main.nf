@@ -17,7 +17,7 @@ workflow SNV_ANNOTATION {
     val_annotate_cadd     // bool: [mandatory]
     ch_cadd_header        // channel: [mandatory] [ path(txt) ]
     ch_cadd_resources     // channel: [mandatory] [ val(meta), path(annotation) ]
-    ch_cadd_prescored     // channel: [mandatory] [ val(meta), path(prescored) ]
+    ch_cadd_prescored_indels     // channel: [mandatory] [ val(meta), path(prescored) ]
 
     main:
     ch_versions = Channel.empty()
@@ -38,7 +38,7 @@ workflow SNV_ANNOTATION {
             BCFTOOLS_FILLTAGS_ANNO.out.tbi,
             ch_cadd_header,
             ch_cadd_resources,
-            ch_cadd_prescored
+            ch_cadd_prescored_indels
         )
         ch_versions = ch_versions.mix(ANNOTATE_CADD.out.versions)
 

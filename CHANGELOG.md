@@ -119,6 +119,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--validationSkipDuplicateCheck` |                                   |
 | `--validationS3PathCheck`        |                                   |
 | `--monochromeLogs`               | `--monochrome_logs`               |
+| `skip_short_variant_calling`     | `skip_snv_calling`                |
+| `skip_assembly_wf`               | `skip_genome_assembly`            |
+| `skip_mapping_wf`                | `skip_alignment`                  |
+| `skip_methylation_wf`            | `skip_methylation_analysis`       |
+| `skip_phasing_wf`                | `skip_phasing`                    |
+| `variant_caller`                 | `snv_caller`                      |
+| `parallel_snv`                   | `snv_calling_processes`           |
+| `cadd_prescored`                 | `cadd_prescored_indels`           |
+| `snp_db`                         | `echtvar_snv_databases`           |
+| `variant_catalog`                | `stranger_repeat_catalog`         |
+| `bed`                            | `target_bed`                      |
+| `hificnv_xy`                     | `hificnv_expected_xy_cn`          |
+| `hificnv_xx`                     | `hificnv_expected_xx_cn`          |
+| `hificnv_exclude`                | `hificnv_excluded_regions`        |
+| `reduced_penetrance`             | `genmod_reduced_penetrance`       |
+| `score_config_snv`               | `genmod_score_config_snvs`        |
+| `score_config_sv`                | `genmod_score_config_svs`         |
+| `parallel_alignments`            | `alignement_processes`            |
+| `svdb_dbs`                       | svdb_sv_databases``               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

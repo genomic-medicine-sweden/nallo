@@ -13,7 +13,7 @@ workflow RANK_VARIANTS {
     take:
     ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_ped                // channel: [mandatory] [ val(meta), path(ped) ]
-    ch_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
+    ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
     ch_score_config       // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
@@ -28,7 +28,7 @@ workflow RANK_VARIANTS {
 
     GENMOD_MODELS (
         genmod_models_in,
-        ch_reduced_penetrance.map { meta, file -> file }
+        ch_genmod_reduced_penetrance.map { meta, file -> file }
     )
     ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 

@@ -79,27 +79,27 @@ workflow NALLO {
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
     ch_cadd_header              = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
     ch_cadd_resources           = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored           = createReferenceChannelFromPath(params.cadd_prescored)
+    ch_cadd_prescored_indels           = createReferenceChannelFromPath(params.cadd_prescored_indels)
     ch_fasta                    = createReferenceChannelFromPath(params.fasta)
     ch_tandem_repeats           = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
-    ch_input_bed                = createReferenceChannelFromPath(params.bed, Channel.value([[],[]]))
+    ch_input_bed                = createReferenceChannelFromPath(params.target_bed, Channel.value([[],[]]))
     ch_par                      = createReferenceChannelFromPath(params.par_regions)
     ch_trgt_bed                 = createReferenceChannelFromPath(params.trgt_repeats)
-    ch_variant_catalog          = createReferenceChannelFromPath(params.variant_catalog)
+    ch_stranger_repeat_catalog          = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snv = createReferenceChannelFromPath(params.variant_consequences_snv)
     ch_variant_consequences_svs = createReferenceChannelFromPath(params.variant_consequences_svs)
     ch_vep_cache_unprocessed    = createReferenceChannelFromPath(params.vep_cache, Channel.value([]))
-    ch_expected_xy_bed          = createReferenceChannelFromPath(params.hificnv_xy)
-    ch_expected_xx_bed          = createReferenceChannelFromPath(params.hificnv_xx)
-    ch_exclude_bed              = createReferenceChannelFromPath(params.hificnv_exclude)
-    ch_reduced_penetrance       = createReferenceChannelFromPath(params.reduced_penetrance)
-    ch_score_config_snv         = createReferenceChannelFromPath(params.score_config_snv)
-    ch_score_config_svs         = createReferenceChannelFromPath(params.score_config_svs)
+    ch_expected_xy_bed          = createReferenceChannelFromPath(params.hificnv_expected_xy_cn)
+    ch_expected_xx_bed          = createReferenceChannelFromPath(params.hificnv_expected_xx_cn)
+    ch_exclude_bed              = createReferenceChannelFromPath(params.hificnv_excluded_regions)
+    ch_genmod_reduced_penetrance       = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
+    ch_genmod_score_config_snvs         = createReferenceChannelFromPath(params.genmod_score_config_snvs)
+    ch_genmod_score_config_svs         = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_somalier_sites           = createReferenceChannelFromPath(params.somalier_sites)
-    ch_svdb_dbs                 = createReferenceChannelFromPath(params.svdb_dbs)
+    ch_svdb_sv_databases                 = createReferenceChannelFromPath(params.svdb_sv_databases)
 
     // Channels from (optional) input samplesheets validated by schema
-    ch_databases                = createReferenceChannelFromSamplesheet(params.snp_db, 'assets/schema_snp_db.json')
+    ch_databases                = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_echtvar_snv_databases.json')
     ch_vep_plugin_files         = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
 
     // Check parameter that doesn't conform to schema validation here
@@ -110,14 +110,14 @@ workflow NALLO {
     //
     CONVERT_INPUT_FILES (
         ch_input,
-        !params.skip_assembly_wf
+        !params.skip_genome_assembly
     )
     ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
 
     //
     // Prepare references
     //
-    if(!params.skip_mapping_wf || !params.skip_assembly_wf ) {
+    if(!params.skip_alignment || !params.skip_genome_assembly ) {
 
         PREPARE_GENOME (
             ch_fasta,
@@ -144,10 +144,10 @@ workflow NALLO {
     //
     // (Split input files and), map reads to reference and merge into a single BAM per sample
     //
-    if(!params.skip_mapping_wf) {
+    if(!params.skip_alignment) {
 
         // Split input files for alignment
-        if (params.parallel_alignments > 1) {
+        if (params.alignment_processes > 1) {
 
             SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
             ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
@@ -270,7 +270,7 @@ workflow NALLO {
         //
         // Hifiasm assembly and assembly variant calling
         //
-        if(!params.skip_assembly_wf) {
+        if(!params.skip_genome_assembly) {
 
             //Hifiasm assembly
             ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
@@ -310,7 +310,7 @@ workflow NALLO {
         //
         // Call (and annotate and rank) SNVs
         //
-        if(!params.skip_short_variant_calling) {
+        if(!params.skip_snv_calling) {
 
             //
             // Make BED intervals, to be used for parallel SNV calling
@@ -318,9 +318,9 @@ workflow NALLO {
             SCATTER_GENOME (
                 fai,
                 ch_input_bed,
-                !params.bed,
-                !params.skip_short_variant_calling,
-                params.parallel_snv
+                !params.target_bed,
+                !params.skip_snv_calling,
+                params.snv_calling_processes
             )
             ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
@@ -356,10 +356,10 @@ workflow NALLO {
                     ch_vep_cache.map { meta, cache -> cache },
                     params.vep_cache_version,
                     ch_vep_plugin_files.collect(),
-                    (params.cadd_resources && params.cadd_prescored),
+                    (params.cadd_resources && params.cadd_prescored_indels),
                     ch_cadd_header,
                     ch_cadd_resources,
-                    ch_cadd_prescored
+                    ch_cadd_prescored_indels
                 )
                 ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
 
@@ -384,8 +384,8 @@ workflow NALLO {
                     RANK_VARIANTS_SNV (
                         ANN_CSQ_PLI_SNV.out.vcf,
                         rank_snvs_ped_in,
-                        ch_reduced_penetrance,
-                        ch_score_config_snv
+                        ch_genmod_reduced_penetrance,
+                        ch_genmod_score_config_snvs
                     )
                     ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
@@ -456,7 +456,7 @@ workflow NALLO {
             //
             // Phase SNVs and INDELs
             //
-            if(!params.skip_phasing_wf) {
+            if(!params.skip_phasing) {
 
                 PHASING (
                     SHORT_VARIANT_CALLING.out.snp_calls_vcf,
@@ -481,7 +481,7 @@ workflow NALLO {
                     // Annotate repeat expansions with stranger
                     //
                     if(!params.skip_repeat_annotation) {
-                        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.sample_vcf )
+                        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, CALL_REPEAT_EXPANSIONS.out.sample_vcf )
                         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
                     }
                 }
@@ -490,9 +490,9 @@ workflow NALLO {
             //
             // Create methylation pileups with modkit
             //
-            if (!params.skip_methylation_wf) {
+            if (!params.skip_methylation_analysis) {
                 METHYLATION (
-                    !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
+                    !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : bam_bai,
                     fasta,
                     fai,
                     ch_input_bed,
@@ -538,7 +538,7 @@ workflow NALLO {
             ANNOTATE_SVS (
                 annotate_svs_in,
                 fasta,
-                ch_svdb_dbs,
+                ch_svdb_sv_databases,
                 ch_vep_cache.map { meta, cache -> cache },
                 params.vep_cache_version,
                 ch_vep_plugin_files.collect()
@@ -554,8 +554,8 @@ workflow NALLO {
                 RANK_VARIANTS_SVS (
                     ANN_CSQ_PLI_SVS.out.vcf,
                     ch_updated_pedfile_family,
-                    ch_reduced_penetrance,
-                    ch_score_config_svs
+                    ch_genmod_reduced_penetrance,
+                    ch_genmod_score_config_svs
                 )
                 ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
             }

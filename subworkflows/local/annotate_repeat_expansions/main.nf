@@ -7,14 +7,14 @@ include { STRANGER                           } from '../../../modules/nf-core/st
 
 workflow ANNOTATE_REPEAT_EXPANSIONS {
     take:
-    ch_variant_catalog // channel: [mandatory] [ path(variant_catalog.json) ]
+    ch_stranger_repeat_catalog // channel: [mandatory] [ path(stranger_repeat_catalog.json) ]
     ch_vcf             // channel: [mandatory] [ val(meta), path(vcf) ]
 
     main:
     ch_versions = Channel.empty()
 
     // Annotate, compress and index
-    STRANGER ( ch_vcf, ch_variant_catalog )
+    STRANGER ( ch_vcf, ch_stranger_repeat_catalog )
     ch_versions = ch_versions.mix(STRANGER.out.versions)
 
     COMPRESS_STRANGER (
