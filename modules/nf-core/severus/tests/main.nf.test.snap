@@ -268,7 +268,12 @@
                     ]
                 ],
                 "7": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "severus_all.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "8": [
                     [
@@ -314,7 +319,12 @@
                     ]
                 ],
                 "all_vcf": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "severus_all.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "breakpoints_double": [
                     [
@@ -409,9 +419,9 @@
         ],
         "meta": {
             "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
+            "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-11T19:09:18.357545892"
+        "timestamp": "2024-07-10T12:00:07.296601854"
     },
     "homo_sapiens - [ bam, bai, bam, bai, [] ], [[],[]]": {
         "content": [

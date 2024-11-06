@@ -4,7 +4,13 @@ multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
 multiqc/multiqc_data/multiqc_software_versions.txt
 multiqc/multiqc_data/multiqc_somalier.txt
+multiqc/multiqc_data/somalier_*_plot.txt
 multiqc/multiqc_data/multiqc_sources.txt
+multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt
+multiqc/multiqc_data/bcftools_stats_vqc_Count_Transitions.txt
+multiqc/multiqc_data/bcftools_stats_vqc_Count_SNP.txt
+multiqc/multiqc_data/bcftools_stats_vqc_Count_Indels.txt
+multiqc/multiqc_plots/**/*.{pdf,svg,txt,png}
 multiqc/multiqc_report.html
 paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
 phased_variants/**/*.{vcf.gz,tbi}
