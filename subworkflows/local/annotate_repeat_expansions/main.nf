@@ -8,7 +8,7 @@ include { STRANGER                           } from '../../../modules/nf-core/st
 workflow ANNOTATE_REPEAT_EXPANSIONS {
     take:
     ch_stranger_repeat_catalog // channel: [mandatory] [ path(stranger_repeat_catalog.json) ]
-    ch_vcf             // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_vcf                     // channel: [mandatory] [ val(meta), path(vcf) ]
 
     main:
     ch_versions = Channel.empty()

@@ -14,11 +14,11 @@ include { TABIX_TABIX as TABIX_CADD            } from '../../../modules/nf-core/
 workflow ANNOTATE_CADD {
 
     take:
-    ch_fai            // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vcf            // channel: [mandatory] [ val(meta), path(vcfs) ]
-    ch_index          // channel: [mandatory] [ val(meta), path(tbis) ]
-    ch_header         // channel: [mandatory] [ val(meta), path(txt) ]
-    ch_cadd_resources // channel: [mandatory] [ val(meta), path(dir) ]
+    ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_vcf                   // channel: [mandatory] [ val(meta), path(vcfs) ]
+    ch_index                 // channel: [mandatory] [ val(meta), path(tbis) ]
+    ch_header                // channel: [mandatory] [ val(meta), path(txt) ]
+    ch_cadd_resources        // channel: [mandatory] [ val(meta), path(dir) ]
     ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(dir) ]
 
     main:

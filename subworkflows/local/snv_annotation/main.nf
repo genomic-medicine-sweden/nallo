@@ -7,17 +7,17 @@ include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV         } from '../../../modules/n
 workflow SNV_ANNOTATION {
 
     take:
-    ch_vcf                // channel [mandatory] [ val(meta), path(vcf) ]
-    ch_databases          // channel: [mandatory] [ path(db) ]
-    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vep_cache          // channel: [mandatory] [ path(cache) ]
-    val_vep_cache_version // string: [mandatory] default: 110
-    ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
-    val_annotate_cadd     // bool: [mandatory]
-    ch_cadd_header        // channel: [mandatory] [ path(txt) ]
-    ch_cadd_resources     // channel: [mandatory] [ val(meta), path(annotation) ]
-    ch_cadd_prescored_indels     // channel: [mandatory] [ val(meta), path(prescored) ]
+    ch_vcf                   // channel [mandatory] [ val(meta), path(vcf) ]
+    ch_databases             // channel: [mandatory] [ path(db) ]
+    ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_vep_cache             // channel: [mandatory] [ path(cache) ]
+    val_vep_cache_version    // string: [mandatory] default: 110
+    ch_vep_extra_files       // channel: [mandatory] [ path(files) ]
+    val_annotate_cadd        // bool: [mandatory]
+    ch_cadd_header           // channel: [mandatory] [ path(txt) ]
+    ch_cadd_resources        // channel: [mandatory] [ val(meta), path(annotation) ]
+    ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(prescored) ]
 
     main:
     ch_versions = Channel.empty()

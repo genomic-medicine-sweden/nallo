@@ -184,10 +184,10 @@ Turned off with `--skip_snv_calling`.
 
 This subworkflow depends on the mapping and short variant calling subworkflows, and requires the following additional files:
 
-| Parameter         | Description                                                                                                                                                                                     |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hificnv_expected_xy_cn`      | expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
-| `hificnv_expected_xx_cn`      | expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
+| Parameter                  | Description                                                                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hificnv_expected_xy_cn`   | expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
+| `hificnv_expected_xx_cn`   | expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
 Turned off with `--skip_cnv_calling`.
@@ -218,8 +218,8 @@ Turned off with `--skip_repeat_calling`.
 
 This subworkflow relies on the mapping, short variant calling, phasing and repeat calling subworkflows, and requires the following additional files:
 
-| Parameter         | Description                                                                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                 | Description                                                                                                                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stranger_repeat_catalog` | a variant catalog matching your reference (e.g. [stranger_repeat_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/stranger_repeat_catalog_grch38.json)) |
 
 Turned off with `--skip_repeat_annotation`.
@@ -230,22 +230,22 @@ This subworkflow relies on the mapping and short variant calling, and requires t
 
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snv should link to real examples -->
 
-| Parameter                  | Description                                                                                                                                                                                                                                                                                                                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `vep_cache`                | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
-| `vep_plugin_files` <sup>1</sup> | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
-| `echtvar_snv_databases` <sup>2</sup>      |  A csv file with annotation databases from ([`echtvar encode`](https://github.com/brentp/echtvar))                                                                                                                                                                                                                                                                            |
-| `variant_consequences_snv` | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
+| Parameter                            | Description                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
+| `vep_plugin_files` <sup>1</sup>      | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
+| `echtvar_snv_databases` <sup>2</sup> |  A csv file with annotation databases from ([`echtvar encode`](https://github.com/brentp/echtvar))                                                                                                                                                                                                                                                                            |
+| `variant_consequences_snv`           | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
 
 ```
 vep_files
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files/pLI_values.txt
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugin_files/LoFtool_scores.txt
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
 ```
 
 <sup>2</sup> Example file for input with `--echtvar_snv_databases`:
@@ -272,10 +272,10 @@ Turned off with `--skip_snv_annotation`.
 
 This subworkflow ranks SNVs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:
 
-| Parameter            | Description                                                                                                                                                                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `genmod_score_config_snvs`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
-| `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/genmod_reduced_penetrance.tsv) |
+| Parameter                   | Description                                                                                                                                                                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `genmod_score_config_snvs`  |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
+| `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
 
 `--skip_rank_variants`.
 
@@ -283,8 +283,8 @@ This subworkflow ranks SNVs, and relies on the mapping, short variant calling an
 
 This subworkflow relies on the mapping subworkflow, and requires the following additional files:
 
-| Parameter               | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
+| Parameter                        | Description                                                                   |
+| -------------------------------- | ----------------------------------------------------------------------------- |
 | `svdb_sv_databases` <sup>1</sup> | Csv file with databases used for structural variant annotation in vcf format. |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
@@ -302,10 +302,10 @@ Turned off with `--skip_sv_annotation`.
 
 This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:
 
-| Parameter            | Description                                                                                                                                                                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                   | Description                                                                                                                                                                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `genmod_score_config_svs`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini).                                                                                                          |
-| `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/genmod_reduced_penetrance.tsv) |
+| `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
 
 `--skip_rank_variants`.
 

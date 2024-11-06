@@ -14,7 +14,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 preset                       = 'ONT_R10'
                 alignment_processes          = 1
-                snv_calling_processes                 = 1
+                snv_calling_processes        = 1
                 phaser                       = "whatshap"
             }
         }
