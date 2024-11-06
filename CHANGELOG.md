@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#450](https://github.com/genomic-medicine-sweden/nallo/pull/450) - Added ranking of SVs (and CNVs)
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added support for running methylation subworkflow without phasing
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added nf-test to methylation
+- [#491](https://github.com/genomic-medicine-sweden/nallo/pull/491) - Added a changelog reminder action
 
 ### `Changed`
 
