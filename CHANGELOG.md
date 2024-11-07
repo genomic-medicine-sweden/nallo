@@ -137,7 +137,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `score_config_snv`               | `genmod_score_config_snvs`        |
 | `score_config_sv`                | `genmod_score_config_svs`         |
 | `parallel_alignments`            | `alignment_processes`            |
-| `svdb_dbs`                       | svdb_sv_databases``               |
+| `svdb_dbs`                       | `svdb_sv_databases`               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
