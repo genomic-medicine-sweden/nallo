@@ -257,7 +257,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c846956d5414ac0eb32846f561f733a4efe9048a/",
                     "hidden": true
                 }
             }
@@ -467,6 +467,24 @@
                     "mimetype": "text/csv",
                     "description": "A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
+                },
+                "filter_variants_hgnc_ids": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.(csv|tsv)$",
+                    "description": "A tsv/csv file with a `#hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281`, not `HGNC:4281`.",
+                    "format": "file-path",
+                    "exits": true,
+                    "schema": "assets/schema_hgnc_ids.json"
+                },
+                "filter_snvs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
+                },
+                "filter_svs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "deepvariant_model_type": {
                     "type": "string",

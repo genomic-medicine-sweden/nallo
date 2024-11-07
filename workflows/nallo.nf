@@ -21,6 +21,8 @@ include { CALL_CNVS                               } from '../subworkflows/local/
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
 include { CALL_SVS                                } from '../subworkflows/local/call_svs'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS } from '../subworkflows/local/filter_variants'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SVS  } from '../subworkflows/local/filter_variants'
 include { METHYLATION                             } from '../subworkflows/local/methylation'
 include { PHASING                                 } from '../subworkflows/local/phasing'
 include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
@@ -101,9 +103,14 @@ workflow NALLO {
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                = createReferenceChannelFromSamplesheet(params.snp_db, 'assets/schema_snp_db.json')
     ch_vep_plugin_files         = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
+    ch_hgnc_ids                 = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json')
+        .map { integer -> 'HGNC:' + integer[0].toString() } // Converts [ 256 ] to a string HGNC:256
+        .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
+        .map { file -> [ [ id: 'hgnc_ids' ], file ] }
 
     // Check parameter that doesn't conform to schema validation here
     if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
+    if (params.filter_variants_hgnc_ids && !params.skip_filter_variants && (params.skip_snv_annotation || params.skip_sv_annotation)) { error "Filtering variants on HGNC IDs requires annotation" }
 
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
@@ -413,7 +420,9 @@ workflow NALLO {
                 .set { ch_bcftools_concat_in }
 
             // Concat into a multisample VCF with all regions
-            BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
+            BCFTOOLS_CONCAT (
+                ch_bcftools_concat_in
+            )
             ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
             // Sort and publish
@@ -436,6 +445,22 @@ workflow NALLO {
             BCFTOOLS_STATS ( ch_bcftools_stats_snv_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
             ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
             ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
+
+            //
+            // Filter SNVs
+            //
+            if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+
+                // Publish filtered `project` SNVs from here
+                FILTER_VARIANTS_SNVS (
+                    BCFTOOLS_SORT.out.vcf,
+                    ch_hgnc_ids,
+                    params.filter_variants_hgnc_ids
+                )
+                ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
+
+            }
+
 
             //
             // Call CNVs with HiFiCNV
@@ -563,6 +588,24 @@ workflow NALLO {
                 ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
             }
 
+        }
+
+        //
+        // Filter SVs
+        //
+        if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+
+            if(params.skip_cnv_calling) {
+                ch_filter_svs_in = params.skip_sv_annotation ? CALL_SVS.out.family_vcf : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
+            } else {
+                ch_filter_svs_in = params.skip_sv_annotation ? annotate_svs_in : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
+            }
+
+            FILTER_VARIANTS_SVS (
+                ch_filter_svs_in,
+                ch_hgnc_ids,
+                params.filter_variants_hgnc_ids
+            )
         }
     }
 

@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c846956d5414ac0eb32846f561f733a4efe9048a/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam.csv'
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"

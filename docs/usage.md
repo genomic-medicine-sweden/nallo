@@ -309,6 +309,26 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 `--skip_rank_variants`.
 
+#### Filter variants
+
+SNVs and INDELs, and SVs and CNVs can be filtered using [filter_vep](https://www.ensembl.org/vep) and [bcftools view](https://samtools.github.io/bcftools/bcftools.html).
+
+| Parameter                               | Description                                                                                                                                                             |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_variants_hgnc_ids` <sup>1</sup> |  Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/bed file with a `#hgnc_ids` column with one numerical HGNC ID per row. E.g. `4281`, not `HGNC:4281`. |
+
+<sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
+
+```
+#hgnc_id
+4865
+14150
+```
+
+To pass filters to bcftools view, use `--filter_snvs_expression` and `--filter_svs_expression`. E.g `--filter_snvs_expression "-e 'INFO/AQ>60'"`.
+
+Filtering of variants only happens if any of these three parameters is active.
+
 ## Other highlighted parameters
 
 - Limit SNV calling to regions in BED file (`--bed`).

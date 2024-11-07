@@ -1,0 +1,33 @@
+{
+    "vcf, [[],[]], false": {
+        "content": [
+            [
+                "versions.yml:md5,c6563ccec6867a29e00bdbb19abee900"
+            ],
+            "test_data.bed_filtered.vcf.gz.tbi",
+            "28024aed73c5c0fd09c14cf32008a335",
+            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=80, phased=false, phasedAutodetect=false]"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-06T15:09:53.145300431"
+    },
+    "vcf, hgnc_ids, true": {
+        "content": [
+            [
+                "versions.yml:md5,24b641f905e26c567657e04d22f2e337",
+                "versions.yml:md5,c6563ccec6867a29e00bdbb19abee900"
+            ],
+            "test_data.bed_filtered.vcf.gz.tbi",
+            "77c14f11bd3af0802b1736cd87b949eb",
+            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=49, phased=false, phasedAutodetect=false]"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-06T16:37:39.828165612"
+    }
+}

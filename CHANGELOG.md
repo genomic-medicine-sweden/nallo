@@ -131,21 +131,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool           | Old version | New version |
-| -------------- | ----------- | ----------- |
-| fqcrs          | 0.1.0       |
-| severus        |             | 1.1         |
-| longphase      |             | 1.7.3       |
-| genmod         | 3.8.2       | 3.9         |
-| WhatsHap       | 2.2         | 2.3         |
-| SVDB           |             | 2.8.1       |
-| hifiasm        | 0.19.8      | 0.20.0      |
-| HiFiCNV        | 0.1.7       | 1.0.0       |
-| samtools/faidx | 1.2         | 1.21        |
-| samtools/index | 1.2         | 1.21        |
-| samtools/merge | 1.2         | 1.21        |
-| stranger       | 0.9.1       | 0.9.2       |
-| multiqc        | 1.21        | 1.25.1      |
+| Tool                  | Old version | New version |
+| --------------------- | ----------- | ----------- |
+| fqcrs                 | 0.1.0       |
+| severus               |             | 1.1         |
+| longphase             |             | 1.7.3       |
+| genmod                | 3.8.2       | 3.9         |
+| WhatsHap              | 2.2         | 2.3         |
+| SVDB                  |             | 2.8.1       |
+| hifiasm               | 0.19.8      | 0.20.0      |
+| HiFiCNV               | 0.1.7       | 1.0.0       |
+| samtools/faidx        | 1.2         | 1.21        |
+| samtools/index        | 1.2         | 1.21        |
+| samtools/merge        | 1.2         | 1.21        |
+| stranger              | 0.9.1       | 0.9.2       |
+| multiqc               | 1.21        | 1.25.1      |
+| ensemblvep/filter_vep |             | 113         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
