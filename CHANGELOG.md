@@ -136,7 +136,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `reduced_penetrance`             | `genmod_reduced_penetrance`       |
 | `score_config_snv`               | `genmod_score_config_snvs`        |
 | `score_config_sv`                | `genmod_score_config_svs`         |
-| `parallel_alignments`            | `alignement_processes`            |
+| `parallel_alignments`            | `alignment_processes`            |
 | `svdb_dbs`                       | svdb_sv_databases``               |
 
 > [!NOTE]
