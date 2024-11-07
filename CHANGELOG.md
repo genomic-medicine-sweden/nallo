@@ -87,6 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#486](https://github.com/genomic-medicine-sweden/nallo/pull/486) - Updated nf-core modules
 - [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
 - [#489](https://github.com/genomic-medicine-sweden/nallo/pull/489) - Updated nf-core template to 3.0.2
+- [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Refactored `nallo.nf` to remove many nested ifs and easier to follow logic
+- [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Updated rank_variants dependencies with sv_annotation
 
 ### `Removed`
 

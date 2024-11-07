@@ -71,7 +71,6 @@ workflow NALLO {
     ch_input
 
     main:
-    ch_vep_cache     = Channel.value([])
     ch_versions      = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
@@ -102,63 +101,52 @@ workflow NALLO {
     ch_databases                = createReferenceChannelFromSamplesheet(params.snp_db, 'assets/schema_snp_db.json')
     ch_vep_plugin_files         = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
 
-    // Check parameter that doesn't conform to schema validation here
-    if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') { error "The HiPhase license only permits analysis of data from PacBio. For details see: https://github.com/PacificBiosciences/HiPhase/blob/main/LICENSE.md" }
-
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
     //
     CONVERT_INPUT_FILES (
         ch_input,
-        !params.skip_assembly_wf
+        !params.skip_assembly_wf, // should bam -> fastq conversion be done
+        !params.skip_mapping_wf   // should fastq -> bam conversion be done
     )
     ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
 
     //
-    // Prepare references
+    // Map reads to reference
     //
-    if(!params.skip_mapping_wf || !params.skip_assembly_wf ) {
+    if (!params.skip_mapping_wf) {
 
+        // Prepeare references
         PREPARE_GENOME (
             ch_fasta,
-            params.fasta.endsWith('.gz'),
             ch_vep_cache_unprocessed,
-            params.vep_plugin_files,
+            params.fasta.endsWith('.gz'),       // should we unzip fasta
+            params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-
-        if(!params.skip_snv_annotation && params.vep_cache) {
-            if (params.vep_cache.endsWith("tar.gz")) {
-                ch_vep_cache = PREPARE_GENOME.out.vep_resources
-            } else {
-                ch_vep_cache = createReferenceChannelFromPath(params.vep_cache)
-            }
-        }
 
         // Gather indices
         fasta = PREPARE_GENOME.out.fasta
         fai   = PREPARE_GENOME.out.fai
         mmi   = PREPARE_GENOME.out.mmi
-    }
 
-    //
-    // (Split input files and), map reads to reference and merge into a single BAM per sample
-    //
-    if(!params.skip_mapping_wf) {
-
-        // Split input files for alignment
-        if (params.parallel_alignments > 1) {
-
+        // Split input BAM files
+        if(params.parallel_alignments > 1) {
             SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
             ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
-
-            reads_for_alignment = SPLITUBAM.out.bam.transpose()
-
-        } else {
-            reads_for_alignment = CONVERT_INPUT_FILES.out.bam
         }
-        // Align (split) reads
-        MINIMAP2_ALIGN ( reads_for_alignment, mmi, true, 'bai', false, false )
+
+        //
+        // Align reads (could be a split-align-merge subworkflow)
+        //
+        MINIMAP2_ALIGN (
+            params.parallel_alignments > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FILES.out.bam,
+            mmi,
+            true,
+            'bai',
+            false,
+            false
+        )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
         // Split channel into cases where we have multiple files or single files
@@ -177,7 +165,11 @@ workflow NALLO {
             .set { bam_to_merge }
 
         // Merge files if we have multiple files per sample
-        SAMTOOLS_MERGE ( bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] }, [[],[]], [[],[]])
+        SAMTOOLS_MERGE (
+            bam_to_merge.multiple.map { meta, bam, bai -> [ meta, bam ] },
+            [[],[]],
+            [[],[]]
+        )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bams
@@ -205,96 +197,228 @@ workflow NALLO {
         //
         // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
         //
-        BAM_INFER_SEX ( bam_infer_sex_in, fasta, fai, ch_somalier_sites, ch_samplesheet_pedfile )
+        BAM_INFER_SEX (
+            bam_infer_sex_in,
+            fasta,
+            fai,
+            ch_somalier_sites,
+            ch_samplesheet_pedfile
+        )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
+        // Set files with updated meta for subsequent processes
         bam     = BAM_INFER_SEX.out.bam
         bai     = BAM_INFER_SEX.out.bai
         bam_bai = BAM_INFER_SEX.out.bam_bai
 
-        //
-        // Create PED with updated sex per project (should perphaps be per SNV-calling region)
-        //
-        bam
-            .map { meta, files -> [ [ id: meta.project ], meta ] }
-            .groupTuple()
-            .set { ch_somalier_ped_in }
+    }
 
-        SOMALIER_PED ( ch_somalier_ped_in )
+    //
+    // Run read QC with FastQC, mosdepth and cramino
+    //
+    if (!params.skip_mapping_wf && !params.skip_qc) {
+
+        QC_ALIGNED_READS (
+            bam_bai,
+            fasta,
+            ch_input_bed
+        )
+        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+
+    }
+
+    //
+    // Call paralogous genes with paraphase
+    //
+    if(!params.skip_mapping_wf && !params.skip_call_paralogs) {
+        CALL_PARALOGS (
+            bam_bai,
+            fasta
+        )
+        ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
+    }
+
+    //
+    // Hifiasm assembly and assembly variant calling
+    //
+    if(!params.skip_mapping_wf && !params.skip_assembly_wf) {
+
+        //Hifiasm assembly
+        ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
+        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+        // Update assembly variant calling meta with sex from somalier
+        ASSEMBLY.out.assembled_haplotypes
+            .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
+            .set { haplotypes }
+
+        bam
+            .map { meta, bam -> [ meta.id, meta ] }
+            .join( haplotypes )
+            .map { id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
+            .set { ch_assembly_variant_calling_in }
+
+        // Run dipcall
+        ASSEMBLY_VARIANT_CALLING (
+            ch_assembly_variant_calling_in,
+            fasta,
+            fai,
+            ch_par
+        )
+        ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+    }
+
+    //
+    // Call SNVs
+    //
+    if(!params.skip_mapping_wf && !params.skip_short_variant_calling) {
+
+        // Make BED intervals, to be used for parallel SNV calling
+        SCATTER_GENOME (
+            fai,
+            ch_input_bed,
+            !params.bed,                        // should a bed be made from fai
+            !params.skip_short_variant_calling, // should bed be split and snv-calling intervals be made
+            params.parallel_snv                 // how many splits should be done
+        )
+        ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
+
+        // Combine to create a bam_bai - interval pair for each sample
+        bam_bai
+            .combine( SCATTER_GENOME.out.bed_intervals )
+            .map { meta, bam, bai, bed, intervals ->
+                [ meta + [ num_intervals: intervals ], bam, bai, bed ]
+            }
+            .set{ ch_snv_calling_in }
+
+        // This subworkflow calls SNVs with DeepVariant and outputs:
+        // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
+        // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
+        SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed, ch_par )
+        ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+
+        SHORT_VARIANT_CALLING.out.combined_bcf
+            .join( SHORT_VARIANT_CALLING.out.combined_csi )
+            .set { ch_vcf_tbi_per_region }
+    }
+
+    //
+    // Annotate SNVs
+    //
+    if(!params.skip_mapping_wf && !params.skip_short_variant_calling && !params.skip_snv_annotation) {
+
+        // Annotates one multisample VCF per variant call region
+        SNV_ANNOTATION(
+            SHORT_VARIANT_CALLING.out.combined_bcf,
+            ch_databases.map { meta, databases -> databases }.collect(),
+            fasta,
+            fai.map { name, fai -> [ [ id: name ], fai ] },
+            PREPARE_GENOME.out.vep_resources.map { meta, cache -> cache },
+            params.vep_cache_version,
+            ch_vep_plugin_files.collect(),
+            (params.cadd_resources && params.cadd_prescored), // should indels be annotated with CADD
+            ch_cadd_header,
+            ch_cadd_resources,
+            ch_cadd_prescored
+        )
+        ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
+
+        ANN_CSQ_PLI_SNV (
+            SNV_ANNOTATION.out.vcf,
+            ch_variant_consequences_snv
+        )
+        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
+
+        ANN_CSQ_PLI_SNV.out.vcf
+            .join( ANN_CSQ_PLI_SNV.out.tbi )
+            .set { ch_vcf_tbi_per_region }
+
+    }
+
+    //
+    // Ranks one multisample VCF per variant call region
+    // Can only run if samplesheet has affected samples
+    //
+    if(!params.skip_mapping_wf && !params.skip_short_variant_calling && !params.skip_snv_annotation && !params.skip_rank_variants) {
+
+        // Create PED with updated sex per project (should perhaps be per SNV-calling region)
+        SOMALIER_PED (
+            bam
+                .map { meta, files -> [ [ id: meta.project ], meta ] }
+                .groupTuple()
+        )
         ch_versions = ch_versions.mix(SOMALIER_PED.out.versions)
 
         SOMALIER_PED.out.ped
             .collect()
             .set { ch_updated_pedfile }
 
-        //
-        // Create PED with updated sex - per family
-        //
-        bam
-            .map { meta, files -> [ [ id: meta.family_id ], meta ] }
+        // Give pedfile meta from variants
+        ANN_CSQ_PLI_SNV.out.vcf
+            .combine(ch_updated_pedfile.map { meta, ped -> ped } )
+            .map { meta, vcf, ped -> [ meta, ped ] }
+            .set { rank_snvs_ped_in }
+
+        // Only run if we have affected individuals
+        RANK_VARIANTS_SNV (
+            ANN_CSQ_PLI_SNV.out.vcf,
+            rank_snvs_ped_in,
+            ch_reduced_penetrance,
+            ch_score_config_snv
+        )
+        ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
+
+        RANK_VARIANTS_SNV.out.vcf
+            .join( RANK_VARIANTS_SNV.out.tbi )
+            .set { ch_vcf_tbi_per_region }
+    }
+
+    //
+    // Concatenate, sort, split, make database and get statistics of SNVs (should be a subworkflow)
+    //
+    if(!params.skip_mapping_wf && !params.skip_short_variant_calling) {
+
+        ch_vcf_tbi_per_region
+            .map { meta, vcf, tbi -> [ [ id: meta.project ], vcf, tbi ] }
             .groupTuple()
-            .set { ch_somalier_ped_family_in }
+            .set { ch_bcftools_concat_in }
 
-        SOMALIER_PED_FAMILY ( ch_somalier_ped_family_in )
-        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
+        // Concat into a multisample VCF with all regions
+        BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
+        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
-        SOMALIER_PED_FAMILY.out.ped
-            .set { ch_updated_pedfile_family }
+        // Sort and publish
+        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
+        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
-        //
-        // Run read QC with FastQC, mosdepth and cramino
-        //
-        if (!params.skip_qc) {
+        // Make an echtvar database of all samples
+        ECHTVAR_ENCODE ( BCFTOOLS_SORT.out.vcf )
+        ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
 
-            QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
-            ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
+        // Split multisample VCF to also publish a VCF per sample
+        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
 
-            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
-            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
-            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
-            ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+        BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
+            .transpose()
+            .map { meta, vcf -> [ meta, vcf, [] ] }
+            .set { ch_bcftools_stats_snv_in }
 
-        }
+        BCFTOOLS_STATS ( ch_bcftools_stats_snv_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
+        ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
+    }
 
-        //
-        // Call paralogous genes with paraphase
-        //
-        if(!params.skip_call_paralogs) {
-            CALL_PARALOGS ( bam_bai, fasta )
-            ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
-        }
-
-        //
-        // Hifiasm assembly and assembly variant calling
-        //
-        if(!params.skip_assembly_wf) {
-
-            //Hifiasm assembly
-            ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
-            ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
-
-            // Update assembly variant calling meta with sex from somalier
-            ASSEMBLY.out.assembled_haplotypes
-                .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
-                .set { haplotypes }
-
-            bam
-                .map { meta, bam -> [ meta.id, meta ] }
-                .join( haplotypes )
-                .map { id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
-                .set { ch_assembly_variant_calling_in }
-
-            // Run dipcall
-            ASSEMBLY_VARIANT_CALLING( ch_assembly_variant_calling_in, fasta, fai , ch_par)
-            ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
-        }
-
-        //
-        // Call structural variants
-        //
+    //
+    // Call SVs
+    //
+    if(!params.skip_mapping_wf) {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
@@ -307,263 +431,149 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
-        //
-        // Call (and annotate and rank) SNVs
-        //
-        if(!params.skip_short_variant_calling) {
+        CALL_SVS.out.family_vcf
+            .set { annotate_svs_in }
+    }
 
-            //
-            // Make BED intervals, to be used for parallel SNV calling
-            //
-            SCATTER_GENOME (
-                fai,
-                ch_input_bed,
-                !params.bed,
-                !params.skip_short_variant_calling,
-                params.parallel_snv
-            )
-            ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
+    //
+    // Call CNVs with HiFiCNV
+    //
+    if(!params.skip_mapping_wf && !params.skip_cnv_calling) {
 
-            // Combine to create a bam_bai - interval pair for each sample
-            bam_bai
-                .combine( SCATTER_GENOME.out.bed_intervals )
-                .map { meta, bam, bai, bed, intervals ->
-                    [ meta + [ num_intervals: intervals ], bam, bai, bed ]
-                }
-                .set{ ch_snv_calling_in }
+        CALL_CNVS (
+            bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
+            fasta,
+            ch_expected_xy_bed,
+            ch_expected_xx_bed,
+            ch_exclude_bed
+        )
+        ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
 
-            //
-            // This subworkflow calls SNVs with DeepVariant and outputs:
-            // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
-            // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
-            //
-            SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed, ch_par )
-            ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+    }
 
-            //
-            // Annotate SNVs
-            //
-            if(!params.skip_snv_annotation) {
+    //
+    // Merge SVs and CNVs if we've called both SVs and CNVs
+    //
+    if (!params.skip_mapping_wf && !params.skip_cnv_calling) {
 
-                //
-                // Annotates one multisample VCF per variant call region
-                //
-                SNV_ANNOTATION(
-                    SHORT_VARIANT_CALLING.out.combined_bcf,
-                    ch_databases.map { meta, databases -> databases }.collect(),
-                    fasta,
-                    fai.map { name, fai -> [ [ id: name ], fai ] },
-                    ch_vep_cache.map { meta, cache -> cache },
-                    params.vep_cache_version,
-                    ch_vep_plugin_files.collect(),
-                    (params.cadd_resources && params.cadd_prescored),
-                    ch_cadd_header,
-                    ch_cadd_resources,
-                    ch_cadd_prescored
-                )
-                ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
-
-                ANN_CSQ_PLI_SNV (
-                    SNV_ANNOTATION.out.vcf,
-                    ch_variant_consequences_snv
-                )
-                ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
-
-                // Give pedfile meta from
-                ANN_CSQ_PLI_SNV.out.vcf
-                    .combine(ch_updated_pedfile.map { meta, ped -> ped } )
-                    .map { meta, vcf, ped -> [ meta, ped ] }
-                    .set { rank_snvs_ped_in }
-
-                //
-                // Ranks one multisample VCF per variant call region
-                // Can only run if samplesheet has affected samples
-                //
-                if(!params.skip_rank_variants) {
-                    // Only run if we have affected individuals
-                    RANK_VARIANTS_SNV (
-                        ANN_CSQ_PLI_SNV.out.vcf,
-                        rank_snvs_ped_in,
-                        ch_reduced_penetrance,
-                        ch_score_config_snv
-                    )
-                    ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
-
-                    // If RANK_VARIANTS has been run input that to VCF concatenation
-                    RANK_VARIANTS_SNV.out.vcf
-                        .join( RANK_VARIANTS_SNV.out.tbi )
-                        .set { ch_vcf_tbi_per_region }
-                } else {
-                    // otherwise grab the VCF that should have gone into RANK_VARIANTS
-                    ANN_CSQ_PLI_SNV.out.vcf
-                        .join( ANN_CSQ_PLI_SNV.out.tbi )
-                        .set { ch_vcf_tbi_per_region }
-                }
-            } else {
-                // If neither snv_annotation nor rank_variants was run, take the output from
-                // SHORT_VARIANT_CALLING
-                SHORT_VARIANT_CALLING.out.combined_bcf
-                    .join( SHORT_VARIANT_CALLING.out.combined_csi )
-                    .set { ch_vcf_tbi_per_region }
-            }
-
-            ch_vcf_tbi_per_region
-                .map { meta, vcf, tbi -> [ [ id: meta.project ], vcf, tbi ] }
-                .groupTuple()
-                .set { ch_bcftools_concat_in }
-
-            // Concat into a multisample VCF with all regions
-            BCFTOOLS_CONCAT ( ch_bcftools_concat_in )
-            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
-            // Sort and publish
-            BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
-            ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
-            // Make an echtvar database of all samples
-            ECHTVAR_ENCODE ( BCFTOOLS_SORT.out.vcf )
-            ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
-
-            // Split multisample VCF to also publish a VCF per sample
-            BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
-            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
-
-            BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
-                .transpose()
-                .map { meta, vcf -> [ meta, vcf, [] ] }
-                .set { ch_bcftools_stats_snv_in }
-
-            BCFTOOLS_STATS ( ch_bcftools_stats_snv_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
-            ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
-            ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
-
-            //
-            // Call CNVs with HiFiCNV
-            //
-            if(!params.skip_cnv_calling) {
-
-                CALL_CNVS (
-                    bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
-                    fasta,
-                    ch_expected_xy_bed,
-                    ch_expected_xx_bed,
-                    ch_exclude_bed
-                )
-                ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
-
-            }
-
-            //
-            // Phase SNVs and INDELs
-            //
-            if(!params.skip_phasing_wf) {
-
-                PHASING (
-                    SHORT_VARIANT_CALLING.out.snp_calls_vcf,
-                    SHORT_VARIANT_CALLING.out.snp_calls_tbi,
-                    bam_bai,
-                    fasta,
-                    fai
-                )
-                ch_versions = ch_versions.mix(PHASING.out.versions)
-
-                ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
-
-                //
-                // Call repeat expansions with TRGT
-                //
-                if(!params.skip_repeat_calling) {
-
-                    CALL_REPEAT_EXPANSIONS ( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed )
-                    ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
-
-                    //
-                    // Annotate repeat expansions with stranger
-                    //
-                    if(!params.skip_repeat_annotation) {
-                        ANNOTATE_REPEAT_EXPANSIONS (
-                            ch_variant_catalog,
-                            CALL_REPEAT_EXPANSIONS.out.family_vcf
-                        )
-                        ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
-                    }
-                }
-            }
-
-            //
-            // Create methylation pileups with modkit
-            //
-            if (!params.skip_methylation_wf) {
-                METHYLATION (
-                    !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
-                    fasta,
-                    fai,
-                    ch_input_bed,
-                )
-                ch_versions = ch_versions.mix(METHYLATION.out.versions)
-            }
-        }
-
-        // Merge SVs and CNVs if we've called both SVs and CNVs
-        if (!params.skip_cnv_calling) {
-            CALL_SVS.out.family_vcf
+        CALL_SVS.out.family_vcf
             .join(CALL_CNVS.out.family_vcf)
             .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
             .set { svdb_merge_svs_cnvs_in }
 
-            // If SV annotation is off, merged variants are output from here
-            SVDB_MERGE_SVS_CNVS (
-                svdb_merge_svs_cnvs_in,
-                ['svs', 'cnvs'], // Because SVs have better breakpoint resolution, give them priority
-                true
-            )
-            ch_versions = ch_versions.mix(SVDB_MERGE_SVS_CNVS.out.versions)
+        // If SV annotation is off, merged variants are output from here (should be a merge and index subworkflow)
+        SVDB_MERGE_SVS_CNVS (
+            svdb_merge_svs_cnvs_in,
+            ['svs', 'cnvs'], // Because SVs have better breakpoint resolution, give them priority
+            true
+        )
+        ch_versions = ch_versions.mix(SVDB_MERGE_SVS_CNVS.out.versions)
 
-            if (params.skip_sv_annotation) {
-                // And tabixed here
-                TABIX_SVDB_MERGE_SVS_CNVS ( SVDB_MERGE_SVS_CNVS.out.vcf )
-                ch_versions = ch_versions.mix(TABIX_SVDB_MERGE_SVS_CNVS.out.versions)
-            }
+        SVDB_MERGE_SVS_CNVS.out.vcf
+            .set { annotate_svs_in }
+    }
 
-            SVDB_MERGE_SVS_CNVS.out.vcf
-                .set { annotate_svs_in }
+    //
+    // Index the merged SVs and SVs if not skipping sv annotation (should be a merge and index subworkflow)
+    //
+    if (!params.skip_mapping_wf && !params.skip_cnv_calling && !params.skip_sv_annotation) {
 
-        } else {
-            CALL_SVS.out.family_vcf
-                .set { annotate_svs_in }
-        }
+        TABIX_SVDB_MERGE_SVS_CNVS ( SVDB_MERGE_SVS_CNVS.out.vcf )
+        ch_versions = ch_versions.mix(TABIX_SVDB_MERGE_SVS_CNVS.out.versions)
+    }
 
-        //
-        // Annotate structural variants
-        //
-        if(!params.skip_sv_annotation) {
-            // If annotation is on, then merged variants are output from here
-            ANNOTATE_SVS (
-                annotate_svs_in,
-                fasta,
-                ch_svdb_dbs,
-                ch_vep_cache.map { meta, cache -> cache },
-                params.vep_cache_version,
-                ch_vep_plugin_files.collect()
-            )
+    //
+    // Annotate SVs
+    //
+    if (!params.skip_mapping_wf && !params.skip_sv_annotation) {
 
-            ANN_CSQ_PLI_SVS (
-                ANNOTATE_SVS.out.vcf,
-                ch_variant_consequences_svs
-            )
-            ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
+        // If annotation is on, then merged variants are output from here
+        ANNOTATE_SVS (
+            annotate_svs_in,
+            fasta,
+            ch_svdb_dbs,
+            PREPARE_GENOME.out.vep_resources.map { meta, cache -> cache },
+            params.vep_cache_version,
+            ch_vep_plugin_files.collect()
+        )
+        ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
-            if (!params.skip_rank_variants) {
-                RANK_VARIANTS_SVS (
-                    ANN_CSQ_PLI_SVS.out.vcf,
-                    ch_updated_pedfile_family,
-                    ch_reduced_penetrance,
-                    ch_score_config_svs
-                )
-                ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
-            }
+        ANN_CSQ_PLI_SVS (
+            ANNOTATE_SVS.out.vcf,
+            ch_variant_consequences_svs
+        )
+        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
+    }
 
-        }
+    //
+    // Rank SVs
+    //
+    if (!params.skip_mapping_wf && !params.skip_sv_annotation && !params.skip_rank_variants) {
+
+        // Create PED with updated sex - per family
+        SOMALIER_PED_FAMILY (
+            bam
+                .map { meta, files -> [ [ id: meta.family_id ], meta ] }
+                .groupTuple()
+        )
+        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
+
+        RANK_VARIANTS_SVS (
+            ANN_CSQ_PLI_SVS.out.vcf,
+            SOMALIER_PED_FAMILY.out.ped,
+            ch_reduced_penetrance,
+            ch_score_config_svs
+        )
+        ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
+    }
+
+    //
+    // Phase SNVs and INDELs
+    //
+    if(!params.skip_mapping_wf && !params.skip_phasing_wf) {
+
+        PHASING (
+            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+            SHORT_VARIANT_CALLING.out.snp_calls_tbi,
+            bam_bai,
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(PHASING.out.versions)
+
+        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
+
+    }
+
+    //
+    // Create methylation pileups with modkit
+    //
+    if(!params.skip_mapping_wf && !params.skip_methylation_wf) {
+        METHYLATION (
+            !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
+            fasta,
+            fai,
+            ch_input_bed,
+        )
+        ch_versions = ch_versions.mix(METHYLATION.out.versions)
+    }
+
+    //
+    // Call repeat expansions with TRGT
+    //
+    if(!params.skip_mapping_wf && !params.skip_phasing_wf && !params.skip_repeat_calling) {
+
+        CALL_REPEAT_EXPANSIONS ( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed )
+        ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
+    }
+
+    //
+    // Annotate repeat expansions with stranger
+    //
+    if(!params.skip_mapping_wf && !params.skip_phasing_wf && !params.skip_repeat_calling && !params.skip_repeat_annotation) {
+
+        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.family_vcf )
+        ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
     }
 
     //

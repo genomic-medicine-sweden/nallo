@@ -5,6 +5,7 @@ workflow CONVERT_INPUT_FILES {
 
     take:
     ch_sample     // channel: [ val(meta), reads ]
+    convert_bam   // bool
     convert_fastq // bool
 
     main:
@@ -20,19 +21,20 @@ workflow CONVERT_INPUT_FILES {
     ch_bam   = ch_filetypes.bam
     ch_fastq = ch_filetypes.fastq
 
-    if(convert_fastq) {
+    if(convert_bam) {
         SAMTOOLS_FASTQ ( ch_filetypes.bam, false )
         ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions)
 
         // Mix converted files back in
         ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
     }
+    if(convert_fastq) {
+        SAMTOOLS_IMPORT ( ch_filetypes.fastq )
+        ch_versions = ch_versions.mix(SAMTOOLS_IMPORT.out.versions)
 
-    SAMTOOLS_IMPORT ( ch_filetypes.fastq )
-    ch_versions = ch_versions.mix(SAMTOOLS_IMPORT.out.versions)
-
-    // Mix converted files back in
-    ch_bam   = ch_bam.mix(SAMTOOLS_IMPORT.out.bam)
+        // Mix converted files back in
+        ch_bam   = ch_bam.mix(SAMTOOLS_IMPORT.out.bam)
+    }
 
     emit:
     bam      = ch_bam      // channel: [ val(meta), bam ]
