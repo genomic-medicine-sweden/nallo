@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added support for running methylation subworkflow without phasing
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added nf-test to methylation
 - [#491](https://github.com/genomic-medicine-sweden/nallo/pull/491) - Added a changelog reminder action
+- [#496](https://github.com/genomic-medicine-sweden/nallo/pull/496) - Added a subworkflow to filter variants
 
 ### `Changed`
 
@@ -123,6 +124,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--validationSkipDuplicateCheck` |                                   |
 | `--validationS3PathCheck`        |                                   |
 | `--monochromeLogs`               | `--monochrome_logs`               |
+|                                  | `--filter_variants_hgnc_ids`      |
+|                                  | `--filter_snvs_expression`        |
+|                                  | `--filter_svs_expression`         |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
