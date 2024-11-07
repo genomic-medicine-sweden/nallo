@@ -37,7 +37,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project', sex: 1 ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -57,7 +57,7 @@ nextflow_workflow {
                 { assert workflow.out.sample_bai.get(0).get(1).endsWith(".bai") },
                 { assert snapshot(
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.project_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     bam(workflow.out.sample_bam.get(0).get(1), stringency: 'silent').getReadsMD5(),
                     workflow.out.versions,
                 ).match() }
@@ -74,7 +74,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id:'test', single_end:false, project: 'project', sex: 1 ], // meta map
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
