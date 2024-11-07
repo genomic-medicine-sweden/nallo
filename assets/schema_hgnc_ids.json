@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_hgnc_ids.json",
-    "title": "genomic-medicine-sweden/nallo pipeline - params.hgnc_ids schema",
-    "description": "Schema for the file provided with params.hgnc_ids",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.filter_variants_hgnc_ids schema",
+    "description": "Schema for the file provided with params.filter_variants_hgnc_ids",
     "type": "array",
     "items": {
         "type": "object",
