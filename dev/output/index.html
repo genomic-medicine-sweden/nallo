@@ -1173,7 +1173,11 @@
 </tbody>
 </table>
 <h3 id="repeats">Repeats</h3>
-<p><a href="https://github.com/PacificBiosciences/trgt">TRGT</a> is used to call repeats:</p>
+<p><a href="https://github.com/PacificBiosciences/trgt">TRGT</a> is used to call repeats.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Merged variants per family are only output without annotation if <code>--skip_repeat_annotation</code> is true. Variants per sample are always output without annotation.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -1183,32 +1187,32 @@
 </thead>
 <tbody>
 <tr>
-<td><code>repeat_calling/trgt/multi_sample/{project}/*.vcf.gz</code></td>
-<td>Merged VCF file for all samples</td>
+<td><code>repeats/{family}/{family}_repeat_expansions.vcf.gz</code></td>
+<td>Merged VCF file per family</td>
 </tr>
 <tr>
-<td><code>repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi</code></td>
+<td><code>repeats/{family}/{family}_repeat_expansions.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
-<td><code>repeat_calling/trgt/single_sample/{sample}/*.vcf.gz</code></td>
+<td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz</code></td>
 <td>VCF file with called repeats for a sample</td>
 </tr>
 <tr>
-<td><code>repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi</code></td>
+<td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
-<td><code>repeat_calling/trgt/single_sample/{sample}/*.bam</code></td>
+<td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bam</code></td>
 <td>BAM file with sorted spanning reads</td>
 </tr>
 <tr>
-<td><code>repeat_calling/trgt/single_sample/{sample}/*.bai</code></td>
+<td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bai</code></td>
 <td>Index of the BAM file</td>
 </tr>
 </tbody>
 </table>
-<p><a href="https://github.com/Clinical-Genomics/stranger">Stranger</a> is used to annotate them:</p>
+<p><a href="https://github.com/Clinical-Genomics/stranger">Stranger</a> is used to annotate repeats.</p>
 <table>
 <thead>
 <tr>
@@ -1218,12 +1222,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>repeat_annotation/stranger/{sample}/*.vcf.gz</code></td>
-<td>Annotated VCF file</td>
+<td><code>repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz</code></td>
+<td>Merged, annotated VCF file per family</td>
 </tr>
 <tr>
-<td><code>repeat_annotation/stranger/{sample}/*.vcf.gz.tbi</code></td>
-<td>Index of the annotated VCF file</td>
+<td><code>repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi</code></td>
+<td>Index of the VCF file</td>
 </tr>
 </tbody>
 </table>
