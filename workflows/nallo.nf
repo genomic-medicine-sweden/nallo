@@ -218,7 +218,7 @@ workflow NALLO {
     //
     // Run read QC with FastQC, mosdepth and cramino
     //
-    if (!params.skip_mapping_wf && !params.skip_qc) {
+    if (!params.skip_qc) {
 
         QC_ALIGNED_READS (
             bam_bai,
@@ -236,7 +236,7 @@ workflow NALLO {
     //
     // Call paralogous genes with paraphase
     //
-    if(!params.skip_mapping_wf && !params.skip_call_paralogs) {
+    if(!params.skip_call_paralogs) {
         CALL_PARALOGS (
             bam_bai,
             fasta
@@ -247,7 +247,7 @@ workflow NALLO {
     //
     // Hifiasm assembly and assembly variant calling
     //
-    if(!params.skip_mapping_wf && !params.skip_assembly_wf) {
+    if(!params.skip_assembly_wf) {
 
         //Hifiasm assembly
         ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
@@ -277,7 +277,7 @@ workflow NALLO {
     //
     // Call SNVs
     //
-    if(!params.skip_mapping_wf && !params.skip_short_variant_calling) {
+    if(!params.skip_short_variant_calling) {
 
         // Make BED intervals, to be used for parallel SNV calling
         SCATTER_GENOME (
@@ -311,7 +311,7 @@ workflow NALLO {
     //
     // Annotate SNVs
     //
-    if(!params.skip_mapping_wf && !params.skip_short_variant_calling && !params.skip_snv_annotation) {
+    if(!params.skip_snv_annotation) {
 
         // Annotates one multisample VCF per variant call region
         SNV_ANNOTATION(
@@ -345,7 +345,7 @@ workflow NALLO {
     // Ranks one multisample VCF per variant call region
     // Can only run if samplesheet has affected samples
     //
-    if(!params.skip_mapping_wf && !params.skip_short_variant_calling && !params.skip_snv_annotation && !params.skip_rank_variants) {
+    if(!params.skip_rank_variants) {
 
         // Create PED with updated sex per project (should perhaps be per SNV-calling region)
         SOMALIER_PED (
@@ -382,7 +382,7 @@ workflow NALLO {
     //
     // Concatenate, sort, split, make database and get statistics of SNVs (should be a subworkflow)
     //
-    if(!params.skip_mapping_wf && !params.skip_short_variant_calling) {
+    if(!params.skip_short_variant_calling) {
 
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.project ], vcf, tbi ] }
@@ -438,7 +438,7 @@ workflow NALLO {
     //
     // Call CNVs with HiFiCNV
     //
-    if(!params.skip_mapping_wf && !params.skip_cnv_calling) {
+    if(!params.skip_cnv_calling) {
 
         CALL_CNVS (
             bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
@@ -454,7 +454,7 @@ workflow NALLO {
     //
     // Merge SVs and CNVs if we've called both SVs and CNVs
     //
-    if (!params.skip_mapping_wf && !params.skip_cnv_calling) {
+    if (!params.skip_cnv_calling) {
 
         CALL_SVS.out.family_vcf
             .join(CALL_CNVS.out.family_vcf)
@@ -476,7 +476,7 @@ workflow NALLO {
     //
     // Index the merged SVs and SVs if not skipping sv annotation (should be a merge and index subworkflow)
     //
-    if (!params.skip_mapping_wf && !params.skip_cnv_calling && !params.skip_sv_annotation) {
+    if (!params.skip_sv_annotation) {
 
         TABIX_SVDB_MERGE_SVS_CNVS ( SVDB_MERGE_SVS_CNVS.out.vcf )
         ch_versions = ch_versions.mix(TABIX_SVDB_MERGE_SVS_CNVS.out.versions)
@@ -485,7 +485,7 @@ workflow NALLO {
     //
     // Annotate SVs
     //
-    if (!params.skip_mapping_wf && !params.skip_sv_annotation) {
+    if (!params.skip_sv_annotation) {
 
         // If annotation is on, then merged variants are output from here
         ANNOTATE_SVS (
@@ -508,7 +508,7 @@ workflow NALLO {
     //
     // Rank SVs
     //
-    if (!params.skip_mapping_wf && !params.skip_sv_annotation && !params.skip_rank_variants) {
+    if (!params.skip_rank_variants) {
 
         // Create PED with updated sex - per family
         SOMALIER_PED_FAMILY (
@@ -548,7 +548,7 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit
     //
-    if(!params.skip_mapping_wf && !params.skip_methylation_wf) {
+    if(!params.skip_methylation_wf) {
         METHYLATION (
             !params.skip_phasing_wf ? PHASING.out.haplotagged_bam_bai : bam_bai,
             fasta,
@@ -561,7 +561,7 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    if(!params.skip_mapping_wf && !params.skip_phasing_wf && !params.skip_repeat_calling) {
+    if(!params.skip_repeat_calling) {
 
         CALL_REPEAT_EXPANSIONS ( PHASING.out.haplotagged_bam_bai, fasta, fai, ch_trgt_bed )
         ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
@@ -570,7 +570,7 @@ workflow NALLO {
     //
     // Annotate repeat expansions with stranger
     //
-    if(!params.skip_mapping_wf && !params.skip_phasing_wf && !params.skip_repeat_calling && !params.skip_repeat_annotation) {
+    if(!params.skip_repeat_annotation) {
 
         ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.family_vcf )
         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
