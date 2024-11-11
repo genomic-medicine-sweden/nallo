@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            116,
+            117,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -686,6 +686,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-07T12:46:21.477060114"
+        "timestamp": "2024-11-11T14:07:42.435942084"
     }
 }
