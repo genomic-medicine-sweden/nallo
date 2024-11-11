@@ -1,5 +1,4 @@
 include { ENSEMBLVEP_FILTERVEP          } from '../../../modules/nf-core/ensemblvep/filtervep/main'
-include { GAWK as CREATE_FILTERVEP_LIST } from '../../../modules/nf-core/gawk/main'
 include { BCFTOOLS_VIEW                 } from '../../../modules/nf-core/bcftools/view/main'
 
 workflow FILTER_VARIANTS {
