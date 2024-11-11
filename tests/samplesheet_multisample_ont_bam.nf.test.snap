@@ -81,6 +81,9 @@
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0
                 },
+                "ENSEMBLVEP_SV": {
+                    "ensemblvep": 110.0
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -164,13 +167,22 @@
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
+                "SVDB_QUERY": {
+                    "svdb": "2.8.2"
+                },
                 "TABIX_BGZIPTABIX": {
                     "tabix": 1.2
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.2
                 },
+                "TABIX_ENSEMBLVEP_SV": {
+                    "tabix": 1.2
+                },
                 "TABIX_SVDB_MERGE": {
+                    "tabix": 1.2
+                },
+                "TABIX_SVDB_MERGE_SVS_CNVS": {
                     "tabix": 1.2
                 },
                 "TABIX_TABIX": {
@@ -635,7 +647,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
