@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            155,
+            156,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -85,6 +85,9 @@
                     "echtvar": "0.2.0"
                 },
                 "ENSEMBLVEP_SNV": {
+                    "ensemblvep": 110.0
+                },
+                "ENSEMBLVEP_SV": {
                     "ensemblvep": 110.0
                 },
                 "FASTQC": {
@@ -203,13 +206,22 @@
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
+                "SVDB_QUERY": {
+                    "svdb": "2.8.2"
+                },
                 "TABIX_BGZIPTABIX": {
                     "tabix": 1.2
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.2
                 },
+                "TABIX_ENSEMBLVEP_SV": {
+                    "tabix": 1.2
+                },
                 "TABIX_SVDB_MERGE": {
+                    "tabix": 1.2
+                },
+                "TABIX_SVDB_MERGE_SVS_CNVS": {
                     "tabix": 1.2
                 },
                 "TABIX_TABIX": {
@@ -855,6 +867,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-06T11:01:42.969612471"
+        "timestamp": "2024-11-07T12:48:14.873817687"
     }
 }
