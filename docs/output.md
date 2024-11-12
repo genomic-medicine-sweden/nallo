@@ -1,5 +1,7 @@
 # genomic-medicine-sweden/nallo: Output
 
+In general, annotated variant calls are output per family in while unannotated calls are output per sample.
+
 ## Aligned reads
 
 [Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, (merged) and indexed using [samtools](https://github.com/samtools/samtools).
@@ -121,17 +123,12 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [somalier](https://github.com/brentp/somalier) checks relatedness and sex.
 
-| Path                                                  | Description                                             |
-| ----------------------------------------------------- | ------------------------------------------------------- |
-| `pedigree/{project}/{project}.ped`                    | PED file updated with somalier-inferred sex per project |
-| `pedigree/{family}/{family).ped`                      | PED file updated with somalier-inferred sex per family  |
-| `qc/somalier/relate/{project}/{project}.html`         | HTML report                                             |
-| `qc/somalier/relate/{project}/{project}.pairs.tsv`    | Information about sample pairs                          |
-| `/qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples                    |
-
-| Path                      | Description                                 |
-| ------------------------- | ------------------------------------------- |
-| `predigree/{project}.ped` | PED file updated with somalier-inferred sex |
+| Path                                                 | Description                                            |
+| ---------------------------------------------------- | ------------------------------------------------------ |
+| `pedigree/family/{family).ped`                       | PED file updated with somalier-inferred sex per family |
+| `qc/somalier/relate/{project}/{project}.html`        | HTML report                                            |
+| `qc/somalier/relate/{project}/{project}.pairs.tsv`   | Information about sample pairs                         |
+| `qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples                   |
 
 ### DeepVariant
 
@@ -147,13 +144,13 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
 
-| Path                                                        | Description                             |
-| ----------------------------------------------------------- | --------------------------------------- |
-| `paraphase/{sample}/*.bam`                                  | BAM file with haplotypes grouped by HP  |
-| `paraphase/{sample}/*.bai`                                  | Index of the BAM file                   |
-| `paraphase/{sample}/*.json`                                 | Summary of haplotypes and variant calls |
-| `paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                       |
-| `paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                   |
+| Path                                                                 | Description                             |
+| -------------------------------------------------------------------- | --------------------------------------- |
+| `paraphase/{sample}/*.bam`                                           | BAM file with haplotypes grouped by HP  |
+| `paraphase/{sample}/*.bai`                                           | Index of the BAM file                   |
+| `paraphase/{sample}/*.json`                                          | Summary of haplotypes and variant calls |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                       |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                   |
 
 ### Repeats
 
@@ -163,21 +160,21 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
     Merged variants per family are only output without annotation if `--skip_repeat_annotation` is true. Variants per sample are always output without annotation.
 
-| Path                                                     | Description                               |
-| -------------------------------------------------------- | ----------------------------------------- |
-| `repeats/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                |
-| `repeats/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`         | VCF file with called repeats for a sample |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`     | Index of the VCF file                     |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`   | BAM file with sorted spanning reads       |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`   | Index of the BAM file                     |
+| Path                                                            | Description                               |
+| --------------------------------------------------------------- | ----------------------------------------- |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     |
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
-| Path                                                                         | Description                           |
-| ---------------------------------------------------------------------------- | ------------------------------------- |
-| `repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |
-| `repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |
+| Path                                                                                | Description                           |
+| ----------------------------------------------------------------------------------- | ------------------------------------- |
+| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |
+| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |
 
 ### SNVs
 
@@ -189,11 +186,11 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 | Path                                                                  | Description                                                                 |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz`                     | VCF file containing called variants with alternative genotypes for a sample |
-| `snvs/single_sample/{sample}/{sample}_snv.vcf.gz.tbi`                 | Index of the corresponding VCF file                                         |
-| `snvs/multi_sample/{project}/{project}_snv.vcf.gz`                    | VCF file containing called variants for all samples                         |
-| `snvs/multi_sample/{project}/{project}_snv.vcf.gz.tbi`                | Index of the corresponding VCF file                                         |
-| `snvs/stats/single_sample/*.stats.txt`                                | Variant statistics                                                          |
+| `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample |
+| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         |
+| `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         |
+| `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         |
+| `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          |
 | `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 |
 
 [echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
@@ -202,22 +199,21 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
     Variants are only output without ranking if that subworkflows are turned off.
 
-| Path                                                             | Description                                                                    |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `databases/echtvar/encode/{project}/*.zip`                       | Database with allele frequency (AF) and allele count (AC) for all samples      |
-| `snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz`      | VCF file containing annotated variants with alternative genotypes for a sample |
-| `snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi`  | Index of the annotated VCF file                                                |
-| `snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz`     | VCF file containing annotated variants for all samples                         |
-| `snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |
+| Path                                                     | Description                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |
+| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |
+| `snvs/family/{family}/{family}_snv_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |
+| `snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
-| Path                                                                    | Description                                                 |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`      | VCF file with annotated and ranked variants for a sample    |
-| `snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi`  | Index of the ranked VCF file                                |
-| `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for all samples |
-| `snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                                |
+| Path                                                            | Description                                              |
+| --------------------------------------------------------------- | -------------------------------------------------------- |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |
+| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |
+| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |
 
 ### SVs (and CNVs)
 
@@ -242,10 +238,10 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                                       |
 | `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family (output if CNV-calling is off) |
 | `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                                       |
-| `svs/single_sample/{sample}/{sample}_cnvs.vcf.gz`               | VCF file with CNVs per sample                                      |
-| `svs/single_sample/{sample}/{sample}_cnvs.vcf.gz.tbi`           | VCF file with CNVs per sample                                      |
-| `svs/single_sample/{sample}/{sample}_svs.vcf.gz`                | VCF file with SVs per sample                                       |
-| `svs/single_sample/{sample}/{sample}_svs.vcf.gz.tbi`            | VCF file with SVs per sample                                       |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                                      |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                                      |
+| `svs/sample/{sample}/{sample}_svs.vcf.gz`                       | VCF file with SVs per sample                                       |
+| `svs/sample/{sample}/{sample}_svs.vcf.gz.tbi`                   | VCF file with SVs per sample                                       |
 
 [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
 
@@ -269,8 +265,8 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
 
-| Path                                                | Description                               |
-| --------------------------------------------------- | ----------------------------------------- |
-|  `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
-| `visualization_tracks/{sample}/*.depth.bw`          | Depth track in BigWig format              |
-| `visualization_tracks/{sample}/*.maf.bw`            | Minor allele frequencies in BigWig format |
+| Path                                               | Description                               |
+| -------------------------------------------------- | ----------------------------------------- |
+| `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
+| `visualization_tracks/{sample}/*.depth.bw`         | Depth track in BigWig format              |
+| `visualization_tracks/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
