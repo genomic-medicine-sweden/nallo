@@ -51,7 +51,7 @@ Define where the pipeline should find input data and save output data.
 | `score_config_snv` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c846956d5414ac0eb32846f561f733a4efe9048a/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ba720cd29322036d966ab3e4bc4c3d03e1731af5/ |  | True |
 
 ## Reference genome options
 

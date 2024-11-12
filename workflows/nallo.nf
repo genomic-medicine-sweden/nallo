@@ -103,7 +103,7 @@ workflow NALLO {
     ch_databases                = createReferenceChannelFromSamplesheet(params.snp_db, 'assets/schema_snp_db.json')
     ch_vep_plugin_files         = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
     ch_hgnc_ids                 = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json')
-        .map { integer -> 'HGNC:' + integer[0].toString() } // Converts [ 256 ] to a string HGNC:256
+        .map { it[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
 
