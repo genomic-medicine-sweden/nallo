@@ -142,7 +142,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--reduced_penetrance`           | `--genmod_reduced_penetrance`     |
 | `--score_config_snv`             | `--genmod_score_config_snvs`      |
 | `--score_config_sv`              | `--genmod_score_config_svs`       |
-| `--alignment_processes`          | `--alignment_processes`           |
+| `--parallel_alignments`          | `--alignment_processes`           |
 | `--svdb_dbs`                     | `--svdb_sv_databases`             |
 
 > [!NOTE]
@@ -247,7 +247,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#317](https://github.com/genomic-medicine-sweden/nallo/pull/317) - Changed so that `--reduced_penetrance` and `--score_config_snv` is required by rank variants and not SNV annotation
 - [#318](https://github.com/genomic-medicine-sweden/nallo/pull/318) - Updated docs and schema to clarify pipeline usage
 - [#321](https://github.com/genomic-medicine-sweden/nallo/pull/321) - Changed the input to BUILD_INTERVALS to have `meta.id` when building intervals from reference
-- [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `alignment_processes` in CI tests as well
+- [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `parallel_alignments` in CI tests as well
 - [#330](https://github.com/genomic-medicine-sweden/nallo/pull/330) - Updated README and version bump
 - [#332](https://github.com/genomic-medicine-sweden/nallo/pull/332) - Changed the PED file input to genmod to include inferred sex from somalier
 - [#333](https://github.com/genomic-medicine-sweden/nallo/pull/333) - Updated TRGT to 0.7.0 and added `meta.id` as output sample name
@@ -282,7 +282,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                    | `--skip_aligned_read_qc`   |
 |                    | `--cadd_resources`         |
 |                    | `--cadd_prescored`         |
-| `--split_fastq`    | `--alignment_processes`    |
+| `--split_fastq`    | `--parallel_alignments`    |
 | `--extra_gvcfs`    |                            |
 | `--extra_snfs`     |                            |
 | `--dipcall_par`    | `--par_regions`            |
