@@ -157,23 +157,27 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 ### Repeats
 
-[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats:
+[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
 
-| Path                                                      | Description                               |
-| --------------------------------------------------------- | ----------------------------------------- |
-| `repeat_calling/trgt/multi_sample/{project}/*.vcf.gz`     | Merged VCF file for all samples           |
-| `repeat_calling/trgt/multi_sample/{project}/*.vcf.gz.tbi` | Index of the VCF file                     |
-| `repeat_calling/trgt/single_sample/{sample}/*.vcf.gz`     | VCF file with called repeats for a sample |
-| `repeat_calling/trgt/single_sample/{sample}/*.vcf.gz.tbi` | Index of the VCF file                     |
-| `repeat_calling/trgt/single_sample/{sample}/*.bam`        | BAM file with sorted spanning reads       |
-| `repeat_calling/trgt/single_sample/{sample}/*.bai`        | Index of the BAM file                     |
+!!!note
 
-[Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate them:
+    Merged variants per family are only output without annotation if `--skip_repeat_annotation` is true. Variants per sample are always output without annotation.
 
-| Path                                               | Description                     |
-| -------------------------------------------------- | ------------------------------- |
-| `repeat_annotation/stranger/{sample}/*.vcf.gz`     | Annotated VCF file              |
-| `repeat_annotation/stranger/{sample}/*.vcf.gz.tbi` | Index of the annotated VCF file |
+| Path                                                     | Description                               |
+| -------------------------------------------------------- | ----------------------------------------- |
+| `repeats/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                |
+| `repeats/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`         | VCF file with called repeats for a sample |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`     | Index of the VCF file                     |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`   | BAM file with sorted spanning reads       |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`   | Index of the BAM file                     |
+
+[Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
+
+| Path                                                                         | Description                           |
+| ---------------------------------------------------------------------------- | ------------------------------------- |
+| `repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |
+| `repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |
 
 ### SNVs
 

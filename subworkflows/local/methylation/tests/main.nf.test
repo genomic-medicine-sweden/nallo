@@ -14,8 +14,8 @@ nextflow_workflow {
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = true
-                input[2] = Channel.empty()
+                input[1] = Channel.empty()
+                input[2] = true
                 input[3] = false
                 """
             }

@@ -59,7 +59,7 @@ def workflowDependencies = [
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
-    rank_variants    : ["mapping", "snv_calling", "snv_annotation"],
+    rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
     repeat_calling   : ["mapping", "snv_calling", "phasing"],
     repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
     methylation      : ["mapping", "snv_calling"]
@@ -165,6 +165,7 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
+    validatePacBioLicense()
 
     //
     // Create channel from input file provided through params.input
@@ -322,7 +323,6 @@ def toolCitationText() {
 
     def citation_text = [
         "MultiQC (Ewels et al. 2016)",
-        "SAMtools (Danecek et al. 2021)",
     ]
     if (!params.skip_alignment) {
         if (params.alignment_processes > 1) {
@@ -653,3 +653,8 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? Channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
+def validatePacBioLicense() {
+    if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') {
+        error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+    }
+}

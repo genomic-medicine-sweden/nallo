@@ -14,11 +14,11 @@ nextflow_workflow {
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = true
-                input[2] = [
+                input[1] = [
                     [ id: 'vep_cache' ],
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
                 ]
+                input[2] = true
                 input[3] = true
                 """
             }

@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#450](https://github.com/genomic-medicine-sweden/nallo/pull/450) - Added ranking of SVs (and CNVs)
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added support for running methylation subworkflow without phasing
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added nf-test to methylation
+- [#491](https://github.com/genomic-medicine-sweden/nallo/pull/491) - Added a changelog reminder action
 
 ### `Changed`
 
@@ -82,7 +83,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#479](https://github.com/genomic-medicine-sweden/nallo/pull/479) - Replaced bgzip tabix with bcftools sort in rank variants to fix [#457](https://github.com/genomic-medicine-sweden/nallo/issues/457)
 - [#480](https://github.com/genomic-medicine-sweden/nallo/pull/480) - Updated ranking of SVs to work with multiple families per project
 - [#484](https://github.com/genomic-medicine-sweden/nallo/pull/484) - Updated metro map and added SVG version
+- [#485](https://github.com/genomic-medicine-sweden/nallo/pull/485) - Updated repeat expansion annotation to annotate per family instead of per sample
+- [#486](https://github.com/genomic-medicine-sweden/nallo/pull/486) - Updated nf-core modules
 - [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
+- [#489](https://github.com/genomic-medicine-sweden/nallo/pull/489) - Updated nf-core template to 3.0.2
+- [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Refactored `nallo.nf` to remove many nested ifs and easier to follow logic
+- [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Updated rank_variants dependencies with sv_annotation
 
 ### `Removed`
 
@@ -146,16 +152,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool       | Old version | New version |
-| ---------- | ----------- | ----------- |
-| fqcrs      | 0.1.0       |
-| severus    |             | 1.1         |
-| longphase  |             | 1.7.3       |
-| genmod     | 3.8.2       | 3.9         |
-| WhatsHap   | 2.2         | 2.3         |
-| SVDB       |             | 2.8.1       |
-| hifiasm    | 0.19.8      | 0.20.0      |
-| HiFiCNV    | 0.1.7       | 1.0.0       |
+| Tool           | Old version | New version |
+| -------------- | ----------- | ----------- |
+| fqcrs          | 0.1.0       |
+| severus        |             | 1.1         |
+| longphase      |             | 1.7.3       |
+| genmod         | 3.8.2       | 3.9         |
+| WhatsHap       | 2.2         | 2.3         |
+| SVDB           |             | 2.8.1       |
+| hifiasm        | 0.19.8      | 0.20.0      |
+| HiFiCNV        | 0.1.7       | 1.0.0       |
+| samtools/faidx | 1.2         | 1.21        |
+| samtools/index | 1.2         | 1.21        |
+| samtools/merge | 1.2         | 1.21        |
+| stranger       | 0.9.1       | 0.9.2       |
+| multiqc        | 1.21        | 1.25.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
