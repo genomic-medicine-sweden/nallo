@@ -12,7 +12,7 @@ Allows skipping certain parts of the pipeline
 | `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
-| `skip_methylation_analysis` | Skip generation of methylation pileups | `boolean` | False |  |  |
+| `skip_methylation_pileups` | Skip generation of methylation pileups | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
@@ -40,10 +40,10 @@ Define where the pipeline should find input data and save output data.
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
 | `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
-| `variant_consequences_snv` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
+| `variant_consequences_snvs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `variant_consequences_svs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
-| `bed` | A BED file with regions of interest, used to limit short variant calling. | `string` |  |  |  |
+| `target_regions` | A BED file with regions of interest, used to limit variant calling. | `string` |  |  |  |
 | `hificnv_expected_xy_cn` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
 | `hificnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
 | `hificnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |

@@ -43,7 +43,7 @@ def workflowSkips = [
     rank_variants    : "skip_rank_variants",
     repeat_calling   : "skip_repeat_calling",
     repeat_annotation: "skip_repeat_annotation",
-    methylation      : "skip_methylation_analysis",
+    methylation      : "skip_methylation_pileups",
     qc               : "skip_qc",
 ]
 
@@ -72,7 +72,7 @@ def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
-    snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snv"],
+    snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
     sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
     cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
     rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
@@ -84,7 +84,7 @@ def parameterStatus = [
     workflow: [
         skip_snv_calling         : params.skip_snv_calling,
         skip_phasing             : params.skip_phasing,
-        skip_methylation_analysis: params.skip_methylation_analysis,
+        skip_methylation_pileups: params.skip_methylation_pileups,
         skip_rank_variants       : params.skip_rank_variants,
         skip_repeat_calling      : params.skip_repeat_calling,
         skip_repeat_annotation   : params.skip_repeat_annotation,
@@ -111,7 +111,7 @@ def parameterStatus = [
         genmod_reduced_penetrance: params.genmod_reduced_penetrance,
         genmod_score_config_snvs : params.genmod_score_config_snvs,
         genmod_score_config_svs  : params.genmod_score_config_svs,
-        variant_consequences_snv : params.variant_consequences_snv,
+        variant_consequences_snvs : params.variant_consequences_snvs,
         variant_consequences_svs : params.variant_consequences_svs,
     ]
 ]
@@ -418,7 +418,7 @@ def toolCitationText() {
                     "LongPhase (Lin et al. 2024)",
                 ]
             }
-            if (!params.skip_methylation_analysis) {
+            if (!params.skip_methylation_pileups) {
                 citation_text = citation_text + [
                     "modkit",
                     "Tabix (Li 2011)",

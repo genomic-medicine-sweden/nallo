@@ -89,7 +89,7 @@ This pipeline comes with three different presets that should be set with the `--
     The selected preset will turn off subworkflows:
 
     - `--skip_genome_assembly` and `--skip_repeat_wf` will be set to `true` for `ONT_R10`
-    - `--skip_methylation_analysis` will be set to `true` for `pacbio`
+    - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
 ## Subworkflows
 
@@ -117,7 +117,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_analysis
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -202,7 +202,7 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on mapping and short variant calling subworkflows, but requires no additional files.
 
-Turned off with `--skip_methylation_analysis`.
+Turned off with `--skip_methylation_pileups`.
 
 ### Repeat calling
 
@@ -228,14 +228,14 @@ Turned off with `--skip_repeat_annotation`.
 
 This subworkflow relies on the mapping and short variant calling, and requires the following additional files:
 
-<!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snv should link to real examples -->
+<!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
 | Parameter                            | Description                                                                                                                                                                                                                                                                                                                                                                   |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
 | `vep_plugin_files` <sup>1</sup>      | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
 | `echtvar_snv_databases` <sup>2</sup> |  A csv file with annotation databases from ([`echtvar encode`](https://github.com/brentp/echtvar))                                                                                                                                                                                                                                                                            |
-| `variant_consequences_snv`           | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
+| `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
 
@@ -311,7 +311,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 ## Other highlighted parameters
 
-- Limit SNV calling to regions in BED file (`--bed`).
+- Limit SNV calling to regions in BED file (`--target_bed`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 

@@ -35,7 +35,7 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_analysis": {
+                "skip_methylation_pileups": {
                     "type": "boolean",
                     "description": "Skip generation of methylation pileups",
                     "fa_icon": "fas fa-fast-forward",
@@ -184,7 +184,7 @@
                     "format": "file-path",
                     "exists": true
                 },
-                "variant_consequences_snv": {
+                "variant_consequences_snvs": {
                     "type": "string",
                     "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
                     "fa_icon": "fas fa-file-csv"
@@ -200,7 +200,7 @@
                     "format": "path",
                     "exists": true
                 },
-                "target_bed": {
+                "target_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
@@ -465,7 +465,7 @@
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
-                    "description": "A csv file with vep_plugin_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
+                    "description": "A csv file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "deepvariant_model_type": {

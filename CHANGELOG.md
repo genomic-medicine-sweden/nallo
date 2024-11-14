@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#411](https://github.com/genomic-medicine-sweden/nallo/pull/411) - Updated longphase module to most recent version. ([#409](https://github.com/genomic-medicine-sweden/nallo/issues/409)).
 - [#416](https://github.com/genomic-medicine-sweden/nallo/pull/416) - Updated WhatsHap to 2.3 and added the `--use-supplementary` flag to use supplementary reads for phasing by default. Changed modules to use biocontainers instead of custom containers. ([#296](https://github.com/genomic-medicine-sweden/nallo/issues/296))
 - [#417](https://github.com/genomic-medicine-sweden/nallo/pull/417) - Updated SNV annotation tests to use correct configuration, and snapshot the md5sum, and summary of the variants
-- [#418](https://github.com/genomic-medicine-sweden/nallo/pull/418) - Changed the default value of `--parallel_alignments` from 1 to 8, meaning the pipeline will perform parallel alignment by default
+- [#418](https://github.com/genomic-medicine-sweden/nallo/pull/418) - Changed the default value of `--alignment_processes` from 1 to 8, meaning the pipeline will perform parallel alignment by default
 - [#422](https://github.com/genomic-medicine-sweden/nallo/pull/422) - Updated nf-core/tools template to v3.0.1
 - [#423](https://github.com/genomic-medicine-sweden/nallo/pull/423) - Updated metro map
 - [#428](https://github.com/genomic-medicine-sweden/nallo/pull/428) - Changed from using bcftools to SVDB for SV merging
@@ -125,25 +125,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--validationSkipDuplicateCheck` |                                   |
 | `--validationS3PathCheck`        |                                   |
 | `--monochromeLogs`               | `--monochrome_logs`               |
-| `skip_short_variant_calling`     | `skip_snv_calling`                |
-| `skip_assembly_wf`               | `skip_genome_assembly`            |
-| `skip_mapping_wf`                | `skip_alignment`                  |
-| `skip_methylation_wf`            | `skip_methylation_analysis`       |
-| `skip_phasing_wf`                | `skip_phasing`                    |
-| `variant_caller`                 | `snv_caller`                      |
-| `parallel_snv`                   | `snv_calling_processes`           |
-| `cadd_prescored`                 | `cadd_prescored_indels`           |
-| `snp_db`                         | `echtvar_snv_databases`           |
-| `variant_catalog`                | `stranger_repeat_catalog`         |
-| `bed`                            | `target_bed`                      |
-| `hificnv_xy`                     | `hificnv_expected_xy_cn`          |
-| `hificnv_xx`                     | `hificnv_expected_xx_cn`          |
-| `hificnv_exclude`                | `hificnv_excluded_regions`        |
-| `reduced_penetrance`             | `genmod_reduced_penetrance`       |
-| `score_config_snv`               | `genmod_score_config_snvs`        |
-| `score_config_sv`                | `genmod_score_config_svs`         |
-| `parallel_alignments`            | `alignment_processes`            |
-| `svdb_dbs`                       | `svdb_sv_databases`               |
+| `--skip_short_variant_calling`   | `--skip_snv_calling`              |
+| `--skip_assembly_wf`             | `--skip_genome_assembly`          |
+| `--skip_mapping_wf`              | `--skip_alignment`                |
+| `--skip_methylation_wf`          | `--skip_methylation_pileups`      |
+| `--skip_phasing_wf`              | `--skip_phasing`                  |
+| `--variant_caller`               | `--snv_caller`                    |
+| `--parallel_snv`                 | `--snv_calling_processes`         |
+| `--cadd_prescored`               | `--cadd_prescored_indels`         |
+| `--snp_db`                       | `--echtvar_snv_databases`         |
+| `--variant_catalog`              | `--stranger_repeat_catalog`       |
+| `--bed`                          | `--target_regions`                |
+| `--hificnv_xy`                   | `--hificnv_expected_xy_cn`        |
+| `--hificnv_xx`                   | `--hificnv_expected_xx_cn`        |
+| `--hificnv_exclude`              | `--hificnv_excluded_regions`      |
+| `--reduced_penetrance`           | `--genmod_reduced_penetrance`     |
+| `--score_config_snv`             | `--genmod_score_config_snvs`      |
+| `--score_config_sv`              | `--genmod_score_config_svs`       |
+| `--alignment_processes`          | `--alignment_processes`           |
+| `--svdb_dbs`                     | `--svdb_sv_databases`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -247,7 +247,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#317](https://github.com/genomic-medicine-sweden/nallo/pull/317) - Changed so that `--reduced_penetrance` and `--score_config_snv` is required by rank variants and not SNV annotation
 - [#318](https://github.com/genomic-medicine-sweden/nallo/pull/318) - Updated docs and schema to clarify pipeline usage
 - [#321](https://github.com/genomic-medicine-sweden/nallo/pull/321) - Changed the input to BUILD_INTERVALS to have `meta.id` when building intervals from reference
-- [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `parallel_alignments` in CI tests as well
+- [#323](https://github.com/genomic-medicine-sweden/nallo/pull/323) - Changed `parallel_alignment` to `alignment_processes` in CI tests as well
 - [#330](https://github.com/genomic-medicine-sweden/nallo/pull/330) - Updated README and version bump
 - [#332](https://github.com/genomic-medicine-sweden/nallo/pull/332) - Changed the PED file input to genmod to include inferred sex from somalier
 - [#333](https://github.com/genomic-medicine-sweden/nallo/pull/333) - Updated TRGT to 0.7.0 and added `meta.id` as output sample name
@@ -282,7 +282,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                    | `--skip_aligned_read_qc`   |
 |                    | `--cadd_resources`         |
 |                    | `--cadd_prescored`         |
-| `--split_fastq`    | `--parallel_alignments`    |
+| `--split_fastq`    | `--alignment_processes`    |
 | `--extra_gvcfs`    |                            |
 | `--extra_snfs`     |                            |
 | `--dipcall_par`    | `--par_regions`            |
