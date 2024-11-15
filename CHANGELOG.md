@@ -92,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#498](https://github.com/genomic-medicine-sweden/nallo/pull/498) - Updated CI to fix CI failures after merge
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed to annotating and ranking SNVs per family instead of per project
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed output documentation and structure to match `sample` and `family` for all variants
+- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed the way of validating the samplesheet to remove outputing false errors with `ifEmpty`
 
 ### `Removed`
 
@@ -101,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Removed support for co-phasing SVs with HiPhase, as the officially supported caller (pbsv) is not in the pipeline
 - [#412](https://github.com/genomic-medicine-sweden/nallo/pull/412) - Removed `bcftools/index`, as indexing is handled by other modules and no references remained. ([#377](https://github.com/genomic-medicine-sweden/nallo/issues/377))
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Removed support for automatically creating an echvar database with SNVs and INDELs
+- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Removed `containts_affected` logic from the snv-calling workflow, since this was previously changed to be checked before pipeline start
 
 ### `Fixed`
 
