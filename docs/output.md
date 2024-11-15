@@ -1,6 +1,6 @@
 # genomic-medicine-sweden/nallo: Output
 
-In general, annotated variant calls are output per family in while unannotated calls are output per sample.
+In general, annotated variant calls are output per family, while unannotated calls are output per sample.
 
 ## Aligned reads
 
