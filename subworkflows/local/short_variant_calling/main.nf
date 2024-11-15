@@ -66,7 +66,7 @@ workflow SHORT_VARIANT_CALLING {
         .map { meta, gvcf ->
             [ [ id:meta.region.name, family_id:meta.family_id ], gvcf ]
         }
-        .groupTuple() // Group files from the same family together per region
+        .groupTuple() // Groups files from the same family together per region
         .set{ glnexus_in }
 
     GLNEXUS( glnexus_in, ch_bed )
