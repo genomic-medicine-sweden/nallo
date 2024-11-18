@@ -49,7 +49,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugins") {
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files") {
 
         when {
             workflow {
@@ -57,7 +57,7 @@ nextflow_workflow {
                 input[0] = SEVERUS.out.all_vcf
                 input[1] = GUNZIP.out.gunzip
                 input[2] = Channel.of([
-                    [ id: 'svdb_dbs' ],
+                    [ id: 'svdb_sv_databases' ],
                     file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
@@ -82,7 +82,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugins -stub") {
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub") {
 
         options "-stub"
 
@@ -92,7 +92,7 @@ nextflow_workflow {
                 input[0] = SEVERUS.out.all_vcf
                 input[1] = GUNZIP.out.gunzip
                 input[2] = Channel.of([
-                    [ id: 'svdb_dbs' ],
+                    [ id: 'svdb_sv_databases' ],
                     file(params.pipelines_testdata_base_path + 'testdata/svdb_dbs.csv', checkIfExists: true)
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }

@@ -113,11 +113,11 @@ nextflow_workflow {
                 input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
-                    [ id: 'reduced_penetrance' ],
+                    [ id: 'genmod_reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = Channel.of([
-                    [ id: 'score_config_snv' ],
+                    [ id: 'genmod_score_config_snvs' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])
                 """
@@ -145,11 +145,11 @@ nextflow_workflow {
                 input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = Channel.of([
-                    [ id: 'reduced_penetrance' ],
+                    [ id: 'genmod_reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = Channel.of([
-                    [ id: 'score_config_snv' ],
+                    [ id: 'genmod_score_config_snvs' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])
                 """

@@ -32,18 +32,18 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 // Define subworkflows and their associated "--skip"
 //
 def workflowSkips = [
-    assembly         : "skip_assembly_wf",
-    mapping          : "skip_mapping_wf",
-    snv_calling      : "skip_short_variant_calling",
+    assembly         : "skip_genome_assembly",
+    mapping          : "skip_alignment",
+    snv_calling      : "skip_snv_calling",
     snv_annotation   : "skip_snv_annotation",
     sv_annotation    : "skip_sv_annotation",
     call_paralogs    : "skip_call_paralogs",
     cnv_calling      : "skip_cnv_calling",
-    phasing          : "skip_phasing_wf",
+    phasing          : "skip_phasing",
     rank_variants    : "skip_rank_variants",
     repeat_calling   : "skip_repeat_calling",
     repeat_annotation: "skip_repeat_annotation",
-    methylation      : "skip_methylation_wf",
+    methylation      : "skip_methylation_pileups",
     qc               : "skip_qc",
 ]
 
@@ -72,47 +72,47 @@ def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
-    snv_annotation   : ["snp_db", "vep_cache", "vep_plugin_files", "variant_consequences_snv"],
-    sv_annotation    : ["svdb_dbs", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-    cnv_calling      : ["hificnv_xy", "hificnv_xx", "hificnv_exclude"],
-    rank_variants    : ["reduced_penetrance", "score_config_snv", "score_config_svs"],
+    snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+    sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
+    cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
+    rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
     repeat_calling   : ["trgt_repeats"],
-    repeat_annotation: ["variant_catalog"],
+    repeat_annotation: ["stranger_repeat_catalog"],
 ]
 
 def parameterStatus = [
     workflow: [
-        skip_short_variant_calling: params.skip_short_variant_calling,
-        skip_phasing_wf           : params.skip_phasing_wf,
-        skip_methylation_wf       : params.skip_methylation_wf,
-        skip_rank_variants        : params.skip_rank_variants,
-        skip_repeat_calling       : params.skip_repeat_calling,
-        skip_repeat_annotation    : params.skip_repeat_annotation,
-        skip_snv_annotation       : params.skip_snv_annotation,
-        skip_sv_annotation        : params.skip_sv_annotation,
-        skip_call_paralogs        : params.skip_call_paralogs,
-        skip_cnv_calling          : params.skip_cnv_calling,
-        skip_mapping_wf           : params.skip_mapping_wf,
-        skip_qc                   : params.skip_qc,
-        skip_assembly_wf          : params.skip_assembly_wf,
+        skip_snv_calling         : params.skip_snv_calling,
+        skip_phasing             : params.skip_phasing,
+        skip_methylation_pileups: params.skip_methylation_pileups,
+        skip_rank_variants       : params.skip_rank_variants,
+        skip_repeat_calling      : params.skip_repeat_calling,
+        skip_repeat_annotation   : params.skip_repeat_annotation,
+        skip_snv_annotation      : params.skip_snv_annotation,
+        skip_sv_annotation       : params.skip_sv_annotation,
+        skip_call_paralogs       : params.skip_call_paralogs,
+        skip_cnv_calling         : params.skip_cnv_calling,
+        skip_alignment           : params.skip_alignment,
+        skip_qc                  : params.skip_qc,
+        skip_genome_assembly     : params.skip_genome_assembly,
     ],
     files: [
-        par_regions             : params.par_regions,
-        snp_db                  : params.snp_db,
-        svdb_dbs                : params.svdb_dbs,
-        somalier_sites          : params.somalier_sites,
-        vep_cache               : params.vep_cache,
-        hificnv_xy              : params.hificnv_xy,
-        hificnv_xx              : params.hificnv_xx,
-        hificnv_exclude         : params.hificnv_exclude,
-        fasta                   : params.fasta,
-        trgt_repeats            : params.trgt_repeats,
-        variant_catalog         : params.variant_catalog,
-        reduced_penetrance      : params.reduced_penetrance,
-        score_config_snv        : params.score_config_snv,
-        score_config_svs        : params.score_config_svs,
-        variant_consequences_snv: params.variant_consequences_snv,
-        variant_consequences_svs: params.variant_consequences_svs,
+        par_regions              : params.par_regions,
+        echtvar_snv_databases    : params.echtvar_snv_databases,
+        svdb_sv_databases        : params.svdb_sv_databases,
+        somalier_sites           : params.somalier_sites,
+        vep_cache                : params.vep_cache,
+        hificnv_expected_xy_cn   : params.hificnv_expected_xy_cn,
+        hificnv_expected_xx_cn   : params.hificnv_expected_xx_cn,
+        hificnv_excluded_regions : params.hificnv_excluded_regions,
+        fasta                    : params.fasta,
+        trgt_repeats             : params.trgt_repeats,
+        stranger_repeat_catalog  : params.stranger_repeat_catalog,
+        genmod_reduced_penetrance: params.genmod_reduced_penetrance,
+        genmod_score_config_snvs : params.genmod_score_config_snvs,
+        genmod_score_config_svs  : params.genmod_score_config_svs,
+        variant_consequences_snvs : params.variant_consequences_snvs,
+        variant_consequences_svs : params.variant_consequences_svs,
     ]
 ]
 
@@ -182,7 +182,7 @@ workflow PIPELINE_INITIALISATION {
         }
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
-            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.parallel_alignments - 1), single_end:true ], reads ]
+            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.alignment_processes - 1), single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap {
@@ -311,8 +311,8 @@ def toolCitationText() {
     def citation_text = [
         "MultiQC (Ewels et al. 2016)",
     ]
-    if (!params.skip_mapping_wf) {
-        if (params.parallel_alignments > 1) {
+    if (!params.skip_alignment) {
+        if (params.alignment_processes > 1) {
             citation_text = citation_text + [
                 "splitubam",
             ]
@@ -337,7 +337,7 @@ def toolCitationText() {
                 "paraphase",
             ]
         }
-        if (!params.skip_assembly_wf) {
+        if (!params.skip_genome_assembly) {
             if (params.hifiasm_mode == 'trio-binning') {
                 citation_text = citation_text + [
                     "yak",
@@ -351,7 +351,7 @@ def toolCitationText() {
                 "Minimap2 (Li 2018)",
             ]
         }
-        if (!params.skip_short_variant_calling) {
+        if (!params.skip_snv_calling) {
             citation_text = citation_text + [
                 "BEDTools (Quinlan & Hall 2010)",
                 "BCFtools (Danecek et al. 2021)",
@@ -385,7 +385,7 @@ def toolCitationText() {
                 "HiFiCNV",
             ]
         }
-        if (!params.skip_phasing_wf) {
+        if (!params.skip_phasing) {
             citation_text = citation_text + [
                 "SAMtools (Danecek et al. 2021)",
                 "cramino (De Coster & Rademakers 2023)",
@@ -405,7 +405,7 @@ def toolCitationText() {
                     "LongPhase (Lin et al. 2024)",
                 ]
             }
-            if (!params.skip_methylation_wf) {
+            if (!params.skip_methylation_pileups) {
                 citation_text = citation_text + [
                     "modkit",
                     "Tabix (Li 2011)",
