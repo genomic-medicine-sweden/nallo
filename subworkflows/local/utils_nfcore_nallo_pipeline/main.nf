@@ -161,6 +161,7 @@ workflow PIPELINE_INITIALISATION {
     UTILS_NFCORE_PIPELINE (
         nextflow_cli_args
     )
+
     //
     // Custom validation for pipeline parameters
     //
@@ -190,25 +191,11 @@ workflow PIPELINE_INITIALISATION {
         }
         .set { ch_samplesheet }
 
-        // Check that there's samples with affected phenotype if we are ranking variants
-        ch_samplesheet
-            .filter { meta, reads -> meta.phenotype == 2 }
-            .ifEmpty {
-                if(!params.skip_rank_variants) {
-                    error("No samples in samplesheet has affected phenotype (=2), --skip_rank_variants has to be active.")
-                }
-            }
+        // Check that all families has at least one sample with affected phenotype if ranking is active
+        validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
 
         // Check that there's no more than one project
-        // TODO: Try to do this in nf-schema
-        ch_samplesheet
-            .map { meta, reads -> meta.project }
-            .unique()
-            .collect()
-            .filter{ it.size() == 1 }
-            .ifEmpty {
-                error("Only one project may be specified per run")
-            }
+        validateSingleProjectPerRun(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -656,5 +643,42 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 def validatePacBioLicense() {
     if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') {
         error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+    }
+}
+
+// Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
+// This is a convinience function to fail early if there are families without affected individuals.
+def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
+
+    if (params.skip_rank_variants) {
+        return
+    }
+
+    def familiesWithPhenotypes = ch_samplesheet
+        .map { meta, reads -> [ meta.family_id, meta.phenotype ] }
+        .groupTuple()
+
+    def familiesWithoutAffected = familiesWithPhenotypes
+        .filter { family, phenotype -> !phenotype.contains(2) }
+
+    familiesWithoutAffected
+        .map { family, phenotype -> family }
+        .collect()
+        .subscribe { familyList ->
+            if (familyList) {
+                error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
+            }
+        }
+}
+
+def validateSingleProjectPerRun(ch_samplesheet) {
+    def oneProject = ch_samplesheet
+        .map { meta, reads -> meta.project }
+        .unique()
+        .collect()
+        .filter{ it.size() == 1 }
+
+    if(!oneProject) {
+        error("Only one project may be specified per run")
     }
 }

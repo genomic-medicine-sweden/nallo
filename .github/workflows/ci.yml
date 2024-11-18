@@ -51,10 +51,6 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
         with:
           fetch-depth: 0
-      - name: Fetch ${{ github.event.pull_request.base.ref }} branch
-        run: |
-          git remote add upstream ${{ github.event.repository.clone_url }}
-          git fetch upstream ${{ github.event.pull_request.base.ref }}
 
       - name: Set up Nextflow
         uses: nf-core/setup-nextflow@v2
@@ -75,7 +71,7 @@ jobs:
         run: |
           nf-test test \
             --ci \
-            --changed-since upstream/${{ github.event.pull_request.base.ref }} \
+            --changed-since HEAD^ \
             --verbose \
             --tag ${{ matrix.tags }} \
             --profile "+${{ matrix.profile }}" \

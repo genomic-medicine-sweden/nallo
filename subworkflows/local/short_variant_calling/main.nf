@@ -61,22 +61,12 @@ workflow SHORT_VARIANT_CALLING {
     BCFTOOLS_NORM_SINGLESAMPLE ( BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
-    // This creates a multisample VCF, with regions from ONE bed file
+    // This creates one multisample VCF per family, with regions from ONE bed file
     DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
         .map { meta, gvcf ->
-            [ meta.region.name, meta.project, meta.phenotype == 2, gvcf ]
+            [ [ id:meta.region.name, family_id:meta.family_id ], gvcf ]
         }
-        .groupTuple() // Group all files together per region
-        // If any of the samples in the VCF have an affected phenotype (2)
-        // add this to the meta of the multisample VCF to know if we should run RANK_VARIANTS or not
-        .map { meta, project, affected, gvcfs ->
-            new_meta = [
-                'id': meta,
-                'project': project.first(), // Works only because only one project per run is allowed
-                'contains_affected': affected.any(),
-            ]
-            [ new_meta, gvcfs ]
-        }
+        .groupTuple() // Groups files from the same family together per region
         .set{ glnexus_in }
 
     GLNEXUS( glnexus_in, ch_bed )
@@ -107,8 +97,8 @@ workflow SHORT_VARIANT_CALLING {
     emit:
     snp_calls_vcf  = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf    // channel: [ val(meta), path(vcf) ]
     snp_calls_tbi  = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi    // channel: [ val(meta), path(tbi) ]
-    combined_bcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf     // channel: [ val(meta), path(bcf) ]
-    combined_csi   = BCFTOOLS_NORM_MULTISAMPLE.out.csi     // channel: [ val(meta), path(csi) ]
+    family_bcf     = BCFTOOLS_NORM_MULTISAMPLE.out.vcf     // channel: [ val(meta), path(bcf) ]
+    family_csi     = BCFTOOLS_NORM_MULTISAMPLE.out.csi     // channel: [ val(meta), path(csi) ]
     vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report // channel: [ val(meta), path(html) ]
     versions       = ch_versions                           // channel: [ path(versions.yml) ]
 }
