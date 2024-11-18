@@ -788,6 +788,7 @@
 
 
 <h1 id="genomic-medicine-swedennallo-output">genomic-medicine-sweden/nallo: Output</h1>
+<p>In general, annotated variant calls are output per family, while unannotated calls are output per sample.</p>
 <h2 id="aligned-reads">Aligned reads</h2>
 <p><a href="https://github.com/lh3/minimap2">Minimap2</a> is used to map the reads to a reference genome. The aligned reads are sorted, (merged) and indexed using <a href="https://github.com/samtools/samtools">samtools</a>.</p>
 <table>
@@ -1088,11 +1089,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>pedigree/{project}/{project}.ped</code></td>
-<td>PED file updated with somalier-inferred sex per project</td>
-</tr>
-<tr>
-<td><code>pedigree/{family}/{family).ped</code></td>
+<td><code>pedigree/family/{family).ped</code></td>
 <td>PED file updated with somalier-inferred sex per family</td>
 </tr>
 <tr>
@@ -1104,22 +1101,8 @@
 <td>Information about sample pairs</td>
 </tr>
 <tr>
-<td><code>/qc/somalier/relate/{project}/{project}.samples.tsv</code></td>
+<td><code>qc/somalier/relate/{project}/{project}.samples.tsv</code></td>
 <td>Information about individual samples</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>predigree/{project}.ped</code></td>
-<td>PED file updated with somalier-inferred sex</td>
 </tr>
 </tbody>
 </table>
@@ -1163,11 +1146,11 @@
 <td>Summary of haplotypes and variant calls</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf</code></td>
+<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf</code></td>
 <td>VCF file per gene</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi</code></td>
+<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 </tbody>
@@ -1187,11 +1170,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>repeats/{family}/{family}_repeat_expansions.vcf.gz</code></td>
+<td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz</code></td>
 <td>Merged VCF file per family</td>
 </tr>
 <tr>
-<td><code>repeats/{family}/{family}_repeat_expansions.vcf.gz.tbi</code></td>
+<td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 <tr>
@@ -1222,11 +1205,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz</code></td>
+<td><code>repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz</code></td>
 <td>Merged, annotated VCF file per family</td>
 </tr>
 <tr>
-<td><code>repeat_expansions/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi</code></td>
+<td><code>repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 </tbody>
@@ -1246,23 +1229,23 @@
 </thead>
 <tbody>
 <tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv.vcf.gz</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv.vcf.gz</code></td>
 <td>VCF file containing called variants with alternative genotypes for a sample</td>
 </tr>
 <tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv.vcf.gz.tbi</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi</code></td>
 <td>Index of the corresponding VCF file</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv.vcf.gz</code></td>
+<td><code>snvs/family/{family}/{family}_snv.vcf.gz</code></td>
 <td>VCF file containing called variants for all samples</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv.vcf.gz.tbi</code></td>
+<td><code>snvs/family/{family}/{family}_snv.vcf.gz.tbi</code></td>
 <td>Index of the corresponding VCF file</td>
 </tr>
 <tr>
-<td><code>snvs/stats/single_sample/*.stats.txt</code></td>
+<td><code>snvs/stats/sample/*.stats.txt</code></td>
 <td>Variant statistics</td>
 </tr>
 <tr>
@@ -1285,23 +1268,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>databases/echtvar/encode/{project}/*.zip</code></td>
-<td>Database with allele frequency (AF) and allele count (AC) for all samples</td>
-</tr>
-<tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz</code></td>
 <td>VCF file containing annotated variants with alternative genotypes for a sample</td>
 </tr>
 <tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi</code></td>
 <td>Index of the annotated VCF file</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz</code></td>
-<td>VCF file containing annotated variants for all samples</td>
+<td><code>snvs/family/{family}/{family}_snv_annotated.vcf.gz</code></td>
+<td>VCF file containing annotated variants per family</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv_annotated.vcf.gz.tbi</code></td>
+<td><code>snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi</code></td>
 <td>Index of the annotated VCF file</td>
 </tr>
 </tbody>
@@ -1316,19 +1295,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz</code></td>
 <td>VCF file with annotated and ranked variants for a sample</td>
 </tr>
 <tr>
-<td><code>snvs/single_sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi</code></td>
+<td><code>snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the ranked VCF file</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz</code></td>
-<td>VCF file with annotated and ranked variants for all samples</td>
+<td><code>snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz</code></td>
+<td>VCF file with annotated and ranked variants per family</td>
 </tr>
 <tr>
-<td><code>snvs/multi_sample/{project}/{project}_snv_annotated_ranked.vcf.gz.tbi</code></td>
+<td><code>snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the ranked VCF file</td>
 </tr>
 </tbody>
@@ -1373,19 +1352,19 @@ then the merged SV and CNV files are merged again, with priority given to coordi
 <td>Index of the merged VCF file</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
+<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
 <td>VCF file with CNVs per sample</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
+<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
 <td>VCF file with CNVs per sample</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/{sample}_svs.vcf.gz</code></td>
+<td><code>svs/sample/{sample}/{sample}_svs.vcf.gz</code></td>
 <td>VCF file with SVs per sample</td>
 </tr>
 <tr>
-<td><code>svs/single_sample/{sample}/{sample}_svs.vcf.gz.tbi</code></td>
+<td><code>svs/sample/{sample}/{sample}_svs.vcf.gz.tbi</code></td>
 <td>VCF file with SVs per sample</td>
 </tr>
 </tbody>
@@ -1455,7 +1434,7 @@ then the merged SV and CNV files are merged again, with priority given to coordi
 </thead>
 <tbody>
 <tr>
-<td> <code>visualization_tracks/{sample}/*.copynum.bedgraph</code></td>
+<td><code>visualization_tracks/{sample}/*.copynum.bedgraph</code></td>
 <td>Copy number in bedgraph format</td>
 </tr>
 <tr>
