@@ -420,20 +420,19 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
-            //
-            // Filter SNVs
-            //
-            if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+    }
+    //
+    // Filter SNVs
+    //
+    if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
 
-                // Publish filtered `project` SNVs from here
-                FILTER_VARIANTS_SNVS (
-                    BCFTOOLS_SORT.out.vcf,
-                    ch_hgnc_ids,
-                    params.filter_variants_hgnc_ids
-                )
-                ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
-
-            }
+        // Publish filtered `project` SNVs from here
+        FILTER_VARIANTS_SNVS (
+            BCFTOOLS_SORT.out.vcf,
+            ch_hgnc_ids,
+            params.filter_variants_hgnc_ids
+        )
+        ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
     }
 

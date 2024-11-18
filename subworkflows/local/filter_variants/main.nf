@@ -1,5 +1,6 @@
 include { ENSEMBLVEP_FILTERVEP          } from '../../../modules/nf-core/ensemblvep/filtervep/main'
 include { BCFTOOLS_VIEW                 } from '../../../modules/nf-core/bcftools/view/main'
+include { ENSEMBLVEP_VEP } from '../../../modules/nf-core/ensemblvep/vep/main.nf'
 
 workflow FILTER_VARIANTS {
 
@@ -18,10 +19,12 @@ workflow FILTER_VARIANTS {
             ch_hgnc_ids.map { meta, file -> file }
         )
         ch_versions = ch_versions.mix(ENSEMBLVEP_FILTERVEP.out.versions)
+
+        ch_vcf = ENSEMBLVEP_FILTERVEP.out.output
     }
 
     BCFTOOLS_VIEW (
-        filter_hgnc ? ENSEMBLVEP_FILTERVEP.out.output.map { meta, vcf -> [ meta, vcf, [] ] } : ch_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        ch_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
         [],
         [],
         []

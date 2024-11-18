@@ -471,7 +471,7 @@
                 "filter_variants_hgnc_ids": {
                     "type": "string",
                     "pattern": "^\\S+\\.(csv|tsv)$",
-                    "description": "A tsv/csv file with a `#hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281`, not `HGNC:4281`.",
+                    "description": "A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`.",
                     "format": "file-path",
                     "exits": true,
                     "schema": "assets/schema_hgnc_ids.json"

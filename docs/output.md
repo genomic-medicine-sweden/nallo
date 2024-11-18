@@ -219,16 +219,16 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 !!!note
 
-    Variants are only output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only project variants are output.
+    Variants are only output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are output.
 
 !!!tip
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
-| Path                                             | Description                                   |
-| ------------------------------------------------ | --------------------------------------------- |
-| `snvs/{project}/{project}_*_filtered.vcf.gz`     | VCF file with filtered variants for a project |
-| `snvs/{project}/{project}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file                |
+| Path                                           | Description                                  |
+| ---------------------------------------------- | -------------------------------------------- |
+| `snvs/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
+| `snvs/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
 
 ### SVs (and CNVs)
 
@@ -243,9 +243,7 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 !!!note
 
-    Due to the complexity of SV merging strategies, SVs and CNVs are reported per family rather than per project.
-    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately,
-    then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
+    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
 | Path                                                            | Description                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------ |
