@@ -1300,8 +1300,8 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p class="admonition-title">Effect of preset on subworkflows</p>
 <p>The selected preset will turn off subworkflows:</p>
 <ul>
-<li><code>--skip_assembly_wf</code> and <code>--skip_repeat_wf</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
-<li><code>--skip_methylation_wf</code> will be set to <code>true</code> for <code>pacbio</code></li>
+<li><code>--skip_genome_assembly</code> and <code>--skip_repeat_wf</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
+<li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
 <h2 id="subworkflows">Subworkflows</h2>
@@ -1309,18 +1309,18 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>The only mandatory parameters for all subworkflows is the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
 <p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will try to guide you through which files are required:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  --skip_assembly_wf is NOT active, the following files are required: --dipcall_par
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  --skip_snv_annotation is NOT active, the following files are required: --snp_db
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  --skip_mapping_wf is NOT active, the following files are required: --somalier_sites
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  --skip_genome_assembly is NOT active, the following files are required: --dipcall_par
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  --skip_snv_annotation is NOT active, the following files are required: --echtvar_snv_databases
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  --skip_alignment is NOT active, the following files are required: --somalier_sites
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  --skip_snv_annotation is NOT active, the following files are required: --vep_cache
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  ...
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
 <p>A thorough description of required files are provided below.</p>
 <p>Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
-<p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_mapping_wf</code> will tell you</p>
+<p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_mapping_wf is active, the pipeline has to be run with: --skip_qc --skip_assembly_wf --skip_call_paralogs --skip_short_variant_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing_wf --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_wf
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  ...
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
@@ -1347,7 +1347,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tr>
 </tbody>
 </table>
-<p>Turned off with <code>--skip_mapping_wf</code>.</p>
+<p>Turned off with <code>--skip_alignment</code>.</p>
 <h3 id="qc">QC</h3>
 <p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
@@ -1372,7 +1372,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p class="admonition-title">Warning</p>
 <p>Make sure chrY PAR is hard masked in reference genome you are using.</p>
 </div>
-<p>Turned off with <code>--skip_assembly_wf</code>.</p>
+<p>Turned off with <code>--skip_genome_assembly</code>.</p>
 <h3 id="call-paralogs">Call paralogs</h3>
 <p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>
 <p>!!warning
@@ -1394,7 +1394,7 @@ Only GRCh38 is supported.</p>
 </tr>
 </tbody>
 </table>
-<p>Turned off with <code>--skip_short_variant_calling</code>.</p>
+<p>Turned off with <code>--skip_snv_calling</code>.</p>
 <h3 id="cnv-calling">CNV calling</h3>
 <p>This subworkflow depends on the mapping and short variant calling subworkflows, and requires the following additional files:</p>
 <table>
@@ -1406,15 +1406,15 @@ Only GRCh38 is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>hificnv_xy</code></td>
+<td><code>hificnv_expected_xy_cn</code></td>
 <td>expected XY copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed">expected_cn.hg38.XY.bed</a>)</td>
 </tr>
 <tr>
-<td><code>hificnv_xx</code></td>
+<td><code>hificnv_expected_xx_cn</code></td>
 <td>expected XX copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed">expected_cn.hg38.XX.bed</a>)</td>
 </tr>
 <tr>
-<td><code>hificnv_exclude</code></td>
+<td><code>hificnv_excluded_regions</code></td>
 <td>BED file specifying regions to exclude (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz">cnv.excluded_regions.hg38.bed.gz</a>)</td>
 </tr>
 </tbody>
@@ -1422,10 +1422,10 @@ Only GRCh38 is supported.</p>
 <p>Turned off with <code>--skip_cnv_calling</code>.</p>
 <h3 id="phasing">Phasing</h3>
 <p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the mapping and short variant calling subworkflows, but requires no additional files.</p>
-<p>Turned off with <code>--skip_phasing_wf</code>.</p>
+<p>Turned off with <code>--skip_phasing</code>.</p>
 <h3 id="methylation">Methylation</h3>
 <p>This subworkflow relies on mapping and short variant calling subworkflows, but requires no additional files.</p>
-<p>Turned off with <code>--skip_methylation_wf</code>.</p>
+<p>Turned off with <code>--skip_methylation_pileups</code>.</p>
 <h3 id="repeat-calling">Repeat calling</h3>
 <p>This subworkflow requires haplotagged BAM files, and such relies on the mapping, short variant calling and phasing subworkflows, and requires the following additional files:</p>
 <table>
@@ -1454,15 +1454,15 @@ Only GRCh38 is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>variant_catalog</code></td>
-<td>a variant catalog matching your reference (e.g. <a href="https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/variant_catalog_grch38.json">variant_catalog_grch38.json</a>)</td>
+<td><code>stranger_repeat_catalog</code></td>
+<td>a variant catalog matching your reference (e.g. <a href="https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/stranger_repeat_catalog_grch38.json">stranger_repeat_catalog_grch38.json</a>)</td>
 </tr>
 </tbody>
 </table>
 <p>Turned off with <code>--skip_repeat_annotation</code>.</p>
 <h3 id="snv-annotation">SNV annotation</h3>
 <p>This subworkflow relies on the mapping and short variant calling, and requires the following additional files:</p>
-<!-- TODO: score_config_snv, reduced_penetrance and variant_consequences_snv should link to real examples -->
+<!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
 <table>
 <thead>
@@ -1477,20 +1477,20 @@ Only GRCh38 is supported.</p>
 <td>VEP cache matching your reference genome, either as a <code>.tar.gz</code> archive or path to a directory (e.g. <a href="https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz">homo_sapiens_vep_110_GRCh38.tar.gz</a>)</td>
 </tr>
 <tr>
-<td><code>vep_plugins</code> <sup>1</sup></td>
+<td><code>vep_plugin_files</code> <sup>1</sup></td>
 <td>A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.</td>
 </tr>
 <tr>
-<td><code>snp_db</code> <sup>2</sup></td>
+<td><code>echtvar_snv_databases</code> <sup>2</sup></td>
 <td> A csv file with annotation databases from (<a href="https://github.com/brentp/echtvar"><code>echtvar encode</code></a>)</td>
 </tr>
 <tr>
-<td><code>variant_consequences_snv</code></td>
+<td><code>variant_consequences_snvs</code></td>
 <td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
 </tr>
 </tbody>
 </table>
-<p><sup>1</sup> Example file for input with <code>--vep_plugins</code></p>
+<p><sup>1</sup> Example file for input with <code>--vep_plugin_files</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vep_files
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
@@ -1498,7 +1498,7 @@ Only GRCh38 is supported.</p>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
 </span></code></pre></div>
-<p><sup>2</sup> Example file for input with <code>--snp_db</code>:</p>
+<p><sup>2</sup> Example file for input with <code>--echtvar_snv_databases</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sample,file
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cadd,/path/to/cadd.v1.6.hg38.zip
@@ -1510,7 +1510,7 @@ Only GRCh38 is supported.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echvtvar and <code>--snp_db</code>.</p>
+<p>Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored_indels</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echvtvar and <code>--echtvar_snv_databases</code>.</p>
 </div>
 <p>Turned off with <code>--skip_snv_annotation</code>.</p>
 <h3 id="rank-snvs-and-indels">Rank SNVs and INDELs</h3>
@@ -1524,11 +1524,11 @@ Only GRCh38 is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>score_config_snv</code></td>
+<td><code>genmod_score_config_snvs</code></td>
 <td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a>.</td>
 </tr>
 <tr>
-<td><code>reduced_penetrance</code></td>
+<td><code>genmod_reduced_penetrance</code></td>
 <td>A list of loci that show <a href="https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/">reduced penetrance</a> in people. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv">here</a></td>
 </tr>
 </tbody>
@@ -1545,12 +1545,12 @@ Only GRCh38 is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>svdb_dbs</code> <sup>1</sup></td>
+<td><code>svdb_sv_databases</code> <sup>1</sup></td>
 <td>Csv file with databases used for structural variant annotation in vcf format.</td>
 </tr>
 </tbody>
 </table>
-<p><sup>1</sup> Example file for input with <code>--svdb_dbs</code>:</p>
+<p><sup>1</sup> Example file for input with <code>--svdb_sv_databases</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>filename,in_freq_info_key,in_allele_count_info_key,out_freq_info_key,out_allele_count_info_key
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz,AF,AC,colorsdb_af,colorsdb_ac
 </span></code></pre></div>
@@ -1567,11 +1567,11 @@ Only GRCh38 is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>score_config_svs</code></td>
+<td><code>genmod_score_config_svs</code></td>
 <td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a>.</td>
 </tr>
 <tr>
-<td><code>reduced_penetrance</code></td>
+<td><code>genmod_reduced_penetrance</code></td>
 <td>A list of loci that show <a href="https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/">reduced penetrance</a> in people. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv">here</a></td>
 </tr>
 </tbody>
@@ -1579,9 +1579,9 @@ Only GRCh38 is supported.</p>
 <p><code>--skip_rank_variants</code>.</p>
 <h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
 <ul>
-<li>Limit SNV calling to regions in BED file (<code>--bed</code>).</li>
-<li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting <code>--parallel_snv</code> to a different number.</li>
-<li>By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--parallel_alignments</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
+<li>Limit SNV calling to regions in BED file (<code>--target_bed</code>).</li>
+<li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting <code>--snv_calling_processes</code> to a different number.</li>
+<li>By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--alignment_processes</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
 </ul>
 <h2 id="reproducibility">Reproducibility</h2>
 <p>It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.</p>
