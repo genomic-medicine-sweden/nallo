@@ -13,7 +13,6 @@ workflow FILTER_VARIANTS {
 
     if ( filter_hgnc ) {
 
-
         ENSEMBLVEP_FILTERVEP (
             ch_vcf,
             ch_hgnc_ids.map { meta, file -> file }
