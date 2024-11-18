@@ -43,7 +43,6 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/local/create_pedigree_file/main'
-include { ECHTVAR_ENCODE                                    } from '../modules/local/echtvar/encode/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
@@ -312,8 +311,8 @@ workflow NALLO {
         SHORT_VARIANT_CALLING( ch_snv_calling_in, fasta, fai, SCATTER_GENOME.out.bed, ch_par )
         ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
-        SHORT_VARIANT_CALLING.out.combined_bcf
-            .join( SHORT_VARIANT_CALLING.out.combined_csi )
+        SHORT_VARIANT_CALLING.out.family_bcf
+            .join( SHORT_VARIANT_CALLING.out.family_csi )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -322,9 +321,9 @@ workflow NALLO {
     //
     if(!params.skip_snv_annotation) {
 
-        // Annotates one multisample VCF per variant call region
+        // Annotates family VCFs per variant call region
         SNV_ANNOTATION(
-            SHORT_VARIANT_CALLING.out.combined_bcf,
+            SHORT_VARIANT_CALLING.out.family_bcf,
             ch_databases.map { meta, databases -> databases }.collect(),
             fasta,
             fai.map { name, fai -> [ [ id: name ], fai ] },
@@ -351,33 +350,33 @@ workflow NALLO {
     }
 
     //
-    // Ranks one multisample VCF per variant call region
+    // Ranks family VCFs per variant call region
     // Can only run if samplesheet has affected samples
     //
     if(!params.skip_rank_variants) {
 
-        // Create PED with updated sex per project (should perhaps be per SNV-calling region)
-        SOMALIER_PED (
+        // Create PED with updated sex - per family
+        SOMALIER_PED_FAMILY (
             bam
-                .map { meta, files -> [ [ id: meta.project ], meta ] }
+                .map { meta, files -> [ [ id: meta.family_id ], meta ] }
                 .groupTuple()
         )
-        ch_versions = ch_versions.mix(SOMALIER_PED.out.versions)
+        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
-        SOMALIER_PED.out.ped
-            .collect()
-            .set { ch_updated_pedfile }
-
-        // Give pedfile meta from variants
+        // Give PED file SNV meta so they can be joined later in the subworkflow.
+        // Since we don't always have matching number of ped files and call regions
+        // we need to combine and filter instead of join
         ANN_CSQ_PLI_SNV.out.vcf
-            .combine(ch_updated_pedfile.map { meta, ped -> ped } )
-            .map { meta, vcf, ped -> [ meta, ped ] }
-            .set { rank_snvs_ped_in }
+            .map { meta, vcf -> [ [ id:meta.family_id ], meta ] }
+            .combine ( SOMALIER_PED_FAMILY.out.ped )
+            .filter { family_id_snv, meta, family_id_ped, ped -> family_id_snv == family_id_ped }
+            .map { family_id_snv, meta, family_id_ped, ped -> [ meta, ped ] }
+            .set { snv_ranking_ped_file }
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV (
             ANN_CSQ_PLI_SNV.out.vcf,
-            rank_snvs_ped_in,
+            snv_ranking_ped_file,
             ch_reduced_penetrance,
             ch_score_config_snv
         )
@@ -394,11 +393,11 @@ workflow NALLO {
     if(!params.skip_short_variant_calling) {
 
         ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.project ], vcf, tbi ] }
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
             .groupTuple()
             .set { ch_bcftools_concat_in }
 
-        // Concat into a multisample VCF with all regions
+        // Concat into family VCFs per family with all regions
         BCFTOOLS_CONCAT (
                 ch_bcftools_concat_in
             )
@@ -408,11 +407,7 @@ workflow NALLO {
         BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
-        // Make an echtvar database of all samples
-        ECHTVAR_ENCODE ( BCFTOOLS_SORT.out.vcf )
-        ch_versions = ch_versions.mix(ECHTVAR_ENCODE.out.versions)
-
-        // Split multisample VCF to also publish a VCF per sample
+        // Split family VCFs to also publish a VCF per sample
         BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
 
@@ -536,14 +531,6 @@ workflow NALLO {
     // Rank SVs
     //
     if (!params.skip_rank_variants) {
-
-        // Create PED with updated sex - per family
-        SOMALIER_PED_FAMILY (
-            bam
-                .map { meta, files -> [ [ id: meta.family_id ], meta ] }
-                .groupTuple()
-        )
-        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
         RANK_VARIANTS_SVS (
             ANN_CSQ_PLI_SVS.out.vcf,
