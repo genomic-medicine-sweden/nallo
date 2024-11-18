@@ -24,8 +24,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
@@ -34,8 +33,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -59,22 +57,20 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -122,7 +118,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:32:32.7841728"
+        "timestamp": "2024-11-12T18:13:18.281203796"
     },
     "1 sample - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -149,16 +145,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -167,16 +161,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -205,38 +197,34 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -289,7 +277,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:36:05.888336005"
+        "timestamp": "2024-11-12T18:16:17.601722369"
     },
     "1 sample - 1 bed, fasta, fai, bed, []": {
         "content": [
@@ -316,8 +304,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
@@ -326,8 +313,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -351,22 +337,20 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -414,7 +398,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:33:12.370911679"
+        "timestamp": "2024-11-12T18:13:48.779934595"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed": {
         "content": [
@@ -455,16 +439,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ]
@@ -473,16 +455,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ]
@@ -523,38 +503,34 @@
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ]
@@ -633,7 +609,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:35:11.690919461"
+        "timestamp": "2024-11-12T18:15:32.090234345"
     },
     "2 samples - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -674,16 +650,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -692,16 +666,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -742,38 +714,34 @@
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -852,7 +820,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:36:19.778517029"
+        "timestamp": "2024-11-12T18:16:31.350382929"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed - stub": {
         "content": [
@@ -893,16 +861,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -911,16 +877,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -961,38 +925,34 @@
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1071,7 +1031,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:36:33.89917989"
+        "timestamp": "2024-11-12T18:16:44.845313016"
     },
     "1 sample - 1 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -1098,8 +1058,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -1108,8 +1067,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1133,22 +1091,20 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1196,7 +1152,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:35:53.449459889"
+        "timestamp": "2024-11-12T18:16:05.823110437"
     },
     "1 sample - no bed, fasta, fai, [], []": {
         "content": [
@@ -1225,8 +1181,7 @@
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
@@ -1237,8 +1192,7 @@
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -1262,26 +1216,24 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -1329,7 +1281,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:31:59.210062583"
+        "timestamp": "2024-11-12T18:12:47.703475448"
     },
     "1 sample - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1356,16 +1308,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
@@ -1374,16 +1324,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -1412,38 +1360,34 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,5d1828b40d43a2a18e30b1dffffd99b0"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,83a0cecdb72c82ae0f5fc56f1426f5c0"
                     ]
@@ -1496,7 +1440,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:33:50.391467443"
+        "timestamp": "2024-11-12T18:14:21.10363239"
     },
     "2 samples - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1537,16 +1481,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ]
@@ -1555,16 +1497,14 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ]
@@ -1605,38 +1545,34 @@
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ce3866081a0bb6d9bd0df30dd3361213"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ],
                     [
                         {
                             "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,95eecbb89b9a60ecebc292e36ab4ebcf"
                     ]
@@ -1715,7 +1651,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:34:29.736634447"
+        "timestamp": "2024-11-12T18:14:56.572901896"
     },
     "1 sample - no bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1744,8 +1680,7 @@
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -1756,8 +1691,7 @@
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1781,26 +1715,24 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": [
                                 
                             ],
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "[]_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1848,7 +1780,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:35:27.990658402"
+        "timestamp": "2024-11-12T18:15:43.480727946"
     },
     "1 sample - 1 bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1875,8 +1807,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -1885,8 +1816,7 @@
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1910,22 +1840,20 @@
                     "versions.yml:md5,ee687c9b68546c8138fab17f68b967c0",
                     "versions.yml:md5,f13ae32e1e3f3d274d4b3c7097f56531"
                 ],
-                "combined_bcf": [
+                "family_bcf": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "combined_csi": [
+                "family_csi": [
                     [
                         {
                             "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
+                            "family_id": null
                         },
                         "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -1973,6 +1901,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-04T16:35:41.50464501"
+        "timestamp": "2024-11-12T18:15:54.801886568"
     }
 }

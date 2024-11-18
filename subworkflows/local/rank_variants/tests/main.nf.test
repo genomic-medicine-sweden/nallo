@@ -60,7 +60,7 @@ nextflow_workflow {
             script "../../snv_annotation/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
