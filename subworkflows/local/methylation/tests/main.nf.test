@@ -74,7 +74,7 @@ nextflow_workflow {
     test("1 sample - [] phased") {
         when {
             params {
-                skip_phasing_wf = false
+                skip_phasing = false
             }
             workflow {
                 """
@@ -96,7 +96,7 @@ nextflow_workflow {
     test("1 sample - [] unphased") {
         when {
             params {
-                skip_phasing_wf = true
+                skip_phasing = true
             }
             workflow {
                 """
@@ -118,7 +118,7 @@ nextflow_workflow {
     test("1 sample - bed phased") {
         when {
             params {
-                skip_phasing_wf = false
+                skip_phasing = false
             }
             workflow {
                 """
@@ -142,7 +142,7 @@ nextflow_workflow {
     test("1 sample - bed unphased") {
         when {
             params {
-                skip_phasing_wf = true
+                skip_phasing = true
             }
             workflow {
                 """
@@ -167,7 +167,7 @@ nextflow_workflow {
         options "-stub"
         when {
             params {
-                skip_phasing_wf = false
+                skip_phasing = false
             }
             workflow {
                 """
@@ -190,7 +190,7 @@ nextflow_workflow {
         options "-stub"
         when {
             params {
-                skip_phasing_wf = false
+                skip_phasing = false
             }
             workflow {
                 """
@@ -215,7 +215,7 @@ nextflow_workflow {
         options "-stub"
         when {
             params {
-                skip_phasing_wf = true
+                skip_phasing = true
             }
             workflow {
                 """
@@ -238,7 +238,7 @@ nextflow_workflow {
         options "-stub"
         when {
             params {
-                skip_phasing_wf = true
+                skip_phasing = true
             }
             workflow {
                 """

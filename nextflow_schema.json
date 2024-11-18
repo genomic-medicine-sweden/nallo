@@ -17,25 +17,25 @@
                     "description": "Skip QC of reads",
                     "default": false
                 },
-                "skip_short_variant_calling": {
+                "skip_snv_calling": {
                     "type": "boolean",
                     "description": "Skip short variant calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_assembly_wf": {
+                "skip_genome_assembly": {
                     "type": "boolean",
                     "description": "Skip genome assembly and assembly variant calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_mapping_wf": {
+                "skip_alignment": {
                     "type": "boolean",
                     "description": "Skip read mapping (alignment)",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_wf": {
+                "skip_methylation_pileups": {
                     "type": "boolean",
                     "description": "Skip generation of methylation pileups",
                     "fa_icon": "fas fa-fast-forward",
@@ -53,7 +53,7 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_phasing_wf": {
+                "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
                     "description": "Skip phasing of variants and haplotagging of reads",
@@ -123,7 +123,7 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
-                "cadd_prescored": {
+                "cadd_prescored_indels": {
                     "type": "string",
                     "exists": true,
                     "format": "directory-path",
@@ -158,7 +158,7 @@
                     "format": "file-path",
                     "exists": true
                 },
-                "snp_db": {
+                "echtvar_snv_databases": {
                     "type": "string",
                     "pattern": "^\\S+\\.csv$",
                     "format": "file-path",
@@ -167,7 +167,7 @@
                     "description": "A csv file with echtvar databases to annotate SNVs with",
                     "exists": true
                 },
-                "svdb_dbs": {
+                "svdb_sv_databases": {
                     "type": "string",
                     "exists": true,
                     "format": "file-path",
@@ -178,13 +178,13 @@
                     "mimetype": "text/csv",
                     "schema": "assets/svdb_query_vcf_schema.json"
                 },
-                "variant_catalog": {
+                "stranger_repeat_catalog": {
                     "type": "string",
                     "description": "A variant catalog json-file for stranger",
                     "format": "file-path",
                     "exists": true
                 },
-                "variant_consequences_snv": {
+                "variant_consequences_snvs": {
                     "type": "string",
                     "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
                     "fa_icon": "fas fa-file-csv"
@@ -200,46 +200,46 @@
                     "format": "path",
                     "exists": true
                 },
-                "bed": {
+                "target_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
-                    "description": "A BED file with regions of interest, used to limit short variant calling.",
+                    "description": "A BED file with regions of interest, used to limit variant calling.",
                     "exists": true
                 },
-                "hificnv_xy": {
+                "hificnv_expected_xy_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XY samples.",
                     "exists": true
                 },
-                "hificnv_xx": {
+                "hificnv_expected_xx_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XX samples.",
                     "exists": true
                 },
-                "hificnv_exclude": {
+                "hificnv_excluded_regions": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
                     "exists": true
                 },
-                "reduced_penetrance": {
+                "genmod_reduced_penetrance": {
                     "type": "string",
                     "exists": true,
                     "format": "path",
                     "fa_icon": "fas fa-file-csv",
                     "description": "A file with gene ids that have reduced penetrance. For use with genmod."
                 },
-                "score_config_snv": {
+                "genmod_score_config_snvs": {
                     "type": "string",
                     "exists": true,
                     "format": "path",
                     "fa_icon": "fas fa-file",
                     "description": "A SNV rank model config file for genmod."
                 },
-                "score_config_svs": {
+                "genmod_score_config_svs": {
                     "type": "string",
                     "exists": true,
                     "format": "path",
@@ -421,7 +421,7 @@
                     "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
                     "enum": ["revio", "pacbio", "ONT_R10"]
                 },
-                "variant_caller": {
+                "snv_caller": {
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
@@ -445,16 +445,16 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "parallel_alignments": {
+                "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
                     "default": 8,
-                    "description": "If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
+                    "description": "If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
                 },
-                "parallel_snv": {
+                "snv_calling_processes": {
                     "type": "integer",
                     "default": 13,
-                    "description": "If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
+                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
                     "minimum": 1
                 },
                 "vep_cache_version": {
@@ -465,7 +465,7 @@
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
-                    "description": "A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
+                    "description": "A csv file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "deepvariant_model_type": {

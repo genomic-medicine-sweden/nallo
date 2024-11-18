@@ -9,13 +9,13 @@ Allows skipping certain parts of the pipeline
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `skip_qc` | Skip QC of reads | `boolean` | False |  |  |
-| `skip_short_variant_calling` | Skip short variant calling | `boolean` | False |  |  |
-| `skip_assembly_wf` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
-| `skip_mapping_wf` | Skip read mapping (alignment) | `boolean` | False |  |  |
-| `skip_methylation_wf` | Skip generation of methylation pileups | `boolean` | False |  |  |
+| `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
+| `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
+| `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
+| `skip_methylation_pileups` | Skip generation of methylation pileups | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
-| `skip_phasing_wf` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
+| `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_cnv_calling` | Skip CNV calling | `boolean` | False |  |  |
@@ -32,24 +32,24 @@ Define where the pipeline should find input data and save output data.
 | `outdir` | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure. | `string` |  | True |  |
 | `email` | Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.</small></details>| `string` |  |  |  |
 | `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified. | `string` |  |  |  |
-| `cadd_prescored` | Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
+| `cadd_prescored_indels` | Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `par_regions` | Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
 | `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
-| `snp_db` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
-| `svdb_dbs` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
-| `variant_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
-| `variant_consequences_snv` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
+| `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
+| `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
+| `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
+| `variant_consequences_snvs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `variant_consequences_svs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
-| `bed` | A BED file with regions of interest, used to limit short variant calling. | `string` |  |  |  |
-| `hificnv_xy` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
-| `hificnv_xx` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
-| `hificnv_exclude` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
-| `reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
-| `score_config_snv` | A SNV rank model config file for genmod. | `string` |  |  |  |
-| `score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
+| `target_regions` | A BED file with regions of interest, used to limit variant calling. | `string` |  |  |  |
+| `hificnv_expected_xy_cn` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
+| `hificnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
+| `hificnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
+| `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
+| `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
+| `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/ |  | True |
 
@@ -99,14 +99,14 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
-| `variant_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
+| `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
 | `sv_caller` | Which structural variant caller to use (`severus`, `sniffles`) | `string` | severus |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
-| `parallel_alignments` | If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
-| `parallel_snv` | If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
+| `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
+| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
-| `vep_plugin_files` | A csv file with vep_plugins as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
+| `vep_plugin_files` | A csv file with vep_plugin_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. | `string` | PACBIO |  | True |
 | `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. | `string` | map-hifi |  | True |
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
