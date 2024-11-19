@@ -3,7 +3,7 @@ include { TRGT_GENOTYPE                          } from '../../../modules/nf-cor
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../../modules/nf-core/bcftools/sort/main'
-include { TRGT_MERGE                             } from '../../../modules/nf-core/bcftools/merge/main'
+include { TRGT_MERGE                             } from '../../../modules/nf-core/trgt/merge/main'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -60,9 +60,8 @@ workflow CALL_REPEAT_EXPANSIONS {
         ch_bcftools_merge_in,
         [[],[]],
         [[],[]],
-        [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
+    ch_versions = ch_versions.mix(TRGT_MERGE.out.versions)
 
     emit:
     sample_vcf  = BCFTOOLS_SORT_TRGT.out.vcf  // channel: [ val(meta), path(vcf) ]
