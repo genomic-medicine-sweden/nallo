@@ -175,11 +175,11 @@ In general, annotated variant calls are output per family while unannotated call
 [DeepVariant](https://github.com/google/deepvariant) is used to call variants, while [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [GLnexus](https://github.com/dnanexus-rnd/GLnexus) are used for merging variants.
 
 | Path                                                                  | Description                                                                 | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- | ------------------ |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- |
 | `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           | :white_check_mark: |
+| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           | :white_check_mark: |
+| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
 | `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
 
@@ -188,8 +188,8 @@ In general, annotated variant calls are output per family while unannotated call
 [Echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
 | Path                                                     | Description                                                                    | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- | --- |
-| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |     |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
+| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |
 | `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
 | `snvs/family/{family}/{family}_snv_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |           | :white_check_mark:   |                              |
 | `snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
@@ -200,8 +200,8 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                            | Description                                              | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
 | --------------------------------------------------------------- | -------------------------------------------------------- | --------- | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           |                      |
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           | :white_check_mark:   |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           | :white_check_mark:   |
 | `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |           |                      | :white_check_mark:           |
 | `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      | :white_check_mark:           |
 
@@ -222,20 +222,20 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 
-!!!info "Structural variant merging"
+!!!info "Variant :white_check_markemerging strategies"
 
     SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
 | Path                                                            | Description                                  | Call SVs           | Call CNVs          | Call SVs & CNVs    |
-| --------------------------------------------------------------- | -------------------------------------------- | ------------------ | ------------------ | ------------------ | --- |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family |                    |                    | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                 |                    |                    | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family          | :white_check_mark: |                    |                    |     |
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                 | :white_check_mark: |                    |                    |
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
+| --------------------------------------------------------------- | -------------------------------------------- | ------------------ | ------------------ | ------------------ |
 | `svs/sample/{sample}/{sample}_svs.vcf.gz`                       | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
 | `svs/sample/{sample}/{sample}_svs.vcf.gz.tbi`                   | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family          | :white_check_mark: |                    |                    |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                 | :white_check_mark: |                    |                    |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family |                    |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                 |                    |                    | :white_check_mark: |
 
 #### Annotation
 

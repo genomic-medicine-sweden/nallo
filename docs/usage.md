@@ -447,4 +447,4 @@ The pipeline and container images can be downloaded using `nf-core download`, e.
 nf-core download genomic-medicine-sweden/nallo -r 0.3.2
 ```
 
-The [offline section](https://nf-co.re/docs/usage/offline#nextflow) from the nf-core docs should be followed for more information.
+The [offline section](https://nf-co.re/docs/usage/offline#nextflow) from the nf-core docs should be followed for more information about offline usage.
