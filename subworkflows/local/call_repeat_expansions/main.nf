@@ -1,5 +1,5 @@
 include { ADD_FOUND_IN_TAG                       } from '../../../modules/local/add_found_in_tag/main'
-include { TRGT_GENOTYPE                          } from '../../../modules/nf-core/trgt/genotype'
+include { TRGT_GENOTYPE                          } from '../../../modules/nf-core/trgt/genotype/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../../modules/nf-core/bcftools/sort/main'
