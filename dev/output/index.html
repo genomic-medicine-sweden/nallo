@@ -348,6 +348,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aligned-reads" class="md-nav__link">
     <span class="md-ellipsis">
       Aligned reads
@@ -496,6 +505,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="SNVs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -504,6 +546,39 @@
       SVs (and CNVs)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="SVs (and CNVs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -596,6 +671,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aligned-reads" class="md-nav__link">
     <span class="md-ellipsis">
       Aligned reads
@@ -744,6 +828,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="SNVs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -752,6 +869,39 @@
       SVs (and CNVs)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="SVs (and CNVs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ranking_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -788,52 +938,60 @@
 
 
 <h1 id="genomic-medicine-swedennallo-output">genomic-medicine-sweden/nallo: Output</h1>
-<p>In general, annotated variant calls are output per family, while unannotated calls are output per sample.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This document describes the pipeline output files and the tools used to generate them.</p>
 <h2 id="aligned-reads">Aligned reads</h2>
-<p><a href="https://github.com/lh3/minimap2">Minimap2</a> is used to map the reads to a reference genome. The aligned reads are sorted, (merged) and indexed using <a href="https://github.com/samtools/samtools">samtools</a>.</p>
+<p><a href="https://github.com/lh3/minimap2">Minimap2</a> is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using <a href="https://github.com/samtools/samtools">samtools</a>. If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Alignment</th>
+<th>Alignment &amp; phasing</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>aligned_reads/minimap2/{sample}/*.bam</code></td>
 <td>Alignment file in bam format</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>aligned_reads/minimap2/{sample}/*.bai</code></td>
 <td>Index of the corresponding bam file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Alignment</th>
+<th>Alignment &amp; phasing</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
 <td>BAM file with haplotags</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
 <td>Index of the BAM file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Alignments will only be output without haplotags if phasing is off.</p>
-</div>
 <h2 id="assembly">Assembly</h2>
-<p><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a> is used to assemble genomes. The assembled haplotypes are then comverted to fasta files using <a href="https://github.com/vgl-hub/gfastats">gfastats</a>. A deconstructed version of <a href="https://github.com/lh3/dipcall">dipcall</a> is to map the assembled haplotypes back to the reference genome.</p>
+<p><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a> is used to assemble genomes. The assembled haplotypes are then converted to fasta files using <a href="https://github.com/vgl-hub/gfastats">gfastats</a>. A deconstructed version of <a href="https://github.com/lh3/dipcall">dipcall</a> is used to map the assembled haplotypes back to the reference genome.</p>
 <table>
 <thead>
 <tr>
@@ -873,30 +1031,40 @@
 </tbody>
 </table>
 <h2 id="methylation-pileups">Methylation pileups</h2>
-<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV.</p>
+<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Alignment</th>
+<th>Alignment &amp; phasing</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz</code></td>
-<td>bedMethyl file with summary counts from haplotagged reads (if phasing is turned on)</td>
+<td>bedMethyl file with summary counts from haplotagged reads</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz</code></td>
-<td>bedMethyl file for ungrouped reads (if phasing is turned on)</td>
+<td>bedMethyl file for ungrouped reads</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz</code></td>
-<td>bedMethyl file with summary counts from all reads (if phasing is turned off)</td>
+<td>bedMethyl file with summary counts from all reads</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>methylation/modkit/pileup/{sample}/*.bed.gz.tbi</code></td>
 <td>Index of the corresponding bedMethyl file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1025,28 +1193,40 @@
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>With <code>--target_regions</code></th>
+<th>Without <code>--target_regions</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>qc/mosdepth/{sample}/*.mosdepth.global.dist.txt</code></td>
 <td>Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome</td>
-</tr>
-<tr>
-<td><code>qc/mosdepth/{sample}/*.mosdepth.region.dist.txt</code></td>
-<td>Cumulative distribution of bases covered for at least a given coverage value, across regions (if a BED file is used)</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>qc/mosdepth/{sample}/*.mosdepth.summary.txt</code></td>
 <td>Mosdepth summary file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>qc/mosdepth/{sample}/*.mosdepth.region.dist.txt</code></td>
+<td>Cumulative distribution of bases covered for at least a given coverage value, across regions</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>qc/mosdepth/{sample}/*.regions.bed.gz</code></td>
-<td>Depth per region (if a BED file is used)</td>
+<td>Depth per region</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>qc/mosdepth/{sample}/*.regions.bed.gz.csi</code></td>
 <td>Index of the regions.bed.gz file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1123,6 +1303,7 @@
 </tbody>
 </table>
 <h2 id="variants">Variants</h2>
+<p>In general, annotated variant calls are output per family while unannotated calls are output per sample.</p>
 <h3 id="paralogous-genes">Paralogous genes</h3>
 <p><a href="https://github.com/PacificBiosciences/paraphase">Paraphase</a> is used to call paralogous genes.</p>
 <table>
@@ -1135,7 +1316,7 @@
 <tbody>
 <tr>
 <td><code>paraphase/{sample}/*.bam</code></td>
-<td>BAM file with haplotypes grouped by HP</td>
+<td>BAM file with reads from analysed regions</td>
 </tr>
 <tr>
 <td><code>paraphase/{sample}/*.bai</code></td>
@@ -1157,41 +1338,51 @@
 </table>
 <h3 id="repeats">Repeats</h3>
 <p><a href="https://github.com/PacificBiosciences/trgt">TRGT</a> is used to call repeats.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Merged variants per family are only output without annotation if <code>--skip_repeat_annotation</code> is true. Variants per sample are always output without annotation.</p>
-</div>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call repeats</th>
+<th>Call &amp; annotate repeats</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz</code></td>
 <td>Merged VCF file per family</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz</code></td>
 <td>VCF file with called repeats for a sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bam</code></td>
 <td>BAM file with sorted spanning reads</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bai</code></td>
 <td>Index of the BAM file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 </tbody>
 </table>
@@ -1201,126 +1392,170 @@
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call repeats</th>
+<th>Call &amp; annotate repeats</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz</code></td>
 <td>Merged, annotated VCF file per family</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 </tbody>
 </table>
 <h3 id="snvs">SNVs</h3>
 <p><a href="https://github.com/google/deepvariant">DeepVariant</a> is used to call variants, while <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> and <a href="https://github.com/dnanexus-rnd/GLnexus">GLnexus</a> are used for merging variants.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Variants are only output without annotation and ranking if these subworkflows are turned off.</p>
-</div>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call SNVs</th>
+<th>Call &amp; annotate SNVs</th>
+<th>Call, annotate and rank SNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv.vcf.gz</code></td>
 <td>VCF file containing called variants with alternative genotypes for a sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi</code></td>
 <td>Index of the corresponding VCF file</td>
-</tr>
-<tr>
-<td><code>snvs/family/{family}/{family}_snv.vcf.gz</code></td>
-<td>VCF file containing called variants for all samples</td>
-</tr>
-<tr>
-<td><code>snvs/family/{family}/{family}_snv.vcf.gz.tbi</code></td>
-<td>Index of the corresponding VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>snvs/stats/sample/*.stats.txt</code></td>
 <td>Variant statistics</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html</code></td>
 <td>Visual report of SNV calls from DeepVariant</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>snvs/family/{family}/{family}_snv.vcf.gz</code></td>
+<td>VCF file containing called variants for all samples</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>snvs/family/{family}/{family}_snv.vcf.gz.tbi</code></td>
+<td>Index of the corresponding VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p><a href="https://github.com/brentp/echtvar">echtvar</a> and <a href="https://www.ensembl.org/vep">VEP</a> are used for annotating SNVs, while <a href="https://cadd.gs.washington.edu/">CADD</a> is used to annotate INDELs with CADD scores.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Variants are only output without ranking if that subworkflows are turned off.</p>
-</div>
+<h4 id="annotation">Annotation</h4>
+<p><a href="https://github.com/brentp/echtvar">Echtvar</a> and <a href="https://www.ensembl.org/vep">VEP</a> are used for annotating SNVs, while <a href="https://cadd.gs.washington.edu/">CADD</a> is used to annotate INDELs with CADD scores.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call SNVs</th>
+<th>Call &amp; annotate SNVs</th>
+<th>Call, annotate and rank SNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz</code></td>
 <td>VCF file containing annotated variants with alternative genotypes for a sample</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi</code></td>
 <td>Index of the annotated VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snv_annotated.vcf.gz</code></td>
 <td>VCF file containing annotated variants per family</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi</code></td>
 <td>Index of the annotated VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+<h4 id="ranking">Ranking</h4>
 <p><a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a> is used to rank the annotated SNVs and INDELs.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call SNVs</th>
+<th>Call &amp; annotate SNVs</th>
+<th>Call, annotate and rank SNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz</code></td>
 <td>VCF file with annotated and ranked variants for a sample</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the ranked VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz</code></td>
 <td>VCF file with annotated and ranked variants per family</td>
+<td></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the ranked VCF file</td>
+<td></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 </tbody>
 </table>
-<p><a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a> can be used to filter variants.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Variants are only output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_snvs_expression</code> has been used, and only family VCFs are output.</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
-</div>
+<h4 id="filtering">Filtering</h4>
+<p><a href="https://www.ensembl.org/vep">Filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> can be used to filter variants. These will be output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_snvs_expression</code> has been used, and only family VCFs are filtered.</p>
 <table>
 <thead>
 <tr>
@@ -1339,17 +1574,14 @@
 </tr>
 </tbody>
 </table>
-<h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
-<p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> is used to call structural variants.
-<a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. It also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.
-<a href="https://github.com/J35P312/SVDB">SVDB</a> is used to combine and merge SVs and CNVs within and between samples.
-<a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a> is used to rank the annotated SVs.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Variants are only output without annotation and/or ranking if these subworkflow is turned off.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
+<p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> are used to call structural variants, while <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Variant :white_check_markemerging strategies</p>
 <p>SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
 </div>
 <table>
@@ -1357,106 +1589,148 @@
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call SVs</th>
+<th>Call CNVs</th>
+<th>Call SVs &amp; CNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz</code></td>
-<td>VCF file with merged CNVs and SVs per family</td>
-</tr>
-<tr>
-<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi</code></td>
-<td>Index of the merged VCF file</td>
-</tr>
-<tr>
-<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz</code></td>
-<td>VCF file with merged SVs per family (output if CNV-calling is off)</td>
-</tr>
-<tr>
-<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi</code></td>
-<td>Index of the merged VCF file</td>
-</tr>
-<tr>
-<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
-<td>VCF file with CNVs per sample</td>
-</tr>
-<tr>
-<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
-<td>VCF file with CNVs per sample</td>
-</tr>
-<tr>
 <td><code>svs/sample/{sample}/{sample}_svs.vcf.gz</code></td>
 <td>VCF file with SVs per sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>svs/sample/{sample}/{sample}_svs.vcf.gz.tbi</code></td>
 <td>VCF file with SVs per sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
+<td>VCF file with CNVs per sample</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
+<td>VCF file with CNVs per sample</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz</code></td>
+<td>VCF file with merged SVs per family</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz</code></td>
+<td>VCF file with merged CNVs and SVs per family</td>
+<td></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi</code></td>
+<td>Index of the merged VCF file</td>
+<td></td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 </tbody>
 </table>
+<h4 id="annotation_1">Annotation</h4>
 <p><a href="https://github.com/J35P312/SVDB">SVDB</a> and <a href="https://www.ensembl.org/vep">VEP</a> are used to annotate structural variants.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Call &amp; annotate SVs</th>
+<th> Call &amp; annotate SVs &amp; CNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz</code></td>
 <td>VCF file with merged and annotated CNVs and SVs per family</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz</code></td>
-<td>VCF file with merged and annotated SVs per family (output if CNV-calling is off)</td>
+<td>VCF file with merged and annotated SVs per family</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+<h4 id="ranking_1">Ranking</h4>
 <p><a href="https://github.com/Clinical-Genomics/genmod">GENMOD</a> is used to rank the annotated SVs.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
+<th>Rank SVs</th>
+<th>Rank SVs &amp; CNVs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz</code></td>
 <td>VCF file with merged, annotated and ranked CNVs and SVs per family</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz</code></td>
-<td>VCF file with merged, annotated and ranked SVs per family (output if CNV-calling is off)</td>
+<td>VCF file with merged, annotated and ranked SVs per family</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p><a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a> can be used to filter variants.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Variants are only output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_svs_expression</code> has been used, and only family variants are output.</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
-</div>
+<h4 id="filtering_1">Filtering</h4>
+<p><a href="https://www.ensembl.org/vep">Filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a> can be used to filter variants. These will be output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_svs_expression</code> has been used, and only family VCFs are filtered.</p>
 <table>
 <thead>
 <tr>
@@ -1466,15 +1740,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>svs/family/{family}/{family}_*_filtered.vcf.gz</code></td>
+<td><code>svs/{family}/{family}_*_filtered.vcf.gz</code></td>
 <td>VCF file with filtered variants for a family</td>
 </tr>
 <tr>
-<td><code>svs/family/{family}/{family}_*_filtered.vcf.gz.tbi</code></td>
+<td><code>svs/{family}/{family}_*_filtered.vcf.gz.tbi</code></td>
 <td>Index of the filtered VCF file</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
+</div>
 <h2 id="visualization-tracks">Visualization Tracks</h2>
 <p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.</p>
 <table>

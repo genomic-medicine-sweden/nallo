@@ -394,6 +394,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Subworkflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skipping-subworkflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skipping subworkflows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -407,9 +431,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mapping" class="md-nav__link">
+  <a href="#alignment" class="md-nav__link">
     <span class="md-ellipsis">
-      Mapping
+      Alignment
     </span>
   </a>
   
@@ -443,9 +467,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#short-variant-calling" class="md-nav__link">
+  <a href="#snv-calling" class="md-nav__link">
     <span class="md-ellipsis">
-      Short variant calling
+      SNV calling
     </span>
   </a>
   
@@ -470,9 +494,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methylation" class="md-nav__link">
+  <a href="#methylation-pileups" class="md-nav__link">
     <span class="md-ellipsis">
-      Methylation
+      Methylation pileups
     </span>
   </a>
   
@@ -530,8 +554,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Rank SVs">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#filter-variants" class="md-nav__link">
@@ -539,11 +562,6 @@
       Filter variants
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -695,24 +713,6 @@
   <a href="#download-pipeline-and-containers" class="md-nav__link">
     <span class="md-ellipsis">
       Download pipeline and containers
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#download-references" class="md-nav__link">
-    <span class="md-ellipsis">
-      Download references
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#download-plugins" class="md-nav__link">
-    <span class="md-ellipsis">
-      Download plugins
     </span>
   </a>
   
@@ -884,6 +884,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Subworkflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skipping-subworkflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skipping subworkflows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -897,9 +921,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mapping" class="md-nav__link">
+  <a href="#alignment" class="md-nav__link">
     <span class="md-ellipsis">
-      Mapping
+      Alignment
     </span>
   </a>
   
@@ -933,9 +957,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#short-variant-calling" class="md-nav__link">
+  <a href="#snv-calling" class="md-nav__link">
     <span class="md-ellipsis">
-      Short variant calling
+      SNV calling
     </span>
   </a>
   
@@ -960,9 +984,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methylation" class="md-nav__link">
+  <a href="#methylation-pileups" class="md-nav__link">
     <span class="md-ellipsis">
-      Methylation
+      Methylation pileups
     </span>
   </a>
   
@@ -1020,8 +1044,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Rank SVs">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#filter-variants" class="md-nav__link">
@@ -1029,11 +1052,6 @@
       Filter variants
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1190,24 +1208,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#download-references" class="md-nav__link">
-    <span class="md-ellipsis">
-      Download references
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#download-plugins" class="md-nav__link">
-    <span class="md-ellipsis">
-      Download plugins
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1268,15 +1268,15 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <h2 id="running-genomic-medicine-swedennallo-with-your-data">Running genomic-medicine-sweden/nallo with your data</h2>
 <p>Running the pipeline on real data involves three steps:</p>
 <ol>
-<li>Preparing a samplesheet with your data</li>
-<li>Gather required files and references</li>
-<li>Supply samplesheet, refeferences and files and run the pipeline</li>
+<li>Prepare a samplesheet with your data</li>
+<li>Gather the required files and references</li>
+<li>Supply the samplesheet, reference files and run the pipeline</li>
 </ol>
 <h2 id="samplesheet">Samplesheet</h2>
 <p>First, you will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--input<span class="w"> </span><span class="s1">&#39;[path to samplesheet file]&#39;</span>
 </span></code></pre></div>
-<p>It has to be a comma-separated file with 7 columns, and a header row as shown in the example below:</p>
+<p>It has to be a comma-separated file with seven columns and a header row, as shown in the example below:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">testrun,HG002,/path/to/HG002.fastq.gz,FAM,HG003,0,1,2</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1</span>
@@ -1291,7 +1291,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <tbody>
 <tr>
 <td><code>project</code></td>
-<td>Project name must be provided and cannot contain spaces, needs to be the same for all samples."</td>
+<td>Project name must be provided and cannot contain spaces, needs to be the same for all samples.</td>
 </tr>
 <tr>
 <td><code>sample</code></td>
@@ -1323,31 +1323,31 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tr>
 </tbody>
 </table>
-<p>An <a href="../assets/samplesheet.csv">example samplesheet</a> has been provided with the pipeline.</p>
 <h2 id="presets">Presets</h2>
-<p>This pipeline comes with three different presets that should be set with the <code>--preset</code> parameter: <code>revio</code> (default), <code>pacbio</code> or <code>ONT_R10</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Effect of preset on subworkflows</p>
-<p>The selected preset will turn off subworkflows:</p>
+<p>This pipeline comes with three different presets that should be set with the <code>--preset</code> parameter: <code>revio</code> (default), <code>pacbio</code> or <code>ONT_R10</code>. The preset parameter controls certain technology specific tools and parameters.</p>
+<div class="admonition info">
+<p class="admonition-title">Preset effects on subworkflows</p>
 <ul>
 <li><code>--skip_genome_assembly</code> and <code>--skip_repeat_wf</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
 <h2 id="subworkflows">Subworkflows</h2>
-<p>As indicated above, this pipeline is divided into multiple subworkflows, each with its own input requirements and outputs. By default, all subworklows are active, and thus all mandatory input files are required.</p>
-<p>The only mandatory parameters for all subworkflows is the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
-<p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will try to guide you through which files are required:</p>
+<p>As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworklows are active, and thus all mandatory input files are required.</p>
+<h3 id="required-parameters">Required parameters</h3>
+<p>The only mandatory parameters for all subworkflows are the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
+<p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will would to guide you through which files are required:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  --skip_genome_assembly is NOT active, the following files are required: --dipcall_par
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  --skip_genome_assembly is NOT active, the following files are required: --par_regions
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  --skip_snv_annotation is NOT active, the following files are required: --echtvar_snv_databases
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  --skip_alignment is NOT active, the following files are required: --somalier_sites
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  --skip_snv_annotation is NOT active, the following files are required: --vep_cache
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  ...
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
-<p>A thorough description of required files are provided below.</p>
-<p>Additionally, if you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
+<p>A thorough description of the required files are provided below.</p>
+<h3 id="skipping-subworkflows">Skipping subworkflows</h3>
+<p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
 <p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
@@ -1356,9 +1356,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span></code></pre></div>
 <p>Because almost all other subworkflows relies on the mapping subworkflow.</p>
 <h2 id="reference-files-and-parameters">Reference files and parameters</h2>
-<p>As descibed above, the files required depend on the active subworkflows. All parameters are listed <a href="../parameters/">here</a>, but the most useful parameters needed to run the pipeline described in more detail below.</p>
-<h3 id="mapping">Mapping</h3>
-<p>The majority of subworkflows depend on the mapping (alignment) subworkflow which requires <code>--fasta</code> and <code>--somalier_sites</code>.</p>
+<p>All parameters are listed in the <a href="../parameters/">parameters section</a>, but the most useful parameters needed to run the pipeline described in more detail below.</p>
+<h3 id="alignment">Alignment</h3>
+<p>The majority of subworkflows depend on the alignment subworkflow which requires <code>--fasta</code> and <code>--somalier_sites</code>.</p>
 <table>
 <thead>
 <tr>
@@ -1369,21 +1369,20 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <tbody>
 <tr>
 <td><code>fasta</code></td>
-<td>Reference genome, either gzipped or uncompressed FASTA (e.g. <a href="https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use">GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</a>)</td>
+<td>Reference genome, either gzipped or uncompressed (e.g. <a href="https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use">GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</a>)</td>
 </tr>
 <tr>
 <td><code>somalier_sites</code></td>
-<td>A VCF of known polymorphic sites (e.g. <a href="https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz">sites.hg38.vcg.gz</a>), from which sex will be inferred if possible.</td>
+<td>A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. <a href="https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz">sites.hg38.vcg.gz</a>)</td>
 </tr>
 </tbody>
 </table>
 <p>Turned off with <code>--skip_alignment</code>.</p>
 <h3 id="qc">QC</h3>
-<p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>
+<p>This subworkflow depends on the alignment subworkflow, but requires no additional files.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
 <h3 id="assembly">Assembly</h3>
-<p>This subworkflow contains both genome assembly and assembly variant calling. The assemblyt variant calling needs the sex of samples and for samples with unknown sex this is inferred from aligned reads, therefore it depends on the mapping subworkflow.</p>
-<p>It requires a BED file with PAR regions.</p>
+<p>This subworkflow contains both genome assembly and assembly variant calling. The assembly variant calling needs the sex of samples. For samples with unknown sex this is inferred with the help of the aligned reads. Therefore it depends on the alignment subworkflow. It requires a BED file with PARs.</p>
 <table>
 <thead>
 <tr>
@@ -1400,16 +1399,18 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </table>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Make sure chrY PAR is hard masked in reference genome you are using.</p>
+<p>Make sure chrY PAR is hard masked in the reference genome.</p>
 </div>
 <p>Turned off with <code>--skip_genome_assembly</code>.</p>
 <h3 id="call-paralogs">Call paralogs</h3>
 <p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>
-<p>!!warning
-Only GRCh38 is supported.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only GRCh38 is supported.</p>
+</div>
 <p>Turned off with <code>--skip_call_paralogs</code>.</p>
-<h3 id="short-variant-calling">Short variant calling</h3>
-<p>This subworkflow depends on the mapping subworkflow, and required the same PAR regions file as the assembly workflow.</p>
+<h3 id="snv-calling">SNV calling</h3>
+<p>This subworkflow depends on the alignment subworkflow, and requires PARs.</p>
 <table>
 <thead>
 <tr>
@@ -1426,7 +1427,7 @@ Only GRCh38 is supported.</p>
 </table>
 <p>Turned off with <code>--skip_snv_calling</code>.</p>
 <h3 id="cnv-calling">CNV calling</h3>
-<p>This subworkflow depends on the mapping and short variant calling subworkflows, and requires the following additional files:</p>
+<p>This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:</p>
 <table>
 <thead>
 <tr>
@@ -1437,11 +1438,11 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>hificnv_expected_xy_cn</code></td>
-<td>expected XY copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed">expected_cn.hg38.XY.bed</a>)</td>
+<td>Expected XY copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed">expected_cn.hg38.XY.bed</a>)</td>
 </tr>
 <tr>
 <td><code>hificnv_expected_xx_cn</code></td>
-<td>expected XX copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed">expected_cn.hg38.XX.bed</a>)</td>
+<td>Expected XX copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed">expected_cn.hg38.XX.bed</a>)</td>
 </tr>
 <tr>
 <td><code>hificnv_excluded_regions</code></td>
@@ -1451,13 +1452,13 @@ Only GRCh38 is supported.</p>
 </table>
 <p>Turned off with <code>--skip_cnv_calling</code>.</p>
 <h3 id="phasing">Phasing</h3>
-<p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the mapping and short variant calling subworkflows, but requires no additional files.</p>
+<p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.</p>
 <p>Turned off with <code>--skip_phasing</code>.</p>
-<h3 id="methylation">Methylation</h3>
-<p>This subworkflow relies on mapping and short variant calling subworkflows, but requires no additional files.</p>
+<h3 id="methylation-pileups">Methylation pileups</h3>
+<p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.</p>
 <p>Turned off with <code>--skip_methylation_pileups</code>.</p>
 <h3 id="repeat-calling">Repeat calling</h3>
-<p>This subworkflow requires haplotagged BAM files, and such relies on the mapping, short variant calling and phasing subworkflows, and requires the following additional files:</p>
+<p>This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
 <tr>
@@ -1468,13 +1469,13 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>trgt_repeats</code></td>
-<td>a BED file with tandem repeats matching your reference genome (e.g. <a href="https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed">pathogenic_repeats.hg38.bed</a>&gt;))</td>
+<td>a BED file with tandem repeats matching your reference genome (e.g. <a href="https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed">pathogenic_repeats.hg38.bed</a>)</td>
 </tr>
 </tbody>
 </table>
 <p>Turned off with <code>--skip_repeat_calling</code>.</p>
 <h3 id="repeat-annotation">Repeat annotation</h3>
-<p>This subworkflow relies on the mapping, short variant calling, phasing and repeat calling subworkflows, and requires the following additional files:</p>
+<p>This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
 <tr>
@@ -1491,7 +1492,7 @@ Only GRCh38 is supported.</p>
 </table>
 <p>Turned off with <code>--skip_repeat_annotation</code>.</p>
 <h3 id="snv-annotation">SNV annotation</h3>
-<p>This subworkflow relies on the mapping and short variant calling, and requires the following additional files:</p>
+<p>This subworkflow relies on the alignment and SNV calling, and requires the following additional files:</p>
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
 <table>
@@ -1512,7 +1513,7 @@ Only GRCh38 is supported.</p>
 </tr>
 <tr>
 <td><code>echtvar_snv_databases</code> <sup>2</sup></td>
-<td> A csv file with annotation databases from (<a href="https://github.com/brentp/echtvar"><code>echtvar encode</code></a>)</td>
+<td>A csv file with annotation databases from <a href="https://github.com/brentp/echtvar">echtvar encode</a> (e.g. <a href="https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download"><code>gnomad.v3.1.2.echtvar.popmax.v2.zip</code></a>)</td>
 </tr>
 <tr>
 <td><code>variant_consequences_snvs</code></td>
@@ -1533,18 +1534,13 @@ Only GRCh38 is supported.</p>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>gnomad,/path/to/gnomad.v3.1.2.echtvar.popmax.v2.zip
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cadd,/path/to/cadd.v1.6.hg38.zip
 </span></code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Generating an echtvar database from a VCF-file is a fairly straightforward process described on the <a href="https://github.com/brentp/echtvar">echtvar GitHub</a>. However, the pre-made <code>gnomad.v3.1.2.echtvar.v2.zip</code> provided by them results in malformed INFO lines that are not compatible with genmod (run in the subsequent ranking subworkflow).</p>
-<p>For a very small test database that only overlaps the coordinates of the pipeline test data set, you could use <a href="https://github.com/genomic-medicine-sweden/test-datasets/raw/refs/heads/nallo/reference/cadd.v1.6.hg38.test_data.zip"><code>cadd.v1.6.hg38.test_data.zip</code></a> to get started.</p>
-</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored_indels</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echvtvar and <code>--echtvar_snv_databases</code>.</p>
 </div>
 <p>Turned off with <code>--skip_snv_annotation</code>.</p>
 <h3 id="rank-snvs-and-indels">Rank SNVs and INDELs</h3>
-<p>This subworkflow ranks SNVs, and relies on the mapping, short variant calling and SNV annotation subworkflows, and requires the following additional files:</p>
+<p>This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
 <tr>
@@ -1555,7 +1551,7 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>genmod_score_config_snvs</code></td>
-<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a>.</td>
+<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a></td>
 </tr>
 <tr>
 <td><code>genmod_reduced_penetrance</code></td>
@@ -1563,9 +1559,9 @@ Only GRCh38 is supported.</p>
 </tr>
 </tbody>
 </table>
-<p><code>--skip_rank_variants</code>.</p>
+<p>Turned off with <code>--skip_rank_variants</code>.</p>
 <h3 id="sv-annotation">SV annotation</h3>
-<p>This subworkflow relies on the mapping subworkflow, and requires the following additional files:</p>
+<p>This subworkflow relies on the alignment subworkflow, and requires the following additional files:</p>
 <table>
 <thead>
 <tr>
@@ -1576,7 +1572,7 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>svdb_sv_databases</code> <sup>1</sup></td>
-<td>Csv file with databases used for structural variant annotation in vcf format.</td>
+<td>Csv file with databases (VCFs) used for structural variant annotation</td>
 </tr>
 </tbody>
 </table>
@@ -1598,7 +1594,7 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>genmod_score_config_svs</code></td>
-<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a>.</td>
+<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a></td>
 </tr>
 <tr>
 <td><code>genmod_reduced_penetrance</code></td>
@@ -1607,8 +1603,8 @@ Only GRCh38 is supported.</p>
 </tbody>
 </table>
 <p><code>--skip_rank_variants</code>.</p>
-<h4 id="filter-variants">Filter variants</h4>
-<p>SNVs and INDELs, and SVs and CNVs can be filtered using <a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a>.</p>
+<h3 id="filter-variants">Filter variants</h3>
+<p>This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.</p>
 <table>
 <thead>
 <tr>
@@ -1619,22 +1615,29 @@ Only GRCh38 is supported.</p>
 <tbody>
 <tr>
 <td><code>filter_variants_hgnc_ids</code> <sup>1</sup></td>
-<td> Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/bed file with a <code>#hgnc_ids</code> column with one numerical HGNC ID per row. E.g. <code>4281</code>, not <code>HGNC:4281</code>.</td>
+<td> Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a <code>hgnc_ids</code> column, that has one numerical HGNC ID per row, e.g. <code>4281</code> or <code>HGNC:4281</code>.</td>
+</tr>
+<tr>
+<td><code>filter_snvs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SNVs, e.g. <code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code></td>
+</tr>
+<tr>
+<td><code>filter_svs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SVs, e.g.<code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code></td>
 </tr>
 </tbody>
 </table>
 <p><sup>1</sup> Example file for input with <code>--filter_variants_hgnc_ids</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>#hgnc_id
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>hgnc_id
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>4865
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>14150
 </span></code></pre></div>
-<p>To pass filters to bcftools view, use <code>--filter_snvs_expression</code> and <code>--filter_svs_expression</code>. E.g <code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code>.</p>
 <p>Filtering of variants only happens if any of these three parameters is active.</p>
 <h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
 <ul>
 <li>Limit SNV calling to regions in BED file (<code>--target_bed</code>).</li>
-<li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Limit this by setting <code>--snv_calling_processes</code> to a different number.</li>
-<li>By default the pipeline splits the input files into eight pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--alignment_processes</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
+<li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting <code>--snv_calling_processes</code> to a different number.</li>
+<li>By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--alignment_processes</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
 </ul>
 <h2 id="reproducibility">Reproducibility</h2>
 <p>It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.</p>
@@ -1712,18 +1715,7 @@ We recommend adding the following line to your environment to limit this (typica
 <p>The pipeline and container images can be downloaded using <code>nf-core download</code>, e.g.:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nf-core<span class="w"> </span>download<span class="w"> </span>genomic-medicine-sweden/nallo<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.3.2
 </span></code></pre></div>
-<h3 id="download-references">Download references</h3>
-<p>When running offline, you will have to make all the reference data available locally. The test profile will not be able to fetch data automatically.</p>
-<h3 id="download-plugins">Download plugins</h3>
-<p><a href="https://nf-co.re/docs/usage/offline#nextflow">This</a> section from the nf-core docs should be followed to download and transfer nextflow plugins from a computer connected to the internet to the offline environment.</p>
-<p>It is necessary to use an explicit version of <code>nf-validation</code> offline, or Nextflow will check for the most recent version online.</p>
-<p>Find the version of nf-validation you downloaded in <code>$HOME/.nextflow/plugins</code>, then specify this version for <code>nf-validation</code> in your configuration file:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>plugins {
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        id &#39;nf-schema@2.2.0&#39;
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>}
-</span></code></pre></div>
-<p>This should go in your Nextflow configuration file, specified with <code>-c &lt;YOURCONFIG&gt;</code> when running the pipeline.</p>
+<p>The <a href="https://nf-co.re/docs/usage/offline#nextflow">offline section</a> from the nf-core docs should be followed for more information about offline usage.</p>
 
 
 
