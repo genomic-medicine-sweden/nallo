@@ -1312,6 +1312,33 @@
 </tr>
 </tbody>
 </table>
+<p><a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a> can be used to filter variants.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Variants are only output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_snvs_expression</code> has been used, and only family VCFs are output.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>snvs/{family}/{family}_*_filtered.vcf.gz</code></td>
+<td>VCF file with filtered variants for a family</td>
+</tr>
+<tr>
+<td><code>snvs/{family}/{family}_*_filtered.vcf.gz.tbi</code></td>
+<td>Index of the filtered VCF file</td>
+</tr>
+</tbody>
+</table>
 <h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
 <p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> is used to call structural variants.
 <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. It also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.
@@ -1323,9 +1350,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Due to the complexity of SV merging strategies, SVs and CNVs are reported per family rather than per project.
-SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately,
-then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
+<p>SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
 </div>
 <table>
 <thead>
@@ -1420,6 +1445,33 @@ then the merged SV and CNV files are merged again, with priority given to coordi
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a> can be used to filter variants.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Variants are only output if either of <code>--filter_variants_hgnc_id</code> and <code>--filter_svs_expression</code> has been used, and only family variants are output.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Filtered variants are output alongside unfiltered variants as additional files.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>svs/family/{family}/{family}_*_filtered.vcf.gz</code></td>
+<td>VCF file with filtered variants for a family</td>
+</tr>
+<tr>
+<td><code>svs/family/{family}/{family}_*_filtered.vcf.gz.tbi</code></td>
+<td>Index of the filtered VCF file</td>
 </tr>
 </tbody>
 </table>

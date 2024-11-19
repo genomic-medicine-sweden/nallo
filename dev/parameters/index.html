@@ -871,7 +871,7 @@
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/22fb5b8a1a358df96e49f8d01a9c6e18770fbd6d/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ba720cd29322036d966ab3e4bc4c3d03e1731af5/</td>
 <td></td>
 <td>True</td>
 </tr>
@@ -1149,7 +1149,31 @@
 </tr>
 <tr>
 <td><code>vep_plugin_files</code></td>
-<td>A csv file with vep_plugin_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.</td>
+<td>A csv file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>filter_variants_hgnc_ids</code></td>
+<td>A tsv/csv file with a <code>#hgnc_ids</code> column header, and then one numerical HGNC ID per row. E.g. <code>4281</code>, not <code>HGNC:4281</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>filter_snvs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ&gt;60'"</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>filter_svs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ&gt;60'"</td>
 <td><code>string</code></td>
 <td></td>
 <td></td>

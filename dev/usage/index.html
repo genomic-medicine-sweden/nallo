@@ -530,6 +530,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Rank SVs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter variants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1004,6 +1019,21 @@
       Rank SVs
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Rank SVs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter variants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1577,6 +1607,29 @@ Only GRCh38 is supported.</p>
 </tbody>
 </table>
 <p><code>--skip_rank_variants</code>.</p>
+<h4 id="filter-variants">Filter variants</h4>
+<p>SNVs and INDELs, and SVs and CNVs can be filtered using <a href="https://www.ensembl.org/vep">filter_vep</a> and <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools view</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filter_variants_hgnc_ids</code> <sup>1</sup></td>
+<td> Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/bed file with a <code>#hgnc_ids</code> column with one numerical HGNC ID per row. E.g. <code>4281</code>, not <code>HGNC:4281</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> Example file for input with <code>--filter_variants_hgnc_ids</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>#hgnc_id
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>4865
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>14150
+</span></code></pre></div>
+<p>To pass filters to bcftools view, use <code>--filter_snvs_expression</code> and <code>--filter_svs_expression</code>. E.g <code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code>.</p>
+<p>Filtering of variants only happens if any of these three parameters is active.</p>
 <h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
 <ul>
 <li>Limit SNV calling to regions in BED file (<code>--target_bed</code>).</li>
@@ -1652,12 +1705,12 @@ Some HPC setups also allow you to run nextflow within a cluster job submitted yo
 <h2 id="nextflow-memory-requirements">Nextflow memory requirements</h2>
 <p>In some cases, the Nextflow Java virtual machines can start to request a large amount of memory.
 We recommend adding the following line to your environment to limit this (typically in <code>~/.bashrc</code> or <code>~./bash_profile</code>):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">&#39;-Xms1g -Xmx4g&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">&#39;-Xms1g -Xmx4g&#39;</span>
 </span></code></pre></div>
 <h2 id="running-the-pipeline-without-internet-access">Running the pipeline without internet access</h2>
 <h3 id="download-pipeline-and-containers">Download pipeline and containers</h3>
 <p>The pipeline and container images can be downloaded using <code>nf-core download</code>, e.g.:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nf-core<span class="w"> </span>download<span class="w"> </span>genomic-medicine-sweden/nallo<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.3.2
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nf-core<span class="w"> </span>download<span class="w"> </span>genomic-medicine-sweden/nallo<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.3.2
 </span></code></pre></div>
 <h3 id="download-references">Download references</h3>
 <p>When running offline, you will have to make all the reference data available locally. The test profile will not be able to fetch data automatically.</p>
@@ -1665,10 +1718,10 @@ We recommend adding the following line to your environment to limit this (typica
 <p><a href="https://nf-co.re/docs/usage/offline#nextflow">This</a> section from the nf-core docs should be followed to download and transfer nextflow plugins from a computer connected to the internet to the offline environment.</p>
 <p>It is necessary to use an explicit version of <code>nf-validation</code> offline, or Nextflow will check for the most recent version online.</p>
 <p>Find the version of nf-validation you downloaded in <code>$HOME/.nextflow/plugins</code>, then specify this version for <code>nf-validation</code> in your configuration file:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>plugins {
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>        // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>        id &#39;nf-schema@2.2.0&#39;
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>plugins {
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        // Set the plugin version explicitly, otherwise nextflow will look for the newest version online.
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        id &#39;nf-schema@2.2.0&#39;
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>}
 </span></code></pre></div>
 <p>This should go in your Nextflow configuration file, specified with <code>-c &lt;YOURCONFIG&gt;</code> when running the pipeline.</p>
 
