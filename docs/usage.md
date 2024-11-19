@@ -69,7 +69,7 @@ testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
 
 | Fields        | Description                                                                                                                       |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                   |
+| `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                    |
 | `sample`      | Custom sample name, cannot contain spaces.                                                                                        |
 | `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                        |
 | `family_id`   | Family ID must be provided and cannot contain spaces. If no family ID is available use the same ID as sample.                     |
@@ -132,10 +132,10 @@ All parameters are listed in the [parameters section](parameters.md), but the mo
 
 The majority of subworkflows depend on the alignment subworkflow which requires `--fasta` and `--somalier_sites`.
 
-| Parameter        | Description                                                                                                                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter        | Description                                                                                                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `fasta`          | Reference genome, either gzipped or uncompressed (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
-| `somalier_sites` | A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz))            |
+| `somalier_sites` | A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz))     |
 
 Turned off with `--skip_alignment`.
 
@@ -207,8 +207,8 @@ Turned off with `--skip_methylation_pileups`.
 
 This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:
 
-| Parameter      | Description                                                                                                                                                                                   |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter      | Description                                                                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)) |
 
 Turned off with `--skip_repeat_calling`.
@@ -233,7 +233,7 @@ This subworkflow relies on the alignment and SNV calling, and requires the follo
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
 | `vep_plugin_files` <sup>1</sup>      | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
-| `echtvar_snv_databases` <sup>2</sup> | A csv file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                                                                                                                                                       |
+| `echtvar_snv_databases` <sup>2</sup> | A csv file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                                            |
 | `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
@@ -267,7 +267,7 @@ This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV an
 
 | Parameter                   | Description                                                                                                                                                                                                                                                 |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `genmod_score_config_snvs`  |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                          |
+| `genmod_score_config_snvs`  |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                           |
 | `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
 
 Turned off with `--skip_rank_variants`.
@@ -276,8 +276,8 @@ Turned off with `--skip_rank_variants`.
 
 This subworkflow relies on the alignment subworkflow, and requires the following additional files:
 
-| Parameter                        | Description                                                                   |
-| -------------------------------- | ----------------------------------------------------------------------------- |
+| Parameter                        | Description                                                           |
+| -------------------------------- | --------------------------------------------------------------------- |
 | `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
@@ -297,7 +297,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 | Parameter                   | Description                                                                                                                                                                                                                                                 |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `genmod_score_config_svs`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                          |
+| `genmod_score_config_svs`   |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                           |
 | `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
 
 `--skip_rank_variants`.
@@ -306,11 +306,11 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.
 
-| Parameter                               | Description                                                                                                                                                             |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                               | Description                                                                                                                                                               |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `filter_variants_hgnc_ids` <sup>1</sup> |  Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a `hgnc_ids` column, that has one numerical HGNC ID per row, e.g. `4281` or `HGNC:4281`. |
-| `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_snvs_expression "-e 'INFO/AQ>60'"` |
-| `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_snvs_expression "-e 'INFO/AQ>60'"`
+| `filter_snvs_expression`                | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                           |
+| `filter_svs_expression`                 | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                             |
 
 <sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
 

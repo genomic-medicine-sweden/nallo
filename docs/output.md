@@ -8,16 +8,15 @@ This document describes the pipeline output files and the tools used to generate
 
 [Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.
 
-| Path                                    | Description                         | Alignment | Alignment & phasing |
-| --------------------------------------- | ----------------------------------- | -------------|--- |
-| `aligned_reads/minimap2/{sample}/*.bam` | Alignment file in bam format        | :white_check_mark: | |
-| `aligned_reads/minimap2/{sample}/*.bai` | Index of the corresponding bam file | :white_check_mark: | |
+| Path                                    | Description                         | Alignment          | Alignment & phasing |
+| --------------------------------------- | ----------------------------------- | ------------------ | ------------------- |
+| `aligned_reads/minimap2/{sample}/*.bam` | Alignment file in bam format        | :white_check_mark: |                     |
+| `aligned_reads/minimap2/{sample}/*.bai` | Index of the corresponding bam file | :white_check_mark: |                     |
 
-
-| Path                                    | Description                         | Alignment | Alignment & phasing |
-| --------------------------------------- | ----------------------------------- | -------------|--- |
-| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags | |:white_check_mark:
-| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   | |:white_check_mark:|
+| Path                                                  | Description             | Alignment | Alignment & phasing |
+| ----------------------------------------------------- | ----------------------- | --------- | ------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags |           | :white_check_mark:  |
+| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   |           | :white_check_mark:  |
 
 ## Assembly
 
@@ -37,12 +36,12 @@ This document describes the pipeline output files and the tools used to generate
 
 [Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.
 
-| Path                                                                         | Description                                                                         | Alignment | Alignment & phasing |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -- | --|
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads | | :white_check_mark: |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                       | | :white_check_mark: |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`                  | bedMethyl file with summary counts from all reads        | :white_check_mark: | |
-| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bedMethyl file                                           | :white_check_mark: | |
+| Path                                                                         | Description                                               | Alignment          | Alignment & phasing |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`                  | bedMethyl file with summary counts from all reads         | :white_check_mark: |                     |
+| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bedMethyl file                 | :white_check_mark: |                     |
 
 ## MultiQC
 
@@ -98,12 +97,12 @@ This document describes the pipeline output files and the tools used to generate
 [Mosdepth](https://github.com/brentp/mosdepth) is used to report quality control metrics such as coverage and GC content from alignment files.
 
 | Path                                              | Description                                                                                                           | With `--target_regions` | Without `--target_regions` |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -- | -- |
-| `qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark: | :white_check_mark: |
-| `qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark: | :white_check_mark: |
-| `qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions | :white_check_mark: | |
-| `qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region                                                                              | :white_check_mark: |
-| `qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark: |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------------- |
+| `qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
+| `qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
+| `qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
+| `qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
 
 ### Cramino
 
@@ -143,68 +142,68 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
 
-| Path                                                                 | Description                             |
-| -------------------------------------------------------------------- | --------------------------------------- |
-| `paraphase/{sample}/*.bam`                                           | BAM file with reads from analysed regions  |
-| `paraphase/{sample}/*.bai`                                           | Index of the BAM file                   |
-| `paraphase/{sample}/*.json`                                          | Summary of haplotypes and variant calls |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                       |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                   |
+| Path                                                                 | Description                               |
+| -------------------------------------------------------------------- | ----------------------------------------- |
+| `paraphase/{sample}/*.bam`                                           | BAM file with reads from analysed regions |
+| `paraphase/{sample}/*.bai`                                           | Index of the BAM file                     |
+| `paraphase/{sample}/*.json`                                          | Summary of haplotypes and variant calls   |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                         |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                     |
 
 ### Repeats
 
 [TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
 
-| Path                                                            | Description                               | Call repeats | Call & annotate repeats |
-| --------------------------------------------------------------- | ----------------------------------------- | -- | -- |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                | :white_check_mark: ||
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file |                    :white_check_mark: ||
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample |:white_check_mark: |:white_check_mark:|
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     |:white_check_mark:|:white_check_mark:|
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       |:white_check_mark:|:white_check_mark:|
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     |:white_check_mark:|:white_check_mark:|
+| Path                                                            | Description                               | Call repeats       | Call & annotate repeats |
+| --------------------------------------------------------------- | ----------------------------------------- | ------------------ | ----------------------- |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                | :white_check_mark: |                         |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     | :white_check_mark: |                         |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     | :white_check_mark: | :white_check_mark:      |
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
 | Path                                                                                | Description                           | Call repeats | Call & annotate repeats |
-| ----------------------------------------------------------------------------------- | ------------------------------------- |--|--|
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family ||:white_check_mark:|
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 ||:white_check_mark:|
+| ----------------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
+| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
+| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
 
 ### SNVs
 
 [DeepVariant](https://github.com/google/deepvariant) is used to call variants, while [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [GLnexus](https://github.com/dnanexus-rnd/GLnexus) are used for merging variants.
 
-| Path                                                                  | Description                                                                 | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------- | --|--|--|
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: |:white_check_mark: |:white_check_mark:|
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |:white_check_mark: |:white_check_mark:|:white_check_mark:|
-| `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: |:white_check_mark: |:white_check_mark:|
-| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: |:white_check_mark: |:white_check_mark:|:white_check_mark:|
-| `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         | :white_check_mark: |||
-| `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |||
+| Path                                                                  | Description                                                                 | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- | ------------------ |
+| `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           | :white_check_mark: |
+| `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           | :white_check_mark: |
+| `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
 
 #### Annotation
 
 [Echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
-| Path                                                     | Description                                                                    |  Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------ | --|--|--|
-| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample | | :white_check_mark: |||
-| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                | | :white_check_mark: ||
-| `snvs/family/{family}/{family}_snv_annotated.vcf.gz`     | VCF file containing annotated variants per family                              || :white_check_mark: ||
-| `snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                | | :white_check_mark: ||
+| Path                                                     | Description                                                                    | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- | --- |
+| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |     |
+| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snv_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
 | Path                                                            | Description                                              | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------------- | -------------------------------------------------------- |--|--|--|
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |||
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             | ||
-| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   | ||:white_check_mark:|
-| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             | ||:white_check_mark:|
+| --------------------------------------------------------------- | -------------------------------------------------------- | --------- | -------------------- | ---------------------------- |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           |                      |
+| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      |
+| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |           |                      | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      | :white_check_mark:           |
 
 #### Filtering
 
@@ -223,50 +222,49 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 
-
 !!!info "Structural variant merging"
 
     SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
-| Path                                                            | Description                                                        | Call SVs | Call CNVs | Call SVs & CNVs
-| --------------------------------------------------------------- | ------------------------------------------------------------------ |--|--|--|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family                       |||:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                                       |||:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family |:white_check_mark:||||
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                                       |:white_check_mark:|||
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                                      ||:white_check_mark:|:white_check_mark:|
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                                      ||:white_check_mark:|:white_check_mark:|
-| `svs/sample/{sample}/{sample}_svs.vcf.gz`                       | VCF file with SVs per sample                                       |:white_check_mark:||:white_check_mark:|
-| `svs/sample/{sample}/{sample}_svs.vcf.gz.tbi`                   | VCF file with SVs per sample                                       |:white_check_mark:||:white_check_mark:|
+| Path                                                            | Description                                  | Call SVs           | Call CNVs          | Call SVs & CNVs    |
+| --------------------------------------------------------------- | -------------------------------------------- | ------------------ | ------------------ | ------------------ | --- |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family |                    |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                 |                    |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family          | :white_check_mark: |                    |                    |     |
+| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                 | :white_check_mark: |                    |                    |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
+| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
+| `svs/sample/{sample}/{sample}_svs.vcf.gz`                       | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
+| `svs/sample/{sample}/{sample}_svs.vcf.gz.tbi`                   | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
 
 #### Annotation
 
 [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
 
-| Path                                                                      | Description                                                                      | Call & annotate SVs | Call & annotate SVs & CNVs |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --|--|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz`     | VCF file with merged and annotated CNVs and SVs per family                       ||:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi` | Index of the merged VCF file                                                     ||:white_check_mark:
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz`          | VCF file with merged and annotated SVs per family |:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi`      | Index of the merged VCF file                                                     |:white_check_mark:|
+| Path                                                                      | Description                                                | Call & annotate SVs |  Call & annotate SVs & CNVs |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------- | --------------------------- |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz`     | VCF file with merged and annotated CNVs and SVs per family |                     | :white_check_mark:          |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi` | Index of the merged VCF file                               |                     | :white_check_mark:          |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz`          | VCF file with merged and annotated SVs per family          | :white_check_mark:  |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi`      | Index of the merged VCF file                               | :white_check_mark:  |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SVs.
 
-| Path                                                                             | Description                                                                              | Rank SVs | Rank SVs & CNVs |
-| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --|--|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz`     | VCF file with merged, annotated and ranked CNVs and SVs per family                       ||:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi` | Index of the merged VCF file                                                             ||:white_check_mark:|
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family |:white_check_mark:||
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi`      | Index of the merged VCF file                                                             |:white_check_mark:||
+| Path                                                                             | Description                                                        | Rank SVs           | Rank SVs & CNVs    |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------ | ------------------ |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz`     | VCF file with merged, annotated and ranked CNVs and SVs per family |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi` | Index of the merged VCF file                                       |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family          | :white_check_mark: |                    |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi`      | Index of the merged VCF file                                       | :white_check_mark: |                    |
 
 #### Filtering
 
 [Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants. These will be output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family VCFs are filtered.
 
-| Path                                           | Description                                  |
-| ---------------------------------------------- | -------------------------------------------- |
+| Path                                          | Description                                  |
+| --------------------------------------------- | -------------------------------------------- |
 | `svs/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
 | `svs/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
 
