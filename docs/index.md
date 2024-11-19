@@ -44,7 +44,11 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 
 ### Ranking
 
-- Rank SNVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
+- Rank SNVs, INDELs, SVs and CNVs with [GENMOD](https://github.com/Clinical-Genomics/genmod)
+
+### Filtering
+
+- Filter SNVs, INDELs, SVs and CNVs with [filter_vep](https://www.ensembl.org/vep) and [bcftools view](https://samtools.github.io/bcftools/bcftools.html).
 
 ## Usage
 

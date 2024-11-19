@@ -215,6 +215,21 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |
 | `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |
 
+[filter_vep](https://www.ensembl.org/vep) and [bcftools view](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants.
+
+!!!note
+
+    Variants are only output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are output.
+
+!!!tip
+
+    Filtered variants are output alongside unfiltered variants as additional files.
+
+| Path                                           | Description                                  |
+| ---------------------------------------------- | -------------------------------------------- |
+| `snvs/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
+| `snvs/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
+
 ### SVs (and CNVs)
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) is used to call structural variants.
@@ -228,9 +243,7 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 
 !!!note
 
-    Due to the complexity of SV merging strategies, SVs and CNVs are reported per family rather than per project.
-    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately,
-    then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
+    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
 | Path                                                            | Description                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -260,6 +273,21 @@ If the pipeline is run with phasing, the aligned reads will be happlotagged usin
 | `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi` | Index of the merged VCF file                                                             |
 | `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family (output if CNV-calling is off) |
 | `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi`      | Index of the merged VCF file                                                             |
+
+[filter_vep](https://www.ensembl.org/vep) and [bcftools view](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants.
+
+!!!note
+
+    Variants are only output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family variants are output.
+
+!!!tip
+
+    Filtered variants are output alongside unfiltered variants as additional files.
+
+| Path                                                 | Description                                  |
+| ---------------------------------------------------- | -------------------------------------------- |
+| `svs/family/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
+| `svs/family/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
 
 ## Visualization Tracks
 

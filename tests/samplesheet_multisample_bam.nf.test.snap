@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            154,
+            158,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -51,6 +51,9 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.2
                 },
+                "BCFTOOLS_VIEW": {
+                    "bcftools": 1.2
+                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -80,6 +83,9 @@
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.0"
+                },
+                "ENSEMBLVEP_FILTERVEP": {
+                    "ensemblvep": 113.0
                 },
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0
@@ -549,6 +555,10 @@
                 "snvs/family/FAM",
                 "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz",
                 "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/multi_sample",
+                "snvs/multi_sample/FAM",
+                "snvs/multi_sample/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
+                "snvs/multi_sample/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio_A",
                 "snvs/sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz",
@@ -565,6 +575,8 @@
                 "svs/family/FAM",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_Revio_A",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_svs.vcf.gz",
@@ -791,6 +803,10 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=104, phased=false, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_snvs_annotated_ranked_filtered.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=55, phased=false, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_Revio_A_snv_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
@@ -801,6 +817,10 @@
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=87, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_A_svs.vcf.gz",
@@ -854,6 +874,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-12T16:48:50.801407496"
+        "timestamp": "2024-11-18T08:55:12.484845801"
     }
 }
