@@ -284,6 +284,16 @@
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
+                    "trgt/genotype": {
+                        "branch": "master",
+                        "git_sha": "484afd16770cf3c466a6c385e33746c877656663",
+                        "installed_by": ["modules"]
+                    },
+                    "trgt/merge": {
+                        "branch": "master",
+                        "git_sha": "6ba546c2f86dc205aca931b8bb3c92e85d548ada",
+                        "installed_by": ["modules"]
+                    },
                     "untar": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
