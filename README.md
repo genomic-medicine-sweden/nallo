@@ -52,7 +52,7 @@
 
 ##### Filtering
 
-- Filter SNVs, INDELs, SVs and CNVs with [filter_vep](https://www.ensembl.org/vep) and [bcftools view](https://samtools.github.io/bcftools/bcftools.html).
+- Filter SNVs, INDELs, SVs and CNVs with [filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html)
 
 ## Usage
 
