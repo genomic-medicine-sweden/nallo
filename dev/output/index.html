@@ -1327,11 +1327,11 @@
 <td>Summary of haplotypes and variant calls</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf</code></td>
+<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz</code></td>
 <td>VCF file per gene</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi</code></td>
+<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 </tr>
 </tbody>
@@ -1581,7 +1581,7 @@
 <h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
 <p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> are used to call structural variants, while <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.</p>
 <div class="admonition info">
-<p class="admonition-title">Variant :white_check_markemerging strategies</p>
+<p class="admonition-title">Variant merging strategies</p>
 <p>SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
 </div>
 <table>
