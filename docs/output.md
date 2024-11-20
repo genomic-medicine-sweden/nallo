@@ -142,13 +142,13 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
 
-| Path                                                                 | Description                               |
-| -------------------------------------------------------------------- | ----------------------------------------- |
-| `paraphase/{sample}/*.bam`                                           | BAM file with reads from analysed regions |
-| `paraphase/{sample}/*.bai`                                           | Index of the BAM file                     |
-| `paraphase/{sample}/*.json`                                          | Summary of haplotypes and variant calls   |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf`     | VCF file per gene                         |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.tbi` | Index of the VCF file                     |
+| Path                                                                    | Description                               |
+| ----------------------------------------------------------------------- | ----------------------------------------- |
+| `paraphase/{sample}/*.bam`                                              | BAM file with reads from analysed regions |
+| `paraphase/{sample}/*.bai`                                              | Index of the BAM file                     |
+| `paraphase/{sample}/*.json`                                             | Summary of haplotypes and variant calls   |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`     | VCF file per gene                         |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi` | Index of the VCF file                     |
 
 ### Repeats
 
@@ -222,7 +222,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 
-!!!info "Variant :white_check_markemerging strategies"
+!!!info "Variant merging strategies"
 
     SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
 
