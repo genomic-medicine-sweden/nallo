@@ -59,6 +59,7 @@ include { paramsSummaryMap                                  } from 'plugin/nf-sc
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -639,15 +640,29 @@ workflow NALLO {
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
         file(params.multiqc_methods_description, checkIfExists: true) :
         file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(
-        methodsDescriptionText(ch_multiqc_custom_methods_description))
-
+    ch_methods_description                = Channel.of(
+        methodsDescriptionText(ch_multiqc_custom_methods_description)
+    )
+    ch_methods_description_citation       = citationBibliographyText(
+        ch_versions,
+        file("$projectDir/assets/software_references.yml"),
+        'citation'
+    )
+    ch_methods_description_bibliography   = citationBibliographyText(
+        ch_versions,
+        file("$projectDir/assets/software_references.yml"),
+        'bibliography'
+    )
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files = ch_multiqc_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true
-        )
+        ch_methods_description
+            .concat(ch_methods_description_citation)
+            .concat(ch_methods_description_bibliography)
+            .flatten()
+            .collectFile(
+                name: 'methods_description_mqc.yaml',
+                sort: false // preserve order for correct yaml structure
+            )
     )
 
     MULTIQC (

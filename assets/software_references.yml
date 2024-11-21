@@ -1,0 +1,139 @@
+tool:
+  nextflow:
+    citation: ""
+    bibliography: 'Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316-319. doi: <a href="https://doi.org/10.1038/nbt.3820">10.1038/nbt.3820</a>'
+  nf_core:
+    citation: ""
+    bibliography: 'Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316-319. doi: <a href="https://doi.org/10.1038/nbt.3820">10.1038/nbt.3820</a>'
+  bioconda:
+    citation: ""
+    bibliography: 'Grüning, B., Dale, R., Sjödin, A., Chapman, B. A., Rowe, J., Tomkins-Tinch, C. H., Valieris, R., Köster, J., & Bioconda Team. (2018). Bioconda: sustainable and comprehensive software distribution for the life sciences. Nature Methods, 15(7), 475–476. doi: <a href="https://doi.org/10.1038/s41592-018-0046-7">10.1038/s41592-018-0046-7</a>'
+  biocontainers:
+    citation: ""
+    bibliography: 'da Veiga Leprevost, F., Grüning, B. A., Alves Aflitos, S., Röst, H. L., Uszkoreit, J., Barsnes, H., Vaudel, M., Moreno, P., Gatto, L., Weber, J., Bai, M., Jimenez, R. C., Sachsenberg, T., Pfeuffer, J., Vera Alvarez, R., Griss, J., Nesvizhskii, A. I., & Perez-Riverol, Y. (2017). BioContainers: an open-source and community-driven framework for software standardization. Bioinformatics (Oxford, England), 33(16), 2580–2582. doi: <a href="https://doi.org/10.1093/bioinformatics/btx192">10.1093/bioinformatics/btx192</a>'
+  multiqc:
+    citation: "MultiQC (Ewels et al. 2016)"
+    bibliography: "Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PMID: 27312411; PMCID: PMC5039924."
+  add_most_severe_consequence:
+    citation: "add_most_severe_consequence (Neethiraj 2022)"
+    bibliography: ""
+  add_most_severe_pli:
+    citation: "add_most_severe_pli (Neethiraj 2022)"
+    bibliography: ""
+  bcftools:
+    citation: "BCFtools (Danecek et al. 2021)"
+    bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"
+  bedtools:
+    citation: "BEDTools (Quinlan & Hall 2010)"
+    bibliography: "Quinlan AR and Hall IM, 2010. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 26, 6, pp. 841–842."
+  bgzip:
+    citation: "bgzip"
+    bibliography: ""
+  busybox_awk:
+    citation: "BusyBox's awk"
+    bibliography: ""
+  cadd:
+    citation: "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)"
+    bibliography: "Rentzsch P, Schubach M, Shendure J, Kircher M. CADD-Splice—improving genome-wide variant effect prediction using deep learning-derived splice scores. Genome Med. 2021;13(1):31. doi:10.1186/s13073-021-00835-9"
+  cramino:
+    citation: "cramino (De Coster & Rademakers 2023)"
+    bibliography: "Wouter De Coster, Rosa Rademakers, NanoPack2: population-scale evaluation of long-read sequencing data, Bioinformatics, Volume 39, Issue 5, May 2023, btad311, https://doi.org/10.1093/bioinformatics/btad311"
+  create_pedigree_file:
+    citation: "create_pedigree_file"
+    bibliography: ""
+  deepvariant:
+    citation: "DeepVariant (Poplin et al. 2018)"
+    bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
+  dipcall:
+    citation: "dipcall (Li et al. 2018)"
+    bibliography: "Li H, Bloom JM, Farjoun Y, Fleharty M, Gauthier L, Neale B, MacArthur D (2018) A synthetic-diploid benchmark for accurate variant-calling evaluation. Nat Methods, 15:595-597. [PMID:30013044]"
+  echtvar:
+    citation: "Echtvar (Pedersen & de Ridder 2023)"
+    bibliography: "Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931"
+  ensemblvep:
+    citation: "VEP (McLaren et al. 2016)"
+    bibliography: "McLaren W, Gil L, Hunt SE, et al. The Ensembl Variant Effect Predictor. Genome Biol. 2016;17(1):122. doi:10.1186/s13059-016-0974-4"
+  fastqc:
+    citation: "FastQC (Andrews 2010)"
+    bibliography: "Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
+  gawk:
+    citation: "gawk"
+    bibliography: ""
+  genmod:
+    citation: "Genmod (Magnusson et al. 2018)"
+    bibliography: "Magnusson M, Hughes T, Glabilloy, Bitdeli Chef. genmod: Version 3.7.3. Published online November 15, 2018. doi:10.5281/ZENODO.3841142"
+  gfastats:
+    citation: "Gfastats (Formenti et al. 2022)"
+    bibliography: "Giulio Formenti, Linelle Abueg, Angelo Brajuka, Nadolina Brajuka, Cristóbal Gallardo-Alba, Alice Giani, Olivier Fedrigo, Erich D Jarvis, Gfastats: conversion, evaluation and manipulation of genome sequences using assembly graphs, Bioinformatics, Volume 38, Issue 17, September 2022, Pages 4214–4216, https://doi.org/10.1093/bioinformatics/btac460"
+  glnexus:
+    citation: "GLnexus (Yun et al. 2021)"
+    bibliography: "Yun T, Li H, Chang PC, Lin MF, Carroll A, McLean CY. Accurate, scalable cohort variant calls using DeepVariant and GLnexus. Robinson P, ed. Bioinformatics. 2021;36(24):5582-5589. doi:10.1093/bioinformatics/btaa1081"
+  gunzip:
+    citation: "gunzip"
+    bibliography: ""
+  hifiasm:
+    citation: "Hifiasm (Cheng et al. 2021)"
+    bibliography: "Cheng, H., Concepcion, G.T., Feng, X. et al. Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm. Nat Methods 18, 170–175 (2021). https://doi.org/10.1038/s41592-020-01056-5"
+  hificnv:
+    citation: "HiFiCNV"
+    bibliography: ""
+  hiphase:
+    citation: "HiPhase (Holt et al. 2024)"
+    bibliography: "James M Holt, Christopher T Saunders, William J Rowell, Zev Kronenberg, Aaron M Wenger, Michael Eberle, HiPhase: jointly phasing small, structural, and tandem repeat variants from HiFi sequencing, Bioinformatics, Volume 40, Issue 2, February 2024, btae042, https://doi.org/10.1093/bioinformatics/btae042"
+  longphase:
+    citation: "LongPhase (Lin et al. 2024)"
+    bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
+  minimap2:
+    citation: "Minimap2 (Li 2018)"
+    bibliography: "Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191"
+  modkit:
+    citation: "modkit"
+    bibliography: ""
+  mosdepth:
+    citation: "mosdepth (Pedersen & Quinlan 2018)"
+    bibliography: "Pedersen BS, Quinlan AR. Mosdepth: quick coverage calculation for genomes and exomes. Hancock J, ed. Bioinformatics. 2018;34(5):867-868. doi:10.1093/bioinformatics/btx699"
+  paraphase:
+    citation: "Paraphase (Chen et al. 2023)"
+    bibliography: "Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294"
+  python:
+    citation: "Python (Van Rossum & Drake Jr 2009)"
+    bibliography: ""
+  samtools:
+    citation: "SAMtools (Danecek et al. 2021)"
+    bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"
+  sniffles:
+    citation: "Sniffles2 (Smolka et al. 2024)"
+    bibliography: "Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02024-y"
+  severus:
+    citation: "Severus (Keskus et al. 2024)"
+    bibliography: "Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756"
+  somalier:
+    citation: "Somalier (Pedersen et al. 2020)"
+    bibliography: "Pedersen, B.S., Bhetariya, P.J., Brown, J. et al. Somalier: rapid relatedness estimation for cancer and germline studies using efficient genome sketches. Genome Med 12, 62 (2020). https://doi.org/10.1186/s13073-020-00761-2"
+  split_bed_chunks:
+    citation: "split_bed_chunks"
+    bibliography: ""
+  splitubam:
+    citation: "splitubam"
+    bibliography: ""
+  stranger:
+    citation: "Stranger (Nilsson & Magnusson 2021)"
+    bibliography: "Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873"
+  svdb:
+    citation: "SVDB (Eisfeldt et al. 2017)"
+    bibliography: ""
+  tabix:
+    citation: "Tabix (Li 2011)"
+    bibliography: "Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011;27(5):718-719. doi:10.1093/bioinformatics/btq671"
+  trgt:
+    citation: "TRGT (Dolzhenko et al. 2024)"
+    bibliography: "Dolzhenko, E., English, A., Dashnow, H. et al. Characterization and visualization of tandem repeats at genome scale. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02057-3"
+  untar:
+    citation: "untar"
+    bibliography: ""
+  yak:
+    citation: "yak"
+    bibliography: ""
+  whatshap:
+    citation: "WhatsHap (Martin et al. 2016)"
+    bibliography: "Marcel Martin, Murray Patterson, Shilpa Garg, Sarah O Fischer, Nadia Pisanti, Gunnar W Klau, Alexander Schöenhuth, Tobias Marschall. bioRxiv 085050; doi: https://doi.org/10.1101/085050"

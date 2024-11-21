@@ -97,6 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#506](https://github.com/genomic-medicine-sweden/nallo/pull/506) - Updated documentation
 - [#507](https://github.com/genomic-medicine-sweden/nallo/pull/507) - Changed the default value of `ch_hgnc_ids` to allow running without `--filter_variants_hgnc_ids` introduced in [#496](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 - [#509](https://github.com/genomic-medicine-sweden/nallo/pull/509) - Updated documentation to fix mistakes
+- [#510](https://github.com/genomic-medicine-sweden/nallo/pull/510) - Changed the MultiQC methods description to update dynamically based on `ch_versions`
 
 ### `Removed`
 

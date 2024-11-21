@@ -5,7 +5,7 @@
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
-                    "busybox-awk": "1.36.1"
+                    "busybox_awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.0,
@@ -874,6 +874,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-18T08:55:12.484845801"
+        "timestamp": "2024-11-21T14:05:18.173305906"
     }
 }
