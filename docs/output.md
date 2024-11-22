@@ -187,23 +187,23 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
-| Path                                                     | Description                                                                    | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |
-| `snvs/sample/{sample}/{sample}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
-| `snvs/family/{family}/{family}_snv_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |           | :white_check_mark:   |                              |
-| `snvs/family/{family}/{family}_snv_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
+| Path                                                      | Description                                                                    | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
+| `snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |
+| `snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
-| Path                                                            | Description                                              | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------------- | -------------------------------------------------------- | --------- | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           | :white_check_mark:   |
-| `snvs/sample/{sample}/{sample}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           | :white_check_mark:   |
-| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |           |                      | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snv_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      | :white_check_mark:           |
+| Path                                                             | Description                                              | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| ---------------------------------------------------------------- | -------------------------------------------------------- | --------- | -------------------- | ---------------------------- |
+| `snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           | :white_check_mark:   |
+| `snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           | :white_check_mark:   |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |           |                      | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      | :white_check_mark:           |
 
 #### Filtering
 
