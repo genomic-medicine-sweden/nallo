@@ -98,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#507](https://github.com/genomic-medicine-sweden/nallo/pull/507) - Changed the default value of `ch_hgnc_ids` to allow running without `--filter_variants_hgnc_ids` introduced in [#496](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 - [#509](https://github.com/genomic-medicine-sweden/nallo/pull/509) - Updated documentation to fix mistakes
 - [#512](https://github.com/genomic-medicine-sweden/nallo/pull/512) - Changed one `single_sample` to `sample` and one `multi_sample` to `family` output directories missed in [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502)
+- [#512](https://github.com/genomic-medicine-sweden/nallo/pull/512) - Changed all `*_snv_*` to `*_snvs_*` for published output files to match `snvs`, `cnvs`, `svs` and `repeats`.
 
 ### `Removed`
 

@@ -559,11 +559,11 @@
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio_A",
-                "snvs/sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz",
-                "snvs/sample/HG002_Revio_A/HG002_Revio_A_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/sample/HG002_Revio_A/HG002_Revio_A_snvs_annotated_ranked.vcf.gz",
+                "snvs/sample/HG002_Revio_A/HG002_Revio_A_snvs_annotated_ranked.vcf.gz.tbi",
                 "snvs/sample/HG002_Revio_B",
-                "snvs/sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz",
-                "snvs/sample/HG002_Revio_B/HG002_Revio_B_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/sample/HG002_Revio_B/HG002_Revio_B_snvs_annotated_ranked.vcf.gz",
+                "snvs/sample/HG002_Revio_B/HG002_Revio_B_snvs_annotated_ranked.vcf.gz.tbi",
                 "snvs/stats",
                 "snvs/stats/sample",
                 "snvs/stats/sample/HG002_Revio_A.vcf.gz.bcftools_stats.txt",
@@ -802,11 +802,11 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=55, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_A_snv_annotated_ranked.vcf.gz",
+                    "HG002_Revio_A_snvs_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_B_snv_annotated_ranked.vcf.gz",
+                    "HG002_Revio_B_snvs_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=100, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -869,6 +869,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-22T11:40:12.186783341"
+        "timestamp": "2024-11-22T11:48:57.369487572"
     }
 }
