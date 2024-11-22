@@ -477,10 +477,8 @@
                 "snvs/family/FAM",
                 "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz",
                 "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz.tbi",
-                "snvs/multi_sample",
-                "snvs/multi_sample/FAM",
-                "snvs/multi_sample/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/multi_sample/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_snv_annotated_ranked.vcf.gz",
@@ -672,6 +670,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-22T11:34:12.100134576"
+        "timestamp": "2024-11-22T11:39:58.90685042"
     }
 }
