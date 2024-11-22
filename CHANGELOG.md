@@ -3,6 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<<<<<<< HEAD
 ## 0.4.0 - [2024-11-22]
 
 ### `Added`
@@ -193,12 +194,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been removed if new version information isn't present.
 
 ## 0.3.2 - [2024-09-20]
+=======
+## v0.3.2 - [2024-09-20]
+>>>>>>> master
 
 ### `Fixed`
 
 - [#396](https://github.com/genomic-medicine-sweden/nallo/pull/396) - Fixed the release test profile not working, by pinning the testdata used [#395](https://github.com/genomic-medicine-sweden/nallo/issues/395)
 
+<<<<<<< HEAD
 ## 0.3.1 - [2024-09-11]
+=======
+## v0.3.1 - [2024-09-11]
+>>>>>>> master
 
 ### `Fixed`
 

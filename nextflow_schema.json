@@ -522,6 +522,147 @@
                 }
             },
             "required": ["preset"]
+<<<<<<< HEAD
+=======
+        },
+        "file_inputs": {
+            "title": "File inputs",
+            "type": "object",
+            "description": "The different files that are required. Some are only required by certain workflows, see the usage documentation.",
+            "default": "",
+            "fa_icon": "fas fa-copy",
+            "properties": {
+                "cadd_prescored": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing prescored indels for CADD.",
+                    "help_text": "This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
+                },
+                "cadd_resources": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing CADD annotations.",
+                    "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
+                },
+                "par_regions": {
+                    "type": "string",
+                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "tandem_repeats": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A tandem repeat BED file for sniffles",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true
+                },
+                "trgt_repeats": {
+                    "type": "string",
+                    "description": "A BED file with repeats to be genotyped with TRGT",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "snp_db": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.csv$",
+                    "format": "file-path",
+                    "mimetype": "text/csv",
+                    "schema": "/assets/schema_snpdb.json",
+                    "description": "A csv file with echtvar databases to annotate SNVs with",
+                    "exists": true
+                },
+                "variant_catalog": {
+                    "type": "string",
+                    "description": "A variant catalog json-file for stranger",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "variant_consequences_snv": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
+                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "vep_cache": {
+                    "type": "string",
+                    "description": "A path to the VEP cache location",
+                    "format": "path",
+                    "exists": true
+                },
+                "bed": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest, used to limit short variant calling.",
+                    "exists": true
+                },
+                "hificnv_xy": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XY samples.",
+                    "exists": true
+                },
+                "hificnv_xx": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XX samples.",
+                    "exists": true
+                },
+                "hificnv_exclude": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
+                    "exists": true
+                },
+                "reduced_penetrance": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file-csv",
+                    "description": "A file with gene ids that have reduced penetrance. For use with genmod."
+                },
+                "score_config_snv": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A SNV rank model config file for genmod."
+                },
+                "somalier_sites": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                    "description": "A VCF of known polymorphic sites for somalier",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "validationFailUnrecognisedParams": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Validation of parameters fails when an unrecognised parameter is found.",
+                    "hidden": true,
+                    "help_text": "By default, when an unrecognised parameter is found, it returns a warning."
+                },
+                "validationLenientMode": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Validation of parameters in lenient more.",
+                    "hidden": true,
+                    "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                },
+                "pipelines_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo-0.3.2/",
+                    "hidden": true
+                }
+            }
+>>>>>>> master
         }
     },
     "allOf": [
