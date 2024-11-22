@@ -5,7 +5,7 @@
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
-                    "busybox-awk": "1.36.1"
+                    "busybox_awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.0,
