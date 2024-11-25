@@ -291,7 +291,7 @@
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "6ba546c2f86dc205aca931b8bb3c92e85d548ada",
+                        "git_sha": "8f77dd07042aef4eb19ea7fa91496a41975299b0",
                         "installed_by": ["modules"]
                     },
                     "untar": {
