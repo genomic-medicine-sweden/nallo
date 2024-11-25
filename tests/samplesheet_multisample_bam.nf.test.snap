@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            158,
+            159,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,

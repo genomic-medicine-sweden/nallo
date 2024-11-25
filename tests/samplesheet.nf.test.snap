@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            115,
+            116,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
