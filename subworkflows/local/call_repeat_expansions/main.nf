@@ -4,6 +4,7 @@ include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../../modules/nf-cor
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../../modules/nf-core/samtools/sort/main'
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE                             } from '../../../modules/nf-core/trgt/merge/main'
+include { BCFTOOLS_INDEX                         } from '../../../modules/nf-core/bcftools/index/main'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -63,9 +64,16 @@ workflow CALL_REPEAT_EXPANSIONS {
     )
     ch_versions = ch_versions.mix(TRGT_MERGE.out.versions)
 
+    BCFTOOLS_INDEX(
+        TRGT_MERGE.out.vcf
+    )
+
+
     emit:
     sample_vcf  = BCFTOOLS_SORT_TRGT.out.vcf  // channel: [ val(meta), path(vcf) ]
-    family_vcf  = TRGT_MERGE.out.vcf      // channel: [ val(meta), path(vcf) ]
+    sample_tbi  = BCFTOOLS_SORT_TRGT.out.tbi  // channel: [ val(meta), path(tbi) ]
+    family_vcf  = TRGT_MERGE.out.vcf          // channel: [ val(meta), path(vcf) ]
+    family_tbi  = BCFTOOLS_INDEX.out.tbi      // channel: [ val(meta), path(tbi) ]
     sample_bam  = SAMTOOLS_SORT_TRGT.out.bam  // channel: [ val(meta), path(bam) ]
     sample_bai  = SAMTOOLS_INDEX_TRGT.out.bai // channel: [ val(meta), path(bai) ]
     versions    = ch_versions                 // channel: [ versions.yml ]
