@@ -16,11 +16,6 @@
                         "git_sha": "d1e0ec7670fa77905a378627232566ce54c3c26d",
                         "installed_by": ["modules"]
                     },
-                    "bcftools/merge": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
-                    },
                     "bcftools/norm": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
