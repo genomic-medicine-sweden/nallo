@@ -54,10 +54,10 @@ workflow CALL_REPEAT_EXPANSIONS {
         .join( BCFTOOLS_SORT_TRGT.out.tbi )
         .map { meta, bcf, csi -> [ [ id : meta.family_id ], bcf, csi ] }
         .groupTuple()
-        .set{ ch_bcftools_merge_in }
+        .set{ ch_trgt_merge_in }
 
     TRGT_MERGE (
-        ch_bcftools_merge_in,
+        ch_trgt_merge_in,
         [[],[]],
         [[],[]],
     )
