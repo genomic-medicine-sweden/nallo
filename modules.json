@@ -146,8 +146,9 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "daa15d5226111e10ca95c0d4a85fa6bd11a08a01",
-                        "installed_by": ["modules"]
+                        "git_sha": "9c12c14558bb3b4ac7ee9542c268342782bacf9d",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
                     "longphase/haplotag": {
                         "branch": "master",
