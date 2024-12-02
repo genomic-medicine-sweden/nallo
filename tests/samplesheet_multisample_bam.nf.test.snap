@@ -24,6 +24,9 @@
                 "BCFTOOLS_FILLTAGS_ANNO": {
                     "bcftools": 1.2
                 },
+                "BCFTOOLS_INDEX": {
+                    "bcftools": 1.2
+                },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.2
                 },

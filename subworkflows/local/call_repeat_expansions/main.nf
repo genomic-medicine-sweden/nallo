@@ -67,6 +67,7 @@ workflow CALL_REPEAT_EXPANSIONS {
     BCFTOOLS_INDEX(
         TRGT_MERGE.out.vcf
     )
+    ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
 
     emit:
