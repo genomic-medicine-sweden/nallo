@@ -94,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed to annotating and ranking SNVs per family instead of per project
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed output documentation and structure to match `sample` and `family` for all variants
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed the way of validating the samplesheet to remove outputing false errors with `ifEmpty`
+- [#505](https://github.com/genomic-medicine-sweden/nallo/pull/505) - Updated TRGT to 1.2.0
 - [#506](https://github.com/genomic-medicine-sweden/nallo/pull/506) - Updated documentation
 - [#507](https://github.com/genomic-medicine-sweden/nallo/pull/507) - Changed the default value of `ch_hgnc_ids` to allow running without `--filter_variants_hgnc_ids` introduced in [#496](https://github.com/genomic-medicine-sweden/nallo/pull/443)
 - [#509](https://github.com/genomic-medicine-sweden/nallo/pull/509) - Updated documentation to fix mistakes
@@ -186,6 +187,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | stranger              | 0.9.1       | 0.9.2       |
 | multiqc               | 1.21        | 1.25.1      |
 | ensemblvep/filter_vep |             | 113         |
+| TRGT                  | 0.4.0       | 1.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

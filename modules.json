@@ -16,7 +16,7 @@
                         "git_sha": "d1e0ec7670fa77905a378627232566ce54c3c26d",
                         "installed_by": ["modules"]
                     },
-                    "bcftools/merge": {
+                    "bcftools/index": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
@@ -282,6 +282,16 @@
                     "tabix/tabix": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "installed_by": ["modules"]
+                    },
+                    "trgt/genotype": {
+                        "branch": "master",
+                        "git_sha": "484afd16770cf3c466a6c385e33746c877656663",
+                        "installed_by": ["modules"]
+                    },
+                    "trgt/merge": {
+                        "branch": "master",
+                        "git_sha": "8f77dd07042aef4eb19ea7fa91496a41975299b0",
                         "installed_by": ["modules"]
                     },
                     "untar": {
