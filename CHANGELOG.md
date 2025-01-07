@@ -87,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#485](https://github.com/genomic-medicine-sweden/nallo/pull/485) - Updated repeat expansion annotation to annotate per family instead of per sample
 - [#486](https://github.com/genomic-medicine-sweden/nallo/pull/486) - Updated nf-core modules
 - [#487](https://github.com/genomic-medicine-sweden/nallo/pull/487) - Changed CI tests to only run tests where changes have been made
+- [#488](https://github.com/genomic-medicine-sweden/nallo/pull/488) - Changed naming of input parameters
 - [#489](https://github.com/genomic-medicine-sweden/nallo/pull/489) - Updated nf-core template to 3.0.2
 - [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Refactored `nallo.nf` to remove many nested ifs and easier to follow logic
 - [#493](https://github.com/genomic-medicine-sweden/nallo/pull/493) - Updated rank_variants dependencies with sv_annotation
@@ -188,6 +189,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | multiqc               | 1.21        | 1.25.1      |
 | ensemblvep/filter_vep |             | 113         |
 | TRGT                  | 0.4.0       | 1.2.0       |
+| bcftools/merge        | 1.2         |             |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
