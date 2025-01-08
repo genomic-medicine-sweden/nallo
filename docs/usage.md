@@ -155,7 +155,7 @@ This subworkflow contains both genome assembly and assembly variant calling. The
 
 !!!warning
 
-    Make sure chrY PAR is hard masked in the reference genome.
+    Make sure chrY PAR is hard masked (masked with the letter N) in the reference genome you are using.
 
 Turned off with `--skip_genome_assembly`.
 
