@@ -521,7 +521,7 @@ def validatePacBioLicense() {
 }
 
 // Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
-// This is a convinience function to fail early if there are families without affected individuals.
+// This is a convenience function to fail early if there are families without affected individuals.
 def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 
     if (params.skip_rank_variants) {
