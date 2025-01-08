@@ -71,17 +71,17 @@ process ADD_FOUND_IN_TAG {
     stub:
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
-                    args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
-                    args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
-                    args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
-                    "vcf"
-    def index = args2.contains("--write-index=tbi") || args2.contains("-W=tbi") ? "tbi" :
-                args2.contains("--write-index=csi") || args2.contains("-W=csi") ? "csi" :
-                args2.contains("--write-index") || args2.contains("-W") ? "csi" :
-                ""
-    def create_cmd = extension.endsWith(".gz") ? "echo '' | gzip >" : "touch"
-    def create_index = extension.endsWith(".gz") && index.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index}" : ""
+    def extension = args2.contains('--output-type b') || args2.contains('-Ob') ? 'bcf.gz' :
+                    args2.contains('--output-type u') || args2.contains('-Ou') ? 'bcf' :
+                    args2.contains('--output-type z') || args2.contains('-Oz') ? "vcf.gz" :
+                    args2.contains('--output-type v') || args2.contains('-Ov') ? 'vcf' :
+                    'vcf'
+    def index = args2.contains('--write-index=tbi') || args2.contains('-W=tbi') ? 'tbi' :
+                args2.contains('--write-index=csi') || args2.contains("-W=csi") ? 'csi' :
+                args2.contains('--write-index') || args2.contains("-W") ? 'csi' :
+                ''
+    def create_cmd = extension.endsWith('.gz') ? "echo '' | gzip >" : 'touch'
+    def create_index = extension.endsWith('.gz') && index.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index}" : ''
 
     """
     ${create_cmd} ${prefix}.${extension}
