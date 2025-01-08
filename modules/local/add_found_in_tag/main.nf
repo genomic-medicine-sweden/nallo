@@ -28,7 +28,7 @@ process ADD_FOUND_IN_TAG {
                     args2.contains('--output-type u') || args2.contains('-Ou') ? 'bcf' :
                     args2.contains('--output-type z') || args2.contains('-Oz') ? 'vcf.gz' :
                     args2.contains('--output-type v') || args2.contains('-Ov') ? 'vcf' :
-                    "vcf"
+                    'vcf'
 
     """
     bcftools view \\
