@@ -24,7 +24,7 @@ process ADD_FOUND_IN_TAG {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def extension = args2.contains("--output-type b") || args2.contains("-Ob") ? "bcf.gz" :
+    def extension = args2.contains('--output-type b') || args2.contains('-Ob') ? 'bcf.gz' :
                     args2.contains("--output-type u") || args2.contains("-Ou") ? "bcf" :
                     args2.contains("--output-type z") || args2.contains("-Oz") ? "vcf.gz" :
                     args2.contains("--output-type v") || args2.contains("-Ov") ? "vcf" :
