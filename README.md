@@ -24,7 +24,7 @@
 ##### Alignment & assembly
 
 - Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
-- Assemble (trio-binned) haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
+- Assemble haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
 
 ##### Variant calling
 
@@ -42,7 +42,7 @@
 
 ##### Annotation
 
-- Annotate SNVs and INDELs with databases of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
+- Annotate SNVs and INDELs with databases of choice, e.g. [gnomAD](https://gnomad.broadinstitute.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [CADD](https://cadd.gs.washington.edu) with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
 - Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
