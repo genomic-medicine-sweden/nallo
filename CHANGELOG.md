@@ -104,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#512](https://github.com/genomic-medicine-sweden/nallo/pull/512) - Changed one `single_sample` to `sample` and one `multi_sample` to `family` output directories missed in [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502)
 - [#512](https://github.com/genomic-medicine-sweden/nallo/pull/512) - Changed all `*_snv_*` to `*_snvs_*` for published output files to match `snvs`, `cnvs`, `svs` and `repeats`.
 - [#513](https://github.com/genomic-medicine-sweden/nallo/pull/513) - Updated CITATIONS.md link in README
+- [#523](https://github.com/genomic-medicine-sweden/nallo/pull/523) - Updated to filter more than one family per run
 
 ### `Removed`
 
