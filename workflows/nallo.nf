@@ -106,6 +106,7 @@ workflow NALLO {
         .map { it[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
+        .collect()
 
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
