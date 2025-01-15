@@ -1,25 +1,34 @@
 Changes in module 'nf-core/ensemblvep/vep'
+'modules/nf-core/ensemblvep/vep/meta.yml' is unchanged
+Changes in 'ensemblvep/vep/main.nf':
 --- modules/nf-core/ensemblvep/vep/main.nf
 +++ modules/nf-core/ensemblvep/vep/main.nf
 @@ -4,8 +4,8 @@
  
      conda "${moduleDir}/environment.yml"
      container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://depot.galaxyproject.org/singularity/ensembl-vep:111.0--pl5321h2a3209d_0' :
--        'biocontainers/ensembl-vep:111.0--pl5321h2a3209d_0' }"
+-        'https://depot.galaxyproject.org/singularity/ensembl-vep:113.0--pl5321h2a3209d_0' :
+-        'biocontainers/ensembl-vep:113.0--pl5321h2a3209d_0' }"
 +        'https://depot.galaxyproject.org/singularity/ensembl-vep:110.0--pl5321h2a3209d_0' :
 +        'biocontainers/ensembl-vep:110.0--pl5321h2a3209d_0' }"
  
      input:
      tuple val(meta), path(vcf), path(custom_extra_files)
 
+Changes in 'ensemblvep/vep/environment.yml':
 --- modules/nf-core/ensemblvep/vep/environment.yml
 +++ modules/nf-core/ensemblvep/vep/environment.yml
-@@ -4,4 +4,4 @@
+@@ -2,4 +2,4 @@
+   - conda-forge
    - bioconda
-   - defaults
  dependencies:
--  - bioconda::ensembl-vep=111.0
+-  - bioconda::ensembl-vep=113.0
 +  - bioconda::ensembl-vep=110.0
 
+'modules/nf-core/ensemblvep/vep/tests/tags.yml' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/nextflow.config' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/tab.gz.config' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/main.nf.test' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/vcf.config' is unchanged
 ************************************************************

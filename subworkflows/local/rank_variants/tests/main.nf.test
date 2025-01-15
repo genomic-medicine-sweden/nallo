@@ -1,0 +1,167 @@
+nextflow_workflow {
+
+    name "Test Workflow RANK_VARIANTS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "RANK_VARIANTS"
+
+    setup {
+        run("PREPARE_GENOME") {
+            script "../../prepare_genome.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = [
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ]
+                input[2] = true
+                input[3] = true
+                """
+            }
+        }
+        run("MINIMAP2_ALIGN") {
+            script "../../../../modules/nf-core/minimap2/align/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: 'project', num_intervals:1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                ]
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = true
+                input[3] = 'csi'
+                input[4] = false
+                input[5] = false
+                """
+            }
+        }
+        run("SHORT_VARIANT_CALLING") {
+            script "../../short_variant_calling/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                            .join(MINIMAP2_ALIGN.out.index)
+                            .join(Channel.of([
+                                [ id: 'project', num_intervals:1 ],
+                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                            ]))
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+            """
+            }
+        }
+        run("SNV_ANNOTATION") {
+            script "../../snv_annotation/main.nf"
+            process {
+                """
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                ]
+                input[2] = PREPARE_GENOME.out.fasta
+                input[3] = PREPARE_GENOME.out.fai
+                input[4] = PREPARE_GENOME.out.vep_resources.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = Channel.value([])
+                input[9] = null
+                input[10] = null
+                """
+            }
+        }
+        run("ANNOTATE_CSQ_PLI") {
+            script "../../../../subworkflows/local/annotate_consequence_pli.nf"
+            process {
+                """
+                input[0] = SNV_ANNOTATION.out.vcf
+                input[1] = [
+                    [ id: 'variant_consequences' ],
+                    [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]
+                ]
+                """
+            }
+        }
+        run("CREATE_PEDIGREE_FILE") {
+            script "../../../../modules/local/create_pedigree_file/main.nf"
+            process {
+                """
+                input[0] = [
+                    [id:'project'],
+                    [
+                        [ id: 'project', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
+                    ]
+                ]
+                """
+            }
+        }
+    }
+
+    test("1 sample") {
+
+        when {
+            workflow {
+                """
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
+                input[2] = Channel.of([
+                    [ id: 'genmod_reduced_penetrance' ],
+                    file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = Channel.of([
+                    [ id: 'genmod_score_config_snvs' ],
+                    file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    path(workflow.out.vcf.get(0).get(1)).vcf.summary, // Can't snapshot MD5 because VEP output is unstable
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
+                input[2] = Channel.of([
+                    [ id: 'genmod_reduced_penetrance' ],
+                    file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = Channel.of([
+                    [ id: 'genmod_score_config_snvs' ],
+                    file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

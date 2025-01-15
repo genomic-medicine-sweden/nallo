@@ -1,47 +1,41 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/nextflow_schema.json",
     "title": "genomic-medicine-sweden/nallo pipeline parameters",
     "description": "Long-read variant calling pipeline",
     "type": "object",
-    "definitions": {
+    "$defs": {
         "workflow_skip_options": {
             "title": "Workflow skip options",
             "type": "object",
             "description": "Allows skipping certain parts of the pipeline",
             "default": "",
             "properties": {
-                "skip_aligned_read_qc": {
+                "skip_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC of aligned reads",
+                    "description": "Skip QC of reads",
                     "default": false
                 },
-                "skip_raw_read_qc": {
-                    "type": "boolean",
-                    "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip QC of unaligned (raw) reads",
-                    "default": false
-                },
-                "skip_short_variant_calling": {
+                "skip_snv_calling": {
                     "type": "boolean",
                     "description": "Skip short variant calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_assembly_wf": {
+                "skip_genome_assembly": {
                     "type": "boolean",
                     "description": "Skip genome assembly and assembly variant calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_mapping_wf": {
+                "skip_alignment": {
                     "type": "boolean",
                     "description": "Skip read mapping (alignment)",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_wf": {
+                "skip_methylation_pileups": {
                     "type": "boolean",
                     "description": "Skip generation of methylation pileups",
                     "fa_icon": "fas fa-fast-forward",
@@ -59,7 +53,7 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_phasing_wf": {
+                "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
                     "description": "Skip phasing of variants and haplotagging of reads",
@@ -68,6 +62,11 @@
                 "skip_snv_annotation": {
                     "type": "boolean",
                     "description": "Skip short variant annotation",
+                    "default": false
+                },
+                "skip_sv_annotation": {
+                    "type": "boolean",
+                    "description": "Skip structural variant annotation",
                     "default": false
                 },
                 "skip_cnv_calling": {
@@ -123,6 +122,143 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                },
+                "cadd_prescored_indels": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing prescored indels for CADD.",
+                    "help_text": "This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
+                },
+                "cadd_resources": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "directory-path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to a directory containing CADD annotations.",
+                    "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
+                },
+                "par_regions": {
+                    "type": "string",
+                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "tandem_repeats": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A tandem repeat BED file for sniffles",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true
+                },
+                "trgt_repeats": {
+                    "type": "string",
+                    "description": "A BED file with repeats to be genotyped with TRGT",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "echtvar_snv_databases": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.csv$",
+                    "format": "file-path",
+                    "mimetype": "text/csv",
+                    "schema": "/assets/schema_snp_db.json",
+                    "description": "A csv file with echtvar databases to annotate SNVs with",
+                    "exists": true
+                },
+                "svdb_sv_databases": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "file-path",
+                    "description": "Databases used for structural variant annotation in vcf format.",
+                    "fa_icon": "fas fa-file-csv",
+                    "help_text": "Path to comma-separated file containing information about the databases used for structural variant annotation.",
+                    "pattern": "^\\S+\\.csv$",
+                    "mimetype": "text/csv",
+                    "schema": "assets/svdb_query_vcf_schema.json"
+                },
+                "stranger_repeat_catalog": {
+                    "type": "string",
+                    "description": "A variant catalog json-file for stranger",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "variant_consequences_snvs": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "variant_consequences_svs": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "vep_cache": {
+                    "type": "string",
+                    "description": "A path to the VEP cache location",
+                    "format": "path",
+                    "exists": true
+                },
+                "target_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest, used to limit variant calling.",
+                    "exists": true
+                },
+                "hificnv_expected_xy_cn": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XY samples.",
+                    "exists": true
+                },
+                "hificnv_expected_xx_cn": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file containing expected copy number regions for XX samples.",
+                    "exists": true
+                },
+                "hificnv_excluded_regions": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
+                    "exists": true
+                },
+                "genmod_reduced_penetrance": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file-csv",
+                    "description": "A file with gene ids that have reduced penetrance. For use with genmod."
+                },
+                "genmod_score_config_snvs": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A SNV rank model config file for genmod."
+                },
+                "genmod_score_config_svs": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A SV rank model config file for genmod."
+                },
+                "somalier_sites": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                    "description": "A VCF of known polymorphic sites for somalier",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "pipelines_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ba720cd29322036d966ab3e4bc4c3d03e1731af5/",
+                    "hidden": true
                 }
             }
         },
@@ -138,19 +274,6 @@
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
                     "format": "file-path",
                     "exists": true
-                },
-                "genome": {
-                    "type": "string",
-                    "description": "Name of iGenomes reference.",
-                    "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
-                },
-                "igenomes_ignore": {
-                    "type": "boolean",
-                    "description": "Do not load the iGenomes reference config.",
-                    "fa_icon": "fas fa-ban",
-                    "hidden": true,
-                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`.",
-                    "default": true
                 }
             }
         },
@@ -202,41 +325,6 @@
                 }
             }
         },
-        "max_job_request_options": {
-            "title": "Max job request options",
-            "type": "object",
-            "fa_icon": "fab fa-acquisitions-incorporated",
-            "description": "Set the top limit for requested resources for any single job.",
-            "help_text": "If you are running on a smaller system, a pipeline step requesting more resources than are available may cause the Nextflow to stop the run with an error. These options allow you to cap the maximum resources requested by any single job so that the pipeline will run on your system.\n\nNote that you can not _increase_ the resources requested by any job using these options. For that you will need your own configuration file. See [the nf-core website](https://nf-co.re/usage/configuration) for details.",
-            "properties": {
-                "max_cpus": {
-                    "type": "integer",
-                    "description": "Maximum number of CPUs that can be requested for any single job.",
-                    "default": 16,
-                    "fa_icon": "fas fa-microchip",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the CPU requirement for each process. Should be an integer e.g. `--max_cpus 1`"
-                },
-                "max_memory": {
-                    "type": "string",
-                    "description": "Maximum amount of memory that can be requested for any single job.",
-                    "default": "128.GB",
-                    "fa_icon": "fas fa-memory",
-                    "pattern": "^\\d+(\\.\\d+)?\\.?\\s*(K|M|G|T)?B$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the memory requirement for each process. Should be a string in the format integer-unit e.g. `--max_memory '8.GB'`"
-                },
-                "max_time": {
-                    "type": "string",
-                    "description": "Maximum amount of time that can be requested for any single job.",
-                    "default": "240.h",
-                    "fa_icon": "far fa-clock",
-                    "pattern": "^(\\d+\\.?\\s*(s|m|h|d|day)\\s*)+$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`"
-                }
-            }
-        },
         "generic_options": {
             "title": "Generic options",
             "type": "object",
@@ -244,12 +332,6 @@
             "description": "Less common options for the pipeline, typically set in a config file.",
             "help_text": "These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.\n\nTypically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.",
             "properties": {
-                "help": {
-                    "type": "boolean",
-                    "description": "Display help text.",
-                    "fa_icon": "fas fa-question-circle",
-                    "hidden": true
-                },
                 "version": {
                     "type": "boolean",
                     "description": "Display version and exit.",
@@ -324,28 +406,6 @@
                     "default": true,
                     "fa_icon": "fas fa-check-square",
                     "hidden": true
-                },
-                "validationShowHiddenParams": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-eye-slash",
-                    "description": "Show all params when using `--help`",
-                    "hidden": true,
-                    "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
-                },
-                "validationSkipDuplicateCheck": {
-                    "type": "boolean",
-                    "hidden": true,
-                    "description": "nf-validation related parameter"
-                },
-                "validationS3PathCheck": {
-                    "type": "boolean",
-                    "hidden": true,
-                    "description": "Boolean whether to validate validate AWS S3 paths"
-                },
-                "monochromeLogs": {
-                    "type": "boolean",
-                    "hidden": true,
-                    "description": "Boolean whether to color nf-validation logs"
                 }
             }
         },
@@ -361,17 +421,23 @@
                     "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
                     "enum": ["revio", "pacbio", "ONT_R10"]
                 },
-                "variant_caller": {
+                "snv_caller": {
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
                     "enum": ["deepvariant"]
                 },
+                "sv_caller": {
+                    "type": "string",
+                    "default": "severus",
+                    "description": "Which structural variant caller to use (`severus`, `sniffles`)",
+                    "enum": ["severus", "sniffles"]
+                },
                 "phaser": {
                     "type": "string",
-                    "default": "whatshap",
-                    "description": "Which phasing software to use (`whatshap`, `hiphase_snv`, `hiphase_sv`)",
-                    "enum": ["whatshap", "hiphase_snv", "hiphase_sv"]
+                    "default": "longphase",
+                    "description": "Which phasing software to use (`longphase`, `whatshap`, `hiphase`)",
+                    "enum": ["longphase", "whatshap", "hiphase"]
                 },
                 "hifiasm_mode": {
                     "type": "string",
@@ -379,16 +445,16 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
-                "parallel_alignments": {
+                "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
-                    "default": 1,
-                    "description": "If parallel_alignments is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
+                    "default": 8,
+                    "description": "If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time."
                 },
-                "parallel_snv": {
+                "snv_calling_processes": {
                     "type": "integer",
                     "default": 13,
-                    "description": "If parallel_snv is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
+                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
                     "minimum": 1
                 },
                 "vep_cache_version": {
@@ -399,8 +465,26 @@
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
-                    "description": "A csv file with paths to vep plugin files. pLI and LoFtool are required.",
+                    "description": "A csv file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
+                },
+                "filter_variants_hgnc_ids": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.(csv|tsv)$",
+                    "description": "A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`.",
+                    "format": "file-path",
+                    "exits": true,
+                    "schema": "assets/schema_hgnc_ids.json"
+                },
+                "filter_snvs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
+                },
+                "filter_svs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "deepvariant_model_type": {
                     "type": "string",
@@ -408,173 +492,68 @@
                     "description": "Sets the model type used for DeepVariant. This is set automatically using `--preset` by default.",
                     "hidden": true,
                     "enum": ["PACBIO", "ONT_R104"]
+                },
+                "minimap2_read_mapping_preset": {
+                    "type": "string",
+                    "description": "Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default.",
+                    "hidden": true,
+                    "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
+                    "default": "map-hifi"
+                },
+                "extra_modkit_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to modkit, used for test profile."
+                },
+                "extra_vep_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to VEP, used for test profile."
+                },
+                "extra_paraphase_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to Paraphase, used for test profile."
+                },
+                "extra_hifiasm_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to hifiasm, used for test profile."
                 }
             },
             "required": ["preset"]
-        },
-        "file_inputs": {
-            "title": "File inputs",
-            "type": "object",
-            "description": "The different files that are required. Some are only required by certain workflows, see the usage documentation.",
-            "default": "",
-            "fa_icon": "fas fa-copy",
-            "properties": {
-                "cadd_prescored": {
-                    "type": "string",
-                    "exists": true,
-                    "format": "directory-path",
-                    "fa_icon": "fas fa-file",
-                    "description": "Path to a directory containing prescored indels for CADD.",
-                    "help_text": "This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
-                },
-                "cadd_resources": {
-                    "type": "string",
-                    "exists": true,
-                    "format": "directory-path",
-                    "fa_icon": "fas fa-file",
-                    "description": "Path to a directory containing CADD annotations.",
-                    "help_text": "This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation."
-                },
-                "par_regions": {
-                    "type": "string",
-                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
-                    "format": "file-path",
-                    "exists": true
-                },
-                "tandem_repeats": {
-                    "type": "string",
-                    "format": "file-path",
-                    "description": "A tandem repeat BED file for sniffles",
-                    "pattern": "^\\S+\\.bed$",
-                    "exists": true
-                },
-                "trgt_repeats": {
-                    "type": "string",
-                    "description": "A BED file with repeats to be genotyped with TRGT",
-                    "format": "file-path",
-                    "exists": true
-                },
-                "snp_db": {
-                    "type": "string",
-                    "pattern": "^\\S+\\.csv$",
-                    "format": "file-path",
-                    "mimetype": "text/csv",
-                    "schema": "/assets/schema_snpdb.json",
-                    "description": "A csv file with echtvar databases to annotate SNVs with",
-                    "exists": true
-                },
-                "variant_catalog": {
-                    "type": "string",
-                    "description": "A variant catalog json-file for stranger",
-                    "format": "file-path",
-                    "exists": true
-                },
-                "variant_consequences_snv": {
-                    "type": "string",
-                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs.",
-                    "help_text": "For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
-                    "fa_icon": "fas fa-file-csv"
-                },
-                "vep_cache": {
-                    "type": "string",
-                    "description": "A path to the VEP cache location",
-                    "format": "path",
-                    "exists": true
-                },
-                "bed": {
-                    "type": "string",
-                    "pattern": "^\\S+\\.bed$",
-                    "format": "file-path",
-                    "description": "A BED file with regions of interest, used to limit short variant calling.",
-                    "exists": true
-                },
-                "hificnv_xy": {
-                    "type": "string",
-                    "format": "file-path",
-                    "description": "A BED file containing expected copy number regions for XY samples.",
-                    "exists": true
-                },
-                "hificnv_xx": {
-                    "type": "string",
-                    "format": "file-path",
-                    "description": "A BED file containing expected copy number regions for XX samples.",
-                    "exists": true
-                },
-                "hificnv_exclude": {
-                    "type": "string",
-                    "format": "file-path",
-                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
-                    "exists": true
-                },
-                "reduced_penetrance": {
-                    "type": "string",
-                    "exists": true,
-                    "format": "path",
-                    "fa_icon": "fas fa-file-csv",
-                    "description": "A file with gene ids that have reduced penetrance. For use with genmod."
-                },
-                "score_config_snv": {
-                    "type": "string",
-                    "exists": true,
-                    "format": "path",
-                    "fa_icon": "fas fa-file",
-                    "description": "A SNV rank model config file for genmod."
-                },
-                "somalier_sites": {
-                    "type": "string",
-                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                    "description": "A VCF of known polymorphic sites for somalier",
-                    "format": "file-path",
-                    "exists": true
-                },
-                "validationFailUnrecognisedParams": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters fails when an unrecognised parameter is found.",
-                    "hidden": true,
-                    "help_text": "By default, when an unrecognised parameter is found, it returns a warning."
-                },
-                "validationLenientMode": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters in lenient more.",
-                    "hidden": true,
-                    "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
-                },
-                "pipelines_testdata_base_path": {
-                    "type": "string",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo-0.3.2/",
-                    "hidden": true
-                }
-            }
         }
     },
     "allOf": [
         {
-            "$ref": "#/definitions/workflow_skip_options"
+            "$ref": "#/$defs/workflow_skip_options"
         },
         {
-            "$ref": "#/definitions/input_output_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/reference_genome_options"
+            "$ref": "#/$defs/reference_genome_options"
         },
         {
-            "$ref": "#/definitions/institutional_config_options"
+            "$ref": "#/$defs/institutional_config_options"
         },
         {
-            "$ref": "#/definitions/max_job_request_options"
+            "$ref": "#/$defs/generic_options"
         },
         {
-            "$ref": "#/definitions/generic_options"
+            "$ref": "#/$defs/workflow_options"
         },
         {
-            "$ref": "#/definitions/workflow_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/file_inputs"
+            "$ref": "#/$defs/reference_genome_options"
+        },
+        {
+            "$ref": "#/$defs/institutional_config_options"
+        },
+        {
+            "$ref": "#/$defs/generic_options"
         }
     ]
 }

@@ -1,4 +1,6 @@
 Changes in module 'nf-core/cadd'
+'modules/nf-core/cadd/meta.yml' is unchanged
+Changes in 'cadd/main.nf':
 --- modules/nf-core/cadd/main.nf
 +++ modules/nf-core/cadd/main.nf
 @@ -7,13 +7,14 @@
@@ -13,10 +15,12 @@ Changes in module 'nf-core/cadd'
  
      input:
      tuple val(meta), path(vcf)
-     path(annotation_dir)
-+    path(prescored_dir)
+-    path(annotation_dir)
++    tuple val(meta2), path(annotation_dir)
++    tuple val(meta3), path(prescored_dir)
  
      output:
      tuple val(meta), path("*.tsv.gz"), emit: tsv
 
+'modules/nf-core/cadd/environment.yml' is unchanged
 ************************************************************

@@ -4,7 +4,6 @@ nextflow_workflow {
     script "../"
     workflow "SNV_ANNOTATION"
     config "./nextflow.config"
-    tag "SNV_ANNOTATION"
 
     setup {
         run("GUNZIP") {
@@ -83,17 +82,17 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache}
                 input[5] = Channel.value('110')
-                input[6] = [
+                input[6] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
-                ]
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
                 input[8] = Channel.value([])
                 input[9] = null
@@ -108,8 +107,8 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[48..118], // Stable
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[121..150] // Stable
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
@@ -125,7 +124,7 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -133,9 +132,9 @@ nextflow_workflow {
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
-                input[6] = [
+                input[6] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
-                ]
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
                 input[8] = Channel.value([])
                 input[9] = null

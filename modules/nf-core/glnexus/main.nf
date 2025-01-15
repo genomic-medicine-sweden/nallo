@@ -3,7 +3,7 @@ process GLNEXUS {
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc 
+    container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc
 
     input:
     tuple val(meta), path(gvcfs)

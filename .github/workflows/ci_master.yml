@@ -39,7 +39,7 @@ jobs:
         parameters:
           - "--bed=`null`"
         NXF_VER:
-          - "23.04.0"
+          - "24.04.2"
           - "latest-everything"
     steps:
       - name: Check out pipeline code

@@ -1,0 +1,69 @@
+{
+    "1 sample": {
+        "content": [
+            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=121, phased=false, phasedAutodetect=false]"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-18T13:47:43.144635306"
+    },
+    "1 sample - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,7089dd9c4bcb1dc87f15d3b1a9d5e89d",
+                    "versions.yml:md5,90ddd1e5113e3c0c61c403c53029d0f1",
+                    "versions.yml:md5,c9446a89a358fa2126b666399c2c804e",
+                    "versions.yml:md5,cc68e7d53d2d24006094e28d37db20a8",
+                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce"
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,7089dd9c4bcb1dc87f15d3b1a9d5e89d",
+                    "versions.yml:md5,90ddd1e5113e3c0c61c403c53029d0f1",
+                    "versions.yml:md5,c9446a89a358fa2126b666399c2c804e",
+                    "versions.yml:md5,cc68e7d53d2d24006094e28d37db20a8",
+                    "versions.yml:md5,dd0a9b5a3a16e3bfdcea734de4509dce"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-04T14:34:36.22073696"
+    }
+}

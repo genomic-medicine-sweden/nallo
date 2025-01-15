@@ -1,0 +1,261 @@
+nextflow_workflow {
+
+    name "Test Workflow METHYLATION"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "METHYLATION"
+
+    setup {
+        run("PREPARE_GENOME") {
+            script "../../prepare_genome.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.empty()
+                input[2] = true
+                input[3] = false
+                """
+            }
+        }
+        run("MINIMAP2_ALIGN") {
+            script "../../../../modules/nf-core/minimap2/align/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: 'test', num_intervals:1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                ]
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = true
+                input[3] = 'csi'
+                input[4] = false
+                input[5] = false
+                """
+            }
+        }
+        run("SHORT_VARIANT_CALLING") {
+            script "../../short_variant_calling/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                            .join(MINIMAP2_ALIGN.out.index)
+                            .join(Channel.of([
+                                [ id: 'test', num_intervals:1 ],
+                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                            ]))
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+            """
+            }
+        }
+        run("PHASING") {
+            script "../../phasing.nf"
+            process {
+                """
+                input[0] = SHORT_VARIANT_CALLING.out.snp_calls_vcf
+                input[1] = SHORT_VARIANT_CALLING.out.snp_calls_tbi
+                input[2] = MINIMAP2_ALIGN.out.bam
+                            .join(MINIMAP2_ALIGN.out.index)
+                            .map { meta, bam, bai ->
+                                [ [ id : meta.id ], bam, bai ]
+                            }
+                input[3] = PREPARE_GENOME.out.fasta
+                input[4] = PREPARE_GENOME.out.fai
+                """
+            }
+        }
+    }
+
+    test("1 sample - [] phased") {
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] unphased") {
+        when {
+            params {
+                skip_phasing = true
+            }
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed phased") {
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed unphased") {
+        when {
+            params {
+                skip_phasing = true
+            }
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] phased - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed phased - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] unphased - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = true
+            }
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = [[],[]]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed unphased - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = true
+            }
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[1] = PREPARE_GENOME.out.fasta
+                input[2] = PREPARE_GENOME.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

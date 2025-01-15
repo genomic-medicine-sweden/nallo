@@ -14,12 +14,12 @@ include { TABIX_TABIX as TABIX_CADD            } from '../../../modules/nf-core/
 workflow ANNOTATE_CADD {
 
     take:
-    ch_fai            // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vcf            // channel: [mandatory] [ val(meta), path(vcfs) ]
-    ch_index          // channel: [mandatory] [ val(meta), path(tbis) ]
-    ch_header         // channel: [mandatory] [ path(txt) ]
-    ch_cadd_resources // channel: [mandatory] [ path(dir) ]
-    ch_cadd_prescored // channel: [mandatory] [ path(dir) ]
+    ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_vcf                   // channel: [mandatory] [ val(meta), path(vcfs) ]
+    ch_index                 // channel: [mandatory] [ val(meta), path(tbis) ]
+    ch_header                // channel: [mandatory] [ val(meta), path(txt) ]
+    ch_cadd_resources        // channel: [mandatory] [ val(meta), path(dir) ]
+    ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(dir) ]
 
     main:
     ch_versions = Channel.empty()
@@ -50,7 +50,7 @@ workflow ANNOTATE_CADD {
     )
     ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
-    CADD ( BCFTOOLS_VIEW.out.vcf, ch_cadd_resources, ch_cadd_prescored )
+    CADD ( BCFTOOLS_VIEW.out.vcf, ch_cadd_resources, ch_cadd_prescored_indels )
     ch_versions = ch_versions.mix(CADD.out.versions)
 
     TABIX_CADD ( CADD.out.tsv )
@@ -64,7 +64,7 @@ workflow ANNOTATE_CADD {
 
     ANNOTATE_INDELS (
         ch_annotate_indels_in,
-        ch_header,
+        ch_header.map { meta, header -> header },
         CADD_TO_REFERENCE_CHRNAMES.out.output.map { meta, txt -> txt }
     )
     ch_versions = ch_versions.mix(ANNOTATE_INDELS.out.versions)

@@ -1,0 +1,37 @@
+{
+    "create_pedigree_file - one sample": {
+        "content": [
+            [
+                "#family_id\tsample_id\tfather\tmother\tsex\tphenotype",
+                "family\tHG002.Revio\t0\t0\t0\t2"
+            ],
+            [
+                "versions.yml:md5,fb643cd2fc69cab285a7f0061ad223d8"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-04T16:16:12.293913485"
+    },
+    "create_pedigree_file - multiple samples": {
+        "content": [
+            [
+                "#family_id\tsample_id\tfather\tmother\tsex\tphenotype",
+                "FAM1\tHG002_Revio_A\t0\t0\t0\t2",
+                "FAM1\tHG002_Revio_B\t0\t0\t0\t1",
+                "FAM2\tHG002_Revio_AA\t0\t0\t0\t1",
+                "FAM2\tHG002_Revio_AB\t0\t0\t0\t1"
+            ],
+            [
+                "versions.yml:md5,fb643cd2fc69cab285a7f0061ad223d8"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-04T16:16:19.916570689"
+    }
+}

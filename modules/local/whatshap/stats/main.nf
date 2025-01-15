@@ -2,8 +2,10 @@ process WHATSHAP_STATS {
     tag "$meta.id"
     label 'process_single'
 
-    conda "bioconda::whatshap=2.2 bioconda::tabix=1.11"
-    container "docker.io/fellen31/whatshap-tabix:2.2"
+    conda "bioconda::whatshap=2.3"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/whatshap:2.3--py38h2494328_0' :
+        'quay.io/biocontainers/whatshap:2.3--py38h2494328_0' }"
 
     input:
     tuple val(meta), path(vcf), path(tbi)
@@ -36,7 +38,7 @@ process WHATSHAP_STATS {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.stats.tsv.gz
+    touch ${prefix}.stats.tsv
     touch ${prefix}.blocks.tsv
 
     cat <<-END_VERSIONS > versions.yml

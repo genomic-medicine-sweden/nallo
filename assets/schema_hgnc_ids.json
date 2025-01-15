@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_hgnc_ids.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.filter_variants_hgnc_ids schema",
+    "description": "Schema for the file provided with params.filter_variants_hgnc_ids",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "hgnc_id": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^\\S+$"
+                    },
+                    {
+                        "type": "integer"
+                    }
+                ],
+                "exists": true,
+                "errorMessage": "HGNC IDs must exist with a header line `hgnc_id`, then one HGNC ID per line, either as e.g. `4826` or `HGNC:4826`."
+            }
+        },
+        "required": ["hgnc_id"]
+    }
+}

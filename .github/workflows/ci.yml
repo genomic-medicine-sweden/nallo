@@ -7,9 +7,13 @@ on:
   pull_request:
   release:
     types: [published]
+  workflow_dispatch:
 
 env:
   NXF_ANSI_LOG: false
+  NXF_SINGULARITY_CACHEDIR: ${{ github.workspace }}/.singularity
+  NXF_SINGULARITY_LIBRARYDIR: ${{ github.workspace }}/.singularity
+  NFTEST_VER: "0.9.2"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
@@ -20,88 +24,55 @@ permissions:
 
 jobs:
   test:
-    name: Run pipeline with test data
-    # Only run on push if this is the nf-core dev branch (merged PRs)
-    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'genomic-medicine-sweden/nallo') }}"
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        parameters:
-          - ""
-          - "--preset ONT_R10 --input https://github.com/genomic-medicine-sweden/test-datasets/raw/e2266a34c14d1e0a9ef798de3cd81a76c9216fc1/testdata/samplesheet_multisample_bam_ont.csv --parallel_alignments 2 --parallel_snv 1"
-        NXF_VER:
-          - "23.04.0"
-          - "latest-everything"
-    steps:
-      - name: Check out pipeline code
-        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
-
-      - name: Install Nextflow
-        uses: nf-core/setup-nextflow@v2
-        with:
-          version: "${{ matrix.NXF_VER }}"
-
-      - name: Disk space cleanup
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
-
-      - name: Run pipeline with test data
-        run: |
-          nextflow run ${GITHUB_WORKSPACE} -profile test,docker --outdir ./results ${{ matrix.parameters }}
-  nftest:
-    name: ${{ matrix.tags }} ${{ matrix.profile }} NF-${{ matrix.NXF_VER }}
+    name: ${{ matrix.tags }} | ${{ matrix.profile }} | NF-${{ matrix.NXF_VER }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         NXF_VER:
+          - "24.04.2"
           - "latest-everything"
-          - "23.04.0"
         tags:
-          - "SHORT_VARIANT_CALLING"
-          - "SNV_ANNOTATION"
           - "samplesheet"
           - "samplesheet_multisample_bam"
+          - "samplesheet_multisample_ont_bam"
+          - "SHORT_VARIANT_CALLING"
+          - "SNV_ANNOTATION"
+          - "CALL_SVS"
+          - "ANNOTATE_SVS"
+          - "RANK_VARIANTS"
+          - "CALL_REPEAT_EXPANSIONS"
+          - "METHYLATION"
         profile:
           - "docker"
 
     steps:
       - name: Check out pipeline code
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Nextflow
-        uses: nf-core/setup-nextflow@b9f764e8ba5c76b712ace14ecbfcef0e40ae2dd8 # v1
+      - name: Set up Nextflow
+        uses: nf-core/setup-nextflow@v2
         with:
           version: "${{ matrix.NXF_VER }}"
 
       - uses: nf-core/setup-nf-test@v1
+        with:
+          version: ${{ env.NFTEST_VER }}
+          install-pdiff: true
 
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           architecture: "x64"
 
-      - name: Install pdiff to see diff between nf-test snapshots
-        run: |
-          python -m pip install --upgrade pip
-          pip install pdiff
-
       - name: Run nf-test
         run: |
-          nf-test test --verbose --tag ${{ matrix.tags }} --profile "+${{ matrix.profile }}" --junitxml=test.xml --tap=test.tap
-
-      - uses: pcolby/tap-summary@v1
-        with:
-          path: >-
-            test.tap
-
-      - name: Output log on failure
-        if: failure()
-        run: |
-          sudo apt install bat > /dev/null
-          batcat --decorations=always --color=always ${{ github.workspace }}/.nf-test/tests/*/meta/nextflow.log
-
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v3
-        if: always() # always run even if the previous step fails
-        with:
-          report_paths: test.xml
+          nf-test test \
+            --ci \
+            --changed-since HEAD^ \
+            --verbose \
+            --tag ${{ matrix.tags }} \
+            --profile "+${{ matrix.profile }}" \
+            --junitxml=test.xml

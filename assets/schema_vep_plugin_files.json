@@ -1,0 +1,20 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_vep_plugin_files.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.vep_plugin_files schema",
+    "description": "Schema for the file provided with params.vep_plugin_files",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "vep_files": {
+                "format": "file-path",
+                "type": "string",
+                "pattern": "^\\S+",
+                "exists": true,
+                "errorMessage": "Vep plugin file must be a path and exist."
+            }
+        },
+        "required": ["vep_files"]
+    }
+}

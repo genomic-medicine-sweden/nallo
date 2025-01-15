@@ -1,0 +1,643 @@
+{
+    "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1": {
+        "content": [
+            107,
+            {
+                "ADD_FOUND_IN_TAG": {
+                    "bcftools": 1.2,
+                    "busybox_awk": "1.36.1"
+                },
+                "ADD_MOST_SEVERE_CSQ": {
+                    "add_most_severe_consequence": 1.0,
+                    "python": "3.8.3"
+                },
+                "ADD_MOST_SEVERE_PLI": {
+                    "add_most_severe_pli": 1.0,
+                    "python": "3.8.3"
+                },
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_FILLTAGS": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_FILLTAGS_ANNO": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_PLUGINSPLIT_SNVS": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_QUERY": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_VIEW": {
+                    "bcftools": 1.2
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "CRAMINO": {
+                    "cramino": "0.14.5"
+                },
+                "CRAMINO_PHASED": {
+                    "cramino": "0.14.5"
+                },
+                "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.1.0"
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.6.1"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.6.1"
+                },
+                "ECHTVAR_ANNO": {
+                    "echtvar": "0.2.0"
+                },
+                "ENSEMBLVEP_FILTERVEP": {
+                    "ensemblvep": 113.0
+                },
+                "ENSEMBLVEP_SNV": {
+                    "ensemblvep": 110.0
+                },
+                "ENSEMBLVEP_SV": {
+                    "ensemblvep": 110.0
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "GENMOD_ANNOTATE": {
+                    "genmod": 3.9
+                },
+                "GENMOD_COMPOUND": {
+                    "genmod": 3.9
+                },
+                "GENMOD_MODELS": {
+                    "genmod": 3.9
+                },
+                "GENMOD_SCORE": {
+                    "genmod": 3.9
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3-0-gcecf42e"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.1
+                },
+                "HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.28-r1209",
+                    "samtools": 1.2
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.28-r1209"
+                },
+                "MODKIT_PILEUP": {
+                    "modkit": "0.3.0"
+                },
+                "MOSDEPTH": {
+                    "mosdepth": "0.3.8"
+                },
+                "PARAPHASE": {
+                    "minimap2": "2.28-r1209",
+                    "paraphase": "3.1.1",
+                    "samtools": 1.2
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_INDEX_WHATSHAP": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.21
+                },
+                "SEVERUS": {
+                    "severus": 1.1
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SPLIT_BED_CHUNKS": {
+                    "split_bed_chunks": 1.0
+                },
+                "SVDB_MERGE": {
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
+                },
+                "SVDB_MERGE_SVS_CNVS": {
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
+                },
+                "SVDB_QUERY": {
+                    "svdb": "2.8.2"
+                },
+                "TABIX_BGZIPTABIX": {
+                    "tabix": 1.2
+                },
+                "TABIX_ENSEMBLVEP_SNV": {
+                    "tabix": 1.2
+                },
+                "TABIX_ENSEMBLVEP_SV": {
+                    "tabix": 1.2
+                },
+                "TABIX_SVDB_MERGE": {
+                    "tabix": 1.2
+                },
+                "TABIX_SVDB_MERGE_SVS_CNVS": {
+                    "tabix": 1.2
+                },
+                "TABIX_TABIX": {
+                    "tabix": 1.2
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "WHATSHAP_HAPLOTAG": {
+                    "whatshap": 2.3
+                },
+                "WHATSHAP_PHASE": {
+                    "whatshap": 2.3,
+                    "bgzip": 1.2,
+                    "tabix": 1.2
+                },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.3
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.4.0"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002_ONT_A",
+                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam",
+                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai",
+                "aligned_reads/HG002_ONT_B",
+                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
+                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
+                "methylation",
+                "methylation/modkit",
+                "methylation/modkit/pileup",
+                "methylation/modkit/pileup/HG002_ONT_A",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz",
+                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
+                "multiqc/multiqc_data/bcftools_stats_indel-lengths.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Indels.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_SNP.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transitions.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt",
+                "multiqc/multiqc_data/fastqc-status-check-heatmap.txt",
+                "multiqc/multiqc_data/fastqc_adapter_content_plot.txt",
+                "multiqc/multiqc_data/fastqc_overrepresented_sequences_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_base_n_content_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_base_sequence_quality_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_gc_content_plot_Counts.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_gc_content_plot_Percentages.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_quality_scores_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_counts_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_length_distribution_plot.txt",
+                "multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/multiqc_data/mosdepth-coverage-per-contig-multi.txt",
+                "multiqc/multiqc_data/mosdepth-cumcoverage-dist-id.txt",
+                "multiqc/multiqc_data/mosdepth_cov_dist.txt",
+                "multiqc/multiqc_data/mosdepth_cumcov_dist.txt",
+                "multiqc/multiqc_data/mosdepth_perchrom.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_bcftools_stats.txt",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_somalier.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
+                "multiqc/multiqc_data/somalier_het_check_plot.txt",
+                "multiqc/multiqc_data/somalier_relatedness_heatmap_plot.txt",
+                "multiqc/multiqc_data/somalier_relatedness_plot.txt",
+                "multiqc/multiqc_data/somalier_sex_check_plot.txt",
+                "multiqc/multiqc_data/somalier_stats.txt",
+                "multiqc/multiqc_data/whatshap-stats-table.txt",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-pct.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_indel-lengths.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Indels.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_SNP.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transitions.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transversions.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc-status-check-heatmap.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_adapter_content_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_overrepresented_sequences_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_base_n_content_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_base_sequence_quality_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_gc_content_plot_Counts.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_gc_content_plot_Percentages.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_quality_scores_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_counts_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_counts_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_length_distribution_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
+                "multiqc/multiqc_plots/pdf/general_stats_table.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-log.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-cumcoverage-dist-id.pdf",
+                "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_relatedness_heatmap_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/whatshap-stats-table.pdf",
+                "multiqc/multiqc_plots/png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-cnt.png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-pct.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_indel-lengths.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Indels.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_SNP.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transitions.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transversions.png",
+                "multiqc/multiqc_plots/png/fastqc-status-check-heatmap.png",
+                "multiqc/multiqc_plots/png/fastqc_adapter_content_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_overrepresented_sequences_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_base_n_content_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_base_sequence_quality_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_gc_content_plot_Counts.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_gc_content_plot_Percentages.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_quality_scores_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_counts_plot-cnt.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_counts_plot-pct.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_length_distribution_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
+                "multiqc/multiqc_plots/png/general_stats_table.png",
+                "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-cnt.png",
+                "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-log.png",
+                "multiqc/multiqc_plots/png/mosdepth-cumcoverage-dist-id.png",
+                "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
+                "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
+                "multiqc/multiqc_plots/png/somalier_relatedness_heatmap_plot.png",
+                "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
+                "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
+                "multiqc/multiqc_plots/png/whatshap-stats-table.png",
+                "multiqc/multiqc_plots/svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-cnt.svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-pct.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_indel-lengths.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Indels.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_SNP.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transitions.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transversions.svg",
+                "multiqc/multiqc_plots/svg/fastqc-status-check-heatmap.svg",
+                "multiqc/multiqc_plots/svg/fastqc_adapter_content_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_overrepresented_sequences_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_base_n_content_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_base_sequence_quality_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_gc_content_plot_Counts.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_gc_content_plot_Percentages.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_quality_scores_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_counts_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_counts_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_length_distribution_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
+                "multiqc/multiqc_plots/svg/general_stats_table.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-cnt.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-log.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-cumcoverage-dist-id.svg",
+                "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_relatedness_heatmap_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
+                "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
+                "multiqc/multiqc_report.html",
+                "paraphase",
+                "paraphase/HG002_ONT_A",
+                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam",
+                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam.bai",
+                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.json",
+                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs",
+                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz",
+                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz.tbi",
+                "paraphase/HG002_ONT_B",
+                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam",
+                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam.bai",
+                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.json",
+                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs",
+                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz",
+                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
+                "phased_variants",
+                "phased_variants/HG002_ONT_A",
+                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz",
+                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi",
+                "phased_variants/HG002_ONT_B",
+                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz",
+                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi",
+                "pipeline_info",
+                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "qc",
+                "qc/cramino",
+                "qc/cramino/phased",
+                "qc/cramino/phased/HG002_ONT_A",
+                "qc/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.txt",
+                "qc/cramino/phased/HG002_ONT_B",
+                "qc/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.txt",
+                "qc/cramino/unphased",
+                "qc/cramino/unphased/HG002_ONT_A",
+                "qc/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.arrow",
+                "qc/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.txt",
+                "qc/cramino/unphased/HG002_ONT_B",
+                "qc/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.arrow",
+                "qc/cramino/unphased/HG002_ONT_B/HG002_ONT_B_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_A",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_A/HG002_ONT_A.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_B",
+                "qc/deepvariant_vcfstatsreport/HG002_ONT_B/HG002_ONT_B.visual_report.html",
+                "qc/fastqc",
+                "qc/fastqc/HG002_ONT_A",
+                "qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.html",
+                "qc/fastqc/HG002_ONT_A/HG002_ONT_A_fastqc.zip",
+                "qc/fastqc/HG002_ONT_B",
+                "qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.html",
+                "qc/fastqc/HG002_ONT_B/HG002_ONT_B_fastqc.zip",
+                "qc/mosdepth",
+                "qc/mosdepth/HG002_ONT_A",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.global.dist.txt",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.region.dist.txt",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.summary.txt",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz.csi",
+                "qc/mosdepth/HG002_ONT_B",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.global.dist.txt",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.region.dist.txt",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.summary.txt",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz.csi",
+                "qc/phasing_stats",
+                "qc/phasing_stats/HG002_ONT_A",
+                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.tsv",
+                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv",
+                "qc/phasing_stats/HG002_ONT_B",
+                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.tsv",
+                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz",
+                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002_ONT_A",
+                "snvs/sample/HG002_ONT_A/HG002_ONT_A_snvs_annotated_ranked.vcf.gz",
+                "snvs/sample/HG002_ONT_A/HG002_ONT_A_snvs_annotated_ranked.vcf.gz.tbi",
+                "snvs/sample/HG002_ONT_B",
+                "snvs/sample/HG002_ONT_B/HG002_ONT_B_snvs_annotated_ranked.vcf.gz",
+                "snvs/sample/HG002_ONT_B/HG002_ONT_B_snvs_annotated_ranked.vcf.gz.tbi",
+                "snvs/stats",
+                "snvs/stats/sample",
+                "snvs/stats/sample/HG002_ONT_A.vcf.gz.bcftools_stats.txt",
+                "snvs/stats/sample/HG002_ONT_B.vcf.gz.bcftools_stats.txt",
+                "svs",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
+                "svs/sample",
+                "svs/sample/HG002_ONT_A",
+                "svs/sample/HG002_ONT_A/HG002_ONT_A_cnvs.vcf.gz",
+                "svs/sample/HG002_ONT_A/HG002_ONT_A_cnvs.vcf.gz.tbi",
+                "svs/sample/HG002_ONT_A/HG002_ONT_A_svs.vcf.gz",
+                "svs/sample/HG002_ONT_A/HG002_ONT_A_svs.vcf.gz.tbi",
+                "svs/sample/HG002_ONT_B",
+                "svs/sample/HG002_ONT_B/HG002_ONT_B_cnvs.vcf.gz",
+                "svs/sample/HG002_ONT_B/HG002_ONT_B_cnvs.vcf.gz.tbi",
+                "svs/sample/HG002_ONT_B/HG002_ONT_B_svs.vcf.gz",
+                "svs/sample/HG002_ONT_B/HG002_ONT_B_svs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002_ONT_A",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.depth.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.maf.bw",
+                "visualization_tracks/HG002_ONT_B",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.depth.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
+            ],
+            [
+                "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
+                "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
+                "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
+                "HG002_ONT_A_modkit_pileup_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
+                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz:md5,b42b812e1dced6242ed206754c7b3f3e",
+                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi:md5,0c232dffb9651d934b179f95365931db",
+                "HG002_ONT_B_modkit_pileup_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
+                "HG002_ONT_B_modkit_pileup_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
+                "HG002_ONT_B_modkit_pileup_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
+                "HG002_ONT_B_modkit_pileup_2.bed.gz.tbi:md5,e6eb3c61b79a4abd0fd952f710d6eab3",
+                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz:md5,42dcaedf8c379a4e5dee0822d5e8aca4",
+                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi:md5,3d97d016882c99e4e21112fc76ceb2a2",
+                "bcftools-stats-subtypes.txt:md5,1a8c8da19e5bc947cfb77de3683c8c00",
+                "bcftools_stats_indel-lengths.txt:md5,cc976b96114f0b68daffec58a7643d53",
+                "fastqc-status-check-heatmap.txt:md5,03e5dc3abd2f2599a7bb03739dd5ca86",
+                "fastqc_adapter_content_plot.txt:md5,00c7bec7dd9304848f7d891d7d1fab7f",
+                "fastqc_overrepresented_sequences_plot.txt:md5,6f0148406e9d5358bf37375b33a4bc01",
+                "fastqc_per_base_n_content_plot.txt:md5,8551be865db8162f7d6203e0e34288e0",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,f5e2e866bebda66cd877522342a2bf8a",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,8f108751cb49e0d80729247b84ddee76",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,2c68289482d7bffc37efe8110eff9328",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,eb18c5356c9bf4eae99f0103b04a8a81",
+                "fastqc_sequence_counts_plot.txt:md5,d80ddc5d3e3810f5bad4e04b85bd3056",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,005e3c05e83b9e681f7d02709007df15",
+                "fastqc_sequence_length_distribution_plot.txt:md5,befaab9e643f27b4fc184577e2dd9dda",
+                "fastqc_top_overrepresented_sequences_table.txt:md5,48a5253938a61c69babe90a5c7c4b862",
+                "mosdepth-coverage-per-contig-multi.txt:md5,4339c1147fa7ec9059126bf4c8b6760e",
+                "mosdepth-cumcoverage-dist-id.txt:md5,d18aa3d23b90333c6d6d84bd0510c5c6",
+                "mosdepth_cov_dist.txt:md5,5ad1d589df3fa7fe5d21fc95001573a9",
+                "mosdepth_cumcov_dist.txt:md5,5ad1d589df3fa7fe5d21fc95001573a9",
+                "mosdepth_perchrom.txt:md5,86a907217d64d4c2717885403058580f",
+                "multiqc_bcftools_stats.txt:md5,41a78d00bdca33cf0d2a558bb60838db",
+                "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
+                "multiqc_fastqc.txt:md5,ce26d17e62f3c8a1c9a01a871a4b9586",
+                "multiqc_general_stats.txt:md5,0814fb98fbb85e001e9c0c04d586d602",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,e97b7038c7155326b5d6a2289cc0aeb7",
+                "multiqc_whatshap_stats.txt:md5,5c4b972c8d52b3d997f117b39ba3ad5d",
+                "somalier_stats.txt:md5,fec840d4fe202c0e3ff7ce94b2a3bf92",
+                "whatshap-stats-table.txt:md5,d552daaaef1c92c3351ec2f4de64e6ad",
+                "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
+                "HG002_ONT_A_cramino_aligned_phased.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
+                "HG002_ONT_B_cramino_aligned_phased.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
+                "HG002_ONT_A_cramino_aligned.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
+                "HG002_ONT_B_cramino_aligned.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
+                "HG002_ONT_A.mosdepth.global.dist.txt:md5,5ae0972357f99aa481a0bf12fb9e0b0b",
+                "HG002_ONT_A.mosdepth.region.dist.txt:md5,023b1c6aeaf8fa5ededd6b711a5cd012",
+                "HG002_ONT_A.mosdepth.summary.txt:md5,c3b664b0983213f73edf3c0d5a0b04a2",
+                "HG002_ONT_A.regions.bed.gz:md5,da66d741bb69b5c259a8611848839dc7",
+                "HG002_ONT_A.regions.bed.gz.csi:md5,76f06311933695287c8716fe2c8a2d20",
+                "HG002_ONT_B.mosdepth.global.dist.txt:md5,e551c7a9d1a26cecc99d15ac93a4a924",
+                "HG002_ONT_B.mosdepth.region.dist.txt:md5,11154f617f447f4c59dc192d9af4249f",
+                "HG002_ONT_B.mosdepth.summary.txt:md5,bcb06b29c22cb6ad200f283e72c29653",
+                "HG002_ONT_B.regions.bed.gz:md5,1aa62d46a1e6683da3d44c59c502354b",
+                "HG002_ONT_B.regions.bed.gz.csi:md5,11db27a464f8996bae5521ee7d71c1ce",
+                "HG002_ONT_A_stats.blocks.tsv:md5,aac8023443ddf578ffcd11121391f1cf",
+                "HG002_ONT_A_stats.stats.tsv:md5,27fdac1e01e6491374c631239e6183aa",
+                "HG002_ONT_B_stats.blocks.tsv:md5,0adf84be03536262bf8d58eda524d709",
+                "HG002_ONT_B_stats.stats.tsv:md5,eb2a2c3b64feb8acff4df3a1b8d33b78",
+                "HG002_ONT_A_hificnv.copynum.bedgraph:md5,4c5517c1783afa11ff93c8d8627fbe42",
+                "HG002_ONT_A_hificnv.depth.bw:md5,69c333b205994200641ea539b4c277c6",
+                "HG002_ONT_A_hificnv.maf.bw:md5,5b46c27cc53cc8dd68903738ab220c5f",
+                "HG002_ONT_B_hificnv.copynum.bedgraph:md5,7d30f621d502d16301fa79cf48a3b903",
+                "HG002_ONT_B_hificnv.depth.bw:md5,5153fd5b008285e0fa0bcfe5026373bf",
+                "HG002_ONT_B_hificnv.maf.bw:md5,02eba7a84f1de8c042e071587a81d279"
+            ],
+            [
+                [
+                    "HG002_ONT_A_haplotagged.bam",
+                    "53495f0b494894437c243a5c5f47c4fc"
+                ],
+                [
+                    "HG002_ONT_B_haplotagged.bam",
+                    "325c284fc112dff72679b38c9ef2c2da"
+                ],
+                [
+                    "HG002_ONT_A.paraphase.bam",
+                    "7b8dc04d36dc2290fd031da73e8c8553"
+                ],
+                [
+                    "HG002_ONT_B.paraphase.bam",
+                    "7b8dc04d36dc2290fd031da73e8c8553"
+                ]
+            ],
+            [
+                [
+                    "HG002_ONT_A_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2101, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2101, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_A_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=236, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=236, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snv_annotated_ranked.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=105, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_filtered.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=56, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_A_snvs_annotated_ranked.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=99, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B_snvs_annotated_ranked.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=99, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=98, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_A_cnvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=30, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_A_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B_cnvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=31, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]"
+                ]
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-22T15:35:40.786297675"
+    }
+}

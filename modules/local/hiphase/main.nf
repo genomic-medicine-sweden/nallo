@@ -42,7 +42,7 @@ process HIPHASE {
         vcfInputs.add('--vcf')
         vcfInputs.add(vcf)
         vcfOutputs.add('--output-vcf')
-        vcfOutputs.add("${prefix}.vcf.gz")
+        vcfOutputs.add("${prefix}_phased.vcf.gz")
 
         vcfNames.add(vcf.getName())
     }
@@ -58,7 +58,7 @@ process HIPHASE {
 
         if(output_bam) {
             bamOutputs.add('--output-bam')
-            bamOutputs.add("${prefix}.bam")
+            bamOutputs.add("${prefix}_haplotagged.bam")
         }
     }
 
