@@ -84,9 +84,9 @@ For more details and further functionality, please refer to the [documentation](
 
 ## Credits
 
-genomic-medicine-sweden/nallo was originally written by Felix Lenner.
+genomic-medicine-sweden/nallo was originally written by [Felix Lenner](https://github.com/fellen31).
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+We thank the following people for their extensive assistance in the development of this pipeline: [Anders Jemt](https://github.com/jemten), [Annick Renevey](https://github.com/rannick), [Daniel Schmitz](https://github.com/Schmytzi), [Lucía Peña-Pérez](https://github.com/Lucpen), [Peter Pruisscher](https://github.com/peterpru) & [Ramprasad Neethiraj](https://github.com/ramprasadn).
 
 ## Contributions and Support
 

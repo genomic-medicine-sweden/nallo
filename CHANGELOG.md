@@ -3,6 +3,38 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.0dev - [XXXX-XX-XX]
+
+### `Added`
+
+- [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
+
+### `Changed`
+
+### `Removed`
+
+### `Fixed`
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool | Old version | New version |
+| ---- | ----------- | ----------- |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.4.0 - [2025-01-15]
 
 ### `Added`
