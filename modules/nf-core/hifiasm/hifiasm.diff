@@ -1,4 +1,4 @@
-Changes in module 'nf-core/hifiasm'
+Changes in component 'nf-core/hifiasm'
 'modules/nf-core/hifiasm/meta.yml' is unchanged
 Changes in 'hifiasm/main.nf':
 --- modules/nf-core/hifiasm/main.nf
