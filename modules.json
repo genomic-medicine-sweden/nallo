@@ -146,7 +146,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "9c12c14558bb3b4ac7ee9542c268342782bacf9d",
+                        "git_sha": "6bb8be8a75d05ee6d31205b2b97d48c7bcef60ab",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },

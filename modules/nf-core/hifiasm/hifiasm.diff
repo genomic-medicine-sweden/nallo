@@ -4,7 +4,7 @@ Changes in 'hifiasm/main.nf':
 --- modules/nf-core/hifiasm/main.nf
 +++ modules/nf-core/hifiasm/main.nf
 @@ -8,7 +8,7 @@
-         'biocontainers/hifiasm:0.21.0--h43eeafb_0' }"
+         'biocontainers/hifiasm:0.24.0--h5ca1c30_0' }"
  
      input:
 -    tuple val(meta) , path(reads)

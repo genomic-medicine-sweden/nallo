@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
 
 ### `Changed`
@@ -17,8 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter      |
+| ------------- | ------------------ |
+|               | `--hifiasm_preset` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -27,8 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool    | Old version | New version |
+| ------- | ----------- | ----------- |
+| hifiasm | 0.19.8      | 0.24.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -68,7 +71,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#451](https://github.com/genomic-medicine-sweden/nallo/pull/451) - Added nf-test to methylation
 - [#491](https://github.com/genomic-medicine-sweden/nallo/pull/491) - Added a changelog reminder action
 - [#496](https://github.com/genomic-medicine-sweden/nallo/pull/496) - Added a subworkflow to filter variants
-- [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 
 ### `Changed`
 
@@ -199,7 +201,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--score_config_sv`              | `--genmod_score_config_svs`       |
 | `--parallel_alignments`          | `--alignment_processes`           |
 | `--svdb_dbs`                     | `--svdb_sv_databases`             |
-|                                  | `--hifiasm_preset`                |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -216,7 +217,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod                | 3.8.2       | 3.9         |
 | WhatsHap              | 2.2         | 2.3         |
 | SVDB                  |             | 2.8.2       |
-| hifiasm               | 0.19.8      | 0.21.0      |
+| hifiasm               | 0.19.8      | 0.20.0      |
 | HiFiCNV               | 0.1.7       | 1.0.0       |
 | samtools/faidx        | 1.2         | 1.21        |
 | samtools/index        | 1.2         | 1.21        |
