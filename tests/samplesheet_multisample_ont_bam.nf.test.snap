@@ -112,7 +112,7 @@
                     "gunzip": 1.1
                 },
                 "HIFIASM": {
-                    "hifiasm": "0.21.0-r686"
+                    "hifiasm": "0.24.0-r702"
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
@@ -217,7 +217,7 @@
                     "whatshap": 2.3
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.4.0"
+                    "genomic-medicine-sweden/nallo": "v0.5.0dev"
                 }
             },
             [
@@ -556,44 +556,44 @@
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
             ],
             [
-                "HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary:md5,178b4dddac381a4cd90a3df818a36ad5",
-                "HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz:md5,c2b2fa5bafcdeabe34b5085447add36d",
-                "HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary:md5,4756d1166da2b2da3422e55b0694d733",
-                "HG002_ONT_A.asm.bp.hap2.p_ctg.fasta.gz:md5,8033bd90ff6b50f0233c60a6a9b621e7",
-                "HG002_ONT_B.asm.bp.hap1.p_ctg.assembly_summary:md5,3f4f51ffb169fe19413831c8c960b189",
-                "HG002_ONT_B.asm.bp.hap1.p_ctg.fasta.gz:md5,c93919053f9c67690d73a147dc1b9e55",
-                "HG002_ONT_B.asm.bp.hap2.p_ctg.assembly_summary:md5,a4a164ab5e37a73846199f07058288f6",
-                "HG002_ONT_B.asm.bp.hap2.p_ctg.fasta.gz:md5,39423d77f4f1d755a9e84956150f3ed0",
-                "HG002_ONT_A.dip.bed:md5,9dd99a5c77d21eb373766fb5b3271f82",
-                "HG002_ONT_A.dip.vcf.gz:md5,2750405b959691a0dfb749a330ff7c67",
-                "HG002_ONT_A.hap1.bam:md5,8aae9c5cf4b0c87364e1a1b302f4829c",
-                "HG002_ONT_A.hap1.bam.bai:md5,c7849e62fd752636f6778e3ea85b6131",
-                "HG002_ONT_A.hap1.bed:md5,e703b273d043b770b048fa72d090f8c3",
-                "HG002_ONT_A.hap1.paf.gz:md5,b33dc91baf55be374205f291836816d9",
-                "HG002_ONT_A.hap1.sam.gz:md5,02c4287e446e623e6b99e634da45229e",
-                "HG002_ONT_A.hap1.var.gz:md5,4f653bb32d16bde2f8ab92982c7dd100",
-                "HG002_ONT_A.hap2.bam:md5,001492965e72003beaa8154c8514d9e1",
-                "HG002_ONT_A.hap2.bam.bai:md5,8b684a2c6e95af2040aef45804288af4",
-                "HG002_ONT_A.hap2.bed:md5,d7ed3bb7d7c26b4cbfdbc55c8bcc2eed",
-                "HG002_ONT_A.hap2.paf.gz:md5,3cc6c506476173e3c3bcffb3dff84f4b",
-                "HG002_ONT_A.hap2.sam.gz:md5,fd6fefdf6bc1d083478bf6347b0cf310",
-                "HG002_ONT_A.hap2.var.gz:md5,fa6169b656f19483b1facb2d6ab8b109",
-                "HG002_ONT_A.pair.vcf.gz:md5,5f849f53279486ec8c2a961e9a7f7f21",
-                "HG002_ONT_B.dip.bed:md5,707832bedf45387b4d683ac69ecc3d94",
-                "HG002_ONT_B.dip.vcf.gz:md5,f71607606e7f0dac0a116c568b254520",
-                "HG002_ONT_B.hap1.bam:md5,e926440a14982c35c4d53b7591c01fb0",
-                "HG002_ONT_B.hap1.bam.bai:md5,a12cddcade8abd3fd226c710752f32fb",
-                "HG002_ONT_B.hap1.bed:md5,3ecaf157f63eeb20b3f53e4589d342b1",
-                "HG002_ONT_B.hap1.paf.gz:md5,c03c74314658e736613fb2c9019d3085",
-                "HG002_ONT_B.hap1.sam.gz:md5,680a3797afbe577cc17d1f3553779cda",
-                "HG002_ONT_B.hap1.var.gz:md5,09efb53985fc4f80856709f3878173d2",
-                "HG002_ONT_B.hap2.bam:md5,1642c2cddeda1bf9e92e74f9d4c38790",
-                "HG002_ONT_B.hap2.bam.bai:md5,d26ce4f37e67955d64209997c5a183ef",
-                "HG002_ONT_B.hap2.bed:md5,a606d31ccdcad93f267c719faf895866",
-                "HG002_ONT_B.hap2.paf.gz:md5,6fbbdd4c8341f9ce1d37221f85401c7b",
-                "HG002_ONT_B.hap2.sam.gz:md5,ff2645e250565329d447f32bcfaef663",
-                "HG002_ONT_B.hap2.var.gz:md5,db0987ba469a588d9b9a49dac65414fd",
-                "HG002_ONT_B.pair.vcf.gz:md5,2493348ece6cdbf457def7a974f35b09",
+                "HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
+                "HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz:md5,4736fe9703aa5a5309beb1798eead615",
+                "HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
+                "HG002_ONT_A.asm.bp.hap2.p_ctg.fasta.gz:md5,d2a76cb8824fcd50880d4f078f915d36",
+                "HG002_ONT_B.asm.bp.hap1.p_ctg.assembly_summary:md5,cb2280cb3895ebbe29093ed9603e81d2",
+                "HG002_ONT_B.asm.bp.hap1.p_ctg.fasta.gz:md5,21dafa9ebff9348c9133e12be3ea020e",
+                "HG002_ONT_B.asm.bp.hap2.p_ctg.assembly_summary:md5,fce697aa7c3c739eff6023b73fd2b382",
+                "HG002_ONT_B.asm.bp.hap2.p_ctg.fasta.gz:md5,a7de34f96f5f4c38c6320ee95c8c1026",
+                "HG002_ONT_A.dip.bed:md5,46741354ad0a5d4eb57665b48fe06b7b",
+                "HG002_ONT_A.dip.vcf.gz:md5,c4dc5155959953f5dfe1725c301fa8ff",
+                "HG002_ONT_A.hap1.bam:md5,10fd14b2a40bf0211f772dd8823a37e4",
+                "HG002_ONT_A.hap1.bam.bai:md5,3536f2bf18dc2fe79292a9509f76b567",
+                "HG002_ONT_A.hap1.bed:md5,1c5d8c3064664f127def910840199e5a",
+                "HG002_ONT_A.hap1.paf.gz:md5,2ff8735bc71629e7989a8b7705d373e0",
+                "HG002_ONT_A.hap1.sam.gz:md5,6b5727ef043432936ff8791229c03426",
+                "HG002_ONT_A.hap1.var.gz:md5,8bc1eacd4dd63417471596b9927d872f",
+                "HG002_ONT_A.hap2.bam:md5,068b182c02c7a662c40c78bd317f47e2",
+                "HG002_ONT_A.hap2.bam.bai:md5,8e06e79b4f6d05583f471cf4a778c68c",
+                "HG002_ONT_A.hap2.bed:md5,aed2e1f4f58b9ab3d623a9b38040166c",
+                "HG002_ONT_A.hap2.paf.gz:md5,c966b22928e7924c3ad70abd28306f2e",
+                "HG002_ONT_A.hap2.sam.gz:md5,1245fe0954594540fd4b99b6606b498b",
+                "HG002_ONT_A.hap2.var.gz:md5,04c8e02c04d40190cd9858421ec9f2c5",
+                "HG002_ONT_A.pair.vcf.gz:md5,8a2c43405ed1812234a085ade2a9517f",
+                "HG002_ONT_B.dip.bed:md5,934ffb3245237f80290e39d1e9e93a0d",
+                "HG002_ONT_B.dip.vcf.gz:md5,f52d2fa65f5b2bffe380de2fd4f6833a",
+                "HG002_ONT_B.hap1.bam:md5,4c19da98c63c9023a4974e8c42b7bca5",
+                "HG002_ONT_B.hap1.bam.bai:md5,01e364727fb9d956411ec0d1e05cd96b",
+                "HG002_ONT_B.hap1.bed:md5,6f7dd338c77a645d5201b9d91b6a0b6f",
+                "HG002_ONT_B.hap1.paf.gz:md5,599dc7ce3d7d9fa8fd55c5df39d166cf",
+                "HG002_ONT_B.hap1.sam.gz:md5,88aee68fa58ed726589b20f1ba7379ec",
+                "HG002_ONT_B.hap1.var.gz:md5,f92ea86fd33bec4cb24e20395d70b1b8",
+                "HG002_ONT_B.hap2.bam:md5,a14ee19e40b04df7d99d0fa77318c34f",
+                "HG002_ONT_B.hap2.bam.bai:md5,9e944b45138d997b8e818f4a29a578d3",
+                "HG002_ONT_B.hap2.bed:md5,48e3d9afdd6d121f4d9afa7060b32ed4",
+                "HG002_ONT_B.hap2.paf.gz:md5,cf8325a3be0ba02e7420e5ceabbab01c",
+                "HG002_ONT_B.hap2.sam.gz:md5,c6bbbc7fad9423840feb7b8cd18395b8",
+                "HG002_ONT_B.hap2.var.gz:md5,020812d4f3c94e5747855df872bf4ce8",
+                "HG002_ONT_B.pair.vcf.gz:md5,07cea4c96b9fe76b35952c46efcc6242",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,2be86a42ac0384ac6d27fdf6e65304b7",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a7955eabc34456dce834a2c966071eaa",
                 "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,ec565bd66fc73d380b7f9eb768369a65",
@@ -670,19 +670,19 @@
                 ],
                 [
                     "HG002_ONT_A.hap1.bam",
-                    "f49aa2bf3e7cdf60b84026e6c9a9bac6"
+                    "4a1999ef98db9a200764b9b2020897c9"
                 ],
                 [
                     "HG002_ONT_A.hap2.bam",
-                    "55b7142d170e2989ebd4b2fca85503c1"
+                    "3d80b83a46d7b4e5657e3bd0478d04bc"
                 ],
                 [
                     "HG002_ONT_B.hap1.bam",
-                    "33163d3bbcd514be6fe3da159fa888df"
+                    "3570420b488e88792f5c4ea1bbe21510"
                 ],
                 [
                     "HG002_ONT_B.hap2.bam",
-                    "3317dc4aef4a0d1cc4bd5cf8202525cb"
+                    "4565ba59fc326364fda8388c6969cdc3"
                 ],
                 [
                     "HG002_ONT_A.paraphase.bam",
@@ -696,19 +696,19 @@
             [
                 [
                     "HG002_ONT_A.dip.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2065, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2914, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A.pair.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2065, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2914, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_B.dip.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2110, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2926, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_B.pair.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2110, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2926, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_hba.vcf.gz",
@@ -770,26 +770,26 @@
             [
                 [
                     "HG002_ONT_A.dip.vcf.gz",
-                    "8e3614a8b48ea6d7f267b6ff0afe6548"
+                    "d8dcbcf490aee5a118736728e9424183"
                 ],
                 [
                     "HG002_ONT_A.pair.vcf.gz",
-                    "a43e774dfcc315e8a81937684f548488"
+                    "81810f5838a6d0ac93a76d5ab5f03c67"
                 ],
                 [
                     "HG002_ONT_B.dip.vcf.gz",
-                    "cf3c23525504ec869b1a2dd1bedd75fb"
+                    "c2961d7300328de68c971839e98bda04"
                 ],
                 [
                     "HG002_ONT_B.pair.vcf.gz",
-                    "4db825d772c7c0256385729b4df8d74a"
+                    "aa7685e6cb037c054805645388af2cf1"
                 ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-11-28T12:22:34.864974459"
+        "timestamp": "2025-01-16T10:38:08.171093362"
     }
 }
