@@ -451,6 +451,12 @@
                     "enum": ["hifi-only", "trio-binning"],
                     "default": "hifi-only"
                 },
+                "hifiasm_preset": {
+                    "type": "string",
+                    "description": "Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active.",
+                    "enum": ["", "--ont"],
+                    "default": ""
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,

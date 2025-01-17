@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
 
 ### `Changed`
@@ -19,8 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter      |
+| ------------- | ------------------ |
+|               | `--hifiasm_preset` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -29,8 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool    | Old version | New version |
+| ------- | ----------- | ----------- |
+| hifiasm | 0.19.8      | 0.24.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -24,7 +24,7 @@
 ##### Alignment & assembly
 
 - Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
-- Assemble haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
+- Assemble genomes with [hifiasm](https://github.com/chhylp123/hifiasm)
 
 ##### Variant calling
 
@@ -33,7 +33,7 @@
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 - Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
-- Call variants from assembly with [dipcall](https://github.com/lh3/dipcall) (HiFi only)
+- Call variants from assembly with [dipcall](https://github.com/lh3/dipcall)
 
 ##### Phasing and methylation
 

@@ -121,7 +121,7 @@
                     "gunzip": 1.1
                 },
                 "HIFIASM": {
-                    "hifiasm": "0.20.0-r639"
+                    "hifiasm": "0.24.0-r702"
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
