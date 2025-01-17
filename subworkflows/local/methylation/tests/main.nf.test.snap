@@ -7,19 +7,19 @@
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_1.bed.gz:md5,b980e56ca6d65d09892b069a7d51b827"
+                        "test_modkit_pileup_1.bed.gz:md5,3df4afc0f8445e05c1d125df317fbc59"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_2.bed.gz:md5,32a5e2148266fefba8159d98f5f5dd87"
+                        "test_modkit_pileup_2.bed.gz:md5,c069e2c7d968217b189ad098ca3de6fe"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_ungrouped.bed.gz:md5,bfeda9731d6d52508301ddf939302676"
+                        "test_modkit_pileup_ungrouped.bed.gz:md5,d1d2a2bbc8b4f525e1f1da091589b4a1"
                     ]
                 ],
                 "1": [
@@ -27,19 +27,19 @@
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_1.bed.gz.tbi:md5,45800db86a2845fe961f536484369f61"
+                        "test_modkit_pileup_1.bed.gz.tbi:md5,dc7847cfd88fa2db0c2322dc692f1a2c"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_2.bed.gz.tbi:md5,14f729ebf5ce7d265df85b21c30a67af"
+                        "test_modkit_pileup_2.bed.gz.tbi:md5,94b4986c67c80a89021f45342397c097"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_ungrouped.bed.gz.tbi:md5,d08da21ae562fcc3c3361a916439c552"
+                        "test_modkit_pileup_ungrouped.bed.gz.tbi:md5,a2968c28e257f46ddfc7c1352748d7b8"
                     ]
                 ],
                 "2": [
@@ -53,19 +53,19 @@
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_1.bed.gz:md5,b980e56ca6d65d09892b069a7d51b827"
+                        "test_modkit_pileup_1.bed.gz:md5,3df4afc0f8445e05c1d125df317fbc59"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_2.bed.gz:md5,32a5e2148266fefba8159d98f5f5dd87"
+                        "test_modkit_pileup_2.bed.gz:md5,c069e2c7d968217b189ad098ca3de6fe"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_ungrouped.bed.gz:md5,bfeda9731d6d52508301ddf939302676"
+                        "test_modkit_pileup_ungrouped.bed.gz:md5,d1d2a2bbc8b4f525e1f1da091589b4a1"
                     ]
                 ],
                 "tbi": [
@@ -73,19 +73,19 @@
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_1.bed.gz.tbi:md5,45800db86a2845fe961f536484369f61"
+                        "test_modkit_pileup_1.bed.gz.tbi:md5,dc7847cfd88fa2db0c2322dc692f1a2c"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_2.bed.gz.tbi:md5,14f729ebf5ce7d265df85b21c30a67af"
+                        "test_modkit_pileup_2.bed.gz.tbi:md5,94b4986c67c80a89021f45342397c097"
                     ],
                     [
                         {
                             "id": "test"
                         },
-                        "test_modkit_pileup_ungrouped.bed.gz.tbi:md5,d08da21ae562fcc3c3361a916439c552"
+                        "test_modkit_pileup_ungrouped.bed.gz.tbi:md5,a2968c28e257f46ddfc7c1352748d7b8"
                     ]
                 ],
                 "versions": [
@@ -98,9 +98,9 @@
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-11-01T16:42:19.164909715"
+        "timestamp": "2025-01-17T10:34:48.673483384"
     },
     "1 sample - bed unphased - stub": {
         "content": [
