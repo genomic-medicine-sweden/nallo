@@ -1,24 +1,20 @@
-Changes in module 'nf-core/hifiasm'
+Changes in component 'nf-core/hifiasm'
 'modules/nf-core/hifiasm/meta.yml' is unchanged
-'modules/nf-core/hifiasm/environment.yml' is unchanged
 Changes in 'hifiasm/main.nf':
 --- modules/nf-core/hifiasm/main.nf
 +++ modules/nf-core/hifiasm/main.nf
-@@ -8,9 +8,9 @@
-         'biocontainers/hifiasm:0.20.0--h43eeafb_0' }"
+@@ -8,7 +8,7 @@
+         'biocontainers/hifiasm:0.24.0--h5ca1c30_0' }"
  
      input:
 -    tuple val(meta) , path(reads)
--    tuple val(meta1), path(paternal_kmer_dump), path(maternal_kmer_dump)
--    tuple val(meta2), path(hic_read1)         , path(hic_read2)
 +    tuple val(meta) , path(reads, stageAs: "?/*")
-+    tuple val(meta1), path(paternal_kmer_dump)   , path(maternal_kmer_dump)
-+    tuple val(meta2), path(hic_read1)            , path(hic_read2)
+     tuple val(meta1), path(paternal_kmer_dump), path(maternal_kmer_dump)
+     tuple val(meta2), path(hic_read1)         , path(hic_read2)
  
-     output:
-     tuple val(meta), path("*.r_utg.gfa")       , emit: raw_unitigs
 
-'modules/nf-core/hifiasm/tests/main.nf.test' is unchanged
+'modules/nf-core/hifiasm/environment.yml' is unchanged
 'modules/nf-core/hifiasm/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/hifiasm/tests/nextflow.config' is unchanged
+'modules/nf-core/hifiasm/tests/main.nf.test' is unchanged
 ************************************************************
