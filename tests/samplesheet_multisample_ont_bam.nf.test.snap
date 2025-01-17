@@ -1,7 +1,7 @@
 {
-    "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1": {
+    "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles": {
         "content": [
-            123,
+            125,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -53,6 +53,9 @@
                 },
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
+                },
+                "CLEAN_SNIFFLES": {
+                    "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
                     "cramino": "0.14.5"
@@ -160,8 +163,8 @@
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.21
                 },
-                "SEVERUS": {
-                    "severus": 1.1
+                "SNIFFLES": {
+                    "sniffles": "1.0.12"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -748,7 +751,7 @@
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_cnvs.vcf.gz",
@@ -756,7 +759,7 @@
                 ],
                 [
                     "HG002_ONT_A_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=67, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_B_cnvs.vcf.gz",
@@ -764,7 +767,7 @@
                 ],
                 [
                     "HG002_ONT_B_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=67, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -790,6 +793,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-16T14:58:06.592348226"
+        "timestamp": "2025-01-17T13:49:26.056284312"
     }
 }

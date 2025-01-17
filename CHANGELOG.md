@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 
 ### `Removed`
 
@@ -31,9 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool    | Old version | New version |
-| ------- | ----------- | ----------- |
-| hifiasm | 0.19.8      | 0.24.0      |
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| hifiasm  | 0.19.8      | 0.24.0      |
+| sniffles | 2.0.7       | 1.0.12      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
