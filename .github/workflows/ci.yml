@@ -25,6 +25,8 @@ permissions:
 jobs:
   test:
     name: ${{ matrix.tags }} | ${{ matrix.profile }} | NF-${{ matrix.NXF_VER }}
+    # Only run on push if this is the dev branch (merged PRs)
+    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'genomic-medicine-sweden/nallo') }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -45,10 +47,9 @@ jobs:
           - "METHYLATION"
         profile:
           - "docker"
-
     steps:
       - name: Check out pipeline code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
 
