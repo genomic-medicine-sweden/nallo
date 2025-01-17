@@ -124,7 +124,7 @@
             "dateModified": "2025-01-16T13:58:29Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
-                "nf-core",
+                "genomic-medicine-sweden",
                 "nextflow"
             ],
             "license": [
