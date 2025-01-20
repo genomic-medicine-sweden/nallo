@@ -1,4 +1,5 @@
 include { ADD_FOUND_IN_TAG                } from '../../../modules/local/add_found_in_tag/main'
+include { CLEAN_SNIFFLES                  } from '../../../modules/local/clean_sniffles/main'
 include { SVDB_MERGE                      } from '../../../modules/nf-core/svdb/merge/main'
 include { BCFTOOLS_QUERY                  } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER               } from '../../../modules/nf-core/bcftools/reheader/main'
@@ -35,15 +36,16 @@ workflow CALL_SVS {
     } else if (sv_caller == "sniffles") {
 
         SNIFFLES (
-            ch_bam_bai,
-            ch_fasta,
-            ch_tandem_repeats,
-            true,
-            false
+            ch_bam_bai
         )
         ch_versions = ch_versions.mix(SNIFFLES.out.versions)
 
-        SNIFFLES.out.vcf
+        CLEAN_SNIFFLES (
+            SNIFFLES.out.vcf
+        )
+        ch_versions = ch_versions.mix(CLEAN_SNIFFLES.out.versions)
+
+        CLEAN_SNIFFLES.out.vcf
             .set { ch_vcf }
     }
 
