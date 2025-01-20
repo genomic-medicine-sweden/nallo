@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
+- [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
 
 ### `Changed`
 
@@ -36,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ----------- | ----------- | ----------- |
 | hifiasm     | 0.19.8      | 0.24.0      |
 | deepvariant | 1.6.1       | 1.8.0       |
+| mosdepth    | 0.3.8       | 0.3.10      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
