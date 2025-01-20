@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ----------- | ----------- | ----------- |
 | hifiasm     | 0.19.8      | 0.24.0      |
 | deepvariant | 1.6.1       | 1.8.0       |
-| sniffles | 2.0.7       | 1.0.12      |
+| sniffles    | 2.0.7       | 1.0.12      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
