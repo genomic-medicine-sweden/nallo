@@ -134,7 +134,7 @@
                     "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.8"
+                    "mosdepth": "0.3.10"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.28-r1209",
@@ -491,12 +491,14 @@
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.summary.txt",
+                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.per-base.d4",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz.csi",
                 "qc/mosdepth/HG002_ONT_B",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.summary.txt",
+                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.per-base.d4",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz.csi",
                 "qc/phasing_stats",
@@ -644,13 +646,15 @@
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,5ae0972357f99aa481a0bf12fb9e0b0b",
                 "HG002_ONT_A.mosdepth.region.dist.txt:md5,023b1c6aeaf8fa5ededd6b711a5cd012",
                 "HG002_ONT_A.mosdepth.summary.txt:md5,c3b664b0983213f73edf3c0d5a0b04a2",
+                "HG002_ONT_A.per-base.d4:md5,3a2781ad58147c843f9b3e4e7a9dd837",
                 "HG002_ONT_A.regions.bed.gz:md5,da66d741bb69b5c259a8611848839dc7",
-                "HG002_ONT_A.regions.bed.gz.csi:md5,76f06311933695287c8716fe2c8a2d20",
+                "HG002_ONT_A.regions.bed.gz.csi:md5,c73f02772e93e2a53c62d25b37aa6f2d",
                 "HG002_ONT_B.mosdepth.global.dist.txt:md5,e551c7a9d1a26cecc99d15ac93a4a924",
                 "HG002_ONT_B.mosdepth.region.dist.txt:md5,11154f617f447f4c59dc192d9af4249f",
                 "HG002_ONT_B.mosdepth.summary.txt:md5,bcb06b29c22cb6ad200f283e72c29653",
+                "HG002_ONT_B.per-base.d4:md5,6ed0393045059dfcad129a4eb32ffda1",
                 "HG002_ONT_B.regions.bed.gz:md5,1aa62d46a1e6683da3d44c59c502354b",
-                "HG002_ONT_B.regions.bed.gz.csi:md5,11db27a464f8996bae5521ee7d71c1ce",
+                "HG002_ONT_B.regions.bed.gz.csi:md5,4ae0bcffa913e0d01fad9e56a053fb12",
                 "HG002_ONT_A_stats.blocks.tsv:md5,fda7110c817668520b340496f34a70f5",
                 "HG002_ONT_A_stats.stats.tsv:md5,f0d8f2ff4399fce2b6e665c7e5b59be8",
                 "HG002_ONT_B_stats.blocks.tsv:md5,ed60b095dba67127aaadf0e706421d99",
@@ -793,6 +797,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-17T13:49:26.056284312"
+        "timestamp": "2025-01-20T13:51:52.759347222"
     }
 }
