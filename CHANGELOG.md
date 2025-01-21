@@ -341,6 +341,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ------------------ | -------------------------- |
 | `--skip_repeat_wf` | `--skip_repeat_calling`    |
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
+|                    | `--skip_sv_calling`        |
 |                    | `--deepvariant_model_type` |
 |                    | `--skip_rank_variants`     |
 |                    | `--skip_aligned_read_qc`   |

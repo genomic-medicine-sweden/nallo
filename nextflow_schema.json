@@ -64,6 +64,11 @@
                     "description": "Skip short variant annotation",
                     "default": false
                 },
+                "skip_sv_calling": {
+                    "type": "boolean",
+                    "description": "Skip structural variant calling",
+                    "default": false
+                },
                 "skip_sv_annotation": {
                     "type": "boolean",
                     "description": "Skip structural variant annotation",

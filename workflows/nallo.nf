@@ -441,7 +441,7 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if(!params.skip_alignment) {
+    if(!params.skip_sv_calling) {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
