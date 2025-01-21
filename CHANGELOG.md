@@ -16,9 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
+- [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
 - [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
 
 ### `Removed`
 
@@ -28,10 +30,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
+<<<<<<< HEAD
 | Old parameter | New parameter       |
 | ------------- | ------------------- |
 |               | `--hifiasm_preset`  |
 |               | `--skip_sv_calling` |
+=======
+| Old parameter | New parameter                                     |
+| ------------- | ------------------------------------------------- |
+|               | `--hifiasm_preset`                                |
+|               | `--publish_unannotated_svs_per_family_and_caller` |
+>>>>>>> d5201ca (Always run multiple SV-callers)
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
