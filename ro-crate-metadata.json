@@ -139,13 +139,8 @@
             "sdPublisher": {
                 "@id": "https://nf-co.re/"
             },
-            "url": [
-                "https://github.com/genomic-medicine-sweden/nallo",
-                "https://nf-co.re/genomic-medicine-sweden/nallo/dev/"
-            ],
-            "version": [
-                "0.5.0dev"
-            ]
+            "url": ["https://github.com/genomic-medicine-sweden/nallo", "https://nf-co.re/genomic-medicine-sweden/nallo/dev/"],
+            "version": ["0.5.0dev"]
         },
         {
             "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow",
