@@ -1,31 +1,32 @@
 lint:
   files_exist:
-  - CITATIONS.md
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-nallo_logo_light.png
-  - docs/README.md
-  - docs/images/nf-core-nallo_logo_light.png
-  - docs/images/nf-core-nallo_logo_dark.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/awstest.yml
-  - .github/workflows/awsfulltest.yml
-  - conf/modules.config
-  - conf/igenomes_ignored.config
+    - CITATIONS.md
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+    - conf/modules.config
+    - conf/igenomes_ignored.config
+    - conf/test_full.config
   files_unchanged:
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-nallo_logo_light.png
-  - docs/README.md
-  - docs/images/nf-core-nallo_logo_light.png
-  - docs/images/nf-core-nallo_logo_dark.png
-  - .github/ISSUE_TEMPLATE/bug_report.yml
-  - .github/CONTRIBUTING.md
-  - .prettierignore
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/CONTRIBUTING.md
+    - .prettierignore
   modules_config: false
   multiqc_config:
-  - report_comment
+    - report_comment
   nextflow_config:
-  - manifest.name
-  - manifest.homePage
+    - manifest.name
+    - manifest.homePage
 nf_core_version: 3.1.1
 repository_type: pipeline
 template:
@@ -37,4 +38,4 @@ template:
   org: genomic-medicine-sweden
   outdir: .
   skip_features: []
-  version: 0.4.0dev
+  version: 0.5.0dev
