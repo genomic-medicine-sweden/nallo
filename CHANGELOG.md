@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
+- [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
 
 ### `Removed`
