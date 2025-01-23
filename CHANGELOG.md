@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
+- [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
 
 ### `Changed`
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
+- [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
+- [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 
 ### `Removed`
 
@@ -36,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ----------- | ----------- | ----------- |
 | hifiasm     | 0.19.8      | 0.24.0      |
 | deepvariant | 1.6.1       | 1.8.0       |
+| sniffles    | 2.0.7       | 1.0.12      |
+| mosdepth    | 0.3.8       | 0.3.10      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
