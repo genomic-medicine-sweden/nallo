@@ -56,7 +56,7 @@ def workflowDependencies = [
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
     qc               : ["mapping"],
-    sv_calling       : ["mapping"], 
+    sv_calling       : ["mapping"],
     sv_annotation    : ["mapping", "cnv_calling", "sv_calling"],
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
