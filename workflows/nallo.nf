@@ -441,7 +441,7 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if(!params.skip_alignment) {
+    if(!params.skip_sv_calling) {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
@@ -477,7 +477,7 @@ workflow NALLO {
     //
     // Merge SVs and CNVs if we've called both SVs and CNVs
     //
-    if (!params.skip_cnv_calling) {
+    if (!params.skip_cnv_calling && !params.skip_sv_calling) {
 
         CALL_SVS.out.family_vcf
             .join(CALL_CNVS.out.family_vcf)
@@ -542,9 +542,10 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-        //
-        // Filter SVs
-        //
+    //
+    // Filter SVs
+    //
+    if (!params.skip_sv_calling) {
         if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
 
             if(params.skip_cnv_calling) {
@@ -559,6 +560,7 @@ workflow NALLO {
                 params.filter_variants_hgnc_ids
             )
         }
+    }
 
     //
     // Phase SNVs and INDELs
