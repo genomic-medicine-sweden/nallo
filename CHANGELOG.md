@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
 - [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
-- [#544](https://github.com/genomic-medicine-sweden/nallo/pull/544) - Added `--skip_sv_calling`  parameter to skip sv_calling subworkflow
+- [#544](https://github.com/genomic-medicine-sweden/nallo/pull/544) - Added `--skip_sv_calling` parameter to skip sv_calling subworkflow
 
 ### `Changed`
 
@@ -25,10 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter      |
-| ------------- | ------------------ |
-|               | `--hifiasm_preset` |
-|               | `--skip_sv_calling`|
+| Old parameter | New parameter       |
+| ------------- | ------------------- |
+|               | `--hifiasm_preset`  |
+|               | `--skip_sv_calling` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
