@@ -476,6 +476,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sv-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      SV calling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cnv-calling" class="md-nav__link">
     <span class="md-ellipsis">
       CNV calling
@@ -966,6 +975,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sv-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      SV calling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cnv-calling" class="md-nav__link">
     <span class="md-ellipsis">
       CNV calling
@@ -1350,7 +1368,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
 <p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  ...
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
@@ -1426,6 +1444,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_snv_calling</code>.</p>
+<h3 id="sv-calling">SV calling</h3>
+<p>This subworkflow depends on the alignment subworkflow.</p>
+<p>Turned off with <code>--skip_sv_calling</code>.</p>
 <h3 id="cnv-calling">CNV calling</h3>
 <p>This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:</p>
 <table>
