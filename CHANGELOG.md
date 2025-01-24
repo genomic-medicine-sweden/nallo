@@ -18,10 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
+- [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 
 ### `Removed`
 
 ### `Fixed`
+
+- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filename descriptions in documentation not matching actual output
 
 ### Parameters
 
