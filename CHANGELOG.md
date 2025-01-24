@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filename descriptions in documentation not matching actual output
+- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
 
 ### Parameters
 

@@ -36,12 +36,13 @@ This document describes the pipeline output files and the tools used to generate
 
 [Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.
 
-| Path                                                                         | Description                                               | Alignment          | Alignment & phasing |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`                  | bedMethyl file with summary counts from all reads         | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bedMethyl file                 | :white_check_mark: |                     |
+| Path                                                                  | Description                                                             | Alignment          | Alignment & phasing |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_1.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 1) |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_2.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 2) |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
+| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: |                     |
 
 ## MultiQC
 
@@ -166,10 +167,10 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
-| Path                                                                                | Description                           | Call repeats | Call & annotate repeats |
-| ----------------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
+| Path                                                                      | Description                           | Call repeats | Call & annotate repeats |
+| ------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
 
 ### SNVs
 
