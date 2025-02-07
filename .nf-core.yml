@@ -1,4 +1,4 @@
-bump_version: null
+bump_version:
 lint:
   files_exist:
     - CITATIONS.md
@@ -28,7 +28,7 @@ lint:
     - manifest.name
     - manifest.homePage
 nf_core_version: 3.0.2
-org_path: null
+org_path:
 repository_type: pipeline
 template:
   author: Felix Lenner
@@ -39,5 +39,5 @@ template:
   org: genomic-medicine-sweden
   outdir: .
   skip_features: []
-  version: 0.4.0dev
-update: null
+  version: 0.4.1dev
+update:
