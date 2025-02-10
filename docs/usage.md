@@ -276,9 +276,12 @@ Turned off with `--skip_rank_variants`.
 
 This subworkflow relies on the alignment subworkflow, and requires the following additional files:
 
-| Parameter                        | Description                                                           |
-| -------------------------------- | --------------------------------------------------------------------- |
-| `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation |
+| Parameter                        | Description                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation                                                                                                                                                                                                                                                                              |
+| `vep_cache`                      | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                               |
+| `vep_plugin_files` <sup>1</sup>  | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                            |
+| `variant_consequences_svs`       | A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
 

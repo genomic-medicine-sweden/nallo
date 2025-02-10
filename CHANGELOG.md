@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#548](https://github.com/genomic-medicine-sweden/nallo/pull/548) - Fixed pipeline always requiring `--vep_cache` to run
+- [#548](https://github.com/genomic-medicine-sweden/nallo/pull/548) - Fixed pipeline always requiring `--vep_cache` to run and clarify documentation
 
 ## 0.4.0 - [2025-01-15]
 
