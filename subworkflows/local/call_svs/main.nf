@@ -105,14 +105,14 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(TABIX_SVDB_MERGE.out.versions)
 
     emit:
-    sample_vcf = filterAndStripCaller(BCFTOOLS_REHEADER.out.vcf, sv_caller)   // channel: [ val(meta), path(vcf) ]
-    sample_tbi = filterAndStripCaller(BCFTOOLS_REHEADER.out.index, sv_caller) // channel: [ val(meta), path(tbi) ]
-    family_vcf = filterAndStripCaller(SVDB_MERGE.out.vcf, sv_caller)          // channel: [ val(meta), path(vcf) ]
-    family_tbi = filterAndStripCaller(TABIX_SVDB_MERGE.out.tbi, sv_caller)    // channel: [ val(meta), path(tbi) ]
+    sample_vcf = keepActiveCallerAndCleanMeta(BCFTOOLS_REHEADER.out.vcf, sv_caller)   // channel: [ val(meta), path(vcf) ]
+    sample_tbi = keepActiveCallerAndCleanMeta(BCFTOOLS_REHEADER.out.index, sv_caller) // channel: [ val(meta), path(tbi) ]
+    family_vcf = keepActiveCallerAndCleanMeta(SVDB_MERGE.out.vcf, sv_caller)          // channel: [ val(meta), path(vcf) ]
+    family_tbi = keepActiveCallerAndCleanMeta(TABIX_SVDB_MERGE.out.tbi, sv_caller)    // channel: [ val(meta), path(tbi) ]
     versions   = ch_versions                                                  // channel: [ path(versions.yml) ]
 }
 
-def filterAndStripCaller(ch_vcf, caller) {
+def keepActiveCallerAndCleanMeta(ch_vcf, caller) {
     ch_vcf.filter { meta, _vcf ->
             meta.sv_caller == caller
         }
