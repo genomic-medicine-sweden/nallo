@@ -183,6 +183,10 @@ Turned off with `--skip_snv_calling`.
 
 This subworkflow depends on the alignment subworkflow.
 
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
 Turned off with `--skip_sv_calling`.
 
 ### CNV calling
@@ -194,6 +198,10 @@ This subworkflow depends on the alignment and SNV calling subworkflows, and requ
 | `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
 | `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_cnv_calling`.
 

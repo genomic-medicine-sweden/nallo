@@ -21,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
 
 ### `Removed`
 
@@ -31,31 +30,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-| Old parameter | New parameter       |
-| ------------- | ------------------- |
-|               | `--hifiasm_preset`  |
-|               | `--skip_sv_calling` |
-=======
-| Old parameter | New parameter                                     |
-| ------------- | ------------------------------------------------- |
-|               | `--hifiasm_preset`                                |
-|               | `--publish_unannotated_svs_per_family_and_caller` |
->>>>>>> d5201ca (Always run multiple SV-callers)
-=======
-| Old parameter | New parameter                                              |
-| ------------- | ---------------------------------------------------------- |
-|               | `--hifiasm_preset`                                         |
-|               | `--publish_unannotated_svs_and_cnvs_per_family_and_caller` |
->>>>>>> 6307482 (Also output CNV-calls)
-=======
 | Old parameter | New parameter                      |
 | ------------- | ---------------------------------- |
 |               | `--hifiasm_preset`                 |
+|               | `--skip_sv_calling`                |
 |               | `--publish_unannotated_family_svs` |
->>>>>>> 390cb07 (wip)
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

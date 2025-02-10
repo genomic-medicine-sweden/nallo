@@ -588,15 +588,15 @@
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_Revio_A",
-                "svs/sample/HG002_Revio_A/HG002_Revio_A_cnvs.vcf.gz",
-                "svs/sample/HG002_Revio_A/HG002_Revio_A_cnvs.vcf.gz.tbi",
+                "svs/sample/HG002_Revio_A/HG002_Revio_A_hificnv_cnvs.vcf.gz",
+                "svs/sample/HG002_Revio_A/HG002_Revio_A_hificnv_cnvs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_severus_svs.vcf.gz",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_sniffles_svs.vcf.gz",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_sniffles_svs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio_B",
-                "svs/sample/HG002_Revio_B/HG002_Revio_B_cnvs.vcf.gz",
-                "svs/sample/HG002_Revio_B/HG002_Revio_B_cnvs.vcf.gz.tbi",
+                "svs/sample/HG002_Revio_B/HG002_Revio_B_hificnv_cnvs.vcf.gz",
+                "svs/sample/HG002_Revio_B/HG002_Revio_B_hificnv_cnvs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio_B/HG002_Revio_B_severus_svs.vcf.gz",
                 "svs/sample/HG002_Revio_B/HG002_Revio_B_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio_B/HG002_Revio_B_sniffles_svs.vcf.gz",
@@ -835,7 +835,7 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_A_cnvs.vcf.gz",
+                    "HG002_Revio_A_hificnv_cnvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -847,7 +847,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=58, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_B_cnvs.vcf.gz",
+                    "HG002_Revio_B_hificnv_cnvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -894,6 +894,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-22T16:53:55.170791661"
+        "timestamp": "2025-02-10T14:05:42.563723496"
     }
 }

@@ -17,7 +17,7 @@ Allows skipping certain parts of the pipeline
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
-| `skip_sv_calling` | Skip SV calling | `boolean` | False |  |  |
+| `skip_sv_calling` | Skip structural variant calling | `boolean` | False |  |  |
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_cnv_calling` | Skip CNV calling | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
@@ -75,7 +75,7 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `config_profile_description` | Institutional config description. | `string` |  |  | True |
 | `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
 | `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
-| `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller (these files are only output by default if `--skip_sv_annotation` or `--skip_cnv_calling are active). | `boolean` |  |  | True |
+| `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller (these files are only output by default if `--skip_sv_annotation` or `--skip_cnv_calling` are active). | `boolean` |  |  | True |
 
 ## Generic options
 

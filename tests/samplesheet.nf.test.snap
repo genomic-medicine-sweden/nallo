@@ -505,8 +505,8 @@
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_Revio",
-                "svs/sample/HG002_Revio/HG002_Revio_cnvs.vcf.gz",
-                "svs/sample/HG002_Revio/HG002_Revio_cnvs.vcf.gz.tbi",
+                "svs/sample/HG002_Revio/HG002_Revio_hificnv_cnvs.vcf.gz",
+                "svs/sample/HG002_Revio/HG002_Revio_hificnv_cnvs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio/HG002_Revio_severus_svs.vcf.gz",
                 "svs/sample/HG002_Revio/HG002_Revio_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_Revio/HG002_Revio_sniffles_svs.vcf.gz",
@@ -652,7 +652,7 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_cnvs.vcf.gz",
+                    "HG002_Revio_hificnv_cnvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -687,6 +687,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-22T16:51:53.196320696"
+        "timestamp": "2025-02-10T14:03:42.829385709"
     }
 }
