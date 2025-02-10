@@ -113,6 +113,7 @@ def parameterStatus = [
         genmod_score_config_svs  : params.genmod_score_config_svs,
         variant_consequences_snvs: params.variant_consequences_snvs,
         variant_consequences_svs : params.variant_consequences_svs,
+        vep_plugin_files         : params.vep_plugin_files,
     ]
 ]
 
