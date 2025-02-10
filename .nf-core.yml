@@ -26,7 +26,6 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
-nf_core_version: 3.1.1
 repository_type: pipeline
 template:
   author: Felix Lenner
@@ -37,4 +36,4 @@ template:
   org: genomic-medicine-sweden
   outdir: .
   skip_features: []
-  version: 0.4.0dev
+  version: 0.4.1dev
