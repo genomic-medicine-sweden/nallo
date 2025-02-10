@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#549](https://github.com/genomic-medicine-sweden/nallo/pull/549) - Add merging of paraphase JSON and VCF files into case files
 - [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
 - [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
