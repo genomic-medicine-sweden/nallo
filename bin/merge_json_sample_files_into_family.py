@@ -1,46 +1,47 @@
-#!/usr/bin/env python3
+"""
+This script merges multiple JSON files into a single JSON file.
+Each input file's content is stored under a key derived from the first part of its filename (before the first dot).
 
-# Released under the MIT license.
+Usage:
+    python merge_json.py --files_in file1.json file2.json file3.json -o output.json
 
-import argparse
+Arguments:
+    --files_in: List of JSON files to merge.
+    -o, --output: Name of the output JSON file (default: merged.json).
+
+Example:
+    python merge_json.py --files_in data1.json data2.json -o merged.json
+"""
+
 import json
-import sys
-from pathlib import Path
+import os
+import argparse
 
+def merge_json_files(json_files, output_file):
+    """Merges multiple JSON files into one JSON file with filenames as keys."""
+    merged_data = {}
 
-def parse_args(argv=None):
-    """Define and immediately parse command line arguments."""
-    parser = argparse.ArgumentParser(
-        description="Merge JSON files per family",
-        epilog="Example: python vcfparser.py --file_in vep.vcf --file_out vep.most_severe_csq.vcf --variant_csq variant_consequence.txt",
-    )
-    parser.add_argument(
-        "--files_in",
-        metavar="FILES_IN",
-        type=list(Path),
-        help="JSON files per sample.",
-    )
-    parser.add_argument(
-        "--file_out",
-        metavar="FILE_OUT",
-        type=Path,
-        help="Merged JSON file.",
-    )
-    return parser.parse_args(argv)
+    for file in json_files:
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                file_key = os.path.basename(file).split('.')[0]  # Extract first part of filename
+                merged_data[file_key] = data
+        except Exception as e:
+            print(f"Error reading {file}: {e}")
 
-
-def main(argv=None):
-    """Coordinate argument parsing and program execution."""
-    args = parse_args(argv)
-    args.file_out.parent.mkdir(parents=True, exist_ok=True)
-    with open(args.file_out, "w") as out_json:
-        for file in args.files_in:
-            if not file.is_file():
-                print(f"The given input file {file} was not found!")
-                sys.exit(2)
-                with open(file, "rt") as in_json:
-                read_json(in_vcf, out_vcf, var_csq)
-
+    try:
+        with open(output_file, 'w', encoding='utf-8') as out_f:
+            json.dump(merged_data, out_f, indent=4)
+        print(f"Merged JSON saved to {output_file}")
+    except Exception as e:
+        print(f"Error writing to {output_file}: {e}")
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description="Merge multiple JSON files into one JSON file with filenames as keys.")
+    parser.add_argument("--files_in", nargs='+', required=True, help="List of JSON files to merge")
+    parser.add_argument("-o", "--output", default="merged.json", help="Output JSON file name (default: merged.json)")
+
+    args = parser.parse_args()
+    merge_json_files(args.files_in, args.output)
+
