@@ -1,24 +1,24 @@
-"""
-This script merges multiple JSON files into a single JSON file.
-Each input file's content is stored under a key derived from the first part of its filename (before the first dot).
 
-Usage:
-    python merge_json.py --files_in file1.json file2.json file3.json -o output.json
-
-Arguments:
-    --files_in: List of JSON files to merge.
-    -o, --output: Name of the output JSON file (default: merged.json).
-
-Example:
-    python merge_json.py --files_in data1.json data2.json -o merged.json
-"""
-
+import argparse
 import json
 import os
-import argparse
+
 
 def merge_json_files(json_files, output_file):
-    """Merges multiple JSON files into one JSON file with filenames as keys."""
+    """
+    This script merges multiple JSON files into a single JSON file.
+    Each input file's content is stored under a key derived from the first part of its filename (before the first dot).
+
+    Usage:
+        python merge_json.py --files_in file1.json file2.json file3.json -o output.json
+
+    Arguments:
+        --files_in: List of JSON files to merge.
+        -o, --output: Name of the output JSON file (default: merged.json).
+
+    Example:
+        python merge_json.py --files_in data1.json data2.json -o merged.json
+    """
     merged_data = {}
 
     for file in json_files:
