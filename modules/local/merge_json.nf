@@ -23,7 +23,7 @@ process MERGE_JSON {
     """
     merge_json_sample_files_into_family.py \\
         --files_in ${json_files} \\
-        --file_out ${prefix}_merged.json \\
+        -o ${prefix}_merged.json \\
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
