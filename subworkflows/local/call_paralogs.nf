@@ -45,7 +45,7 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_REHEADER.out.vcf
         .join( BCFTOOLS_REHEADER.out.index )
-        .map { meta, vcf, index -> [ meta, [vcf], [index] ] }
+        .groupTuple()
         .set { ch_bcftools_merge_in }
 
     BCFTOOLS_MERGE_PER_SAMPLE(
@@ -58,7 +58,7 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_MERGE_PER_SAMPLE.out.vcf
         .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index )
-        .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
+        .groupTuple()
         .set { bcftools_merge_family_in }
 
     BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, [[],[]], [[],[]])
