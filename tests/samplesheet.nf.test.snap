@@ -479,8 +479,8 @@
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
-                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz",
-                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz.tbi",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
                 "snvs/sample",
@@ -624,7 +624,7 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_snv_annotated_ranked.vcf.gz",
+                    "FAM_snvs_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=113, phased=false, phasedAutodetect=false]"
                 ],
                 [
