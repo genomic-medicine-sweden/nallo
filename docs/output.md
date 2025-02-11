@@ -178,12 +178,12 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                  | Description                                                                 | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_snvs.vcf.gz`                           | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
-| `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
 
 #### Annotation
 

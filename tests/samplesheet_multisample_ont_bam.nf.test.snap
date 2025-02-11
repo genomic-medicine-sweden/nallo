@@ -1355,8 +1355,8 @@
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
-                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz",
-                "snvs/family/FAM/FAM_snv_annotated_ranked.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz.tbi",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
                 "snvs/sample",
@@ -1576,7 +1576,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=237, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_snv_annotated_ranked.vcf.gz",
+                    "FAM_snvs_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=109, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -1647,6 +1647,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-22T16:55:53.007614336"
+        "timestamp": "2025-02-10T16:34:01.690765611"
     }
 }

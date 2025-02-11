@@ -21,12 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Changed family-level SNVs naming to `snvs` from `snv`, matching sample-level and other variants
 
 ### `Removed`
 
 ### `Fixed`
 
 - [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
+- [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
 
 ### Parameters
 
