@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Written by Annick Renevey, 2025
+
 import argparse
 import json
 import os
