@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#567](https://github.com/genomic-medicine-sweden/nallo/pull/567) - Updated Severus to version 1.3
 
 ### `Removed`
 
@@ -46,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | deepvariant | 1.6.1       | 1.8.0       |
 | sniffles    | 2.0.7       | 1.0.12      |
 | mosdepth    | 0.3.8       | 0.3.10      |
+| severus     | 1.1         | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
