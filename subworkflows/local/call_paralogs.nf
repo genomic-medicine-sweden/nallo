@@ -2,7 +2,7 @@ include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_CASE } from '../../modules/nf-cor
 include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE} from '../../modules/nf-core/bcftools/merge/main'
 include { BCFTOOLS_QUERY } from '../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER } from '../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_FILE } from '../../modules/local/create_samples_file/main'
+include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../modules/local/create_samples_haplotypes_file/main'
 include { PARAPHASE } from '../../modules/nf-core/paraphase/main'
 
 workflow CALL_PARALOGS {
@@ -31,11 +31,11 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     // Creates a "vcf_sample_name meta.id" file for bcftools reheader
-    CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
-    ch_versions = ch_versions.mix(CREATE_SAMPLES_FILE.out.versions)
+    CREATE_SAMPLES_HAPLOTYPES_FILE ( BCFTOOLS_QUERY.out.output )
+    ch_versions = ch_versions.mix(CREATE_SAMPLES_HAPLOTYPES_FILE.out.versions)
 
     PARAPHASE.out.vcf
-        .join( CREATE_SAMPLES_FILE.out.samples )
+        .join( CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples )
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
 
@@ -45,9 +45,18 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_REHEADER.out.vcf
         .join( BCFTOOLS_REHEADER.out.index )
+        .map { meta, vcf, index -> [ meta, [vcf], [index] ] }
         .set { ch_bcftools_merge_in }
 
-    BCFTOOLS_MERGE_PER_SAMPLE ( ch_bcftools_merge_in, [], [], [] )
+    ch_fai = Channel.value([[:], []])
+    ch_bed = Channel.value([[:], []])
+
+    BCFTOOLS_MERGE_PER_SAMPLE(
+        ch_bcftools_merge_in,
+        fasta,
+        ch_fai,
+        ch_bed
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_SAMPLE.out.versions)
 
     BCFTOOLS_MERGE_PER_SAMPLE.out.vcf

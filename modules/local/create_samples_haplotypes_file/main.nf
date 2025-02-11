@@ -22,7 +22,7 @@ process CREATE_SAMPLES_HAPLOTYPES_FILE {
     if ("$txt" == "${prefix}.txt") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
 
     """
-    awk '{print \$1,"${meta.id}_\$1"}' ${txt} > ${prefix}.txt
+    awk '{print \$1,"${meta.id}_"\$1}' ${txt} > ${prefix}.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
