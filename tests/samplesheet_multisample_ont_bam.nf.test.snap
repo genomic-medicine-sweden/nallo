@@ -1,6 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles": {
         "content": [
+<<<<<<< HEAD
             135,
             {
                 "ADD_FOUND_IN_TAG": {
@@ -228,11 +229,16 @@
                 "WHATSHAP_STATS": {
                     "whatshap": 2.3
                 },
+=======
+            0,
+            {
+>>>>>>> a7785d13d730095938159a3d3293a05fc3189b31
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.5.0dev"
                 }
             },
             [
+<<<<<<< HEAD
                 "aligned_reads",
                 "aligned_reads/HG002_ONT_A",
                 "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam",
@@ -481,8 +487,9 @@
                 "phased_variants/HG002_ONT_B",
                 "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz",
                 "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi",
+=======
+>>>>>>> a7785d13d730095938159a3d3293a05fc3189b31
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
                 "qc",
                 "qc/cramino",
                 "qc/cramino/phased",
@@ -586,6 +593,7 @@
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
             ],
             [
+<<<<<<< HEAD
                 "HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
                 "HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz:md5,4736fe9703aa5a5309beb1798eead615",
                 "HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
@@ -738,6 +746,12 @@
                     "HG002_ONT_B.paraphase.bam",
                     "c66015888c38197b3da68deb7ab94916"
                 ]
+=======
+                
+            ],
+            [
+                
+>>>>>>> a7785d13d730095938159a3d3293a05fc3189b31
             ],
             [
                 [
@@ -834,6 +848,7 @@
                 ]
             ],
             [
+<<<<<<< HEAD
                 [
                     "HG002_ONT_A.dip.vcf.gz",
                     "d8dcbcf490aee5a118736728e9424183"
@@ -870,12 +885,19 @@
                     "null_merged.vcf.gz",
                     "d2f2f9e0728c2138921b415faa544660"
                 ]
+=======
+                
+>>>>>>> a7785d13d730095938159a3d3293a05fc3189b31
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
+<<<<<<< HEAD
         "timestamp": "2025-02-11T12:41:35.207854253"
+=======
+        "timestamp": "2025-02-11T12:31:20.159431"
+>>>>>>> a7785d13d730095938159a3d3293a05fc3189b31
     }
 }

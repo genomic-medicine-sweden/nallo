@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            121,
+            31,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -117,6 +117,15 @@
                 "GENMOD_SCORE": {
                     "genmod": 3.9
                 },
+                "CRAMINO": {
+                    "cramino": "0.14.5"
+                },
+                "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.1.0"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
                 "GFASTATS_MATERNAL": {
                     "gfastats": "1.3.6"
                 },
@@ -190,6 +199,9 @@
                 "SAMTOOLS_SORT_TRGT": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.21
+                },
                 "SEVERUS": {
                     "severus": 1.1
                 },
@@ -252,6 +264,12 @@
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.3
+                },
+                "TABIX_SVDB_MERGE": {
+                    "tabix": 1.2
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.5.0dev"
@@ -447,6 +465,9 @@
                 "phased_variants/HG002_Revio",
                 "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz",
                 "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
                 "pipeline_info",
                 "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
                 "qc",
@@ -484,6 +505,13 @@
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
                 "qc/somalier/relate/test/test.samples.tsv",
+                "svs",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/sample",
+                "svs/sample/HG002_Revio",
+                "svs/sample/HG002_Revio/HG002_Revio_svs.vcf.gz",
+                "svs/sample/HG002_Revio/HG002_Revio_svs.vcf.gz.tbi"
                 "repeats",
                 "repeats/family",
                 "repeats/family/FAM",
@@ -624,9 +652,18 @@
                     "HG002_Revio_spanning_sorted.bam",
                     "a51f00198c7449fd64772fe680c6241"
                 ]
+                "HG002_Revio.regions.bed.gz.csi:md5,98ab5f668e864129054ffc1663a980ee"
             ],
             [
                 [
+                    "HG002_Revio.paraphase.bam",
+                    "12b7845566fc2863bfd5328a5bcbfab6"
+                ]
+            ],
+            [
+                [
+                    "HG002_Revio_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                     "HG002_Revio.dip.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=1917, phased=true, phasedAutodetect=false]"
                 ],
