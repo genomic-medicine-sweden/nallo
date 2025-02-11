@@ -311,15 +311,7 @@
                 "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.pair.vcf.gz",
                 "bcftools",
                 "bcftools/HG002_Revio_A.txt",
-                "bcftools/HG002_Revio_A_merged.vcf.gz",
-                "bcftools/HG002_Revio_A_merged.vcf.gz.tbi",
-                "bcftools/HG002_Revio_A_paraphase.vcf.gz",
-                "bcftools/HG002_Revio_A_paraphase.vcf.gz.tbi",
                 "bcftools/HG002_Revio_B.txt",
-                "bcftools/HG002_Revio_B_merged.vcf.gz",
-                "bcftools/HG002_Revio_B_merged.vcf.gz.tbi",
-                "bcftools/HG002_Revio_B_paraphase.vcf.gz",
-                "bcftools/HG002_Revio_B_paraphase.vcf.gz.tbi",
                 "create",
                 "create/HG002_Revio_A_samples_file.txt",
                 "create/HG002_Revio_B_samples_file.txt",
@@ -485,6 +477,10 @@
                 "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.bam",
                 "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.bam.bai",
                 "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.json",
+                "paraphase/HG002_Revio_A/HG002_Revio_A_merged.vcf.gz",
+                "paraphase/HG002_Revio_A/HG002_Revio_A_merged.vcf.gz.tbi",
+                "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase.vcf.gz",
+                "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase.vcf.gz.tbi",
                 "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs",
                 "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz",
                 "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz.tbi",
@@ -492,6 +488,10 @@
                 "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.bam",
                 "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.bam.bai",
                 "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.json",
+                "paraphase/HG002_Revio_B/HG002_Revio_B_merged.vcf.gz",
+                "paraphase/HG002_Revio_B/HG002_Revio_B_merged.vcf.gz.tbi",
+                "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase.vcf.gz",
+                "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase.vcf.gz.tbi",
                 "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs",
                 "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz",
                 "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz.tbi",
@@ -678,15 +678,7 @@
                 "HG002_Revio_B.hap2.var.gz:md5,f09b01fcb43bf64f92ca7ec8a2380c25",
                 "HG002_Revio_B.pair.vcf.gz:md5,676492865a9d4765835638d52651af73",
                 "HG002_Revio_A.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_Revio_A_merged.vcf.gz:md5,b9a52e3fdc5e91b8a59fff9a79d5d65b",
-                "HG002_Revio_A_merged.vcf.gz.tbi:md5,971a38fb3cc9da15f891fd039f629347",
-                "HG002_Revio_A_paraphase.vcf.gz:md5,fe1022637fb6dd5cfc78ac1fa3e556dc",
-                "HG002_Revio_A_paraphase.vcf.gz.tbi:md5,2689bf1fa60a2bb0a54cf14e0f1f969d",
                 "HG002_Revio_B.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_Revio_B_merged.vcf.gz:md5,d06d5d6aed328ea7f608453e3d4d8839",
-                "HG002_Revio_B_merged.vcf.gz.tbi:md5,643847b8f440e04b7c3b8d5d695719ed",
-                "HG002_Revio_B_paraphase.vcf.gz:md5,d01c06acad23f4a9d802fde4acd23487",
-                "HG002_Revio_B_paraphase.vcf.gz.tbi:md5,a2df5073716159fae79fc007ef504464",
                 "HG002_Revio_A_samples_file.txt:md5,c1acc4c856e1723e296679b85d776892",
                 "HG002_Revio_B_samples_file.txt:md5,971e1cc506e698e1174cb30aa601a004",
                 "HG002_Revio_A_merged.json:md5,f73f7163c7fd25355b784a1c0c56dbef",
@@ -832,15 +824,15 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
                 [
+                    "HG002_Revio_A_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_Revio_B_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_B_paraphase.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_A_hba.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
                 [
@@ -934,22 +926,6 @@
                     "83dc2bb5d8f46bf3daf99f27e4d3b022"
                 ],
                 [
-                    "HG002_Revio_A_merged.vcf.gz",
-                    "7f2f5b2b1a46b3d59d5a806e82d81e2f"
-                ],
-                [
-                    "HG002_Revio_A_paraphase.vcf.gz",
-                    "2b0461ad5cc8c76410537d17dbefb9fb"
-                ],
-                [
-                    "HG002_Revio_B_merged.vcf.gz",
-                    "d9117359dd5947c6138b23b43bfe0053"
-                ],
-                [
-                    "HG002_Revio_B_paraphase.vcf.gz",
-                    "e843ffed38c3fee946f5cb39f5e2cd79"
-                ],
-                [
                     "FAM_repeats_annotated.vcf.gz",
                     "951b776cf91119f9962b75756acedbd0"
                 ],
@@ -967,6 +943,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-11T20:09:01.111709275"
+        "timestamp": "2025-02-11T20:58:57.104900969"
     }
 }
