@@ -3,6 +3,7 @@ include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE } from '../../modules/nf-c
 include { BCFTOOLS_QUERY                              } from '../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER                           } from '../../modules/nf-core/bcftools/reheader/main'
 include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../modules/local/create_samples_haplotypes_file/main'
+include { MERGE_JSON                                  } from '../../modules/local/merge_json.nf'
 include { PARAPHASE                                   } from '../../modules/nf-core/paraphase/main'
 
 workflow CALL_PARALOGS {
@@ -18,8 +19,11 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
     PARAPHASE.out.vcf
-        .join(PARAPHASE.out.vcf_index)
+        .join( PARAPHASE.out.vcf_index )
         .set { paraphase_vcf_tbis }
+
+    MERGE_JSON ( PARAPHASE.out.json )
+    ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
 
     // Get the sample name (GENE_hapX) from the VCF
     BCFTOOLS_QUERY (
@@ -61,7 +65,7 @@ workflow CALL_PARALOGS {
         .groupTuple()
         .set { bcftools_merge_family_in }
 
-    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, [[],[]], [[],[]])
+    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, [[],[]], [[],[]] )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_FAMILY.out.versions)
 
 
@@ -70,7 +74,7 @@ workflow CALL_PARALOGS {
     emit:
     bam      = PARAPHASE.out.bam                     // channel: [ val(meta), path(bam) ]
     bai      = PARAPHASE.out.bai                     // channel: [ val(meta), path(bai) ]
-    json     = PARAPHASE.out.json                    // channel: [ val(meta), path(json) ]
+    json     = MERGE_JSON.out.json                   // channel: [ val(meta), path(json) ]
     vcf      = BCFTOOLS_MERGE_PER_FAMILY.out.vcf     // channel: [ val(meta), path(vcfs) ]
     tbi      = BCFTOOLS_MERGE_PER_FAMILY.out.index   // channel: [ val(meta), path(tbis) ]
     versions = ch_versions                           // channel: [ versions.yml ]
