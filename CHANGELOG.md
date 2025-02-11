@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Changed family-level SNVs naming to `snvs` from `snv`, matching sample-level and other variants
+- [#558](https://github.com/genomic-medicine-sweden/nallo/pull/558) - Changed VEP to single-threaded by default, because of https://github.com/Ensembl/ensembl-vep/issues/1759
 
 ### `Removed`
 
