@@ -64,7 +64,7 @@ workflow CALL_PARALOGS {
         .map{ meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
         .set {bcftools_merge_case_in}
 
-    BCFTOOLS_MERGE_PER_CASE ( bcftools_merge_case_in, [], [], [] )
+    BCFTOOLS_MERGE_PER_CASE ( bcftools_merge_case_in, fasta, ch_fai, ch_bed )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_CASE.out.versions)
 
 
