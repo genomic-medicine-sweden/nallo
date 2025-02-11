@@ -678,15 +678,15 @@
                 "HG002_Revio_B.hap2.var.gz:md5,f09b01fcb43bf64f92ca7ec8a2380c25",
                 "HG002_Revio_B.pair.vcf.gz:md5,676492865a9d4765835638d52651af73",
                 "HG002_Revio_A.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_Revio_A_merged.vcf.gz:md5,b21970b208231bc9f81c7689d7631e85",
-                "HG002_Revio_A_merged.vcf.gz.tbi:md5,ec662f18574cbceb827b397b7a008279",
-                "HG002_Revio_A_paraphase.vcf.gz:md5,d57099e51d75710d4da7144cab0fa378",
-                "HG002_Revio_A_paraphase.vcf.gz.tbi:md5,70d8412c0271e9f56e5c395ce393c807",
+                "HG002_Revio_A_merged.vcf.gz:md5,b9a52e3fdc5e91b8a59fff9a79d5d65b",
+                "HG002_Revio_A_merged.vcf.gz.tbi:md5,971a38fb3cc9da15f891fd039f629347",
+                "HG002_Revio_A_paraphase.vcf.gz:md5,fe1022637fb6dd5cfc78ac1fa3e556dc",
+                "HG002_Revio_A_paraphase.vcf.gz.tbi:md5,2689bf1fa60a2bb0a54cf14e0f1f969d",
                 "HG002_Revio_B.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_Revio_B_merged.vcf.gz:md5,aea601c98cf3faa1dfc5b120a574aaa1",
-                "HG002_Revio_B_merged.vcf.gz.tbi:md5,5ab3c6ee770d3b8d041c1bc22efa6c3c",
-                "HG002_Revio_B_paraphase.vcf.gz:md5,e6c699c2dcf00981edc73db709d5e501",
-                "HG002_Revio_B_paraphase.vcf.gz.tbi:md5,972c03b54c067630f0407d7cc1edb87f",
+                "HG002_Revio_B_merged.vcf.gz:md5,d06d5d6aed328ea7f608453e3d4d8839",
+                "HG002_Revio_B_merged.vcf.gz.tbi:md5,643847b8f440e04b7c3b8d5d695719ed",
+                "HG002_Revio_B_paraphase.vcf.gz:md5,d01c06acad23f4a9d802fde4acd23487",
+                "HG002_Revio_B_paraphase.vcf.gz.tbi:md5,a2df5073716159fae79fc007ef504464",
                 "HG002_Revio_A_samples_file.txt:md5,c1acc4c856e1723e296679b85d776892",
                 "HG002_Revio_B_samples_file.txt:md5,971e1cc506e698e1174cb30aa601a004",
                 "HG002_Revio_A_merged.json:md5,f73f7163c7fd25355b784a1c0c56dbef",
@@ -935,19 +935,19 @@
                 ],
                 [
                     "HG002_Revio_A_merged.vcf.gz",
-                    "197ad80e79686bcf35e5562c62a4490"
+                    "7f2f5b2b1a46b3d59d5a806e82d81e2f"
                 ],
                 [
                     "HG002_Revio_A_paraphase.vcf.gz",
-                    "4fba5381d5583acd0e48b1127cfc06b2"
+                    "2b0461ad5cc8c76410537d17dbefb9fb"
                 ],
                 [
                     "HG002_Revio_B_merged.vcf.gz",
-                    "c0224234a474d531eca0ecdcae7419b6"
+                    "d9117359dd5947c6138b23b43bfe0053"
                 ],
                 [
                     "HG002_Revio_B_paraphase.vcf.gz",
-                    "3da81675fb1c01cd39dc1d6a1f8a58f2"
+                    "e843ffed38c3fee946f5cb39f5e2cd79"
                 ],
                 [
                     "FAM_repeats_annotated.vcf.gz",
@@ -967,6 +967,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-11T15:27:52.557821713"
+        "timestamp": "2025-02-11T20:09:01.111709275"
     }
 }
