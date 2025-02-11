@@ -21,7 +21,7 @@ process MERGE_JSON {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    merge_json_sample_files_into_case.py \\
+    merge_json_sample_files_into_family.py \\
         --files_in ${json_files} \\
         --file_out ${prefix}_merged.json \\
 
