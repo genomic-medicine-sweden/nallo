@@ -1,9 +1,9 @@
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_CASE } from '../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE} from '../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_QUERY } from '../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER } from '../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../modules/local/create_samples_haplotypes_file/main'
-include { PARAPHASE } from '../../modules/nf-core/paraphase/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_FAMILY } from '../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE } from '../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_QUERY                              } from '../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                           } from '../../modules/nf-core/bcftools/reheader/main'
+include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../modules/local/create_samples_haplotypes_file/main'
+include { PARAPHASE                                   } from '../../modules/nf-core/paraphase/main'
 
 workflow CALL_PARALOGS {
 
@@ -61,7 +61,7 @@ workflow CALL_PARALOGS {
         .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
         .set { bcftools_merge_family_in }
 
-    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, ch_fai, ch_bed )
+    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, [[],[]], [[],[]])
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_FAMILY.out.versions)
 
 
@@ -71,8 +71,8 @@ workflow CALL_PARALOGS {
     bam      = PARAPHASE.out.bam                     // channel: [ val(meta), path(bam) ]
     bai      = PARAPHASE.out.bai                     // channel: [ val(meta), path(bai) ]
     json     = PARAPHASE.out.json                    // channel: [ val(meta), path(json) ]
-    vcf      = BCFTOOLS_MERGE_PER_CASE.out.vcf       // channel: [ val(meta), path(vcfs) ]
-    tbi      = BCFTOOLS_MERGE_PER_CASE.out.index     // channel: [ val(meta), path(tbis) ]
+    vcf      = BCFTOOLS_MERGE_PER_FAMILY.out.vcf     // channel: [ val(meta), path(vcfs) ]
+    tbi      = BCFTOOLS_MERGE_PER_FAMILY.out.index   // channel: [ val(meta), path(tbis) ]
     versions = ch_versions                           // channel: [ versions.yml ]
 }
 
