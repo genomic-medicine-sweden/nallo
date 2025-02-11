@@ -21,7 +21,7 @@ workflow CALL_PARALOGS {
         .join(PARAPHASE.out.vcf_index)
         .set { paraphase_vcf_tbis }
 
-    // Get the sample name (GENE_hapX)from the VCF
+    // Get the sample name (GENE_hapX) from the VCF
     BCFTOOLS_QUERY (
         paraphase_vcf_tbis,
         [],
@@ -48,24 +48,21 @@ workflow CALL_PARALOGS {
         .map { meta, vcf, index -> [ meta, [vcf], [index] ] }
         .set { ch_bcftools_merge_in }
 
-    ch_fai = Channel.value([[:], []])
-    ch_bed = Channel.value([[:], []])
-
     BCFTOOLS_MERGE_PER_SAMPLE(
         ch_bcftools_merge_in,
         fasta,
-        ch_fai,
-        ch_bed
+        [[],[]],
+        [[],[]]
     )
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_SAMPLE.out.versions)
 
     BCFTOOLS_MERGE_PER_SAMPLE.out.vcf
         .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index )
-        .map{ meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
-        .set {bcftools_merge_case_in}
+        .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
+        .set { bcftools_merge_family_in }
 
-    BCFTOOLS_MERGE_PER_CASE ( bcftools_merge_case_in, fasta, ch_fai, ch_bed )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_CASE.out.versions)
+    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, ch_fai, ch_bed )
+    ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_FAMILY.out.versions)
 
 
 

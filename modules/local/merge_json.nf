@@ -27,7 +27,7 @@ process MERGE_JSON {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        merge_json_sample_files_into_case: 1.0
+        merge_json_sample_files_into_family: 1.0
         python: \$(python --version | sed 's/Python //g')
     END_VERSIONS
     """
