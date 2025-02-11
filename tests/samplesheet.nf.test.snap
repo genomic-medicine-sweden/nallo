@@ -293,10 +293,6 @@
                 "assembly_variant_calling/dipcall/HG002_Revio/HG002_Revio.pair.vcf.gz",
                 "bcftools",
                 "bcftools/HG002_Revio.txt",
-                "bcftools/HG002_Revio_merged.vcf.gz",
-                "bcftools/HG002_Revio_merged.vcf.gz.tbi",
-                "bcftools/HG002_Revio_paraphase.vcf.gz",
-                "bcftools/HG002_Revio_paraphase.vcf.gz.tbi",
                 "create",
                 "create/HG002_Revio_samples_file.txt",
                 "merge",
@@ -441,6 +437,10 @@
                 "paraphase/HG002_Revio/HG002_Revio.paraphase.bam",
                 "paraphase/HG002_Revio/HG002_Revio.paraphase.bam.bai",
                 "paraphase/HG002_Revio/HG002_Revio.paraphase.json",
+                "paraphase/HG002_Revio/HG002_Revio_merged.vcf.gz",
+                "paraphase/HG002_Revio/HG002_Revio_merged.vcf.gz.tbi",
+                "paraphase/HG002_Revio/HG002_Revio_paraphase.vcf.gz",
+                "paraphase/HG002_Revio/HG002_Revio_paraphase.vcf.gz.tbi",
                 "paraphase/HG002_Revio/HG002_Revio_paraphase_vcfs",
                 "paraphase/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz",
                 "paraphase/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz.tbi",
@@ -557,10 +557,6 @@
                 "HG002_Revio.hap2.var.gz:md5,9ba9303b30730e419138e177c7d1e0c2",
                 "HG002_Revio.pair.vcf.gz:md5,1909dffa43850282fe7e5ae2b2d273a7",
                 "HG002_Revio.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_Revio_merged.vcf.gz:md5,0426815eb62d39266a960a764d9eac72",
-                "HG002_Revio_merged.vcf.gz.tbi:md5,f923f7976e2872749e106ab1e3f9d609",
-                "HG002_Revio_paraphase.vcf.gz:md5,71c996c9a7dc323332cda1ad1e94799b",
-                "HG002_Revio_paraphase.vcf.gz.tbi:md5,c524140d8602d3bbebaf748f3809cecf",
                 "HG002_Revio_samples_file.txt:md5,f7a93fe03ec8d0c6ae4be40a9f2d75e1",
                 "HG002_Revio_merged.json:md5,2e4ded075fbb8ba374e0ff3ea18f7512",
                 "HG002_Revio_modkit_pileup_1.bed.gz:md5,1d90dc72aea71d6c9de602cc51aa9861",
@@ -708,14 +704,6 @@
                     "fa3bfacdab5449526d29d642340d6708"
                 ],
                 [
-                    "HG002_Revio_merged.vcf.gz",
-                    "b46517dabd3cc61d8f90bfc77e96edfc"
-                ],
-                [
-                    "HG002_Revio_paraphase.vcf.gz",
-                    "e6e9d9b1eae4122823e2048836fcc41"
-                ],
-                [
                     "FAM_repeats_annotated.vcf.gz",
                     "c70a3906d95d9d9c0a1a61c354302c7c"
                 ],
@@ -729,6 +717,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-11T20:04:23.167186453"
+        "timestamp": "2025-02-11T20:53:52.994521257"
     }
 }
