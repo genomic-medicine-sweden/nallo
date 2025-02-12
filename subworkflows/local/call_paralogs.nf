@@ -62,6 +62,7 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_MERGE_PER_SAMPLE.out.vcf
         .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index )
+        .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { bcftools_merge_family_in }
 
