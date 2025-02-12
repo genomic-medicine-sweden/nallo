@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles": {
         "content": [
-            125,
+            136,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -22,6 +22,12 @@
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_FILLTAGS_ANNO": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_MERGE_PER_FAMILY": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_MERGE_PER_SAMPLE": {
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
@@ -64,6 +70,9 @@
                     "cramino": "0.14.5"
                 },
                 "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.1.0"
+                },
+                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -120,6 +129,10 @@
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
+                "MERGE_JSON": {
+                    "merge_json_sample_files_into_family": 1.0,
+                    "python": "3.8.3"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.28-r1209",
                     "samtools": 1.2
@@ -138,8 +151,8 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.28-r1209",
-                    "paraphase": "3.1.1",
-                    "samtools": 1.2
+                    "paraphase": "3.2.1",
+                    "samtools": 1.21
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -432,20 +445,26 @@
                 "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
                 "multiqc/multiqc_report.html",
                 "paraphase",
-                "paraphase/HG002_ONT_A",
-                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam",
-                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam.bai",
-                "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.json",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz.tbi",
-                "paraphase/HG002_ONT_B",
-                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam",
-                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam.bai",
-                "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.json",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi",
+                "paraphase/family",
+                "paraphase/family/FAM",
+                "paraphase/family/FAM/FAM_merged.json",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
+                "paraphase/sample",
+                "paraphase/sample/HG002_ONT_A",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A.paraphase.bam",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A.paraphase.bam.bai",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A.paraphase.json",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz",
+                "paraphase/sample/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz.tbi",
+                "paraphase/sample/HG002_ONT_B",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B.paraphase.bam",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B.paraphase.bam.bai",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B.paraphase.json",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz",
+                "paraphase/sample/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi",
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
@@ -693,11 +712,11 @@
                 ],
                 [
                     "HG002_ONT_A.paraphase.bam",
-                    "7b8dc04d36dc2290fd031da73e8c8553"
+                    "c66015888c38197b3da68deb7ab94916"
                 ],
                 [
                     "HG002_ONT_B.paraphase.bam",
-                    "7b8dc04d36dc2290fd031da73e8c8553"
+                    "c66015888c38197b3da68deb7ab94916"
                 ]
             ],
             [
@@ -718,12 +737,16 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2926, phased=false, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3695, phased=true, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_ONT_A_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2101, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_B_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2101, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_phased.vcf.gz",
@@ -794,9 +817,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-10T16:34:01.690765611"
+        "timestamp": "2025-02-12T12:49:36.059934943"
     }
 }

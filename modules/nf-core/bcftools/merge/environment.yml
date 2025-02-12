@@ -3,8 +3,5 @@
 channels:
   - conda-forge
   - bioconda
-
 dependencies:
-  - bioconda::minimap2=2.28
-  - bioconda::paraphase=3.2.1
-  - bioconda::samtools=1.21
+  - bioconda::bcftools=1.20
