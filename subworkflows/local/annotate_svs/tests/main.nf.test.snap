@@ -1,4 +1,20 @@
 {
+    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
+        "content": [
+            [
+                "versions.yml:md5,84c59e3a0a183b01a21620b16ee9ca4d",
+                "versions.yml:md5,8b626b9e41c9e6de6edc8f94e0e75aed",
+                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
+            ],
+            "683077b045a3fe05552d187a1bd8a435",
+            "test_svs_cnvs_merged_annotated.vcf.gz.tbi"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-11T09:15:23.559003186"
+    },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
             [
@@ -12,21 +28,5 @@
             "nextflow": "24.04.4"
         },
         "timestamp": "2024-11-04T16:18:47.369135866"
-    },
-    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
-        "content": [
-            [
-                "versions.yml:md5,84c59e3a0a183b01a21620b16ee9ca4d",
-                "versions.yml:md5,8b626b9e41c9e6de6edc8f94e0e75aed",
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
-            ],
-            "28e9be031273d5e4a94a8654da6e56ed",
-            "test_svs_cnvs_merged_annotated.vcf.gz.tbi"
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
-        },
-        "timestamp": "2024-11-04T16:18:35.246526033"
     }
 }

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            173,
+            184,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -25,6 +25,12 @@
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_INDEX": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_MERGE_PER_FAMILY": {
+                    "bcftools": 1.2
+                },
+                "BCFTOOLS_MERGE_PER_SAMPLE": {
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
@@ -73,6 +79,9 @@
                     "cramino": "0.14.5"
                 },
                 "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.1.0"
+                },
+                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -132,6 +141,10 @@
                 "HIPHASE": {
                     "hiphase": "1.4.0-7bf2743"
                 },
+                "MERGE_JSON": {
+                    "merge_json_sample_files_into_family": 1.0,
+                    "python": "3.8.3"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.28-r1209",
                     "samtools": 1.2
@@ -150,8 +163,8 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.28-r1209",
-                    "paraphase": "3.1.1",
-                    "samtools": 1.2
+                    "paraphase": "3.2.1",
+                    "samtools": 1.21
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -182,7 +195,7 @@
                     "samtools": 1.21
                 },
                 "SEVERUS": {
-                    "severus": 1.1
+                    "severus": 1.3
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
@@ -457,20 +470,26 @@
                 "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
                 "multiqc/multiqc_report.html",
                 "paraphase",
-                "paraphase/HG002_Revio_A",
-                "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.bam",
-                "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.bam.bai",
-                "paraphase/HG002_Revio_A/HG002_Revio_A.paraphase.json",
-                "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs",
-                "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz",
-                "paraphase/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz.tbi",
-                "paraphase/HG002_Revio_B",
-                "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.bam",
-                "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.bam.bai",
-                "paraphase/HG002_Revio_B/HG002_Revio_B.paraphase.json",
-                "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs",
-                "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz",
-                "paraphase/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz.tbi",
+                "paraphase/family",
+                "paraphase/family/FAM",
+                "paraphase/family/FAM/FAM_merged.json",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
+                "paraphase/sample",
+                "paraphase/sample/HG002_Revio_A",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A.paraphase.bam",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A.paraphase.bam.bai",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A.paraphase.json",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz",
+                "paraphase/sample/HG002_Revio_A/HG002_Revio_A_paraphase_vcfs/HG002_Revio_A_hba.vcf.gz.tbi",
+                "paraphase/sample/HG002_Revio_B",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B.paraphase.bam",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B.paraphase.bam.bai",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B.paraphase.json",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz",
+                "paraphase/sample/HG002_Revio_B/HG002_Revio_B_paraphase_vcfs/HG002_Revio_B_hba.vcf.gz.tbi",
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
@@ -750,11 +769,11 @@
                 ],
                 [
                     "HG002_Revio_A.paraphase.bam",
-                    "fcc3f220bb09d3264f97e7f620779be0"
+                    "12b7845566fc2863bfd5328a5bcbfab6"
                 ],
                 [
                     "HG002_Revio_B.paraphase.bam",
-                    "fcc3f220bb09d3264f97e7f620779be0"
+                    "12b7845566fc2863bfd5328a5bcbfab6"
                 ],
                 [
                     "HG002_Revio_A_spanning_sorted.bam",
@@ -783,12 +802,16 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=1862, phased=false, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3970, phased=true, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_Revio_A_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2121, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_B_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2121, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_A_phased.vcf.gz",
@@ -828,7 +851,7 @@
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=87, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
@@ -840,7 +863,7 @@
                 ],
                 [
                     "HG002_Revio_A_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=52, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_A_sniffles_svs.vcf.gz",
@@ -852,7 +875,7 @@
                 ],
                 [
                     "HG002_Revio_B_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=52, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_B_sniffles_svs.vcf.gz",
@@ -894,6 +917,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-10T16:32:06.606669418"
+        "timestamp": "2025-02-12T15:59:23.425194007"
     }
 }
