@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#549](https://github.com/genomic-medicine-sweden/nallo/pull/549) - Added merging of paraphase JSON and VCF files into family files
 - [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
 - [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
 - [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Changed family-level SNVs naming to `snvs` from `snv`, matching sample-level and other variants
 - [#557](https://github.com/genomic-medicine-sweden/nallo/pull/557) - Updated Severus to version 1.3
+- [#558](https://github.com/genomic-medicine-sweden/nallo/pull/558) - Changed VEP to single-threaded by default, because of https://github.com/Ensembl/ensembl-vep/issues/1759
 
 ### `Removed`
 
@@ -43,13 +45,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool        | Old version | New version |
-| ----------- | ----------- | ----------- |
-| hifiasm     | 0.19.8      | 0.24.0      |
-| deepvariant | 1.6.1       | 1.8.0       |
-| sniffles    | 2.0.7       | 1.0.12      |
-| mosdepth    | 0.3.8       | 0.3.10      |
-| severus     | 1.1         | 1.3         |
+| Tool           | Old version | New version |
+| -------------- | ----------- | ----------- |
+| hifiasm        | 0.19.8      | 0.24.0      |
+| deepvariant    | 1.6.1       | 1.8.0       |
+| sniffles       | 2.0.7       | 1.0.12      |
+| mosdepth       | 0.3.8       | 0.3.10      |
+| paraphase      | 3.1.1       | 3.2.1       |
+| bcftools merge |             | 1.20        |
+| merge_json     |             | 1.0         |
+| severus        | 1.1         | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
