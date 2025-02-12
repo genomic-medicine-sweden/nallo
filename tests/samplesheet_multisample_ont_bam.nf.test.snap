@@ -290,15 +290,6 @@
                 "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.sam.gz",
                 "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.var.gz",
                 "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.pair.vcf.gz",
-                "bcftools",
-                "bcftools/HG002_ONT_A.txt",
-                "bcftools/HG002_ONT_B.txt",
-                "create",
-                "create/HG002_ONT_A_samples_file.txt",
-                "create/HG002_ONT_B_samples_file.txt",
-                "merge",
-                "merge/HG002_ONT_A_merged.json",
-                "merge/HG002_ONT_B_merged.json",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -454,14 +445,14 @@
                 "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
                 "multiqc/multiqc_report.html",
                 "paraphase",
+                "paraphase/FAM",
+                "paraphase/FAM/FAM_merged.json",
+                "paraphase/FAM/FAM_paraphase_merged.vcf.gz",
+                "paraphase/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/HG002_ONT_A",
                 "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam",
                 "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.bam.bai",
                 "paraphase/HG002_ONT_A/HG002_ONT_A.paraphase.json",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_merged.vcf.gz",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_merged.vcf.gz.tbi",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase.vcf.gz",
-                "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase.vcf.gz.tbi",
                 "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs",
                 "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz",
                 "paraphase/HG002_ONT_A/HG002_ONT_A_paraphase_vcfs/HG002_ONT_A_hba.vcf.gz.tbi",
@@ -469,20 +460,9 @@
                 "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam",
                 "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.bam.bai",
                 "paraphase/HG002_ONT_B/HG002_ONT_B.paraphase.json",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_merged.vcf.gz",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_merged.vcf.gz.tbi",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase.vcf.gz",
-                "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase.vcf.gz.tbi",
                 "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs",
                 "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz",
                 "paraphase/HG002_ONT_B/HG002_ONT_B_paraphase_vcfs/HG002_ONT_B_hba.vcf.gz.tbi",
-                "paraphase/family",
-                "paraphase/family/HG002_ONT_A",
-                "paraphase/family/HG002_ONT_A/FAM_paraphase_merged.vcf.gz",
-                "paraphase/family/HG002_ONT_A/FAM_paraphase_merged.vcf.gz.tbi",
-                "paraphase/family/HG002_ONT_B",
-                "paraphase/family/HG002_ONT_B/FAM_paraphase_merged.vcf.gz",
-                "paraphase/family/HG002_ONT_B/FAM_paraphase_merged.vcf.gz.tbi",
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
@@ -636,12 +616,6 @@
                 "HG002_ONT_B.hap2.sam.gz:md5,c6bbbc7fad9423840feb7b8cd18395b8",
                 "HG002_ONT_B.hap2.var.gz:md5,020812d4f3c94e5747855df872bf4ce8",
                 "HG002_ONT_B.pair.vcf.gz:md5,07cea4c96b9fe76b35952c46efcc6242",
-                "HG002_ONT_A.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_ONT_B.txt:md5,a0e25edabd1af8f8460e4178b75d3d99",
-                "HG002_ONT_A_samples_file.txt:md5,cbff644a5a7e862abf7450c9c3cfddb2",
-                "HG002_ONT_B_samples_file.txt:md5,e7e4cf5cee2367bfa3680e42215477b5",
-                "HG002_ONT_A_merged.json:md5,3173ef9c54fa8c2e1cf16ae2ddb59678",
-                "HG002_ONT_B_merged.json:md5,e6b430330f7e672be7b2e334cefc6131",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,a833ab3d48e7f94372edbefe8ca99e59",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a0c5a1faaf0373a58f97302b977e5595",
                 "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,7c645581ccb6a55046d11f9a6f4b0d4a",
@@ -761,11 +735,7 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2926, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_A_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_A_paraphase.vcf.gz",
+                    "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
@@ -773,23 +743,7 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_B_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_B_paraphase.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_ONT_B_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
@@ -864,6 +818,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-11T21:02:57.610333137"
+        "timestamp": "2025-02-12T11:13:40.60399855"
     }
 }
