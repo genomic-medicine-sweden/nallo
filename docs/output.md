@@ -144,14 +144,14 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
 
-| Path                                                                    | Description                               |
-| ----------------------------------------------------------------------- | ----------------------------------------- |
-| `paraphase/{sample}/*.bam`                                              | BAM file with reads from analysed regions |
-| `paraphase/{sample}/*.bai`                                              | Index of the BAM file                     |
-| `paraphase/{sample}/*.json`                                             | Summary of haplotypes and variant calls   |
+| Path                                                                    | Description                                               |
+| ----------------------------------------------------------------------- | --------------------------------------------------------- |
+| `paraphase/{sample}/*.bam`                                              | BAM file with reads from analysed regions                 |
+| `paraphase/{sample}/*.bai`                                              | Index of the BAM file                                     |
+| `paraphase/{sample}/*.json`                                             | Summary of haplotypes and variant calls                   |
 | `paraphase/{family}/*.json`                                             | Summary of haplotypes and variant calls, merged by family |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`     | VCF file per gene                         |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi` | Index of the VCF file                     |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`     | VCF file per gene                                         |
+| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi` | Index of the VCF file                                     |
 
 ### Repeats
 
