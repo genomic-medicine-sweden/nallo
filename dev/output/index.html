@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -1334,24 +1334,36 @@
 </thead>
 <tbody>
 <tr>
-<td><code>paraphase/{sample}/*.bam</code></td>
+<td><code>paraphase/sample/{sample}/*.bam</code></td>
 <td>BAM file with reads from analysed regions</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/*.bai</code></td>
+<td><code>paraphase/sample/{sample}/*.bai</code></td>
 <td>Index of the BAM file</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/*.json</code></td>
+<td><code>paraphase/sample/{sample}/*.json</code></td>
 <td>Summary of haplotypes and variant calls</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz</code></td>
+<td><code>paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz</code></td>
 <td>VCF file per gene</td>
 </tr>
 <tr>
-<td><code>paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi</code></td>
+<td><code>paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
+</tr>
+<tr>
+<td><code>paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz</code></td>
+<td>VCF file from paraphase, merged by family</td>
+</tr>
+<tr>
+<td><code>paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz.tbi</code></td>
+<td>Index of the VCF file merged by family</td>
+</tr>
+<tr>
+<td><code>paraphase/family/{family_id}/{family_id}_merged.json</code></td>
+<td>Summary of haplotypes and variant calls, merged by family</td>
 </tr>
 </tbody>
 </table>
