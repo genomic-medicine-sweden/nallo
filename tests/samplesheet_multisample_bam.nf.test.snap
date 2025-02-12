@@ -192,7 +192,7 @@
                     "samtools": 1.21
                 },
                 "SEVERUS": {
-                    "severus": 1.1
+                    "severus": 1.3
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -841,7 +841,7 @@
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=87, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
@@ -853,7 +853,7 @@
                 ],
                 [
                     "HG002_Revio_A_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=52, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_B_cnvs.vcf.gz",
@@ -861,7 +861,7 @@
                 ],
                 [
                     "HG002_Revio_B_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=52, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
