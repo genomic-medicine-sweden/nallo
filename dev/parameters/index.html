@@ -644,7 +644,7 @@
 </tr>
 <tr>
 <td><code>skip_sv_calling</code></td>
-<td>Skip SV calling</td>
+<td>Skip structural variant calling</td>
 <td><code>boolean</code></td>
 <td>False</td>
 <td></td>
@@ -886,7 +886,15 @@
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ba720cd29322036d966ab3e4bc4c3d03e1731af5/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/</td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>trace_report_suffix</code></td>
+<td>Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.</td>
+<td><code>string</code></td>
+<td></td>
 <td></td>
 <td>True</td>
 </tr>
@@ -974,6 +982,14 @@
 <td><code>config_profile_url</code></td>
 <td>Institutional config URL link.</td>
 <td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>publish_unannotated_family_svs</code></td>
+<td>Publish unannotated SVs and CNVs per family and caller (these files are only output by default if <code>--skip_sv_annotation</code> or <code>--skip_cnv_calling</code> are active).</td>
+<td><code>boolean</code></td>
 <td></td>
 <td></td>
 <td>True</td>
@@ -1116,7 +1132,7 @@
 </tr>
 <tr>
 <td><code>sv_caller</code></td>
-<td>Which structural variant caller to use (<code>severus</code>, <code>sniffles</code>)</td>
+<td>From which SV caller to merge (with CNVs), annotate, rank and filter variants from (<code>severus</code> or <code>sniffles</code>).</td>
 <td><code>string</code></td>
 <td>severus</td>
 <td></td>
@@ -1135,6 +1151,14 @@
 <td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>)</td>
 <td><code>string</code></td>
 <td>hifi-only</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>hifiasm_preset</code></td>
+<td>Hifiasm preset, is set to <code>--ont</code> when <code>--profile ONT_R10</code> is active.</td>
+<td><code>string</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>

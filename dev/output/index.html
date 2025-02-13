@@ -1613,7 +1613,7 @@
 <p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> are used to call structural variants, while <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Variant merging strategies</p>
-<p>SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.</p>
+<p>SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls. SV calls are output for all callers, but only variants from one caller (set by <code>--sv_caller</code>) are merged with CNVs, then annotated, ranked and filtered.</p>
 </div>
 <table>
 <thead>
@@ -1623,50 +1623,57 @@
 <th>Call SVs</th>
 <th>Call CNVs</th>
 <th>Call SVs &amp; CNVs</th>
+<th><code>--publish_unannotated_family_svs</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>svs/sample/{sample}/{sample}_svs.vcf.gz</code></td>
+<td><code>svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz</code></td>
 <td>VCF file with SVs per sample</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
-<td><code>svs/sample/{sample}/{sample}_svs.vcf.gz.tbi</code></td>
+<td><code>svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz.tbi</code></td>
 <td>VCF file with SVs per sample</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
-<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz</code></td>
+<td><code>svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz</code></td>
 <td>VCF file with CNVs per sample</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
-<td><code>svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi</code></td>
+<td><code>svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz.tbi</code></td>
 <td>VCF file with CNVs per sample</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
-<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz</code></td>
-<td>VCF file with merged SVs per family</td>
+<td><code>svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{svs,cnvs}.vcf.gz</code></td>
+<td>VCF file with merged SVs per family and caller</td>
+<td></td>
+<td></td>
+<td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
-<td><code>svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi</code></td>
+<td><code>svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{snvs,cnvs}.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
+<td></td>
+<td></td>
+<td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz</code></td>
@@ -1674,6 +1681,7 @@
 <td></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 <tr>
 <td><code>svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi</code></td>
@@ -1681,6 +1689,7 @@
 <td></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td></td>
 </tr>
 </tbody>
 </table>
