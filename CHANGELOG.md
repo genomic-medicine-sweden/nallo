@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | merge_json     |             | 1.0         |
 | severus        | 1.1         | 1.3         |
 | dipcall        | 0.3         |             |
-| tagbam         |             | 0.1         |
+| tagbam         |             | 0.1.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
