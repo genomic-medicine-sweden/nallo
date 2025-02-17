@@ -72,7 +72,7 @@ def workflowDependencies = [
 //
 def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
-    assembly         : ["fasta"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
     sv_calling       : ["fasta"],
