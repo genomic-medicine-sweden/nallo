@@ -9,12 +9,12 @@ include {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { ALIGN_ASSEMBLIES                        } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
@@ -253,35 +253,22 @@ workflow NALLO {
     }
 
     //
-    // Hifiasm assembly and assembly variant calling
+    // Hifiasm assembly and alignment to reference genome
     //
     if(!params.skip_genome_assembly) {
 
         //Hifiasm assembly
-        ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
+        ASSEMBLY(
+            CONVERT_INPUT_FILES.out.fastq
+        )
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
-        // Update assembly variant calling meta with sex from somalier
-        ASSEMBLY.out.assembled_haplotypes
-            .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
-            .set { haplotypes }
-
-        bam
-            .map { meta, bam -> [ meta.id, meta ] }
-            .join( haplotypes )
-            .map { id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
-            .set { ch_assembly_variant_calling_in }
-
         // Run dipcall
-        ASSEMBLY_VARIANT_CALLING (
-            ch_assembly_variant_calling_in,
-            ASSEMBLY.out.paternal_haplotype,
-            ASSEMBLY.out.maternal_haplotype,
-            fasta,
-            fai,
-            ch_par
+        ALIGN_ASSEMBLIES (
+            ASSEMBLY.out.assembled_haplotypes,
+            fasta
         )
-        ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
     //

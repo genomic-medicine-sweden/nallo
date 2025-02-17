@@ -20,17 +20,14 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Assembly
 
-[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then converted to fasta files using [gfastats](https://github.com/vgl-hub/gfastats). A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is used to map the assembled haplotypes back to the reference genome.
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also ouputs summary stats per haplotype.
 
-| Path                                                         | Description                                          |
-| ------------------------------------------------------------ | ---------------------------------------------------- |
-| `assembly_haplotypes/gfastats/{sample}/*hap1.p_ctg.fasta.gz` | Assembled haplotype 1                                |
-| `assembly_haplotypes/gfastats/{sample}/*hap2.p_ctg.fasta.gz` | Assembled haplotype 2                                |
-| `assembly_haplotypes/gfastats/{sample}/*.assembly_summary`   | Summary statistics                                   |
-| `assembly_variant_calling/dipcall/{sample}/*hap1.bam`        | Assembled haplotype 1 mapped to the reference genome |
-| `assembly_variant_calling/dipcall/{sample}/*hap1.bai`        | Index of the corresponding BAM file for haplotype 1  |
-| `assembly_variant_calling/dipcall/{sample}/*hap2.bam`        | Assembled haplotype 2 mapped to the reference genome |
-| `assembly_variant_calling/dipcall/{sample}/*hap2.bai`        | Index of the corresponding BAM file for haplotype 2  |
+| Path                                                             | Description                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.bam`         | Both assembled haplotypes mapped to the reference genome, merged and haplotagged (`HP:1`/`HP:2`). |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.bam.bai`     | Index of aligned assembly.                                                                        |
+| `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`  | Summary statistics for haplotype 1/paternal haplotype                                             |
+| `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary` | Summary statistics for haplotype 2/maternal haplotype                                             |
 
 ## Methylation pileups
 

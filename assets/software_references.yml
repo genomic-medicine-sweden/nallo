@@ -47,9 +47,6 @@ tool:
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
     bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
-  dipcall:
-    citation: "dipcall (Li et al. 2018)"
-    bibliography: "Li H, Bloom JM, Farjoun Y, Fleharty M, Gauthier L, Neale B, MacArthur D (2018) A synthetic-diploid benchmark for accurate variant-calling evaluation. Nat Methods, 15:595-597. [PMID:30013044]"
   echtvar:
     citation: "Echtvar (Pedersen & de Ridder 2023)"
     bibliography: "Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931"
@@ -131,6 +128,9 @@ tool:
   tabix:
     citation: "Tabix (Li 2011)"
     bibliography: "Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011;27(5):718-719. doi:10.1093/bioinformatics/btq671"
+  tagbam:
+    citation: "Felix Lenner (2025)"
+    bibliography: ""
   trgt:
     citation: "TRGT (Dolzhenko et al. 2024)"
     bibliography: "Dolzhenko, E., English, A., Dashnow, H. et al. Characterization and visualization of tandem repeats at genome scale. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02057-3"

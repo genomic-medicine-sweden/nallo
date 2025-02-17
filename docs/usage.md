@@ -147,15 +147,7 @@ Turned off with `--skip_qc`.
 
 ### Assembly
 
-This subworkflow contains both genome assembly and assembly variant calling. The assembly variant calling needs the sex of samples. For samples with unknown sex this is inferred with the help of the aligned reads. Therefore it depends on the alignment subworkflow. It requires a BED file with PARs.
-
-| Parameter     | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
-
-!!!warning
-
-    Make sure chrY PAR is hard masked (masked with the letter N) in the reference genome you are using.
+This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
 
 Turned off with `--skip_genome_assembly`.
 
