@@ -126,7 +126,7 @@ workflow ASSEMBLY {
     ch_versions = ch_versions.mix(GFASTATS.out.versions)
 
     emit:
-    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta)
+    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
     versions = ch_versions                       // channel: [ versions.yml ]
 }
 

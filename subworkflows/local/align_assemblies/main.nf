@@ -11,7 +11,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
 
     main:
-    ch_versions     = Channel.empty()
+    ch_versions = Channel.empty()
 
     MINIMAP2_INDEX (
         ch_fasta
