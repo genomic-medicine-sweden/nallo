@@ -12,7 +12,8 @@ process WHATSHAP_STATS {
 
     output:
     tuple val(meta), path("*.stats.tsv") , emit: stats
-    tuple val(meta), path("*.blocks.tsv"), emit: blocks
+    tuple val(meta), path("*.blocks.tsv.gz"), emit: blocks
+    tuple val(meta), path("*.blocks.tsv.gz.tbi"), emit: blocks_index
     path "versions.yml"                  , emit: versions
 
     when:
@@ -34,7 +35,6 @@ process WHATSHAP_STATS {
         ${prefix}.blocks.tsv
 
     tabix \\
-        -p vcf \\
         ${prefix}.blocks.tsv.gz
 
     cat <<-END_VERSIONS > versions.yml
