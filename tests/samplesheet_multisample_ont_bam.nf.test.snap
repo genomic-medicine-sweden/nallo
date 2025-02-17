@@ -556,10 +556,6 @@
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
             ],
             [
-                "HG002_ONT_A_aligned_assembly.bam:md5,804fd6394536488c907c14f3adf660cb",
-                "HG002_ONT_A_aligned_assembly.bam.bai:md5,8d110a73f21ff4ca12d5ea278ccbe123",
-                "HG002_ONT_B_aligned_assembly.bam:md5,8daefb96df48d69b58987bcb9c49f33b",
-                "HG002_ONT_B_aligned_assembly.bam.bai:md5,086c058d0190e01743f596d1a4cc7fe9",
                 "HG002_ONT_A_haplotype_1.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
                 "HG002_ONT_A_haplotype_2.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
                 "HG002_ONT_B_haplotype_1.assembly_summary:md5,cb2280cb3895ebbe29093ed9603e81d2",
@@ -747,6 +743,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-17T14:43:25.749306531"
+        "timestamp": "2025-02-17T15:51:11.213948714"
     }
 }
