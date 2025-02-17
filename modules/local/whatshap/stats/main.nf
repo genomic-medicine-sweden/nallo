@@ -29,9 +29,19 @@ process WHATSHAP_STATS {
         --block-list ${prefix}.blocks.tsv \\
         $vcf
 
+    bgzip \\
+        -@ $task.cpus \\
+        ${prefix}.blocks.tsv
+
+    tabix \\
+        -p vcf \\
+        ${prefix}.blocks.tsv.gz
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         whatshap: \$( whatshap --version )
+        bgzip: \$( bgzip --version | head -n 1 | sed 's/bgzip (htslib) //g')
+        tabix: \$( tabix --version | head -n 1 | sed 's/tabix (htslib) //g')
     END_VERSIONS
     """
 
