@@ -290,6 +290,11 @@
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
+                    "tagbam": {
+                        "branch": "master",
+                        "git_sha": "84a45189310c8381dfea09f3cca03ac4104809a4",
+                        "installed_by": ["modules"]
+                    },
                     "trgt/genotype": {
                         "branch": "master",
                         "git_sha": "484afd16770cf3c466a6c385e33746c877656663",

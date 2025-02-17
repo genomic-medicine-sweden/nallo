@@ -275,6 +275,8 @@ workflow NALLO {
         // Run dipcall
         ASSEMBLY_VARIANT_CALLING (
             ch_assembly_variant_calling_in,
+            ASSEMBLY.out.paternal_haplotype,
+            ASSEMBLY.out.maternal_haplotype,
             fasta,
             fai,
             ch_par

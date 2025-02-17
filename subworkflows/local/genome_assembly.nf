@@ -113,12 +113,24 @@ workflow ASSEMBLY {
     GFASTATS_MATERNAL( HIFIASM.out.maternal_contigs,'fasta', '', '', [], [], [], [] )
     ch_versions = ch_versions.mix(GFASTATS_MATERNAL.out.versions)
 
+    // TODO: Remove emit dual
+
     GFASTATS_PATERNAL.out.assembly
         .join(GFASTATS_MATERNAL.out.assembly)
         .set{ ch_dual_assembly_fa }
 
+    GFASTATS_PATERNAL.out.assembly
+        .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
+        .set { paternal_haplotype }
+
+    GFASTATS_MATERNAL.out.assembly
+        .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
+        .set { maternal_haplotype }
+
     emit:
     assembled_haplotypes = ch_dual_assembly_fa // channel: [ val(meta), path(paternal_fasta), path(maternal_fasta) ]
+    paternal_haplotype                         // channel: [ val(meta), path(paternal_fasta) ]
+    maternal_haplotype                         // channel: [ val(meta), path(maternal_fasta) ]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
 

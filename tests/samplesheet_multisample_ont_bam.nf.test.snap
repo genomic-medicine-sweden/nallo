@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            148,
+            156,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -248,6 +248,11 @@
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
                 "assembly_haplotypes",
+                "assembly_haplotypes/aligned_assemblies",
+                "assembly_haplotypes/aligned_assemblies/HG002_ONT_A",
+                "assembly_haplotypes/aligned_assemblies/HG002_ONT_A/HG002_ONT_A_filtered.bam",
+                "assembly_haplotypes/aligned_assemblies/HG002_ONT_B",
+                "assembly_haplotypes/aligned_assemblies/HG002_ONT_B/HG002_ONT_B_filtered.bam",
                 "assembly_haplotypes/gfastats",
                 "assembly_haplotypes/gfastats/HG002_ONT_A",
                 "assembly_haplotypes/gfastats/HG002_ONT_A/HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary",
@@ -593,6 +598,8 @@
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
             ],
             [
+                "HG002_ONT_A_filtered.bam:md5,1cbde351aca3ef393e592fcae5a0e813",
+                "HG002_ONT_B_filtered.bam:md5,2d8334f3420e598ef4149d303176bd13",
                 "HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
                 "HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz:md5,4736fe9703aa5a5309beb1798eead615",
                 "HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
@@ -706,6 +713,14 @@
                 [
                     "HG002_ONT_B_haplotagged.bam",
                     "325c284fc112dff72679b38c9ef2c2da"
+                ],
+                [
+                    "HG002_ONT_A_filtered.bam",
+                    "d2e209aa22dc7bea17ad08163ae9112a"
+                ],
+                [
+                    "HG002_ONT_B_filtered.bam",
+                    "7c252844989aac41bb33c21d38f3cb5f"
                 ],
                 [
                     "HG002_ONT_A.hap1.bam",
@@ -853,6 +868,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-12T16:24:00.953813798"
+        "timestamp": "2025-02-14T11:06:29.184185537"
     }
 }
