@@ -8,7 +8,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFSCHEMA_PLUGIN } from '../../nf-core/utils_nfschema_plugin'
+include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
 include { samplesheetToList         } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
@@ -36,6 +36,7 @@ def workflowSkips = [
     mapping          : "skip_alignment",
     snv_calling      : "skip_snv_calling",
     snv_annotation   : "skip_snv_annotation",
+    sv_calling       : "skip_sv_calling",
     sv_annotation    : "skip_sv_annotation",
     call_paralogs    : "skip_call_paralogs",
     cnv_calling      : "skip_cnv_calling",
@@ -55,7 +56,8 @@ def workflowDependencies = [
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
     qc               : ["mapping"],
-    sv_annotation    : ["mapping"],
+    sv_calling       : ["mapping"],
+    sv_annotation    : ["mapping", "cnv_calling", "sv_calling"],
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
@@ -73,6 +75,7 @@ def fileDependencies = [
     assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+    sv_calling       : ["fasta"],
     sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
     cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
     rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
@@ -89,6 +92,7 @@ def parameterStatus = [
         skip_repeat_calling      : params.skip_repeat_calling,
         skip_repeat_annotation   : params.skip_repeat_annotation,
         skip_snv_annotation      : params.skip_snv_annotation,
+        skip_sv_calling          : params.skip_sv_calling,
         skip_sv_annotation       : params.skip_sv_annotation,
         skip_call_paralogs       : params.skip_call_paralogs,
         skip_cnv_calling         : params.skip_cnv_calling,
@@ -145,7 +149,6 @@ workflow PIPELINE_INITIALISATION {
         workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
     )
 
-
     //
     // Validate parameters and generate parameter summary to stdout
     //
@@ -154,7 +157,6 @@ workflow PIPELINE_INITIALISATION {
         validate_params,
         null
     )
-
 
     //
     // Check config provided to the pipeline
@@ -215,7 +217,6 @@ workflow PIPELINE_COMPLETION {
     email           //  string: email address
     email_on_fail   //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-
     outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
     hook_url        //  string: hook URL for notifications
@@ -223,6 +224,7 @@ workflow PIPELINE_COMPLETION {
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    def multiqc_reports = multiqc_report.toList()
 
     //
     // Completion email and summary
@@ -236,7 +238,7 @@ workflow PIPELINE_COMPLETION {
                 plaintext_email,
                 outdir,
                 monochrome_logs,
-                multiqc_report.toList()
+                multiqc_reports.getVal(),
             )
         }
 

@@ -35,6 +35,9 @@ tool:
   cadd:
     citation: "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)"
     bibliography: "Rentzsch P, Schubach M, Shendure J, Kircher M. CADD-Splice—improving genome-wide variant effect prediction using deep learning-derived splice scores. Genome Med. 2021;13(1):31. doi:10.1186/s13073-021-00835-9"
+  clean_sniffles:
+    citation: "clean_sniffles (Eisfeldt 2024)"
+    bibliography: ""
   cramino:
     citation: "cramino (De Coster & Rademakers 2023)"
     bibliography: "Wouter De Coster, Rosa Rademakers, NanoPack2: population-scale evaluation of long-read sequencing data, Bioinformatics, Volume 39, Issue 5, May 2023, btad311, https://doi.org/10.1093/bioinformatics/btad311"
@@ -83,6 +86,9 @@ tool:
   longphase:
     citation: "LongPhase (Lin et al. 2024)"
     bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
+  merge_json_sample_files_into_family:
+    citation: "Renevey (2025)"
+    bibliography: ""
   minimap2:
     citation: "Minimap2 (Li 2018)"
     bibliography: "Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191"
@@ -102,8 +108,8 @@ tool:
     citation: "SAMtools (Danecek et al. 2021)"
     bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"
   sniffles:
-    citation: "Sniffles2 (Smolka et al. 2024)"
-    bibliography: "Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02024-y"
+    citation: "Sniffles (Sedlazeck et al. 2018)"
+    bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461–468 (2018). https://doi.org/10.1038/s41592-018-0001-7"
   severus:
     citation: "Severus (Keskus et al. 2024)"
     bibliography: "Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756"

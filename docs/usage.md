@@ -117,7 +117,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -179,6 +179,16 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
+### SV calling
+
+This subworkflow depends on the alignment subworkflow.
+
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
+Turned off with `--skip_sv_calling`.
+
 ### CNV calling
 
 This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
@@ -188,6 +198,10 @@ This subworkflow depends on the alignment and SNV calling subworkflows, and requ
 | `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
 | `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_cnv_calling`.
 

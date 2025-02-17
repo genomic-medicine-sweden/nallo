@@ -21,6 +21,11 @@
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/merge": {
+                        "branch": "master",
+                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/norm": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
@@ -79,12 +84,12 @@
                     },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "e9b59c82daa0fac067284fc52f93011b43952a8f",
                         "installed_by": ["modules"]
                     },
                     "deepvariant/vcfstatsreport": {
                         "branch": "master",
-                        "git_sha": "2f9a5431355897e299cb41928c45f51ea8410c42",
+                        "git_sha": "e9b59c82daa0fac067284fc52f93011b43952a8f",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/filtervep": {
@@ -146,8 +151,9 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "daa15d5226111e10ca95c0d4a85fa6bd11a08a01",
-                        "installed_by": ["modules"]
+                        "git_sha": "6bb8be8a75d05ee6d31205b2b97d48c7bcef60ab",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
                     "longphase/haplotag": {
                         "branch": "master",
@@ -176,7 +182,7 @@
                     },
                     "mosdepth": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ee0d6b8f8a1a45c16a956095cf40fe3750f8b569",
                         "installed_by": ["modules"]
                     },
                     "multiqc": {
@@ -186,7 +192,7 @@
                     },
                     "paraphase": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "b449d9a842b37cb6850e7e6364f3ac45d891cde0",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
@@ -228,7 +234,7 @@
                     },
                     "severus": {
                         "branch": "master",
-                        "git_sha": "8a36181859504560ef333c299f6773c7b99a801f",
+                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
                         "installed_by": ["modules"]
                     },
                     "sniffles": {
