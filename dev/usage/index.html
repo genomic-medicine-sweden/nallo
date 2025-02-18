@@ -1407,25 +1407,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>This subworkflow depends on the alignment subworkflow, but requires no additional files.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
 <h3 id="assembly">Assembly</h3>
-<p>This subworkflow contains both genome assembly and assembly variant calling. The assembly variant calling needs the sex of samples. For samples with unknown sex this is inferred with the help of the aligned reads. Therefore it depends on the alignment subworkflow. It requires a BED file with PARs.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>par_regions</code></td>
-<td>A BED file with PAR regions (e.g. <a href="https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed">GRCh38_PAR.bed</a>)</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Make sure chrY PAR is hard masked (masked with the letter N) in the reference genome you are using.</p>
-</div>
+<p>This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.</p>
 <p>Turned off with <code>--skip_genome_assembly</code>.</p>
 <h3 id="call-paralogs">Call paralogs</h3>
 <p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>

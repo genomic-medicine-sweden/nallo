@@ -998,7 +998,7 @@
 </tbody>
 </table>
 <h2 id="assembly">Assembly</h2>
-<p><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a> is used to assemble genomes. The assembled haplotypes are then converted to fasta files using <a href="https://github.com/vgl-hub/gfastats">gfastats</a>. A deconstructed version of <a href="https://github.com/lh3/dipcall">dipcall</a> is used to map the assembled haplotypes back to the reference genome.</p>
+<p><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a> is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with <a href="https://github.com/lh3/minimap2">minimap2</a>, tagged with <code>HP:1</code> for the "paternal" haplotype, and <code>HP:2</code> for the "maternal" haplotype, before being merged together into one file with <a href="https://github.com/samtools/samtools">samtools</a>. <a href="https://github.com/vgl-hub/gfastats">gfastats</a> is used to convert the assembly to fasta format before alignment, and also ouputs summary stats per haplotype.</p>
 <table>
 <thead>
 <tr>
@@ -1008,32 +1008,20 @@
 </thead>
 <tbody>
 <tr>
-<td><code>assembly_haplotypes/gfastats/{sample}/*hap1.p_ctg.fasta.gz</code></td>
-<td>Assembled haplotype 1</td>
+<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.bam</code></td>
+<td>Both assembled haplotypes mapped to the reference genome, merged and haplotagged (<code>HP:1</code>/<code>HP:2</code>).</td>
 </tr>
 <tr>
-<td><code>assembly_haplotypes/gfastats/{sample}/*hap2.p_ctg.fasta.gz</code></td>
-<td>Assembled haplotype 2</td>
+<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.bam.bai</code></td>
+<td>Index of aligned assembly.</td>
 </tr>
 <tr>
-<td><code>assembly_haplotypes/gfastats/{sample}/*.assembly_summary</code></td>
-<td>Summary statistics</td>
+<td><code>assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary</code></td>
+<td>Summary statistics for haplotype 1/paternal haplotype</td>
 </tr>
 <tr>
-<td><code>assembly_variant_calling/dipcall/{sample}/*hap1.bam</code></td>
-<td>Assembled haplotype 1 mapped to the reference genome</td>
-</tr>
-<tr>
-<td><code>assembly_variant_calling/dipcall/{sample}/*hap1.bai</code></td>
-<td>Index of the corresponding BAM file for haplotype 1</td>
-</tr>
-<tr>
-<td><code>assembly_variant_calling/dipcall/{sample}/*hap2.bam</code></td>
-<td>Assembled haplotype 2 mapped to the reference genome</td>
-</tr>
-<tr>
-<td><code>assembly_variant_calling/dipcall/{sample}/*hap2.bai</code></td>
-<td>Index of the corresponding BAM file for haplotype 2</td>
+<td><code>assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary</code></td>
+<td>Summary statistics for haplotype 2/maternal haplotype</td>
 </tr>
 </tbody>
 </table>
