@@ -87,9 +87,9 @@ workflow NALLO {
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_trgt_bed                  = createReferenceChannelFromPath(params.trgt_repeats)
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs  = createReferenceChannelFromPath(params.variant_consequences_snvs)
+    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([]))
+    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
     ch_expected_xy_bed           = createReferenceChannelFromPath(params.hificnv_expected_xy_cn)
     ch_expected_xx_bed           = createReferenceChannelFromPath(params.hificnv_expected_xx_cn)
     ch_exclude_bed               = createReferenceChannelFromPath(params.hificnv_excluded_regions)
@@ -127,8 +127,8 @@ workflow NALLO {
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
-            params.fasta.endsWith('.gz'),       // should we unzip fasta
-            params.vep_cache.endsWith("tar.gz") // should we untar vep cache
+            params.fasta.endsWith('.gz'),                           // should we unzip fasta
+            params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 

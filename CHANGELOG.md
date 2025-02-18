@@ -65,6 +65,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.4.1 - [2025-02-17]
+
+### `Fixed`
+
+- [#553](https://github.com/genomic-medicine-sweden/nallo/pull/553) - Fixed pipeline always requiring `--vep_cache` to run, and clarified documentation
+- [#553](https://github.com/genomic-medicine-sweden/nallo/pull/553) - Fixed `process.shell` in `nextflow.config` causing CI runners to fail
+
 ## 0.4.0 - [2025-01-15]
 
 ### `Added`

@@ -87,7 +87,7 @@ def parameterStatus = [
     workflow: [
         skip_snv_calling         : params.skip_snv_calling,
         skip_phasing             : params.skip_phasing,
-        skip_methylation_pileups: params.skip_methylation_pileups,
+        skip_methylation_pileups : params.skip_methylation_pileups,
         skip_rank_variants       : params.skip_rank_variants,
         skip_repeat_calling      : params.skip_repeat_calling,
         skip_repeat_annotation   : params.skip_repeat_annotation,
@@ -115,8 +115,9 @@ def parameterStatus = [
         genmod_reduced_penetrance: params.genmod_reduced_penetrance,
         genmod_score_config_snvs : params.genmod_score_config_snvs,
         genmod_score_config_svs  : params.genmod_score_config_svs,
-        variant_consequences_snvs : params.variant_consequences_snvs,
+        variant_consequences_snvs: params.variant_consequences_snvs,
         variant_consequences_svs : params.variant_consequences_svs,
+        vep_plugin_files         : params.vep_plugin_files,
     ]
 ]
 
@@ -450,18 +451,22 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 // Lookup if a file is required by any workflows, and add to errors
 //
 def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
-    // Get the the workflow required by file
-    def workflowThatRequiresFile = findKeyForValue(file, combinationsMap)
-    // Get the "--skip" for that workflow
-    def workflowSkip = workflowMap[workflowThatRequiresFile]
-    // Get the status of the "--skip", if false then workflow is active
-    def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
-    // Get the file path
-    def FilePath = statusMap["files"][file]
-    // If the workflow that requires the file is active & theres no file available
-    if(WorkflowIsActive && FilePath == null) {
-        errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+    // Get all workflows required by a file
+    def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
+
+    for (workflow in workflowThatRequiresFile) {
+        // Get the "--skip" for that workflow
+        def workflowSkip = workflowMap[workflow]
+        // Get the status of the "--skip", if false then workflow is active
+        def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
+        // Get the file path
+        def FilePath = statusMap["files"][file]
+        // If the workflow that requires the file is active & theres no file available
+        if(WorkflowIsActive && FilePath == null) {
+            errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+        }
     }
+
     return errors
 }
 
@@ -487,22 +492,19 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeyForValue(def valueToFind, Map map) {
+def findKeysForValue(def valueToFind, Map map) {
+
+    def keys = []
+
     for (entry in map) {
         def key = entry.key
         def value = entry.value
 
-        if (value instanceof List) {
-            if (value.contains(valueToFind)) {
-                return key
-            }
-        } else {
-            if (value == valueToFind) {
-                return key
-            }
+        if ((value instanceof List && value.contains(valueToFind)) || value == valueToFind) {
+            keys << key
         }
     }
-    return null // Value not found
+    return keys.isEmpty() ? null : keys
 }
 
 // Utility function to create channels from references

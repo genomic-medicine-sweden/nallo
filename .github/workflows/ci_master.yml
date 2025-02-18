@@ -18,9 +18,6 @@ on:
       - synchronize
     branches:
       - master
-  pull_request_target:
-    branches:
-      - master
 
 env:
   NXF_ANSI_LOG: false
