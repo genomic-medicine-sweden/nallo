@@ -1610,6 +1610,18 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <td><code>svdb_sv_databases</code> <sup>1</sup></td>
 <td>Csv file with databases (VCFs) used for structural variant annotation</td>
 </tr>
+<tr>
+<td><code>vep_cache</code></td>
+<td>VEP cache matching your reference genome, either as a <code>.tar.gz</code> archive or path to a directory (e.g. <a href="https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz">homo_sapiens_vep_110_GRCh38.tar.gz</a>)</td>
+</tr>
+<tr>
+<td><code>vep_plugin_files</code> <sup>2</sup></td>
+<td>A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.</td>
+</tr>
+<tr>
+<td><code>variant_consequences_svs</code></td>
+<td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
+</tr>
 </tbody>
 </table>
 <p><sup>1</sup> Example file for input with <code>--svdb_sv_databases</code>:</p>
@@ -1617,6 +1629,14 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz,AF,AC,colorsdb_af,colorsdb_ac
 </span></code></pre></div>
 <p>These databases could for example come from <a href="https://zenodo.org/records/13145123">CoLoRSdb</a>.</p>
+<p><sup>2</sup> Example file for input with <code>--vep_plugin_files</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vep_files
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
+</span></code></pre></div>
 <p>Turned off with <code>--skip_sv_annotation</code>.</p>
 <h3 id="rank-svs">Rank SVs</h3>
 <p>This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:</p>
@@ -1664,9 +1684,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p><sup>1</sup> Example file for input with <code>--filter_variants_hgnc_ids</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>hgnc_id
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>4865
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>14150
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>hgnc_id
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>4865
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>14150
 </span></code></pre></div>
 <p>Filtering of variants only happens if any of these three parameters is active.</p>
 <h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
@@ -1744,12 +1764,12 @@ Some HPC setups also allow you to run nextflow within a cluster job submitted yo
 <h2 id="nextflow-memory-requirements">Nextflow memory requirements</h2>
 <p>In some cases, the Nextflow Java virtual machines can start to request a large amount of memory.
 We recommend adding the following line to your environment to limit this (typically in <code>~/.bashrc</code> or <code>~./bash_profile</code>):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">&#39;-Xms1g -Xmx4g&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">&#39;-Xms1g -Xmx4g&#39;</span>
 </span></code></pre></div>
 <h2 id="running-the-pipeline-without-internet-access">Running the pipeline without internet access</h2>
 <h3 id="download-pipeline-and-containers">Download pipeline and containers</h3>
 <p>The pipeline and container images can be downloaded using <code>nf-core download</code>, e.g.:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nf-core<span class="w"> </span>download<span class="w"> </span>genomic-medicine-sweden/nallo<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.3.2
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nf-core<span class="w"> </span>download<span class="w"> </span>genomic-medicine-sweden/nallo<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.3.2
 </span></code></pre></div>
 <p>The <a href="https://nf-co.re/docs/usage/offline#nextflow">offline section</a> from the nf-core docs should be followed for more information about offline usage.</p>
 
