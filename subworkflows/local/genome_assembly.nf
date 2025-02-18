@@ -3,8 +3,7 @@ include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../modules/nf-core/cat/fast
 include { HIFIASM                         } from '../../modules/nf-core/hifiasm'
 include { YAK as YAK_PATERNAL             } from '../../modules/local/yak'
 include { YAK as YAK_MATERNAL             } from '../../modules/local/yak'
-include { GFASTATS as GFASTATS_MATERNAL   } from '../../modules/nf-core/gfastats/main'
-include { GFASTATS as GFASTATS_PATERNAL   } from '../../modules/nf-core/gfastats/main'
+include { GFASTATS                        } from '../../modules/nf-core/gfastats/main'
 
 workflow ASSEMBLY {
 
@@ -106,19 +105,28 @@ workflow ASSEMBLY {
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
     }
 
-    // Not the cleanest way, but better than to rely on hap_* in file names..
-    GFASTATS_PATERNAL( HIFIASM.out.paternal_contigs,'fasta', '', '', [], [], [], [] )
-    ch_versions = ch_versions.mix(GFASTATS_PATERNAL.out.versions)
+    HIFIASM.out.paternal_contigs
+        .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
+        .set { ch_gfastats_paternal_in }
 
-    GFASTATS_MATERNAL( HIFIASM.out.maternal_contigs,'fasta', '', '', [], [], [], [] )
-    ch_versions = ch_versions.mix(GFASTATS_MATERNAL.out.versions)
+    HIFIASM.out.maternal_contigs
+        .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
+        .set { ch_gfastats_maternal_in }
 
-    GFASTATS_PATERNAL.out.assembly
-        .join(GFASTATS_MATERNAL.out.assembly)
-        .set{ ch_dual_assembly_fa }
+    GFASTATS(
+        ch_gfastats_paternal_in.mix(ch_gfastats_maternal_in),
+        'fasta',
+        '',
+        '',
+        [],
+        [],
+        [],
+        []
+    )
+    ch_versions = ch_versions.mix(GFASTATS.out.versions)
 
     emit:
-    assembled_haplotypes = ch_dual_assembly_fa // channel: [ val(meta), path(paternal_fasta), path(maternal_fasta) ]
-    versions = ch_versions                     // channel: [ versions.yml ]
+    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    versions = ch_versions                       // channel: [ versions.yml ]
 }
 

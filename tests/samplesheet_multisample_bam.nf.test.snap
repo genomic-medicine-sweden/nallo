@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --phaser hiphase": {
         "content": [
-            184,
+            192,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -90,9 +90,6 @@
                 "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.8.0"
                 },
-                "DIPCALL": {
-                    "dipcall": 0.3
-                },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.0"
                 },
@@ -120,10 +117,7 @@
                 "GENMOD_SCORE": {
                     "genmod": 3.9
                 },
-                "GFASTATS_MATERNAL": {
-                    "gfastats": "1.3.6"
-                },
-                "GFASTATS_PATERNAL": {
+                "GFASTATS": {
                     "gfastats": "1.3.6"
                 },
                 "GLNEXUS": {
@@ -150,9 +144,6 @@
                     "samtools": 1.2
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.28-r1209"
-                },
-                "MINIMAP2_INDEX_DIPCALL": {
                     "minimap2": "2.28-r1209"
                 },
                 "MODKIT_PILEUP": {
@@ -182,9 +173,6 @@
                 "SAMTOOLS_FASTQ": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_DIPCALL": {
-                    "samtools": 1.21
-                },
                 "SAMTOOLS_INDEX_TRGT": {
                     "samtools": 1.21
                 },
@@ -192,6 +180,9 @@
                     "samtools": 1.21
                 },
                 "SAMTOOLS_SORT_TRGT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_VIEW": {
                     "samtools": 1.21
                 },
                 "SEVERUS": {
@@ -245,6 +236,9 @@
                 "TABIX_TABIX": {
                     "tabix": 1.2
                 },
+                "TAGBAM": {
+                    "tagbam": "0.1.0"
+                },
                 "TRGT_GENOTYPE": {
                     "trgt": "1.2.0-9eda4dd"
                 },
@@ -269,52 +263,21 @@
                 "aligned_reads/HG002_Revio_B",
                 "aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam",
                 "aligned_reads/HG002_Revio_B/HG002_Revio_B_haplotagged.bam.bai",
-                "assembly_haplotypes",
-                "assembly_haplotypes/gfastats",
-                "assembly_haplotypes/gfastats/HG002_Revio_A",
-                "assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary",
-                "assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap1.p_ctg.fasta.gz",
-                "assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary",
-                "assembly_haplotypes/gfastats/HG002_Revio_A/HG002_Revio_A.asm.bp.hap2.p_ctg.fasta.gz",
-                "assembly_haplotypes/gfastats/HG002_Revio_B",
-                "assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary",
-                "assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap1.p_ctg.fasta.gz",
-                "assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap2.p_ctg.assembly_summary",
-                "assembly_haplotypes/gfastats/HG002_Revio_B/HG002_Revio_B.asm.bp.hap2.p_ctg.fasta.gz",
-                "assembly_variant_calling",
-                "assembly_variant_calling/dipcall",
-                "assembly_variant_calling/dipcall/HG002_Revio_A",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.dip.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.dip.vcf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bam.bai",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.paf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.sam.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap1.var.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.bam",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.bam.bai",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.paf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.sam.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.hap2.var.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_A/HG002_Revio_A.pair.vcf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.dip.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.dip.vcf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bam.bai",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.paf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.sam.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap1.var.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.bam",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.bam.bai",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.bed",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.paf.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.sam.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.hap2.var.gz",
-                "assembly_variant_calling/dipcall/HG002_Revio_B/HG002_Revio_B.pair.vcf.gz",
+                "assembly",
+                "assembly/sample",
+                "assembly/sample/HG002_Revio_A",
+                "assembly/sample/HG002_Revio_A/HG002_Revio_A_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio_A/HG002_Revio_A_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio_B",
+                "assembly/sample/HG002_Revio_B/HG002_Revio_B_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio_B/HG002_Revio_B_aligned_assembly.bam.bai",
+                "assembly/stats",
+                "assembly/stats/HG002_Revio_A",
+                "assembly/stats/HG002_Revio_A/HG002_Revio_A_haplotype_1.assembly_summary",
+                "assembly/stats/HG002_Revio_A/HG002_Revio_A_haplotype_2.assembly_summary",
+                "assembly/stats/HG002_Revio_B",
+                "assembly/stats/HG002_Revio_B/HG002_Revio_B_haplotype_1.assembly_summary",
+                "assembly/stats/HG002_Revio_B/HG002_Revio_B_haplotype_2.assembly_summary",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -631,44 +594,10 @@
                 "visualization_tracks/HG002_Revio_B/HG002_Revio_B_hificnv.maf.bw"
             ],
             [
-                "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
-                "HG002_Revio_A.asm.bp.hap1.p_ctg.fasta.gz:md5,380ed173f8d50419a86c229dd81a20c2",
-                "HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
-                "HG002_Revio_A.asm.bp.hap2.p_ctg.fasta.gz:md5,6ca4cd66b46b2bf7b1ed1ee959fba6ab",
-                "HG002_Revio_B.asm.bp.hap1.p_ctg.assembly_summary:md5,7fd907d993bf1140eabc2f3c2116df96",
-                "HG002_Revio_B.asm.bp.hap1.p_ctg.fasta.gz:md5,323fd57714246acb37e4e5d55e953429",
-                "HG002_Revio_B.asm.bp.hap2.p_ctg.assembly_summary:md5,241c10b531eae6c6bd56d71be2b0806c",
-                "HG002_Revio_B.asm.bp.hap2.p_ctg.fasta.gz:md5,6481372dcc00afaea3418749a04ffbbf",
-                "HG002_Revio_A.dip.bed:md5,8230ffcc5539eef359ab5128fa60e765",
-                "HG002_Revio_A.dip.vcf.gz:md5,d5a5d0620cba624a482d0e48e725e232",
-                "HG002_Revio_A.hap1.bam:md5,f5f71f0f37cf23c69981468ed1acc977",
-                "HG002_Revio_A.hap1.bam.bai:md5,3e8c67dc7fc05362ff09ecbd9d43c205",
-                "HG002_Revio_A.hap1.bed:md5,44dcedabe0edb29af441df1f0b55210a",
-                "HG002_Revio_A.hap1.paf.gz:md5,680a7278a2d492ed6ee5c7b19dd5d80f",
-                "HG002_Revio_A.hap1.sam.gz:md5,7588cdfcad98f12558e80eca03e22a7f",
-                "HG002_Revio_A.hap1.var.gz:md5,bd714e935825d8c665445d93c7d82206",
-                "HG002_Revio_A.hap2.bam:md5,490c6e0d6aeef42da8b430a237b390c2",
-                "HG002_Revio_A.hap2.bam.bai:md5,04a41250610872ae3bf86108be610883",
-                "HG002_Revio_A.hap2.bed:md5,6b4b879d4ebe97f778921252469a029c",
-                "HG002_Revio_A.hap2.paf.gz:md5,77ff9e7c1b0ed8454f7a10beba01cbf9",
-                "HG002_Revio_A.hap2.sam.gz:md5,981e2e08c4b9b4d1d16410514440c2d6",
-                "HG002_Revio_A.hap2.var.gz:md5,9ba9303b30730e419138e177c7d1e0c2",
-                "HG002_Revio_A.pair.vcf.gz:md5,4680402dd40f18cc177bd50fb618e6f4",
-                "HG002_Revio_B.dip.bed:md5,395e61d926c5f9cbda71f770182a52b6",
-                "HG002_Revio_B.dip.vcf.gz:md5,3b3644ef50af7d513e44e09bf043d129",
-                "HG002_Revio_B.hap1.bam:md5,c0efe721c19a94dab1037b7a80a8ee05",
-                "HG002_Revio_B.hap1.bam.bai:md5,479da74059364a71bd24a0a6b98edf8f",
-                "HG002_Revio_B.hap1.bed:md5,8d007624a4935390fb4731817e251cff",
-                "HG002_Revio_B.hap1.paf.gz:md5,df23f568c86230a5dea8719e47d233b8",
-                "HG002_Revio_B.hap1.sam.gz:md5,36f83a3f60747d41f1472a726d2ddad1",
-                "HG002_Revio_B.hap1.var.gz:md5,6234237b2aee91083b6d4c67a91c0d0b",
-                "HG002_Revio_B.hap2.bam:md5,2081ccd985b5cf938a258183a296aedf",
-                "HG002_Revio_B.hap2.bam.bai:md5,d28e7fd4f409cac6d9fb07781aa2184c",
-                "HG002_Revio_B.hap2.bed:md5,f4d086b5254b13a8d7836290d2c1b1cb",
-                "HG002_Revio_B.hap2.paf.gz:md5,b1cffc2fa1ed71057acc9cef610a7fc6",
-                "HG002_Revio_B.hap2.sam.gz:md5,ecdf9b9d50b54776d0555c71a194af7e",
-                "HG002_Revio_B.hap2.var.gz:md5,f09b01fcb43bf64f92ca7ec8a2380c25",
-                "HG002_Revio_B.pair.vcf.gz:md5,676492865a9d4765835638d52651af73",
+                "HG002_Revio_A_haplotype_1.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
+                "HG002_Revio_A_haplotype_2.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
+                "HG002_Revio_B_haplotype_1.assembly_summary:md5,7fd907d993bf1140eabc2f3c2116df96",
+                "HG002_Revio_B_haplotype_2.assembly_summary:md5,241c10b531eae6c6bd56d71be2b0806c",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz:md5,7af3b6246d0c007aec686714b96a0f7f",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz.tbi:md5,b7083ebf6ba176ed5a472ad653c5be27",
                 "HG002_Revio_A_modkit_pileup_2.bed.gz:md5,98e42ec905d8af26046862618ca0823e",
@@ -752,20 +681,12 @@
                     "4fc125e25365fa6e33193fd436ae135d"
                 ],
                 [
-                    "HG002_Revio_A.hap1.bam",
-                    "da103c401cf854a00aa75a57cda0f34d"
+                    "HG002_Revio_A_aligned_assembly.bam",
+                    "89cbed3bd5ec28ae4333757f03b658bb"
                 ],
                 [
-                    "HG002_Revio_A.hap2.bam",
-                    "e8599cef23fc88e2fe09d2bda5ea372f"
-                ],
-                [
-                    "HG002_Revio_B.hap1.bam",
-                    "2352f7a9960c400d8182ad2ec442887"
-                ],
-                [
-                    "HG002_Revio_B.hap2.bam",
-                    "6e4f7fa25e9905d538ecc65f923806"
+                    "HG002_Revio_B_aligned_assembly.bam",
+                    "6c58e6d74d98843140656ce57b462e5b"
                 ],
                 [
                     "HG002_Revio_A.paraphase.bam",
@@ -785,22 +706,6 @@
                 ]
             ],
             [
-                [
-                    "HG002_Revio_A.dip.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=1917, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_A.pair.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=1917, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_B.dip.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=1862, phased=true, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_B.pair.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=1862, phased=false, phasedAutodetect=false]"
-                ],
                 [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3970, phased=true, phasedAutodetect=false]"
@@ -884,22 +789,6 @@
             ],
             [
                 [
-                    "HG002_Revio_A.dip.vcf.gz",
-                    "db10cdb233cb09a46c1694536c2e79e7"
-                ],
-                [
-                    "HG002_Revio_A.pair.vcf.gz",
-                    "fa3bfacdab5449526d29d642340d6708"
-                ],
-                [
-                    "HG002_Revio_B.dip.vcf.gz",
-                    "eecfa7a0111b2ababb2e37fb91686b3f"
-                ],
-                [
-                    "HG002_Revio_B.pair.vcf.gz",
-                    "83dc2bb5d8f46bf3daf99f27e4d3b022"
-                ],
-                [
                     "FAM_repeats_annotated.vcf.gz",
                     "951b776cf91119f9962b75756acedbd0"
                 ],
@@ -917,6 +806,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-12T15:59:23.425194007"
+        "timestamp": "2025-02-17T15:49:10.591896699"
     }
 }

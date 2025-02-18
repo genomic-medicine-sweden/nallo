@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#557](https://github.com/genomic-medicine-sweden/nallo/pull/557) - Updated Severus to version 1.3
 - [#558](https://github.com/genomic-medicine-sweden/nallo/pull/558) - Changed VEP to single-threaded by default, because of https://github.com/Ensembl/ensembl-vep/issues/1759
 - [#560](https://github.com/genomic-medicine-sweden/nallo/pull/560) - Updated template to nf-core/tools version 3.2.0
+- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicing the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
 
 ### `Removed`
 
@@ -33,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
+- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
 
 ### Parameters
 
@@ -59,6 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bcftools merge |             | 1.20        |
 | merge_json     |             | 1.0         |
 | severus        | 1.1         | 1.3         |
+| dipcall        | 0.3         |             |
+| tagbam         |             | 0.1.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -32,10 +32,6 @@
 
   > Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235
 
-- [dipcall](https://www.nature.com/articles/s41592-018-0054-7)
-
-  > Li H, Bloom JM, Farjoun Y, Fleharty M, Gauthier L, Neale B, MacArthur D (2018) A synthetic-diploid benchmark for accurate variant-calling evaluation. Nat Methods, 15:595-597. [PMID:30013044]
-
 - [echtvar](https://academic.oup.com/nar/article/51/1/e3/6775383)
 
   > Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931
