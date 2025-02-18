@@ -263,7 +263,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
-        // Run dipcall
         ALIGN_ASSEMBLIES (
             ASSEMBLY.out.assembled_haplotypes,
             fasta
