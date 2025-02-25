@@ -414,7 +414,7 @@ workflow NALLO {
     //
     // Filter SNVs
     //
-    if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+    if(!params.skip_snv_calling && (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '')) {
 
         // Publish filtered `project` SNVs from here
         FILTER_VARIANTS_SNVS (

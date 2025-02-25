@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.5.0dev - [XXXX-XX-XX]
 
+-
+
 ### `Added`
 
 - [#549](https://github.com/genomic-medicine-sweden/nallo/pull/549) - Added merging of paraphase JSON and VCF files into family files
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
 
 ### Parameters
 
