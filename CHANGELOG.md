@@ -5,8 +5,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.5.0dev - [XXXX-XX-XX]
 
--
-
 ### `Added`
 
 - [#549](https://github.com/genomic-medicine-sweden/nallo/pull/549) - Added merging of paraphase JSON and VCF files into family files
