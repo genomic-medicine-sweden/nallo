@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Added a hidden parameter `--publish_unannotated_family_svs`
 - [#544](https://github.com/genomic-medicine-sweden/nallo/pull/544) - Added `--skip_sv_calling` parameter to skip sv_calling subworkflow
+- [#574](https://github.com/genomic-medicine-sweden/nallo/pull/574) - Added contributors to `nextflow.config`
 
 ### `Changed`
 
