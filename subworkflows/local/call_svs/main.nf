@@ -3,6 +3,7 @@ include { CLEAN_SNIFFLES                  } from '../../../modules/local/clean_s
 include { SVDB_MERGE                      } from '../../../modules/nf-core/svdb/merge/main'
 include { BCFTOOLS_QUERY                  } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER               } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                   } from '../../../modules/nf-core/bcftools/sort/main'
 include { CREATE_SAMPLES_FILE             } from '../../../modules/local/create_samples_file/main'
 include { SEVERUS                         } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                        } from '../../../modules/nf-core/sniffles/main'
@@ -46,8 +47,14 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(CLEAN_SNIFFLES.out.versions)
 
-    ch_sv_calls = ch_sv_calls.mix(
+
+    BCFTOOLS_SORT (
         CLEAN_SNIFFLES.out.vcf
+    )
+    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
+
+    ch_sv_calls = ch_sv_calls.mix(
+        BCFTOOLS_SORT.out.vcf
         .map { meta , vcf -> [ meta + [ sv_caller: 'sniffles' ], vcf ] }
     )
 
