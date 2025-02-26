@@ -263,7 +263,7 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES (
             ASSEMBLY.out.assembled_haplotypes,
-            fasta
+            ch_fasta
         )
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
@@ -437,7 +437,7 @@ workflow NALLO {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
-            bam_bai,
+            ch_bam_bai,
             params.sv_caller,
             ch_tandem_repeats
         )
