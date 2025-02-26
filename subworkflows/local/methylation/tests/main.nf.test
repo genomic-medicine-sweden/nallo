@@ -80,8 +80,7 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
+                input[2] = [[],[]]
                 """
             }
         }
@@ -102,8 +101,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
+                input[2] = [[],[]]
                 """
             }
         }
@@ -124,8 +122,7 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 """
@@ -148,8 +145,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 """
@@ -173,8 +169,7 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
+                input[2] = [[],[]]
                 """
             }
         }
@@ -196,8 +191,7 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 """
@@ -221,8 +215,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
+                input[2] = [[],[]]
                 """
             }
         }
@@ -244,8 +237,7 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 """

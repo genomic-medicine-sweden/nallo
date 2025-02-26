@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Updated the fastqc module
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
 - [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
@@ -33,8 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Removed local module echtvar encode, not used anymore
+
 ### `Fixed`
 
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Fixed some Nexftlow language server issues
 - [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
