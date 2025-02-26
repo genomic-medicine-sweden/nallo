@@ -258,6 +258,13 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "modules_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of modules test dataset files",
+                    "default": "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/",
+                    "hidden": true
+                },
                 "pipelines_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
