@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
 - [#570](https://github.com/genomic-medicine-sweden/nallo/pull/570) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
 - [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Fixed warning about non-existing `params.genome` when running the pipeline
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Fixed missing nf-test triggers for changes that may affect the entire pipeline
 
 ### Parameters
 
