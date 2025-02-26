@@ -22,5 +22,5 @@ for line in open(sys.argv[1]):
         before=var[0]
         after=var[-1]
         line=before+after
- 
+
     print(line.strip())
