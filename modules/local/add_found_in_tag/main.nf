@@ -81,7 +81,7 @@ process ADD_FOUND_IN_TAG {
                     args2.contains('--write-index') || args2.contains("-W") ? 'csi' :
                     ''
     def create_cmd = extension.endsWith('.gz') ? "echo '' | gzip >" : 'touch'
-    def create_index = extension.endsWith('.gz') && index.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index_type}" : ''
+    def create_index = extension.endsWith('.gz') && index_type.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index_type}" : ''
 
     """
     ${create_cmd} ${prefix}.${extension}
