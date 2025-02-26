@@ -1,0 +1,86 @@
+{
+    "bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                    "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                    "versions.yml:md5,737f29f0cdcb2c85965487e46110fc4b",
+                    "versions.yml:md5,8065259e8f1e0e9af6f2b56effbe0156",
+                    "versions.yml:md5,8065259e8f1e0e9af6f2b56effbe0156",
+                    "versions.yml:md5,82e6ac9ca240d79971cb197be4b30647",
+                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
+                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                    "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                    "versions.yml:md5,737f29f0cdcb2c85965487e46110fc4b",
+                    "versions.yml:md5,8065259e8f1e0e9af6f2b56effbe0156",
+                    "versions.yml:md5,8065259e8f1e0e9af6f2b56effbe0156",
+                    "versions.yml:md5,82e6ac9ca240d79971cb197be4b30647",
+                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
+                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-17T14:36:24.630337248"
+    },
+    "bam": {
+        "content": [
+            [
+                "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                "versions.yml:md5,493d8cf85cee34a20902289619bc5d5b",
+                "versions.yml:md5,737f29f0cdcb2c85965487e46110fc4b",
+                "versions.yml:md5,82e6ac9ca240d79971cb197be4b30647",
+                "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
+                "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
+                "versions.yml:md5,dd66d91ce97e7998f21215a8dfd1fa60",
+                "versions.yml:md5,dd66d91ce97e7998f21215a8dfd1fa60"
+            ],
+            "43bb6ef7e9eccece743204535a3abbd6",
+            "hg38.bam.bai"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2025-02-17T14:35:36.622658596"
+    }
+}

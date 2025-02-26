@@ -1,7 +1,0 @@
-name: dipcall
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
-dependencies:
-  - bioconda::dipcall=0.3

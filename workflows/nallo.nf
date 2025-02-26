@@ -9,12 +9,12 @@ include {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { ALIGN_ASSEMBLIES                        } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
-include { ASSEMBLY_VARIANT_CALLING                } from '../subworkflows/local/assembly_variant_calling'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
@@ -87,9 +87,9 @@ workflow NALLO {
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_trgt_bed                  = createReferenceChannelFromPath(params.trgt_repeats)
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs  = createReferenceChannelFromPath(params.variant_consequences_snvs)
+    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([]))
+    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
     ch_expected_xy_bed           = createReferenceChannelFromPath(params.hificnv_expected_xy_cn)
     ch_expected_xx_bed           = createReferenceChannelFromPath(params.hificnv_expected_xx_cn)
     ch_exclude_bed               = createReferenceChannelFromPath(params.hificnv_excluded_regions)
@@ -127,8 +127,8 @@ workflow NALLO {
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
-            params.fasta.endsWith('.gz'),       // should we unzip fasta
-            params.vep_cache.endsWith("tar.gz") // should we untar vep cache
+            params.fasta.endsWith('.gz'),                           // should we unzip fasta
+            params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
         ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
@@ -251,33 +251,21 @@ workflow NALLO {
     }
 
     //
-    // Hifiasm assembly and assembly variant calling
+    // Hifiasm assembly and alignment to reference genome
     //
     if(!params.skip_genome_assembly) {
 
         //Hifiasm assembly
-        ASSEMBLY( CONVERT_INPUT_FILES.out.fastq )
+        ASSEMBLY(
+            CONVERT_INPUT_FILES.out.fastq
+        )
         ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
-        // Update assembly variant calling meta with sex from somalier
-        ASSEMBLY.out.assembled_haplotypes
-            .map { meta, hap1, hap2 -> [ meta.id, [ hap1, hap2 ] ] }
-            .set { ch_haplotypes }
-
-        ch_bam
-            .map { meta, _bam -> [ meta.id, meta ] }
-            .join( ch_haplotypes )
-            .map { _id, meta, haplotypes -> [ meta, haplotypes[0], haplotypes[1] ] }
-            .set { ch_assembly_variant_calling_in }
-
-        // Run dipcall
-        ASSEMBLY_VARIANT_CALLING (
-            ch_assembly_variant_calling_in,
-            ch_fasta,
-            ch_fai,
-            ch_par
+        ALIGN_ASSEMBLIES (
+            ASSEMBLY.out.assembled_haplotypes,
+            fasta
         )
-        ch_versions = ch_versions.mix(ASSEMBLY_VARIANT_CALLING.out.versions)
+        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
     //
@@ -430,7 +418,7 @@ workflow NALLO {
     //
     // Filter SNVs
     //
-    if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+    if(!params.skip_snv_calling && (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '')) {
 
         // Publish filtered `project` SNVs from here
         FILTER_VARIANTS_SNVS (
@@ -445,12 +433,11 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if(!params.skip_alignment) {
+    if(!params.skip_sv_calling) {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
-            ch_bam_bai,
-            ch_fasta,
+            bam_bai,
             params.sv_caller,
             ch_tandem_repeats
         )
@@ -479,7 +466,7 @@ workflow NALLO {
     //
     // Merge SVs and CNVs if we've called both SVs and CNVs
     //
-    if (!params.skip_cnv_calling) {
+    if (!params.skip_cnv_calling && !params.skip_sv_calling) {
 
         CALL_SVS.out.family_vcf
             .join(CALL_CNVS.out.family_vcf)
@@ -544,9 +531,10 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-        //
-        // Filter SVs
-        //
+    //
+    // Filter SVs
+    //
+    if (!params.skip_sv_calling) {
         if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
 
             if(params.skip_cnv_calling) {
@@ -561,6 +549,7 @@ workflow NALLO {
                 params.filter_variants_hgnc_ids
             )
         }
+    }
 
     //
     // Phase SNVs and INDELs

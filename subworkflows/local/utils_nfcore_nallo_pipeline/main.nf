@@ -8,7 +8,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFSCHEMA_PLUGIN } from '../../nf-core/utils_nfschema_plugin'
+include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
 include { samplesheetToList         } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
@@ -36,6 +36,7 @@ def workflowSkips = [
     mapping          : "skip_alignment",
     snv_calling      : "skip_snv_calling",
     snv_annotation   : "skip_snv_annotation",
+    sv_calling       : "skip_sv_calling",
     sv_annotation    : "skip_sv_annotation",
     call_paralogs    : "skip_call_paralogs",
     cnv_calling      : "skip_cnv_calling",
@@ -51,11 +52,11 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
-    assembly         : ["mapping"],
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
     qc               : ["mapping"],
-    sv_annotation    : ["mapping"],
+    sv_calling       : ["mapping"],
+    sv_annotation    : ["mapping", "cnv_calling", "sv_calling"],
     snv_annotation   : ["mapping", "snv_calling"],
     cnv_calling      : ["mapping", "snv_calling"],
     phasing          : ["mapping", "snv_calling"],
@@ -70,9 +71,10 @@ def workflowDependencies = [
 //
 def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
-    assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+    sv_calling       : ["fasta"],
     sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
     cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
     rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
@@ -84,11 +86,12 @@ def parameterStatus = [
     workflow: [
         skip_snv_calling         : params.skip_snv_calling,
         skip_phasing             : params.skip_phasing,
-        skip_methylation_pileups: params.skip_methylation_pileups,
+        skip_methylation_pileups : params.skip_methylation_pileups,
         skip_rank_variants       : params.skip_rank_variants,
         skip_repeat_calling      : params.skip_repeat_calling,
         skip_repeat_annotation   : params.skip_repeat_annotation,
         skip_snv_annotation      : params.skip_snv_annotation,
+        skip_sv_calling          : params.skip_sv_calling,
         skip_sv_annotation       : params.skip_sv_annotation,
         skip_call_paralogs       : params.skip_call_paralogs,
         skip_cnv_calling         : params.skip_cnv_calling,
@@ -111,8 +114,9 @@ def parameterStatus = [
         genmod_reduced_penetrance: params.genmod_reduced_penetrance,
         genmod_score_config_snvs : params.genmod_score_config_snvs,
         genmod_score_config_svs  : params.genmod_score_config_svs,
-        variant_consequences_snvs : params.variant_consequences_snvs,
+        variant_consequences_snvs: params.variant_consequences_snvs,
         variant_consequences_svs : params.variant_consequences_svs,
+        vep_plugin_files         : params.vep_plugin_files,
     ]
 ]
 
@@ -144,7 +148,6 @@ workflow PIPELINE_INITIALISATION {
         workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
     )
 
-
     //
     // Validate parameters and generate parameter summary to stdout
     //
@@ -153,7 +156,6 @@ workflow PIPELINE_INITIALISATION {
         validate_params,
         null
     )
-
 
     //
     // Check config provided to the pipeline
@@ -214,7 +216,6 @@ workflow PIPELINE_COMPLETION {
     email           //  string: email address
     email_on_fail   //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-
     outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
     hook_url        //  string: hook URL for notifications
@@ -222,6 +223,7 @@ workflow PIPELINE_COMPLETION {
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    def multiqc_reports = multiqc_report.toList()
 
     //
     // Completion email and summary
@@ -235,7 +237,7 @@ workflow PIPELINE_COMPLETION {
                 plaintext_email,
                 outdir,
                 monochrome_logs,
-                multiqc_report.toList()
+                multiqc_reports.getVal(),
             )
         }
 
@@ -448,18 +450,22 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 // Lookup if a file is required by any workflows, and add to errors
 //
 def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
-    // Get the the workflow required by file
-    def workflowThatRequiresFile = findKeyForValue(file, combinationsMap)
-    // Get the "--skip" for that workflow
-    def workflowSkip = workflowMap[workflowThatRequiresFile]
-    // Get the status of the "--skip", if false then workflow is active
-    def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
-    // Get the file path
-    def FilePath = statusMap["files"][file]
-    // If the workflow that requires the file is active & theres no file available
-    if(WorkflowIsActive && FilePath == null) {
-        errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+    // Get all workflows required by a file
+    def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
+
+    for (workflow in workflowThatRequiresFile) {
+        // Get the "--skip" for that workflow
+        def workflowSkip = workflowMap[workflow]
+        // Get the status of the "--skip", if false then workflow is active
+        def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
+        // Get the file path
+        def FilePath = statusMap["files"][file]
+        // If the workflow that requires the file is active & theres no file available
+        if(WorkflowIsActive && FilePath == null) {
+            errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+        }
     }
+
     return errors
 }
 
@@ -485,22 +491,19 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeyForValue(def valueToFind, Map map) {
+def findKeysForValue(def valueToFind, Map map) {
+
+    def keys = []
+
     for (entry in map) {
         def key = entry.key
         def value = entry.value
 
-        if (value instanceof List) {
-            if (value.contains(valueToFind)) {
-                return key
-            }
-        } else {
-            if (value == valueToFind) {
-                return key
-            }
+        if ((value instanceof List && value.contains(valueToFind)) || value == valueToFind) {
+            keys << key
         }
     }
-    return null // Value not found
+    return keys.isEmpty() ? null : keys
 }
 
 // Utility function to create channels from references

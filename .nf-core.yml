@@ -1,4 +1,3 @@
-bump_version: null
 lint:
   files_exist:
     - CITATIONS.md
@@ -12,6 +11,7 @@ lint:
     - .github/workflows/awsfulltest.yml
     - conf/modules.config
     - conf/igenomes_ignored.config
+    - conf/test_full.config
   files_unchanged:
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
@@ -27,8 +27,7 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
-nf_core_version: 3.0.2
-org_path: null
+nf_core_version: 3.2.0
 repository_type: pipeline
 template:
   author: Felix Lenner
@@ -39,5 +38,4 @@ template:
   org: genomic-medicine-sweden
   outdir: .
   skip_features: []
-  version: 0.4.0dev
-update: null
+  version: 0.5.0dev
