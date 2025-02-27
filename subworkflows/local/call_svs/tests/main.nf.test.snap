@@ -517,6 +517,7 @@
                 "##contig=<ID=chrUn_GL000216v2,length=176608>",
                 "##contig=<ID=chrUn_GL000218v1,length=161147>",
                 "##contig=<ID=chrEBV,length=171823>",
+                "##FILTER=<ID=STRANDBIAS,Description=\"Not sure what this means\">",
                 "##FILTER=<ID=UNRESOLVED,Description=\"An insertion that is longer than the read and thus we cannot predict the full size.\">",
                 "##FORMAT=<ID=DR,Number=1,Type=Integer,Description=\"# high-quality reference reads\">",
                 "##FORMAT=<ID=DV,Number=1,Type=Integer,Description=\"# high-quality variant reads\">",
@@ -612,7 +613,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-02-25T09:20:10.640467285"
+        "timestamp": "2025-02-26T18:58:30.977090278"
     },
     "2 samples - [bam, bai], 'severus', []": {
         "content": [
