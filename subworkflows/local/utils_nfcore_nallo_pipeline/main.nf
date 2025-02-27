@@ -522,13 +522,13 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
-    def oneProject = ch_samplesheet
+    ch_samplesheet
         .map { meta, reads -> meta.project }
         .unique()
-        .collect()
-        .filter{ it.size() == 1 }
-
-    if(!oneProject) {
-        error("Only one project may be specified per run")
-    }
+        .count()
+        .map { n ->
+            if ( n > 1 ) {
+                error("ERROR: Only one project may be specified per run.")
+            }
+        }
 }
