@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicing the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
 - [#572](https://github.com/genomic-medicine-sweden/nallo/pull/572) - Changed `CALL_SVS` to sort sniffles1 variants, which could be unsorted by default
 - [#573](https://github.com/genomic-medicine-sweden/nallo/pull/573) - Updated metro-map to reflect changes to sniffles and dipcall
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
 
 ### `Removed`
 
@@ -46,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
 - [#570](https://github.com/genomic-medicine-sweden/nallo/pull/570) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
 - [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Fixed warning about non-existing `params.genome` when running the pipeline
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Fixed missing nf-test triggers for changes that may affect the entire pipeline
 
 ### Parameters
 
