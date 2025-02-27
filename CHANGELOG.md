@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Fixed warning about non-existing `params.genome` when running the pipeline
 - [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Fixed missing nf-test triggers for changes that may affect the entire pipeline
 - [#584](https://github.com/genomic-medicine-sweden/nallo/pull/584) - Fixed pipeline not validating that the samplesheet only contains one project correctly
+- [#586](https://github.com/genomic-medicine-sweden/nallo/pull/586) - Fixed mistake in the usage docs where `--target_regions` was written as `--target_bed`
 
 ### Parameters
 
