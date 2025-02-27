@@ -32,11 +32,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicing the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
 - [#572](https://github.com/genomic-medicine-sweden/nallo/pull/572) - Changed `CALL_SVS` to sort sniffles1 variants, which could be unsorted by default
 - [#573](https://github.com/genomic-medicine-sweden/nallo/pull/573) - Updated metro-map to reflect changes to sniffles and dipcall
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Updated `docs/index.md` to match `README.md`
 - [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
 
 ### `Removed`
 
 - [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Removed local module echtvar encode, not used anymore
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Removed dipcall references missed in [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566).
 - [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Removed igenomes code
 
 ### `Fixed`
