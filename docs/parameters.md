@@ -35,7 +35,7 @@ Define where the pipeline should find input data and save output data.
 | `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified. | `string` |  |  |  |
 | `cadd_prescored_indels` | Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
-| `par_regions` | Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant | `string` |  |  |  |
+| `par_regions` | Provide a bed file of chrX and chrY PAR regions for DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
 | `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |

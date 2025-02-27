@@ -13,10 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Added a hidden parameter `--publish_unannotated_family_svs`
 - [#544](https://github.com/genomic-medicine-sweden/nallo/pull/544) - Added `--skip_sv_calling` parameter to skip sv_calling subworkflow
+- [#574](https://github.com/genomic-medicine-sweden/nallo/pull/574) - Added contributors to `nextflow.config`
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Added back help texts, fixing lint warning
 
 ### `Changed`
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Updated the fastqc module
 - [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
 - [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
@@ -30,15 +33,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#572](https://github.com/genomic-medicine-sweden/nallo/pull/572) - Changed `CALL_SVS` to sort sniffles1 variants, which could be unsorted by default
 - [#573](https://github.com/genomic-medicine-sweden/nallo/pull/573) - Updated metro-map to reflect changes to sniffles and dipcall
 - [#576](https://github.com/genomic-medicine-sweden/nallo/pull/576) - Merged master back to dev
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Updated `docs/index.md` to match `README.md`
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
 
 ### `Removed`
 
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Removed local module echtvar encode, not used anymore
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Removed dipcall references missed in [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566).
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Removed igenomes code
+
 ### `Fixed`
 
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Fixed some Nexftlow language server issues
 - [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
 - [#570](https://github.com/genomic-medicine-sweden/nallo/pull/570) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Fixed warning about non-existing `params.genome` when running the pipeline
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Fixed missing nf-test triggers for changes that may affect the entire pipeline
 
 ### Parameters
 
