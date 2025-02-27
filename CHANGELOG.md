@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#576](https://github.com/genomic-medicine-sweden/nallo/pull/576) - Merged master back to dev
 - [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Updated `docs/index.md` to match `README.md`
 - [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
+- [#583](https://github.com/genomic-medicine-sweden/nallo/pull/583) - Merged master back to dev
 
 ### `Removed`
 
