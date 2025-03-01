@@ -344,7 +344,7 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ## Other highlighted parameters
 
-- Limit SNV calling to regions in BED file (`--target_bed`).
+- Limit SNV calling to regions in BED file (`--target_regions`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 
