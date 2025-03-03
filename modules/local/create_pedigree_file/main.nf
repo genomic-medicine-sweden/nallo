@@ -24,11 +24,10 @@ process CREATE_PEDIGREE_FILE {
         a.family_id <=> b.family_id ?: a.id <=> b.id } : sample_metas
     outfile_text = ['#family_id', 'sample_id', 'father', 'mother', 'sex', 'phenotype'].join('\\t')
     def samples_list = []
-    for(int i = 0; i<samples.size(); i++) {
-        sample_name = samples[i].id
-        if (!samples_list.contains(sample_name)) {
-            outfile_text += "\\n" + [samples[i].family_id, sample_name, samples[i].paternal_id, samples[i].maternal_id, samples[i].sex, samples[i].phenotype].join('\\t')
-            samples_list.add(sample_name)
+    samples.each { sample ->
+        if (!samples_list.contains(sample.id)) {
+            outfile_text += "\\n" + [sample.family_id, sample.id, sample.paternal_id, sample.maternal_id, sample.sex, sample.phenotype].join('\\t')
+            samples_list.add(sample.id)
         }
     }
     """
