@@ -23,17 +23,16 @@
 
 ##### Alignment & assembly
 
-- Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
-- Assemble haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
+- Assemble genomes with [hifiasm](https://github.com/chhylp123/hifiasm)
+- Align reads and assemblies to reference with [minimap2](https://github.com/lh3/minimap2)
 
 ##### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
-- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 - Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
-- Call variants from assembly with [dipcall](https://github.com/lh3/dipcall) (HiFi only)
 
 ##### Phasing and methylation
 
@@ -84,9 +83,9 @@ For more details and further functionality, please refer to the [documentation](
 
 ## Credits
 
-genomic-medicine-sweden/nallo was originally written by Felix Lenner.
+genomic-medicine-sweden/nallo was originally written by [Felix Lenner](https://github.com/fellen31).
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+We thank the following people for their extensive assistance in the development of this pipeline: [Anders Jemt](https://github.com/jemten), [Annick Renevey](https://github.com/rannick), [Daniel Schmitz](https://github.com/Schmytzi), [Lucía Peña-Pérez](https://github.com/Lucpen), [Peter Pruisscher](https://github.com/peterpru) & [Ramprasad Neethiraj](https://github.com/ramprasadn).
 
 ## Contributions and Support
 

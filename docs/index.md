@@ -19,17 +19,16 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 
 ### Alignment & assembly
 
-- Align reads to reference with [minimap2](https://github.com/lh3/minimap2)
-- Assemble (trio-binned) haploid genomes with [hifiasm](https://github.com/chhylp123/hifiasm) (HiFi only)
+- Assemble genomes with [hifiasm](https://github.com/chhylp123/hifiasm)
+- Align reads and assemblies to reference with [minimap2](https://github.com/lh3/minimap2)
 
 ### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
-- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles2](https://github.com/fritzsedlazeck/Sniffles)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 - Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
-- Call variants from assembly with [dipcall](https://github.com/lh3/dipcall) (HiFi only)
 
 ### Phasing and methylation
 
@@ -38,7 +37,7 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 
 ### Annotation
 
-- Annotate SNVs and INDELs with databases of choice, i.e. [gnomAD](https://gnomad.broadinstitute.org), [CADD](https://cadd.gs.washington.edu) etc. with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
+- Annotate SNVs and INDELs with databases of choice, e.g. [gnomAD](https://gnomad.broadinstitute.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [CADD](https://cadd.gs.washington.edu) with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
 - Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
@@ -91,9 +90,9 @@ For more details and further functionality, please refer to the [usage documenta
 
 ## Credits
 
-genomic-medicine-sweden/nallo was originally written by Felix Lenner.
+genomic-medicine-sweden/nallo was originally written by [Felix Lenner](https://github.com/fellen31).
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+We thank the following people for their extensive assistance in the development of this pipeline: [Anders Jemt](https://github.com/jemten), [Annick Renevey](https://github.com/rannick), [Daniel Schmitz](https://github.com/Schmytzi), [Lucía Peña-Pérez](https://github.com/Lucpen), [Peter Pruisscher](https://github.com/peterpru) & [Ramprasad Neethiraj](https://github.com/ramprasadn).
 
 ## Contributions and Support
 

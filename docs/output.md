@@ -20,28 +20,26 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Assembly
 
-[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then converted to fasta files using [gfastats](https://github.com/vgl-hub/gfastats). A deconstructed version of [dipcall](https://github.com/lh3/dipcall) is used to map the assembled haplotypes back to the reference genome.
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also ouputs summary stats per haplotype.
 
-| Path                                                         | Description                                          |
-| ------------------------------------------------------------ | ---------------------------------------------------- |
-| `assembly_haplotypes/gfastats/{sample}/*hap1.p_ctg.fasta.gz` | Assembled haplotype 1                                |
-| `assembly_haplotypes/gfastats/{sample}/*hap2.p_ctg.fasta.gz` | Assembled haplotype 2                                |
-| `assembly_haplotypes/gfastats/{sample}/*.assembly_summary`   | Summary statistics                                   |
-| `assembly_variant_calling/dipcall/{sample}/*hap1.bam`        | Assembled haplotype 1 mapped to the reference genome |
-| `assembly_variant_calling/dipcall/{sample}/*hap1.bai`        | Index of the corresponding BAM file for haplotype 1  |
-| `assembly_variant_calling/dipcall/{sample}/*hap2.bam`        | Assembled haplotype 2 mapped to the reference genome |
-| `assembly_variant_calling/dipcall/{sample}/*hap2.bai`        | Index of the corresponding BAM file for haplotype 2  |
+| Path                                                             | Description                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.bam`         | Both assembled haplotypes mapped to the reference genome, merged and haplotagged (`HP:1`/`HP:2`). |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.bam.bai`     | Index of aligned assembly.                                                                        |
+| `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`  | Summary statistics for haplotype 1/paternal haplotype                                             |
+| `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary` | Summary statistics for haplotype 2/maternal haplotype                                             |
 
 ## Methylation pileups
 
 [Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.
 
-| Path                                                                         | Description                                               | Alignment          | Alignment & phasing |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_*.bed.gz`         | bedMethyl file with summary counts from haplotagged reads |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_phased_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                        |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`                  | bedMethyl file with summary counts from all reads         | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bedMethyl file                 | :white_check_mark: |                     |
+| Path                                                                  | Description                                                             | Alignment          | Alignment & phasing |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_1.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 1) |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_2.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 2) |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
+| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
+| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: |                     |
 
 ## MultiQC
 
@@ -96,13 +94,14 @@ This document describes the pipeline output files and the tools used to generate
 
 [Mosdepth](https://github.com/brentp/mosdepth) is used to report quality control metrics such as coverage and GC content from alignment files.
 
-| Path                                              | Description                                                                                                           | With `--target_regions` | Without `--target_regions` |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------------- |
-| `qc/mosdepth/{sample}/*.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
-| `qc/mosdepth/{sample}/*.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
-| `qc/mosdepth/{sample}/*.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
-| `qc/mosdepth/{sample}/*.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
-| `qc/mosdepth/{sample}/*.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
+| Path                                                     | Description                                                                                                           | With `--target_regions` | Without `--target_regions` |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------------- |
+| `qc/mosdepth/{sample}/{sample}.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
+| `qc/mosdepth/{sample}/{sample}.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
+| `qc/mosdepth/{sample}/{sample}.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format                                                                                           | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
 
 ### Cramino
 
@@ -142,13 +141,16 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
 
-| Path                                                                    | Description                               |
-| ----------------------------------------------------------------------- | ----------------------------------------- |
-| `paraphase/{sample}/*.bam`                                              | BAM file with reads from analysed regions |
-| `paraphase/{sample}/*.bai`                                              | Index of the BAM file                     |
-| `paraphase/{sample}/*.json`                                             | Summary of haplotypes and variant calls   |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`     | VCF file per gene                         |
-| `paraphase/{sample}/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi` | Index of the VCF file                     |
+| Path                                                                   | Description                                               |
+| ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| `paraphase/sample/{sample}/*.bam`                                      | BAM file with reads from analysed regions                 |
+| `paraphase/sample/{sample}/*.bai`                                      | Index of the BAM file                                     |
+| `paraphase/sample/{sample}/*.json`                                     | Summary of haplotypes and variant calls                   |
+| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`      | VCF file per gene                                         |
+| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi`  | Index of the VCF file                                     |
+| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz`     | VCF file from paraphase, merged by family                 |
+| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz.tbi` | Index of the VCF file merged by family                    |
+| `paraphase/family/{family_id}/{family_id}_merged.json`                 | Summary of haplotypes and variant calls, merged by family |
 
 ### Repeats
 
@@ -165,10 +167,10 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
-| Path                                                                                | Description                           | Call repeats | Call & annotate repeats |
-| ----------------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
-| `repeat_expansions/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
+| Path                                                                      | Description                           | Call repeats | Call & annotate repeats |
+| ------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
 
 ### SNVs
 
@@ -176,12 +178,12 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                  | Description                                                                 | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz`                            | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/sample/{sample}/{sample}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_snvs.vcf.gz`                           | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snv.vcf.gz`                            | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
-| `snvs/family/{family}/{family}_snv.vcf.gz.tbi`                        | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
 
 #### Annotation
 
@@ -224,18 +226,18 @@ In general, annotated variant calls are output per family while unannotated call
 
 !!!info "Variant merging strategies"
 
-    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls.
+    SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls. SV calls are output for all callers, but only variants from one caller (set by `--sv_caller`) are merged with CNVs, then annotated, ranked and filtered.
 
-| Path                                                            | Description                                  | Call SVs           | Call CNVs          | Call SVs & CNVs    |
-| --------------------------------------------------------------- | -------------------------------------------- | ------------------ | ------------------ | ------------------ |
-| `svs/sample/{sample}/{sample}_svs.vcf.gz`                       | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
-| `svs/sample/{sample}/{sample}_svs.vcf.gz.tbi`                   | VCF file with SVs per sample                 | :white_check_mark: |                    | :white_check_mark: |
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz`                      | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
-| `svs/sample/{sample}/{sample}_cnvs.vcf.gz.tbi`                  | VCF file with CNVs per sample                |                    | :white_check_mark: | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz`          | VCF file with merged SVs per family          | :white_check_mark: |                    |                    |
-| `svs/family/{family_id}/{family_id}_svs_merged.vcf.gz.tbi`      | Index of the merged VCF file                 | :white_check_mark: |                    |                    |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`     | VCF file with merged CNVs and SVs per family |                    |                    | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi` | Index of the merged VCF file                 |                    |                    | :white_check_mark: |
+| Path                                                                                    | Description                                    | Call SVs           | Call CNVs          | Call SVs & CNVs    | `--publish_unannotated_family_svs` |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------ | ------------------ | ------------------ | ---------------------------------- |
+| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz`                            | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz.tbi`                        | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz`                                      | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz.tbi`                                  | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{svs,cnvs}.vcf.gz`      | VCF file with merged SVs per family and caller |                    |                    |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{snvs,cnvs}.vcf.gz.tbi` | Index of the merged VCF file                   |                    |                    |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`                             | VCF file with merged CNVs and SVs per family   |                    |                    | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi`                         | Index of the merged VCF file                   |                    |                    | :white_check_mark: |                                    |
 
 #### Annotation
 

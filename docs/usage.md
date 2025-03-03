@@ -117,7 +117,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -147,15 +147,7 @@ Turned off with `--skip_qc`.
 
 ### Assembly
 
-This subworkflow contains both genome assembly and assembly variant calling. The assembly variant calling needs the sex of samples. For samples with unknown sex this is inferred with the help of the aligned reads. Therefore it depends on the alignment subworkflow. It requires a BED file with PARs.
-
-| Parameter     | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
-
-!!!warning
-
-    Make sure chrY PAR is hard masked (masked with the letter N) in the reference genome you are using.
+This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
 
 Turned off with `--skip_genome_assembly`.
 
@@ -179,6 +171,16 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
+### SV calling
+
+This subworkflow depends on the alignment subworkflow.
+
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
+Turned off with `--skip_sv_calling`.
+
 ### CNV calling
 
 This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
@@ -188,6 +190,10 @@ This subworkflow depends on the alignment and SNV calling subworkflows, and requ
 | `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
 | `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+
+!!!tip "Family-level VCFs per caller"
+
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_cnv_calling`.
 
@@ -338,7 +344,7 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ## Other highlighted parameters
 
-- Limit SNV calling to regions in BED file (`--target_bed`).
+- Limit SNV calling to regions in BED file (`--target_regions`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 

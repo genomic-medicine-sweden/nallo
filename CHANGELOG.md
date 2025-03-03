@@ -3,6 +3,92 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.0 - [2025-03-03]
+
+### `Added`
+
+- [#549](https://github.com/genomic-medicine-sweden/nallo/pull/549) - Added merging of paraphase JSON and VCF files into family files
+- [#516](https://github.com/genomic-medicine-sweden/nallo/pull/516) - Added beta support for ONT R10 assembly
+- [#531](https://github.com/genomic-medicine-sweden/nallo/pull/531) - Added missing credits to the README
+- [#537](https://github.com/genomic-medicine-sweden/nallo/pull/537) - Added per-base depth output in d4 format from mosdepth
+- [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Added a hidden parameter `--publish_unannotated_family_svs`
+- [#544](https://github.com/genomic-medicine-sweden/nallo/pull/544) - Added `--skip_sv_calling` parameter to skip sv_calling subworkflow
+- [#574](https://github.com/genomic-medicine-sweden/nallo/pull/574) - Added contributors to `nextflow.config`
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Added back help texts, fixing lint warning
+
+### `Changed`
+
+- [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Updated the fastqc module
+- [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
+- [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
+- [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
+- [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
+- [#545](https://github.com/genomic-medicine-sweden/nallo/pull/545) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Changed family-level SNVs naming to `snvs` from `snv`, matching sample-level and other variants
+- [#557](https://github.com/genomic-medicine-sweden/nallo/pull/557) - Updated Severus to version 1.3
+- [#558](https://github.com/genomic-medicine-sweden/nallo/pull/558) - Changed VEP to single-threaded by default, because of https://github.com/Ensembl/ensembl-vep/issues/1759
+- [#560](https://github.com/genomic-medicine-sweden/nallo/pull/560) - Updated template to nf-core/tools version 3.2.0
+- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicing the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
+- [#572](https://github.com/genomic-medicine-sweden/nallo/pull/572) - Changed `CALL_SVS` to sort sniffles1 variants, which could be unsorted by default
+- [#573](https://github.com/genomic-medicine-sweden/nallo/pull/573) - Updated metro-map to reflect changes to sniffles and dipcall
+- [#576](https://github.com/genomic-medicine-sweden/nallo/pull/576) - Merged master back to dev
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Updated `docs/index.md` to match `README.md`
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
+- [#583](https://github.com/genomic-medicine-sweden/nallo/pull/583) - Merged master back to dev
+- [#585](https://github.com/genomic-medicine-sweden/nallo/pull/585) - Updated version to 0.5.0
+
+### `Removed`
+
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Removed local module echtvar encode, not used anymore
+- [#577](https://github.com/genomic-medicine-sweden/nallo/pull/577) - Removed dipcall references missed in [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566).
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Removed igenomes code
+
+### `Fixed`
+
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Fixed some Nexftlow language server issues
+- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
+- [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
+- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
+- [#570](https://github.com/genomic-medicine-sweden/nallo/pull/570) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
+- [#578](https://github.com/genomic-medicine-sweden/nallo/pull/578) - Fixed warning about non-existing `params.genome` when running the pipeline
+- [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Fixed missing nf-test triggers for changes that may affect the entire pipeline
+- [#584](https://github.com/genomic-medicine-sweden/nallo/pull/584) - Fixed pipeline not validating that the samplesheet only contains one project correctly
+- [#586](https://github.com/genomic-medicine-sweden/nallo/pull/586) - Fixed mistake in the usage docs where `--target_regions` was written as `--target_bed`
+
+### Parameters
+
+| Old parameter | New parameter                      |
+| ------------- | ---------------------------------- |
+|               | `--hifiasm_preset`                 |
+|               | `--skip_sv_calling`                |
+|               | `--publish_unannotated_family_svs` |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool           | Old version | New version |
+| -------------- | ----------- | ----------- |
+| hifiasm        | 0.19.8      | 0.24.0      |
+| deepvariant    | 1.6.1       | 1.8.0       |
+| sniffles       | 2.0.7       | 1.0.12      |
+| mosdepth       | 0.3.8       | 0.3.10      |
+| paraphase      | 3.1.1       | 3.2.1       |
+| bcftools merge |             | 1.20        |
+| merge_json     |             | 1.0         |
+| severus        | 1.1         | 1.3         |
+| dipcall        | 0.3         |             |
+| tagbam         |             | 0.1.0       |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.4.1 - [2025-02-17]
 
 ### `Fixed`

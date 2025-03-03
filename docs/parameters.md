@@ -17,6 +17,7 @@ Allows skipping certain parts of the pipeline
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
+| `skip_sv_calling` | Skip structural variant calling | `boolean` | False |  |  |
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_cnv_calling` | Skip CNV calling | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
@@ -34,7 +35,7 @@ Define where the pipeline should find input data and save output data.
 | `multiqc_title` | MultiQC report title. Printed as page header, used for filename if not otherwise specified. | `string` |  |  |  |
 | `cadd_prescored_indels` | Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
-| `par_regions` | Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant | `string` |  |  |  |
+| `par_regions` | Provide a bed file of chrX and chrY PAR regions for DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
 | `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
@@ -51,7 +52,8 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ba720cd29322036d966ab3e4bc4c3d03e1731af5/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/ |  | True |
+| `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 
 ## Reference genome options
 
@@ -73,6 +75,7 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `config_profile_description` | Institutional config description. | `string` |  |  | True |
 | `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
 | `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
+| `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller (these files are only output by default if `--skip_sv_annotation` or `--skip_cnv_calling` are active). | `boolean` |  |  | True |
 
 ## Generic options
 
@@ -100,9 +103,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
-| `sv_caller` | Which structural variant caller to use (`severus`, `sniffles`) | `string` | severus |  |  |
+| `sv_caller` | From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`). | `string` | severus |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
+| `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active. | `string` |  |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |

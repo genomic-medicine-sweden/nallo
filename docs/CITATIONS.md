@@ -32,10 +32,6 @@
 
   > Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235
 
-- [dipcall](https://www.nature.com/articles/s41592-018-0054-7)
-
-  > Li H, Bloom JM, Farjoun Y, Fleharty M, Gauthier L, Neale B, MacArthur D (2018) A synthetic-diploid benchmark for accurate variant-calling evaluation. Nat Methods, 15:595-597. [PMID:30013044]
-
 - [echtvar](https://academic.oup.com/nar/article/51/1/e3/6775383)
 
   > Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931
@@ -96,9 +92,9 @@
 
   > Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756
 
-- [Sniffles2](https://www.nature.com/articles/s41587-023-02024-y)
+- [Sniffles](https://www.nature.com/articles/s41592-018-0001-7)
 
-  > Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol (2024). https://doi.org/10.1038/s41587-023-02024-y
+  > Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461–468 (2018). https://doi.org/10.1038/s41592-018-0001-7
 
 - [Somalier](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-020-00761-2)
 
