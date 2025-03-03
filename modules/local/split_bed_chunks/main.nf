@@ -17,7 +17,7 @@ process SPLIT_BED_CHUNKS {
     // Chunk size needs to be > 0. Where to specify a needed argument? params?
     // Will not output more regions than in file, even if chunk_size > number of regions
     script:
-    def VERSION = "1.0"
+    def VERSION = "1.0" // WARN: Version information not provided by tool on CLI. Please update this string when updating the script.
     """
     split_bed_chunks.py ${bed} $chunk_size
 
