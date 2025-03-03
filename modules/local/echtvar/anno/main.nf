@@ -20,7 +20,7 @@ process ECHTVAR_ANNO {
     prefix      = task.ext.prefix ?: "${meta.id}"
 
     modifiedList = []
-    for (element in databases) {
+    databases.each { element ->
         modifiedList.add("-e")
         modifiedList.add(element)
     }

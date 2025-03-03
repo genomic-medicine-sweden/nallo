@@ -38,7 +38,7 @@ process HIPHASE {
     def vcfInputs = []
     def vcfOutputs = []
     def vcfNames = []
-    for (vcf in vcfs) {
+    vcfs.each { vcf ->
         vcfInputs.add('--vcf')
         vcfInputs.add(vcf)
         vcfOutputs.add('--output-vcf')
@@ -50,7 +50,7 @@ process HIPHASE {
     def bamInputs = []
     def bamOutputs = []
     def bamNames = []
-    for (bam in bams) {
+    bams.each { bam ->
         bamInputs.add('--bam')
         bamInputs.add("${bam}")
 
