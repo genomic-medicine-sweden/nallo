@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://genomic-medicine-sweden.github.io/nallo/0.5.0/</loc>
+         <lastmod>2025-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://genomic-medicine-sweden.github.io/nallo/0.5.0/CITATIONS/</loc>
+         <lastmod>2025-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://genomic-medicine-sweden.github.io/nallo/0.5.0/output/</loc>
+         <lastmod>2025-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://genomic-medicine-sweden.github.io/nallo/0.5.0/parameters/</loc>
+         <lastmod>2025-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://genomic-medicine-sweden.github.io/nallo/0.5.0/usage/</loc>
+         <lastmod>2025-03-03</lastmod>
+    </url>
+</urlset>
