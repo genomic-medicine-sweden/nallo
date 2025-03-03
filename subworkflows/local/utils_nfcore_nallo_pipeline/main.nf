@@ -361,19 +361,13 @@ def citationBibliographyText(ch_versions, references_yaml, description) {
 def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
-    // For each of the "workflow", "files"
-    statusMap.each { paramsType, allParams ->
-        // Go through all params and their status
-        statusMap[paramsType].each { param, paramStatus ->
-            switch (paramsType) {
-                case "files":
-                    checkFileDependencies(param, fileDependencies, statusMap, workflowMap, errors)
-                    break
-                case "workflow":
-                    checkWorkflowDependencies(param, workflowDependencies, statusMap, workflowMap, errors)
-                    break
-                default:
-                    break
+    // For each of the "workflow", "files" - TODO: All errors now are comming from other parts of the workflow
+    statusMap.each { paramsType, paramsMap ->
+        paramsMap.each { param, _paramStatus ->
+            if (paramsType == "files") {
+                checkFileDependencies(param, fileDependencies, statusMap, workflowMap, errors)
+            } else if (paramsType == "workflow") {
+                checkWorkflowDependencies(param, workflowDependencies, statusMap, workflowMap, errors)
             }
         }
     }
