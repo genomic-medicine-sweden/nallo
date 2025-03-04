@@ -251,6 +251,20 @@
                     "fa_icon": "fas fa-file",
                     "description": "A SV rank model config file for genmod."
                 },
+                "somalier_labels": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv(\\.gz)?$",
+                    "description": "TSV for labelled samples. e.g. Somalier labels for 1kg",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "somalier_labelled_files": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv(\\.gz)?$",
+                    "description": "Set of somalier files for labelled samples. e.g. Somalier files",
+                    "format": "file-path",
+                    "exists": true
+                },
                 "somalier_sites": {
                     "type": "string",
                     "pattern": "^\\S+\\.vcf(\\.gz)?$",

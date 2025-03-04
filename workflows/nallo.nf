@@ -16,7 +16,7 @@ include { ANNOTATE_SVS                            } from '../subworkflows/local/
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
+include { BAM_INFER_SEX_ANCESTRY                  } from '../subworkflows/local/bam_infer_sex_ancestry'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
@@ -97,6 +97,8 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
+    ch_somalier_labels           = createReferenceChannelFromPath(params.somalier_labels)
+    ch_somalier_labelled_files   = createReferenceChannelFromPath(params.somalier_labelled_files)
     ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
 
     // Channels from (optional) input samplesheets validated by schema
@@ -204,20 +206,22 @@ workflow NALLO {
         //
         // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
         //
-        BAM_INFER_SEX (
+        BAM_INFER_SEX_ANCESTRY (
             bam_infer_sex_in,
             ch_fasta,
             ch_fai,
             ch_somalier_sites,
-            ch_samplesheet_pedfile
+            ch_samplesheet_pedfile,
+            ch_somalier_labels,
+            ch_somalier_labelled_files
         )
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
+        ch_versions = ch_versions.mix(BAM_INFER_SEX_ANCESTRY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX_ANCESTRY.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX_ANCESTRY.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
         // Set files with updated meta for subsequent processes
-        ch_bam     = BAM_INFER_SEX.out.bam
-        ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+        ch_bam     = BAM_INFER_SEX_ANCESTRY.out.bam
+        ch_bam_bai = BAM_INFER_SEX_ANCESTRY.out.bam_bai
 
     }
 

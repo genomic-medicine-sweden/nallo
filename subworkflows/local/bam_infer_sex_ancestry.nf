@@ -1,15 +1,18 @@
+include { SOMALIER_ANCESTRY                } from '../../modules/nf-core/somalier/ancestry/main'
 include { SOMALIER_EXTRACT                 } from '../../modules/nf-core/somalier/extract/main'
 include { SOMALIER_RELATE as RELATE_INFER  } from '../../modules/nf-core/somalier/relate/main'
 include { SOMALIER_RELATE as RELATE_RELATE } from '../../modules/nf-core/somalier/relate/main'
 
-workflow BAM_INFER_SEX {
+workflow BAM_INFER_SEX_ANCESTRY {
 
     take:
-    ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
-    ch_fasta          // channel: [ val(meta), path(fasta) ]
-    ch_fai            // channel: [ val(meta), path(fai) ]
-    ch_somalier_sites // channel: [ val(meta), path(somalier_sites_vcf) ]
-    ch_ped            // channel: [ val(meta), path(ped) ]
+    ch_bam_bai                 // channel: [ val(meta), path(bam), path(bai) ]
+    ch_fasta                   // channel: [ val(meta), path(fasta) ]
+    ch_fai                     // channel: [ val(meta), path(fai) ]
+    ch_somalier_sites          // channel: [ val(meta), path(somalier_sites_vcf) ]
+    ch_ped                     // channel: [ val(meta), path(ped) ]
+    ch_somalier_labels         // channel: [ val(meta), path(somalier_labels) ]
+    ch_somalier_labelled_files // channel: [ val(meta), path(somalier_labelled_files) ]
 
     main:
     ch_versions = Channel.empty()
@@ -77,12 +80,21 @@ workflow BAM_INFER_SEX {
     RELATE_RELATE ( ch_relate_relate_in, [] )
     ch_versions = ch_versions.mix(RELATE_RELATE.out.versions)
 
+    SOMALIER_EXTRACT.out.extract
+        .map { meta, extract -> [ [ id: meta.project ], extract ] }
+        .groupTuple()
+        .set { ch_extracted_somalier }
+
+    SOMALIER_ANCESTRY ( ch_extracted_somalier, ch_somalier_labels.join( ch_somalier_labelled_files ))
+
+
     emit:
-    bam              = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
-    bai              = ch_updated_sex.map { meta, _bam, bai -> [ meta, bai ] } // channel: [ val(meta), path(bai) ]
-    bam_bai          = ch_updated_sex                                          // channel: [ val(meta), path(bam), path(bai) ]
-    somalier_samples = RELATE_RELATE.out.samples_tsv                           // channel: [ val(meta), path(samples_tsv) ]
-    somalier_pairs   = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
-    versions = ch_versions                                                     // channel: [ versions.yml ]
+    bam               = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
+    bai               = ch_updated_sex.map { meta, _bam, bai -> [ meta, bai ] } // channel: [ val(meta), path(bai) ]
+    bam_bai           = ch_updated_sex                                          // channel: [ val(meta), path(bam), path(bai) ]
+    somalier_samples  = RELATE_RELATE.out.samples_tsv                           // channel: [ val(meta), path(samples_tsv) ]
+    somalier_pairs    = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
+    somalier_ancestry = SOMALIER_ANCESTRY.out.tsv                               // channel: [ val(meta), path(ancestry_tsv) ]
+    versions          = ch_versions                                             // channel: [ versions.yml ]
 }
 
