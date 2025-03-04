@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Updated version to 0.6.0dev
+- [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
 
 ### `Removed`
 
