@@ -51,6 +51,8 @@ Define where the pipeline should find input data and save output data.
 | `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
+| `somalier_labels` | TSV for labelled samples. e.g. Somalier labels for 1kg | `string` |  |  |  |
+| `somalier_labelled_files` |  Set of somalier files for labelled samples. e.g. Somalier files | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |

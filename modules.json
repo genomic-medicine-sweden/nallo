@@ -243,6 +243,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sniffles/sniffles.diff"
                     },
+                    "somalier/ancestry": {
+                        "branch": "master",
+                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "installed_by": ["modules"]
+                    },
                     "somalier/extract": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
