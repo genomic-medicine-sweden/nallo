@@ -35,31 +35,31 @@ process HIPHASE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    def vcfInputs = []
-    def vcfOutputs = []
+    def bamNames = []
     def vcfNames = []
-    vcfs.each { vcf ->
-        vcfInputs.add('--vcf')
-        vcfInputs.add(vcf)
-        vcfOutputs.add('--output-vcf')
-        vcfOutputs.add("${prefix}_phased.vcf.gz")
 
+    def vcfs_input = vcfs.collectMany { file ->
+        [
+            "--vcf",
+            file,
+            "--output-vcf",
+            "${prefix}_phased.vcf.gz"
+        ] }.join(" ")
+
+    def bams_input = bams.collectMany { file ->
+        [
+            "--bam",
+            file,
+            output_bam ? '--output-bam' : '',
+            output_bam ? "${prefix}_haplotagged.bam" : ''
+        ] }.join(" ")
+
+    vcfs.each { vcf ->
         vcfNames.add(vcf.getName())
     }
 
-    def bamInputs = []
-    def bamOutputs = []
-    def bamNames = []
     bams.each { bam ->
-        bamInputs.add('--bam')
-        bamInputs.add("${bam}")
-
         bamNames.add(bam.getName())
-
-        if(output_bam) {
-            bamOutputs.add('--output-bam')
-            bamOutputs.add("${prefix}_haplotagged.bam")
-        }
     }
 
     def uniqueVcfNames = new HashSet(vcfNames);
@@ -79,10 +79,8 @@ process HIPHASE {
         $args \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
-        ${bamInputs.join(' ')} \\
-        ${bamOutputs.join(' ')} \\
-        ${vcfInputs.join(' ')} \\
-        ${vcfOutputs.join(' ')}
+        ${bams_input} \\
+        ${vcfs_input}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
