@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Fixed unstable assembly outputs when there's multiple input files per sample
+
 ### Parameters
 
 | Old parameter | New parameter |
