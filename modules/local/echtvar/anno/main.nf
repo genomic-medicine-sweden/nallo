@@ -16,16 +16,16 @@ process ECHTVAR_ANNO {
     task.ext.when == null || task.ext.when
 
     script:
-    def args    = task.ext.args ?: ''
-    prefix      = task.ext.prefix ?: "${meta.id}"
-
-    modifiedList = []
-    for (element in databases) {
-        modifiedList.add("-e")
-        modifiedList.add(element)
-    }
+    def args  = task.ext.args ?: ''
+    prefix    = task.ext.prefix ?: "${meta.id}"
+    def input = databases.collectMany { file -> ["-e", file] }.join(" ")
     """
-    echtvar anno ${args} ${modifiedList.join(" ")} ${vcf} ${prefix}.bcf.gz
+    echtvar \\
+        anno \\
+        ${args} \\
+        ${input} \\
+        ${vcf} \\
+        ${prefix}.bcf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
