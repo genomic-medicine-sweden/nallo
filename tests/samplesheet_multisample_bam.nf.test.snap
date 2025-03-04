@@ -596,8 +596,8 @@
             [
                 "HG002_Revio_A_haplotype_1.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
                 "HG002_Revio_A_haplotype_2.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
-                "HG002_Revio_B_haplotype_1.assembly_summary:md5,7fd907d993bf1140eabc2f3c2116df96",
-                "HG002_Revio_B_haplotype_2.assembly_summary:md5,241c10b531eae6c6bd56d71be2b0806c",
+                "HG002_Revio_B_haplotype_1.assembly_summary:md5,54140e0f06c64450e9e77cfcb2421a10",
+                "HG002_Revio_B_haplotype_2.assembly_summary:md5,3a21cefa394ba4851b2cc33e21670458",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz:md5,7af3b6246d0c007aec686714b96a0f7f",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz.tbi:md5,b7083ebf6ba176ed5a472ad653c5be27",
                 "HG002_Revio_A_modkit_pileup_2.bed.gz:md5,98e42ec905d8af26046862618ca0823e",
@@ -686,7 +686,7 @@
                 ],
                 [
                     "HG002_Revio_B_aligned_assembly.bam",
-                    "6c58e6d74d98843140656ce57b462e5b"
+                    "c42cf558e7999076a6fca639b37615d8"
                 ],
                 [
                     "HG002_Revio_A.paraphase.bam",
@@ -806,6 +806,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-03T16:55:30.471294594"
+        "timestamp": "2025-03-04T16:23:36.302480749"
     }
 }
