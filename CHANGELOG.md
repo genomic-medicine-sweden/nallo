@@ -3,12 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
-| Old parameter   | New parameter          |
-| --------------- | ---------------------- |
-|                 | `--somalier_labels`    |
-|                 | `--somalier_labelled_files` |
-
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--somalier_labels`         |
+|               | `--somalier_labelled_files` |
 
 ## 0.5.0 - [2025-03-03]
 
