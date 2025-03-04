@@ -16,7 +16,7 @@ include { ANNOTATE_SVS                            } from '../subworkflows/local/
 include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
+include { BAM_INFER_SEX_ANCESTRY                  } from '../subworkflows/local/bam_infer_sex_ancestry'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
@@ -216,13 +216,13 @@ workflow NALLO {
             ch_somalier_labels,
             ch_somalier_labelled_files
         )
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
+        ch_versions = ch_versions.mix(BAM_INFER_SEX_ANCESTRY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX_ANCESTRY.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX_ANCESTRY.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
 
         // Set files with updated meta for subsequent processes
-        ch_bam     = BAM_INFER_SEX.out.bam
-        ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+        ch_bam     = BAM_INFER_SEX_ANCESTRY.out.bam
+        ch_bam_bai = BAM_INFER_SEX_ANCESTRY.out.bam_bai
 
     }
 
