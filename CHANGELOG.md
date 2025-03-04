@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
+- [#592](https://github.com/genomic-medicine-sweden/nallo/pull/592) - Updated local and nf-core modules to fix Nextflow language server issues
 
 ### `Removed`
 
