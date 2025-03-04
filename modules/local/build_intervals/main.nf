@@ -27,4 +27,14 @@ process BUILD_INTERVALS {
         gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
     END_VERSIONS
     """
+
+    stub:
+    """
+    touch ${fasta_fai.baseName}.bed
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
+    END_VERSIONS
+    """
 }
