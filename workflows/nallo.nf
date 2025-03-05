@@ -158,7 +158,10 @@ workflow NALLO {
 
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true)
+            // If there are multiple files per sample, each file has the same meta so failOnDuplicate fails here.
+            // The end result is fine, but it might be worth to e.g. give each file a non-indentical meta,
+            // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
+            .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
             .map {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
