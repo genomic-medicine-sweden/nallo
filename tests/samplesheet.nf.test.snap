@@ -208,7 +208,7 @@
                     "split_bed_chunks": 1.0
                 },
                 "STRANGER": {
-                    "stranger": "0.9.2"
+                    "stranger": "stranger, version 0.9.4"
                 },
                 "SVDB_MERGE": {
                     "svdb": "2.8.2",
@@ -651,6 +651,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-27T15:09:25.383542842"
+        "timestamp": "2025-03-05T13:27:04.780675179"
     }
 }
