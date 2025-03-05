@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#598](https://github.com/genomic-medicine-sweden/nallo/pull/598) - Added stub to `BUILD_INTERVALS`
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added stub to `SPLIT_BED_CHUNKS`
+
 ### `Changed`
 
 - [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
