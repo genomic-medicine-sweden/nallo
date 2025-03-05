@@ -24,7 +24,7 @@ workflow PHASING {
     if (params.phaser.equals("longphase")) {
 
         ch_bam_bai
-            .join( ch_vcf )
+            .join( ch_vcf, failOnMismatch:true, failOnDuplicate:true )
             .map { meta, bam, bai, snvs -> [ meta, bam, bai, snvs, [], [] ] }
             .set { ch_longphase_phase_in }
 
@@ -41,11 +41,11 @@ workflow PHASING {
         ch_versions = ch_versions.mix(TABIX_LONGPHASE_PHASE.out.versions)
 
         LONGPHASE_PHASE.out.vcf
-            .join( TABIX_LONGPHASE_PHASE.out.tbi )
+            .join( TABIX_LONGPHASE_PHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
         ch_bam_bai
-            .join( LONGPHASE_PHASE.out.vcf )
+            .join( LONGPHASE_PHASE.out.vcf, failOnMismatch:true, failOnDuplicate:true )
             .map { meta, bam, bai, vcf -> [ meta, bam, bai, vcf, [], [] ] }
             .set { ch_longphase_haplotag_in }
 
@@ -62,21 +62,21 @@ workflow PHASING {
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX_LONGPHASE.out.versions)
 
         LONGPHASE_HAPLOTAG.out.bam
-            .join( SAMTOOLS_INDEX_LONGPHASE.out.bai )
+            .join( SAMTOOLS_INDEX_LONGPHASE.out.bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
     // Phase variants and haplotag reads with whatshap
     } else if (params.phaser.equals("whatshap")) {
 
         WHATSHAP_PHASE(
-            ch_vcf.join( ch_bam_bai ),
+            ch_vcf.join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true ),
             fasta,
             fai
         )
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
         WHATSHAP_PHASE.out.vcf_tbi
-            .join( ch_bam_bai )
+            .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_whatshap_haplotag_in }
 
         WHATSHAP_HAPLOTAG (
@@ -92,7 +92,7 @@ workflow PHASING {
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions)
 
         WHATSHAP_HAPLOTAG.out.bam
-            .join( SAMTOOLS_INDEX_WHATSHAP.out.bai )
+            .join( SAMTOOLS_INDEX_WHATSHAP.out.bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
         WHATSHAP_PHASE.out.vcf_tbi
@@ -101,8 +101,8 @@ workflow PHASING {
     // Phase variants and haplotag reads with HiPhase
     } else if (params.phaser.equals("hiphase")) {
         ch_vcf
-            .join( ch_vcf_index )
-            .join( ch_bam_bai )
+            .join( ch_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_hiphase_snv_in }
 
         HIPHASE (
@@ -114,11 +114,11 @@ workflow PHASING {
         ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
         HIPHASE.out.bams
-            .join( HIPHASE.out.bais )
+            .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
         HIPHASE.out.vcfs
-            .join( HIPHASE.out.vcfs_tbi )
+            .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
     }
