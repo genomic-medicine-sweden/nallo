@@ -158,7 +158,7 @@ workflow NALLO {
 
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index)
+            .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true)
             .map {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
@@ -181,7 +181,7 @@ workflow NALLO {
 
         // Combine merged with unmerged bams
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.bai)
+            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
             .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { bam_infer_sex_in }
@@ -306,7 +306,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
         SHORT_VARIANT_CALLING.out.family_bcf
-            .join( SHORT_VARIANT_CALLING.out.family_csi )
+            .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -338,7 +338,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
-            .join( ANN_CSQ_PLI_SNV.out.tbi )
+            .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
 
     }
@@ -377,7 +377,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
         RANK_VARIANTS_SNV.out.vcf
-            .join( RANK_VARIANTS_SNV.out.tbi )
+            .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -402,7 +402,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
         // Split family VCFs to also publish a VCF per sample
-        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
+        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true ), [], [], [], [] )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
 
         BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
@@ -453,7 +453,7 @@ workflow NALLO {
     if(!params.skip_cnv_calling) {
 
         CALL_CNVS (
-            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
+            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
@@ -469,7 +469,7 @@ workflow NALLO {
     if (!params.skip_cnv_calling && !params.skip_sv_calling) {
 
         CALL_SVS.out.family_vcf
-            .join(CALL_CNVS.out.family_vcf)
+            .join(CALL_CNVS.out.family_vcf, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
             .set { svdb_merge_svs_cnvs_in }
 

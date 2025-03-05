@@ -57,7 +57,7 @@ workflow BAM_INFER_SEX {
     // Update sex with sex from somalier for samples with unknown sex
     ch_samples.unknown_sex
         .map { meta, bam, bai -> [ meta.id, meta, bam, bai ] }
-        .join( ch_somalier_sex )
+        .join( ch_somalier_sex, failOnMismatch:true, failOnDuplicate:true )
         .map { _id, meta, bam, bai, somalier ->
             def updated_sex = (meta.sex == 0 ? somalier.sex.toInteger() : meta.sex)
             [ meta + [sex: updated_sex], bam, bai ]
@@ -71,7 +71,7 @@ workflow BAM_INFER_SEX {
     SOMALIER_EXTRACT.out.extract
         .map { meta, extract -> [ [ id: meta.project ], extract ] }
         .groupTuple()
-        .join( ch_ped )
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
         .set { ch_relate_relate_in }
 
     RELATE_RELATE ( ch_relate_relate_in, [] )

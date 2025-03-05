@@ -23,7 +23,7 @@ workflow RANK_VARIANTS {
     ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)
 
     GENMOD_ANNOTATE.out.vcf
-        .join( ch_ped, failOnMismatch: true )
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
         .set { genmod_models_in }
 
     GENMOD_MODELS (
@@ -33,7 +33,7 @@ workflow RANK_VARIANTS {
     ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 
     GENMOD_MODELS.out.vcf
-        .join( ch_ped, failOnMismatch: true )
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true)
         .set { genmod_score_in }
 
     GENMOD_SCORE (
