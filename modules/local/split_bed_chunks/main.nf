@@ -26,4 +26,17 @@ process SPLIT_BED_CHUNKS {
         split_bed_chunks: \$(echo "$VERSION" )
     END_VERSIONS
     """
+
+    stub:
+    def VERSION = "1.0" // WARN: Version information not provided by tool on CLI. Please update this string when updating the script.
+    """
+    for ((i=1; i<=$chunk_size; i++)); do
+        touch "\$i.bed"
+    done
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        split_bed_chunks: \$(echo "$VERSION" )
+    END_VERSIONS
+    """
 }
