@@ -262,7 +262,7 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "26cdbf29e76695c7fd85e42e0015c7e96f979fe9",
+                        "git_sha": "776a380f11632060c655fe6bd35b1da7526ba17e",
                         "installed_by": ["modules"]
                     },
                     "svdb/merge": {
