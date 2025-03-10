@@ -41,6 +41,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.5.1 - [2025-03-10]
+
+### `Fixed`
+
+[#607](https://github.com/genomic-medicine-sweden/nallo/pull/607) - Fixed repeat annotation not working with multiple individuals per family ([#562](https://github.com/genomic-medicine-sweden/nallo/issues/562))
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| stranger | 0.9.2       | 0.9.4       |
+
 ## 0.5.0 - [2025-03-03]
 
 ### `Added`
