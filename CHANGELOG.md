@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.1 - [2025-03-10]
+
+### `Fixed`
+
+[#600](https://github.com/genomic-medicine-sweden/nallo/pull/600) - Fixed repeat annotation not working with multiple individuals per family ([#562](https://github.com/genomic-medicine-sweden/nallo/issues/562))
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| stranger | 0.9.2       | 0.9.4       |
+
 ## 0.5.0 - [2025-03-03]
 
 ### `Added`
