@@ -53,6 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | -------- | ----------- | ----------- |
 | stranger | 0.9.2       | 0.9.4       |
 
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.5.0 - [2025-03-03]
 
 ### `Added`
