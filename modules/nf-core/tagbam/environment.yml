@@ -3,7 +3,5 @@
 channels:
   - conda-forge
   - bioconda
-
 dependencies:
-  - bioconda::htslib=1.20
-  - bioconda::longphase=1.7.3
+  - bioconda::tagbam=0.1.0

@@ -146,7 +146,7 @@
                 },
                 "par_regions": {
                     "type": "string",
-                    "description": "Provide a bed file of chrX and chrY PAR regions for dipcall and DeepVariant",
+                    "description": "Provide a bed file of chrX and chrY PAR regions for DeepVariant",
                     "format": "file-path",
                     "exists": true
                 },
@@ -257,6 +257,13 @@
                     "description": "A VCF of known polymorphic sites for somalier",
                     "format": "file-path",
                     "exists": true
+                },
+                "modules_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of modules test dataset files",
+                    "default": "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/",
+                    "hidden": true
                 },
                 "pipelines_testdata_base_path": {
                     "type": "string",

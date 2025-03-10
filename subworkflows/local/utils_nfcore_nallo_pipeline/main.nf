@@ -52,7 +52,6 @@ def workflowSkips = [
 //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
 //
 def workflowDependencies = [
-    assembly         : ["mapping"],
     call_paralogs    : ["mapping"],
     snv_calling      : ["mapping"],
     qc               : ["mapping"],
@@ -72,7 +71,7 @@ def workflowDependencies = [
 //
 def fileDependencies = [
     mapping          : ["fasta", "somalier_sites"],
-    assembly         : ["fasta", "par_regions"], // The assembly workflow should be split into two - assembly and variant calling (requires ref)
+    assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
     snv_calling      : ["fasta", "par_regions"],
     snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
     sv_calling       : ["fasta"],
@@ -87,7 +86,7 @@ def parameterStatus = [
     workflow: [
         skip_snv_calling         : params.skip_snv_calling,
         skip_phasing             : params.skip_phasing,
-        skip_methylation_pileups: params.skip_methylation_pileups,
+        skip_methylation_pileups : params.skip_methylation_pileups,
         skip_rank_variants       : params.skip_rank_variants,
         skip_repeat_calling      : params.skip_repeat_calling,
         skip_repeat_annotation   : params.skip_repeat_annotation,
@@ -115,8 +114,9 @@ def parameterStatus = [
         genmod_reduced_penetrance: params.genmod_reduced_penetrance,
         genmod_score_config_snvs : params.genmod_score_config_snvs,
         genmod_score_config_svs  : params.genmod_score_config_svs,
-        variant_consequences_snvs : params.variant_consequences_snvs,
+        variant_consequences_snvs: params.variant_consequences_snvs,
         variant_consequences_svs : params.variant_consequences_svs,
+        vep_plugin_files         : params.vep_plugin_files,
     ]
 ]
 
@@ -262,7 +262,6 @@ workflow PIPELINE_COMPLETION {
 //
 
 def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
-    genomeExistsError()
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 
 }
@@ -277,32 +276,6 @@ def validateInputSamplesheet(input) {
         error "Error: Input filenames needs to be unique for each sample."
     }
     return input
-}
-
-//
-// Get attribute from genome config file e.g. fasta
-//
-def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
-    }
-    return null
-}
-
-//
-// Exit pipeline if incorrect --genome key provided
-//
-def genomeExistsError() {
-    if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
-        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-            "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" +
-            "  Currently, the available genome keys are:\n" +
-            "  ${params.genomes.keySet().join(", ")}\n" +
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        error(error_string)
-    }
 }
 
 //
@@ -450,18 +423,22 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 // Lookup if a file is required by any workflows, and add to errors
 //
 def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
-    // Get the the workflow required by file
-    def workflowThatRequiresFile = findKeyForValue(file, combinationsMap)
-    // Get the "--skip" for that workflow
-    def workflowSkip = workflowMap[workflowThatRequiresFile]
-    // Get the status of the "--skip", if false then workflow is active
-    def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
-    // Get the file path
-    def FilePath = statusMap["files"][file]
-    // If the workflow that requires the file is active & theres no file available
-    if(WorkflowIsActive && FilePath == null) {
-        errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+    // Get all workflows required by a file
+    def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
+
+    for (workflow in workflowThatRequiresFile) {
+        // Get the "--skip" for that workflow
+        def workflowSkip = workflowMap[workflow]
+        // Get the status of the "--skip", if false then workflow is active
+        def WorkflowIsActive = !statusMap["workflow"][workflowSkip]
+        // Get the file path
+        def FilePath = statusMap["files"][file]
+        // If the workflow that requires the file is active & theres no file available
+        if(WorkflowIsActive && FilePath == null) {
+            errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+        }
     }
+
     return errors
 }
 
@@ -487,22 +464,19 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeyForValue(def valueToFind, Map map) {
+def findKeysForValue(def valueToFind, Map map) {
+
+    def keys = []
+
     for (entry in map) {
         def key = entry.key
         def value = entry.value
 
-        if (value instanceof List) {
-            if (value.contains(valueToFind)) {
-                return key
-            }
-        } else {
-            if (value == valueToFind) {
-                return key
-            }
+        if ((value instanceof List && value.contains(valueToFind)) || value == valueToFind) {
+            keys << key
         }
     }
-    return null // Value not found
+    return keys.isEmpty() ? null : keys
 }
 
 // Utility function to create channels from references
@@ -548,13 +522,13 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
-    def oneProject = ch_samplesheet
+    ch_samplesheet
         .map { meta, reads -> meta.project }
         .unique()
-        .collect()
-        .filter{ it.size() == 1 }
-
-    if(!oneProject) {
-        error("Only one project may be specified per run")
-    }
+        .count()
+        .map { n ->
+            if ( n > 1 ) {
+                error("ERROR: Only one project may be specified per run.")
+            }
+        }
 }

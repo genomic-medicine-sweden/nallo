@@ -147,15 +147,7 @@ Turned off with `--skip_qc`.
 
 ### Assembly
 
-This subworkflow contains both genome assembly and assembly variant calling. The assembly variant calling needs the sex of samples. For samples with unknown sex this is inferred with the help of the aligned reads. Therefore it depends on the alignment subworkflow. It requires a BED file with PARs.
-
-| Parameter     | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
-
-!!!warning
-
-    Make sure chrY PAR is hard masked (masked with the letter N) in the reference genome you are using.
+This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
 
 Turned off with `--skip_genome_assembly`.
 
@@ -290,9 +282,12 @@ Turned off with `--skip_rank_variants`.
 
 This subworkflow relies on the alignment subworkflow, and requires the following additional files:
 
-| Parameter                        | Description                                                           |
-| -------------------------------- | --------------------------------------------------------------------- |
-| `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation |
+| Parameter                        | Description                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation                                                                                                                                                                                                                                                                              |
+| `vep_cache`                      | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                               |
+| `vep_plugin_files` <sup>2</sup>  | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                            |
+| `variant_consequences_svs`       | A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
 
@@ -302,6 +297,17 @@ https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6
 ```
 
 These databases could for example come from [CoLoRSdb](https://zenodo.org/records/13145123).
+
+<sup>2</sup> Example file for input with `--vep_plugin_files`
+
+```
+vep_files
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_indel_-v1.3-.vcf.gz
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/spliceai_21_scores_raw_snv_-v1.3-.vcf.gz.tbi
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/pLI_values.txt
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
+```
 
 Turned off with `--skip_sv_annotation`.
 
@@ -338,7 +344,7 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ## Other highlighted parameters
 
-- Limit SNV calling to regions in BED file (`--target_bed`).
+- Limit SNV calling to regions in BED file (`--target_regions`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 

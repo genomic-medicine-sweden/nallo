@@ -3,8 +3,7 @@ include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../modules/nf-core/cat/fast
 include { HIFIASM                         } from '../../modules/nf-core/hifiasm'
 include { YAK as YAK_PATERNAL             } from '../../modules/local/yak'
 include { YAK as YAK_MATERNAL             } from '../../modules/local/yak'
-include { GFASTATS as GFASTATS_MATERNAL   } from '../../modules/nf-core/gfastats/main'
-include { GFASTATS as GFASTATS_PATERNAL   } from '../../modules/nf-core/gfastats/main'
+include { GFASTATS                        } from '../../modules/nf-core/gfastats/main'
 
 workflow ASSEMBLY {
 
@@ -27,7 +26,7 @@ workflow ASSEMBLY {
     } else if(params.hifiasm_mode == 'trio-binning') {
         // Multiple trios with different parents may not work?
         ch_reads.groupTuple()
-            .map{ meta, reads -> meta } // Takes meta, then
+            .map{ meta, _reads -> meta } // Takes meta, then
             // combine to create all possible combinations of [ meta, meta ]
             // but keep only the id of the second meta [ meta, meta.id ]
             .combine(ch_reads.groupTuple().map{ meta, reads -> [meta.id, reads] })
@@ -42,7 +41,7 @@ workflow ASSEMBLY {
             // If any sample has the id of another sample as id, then that is a kid (should be one
             // combination like this for every sample)
             // This means that everyone is a kid (even parents), but not every kid has parents
-            .branch{ kid_meta, sample_id, reads ->
+            .branch{ kid_meta, sample_id, _reads ->
                 kid: sample_id == kid_meta.id
                 mom: sample_id == kid_meta.maternal_id
                 dad: sample_id == kid_meta.paternal_id
@@ -50,10 +49,10 @@ workflow ASSEMBLY {
             .set{branch_result}
 
         branch_result
-            .kid.map{ meta, sample_id, reads -> [ meta, reads ] }
+            .kid.map{ meta, _sample_id, reads -> [ meta, reads ] }
             // Then we join the kids, together with dads and moms
-            .join(branch_result.dad.map { meta, sample_id, reads -> [ meta, reads ] }, remainder: true)
-            .join(branch_result.mom.map { meta, sample_id, reads -> [ meta, reads ] }, remainder: true)
+            .join(branch_result.dad.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true)
+            .join(branch_result.mom.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true)
             // Since every sample is still a considered a kid,
             // we check if they have both parents, and is therefore a trio
             .branch{ kid_meta, kid_reads, dad_reads, mom_reads ->
@@ -65,15 +64,15 @@ workflow ASSEMBLY {
         .set{ ch_samples }
 
         // We keep using kid_meta for the parental reads, since they need to go toghether into hifiasm
-        trio_kids = ch_samples.is_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, kid_reads ] }
-        trio_dads = ch_samples.is_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, dad_reads ] }
-        trio_moms = ch_samples.is_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
+        trio_kids = ch_samples.is_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
+        trio_dads = ch_samples.is_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
+        trio_moms = ch_samples.is_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
 
         // These can be someone elses mom or dad (parents)
-        non_trio_kids = ch_samples.no_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, kid_reads ] }
+        non_trio_kids = ch_samples.no_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
         // Should just be a kid_meta with empty reads
-        non_trio_dads = ch_samples.no_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, dad_reads ] }
-        non_trio_moms = ch_samples.no_trio.map{ kid_meta, kid_reads, dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
+        non_trio_dads = ch_samples.no_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
+        non_trio_moms = ch_samples.no_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
 
         // Parental samples needs to be merged before YAK
         // For now merge every sample, even if there's only one copy of reads
@@ -106,19 +105,28 @@ workflow ASSEMBLY {
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
     }
 
-    // Not the cleanest way, but better than to rely on hap_* in file names..
-    GFASTATS_PATERNAL( HIFIASM.out.paternal_contigs,'fasta', '', '', [], [], [], [] )
-    ch_versions = ch_versions.mix(GFASTATS_PATERNAL.out.versions)
+    HIFIASM.out.paternal_contigs
+        .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
+        .set { ch_gfastats_paternal_in }
 
-    GFASTATS_MATERNAL( HIFIASM.out.maternal_contigs,'fasta', '', '', [], [], [], [] )
-    ch_versions = ch_versions.mix(GFASTATS_MATERNAL.out.versions)
+    HIFIASM.out.maternal_contigs
+        .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
+        .set { ch_gfastats_maternal_in }
 
-    GFASTATS_PATERNAL.out.assembly
-        .join(GFASTATS_MATERNAL.out.assembly)
-        .set{ ch_dual_assembly_fa }
+    GFASTATS(
+        ch_gfastats_paternal_in.mix(ch_gfastats_maternal_in),
+        'fasta',
+        '',
+        '',
+        [],
+        [],
+        [],
+        []
+    )
+    ch_versions = ch_versions.mix(GFASTATS.out.versions)
 
     emit:
-    assembled_haplotypes = ch_dual_assembly_fa // channel: [ val(meta), path(paternal_fasta), path(maternal_fasta) ]
-    versions = ch_versions                     // channel: [ versions.yml ]
+    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    versions = ch_versions                       // channel: [ versions.yml ]
 }
 
