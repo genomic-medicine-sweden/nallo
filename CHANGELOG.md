@@ -7,10 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
+- [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
+
 ### `Changed`
 
 - [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
-- [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` for better
+- [#592](https://github.com/genomic-medicine-sweden/nallo/pull/592) - Updated local and nf-core modules to fix Nextflow language server issues
+- [#602](https://github.com/genomic-medicine-sweden/nallo/pull/602) - Updated the samtools/fastq module to add stub
+- [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
 
 ### `Removed`
 

@@ -58,7 +58,7 @@
                     },
                     "bcftools/view": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ede1e20af42e2f736638efae1b79762293a6a98a",
                         "installed_by": ["modules"]
                     },
                     "bedtools/merge": {
@@ -162,7 +162,7 @@
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "22fc6d90be8eca2cf6afe5d10b3c5cffcdbcb19c",
+                        "git_sha": "f303120bb5ee191c815bc7a756ab57576afe4c90",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
@@ -202,7 +202,7 @@
                     },
                     "samtools/fastq": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "7bbde4b24d71a12022ae12db97d740e746ff1aaf",
                         "installed_by": ["modules"]
                     },
                     "samtools/import": {
@@ -229,7 +229,7 @@
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "b21df1b4e806f7bf3aff0eb41d84453a0025b43e",
                         "installed_by": ["modules"]
                     },
                     "severus": {
@@ -267,7 +267,7 @@
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "a8ad84b7ee0cda0b001490e95d9ed277e687e368",
+                        "git_sha": "95185f269ec10a33cde61d294fcd4ba7c66bc6b8",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
