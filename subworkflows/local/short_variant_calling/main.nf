@@ -45,7 +45,7 @@ workflow SHORT_VARIANT_CALLING {
                 def new_meta = meta - meta.subMap('region')
                 [ groupKey(new_meta, new_meta.num_intervals ), tbi ]
             }
-            .groupTuple()
+            .groupTuple(), failOnMismatch:true, failOnDuplicate:true
         )
         .map { meta, vcf, tbi ->
             [ meta - meta.subMap('num_intervals'), vcf, tbi ]

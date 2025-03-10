@@ -51,7 +51,7 @@ workflow CALL_REPEAT_EXPANSIONS {
     ch_versions = ch_versions.mix(BCFTOOLS_SORT_TRGT.out.versions)
 
     BCFTOOLS_SORT_TRGT.out.vcf
-        .join( BCFTOOLS_SORT_TRGT.out.tbi )
+        .join( BCFTOOLS_SORT_TRGT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, bcf, csi -> [ [ id : meta.family_id ], bcf, csi ] }
         .groupTuple()
         .set{ ch_trgt_merge_in }
