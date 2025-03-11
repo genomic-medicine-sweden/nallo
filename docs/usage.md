@@ -348,6 +348,10 @@ Filtering of variants only happens if any of these three parameters is active.
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 
+## Runtime estimates
+
+Version 0.5.1 of the pipeline processed a ~32x coverage PacBio trio (HG002, HG003, HG004) in 5h 52m using 1,033 CPUh, or HG002 only in 5h 54min using 370 CPUh, on a cluster with 68 compute nodes (dual Intel Xeon Gold 6248R, 24 cores @ 3.0GHz). This included all steps of the pipeline except filtering on HGNC IDs with `filter_vep`, which would currently add approximately 3 hours of total runtime or 3 CPUh per sample.
+
 ## Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
