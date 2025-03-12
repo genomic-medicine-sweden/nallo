@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 
 ### `Changed`
 
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#592](https://github.com/genomic-medicine-sweden/nallo/pull/592) - Updated local and nf-core modules to fix Nextflow language server issues
 - [#602](https://github.com/genomic-medicine-sweden/nallo/pull/602) - Updated the samtools/fastq module to add stub
 - [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Updated splitubam module to fix stubs
 
 ### `Removed`
 

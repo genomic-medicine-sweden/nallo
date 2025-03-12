@@ -35,4 +35,15 @@ process YAK {
         yak: \$(echo yak version))
     END_VERSIONS
     """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.yak
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        yak: \$(echo yak version))
+    END_VERSIONS
+    """
 }
