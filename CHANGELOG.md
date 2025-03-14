@@ -7,10 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
+- [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
+- [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
+
 ### `Changed`
 
 - [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
+- [#592](https://github.com/genomic-medicine-sweden/nallo/pull/592) - Updated local and nf-core modules to fix Nextflow language server issues
 - [#593](https://github.com/genomic-medicine-sweden/nallo/pull/593) - Updated local subworkflow to fix Nextflow language server issues
+- [#602](https://github.com/genomic-medicine-sweden/nallo/pull/602) - Updated the samtools/fastq module to add stub
+- [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
 
 ### `Removed`
 
@@ -30,6 +37,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool | Old version | New version |
 | ---- | ----------- | ----------- |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.5.1 - [2025-03-10]
+
+### `Fixed`
+
+[#607](https://github.com/genomic-medicine-sweden/nallo/pull/607) - Fixed repeat annotation not working with multiple individuals per family ([#562](https://github.com/genomic-medicine-sweden/nallo/issues/562))
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| stranger | 0.9.2       | 0.9.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
