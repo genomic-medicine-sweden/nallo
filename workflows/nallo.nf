@@ -401,14 +401,6 @@ workflow NALLO {
             )
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
-        if (!params.skip_peddy) {
-            PEDDY (
-                ch_vcf_tbi_per_region,
-                ch_samplesheet_pedfile
-            )
-            ch_versions = ch_versions.mix(PEDDY.out.versions.first())
-        }
-
         // Sort and publish
         BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
@@ -426,6 +418,17 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
+        if (!params.skip_peddy) {
+
+            ch_samplesheet_pedfile
+                .map { meta, ped -> [ ped ] }
+                .set { ch_samplesheet_pedfile_no_meta }
+            PEDDY (
+                ch_vcf_tbi_per_region,
+                ch_samplesheet_pedfile_no_meta
+            )
+            ch_versions = ch_versions.mix(PEDDY.out.versions.first())
+        }
     }
     //
     // Filter SNVs
