@@ -53,6 +53,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_peddy": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip peddy",
+                    "default": false
+                },
                 "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",

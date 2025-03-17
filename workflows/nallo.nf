@@ -52,6 +52,7 @@ include { BCFTOOLS_SORT                                     } from '../modules/n
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { TABIX_TABIX as TABIX_SVDB_MERGE_SVS_CNVS          } from '../modules/nf-core/tabix/tabix/main'
@@ -123,7 +124,7 @@ workflow NALLO {
     //
     if (!params.skip_alignment) {
 
-        // Prepeare references
+        // Prepare references
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
@@ -159,7 +160,7 @@ workflow NALLO {
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
             // If there are multiple files per sample, each file has the same meta so failOnDuplicate fails here.
-            // The end result is fine, but it might be worth to e.g. give each file a non-indentical meta,
+            // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
             // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
             .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
             .map {
@@ -205,7 +206,7 @@ workflow NALLO {
             .set { ch_samplesheet_pedfile }
 
         //
-        // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
+        // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
         //
         BAM_INFER_SEX (
             bam_infer_sex_in,
@@ -399,6 +400,14 @@ workflow NALLO {
                 ch_bcftools_concat_in
             )
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+
+        if (!params.skip_peddy) {
+            PEDDY (
+                BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                ch_samplesheet_pedfile
+            )
+            ch_versions = ch_versions.mix(PEDDY.out.versions.first())
+        }
 
         // Sort and publish
         BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
