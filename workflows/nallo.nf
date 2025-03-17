@@ -403,7 +403,7 @@ workflow NALLO {
 
         if (!params.skip_peddy) {
             PEDDY (
-                BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                ch_vcf_tbi_per_region,
                 ch_samplesheet_pedfile
             )
             ch_versions = ch_versions.mix(PEDDY.out.versions.first())
