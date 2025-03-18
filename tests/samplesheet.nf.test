@@ -13,11 +13,13 @@ nextflow_pipeline {
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
             }
-            process {
-                withName: '.*:NALLO:PEDDY' {
-                    ext.args = { [
-                        "--sites $projectDir/assets/peddy_chr16_chrX_sites",
-                    ].join(' ') }
+            config {
+                process {
+                    withName: '.*:NALLO:PEDDY' {
+                        ext.args = { [
+                            "--sites $projectDir/assets/peddy_chr16_chrX_sites",
+                        ].join(' ') }
+                    }
                 }
             }
         }
