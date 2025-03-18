@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 - [#618](https://github.com/genomic-medicine-sweden/nallo/pull/618) - Added peddy (https://github.com/brentp/peddy)
 
 ### `Changed`
@@ -19,10 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#593](https://github.com/genomic-medicine-sweden/nallo/pull/593) - Updated local subworkflow to fix Nextflow language server issues
 - [#602](https://github.com/genomic-medicine-sweden/nallo/pull/602) - Updated the samtools/fastq module to add stub
 - [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Updated splitubam module to fix stubs
 
 ### `Removed`
 
 ### `Fixed`
+
+- [#595](https://github.com/genomic-medicine-sweden/nallo/pull/595) - Fixed unstable assembly outputs when there's multiple input files per sample
 
 ### Parameters
 

@@ -18,6 +18,7 @@ workflow ASSEMBLY {
 
         ch_reads
             .groupTuple()
+            .map { meta, reads -> [ meta, reads, [] ] }
             .set { hifiasm_in }
 
         HIFIASM ( hifiasm_in, ch_hifiasm_empty, ch_hifiasm_empty )
@@ -96,7 +97,7 @@ workflow ASSEMBLY {
             .join(paternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
             .join(maternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
             .multiMap { meta, reads, paternal_yak, maternal_yak ->
-                reads : [meta, reads                     ]
+                reads : [meta, reads, []                 ]
                 yak   : [meta, paternal_yak, maternal_yak]
             }
             .set { ch_hifiasm_in }

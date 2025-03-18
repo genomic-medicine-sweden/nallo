@@ -151,7 +151,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "6bb8be8a75d05ee6d31205b2b97d48c7bcef60ab",
+                        "git_sha": "fcab846b30baf8391257dd302feece91714769f2",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
@@ -262,7 +262,7 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ea830ec55d448a815128d33ff965e5bd27430070",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
