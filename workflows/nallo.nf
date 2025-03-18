@@ -421,10 +421,13 @@ workflow NALLO {
         if (!params.skip_peddy) {
 
             ch_samplesheet_pedfile
-                .map { meta, ped -> [ ped ] }
+                .map { _meta, ped -> [ ped ] }
                 .set { ch_samplesheet_pedfile_no_meta }
+            BCFTOOLS_SORT.out.vcf
+                .join( BCFTOOLS_SORT.out.tbi )
+                .set { ch_peddy_in }
             PEDDY (
-                ch_bcftools_stats_snv_in,
+                ch_peddy_in,
                 ch_samplesheet_pedfile_no_meta
             )
             ch_versions = ch_versions.mix(PEDDY.out.versions.first())
