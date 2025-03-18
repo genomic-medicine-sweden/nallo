@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
+    config './custom_sites.config'
 
     test("test profile") {
         tag "samplesheet"
@@ -12,11 +13,6 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
-            }
-            process {
-                withName: '.*:NALLO:PEDDY' {
-                    ext.args = "--sites $projectDir/assets/peddy_chr16_chrX_sites"
-                }
             }
         }
 
