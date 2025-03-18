@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
+    config './custom_sites.config'
 
     test("samplesheet_multisample_bam | --phaser hiphase") {
         tag "samplesheet_multisample_bam"
