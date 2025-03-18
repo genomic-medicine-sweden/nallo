@@ -424,7 +424,7 @@ workflow NALLO {
                 .map { meta, ped -> [ ped ] }
                 .set { ch_samplesheet_pedfile_no_meta }
             PEDDY (
-                ch_vcf_tbi_per_region,
+                ch_bcftools_stats_snv_in,
                 ch_samplesheet_pedfile_no_meta
             )
             ch_versions = ch_versions.mix(PEDDY.out.versions.first())
