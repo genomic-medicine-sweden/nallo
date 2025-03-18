@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="Test pipeline GENOMICMEDICINESWEDEN_NALLO" time="122.694" tests="1" skipped="0" failures="1" timestamp="2025 03 18 15:45:24"><testcase classname="Test pipeline GENOMICMEDICINESWEDEN_NALLO" name="test profile" time="122.54" status="FAILED"><failure message="Assertion failed: 
+
+2 of 2 assertions failed
+">Nextflow stdout:
+
+N E X T F L O W  ~  version 24.10.4
+Launching `/Users/annick.renevey/Projects/nallo/tests/../main.nf` [nasty_northcutt] DSL2 - revision: 9312e09cc0
+
+[0;34m                                   _                              _ _      _
+[0;34m   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+[0;34m  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+[0;34m | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+[0;34m  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+[0;34m  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+[0;34m / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+[0;34m \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+[0;34m |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+[0;34m
+[1mInput/output options[0m
+  [0;34minput                     : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/testdata/samplesheet.csv[0m
+  [0;34moutdir                    : [0;32m/Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be/output[0m
+  [0;34mpar_regions               : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/hs38.PAR.bed[0m
+  [0;34mtrgt_repeats              : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/pathogenic_repeats.hg38.bed[0m
+  [0;34mechtvar_snv_databases     : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/testdata/snp_dbs.csv[0m
+  [0;34msvdb_sv_databases         : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/testdata/svdb_dbs.csv[0m
+  [0;34mstranger_repeat_catalog   : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/variant_catalog_grch38.json[0m
+  [0;34mvariant_consequences_snvs : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/variant_consequences_v2.txt[0m
+  [0;34mvariant_consequences_svs  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/variant_consequences_v2.txt[0m
+  [0;34mvep_cache                 : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/vep_cache_test_data.tar.gz[0m
+  [0;34mtarget_regions            : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/test_data.bed[0m
+  [0;34mhificnv_expected_xy_cn    : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/expected_cn.hg38.XY.bed[0m
+  [0;34mhificnv_expected_xx_cn    : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/expected_cn.hg38.XX.bed[0m
+  [0;34mhificnv_excluded_regions  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/empty.bed[0m
+  [0;34mgenmod_reduced_penetrance : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/reduced_penetrance.tsv[0m
+  [0;34mgenmod_score_config_snvs  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/rank_model_snv.ini[0m
+  [0;34mgenmod_score_config_svs   : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/rank_model_svs.ini[0m
+  [0;34msomalier_sites            : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/somalier_sites.vcf.gz[0m
+  [0;34mtrace_report_suffix       : [0;32m2025-03-18_15-45-37[0m
+
+[1mReference genome options[0m
+  [0;34mfasta                     : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/hg38.test.fa.gz[0m
+
+[1mInstitutional config options[0m
+  [0;34mconfig_profile_name       : [0;32mTest profile[0m
+  [0;34mconfig_profile_description: [0;32mMinimal test dataset to check pipeline function[0m
+
+[1mWorkflow options[0m
+  [0;34malignment_processes       : [0;32m2[0m
+  [0;34msnv_calling_processes     : [0;32m2[0m
+  [0;34mvep_plugin_files          : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/vep_plugin_files.csv[0m
+  [0;34mfilter_variants_hgnc_ids  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/testdata/hgnc_ids.tsv[0m
+  [0;34mextra_modkit_options      : [0;32m--seed 1 --sampling-frac 0.1[0m
+  [0;34mextra_vep_options         : [0;32m--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz[0m
+  [0;34mextra_paraphase_options   : [0;32m--gene hba[0m
+  [0;34mextra_hifiasm_options     : [0;32m-f0 -k30 -w30 -D10 -r1 -N1[0m
+
+[1mCore Nextflow options[0m
+  [0;34mrunName                   : [0;32mnasty_northcutt[0m
+  [0;34mcontainerEngine           : [0;32mdocker[0m
+  [0;34mlaunchDir                 : [0;32m/Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be[0m
+  [0;34mworkDir                   : [0;32m/Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be/work[0m
+  [0;34mprojectDir                : [0;32m/Users/annick.renevey/Projects/nallo[0m
+  [0;34muserName                  : [0;32mannick.renevey[0m
+  [0;34mprofile                   : [0;32mtest,docker,arm[0m
+  [0;34mconfigFiles               : [0;32m/Users/annick.renevey/Projects/nallo/nextflow.config, /Users/annick.renevey/Projects/nallo/nextflow.config, /Users/annick.renevey/Projects/nallo/conf/test.config[0m
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+-[2m----------------------------------------------------[0m-* The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+WARN: The operator `first` is useless when applied to a value channel which returns a single value by definition
+[de/d500e5] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED (test)
+[30/60bcab] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SCATTER_GENOME:BEDTOOLS_SORT (test_data)
+Staging foreign file: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/hg38.test.fa.gz
+Staging foreign file: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/testdata/HG002_PacBio_Revio.fastq.gz
+Staging foreign file: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/reference/vep_cache_test_data.tar.gz
+[77/fe8267] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SCATTER_GENOME:BEDTOOLS_MERGE (test_data)
+[39/fdb893] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_GENOME:GUNZIP_FASTA (hg38.test.fa.gz)
+[41/391d5a] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FILES:SAMTOOLS_IMPORT (HG002_Revio)
+[42/6e661c] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SCATTER_GENOME:SPLIT_BED_CHUNKS (test_data)
+[7c/092465] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_GENOME:UNTAR_VEP_CACHE (vep_cache_test_data.tar.gz)
+[57/4bdc71] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_GENOME:SAMTOOLS_FAIDX (hg38.test.fa)
+[df/fae312] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_GENOME:MINIMAP2_INDEX
+[0d/9b1926] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:MINIMAP2_INDEX
+[15/be06f3] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM (HG002_Revio)
+[e6/a69dbc] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ASSEMBLY:HIFIASM (HG002_Revio)
+[2d/a20e5e] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio)
+[28/142696] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio)
+[19/2a2a16] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ASSEMBLY:GFASTATS (HG002_Revio)
+[79/b04709] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ASSEMBLY:GFASTATS (HG002_Revio)
+[09/923a0a] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE (HG002_Revio)
+[4f/416980] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:MINIMAP2_ALIGN (HG002_Revio)
+[f3/564736] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:MINIMAP2_ALIGN (HG002_Revio)
+[7f/75e87c] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:PARAPHASE (HG002_Revio)
+[d9/b8aebe] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:SEVERUS (HG002_Revio)
+[2e/b335e1] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:QC_ALIGNED_READS:FASTQC (HG002_Revio)
+[af/678217] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:QC_ALIGNED_READS:CRAMINO (HG002_Revio)
+[96/aa297d] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:QC_ALIGNED_READS:MOSDEPTH (HG002_Revio)
+[0c/033a21] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT (HG002_Revio)
+[a2/6fb81e] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:SAMTOOLS_VIEW (HG002_Revio)
+[cc/179e9f] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:SAMTOOLS_VIEW (HG002_Revio)
+[cf/d93327] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:ADD_FOUND_IN_TAG (HG002_Revio)
+[8f/72b87a] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:MERGE_JSON (HG002_Revio)
+[be/efcdc0] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:BCFTOOLS_QUERY (HG002_Revio)
+[24/c7d739] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:TAGBAM (HG002_Revio)
+[1c/27e3dd] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE (test)
+[3f/213a43] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SOMALIER_PED_FAMILY (FAM)
+[b8/c168db] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:BCFTOOLS_QUERY (HG002_Revio)
+[cc/61a31e] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:CREATE_SAMPLES_HAPLOTYPES_FILE (HG002_Revio)
+[65/f9e5d8] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:TAGBAM (HG002_Revio)
+[31/be3207] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:CREATE_SAMPLES_FILE (HG002_Revio)
+[3c/4de94d] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:BCFTOOLS_REHEADER (HG002_Revio)
+[8f/a5e839] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:ALIGN_ASSEMBLIES:SAMTOOLS_MERGE (HG002_Revio)
+[d5/ce5e0c] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:BCFTOOLS_MERGE_PER_SAMPLE (HG002_Revio)
+[d5/c255d6] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:BCFTOOLS_REHEADER (HG002_Revio)
+[ef/ed91b6] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:SNIFFLES (HG002_Revio)
+[d1/983826] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)
+[58/8f1560] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)
+[d1/983826] NOTE: Process `GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)` terminated with an error exit status (134) -- Execution is retried (1)
+[58/8f1560] NOTE: Process `GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)` terminated with an error exit status (134) -- Execution is retried (1)
+[4a/3a25b1] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_PARALOGS:BCFTOOLS_MERGE_PER_FAMILY (FAM)
+[26/854c6e] Submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:CALL_SVS:CLEAN_SNIFFLES (HG002_Revio)
+[2f/451dc9] Re-submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)
+[40/d9d19e] Re-submitted process &gt; GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)
+ERROR ~ Error executing process &gt; 'GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)'
+
+Caused by:
+  Process `GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT (HG002_Revio)` terminated with an error exit status (134)
+
+
+Command executed:
+
+  /opt/deepvariant/bin/run_deepvariant \
+      --ref=hg38.test.fa \
+      --reads=HG002_Revio_aligned.bam \
+      --output_vcf=HG002_Revio_1.bed_deepvariant.vcf.gz \
+      --output_gvcf=HG002_Revio_1.bed_deepvariant.g.vcf.gz \
+      --sample_name=HG002_Revio --model_type=PACBIO -vcf_stats_report=False --haploid_contigs="chrX,chrY" \
+      --regions=1.bed \
+      --par_regions_bed=hs38.PAR.bed \
+      --intermediate_results_dir=tmp \
+      --num_shards=4
+  
+  cat &lt;&lt;-END_VERSIONS &gt; versions.yml
+  "GENOMICMEDICINESWEDEN_NALLO:NALLO:SHORT_VARIANT_CALLING:DEEPVARIANT_RUNDEEPVARIANT":
+      deepvariant: $(echo $(/opt/deepvariant/bin/run_deepvariant --version) | sed 's/^.*version //; s/ .*$//' )
+  END_VERSIONS
+
+Command exit status:
+  134
+
+Command output:
+  (empty)
+
+Command error:
+  The TensorFlow library was compiled to use AVX instructions, but these aren't available on your machine.
+  /opt/deepvariant/bin/run_deepvariant: line 2:    37 Aborted                 python3 -u /opt/deepvariant/bin/run_deepvariant.py "$@"
+
+Work dir:
+  /Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be/work/2f/451dc9eb06104fc49dfbe5043b5d8a
+
+Container:
+  docker.io/google/deepvariant:1.8.0
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '/Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be/meta/nextflow.log' file for details
+ERROR ~ Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting
+
+ -- Check '/Users/annick.renevey/Projects/nallo/.nf-test/tests/9939b772b9596ca8b9d586cc917659be/meta/nextflow.log' file for details
+-[0;35m[genomic-medicine-sweden/nallo][0;31m Pipeline completed with errors[0m-
+WARN: Killing running tasks (1)
+Join mismatch for the following entries: key=[id:HG002_Revio, family_id:FAM, paternal_id:0, maternal_id:0, sex:1, phenotype:2, project:test, single_end:true] values=
+
+
+Join mismatch for the following entries: key=[id:HG002_Revio, family_id:FAM, paternal_id:0, maternal_id:0, sex:1, phenotype:2, project:test, single_end:true] values=
+
+
+Join mismatch for the following entries: key=[id:HG002_Revio, family_id:FAM, paternal_id:0, maternal_id:0, sex:1, phenotype:2, project:test, single_end:true] values=
+
+
+Join mismatch for the following entries: key=[id:FAM] values=
+
+
+Join mismatch for the following entries: key=[id:FAM] values=
+
+
+Nextflow stderr:
+
+[33mNextflow 24.10.5 is available - Please consider updating your version to it[m
+</failure></testcase></testsuite></testsuites>
