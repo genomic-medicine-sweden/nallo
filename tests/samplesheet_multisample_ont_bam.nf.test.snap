@@ -558,8 +558,8 @@
             [
                 "HG002_ONT_A_haplotype_1.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
                 "HG002_ONT_A_haplotype_2.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
-                "HG002_ONT_B_haplotype_1.assembly_summary:md5,cb2280cb3895ebbe29093ed9603e81d2",
-                "HG002_ONT_B_haplotype_2.assembly_summary:md5,fce697aa7c3c739eff6023b73fd2b382",
+                "HG002_ONT_B_haplotype_1.assembly_summary:md5,563bf25ae45f1f2b1d654dba508565cf",
+                "HG002_ONT_B_haplotype_2.assembly_summary:md5,28835c2b317c19c53d20eaa6cf7ae6a6",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,a833ab3d48e7f94372edbefe8ca99e59",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a0c5a1faaf0373a58f97302b977e5595",
                 "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,7c645581ccb6a55046d11f9a6f4b0d4a",
@@ -642,7 +642,7 @@
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "1eec67256dd70aaa8d6272b6bea5fb42"
+                    "6fbb9538b134415a33ae501fbee7a375"
                 ],
                 [
                     "HG002_ONT_A.paraphase.bam",
@@ -743,6 +743,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-03T16:57:29.462467053"
+        "timestamp": "2025-03-04T16:25:34.44185882"
     }
 }
