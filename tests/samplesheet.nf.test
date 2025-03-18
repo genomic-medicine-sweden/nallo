@@ -17,9 +17,7 @@ nextflow_pipeline {
         config {
             process {
                 withName: '.*:NALLO:PEDDY' {
-                    ext.args = { [
-                        "--sites $projectDir/assets/peddy_chr16_chrX_sites",
-                    ].join(' ') }
+                    ext.args = "--sites $projectDir/assets/peddy_chr16_chrX_sites"
                 }
             }
         }
