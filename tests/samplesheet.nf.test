@@ -3,7 +3,6 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
-    config './custom_sites.config'
 
     test("test profile") {
         tag "samplesheet"
