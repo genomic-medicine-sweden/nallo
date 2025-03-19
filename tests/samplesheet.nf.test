@@ -12,6 +12,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c7e99d0b2a366c606a5b3e5626b36e727c794a91/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
+                peddy_sites                  = params.pipelines_testdata_base_path + 'reference/peddy.site'
             }
         }
 
