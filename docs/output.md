@@ -125,6 +125,19 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/somalier/relate/{project}/{project}.pairs.tsv`   | Information about sample pairs                         |
 | `qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples                   |
 
+### Peddy
+
+[peddy](https://github.com/brentp/peddy) checks relatedness and sex.
+
+| Path                              | Description                                                                                                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `qc/peddy/{family).peddy.ped`     | PED file updated with peddy-inferred sex per family                                                                                                                            |
+| `qc/peddy/{family}.html`          | HTML report                                                                                                                                                                    |
+| `qc/peddy/{family}.vs.html`       | HTML report of observed vs expected relatedness                                                                                                                                |
+| `qc/peddy/{family}.sex_check.csv` | Comparison between reported sex (ped file) and that inferred from peddy                                                                                                        |
+| `qc/peddy/{family}.het_check.csv` | Het check does general QC including rate of het calls, allele-balance at het calls, mean and median depth, and a PCA projection onto thousand genomes. Incudes ancestry check. |
+| `qc/peddy/{family}.ped_check.csv` | Ped check compares the relatedness of 2 samples as reported in a .ped file to the relatedness inferred from the genotypes and ~25K sites in the genome.                        |
+
 ### DeepVariant
 
 `vcf_stats_report.py` from [DeepVariant](https://github.com/google/deepvariant) is used to generate a html report per sample.
