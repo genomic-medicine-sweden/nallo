@@ -264,6 +264,13 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "peddy_sites": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                    "description": "A VCF of known polymorphic sites for peddy",
+                    "default": "hg38",
+                    "exists": true
+                },
                 "modules_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
