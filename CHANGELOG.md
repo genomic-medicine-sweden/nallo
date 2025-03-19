@@ -40,8 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool  | Old version | New version |
+| ----- | ----------- | ----------- |
+| Peddy |             | 0.4.8       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
