@@ -64,7 +64,7 @@ workflow ASSEMBLY {
             }
         .set{ ch_samples }
 
-        // We keep using kid_meta for the parental reads, since they need to go toghether into hifiasm
+        // We keep using kid_meta for the parental reads, since they need to go together into hifiasm
         trio_kids = ch_samples.is_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
         trio_dads = ch_samples.is_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
         trio_moms = ch_samples.is_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
@@ -119,10 +119,10 @@ workflow ASSEMBLY {
         'fasta',
         '',
         '',
-        [],
-        [],
-        [],
-        []
+        [[],[]],
+        [[],[]],
+        [[],[]],
+        [[],[]]
     )
     ch_versions = ch_versions.mix(GFASTATS.out.versions)
 

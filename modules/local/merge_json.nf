@@ -18,7 +18,6 @@ process MERGE_JSON {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     merge_json_sample_files_into_family.py \\
