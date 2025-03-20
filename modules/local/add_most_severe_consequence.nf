@@ -42,7 +42,7 @@ process ADD_MOST_SEVERE_CSQ {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        add_most_severe_consequence: 1.0
+        add_most_severe_consequence: 1.1
         python: \$(python --version | sed 's/Python //g')
     END_VERSIONS
     """
