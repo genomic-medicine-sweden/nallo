@@ -119,10 +119,10 @@ workflow ASSEMBLY {
         'fasta',
         '',
         '',
-        [],
-        [],
-        [],
-        []
+        [[],[]],
+        [[],[]],
+        [[],[]],
+        [[],[]]
     )
     ch_versions = ch_versions.mix(GFASTATS.out.versions)
 
