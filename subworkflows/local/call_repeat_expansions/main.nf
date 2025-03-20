@@ -1,12 +1,13 @@
-include { ADD_FOUND_IN_TAG                         } from '../../../modules/local/add_found_in_tag/main'
-include { TRGT_GENOTYPE                            } from '../../../modules/nf-core/trgt/genotype/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT    } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT      } from '../../../modules/nf-core/samtools/sort/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT      } from '../../../modules/nf-core/bcftools/sort/main'
-include { TRGT_MERGE                               } from '../../../modules/nf-core/trgt/merge/main'
-include { BCFTOOLS_INDEX                           } from '../../../modules/nf-core/bcftools/index/main'
-include { STRDUST                                  } from '../../../modules/nf-core/strdust/'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST } from '../../../modules/nf-core/bcftools/merge/'
+include { TRGT_GENOTYPE                                } from '../../../modules/nf-core/trgt/genotype/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT        } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT          } from '../../../modules/nf-core/samtools/sort/main'
+include { ADD_FOUND_IN_TAG as ADD_FOUND_IN_TAG_TRGT    } from '../../../modules/local/add_found_in_tag/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT          } from '../../../modules/nf-core/bcftools/sort/main'
+include { TRGT_MERGE                                   } from '../../../modules/nf-core/trgt/merge/main'
+include { BCFTOOLS_INDEX                               } from '../../../modules/nf-core/bcftools/index/main'
+include { STRDUST                                      } from '../../../modules/nf-core/strdust/'
+include { ADD_FOUND_IN_TAG as ADD_FOUND_IN_TAG_STRDUST } from '../../../modules/local/add_found_in_tag/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST     } from '../../../modules/nf-core/bcftools/merge/'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -51,13 +52,13 @@ workflow CALL_REPEAT_EXPANSIONS {
         ch_versions = ch_versions.mix(SAMTOOLS_INDEX_TRGT.out.versions)
 
         // Add FOUND_IN=TRGT tag
-        ADD_FOUND_IN_TAG (
+        ADD_FOUND_IN_TAG_TRGT (
             TRGT_GENOTYPE.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
             "TRGT"
         )
 
         // Sort and index bcf
-        BCFTOOLS_SORT_TRGT ( ADD_FOUND_IN_TAG.out.vcf )
+        BCFTOOLS_SORT_TRGT ( ADD_FOUND_IN_TAG_TRGT.out.vcf )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT_TRGT.out.versions)
 
         BCFTOOLS_SORT_TRGT.out.vcf
@@ -94,13 +95,13 @@ workflow CALL_REPEAT_EXPANSIONS {
         )
         ch_versions.mix(STRDUST.out.versions)
 
-        ADD_FOUND_IN_TAG (
+        ADD_FOUND_IN_TAG_STRDUST (
             STRDUST.out.vcf.join(STRDUST.out.tbi),
             "STRdust"
         )
 
-        ADD_FOUND_IN_TAG.out.vcf
-            .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
+        ADD_FOUND_IN_TAG_STRDUST.out.vcf
+            .join(ADD_FOUND_IN_TAG_STRDUST.out.tbi, failOnDuplicate: true, failOnMismatch: true)
             .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
             .groupTuple()
             .set { ch_bcftools_merge_in }
@@ -113,8 +114,8 @@ workflow CALL_REPEAT_EXPANSIONS {
         )
         ch_versions = ch_versions.mix(BCFTOOLS_MERGE_STRDUST.out.versions)
 
-        ch_sample_vcf  = ch_sample_vcf.mix(ADD_FOUND_IN_TAG.out.vcf)
-        ch_sample_tbi  = ch_sample_tbi.mix(ADD_FOUND_IN_TAG.out.tbi)
+        ch_sample_vcf  = ch_sample_vcf.mix(ADD_FOUND_IN_TAG_STRDUST.out.vcf)
+        ch_sample_tbi  = ch_sample_tbi.mix(ADD_FOUND_IN_TAG_STRDUST.out.tbi)
         ch_family_vcf  = ch_family_vcf.mix(BCFTOOLS_MERGE_STRDUST.out.vcf)
         ch_family_tbi  = ch_family_tbi.mix(BCFTOOLS_MERGE_STRDUST.out.index)
     }
