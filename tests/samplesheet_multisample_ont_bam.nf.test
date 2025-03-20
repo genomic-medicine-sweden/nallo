@@ -3,14 +3,13 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
-    config './custom_sites.config'
 
     test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs") {
         tag "samplesheet_multisample_ont_bam"
 
         when {
             params {
-                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c7e99d0b2a366c606a5b3e5626b36e727c794a91/'
                 input                          = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                         = "$outputDir"
                 preset                         = 'ONT_R10'

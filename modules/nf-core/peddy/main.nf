@@ -9,7 +9,8 @@ process PEDDY {
 
     input:
     tuple val(meta), path(vcf), path(vcf_tbi)
-    path ped
+    tuple val(meta2), path(ped)
+    tuple val(meta3), path(sites_file)
 
     output:
     tuple val(meta), path("*.html")     , emit: html
@@ -24,9 +25,13 @@ process PEDDY {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def sites = sites_file ? "--sites ${sites_file}" : ''
+    if (sites_file && args.contains('--sites')) error "--sites in args can't be used at the same time as sites"
+    
     """
     peddy \\
         $args \\
+        $sites \\
         --prefix $prefix \\
         --plot \\
         -p $task.cpus \\

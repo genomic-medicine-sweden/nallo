@@ -97,6 +97,7 @@ workflow NALLO {
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
 
@@ -420,17 +421,14 @@ workflow NALLO {
 
         if (!params.skip_peddy) {
 
-            ch_samplesheet_pedfile
-                .map { _meta, ped -> ped }
-                .set { ch_samplesheet_pedfile_no_meta }
-
             BCFTOOLS_SORT.out.vcf
                 .join( BCFTOOLS_SORT.out.tbi )
                 .set { ch_peddy_in }
 
             PEDDY (
                 ch_peddy_in,
-                ch_samplesheet_pedfile_no_meta
+                ch_samplesheet_pedfile,
+                ch_peddy_sites
             )
             ch_versions = ch_versions.mix(PEDDY.out.versions)
         }

@@ -266,9 +266,8 @@
                 },
                 "peddy_sites": {
                     "type": "string",
-                    "description": "A VCF of known polymorphic sites for peddy",
-                    "default": "hg38",
-                    "exists": true
+                    "format": "file-path",
+                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
                 },
                 "modules_testdata_base_path": {
                     "type": "string",
