@@ -104,6 +104,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
 | `sv_caller` | From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`). | `string` | severus |  |  |
+| `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). | `string` | trgt |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active. | `string` |  |  |  |
