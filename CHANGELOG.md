@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
 
 ### `Changed`
 
@@ -34,8 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter  |
+| ------------- | -------------- |
+|               | `--str_caller` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -49,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | gfastats                    | 1.3.6       | 1.3.10      |
 | add_most_severe_consequence | 1.0         | 1.1         |
 | add_most_severe_pli         | 1.0         | 1.1         |
+| strdust                     |             | 0.11.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
