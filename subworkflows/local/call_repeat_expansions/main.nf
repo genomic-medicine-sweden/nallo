@@ -1,12 +1,12 @@
-include { ADD_FOUND_IN_TAG                       } from '../../../modules/local/add_found_in_tag/main'
-include { TRGT_GENOTYPE                          } from '../../../modules/nf-core/trgt/genotype/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT  } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT    } from '../../../modules/nf-core/samtools/sort/main'
-include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT    } from '../../../modules/nf-core/bcftools/sort/main'
-include { TRGT_MERGE                             } from '../../../modules/nf-core/trgt/merge/main'
-include { BCFTOOLS_INDEX                         } from '../../../modules/nf-core/bcftools/index/main'
-include { STRDUST                                } from '../../../modules/nf-core/strdust/'
-include { BCFTOOLS_MERGE                         } from '../../../modules/bcftools/merge/'
+include { ADD_FOUND_IN_TAG                         } from '../../../modules/local/add_found_in_tag/main'
+include { TRGT_GENOTYPE                            } from '../../../modules/nf-core/trgt/genotype/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_TRGT    } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_SORT as SAMTOOLS_SORT_TRGT      } from '../../../modules/nf-core/samtools/sort/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT      } from '../../../modules/nf-core/bcftools/sort/main'
+include { TRGT_MERGE                               } from '../../../modules/nf-core/trgt/merge/main'
+include { BCFTOOLS_INDEX                           } from '../../../modules/nf-core/bcftools/index/main'
+include { STRDUST                                  } from '../../../modules/nf-core/strdust/'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST } from '../../../modules/bcftools/merge/'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -105,7 +105,7 @@ workflow CALL_REPEAT_EXPANSIONS {
             .groupTuple()
             .set { ch_bcftools_merge_in }
 
-        BCFTOOLS_MERGE (¨
+        BCFTOOLS_MERGE_STRDUST (
             ch_bcftools_merge_in,
             [ [], [] ],
             [ [], [] ],
