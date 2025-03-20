@@ -6,7 +6,7 @@ include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT      } from '../../../modules/nf-c
 include { TRGT_MERGE                               } from '../../../modules/nf-core/trgt/merge/main'
 include { BCFTOOLS_INDEX                           } from '../../../modules/nf-core/bcftools/index/main'
 include { STRDUST                                  } from '../../../modules/nf-core/strdust/'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST } from '../../../modules/bcftools/merge/'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST } from '../../../modules/nf-core/bcftools/merge/'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -111,11 +111,12 @@ workflow CALL_REPEAT_EXPANSIONS {
             [ [], [] ],
             [ [], [] ]
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
+        ch_versions = ch_versions.mix(BCFTOOLS_MERGE_STRDUST.out.versions)
+
         ch_sample_vcf  = ch_sample_vcf.mix(ADD_FOUND_IN_TAG.out.vcf)
         ch_sample_tbi  = ch_sample_tbi.mix(ADD_FOUND_IN_TAG.out.tbi)
-        ch_family_vcf  = ch_family_vcf.mix(BCFTOOLS_MERGE.out.vcf)
-        ch_family_tbi  = ch_family_tbi.mix(BCFTOOLS_INDEX.out.tbi)
+        ch_family_vcf  = ch_family_vcf.mix(BCFTOOLS_MERGE_STRDUST.out.vcf)
+        ch_family_tbi  = ch_family_tbi.mix(BCFTOOLS_MERGE_STRDUST.out.index)
     }
 
     emit:
