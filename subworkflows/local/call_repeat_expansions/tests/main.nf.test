@@ -31,7 +31,7 @@ nextflow_workflow {
             }
     }
 
-    test("[bam, bai], fasta, fai, bed") {
+    test("[bam, bai], fasta, fai, bed - TRGT") {
 
         when {
             workflow {
@@ -47,6 +47,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = 'trgt'
                 """
             }
         }
@@ -66,7 +67,40 @@ nextflow_workflow {
 
     }
 
-    test("[bam, bai], fasta, fai, bed - stub") {
+    test("[bam, bai], fasta, fai, bed - STRdust") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = Channel.of([
+                    [ id: 'pathogenic_repeats' ],
+                    file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
+                ])
+                input[4] = 'strdust'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("[bam, bai], fasta, fai, bed - TRGT - stub") {
 
         options "-stub"
 
@@ -84,6 +118,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = 'trgt'
                 """
             }
         }
@@ -95,5 +130,35 @@ nextflow_workflow {
             )
         }
 
+    }
+
+    test("[bam, bai], fasta, fai, bed - STRdust - stub") {
+
+        options '-stub'
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = Channel.of([
+                    [ id: 'pathogenic_repeats' ],
+                    file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
+                ])
+                input[4] = 'strdust'
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
     }
 }
