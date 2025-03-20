@@ -593,7 +593,8 @@ workflow NALLO {
             PHASING.out.haplotagged_bam_bai,
             ch_fasta,
             ch_fai,
-            ch_trgt_bed
+            ch_trgt_bed,
+            params.str_caller
         )
         ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
     }
