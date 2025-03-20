@@ -457,6 +457,12 @@
                     "description": "From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`).",
                     "enum": ["severus", "sniffles"]
                 },
+                "str_caller": {
+                    "type": "string",
+                    "default": "trgt",
+                    "description": "Which caller to use for short tandem repeat expansions (TRGT or STRdust).",
+                    "enum": ["trgt", "strdust"]
+                },
                 "phaser": {
                     "type": "string",
                     "default": "longphase",
