@@ -213,10 +213,10 @@ Turned off with `--skip_methylation_pileups`.
 
 This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:
 
-| Parameter      | Description                                                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)) |
-| `str_caller`   | The tool to be used for repeat calling. `trgt` for TRGT (default for presets `revio`, `pacbio`, disallowed with `ONT_R10`) or `strdust` for STRdust (default for preset `ONT_R10`)          |
+| Parameter    | Description                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `str_bed`    | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)) |
+| `str_caller` | The tool to be used for repeat calling. `trgt` for TRGT (default for presets `revio`, `pacbio`, disallowed with `ONT_R10`) or `strdust` for STRdust (default for preset `ONT_R10`)          |
 
 Turned off with `--skip_repeat_calling`.
 

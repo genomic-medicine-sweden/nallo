@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added `--str_caller` parameter
 
 ### `Changed`
 
@@ -23,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Updated splitubam module to fix stubs
 - [#619](https://github.com/genomic-medicine-sweden/nallo/pull/619) - Updated gfastats to fix Nextflow language server issues
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default iff repeat expansions were called with TRGT.
 
 ### `Removed`
 
@@ -35,9 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter  |
-| ------------- | -------------- |
-|               | `--str_caller` |
+| Old parameter    | New parameter  |
+| ---------------- | -------------- |
+|                  | `--str_caller` |
+| `--trgt_repeats` | `--str_bed`    |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

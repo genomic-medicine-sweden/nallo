@@ -157,7 +157,7 @@
                     "pattern": "^\\S+\\.bed$",
                     "exists": true
                 },
-                "trgt_repeats": {
+                "str_bed": {
                     "type": "string",
                     "description": "A BED file with repeats to be genotyped with TRGT",
                     "format": "file-path",

@@ -37,7 +37,7 @@ Define where the pipeline should find input data and save output data.
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `par_regions` | Provide a bed file of chrX and chrY PAR regions for DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
-| `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
+| `str_bed` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
 | `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
