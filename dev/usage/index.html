@@ -1316,7 +1316,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <li>Supply the samplesheet, reference files and run the pipeline</li>
 </ol>
 <h2 id="samplesheet">Samplesheet</h2>
-<p>First, you will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.</p>
+<p>First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--input<span class="w"> </span><span class="s1">&#39;[path to samplesheet file]&#39;</span>
 </span></code></pre></div>
 <p>It has to be a comma-separated file with seven columns and a header row, as shown in the example below:</p>
@@ -1376,7 +1376,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </ul>
 </div>
 <h2 id="subworkflows">Subworkflows</h2>
-<p>As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworklows are active, and thus all mandatory input files are required.</p>
+<p>As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.</p>
 <h3 id="required-parameters">Required parameters</h3>
 <p>The only mandatory parameters for all subworkflows are the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
 <p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will would to guide you through which files are required:</p>
@@ -1572,7 +1572,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored_indels</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echvtvar and <code>--echtvar_snv_databases</code>.</p>
+<p>Optionally, to calculate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored_indels</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echtvar and <code>--echtvar_snv_databases</code>.</p>
 </div>
 <p>Turned off with <code>--skip_snv_annotation</code>.</p>
 <h3 id="rank-snvs-and-indels">Rank SNVs and INDELs</h3>
@@ -1701,7 +1701,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.</p>
 <p>First, go to the <a href="https://github.com/genomic-medicine-sweden/nallo/releases">genomic-medicine-sweden/nallo releases page</a> and find the latest pipeline version - numeric only (eg. <code>0.2.0</code>). Then specify this when running the pipeline with <code>-r</code> (one hyphen) - eg. <code>-r 0.2.0</code>. Of course, you can switch to another version by changing the number after the <code>-r</code> flag.</p>
 <p>This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.</p>
-<p>To further assist in reproducbility, you can use share and re-use <a href="#running-the-pipeline">parameter files</a> to repeat pipeline runs with the same settings without having to write out a command with every single parameter.</p>
+<p>To further assist in reproducibility, you can use share and re-use <a href="#running-the-pipeline">parameter files</a> to repeat pipeline runs with the same settings without having to write out a command with every single parameter.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.</p>
@@ -1717,7 +1717,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>The pipeline also dynamically loads configurations from <a href="https://github.com/nf-core/configs">https://github.com/nf-core/configs</a> when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the <a href="https://github.com/nf-core/configs#documentation">nf-core/configs documentation</a>.</p>
 <p>Note that multiple profiles can be loaded, for example: <code>-profile test,docker</code> - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.</p>
-<p>If <code>-profile</code> is not specified, the pipeline will run locally and expect all software to be installed and available on the <code>PATH</code>. This is <em>not</em> recommended, since it can lead to different results on different machines dependent on the computer enviroment.</p>
+<p>If <code>-profile</code> is not specified, the pipeline will run locally and expect all software to be installed and available on the <code>PATH</code>. This is <em>not</em> recommended, since it can lead to different results on different machines dependent on the computer environment.</p>
 <ul>
 <li><code>test</code></li>
 <li>A profile with a complete configuration for automated testing</li>
