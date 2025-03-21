@@ -31,7 +31,7 @@
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
 - Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
-- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
+- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only) or [STRdust](https://github.com/wdecoster/STRdust)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
 
 ##### Phasing and methylation
