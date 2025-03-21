@@ -106,8 +106,8 @@
     },
     "[bam, bai], fasta, fai, bed - STRdust": {
         "content": [
-            "32e3c59f20cb0d43886a95edd73b5004",
-            "32e3c59f20cb0d43886a95edd73b5004",
+            "8590f632be561008e1f40352b44080c9",
+            "8590f632be561008e1f40352b44080c9",
             [
                 "versions.yml:md5,22da68238d6ec5972c28237b86f00697"
             ]
@@ -116,7 +116,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-03-20T17:16:44.913212176"
+        "timestamp": "2025-03-21T09:40:05.562616243"
     },
     "[bam, bai], fasta, fai, bed - TRGT - stub": {
         "content": [
