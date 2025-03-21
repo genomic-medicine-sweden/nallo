@@ -154,7 +154,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Repeats
 
-[TRGT](https://github.com/PacificBiosciences/trgt) and [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
+[TRGT](https://github.com/PacificBiosciences/trgt) or [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
 
 | Path                                                   | Description                               | TRGT (Call repeats only) | TRGT (Call & annotate repeats) | STRdust (Call repeats only) |
 | ------------------------------------------------------ | ----------------------------------------- | ------------------------ | ------------------------------ | --------------------------- |

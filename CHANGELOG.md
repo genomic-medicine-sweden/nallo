@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#619](https://github.com/genomic-medicine-sweden/nallo/pull/619) - Updated gfastats to fix Nextflow language server issues
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
-- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default iff repeat expansions were called with TRGT.
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
 
 ### `Removed`
 
