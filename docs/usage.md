@@ -84,7 +84,7 @@ This pipeline comes with three different presets that should be set with the `--
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_genome_assembly` and `--skip_repeat_wf` will be set to `true` for `ONT_R10`
+    - `--skip_genome_assembly` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
 ## Subworkflows
@@ -216,6 +216,7 @@ This subworkflow requires haplotagged BAM files, and such relies on aligment, SN
 | Parameter      | Description                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `trgt_repeats` | a BED file with tandem repeats matching your reference genome (e.g. [pathogenic_repeats.hg38.bed](https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed)) |
+| `str_caller`   | The tool to be used for repeat calling. `trgt` for TRGT (default for presets `revio`, `pacbio`, disallowed with `ONT_R10`) or `strdust` for STRdust (default for preset `ONT_R10`)          |
 
 Turned off with `--skip_repeat_calling`.
 
