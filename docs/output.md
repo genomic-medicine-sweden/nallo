@@ -154,16 +154,16 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Repeats
 
-[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
+[TRGT](https://github.com/PacificBiosciences/trgt) and [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
 
-| Path                                                            | Description                               | Call repeats       | Call & annotate repeats |
-| --------------------------------------------------------------- | ----------------------------------------- | ------------------ | ----------------------- |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                | :white_check_mark: |                         |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     | :white_check_mark: |                         |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     | :white_check_mark: | :white_check_mark:      |
+| Path                                                   | Description                               | Call repeats       | Call & annotate repeats |
+| ------------------------------------------------------ | ----------------------------------------- | ------------------ | ----------------------- |
+| `repeats/family/{family}/{family}_repeats.vcf.gz`      | Merged VCF file per family                | :white_check_mark: |                         |
+| `repeats/family/{family}/{family}_repeats.vcf.gz.tbi`  | Index of the VCF file                     | :white_check_mark: |                         |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`       | VCF file with called repeats for a sample | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`   | Index of the VCF file                     | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bam` | BAM file with sorted spanning reads       | :white_check_mark: | :white_check_mark:      |
+| `repeats/sample/{sample}/{sample}_spanning_sorted.bai` | Index of the BAM file                     | :white_check_mark: | :white_check_mark:      |
 
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
