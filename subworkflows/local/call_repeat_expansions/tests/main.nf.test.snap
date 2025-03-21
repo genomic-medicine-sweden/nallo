@@ -106,8 +106,8 @@
     },
     "[bam, bai], fasta, fai, bed - STRdust": {
         "content": [
-            "8590f632be561008e1f40352b44080c9",
-            "8590f632be561008e1f40352b44080c9",
+            "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]",
+            "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]",
             [
                 "versions.yml:md5,22da68238d6ec5972c28237b86f00697"
             ]
@@ -116,7 +116,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-03-21T09:40:05.562616243"
+        "timestamp": "2025-03-21T09:52:28.245228359"
     },
     "[bam, bai], fasta, fai, bed - TRGT - stub": {
         "content": [
