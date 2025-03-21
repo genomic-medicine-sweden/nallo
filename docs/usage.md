@@ -84,7 +84,7 @@ This pipeline comes with three different presets that should be set with the `--
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_genome_assembly` will be set to `true` for `ONT_R10`
+    - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
 ## Subworkflows
