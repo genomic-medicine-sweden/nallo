@@ -13,7 +13,7 @@ workflow RANK_VARIANTS {
     take:
     ch_vcf                       // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_ped                       // channel: [mandatory] [ val(meta), path(ped) ]
-    ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
+    ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(penetrance) ]
     ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
