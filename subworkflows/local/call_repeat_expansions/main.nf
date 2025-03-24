@@ -5,9 +5,6 @@ include { ADD_FOUND_IN_TAG as ADD_FOUND_IN_TAG_TRGT    } from '../../../modules/
 include { BCFTOOLS_SORT as BCFTOOLS_SORT_TRGT          } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE                                   } from '../../../modules/nf-core/trgt/merge/main'
 include { BCFTOOLS_INDEX                               } from '../../../modules/nf-core/bcftools/index/main'
-include { STRDUST                                      } from '../../../modules/nf-core/strdust/'
-include { ADD_FOUND_IN_TAG as ADD_FOUND_IN_TAG_STRDUST } from '../../../modules/local/add_found_in_tag/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_STRDUST     } from '../../../modules/nf-core/bcftools/merge/'
 
 workflow CALL_REPEAT_EXPANSIONS {
 
@@ -86,38 +83,6 @@ workflow CALL_REPEAT_EXPANSIONS {
         ch_sample_bam  = ch_sample_bam.mix(SAMTOOLS_SORT_TRGT.out.bam)
         ch_sample_bai  = ch_sample_bai.mix(SAMTOOLS_INDEX_TRGT.out.bai)
 
-    } else if (str_caller == "strdust"){
-        STRDUST (
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_bed
-        )
-        ch_versions.mix(STRDUST.out.versions)
-
-        ADD_FOUND_IN_TAG_STRDUST (
-            STRDUST.out.vcf.join(STRDUST.out.tbi),
-            "STRdust"
-        )
-
-        ADD_FOUND_IN_TAG_STRDUST.out.vcf
-            .join(ADD_FOUND_IN_TAG_STRDUST.out.tbi, failOnDuplicate: true, failOnMismatch: true)
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
-            .groupTuple()
-            .set { ch_bcftools_merge_in }
-
-        BCFTOOLS_MERGE_STRDUST (
-            ch_bcftools_merge_in,
-            [ [], [] ],
-            [ [], [] ],
-            [ [], [] ]
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_MERGE_STRDUST.out.versions)
-
-        ch_sample_vcf  = ch_sample_vcf.mix(ADD_FOUND_IN_TAG_STRDUST.out.vcf)
-        ch_sample_tbi  = ch_sample_tbi.mix(ADD_FOUND_IN_TAG_STRDUST.out.tbi)
-        ch_family_vcf  = ch_family_vcf.mix(BCFTOOLS_MERGE_STRDUST.out.vcf)
-        ch_family_tbi  = ch_family_tbi.mix(BCFTOOLS_MERGE_STRDUST.out.index)
     }
 
     emit:

@@ -1,36 +1,51 @@
-// TODO nf-core: If in doubt look at other nf-core/subworkflows to see how we are doing things! :)
-//               https://github.com/nf-core/modules/tree/master/subworkflows
-//               You can also ask for help via your pull request or on the #subworkflows channel on the nf-core Slack workspace:
-//               https://nf-co.re/join
-// TODO nf-core: A subworkflow SHOULD import at least two modules
-
-include { SAMTOOLS_SORT      } from '../../../modules/nf-core/samtools/sort/main'
-include { SAMTOOLS_INDEX     } from '../../../modules/nf-core/samtools/index/main'
+include { STRDUST          } from '../../../modules/nf-core/strdust/'
+include { ADD_FOUND_IN_TAG } from '../../../modules/local/add_found_in_tag/main'
+include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
 
     take:
-    // TODO nf-core: edit input (take) channels
-    ch_bam // channel: [ val(meta), [ bam ] ]
+    ch_bam_bai  // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai      // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
+    ch_versions         = Channel.empty()
 
-    ch_versions = Channel.empty()
+    STRDUST (
+        ch_bam_bai,
+        ch_fasta,
+        ch_fai,
+        ch_bed
+    )
+    ch_versions.mix(STRDUST.out.versions)
 
-    // TODO nf-core: substitute modules here for the modules of your subworkflow
+    ADD_FOUND_IN_TAG (
+        STRDUST.out.vcf.join(STRDUST.out.tbi),
+        "STRdust"
+    )
 
-    SAMTOOLS_SORT ( ch_bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
+    ADD_FOUND_IN_TAG.out.vcf
+        .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
+        .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+        .groupTuple()
+        .set { ch_bcftools_merge_in }
 
-    SAMTOOLS_INDEX ( SAMTOOLS_SORT.out.bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
+    BCFTOOLS_MERGE (
+        ch_bcftools_merge_in,
+        [ [], [] ],
+        [ [], [] ],
+        [ [], [] ]
+    )
+    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
-    // TODO nf-core: edit emitted channels
-    bam      = SAMTOOLS_SORT.out.bam           // channel: [ val(meta), [ bam ] ]
-    bai      = SAMTOOLS_INDEX.out.bai          // channel: [ val(meta), [ bai ] ]
-    csi      = SAMTOOLS_INDEX.out.csi          // channel: [ val(meta), [ csi ] ]
+    sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]
+    sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
+    family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
+    family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
+    versions    = ch_versions              // channel: [ versions.yml ]
 
-    versions = ch_versions                     // channel: [ versions.yml ]
 }
 
