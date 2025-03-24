@@ -123,7 +123,7 @@ workflow NALLO {
     //
     if (!params.skip_alignment) {
 
-        // Prepeare references
+        // Prepare references
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
@@ -159,7 +159,7 @@ workflow NALLO {
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
             // If there are multiple files per sample, each file has the same meta so failOnDuplicate fails here.
-            // The end result is fine, but it might be worth to e.g. give each file a non-indentical meta,
+            // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
             // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
             .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
             .map {
@@ -182,7 +182,7 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
-        // Combine merged with unmerged bams
+        // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
             .concat(bam_to_merge.single)
@@ -205,7 +205,7 @@ workflow NALLO {
             .set { ch_samplesheet_pedfile }
 
         //
-        // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
+        // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
         //
         BAM_INFER_SEX (
             bam_infer_sex_in,
@@ -297,8 +297,8 @@ workflow NALLO {
             .set{ ch_snv_calling_in }
 
         // This subworkflow calls SNVs with DeepVariant and outputs:
-        // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
-        // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
+        // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
+        // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         SHORT_VARIANT_CALLING (
             ch_snv_calling_in,
             ch_fasta,

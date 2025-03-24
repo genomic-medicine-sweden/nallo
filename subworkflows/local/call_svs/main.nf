@@ -20,7 +20,7 @@ workflow CALL_SVS {
     ch_versions = Channel.empty()
     ch_sv_calls = Channel.empty()
 
-    // Here, we currently want the possiblity to run multiple SV-callers
+    // Here, we currently want the possibility to run multiple SV-callers
     // even though only calls from one caller is used for annotation, ranking and filtering.
     // In the future these calls could possibly be merged.
 
