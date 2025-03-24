@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#293](https://github.com/genomic-medicine-sweden/nallo/pull/293) - Added bgzip and tabix blocks.tsv from whatshap/stats
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
