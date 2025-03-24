@@ -6,7 +6,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Aligned reads
 
-[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
 
 | Path                                    | Description                         | Alignment          | Alignment & phasing |
 | --------------------------------------- | ----------------------------------- | ------------------ | ------------------- |
@@ -20,7 +20,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Assembly
 
-[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also ouputs summary stats per haplotype.
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also outputs summary stats per haplotype.
 
 | Path                                                             | Description                                                                                       |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -156,7 +156,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                   | Description                                               |
 | ---------------------------------------------------------------------- | --------------------------------------------------------- |
-| `paraphase/sample/{sample}/*.bam`                                      | BAM file with reads from analysed regions                 |
+| `paraphase/sample/{sample}/*.bam`                                      | BAM file with reads from analyzed regions                 |
 | `paraphase/sample/{sample}/*.bai`                                      | Index of the BAM file                                     |
 | `paraphase/sample/{sample}/*.json`                                     | Summary of haplotypes and variant calls                   |
 | `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`      | VCF file per gene                                         |

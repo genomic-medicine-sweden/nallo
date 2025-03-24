@@ -184,7 +184,7 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
-        // Combine merged with unmerged bams
+        // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
             .concat(bam_to_merge.single)
@@ -299,8 +299,8 @@ workflow NALLO {
             .set{ ch_snv_calling_in }
 
         // This subworkflow calls SNVs with DeepVariant and outputs:
-        // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
-        // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
+        // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
+        // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         SHORT_VARIANT_CALLING (
             ch_snv_calling_in,
             ch_fasta,
