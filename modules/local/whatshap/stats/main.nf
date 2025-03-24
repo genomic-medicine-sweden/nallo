@@ -50,7 +50,7 @@ process WHATSHAP_STATS {
 
     """
     touch ${prefix}.stats.tsv
-    echo | gzip > ${prefix}.blocks.tsv
+    echo | gzip > ${prefix}.blocks.tsv.gz
     touch ${prefix}.blocks.tsv.gz.tbi
 
     cat <<-END_VERSIONS > versions.yml
