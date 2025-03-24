@@ -135,7 +135,7 @@
                     },
                     "gfastats": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "8bc54984b57a02c8712d48274b90c1161bf2c996",
                         "installed_by": ["modules"]
                     },
                     "glnexus": {
@@ -151,7 +151,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "6bb8be8a75d05ee6d31205b2b97d48c7bcef60ab",
+                        "git_sha": "fcab846b30baf8391257dd302feece91714769f2",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
@@ -257,12 +257,12 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ea830ec55d448a815128d33ff965e5bd27430070",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "26cdbf29e76695c7fd85e42e0015c7e96f979fe9",
+                        "git_sha": "91bd9632769793b0da3129b788fae7856ebea3ab",
                         "installed_by": ["modules"]
                     },
                     "svdb/merge": {

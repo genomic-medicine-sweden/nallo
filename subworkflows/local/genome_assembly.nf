@@ -18,6 +18,7 @@ workflow ASSEMBLY {
 
         ch_reads
             .groupTuple()
+            .map { meta, reads -> [ meta, reads, [] ] }
             .set { hifiasm_in }
 
         HIFIASM ( hifiasm_in, ch_hifiasm_empty, ch_hifiasm_empty )
@@ -51,8 +52,8 @@ workflow ASSEMBLY {
         branch_result
             .kid.map{ meta, _sample_id, reads -> [ meta, reads ] }
             // Then we join the kids, together with dads and moms
-            .join(branch_result.dad.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true)
-            .join(branch_result.mom.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true)
+            .join(branch_result.dad.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true) // failOnMismatch:true, failOnDuplicate:true ?
+            .join(branch_result.mom.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true) // failOnMismatch:true, failOnDuplicate:true ?
             // Since every sample is still a considered a kid,
             // we check if they have both parents, and is therefore a trio
             .branch{ kid_meta, kid_reads, dad_reads, mom_reads ->
@@ -91,16 +92,16 @@ workflow ASSEMBLY {
         paternal_yak_or_empty = YAK_PATERNAL.out.yak.concat(non_trio_dads)
         maternal_yak_or_empty = YAK_MATERNAL.out.yak.concat(non_trio_moms)
 
-        all_kid_reads = trio_kids.concat(non_trio_kids)
-
-        hifiasm_trio_in = all_kid_reads.join(paternal_yak_or_empty).join(maternal_yak_or_empty)
-
-        hifiasm_trio_in
+        trio_kids
+            .concat(non_trio_kids)
+            .join(paternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
+            .join(maternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
             .multiMap { meta, reads, paternal_yak, maternal_yak ->
-                reads : [meta, reads                     ]
+                reads : [meta, reads, []                 ]
                 yak   : [meta, paternal_yak, maternal_yak]
             }
             .set { ch_hifiasm_in }
+
         HIFIASM ( ch_hifiasm_in.reads, ch_hifiasm_in.yak, ch_hifiasm_empty )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
     }
@@ -118,10 +119,10 @@ workflow ASSEMBLY {
         'fasta',
         '',
         '',
-        [],
-        [],
-        [],
-        []
+        [[],[]],
+        [[],[]],
+        [[],[]],
+        [[],[]]
     )
     ch_versions = ch_versions.mix(GFASTATS.out.versions)
 

@@ -19,7 +19,7 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
     PARAPHASE.out.vcf
-        .join( PARAPHASE.out.vcf_index )
+        .join( PARAPHASE.out.vcf_index, failOnMismatch:true, failOnDuplicate:true )
         .set { paraphase_vcf_tbis }
 
     MERGE_JSON ( PARAPHASE.out.json )
@@ -39,7 +39,7 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(CREATE_SAMPLES_HAPLOTYPES_FILE.out.versions)
 
     PARAPHASE.out.vcf
-        .join( CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples )
+        .join( CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
 
@@ -48,7 +48,7 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     BCFTOOLS_REHEADER.out.vcf
-        .join( BCFTOOLS_REHEADER.out.index )
+        .join( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
         .groupTuple()
         .set { ch_bcftools_merge_in }
 
@@ -61,7 +61,7 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_SAMPLE.out.versions)
 
     BCFTOOLS_MERGE_PER_SAMPLE.out.vcf
-        .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index )
+        .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { bcftools_merge_family_in }

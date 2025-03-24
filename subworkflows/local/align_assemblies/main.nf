@@ -29,7 +29,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
     SAMTOOLS_VIEW (
-        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index),
+        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true),
         [[],[]],
         []
     )

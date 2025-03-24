@@ -53,7 +53,7 @@ Running the pipeline on real data involves three steps:
 
 ## Samplesheet
 
-First, you will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
+First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -89,7 +89,7 @@ This pipeline comes with three different presets that should be set with the `--
 
 ## Subworkflows
 
-As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworklows are active, and thus all mandatory input files are required.
+As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
 ### Required parameters
 
@@ -263,7 +263,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 !!!tip
 
-    Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored_indels`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--echtvar_snv_databases`.
+    Optionally, to calculate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored_indels`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echtvar and `--echtvar_snv_databases`.
 
 Turned off with `--skip_snv_annotation`.
 
@@ -348,6 +348,10 @@ Filtering of variants only happens if any of these three parameters is active.
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
 
+## Runtime estimates
+
+Version 0.5.1 of the pipeline processed a ~32x coverage PacBio trio (HG002, HG003, HG004) in 5h 52m using 1,033 CPUh, or HG002 only in 5h 54min using 370 CPUh, on a cluster with 68 compute nodes (dual Intel Xeon Gold 6248R, 24 cores @ 3.0GHz). This included all steps of the pipeline except filtering on HGNC IDs with `filter_vep`, which would currently add approximately 3 hours of total runtime or 3 CPUh per sample.
+
 ## Reproducibility
 
 It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
@@ -356,7 +360,7 @@ First, go to the [genomic-medicine-sweden/nallo releases page](https://github.co
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
-To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
+To further assist in reproducibility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
 !!!tip
 
@@ -379,7 +383,7 @@ The pipeline also dynamically loads configurations from [https://github.com/nf-c
 Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer enviroment.
+If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
   - A profile with a complete configuration for automated testing

@@ -9,16 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
+- [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
+- [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
 
 ### `Changed`
 
 - [#591](https://github.com/genomic-medicine-sweden/nallo/pull/591) - Updated version to 0.6.0dev
 - [#592](https://github.com/genomic-medicine-sweden/nallo/pull/592) - Updated local and nf-core modules to fix Nextflow language server issues
+- [#593](https://github.com/genomic-medicine-sweden/nallo/pull/593) - Updated local subworkflow to fix Nextflow language server issues
 - [#602](https://github.com/genomic-medicine-sweden/nallo/pull/602) - Updated the samtools/fastq module to add stub
+- [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
+- [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Updated splitubam module to fix stubs
+- [#619](https://github.com/genomic-medicine-sweden/nallo/pull/619) - Updated gfastats to fix Nextflow language server issues
 
 ### `Removed`
 
+- [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Removed args from local modules that doesn't use it
+
 ### `Fixed`
+
+- [#595](https://github.com/genomic-medicine-sweden/nallo/pull/595) - Fixed unstable assembly outputs when there's multiple input files per sample
+- [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
 
 ### Parameters
 
@@ -32,8 +44,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                        | Old version | New version |
+| --------------------------- | ----------- | ----------- |
+| gfastats                    | 1.3.6       | 1.3.10      |
+| add_most_severe_consequence | 1.0         | 1.1         |
+| add_most_severe_pli         | 1.0         | 1.1         |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.5.1 - [2025-03-10]
+
+### `Fixed`
+
+[#607](https://github.com/genomic-medicine-sweden/nallo/pull/607) - Fixed repeat annotation not working with multiple individuals per family ([#562](https://github.com/genomic-medicine-sweden/nallo/issues/562))
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| stranger | 0.9.2       | 0.9.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -57,7 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#532](https://github.com/genomic-medicine-sweden/nallo/pull/532) - Updated template to nf-core/tools version 3.1.1
 - [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Updated the fastqc module
-- [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatability
+- [#535](https://github.com/genomic-medicine-sweden/nallo/pull/535) - Updated DeepVariant to 1.8.0 for SPRQ compatibility
 - [#536](https://github.com/genomic-medicine-sweden/nallo/pull/536) - Downgraded Sniffles from 2.0.7 to 1.0.12 due to missing calls
 - [#541](https://github.com/genomic-medicine-sweden/nallo/pull/541) - Updated template to nf-core/tools version 3.1.2
 - [#542](https://github.com/genomic-medicine-sweden/nallo/pull/542) - Changed to always use all SV callers, but only take variants from one of them forward, set by `--sv_caller`
@@ -66,7 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#557](https://github.com/genomic-medicine-sweden/nallo/pull/557) - Updated Severus to version 1.3
 - [#558](https://github.com/genomic-medicine-sweden/nallo/pull/558) - Changed VEP to single-threaded by default, because of https://github.com/Ensembl/ensembl-vep/issues/1759
 - [#560](https://github.com/genomic-medicine-sweden/nallo/pull/560) - Updated template to nf-core/tools version 3.2.0
-- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicing the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
+- [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Replaced dipcall with `ALIGN_ASSEMBLIES`, mostly mimicking the alignment part of dipcall, while omitting the variant calling. Updated docs and output files.
 - [#572](https://github.com/genomic-medicine-sweden/nallo/pull/572) - Changed `CALL_SVS` to sort sniffles1 variants, which could be unsorted by default
 - [#573](https://github.com/genomic-medicine-sweden/nallo/pull/573) - Updated metro-map to reflect changes to sniffles and dipcall
 - [#576](https://github.com/genomic-medicine-sweden/nallo/pull/576) - Merged master back to dev
@@ -83,8 +115,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Fixed some Nexftlow language server issues
-- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames missmatches in documentation compared to pipeline
+- [#533](https://github.com/genomic-medicine-sweden/nallo/pull/533) - Fixed some Nextflow language server issues
+- [#546](https://github.com/genomic-medicine-sweden/nallo/pull/546) - Fixed output filenames mismatches in documentation compared to pipeline
 - [#556](https://github.com/genomic-medicine-sweden/nallo/pull/556) - Fixed an issue where the pipeline could not run with `--skip_snv_annotation`
 - [#566](https://github.com/genomic-medicine-sweden/nallo/pull/566) - Fixed wrong minimap2 mapping preset for genome assemblies
 - [#570](https://github.com/genomic-medicine-sweden/nallo/pull/570) - Fixed bug where filtering of SNVs was trying to run even if `--skip_snv_calling` was active
@@ -225,7 +257,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#498](https://github.com/genomic-medicine-sweden/nallo/pull/498) - Updated CI to fix CI failures after merge
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed to annotating and ranking SNVs per family instead of per project
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed output documentation and structure to match `sample` and `family` for all variants
-- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed the way of validating the samplesheet to remove outputing false errors with `ifEmpty`
+- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Changed the way of validating the samplesheet to remove outputting false errors with `ifEmpty`
 - [#505](https://github.com/genomic-medicine-sweden/nallo/pull/505) - Updated TRGT to 1.2.0
 - [#506](https://github.com/genomic-medicine-sweden/nallo/pull/506) - Updated documentation
 - [#507](https://github.com/genomic-medicine-sweden/nallo/pull/507) - Changed the default value of `ch_hgnc_ids` to allow running without `--filter_variants_hgnc_ids` introduced in [#496](https://github.com/genomic-medicine-sweden/nallo/pull/443)
@@ -244,7 +276,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Removed support for co-phasing SVs with HiPhase, as the officially supported caller (pbsv) is not in the pipeline
 - [#412](https://github.com/genomic-medicine-sweden/nallo/pull/412) - Removed `bcftools/index`, as indexing is handled by other modules and no references remained. ([#377](https://github.com/genomic-medicine-sweden/nallo/issues/377))
 - [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Removed support for automatically creating an echvar database with SNVs and INDELs
-- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Removed `containts_affected` logic from the snv-calling workflow, since this was previously changed to be checked before pipeline start
+- [#502](https://github.com/genomic-medicine-sweden/nallo/pull/502) - Removed `contains_affected` logic from the snv-calling workflow, since this was previously changed to be checked before pipeline start
 
 ### `Fixed`
 
@@ -338,7 +370,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#359](https://github.com/genomic-medicine-sweden/nallo/pull/359) - Fixed single sample SNV VCFs containing variants from all samples, resuling in a large number of empty GT calls
+- [#359](https://github.com/genomic-medicine-sweden/nallo/pull/359) - Fixed single sample SNV VCFs containing variants from all samples, resulting in a large number of empty GT calls
 
 ## 0.3.0 - [2024-08-29]
 
@@ -420,7 +452,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#231](https://github.com/genomic-medicine-sweden/nallo/pull/231) - Fixed certain tags in input BAM files being transfered over to (re)aligned BAM
+- [#231](https://github.com/genomic-medicine-sweden/nallo/pull/231) - Fixed certain tags in input BAM files being transferred over to (re)aligned BAM
 - [#252](https://github.com/genomic-medicine-sweden/nallo/pull/252) - Fixed duplicate SNVs in outputs when providing a BED-regions with overlapping regions
 - [#267](https://github.com/genomic-medicine-sweden/nallo/pull/267) - Fixed warning where `MODKIT_PILEUP_HAPLOTYPES` would be defined more than once
 - [#300](https://github.com/genomic-medicine-sweden/nallo/pull/300) - Fixed missing paraphase version
@@ -480,7 +512,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#148](https://github.com/genomic-medicine-sweden/nallo/pull/148) - Added a `RG` tag to BAM-files during alignment with `ID:${meta.id}` and `SM:${meta.id}`
 - [#159](https://github.com/genomic-medicine-sweden/nallo/pull/159) - Added the ability to use multiple input files per sample, by splitting and aligning each input file individually, then merging them post-alignment for streamlined processing
 - [#162](https://github.com/genomic-medicine-sweden/nallo/pull/162) - Added paraphase, a "HiFi-based caller for highly similar paralogous genes"
-- [#179](https://github.com/genomic-medicine-sweden/nallo/pull/179) - Added support for running without `--fasta`, when running subworklows that do not require a reference genome
+- [#179](https://github.com/genomic-medicine-sweden/nallo/pull/179) - Added support for running without `--fasta`, when running subworkflows that do not require a reference genome
 - [#226](https://github.com/genomic-medicine-sweden/nallo/pull/226) - Added file-level output documentation
 
 ### `Changed`
@@ -574,4 +606,4 @@ Initial release of genomic-medicine-sweden/nallo, created with the [nf-core](htt
 - Phase variants and haplotag reads with whatshap or HiPhase
 - Create methylation pileups with modkit
 - Assemble genomes with hifiasm
-- Align assemly to reference and call variants with dipcall
+- Align assembly to reference and call variants with dipcall
