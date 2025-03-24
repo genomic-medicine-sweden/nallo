@@ -51,9 +51,6 @@
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.2
                 },
-                "BCFTOOLS_SORT_TRGT": {
-                    "bcftools": 1.2
-                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.2
                 },
@@ -173,16 +170,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_LONGPHASE": {
+                "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_TRGT": {
+                "SAMTOOLS_INDEX_LONGPHASE": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_SORT_TRGT": {
+                "SAMTOOLS_SORT": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_VIEW": {
@@ -642,8 +639,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-19T16:19:46.285827985"
+        "timestamp": "2025-03-24T16:40:45.926680194"
     }
 }
