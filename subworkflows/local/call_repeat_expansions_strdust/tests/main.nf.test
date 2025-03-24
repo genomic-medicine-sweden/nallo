@@ -31,7 +31,7 @@ nextflow_workflow {
             }
     }
 
-    test("[bam, bai], fasta, fai, bed - STRdust") {
+    test("[bam, bai], fasta, fai, bed") {
 
         when {
             workflow {
@@ -63,7 +63,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, bai], fasta, fai, bed - STRdust - stub") {
+    test("[bam, bai], fasta, fai, bed - stub") {
 
         options '-stub'
 
