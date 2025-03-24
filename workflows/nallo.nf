@@ -588,10 +588,8 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    def ch_repeat_expansions
     if(!params.skip_repeat_calling) {
-
-            if (params.str_caller == "trgt") {
+        if (params.str_caller == "trgt") {
             CALL_REPEAT_EXPANSIONS_TRGT (
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
@@ -609,7 +607,6 @@ workflow NALLO {
             )
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
-
         }
     }
     //
