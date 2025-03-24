@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow CALL_REPEAT_EXPANSIONS_TRGT"
     script "../main.nf"
     workflow "CALL_REPEAT_EXPANSIONS_TRGT"
+    config "./nextflow.config"
 
     setup {
         run("GUNZIP") {
