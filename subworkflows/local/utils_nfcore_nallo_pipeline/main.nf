@@ -163,6 +163,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense()
+    validateWorkflowCompatibility()
 
     //
     // Create channel from input file provided through params.input
@@ -523,4 +524,10 @@ def validateSingleProjectPerRun(ch_samplesheet) {
                 error("ERROR: Only one project may be specified per run.")
             }
         }
+}
+
+def validateWorkflowCompatibility() {
+    if (params.str_caller.matches('strdust') && !params.skip_repeat_annotation) {
+        error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
+    }
 }
