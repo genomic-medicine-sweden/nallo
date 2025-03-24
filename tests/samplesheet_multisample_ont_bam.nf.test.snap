@@ -8,11 +8,11 @@
                     "busybox_awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.0,
+                    "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
                 },
                 "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.0,
+                    "add_most_severe_pli": 1.1,
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
@@ -768,6 +768,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-19T09:51:46.574079786"
+        "timestamp": "2025-03-19T16:23:48.022182288"
     }
 }

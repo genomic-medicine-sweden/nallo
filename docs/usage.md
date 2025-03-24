@@ -53,7 +53,7 @@ Running the pipeline on real data involves three steps:
 
 ## Samplesheet
 
-First, you will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location.
+First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -89,7 +89,7 @@ This pipeline comes with three different presets that should be set with the `--
 
 ## Subworkflows
 
-As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworklows are active, and thus all mandatory input files are required.
+As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
 ### Required parameters
 
@@ -263,7 +263,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 !!!tip
 
-    Optionally, to calcuate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored_indels`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echvtvar and `--echtvar_snv_databases`.
+    Optionally, to calculate CADD scores for small indels, supply a path to a folder containing cadd annotations with `--cadd_resources` and prescored indels with `--cadd_prescored_indels`. Equivalent of the `data/annotations/` and `data/prescored/` folders described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation). CADD scores for SNVs can be annotated through echtvar and `--echtvar_snv_databases`.
 
 Turned off with `--skip_snv_annotation`.
 
@@ -360,7 +360,7 @@ First, go to the [genomic-medicine-sweden/nallo releases page](https://github.co
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
-To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
+To further assist in reproducibility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 
 !!!tip
 
@@ -383,7 +383,7 @@ The pipeline also dynamically loads configurations from [https://github.com/nf-c
 Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer enviroment.
+If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
   - A profile with a complete configuration for automated testing

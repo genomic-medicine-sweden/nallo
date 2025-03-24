@@ -21,7 +21,7 @@ workflow CALL_REPEAT_EXPANSIONS {
         .map { meta, bam, bai -> [ meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX' ] }
         .set { ch_trgt_input }
 
-    // Run TGRT
+    // Run TRGT
     TRGT_GENOTYPE (
         ch_trgt_input,
         ch_fasta,

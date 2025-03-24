@@ -62,7 +62,7 @@ workflow PIPELINE_INITIALISATION {
     )
 
     //
-    // nf-validation does not support contitional file and params validation,
+    // nf-validation does not support conditional file and params validation,
     // add these here.
     //
 
@@ -278,7 +278,7 @@ def validateInputSamplesheet(input) {
 // Generate methods description for MultiQC
 //
 def methodsDescriptionText(mqc_methods_yaml) {
-    // Convert  to a named map so can be used as with familar NXF ${workflow} variable syntax in the MultiQC YML file
+    // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
     meta.workflow = workflow.toMap()
     meta["manifest_map"] = workflow.manifest.toMap()
@@ -357,7 +357,7 @@ def citationBibliographyText(ch_versions, references_yaml, description) {
 def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
-    // For each of the "workflow", "files" - TODO: All errors now are comming from other parts of the workflow
+    // For each of the "workflow", "files"
     statusMap.each { paramsType, paramsMap ->
         paramsMap.each { param, _paramStatus ->
             if (paramsType == "files") {
@@ -391,7 +391,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
         return
     }
 
-    // Get all other worflows that are required for a certain workflow
+    // Get all other workflows that are required for a certain workflow
     def requiredWorkflows = combinationsMap.findAll { it.value.contains(currentWorkflow) }.keySet()
     // If no direct dependencies are found or combinationsMap does not contain the workflow, return an empty list
     if (!requiredWorkflows) {
@@ -401,7 +401,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
         .collect { [ '--', it ].join('') }
         .join(" ")
-    // If all reqired sets are set, give no error
+    // If all required sets are set, give no error
     if (!dependencyString) {
         return
     }
