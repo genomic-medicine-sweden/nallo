@@ -478,8 +478,13 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
-    if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') {
-        error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+    if (params.preset == "ONT_R10") {
+        if (params.phaser.matches('hiphase')) {
+            error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+        }
+        if (params.str_caller.matches('trgt')) {
+            error "ERROR: The TRGT license only permits analysis of data from PacBio."
+        }
     }
 }
 
