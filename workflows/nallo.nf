@@ -605,7 +605,6 @@ workflow NALLO {
                 ch_fai,
                 ch_str_bed
             )
-            ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
     }
