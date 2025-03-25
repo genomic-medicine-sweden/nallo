@@ -1,4 +1,4 @@
-include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino'
+include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino/main'
 include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
 include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
