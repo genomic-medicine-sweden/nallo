@@ -1,10 +1,10 @@
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_FAMILY } from '../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE } from '../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_QUERY                              } from '../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                           } from '../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../modules/local/create_samples_haplotypes_file/main'
-include { MERGE_JSON                                  } from '../../modules/local/merge_json.nf'
-include { PARAPHASE                                   } from '../../modules/nf-core/paraphase/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_FAMILY } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_QUERY                              } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                           } from '../../../modules/nf-core/bcftools/reheader/main'
+include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../../modules/local/create_samples_haplotypes_file/main'
+include { MERGE_JSON                                  } from '../../../modules/local/merge_json/main'
+include { PARAPHASE                                   } from '../../../modules/nf-core/paraphase/main'
 
 workflow CALL_PARALOGS {
 
