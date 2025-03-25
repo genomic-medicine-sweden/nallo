@@ -74,7 +74,8 @@ This document describes the pipeline output files and the tools used to generate
 | `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file         |
 | `phased_variants/{sample}/*.vcf.gz`                   | VCF file with phased variants |
 | `phased_variants/{sample}/*.vcf.gz.tbi`               | Index of the VCF file         |
-| `qc/phasing_stats/{sample}/*.blocks.tsv`              | Phase block file              |
+| `qc/phasing_stats/{sample}/*.blocks.tsv.gz`           | Phase block file              |
+| `qc/phasing_stats/{sample}/*.blocks.tsv.gz.tbi`       | Index of block file           |
 | `qc/phasing_stats/{sample}/*.stats.tsv`               | Phasing statistics file       |
 
 ## QC
