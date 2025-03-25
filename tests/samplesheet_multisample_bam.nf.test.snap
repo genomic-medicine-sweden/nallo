@@ -535,15 +535,15 @@
                 "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_Revio_A",
-                "repeats/sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz",
-                "repeats/sample/HG002_Revio_A/HG002_Revio_A_sorted.vcf.gz.tbi",
-                "repeats/sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam",
-                "repeats/sample/HG002_Revio_A/HG002_Revio_A_spanning_sorted.bam.bai",
+                "repeats/sample/HG002_Revio_A/HG002_Revio_A_spanning_trgt.bam",
+                "repeats/sample/HG002_Revio_A/HG002_Revio_A_spanning_trgt.bam.bai",
+                "repeats/sample/HG002_Revio_A/HG002_Revio_A_trgt.vcf.gz",
+                "repeats/sample/HG002_Revio_A/HG002_Revio_A_trgt.vcf.gz.tbi",
                 "repeats/sample/HG002_Revio_B",
-                "repeats/sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz",
-                "repeats/sample/HG002_Revio_B/HG002_Revio_B_sorted.vcf.gz.tbi",
-                "repeats/sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam",
-                "repeats/sample/HG002_Revio_B/HG002_Revio_B_spanning_sorted.bam.bai",
+                "repeats/sample/HG002_Revio_B/HG002_Revio_B_spanning_trgt.bam",
+                "repeats/sample/HG002_Revio_B/HG002_Revio_B_spanning_trgt.bam.bai",
+                "repeats/sample/HG002_Revio_B/HG002_Revio_B_trgt.vcf.gz",
+                "repeats/sample/HG002_Revio_B/HG002_Revio_B_trgt.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -700,11 +700,11 @@
                     "12b7845566fc2863bfd5328a5bcbfab6"
                 ],
                 [
-                    "HG002_Revio_A_spanning_sorted.bam",
+                    "HG002_Revio_A_spanning_trgt.bam",
                     "a51f00198c7449fd64772fe680c6241"
                 ],
                 [
-                    "HG002_Revio_B_spanning_sorted.bam",
+                    "HG002_Revio_B_spanning_trgt.bam",
                     "a51f00198c7449fd64772fe680c6241"
                 ]
             ],
@@ -734,11 +734,11 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_A_sorted.vcf.gz",
+                    "HG002_Revio_A_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_B_sorted.vcf.gz",
+                    "HG002_Revio_B_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -791,13 +791,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-24T16:46:04.708663747"
+        "timestamp": "2025-03-25T14:55:38.497458869"
     }
 }
