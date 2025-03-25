@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
+- [#606](https://github.com/genomic-medicine-sweden/nallo/pull/606) - Added bgzip and tabix blocks.tsv from whatshap/stats
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Removed`
 
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Removed args from local modules that doesn't use it
+- [#625](https://github.com/genomic-medicine-sweden/nallo/pull/625) - Removed last `.first()` from versions, that resulted in a warning displayed when running the pipeline
 
 ### `Fixed`
 

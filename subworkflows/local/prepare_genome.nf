@@ -21,7 +21,7 @@ workflow PREPARE_GENOME {
             .gunzip
             .collect()
             .set { ch_fasta }
-        ch_versions = ch_versions.mix(GUNZIP_FASTA.out.versions.first())
+        ch_versions = ch_versions.mix(GUNZIP_FASTA.out.versions)
     } else {
         fasta_in
             .set { ch_fasta }

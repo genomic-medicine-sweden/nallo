@@ -246,7 +246,9 @@
                     "untar": 1.34
                 },
                 "WHATSHAP_STATS": {
-                    "whatshap": 2.3
+                    "whatshap": 2.3,
+                    "bgzip": 1.2,
+                    "tabix": 1.2
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.6.0dev"
@@ -513,10 +515,12 @@
                 "qc/mosdepth/HG002_Revio_B/HG002_Revio_B.regions.bed.gz.csi",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio_A",
-                "qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.blocks.tsv",
+                "qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.blocks.tsv.gz",
+                "qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.blocks.tsv.gz.tbi",
                 "qc/phasing_stats/HG002_Revio_A/HG002_Revio_A_stats.stats.tsv",
                 "qc/phasing_stats/HG002_Revio_B",
-                "qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.blocks.tsv",
+                "qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.blocks.tsv.gz",
+                "qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.blocks.tsv.gz.tbi",
                 "qc/phasing_stats/HG002_Revio_B/HG002_Revio_B_stats.stats.tsv",
                 "qc/somalier",
                 "qc/somalier/relate",
@@ -657,9 +661,11 @@
                 "HG002_Revio_B.per-base.d4:md5,e22533485912a648cc708a4851fa4c7d",
                 "HG002_Revio_B.regions.bed.gz:md5,9c4c037139c752c60385d3c0b905af7f",
                 "HG002_Revio_B.regions.bed.gz.csi:md5,78d70be812a3d19360a3d51a5fb19432",
-                "HG002_Revio_A_stats.blocks.tsv:md5,62a91b634efa68a74e42141b6312b145",
+                "HG002_Revio_A_stats.blocks.tsv.gz:md5,62a91b634efa68a74e42141b6312b145",
+                "HG002_Revio_A_stats.blocks.tsv.gz.tbi:md5,0022a044e6b7ebd30d496837c223b1bc",
                 "HG002_Revio_A_stats.stats.tsv:md5,f115ed22f863f2da51151f160ce1bcee",
-                "HG002_Revio_B_stats.blocks.tsv:md5,644b6fa58d13ff899ec3792988cca4f9",
+                "HG002_Revio_B_stats.blocks.tsv.gz:md5,644b6fa58d13ff899ec3792988cca4f9",
+                "HG002_Revio_B_stats.blocks.tsv.gz.tbi:md5,c7cc8b53977944e3eca42ed8392edef1",
                 "HG002_Revio_B_stats.stats.tsv:md5,e224a5892ce56e0152fcc886340262e5",
                 "HG002_Revio_A_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_A_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
@@ -785,7 +791,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
