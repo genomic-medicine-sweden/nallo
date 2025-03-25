@@ -11,7 +11,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-    ch_versions         = Channel.empty()
+    ch_versions = Channel.empty()
 
     STRDUST (
         ch_bam_bai,

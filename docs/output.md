@@ -160,8 +160,8 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                      | Description                               | STRdust, Call repeats only | TRGT, Call repeats only | TRGT, Call & annotate repeats |
 | ------------------------------------------------------------------------- | ----------------------------------------- | -------------------------- | ----------------------- | ----------------------------- |
-| `repeats/sample/{sample}/{sample}_*.vcf.gz`                               | VCF file with called repeats for a sample | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
-| `repeats/sample/{sample}/{sample}_*.vcf.gz.tbi`                           | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz`                    | VCF file with called repeats for a sample | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz.tbi`                | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
 | `repeats/sample/{sample}/{sample}_spanning_trgt.bam`                      | BAM file with sorted spanning reads       |                            | :white_check_mark:      | :white_check_mark:            |
 | `repeats/sample/{sample}/{sample}_spanning_trgt.bai`                      | Index of the BAM file                     |                            | :white_check_mark:      | :white_check_mark:            |
 | `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`               | Merged VCF file per family                | :white_check_mark:         | :white_check_mark:      |                               |
