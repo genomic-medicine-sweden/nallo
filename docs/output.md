@@ -129,14 +129,18 @@ This document describes the pipeline output files and the tools used to generate
 
 [peddy](https://github.com/brentp/peddy) checks relatedness and sex.
 
-| Path                              | Description                                                                                                                                                                    |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `qc/peddy/{family).peddy.ped`     | PED file updated with peddy-inferred sex per family                                                                                                                            |
-| `qc/peddy/{family}.html`          | HTML report                                                                                                                                                                    |
-| `qc/peddy/{family}.vs.html`       | HTML report of observed vs expected relatedness                                                                                                                                |
-| `qc/peddy/{family}.sex_check.csv` | Comparison between reported sex (ped file) and that inferred from peddy                                                                                                        |
-| `qc/peddy/{family}.het_check.csv` | Het check does general QC including rate of het calls, allele-balance at het calls, mean and median depth, and a PCA projection onto thousand genomes. Incudes ancestry check. |
-| `qc/peddy/{family}.ped_check.csv` | Ped check compares the relatedness of 2 samples as reported in a .ped file to the relatedness inferred from the genotypes and ~25K sites in the genome.                        |
+| Path                                                      | Description                                                                                                                                                                   |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `qc/peddy/{family}/{family}.peddy.ped`                    | PED file updated with peddy-inferred sex per family                                                                                                                           |
+| `qc/peddy/{family}/{family}.html`                         | HTML report                                                                                                                                                                   |
+| `qc/peddy/{family}/{family}.vs.html`                      | HTML report of observed vs expected relatedness                                                                                                                               |
+| `qc/peddy/{family}/{family}.sex_check.csv`                | Comparison between reported sex (ped file) and that inferred from peddy                                                                                                       |
+| `qc/peddy/{family}/{family}.het_check.csv`                | Het check does general QC including rate of het calls, allele-balance at het calls, mean and median depth, and a PCA projection onto thousand genomes. Incudes ancestry check |
+| `qc/peddy/{family}/{family}.ped_check.csv`                | Ped check compares the relatedness of 2 samples as reported in a .ped file to the relatedness inferred from the genotypes and ~25K sites in the genome                        |
+| `qc/peddy/{family}/{family}.sex_check.png`                | PNG comparison between reported sex (ped file) and that inferred from peddy                                                                                                   |
+| `qc/peddy/{family}/{family}.het_check.png`                | PNG of heterozygosity check                                                                                                                                                   |
+| `qc/peddy/{family}/{family}.ped_check.png`                | PNG of the ped check comparison                                                                                                                                               |
+| `qc/peddy/{family}/{family}.ped_check.rel-difference.csv` | CSV file with the comparison between inferred and given relatedness                                                                                                           |
 
 ### DeepVariant
 
