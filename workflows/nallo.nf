@@ -431,6 +431,8 @@ workflow NALLO {
                 ch_peddy_sites
             )
             ch_versions = ch_versions.mix(PEDDY.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.csv.map{it[1]}.collect().ifEmpty([]))
         }
     }
     //
