@@ -19,7 +19,8 @@ include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
+include { CALL_REPEAT_EXPANSIONS_STRDUST          } from '../subworkflows/local/call_repeat_expansions_strdust'
+include { CALL_REPEAT_EXPANSIONS_TRGT             } from '../subworkflows/local/call_repeat_expansions_trgt'
 include { CALL_SVS                                } from '../subworkflows/local/call_svs'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS } from '../subworkflows/local/filter_variants'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS  } from '../subworkflows/local/filter_variants'
@@ -85,7 +86,7 @@ workflow NALLO {
     ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
     ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
-    ch_trgt_bed                  = createReferenceChannelFromPath(params.trgt_repeats)
+    ch_str_bed                  = createReferenceChannelFromPath(params.str_bed)
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -588,22 +589,31 @@ workflow NALLO {
     // Call repeat expansions with TRGT
     //
     if(!params.skip_repeat_calling) {
-
-        CALL_REPEAT_EXPANSIONS (
-            PHASING.out.haplotagged_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_trgt_bed
-        )
-        ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
+        if (params.str_caller == "trgt") {
+            CALL_REPEAT_EXPANSIONS_TRGT (
+                PHASING.out.haplotagged_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_str_bed
+            )
+            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
+            ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+        } else if (params.str_caller == "strdust"){
+            CALL_REPEAT_EXPANSIONS_STRDUST (
+                PHASING.out.haplotagged_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_str_bed
+            )
+            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
+        }
     }
-
     //
     // Annotate repeat expansions with stranger
     //
     if(!params.skip_repeat_annotation) {
 
-        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, CALL_REPEAT_EXPANSIONS.out.family_vcf )
+        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, ch_repeat_expansions )
         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
     }
 

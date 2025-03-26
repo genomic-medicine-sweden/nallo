@@ -51,9 +51,6 @@
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.2
                 },
-                "BCFTOOLS_SORT_TRGT": {
-                    "bcftools": 1.2
-                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.2
                 },
@@ -173,16 +170,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_LONGPHASE": {
+                "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_TRGT": {
+                "SAMTOOLS_INDEX_LONGPHASE": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_SORT_TRGT": {
+                "SAMTOOLS_SORT": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_VIEW": {
@@ -478,10 +475,10 @@
                 "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_Revio",
-                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz",
-                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam.bai",
+                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz",
+                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -582,7 +579,7 @@
                     "12b7845566fc2863bfd5328a5bcbfab6"
                 ],
                 [
-                    "HG002_Revio_spanning_sorted.bam",
+                    "HG002_Revio_spanning_trgt.bam",
                     "a51f00198c7449fd64772fe680c6241"
                 ]
             ],
@@ -604,7 +601,7 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=2, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_sorted.vcf.gz",
+                    "HG002_Revio_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -641,20 +638,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "c70a3906d95d9d9c0a1a61c354302c7c"
-                ],
-                [
-                    "HG002_Revio_sorted.vcf.gz",
-                    "d7d518f68789d3d51a26be28a93b9654"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-24T16:20:13.786922066"
+        "timestamp": "2025-03-26T09:12:56.960640359"
     }
 }

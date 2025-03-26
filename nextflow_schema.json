@@ -157,7 +157,7 @@
                     "pattern": "^\\S+\\.bed$",
                     "exists": true
                 },
-                "trgt_repeats": {
+                "str_bed": {
                     "type": "string",
                     "description": "A BED file with repeats to be genotyped with TRGT",
                     "format": "file-path",
@@ -456,6 +456,12 @@
                     "default": "severus",
                     "description": "From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`).",
                     "enum": ["severus", "sniffles"]
+                },
+                "str_caller": {
+                    "type": "string",
+                    "default": "trgt",
+                    "description": "Which caller to use for short tandem repeat expansions (TRGT or STRdust).",
+                    "enum": ["trgt", "strdust"]
                 },
                 "phaser": {
                     "type": "string",
