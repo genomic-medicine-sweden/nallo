@@ -521,7 +521,6 @@
                 "multiqc_general_stats.txt:md5,1a683ca8e27e2f3bb81903cbcaa79082",
                 "multiqc_peddy.txt:md5,07fd1049053820cd37b225a6cebfed3a",
                 "peddy_het_check_plot.txt:md5,70eae014975db9ffdf43030f9de8802d",
-                "peddy_sex_check_plot.txt:md5,e86afb26286d641314ad018f89a78357",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
                 "HG002_Revio_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
@@ -628,6 +627,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T14:27:06.307717634"
+        "timestamp": "2025-03-26T15:27:44.961027525"
     }
 }
