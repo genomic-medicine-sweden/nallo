@@ -197,7 +197,7 @@
                     },
                     "peddy": {
                         "branch": "master",
-                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "git_sha": "e1c5e2ecade9fdf66fca3b7bcb6b670f50493b24",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/peddy/peddy.diff"
                     },
