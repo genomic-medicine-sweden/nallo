@@ -1371,7 +1371,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <div class="admonition info">
 <p class="admonition-title">Preset effects on subworkflows</p>
 <ul>
-<li><code>--skip_genome_assembly</code> and <code>--skip_repeat_wf</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
+<li><code>--skip_genome_assembly</code> and <code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
@@ -1504,8 +1504,12 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </thead>
 <tbody>
 <tr>
-<td><code>trgt_repeats</code></td>
+<td><code>str_bed</code></td>
 <td>a BED file with tandem repeats matching your reference genome (e.g. <a href="https://github.com/PacificBiosciences/trgt/raw/main/repeats/pathogenic_repeats.hg38.bed">pathogenic_repeats.hg38.bed</a>)</td>
+</tr>
+<tr>
+<td><code>str_caller</code></td>
+<td>The tool to be used for repeat calling. <code>trgt</code> for TRGT (default for presets <code>revio</code>, <code>pacbio</code>, disallowed with <code>ONT_R10</code>) or <code>strdust</code> for STRdust (default for preset <code>ONT_R10</code>)</td>
 </tr>
 </tbody>
 </table>

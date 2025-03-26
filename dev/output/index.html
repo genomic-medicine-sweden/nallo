@@ -1360,20 +1360,51 @@
 </tbody>
 </table>
 <h3 id="repeats">Repeats</h3>
-<p><a href="https://github.com/PacificBiosciences/trgt">TRGT</a> is used to call repeats.</p>
+<p><a href="https://github.com/PacificBiosciences/trgt">TRGT</a> or <a href="https://github.com/wdecoster/STRdust">STRdust</a> are used to call repeats.
+<a href="https://github.com/Clinical-Genomics/stranger">Stranger</a> is used to annotate repeats.</p>
 <table>
 <thead>
 <tr>
 <th>Path</th>
 <th>Description</th>
-<th>Call repeats</th>
-<th>Call &amp; annotate repeats</th>
+<th>STRdust, Call repeats only</th>
+<th>TRGT, Call repeats only</th>
+<th>TRGT, Call &amp; annotate repeats</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz</code></td>
+<td>VCF file with called repeats for a sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz.tbi</code></td>
+<td>Index of the VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.bam</code></td>
+<td>BAM file with sorted spanning reads</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.bai</code></td>
+<td>Index of the BAM file</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
 <td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz</code></td>
 <td>Merged VCF file per family</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
@@ -1381,54 +1412,20 @@
 <td><code>repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
 <tr>
-<td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz</code></td>
-<td>VCF file with called repeats for a sample</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-<tr>
-<td><code>repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi</code></td>
-<td>Index of the VCF file</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-<tr>
-<td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bam</code></td>
-<td>BAM file with sorted spanning reads</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-<tr>
-<td><code>repeats/sample/{sample}/{sample}_spanning_sorted.bai</code></td>
-<td>Index of the BAM file</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://github.com/Clinical-Genomics/stranger">Stranger</a> is used to annotate repeats.</p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Description</th>
-<th>Call repeats</th>
-<th>Call &amp; annotate repeats</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td><code>repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz</code></td>
 <td>Merged, annotated VCF file per family</td>
+<td></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
 <td><code>repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi</code></td>
 <td>Index of the VCF file</td>
+<td></td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
