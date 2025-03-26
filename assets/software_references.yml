@@ -122,6 +122,9 @@ tool:
   stranger:
     citation: "Stranger (Nilsson & Magnusson 2021)"
     bibliography: "Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873"
+  strdust:
+    citation: "STRdust (De Coster et al. 2024)"
+    bibliography: "De Coster W, Höijer I, Bruggeman I, D'Hert S, Melin M, Ameur A, Rademakers R. Visualization and analysis of medically relevant tandem repeats in nanopore sequencing of control cohorts with pathSTR. Genome Res 34, 2074-2080 (2024). https://doi.org/10.1101/gr.279265.124"
   svdb:
     citation: "SVDB (Eisfeldt et al. 2017)"
     bibliography: ""

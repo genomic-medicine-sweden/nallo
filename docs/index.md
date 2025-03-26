@@ -12,3 +12,4 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 <picture align="center">
     <img alt="genomic-medicine-sweden/nallo workflow" src="images/nallo_metromap.png">
   </picture>
+  

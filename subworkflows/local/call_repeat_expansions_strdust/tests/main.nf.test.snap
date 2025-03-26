@@ -1,0 +1,109 @@
+{
+    "[bam, bai], fasta, fai, bed": {
+        "content": [
+            "e4981640adf7b05b75ba09d55a7185ad",
+            "32e3c59f20cb0d43886a95edd73b5004",
+            [
+                "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-26T07:34:54.491978506"
+    },
+    "[bam, bai], fasta, fai, bed - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_repeat_expansions.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_repeat_expansions.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+                ],
+                "family_tbi": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_repeat_expansions.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_vcf": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_repeat_expansions.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "sample_tbi": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sample_vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-03-26T07:35:09.926271919"
+    }
+}
