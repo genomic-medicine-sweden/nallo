@@ -24,6 +24,9 @@
                 "BCFTOOLS_FILLTAGS_ANNO": {
                     "bcftools": 1.2
                 },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.2
+                },
                 "BCFTOOLS_MERGE_PER_FAMILY": {
                     "bcftools": 1.2
                 },
@@ -518,6 +521,18 @@
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
                 "qc/somalier/relate/test/test.samples.tsv",
+                "repeats",
+                "repeats/family",
+                "repeats/family/FAM",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz.tbi",
+                "repeats/sample",
+                "repeats/sample/HG002_ONT_A",
+                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz",
+                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz.tbi",
+                "repeats/sample/HG002_ONT_B",
+                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz",
+                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -706,6 +721,18 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=237, phased=false, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_repeat_expansions.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG002_ONT_A_strdust.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG002_ONT_B_strdust.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                ],
+                [
                     "FAM_snvs_annotated_ranked.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=109, phased=false, phasedAutodetect=false]"
                 ],
@@ -774,6 +801,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-24T16:23:25.919151202"
+        "timestamp": "2025-03-26T09:22:19.032623589"
     }
 }

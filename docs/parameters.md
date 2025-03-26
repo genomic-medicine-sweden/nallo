@@ -38,7 +38,7 @@ Define where the pipeline should find input data and save output data.
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `par_regions` | Provide a bed file of chrX and chrY PAR regions for DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
-| `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
+| `str_bed` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
 | `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
@@ -107,6 +107,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
 | `sv_caller` | From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`). | `string` | severus |  |  |
+| `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). | `string` | trgt |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active. | `string` |  |  |  |

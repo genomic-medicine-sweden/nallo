@@ -118,7 +118,7 @@ workflow PIPELINE_INITIALISATION {
         sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
         cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
-        repeat_calling   : ["trgt_repeats"],
+        repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
     ]
 
@@ -150,7 +150,7 @@ workflow PIPELINE_INITIALISATION {
             hificnv_expected_xx_cn   : params.hificnv_expected_xx_cn,
             hificnv_excluded_regions : params.hificnv_excluded_regions,
             fasta                    : params.fasta,
-            trgt_repeats             : params.trgt_repeats,
+            str_bed                  : params.str_bed,
             stranger_repeat_catalog  : params.stranger_repeat_catalog,
             genmod_reduced_penetrance: params.genmod_reduced_penetrance,
             genmod_score_config_snvs : params.genmod_score_config_snvs,
@@ -166,6 +166,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense()
+    validateWorkflowCompatibility()
 
     //
     // Create channel from input file provided through params.input
@@ -481,8 +482,13 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
-    if (params.phaser.matches('hiphase') && params.preset == 'ONT_R10') {
-        error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+    if (params.preset == "ONT_R10") {
+        if (params.phaser.matches('hiphase')) {
+            error "ERROR: The HiPhase license only permits analysis of data from PacBio."
+        }
+        if (params.str_caller.matches('trgt')) {
+            error "ERROR: The TRGT license only permits analysis of data from PacBio."
+        }
     }
 }
 
@@ -521,4 +527,10 @@ def validateSingleProjectPerRun(ch_samplesheet) {
                 error("ERROR: Only one project may be specified per run.")
             }
         }
+}
+
+def validateWorkflowCompatibility() {
+    if (params.str_caller.matches('strdust') && !params.skip_repeat_annotation) {
+        error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
+    }
 }

@@ -27,7 +27,7 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
 - Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
-- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only)
+- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only) or [STRdust](https://github.com/wdecoster/STRdust)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
 
 ### Phasing and methylation
@@ -38,7 +38,7 @@ description: A bioinformatics analysis pipeline for long-reads from both PacBio 
 ### Annotation
 
 - Annotate SNVs and INDELs with databases of choice, e.g. [gnomAD](https://gnomad.broadinstitute.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [CADD](https://cadd.gs.washington.edu) with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
-- Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger)
+- Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger) (TRGT only)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
 ### Ranking
