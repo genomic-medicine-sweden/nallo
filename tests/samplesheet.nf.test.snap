@@ -638,20 +638,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "c70a3906d95d9d9c0a1a61c354302c7c"
-                ],
-                [
-                    "HG002_Revio_trgt.vcf.gz",
-                    "d7d518f68789d3d51a26be28a93b9654"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T07:44:19.108276469"
+        "timestamp": "2025-03-26T09:12:56.960640359"
     }
 }

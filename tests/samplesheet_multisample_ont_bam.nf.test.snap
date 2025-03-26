@@ -769,24 +769,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_repeat_expansions.vcf.gz",
-                    "1fd315d633e039bb5a5583a19e863fbd"
-                ],
-                [
-                    "HG002_ONT_A_strdust.vcf.gz",
-                    "9c26b135ba680b03ba192da4955d31d1"
-                ],
-                [
-                    "HG002_ONT_B_strdust.vcf.gz",
-                    "fa969369a3805060f6e4d4ae1765f3f9"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T07:52:58.919846024"
+        "timestamp": "2025-03-26T09:22:19.032623589"
     }
 }
