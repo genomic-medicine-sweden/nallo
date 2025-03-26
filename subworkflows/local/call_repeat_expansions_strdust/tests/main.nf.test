@@ -55,8 +55,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
