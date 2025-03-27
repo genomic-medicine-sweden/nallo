@@ -134,6 +134,7 @@ workflow PHASING {
             fasta,
             fai
         )
+        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
     // Phasing QC
