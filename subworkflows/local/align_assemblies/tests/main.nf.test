@@ -50,10 +50,14 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = GFASTATS.out.assembly
-                input[1] = Channel.of([
+                input[1] = [
                     [ id: 'genome' ],
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
-                ])
+                ]
+                input[2] = [
+                    [ id : 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
                 """
             }
         }
@@ -76,10 +80,14 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = GFASTATS.out.assembly
-                input[1] = Channel.of([
+                input[1] = [
                     [ id: 'genome' ],
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
-                ])
+                ]
+                input[2] = [
+                    [ id : 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
                 """
             }
         }
