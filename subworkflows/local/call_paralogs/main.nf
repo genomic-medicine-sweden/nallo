@@ -5,12 +5,14 @@ include { BCFTOOLS_REHEADER                           } from '../../../modules/n
 include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../../modules/local/create_samples_haplotypes_file/main'
 include { MERGE_JSON                                  } from '../../../modules/local/merge_json/main'
 include { PARAPHASE                                   } from '../../../modules/nf-core/paraphase/main'
+include { SAMTOOLS_CONVERT                            } from '../../../modules/nf-core/samtools/convert/main'
 
 workflow CALL_PARALOGS {
 
     take:
     bam_bai // channel: [ val(meta), bam, bai ]
-    fasta   // channel: [ val(meta), fasta ]
+    fasta   // channel: [ val(meta), fasta    ]
+    fai     // channel: [ val(meta), fai      ]
 
     main:
     ch_versions = Channel.empty()
@@ -24,6 +26,16 @@ workflow CALL_PARALOGS {
 
     MERGE_JSON ( PARAPHASE.out.json )
     ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
+
+    // Publish bam output as CRAM if requested
+    if (params.alignment_output_format == 'cram') {
+        SAMTOOLS_CONVERT (
+            PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
+    }
 
     // Get the sample name (GENE_hapX) from the VCF
     BCFTOOLS_QUERY (
@@ -42,6 +54,7 @@ workflow CALL_PARALOGS {
         .join( CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
+
 
     // Give meta.id as sample name in the VCF
     BCFTOOLS_REHEADER ( ch_bcftools_reheader_in, [[],[]] )

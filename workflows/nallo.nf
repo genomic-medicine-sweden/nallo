@@ -262,7 +262,8 @@ workflow NALLO {
     if(!params.skip_call_paralogs) {
         CALL_PARALOGS (
             ch_bam_bai,
-            ch_fasta
+            ch_fasta,
+            ch_fai
         )
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
