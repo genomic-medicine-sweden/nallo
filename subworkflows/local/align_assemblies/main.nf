@@ -1,14 +1,16 @@
-include { MINIMAP2_ALIGN } from '../../../modules/nf-core/minimap2/align/main'
-include { MINIMAP2_INDEX } from '../../../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_MERGE } from '../../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_VIEW  } from '../../../modules/nf-core/samtools/view/main'
-include { TAGBAM         } from '../../../modules/nf-core/tagbam/main'
+include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
+include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
+include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
 
     take:
     ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai      // channel: [mandatory] [ val(meta), path(fai)   ]
 
     main:
     ch_versions = Channel.empty()
@@ -51,6 +53,16 @@ workflow ALIGN_ASSEMBLIES {
         [[],[]]
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
+
+    // Publish alignment as CRAM if requested
+    if (params.alignment_output_format == 'cram') {
+        SAMTOOLS_CONVERT(
+            SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.bai, failOnDuplicate: true, failOnMismatch: true),
+            ch_fasta,
+            ch_fai
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
+    }
 
     emit:
     bam      = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]

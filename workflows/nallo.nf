@@ -280,7 +280,8 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES (
             ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta
+            ch_fasta,
+            ch_fai
         )
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
