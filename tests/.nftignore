@@ -1,13 +1,8 @@
 aligned_reads/**/*.{bam,bai}
 assembly/**/*.{bam,bai}
 cnv_calling/**/*.log
-multiqc/multiqc_plots/**/*.{pdf, svg, txt, png, log}
-multiqc/multiqc_data/**/*.{json, pdf,svg,txt,png, log}
-multiqc/multiqc_plots/*.{pdf,svg,txt,png, log}
-multiqc/multiqc_data/*.{json, pdf, svg, txt, png, log}
+multiqc/**/*
 multiqc/multiqc_report.html
-multiqc/**/*.{json, pdf, svg, txt, png, log}
-paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
 phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
 qc/cramino/**/*.txt
@@ -17,3 +12,4 @@ qc/deepvariant_vcfstatsreport/**/*.html
 repeats/**/*.{vcf.gz,tbi,bam,bai}
 snvs/**/*.{vcf.gz,tbi,txt}
 svs/**/*.{vcf.gz,tbi}
+paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
