@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#595](https://github.com/genomic-medicine-sweden/nallo/pull/595) - Fixed unstable assembly outputs when there's multiple input files per sample
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
+- [#637](https://github.com/genomic-medicine-sweden/nallo/pull/637) - Fixed test without target regions not triggering on PRs to the master branch
 
 ### Parameters
 
