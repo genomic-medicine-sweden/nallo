@@ -44,7 +44,6 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/local/create_pedigree_file/main'
-include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
@@ -52,6 +51,8 @@ include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/n
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
@@ -190,7 +191,16 @@ workflow NALLO {
             .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
             .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
-            .set { bam_infer_sex_in }
+            .set { ch_aligned_bam }
+
+        // Publish alignments as CRAM if requested
+        if (params.alignment_output_format == 'cram') {
+            SAMTOOLS_CONVERT (
+                ch_aligned_bam,
+                ch_fasta,
+                ch_fai
+            )
+        }
 
         //
         // Create PED from samplesheet
@@ -211,7 +221,7 @@ workflow NALLO {
         // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
         //
         BAM_INFER_SEX (
-            bam_infer_sex_in,
+            ch_aligned_bam,
             ch_fasta,
             ch_fai,
             ch_somalier_sites,
