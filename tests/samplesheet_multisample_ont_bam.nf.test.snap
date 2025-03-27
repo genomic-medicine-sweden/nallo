@@ -539,12 +539,12 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_hificnv_cnvs.vcf.gz",
-                "svs/family/FAM/FAM_hificnv_cnvs.vcf.gz.tbi",
-                "svs/family/FAM/FAM_severus_svs.vcf.gz",
-                "svs/family/FAM/FAM_severus_svs.vcf.gz.tbi",
-                "svs/family/FAM/FAM_sniffles_svs.vcf.gz",
-                "svs/family/FAM/FAM_sniffles_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz",
+                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz.tbi",
+                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz",
+                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz.tbi",
+                "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz",
+                "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
@@ -724,15 +724,15 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=102, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_hificnv_cnvs.vcf.gz",
+                    "FAM_hificnv_cnvs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=33, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_severus_svs.vcf.gz",
+                    "FAM_severus_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=64, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_sniffles_svs.vcf.gz",
+                    "FAM_sniffles_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=67, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -769,7 +769,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
