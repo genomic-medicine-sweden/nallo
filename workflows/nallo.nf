@@ -200,6 +200,7 @@ workflow NALLO {
                 ch_fasta,
                 ch_fai
             )
+            ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
         }
 
         //
