@@ -6,7 +6,7 @@ multiqc/multiqc_data/**/*.{json, pdf,svg,txt,png, log}
 multiqc/multiqc_plots/*.{pdf,svg,txt,png, log}
 multiqc/multiqc_data/*.{json, pdf, svg, txt, png, log}
 multiqc/multiqc_report.html
-multiqc/*.{json, pdf, svg, txt, png, log}
+multiqc/**/*.{json, pdf, svg, txt, png, log}
 paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
 phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
