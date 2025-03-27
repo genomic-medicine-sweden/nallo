@@ -45,7 +45,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     // Publish spanning reads as CRAM if requested
     if (params.alignment_output_format == 'cram') {
         SAMTOOLS_CONVERT (
-            SAMTOOLS_SORT.out.bam.join(SAMTOOLS_SORT.out.bai, failOnDuplicate: true, failOnMismatch: true),
+            SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta,
             ch_fai
         )
