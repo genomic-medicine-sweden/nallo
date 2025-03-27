@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.2 - [2025-03-27]
+
+### `Fixed`
+
+[#634](https://github.com/genomic-medicine-sweden/nallo/pull/634) - Fixed SVDB process error when sample and family_id was named the same ([#633](https://github.com/genomic-medicine-sweden/nallo/issues/633))
+
 ## 0.5.1 - [2025-03-10]
 
 ### `Fixed`
