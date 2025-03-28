@@ -1,7 +1,7 @@
-include { GUNZIP as GUNZIP_FASTA   } from '../../modules/nf-core/gunzip/main'
-include { MINIMAP2_INDEX           } from '../../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_FAIDX           } from '../../modules/nf-core/samtools/faidx/main'
-include { UNTAR as UNTAR_VEP_CACHE } from '../../modules/nf-core/untar/main'
+include { GUNZIP as GUNZIP_FASTA   } from '../../../modules/nf-core/gunzip/main'
+include { MINIMAP2_INDEX           } from '../../../modules/nf-core/minimap2/index/main'
+include { SAMTOOLS_FAIDX           } from '../../../modules/nf-core/samtools/faidx/main'
+include { UNTAR as UNTAR_VEP_CACHE } from '../../../modules/nf-core/untar/main'
 
 workflow PREPARE_GENOME {
 
