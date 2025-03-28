@@ -5,7 +5,7 @@ nextflow_pipeline {
     tag "PIPELINE"
 
     test("test profile - CRAM output") {
-        tag "samplesheet"
+        tag "samplesheet_cram"
 
         when {
             params {
