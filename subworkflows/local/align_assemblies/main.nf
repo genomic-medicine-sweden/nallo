@@ -42,7 +42,7 @@ workflow ALIGN_ASSEMBLIES {
 
     TAGBAM.out.bam
         .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
-        .groupTuple()
+        .groupTuple(size: 2)
         .set { ch_assemblies_per_sample }
 
     SAMTOOLS_MERGE (
