@@ -1,6 +1,6 @@
-include { SOMALIER_EXTRACT                 } from '../../modules/nf-core/somalier/extract/main'
-include { SOMALIER_RELATE as RELATE_INFER  } from '../../modules/nf-core/somalier/relate/main'
-include { SOMALIER_RELATE as RELATE_RELATE } from '../../modules/nf-core/somalier/relate/main'
+include { SOMALIER_EXTRACT                 } from '../../../modules/nf-core/somalier/extract/main'
+include { SOMALIER_RELATE as RELATE_INFER  } from '../../../modules/nf-core/somalier/relate/main'
+include { SOMALIER_RELATE as RELATE_RELATE } from '../../../modules/nf-core/somalier/relate/main'
 
 workflow BAM_INFER_SEX {
 
