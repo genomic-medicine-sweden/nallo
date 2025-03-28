@@ -1,6 +1,6 @@
-include { CRAMINO  } from '../../modules/local/cramino'
-include { FASTQC   } from '../../modules/nf-core/fastqc/main'
-include { MOSDEPTH } from '../../modules/nf-core/mosdepth/main.nf'
+include { CRAMINO  } from '../../../modules/local/cramino/main'
+include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
+include { FASTQC   } from '../../../modules/nf-core/fastqc/main'
 
 workflow QC_ALIGNED_READS {
 
