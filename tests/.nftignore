@@ -11,6 +11,7 @@ multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt
 multiqc/multiqc_data/bcftools_stats_vqc_Count_Transitions.txt
 multiqc/multiqc_data/bcftools_stats_vqc_Count_SNP.txt
 multiqc/multiqc_data/bcftools_stats_vqc_Count_Indels.txt
+multiqc/multiqc_data/peddy_sex_check_plot.txt
 multiqc/multiqc_plots/**/*.{pdf,svg,txt,png}
 multiqc/multiqc_report.html
 paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
@@ -23,3 +24,4 @@ qc/deepvariant_vcfstatsreport/**/*.html
 repeats/**/*.{vcf.gz,tbi,bam,bai}
 snvs/**/*.{vcf.gz,tbi,txt}
 svs/**/*.{vcf.gz,tbi}
+paraphase/**/*.{vcf.gz,tbi,bam,bai,json}

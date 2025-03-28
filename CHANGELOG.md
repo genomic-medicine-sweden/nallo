@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added `--str_caller` parameter
+- [#618](https://github.com/genomic-medicine-sweden/nallo/pull/618) - Added peddy (https://github.com/brentp/peddy)
 
 ### `Changed`
 
@@ -46,10 +47,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter    | New parameter  |
-| ---------------- | -------------- |
-|                  | `--str_caller` |
-| `--trgt_repeats` | `--str_bed`    |
+| Old parameter    | New parameter   |
+| ---------------- | --------------- |
+|                  | `--str_caller`  |
+| `--trgt_repeats` | `--str_bed`     |
+|                  | `--skip_peddy`  |
+|                  | `--peddy_sites` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -63,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | gfastats                    | 1.3.6       | 1.3.10      |
 | add_most_severe_consequence | 1.0         | 1.1         |
 | add_most_severe_pli         | 1.0         | 1.1         |
+| peddy                       |             | 0.4.8       |
 | strdust                     |             | 0.11.1      |
 
 > [!NOTE]

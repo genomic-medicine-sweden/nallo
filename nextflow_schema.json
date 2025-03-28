@@ -53,6 +53,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_peddy": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip peddy",
+                    "default": false
+                },
                 "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -258,6 +264,11 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "peddy_sites": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
                 "modules_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
@@ -269,7 +280,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/77b4411d1fd865127c9c087934567014770e2d71/",
                     "hidden": true
                 },
                 "trace_report_suffix": {

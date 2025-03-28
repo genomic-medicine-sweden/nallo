@@ -53,6 +53,7 @@ include { BCFTOOLS_SORT                                     } from '../modules/n
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { TABIX_TABIX as TABIX_SVDB_MERGE_SVS_CNVS          } from '../modules/nf-core/tabix/tabix/main'
@@ -97,6 +98,7 @@ workflow NALLO {
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
 
@@ -418,6 +420,28 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
+        if (!params.skip_peddy) {
+
+            BCFTOOLS_SORT.out.vcf
+                .join( BCFTOOLS_SORT.out.tbi )
+                .set { ch_peddy_in }
+
+            PEDDY (
+                ch_peddy_in,
+                ch_samplesheet_pedfile,
+                ch_peddy_sites
+            )
+            ch_versions = ch_versions.mix(PEDDY.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+
+        }
     }
     //
     // Filter SNVs

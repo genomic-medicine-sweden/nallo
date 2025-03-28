@@ -195,6 +195,12 @@
                         "git_sha": "b449d9a842b37cb6850e7e6364f3ac45d891cde0",
                         "installed_by": ["modules"]
                     },
+                    "peddy": {
+                        "branch": "master",
+                        "git_sha": "e1c5e2ecade9fdf66fca3b7bcb6b670f50493b24",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/peddy/peddy.diff"
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
