@@ -7,7 +7,7 @@ nextflow_workflow {
 
     setup {
         run("PREPARE_GENOME") {
-            script "../../prepare_genome.nf"
+            script "../../prepare_genome/main.nf"
             process {
                 """
                 input[0] = Channel.of([
@@ -79,7 +79,7 @@ nextflow_workflow {
             }
         }
         run("ANNOTATE_CSQ_PLI") {
-            script "../../../../subworkflows/local/annotate_consequence_pli.nf"
+            script "../../annotate_consequence_pli/main.nf"
             process {
                 """
                 input[0] = SNV_ANNOTATION.out.vcf
