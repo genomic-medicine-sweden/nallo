@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
+- [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Updated `docs/index.md` to avoid duplication with `README.md`
 
 ### `Removed`
 
