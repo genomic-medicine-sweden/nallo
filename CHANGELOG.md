@@ -42,10 +42,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter    | New parameter  |
-| ---------------- | -------------- |
-|                  | `--str_caller` |
-| `--trgt_repeats` | `--str_bed`    |
+| Old parameter    | New parameter   |
+| ---------------- | --------------- |
+|                  | `--str_caller`  |
+| `--trgt_repeats` | `--str_bed`     |
+|                  | `--skip_peddy`  |
+|                  | `--peddy_sites` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
