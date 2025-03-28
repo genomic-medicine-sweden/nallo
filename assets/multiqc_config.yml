@@ -12,14 +12,23 @@ report_section_order:
 export_plots: true
 
 run_modules:
+  - fastqc
   - mosdepth
+  - somalier
+  - bcftools
+  - whatshap
   - peddy
   - custom_content
 
 module_order:
+  - fastqc
   - mosdepth:
       name: "Mosdepth"
+  - somalier
+  - bcftools
+  - whatshap
   - peddy:
       name: "Peddy"
+  - custom_content
 
 disable_version_detection: true
