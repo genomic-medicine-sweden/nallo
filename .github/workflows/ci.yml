@@ -39,6 +39,7 @@ jobs:
           - "samplesheet_multisample_bam"
           - "samplesheet_multisample_ont_bam"
           - "samplesheet_target_regions_null"
+          - "samplesheet_cram"
           - "ALIGN_ASSEMBLIES"
           - "ANNOTATE_SVS"
           - "CALL_REPEAT_EXPANSIONS_STRDUST"
