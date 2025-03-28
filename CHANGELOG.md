@@ -7,12 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#606](https://github.com/genomic-medicine-sweden/nallo/pull/606) - Added bgzip and tabix blocks.tsv from whatshap/stats
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `BUILD_INTERVALS`
 - [#601](https://github.com/genomic-medicine-sweden/nallo/pull/601) - Added stub to `SPLIT_BED_CHUNKS`
+- [#606](https://github.com/genomic-medicine-sweden/nallo/pull/606) - Added bgzip and tabix blocks.tsv from whatshap/stats
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added `--str_caller` parameter
 
 ### `Changed`
 
@@ -23,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#604](https://github.com/genomic-medicine-sweden/nallo/pull/604) - Changed all `.join()` to include `failOnMismatch:true, failOnDuplicate:true` where possible
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Updated splitubam module to fix stubs
 - [#619](https://github.com/genomic-medicine-sweden/nallo/pull/619) - Updated gfastats to fix Nextflow language server issues
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
+- [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
 
 ### `Removed`
 
@@ -34,11 +39,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#595](https://github.com/genomic-medicine-sweden/nallo/pull/595) - Fixed unstable assembly outputs when there's multiple input files per sample
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
 - [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626) - Fixed pipeline lint `local_component_structure` warnings
+- [#637](https://github.com/genomic-medicine-sweden/nallo/pull/637) - Fixed test without target regions not triggering on PRs to the master branch
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter    | New parameter  |
+| ---------------- | -------------- |
+|                  | `--str_caller` |
+| `--trgt_repeats` | `--str_bed`    |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -52,11 +60,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | gfastats                    | 1.3.6       | 1.3.10      |
 | add_most_severe_consequence | 1.0         | 1.1         |
 | add_most_severe_pli         | 1.0         | 1.1         |
+| strdust                     |             | 0.11.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.5.2 - [2025-03-27]
+
+### `Fixed`
+
+[#634](https://github.com/genomic-medicine-sweden/nallo/pull/634) - Fixed SVDB process error when sample and family_id was named the same ([#633](https://github.com/genomic-medicine-sweden/nallo/issues/633))
 
 ## 0.5.1 - [2025-03-10]
 

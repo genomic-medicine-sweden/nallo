@@ -155,23 +155,19 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Repeats
 
-[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
-
-| Path                                                            | Description                               | Call repeats       | Call & annotate repeats |
-| --------------------------------------------------------------- | ----------------------------------------- | ------------------ | ----------------------- |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                | :white_check_mark: |                         |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     | :white_check_mark: |                         |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     | :white_check_mark: | :white_check_mark:      |
-
+[TRGT](https://github.com/PacificBiosciences/trgt) or [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
-| Path                                                                      | Description                           | Call repeats | Call & annotate repeats |
-| ------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
-| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
-| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
+| Path                                                                      | Description                               | STRdust, Call repeats only | TRGT, Call repeats only | TRGT, Call & annotate repeats |
+| ------------------------------------------------------------------------- | ----------------------------------------- | -------------------------- | ----------------------- | ----------------------------- |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz`                    | VCF file with called repeats for a sample | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz.tbi`                | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_spanning_trgt.bam`                      | BAM file with sorted spanning reads       |                            | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_spanning_trgt.bai`                      | Index of the BAM file                     |                            | :white_check_mark:      | :white_check_mark:            |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`               | Merged VCF file per family                | :white_check_mark:         | :white_check_mark:      |                               |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi`           | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      |                               |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family     |                            |                         | :white_check_mark:            |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                     |                            |                         | :white_check_mark:            |
 
 ### SNVs
 
@@ -229,16 +225,16 @@ In general, annotated variant calls are output per family while unannotated call
 
     SV and CNV calls are output unmerged per sample, while the family files are first merged between samples for SVs and CNVs separately, then the merged SV and CNV files are merged again, with priority given to coordinates from the SV calls. SV calls are output for all callers, but only variants from one caller (set by `--sv_caller`) are merged with CNVs, then annotated, ranked and filtered.
 
-| Path                                                                                    | Description                                    | Call SVs           | Call CNVs          | Call SVs & CNVs    | `--publish_unannotated_family_svs` |
-| --------------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------ | ------------------ | ------------------ | ---------------------------------- |
-| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz`                            | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
-| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs.vcf.gz.tbi`                        | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
-| `svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz`                                      | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
-| `svs/sample/{sample}/{sample}_hificnv_cnvs.vcf.gz.tbi`                                  | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{svs,cnvs}.vcf.gz`      | VCF file with merged SVs per family and caller |                    |                    |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{snvs,cnvs}.vcf.gz.tbi` | Index of the merged VCF file                   |                    |                    |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`                             | VCF file with merged CNVs and SVs per family   |                    |                    | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi`                         | Index of the merged VCF file                   |                    |                    | :white_check_mark: |                                    |
+| Path                                                                                           | Description                                    | Call SVs           | Call CNVs          | Call SVs & CNVs    | `--publish_unannotated_family_svs` |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------ | ------------------ | ------------------ | ---------------------------------- |
+| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs_merged.vcf.gz`                            | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_{sniffles,severus}_svs_merged.vcf.gz.tbi`                        | VCF file with SVs per sample                   | :white_check_mark: |                    | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_hificnv_cnvs_merged.vcf.gz`                                      | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
+| `svs/sample/{sample}/{sample}_hificnv_cnvs_merged.vcf.gz.tbi`                                  | VCF file with CNVs per sample                  |                    | :white_check_mark: | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{svs,cnvs}_merged.vcf.gz`      | VCF file with merged SVs per family and caller |                    |                    |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{snvs,cnvs}_merged.vcf.gz.tbi` | Index of the merged VCF file                   |                    |                    |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz`                                    | VCF file with merged CNVs and SVs per family   |                    |                    | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged.vcf.gz.tbi`                                | Index of the merged VCF file                   |                    |                    | :white_check_mark: |                                    |
 
 #### Annotation
 
