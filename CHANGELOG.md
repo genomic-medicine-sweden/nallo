@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
+- [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Updated `docs/index.md` to avoid duplication with `README.md`
 
 ### `Removed`
 
@@ -39,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#595](https://github.com/genomic-medicine-sweden/nallo/pull/595) - Fixed unstable assembly outputs when there's multiple input files per sample
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
+- [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626) - Fixed pipeline lint `local_component_structure` warnings
+- [#637](https://github.com/genomic-medicine-sweden/nallo/pull/637) - Fixed test without target regions not triggering on PRs to the master branch
 
 ### Parameters
 

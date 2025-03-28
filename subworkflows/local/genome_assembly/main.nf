@@ -1,9 +1,9 @@
-include { CAT_FASTQ as CAT_FASTQ_PATERNAL } from '../../modules/nf-core/cat/fastq/main'
-include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../modules/nf-core/cat/fastq/main'
-include { HIFIASM                         } from '../../modules/nf-core/hifiasm'
-include { YAK as YAK_PATERNAL             } from '../../modules/local/yak'
-include { YAK as YAK_MATERNAL             } from '../../modules/local/yak'
-include { GFASTATS                        } from '../../modules/nf-core/gfastats/main'
+include { CAT_FASTQ as CAT_FASTQ_PATERNAL } from '../../../modules/nf-core/cat/fastq/main'
+include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../../modules/nf-core/cat/fastq/main'
+include { HIFIASM                         } from '../../../modules/nf-core/hifiasm'
+include { YAK as YAK_PATERNAL             } from '../../../modules/local/yak/main'
+include { YAK as YAK_MATERNAL             } from '../../../modules/local/yak/main'
+include { GFASTATS                        } from '../../../modules/nf-core/gfastats/main'
 
 workflow ASSEMBLY {
 
@@ -64,7 +64,7 @@ workflow ASSEMBLY {
             }
         .set{ ch_samples }
 
-        // We keep using kid_meta for the parental reads, since they need to go toghether into hifiasm
+        // We keep using kid_meta for the parental reads, since they need to go together into hifiasm
         trio_kids = ch_samples.is_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
         trio_dads = ch_samples.is_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
         trio_moms = ch_samples.is_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }

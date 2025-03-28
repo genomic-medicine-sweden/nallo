@@ -1,13 +1,13 @@
-include { CRAMINO as CRAMINO_PHASED                  } from '../../modules/local/cramino'
-include { HIPHASE                                    } from '../../modules/local/hiphase/main'
-include { LONGPHASE_HAPLOTAG                         } from '../../modules/nf-core/longphase/haplotag/main'
-include { LONGPHASE_PHASE                            } from '../../modules/nf-core/longphase/phase/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../modules/nf-core/samtools/index/main'
-include { TABIX_TABIX as TABIX_LONGPHASE_PHASE       } from '../../modules/nf-core/tabix/tabix/main'
-include { WHATSHAP_HAPLOTAG                          } from '../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                             } from '../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                             } from '../../modules/local/whatshap/stats/main'
+include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino/main'
+include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
+include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
+include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../../modules/nf-core/samtools/index/main'
+include { TABIX_TABIX as TABIX_LONGPHASE_PHASE       } from '../../../modules/nf-core/tabix/tabix/main'
+include { WHATSHAP_HAPLOTAG                          } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                             } from '../../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                             } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:

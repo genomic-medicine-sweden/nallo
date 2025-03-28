@@ -1,5 +1,5 @@
-include { SAMTOOLS_IMPORT } from '../../modules/nf-core/samtools/import/main'
-include { SAMTOOLS_FASTQ } from '../../modules/nf-core/samtools/fastq/main'
+include { SAMTOOLS_IMPORT } from '../../../modules/nf-core/samtools/import/main'
+include { SAMTOOLS_FASTQ  } from '../../../modules/nf-core/samtools/fastq/main'
 
 workflow CONVERT_INPUT_FILES {
 
