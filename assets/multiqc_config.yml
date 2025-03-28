@@ -12,16 +12,11 @@ report_section_order:
 export_plots: true
 
 run_modules:
-  - fastqc
   - mosdepth
   - peddy
   - custom_content
 
 module_order:
-  - fastqc:
-      name: "FastQC"
-      path_filters:
-        - "*.zip"
   - mosdepth:
       name: "Mosdepth"
   - peddy:
