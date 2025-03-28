@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Removed args from local modules that doesn't use it
 - [#625](https://github.com/genomic-medicine-sweden/nallo/pull/625) - Removed last `.first()` from versions, that resulted in a warning displayed when running the pipeline
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
 
 ### `Fixed`
 
