@@ -66,6 +66,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.5.2 - [2025-03-27]
+
+### `Fixed`
+
+[#634](https://github.com/genomic-medicine-sweden/nallo/pull/634) - Fixed SVDB process error when sample and family_id was named the same ([#633](https://github.com/genomic-medicine-sweden/nallo/issues/633))
+
 ## 0.5.1 - [2025-03-10]
 
 ### `Fixed`
