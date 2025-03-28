@@ -627,6 +627,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>skip_peddy</code></td>
+<td>Skip peddy</td>
+<td><code>boolean</code></td>
+<td>False</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>skip_phasing</code></td>
 <td>Skip phasing of variants and haplotagging of reads</td>
 <td><code>boolean</code></td>
@@ -883,10 +891,26 @@
 <td></td>
 </tr>
 <tr>
+<td><code>peddy_sites</code></td>
+<td>A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>modules_testdata_base_path</code></td>
+<td>Base URL or local path to location of modules test dataset files</td>
+<td><code>string</code></td>
+<td>https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/</td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c7e99d0b2a366c606a5b3e5626b36e727c794a91/</td>
 <td></td>
 <td>True</td>
 </tr>

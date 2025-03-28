@@ -461,6 +461,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#peddy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peddy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#deepvariant" class="md-nav__link">
     <span class="md-ellipsis">
       DeepVariant
@@ -780,6 +789,15 @@
   <a href="#somalier" class="md-nav__link">
     <span class="md-ellipsis">
       Somalier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peddy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Peddy
     </span>
   </a>
   
@@ -1294,6 +1312,58 @@
 <tr>
 <td><code>qc/somalier/relate/{project}/{project}.samples.tsv</code></td>
 <td>Information about individual samples</td>
+</tr>
+</tbody>
+</table>
+<h3 id="peddy">Peddy</h3>
+<p><a href="https://github.com/brentp/peddy">peddy</a> checks relatedness and sex.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qc/peddy/{family}/{family}.peddy.ped</code></td>
+<td>PED file updated with peddy-inferred sex per family</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.html</code></td>
+<td>HTML report</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.vs.html</code></td>
+<td>HTML report of observed vs expected relatedness</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.sex_check.csv</code></td>
+<td>Comparison between reported sex (ped file) and that inferred from peddy</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.het_check.csv</code></td>
+<td>Het check does general QC including rate of het calls, allele-balance at het calls, mean and median depth, and a PCA projection onto thousand genomes. Incudes ancestry check</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.ped_check.csv</code></td>
+<td>Ped check compares the relatedness of 2 samples as reported in a .ped file to the relatedness inferred from the genotypes and ~25K sites in the genome</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.sex_check.png</code></td>
+<td>PNG comparison between reported sex (ped file) and that inferred from peddy</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.het_check.png</code></td>
+<td>PNG of heterozygosity check</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.ped_check.png</code></td>
+<td>PNG of the ped check comparison</td>
+</tr>
+<tr>
+<td><code>qc/peddy/{family}/{family}.ped_check.rel-difference.csv</code></td>
+<td>CSV file with the comparison between inferred and given relatedness</td>
 </tr>
 </tbody>
 </table>
