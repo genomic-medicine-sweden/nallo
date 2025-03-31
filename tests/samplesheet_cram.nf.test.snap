@@ -542,10 +542,6 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ],
             [
-                "HG002_Revio_haplotagged.cram:md5,7ff9ec561a59a295b5fde1b15235f57b",
-                "HG002_Revio_haplotagged.cram.crai:md5,439758ac2bb854f151d339ac6fe0eb65",
-                "HG002_Revio_aligned_assembly.cram:md5,39d6cc9291bb472f71728cf848446cf9",
-                "HG002_Revio_aligned_assembly.cram.crai:md5,41d508c8e42a302bea89fa23dfd6c0d2",
                 "HG002_Revio_haplotype_1.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
                 "HG002_Revio_modkit_pileup_1.bed.gz:md5,1d90dc72aea71d6c9de602cc51aa9861",
@@ -582,8 +578,6 @@
                 "peddy_het_check_plot.txt:md5,70eae014975db9ffdf43030f9de8802d",
                 "somalier_stats.txt:md5,150fa6b9c197c539947168c11d2115f9",
                 "whatshap-stats-table.txt:md5,8cc1d8ade38cf3ae084b85d24d8e2f31",
-                "HG002_Revio.paraphase.cram:md5,8ee13ad6f964edd7fb12d157441e987e",
-                "HG002_Revio.paraphase.cram.crai:md5,1782973c24bf708c6471f41cef258930",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
                 "HG002_Revio_cramino_aligned.arrow:md5,72df2934ff8aa7e1bf8cf8a4881a0d2a",
@@ -606,8 +600,6 @@
                 "HG002_Revio_stats.blocks.tsv.gz:md5,dc631306f4ff70ff0352994b2a975917",
                 "HG002_Revio_stats.blocks.tsv.gz.tbi:md5,9c44af57119b9d2868dd4449cc6dbf99",
                 "HG002_Revio_stats.stats.tsv:md5,6adb96784c82826928ebfc4f4726a35d",
-                "HG002_Revio_spanning_trgt.cram:md5,749b51991088e2e66273c5f363178a6e",
-                "HG002_Revio_spanning_trgt.cram.crai:md5,736afcd276b880c320d6706517ff65ff",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_hificnv.maf.bw:md5,cffee4ce0734c1c6eae507c0f80c4a4a"
@@ -692,6 +684,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-28T16:55:59.390061285"
+        "timestamp": "2025-03-31T11:11:48.457180318"
     }
 }
