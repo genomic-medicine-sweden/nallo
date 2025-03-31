@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/914ac53d2a801418e1849d3f77c865aedc03959d/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/914ac53d2a801418e1849d3f77c865aedc03959d/'
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet.csv'
                 outdir                       = "$outputDir"
             }
@@ -25,7 +25,7 @@ nextflow_pipeline {
             // Reference (needed for CRAM inspection)
             def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             // cram_files: All cram files
-            def cram_files        = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
+            def cram_files       = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5

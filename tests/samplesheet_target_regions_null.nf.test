@@ -26,7 +26,7 @@ nextflow_pipeline {
             // Reference (needed for CRAM inspection)
             def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             // cram_files: All cram files
-            def cram_files        = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
+            def cram_files       = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
