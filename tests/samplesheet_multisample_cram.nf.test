@@ -4,8 +4,8 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_bam | --phaser hiphase") {
-        tag "samplesheet_multisample_bam"
+    test("samplesheet_multisample_cram | --phaser hiphase") {
+        tag "samplesheet_multisample_cram"
 
         when {
             params {
@@ -13,7 +13,7 @@ nextflow_pipeline {
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam.csv'
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
-
+                alignment_output_format      = 'cram'
             }
         }
 
@@ -22,14 +22,19 @@ nextflow_pipeline {
             def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-            // bam_files: All bam files
+            // Reference (needed for CRAM inspection)
+            def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            // bam_files: All bam files (should be empty)
             def bam_files        = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            // cram_files: All cram files
+            def cram_files        = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
                 { assert workflow.success},
+                { assert bam_files.isEmpty() }, // Make sure there are no BAM files
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
@@ -39,8 +44,8 @@ nextflow_pipeline {
                     stable_name,
                     // All files with stable contents
                     stable_path,
-                    // All bam files
-                    bam_files.collect{ file -> [ file.getName(), bam(file.toString(), stringency: 'silent').getReadsMD5() ] },
+                    // All cram files
+                    cram_files.collect{ file -> [ file.getName(), cram(file.toString(), fasta).getReadsMD5() ] },
                     // All vcf files
                     all_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.summary ] },
                     // Stable vcf files
