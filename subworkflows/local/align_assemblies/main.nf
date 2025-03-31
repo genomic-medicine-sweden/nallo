@@ -11,6 +11,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai      // channel: [mandatory] [ val(meta), path(fai)   ]
+    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions = Channel.empty()
@@ -55,7 +56,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
     // Publish alignment as CRAM if requested
-    if (params.alignment_output_format == 'cram') {
+    if (cram_output) {
         SAMTOOLS_CONVERT(
             SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.bai, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta,

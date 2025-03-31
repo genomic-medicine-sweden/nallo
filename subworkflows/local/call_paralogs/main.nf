@@ -10,9 +10,10 @@ include { SAMTOOLS_CONVERT                            } from '../../../modules/n
 workflow CALL_PARALOGS {
 
     take:
-    bam_bai // channel: [ val(meta), bam, bai ]
-    fasta   // channel: [ val(meta), fasta    ]
-    fai     // channel: [ val(meta), fai      ]
+    bam_bai     // channel: [ val(meta), bam, bai ]
+    fasta       // channel: [ val(meta), fasta    ]
+    fai         // channel: [ val(meta), fai      ]
+    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions = Channel.empty()
@@ -28,7 +29,7 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
 
     // Publish bam output as CRAM if requested
-    if (params.alignment_output_format == 'cram') {
+    if (cram_output) {
         SAMTOOLS_CONVERT (
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
             fasta,

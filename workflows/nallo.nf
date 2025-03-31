@@ -112,6 +112,8 @@ workflow NALLO {
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
         .collect()
 
+    def cram_output = params.alignment_output_format == 'cram'
+
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
     //
@@ -194,7 +196,7 @@ workflow NALLO {
             .set { ch_aligned_bam }
 
         // Publish alignments as CRAM if requested
-        if (params.alignment_output_format == 'cram') {
+        if (cram_output) {
             SAMTOOLS_CONVERT (
                 ch_aligned_bam,
                 ch_fasta,
@@ -263,7 +265,8 @@ workflow NALLO {
         CALL_PARALOGS (
             ch_bam_bai,
             ch_fasta,
-            ch_fai
+            ch_fai,
+            cram_output
         )
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
@@ -602,7 +605,8 @@ workflow NALLO {
             SHORT_VARIANT_CALLING.out.snp_calls_tbi,
             ch_bam_bai,
             ch_fasta,
-            ch_fai
+            ch_fai,
+            cram_output
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
@@ -631,7 +635,8 @@ workflow NALLO {
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
                 ch_fai,
-                ch_str_bed
+                ch_str_bed,
+                cram_output
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf

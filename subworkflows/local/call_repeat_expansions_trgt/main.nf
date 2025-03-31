@@ -14,6 +14,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai      // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
+    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
 
@@ -43,7 +44,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     // Publish spanning reads as CRAM if requested
-    if (params.alignment_output_format == 'cram') {
+    if (cram_output) {
         SAMTOOLS_CONVERT (
             SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta,
