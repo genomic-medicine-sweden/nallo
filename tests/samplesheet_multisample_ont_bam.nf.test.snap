@@ -716,6 +716,9 @@
                 ]
             ],
             [
+                
+            ],
+            [
                 [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3695, phased=true, phasedAutodetect=false]"
@@ -817,6 +820,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-28T09:28:42.309424245"
+        "timestamp": "2025-03-31T17:50:18.264894167"
     }
 }
