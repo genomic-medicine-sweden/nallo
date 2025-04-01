@@ -12,11 +12,11 @@ include { WHATSHAP_STATS                             } from '../../../modules/lo
 
 workflow PHASING {
     take:
-    ch_vcf        // channel: [ val(meta), path(vcf) ]
-    ch_vcf_index  // channel: [ val(meta), path(tbi) ]
-    ch_bam_bai    // channel: [ val(meta), path(bam), path(bai) ]
-    fasta         // channel: [ val(meta), path(fasta) ]
-    fai           // channel: [ val(meta), path(fai) ]
+    ch_vcf       // channel: [ val(meta), path(vcf) ]
+    ch_vcf_index // channel: [ val(meta), path(tbi) ]
+    ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
+    fasta        // channel: [ val(meta), path(fasta) ]
+    fai          // channel: [ val(meta), path(fai) ]
     cram_output   // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:

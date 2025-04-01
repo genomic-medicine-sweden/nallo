@@ -56,7 +56,6 @@ workflow CALL_PARALOGS {
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
 
-
     // Give meta.id as sample name in the VCF
     BCFTOOLS_REHEADER ( ch_bcftools_reheader_in, [[],[]] )
     ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
