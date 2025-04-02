@@ -48,10 +48,12 @@ The above command downloads the pipeline from GitHub, caches it, and tests it on
 Running the pipeline on real data involves three steps:
 
 1. Prepare a samplesheet with your data
-2. Gather the required files and references
-3. Supply the samplesheet, reference files and run the pipeline
+2. Choose a matching preset
+3. (Select which parts of the pipeline to run)
+4. Gather the required files and references
+5. Supply the samplesheet, reference files and run the pipeline
 
-## Samplesheet
+### Samplesheet
 
 First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.
 
@@ -78,7 +80,7 @@ testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
 | `sex`         | Sex must be provided as 0, 1 or 2 (0=unknown; 1=male; 2=female). If sex is unknown it will be assigned automatically if possible. |
 | `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                               |
 
-## Presets
+### Presets
 
 This pipeline comes with three different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio` or `ONT_R10`. The preset parameter controls certain technology specific tools and parameters.
 
@@ -87,11 +89,11 @@ This pipeline comes with three different presets that should be set with the `--
     - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
-## Subworkflows
+### Subworkflows
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
-### Required parameters
+#### Required parameters
 
 The only mandatory parameters for all subworkflows are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
 
@@ -109,7 +111,7 @@ For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profi
 
 A thorough description of the required files are provided below.
 
-### Skipping subworkflows
+#### Skipping subworkflows
 
 If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
 
@@ -126,9 +128,9 @@ Because almost all other subworkflows relies on the mapping subworkflow.
 
 ## Reference files and parameters
 
-All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described in more detail below.
+All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
 
-### Alignment
+#### Alignment
 
 The majority of subworkflows depend on the alignment subworkflow which requires `--fasta` and `--somalier_sites`.
 
@@ -139,19 +141,19 @@ The majority of subworkflows depend on the alignment subworkflow which requires 
 
 Turned off with `--skip_alignment`.
 
-### QC
+#### QC
 
 This subworkflow depends on the alignment subworkflow, but requires no additional files.
 
 Turned off with `--skip_qc`.
 
-### Assembly
+#### Assembly
 
 This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
 
 Turned off with `--skip_genome_assembly`.
 
-### Call paralogs
+#### Call paralogs
 
 This subworkflow depends on the mapping subworkflow, but requires no additional files.
 
@@ -161,7 +163,7 @@ This subworkflow depends on the mapping subworkflow, but requires no additional 
 
 Turned off with `--skip_call_paralogs`.
 
-### SNV calling
+#### SNV calling
 
 This subworkflow depends on the alignment subworkflow, and requires PARs.
 
@@ -171,7 +173,7 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
-### SV calling
+#### SV calling
 
 This subworkflow depends on the alignment subworkflow.
 
@@ -181,7 +183,7 @@ Unannotated family-level VCFs per caller can be output with `--publish_unannotat
 
 Turned off with `--skip_sv_calling`.
 
-### CNV calling
+#### CNV calling
 
 This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
 
@@ -197,19 +199,19 @@ Unannotated family-level VCFs per caller can be output with `--publish_unannotat
 
 Turned off with `--skip_cnv_calling`.
 
-### Phasing
+#### Phasing
 
 This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.
 
 Turned off with `--skip_phasing`.
 
-### Methylation pileups
+#### Methylation pileups
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.
 
 Turned off with `--skip_methylation_pileups`.
 
-### Repeat calling
+#### Repeat calling
 
 This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:
 
@@ -220,7 +222,7 @@ This subworkflow requires haplotagged BAM files, and such relies on aligment, SN
 
 Turned off with `--skip_repeat_calling`.
 
-### Repeat annotation
+#### Repeat annotation
 
 This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:
 
@@ -230,7 +232,7 @@ This subworkflow relies on the alignment, SNV calling, phasing and repeat callin
 
 Turned off with `--skip_repeat_annotation`.
 
-### SNV annotation
+#### SNV annotation
 
 This subworkflow relies on the alignment and SNV calling, and requires the following additional files:
 
@@ -268,7 +270,7 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 Turned off with `--skip_snv_annotation`.
 
-### Rank SNVs and INDELs
+#### Rank SNVs and INDELs
 
 This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:
 
@@ -279,7 +281,7 @@ This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV an
 
 Turned off with `--skip_rank_variants`.
 
-### SV annotation
+#### SV annotation
 
 This subworkflow relies on the alignment subworkflow, and requires the following additional files:
 
@@ -312,7 +314,7 @@ https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/re
 
 Turned off with `--skip_sv_annotation`.
 
-### Rank SVs
+#### Rank SVs
 
 This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:
 
@@ -323,7 +325,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 `--skip_rank_variants`.
 
-### Filter variants
+#### Filter variants
 
 This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.
 
@@ -343,7 +345,7 @@ hgnc_id
 
 Filtering of variants only happens if any of these three parameters is active.
 
-## Other highlighted parameters
+#### Other highlighted parameters
 
 - Limit SNV calling to regions in BED file (`--target_regions`).
 - By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added `--str_caller` parameter
 - [#618](https://github.com/genomic-medicine-sweden/nallo/pull/618) - Added peddy (https://github.com/brentp/peddy)
+- [#646](https://github.com/genomic-medicine-sweden/nallo/pull/646) - Added link to [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) in documentation
 
 ### `Changed`
 
