@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
 - [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626) - Fixed pipeline lint `local_component_structure` warnings
 - [#637](https://github.com/genomic-medicine-sweden/nallo/pull/637) - Fixed test without target regions not triggering on PRs to the master branch
+- [#644](https://github.com/genomic-medicine-sweden/nallo/pull/644) - Fixed FastQC ignoring memory parameter
 
 ### Parameters
 
