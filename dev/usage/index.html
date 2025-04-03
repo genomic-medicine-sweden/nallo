@@ -376,9 +376,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Running genomic-medicine-sweden/nallo with your data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#samplesheet" class="md-nav__link">
     <span class="md-ellipsis">
       Samplesheet
@@ -386,8 +387,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#presets" class="md-nav__link">
     <span class="md-ellipsis">
       Presets
@@ -395,8 +396,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Subworkflows
@@ -421,6 +422,11 @@
       Skipping subworkflows
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -583,17 +589,17 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#other-highlighted-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Other highlighted parameters
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -890,9 +896,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Running genomic-medicine-sweden/nallo with your data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#samplesheet" class="md-nav__link">
     <span class="md-ellipsis">
       Samplesheet
@@ -900,8 +907,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#presets" class="md-nav__link">
     <span class="md-ellipsis">
       Presets
@@ -909,8 +916,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Subworkflows
@@ -935,6 +942,11 @@
       Skipping subworkflows
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1097,17 +1109,17 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#other-highlighted-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Other highlighted parameters
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1321,10 +1333,12 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>Running the pipeline on real data involves three steps:</p>
 <ol>
 <li>Prepare a samplesheet with your data</li>
+<li>Choose a matching preset</li>
+<li>(Select which parts of the pipeline to run)</li>
 <li>Gather the required files and references</li>
 <li>Supply the samplesheet, reference files and run the pipeline</li>
 </ol>
-<h2 id="samplesheet">Samplesheet</h2>
+<h3 id="samplesheet">Samplesheet</h3>
 <p>First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--input<span class="w"> </span><span class="s1">&#39;[path to samplesheet file]&#39;</span>
 </span></code></pre></div>
@@ -1375,7 +1389,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tr>
 </tbody>
 </table>
-<h2 id="presets">Presets</h2>
+<h3 id="presets">Presets</h3>
 <p>This pipeline comes with three different presets that should be set with the <code>--preset</code> parameter: <code>revio</code> (default), <code>pacbio</code> or <code>ONT_R10</code>. The preset parameter controls certain technology specific tools and parameters.</p>
 <div class="admonition info">
 <p class="admonition-title">Preset effects on subworkflows</p>
@@ -1384,9 +1398,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
-<h2 id="subworkflows">Subworkflows</h2>
+<h3 id="subworkflows">Subworkflows</h3>
 <p>As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.</p>
-<h3 id="required-parameters">Required parameters</h3>
+<h4 id="required-parameters">Required parameters</h4>
 <p>The only mandatory parameters for all subworkflows are the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
 <p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will would to guide you through which files are required:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1398,7 +1412,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
 <p>A thorough description of the required files are provided below.</p>
-<h3 id="skipping-subworkflows">Skipping subworkflows</h3>
+<h4 id="skipping-subworkflows">Skipping subworkflows</h4>
 <p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
 <p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1408,8 +1422,8 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span></code></pre></div>
 <p>Because almost all other subworkflows relies on the mapping subworkflow.</p>
 <h2 id="reference-files-and-parameters">Reference files and parameters</h2>
-<p>All parameters are listed in the <a href="../parameters/">parameters section</a>, but the most useful parameters needed to run the pipeline described in more detail below.</p>
-<h3 id="alignment">Alignment</h3>
+<p>All parameters are listed in the <a href="../parameters/">parameters section</a>, but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, <a href="https://github.com/genomic-medicine-sweden/nallorefs">genomic-medicine-sweden/nallorefs</a> can automatically download and prepare the majority of a set of references that works with Nallo. See the <a href="https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs">nallorefs documentation</a> for more information.</p>
+<h4 id="alignment">Alignment</h4>
 <p>The majority of subworkflows depend on the alignment subworkflow which requires <code>--fasta</code> and <code>--somalier_sites</code>.</p>
 <table>
 <thead>
@@ -1430,20 +1444,20 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_alignment</code>.</p>
-<h3 id="qc">QC</h3>
+<h4 id="qc">QC</h4>
 <p>This subworkflow depends on the alignment subworkflow, but requires no additional files.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
-<h3 id="assembly">Assembly</h3>
+<h4 id="assembly">Assembly</h4>
 <p>This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.</p>
 <p>Turned off with <code>--skip_genome_assembly</code>.</p>
-<h3 id="call-paralogs">Call paralogs</h3>
+<h4 id="call-paralogs">Call paralogs</h4>
 <p>This subworkflow depends on the mapping subworkflow, but requires no additional files.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Only GRCh38 is supported.</p>
 </div>
 <p>Turned off with <code>--skip_call_paralogs</code>.</p>
-<h3 id="snv-calling">SNV calling</h3>
+<h4 id="snv-calling">SNV calling</h4>
 <p>This subworkflow depends on the alignment subworkflow, and requires PARs.</p>
 <table>
 <thead>
@@ -1460,14 +1474,14 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_snv_calling</code>.</p>
-<h3 id="sv-calling">SV calling</h3>
+<h4 id="sv-calling">SV calling</h4>
 <p>This subworkflow depends on the alignment subworkflow.</p>
 <div class="admonition tip">
 <p class="admonition-title">Family-level VCFs per caller</p>
 </div>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
 <p>Turned off with <code>--skip_sv_calling</code>.</p>
-<h3 id="cnv-calling">CNV calling</h3>
+<h4 id="cnv-calling">CNV calling</h4>
 <p>This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:</p>
 <table>
 <thead>
@@ -1496,13 +1510,13 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </div>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
 <p>Turned off with <code>--skip_cnv_calling</code>.</p>
-<h3 id="phasing">Phasing</h3>
+<h4 id="phasing">Phasing</h4>
 <p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.</p>
 <p>Turned off with <code>--skip_phasing</code>.</p>
-<h3 id="methylation-pileups">Methylation pileups</h3>
+<h4 id="methylation-pileups">Methylation pileups</h4>
 <p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.</p>
 <p>Turned off with <code>--skip_methylation_pileups</code>.</p>
-<h3 id="repeat-calling">Repeat calling</h3>
+<h4 id="repeat-calling">Repeat calling</h4>
 <p>This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
@@ -1523,7 +1537,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_repeat_calling</code>.</p>
-<h3 id="repeat-annotation">Repeat annotation</h3>
+<h4 id="repeat-annotation">Repeat annotation</h4>
 <p>This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
@@ -1540,7 +1554,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_repeat_annotation</code>.</p>
-<h3 id="snv-annotation">SNV annotation</h3>
+<h4 id="snv-annotation">SNV annotation</h4>
 <p>This subworkflow relies on the alignment and SNV calling, and requires the following additional files:</p>
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
@@ -1588,7 +1602,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>Optionally, to calculate CADD scores for small indels, supply a path to a folder containing cadd annotations with <code>--cadd_resources</code> and prescored indels with <code>--cadd_prescored_indels</code>. Equivalent of the <code>data/annotations/</code> and <code>data/prescored/</code> folders described <a href="https://github.com/kircherlab/CADD-scripts/#manual-installation">here</a>. CADD scores for SNVs can be annotated through echtvar and <code>--echtvar_snv_databases</code>.</p>
 </div>
 <p>Turned off with <code>--skip_snv_annotation</code>.</p>
-<h3 id="rank-snvs-and-indels">Rank SNVs and INDELs</h3>
+<h4 id="rank-snvs-and-indels">Rank SNVs and INDELs</h4>
 <p>This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:</p>
 <table>
 <thead>
@@ -1609,7 +1623,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_rank_variants</code>.</p>
-<h3 id="sv-annotation">SV annotation</h3>
+<h4 id="sv-annotation">SV annotation</h4>
 <p>This subworkflow relies on the alignment subworkflow, and requires the following additional files:</p>
 <table>
 <thead>
@@ -1651,7 +1665,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/nallo/reference/vep_plugins/LoFtool_scores.txt
 </span></code></pre></div>
 <p>Turned off with <code>--skip_sv_annotation</code>.</p>
-<h3 id="rank-svs">Rank SVs</h3>
+<h4 id="rank-svs">Rank SVs</h4>
 <p>This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotation subworkflows, and requires the following additional files:</p>
 <table>
 <thead>
@@ -1672,7 +1686,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p><code>--skip_rank_variants</code>.</p>
-<h3 id="filter-variants">Filter variants</h3>
+<h4 id="filter-variants">Filter variants</h4>
 <p>This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.</p>
 <table>
 <thead>
@@ -1702,7 +1716,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>14150
 </span></code></pre></div>
 <p>Filtering of variants only happens if any of these three parameters is active.</p>
-<h2 id="other-highlighted-parameters">Other highlighted parameters</h2>
+<h4 id="other-highlighted-parameters">Other highlighted parameters</h4>
 <ul>
 <li>Limit SNV calling to regions in BED file (<code>--target_regions</code>).</li>
 <li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting <code>--snv_calling_processes</code> to a different number.</li>
