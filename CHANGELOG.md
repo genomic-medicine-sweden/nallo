@@ -12,10 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#606](https://github.com/genomic-medicine-sweden/nallo/pull/606) - Added bgzip and tabix blocks.tsv from whatshap/stats
 - [#609](https://github.com/genomic-medicine-sweden/nallo/pull/609) - Added runtime estimates to documentation
 - [#611](https://github.com/genomic-medicine-sweden/nallo/pull/611) - Added stub to `YAK`
+- [#618](https://github.com/genomic-medicine-sweden/nallo/pull/618) - Added peddy (https://github.com/brentp/peddy)
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Added words to vscode spellchecker
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added STRdust caller for short tandem repeat expansions
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Added `--str_caller` parameter
-- [#618](https://github.com/genomic-medicine-sweden/nallo/pull/618) - Added peddy (https://github.com/brentp/peddy)
+- [#638](https://github.com/genomic-medicine-sweden/nallo/pull/638) - Added feature to output alignments as CRAM using `--alignment_output_format` parameter
 - [#646](https://github.com/genomic-medicine-sweden/nallo/pull/646) - Added link to [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) in documentation
 
 ### `Changed`
@@ -32,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
 - [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Updated `docs/index.md` to avoid duplication with `README.md`
 - [#640](https://github.com/genomic-medicine-sweden/nallo/pull/640) - Updated nf-test paths that were broken by [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626)
+- [#645](https://github.com/genomic-medicine-sweden/nallo/pull/645) - Updated metro map with peddy and STRdust
 
 ### `Removed`
 
@@ -49,12 +51,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter    | New parameter   |
-| ---------------- | --------------- |
-|                  | `--str_caller`  |
-| `--trgt_repeats` | `--str_bed`     |
-|                  | `--skip_peddy`  |
-|                  | `--peddy_sites` |
+| Old parameter    | New parameter               |
+| ---------------- | --------------------------- |
+|                  | `--str_caller`              |
+| `--trgt_repeats` | `--str_bed`                 |
+|                  | `--skip_peddy`              |
+|                  | `--peddy_sites`             |
+|                  | `--alignment_output_format` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

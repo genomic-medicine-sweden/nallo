@@ -1,6 +1,7 @@
 include { TRGT_GENOTYPE    } from '../../../modules/nf-core/trgt/genotype/main'
 include { SAMTOOLS_INDEX   } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SORT    } from '../../../modules/nf-core/samtools/sort/main'
+include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
 include { ADD_FOUND_IN_TAG } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_SORT    } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE       } from '../../../modules/nf-core/trgt/merge/main'
@@ -13,6 +14,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai      // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
+    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
 
@@ -40,6 +42,16 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
     SAMTOOLS_INDEX ( SAMTOOLS_SORT.out.bam )
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
+
+    // Publish spanning reads as CRAM if requested
+    if (cram_output) {
+        SAMTOOLS_CONVERT (
+            SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true),
+            ch_fasta,
+            ch_fai
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
+    }
 
     // Add FOUND_IN=TRGT tag
     ADD_FOUND_IN_TAG (

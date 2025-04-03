@@ -1,5 +1,5 @@
-aligned_reads/**/*.{bam,bai}
-assembly/**/*.{bam,bai}
+aligned_reads/**/*.{bam,bai,cram,crai}
+assembly/**/*.{bam,bai,cram,crai}
 cnv_calling/**/*.log
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
@@ -21,7 +21,7 @@ qc/cramino/**/*.txt
 qc/fastqc/**/*.{zip,html}
 qc/somalier/**/*.{html,tsv}
 qc/deepvariant_vcfstatsreport/**/*.html
-repeats/**/*.{vcf.gz,tbi,bam,bai}
+repeats/**/*.{vcf.gz,tbi,bam,bai,cram,crai}
 snvs/**/*.{vcf.gz,tbi,txt}
 svs/**/*.{vcf.gz,tbi}
-paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
+paraphase/**/*.{vcf.gz,tbi,bam,bai,cram,crai,json}
