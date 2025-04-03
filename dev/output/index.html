@@ -987,14 +987,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>aligned_reads/minimap2/{sample}/*.bam</code></td>
-<td>Alignment file in bam format</td>
+<td><code>aligned_reads/minimap2/{sample}/{sample}_aligned.{bam,cram}</code></td>
+<td>Alignment file in BAM or CRAM format</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
 <tr>
-<td><code>aligned_reads/minimap2/{sample}/*.bai</code></td>
-<td>Index of the corresponding bam file</td>
+<td><code>aligned_reads/minimap2/{sample}/{sample}_aligned.{bam.bai,cram.crai}</code></td>
+<td>Index of the corresponding alignment file</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
@@ -1011,14 +1011,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
-<td>BAM file with haplotags</td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}</code></td>
+<td>Alignment file with haplotags in BAM or CRAM format</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
-<td>Index of the BAM file</td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}</code></td>
+<td>Index of the alignment file</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
@@ -1035,11 +1035,11 @@
 </thead>
 <tbody>
 <tr>
-<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.bam</code></td>
+<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.{bam,cram}</code></td>
 <td>Both assembled haplotypes mapped to the reference genome, merged and haplotagged (<code>HP:1</code>/<code>HP:2</code>).</td>
 </tr>
 <tr>
-<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.bam.bai</code></td>
+<td><code>assembly/sample/{sample}/{sample}_aligned_assembly.{bam.bai,cram.crai}</code></td>
 <td>Index of aligned assembly.</td>
 </tr>
 <tr>
@@ -1167,12 +1167,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam</code></td>
-<td>BAM file with haplotags</td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}</code></td>
+<td>BAM/CRAM file with haplotags</td>
 </tr>
 <tr>
-<td><code>aligned_reads/{sample}/{sample}_haplotagged.bam.bai</code></td>
-<td>Index of the BAM file</td>
+<td><code>aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}</code></td>
+<td>Index of the BAM/CRAM file</td>
 </tr>
 <tr>
 <td><code>phased_variants/{sample}/*.vcf.gz</code></td>
@@ -1405,15 +1405,15 @@
 </thead>
 <tbody>
 <tr>
-<td><code>paraphase/sample/{sample}/*.bam</code></td>
-<td>BAM file with reads from analyzed regions</td>
+<td><code>paraphase/sample/{sample}/{sample}.paraphase.{bam,cram}</code></td>
+<td>BAM/CRAM file with reads from analyzed regions</td>
 </tr>
 <tr>
-<td><code>paraphase/sample/{sample}/*.bai</code></td>
-<td>Index of the BAM file</td>
+<td><code>paraphase/sample/{sample}/{sample}.paraphase.{bam.bai,cram.crai}</code></td>
+<td>Index of the BAM/CRAM file</td>
 </tr>
 <tr>
-<td><code>paraphase/sample/{sample}/*.json</code></td>
+<td><code>paraphase/sample/{sample}/{sample}.paraphase.json</code></td>
 <td>Summary of haplotypes and variant calls</td>
 </tr>
 <tr>
@@ -1467,15 +1467,15 @@
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.bam</code></td>
-<td>BAM file with sorted spanning reads</td>
+<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.{bam,cram}</code></td>
+<td>BAM/CRAM file with sorted spanning reads</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.bai</code></td>
-<td>Index of the BAM file</td>
+<td><code>repeats/sample/{sample}/{sample}_spanning_trgt.{bam.bai,cram.crai}</code></td>
+<td>Index of the BAM/CRAM file</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
