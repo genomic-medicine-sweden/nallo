@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.6.0 - [XXXX-XX-XX]
+## 0.6.0 - [2025-04-03]
 
 ### `Added`
 
@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Updated `docs/index.md` to avoid duplication with `README.md`
 - [#640](https://github.com/genomic-medicine-sweden/nallo/pull/640) - Updated nf-test paths that were broken by [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626)
 - [#645](https://github.com/genomic-medicine-sweden/nallo/pull/645) - Updated metro map with peddy and STRdust
+- [#647](https://github.com/genomic-medicine-sweden/nallo/pull/647) - Updated version to 0.6.0
 
 ### `Removed`
 
