@@ -269,6 +269,13 @@
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
                 },
+                "alignment_output_format": {
+                    "type": "string",
+                    "fa_icon": "fa-solid fa-download",
+                    "enum": ["bam", "cram"],
+                    "description": "Output format for alignment files. Either `bam` or `cram`",
+                    "default": "bam"
+                },
                 "modules_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
@@ -280,7 +287,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/77b4411d1fd865127c9c087934567014770e2d71/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/914ac53d2a801418e1849d3f77c865aedc03959d/",
                     "hidden": true
                 },
                 "trace_report_suffix": {

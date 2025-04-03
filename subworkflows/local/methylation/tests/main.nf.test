@@ -66,6 +66,7 @@ nextflow_workflow {
                             }
                 input[3] = PREPARE_GENOME.out.fasta
                 input[4] = PREPARE_GENOME.out.fai
+                input[5] = false
                 """
             }
         }

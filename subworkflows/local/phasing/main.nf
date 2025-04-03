@@ -2,6 +2,7 @@ include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/lo
 include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
 include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_CONVERT                           } from '../../../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../../modules/nf-core/samtools/index/main'
 include { TABIX_TABIX as TABIX_LONGPHASE_PHASE       } from '../../../modules/nf-core/tabix/tabix/main'
@@ -16,6 +17,7 @@ workflow PHASING {
     ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
     fasta        // channel: [ val(meta), path(fasta) ]
     fai          // channel: [ val(meta), path(fai) ]
+    cram_output   // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = Channel.empty()
@@ -126,6 +128,15 @@ workflow PHASING {
     // Phasing stats
     WHATSHAP_STATS ( ch_phased_vcf_index )
     ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
+
+    if (cram_output) {
+        SAMTOOLS_CONVERT (
+            ch_bam_bai_haplotagged,
+            fasta,
+            fai
+        )
+        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
+    }
 
     // Phasing QC
     CRAMINO_PHASED ( ch_bam_bai_haplotagged )

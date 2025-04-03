@@ -1,7 +1,7 @@
 {
     "test profile - target_regions null": {
         "content": [
-            136,
+            137,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -49,9 +49,6 @@
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.2
-                },
-                "BCFTOOLS_SORT_TRGT": {
                     "bcftools": 1.2
                 },
                 "BCFTOOLS_STATS": {
@@ -163,6 +160,9 @@
                     "paraphase": "3.2.1",
                     "samtools": 1.21
                 },
+                "PEDDY": {
+                    "peddy": "0.4.8"
+                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -176,16 +176,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_LONGPHASE": {
+                "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_INDEX_TRGT": {
+                "SAMTOOLS_INDEX_LONGPHASE": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_SORT_TRGT": {
+                "SAMTOOLS_SORT": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_VIEW": {
@@ -320,11 +320,14 @@
                 "multiqc/multiqc_data/multiqc_data.json",
                 "multiqc/multiqc_data/multiqc_fastqc.txt",
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/multiqc_data/multiqc_peddy.txt",
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/multiqc_data/multiqc_somalier.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
                 "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
+                "multiqc/multiqc_data/peddy_het_check_plot.txt",
+                "multiqc/multiqc_data/peddy_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_het_check_plot.txt",
                 "multiqc/multiqc_data/somalier_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_stats.txt",
@@ -355,6 +358,8 @@
                 "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-log.pdf",
                 "multiqc/multiqc_plots/pdf/mosdepth-cumcoverage-dist-id.pdf",
                 "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
+                "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/peddy_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/whatshap-stats-table.pdf",
@@ -383,6 +388,8 @@
                 "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-log.png",
                 "multiqc/multiqc_plots/png/mosdepth-cumcoverage-dist-id.png",
                 "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
+                "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
+                "multiqc/multiqc_plots/png/peddy_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/whatshap-stats-table.png",
@@ -411,6 +418,8 @@
                 "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-log.svg",
                 "multiqc/multiqc_plots/svg/mosdepth-cumcoverage-dist-id.svg",
                 "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
+                "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
+                "multiqc/multiqc_plots/svg/peddy_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
@@ -463,6 +472,18 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.d4",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
+                "qc/peddy",
+                "qc/peddy/FAM",
+                "qc/peddy/FAM/FAM.het_check.csv",
+                "qc/peddy/FAM/FAM.het_check.png",
+                "qc/peddy/FAM/FAM.html",
+                "qc/peddy/FAM/FAM.ped_check.csv",
+                "qc/peddy/FAM/FAM.ped_check.png",
+                "qc/peddy/FAM/FAM.ped_check.rel-difference.csv",
+                "qc/peddy/FAM/FAM.peddy.ped",
+                "qc/peddy/FAM/FAM.sex_check.csv",
+                "qc/peddy/FAM/FAM.sex_check.png",
+                "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.tsv.gz",
@@ -481,10 +502,10 @@
                 "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_Revio",
-                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz",
-                "repeats/sample/HG002_Revio/HG002_Revio_sorted.vcf.gz.tbi",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_sorted.bam.bai",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam.bai",
+                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz",
+                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -548,11 +569,13 @@
                 "mosdepth_cumcov_dist.txt:md5,a10647e86c52b1dff066dda0915e6784",
                 "mosdepth_perchrom.txt:md5,15b16ccff2c07ff91376b07e10138d3e",
                 "multiqc_bcftools_stats.txt:md5,1f668bd7ac3393e24712974185c18722",
-                "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
+                "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,8c0330b85e73f68610d35dd71f234cce",
-                "multiqc_general_stats.txt:md5,96424ef1ef40dbf3400c5b4af392fd59",
+                "multiqc_general_stats.txt:md5,e80cd26adfcc8129b95728c86fea35b3",
+                "multiqc_peddy.txt:md5,ceef90ee9aa63e723880e7b856c4bf6d",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,340c18a15453744142d78b2a5b008f74",
                 "multiqc_whatshap_stats.txt:md5,c07d5f342144565334dd1e78e5fbf29e",
+                "peddy_het_check_plot.txt:md5,c1748cc99dc31c7a0345a71194e999be",
                 "somalier_stats.txt:md5,150fa6b9c197c539947168c11d2115f9",
                 "whatshap-stats-table.txt:md5,19c260b17c517d9c27367bdbb5f90df2",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
@@ -564,6 +587,16 @@
                 "HG002_Revio.per-base.d4:md5,a4341498b23fdd2b81023499b8c4e1aa",
                 "HG002_Revio.regions.bed.gz:md5,2376da69db87feb03cd6689e1b9a17fd",
                 "HG002_Revio.regions.bed.gz.csi:md5,efed4551d5ed6f20995d76303d80b457",
+                "FAM.het_check.csv:md5,ebd5c69c1dbd3690f14014f496bce5b4",
+                "FAM.het_check.png:md5,e01abc963407ce6f3b247d4e5803a9ed",
+                "FAM.html:md5,d8eedf56ffcb2824ed639510e45ce0d4",
+                "FAM.ped_check.csv:md5,21dded6c03dab39859d2936d4820c426",
+                "FAM.ped_check.png:md5,01205cbb85c20361bcf8489c304be4b7",
+                "FAM.ped_check.rel-difference.csv:md5,b59f50df00b5b3af6e71e774d8b99103",
+                "FAM.peddy.ped:md5,2e8a3b9a46c4af4e609612a592bb64b7",
+                "FAM.sex_check.csv:md5,72261b11e55ae937661de363ffd9f4af",
+                "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
+                "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_stats.blocks.tsv.gz:md5,5f82b773c12d3e61f9200c24d47c7150",
                 "HG002_Revio_stats.blocks.tsv.gz.tbi:md5,5634b8743c1a98f36bb52cc8a32c761d",
                 "HG002_Revio_stats.stats.tsv:md5,88735a893202a8156a1ba5122a1efe69",
@@ -585,9 +618,12 @@
                     "12b7845566fc2863bfd5328a5bcbfab6"
                 ],
                 [
-                    "HG002_Revio_spanning_sorted.bam",
+                    "HG002_Revio_spanning_trgt.bam",
                     "a51f00198c7449fd64772fe680c6241"
                 ]
+            ],
+            [
+                
             ],
             [
                 [
@@ -607,7 +643,7 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=2, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_Revio_sorted.vcf.gz",
+                    "HG002_Revio_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -644,20 +680,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "c70a3906d95d9d9c0a1a61c354302c7c"
-                ],
-                [
-                    "HG002_Revio_sorted.vcf.gz",
-                    "d7d518f68789d3d51a26be28a93b9654"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-27T09:30:55.760015583"
+        "timestamp": "2025-03-31T18:25:22.736089853"
     }
 }
