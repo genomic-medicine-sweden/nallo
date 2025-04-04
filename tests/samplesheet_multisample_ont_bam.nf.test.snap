@@ -724,6 +724,10 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3695, phased=true, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_ONT_A_hba.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
                 ],

@@ -188,6 +188,9 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_VIEW": {
+                    "samtools": 1.21
+                },
                 "SEVERUS": {
                     "severus": 1.3
                 },
