@@ -437,7 +437,7 @@ workflow NALLO {
 
         // If both CNV-calling and SV annotation is off, merged variants are output from here
         CALL_SVS (
-            ch_bam_bai,
+            bam_bai,
             params.sv_caller,
             ch_tandem_repeats
         )

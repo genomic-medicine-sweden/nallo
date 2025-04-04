@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            158,
+            148,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -81,6 +81,9 @@
                 "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.8.0"
                 },
+                "DIPCALL": {
+                    "dipcall": 0.3
+                },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.0"
                 },
@@ -108,7 +111,10 @@
                 "GENMOD_SCORE": {
                     "genmod": 3.9
                 },
-                "GFASTATS": {
+                "GFASTATS_MATERNAL": {
+                    "gfastats": "1.3.6"
+                },
+                "GFASTATS_PATERNAL": {
                     "gfastats": "1.3.6"
                 },
                 "GLNEXUS": {
@@ -134,6 +140,9 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.28-r1209"
                 },
+                "MINIMAP2_INDEX_DIPCALL": {
+                    "minimap2": "2.28-r1209"
+                },
                 "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
                 },
@@ -156,6 +165,9 @@
                     "samtools": 1.21
                 },
                 "SAMTOOLS_FASTQ": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_INDEX_DIPCALL": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_INDEX_WHATSHAP": {
@@ -230,7 +242,7 @@
                     "whatshap": 2.3
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.5.2"
+                    "genomic-medicine-sweden/nallo": "v0.5.0dev"
                 }
             },
             [
@@ -241,21 +253,52 @@
                 "aligned_reads/HG002_ONT_B",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002_ONT_A",
-                "assembly/sample/HG002_ONT_A/HG002_ONT_A_aligned_assembly.bam",
-                "assembly/sample/HG002_ONT_A/HG002_ONT_A_aligned_assembly.bam.bai",
-                "assembly/sample/HG002_ONT_B",
-                "assembly/sample/HG002_ONT_B/HG002_ONT_B_aligned_assembly.bam",
-                "assembly/sample/HG002_ONT_B/HG002_ONT_B_aligned_assembly.bam.bai",
-                "assembly/stats",
-                "assembly/stats/HG002_ONT_A",
-                "assembly/stats/HG002_ONT_A/HG002_ONT_A_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_ONT_A/HG002_ONT_A_haplotype_2.assembly_summary",
-                "assembly/stats/HG002_ONT_B",
-                "assembly/stats/HG002_ONT_B/HG002_ONT_B_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_ONT_B/HG002_ONT_B_haplotype_2.assembly_summary",
+                "assembly_haplotypes",
+                "assembly_haplotypes/gfastats",
+                "assembly_haplotypes/gfastats/HG002_ONT_A",
+                "assembly_haplotypes/gfastats/HG002_ONT_A/HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary",
+                "assembly_haplotypes/gfastats/HG002_ONT_A/HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz",
+                "assembly_haplotypes/gfastats/HG002_ONT_A/HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary",
+                "assembly_haplotypes/gfastats/HG002_ONT_A/HG002_ONT_A.asm.bp.hap2.p_ctg.fasta.gz",
+                "assembly_haplotypes/gfastats/HG002_ONT_B",
+                "assembly_haplotypes/gfastats/HG002_ONT_B/HG002_ONT_B.asm.bp.hap1.p_ctg.assembly_summary",
+                "assembly_haplotypes/gfastats/HG002_ONT_B/HG002_ONT_B.asm.bp.hap1.p_ctg.fasta.gz",
+                "assembly_haplotypes/gfastats/HG002_ONT_B/HG002_ONT_B.asm.bp.hap2.p_ctg.assembly_summary",
+                "assembly_haplotypes/gfastats/HG002_ONT_B/HG002_ONT_B.asm.bp.hap2.p_ctg.fasta.gz",
+                "assembly_variant_calling",
+                "assembly_variant_calling/dipcall",
+                "assembly_variant_calling/dipcall/HG002_ONT_A",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.dip.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.dip.vcf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.bam",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.bam.bai",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.paf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.sam.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap1.var.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.bam",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.bam.bai",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.paf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.sam.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.hap2.var.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_A/HG002_ONT_A.pair.vcf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.dip.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.dip.vcf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.bam",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.bam.bai",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.paf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.sam.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap1.var.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.bam",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.bam.bai",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.bed",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.paf.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.sam.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.hap2.var.gz",
+                "assembly_variant_calling/dipcall/HG002_ONT_B/HG002_ONT_B.pair.vcf.gz",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -520,12 +563,12 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz",
-                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz.tbi",
-                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz",
-                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz.tbi",
-                "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz",
-                "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz.tbi",
+                "svs/family/FAM/FAM_hificnv_cnvs.vcf.gz",
+                "svs/family/FAM/FAM_hificnv_cnvs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_severus_svs.vcf.gz",
+                "svs/family/FAM/FAM_severus_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_sniffles_svs.vcf.gz",
+                "svs/family/FAM/FAM_sniffles_svs.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
@@ -556,10 +599,44 @@
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw"
             ],
             [
-                "HG002_ONT_A_haplotype_1.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
-                "HG002_ONT_A_haplotype_2.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
-                "HG002_ONT_B_haplotype_1.assembly_summary:md5,cb2280cb3895ebbe29093ed9603e81d2",
-                "HG002_ONT_B_haplotype_2.assembly_summary:md5,fce697aa7c3c739eff6023b73fd2b382",
+                "HG002_ONT_A.asm.bp.hap1.p_ctg.assembly_summary:md5,362b1d3234e3dcdfe07724b4c4e8fb32",
+                "HG002_ONT_A.asm.bp.hap1.p_ctg.fasta.gz:md5,4736fe9703aa5a5309beb1798eead615",
+                "HG002_ONT_A.asm.bp.hap2.p_ctg.assembly_summary:md5,68654acb33785035a2e701a87c169bb2",
+                "HG002_ONT_A.asm.bp.hap2.p_ctg.fasta.gz:md5,d2a76cb8824fcd50880d4f078f915d36",
+                "HG002_ONT_B.asm.bp.hap1.p_ctg.assembly_summary:md5,cb2280cb3895ebbe29093ed9603e81d2",
+                "HG002_ONT_B.asm.bp.hap1.p_ctg.fasta.gz:md5,21dafa9ebff9348c9133e12be3ea020e",
+                "HG002_ONT_B.asm.bp.hap2.p_ctg.assembly_summary:md5,fce697aa7c3c739eff6023b73fd2b382",
+                "HG002_ONT_B.asm.bp.hap2.p_ctg.fasta.gz:md5,a7de34f96f5f4c38c6320ee95c8c1026",
+                "HG002_ONT_A.dip.bed:md5,46741354ad0a5d4eb57665b48fe06b7b",
+                "HG002_ONT_A.dip.vcf.gz:md5,c4dc5155959953f5dfe1725c301fa8ff",
+                "HG002_ONT_A.hap1.bam:md5,10fd14b2a40bf0211f772dd8823a37e4",
+                "HG002_ONT_A.hap1.bam.bai:md5,3536f2bf18dc2fe79292a9509f76b567",
+                "HG002_ONT_A.hap1.bed:md5,1c5d8c3064664f127def910840199e5a",
+                "HG002_ONT_A.hap1.paf.gz:md5,2ff8735bc71629e7989a8b7705d373e0",
+                "HG002_ONT_A.hap1.sam.gz:md5,6b5727ef043432936ff8791229c03426",
+                "HG002_ONT_A.hap1.var.gz:md5,8bc1eacd4dd63417471596b9927d872f",
+                "HG002_ONT_A.hap2.bam:md5,068b182c02c7a662c40c78bd317f47e2",
+                "HG002_ONT_A.hap2.bam.bai:md5,8e06e79b4f6d05583f471cf4a778c68c",
+                "HG002_ONT_A.hap2.bed:md5,aed2e1f4f58b9ab3d623a9b38040166c",
+                "HG002_ONT_A.hap2.paf.gz:md5,c966b22928e7924c3ad70abd28306f2e",
+                "HG002_ONT_A.hap2.sam.gz:md5,1245fe0954594540fd4b99b6606b498b",
+                "HG002_ONT_A.hap2.var.gz:md5,04c8e02c04d40190cd9858421ec9f2c5",
+                "HG002_ONT_A.pair.vcf.gz:md5,8a2c43405ed1812234a085ade2a9517f",
+                "HG002_ONT_B.dip.bed:md5,934ffb3245237f80290e39d1e9e93a0d",
+                "HG002_ONT_B.dip.vcf.gz:md5,f52d2fa65f5b2bffe380de2fd4f6833a",
+                "HG002_ONT_B.hap1.bam:md5,4c19da98c63c9023a4974e8c42b7bca5",
+                "HG002_ONT_B.hap1.bam.bai:md5,01e364727fb9d956411ec0d1e05cd96b",
+                "HG002_ONT_B.hap1.bed:md5,6f7dd338c77a645d5201b9d91b6a0b6f",
+                "HG002_ONT_B.hap1.paf.gz:md5,599dc7ce3d7d9fa8fd55c5df39d166cf",
+                "HG002_ONT_B.hap1.sam.gz:md5,88aee68fa58ed726589b20f1ba7379ec",
+                "HG002_ONT_B.hap1.var.gz:md5,f92ea86fd33bec4cb24e20395d70b1b8",
+                "HG002_ONT_B.hap2.bam:md5,a14ee19e40b04df7d99d0fa77318c34f",
+                "HG002_ONT_B.hap2.bam.bai:md5,9e944b45138d997b8e818f4a29a578d3",
+                "HG002_ONT_B.hap2.bed:md5,48e3d9afdd6d121f4d9afa7060b32ed4",
+                "HG002_ONT_B.hap2.paf.gz:md5,cf8325a3be0ba02e7420e5ceabbab01c",
+                "HG002_ONT_B.hap2.sam.gz:md5,c6bbbc7fad9423840feb7b8cd18395b8",
+                "HG002_ONT_B.hap2.var.gz:md5,020812d4f3c94e5747855df872bf4ce8",
+                "HG002_ONT_B.pair.vcf.gz:md5,07cea4c96b9fe76b35952c46efcc6242",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,a833ab3d48e7f94372edbefe8ca99e59",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,a0c5a1faaf0373a58f97302b977e5595",
                 "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,7c645581ccb6a55046d11f9a6f4b0d4a",
@@ -637,12 +714,20 @@
                     "325c284fc112dff72679b38c9ef2c2da"
                 ],
                 [
-                    "HG002_ONT_A_aligned_assembly.bam",
-                    "9e38da39eb3ca1c6978ba9618b9ce9a0"
+                    "HG002_ONT_A.hap1.bam",
+                    "4a1999ef98db9a200764b9b2020897c9"
                 ],
                 [
-                    "HG002_ONT_B_aligned_assembly.bam",
-                    "1eec67256dd70aaa8d6272b6bea5fb42"
+                    "HG002_ONT_A.hap2.bam",
+                    "3d80b83a46d7b4e5657e3bd0478d04bc"
+                ],
+                [
+                    "HG002_ONT_B.hap1.bam",
+                    "3570420b488e88792f5c4ea1bbe21510"
+                ],
+                [
+                    "HG002_ONT_B.hap2.bam",
+                    "4565ba59fc326364fda8388c6969cdc3"
                 ],
                 [
                     "HG002_ONT_A.paraphase.bam",
@@ -654,6 +739,22 @@
                 ]
             ],
             [
+                [
+                    "HG002_ONT_A.dip.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2914, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_A.pair.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2914, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B.dip.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=2926, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_B.pair.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=2926, phased=false, phasedAutodetect=false]"
+                ],
                 [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3695, phased=true, phasedAutodetect=false]"
@@ -691,15 +792,15 @@
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=102, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_hificnv_cnvs_merged.vcf.gz",
+                    "FAM_hificnv_cnvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=33, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_severus_svs_merged.vcf.gz",
+                    "FAM_severus_svs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=64, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_sniffles_svs_merged.vcf.gz",
+                    "FAM_sniffles_svs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=67, phased=false, phasedAutodetect=false]"
                 ],
                 [
@@ -736,13 +837,28 @@
                 ]
             ],
             [
-                
+                [
+                    "HG002_ONT_A.dip.vcf.gz",
+                    "d8dcbcf490aee5a118736728e9424183"
+                ],
+                [
+                    "HG002_ONT_A.pair.vcf.gz",
+                    "81810f5838a6d0ac93a76d5ab5f03c67"
+                ],
+                [
+                    "HG002_ONT_B.dip.vcf.gz",
+                    "c2961d7300328de68c971839e98bda04"
+                ],
+                [
+                    "HG002_ONT_B.pair.vcf.gz",
+                    "aa7685e6cb037c054805645388af2cf1"
+                ]
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nf-test": "0.9.0",
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2025-03-26T14:06:03.813534346"
+        "timestamp": "2025-02-12T16:24:00.953813798"
     }
 }

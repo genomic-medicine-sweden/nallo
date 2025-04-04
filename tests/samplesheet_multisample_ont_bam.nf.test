@@ -9,15 +9,15 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/'
-                input                          = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
-                outdir                         = "$outputDir"
-                preset                         = 'ONT_R10'
-                alignment_processes            = 1
-                snv_calling_processes          = 1
-                phaser                         = "whatshap"
-                sv_caller                      = "sniffles"
-                publish_unannotated_family_svs = true
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/'
+                input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
+                outdir                       = "$outputDir"
+                preset                       = 'ONT_R10'
+                alignment_processes          = 1
+                snv_calling_processes        = 1
+                phaser                       = "whatshap"
+                sv_caller                    = "sniffles"
+                publish_unannotated_family_svs    = true
             }
         }
 

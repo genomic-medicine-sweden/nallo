@@ -47,14 +47,8 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(CLEAN_SNIFFLES.out.versions)
 
-
-    BCFTOOLS_SORT (
-        CLEAN_SNIFFLES.out.vcf
-    )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
     ch_sv_calls = ch_sv_calls.mix(
-        BCFTOOLS_SORT.out.vcf
+        CLEAN_SNIFFLES.out.vcf
         .map { meta , vcf -> [ meta + [ sv_caller: 'sniffles' ], vcf ] }
     )
 
