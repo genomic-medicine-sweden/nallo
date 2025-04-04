@@ -6,28 +6,28 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Aligned reads
 
-[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be happlotagged using the active phasing tool.
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
 
-| Path                                    | Description                         | Alignment          | Alignment & phasing |
-| --------------------------------------- | ----------------------------------- | ------------------ | ------------------- |
-| `aligned_reads/minimap2/{sample}/*.bam` | Alignment file in bam format        | :white_check_mark: |                     |
-| `aligned_reads/minimap2/{sample}/*.bai` | Index of the corresponding bam file | :white_check_mark: |                     |
+| Path                                                                   | Description                               | Alignment          | Alignment & phasing |
+| ---------------------------------------------------------------------- | ----------------------------------------- | ------------------ | ------------------- |
+| `aligned_reads/minimap2/{sample}/{sample}_aligned.{bam,cram}`          | Alignment file in BAM or CRAM format      | :white_check_mark: |                     |
+| `aligned_reads/minimap2/{sample}/{sample}_aligned.{bam.bai,cram.crai}` | Index of the corresponding alignment file | :white_check_mark: |                     |
 
-| Path                                                  | Description             | Alignment | Alignment & phasing |
-| ----------------------------------------------------- | ----------------------- | --------- | ------------------- |
-| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags |           | :white_check_mark:  |
-| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file   |           | :white_check_mark:  |
+| Path                                                              | Description                                         | Alignment | Alignment & phasing |
+| ----------------------------------------------------------------- | --------------------------------------------------- | --------- | ------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | Alignment file with haplotags in BAM or CRAM format |           | :white_check_mark:  |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the alignment file                         |           | :white_check_mark:  |
 
 ## Assembly
 
-[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also ouputs summary stats per haplotype.
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble genomes. The assembled haplotypes are then aligned to the reference genome with [minimap2](https://github.com/lh3/minimap2), tagged with `HP:1` for the "paternal" haplotype, and `HP:2` for the "maternal" haplotype, before being merged together into one file with [samtools](https://github.com/samtools/samtools). [gfastats](https://github.com/vgl-hub/gfastats) is used to convert the assembly to fasta format before alignment, and also outputs summary stats per haplotype.
 
-| Path                                                             | Description                                                                                       |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `assembly/sample/{sample}/{sample}_aligned_assembly.bam`         | Both assembled haplotypes mapped to the reference genome, merged and haplotagged (`HP:1`/`HP:2`). |
-| `assembly/sample/{sample}/{sample}_aligned_assembly.bam.bai`     | Index of aligned assembly.                                                                        |
-| `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`  | Summary statistics for haplotype 1/paternal haplotype                                             |
-| `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary` | Summary statistics for haplotype 2/maternal haplotype                                             |
+| Path                                                                     | Description                                                                                       |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.{bam,cram}`          | Both assembled haplotypes mapped to the reference genome, merged and haplotagged (`HP:1`/`HP:2`). |
+| `assembly/sample/{sample}/{sample}_aligned_assembly.{bam.bai,cram.crai}` | Index of aligned assembly.                                                                        |
+| `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`          | Summary statistics for haplotype 1/paternal haplotype                                             |
+| `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary`         | Summary statistics for haplotype 2/maternal haplotype                                             |
 
 ## Methylation pileups
 
@@ -68,14 +68,15 @@ This document describes the pipeline output files and the tools used to generate
 
 [LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/), or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used for phasing.
 
-| Path                                                  | Description                   |
-| ----------------------------------------------------- | ----------------------------- |
-| `aligned_reads/{sample}/{sample}_haplotagged.bam`     | BAM file with haplotags       |
-| `aligned_reads/{sample}/{sample}_haplotagged.bam.bai` | Index of the BAM file         |
-| `phased_variants/{sample}/*.vcf.gz`                   | VCF file with phased variants |
-| `phased_variants/{sample}/*.vcf.gz.tbi`               | Index of the VCF file         |
-| `qc/phasing_stats/{sample}/*.blocks.tsv`              | Phase block file              |
-| `qc/phasing_stats/{sample}/*.stats.tsv`               | Phasing statistics file       |
+| Path                                                              | Description                   |
+| ----------------------------------------------------------------- | ----------------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags  |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file    |
+| `phased_variants/{sample}/*.vcf.gz`                               | VCF file with phased variants |
+| `phased_variants/{sample}/*.vcf.gz.tbi`                           | Index of the VCF file         |
+| `qc/phasing_stats/{sample}/*.blocks.tsv.gz`                       | Phase block file              |
+| `qc/phasing_stats/{sample}/*.blocks.tsv.gz.tbi`                   | Index of block file           |
+| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file       |
 
 ## QC
 
@@ -125,6 +126,23 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/somalier/relate/{project}/{project}.pairs.tsv`   | Information about sample pairs                         |
 | `qc/somalier/relate/{project}/{project}.samples.tsv` | Information about individual samples                   |
 
+### Peddy
+
+[peddy](https://github.com/brentp/peddy) checks relatedness and sex.
+
+| Path                                                      | Description                                                                                                                                                                   |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `qc/peddy/{family}/{family}.peddy.ped`                    | PED file updated with peddy-inferred sex per family                                                                                                                           |
+| `qc/peddy/{family}/{family}.html`                         | HTML report                                                                                                                                                                   |
+| `qc/peddy/{family}/{family}.vs.html`                      | HTML report of observed vs expected relatedness                                                                                                                               |
+| `qc/peddy/{family}/{family}.sex_check.csv`                | Comparison between reported sex (ped file) and that inferred from peddy                                                                                                       |
+| `qc/peddy/{family}/{family}.het_check.csv`                | Het check does general QC including rate of het calls, allele-balance at het calls, mean and median depth, and a PCA projection onto thousand genomes. Incudes ancestry check |
+| `qc/peddy/{family}/{family}.ped_check.csv`                | Ped check compares the relatedness of 2 samples as reported in a .ped file to the relatedness inferred from the genotypes and ~25K sites in the genome                        |
+| `qc/peddy/{family}/{family}.sex_check.png`                | PNG comparison between reported sex (ped file) and that inferred from peddy                                                                                                   |
+| `qc/peddy/{family}/{family}.het_check.png`                | PNG of heterozygosity check                                                                                                                                                   |
+| `qc/peddy/{family}/{family}.ped_check.png`                | PNG of the ped check comparison                                                                                                                                               |
+| `qc/peddy/{family}/{family}.ped_check.rel-difference.csv` | CSV file with the comparison between inferred and given relatedness                                                                                                           |
+
 ### DeepVariant
 
 `vcf_stats_report.py` from [DeepVariant](https://github.com/google/deepvariant) is used to generate a html report per sample.
@@ -143,9 +161,9 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                   | Description                                               |
 | ---------------------------------------------------------------------- | --------------------------------------------------------- |
-| `paraphase/sample/{sample}/*.bam`                                      | BAM file with reads from analysed regions                 |
-| `paraphase/sample/{sample}/*.bai`                                      | Index of the BAM file                                     |
-| `paraphase/sample/{sample}/*.json`                                     | Summary of haplotypes and variant calls                   |
+| `paraphase/sample/{sample}/{sample}.paraphase.{bam,cram}`              | BAM/CRAM file with reads from analyzed regions            |
+| `paraphase/sample/{sample}/{sample}.paraphase.{bam.bai,cram.crai}`     | Index of the BAM/CRAM file                                |
+| `paraphase/sample/{sample}/{sample}.paraphase.json`                    | Summary of haplotypes and variant calls                   |
 | `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`      | VCF file per gene                                         |
 | `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi`  | Index of the VCF file                                     |
 | `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz`     | VCF file from paraphase, merged by family                 |
@@ -154,23 +172,19 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Repeats
 
-[TRGT](https://github.com/PacificBiosciences/trgt) is used to call repeats.
-
-| Path                                                            | Description                               | Call repeats       | Call & annotate repeats |
-| --------------------------------------------------------------- | ----------------------------------------- | ------------------ | ----------------------- |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`     | Merged VCF file per family                | :white_check_mark: |                         |
-| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi` | Index of the VCF file                     | :white_check_mark: |                         |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz`                | VCF file with called repeats for a sample | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_sorted.vcf.gz.tbi`            | Index of the VCF file                     | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bam`          | BAM file with sorted spanning reads       | :white_check_mark: | :white_check_mark:      |
-| `repeats/sample/{sample}/{sample}_spanning_sorted.bai`          | Index of the BAM file                     | :white_check_mark: | :white_check_mark:      |
-
+[TRGT](https://github.com/PacificBiosciences/trgt) or [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
 [Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
 
-| Path                                                                      | Description                           | Call repeats | Call & annotate repeats |
-| ------------------------------------------------------------------------- | ------------------------------------- | ------------ | ----------------------- |
-| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family |              | :white_check_mark:      |
-| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                 |              | :white_check_mark:      |
+| Path                                                                      | Description                               | STRdust, Call repeats only | TRGT, Call repeats only | TRGT, Call & annotate repeats |
+| ------------------------------------------------------------------------- | ----------------------------------------- | -------------------------- | ----------------------- | ----------------------------- |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz`                    | VCF file with called repeats for a sample | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_{str_caller}.vcf.gz.tbi`                | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_spanning_trgt.{bam,cram}`               | BAM/CRAM file with sorted spanning reads  |                            | :white_check_mark:      | :white_check_mark:            |
+| `repeats/sample/{sample}/{sample}_spanning_trgt.{bam.bai,cram.crai}`      | Index of the BAM/CRAM file                |                            | :white_check_mark:      | :white_check_mark:            |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz`               | Merged VCF file per family                | :white_check_mark:         | :white_check_mark:      |                               |
+| `repeats/family/{family}/{family}_repeat_expansions.vcf.gz.tbi`           | Index of the VCF file                     | :white_check_mark:         | :white_check_mark:      |                               |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz`     | Merged, annotated VCF file per family     |                            |                         | :white_check_mark:            |
+| `repeats/family/{family}/{family}_repeat_expansions_annotated.vcf.gz.tbi` | Index of the VCF file                     |                            |                         | :white_check_mark:            |
 
 ### SNVs
 

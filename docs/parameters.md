@@ -15,6 +15,7 @@ Allows skipping certain parts of the pipeline
 | `skip_methylation_pileups` | Skip generation of methylation pileups | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
+| `skip_peddy` | Skip peddy | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
 | `skip_sv_calling` | Skip structural variant calling | `boolean` | False |  |  |
@@ -37,7 +38,7 @@ Define where the pipeline should find input data and save output data.
 | `cadd_resources` | Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>| `string` |  |  |  |
 | `par_regions` | Provide a bed file of chrX and chrY PAR regions for DeepVariant | `string` |  |  |  |
 | `tandem_repeats` | A tandem repeat BED file for sniffles | `string` |  |  |  |
-| `trgt_repeats` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
+| `str_bed` | A BED file with repeats to be genotyped with TRGT | `string` |  |  |  |
 | `echtvar_snv_databases` | A csv file with echtvar databases to annotate SNVs with | `string` |  |  |  |
 | `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to comma-separated file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
@@ -52,7 +53,10 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/ |  | True |
+| `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` | `string` | bam |  |  |
+| `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
+| `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c7e99d0b2a366c606a5b3e5626b36e727c794a91/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 
 ## Reference genome options
@@ -104,6 +108,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
 | `sv_caller` | From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`). | `string` | severus |  |  |
+| `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). | `string` | trgt |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | hifi-only |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active. | `string` |  |  |  |

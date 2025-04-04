@@ -1,7 +1,7 @@
 nextflow_workflow {
 
     name "Test Workflow SNV_ANNOTATION"
-    script "../"
+    script "../main.nf"
     workflow "SNV_ANNOTATION"
     config "./nextflow.config"
 

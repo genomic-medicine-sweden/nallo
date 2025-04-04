@@ -31,7 +31,7 @@ workflow ANNOTATE_CADD {
     ch_versions = ch_versions.mix(CADD_TO_REFERENCE_CHRNAMES.out.versions)
 
     ch_vcf
-        .join(ch_index)
+        .join(ch_index, failOnMismatch:true, failOnDuplicate:true)
         .map { meta, vcf, tbi -> [ meta, vcf, tbi, [], [] ] }
         .set { rename_chrnames_in }
 
@@ -57,8 +57,8 @@ workflow ANNOTATE_CADD {
     ch_versions = ch_versions.mix(TABIX_CADD.out.versions)
 
     RENAME_CHRNAMES.out.vcf
-        .join(CADD.out.tsv)
-        .join(TABIX_CADD.out.tbi)
+        .join(CADD.out.tsv, failOnMismatch:true, failOnDuplicate:true)
+        .join(TABIX_CADD.out.tbi, failOnMismatch:true, failOnDuplicate:true)
         .map { meta, vcf, annotations, annotations_index -> [ meta, vcf, [], annotations, annotations_index ] }
         .set { ch_annotate_indels_in }
 

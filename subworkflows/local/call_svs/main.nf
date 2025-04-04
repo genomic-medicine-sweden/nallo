@@ -20,7 +20,7 @@ workflow CALL_SVS {
     ch_versions = Channel.empty()
     ch_sv_calls = Channel.empty()
 
-    // Here, we currently want the possiblity to run multiple SV-callers
+    // Here, we currently want the possibility to run multiple SV-callers
     // even though only calls from one caller is used for annotation, ranking and filtering.
     // In the future these calls could possibly be merged.
 
@@ -75,7 +75,7 @@ workflow CALL_SVS {
     // Get the sample name from the VCF
     // For Sniffles this is hardcoded as SAMPLE and for Severus it's based on the filename
     BCFTOOLS_QUERY (
-        ADD_FOUND_IN_TAG.out.vcf.join(ADD_FOUND_IN_TAG.out.csi),
+        ADD_FOUND_IN_TAG.out.vcf.join(ADD_FOUND_IN_TAG.out.csi, failOnMismatch:true, failOnDuplicate:true),
         [],
         [],
         []
@@ -87,7 +87,7 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(CREATE_SAMPLES_FILE.out.versions)
 
     ADD_FOUND_IN_TAG.out.vcf
-        .join( CREATE_SAMPLES_FILE.out.samples )
+        .join( CREATE_SAMPLES_FILE.out.samples, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
 

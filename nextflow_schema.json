@@ -53,6 +53,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_peddy": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip peddy",
+                    "default": false
+                },
                 "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -157,7 +163,7 @@
                     "pattern": "^\\S+\\.bed$",
                     "exists": true
                 },
-                "trgt_repeats": {
+                "str_bed": {
                     "type": "string",
                     "description": "A BED file with repeats to be genotyped with TRGT",
                     "format": "file-path",
@@ -258,6 +264,18 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "peddy_sites": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
+                "alignment_output_format": {
+                    "type": "string",
+                    "fa_icon": "fa-solid fa-download",
+                    "enum": ["bam", "cram"],
+                    "description": "Output format for alignment files. Either `bam` or `cram`",
+                    "default": "bam"
+                },
                 "modules_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
@@ -269,7 +287,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/63be90490a026e6d51597f6174d12f0afee0d392/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -456,6 +474,12 @@
                     "default": "severus",
                     "description": "From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`).",
                     "enum": ["severus", "sniffles"]
+                },
+                "str_caller": {
+                    "type": "string",
+                    "default": "trgt",
+                    "description": "Which caller to use for short tandem repeat expansions (TRGT or STRdust).",
+                    "enum": ["trgt", "strdust"]
                 },
                 "phaser": {
                     "type": "string",

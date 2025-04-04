@@ -13,7 +13,7 @@ workflow RANK_VARIANTS {
     take:
     ch_vcf                       // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_ped                       // channel: [mandatory] [ val(meta), path(ped) ]
-    ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(pentrance) ]
+    ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(penetrance) ]
     ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
@@ -23,7 +23,7 @@ workflow RANK_VARIANTS {
     ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)
 
     GENMOD_ANNOTATE.out.vcf
-        .join( ch_ped, failOnMismatch: true )
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
         .set { genmod_models_in }
 
     GENMOD_MODELS (
@@ -33,7 +33,7 @@ workflow RANK_VARIANTS {
     ch_versions = ch_versions.mix(GENMOD_MODELS.out.versions)
 
     GENMOD_MODELS.out.vcf
-        .join( ch_ped, failOnMismatch: true )
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true)
         .set { genmod_score_in }
 
     GENMOD_SCORE (

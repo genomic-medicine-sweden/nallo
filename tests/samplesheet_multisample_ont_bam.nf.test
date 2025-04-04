@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/630ff7c9bd62f3446070ebd685df380a53926366/'
+                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/63be90490a026e6d51597f6174d12f0afee0d392/'
                 input                          = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                         = "$outputDir"
                 preset                         = 'ONT_R10'
@@ -28,9 +28,13 @@ nextflow_pipeline {
             def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
             // bam_files: All bam files
             def bam_files        = getAllFilesFromDir(params.outdir, include: ['**/*.bam'])
+            // Reference (needed for CRAM inspection)
+            def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            // cram_files: All cram files
+            def cram_files       = getAllFilesFromDir(params.outdir, include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
-            // stable_vcf_files: Vcf files with stable variants - can be snapshot unsing variantsMD5
+            // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
                 { assert workflow.success},
@@ -45,6 +49,8 @@ nextflow_pipeline {
                     stable_path,
                     // All bam files
                     bam_files.collect{ file -> [ file.getName(), bam(file.toString(), stringency: 'silent').getReadsMD5() ] },
+                    // All cram files
+                    cram_files.collect{ file -> [ file.getName(), cram(file.toString(), fasta, stringency: 'silent').getReadsMD5() ] },
                     // All vcf files
                     all_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.summary ] },
                     // Stable vcf files
