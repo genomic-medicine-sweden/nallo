@@ -1,7 +1,7 @@
 include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
 include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
 include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { SPLIT_BED_CHUNKS         } from '../../../modules/local/split_bed_chunks/main'
+include { BEDTOOLS_SPLIT           } from '../modules/nf-core/bedtools/split/main'
 
 workflow SCATTER_GENOME {
 
@@ -46,11 +46,15 @@ workflow SCATTER_GENOME {
         BEDTOOLS_MERGE ( BEDTOOLS_SORT.out.sorted )
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
-        SPLIT_BED_CHUNKS( BEDTOOLS_MERGE.out.bed, split_n )
-        ch_versions = ch_versions.mix(SPLIT_BED_CHUNKS.out.versions)
+        BEDTOOLS_SPLIT(
+            BEDTOOLS_MERGE.out.bed.map { meta, bed ->
+                [ meta, bed, split_n ]
+            }
+        )
+        ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
         // Create a channel with the bed file and the total number of intervals (for groupKey)
-        SPLIT_BED_CHUNKS.out.split_beds
+        BEDTOOLS_SPLIT.out.split_beds
             .collect()
             .map{ it -> [ it, it.size() ] }
             .transpose()
