@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_cram | --phaser hiphase | --alignment_output_format cram") {
+    test("samplesheet_multisample_bam | --phaser hiphase | --alignment_output_format cram") {
         tag "samplesheet_multisample_bam"
 
         when {
