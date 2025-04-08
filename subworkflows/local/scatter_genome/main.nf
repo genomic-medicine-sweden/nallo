@@ -54,7 +54,7 @@ workflow SCATTER_GENOME {
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
         // Create a channel with the bed file and the total number of intervals (for groupKey)
-        BEDTOOLS_SPLIT.out.split_beds
+        BEDTOOLS_SPLIT.out.beds
             .collect()
             .map{ it -> [ it, it.size() ] }
             .transpose()
