@@ -31,7 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Renamed parameter `--trgt_repeats` to `--str_bed`.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Updated preset `ONT_R10` to enable repeat expansion calling by default.
 - [#621](https://github.com/genomic-medicine-sweden/nallo/pull/621) - Changed repeat annotation workflow to run by default if and only if repeat expansions were called with TRGT.
-- [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Updated `docs/index.md` to avoid duplication with `README.md`
 - [#640](https://github.com/genomic-medicine-sweden/nallo/pull/640) - Updated nf-test paths that were broken by [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626)
 - [#645](https://github.com/genomic-medicine-sweden/nallo/pull/645) - Updated metro map with peddy and STRdust
 - [#647](https://github.com/genomic-medicine-sweden/nallo/pull/647) - Updated version to 0.6.0
@@ -40,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Removed args from local modules that doesn't use it
 - [#625](https://github.com/genomic-medicine-sweden/nallo/pull/625) - Removed last `.first()` from versions, that resulted in a warning displayed when running the pipeline
-- [#639](https://github.com/genomic-medicine-sweden/nallo/pull/639) - Removed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
+- [#632](https://github.com/genomic-medicine-sweden/nallo/pull/632) - Removed most of `docs/index.md` to avoid duplication with `README.md`
 
 ### `Fixed`
 
@@ -48,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#620](https://github.com/genomic-medicine-sweden/nallo/pull/620) - Fixed spelling mistakes
 - [#626](https://github.com/genomic-medicine-sweden/nallo/pull/626) - Fixed pipeline lint `local_component_structure` warnings
 - [#637](https://github.com/genomic-medicine-sweden/nallo/pull/637) - Fixed test without target regions not triggering on PRs to the master branch
+- [#639](https://github.com/genomic-medicine-sweden/nallo/pull/639) - Fixed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
 - [#644](https://github.com/genomic-medicine-sweden/nallo/pull/644) - Fixed FastQC ignoring memory parameter
 
 ### Parameters
