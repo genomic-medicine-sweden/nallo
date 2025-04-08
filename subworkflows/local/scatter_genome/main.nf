@@ -1,7 +1,7 @@
 include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
 include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
 include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { BEDTOOLS_SPLIT           } from '../modules/nf-core/bedtools/split/main'
+include { BEDTOOLS_SPLIT           } from '../../../modules/nf-core/bedtools/split/main'
 
 workflow SCATTER_GENOME {
 
