@@ -58,7 +58,7 @@
                     },
                     "bcftools/view": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ede1e20af42e2f736638efae1b79762293a6a98a",
                         "installed_by": ["modules"]
                     },
                     "bedtools/merge": {
@@ -105,7 +105,7 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "08108058ea36a63f141c25c4e75f9f872a5b2296",
+                        "git_sha": "b1966f36ec9de31927b2603d8f499960b2a4c294",
                         "installed_by": ["modules"]
                     },
                     "gawk": {
@@ -135,7 +135,7 @@
                     },
                     "gfastats": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "8bc54984b57a02c8712d48274b90c1161bf2c996",
                         "installed_by": ["modules"]
                     },
                     "glnexus": {
@@ -151,7 +151,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "6bb8be8a75d05ee6d31205b2b97d48c7bcef60ab",
+                        "git_sha": "fcab846b30baf8391257dd302feece91714769f2",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
@@ -162,7 +162,7 @@
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "22fc6d90be8eca2cf6afe5d10b3c5cffcdbcb19c",
+                        "git_sha": "f303120bb5ee191c815bc7a756ab57576afe4c90",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
@@ -195,6 +195,17 @@
                         "git_sha": "b449d9a842b37cb6850e7e6364f3ac45d891cde0",
                         "installed_by": ["modules"]
                     },
+                    "peddy": {
+                        "branch": "master",
+                        "git_sha": "e1c5e2ecade9fdf66fca3b7bcb6b670f50493b24",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/peddy/peddy.diff"
+                    },
+                    "samtools/convert": {
+                        "branch": "master",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
@@ -202,7 +213,7 @@
                     },
                     "samtools/fastq": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "7bbde4b24d71a12022ae12db97d740e746ff1aaf",
                         "installed_by": ["modules"]
                     },
                     "samtools/import": {
@@ -229,7 +240,7 @@
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "b21df1b4e806f7bf3aff0eb41d84453a0025b43e",
                         "installed_by": ["modules"]
                     },
                     "severus": {
@@ -257,7 +268,7 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ea830ec55d448a815128d33ff965e5bd27430070",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
@@ -265,9 +276,14 @@
                         "git_sha": "91bd9632769793b0da3129b788fae7856ebea3ab",
                         "installed_by": ["modules"]
                     },
+                    "strdust": {
+                        "branch": "master",
+                        "git_sha": "ce475295fb2edd3264ca8481fa9324a9c90753a5",
+                        "installed_by": ["modules"]
+                    },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "a8ad84b7ee0cda0b001490e95d9ed277e687e368",
+                        "git_sha": "95185f269ec10a33cde61d294fcd4ba7c66bc6b8",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {

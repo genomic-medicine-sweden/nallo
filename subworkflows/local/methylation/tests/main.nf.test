@@ -7,7 +7,7 @@ nextflow_workflow {
 
     setup {
         run("PREPARE_GENOME") {
-            script "../../prepare_genome.nf"
+            script "../../prepare_genome/main.nf"
             process {
                 """
                 input[0] = Channel.of([
@@ -54,7 +54,7 @@ nextflow_workflow {
             }
         }
         run("PHASING") {
-            script "../../phasing.nf"
+            script "../../phasing/main.nf"
             process {
                 """
                 input[0] = SHORT_VARIANT_CALLING.out.snp_calls_vcf
@@ -66,6 +66,7 @@ nextflow_workflow {
                             }
                 input[3] = PREPARE_GENOME.out.fasta
                 input[4] = PREPARE_GENOME.out.fai
+                input[5] = false
                 """
             }
         }

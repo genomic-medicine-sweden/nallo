@@ -19,7 +19,8 @@ include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
 include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS                  } from '../subworkflows/local/call_repeat_expansions'
+include { CALL_REPEAT_EXPANSIONS_STRDUST          } from '../subworkflows/local/call_repeat_expansions_strdust'
+include { CALL_REPEAT_EXPANSIONS_TRGT             } from '../subworkflows/local/call_repeat_expansions_trgt'
 include { CALL_SVS                                } from '../subworkflows/local/call_svs'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS } from '../subworkflows/local/filter_variants'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS  } from '../subworkflows/local/filter_variants'
@@ -43,7 +44,6 @@ include { SNV_ANNOTATION                          } from '../subworkflows/local/
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/local/create_pedigree_file/main'
-include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
@@ -51,7 +51,10 @@ include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/n
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { TABIX_TABIX as TABIX_SVDB_MERGE_SVS_CNVS          } from '../modules/nf-core/tabix/tabix/main'
@@ -85,7 +88,7 @@ workflow NALLO {
     ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
     ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
-    ch_trgt_bed                  = createReferenceChannelFromPath(params.trgt_repeats)
+    ch_str_bed                  = createReferenceChannelFromPath(params.str_bed)
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -96,6 +99,7 @@ workflow NALLO {
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
 
@@ -107,6 +111,8 @@ workflow NALLO {
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
         .collect()
+
+    def cram_output = params.alignment_output_format == 'cram'
 
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
@@ -123,7 +129,7 @@ workflow NALLO {
     //
     if (!params.skip_alignment) {
 
-        // Prepeare references
+        // Prepare references
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
@@ -158,7 +164,10 @@ workflow NALLO {
 
         // Split channel into cases where we have multiple files or single files
         MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index)
+            // If there are multiple files per sample, each file has the same meta so failOnDuplicate fails here.
+            // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
+            // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
+            .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
             .map {
                 meta, bam, bai ->
                     [ groupKey(meta, meta.n_files), bam, bai ]
@@ -179,12 +188,22 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
-        // Combine merged with unmerged bams
+        // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.bai)
+            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
             .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
-            .set { bam_infer_sex_in }
+            .set { ch_aligned_bam }
+
+        // Publish alignments as CRAM if requested
+        if (cram_output) {
+            SAMTOOLS_CONVERT (
+                ch_aligned_bam,
+                ch_fasta,
+                ch_fai
+            )
+            ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
+        }
 
         //
         // Create PED from samplesheet
@@ -202,10 +221,10 @@ workflow NALLO {
             .set { ch_samplesheet_pedfile }
 
         //
-        // Check sex and relatedness, and update with infered sex if the sex for a sample is unknown
+        // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
         //
         BAM_INFER_SEX (
-            bam_infer_sex_in,
+            ch_aligned_bam,
             ch_fasta,
             ch_fai,
             ch_somalier_sites,
@@ -245,7 +264,9 @@ workflow NALLO {
     if(!params.skip_call_paralogs) {
         CALL_PARALOGS (
             ch_bam_bai,
-            ch_fasta
+            ch_fasta,
+            ch_fai,
+            cram_output
         )
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
@@ -263,7 +284,9 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES (
             ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta
+            ch_fasta,
+            ch_fai,
+            cram_output
         )
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
@@ -294,8 +317,8 @@ workflow NALLO {
             .set{ ch_snv_calling_in }
 
         // This subworkflow calls SNVs with DeepVariant and outputs:
-        // 1. A merged and normalised VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
-        // 2. A merged and normalised VCF, containing one region with all samples, to be used in annotation and ranking.
+        // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
+        // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         SHORT_VARIANT_CALLING (
             ch_snv_calling_in,
             ch_fasta,
@@ -306,7 +329,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
         SHORT_VARIANT_CALLING.out.family_bcf
-            .join( SHORT_VARIANT_CALLING.out.family_csi )
+            .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -338,7 +361,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
-            .join( ANN_CSQ_PLI_SNV.out.tbi )
+            .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
 
     }
@@ -377,7 +400,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
         RANK_VARIANTS_SNV.out.vcf
-            .join( RANK_VARIANTS_SNV.out.tbi )
+            .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -402,7 +425,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
         // Split family VCFs to also publish a VCF per sample
-        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi ), [], [], [], [] )
+        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true ), [], [], [], [] )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
 
         BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
@@ -414,6 +437,28 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
+        if (!params.skip_peddy) {
+
+            BCFTOOLS_SORT.out.vcf
+                .join( BCFTOOLS_SORT.out.tbi )
+                .set { ch_peddy_in }
+
+            PEDDY (
+                ch_peddy_in,
+                ch_samplesheet_pedfile,
+                ch_peddy_sites
+            )
+            ch_versions = ch_versions.mix(PEDDY.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+
+        }
     }
     //
     // Filter SNVs
@@ -453,7 +498,7 @@ workflow NALLO {
     if(!params.skip_cnv_calling) {
 
         CALL_CNVS (
-            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf),
+            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
@@ -469,7 +514,7 @@ workflow NALLO {
     if (!params.skip_cnv_calling && !params.skip_sv_calling) {
 
         CALL_SVS.out.family_vcf
-            .join(CALL_CNVS.out.family_vcf)
+            .join(CALL_CNVS.out.family_vcf, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
             .set { svdb_merge_svs_cnvs_in }
 
@@ -561,7 +606,8 @@ workflow NALLO {
             SHORT_VARIANT_CALLING.out.snp_calls_tbi,
             ch_bam_bai,
             ch_fasta,
-            ch_fai
+            ch_fai,
+            cram_output
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
@@ -585,22 +631,32 @@ workflow NALLO {
     // Call repeat expansions with TRGT
     //
     if(!params.skip_repeat_calling) {
-
-        CALL_REPEAT_EXPANSIONS (
-            PHASING.out.haplotagged_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_trgt_bed
-        )
-        ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
+        if (params.str_caller == "trgt") {
+            CALL_REPEAT_EXPANSIONS_TRGT (
+                PHASING.out.haplotagged_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_str_bed,
+                cram_output
+            )
+            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
+            ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+        } else if (params.str_caller == "strdust"){
+            CALL_REPEAT_EXPANSIONS_STRDUST (
+                PHASING.out.haplotagged_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_str_bed
+            )
+            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
+        }
     }
-
     //
     // Annotate repeat expansions with stranger
     //
     if(!params.skip_repeat_annotation) {
 
-        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, CALL_REPEAT_EXPANSIONS.out.family_vcf )
+        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, ch_repeat_expansions )
         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
     }
 

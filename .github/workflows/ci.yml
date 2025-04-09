@@ -38,9 +38,11 @@ jobs:
           - "samplesheet"
           - "samplesheet_multisample_bam"
           - "samplesheet_multisample_ont_bam"
+          - "samplesheet_target_regions_null"
           - "ALIGN_ASSEMBLIES"
           - "ANNOTATE_SVS"
-          - "CALL_REPEAT_EXPANSIONS"
+          - "CALL_REPEAT_EXPANSIONS_STRDUST"
+          - "CALL_REPEAT_EXPANSIONS_TRGT"
           - "CALL_SVS"
           - "METHYLATION"
           - "RANK_VARIANTS"
@@ -48,6 +50,12 @@ jobs:
           - "SNV_ANNOTATION"
         profile:
           - "docker"
+        isMaster:
+          - ${{ github.base_ref == 'master' }}
+        exclude:
+          - isMaster: false
+            tags: "samplesheet_target_regions_null"
+
     steps:
       - name: Check out pipeline code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
