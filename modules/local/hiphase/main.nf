@@ -38,7 +38,7 @@ process HIPHASE {
     def bamNames = []
     def vcfNames = []
 
-    def vcfs_input = vcfs.collectMany { file ->
+    def vcf_args = vcfs.collectMany { file ->
         [
             "--vcf",
             file,
@@ -46,7 +46,7 @@ process HIPHASE {
             "${prefix}_phased.vcf.gz"
         ] }.join(" ")
 
-    def bams_input = bams.collectMany { file ->
+    def bam_args = bams.collectMany { file ->
         [
             "--bam",
             file,
@@ -79,8 +79,8 @@ process HIPHASE {
         $args \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
-        ${bams_input} \\
-        ${vcfs_input}
+        ${bam_args} \\
+        ${vcf_args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
