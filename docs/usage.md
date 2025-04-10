@@ -45,7 +45,7 @@ The above command downloads the pipeline from GitHub, caches it, and tests it on
 
 ## Running genomic-medicine-sweden/nallo with your data
 
-Running the pipeline on real data involves three steps:
+Running the pipeline on real data involves five steps:
 
 1. Prepare a samplesheet with your data
 2. Choose a matching preset
