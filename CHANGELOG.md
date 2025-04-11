@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased - [XXXX-XX-XX]
+## 0.7.0dev - [xxxx-xx-xx]
 
 ### `Added`
 
@@ -12,16 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
 
 ### `Removed`
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Removed local module `SPLIT_BED_CHUNKS`
 
+### `Fixed`
+
 ### Parameters
 
 | Old parameter | New parameter |
 | ------------- | ------------- |
-|               |               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
