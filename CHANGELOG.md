@@ -35,6 +35,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.6.1 - [2025-04-11]
+
+### `Changed`
+
+- [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Changed phase block output format from tsv to gtf
+
+### `Fixed`
+
+- [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Fixed bug in whatshap stats in full-sized data ([#655](https://github.com/genomic-medicine-sweden/nallo/issues/655))
+
 ## 0.6.0 - [2025-04-09]
 
 ### `Added`

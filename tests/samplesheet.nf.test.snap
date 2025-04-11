@@ -483,8 +483,8 @@
                 "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.tsv.gz",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.tsv.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
                 "qc/somalier",
                 "qc/somalier/relate",
@@ -594,8 +594,8 @@
                 "FAM.sex_check.csv:md5,763950d0eff48b64da29a6a883d6b11c",
                 "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_Revio_stats.blocks.tsv.gz:md5,dc631306f4ff70ff0352994b2a975917",
-                "HG002_Revio_stats.blocks.tsv.gz.tbi:md5,9c44af57119b9d2868dd4449cc6dbf99",
+                "HG002_Revio_stats.blocks.gtf.gz:md5,3a2fb4054cae59abfed56ac11ba099c0",
+                "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,a1554a24d7e374852045411e6ea45dc8",
                 "HG002_Revio_stats.stats.tsv:md5,6adb96784c82826928ebfc4f4726a35d",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
@@ -684,6 +684,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-09T16:42:35.444197187"
+        "timestamp": "2025-04-11T16:59:10.146738201"
     }
 }
