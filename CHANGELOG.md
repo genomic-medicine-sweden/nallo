@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+
 ### `Changed`
 
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 - [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
 
 ### `Removed`
+
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Removed local module `SPLIT_BED_CHUNKS`
 
 ### `Fixed`
 
@@ -27,8 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool           | Old version | New version |
+| -------------- | ----------- | ----------- |
+| bedtools split |             | 2.31.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

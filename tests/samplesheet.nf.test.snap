@@ -63,6 +63,9 @@
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
                 },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -203,9 +206,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "SPLIT_BED_CHUNKS": {
-                    "split_bed_chunks": 1.0
                 },
                 "STRANGER": {
                     "stranger": "0.9.4"

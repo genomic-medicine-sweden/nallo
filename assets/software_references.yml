@@ -116,9 +116,6 @@ tool:
   somalier:
     citation: "Somalier (Pedersen et al. 2020)"
     bibliography: "Pedersen, B.S., Bhetariya, P.J., Brown, J. et al. Somalier: rapid relatedness estimation for cancer and germline studies using efficient genome sketches. Genome Med 12, 62 (2020). https://doi.org/10.1186/s13073-020-00761-2"
-  split_bed_chunks:
-    citation: "split_bed_chunks"
-    bibliography: ""
   splitubam:
     citation: "splitubam"
     bibliography: ""
