@@ -12,8 +12,8 @@ process WHATSHAP_STATS {
 
     output:
     tuple val(meta), path("*.stats.tsv")        , emit: stats
-    tuple val(meta), path("*.blocks.tsv.gz")    , emit: blocks
-    tuple val(meta), path("*.blocks.tsv.gz.tbi"), emit: blocks_index
+    tuple val(meta), path("*.blocks.gtf.gz")    , emit: blocks
+    tuple val(meta), path("*.blocks.gtf.gz.tbi"), emit: blocks_index
     path "versions.yml"                         , emit: versions
 
     when:
@@ -27,15 +27,15 @@ process WHATSHAP_STATS {
         $args \\
         --sample ${meta.id} \\
         --tsv ${prefix}.stats.tsv \\
-        --block-list ${prefix}.blocks.tsv \\
+        --gtf ${prefix}.blocks.gtf \\
         $vcf
 
     bgzip \\
         -@ $task.cpus \\
-        ${prefix}.blocks.tsv
+        ${prefix}.blocks.gtf
 
     tabix \\
-        ${prefix}.blocks.tsv.gz
+        ${prefix}.blocks.gtf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -50,8 +50,8 @@ process WHATSHAP_STATS {
 
     """
     touch ${prefix}.stats.tsv
-    echo | gzip > ${prefix}.blocks.tsv.gz
-    touch ${prefix}.blocks.tsv.gz.tbi
+    echo | gzip > ${prefix}.blocks.gtf.gz
+    touch ${prefix}.blocks.gtf.gz.tbi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
