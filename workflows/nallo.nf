@@ -49,6 +49,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/l
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
+include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
@@ -364,11 +365,39 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
 
+        SNV_ANNOTATION.out.vcf
+            .multiMap { meta, vcf ->
+                clinical: [ meta + [ set: "clinical" ], vcf ]
+                research: [ meta + [ set: "research" ], vcf ]
+            }
+            .set { ch_clin_research_snvs_vcf }
+
+        //
+        // Filter SNVs - TODO: Figure out why clinical variants are empty by filter_vep -
+        // It's because we are now filtering per region - and some regions can therefore end up having no variants
+        // We need to update genmod to fix this.
+        //
+        if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+
+            FILTER_VARIANTS_SNVS (
+                ch_clin_research_snvs_vcf.clinical,
+                ch_hgnc_ids,
+                params.filter_variants_hgnc_ids
+            )
+            ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
+
+        }
+
+        FILTER_VARIANTS_SNVS.out.vcf
+            .mix(ch_clin_research_snvs_vcf.research)
+            .set { ch_ann_csq_pli_snv_in }
+
         ANN_CSQ_PLI_SNV (
-            SNV_ANNOTATION.out.vcf,
+            ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
+
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -394,10 +423,9 @@ workflow NALLO {
         // Since we don't always have matching number of ped files and call regions
         // we need to combine and filter instead of join
         ANN_CSQ_PLI_SNV.out.vcf
-            .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
-            .combine ( SOMALIER_PED_FAMILY.out.ped )
-            .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
-            .map { _family_id_snv, meta, _family_id_ped, ped -> [ meta, ped ] }
+            .combine(SOMALIER_PED_FAMILY.out.ped)
+            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.family_id == ped_meta.id }
+            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
             .set { snv_ranking_ped_file }
 
         // Only run if we have affected individuals
@@ -556,8 +584,33 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
+        ANNOTATE_SVS.out.vcf
+            .multiMap { meta, vcf ->
+                clinical: [ meta + [ set: "clinical" ], vcf ]
+                research: [ meta + [ set: "research" ], vcf ]
+            }
+            .set { ch_clin_research_svs_vcf }
+
+        //
+        // Filter SVs
+        //
+        if (!params.skip_sv_calling) {
+            if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+
+                FILTER_VARIANTS_SVS (
+                    ch_clin_research_svs_vcf.clinical,
+                    ch_hgnc_ids,
+                    params.filter_variants_hgnc_ids
+                )
+            }
+        }
+
+        FILTER_VARIANTS_SVS.out.vcf
+            .mix(ch_clin_research_svs_vcf.research)
+            .set { ch_ann_csq_svs_in }
+
         ANN_CSQ_PLI_SVS (
-            ANNOTATE_SVS.out.vcf,
+            ch_ann_csq_svs_in,
             ch_variant_consequences_svs
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
@@ -577,25 +630,17 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-    //
-    // Filter SVs
-    //
-    if (!params.skip_sv_calling) {
-        if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+    ch_collect_svs = params.skip_sv_annotation ? annotate_svs_in :
+        params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
+        RANK_VARIANTS_SVS.out.vcf
 
-            if(params.skip_cnv_calling) {
-                ch_filter_svs_in = params.skip_sv_annotation ? CALL_SVS.out.family_vcf : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
-            } else {
-                ch_filter_svs_in = params.skip_sv_annotation ? annotate_svs_in : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
-            }
-
-            FILTER_VARIANTS_SVS (
-                ch_filter_svs_in,
-                ch_hgnc_ids,
-                params.filter_variants_hgnc_ids
-            )
-        }
-    }
+    // Publish all SVs from here
+    BCFTOOLS_VIEW (
+        ch_collect_svs,
+        [],
+        [],
+        []
+    )
 
     //
     // Phase SNVs and INDELs
