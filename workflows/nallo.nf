@@ -373,9 +373,7 @@ workflow NALLO {
             .set { ch_clin_research_snvs_vcf }
 
         //
-        // Filter SNVs - TODO: Figure out why clinical variants are empty by filter_vep -
-        // It's because we are now filtering per region - and some regions can therefore end up having no variants
-        // We need to update genmod to fix this.
+        // Filter SNVs
         //
         if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
 
@@ -621,9 +619,15 @@ workflow NALLO {
     //
     if (!params.skip_rank_variants) {
 
+        ANN_CSQ_PLI_SVS.out.vcf
+            .combine(SOMALIER_PED_FAMILY.out.ped)
+            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
+            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
+            .set { svs_ranking_ped_file }
+
         RANK_VARIANTS_SVS (
             ANN_CSQ_PLI_SVS.out.vcf,
-            SOMALIER_PED_FAMILY.out.ped,
+            svs_ranking_ped_file,
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )

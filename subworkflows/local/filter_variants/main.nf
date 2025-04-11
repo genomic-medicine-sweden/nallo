@@ -22,7 +22,7 @@ workflow FILTER_VARIANTS {
 
         ch_vcf = ENSEMBLVEP_FILTERVEP.out.output
     }
-    ch_vcf.view()
+
     BCFTOOLS_VIEW (
         ch_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
         [],
