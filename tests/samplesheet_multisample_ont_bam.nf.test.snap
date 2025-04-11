@@ -63,6 +63,9 @@
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
                 },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -185,9 +188,6 @@
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
-                },
-                "SPLIT_BED_CHUNKS": {
-                    "split_bed_chunks": 1.0
                 },
                 "SVDB_MERGE": {
                     "svdb": "2.8.2",
