@@ -47,9 +47,9 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/l
 
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
-include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
@@ -83,7 +83,7 @@ workflow NALLO {
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
     ch_cadd_header               = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
     ch_cadd_resources            = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
+    ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels, Channel.value([[],[]]))
     ch_fasta                     = createReferenceChannelFromPath(params.fasta)
     ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
     ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
@@ -104,6 +104,7 @@ workflow NALLO {
     ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
 
     // Channels from (optional) input samplesheets validated by schema
+    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
     ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
     ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', Channel.value([]))
@@ -342,6 +343,35 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+    //
+    // SNV QC
+    //
+    if (!params.skip_snv_calling && !params.skip_peddy) {
+
+        SHORT_VARIANT_CALLING.out.snp_calls_vcf
+            .join(SHORT_VARIANT_CALLING.out.snp_calls_tbi)
+            .set { ch_snv_stats_in }
+
+        BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
+        ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
+
+        PEDDY (
+            ch_snv_stats_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_versions = ch_versions.mix(PEDDY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+
+    }
 
     //
     // Annotate SNVs
@@ -357,7 +387,7 @@ workflow NALLO {
             PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
-            (params.cadd_resources && params.cadd_prescored_indels),
+            params.cadd_resources,
             params.echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
@@ -365,37 +395,11 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
 
-        SNV_ANNOTATION.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [ meta + [ set: "clinical" ], vcf ]
-                research: [ meta + [ set: "research" ], vcf ]
-            }
-            .set { ch_clin_research_snvs_vcf }
-
-        //
-        // Filter SNVs
-        //
-        if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
-
-            FILTER_VARIANTS_SNVS (
-                ch_clin_research_snvs_vcf.clinical,
-                ch_hgnc_ids,
-                params.filter_variants_hgnc_ids
-            )
-            ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
-
-        }
-
-        FILTER_VARIANTS_SNVS.out.vcf
-            .mix(ch_clin_research_snvs_vcf.research)
-            .set { ch_ann_csq_pli_snv_in }
-
         ANN_CSQ_PLI_SNV (
-            ch_ann_csq_pli_snv_in,
+            SNV_ANNOTATION.out.vcf,
             ch_variant_consequences_snvs
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
-
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -420,10 +424,15 @@ workflow NALLO {
         // Give PED file SNV meta so they can be joined later in the subworkflow.
         // Since we don't always have matching number of ped files and call regions
         // we need to combine and filter instead of join
+
+        // TODO: Is there something up with the meta.id meta.set not being enough to separate?
+        // TODO: Do we have contamination between processes?
+
         ANN_CSQ_PLI_SNV.out.vcf
-            .combine(SOMALIER_PED_FAMILY.out.ped)
-            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.family_id == ped_meta.id }
-            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
+            .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
+            .combine ( SOMALIER_PED_FAMILY.out.ped )
+            .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
+            .map { _family_id_snv, meta, _family_id_ped, ped -> [ meta, ped ] }
             .set { snv_ranking_ped_file }
 
         // Only run if we have affected individuals
@@ -441,12 +450,12 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort SNVs (should be a subworkflow)
+    // Concatenate, sort, split, make database and get statistics of SNVs (should be a subworkflow)
     //
     if(!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
             .set { ch_bcftools_concat_in }
 
@@ -501,6 +510,20 @@ workflow NALLO {
         ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
     }
+    //
+    // Filter SNVs
+    //
+    if(!params.skip_snv_calling && (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '')) {
+
+        // Publish filtered `project` SNVs from here
+        FILTER_VARIANTS_SNVS (
+            BCFTOOLS_SORT.out.vcf,
+            ch_hgnc_ids,
+            params.filter_variants_hgnc_ids
+        )
+        ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
+
+    }
 
     //
     // Call SVs
@@ -523,7 +546,6 @@ workflow NALLO {
     // Call CNVs with HiFiCNV
     //
     if(!params.skip_cnv_calling) {
-
         CALL_CNVS (
             ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
             ch_fasta,
@@ -582,33 +604,8 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
-        ANNOTATE_SVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [ meta + [ set: "clinical" ], vcf ]
-                research: [ meta + [ set: "research" ], vcf ]
-            }
-            .set { ch_clin_research_svs_vcf }
-
-        //
-        // Filter SVs
-        //
-        if (!params.skip_sv_calling) {
-            if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
-
-                FILTER_VARIANTS_SVS (
-                    ch_clin_research_svs_vcf.clinical,
-                    ch_hgnc_ids,
-                    params.filter_variants_hgnc_ids
-                )
-            }
-        }
-
-        FILTER_VARIANTS_SVS.out.vcf
-            .mix(ch_clin_research_svs_vcf.research)
-            .set { ch_ann_csq_svs_in }
-
         ANN_CSQ_PLI_SVS (
-            ch_ann_csq_svs_in,
+            ANNOTATE_SVS.out.vcf,
             ch_variant_consequences_svs
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
@@ -619,32 +616,34 @@ workflow NALLO {
     //
     if (!params.skip_rank_variants) {
 
-        ANN_CSQ_PLI_SVS.out.vcf
-            .combine(SOMALIER_PED_FAMILY.out.ped)
-            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
-            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
-            .set { svs_ranking_ped_file }
-
         RANK_VARIANTS_SVS (
             ANN_CSQ_PLI_SVS.out.vcf,
-            svs_ranking_ped_file,
+            SOMALIER_PED_FAMILY.out.ped,
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-    ch_collect_svs = params.skip_sv_annotation ? annotate_svs_in :
-        params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
-        RANK_VARIANTS_SVS.out.vcf
+    //
+    // Filter SVs
+    //
+    if (!params.skip_sv_calling) {
+        if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
 
-    // Publish all SVs from here
-    BCFTOOLS_VIEW (
-        ch_collect_svs,
-        [],
-        [],
-        []
-    )
+            if(params.skip_cnv_calling) {
+                ch_filter_svs_in = params.skip_sv_annotation ? CALL_SVS.out.family_vcf : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
+            } else {
+                ch_filter_svs_in = params.skip_sv_annotation ? annotate_svs_in : params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf : RANK_VARIANTS_SVS.out.vcf
+            }
+
+            FILTER_VARIANTS_SVS (
+                ch_filter_svs_in,
+                ch_hgnc_ids,
+                params.filter_variants_hgnc_ids
+            )
+        }
+    }
 
     //
     // Phase SNVs and INDELs
