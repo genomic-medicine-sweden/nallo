@@ -3,9 +3,7 @@ process GENMOD_COMPOUND {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/genmod:3.9--pyhdfd78af_0':
-        'biocontainers/genmod:3.9--pyhdfd78af_0' }"
+    container "docker.io/fellen31/genmod:3.10.1"
 
     input:
     tuple val(meta), path(input_vcf)
