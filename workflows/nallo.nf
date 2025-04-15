@@ -424,10 +424,6 @@ workflow NALLO {
         // Give PED file SNV meta so they can be joined later in the subworkflow.
         // Since we don't always have matching number of ped files and call regions
         // we need to combine and filter instead of join
-
-        // TODO: Is there something up with the meta.id meta.set not being enough to separate?
-        // TODO: Do we have contamination between processes?
-
         ANN_CSQ_PLI_SNV.out.vcf
             .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
             .combine ( SOMALIER_PED_FAMILY.out.ped )
