@@ -17,11 +17,12 @@ multiqc/multiqc_report.html
 paraphase/**/*.{vcf.gz,tbi,bam,bai,json}
 phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
+qc/bcftools_stats/**/*.txt
 qc/cramino/**/*.txt
 qc/fastqc/**/*.{zip,html}
 qc/somalier/**/*.{html,tsv}
 qc/deepvariant_vcfstatsreport/**/*.html
 repeats/**/*.{vcf.gz,tbi,bam,bai,cram,crai}
-snvs/**/*.{vcf.gz,tbi,txt}
+snvs/**/*.{vcf.gz,tbi}
 svs/**/*.{vcf.gz,tbi}
 paraphase/**/*.{vcf.gz,tbi,bam,bai,cram,crai,json}
