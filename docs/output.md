@@ -151,6 +151,14 @@ This document describes the pipeline output files and the tools used to generate
 | --------------------------------------------------------------------- | ------------------------------------------- |
 | `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant |
 
+### Bcftools
+
+[bcftools stats](https://samtools.github.io/bcftools/bcftools.html) is used to generate variants statistics from SNV calls.
+
+| Path                                                       | Description        |
+| ---------------------------------------------------------- | ------------------ |
+| `qc/bcftools_stats/${sample}/${sample}.bcftools_stats.txt` | Variant statistics |
+
 ## Variants
 
 In general, annotated variant calls are output per family while unannotated calls are output per sample.
@@ -192,10 +200,10 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                  | Description                                                     | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
 | --------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- |
-| `qc/bcftools_stats/${sample}/*.stats.txt`                             | Variant statistics                                              | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `qc/bcftools_stats/${sample}/${sample}.bcftools_stats.txt`            | Variant statistics                                              | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                     | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz`               | VCF file containing called variants for a single sample         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi`           | Index of the corresponding VCF file                             | :white_check_mark: | :white_check_mark    | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi`           | Index of the corresponding VCF file                             | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples in a family | :white_check_mark: |                      |                              |
 | `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                             | :white_check_mark: |                      |                              |
 
