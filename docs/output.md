@@ -190,36 +190,32 @@ In general, annotated variant calls are output per family while unannotated call
 
 [DeepVariant](https://github.com/google/deepvariant) is used to call variants, while [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [GLnexus](https://github.com/dnanexus-rnd/GLnexus) are used for merging variants.
 
-| Path                                                                  | Description                                                                 | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snvs.vcf.gz`                           | VCF file containing called variants with alternative genotypes for a sample | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/sample/{sample}/{sample}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/stats/sample/*.stats.txt`                                       | Variant statistics                                                          | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                                 | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples                         | :white_check_mark: |                      |                              |
-| `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                                         | :white_check_mark: |                      |                              |
+| Path                                                                  | Description                                                     | Call SNVs          | Call & annotate SNVs | Call, annotate and rank SNVs |
+| --------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------ | -------------------- | ---------------------------- | ------------------ |
+| `qc/bcftools_stats/${sample}/*.stats.txt`                             | Variant statistics                                              | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `qc/deepvariant_vcfstatsreport/{sample}/${sample}.visual_report.html` | Visual report of SNV calls from DeepVariant                     | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz`               | VCF file containing called variants for a single sample         | :white_check_mark: |                      | :white_check_mark:           | :white_check_mark: |
+| `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi`           | Index of the corresponding VCF file                             | :white_check_mark: | :white_check_mark    | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples in a family | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                             | :white_check_mark: |                      |                              |
 
 #### Annotation
 
 [Echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
-| Path                                                      | Description                                                                    | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants with alternative genotypes for a sample |           | :white_check_mark:   |                              |
-| `snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
-| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants per family                              |           | :white_check_mark:   |                              |
-| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                                                |           | :white_check_mark:   |                              |
+| Path                                                      | Description                                       | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| --------------------------------------------------------- | ------------------------------------------------- | --------- | -------------------- | ---------------------------- |
+| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants per family |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                   |           | :white_check_mark:   |                              |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
-| Path                                                             | Description                                              | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| ---------------------------------------------------------------- | -------------------------------------------------------- | --------- | -------------------- | ---------------------------- |
-| `snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants for a sample |           | :white_check_mark:   |
-| `snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           | :white_check_mark:   |
-| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family   |           |                      | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                             |           |                      | :white_check_mark:           |
+| Path                                                             | Description                                            | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| ---------------------------------------------------------------- | ------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family |           |                      | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                           |           |                      | :white_check_mark:           |
 
 #### Filtering
 
