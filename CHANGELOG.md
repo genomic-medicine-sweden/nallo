@@ -7,11 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+
 ### `Changed`
 
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 - [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed bcftools stats to run on unannotated variants instead of annotated (and ranked) variants
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
 
 ### `Removed`
+
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCTOOLS_PLUGINSPLIT`
 
 ### `Fixed`
 
@@ -27,13 +36,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool           | Old version | New version |
+| -------------- | ----------- | ----------- |
+| bedtools split |             | 2.31.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.6.1 - [2025-04-11]
+
+### `Changed`
+
+- [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Changed phase block output format from tsv to gtf
+
+### `Fixed`
+
+- [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Fixed bug in whatshap stats in full-sized data ([#655](https://github.com/genomic-medicine-sweden/nallo/issues/655))
 
 ## 0.6.0 - [2025-04-09]
 
