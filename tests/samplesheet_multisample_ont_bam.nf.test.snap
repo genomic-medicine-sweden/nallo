@@ -648,8 +648,6 @@
                 "somalier_stats.txt:md5,fec840d4fe202c0e3ff7ce94b2a3bf92",
                 "whatshap-stats-table.txt:md5,c4a84c623b8251228cb84d57e9984628",
                 "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
-                "HG002_ONT_A.bcftools_stats.txt:md5,9c792c4ef2c4243c84bf034fcf825aeb",
-                "HG002_ONT_B.bcftools_stats.txt:md5,9fd74ed759a74d57c4dbbf744f499df4",
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
                 "HG002_ONT_B_cramino_aligned_phased.arrow:md5,61af72539e105cec79db7c9b78eb15a7",
                 "HG002_ONT_A_cramino_aligned.arrow:md5,d2a5c81595fa34925ab8f03078487d81",
@@ -820,6 +818,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-15T11:21:39.900811566"
+        "timestamp": "2025-04-15T13:18:50.27151845"
     }
 }
