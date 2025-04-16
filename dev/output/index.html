@@ -485,6 +485,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#bcftools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bcftools
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -816,6 +825,15 @@
   <a href="#deepvariant" class="md-nav__link">
     <span class="md-ellipsis">
       DeepVariant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bcftools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bcftools
     </span>
   </a>
   
@@ -1392,6 +1410,22 @@
 </tr>
 </tbody>
 </table>
+<h3 id="bcftools">Bcftools</h3>
+<p><a href="https://samtools.github.io/bcftools/bcftools.html">bcftools stats</a> is used to generate variants statistics from SNV calls.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qc/bcftools_stats/${sample}/${sample}.bcftools_stats.txt</code></td>
+<td>Variant statistics</td>
+</tr>
+</tbody>
+</table>
 <h2 id="variants">Variants</h2>
 <p>In general, annotated variant calls are output per family while unannotated calls are output per sample.</p>
 <h3 id="paralogous-genes">Paralogous genes</h3>
@@ -1524,21 +1558,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs.vcf.gz</code></td>
-<td>VCF file containing called variants with alternative genotypes for a sample</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-<tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs.vcf.gz.tbi</code></td>
-<td>Index of the corresponding VCF file</td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-</tr>
-<tr>
-<td><code>snvs/stats/sample/*.stats.txt</code></td>
+<td><code>qc/bcftools_stats/${sample}/${sample}.bcftools_stats.txt</code></td>
 <td>Variant statistics</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
@@ -1552,8 +1572,22 @@
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
+<td><code>snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz</code></td>
+<td>VCF file containing called variants for a single sample</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi</code></td>
+<td>Index of the corresponding VCF file</td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
 <td><code>snvs/family/{family}/{family}_snvs.vcf.gz</code></td>
-<td>VCF file containing called variants for all samples</td>
+<td>VCF file containing called variants for all samples in a family</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 <td></td>
@@ -1580,20 +1614,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz</code></td>
-<td>VCF file containing annotated variants with alternative genotypes for a sample</td>
-<td></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-</tr>
-<tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs_annotated.vcf.gz.tbi</code></td>
-<td>Index of the annotated VCF file</td>
-<td></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-</tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snvs_annotated.vcf.gz</code></td>
 <td>VCF file containing annotated variants per family</td>
@@ -1623,20 +1643,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz</code></td>
-<td>VCF file with annotated and ranked variants for a sample</td>
-<td></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-</tr>
-<tr>
-<td><code>snvs/sample/{sample}/{sample}_snvs_annotated_ranked.vcf.gz.tbi</code></td>
-<td>Index of the ranked VCF file</td>
-<td></td>
-<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
-</tr>
 <tr>
 <td><code>snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz</code></td>
 <td>VCF file with annotated and ranked variants per family</td>
@@ -1736,7 +1742,7 @@
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{snvs,cnvs}_merged.vcf.gz.tbi</code></td>
+<td><code>svs/family/{family_id}/{family_id}_${hifiasm,sniffles,severus}_{svs,cnvs}_merged.vcf.gz.tbi</code></td>
 <td>Index of the merged VCF file</td>
 <td></td>
 <td></td>
