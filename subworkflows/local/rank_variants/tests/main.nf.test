@@ -72,9 +72,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
-                input[8] = Channel.value([])
-                input[9] = null
+                input[8] = true
+                input[9] = Channel.value([])
                 input[10] = null
+                input[11] = null
                 """
             }
         }
