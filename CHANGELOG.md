@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 - [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Updated genmod to 3.10.1
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed bcftools stats to run on unannotated variants instead of annotated (and ranked) variants
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
@@ -40,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Tool           | Old version | New version |
 | -------------- | ----------- | ----------- |
 | bedtools split |             | 2.31.1      |
+| genmod         | 3.9         | 3.10.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

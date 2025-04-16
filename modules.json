@@ -115,22 +115,22 @@
                     },
                     "genmod/annotate": {
                         "branch": "master",
-                        "git_sha": "91a84f951358143e93dc9e03470db4e6a4a7105c",
+                        "git_sha": "2b45a128cf65400a510335828d6d378471779978",
                         "installed_by": ["modules"]
                     },
                     "genmod/compound": {
                         "branch": "master",
-                        "git_sha": "91a84f951358143e93dc9e03470db4e6a4a7105c",
+                        "git_sha": "2b45a128cf65400a510335828d6d378471779978",
                         "installed_by": ["modules"]
                     },
                     "genmod/models": {
                         "branch": "master",
-                        "git_sha": "f888300c726e1f817a9f93a680866ff7e6c669f6",
+                        "git_sha": "2b45a128cf65400a510335828d6d378471779978",
                         "installed_by": ["modules"]
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "f888300c726e1f817a9f93a680866ff7e6c669f6",
+                        "git_sha": "2b45a128cf65400a510335828d6d378471779978",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
