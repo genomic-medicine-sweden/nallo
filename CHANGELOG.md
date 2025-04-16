@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 - [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Updated genmod to 3.10.1
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Changed filtering from after ranking variants to between annotation and ranking. This ensures the correct `most_severe_consequence` and `most_severe_pli` are added to the filtered (clinical) and unfiltered (research) variants
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed bcftools stats to run on unannotated variants instead of annotated (and ranked) variants
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
@@ -25,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCTOOLS_PLUGINSPLIT`
 
 ### `Fixed`
+
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
 
 ### Parameters
 
