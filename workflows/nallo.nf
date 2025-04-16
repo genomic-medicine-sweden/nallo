@@ -47,7 +47,6 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/l
 
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNVS } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
@@ -328,10 +327,20 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
+        // SNV QC
+        SHORT_VARIANT_CALLING.out.snp_calls_vcf
+            .join(SHORT_VARIANT_CALLING.out.snp_calls_tbi)
+            .set { ch_snv_stats_in }
+
+        BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
+        ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
+
         SHORT_VARIANT_CALLING.out.family_bcf
             .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
+
 
     //
     // Annotate SNVs
@@ -406,13 +415,13 @@ workflow NALLO {
     }
 
     //
-    // Concatenate, sort, split, make database and get statistics of SNVs (should be a subworkflow)
+    // Concatenate and sort SNVs (should be a subworkflow)
     //
     if(!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
-            .groupTuple()
+            .groupTuple(size: params.snv_calling_processes)
             .set { ch_bcftools_concat_in }
 
         // Concat into family VCFs per family with all regions
@@ -424,43 +433,34 @@ workflow NALLO {
         // Sort and publish
         BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
-        // Split family VCFs to also publish a VCF per sample
-        BCFTOOLS_PLUGINSPLIT_SNVS ( BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true ), [], [], [], [] )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNVS.out.versions)
-
-        BCFTOOLS_PLUGINSPLIT_SNVS.out.vcf
-            .transpose()
-            .map { meta, vcf -> [ meta, vcf, [] ] }
-            .set { ch_bcftools_stats_snv_in }
-
-        BCFTOOLS_STATS ( ch_bcftools_stats_snv_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
-        ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
-
-        if (!params.skip_peddy) {
-
-            BCFTOOLS_SORT.out.vcf
-                .join( BCFTOOLS_SORT.out.tbi )
-                .set { ch_peddy_in }
-
-            PEDDY (
-                ch_peddy_in,
-                ch_samplesheet_pedfile,
-                ch_peddy_sites
-            )
-            ch_versions = ch_versions.mix(PEDDY.out.versions)
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
-
-        }
     }
+
+    //
+    // Run Peddy
+    //
+    if (!params.skip_snv_calling && !params.skip_peddy) {
+
+        BCFTOOLS_SORT.out.vcf
+            .join( BCFTOOLS_SORT.out.tbi )
+            .set { ch_peddy_in }
+
+        PEDDY (
+            ch_peddy_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_versions = ch_versions.mix(PEDDY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+
+    }
+
     //
     // Filter SNVs
     //

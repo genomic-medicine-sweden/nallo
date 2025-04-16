@@ -7,17 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 
 ### `Changed`
 
-- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
 - [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed bcftools stats to run on unannotated variants instead of annotated (and ranked) variants
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
 - [#677](https://github.com/genomic-medicine-sweden/nallo/pull/677) - Changed `echtvar_snv_databases` from required to an optional parameter
 
 ### `Removed`
 
-- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654/) - Removed local module `SPLIT_BED_CHUNKS`
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCTOOLS_PLUGINSPLIT`
 
 ### `Fixed`
 
@@ -47,10 +51,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Changed phase block output format from tsv to gtf
+- [#676](https://github.com/genomic-medicine-sweden/nallorefs/pull/676) - Changed to `max_sv_size 999999999` in VEP config
 
 ### `Fixed`
 
 - [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Fixed bug in whatshap stats in full-sized data ([#655](https://github.com/genomic-medicine-sweden/nallo/issues/655))
+- [#676](https://github.com/genomic-medicine-sweden/nallorefs/pull/676) - Fixed pipeline failing due to variants ending up with no CSQ, since `max_sv_size` in VEP was too low ([#605](https://github.com/genomic-medicine-sweden/nallorefs/pull/605))
 
 ## 0.6.0 - [2025-04-09]
 
