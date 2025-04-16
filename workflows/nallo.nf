@@ -437,7 +437,7 @@ workflow NALLO {
     }
 
     //
-    // Concatenate, sort, split, make database and get statistics of SNVs (should be a subworkflow)
+    // Concatenate and sort SNVs (could be a subworkflow)
     //
     if(!params.skip_snv_calling) {
 
@@ -505,6 +505,7 @@ workflow NALLO {
     // Call CNVs with HiFiCNV
     //
     if(!params.skip_cnv_calling) {
+
         CALL_CNVS (
             ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
             ch_fasta,
