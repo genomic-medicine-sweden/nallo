@@ -26,10 +26,10 @@ nextflow_workflow {
             script "../../../../modules/nf-core/gfastats/main.nf"
             process {
                 """
-                input[0] = HIFIASM.out.paternal_contigs
+                input[0] = HIFIASM.out.hap1_contigs
                     .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
                     .mix(
-                        HIFIASM.out.maternal_contigs
+                        HIFIASM.out.hap2_contigs
                         .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
                     )
                 input[1] = 'fasta'
