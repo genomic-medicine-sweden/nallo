@@ -39,7 +39,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool           | Old version | New version |
 | -------------- | ----------- | ----------- |
-| bedtools split |             | 2.31.1      |
+| bedtools/split |             | 2.31.1      |
+| severus        | 1.3         | 1.5         |
+| strdust        | 0.11.1      | 0.11.4      |
+| trgt/genotype  | 1.2.0       | 2.0.0       |
+| trgt/merge     | 1.2.0       | 2.0.0       |
+| hifiasm        | 0.24.0      | 0.25.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

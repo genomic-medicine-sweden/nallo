@@ -12,7 +12,6 @@ workflow ASSEMBLY {
 
     main:
     ch_versions = Channel.empty()
-    ch_hifiasm_empty = Channel.value([ [], [], [] ])
 
     if(params.hifiasm_mode == 'hifi-only') {
 
@@ -21,7 +20,12 @@ workflow ASSEMBLY {
             .map { meta, reads -> [ meta, reads, [] ] }
             .set { hifiasm_in }
 
-        HIFIASM ( hifiasm_in, ch_hifiasm_empty, ch_hifiasm_empty )
+        HIFIASM (
+            hifiasm_in,
+            [[],[],[]],
+            [[],[],[]],
+            [[],[]]
+        )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
     } else if(params.hifiasm_mode == 'trio-binning') {
@@ -102,15 +106,20 @@ workflow ASSEMBLY {
             }
             .set { ch_hifiasm_in }
 
-        HIFIASM ( ch_hifiasm_in.reads, ch_hifiasm_in.yak, ch_hifiasm_empty )
+        HIFIASM (
+            ch_hifiasm_in.reads,
+            ch_hifiasm_in.yak,
+            [[],[],[]],
+            [[],[]]
+        )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
     }
 
-    HIFIASM.out.paternal_contigs
+    HIFIASM.out.hap1_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
         .set { ch_gfastats_paternal_in }
 
-    HIFIASM.out.maternal_contigs
+    HIFIASM.out.hap2_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
         .set { ch_gfastats_maternal_in }
 

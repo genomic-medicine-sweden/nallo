@@ -73,7 +73,7 @@
                     },
                     "cadd": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "6aa72b5d45b13802beb0410707ab5a02067ddd11",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/cadd/cadd.diff"
                     },
@@ -151,7 +151,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "fcab846b30baf8391257dd302feece91714769f2",
+                        "git_sha": "971d801da83f2e50ab5935f93e40375adaa79b51",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hifiasm/hifiasm.diff"
                     },
@@ -245,7 +245,7 @@
                     },
                     "severus": {
                         "branch": "master",
-                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "git_sha": "b548397f546b85ae02df11dfec3023d744331a35",
                         "installed_by": ["modules"]
                     },
                     "sniffles": {
@@ -278,7 +278,7 @@
                     },
                     "strdust": {
                         "branch": "master",
-                        "git_sha": "ce475295fb2edd3264ca8481fa9324a9c90753a5",
+                        "git_sha": "9a0e40feaa557a1c873ca7763b2676fb564a6ebe",
                         "installed_by": ["modules"]
                     },
                     "svdb/merge": {
@@ -313,12 +313,12 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "484afd16770cf3c466a6c385e33746c877656663",
+                        "git_sha": "7cf69bf10ea16f7d006319da48a12232310e5f40",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "8f77dd07042aef4eb19ea7fa91496a41975299b0",
+                        "git_sha": "7cf69bf10ea16f7d006319da48a12232310e5f40",
                         "installed_by": ["modules"]
                     },
                     "untar": {
