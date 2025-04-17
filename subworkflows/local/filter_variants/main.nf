@@ -1,6 +1,5 @@
-include { ENSEMBLVEP_FILTERVEP          } from '../../../modules/nf-core/ensemblvep/filtervep/main'
-include { BCFTOOLS_VIEW                 } from '../../../modules/nf-core/bcftools/view/main'
-include { ENSEMBLVEP_VEP } from '../../../modules/nf-core/ensemblvep/vep/main.nf'
+include { ENSEMBLVEP_FILTERVEP } from '../../../modules/nf-core/ensemblvep/filtervep/main'
+include { BCFTOOLS_VIEW        } from '../../../modules/nf-core/bcftools/view/main'
 
 workflow FILTER_VARIANTS {
 

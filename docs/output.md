@@ -211,28 +211,28 @@ In general, annotated variant calls are output per family while unannotated call
 
 [Echtvar](https://github.com/brentp/echtvar) and [VEP](https://www.ensembl.org/vep) are used for annotating SNVs, while [CADD](https://cadd.gs.washington.edu/) is used to annotate INDELs with CADD scores.
 
-| Path                                                      | Description                                       | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| --------------------------------------------------------- | ------------------------------------------------- | --------- | -------------------- | ---------------------------- |
-| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz`     | VCF file containing annotated variants per family |           | :white_check_mark:   |                              |
-| `snvs/family/{family}/{family}_snvs_annotated.vcf.gz.tbi` | Index of the annotated VCF file                   |           | :white_check_mark:   |                              |
+| Path                                                               | Description                                       | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| ------------------------------------------------------------------ | ------------------------------------------------- | --------- | -------------------- | ---------------------------- |
+| `snvs/family/{family}/{family}_snvs_annotated_research.vcf.gz`     | VCF file containing annotated variants per family |           | :white_check_mark:   |                              |
+| `snvs/family/{family}/{family}_snvs_annotated_research.vcf.gz.tbi` | Index of the annotated VCF file                   |           | :white_check_mark:   |                              |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SNVs and INDELs.
 
-| Path                                                             | Description                                            | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
-| ---------------------------------------------------------------- | ------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
-| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz`     | VCF file with annotated and ranked variants per family |           |                      | :white_check_mark:           |
-| `snvs/family/{family}/{family}_snvs_annotated_ranked.vcf.gz.tbi` | Index of the ranked VCF file                           |           |                      | :white_check_mark:           |
+| Path                                                                      | Description                                            | Call SNVs | Call & annotate SNVs | Call, annotate and rank SNVs |
+| ------------------------------------------------------------------------- | ------------------------------------------------------ | --------- | -------------------- | ---------------------------- |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked_research.vcf.gz`     | VCF file with annotated and ranked variants per family |           |                      | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs_annotated_ranked_research.vcf.gz.tbi` | Index of the ranked VCF file                           |           |                      | :white_check_mark:           |
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants. These will be output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                           | Description                                  |
 | ---------------------------------------------- | -------------------------------------------- |
-| `snvs/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
-| `snvs/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
+| `snvs/{family}/{family}_*_clinical.vcf.gz`     | VCF file with filtered variants for a family |
+| `snvs/{family}/{family}_*_clinical.vcf.gz.tbi` | Index of the filtered VCF file               |
 
 !!!tip
 
@@ -261,32 +261,32 @@ In general, annotated variant calls are output per family while unannotated call
 
 [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://www.ensembl.org/vep) are used to annotate structural variants.
 
-| Path                                                                      | Description                                                | Call & annotate SVs |  Call & annotate SVs & CNVs |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------- | --------------------------- |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz`     | VCF file with merged and annotated CNVs and SVs per family |                     | :white_check_mark:          |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated.vcf.gz.tbi` | Index of the merged VCF file                               |                     | :white_check_mark:          |
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz`          | VCF file with merged and annotated SVs per family          | :white_check_mark:  |
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated.vcf.gz.tbi`      | Index of the merged VCF file                               | :white_check_mark:  |
+| Path                                                                               | Description                                                | Call & annotate SVs |  Call & annotate SVs & CNVs |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------- | --------------------------- |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_research.vcf.gz`     | VCF file with merged and annotated CNVs and SVs per family |                     | :white_check_mark:          |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_research.vcf.gz.tbi` | Index of the merged VCF file                               |                     | :white_check_mark:          |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_research.vcf.gz`          | VCF file with merged and annotated SVs per family          | :white_check_mark:  |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_research.vcf.gz.tbi`      | Index of the merged VCF file                               | :white_check_mark:  |
 
 #### Ranking
 
 [GENMOD](https://github.com/Clinical-Genomics/genmod) is used to rank the annotated SVs.
 
-| Path                                                                             | Description                                                        | Rank SVs           | Rank SVs & CNVs    |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------ | ------------------ |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz`     | VCF file with merged, annotated and ranked CNVs and SVs per family |                    | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked.vcf.gz.tbi` | Index of the merged VCF file                                       |                    | :white_check_mark: |
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family          | :white_check_mark: |                    |
-| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked.vcf.gz.tbi`      | Index of the merged VCF file                                       | :white_check_mark: |                    |
+| Path                                                                                      | Description                                                        | Rank SVs           | Rank SVs & CNVs    |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------ | ------------------ |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked_research.vcf.gz`     | VCF file with merged, annotated and ranked CNVs and SVs per family |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_cnvs_svs_merged_annotated_ranked_research.vcf.gz.tbi` | Index of the merged VCF file                                       |                    | :white_check_mark: |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked_research.vcf.gz`          | VCF file with merged, annotated and ranked SVs per family          | :white_check_mark: |                    |
+| `svs/family/{family_id}/{family_id}_svs_merged_annotated_ranked_research.vcf.gz.tbi`      | Index of the merged VCF file                                       | :white_check_mark: |                    |
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants. These will be output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                          | Description                                  |
 | --------------------------------------------- | -------------------------------------------- |
-| `svs/{family}/{family}_*_filtered.vcf.gz`     | VCF file with filtered variants for a family |
-| `svs/{family}/{family}_*_filtered.vcf.gz.tbi` | Index of the filtered VCF file               |
+| `svs/{family}/{family}_*_clinical.vcf.gz`     | VCF file with filtered variants for a family |
+| `svs/{family}/{family}_*_clinical.vcf.gz.tbi` | Index of the filtered VCF file               |
 
 !!!tip
 
