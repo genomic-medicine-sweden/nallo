@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
 - [#677](https://github.com/genomic-medicine-sweden/nallo/pull/677) - Changed `echtvar_snv_databases` from required to an optional parameter
+- [#678](https://github.com/genomic-medicine-sweden/nallo/pull/678) - Updated modules
 
 ### `Removed`
 
@@ -39,7 +40,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool           | Old version | New version |
 | -------------- | ----------- | ----------- |
-| bedtools split |             | 2.31.1      |
+| bedtools/split |             | 2.31.1      |
+| severus        | 1.3         | 1.5         |
+| strdust        | 0.11.1      | 0.11.4      |
+| trgt/genotype  | 1.2.0       | 2.0.0       |
+| trgt/merge     | 1.2.0       | 2.0.0       |
+| hifiasm        | 0.24.0      | 0.25.0      |
+| echtvar/anno   | 0.2.0       | 0.2.2       |
+| gunzip         | 1.1         | 1.13        |
+| tabix          | 1.2         | 1.21        |
+| multiqc        | 1.25.1      | 1.28        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

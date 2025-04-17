@@ -61,150 +61,152 @@ output:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
+          pattern: "${prefix}/severus.log"
       - ${prefix}/severus.log:
           type: file
-          description: Severus log file
+          description: |
+            log file
           pattern: "${prefix}/severus.log"
   - read_qual:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
+          pattern: "${prefix}/read_qual.txt"
       - ${prefix}/read_qual.txt:
           type: file
-          description: Severus read_qual file
+          description: |
+            txt file containing read quality information
           pattern: "${prefix}/read_qual.txt"
   - breakpoints_double:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/breakpoints_double.csv:
           type: file
-          description: Severus breakpoints_double file
+          description: |
+            Detailed info about the detected breakpoints for all samples in text format, intended for an advanced user.
           pattern: "${prefix}/breakpoints_double.csv"
   - read_alignments:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
+          pattern: "${prefix}/read_alignments"
       - ${prefix}/read_alignments:
           type: file
-          description: read alignments file
+          description: |
           pattern: "${prefix}/read_alignments"
   - read_ids:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
+          pattern: "${prefix}/read_ids"
       - ${prefix}/read_ids.csv:
           type: file
-          description: read IDs for support reads
+          description: |
+            Contains supporting read IDs for each SV
           pattern: "${prefix}/read_ids"
   - collapsed_dup:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/severus_collaped_dup.bed:
           type: file
-          description: a bed file with identified collapsed duplication regions
+          description: |
           pattern: "${prefix}/severus_collaped_dup"
   - loh:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/severus_LOH.bed:
           type: file
-          description: a bed file with predicted LOH regions
+          description: |
+            BED file containing loss of heterozygosity information
           pattern: "${prefix}/severus_LOH.bed"
   - all_vcf:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/all_SVs/severus_all.vcf:
-          type: file
-          description: VCF file with all SVs (somatic + germline)
+          type: map
+          description: |
+            VCF file containing somatic and germline structural variants
           pattern: "${prefix}/all_SVs/severus_all.vcf"
   - all_breakpoints_clusters_list:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/all_SVs/breakpoints_clusters_list.tsv:
           type: file
-          description: Severus breakpoints clusters list file
+          description: |
+            a TSV containing a list of all breakpoint clusters
           pattern: "${prefix}/all_SVs/breakpoints_clusters_list.tsv"
   - all_breakpoints_clusters:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/all_SVs/breakpoints_clusters.tsv:
           type: file
-          description: Severus breakpoints clusters file
+          description: |
+            TSV file listing meta information in breakpoint clusters
           pattern: "${prefix}/all_SVs/breakpoints_clusters.tsv"
   - all_plots:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/all_SVs/plots/severus_*.html:
           type: file
-          description: Severus plots
+          description: |
+            Plotly graph containing of somatic and germline breakpoint clusters
           pattern: "${prefix}/all_SVs/plots/*.html"
   - somatic_vcf:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
-      - ${prefix}/somatic_SVs/severus_all.vcf:
+      - ${prefix}/somatic_SVs/severus_somatic.vcf:
           type: file
-          description: VCF file with somatic SVs
+          description: |
+            VCF file containing somatic structural variants (SV)
           pattern: "${prefix}/somatic_SVs/severus_all.vcf"
   - somatic_breakpoints_clusters_list:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/somatic_SVs/breakpoints_clusters_list.tsv:
           type: file
-          description: Severus somatic breakpoints clusters list file
+          description: |
+            TSV file containing full list of somatic breakpoint clusters
           pattern: "${prefix}/somatic_SVs/breakpoints_clusters_list.tsv"
   - somatic_breakpoints_clusters:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/somatic_SVs/breakpoints_clusters.tsv:
           type: file
-          description: Severus somatic breakpoints clusters file
+          description: |
+            TSV file containing meta information of somatic breakpoint clusters
           pattern: "${prefix}/somatic_SVs/breakpoints_clusters.tsv"
   - somatic_plots:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
       - ${prefix}/somatic_SVs/plots/severus_*.html:
           type: file
-          description: Severus somatic plots
+          description: |
+            Plotly graph of somatic breakpoint clusters
           pattern: "${prefix}/somatic_SVs/plots/*.html"
   - versions:
       - versions.yml:
