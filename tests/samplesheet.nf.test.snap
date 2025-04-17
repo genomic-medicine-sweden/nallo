@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            165,
+            164,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -233,9 +233,6 @@
                 "TABIX_SVDB_MERGE": {
                     "tabix": 1.2
                 },
-                "TABIX_SVDB_MERGE_SVS_CNVS": {
-                    "tabix": 1.2
-                },
                 "TABIX_TABIX": {
                     "tabix": 1.2
                 },
@@ -274,9 +271,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/FAM.vcf.gz",
-                "bcftools/FAM.vcf.gz.tbi",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -509,27 +503,23 @@
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz.tbi",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
-                "snvs/family/test_data_chunk.00001.bed",
-                "snvs/family/test_data_chunk.00001.bed/test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/test_data_chunk.00001.bed/test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz.tbi",
-                "snvs/family/test_data_chunk.00002.bed",
-                "snvs/family/test_data_chunk.00002.bed/test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/test_data_chunk.00002.bed/test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
+                "svdb",
+                "svdb/FAM_svdb.vcf.gz",
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_Revio",
                 "svs/sample/HG002_Revio/HG002_Revio_hificnv_cnvs.vcf.gz",
@@ -547,8 +537,6 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,b949217515292b5a7735af4ad4bd5b11",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
-                "FAM.vcf.gz:md5,73b7f68837de3d6af05ff5c5d4598ae2",
-                "FAM.vcf.gz.tbi:md5,5ead2abe1e9b405ddbdfc119c7847469",
                 "HG002_Revio_modkit_pileup_1.bed.gz:md5,1d90dc72aea71d6c9de602cc51aa9861",
                 "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,52170bbfdc00a08e2fb1c41d8c8ae2cf",
                 "HG002_Revio_modkit_pileup_2.bed.gz:md5,2aa5ded8734f4f1f0bc33b6579e8dbb2",
@@ -605,6 +593,7 @@
                 "HG002_Revio_stats.blocks.gtf.gz:md5,3a2fb4054cae59abfed56ac11ba099c0",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,a1554a24d7e374852045411e6ea45dc8",
                 "HG002_Revio_stats.stats.tsv:md5,6adb96784c82826928ebfc4f4726a35d",
+                "FAM_svdb.vcf.gz:md5,56756b9e5401909a13769171200b4b59",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_hificnv.maf.bw:md5,cffee4ce0734c1c6eae507c0f80c4a4a"
@@ -632,10 +621,6 @@
             ],
             [
                 [
-                    "FAM.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
@@ -656,32 +641,28 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_snvs_annotated_ranked.vcf.gz",
+                    "FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=64, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=113, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=64, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=64, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=191, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=85, phased=false, phasedAutodetect=false]"
+                    "FAM_svdb.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=87, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
+                    "FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_hificnv_cnvs.vcf.gz",
@@ -698,8 +679,8 @@
             ],
             [
                 [
-                    "FAM.vcf.gz",
-                    "20aae3f34a04e1cf9544df51c58380fc"
+                    "FAM_svdb.vcf.gz",
+                    "b52b0f7b0b9745f7b9a4eaf6037b7d77"
                 ]
             ]
         ],
@@ -707,6 +688,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-16T15:42:14.255701275"
+        "timestamp": "2025-04-17T10:56:06.145384408"
     }
 }

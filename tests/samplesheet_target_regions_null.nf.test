@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE_MASTER"
 
-    test("test profile - target_regions null") {
+    test("test profile | --target_regions null") {
         tag "samplesheet_target_regions_null"
 
         when {

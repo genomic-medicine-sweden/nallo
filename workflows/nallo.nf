@@ -57,7 +57,6 @@ include { MULTIQC                                           } from '../modules/n
 include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
-include { TABIX_TABIX as TABIX_SVDB_MERGE_SVS_CNVS          } from '../modules/nf-core/tabix/tabix/main'
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -357,6 +356,7 @@ workflow NALLO {
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
             (params.cadd_resources && params.cadd_prescored_indels),
+            params.echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
             ch_cadd_prescored_indels
@@ -370,6 +370,9 @@ workflow NALLO {
             }
             .set { ch_clin_research_snvs_vcf }
 
+        ch_clin_research_snvs_vcf.research
+            .set { ch_ann_csq_pli_snv_in }
+
         if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS (
@@ -379,12 +382,8 @@ workflow NALLO {
             )
             ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
+            ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
-
-        FILTER_VARIANTS_SNVS.out.vcf
-            .mix(ch_clin_research_snvs_vcf.research)
-            .set { ch_ann_csq_pli_snv_in }
-
 
         ANN_CSQ_PLI_SNV (
             ch_ann_csq_pli_snv_in,
@@ -540,15 +539,6 @@ workflow NALLO {
     }
 
     //
-    // Index the merged SVs and SVs if not skipping sv annotation (should be a merge and index subworkflow)
-    //
-    if (!params.skip_sv_annotation) {
-
-        TABIX_SVDB_MERGE_SVS_CNVS ( SVDB_MERGE_SVS_CNVS.out.vcf )
-        ch_versions = ch_versions.mix(TABIX_SVDB_MERGE_SVS_CNVS.out.versions)
-    }
-
-    //
     // Annotate SVs
     //
     if (!params.skip_sv_annotation) {
@@ -571,6 +561,9 @@ workflow NALLO {
             }
             .set { ch_clin_research_svs_vcf }
 
+        ch_clin_research_svs_vcf.research
+            .set { ch_ann_csq_svs_in }
+
         //
         // Filter SVs
         //
@@ -581,11 +574,11 @@ workflow NALLO {
                 ch_hgnc_ids,
                 params.filter_variants_hgnc_ids
             )
-        }
+            ch_versions = ch_versions.mix(FILTER_VARIANTS_SVS.out.versions)
 
-        FILTER_VARIANTS_SVS.out.vcf
-            .mix(ch_clin_research_svs_vcf.research)
-            .set { ch_ann_csq_svs_in }
+            ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
+
+        }
 
         ANN_CSQ_PLI_SVS (
             ch_ann_csq_svs_in,

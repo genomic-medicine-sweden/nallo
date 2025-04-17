@@ -1,7 +1,7 @@
 {
-    "samplesheet_multisample_bam | --phaser hiphase | --alignment_output_format cram": {
+    "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram": {
         "content": [
-            234,
+            200,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -51,9 +51,6 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.2
                 },
-                "BCFTOOLS_VIEW": {
-                    "bcftools": 1.2
-                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -89,9 +86,6 @@
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.0"
-                },
-                "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 113.0
                 },
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0
@@ -230,9 +224,6 @@
                 "TABIX_SVDB_MERGE": {
                     "tabix": 1.2
                 },
-                "TABIX_SVDB_MERGE_SVS_CNVS": {
-                    "tabix": 1.2
-                },
                 "TABIX_TABIX": {
                     "tabix": 1.2
                 },
@@ -280,9 +271,6 @@
                 "assembly/stats/HG002_Revio_B",
                 "assembly/stats/HG002_Revio_B/HG002_Revio_B_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio_B/HG002_Revio_B_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/FAM.vcf.gz",
-                "bcftools/FAM.vcf.gz.tbi",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -583,16 +571,8 @@
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked.vcf.gz.tbi",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/FAM/FAM_snvs_annotated_ranked_filtered.vcf.gz.tbi",
-                "snvs/family/test_data_chunk.00001.bed",
-                "snvs/family/test_data_chunk.00001.bed/test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/test_data_chunk.00001.bed/test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz.tbi",
-                "snvs/family/test_data_chunk.00002.bed",
-                "snvs/family/test_data_chunk.00002.bed/test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                "snvs/family/test_data_chunk.00002.bed/test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio_A",
                 "snvs/sample/HG002_Revio_A/HG002_Revio_A_deepvariant_snvs.vcf.gz",
@@ -600,13 +580,13 @@
                 "snvs/sample/HG002_Revio_B",
                 "snvs/sample/HG002_Revio_B/HG002_Revio_B_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002_Revio_B/HG002_Revio_B_deepvariant_snvs.vcf.gz.tbi",
+                "svdb",
+                "svdb/FAM_svdb.vcf.gz",
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked.vcf.gz.tbi",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_Revio_A",
                 "svs/sample/HG002_Revio_A/HG002_Revio_A_hificnv_cnvs.vcf.gz",
@@ -637,8 +617,6 @@
                 "HG002_Revio_A_haplotype_2.assembly_summary:md5,c3e50f54e9e2871771d1735c54e57c5e",
                 "HG002_Revio_B_haplotype_1.assembly_summary:md5,54140e0f06c64450e9e77cfcb2421a10",
                 "HG002_Revio_B_haplotype_2.assembly_summary:md5,3a21cefa394ba4851b2cc33e21670458",
-                "FAM.vcf.gz:md5,d50e973f1257e13c72b4fbca2cb1b198",
-                "FAM.vcf.gz.tbi:md5,6d152db5b6eb3d5f3ed1bf93321ed9fb",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz:md5,7af3b6246d0c007aec686714b96a0f7f",
                 "HG002_Revio_A_modkit_pileup_1.bed.gz.tbi:md5,b7083ebf6ba176ed5a472ad653c5be27",
                 "HG002_Revio_A_modkit_pileup_2.bed.gz:md5,98e42ec905d8af26046862618ca0823e",
@@ -720,6 +698,7 @@
                 "HG002_Revio_B_stats.blocks.gtf.gz:md5,2ce013a323c8d615ec1f3296d31acb12",
                 "HG002_Revio_B_stats.blocks.gtf.gz.tbi:md5,a1554a24d7e374852045411e6ea45dc8",
                 "HG002_Revio_B_stats.stats.tsv:md5,e224a5892ce56e0152fcc886340262e5",
+                "FAM_svdb.vcf.gz:md5,44f95e4da90c7fd58ac09dd806516c94",
                 "HG002_Revio_A_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_A_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_A_hificnv.maf.bw:md5,cffee4ce0734c1c6eae507c0f80c4a4a",
@@ -766,10 +745,6 @@
             ],
             [
                 [
-                    "FAM.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=10, variantCount=3970, phased=true, phasedAutodetect=false]"
                 ],
@@ -802,20 +777,8 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_snvs_annotated_ranked.vcf.gz",
+                    "FAM_snvs_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=114, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=65, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test_data_chunk.00001.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=65, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test_data_chunk.00002.bed_snvs_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[], sampleCount=2, variantCount=0, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_Revio_A_deepvariant_snvs.vcf.gz",
@@ -826,12 +789,12 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=191, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=85, phased=false, phasedAutodetect=false]"
+                    "FAM_svdb.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=87, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_filtered.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
+                    "FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=85, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_A_hificnv_cnvs.vcf.gz",
@@ -860,8 +823,8 @@
             ],
             [
                 [
-                    "FAM.vcf.gz",
-                    "8cf2a5906280f05f7bf6e12bb844e95e"
+                    "FAM_svdb.vcf.gz",
+                    "b6e3f4f24ccf70bf8ba95712d5313093"
                 ]
             ]
         ],
@@ -869,6 +832,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-16T15:44:33.051442942"
+        "timestamp": "2025-04-17T10:58:13.1386987"
     }
 }
