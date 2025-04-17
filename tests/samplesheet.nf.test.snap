@@ -511,8 +511,6 @@
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
-                "svdb",
-                "svdb/FAM_svdb.vcf.gz",
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
@@ -593,7 +591,6 @@
                 "HG002_Revio_stats.blocks.gtf.gz:md5,3a2fb4054cae59abfed56ac11ba099c0",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,a1554a24d7e374852045411e6ea45dc8",
                 "HG002_Revio_stats.stats.tsv:md5,6adb96784c82826928ebfc4f4726a35d",
-                "FAM_svdb.vcf.gz:md5,56756b9e5401909a13769171200b4b59",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,517bc59c1b235490c79aa8319437b033",
                 "HG002_Revio_hificnv.depth.bw:md5,70211e34c58cd83f6c9c6f2a8bda4a3b",
                 "HG002_Revio_hificnv.maf.bw:md5,cffee4ce0734c1c6eae507c0f80c4a4a"
@@ -653,10 +650,6 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=191, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svdb.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=87, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
@@ -678,16 +671,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_svdb.vcf.gz",
-                    "b52b0f7b0b9745f7b9a4eaf6037b7d77"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-17T10:56:06.145384408"
+        "timestamp": "2025-04-17T11:08:42.451486068"
     }
 }

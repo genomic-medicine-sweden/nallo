@@ -559,8 +559,6 @@
                 "snvs/sample/HG002_ONT_B",
                 "snvs/sample/HG002_ONT_B/HG002_ONT_B_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002_ONT_B/HG002_ONT_B_deepvariant_snvs.vcf.gz.tbi",
-                "svdb",
-                "svdb/FAM_svdb.vcf.gz",
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
@@ -679,7 +677,6 @@
                 "HG002_ONT_B_stats.blocks.gtf.gz:md5,43e5ee4aaabecaf7f6d412f8e44ecd36",
                 "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,570230efc4e4a93596f7a7bef5a864fb",
                 "HG002_ONT_B_stats.stats.tsv:md5,56313c39759bdd7c30c5b3c352e35fc5",
-                "FAM_svdb.vcf.gz:md5,0ee944c2414390b38f6653acd76d9b3f",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,4c5517c1783afa11ff93c8d8627fbe42",
                 "HG002_ONT_A_hificnv.depth.bw:md5,69c333b205994200641ea539b4c277c6",
                 "HG002_ONT_A_hificnv.maf.bw:md5,460a692e4566462f69cf59dffcd94bc8",
@@ -766,10 +763,6 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=237, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svdb.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=100, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_hificnv_cnvs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=33, phased=false, phasedAutodetect=false]"
                 ],
@@ -815,16 +808,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_svdb.vcf.gz",
-                    "f666995a57f57ce9a3288355ef46ebbf"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-17T11:00:18.720663691"
+        "timestamp": "2025-04-17T11:12:54.718967179"
     }
 }
