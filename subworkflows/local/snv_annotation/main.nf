@@ -7,31 +7,38 @@ include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV         } from '../../../modules/n
 workflow SNV_ANNOTATION {
 
     take:
-    ch_vcf                   // channel [mandatory] [ val(meta), path(vcf) ]
-    ch_databases             // channel: [mandatory] [ path(db) ]
+    ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_databases             // channel:  [optional] [ path(db) ]
     ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache             // channel: [mandatory] [ path(cache) ]
-    val_vep_cache_version    // string: [mandatory] default: 110
+    val_vep_cache_version    //  string: [mandatory] default: 110
     ch_vep_extra_files       // channel: [mandatory] [ path(files) ]
-    val_annotate_cadd        // bool: [mandatory]
-    ch_cadd_header           // channel: [mandatory] [ path(txt) ]
-    ch_cadd_resources        // channel: [mandatory] [ val(meta), path(annotation) ]
-    ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(prescored) ]
+    annotate_cadd            //    bool: [mandatory] should CADD be used to annotate indels
+    annotate_echtvar         //    bool: [mandatory] should echtvar be used to annotate variants
+    ch_cadd_header           // channel:  [optional] [ path(txt) ]
+    ch_cadd_resources        // channel:  [optional] [ val(meta), path(annotation) ]
+    ch_cadd_prescored_indels // channel:  [optional] [ val(meta), path(prescored) ]
 
     main:
     ch_versions = Channel.empty()
-    ch_vep_in   = Channel.empty()
 
-    // Annotate with chosen databases (GNOMAD,CADD + SAMPLES_DB)
-    ECHTVAR_ANNO ( ch_vcf, ch_databases )
-    ch_versions = ch_versions.mix(ECHTVAR_ANNO.out.versions)
+    // Annotate with chosen databases
+    if (annotate_echtvar) {
+        ECHTVAR_ANNO (
+            ch_vcf,
+            ch_databases
+        )
+        ch_versions = ch_versions.mix(ECHTVAR_ANNO.out.versions)
+    }
 
-    BCFTOOLS_FILLTAGS_ANNO(ECHTVAR_ANNO.out.bcf)
+    BCFTOOLS_FILLTAGS_ANNO(
+        annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS_ANNO.out.versions)
 
     // Annotating with CADD
-    if (val_annotate_cadd) {
+    if (annotate_cadd) {
         ANNOTATE_CADD (
             ch_fai,
             BCFTOOLS_FILLTAGS_ANNO.out.vcf,
@@ -42,17 +49,13 @@ workflow SNV_ANNOTATION {
         )
         ch_versions = ch_versions.mix(ANNOTATE_CADD.out.versions)
 
-        ANNOTATE_CADD.out.vcf
-            .map { meta, vcf -> [ meta, vcf, [] ] }
-            .set { ch_vep_in }
-
-    } else {
-        BCFTOOLS_FILLTAGS_ANNO.out.vcf
-            .map { meta, vcf -> [ meta, vcf, [] ] }
-            .set { ch_vep_in }
-
     }
 
+    (annotate_cadd ? ANNOTATE_CADD.out.vcf : BCFTOOLS_FILLTAGS_ANNO.out.vcf)
+        .map { meta, vcf -> [ meta, vcf, [] ] }
+        .set { ch_vep_in }
+
+    // Always annotate with VEP
     ENSEMBLVEP_SNV (
         ch_vep_in,
         "GRCh38",
@@ -64,7 +67,9 @@ workflow SNV_ANNOTATION {
     )
     ch_versions = ch_versions.mix(ENSEMBLVEP_SNV.out.versions)
 
-    TABIX_ENSEMBLVEP_SNV ( ENSEMBLVEP_SNV.out.vcf )
+    TABIX_ENSEMBLVEP_SNV (
+        ENSEMBLVEP_SNV.out.vcf
+    )
     ch_versions = ch_versions.mix(TABIX_ENSEMBLVEP_SNV.out.versions)
 
     emit:
