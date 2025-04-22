@@ -2,7 +2,7 @@ process ECHTVAR_ANNO {
     tag "$meta.id"
     label 'process_single'
 
-    container "docker.io/fellen31/echtvar:0.2.0"
+    container "docker.io/fellen31/echtvar:0.2.2"
 
     input:
     tuple val(meta),  path(vcf)
