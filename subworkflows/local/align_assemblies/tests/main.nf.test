@@ -78,6 +78,7 @@ nextflow_workflow {
 
     test("bam - stub") {
         options "-stub"
+        tag "as"
         when {
             workflow {
                 """
