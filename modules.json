@@ -93,12 +93,12 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "6e3585d9ad20b41adc7d271009f8cb5e191ecab4",
+                        "git_sha": "7452092e1a296442f2989bff9801797f28c28aaf",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
-                        "git_sha": "6e3585d9ad20b41adc7d271009f8cb5e191ecab4",
+                        "git_sha": "7452092e1a296442f2989bff9801797f28c28aaf",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/ensemblvep/vep/ensemblvep-vep.diff"
                     },
@@ -139,7 +139,7 @@
                     },
                     "glnexus": {
                         "branch": "master",
-                        "git_sha": "bcf36bc95e3e5605e9859b8e9a49648841e04fe8",
+                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/glnexus/glnexus.diff"
                     },
@@ -246,19 +246,19 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/sniffles/sniffles.diff"
                     },
                     "somalier/extract": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/somalier/extract/somalier-extract.diff"
                     },
                     "somalier/relate": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/somalier/relate/somalier-relate.diff"
                     },
@@ -319,7 +319,7 @@
                     },
                     "untar": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
                     }
