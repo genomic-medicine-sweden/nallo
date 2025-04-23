@@ -1,5 +1,6 @@
-Changes in module 'nf-core/glnexus'
+Changes in component 'nf-core/glnexus'
 'modules/nf-core/glnexus/meta.yml' is unchanged
+'modules/nf-core/glnexus/environment.yml' is unchanged
 Changes in 'glnexus/main.nf':
 --- modules/nf-core/glnexus/main.nf
 +++ modules/nf-core/glnexus/main.nf
@@ -15,7 +16,6 @@ Changes in 'glnexus/main.nf':
      input:
      tuple val(meta), path(gvcfs)
 
-'modules/nf-core/glnexus/environment.yml' is unchanged
-'modules/nf-core/glnexus/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/glnexus/tests/main.nf.test' is unchanged
+'modules/nf-core/glnexus/tests/main.nf.test.snap' is unchanged
 ************************************************************
