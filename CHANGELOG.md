@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bcftools             | 1.2         | 1.21        |
 | samtools             | 1.2         | 1.21        |
 | ensemblvep/filtervep | 113         | 113.4       |
+| minimap2             | 2.28        | 2.29        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
