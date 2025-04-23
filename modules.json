@@ -165,12 +165,12 @@
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "a532706a19b3d83f14b1d48a6a815ed33eb48b0c",
                         "installed_by": ["modules"]
                     },
                     "minimap2/index": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "a532706a19b3d83f14b1d48a6a815ed33eb48b0c",
                         "installed_by": ["modules"]
                     },
                     "modkit/pileup": {
@@ -314,7 +314,7 @@
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "7cf69bf10ea16f7d006319da48a12232310e5f40",
+                        "git_sha": "0f11c7da2e049365b7034d4a406c9d39b5dce4a1",
                         "installed_by": ["modules"]
                     },
                     "untar": {

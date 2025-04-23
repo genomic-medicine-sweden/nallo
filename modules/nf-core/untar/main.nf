@@ -21,7 +21,6 @@ process UNTAR {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     prefix = task.ext.prefix ?: (meta.id ? "${meta.id}" : archive.baseName.toString().replaceFirst(/\.tar$/, ""))
-    
     dir = prefix.split('/')[1]
     """
     mkdir -p ${prefix}
@@ -52,6 +51,7 @@ process UNTAR {
 
     stub:
     prefix = task.ext.prefix ?: (meta.id ? "${meta.id}" : archive.toString().replaceFirst(/\.[^\.]+(.gz)?$/, ""))
+    dir = prefix.split('/')[1]
     """
     mkdir -p ${prefix}
     ## Dry-run untaring the archive to get the files and place all in prefix
