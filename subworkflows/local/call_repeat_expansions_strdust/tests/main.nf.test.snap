@@ -4,14 +4,14 @@
             "e4981640adf7b05b75ba09d55a7185ad",
             "32e3c59f20cb0d43886a95edd73b5004",
             [
-                "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+                "versions.yml:md5,5e586dd4ba11708f6b7f46f58fa6dd7b"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T07:34:54.491978506"
+        "timestamp": "2025-04-22T16:17:57.267695457"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
@@ -55,7 +55,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+                    "versions.yml:md5,5e586dd4ba11708f6b7f46f58fa6dd7b"
                 ],
                 "family_tbi": [
                     [
@@ -96,7 +96,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,172f269845094d862752db4ecce6c87a"
+                    "versions.yml:md5,5e586dd4ba11708f6b7f46f58fa6dd7b"
                 ]
             }
         ],
@@ -104,6 +104,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-03-26T07:35:09.926271919"
+        "timestamp": "2025-04-22T16:18:09.03901794"
     }
 }

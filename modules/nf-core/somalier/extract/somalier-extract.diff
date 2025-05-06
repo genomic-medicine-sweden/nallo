@@ -1,5 +1,15 @@
-Changes in module 'nf-core/somalier/extract'
+Changes in component 'nf-core/somalier/extract'
 'modules/nf-core/somalier/extract/meta.yml' is unchanged
+Changes in 'somalier/extract/environment.yml':
+--- modules/nf-core/somalier/extract/environment.yml
++++ modules/nf-core/somalier/extract/environment.yml
+@@ -4,4 +4,4 @@
+   - conda-forge
+   - bioconda
+ dependencies:
+-  - bioconda::somalier=0.2.19
++  - bioconda::somalier=0.2.18
+
 Changes in 'somalier/extract/main.nf':
 --- modules/nf-core/somalier/extract/main.nf
 +++ modules/nf-core/somalier/extract/main.nf
@@ -15,17 +25,6 @@ Changes in 'somalier/extract/main.nf':
      input:
      tuple val(meta), path(input), path(input_index)
 
-Changes in 'somalier/extract/environment.yml':
---- modules/nf-core/somalier/extract/environment.yml
-+++ modules/nf-core/somalier/extract/environment.yml
-@@ -2,4 +2,4 @@
-   - conda-forge
-   - bioconda
- dependencies:
--  - bioconda::somalier=0.2.19
-+  - bioconda::somalier=0.2.18
-
-'modules/nf-core/somalier/extract/tests/tags.yml' is unchanged
-'modules/nf-core/somalier/extract/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/somalier/extract/tests/main.nf.test' is unchanged
+'modules/nf-core/somalier/extract/tests/main.nf.test.snap' is unchanged
 ************************************************************
