@@ -327,7 +327,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 #### Filter variants
 
-This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.
+This subworkflow filters SNVs and SVs to generate a "clinical" set of variants. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
 
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
