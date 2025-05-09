@@ -23,12 +23,16 @@ workflow CALL_PARALOGS {
         [[],[]]
     )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
+    PARAPHASE.out.json
+        .map { meta, json -> [ [ 'id': meta.family_id ], json ] }
+        .groupTuple()
+        .set { ch_merge_json_input }
 
     MERGE_JSON (
-        PARAPHASE.out.json
+        ch_merge_json_input
     )
     ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
-
+    
     // Publish bam output as CRAM if requested
     if (cram_output) {
         SAMTOOLS_CONVERT (
@@ -84,11 +88,13 @@ workflow CALL_PARALOGS {
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
-    bam      = PARAPHASE.out.bam        // channel: [ val(meta), path(bam) ]
-    bai      = PARAPHASE.out.bai        // channel: [ val(meta), path(bai) ]
-    json     = MERGE_JSON.out.json      // channel: [ val(meta), path(json) ]
-    vcf      = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcfs) ]
-    tbi      = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbis) ]
-    versions = ch_versions              // channel: [ versions.yml ]
+    bam      = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam) ]
+    bai      = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai) ]
+    cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : Channel.empty() // channel: [ val(meta), path(cram) ]
+    crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : Channel.empty() // channel: [ val(meta), path(crai) ]
+    json     = MERGE_JSON.out.json                                       // channel: [ val(meta), path(json) ]
+    vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
+    tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
+    versions = ch_versions                                               // channel: [ versions.yml ]
 }
 
