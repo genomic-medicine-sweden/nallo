@@ -6,14 +6,14 @@
                 "versions.yml:md5,8b626b9e41c9e6de6edc8f94e0e75aed",
                 "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
             ],
-            "683077b045a3fe05552d187a1bd8a435",
+            "be6456f9fa0357d2e3121129c172a295",
             "test_svs_cnvs_merged_annotated.vcf.gz.tbi"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
         },
-        "timestamp": "2025-02-11T09:15:23.559003186"
+        "timestamp": "2025-05-09T16:57:11.308463271"
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [

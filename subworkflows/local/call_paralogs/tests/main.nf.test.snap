@@ -1,0 +1,183 @@
+{
+    "one sample, one family - bam output": {
+        "content": [
+            [
+                [
+                    "HG002.paraphase.bam:md5,d3fe17ecb38ea94b9d09a074a80364f0",
+                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                ]
+            ],
+            [
+                "HG002.paraphase.bam.bai:md5,eed9fecce9df0e8ef457aee650977c4b"
+            ],
+            [
+                "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+            ],
+            [
+                [
+                    "NIST_paraphase_merged.vcf.gz:md5,994fe971eda58d89fd4e4329dc5832d8",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
+                    "62fb7a8ee0a2bea208003b7e5d56fca1"
+                ]
+            ],
+            [
+                "NIST_paraphase_merged.vcf.gz.tbi:md5,5bdabd9ee26e87088a7d47e1d5d0057d"
+            ],
+            [
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,9e7321e7d0424aded889259bcf91ebfb",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-05-09T18:51:29.697971846"
+    },
+    "four sample, two families - bam output": {
+        "content": [
+            [
+                [
+                    "HG002.paraphase.bam:md5,0c179c15b8a3a05f3e79fdfbb1827d12",
+                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                ],
+                [
+                    "HG003.paraphase.bam:md5,bcc50837cf144248a9e232cb169e5080",
+                    "3fc6b03675906833f3a980f712072622"
+                ],
+                [
+                    "HG004.paraphase.bam:md5,243d62fb53ef690cca73077728cc6303",
+                    "c1b79269de67fc3c52ee6d985d1d3cdf"
+                ],
+                [
+                    "second_sample.paraphase.bam:md5,14843de2cf54dd6bb1a7b8bb27e41fd9",
+                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                ]
+            ],
+            [
+                "HG002.paraphase.bam.bai:md5,32fd6e6e60435ccc30c40149a4f4dee8",
+                "HG003.paraphase.bam.bai:md5,d65e9ff3fffc7aad9dffb9ec47420a6d",
+                "HG004.paraphase.bam.bai:md5,a3e1f82fbdba9d913206e36a9ef160f3",
+                "second_sample.paraphase.bam.bai:md5,66a2fe4f48789332cea576ebb4a00f83"
+            ],
+            [
+                "NIST_merged.json:md5,4d91486e8b344fa5d270951b16d5a162",
+                "second_family_merged.json:md5,dbd8d89c1732b02537d5a6ca11a05d62"
+            ],
+            [
+                [
+                    "NIST_paraphase_merged.vcf.gz:md5,94dc22d042fee5788e9fc887b5dd651c",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=24018, phased=true, phasedAutodetect=false]",
+                    "3feca04bc212315355654024200a2bbb"
+                ],
+                [
+                    "second_family_paraphase_merged.vcf.gz:md5,7a7675ab20426ac7c13cb4c53250f144",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
+                    "567a7bb77c5b11bdead87126015af633"
+                ]
+            ],
+            [
+                "NIST_paraphase_merged.vcf.gz.tbi:md5,99418ff7a851daa406f3f6f7a980eec0",
+                "second_family_paraphase_merged.vcf.gz.tbi:md5,0f49ebd97d950669677a94e2efa66925"
+            ],
+            [
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,9e7321e7d0424aded889259bcf91ebfb",
+                "versions.yml:md5,9e7321e7d0424aded889259bcf91ebfb",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
+                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-05-09T18:52:01.695578306"
+    },
+    "one sample, one family - cram output": {
+        "content": [
+            [
+                [
+                    "HG002.paraphase.bam:md5,c1737b64e2d574a59008e980fcaa2665",
+                    "a87856c9877cd91eac3e5cf82f2a0d84"
+                ]
+            ],
+            [
+                "HG002.paraphase.bam.bai:md5,cb5fc0c14a490acf8029cdb1b0caf497"
+            ],
+            [
+                [
+                    "HG002_paraphase.cram:md5,b34d445d0a483ffe93055f340afd00b9",
+                    "a87856c9877cd91eac3e5cf82f2a0d84"
+                ]
+            ],
+            [
+                "HG002_paraphase.cram.crai:md5,3d6014dc88b8f0380e8e5a5f300f23b0"
+            ],
+            [
+                "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+            ],
+            [
+                [
+                    "NIST_paraphase_merged.vcf.gz:md5,480d441b3d1b93245818b9f092f73c99",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
+                    "9cd2a28b83512235f36c9677ad44726d"
+                ]
+            ],
+            [
+                "NIST_paraphase_merged.vcf.gz.tbi:md5,d3e242e81346dca3137ce253005e5204"
+            ],
+            [
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
+                "versions.yml:md5,34f1825c27eb977faf7db384f433e33d",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,3ac43aa7eb8e5e55ce5fa6587d4590ad",
+                "versions.yml:md5,77eba9cbcc7e165fc1509a280c346940",
+                "versions.yml:md5,9e7321e7d0424aded889259bcf91ebfb",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
+                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-05-09T18:51:44.709946498"
+    }
+}
