@@ -27,7 +27,7 @@ nextflow_workflow {
                 """
             }
         }
-    } 
+    }
 
     test("one sample, one family - bam output") {
         when {
@@ -45,11 +45,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = params.publish_alignments_as_cram 
+                input[3] = params.publish_alignments_as_cram
                 """
             }
         }
-
         then {
             assertAll(
                 { assert workflow.success },
@@ -57,7 +56,7 @@ nextflow_workflow {
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
                 // Check that json contains the expected samples
                 { assert workflow.out.json.any { meta, file ->
-                    def content = new File(file).text 
+                    def content = new File(file).text
                     meta.id == 'NIST' && content.contains('HG002')
                 } },
                 { assert workflow.out.crai.empty },
@@ -65,7 +64,8 @@ nextflow_workflow {
                     workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ] },
                     workflow.out.bai.collect { meta, file -> file },
                     workflow.out.json.collect { meta, file -> file },
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5 ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
                     workflow.out.tbi.collect { meta, file -> file },
                     workflow.out.versions
                 ).match() }
@@ -73,7 +73,7 @@ nextflow_workflow {
         }
     }
 
-     test("one sample, one family - cram output") {
+    test("one sample, one family - cram output") {
         when {
             params {
                 publish_alignments_as_cram   = true
@@ -89,11 +89,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = params.publish_alignments_as_cram 
+                input[3] = params.publish_alignments_as_cram
                 """
             }
         }
-
         then {
             assertAll(
                 { assert workflow.success },
@@ -101,7 +100,7 @@ nextflow_workflow {
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
                 // Check that json contains the expected samples
                 { assert workflow.out.json.any { meta, file ->
-                    def content = new File(file).text 
+                    def content = new File(file).text
                     meta.id == 'NIST' && content.contains('HG002')
                 } },
                 { assert snapshot(
@@ -110,16 +109,16 @@ nextflow_workflow {
                     workflow.out.cram.collect{ meta, file -> [ file, cram(file.toString(), params.fasta).getReadsMD5() ] },
                     workflow.out.crai.collect{ meta, file -> file },
                     workflow.out.json.collect { meta, file -> file },
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5 ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
                     workflow.out.tbi.collect { meta, file -> file },
                     workflow.out.versions
                 ).match() }
             )
         }
     }
-    
+
     test("four sample, two families - bam output") {
-        
         when {
             params {
                 publish_alignments_as_cram   = false
@@ -152,33 +151,124 @@ nextflow_workflow {
                 )
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = params.publish_alignments_as_cram 
+                input[3] = params.publish_alignments_as_cram
                 """
             }
         }
-
         then {
-
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
                 // Check that json contains the expected samples
-                { assert workflow.out.json.any { meta, file ->
-                    def content = new File(file).text 
+                { assert workflow.out.json.every { meta, file ->
+                    def content = new File(file).text
                     def nist_samples = ['HG002', 'HG003', 'HG004']
                     (meta.id == 'NIST' && nist_samples.every { content.contains(it) }) ||
-                    (meta.id == 'second_family' && content.contains('second_family')) 
+                    (meta.id == 'second_family' && content.contains('second_sample'))
                 } },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
-                    workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ] },
+                    workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ]},
                     workflow.out.bai.collect { meta, file -> file },
                     workflow.out.json.collect { meta, file -> file },
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5 ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
                     workflow.out.tbi.collect { meta, file -> file },
                     workflow.out.versions
                 ).match() }
+            )
+        }
+    }
+
+    test("four sample, two families - bam output - stub") {
+        options "-stub"
+        when {
+            params {
+                publish_alignments_as_cram   = false
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/45aa1918fc8486dbbdc153932ff7b8b0964bd0ea/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'second_sample', family_id: 'second_family' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("four sample, two families - cram output - stub") {
+        options "-stub"
+        when {
+            params {
+                publish_alignments_as_cram   = true
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/45aa1918fc8486dbbdc153932ff7b8b0964bd0ea/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'second_sample', family_id: 'second_family' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
             )
         }
     }

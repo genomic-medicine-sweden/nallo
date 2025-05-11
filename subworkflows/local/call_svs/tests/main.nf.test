@@ -73,7 +73,7 @@ nextflow_workflow {
     }
 
     test("2 samples - [bam, bai], 'sniffles', []") {
-        
+
         when {
             workflow {
                 """

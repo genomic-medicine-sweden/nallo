@@ -18,7 +18,7 @@ workflow CALL_PARALOGS {
     ch_versions = Channel.empty()
 
     PARAPHASE (
-        bam_bai, 
+        bam_bai,
         fasta,
         [[],[]]
     )
@@ -32,7 +32,7 @@ workflow CALL_PARALOGS {
         ch_merge_json_input
     )
     ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
-    
+
     // Publish bam output as CRAM if requested
     if (cram_output) {
         SAMTOOLS_CONVERT (
@@ -42,7 +42,7 @@ workflow CALL_PARALOGS {
         )
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
-    
+
     PARAPHASE.out.vcf
         .transpose()
         .map { meta, vcf ->
@@ -58,7 +58,7 @@ workflow CALL_PARALOGS {
         []
     )
     ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
-    
+
     // Create rename file for bcftools reheader, e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1
     CREATE_SAMPLES_HAPLOTYPES_FILE (
         BCFTOOLS_QUERY.out.output
