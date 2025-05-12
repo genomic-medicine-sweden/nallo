@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed the location of test samplesheets to `assets/` from `genomic-medicine-sweden/test-datasets` to make them more flexible to update
-- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Updated test data and tests with an extra paraphase region, `OR1D5` on chr17
-- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed samples in `assets/samplesheet_multisample_bam.csv` due to updates in test data
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed the location of test samplesheets to `assets/` from `genomic-medicine-sweden/test-datasets` to make them more flexible to update,
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Updated test data and tests with an extra paraphase region, OR1D5 on chr17
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed samples in `assets/samplesheet_multisample_bam.csv` from HG002 to HG003 due to updates in test data
 
 ### `Fixed`
 

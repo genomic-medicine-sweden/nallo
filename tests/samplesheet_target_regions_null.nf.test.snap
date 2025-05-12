@@ -619,7 +619,7 @@
                 ],
                 [
                     "HG002_Revio.paraphase.bam",
-                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                    "a87856c9877cd91eac3e5cf82f2a0d84"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -695,6 +695,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-09T16:45:53.470794565"
+        "timestamp": "2025-05-12T09:24:21.939560442"
     }
 }
