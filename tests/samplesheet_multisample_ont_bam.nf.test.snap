@@ -642,7 +642,6 @@
                 "multiqc_general_stats.txt:md5,a3c715977d1cc1eab09a7318be43897c",
                 "multiqc_peddy.txt:md5,9899852d4ae3876341534bfe4b9c3f30",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,d42666bf64e5266de67ade33c1dde06d",
-                "multiqc_whatshap_stats.txt:md5,14136a7238407e9658d839f4b4e8dba3",
                 "peddy_het_check_plot.txt:md5,d06426fe7bb60aa6891a9e3a7714c193",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,fec840d4fe202c0e3ff7ce94b2a3bf92",
@@ -676,10 +675,8 @@
                 "FAM.vs.html:md5,33031c05e249eb831e7a0a1a512a9a16",
                 "HG002_ONT_A_stats.blocks.gtf.gz:md5,f4a77ce5f9857df52b2f088443d235e0",
                 "HG002_ONT_A_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
-                "HG002_ONT_A_stats.stats.tsv:md5,a6acff764238040748f3ffa2ab68fb24",
                 "HG002_ONT_B_stats.blocks.gtf.gz:md5,f4a77ce5f9857df52b2f088443d235e0",
                 "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
-                "HG002_ONT_B_stats.stats.tsv:md5,ead97f56a152063752b42fabc05e919c",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
                 "HG002_ONT_A_hificnv.maf.bw:md5,9013d67711300eeab78dc97ee4be5683",
@@ -818,6 +815,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-12T12:33:40.644994262"
+        "timestamp": "2025-05-12T14:32:43.955497645"
     }
 }

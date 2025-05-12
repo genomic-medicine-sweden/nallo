@@ -575,7 +575,6 @@
                 "multiqc_general_stats.txt:md5,2942198ca4170708ebb0bcdc8179d001",
                 "multiqc_peddy.txt:md5,7ba33ce7d9a3215d33dc29950fefc745",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,41dcd2951f7a6f925f64519491c18d45",
-                "multiqc_whatshap_stats.txt:md5,ecdd8b4b6368808dccbc7c14972d9c66",
                 "peddy_het_check_plot.txt:md5,55b1b0f326c09ff79b9c71edcd26715a",
                 "somalier_stats.txt:md5,8a19330afe2498d81a7bc4eb83be7f46",
                 "whatshap-stats-table.txt:md5,e6c34f0c5dd985d74e18cbfe060c68ce",
@@ -600,7 +599,6 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_stats.blocks.gtf.gz:md5,8a6151456cbc39fa108f0d920560e572",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,510c1bdb78322022d8af80dd6f690697",
-                "HG002_Revio_stats.stats.tsv:md5,820c86697077c54ded5dd95d6bbef41c",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
                 "HG002_Revio_hificnv.maf.bw:md5,03f88aa6ade0c06458f0f8ff5802bc7a"
@@ -688,6 +686,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-12T12:29:52.847684103"
+        "timestamp": "2025-05-12T14:28:48.292963726"
     }
 }
