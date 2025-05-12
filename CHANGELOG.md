@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Added`
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#691](https://github.com/genomic-medicine-sweden/nallo/pull/691) - Added samplesheet validation requiring at least one sample
 
 ### `Changed`
 
