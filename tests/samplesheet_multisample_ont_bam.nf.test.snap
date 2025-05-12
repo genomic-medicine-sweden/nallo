@@ -232,7 +232,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.6.1"
+                    "genomic-medicine-sweden/nallo": "v0.6.2"
                 }
             },
             [
@@ -703,14 +703,6 @@
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
                     "3aae67a60fed28da56dcc91d46769914"
-                ],
-                [
-                    "HG002_ONT_A.paraphase.bam",
-                    "9be2d6edfd93381c3ece30e94319f019"
-                ],
-                [
-                    "HG002_ONT_B.paraphase.bam",
-                    "a5ed325c7e95ef5e0347ff991816ccc"
                 ]
             ],
             [
@@ -826,6 +818,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-12T09:21:43.290642592"
+        "timestamp": "2025-05-12T12:33:40.644994262"
     }
 }

@@ -254,7 +254,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.6.1"
+                    "genomic-medicine-sweden/nallo": "v0.6.2"
                 }
             },
             [
@@ -740,14 +740,6 @@
                     "a8e423057d931c419fe140f8acc2e699"
                 ],
                 [
-                    "HG002.paraphase.cram",
-                    "d2fba731a57473c4198fe059519e038b"
-                ],
-                [
-                    "HG003.paraphase.cram",
-                    "3ed72ed5339453022266f02bdd2e2b54"
-                ],
-                [
                     "HG002_spanning_trgt.cram",
                     "6b2c2c5b923baf65837a81f0be8aa4e7"
                 ],
@@ -854,6 +846,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-12T09:19:50.676392643"
+        "timestamp": "2025-05-12T12:31:48.356718797"
     }
 }
