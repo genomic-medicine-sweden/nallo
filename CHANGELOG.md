@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - nf-test for `CALL_PARALOGS`
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Added nf-test for `CALL_PARALOGS`
 
 ### `Changed`
 
