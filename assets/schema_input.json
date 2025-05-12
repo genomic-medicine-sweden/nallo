@@ -4,6 +4,7 @@
     "title": "genomic-medicine-sweden/nallo pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
+    "uniqueItems": true,
     "items": {
         "type": "object",
         "properties": {
