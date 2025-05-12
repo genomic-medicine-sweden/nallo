@@ -177,9 +177,6 @@ workflow PIPELINE_INITIALISATION {
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
         .groupTuple() // group by sample
-        .map {
-            validateInputSamplesheet(it)
-        }
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
             [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.alignment_processes - 1), single_end:true ], reads ]
@@ -261,18 +258,6 @@ workflow PIPELINE_COMPLETION {
 def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 
-}
-
-//
-// Validate channels from input samplesheet
-//
-def validateInputSamplesheet(input) {
-    // Filenames needs to be unique for each sample to avoid collisions when merging
-    def fileNames = input[2].collect { new File(it.toString()).name }
-    if (fileNames.size() != fileNames.unique().size()) {
-        error "Error: Input filenames needs to be unique for each sample."
-    }
-    return input
 }
 
 //
