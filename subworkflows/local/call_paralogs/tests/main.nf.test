@@ -106,8 +106,8 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ] },
                     workflow.out.bai.collect { meta, file -> file },
-                    workflow.out.cram.collect{ meta, file -> [ file, cram(file.toString(), params.fasta).getReadsMD5() ] },
-                    workflow.out.crai.collect{ meta, file -> file },
+                    workflow.out.cram.collect { meta, file -> [ file, cram(file.toString(), params.fasta).getReadsMD5() ] },
+                    workflow.out.crai.collect { meta, file -> file },
                     workflow.out.json.collect { meta, file -> file },
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
