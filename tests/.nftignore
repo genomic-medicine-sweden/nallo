@@ -20,7 +20,7 @@ phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
 qc/cramino/**/*.txt
 qc/fastqc/**/*.{zip,html}
-qc/phasing_stats/**/**.stats.tsv
+qc/phasing_stats/**/*.stats.tsv
 qc/somalier/**/*.{html,tsv}
 qc/deepvariant_vcfstatsreport/**/*.html
 repeats/**/*.{vcf.gz,tbi,bam,bai,cram,crai}
