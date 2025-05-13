@@ -9,7 +9,6 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
-    - .github/workflows/branch.yml
     - conf/modules.config
     - conf/igenomes_ignored.config
     - conf/igenomes.config
