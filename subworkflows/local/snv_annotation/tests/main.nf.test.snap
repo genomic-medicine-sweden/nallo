@@ -41,13 +41,13 @@
                 "versions.yml:md5,f533675b4401f25d7dcfc9f63abeb619"
             ],
             "test_data.bed.vcf.gz.tbi",
-            "b85129ecd461179b96d97bff6f1ab309",
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=121, phased=false, phasedAutodetect=false]"
+            "62d0ac1a19fa0ab350aaa6387f3634e4",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=132, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
         },
-        "timestamp": "2025-01-17T10:11:47.362408395"
+        "timestamp": "2025-05-09T17:10:21.712559482"
     }
 }

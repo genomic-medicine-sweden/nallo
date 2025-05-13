@@ -5,6 +5,7 @@ multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
 multiqc/multiqc_data/multiqc_software_versions.txt
 multiqc/multiqc_data/multiqc_somalier.txt
+multiqc/multiqc_data/multiqc_whatshap_stats.txt
 multiqc/multiqc_data/somalier_*_plot.txt
 multiqc/multiqc_data/multiqc_sources.txt
 multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt
@@ -19,6 +20,7 @@ phased_variants/**/*.{vcf.gz,tbi}
 pipeline_info/*.{html,json,txt,yml}
 qc/cramino/**/*.txt
 qc/fastqc/**/*.{zip,html}
+qc/phasing_stats/**/*.stats.tsv
 qc/somalier/**/*.{html,tsv}
 qc/deepvariant_vcfstatsreport/**/*.html
 repeats/**/*.{vcf.gz,tbi,bam,bai,cram,crai}
