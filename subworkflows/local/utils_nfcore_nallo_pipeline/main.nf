@@ -173,6 +173,7 @@ workflow PIPELINE_INITIALISATION {
     //
     Channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .ifEmpty { error "Error: No samples found in samplesheet." }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
