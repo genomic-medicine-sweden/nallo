@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#693](https://github.com/genomic-medicine-sweden/nallo/pull/693) - Fixed bcftools norm not removing duplicate sites
+- [#694](https://github.com/genomic-medicine-sweden/nallo/pull/694) - Fixed bcftools norm not removing duplicate sites
 
 ## 0.6.2 - [2025-05-12]
 
