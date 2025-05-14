@@ -1,11 +1,10 @@
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_FAMILY } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_PER_SAMPLE } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_QUERY                              } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                           } from '../../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_HAPLOTYPES_FILE              } from '../../../modules/local/create_samples_haplotypes_file/main'
-include { MERGE_JSON                                  } from '../../../modules/local/merge_json/main'
-include { PARAPHASE                                   } from '../../../modules/nf-core/paraphase/main'
-include { SAMTOOLS_CONVERT                            } from '../../../modules/nf-core/samtools/convert/main'
+include { BCFTOOLS_MERGE                 } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_QUERY                 } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftools/reheader/main'
+include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_samples_haplotypes_file/main'
+include { MERGE_JSON                     } from '../../../modules/local/merge_json/main'
+include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
+include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
 
 workflow CALL_PARALOGS {
 
@@ -18,14 +17,20 @@ workflow CALL_PARALOGS {
     main:
     ch_versions = Channel.empty()
 
-    PARAPHASE ( bam_bai, fasta, [[],[]] )
+    PARAPHASE (
+        bam_bai,
+        fasta,
+        [[],[]]
+    )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
+    PARAPHASE.out.json
+        .map { meta, json -> [ [ 'id': meta.family_id ], json ] }
+        .groupTuple()
+        .set { ch_merge_json_input }
 
-    PARAPHASE.out.vcf
-        .join( PARAPHASE.out.vcf_index, failOnMismatch:true, failOnDuplicate:true )
-        .set { paraphase_vcf_tbis }
-
-    MERGE_JSON ( PARAPHASE.out.json )
+    MERGE_JSON (
+        ch_merge_json_input
+    )
     ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
 
     // Publish bam output as CRAM if requested
@@ -38,7 +43,14 @@ workflow CALL_PARALOGS {
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
-    // Get the sample name (GENE_hapX) from the VCF
+    PARAPHASE.out.vcf
+        .transpose()
+        .map { meta, vcf ->
+            [ [ 'id' : vcf.simpleName, 'family_id': meta.family_id ], vcf, [] ]
+        }
+        .set { paraphase_vcf_tbis }
+
+    // Get the "sample" name (which is actually the paraphase region, e.g. hba_hba2_hap1) from the VCF
     BCFTOOLS_QUERY (
         paraphase_vcf_tbis,
         [],
@@ -47,13 +59,14 @@ workflow CALL_PARALOGS {
     )
     ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
-    // Creates a "vcf_sample_name meta.id" file for bcftools reheader
-    CREATE_SAMPLES_HAPLOTYPES_FILE ( BCFTOOLS_QUERY.out.output )
+    // Create rename file for bcftools reheader, e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1
+    CREATE_SAMPLES_HAPLOTYPES_FILE (
+        BCFTOOLS_QUERY.out.output
+    )
     ch_versions = ch_versions.mix(CREATE_SAMPLES_HAPLOTYPES_FILE.out.versions)
 
-    PARAPHASE.out.vcf
+    paraphase_vcf_tbis
         .join( CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples, failOnMismatch:true, failOnDuplicate:true )
-        .map { meta, vcf, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_in }
 
     // Give meta.id as sample name in the VCF
@@ -62,35 +75,26 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_REHEADER.out.vcf
         .join( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
+        .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { ch_bcftools_merge_in }
 
-    BCFTOOLS_MERGE_PER_SAMPLE(
+    BCFTOOLS_MERGE (
         ch_bcftools_merge_in,
         fasta,
         [[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_SAMPLE.out.versions)
-
-    BCFTOOLS_MERGE_PER_SAMPLE.out.vcf
-        .join( BCFTOOLS_MERGE_PER_SAMPLE.out.index, failOnMismatch:true, failOnDuplicate:true )
-        .map { meta, vcf, tbi -> [ [ 'id': meta.family_id ], vcf, tbi ] }
-        .groupTuple()
-        .set { bcftools_merge_family_in }
-
-    BCFTOOLS_MERGE_PER_FAMILY ( bcftools_merge_family_in, fasta, [[],[]], [[],[]] )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE_PER_FAMILY.out.versions)
-
-
-
+    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
-    bam      = PARAPHASE.out.bam                     // channel: [ val(meta), path(bam) ]
-    bai      = PARAPHASE.out.bai                     // channel: [ val(meta), path(bai) ]
-    json     = MERGE_JSON.out.json                   // channel: [ val(meta), path(json) ]
-    vcf      = BCFTOOLS_MERGE_PER_FAMILY.out.vcf     // channel: [ val(meta), path(vcfs) ]
-    tbi      = BCFTOOLS_MERGE_PER_FAMILY.out.index   // channel: [ val(meta), path(tbis) ]
-    versions = ch_versions                           // channel: [ versions.yml ]
+    bam      = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam) ]
+    bai      = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai) ]
+    cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : Channel.empty() // channel: [ val(meta), path(cram) ]
+    crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : Channel.empty() // channel: [ val(meta), path(crai) ]
+    json     = MERGE_JSON.out.json                                       // channel: [ val(meta), path(json) ]
+    vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
+    tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
+    versions = ch_versions                                               // channel: [ versions.yml ]
 }
 

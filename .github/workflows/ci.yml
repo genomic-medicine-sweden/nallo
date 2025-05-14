@@ -41,6 +41,7 @@ jobs:
           - "samplesheet_target_regions_null"
           - "ALIGN_ASSEMBLIES"
           - "ANNOTATE_SVS"
+          - "CALL_PARALOGS"
           - "CALL_REPEAT_EXPANSIONS_STRDUST"
           - "CALL_REPEAT_EXPANSIONS_TRGT"
           - "CALL_SVS"
