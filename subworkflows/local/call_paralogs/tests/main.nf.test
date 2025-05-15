@@ -59,14 +59,15 @@ nextflow_workflow {
                     def content = new File(file).text
                     meta.id == 'NIST' && content.contains('HG002')
                 } },
+                { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
-                    workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ] },
-                    workflow.out.bai.collect { meta, file -> file },
-                    workflow.out.json.collect { meta, file -> file },
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { it },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
-                    workflow.out.tbi.collect { meta, file -> file },
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.versions
                 ).match() }
             )
@@ -104,14 +105,14 @@ nextflow_workflow {
                     meta.id == 'NIST' && content.contains('HG002')
                 } },
                 { assert snapshot(
-                    workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ] },
-                    workflow.out.bai.collect { meta, file -> file },
-                    workflow.out.cram.collect { meta, file -> [ file, cram(file.toString(), params.fasta).getReadsMD5() ] },
-                    workflow.out.crai.collect { meta, file -> file },
-                    workflow.out.json.collect { meta, file -> file },
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.cram.collect { [ it[0], file(it[1]).name, cram(it[1].toString(), params.fasta).getStatistics() ] },
+                    workflow.out.crai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { it },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
-                    workflow.out.tbi.collect { meta, file -> file },
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.versions
                 ).match() }
             )
@@ -167,14 +168,15 @@ nextflow_workflow {
                     (meta.id == 'NIST' && nist_samples.every { content.contains(it) }) ||
                     (meta.id == 'second_family' && content.contains('second_sample'))
                 } },
+                { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
-                    workflow.out.bam.collect { meta, file -> [ file, bam(file.toString()).getReadsMD5() ]},
-                    workflow.out.bai.collect { meta, file -> file },
-                    workflow.out.json.collect { meta, file -> file },
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { it },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { meta, file -> [ file, path(file).vcf.summary, path(file).vcf.variantsMD5, path(file).linesGzip[13] ]},
-                    workflow.out.tbi.collect { meta, file -> file },
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.versions
                 ).match() }
             )
@@ -222,6 +224,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.cram.empty },
+                { assert workflow.out.crai.empty },
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -268,6 +272,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert !workflow.out.cram.empty },
+                { assert !workflow.out.crai.empty },
                 { assert snapshot(workflow.out).match() }
             )
         }
