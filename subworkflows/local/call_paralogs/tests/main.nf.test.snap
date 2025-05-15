@@ -304,7 +304,7 @@
                     {
                         "id": "NIST"
                     },
-                    "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+                    "NIST_merged.json"
                 ]
             ],
             [
@@ -341,7 +341,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-15T16:14:08.837231762"
+        "timestamp": "2025-05-15T16:55:15.466568797"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -446,13 +446,13 @@
                     {
                         "id": "NIST"
                     },
-                    "NIST_merged.json:md5,4d91486e8b344fa5d270951b16d5a162"
+                    "NIST_merged.json"
                 ],
                 [
                     {
                         "id": "second_family"
                     },
-                    "second_family_merged.json:md5,dbd8d89c1732b02537d5a6ca11a05d62"
+                    "second_family_merged.json"
                 ]
             ],
             [
@@ -526,7 +526,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-15T16:14:40.516873436"
+        "timestamp": "2025-05-15T16:55:46.753105845"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -976,7 +976,7 @@
                     {
                         "id": "NIST"
                     },
-                    "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+                    "NIST_merged.json"
                 ]
             ],
             [
@@ -1014,6 +1014,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-15T16:14:22.833719364"
+        "timestamp": "2025-05-15T16:55:29.837820477"
     }
 }

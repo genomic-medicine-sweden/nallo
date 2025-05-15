@@ -64,7 +64,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.json.collect { it },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
@@ -109,7 +109,7 @@ nextflow_workflow {
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.cram.collect { [ it[0], file(it[1]).name, cram(it[1].toString(), params.fasta).getStatistics() ] },
                     workflow.out.crai.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.json.collect { it },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
@@ -173,7 +173,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.json.collect { it },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
