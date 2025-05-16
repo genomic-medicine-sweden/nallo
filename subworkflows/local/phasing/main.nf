@@ -120,13 +120,8 @@ workflow PHASING {
             .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
-        BCFTOOLS_SORT (
-            HIPHASE.out.vcfs,
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+        HIPHASE.out.vcfs
+            .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
     }
