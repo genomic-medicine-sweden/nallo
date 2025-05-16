@@ -232,7 +232,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.6.4"
+                    "genomic-medicine-sweden/nallo": "v0.6.5"
                 }
             },
             [
@@ -814,6 +814,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-16T10:50:22.595958648"
+        "timestamp": "2025-05-16T14:25:43.920452186"
     }
 }
