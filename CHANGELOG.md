@@ -71,6 +71,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.6.4 - [2025-05-16]
+
+### `Fixed`
+
+- [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `CALL_PARALOGS` test snapshots
+- [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `samplesheet_multisample_bam` test snapshots by sorting hiphase variants
+
 ## 0.6.3 - [2025-05-14]
 
 ### `Added`
