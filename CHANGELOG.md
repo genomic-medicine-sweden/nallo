@@ -71,6 +71,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.6.5 - [2025-05-16]
+
+### `Fixed`
+
+- [#701](https://github.com/genomic-medicine-sweden/nallo/pull/701) - Fixed family VCF merging for single samples when using STRdust as repeat caller
+
+## 0.6.4 - [2025-05-16]
+
+### `Fixed`
+
+- [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `CALL_PARALOGS` test snapshots
+- [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `samplesheet_multisample_bam` test snapshots by sorting hiphase variants
+
+## 0.6.3 - [2025-05-14]
+
+### `Added`
+
+- [#694](https://github.com/genomic-medicine-sweden/nallo/pull/694) - Added `CALL_PARALOGS` test to CI, missed in [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688)
+
+### `Fixed`
+
+- [#694](https://github.com/genomic-medicine-sweden/nallo/pull/694) - Fixed bcftools norm not removing duplicate sites
+
+## 0.6.2 - [2025-05-12]
+
+### `Added`
+
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Added nf-test for `CALL_PARALOGS`
+
+### `Changed`
+
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed the location of test samplesheets to `assets/` from `genomic-medicine-sweden/test-datasets` to make them more flexible to update,
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Updated test data and tests with an extra paraphase region, OR1D5 on chr17
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Changed samples in `assets/samplesheet_multisample_bam.csv` from HG002 to HG003 due to updates in test data
+
+### `Fixed`
+
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Fixed paraphase VCF merging only containing variants from one region ([#683](https://github.com/genomic-medicine-sweden/nallo/issues/683))
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Fixed paraphase JSON merging only containing information from one sample ([#689](https://github.com/genomic-medicine-sweden/nallo/issues/689))
+
+### `Removed`
+
+- [#688](https://github.com/genomic-medicine-sweden/nallo/pull/688) - Removed per-sample merging in `CALL_PARALOGS`
+
 ## 0.6.1 - [2025-04-11]
 
 ### `Changed`

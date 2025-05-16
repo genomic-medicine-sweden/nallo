@@ -1,0 +1,282 @@
+nextflow_workflow {
+
+    name "Test Workflow CALL_PARALOGS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "CALL_PARALOGS"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                input[1] = [[],[]]
+                input[2] = false
+                """
+            }
+        }
+    }
+
+    test("one sample, one family - bam output") {
+        when {
+            params {
+                publish_alignments_as_cram   = false
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002', family_id: 'NIST' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                // Check that json contains the expected samples
+                { assert workflow.out.json.any { meta, file ->
+                    def content = new File(file).text
+                    meta.id == 'NIST' && content.contains('HG002')
+                } },
+                { assert workflow.out.cram.empty },
+                { assert workflow.out.crai.empty },
+                { assert snapshot(
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("one sample, one family - cram output") {
+        when {
+            params {
+                publish_alignments_as_cram   = true
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002', family_id: 'NIST' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                // Check that json contains the expected samples
+                { assert workflow.out.json.any { meta, file ->
+                    def content = new File(file).text
+                    meta.id == 'NIST' && content.contains('HG002')
+                } },
+                { assert snapshot(
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.cram.collect { [ it[0], file(it[1]).name, cram(it[1].toString(), params.fasta).getStatistics() ] },
+                    workflow.out.crai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("four sample, two families - bam output") {
+        when {
+            params {
+                publish_alignments_as_cram   = false
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'second_sample', family_id: 'second_family' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                // Check that json contains the expected samples
+                { assert workflow.out.json.every { meta, file ->
+                    def content = new File(file).text
+                    def nist_samples = ['HG002', 'HG003', 'HG004']
+                    (meta.id == 'NIST' && nist_samples.every { content.contains(it) }) ||
+                    (meta.id == 'second_family' && content.contains('second_sample'))
+                } },
+                { assert workflow.out.cram.empty },
+                { assert workflow.out.crai.empty },
+                { assert snapshot(
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.json.collect { [ it[0], file(it[1]).name ] },
+                    // Snapshot the samples in the VCF with linesGzip[13]
+                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    test("four sample, two families - bam output - stub") {
+        options "-stub"
+        when {
+            params {
+                publish_alignments_as_cram   = false
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'second_sample', family_id: 'second_family' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.cram.empty },
+                { assert workflow.out.crai.empty },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("four sample, two families - cram output - stub") {
+        options "-stub"
+        when {
+            params {
+                publish_alignments_as_cram   = true
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            }
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id: 'NIST' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'second_sample', family_id: 'second_family' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = params.publish_alignments_as_cram
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert !workflow.out.cram.empty },
+                { assert !workflow.out.crai.empty },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

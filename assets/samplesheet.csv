@@ -1,3 +1,2 @@
-sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-sample_1,/path/to/fastq_or_bam/files/sample_1.fastq.gz,FAM,0,0,0,2
-sample_2,/path/to/fastq_or_bam/files/sample_2.bam,FAM,0,0,1,1
+project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+test,HG002_Revio,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_PacBio_Revio.fastq.gz,FAM,0,0,1,2
