@@ -2,9 +2,9 @@
     "1 sample - [bam, bai], 'severus', []": {
         "content": [
             "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "978edb6566ab79a0a18c8b7b31192a05",
+            "d96009d3dcac8a7ddc0af6aa139bae46",
             "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "7e815ca9a896ed4126996f5a4380678a",
+            "a358ec5988856f13a368d252374d7c85",
             [
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
@@ -28,7 +28,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-09T16:59:07.237842569"
+        "timestamp": "2025-05-16T15:49:55.633737938"
     },
     "1 sample - [bam, bai], 'severus', [] -stub": {
         "content": [
@@ -636,11 +636,11 @@
     "2 samples - [bam, bai], 'severus', []": {
         "content": [
             "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "978edb6566ab79a0a18c8b7b31192a05",
-            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=69, phased=false, phasedAutodetect=false]",
-            "c21bc0d065aded560e27947120a90929",
-            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=76, phased=false, phasedAutodetect=false]",
-            "1f31a29997cf470cc6b597f20c9e2303",
+            "d96009d3dcac8a7ddc0af6aa139bae46",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]",
+            "bf1e3bb523498ec33318e5ff77bb7c6b",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=75, phased=false, phasedAutodetect=false]",
+            "19177a1d687b43b7aab3e1b27ba3dd23",
             [
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
@@ -676,7 +676,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-09T17:00:02.164049623"
+        "timestamp": "2025-05-16T15:50:49.752348284"
     },
     "2 samples - [bam, bai], 'severus', [] -stub": {
         "content": [
@@ -1024,9 +1024,9 @@
     "1 sample - [bam, bai], 'severus', bed": {
         "content": [
             "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=38, phased=false, phasedAutodetect=false]",
-            "c80e37a9dfa73dee6fb4f010dca86f5c",
+            "8b9b9caf092b24ab944d34b04b5e4b7a",
             "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=38, phased=false, phasedAutodetect=false]",
-            "f1700a3cacadf2dca68fa03807314a39",
+            "9d7c4cc3049d3ab4a31a08f9426f415",
             [
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
@@ -1050,7 +1050,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-09T16:59:20.258408454"
+        "timestamp": "2025-05-16T15:50:08.781300319"
     },
     "1 sample - [bam, bai], 'sniffles', []": {
         "content": [
