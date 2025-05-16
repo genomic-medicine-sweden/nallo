@@ -71,6 +71,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
 
+## 0.6.5 - [2025-05-16]
+
+### `Fixed`
+
+- [#701](https://github.com/genomic-medicine-sweden/nallo/pull/701) - Fixed family VCF merging for single samples when using STRdust as repeat caller
+
 ## 0.6.4 - [2025-05-16]
 
 ### `Fixed`
