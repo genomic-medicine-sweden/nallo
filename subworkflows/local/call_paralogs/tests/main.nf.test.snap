@@ -274,26 +274,56 @@
         "content": [
             [
                 [
-                    "HG002.paraphase.bam:md5,4ffff920e93fa836b7166263f116bc1d",
-                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam",
+                    {
+                        "maxReadLength": 27611,
+                        "minReadLength": 826,
+                        "meanReadLength": 12089,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 118
+                    }
                 ]
             ],
             [
-                "HG002.paraphase.bam.bai:md5,67ac8b830d1f00bcba1b084f7c9f8d47"
-            ],
-            [
-                "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam.bai"
+                ]
             ],
             [
                 [
-                    "NIST_paraphase_merged.vcf.gz:md5,f6d624fe7fde39fb7b3e5949a8eebaae",
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_merged.json"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
-                    "7735be0dae9b5c3718f2a1453e4b44a1",
                     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tHG002_OR1D5_OR1D5_hap1\tHG002_OR1D5_OR1D5_hap2\tHG002_hba_hba_hba2hap1\tHG002_hba_hba_hba2hap2\tHG002_hba_hba_hba1hap1\tHG002_hba_hba_hba1hap1_cp2\tHG002_hba_hba_homologyhap1"
                 ]
             ],
             [
-                "NIST_paraphase_merged.vcf.gz.tbi:md5,a3a84579911cf9476fd737c61f9b2ddb"
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz.tbi"
+                ]
             ],
             [
                 "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
@@ -311,55 +341,151 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-13T20:39:47.202497777"
+        "timestamp": "2025-05-15T16:55:15.466568797"
     },
     "four sample, two families - bam output": {
         "content": [
             [
                 [
-                    "HG002.paraphase.bam:md5,6c1fff983b223452bd1f100e10529636",
-                    "85a1e5c10d91a9e9c94a23e720a64c0a"
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam",
+                    {
+                        "maxReadLength": 27611,
+                        "minReadLength": 826,
+                        "meanReadLength": 12089,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 118
+                    }
                 ],
                 [
-                    "HG003.paraphase.bam:md5,30f8edccc9c308a0fee840f82ae2c916",
-                    "3ed72ed5339453022266f02bdd2e2b54"
+                    {
+                        "id": "HG003",
+                        "family_id": "NIST"
+                    },
+                    "HG003.paraphase.bam",
+                    {
+                        "maxReadLength": 24544,
+                        "minReadLength": 910,
+                        "meanReadLength": 11134,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 123
+                    }
                 ],
                 [
-                    "HG004.paraphase.bam:md5,220b8636496a1c77a29524d7bea6041f",
-                    "e6efd55da8f2a5d6bafc9655161ca82c"
+                    {
+                        "id": "HG004",
+                        "family_id": "NIST"
+                    },
+                    "HG004.paraphase.bam",
+                    {
+                        "maxReadLength": 28209,
+                        "minReadLength": 1731,
+                        "meanReadLength": 13476,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 89
+                    }
                 ],
                 [
-                    "second_sample.paraphase.bam:md5,1a72b82ec9bd078a0c4961b6a64890d0",
-                    "a87856c9877cd91eac3e5cf82f2a0d84"
+                    {
+                        "id": "second_sample",
+                        "family_id": "second_family"
+                    },
+                    "second_sample.paraphase.bam",
+                    {
+                        "maxReadLength": 27611,
+                        "minReadLength": 826,
+                        "meanReadLength": 12089,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 118
+                    }
                 ]
             ],
             [
-                "HG002.paraphase.bam.bai:md5,32fd6e6e60435ccc30c40149a4f4dee8",
-                "HG003.paraphase.bam.bai:md5,68e810222f0a77a2b98cc0795c89fbd8",
-                "HG004.paraphase.bam.bai:md5,38df666956922897583a22a3a47cf50e",
-                "second_sample.paraphase.bam.bai:md5,83be2e46eed50604b38ba0331e08d58f"
-            ],
-            [
-                "NIST_merged.json:md5,4d91486e8b344fa5d270951b16d5a162",
-                "second_family_merged.json:md5,dbd8d89c1732b02537d5a6ca11a05d62"
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam.bai"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "NIST"
+                    },
+                    "HG003.paraphase.bam.bai"
+                ],
+                [
+                    {
+                        "id": "HG004",
+                        "family_id": "NIST"
+                    },
+                    "HG004.paraphase.bam.bai"
+                ],
+                [
+                    {
+                        "id": "second_sample",
+                        "family_id": "second_family"
+                    },
+                    "second_sample.paraphase.bam.bai"
+                ]
             ],
             [
                 [
-                    "NIST_paraphase_merged.vcf.gz:md5,18d63e22d78d459da8fed5ac1c104a92",
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_merged.json"
+                ],
+                [
+                    {
+                        "id": "second_family"
+                    },
+                    "second_family_merged.json"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=24018, phased=true, phasedAutodetect=false]",
-                    "7fe17bc3c807ebe9449e5c92c9b46407",
                     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tHG002_OR1D5_OR1D5_hap1\tHG002_OR1D5_OR1D5_hap2\tHG002_hba_hba_hba2hap1\tHG002_hba_hba_hba2hap2\tHG002_hba_hba_hba1hap1\tHG002_hba_hba_hba1hap1_cp2\tHG002_hba_hba_homologyhap1\tHG003_OR1D5_OR1D5_hap1\tHG003_OR1D5_OR1D5_hap2\tHG003_hba_hba_hba2hap1\tHG003_hba_hba_hba2hap2\tHG003_hba_hba_hba1hap1\tHG003_hba_hba_hba1hap1_cp2\tHG003_hba_hba_homologyhap1\tHG004_OR1D5_OR1D5_hap1\tHG004_OR1D5_OR1D5_hap2\tHG004_hba_hba_hba2hap1\tHG004_hba_hba_hba2hap1_cp2\tHG004_hba_hba_hba1hap1\tHG004_hba_hba_hba1hap1_cp2\tHG004_hba_hba_homologyhap1"
                 ],
                 [
-                    "second_family_paraphase_merged.vcf.gz:md5,b9e5ece4169c3976960640618388fc0b",
+                    {
+                        "id": "second_family"
+                    },
+                    "second_family_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
-                    "a1cf920c4731b5aace6cc25bf12bd572",
                     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsecond_sample_OR1D5_OR1D5_hap1\tsecond_sample_OR1D5_OR1D5_hap2\tsecond_sample_hba_hba_hba2hap1\tsecond_sample_hba_hba_hba2hap2\tsecond_sample_hba_hba_hba1hap1\tsecond_sample_hba_hba_hba1hap1_cp2\tsecond_sample_hba_hba_homologyhap1"
                 ]
             ],
             [
-                "NIST_paraphase_merged.vcf.gz.tbi:md5,4576805411c4d22829b7f67908e0f568",
-                "second_family_paraphase_merged.vcf.gz.tbi:md5,823d03c8d80947651ed01e9b25a85253"
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz.tbi"
+                ],
+                [
+                    {
+                        "id": "second_family"
+                    },
+                    "second_family_paraphase_merged.vcf.gz.tbi"
+                ]
             ],
             [
                 "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
@@ -400,7 +526,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-13T20:40:19.732858626"
+        "timestamp": "2025-05-15T16:55:46.753105845"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -793,35 +919,83 @@
         "content": [
             [
                 [
-                    "HG002.paraphase.bam:md5,ea889e94a5c62db523a1240e6e4de851",
-                    "a87856c9877cd91eac3e5cf82f2a0d84"
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam",
+                    {
+                        "maxReadLength": 27611,
+                        "minReadLength": 826,
+                        "meanReadLength": 12089,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 118
+                    }
                 ]
             ],
             [
-                "HG002.paraphase.bam.bai:md5,cb5fc0c14a490acf8029cdb1b0caf497"
-            ],
-            [
                 [
-                    "HG002_paraphase.cram:md5,578803d722997804890f030aaf83eab0",
-                    "a87856c9877cd91eac3e5cf82f2a0d84"
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002.paraphase.bam.bai"
                 ]
             ],
             [
-                "HG002_paraphase.cram.crai:md5,41b9f86bfa093d9ffe23bb7959ab8fec"
-            ],
-            [
-                "NIST_merged.json:md5,376020a399bcae36e8f11d76fea53f16"
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002_paraphase.cram",
+                    {
+                        "maxReadLength": 27611,
+                        "minReadLength": 826,
+                        "meanReadLength": 12089,
+                        "maxQuality": 60,
+                        "minQuality": 60,
+                        "meanQuality": 60,
+                        "readCount": 118
+                    }
+                ]
             ],
             [
                 [
-                    "NIST_paraphase_merged.vcf.gz:md5,d6c1130d469e213096014231d323803d",
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
+                    "HG002_paraphase.cram.crai"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_merged.json"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23967, phased=true, phasedAutodetect=false]",
-                    "3ee9f29ef95984779b63465f655fc10a",
                     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tHG002_OR1D5_OR1D5_hap1\tHG002_OR1D5_OR1D5_hap2\tHG002_hba_hba_hba2hap1\tHG002_hba_hba_hba2hap2\tHG002_hba_hba_hba1hap1\tHG002_hba_hba_hba1hap1_cp2\tHG002_hba_hba_homologyhap1"
                 ]
             ],
             [
-                "NIST_paraphase_merged.vcf.gz.tbi:md5,6ad9b97337cd63297c266088812215e3"
+                [
+                    {
+                        "id": "NIST"
+                    },
+                    "NIST_paraphase_merged.vcf.gz.tbi"
+                ]
             ],
             [
                 "versions.yml:md5,17ff10291ead5b0490bc2968c7b141bf",
@@ -840,6 +1014,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-13T20:40:02.238395825"
+        "timestamp": "2025-05-15T16:55:29.837820477"
     }
 }
