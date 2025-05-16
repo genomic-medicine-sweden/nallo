@@ -83,13 +83,13 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache}
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -122,11 +122,11 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = Channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache}
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -163,7 +163,7 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
