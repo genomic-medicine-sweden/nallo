@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `CALL_PARALOGS` test snapshots
+- [#698](https://github.com/genomic-medicine-sweden/nallo/pull/698) - Fixed unstable `samplesheet_multisample_bam` test snapshots by sorting hiphase variants
 
 ## 0.6.3 - [2025-05-14]
 
