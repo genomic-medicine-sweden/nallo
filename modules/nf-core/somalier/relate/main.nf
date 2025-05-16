@@ -48,7 +48,11 @@ process SOMALIER_RELATE {
     """
     touch ${prefix}.html
     touch ${prefix}.pairs.tsv
-    touch ${prefix}.samples.tsv
+
+    cat <<EOF > ${prefix}.samples.tsv
+    #family_id\tsample_id\tpaternal_id\tmaternal_id\tsex\tphenotype\toriginal_pedigree_sex
+    ${meta.family_id}\t${prefix}\t${meta.paternal_id}\t${meta.maternal_id}\t2\t${meta.phenotype}\tunknown
+    EOF
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -1,5 +1,4 @@
 Changes in component 'nf-core/somalier/relate'
-'modules/nf-core/somalier/relate/meta.yml' is unchanged
 Changes in 'somalier/relate/environment.yml':
 --- modules/nf-core/somalier/relate/environment.yml
 +++ modules/nf-core/somalier/relate/environment.yml
@@ -24,7 +23,21 @@ Changes in 'somalier/relate/main.nf':
  
      input:
      tuple val(meta), path(extract), path(ped)
+@@ -48,7 +48,11 @@
+     """
+     touch ${prefix}.html
+     touch ${prefix}.pairs.tsv
+-    touch ${prefix}.samples.tsv
++
++    cat <<EOF > ${prefix}.samples.tsv
++    #family_id\tsample_id\tpaternal_id\tmaternal_id\tsex\tphenotype\toriginal_pedigree_sex
++    ${meta.family_id}\t${prefix}\t${meta.paternal_id}\t${meta.maternal_id}\t2\t${meta.phenotype}\tunknown
++    EOF
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
 
-'modules/nf-core/somalier/relate/tests/main.nf.test' is unchanged
+'modules/nf-core/somalier/relate/meta.yml' is unchanged
 'modules/nf-core/somalier/relate/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/somalier/relate/tests/main.nf.test' is unchanged
 ************************************************************

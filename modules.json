@@ -27,7 +27,7 @@
                     },
                     "bcftools/norm": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "39fed2e840a805454a64dda9c2ef64c00e2c6781",
                         "installed_by": ["modules"]
                     },
                     "bcftools/query": {
