@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.5 - [2025-05-16]
+
+### `Fixed`
+
+- [#701](https://github.com/genomic-medicine-sweden/nallo/pull/701) - Fixed family VCF merging for single samples when using STRdust as repeat caller
+
 ## 0.6.4 - [2025-05-16]
 
 ### `Fixed`
