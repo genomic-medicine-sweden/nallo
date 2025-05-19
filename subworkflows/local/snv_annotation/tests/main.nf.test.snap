@@ -39,14 +39,14 @@
                 "versions.yml:md5,cfdaaec085fc11ffbd2e23e163490606"
             ],
             "test.vcf.gz.tbi",
-            "62d0ac1a19fa0ab350aaa6387f3634e4",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=132, phased=false, phasedAutodetect=false]"
+            "70ab3aec3a8df46344eadb1e24c0f033",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=109, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-16T17:22:24.54442548"
+        "timestamp": "2025-05-19T17:47:39.931522246"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
@@ -56,13 +56,13 @@
                 "versions.yml:md5,cfdaaec085fc11ffbd2e23e163490606"
             ],
             "test.vcf.gz.tbi",
-            "79266f6afd33fe845dde86306f804441",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=132, phased=false, phasedAutodetect=false]"
+            "6c07a31e66ccb7f6913cbec942e16e19",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=109, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-16T17:22:52.751605082"
+        "timestamp": "2025-05-19T17:48:11.393808389"
     }
 }
