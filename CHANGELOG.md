@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Added a test without `--filter_variants_hgnc_ids`
 - [#691](https://github.com/genomic-medicine-sweden/nallo/pull/691) - Added samplesheet validation requiring at least one sample, and require each row to be unique
 - [#692](https://github.com/genomic-medicine-sweden/nallo/pull/692) - Added the capability to run the pipeline in `-stub` mode
+- [#705](https://github.com/genomic-medicine-sweden/nallo/pull/705) - Add stub pipeline test for `cadd_prescored_indels` and `cadd_resources` with mock resources
 
 ### `Changed`
 
