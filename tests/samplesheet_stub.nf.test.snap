@@ -1,5 +1,5 @@
 {
-    "test profile": {
+    "Test CADD with mock resources": {
         "content": [
             173,
             {
@@ -322,7 +322,6 @@
                 "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
-                "pipeline_info/params_2025-05-19_14-53-29.json",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
@@ -429,6 +428,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-19T14:53:59.118076448"
+        "timestamp": "2025-05-19T15:27:03.280754308"
     }
 }
