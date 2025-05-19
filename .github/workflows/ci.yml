@@ -39,7 +39,7 @@ jobs:
           - "samplesheet_multisample_bam"
           - "samplesheet_multisample_ont_bam"
           - "samplesheet_target_regions_null"
-          - "samplesheet_stub_cadd"
+          - "samplesheet_stub"
           - "ALIGN_ASSEMBLIES"
           - "ANNOTATE_SVS"
           - "CALL_PARALOGS"
