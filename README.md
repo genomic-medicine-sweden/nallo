@@ -7,15 +7,23 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
 
+<h1 align="center">Nallo</h1>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/nallo_dark.png">
+    <img width=250px alt="Nallo logo" src="docs/images/nallo_light.png">
+  </picture>
+</p>
+
 ## Introduction
 
 **genomic-medicine-sweden/nallo** is a bioinformatics analysis pipeline for long-reads from both PacBio and (targeted) ONT-data, focused on rare-disease. Heavily influenced by best-practice pipelines such as [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
 
-<picture align="center">
-    <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
-  </picture>
-
 ## Pipeline summary
+
+<picture align="center">
+  <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
+</picture>
 
 ##### QC
 
