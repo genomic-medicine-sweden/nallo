@@ -9,7 +9,7 @@
 
 <h1 align="center">Nallo</h1>
 <p align="center">
-  <picture align="center">
+  <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/nallo_dark.png">
     <img width=250px alt="Nallo logo" src="docs/images/nallo_light.png">
   </picture>
