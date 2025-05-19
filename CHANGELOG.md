@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680) - Updated more modules
 - [#685](https://github.com/genomic-medicine-sweden/nallo/pull/685) - Updated patch for VEP missed in [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680)
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
+- [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Updated DeepVariant to 1.9.0
 
 ### `Removed`
 
@@ -68,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools             | 1.2         | 1.21        |
 | ensemblvep/filtervep | 113         | 113.4       |
 | minimap2             | 2.28        | 2.29        |
+| deepvariant          | 1.8.0       | 1.9.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
