@@ -24,10 +24,18 @@ workflow ANNOTATE_CADD {
     main:
     ch_versions = Channel.empty()
 
-    REFERENCE_TO_CADD_CHRNAMES ( ch_fai , [] )
+    REFERENCE_TO_CADD_CHRNAMES (
+        ch_fai,
+        [],
+        false
+    )
     ch_versions = ch_versions.mix(REFERENCE_TO_CADD_CHRNAMES.out.versions)
 
-    CADD_TO_REFERENCE_CHRNAMES ( ch_fai , [] )
+    CADD_TO_REFERENCE_CHRNAMES (
+        ch_fai,
+        [],
+        false
+    )
     ch_versions = ch_versions.mix(CADD_TO_REFERENCE_CHRNAMES.out.versions)
 
     ch_vcf
