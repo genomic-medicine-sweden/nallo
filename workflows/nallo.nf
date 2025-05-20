@@ -13,7 +13,6 @@ include { ALIGN_ASSEMBLIES                        } from '../subworkflows/local/
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
-include { ANNOTATE_REPEAT_EXPANSIONS              } from '../subworkflows/local/annotate_repeat_expansions'
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
@@ -56,6 +55,7 @@ include { SAMTOOLS_CONVERT                                  } from '../modules/n
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
+include { STRANGER                                          } from '../modules/nf-core/stranger/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -675,13 +675,16 @@ workflow NALLO {
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
     }
+
     //
-    // Annotate repeat expansions with stranger
+    // Annotate repeat expansions with Stranger
     //
     if(!params.skip_repeat_annotation) {
-
-        ANNOTATE_REPEAT_EXPANSIONS ( ch_stranger_repeat_catalog, ch_repeat_expansions )
-        ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
+        STRANGER (
+            ch_repeat_expansions,
+            ch_stranger_repeat_catalog
+        )
+        ch_versions = ch_versions.mix(STRANGER.out.versions)
     }
 
     //
