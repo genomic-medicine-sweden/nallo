@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#685](https://github.com/genomic-medicine-sweden/nallo/pull/685) - Updated patch for VEP missed in [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680)
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
 - [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
+- [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Changed to snapshot repeat annotations in the pipeline tests, but not when STRdust is used as caller
 
 ### `Removed`
 
