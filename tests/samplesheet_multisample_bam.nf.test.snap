@@ -815,24 +815,13 @@
                 ]
             ],
             [
-                [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "3911e3eb6940c31d8f3b80dc6e02d797"
-                ],
-                [
-                    "HG002_trgt.vcf.gz",
-                    "d7c4b2f606f9b4ec46b225702b4d821f"
-                ],
-                [
-                    "HG003_trgt.vcf.gz",
-                    "d8cde591fdf577c7dc39d607fb4fca1f"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-20T12:09:07.517636573"
+        "timestamp": "2025-05-20T10:23:58.119530716"
     }
 }

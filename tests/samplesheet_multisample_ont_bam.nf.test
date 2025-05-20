@@ -35,7 +35,7 @@ nextflow_pipeline {
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
             def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
-            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants_strdust', include: ['**/*.vcf.gz'])
+            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
