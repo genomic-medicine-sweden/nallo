@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram": {
         "content": [
-            204,
+            203,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
