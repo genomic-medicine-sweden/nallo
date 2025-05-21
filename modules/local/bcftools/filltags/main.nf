@@ -51,8 +51,19 @@ process BCFTOOLS_FILLTAGS {
                     args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
                     args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
                     "vcf"
+    def index = ''
+    if (extension in ['vcf.gz', 'bcf', 'bcf.gz']) {
+        if (['--write-index=tbi', '-W=tbi'].any { args.contains(it) }  && extension == 'vcf.gz') {
+            index = 'tbi'
+        } else if (['--write-index=tbi', '-W=tbi', '--write-index=csi', '-W=csi', '--write-index', '-W'].any { args.contains(it) }) {
+            index = 'csi'
+        }
+    }
+    def create_cmd = extension.endsWith(".gz") ? "echo '' | gzip >" : "touch"
+    def create_index = index ? "touch ${prefix}.${extension}.${index}" : ""
     """
-    touch ${prefix}.${extension}
+    ${create_cmd} ${prefix}.${extension}
+    ${create_index}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
