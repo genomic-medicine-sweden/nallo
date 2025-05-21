@@ -269,7 +269,7 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "ffe458cbd1208b82e33e607fa43fbe80df191047",
                         "installed_by": ["modules"]
                     },
                     "strdust": {
