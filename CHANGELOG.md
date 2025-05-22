@@ -31,12 +31,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680) - Updated more modules
 - [#685](https://github.com/genomic-medicine-sweden/nallo/pull/685) - Updated patch for VEP missed in [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680)
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Simplified HiPhase saveAs logic
 - [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
 
 ### `Removed`
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCFTOOLS_PLUGINSPLIT`
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
 
 ### `Fixed`
 
