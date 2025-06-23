@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.0 - [2025-06-23]
+
+### `Changed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Updated Stranger and TRGT versions
+
+### `Fixed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Fixed annotated repeats counting all motifs (not just pathogenic) towards the count that sets `STR_STATUS`, resulting in false positives
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| trgt     | 1.2.0       | 3.0.0       |
+| stranger | 0.9.4       | 0.9.5       |
+
 ## 0.6.5 - [2025-05-16]
 
 ### `Fixed`
