@@ -269,7 +269,7 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "ffe458cbd1208b82e33e607fa43fbe80df191047",
+                        "git_sha": "ee15959e40c5b7410c30b22742944c30538f8998",
                         "installed_by": ["modules"]
                     },
                     "strdust": {
@@ -309,12 +309,12 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "7cf69bf10ea16f7d006319da48a12232310e5f40",
+                        "git_sha": "e46d8b3f0cb2f5a5adae908656f80add8d05af65",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "0f11c7da2e049365b7034d4a406c9d39b5dce4a1",
+                        "git_sha": "e46d8b3f0cb2f5a5adae908656f80add8d05af65",
                         "installed_by": ["modules"]
                     },
                     "untar": {

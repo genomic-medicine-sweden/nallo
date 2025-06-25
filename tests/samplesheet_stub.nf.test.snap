@@ -215,8 +215,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.4",
-                    "tabix": 1.21
+                    "stranger": "0.9.5",
+                    "tabix": 1.22
                 },
                 "SVDB_MERGE": {
                     "svdb": "2.8.2",
@@ -254,10 +254,10 @@
                     "tagbam": "0.1.0"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "2.0.0"
+                    "trgt": "3.0.0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "2.1.0"
+                    "trgt": "3.0.0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -268,7 +268,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.7.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.8.0dev"
                 }
             },
             [
@@ -426,6 +426,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-20T10:26:40.14662335"
+        "timestamp": "2025-06-25T16:15:01.902131413"
     }
 }

@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.7.0dev - [xxxx-xx-xx]
+## 0.8.0dev - [xxxx-xx-xx]
 
 ### `Added`
 
@@ -78,6 +78,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.7.0 - [2025-06-23]
+
+### `Changed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Updated Stranger and TRGT versions
+
+### `Fixed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Fixed annotated repeats counting all motifs (not just pathogenic) towards the count that sets `STR_STATUS`, resulting in false positives
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| trgt     | 1.2.0       | 3.0.0       |
+| stranger | 0.9.4       | 0.9.5       |
 
 ## 0.6.5 - [2025-05-16]
 
