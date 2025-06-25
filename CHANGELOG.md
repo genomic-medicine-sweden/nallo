@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.7.0dev - [xxxx-xx-xx]
+## 0.8.0dev - [xxxx-xx-xx]
 
 ### `Added`
 
@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
 - [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Simplified HiPhase saveAs logic
 - [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
+- [#721](https://github.com/genomic-medicine-sweden/nallo/pull/721) - Bump version to 0.8.0dev
 
 ### `Removed`
 
@@ -61,8 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bedtools/split       |             | 2.31.1      |
 | severus              | 1.3         | 1.5         |
 | strdust              | 0.11.1      | 0.11.4      |
-| trgt/genotype        | 1.2.0       | 2.1.0       |
-| trgt/merge           | 1.2.0       | 2.1.0       |
 | hifiasm              | 0.24.0      | 0.25.0      |
 | echtvar/anno         | 0.2.0       | 0.2.2       |
 | genmod               | 3.9         | 3.10.1      |
@@ -78,6 +77,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.7.0 - [2025-06-23]
+
+### `Changed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Updated Stranger and TRGT versions
+
+### `Fixed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Fixed annotated repeats counting all motifs (not just pathogenic) towards the count that sets `STR_STATUS`, resulting in false positives
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| trgt     | 1.2.0       | 3.0.0       |
+| stranger | 0.9.4       | 0.9.5       |
 
 ## 0.6.5 - [2025-05-16]
 
