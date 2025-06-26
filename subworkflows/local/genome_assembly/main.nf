@@ -1,8 +1,8 @@
 include { CAT_FASTQ as CAT_FASTQ_PATERNAL } from '../../../modules/nf-core/cat/fastq/main'
 include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../../modules/nf-core/cat/fastq/main'
 include { HIFIASM                         } from '../../../modules/nf-core/hifiasm'
-include { YAK as YAK_PATERNAL             } from '../../../modules/local/yak/main'
-include { YAK as YAK_MATERNAL             } from '../../../modules/local/yak/main'
+include { YAK_COUNT as YAK_PATERNAL       } from '../../../modules/nf-core/yak/count/main'
+include { YAK_COUNT as YAK_MATERNAL       } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS                        } from '../../../modules/nf-core/gfastats/main'
 
 workflow ASSEMBLY {
