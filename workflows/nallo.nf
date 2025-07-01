@@ -113,7 +113,7 @@ workflow NALLO {
         .collect()
 
     def cram_output = params.alignment_output_format == 'cram'
-    ch_svdb_sv_databases.view()
+
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
     //
