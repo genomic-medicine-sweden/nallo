@@ -171,7 +171,6 @@
                 },
                 "echtvar_snv_databases": {
                     "type": "string",
-                    "pattern": "^\\S+\\.csv$",
                     "format": "file-path",
                     "mimetype": "text/csv",
                     "schema": "/assets/schema_snp_db.json",
@@ -185,7 +184,6 @@
                     "description": "Databases used for structural variant annotation in vcf format.",
                     "fa_icon": "fas fa-file-csv",
                     "help_text": "Path to comma-separated file containing information about the databases used for structural variant annotation.",
-                    "pattern": "^\\S+\\.csv$",
                     "mimetype": "text/csv",
                     "schema": "assets/svdb_query_vcf_schema.json"
                 },
