@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed file ending restrictions on `echtvar_snv_databases` and `svdb_sv_databases` to allow for json and yaml in formats in addition to csv.
+- [#714](https://github.com/genomic-medicine-sweden/nallo/pull/714) - Changed file ending restrictions on `echtvar_snv_databases` and `svdb_sv_databases` to allow for TSV, JSON and YAML formats in addition to CSV.
 
 ## 0.7.0 - [2025-06-23]
 
