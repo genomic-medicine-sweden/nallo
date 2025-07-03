@@ -41,4 +41,3 @@ workflow CONVERT_INPUT_FILES {
     fastq    = ch_fastq    // channel: [ val(meta), fastq ]
     versions = ch_versions // channel: [ versions.yml ]
 }
-

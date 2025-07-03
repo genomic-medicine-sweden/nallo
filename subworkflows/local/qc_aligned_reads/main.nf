@@ -32,4 +32,3 @@ workflow QC_ALIGNED_READS {
     mosdepth_region_dist = MOSDEPTH.out.regions_txt // channel: [ val(meta), path(txt) ]
     versions             = ch_versions              // channel: [ versions.yml ]
 }
-

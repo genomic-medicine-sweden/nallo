@@ -50,4 +50,3 @@ process CRAMINO {
     END_VERSIONS
     """
 }
-

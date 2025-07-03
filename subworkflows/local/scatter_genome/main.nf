@@ -68,4 +68,3 @@ workflow SCATTER_GENOME {
     bed_intervals = ch_bed_intervals                   // channel: [ path(bed), val(num_intervals) ]
     versions      = ch_versions                        // channel: [ versions.yml ]
 }
-

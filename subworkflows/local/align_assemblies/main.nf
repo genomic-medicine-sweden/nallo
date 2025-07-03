@@ -71,4 +71,3 @@ workflow ALIGN_ASSEMBLIES {
     bai      = SAMTOOLS_MERGE.out.bai // channel: [ val(meta), path(bai) ]
     versions = ch_versions            // channel: [ versions.yml ]
 }
-
