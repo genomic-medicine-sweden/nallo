@@ -1,0 +1,54 @@
+name: Find tests
+description: Finds all subdirectories and local modules containing a 'tests' folder, outputs the directory as tag. In addition, find all pipeline-level tests that are directly under the 'tests' directory. This assumes that the pipeline-level tests has a tag named the same as the file.
+
+inputs: {}
+
+outputs:
+  tags:
+    description: JSON array of matching subworkflow directory names
+    value: ${{ steps.search.outputs.tags }}
+
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      id: "search"
+      run: |
+        names_json="["
+
+        first=true
+        # Find all 'tests' dirs anywhere under modules/local and subworkflows
+        tests_dirs=$(find modules/local subworkflows -type d -name tests)
+
+        for td in $tests_dirs; do
+          module_dir=$(dirname "$td")
+          module_name=$(basename "$module_dir")
+
+          if [ "$first" = true ]; then
+            first=false
+          else
+            names_json+=","
+          fi
+
+          names_json+="\"$module_name\""
+        done
+
+        # Find all *.test files directly under ./tests (top-level)
+        test_files=$(find tests -maxdepth 1 -type f -name '*.test')
+        for tf in $test_files; do
+          tf_base=$(basename "$tf" .nf.test)
+          echo "Found top-level test file: $tf_base"
+
+          if [ "$first" = true ]; then
+            first=false
+          else
+            names_json+=","
+          fi
+
+          names_json+="\"$tf_base\""
+        done
+
+        names_json+="]"
+
+        # Write to GitHub Actions outputs
+        echo "tags=$names_json" >> $GITHUB_OUTPUT

@@ -4,7 +4,7 @@
             172,
             {
                 "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
+                    "bcftools": 1.2failplease,
                     "busybox_awk": "1.36.1"
                 },
                 "ADD_MOST_SEVERE_CSQ": {
