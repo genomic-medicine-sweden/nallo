@@ -171,11 +171,11 @@
                 },
                 "echtvar_snv_databases": {
                     "type": "string",
-                    "pattern": "^\\S+\\.csv$",
+                    "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
                     "format": "file-path",
                     "mimetype": "text/csv",
                     "schema": "/assets/schema_snp_db.json",
-                    "description": "A csv file with echtvar databases to annotate SNVs with",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with echtvar databases to annotate SNVs with.",
                     "exists": true
                 },
                 "svdb_sv_databases": {
@@ -184,9 +184,9 @@
                     "format": "file-path",
                     "description": "Databases used for structural variant annotation in vcf format.",
                     "fa_icon": "fas fa-file-csv",
-                    "help_text": "Path to comma-separated file containing information about the databases used for structural variant annotation.",
-                    "pattern": "^\\S+\\.csv$",
+                    "help_text": "Path to a CSV/TSV/JSON/YAML file containing information about the databases used for structural variant annotation.",
                     "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
                     "schema": "assets/svdb_query_vcf_schema.json"
                 },
                 "stranger_repeat_catalog": {
@@ -519,7 +519,8 @@
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
-                    "description": "A csv file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
+                    "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "filter_variants_hgnc_ids": {
