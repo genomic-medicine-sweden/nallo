@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram": {
         "content": [
-            205,
+            202,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -59,9 +59,6 @@
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
-                },
-                "COMPRESS_STRANGER": {
-                    "bcftools": 1.21
                 },
                 "CRAMINO": {
                     "cramino": "0.14.5"
@@ -198,7 +195,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.4"
+                    "stranger": "0.9.5",
+                    "tabix": 1.22
                 },
                 "SVDB_MERGE": {
                     "svdb": "2.8.2",
@@ -230,10 +228,10 @@
                     "tagbam": "0.1.0"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "2.0.0"
+                    "trgt": "3.0.0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "2.1.0"
+                    "trgt": "3.0.0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -244,7 +242,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.7.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.8.0dev"
                 }
             },
             [
@@ -470,15 +468,9 @@
                 "pedigree/family/FAM.ped",
                 "phased_variants",
                 "phased_variants/HG002",
-                "phased_variants/HG002/HG002_phased.blocks.tsv",
-                "phased_variants/HG002/HG002_phased.stats.tsv",
-                "phased_variants/HG002/HG002_phased.summary.tsv",
                 "phased_variants/HG002/HG002_phased.vcf.gz",
                 "phased_variants/HG002/HG002_phased.vcf.gz.tbi",
                 "phased_variants/HG003",
-                "phased_variants/HG003/HG003_phased.blocks.tsv",
-                "phased_variants/HG003/HG003_phased.stats.tsv",
-                "phased_variants/HG003/HG003_phased.summary.tsv",
                 "phased_variants/HG003/HG003_phased.vcf.gz",
                 "phased_variants/HG003/HG003_phased.vcf.gz.tbi",
                 "pipeline_info",
@@ -662,12 +654,6 @@
                 "somalier_stats.txt:md5,c0dd40d8c16648e67c54d06511e360fb",
                 "whatshap-stats-table.txt:md5,748ecc274a4a67a9bcafb98bc53fc690",
                 "FAM.ped:md5,d4768d9ea02a0ad85662a143242ba1b8",
-                "HG002_phased.blocks.tsv:md5,465f86a0a8746576f55d397a4c7d41b4",
-                "HG002_phased.stats.tsv:md5,77c8dae70699253b7ca4b2e3527c5d67",
-                "HG002_phased.summary.tsv:md5,606f17a4a1afdda19c5d44b17c69dca6",
-                "HG003_phased.blocks.tsv:md5,6b64a7ccb5f516e209a1809188805406",
-                "HG003_phased.stats.tsv:md5,16e9e6043120120e5565327c0222355e",
-                "HG003_phased.summary.tsv:md5,d999a18420d7b0837363c5604da4cf50",
                 "HG002_cramino_aligned_phased.arrow:md5,9e13732788f7691b811b8b574bd673e5",
                 "HG003_cramino_aligned_phased.arrow:md5,7bd95ef011ec80630578187cbb7450e6",
                 "HG002_cramino_aligned.arrow:md5,9e13732788f7691b811b8b574bd673e5",
@@ -824,6 +810,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-19T17:51:57.474728999"
+        "timestamp": "2025-07-01T13:58:20.329566406"
     }
 }

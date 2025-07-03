@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.7.0dev - [xxxx-xx-xx]
+## 0.8.0dev - [xxxx-xx-xx]
 
 ### `Added`
 
@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Added a test without `--filter_variants_hgnc_ids`
 - [#691](https://github.com/genomic-medicine-sweden/nallo/pull/691) - Added samplesheet validation requiring at least one sample, and require each row to be unique
 - [#692](https://github.com/genomic-medicine-sweden/nallo/pull/692) - Added the capability to run the pipeline in `-stub` mode
+- [#705](https://github.com/genomic-medicine-sweden/nallo/pull/705) - Add stub pipeline test for `cadd_prescored_indels` and `cadd_resources` with mock resources
 - [#706](https://github.com/genomic-medicine-sweden/nallo/pull/706) - Added a logo to `README.md`
+- [#709](https://github.com/genomic-medicine-sweden/nallo/pull/709) - Added nf-test for `ANNOTATE_CADD`
 
 ### `Changed`
 
@@ -29,12 +31,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680) - Updated more modules
 - [#685](https://github.com/genomic-medicine-sweden/nallo/pull/685) - Updated patch for VEP missed in [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680)
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Simplified HiPhase saveAs logic
+- [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
 - [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Updated DeepVariant to 1.9.0
+- [#721](https://github.com/genomic-medicine-sweden/nallo/pull/721) - Bump version to 0.8.0dev
 
 ### `Removed`
 
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCFTOOLS_PLUGINSPLIT`
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
 
 ### `Fixed`
 
@@ -57,8 +63,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bedtools/split       |             | 2.31.1      |
 | severus              | 1.3         | 1.5         |
 | strdust              | 0.11.1      | 0.11.4      |
-| trgt/genotype        | 1.2.0       | 2.1.0       |
-| trgt/merge           | 1.2.0       | 2.1.0       |
 | hifiasm              | 0.24.0      | 0.25.0      |
 | echtvar/anno         | 0.2.0       | 0.2.2       |
 | genmod               | 3.9         | 3.10.1      |
@@ -75,6 +79,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.7.1 - [2025-07-01]
+
+### `Changed`
+
+- [#714](https://github.com/genomic-medicine-sweden/nallo/pull/714) - Changed file ending restrictions on `echtvar_snv_databases` and `svdb_sv_databases` to allow for TSV, JSON and YAML formats in addition to CSV.
+
+## 0.7.0 - [2025-06-23]
+
+### `Changed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Updated Stranger and TRGT versions
+
+### `Fixed`
+
+- [#711](https://github.com/genomic-medicine-sweden/nallo/pull/711) - Fixed annotated repeats counting all motifs (not just pathogenic) towards the count that sets `STR_STATUS`, resulting in false positives
+
+### Module updates
+
+| Tool     | Old version | New version |
+| -------- | ----------- | ----------- |
+| trgt     | 1.2.0       | 3.0.0       |
+| stranger | 0.9.4       | 0.9.5       |
 
 ## 0.6.5 - [2025-05-16]
 
