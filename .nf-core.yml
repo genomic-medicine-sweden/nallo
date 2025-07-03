@@ -15,6 +15,7 @@ lint:
     - conf/test.config
     - conf/test_full.config
     - tests/default.config
+    - tests/default.nf.test
   files_unchanged:
     - CODE_OF_CONDUCT.md
     - assets/nf-core-nallo_logo_light.png
