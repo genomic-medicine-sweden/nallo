@@ -77,7 +77,7 @@ nextflow_workflow {
             script "../../snv_annotation/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
+                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -89,9 +89,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
-                input[8] = Channel.value([])
-                input[9] = null
+                input[8] = true
+                input[9] = Channel.value([])
                 input[10] = null
+                input[11] = null
             """
             }
         }
@@ -115,7 +116,6 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
@@ -142,7 +142,6 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )

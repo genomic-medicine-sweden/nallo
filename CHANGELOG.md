@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#705](https://github.com/genomic-medicine-sweden/nallo/pull/705) - Add stub pipeline test for `cadd_prescored_indels` and `cadd_resources` with mock resources
 - [#706](https://github.com/genomic-medicine-sweden/nallo/pull/706) - Added a logo to `README.md`
 - [#709](https://github.com/genomic-medicine-sweden/nallo/pull/709) - Added nf-test for `ANNOTATE_CADD`
+- [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Added a find-tests action to find all nf-tests to be run during CI
 
 ### `Changed`
 
@@ -46,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
+- [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Fixed tests for `add_found_in_tag`, `create_pedigree_file`, `create_samples_haplotypes_file`, `filter_variants` and `samplesheet_stub` that were not previously automatically tested in the CI.
 
 ### Parameters
 
