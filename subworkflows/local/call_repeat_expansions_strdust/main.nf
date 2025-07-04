@@ -48,4 +48,3 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     versions    = ch_versions              // channel: [ versions.yml ]
 
 }
-

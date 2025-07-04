@@ -139,4 +139,3 @@ workflow ASSEMBLY {
     assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
     versions = ch_versions                       // channel: [ versions.yml ]
 }
-

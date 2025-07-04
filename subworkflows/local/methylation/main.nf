@@ -28,4 +28,3 @@ workflow METHYLATION {
     tbi      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
     versions = ch_versions // channel: [ versions.yml ]
 }
-

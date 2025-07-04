@@ -47,4 +47,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     merge_json_files(args.files_in, args.output)
-
