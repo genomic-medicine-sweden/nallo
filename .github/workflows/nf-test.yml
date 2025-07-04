@@ -77,6 +77,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Clean up Disk space
+        if: startsWith(matrix.tag, 'samplesheet') && !contains(matrix.tag, 'stub') # Hacky way to avoid running this on every test
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+
       - name: Run nf-test
         uses: ./.github/actions/nf-test
         env:

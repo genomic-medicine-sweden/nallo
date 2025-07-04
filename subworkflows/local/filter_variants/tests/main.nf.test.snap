@@ -5,13 +5,13 @@
                 "versions.yml:md5,a5f34bf431e0dd78d5bfd261544f246d"
             ],
             "test_data.bed_filtered.vcf.gz.tbi",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=99, phased=false, phasedAutodetect=false]"
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=124, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-04T10:30:35.601186138"
+        "timestamp": "2025-07-04T13:00:56.494014895"
     },
     "vcf, hgnc_ids, true": {
         "content": [
@@ -20,12 +20,12 @@
                 "versions.yml:md5,a5f34bf431e0dd78d5bfd261544f246d"
             ],
             "test_data.bed_filtered.vcf.gz.tbi",
-            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=65, phased=false, phasedAutodetect=false]"
+            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=62, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-04T10:32:15.473481143"
+        "timestamp": "2025-07-04T13:01:25.355572155"
     }
 }

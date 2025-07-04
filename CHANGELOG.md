@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#692](https://github.com/genomic-medicine-sweden/nallo/pull/692) - Added the capability to run the pipeline in `-stub` mode
 - [#705](https://github.com/genomic-medicine-sweden/nallo/pull/705) - Add stub pipeline test for `cadd_prescored_indels` and `cadd_resources` with mock resources
 - [#706](https://github.com/genomic-medicine-sweden/nallo/pull/706) - Added a logo to `README.md`
+- [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Added a clean up step to the nf-test CI
 - [#709](https://github.com/genomic-medicine-sweden/nallo/pull/709) - Added nf-test for `ANNOTATE_CADD`
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Added a find-tests action to find all nf-tests to be run during CI
 
@@ -34,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
 - [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Simplified HiPhase saveAs logic
 - [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
+- [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Updated DeepVariant to 1.9.0
 - [#712](https://github.com/genomic-medicine-sweden/nallo/pull/712) - Bump version to 0.8.0dev
 - [#717](https://github.com/genomic-medicine-sweden/nallo/pull/717) - Use family ID in `RankScore` repeat annotation
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Updated nf-core template to v3.3.1
@@ -76,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools             | 1.2         | 1.21        |
 | ensemblvep/filtervep | 113         | 113.4       |
 | minimap2             | 2.28        | 2.29        |
+| deepvariant          | 1.8.0       | 1.9.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
