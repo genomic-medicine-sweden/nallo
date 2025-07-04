@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#712](https://github.com/genomic-medicine-sweden/nallo/pull/712) - Bump version to 0.8.0dev
 - [#717](https://github.com/genomic-medicine-sweden/nallo/pull/717) - Use family ID in `RankScore` repeat annotation
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Updated nf-core template to v3.3.1
+- [#721](https://github.com/genomic-medicine-sweden/nallo/pull/721) - Updated `samplesheet_multisample_bam` with HG004 to complete a trio, and added a second family to `samplesheet_multisample_ont_bam` in order to perform more comprehensive testing
 
 ### `Removed`
 
