@@ -59,4 +59,3 @@ workflow CALL_CNVS {
     family_tbi  = TABIX_TABIX.out.tbi      // channel: [ val(meta), path(tbi) ]
     versions = ch_versions                 // channel: [ versions.yml ]
 }
-

@@ -35,4 +35,3 @@ workflow FILTER_VARIANTS {
     tbi      = BCFTOOLS_VIEW.out.tbi // channel: [ val(meta), path(tbi) ]
     versions = ch_versions           // channel: [ path(versions.yml) ]
 }
-

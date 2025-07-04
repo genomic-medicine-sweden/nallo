@@ -242,7 +242,8 @@
                     "severus": {
                         "branch": "master",
                         "git_sha": "b548397f546b85ae02df11dfec3023d744331a35",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/severus/severus.diff"
                     },
                     "sniffles": {
                         "branch": "master",
@@ -289,7 +290,7 @@
                     },
                     "tabix/bgzip": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "52a49a8807214ba93b0fdc9fa401876d9845f62a",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {
@@ -329,12 +330,12 @@
                 "nf-core": {
                     "utils_nextflow_pipeline": {
                         "branch": "master",
-                        "git_sha": "56372688d8979092cafbe0c5c3895b491166ca1c",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
-                        "git_sha": "1b6b9a3338d011367137808b49b923515080e3ba",
+                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {

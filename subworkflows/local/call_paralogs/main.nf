@@ -97,4 +97,3 @@ workflow CALL_PARALOGS {
     tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
     versions = ch_versions                                               // channel: [ versions.yml ]
 }
-

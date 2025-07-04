@@ -124,11 +124,7 @@
         },
         {
             "@id": "main.nf",
-            "@type": [
-                "File",
-                "SoftwareSourceCode",
-                "ComputationalWorkflow"
-            ],
+            "@type": ["File", "SoftwareSourceCode", "ComputationalWorkflow"],
             "creator": [
                 {
                     "@id": "https://orcid.org/0000-0002-9594-0710"
@@ -137,21 +133,14 @@
             "dateCreated": "",
             "dateModified": "2025-07-03T11:40:30Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
-            "keywords": [
-                "nf-core",
-                "nextflow"
-            ],
-            "license": [
-                "MIT"
-            ],
+            "keywords": ["nf-core", "nextflow"],
+            "license": ["MIT"],
             "maintainer": [
                 {
                     "@id": "https://orcid.org/0000-0002-9594-0710"
                 }
             ],
-            "name": [
-                "genomic-medicine-sweden/nallo"
-            ],
+            "name": ["genomic-medicine-sweden/nallo"],
             "programmingLanguage": {
                 "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow"
             },
@@ -162,9 +151,7 @@
                 "https://github.com/genomic-medicine-sweden/nallo",
                 "https://nf-co.re/genomic-medicine-sweden/nallo/dev/"
             ],
-            "version": [
-                "0.8.0dev"
-            ]
+            "version": ["0.8.0dev"]
         },
         {
             "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow",
