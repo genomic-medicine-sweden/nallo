@@ -85,7 +85,7 @@
                     "gawk": "5.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.8.0"
+                    "deepvariant": "1.9.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.8.0"
@@ -426,6 +426,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-06-25T16:15:01.902131413"
+        "timestamp": "2025-07-04T15:20:40.104637266"
     }
 }
