@@ -726,9 +726,7 @@
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,df4af39e3f160095dc1cc9806546ddfb",
                 "multiqc_general_stats.txt:md5,e89ec56c068046b655177801ac4686aa",
-                "multiqc_peddy.txt:md5,536454d4b1240b7ea8291c562804f05d",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,a59c50c45256ebd3d8673366bfe13feb",
-                "peddy_het_check_plot.txt:md5,c87ee79fa631f5e0f53776de1922e9b7",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,018cf5322938687a3ac6a4222d3b2e7a",
                 "whatshap-stats-table.txt:md5,7371de64e8c77b90c83906dad6dc9529",
@@ -946,6 +944,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-04T15:37:57.7438471"
+        "timestamp": "2025-07-07T10:55:04.437506665"
     }
 }
