@@ -138,7 +138,7 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
-    // Then crereate a "vcf_sample_name meta.id" file for bcftools reheader
+    // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
     ch_versions = ch_versions.mix(CREATE_SAMPLES_FILE.out.versions)
 
@@ -195,11 +195,11 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
     emit:
-    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf  // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi  // channel: [ val(meta), path(tbi) ]
-    family_vcf = SVDB_MERGE_BY_FAMILY.out.vcf         // channel: [ val(meta), path(vcf) ]
-    family_tbi = SVDB_MERGE_BY_FAMILY.out.tbi         // channel: [ val(meta), path(tbi) ]
-    versions   = ch_versions                                                           // channel: [ path(versions.yml) ]
+    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
+    versions          = ch_versions                  // channel: [ path(versions.yml) ]
 
 }
 

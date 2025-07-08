@@ -574,17 +574,22 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-    ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
-        params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
-        RANK_VARIANTS_SVS.out.vcf
+    //
+    // Collect and publish SVs
+    //
+    if(!params.skip_sv_calling) {
 
-    // Publish all SVs from here
-    BCFTOOLS_VIEW (
-        ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
-        [],
-        [],
-        []
-    )
+        ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
+            params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
+            RANK_VARIANTS_SVS.out.vcf
+
+        BCFTOOLS_VIEW (
+            ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
+            [],
+            [],
+            []
+        )
+    }
 
     //
     // Phase SNVs and INDELs
