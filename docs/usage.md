@@ -191,13 +191,6 @@ Unannotated family-level VCFs per caller can be output with `--publish_unannotat
 
 Turned off with `--skip_sv_calling`.
 
-#### CNV calling
-
-This , and requires the following additional files:
-
-| Parameter | Description |
-| --------- | ----------- |
-
 #### Phasing
 
 This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.
