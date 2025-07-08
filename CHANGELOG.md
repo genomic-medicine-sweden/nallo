@@ -55,11 +55,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                  |
-| ------------- | ------------------------------ |
-| `--sv_caller` |  `sv_callers`                  |
-|               |  `--sv_caller_priority`        |
-|               |  `--always_run_all_sv_callers` |
+| Old parameter | New parameter                 |
+| ------------- | ----------------------------- |
+| `--sv_caller` | `sv_callers`                  |
+|               | `--sv_caller_priority`        |
+|               | `--always_run_all_sv_callers` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
