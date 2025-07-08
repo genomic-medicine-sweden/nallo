@@ -5,92 +5,90 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "CALL_SVS"
 
-    test("1 sample - [bam, bai], 'sniffles', []") {
-
-        when {
-            workflow {
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
                 """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "sniffles"
-                input[2] = [[],[]]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    workflow.out.versions,
-                ).match() }
-            )
-        }
-
-    }
-
-    test("1 sample - [bam, bai], 'sniffles', bed") {
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "sniffles"
-                input[2] = [
-                    [ id:'trf' ],
-                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
                 """
             }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                input[1] = [[],[]]
+                input[2] = false
+                """
+            }
         }
 
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    workflow.out.versions,
-                ).match() }
-            )
-        }
-
-    }
-
-    test("2 samples - [bam, bai], 'sniffles', []") {
-
-        when {
-            workflow {
+        run("MINIMAP2_ALIGN") {
+            script "../../../../modules/nf-core/minimap2/align/main.nf"
+            process {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
+                        [ id:'test_1', single_end:false, family_id: 'family', sex: 1 ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                     ],
                     [
-                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
+                        [ id:'test_2', single_end:false, family_id: 'family', sex: 1 ], // meta map
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = "sniffles"
+                input[1] = GUNZIP.out.gunzip
+                input[2] = true
+                input[3] = 'bai'
+                input[4] = false
+                input[5] = false
+                """
+            }
+        }
+        run("DEEPVARIANT_RUNDEEPVARIANT") {
+            script "../../../../modules/nf-core/deepvariant/rundeepvariant/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .map { meta, bam, bai -> [ meta, bam, bai, file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true) ] }
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+    }
+
+    test("1 sample, 1 family - sniffles") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = [[],[]]
                 input[2] = [[],[]]
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = ['sniffles']
+                input[8] = ['sniffles']
+                input[9] = false
                 """
             }
         }
@@ -98,17 +96,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.sample_tbi.get(1).get(1).endsWith("tbi") },
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).linesGzip,
+                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -116,54 +108,34 @@ nextflow_workflow {
 
     }
 
-    test("1 sample - [bam, bai], 'severus', []") {
+    test("2 samples, 1 family - sniffes,severus,hificnv with trf bed") {
 
         when {
             workflow {
                 """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "severus"
-                input[2] = [[],[]]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    workflow.out.versions,
-                ).match() }
-            )
-        }
-
-    }
-
-    test("1 sample - [bam, bai], 'severus', bed") {
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "severus"
-                input[2] = [
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = [
                     [ id:'trf' ],
                     file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
                 ]
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]
+                input[5] = [
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]
+                input[6] = [
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]
+                input[7] = ['sniffles', 'hificnv', 'severus']
+                input[8] = ['sniffles', 'severus', 'hificnv']
+                input[9] = false
                 """
             }
         }
@@ -171,13 +143,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
@@ -185,25 +155,34 @@ nextflow_workflow {
 
     }
 
-    test("2 samples - [bam, bai], 'severus', []") {
+    test("2 samples, 1 family - sniffes,severus with trf bed, run all callers") {
 
         when {
             workflow {
                 """
-                input[0] = Channel.of(
-                    [
-                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
-                    [
-                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
-                    ]
-                )
-                input[1] = "severus"
-                input[2] = [[],[]]
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = [
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]
+                input[5] = [
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]
+                input[6] = [
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]
+                input[7] = ['sniffles', 'severus']
+                input[8] = ['sniffles', 'severus']
+                input[9] = true
                 """
             }
         }
@@ -211,37 +190,47 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.sample_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.sample_tbi.get(1).get(1).endsWith("tbi") },
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.summary,
-                    path(workflow.out.sample_vcf.get(1).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.summary,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
                     workflow.out.versions,
                 ).match() }
             )
         }
-
     }
 
-    test("1 sample - [bam, bai], 'sniffles', [] -stub") {
+    test("2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub") {
 
         options "-stub"
 
         when {
             workflow {
                 """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "sniffles"
-                input[2] = [[],[]]
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = [
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]
+                input[5] = [
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]
+                input[6] = [
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]
+                input[7] = ['sniffles', 'severus']
+                input[8] = ['sniffles', 'severus']
+                input[9] = true
                 """
             }
         }
@@ -252,173 +241,5 @@ nextflow_workflow {
                 { assert snapshot(workflow.out).match() }
             )
         }
-
-    }
-
-    test("1 sample - [bam, bai], 'sniffles', bed -stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "sniffles"
-                input[2] = [
-                    [ id:'trf' ],
-                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
-                ]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-
-    }
-
-    test("2 samples - [bam, bai], 'sniffles', [] -stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of(
-                    [
-                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
-                    [
-                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
-                    ]
-                )
-                input[1] = "sniffles"
-                input[2] = [[],[]]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.sample_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
-                    workflow.out.sample_tbi,
-                    workflow.out.family_vcf,
-                    workflow.out.family_tbi,
-                    workflow.out.versions,
-                ).match() }
-            )
-        }
-
-    }
-
-    test("1 sample - [bam, bai], 'severus', [] -stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "severus"
-                input[2] = [[],[]]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-
-    }
-
-    test("1 sample - [bam, bai], 'severus', bed -stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id:'test', single_end:false, family_id: 'family' ], // meta map
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[1] = "severus"
-                input[2] = [
-                    [ id:'trf' ],
-                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
-                ]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-
-    }
-
-    test("2 samples - [bam, bai], 'severus', [] -stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] = Channel.of(
-                    [
-                        [ id:'test_1', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
-                    [
-                        [ id:'test_2', single_end:false, family_id: 'family' ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
-                    ]
-                )
-                input[1] = "severus"
-                input[2] = [[],[]]
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.sample_vcf.collect { file(it[1]).name }.sort().toString(), // don't know the order of the output VCFs
-                    workflow.out.sample_tbi,
-                    workflow.out.family_vcf,
-                    workflow.out.family_tbi,
-                    workflow.out.versions,
-                ).match() }
-            )
-        }
-
     }
 }

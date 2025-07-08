@@ -16,7 +16,6 @@ include { ANNOTATE_SVS                            } from '../subworkflows/local/
 include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
-include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
 include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST          } from '../subworkflows/local/call_repeat_expansions_strdust'
 include { CALL_REPEAT_EXPANSIONS_TRGT             } from '../subworkflows/local/call_repeat_expansions_trgt'
@@ -488,54 +487,22 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        // If both CNV-calling and SV annotation is off, merged variants are output from here
+        // If both SV annotation is off, merged variants are output from here
         CALL_SVS (
             ch_bam_bai,
-            params.sv_caller,
-            ch_tandem_repeats
-        )
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
-        CALL_SVS.out.family_vcf
-            .set { annotate_svs_in }
-    }
-
-    //
-    // Call CNVs with HiFiCNV
-    //
-    if(!params.skip_cnv_calling) {
-
-        CALL_CNVS (
-            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
+            ch_tandem_repeats,
+            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
-            ch_exclude_bed
+            ch_exclude_bed,
+            params.sv_callers.split(',').collect { it.toLowerCase().trim() },
+            params.sv_caller_priority.split(',').collect { it.toLowerCase().trim() },
+            params.always_run_all_sv_callers
         )
-        ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
 
-    }
+        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
-    //
-    // Merge SVs and CNVs if we've called both SVs and CNVs
-    //
-    if (!params.skip_cnv_calling && !params.skip_sv_calling) {
-
-        CALL_SVS.out.family_vcf
-            .join(CALL_CNVS.out.family_vcf, failOnMismatch:true, failOnDuplicate:true)
-            .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
-            .set { svdb_merge_svs_cnvs_in }
-
-        // If SV annotation is off, merged variants are output from here (should be a merge and index subworkflow)
-        SVDB_MERGE_SVS_CNVS (
-            svdb_merge_svs_cnvs_in,
-            ['svs', 'cnvs'], // Because SVs have better breakpoint resolution, give them priority
-            true
-        )
-        ch_versions = ch_versions.mix(SVDB_MERGE_SVS_CNVS.out.versions)
-
-        SVDB_MERGE_SVS_CNVS.out.vcf
-            .set { annotate_svs_in }
     }
 
     //
@@ -543,9 +510,8 @@ workflow NALLO {
     //
     if (!params.skip_sv_annotation) {
 
-        // If annotation is on, then merged variants are output from here
         ANNOTATE_SVS (
-            annotate_svs_in,
+            CALL_SVS.out.family_vcf,
             ch_fasta,
             ch_svdb_sv_databases,
             PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
@@ -608,7 +574,7 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-    ch_collect_svs = params.skip_sv_annotation ? annotate_svs_in :
+    ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
         params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
         RANK_VARIANTS_SVS.out.vcf
 

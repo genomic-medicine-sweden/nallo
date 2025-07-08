@@ -1,56 +1,82 @@
 {
-    "1 sample - [bam, bai], 'severus', []": {
+    "2 samples, 1 family - sniffes,severus,hificnv with trf bed": {
         "content": [
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "d96009d3dcac8a7ddc0af6aa139bae46",
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "a358ec5988856f13a368d252374d7c85",
+            "d3b727f35c277db3db8d3032a9d146dd",
+            "5427a50b33d668e56372667cbef78a0e",
             [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                 "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                 "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
+                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                 "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
+                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                 "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                 "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-16T15:49:55.633737938"
+        "timestamp": "2025-07-08T16:27:42.327312515"
     },
-    "1 sample - [bam, bai], 'severus', [] -stub": {
+    "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
+                            "id": "family",
+                            "sv_caller": "severus"
                         },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "severus_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
+                            "id": "family",
+                            "sv_caller": "severus"
                         },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "severus_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -58,7 +84,7 @@
                         {
                             "id": "family"
                         },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -66,33 +92,78 @@
                         {
                             "id": "family"
                         },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                     "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                     "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
+                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
+                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                ],
+                "family_caller_tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_caller_vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "family_tbi": [
                     [
                         {
                             "id": "family"
                         },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "family_vcf": [
@@ -100,548 +171,76 @@
                         {
                             "id": "family"
                         },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "sample_tbi": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "sample_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                     "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                     "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
+                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                     "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
+                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "24.10.6"
         },
-        "timestamp": "2025-04-23T09:46:10.726151969"
+        "timestamp": "2025-07-08T16:06:47.476301477"
     },
-    "1 sample - [bam, bai], 'sniffles', bed -stub": {
+    "1 sample, 1 family - sniffles": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "4": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ],
-                "family_tbi": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "family_vcf": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "sample_tbi": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "sample_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-04-23T09:45:32.122237482"
-    },
-    "2 samples - [bam, bai], 'sniffles', []": {
-        "content": [
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]",
-            "7e847abe46139ce0f92d3c5d38e87643",
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
-            "6212dd5ed640e71eb17121ec07e20322",
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=2, variantCount=44, phased=false, phasedAutodetect=false]",
-            "8b584fcb8ca561985a0bc43304ae1148",
+            "f10df4fbd5c5ac0a5e99647f72d75b34",
+            "be9eaa81ae5acefc40d8cfeedfc02a2d",
             [
-                "##fileformat=VCFv4.1",
-                "##FILTER=<ID=PASS,Description=\"All filters passed\">",
-                "##source=MergeVCF",
-                "##SVDB_version=2.8.2 cmd=\"/usr/local/bin/svdb --merge --bnd_distance 1000 --overlap .5 --vcf test_1_reheader.vcf.gz test_2_reheader.vcf.gz\"",
-                "##ALT=<ID=DEL,Description=\"Deletion\">",
-                "##ALT=<ID=DUP,Description=\"Duplication\">",
-                "##ALT=<ID=INS,Description=\"Insertion\">",
-                "##ALT=<ID=INV,Description=\"Inversion\">",
-                "##ALT=<ID=INVDUP,Description=\"InvertedDUP with unknown boundaries\">",
-                "##ALT=<ID=TRA,Description=\"Translocation\">",
-                "##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele Frequency.\">",
-                "##INFO=<ID=CHR2,Number=1,Type=String,Description=\"Chromosome for END coordinate in case of a translocation\">",
-                "##INFO=<ID=END,Number=1,Type=Integer,Description=\"End position of the structural variant\">",
-                "##INFO=<ID=FOUND_IN,Number=1,Type=String,Description=\"Program that called the variant\">",
-                "##INFO=<ID=IMPRECISE,Number=0,Type=Flag,Description=\"Imprecise structural variation\">",
-                "##INFO=<ID=Kurtosis_quant_start,Number=A,Type=Float,Description=\"Kurtosis value of the start breakpoints across the reads.\">",
-                "##INFO=<ID=Kurtosis_quant_stop,Number=A,Type=Float,Description=\"Kurtosis value of the stop breakpoints across the reads.\">",
-                "##INFO=<ID=MAPQ,Number=1,Type=Integer,Description=\"Median mapping quality of paired-ends\">",
-                "##INFO=<ID=PRECISE,Number=0,Type=Flag,Description=\"Precise structural variation\">",
-                "##INFO=<ID=RE,Number=1,Type=Integer,Description=\"read support\">",
-                "##INFO=<ID=REF_strand,Number=.,Type=Integer,Description=\"plus strand ref, minus strand ref.\">",
-                "##INFO=<ID=SEQ,Number=1,Type=String,Description=\"Extracted sequence from the best representative read.\">",
-                "##INFO=<ID=STD_quant_start,Number=A,Type=Float,Description=\"STD of the start breakpoints across the reads.\">",
-                "##INFO=<ID=STD_quant_stop,Number=A,Type=Float,Description=\"STD of the stop breakpoints across the reads.\">",
-                "##INFO=<ID=STRANDS,Number=A,Type=String,Description=\"Strand orientation of the adjacency in BEDPE format (DEL:+-, DUP:-+, INV:++/--)\">",
-                "##INFO=<ID=STRANDS2,Number=4,Type=Integer,Description=\"alt reads first + ,alt reads first -,alt reads second + ,alt reads second -.\">",
-                "##INFO=<ID=SUPTYPE,Number=.,Type=String,Description=\"Type by which the variant is supported.(SR,AL,NR)\">",
-                "##INFO=<ID=SVLEN,Number=1,Type=Integer,Description=\"Length of the SV\">",
-                "##INFO=<ID=SVMETHOD,Number=1,Type=String,Description=\"Type of approach used to detect SV\">",
-                "##INFO=<ID=SVTYPE,Number=1,Type=String,Description=\"Type of structural variant\">",
-                "##INFO=<ID=Strandbias_pval,Number=A,Type=Float,Description=\"P-value for fisher exact test for strand bias.\">",
-                "##INFO=<ID=ZMW,Number=A,Type=Integer,Description=\"Number of ZMWs (Pacbio) supporting SV.\">",
-                "##INFO=<ID=test_1_reheader_INFO,Number=.,Type=String,Description=\"pipe separated list of all details in the INFO column of file test_1_reheader\">",
-                "##INFO=<ID=test_1_reheader_SAMPLE,Number=.,Type=String,Description=\"pipe separated list of all details in the SAMPLEs column of file test_1_reheader\">",
-                "##INFO=<ID=test_1_reheader_CHROM,Number=.,Type=String,Description=\"pipe separated list of all details in the CHROM column of file test_1_reheader\">",
-                "##INFO=<ID=test_1_reheader_POS,Number=.,Type=String,Description=\"pipe separated list of all details in the POS column of file test_1_reheader\">",
-                "##INFO=<ID=test_1_reheader_QUAL,Number=.,Type=String,Description=\"pipe separated list of all details in the QUAL column of file test_1_reheader\">",
-                "##INFO=<ID=test_1_reheader_FILTERS,Number=.,Type=String,Description=\"pipe separated list of all details in the FILTER column of file test_1_reheader\">",
-                "##INFO=<ID=test_2_reheader_INFO,Number=.,Type=String,Description=\"pipe separated list of all details in the INFO column of file test_2_reheader\">",
-                "##INFO=<ID=test_2_reheader_SAMPLE,Number=.,Type=String,Description=\"pipe separated list of all details in the SAMPLEs column of file test_2_reheader\">",
-                "##INFO=<ID=test_2_reheader_CHROM,Number=.,Type=String,Description=\"pipe separated list of all details in the CHROM column of file test_2_reheader\">",
-                "##INFO=<ID=test_2_reheader_POS,Number=.,Type=String,Description=\"pipe separated list of all details in the POS column of file test_2_reheader\">",
-                "##INFO=<ID=test_2_reheader_QUAL,Number=.,Type=String,Description=\"pipe separated list of all details in the QUAL column of file test_2_reheader\">",
-                "##INFO=<ID=test_2_reheader_FILTERS,Number=.,Type=String,Description=\"pipe separated list of all details in the FILTER column of file test_2_reheader\">",
-                "##INFO=<ID=SUPP_VEC,Number=1,Type=String,Description=\"Vector of supporting callers/files (order: test_1_reheader test_2_reheader).\">",
-                "##contig=<ID=chr1,length=248956422>",
-                "##contig=<ID=chr2,length=242193529>",
-                "##contig=<ID=chr3,length=198295559>",
-                "##contig=<ID=chr4,length=190214555>",
-                "##contig=<ID=chr5,length=181538259>",
-                "##contig=<ID=chr6,length=170805979>",
-                "##contig=<ID=chr7,length=159345973>",
-                "##contig=<ID=chr8,length=145138636>",
-                "##contig=<ID=chr9,length=138394717>",
-                "##contig=<ID=chr10,length=133797422>",
-                "##contig=<ID=chr11,length=135086622>",
-                "##contig=<ID=chr12,length=133275309>",
-                "##contig=<ID=chr13,length=114364328>",
-                "##contig=<ID=chr14,length=107043718>",
-                "##contig=<ID=chr15,length=101991189>",
-                "##contig=<ID=chr16,length=90338345>",
-                "##contig=<ID=chr17,length=83257441>",
-                "##contig=<ID=chr18,length=80373285>",
-                "##contig=<ID=chr19,length=58617616>",
-                "##contig=<ID=chr20,length=64444167>",
-                "##contig=<ID=chr21,length=46709983>",
-                "##contig=<ID=chr22,length=50818468>",
-                "##contig=<ID=chrX,length=156040895>",
-                "##contig=<ID=chrY,length=57227415>",
-                "##contig=<ID=chrM,length=16569>",
-                "##contig=<ID=chr1_KI270706v1_random,length=175055>",
-                "##contig=<ID=chr1_KI270707v1_random,length=32032>",
-                "##contig=<ID=chr1_KI270708v1_random,length=127682>",
-                "##contig=<ID=chr1_KI270709v1_random,length=66860>",
-                "##contig=<ID=chr1_KI270710v1_random,length=40176>",
-                "##contig=<ID=chr1_KI270711v1_random,length=42210>",
-                "##contig=<ID=chr1_KI270712v1_random,length=176043>",
-                "##contig=<ID=chr1_KI270713v1_random,length=40745>",
-                "##contig=<ID=chr1_KI270714v1_random,length=41717>",
-                "##contig=<ID=chr2_KI270715v1_random,length=161471>",
-                "##contig=<ID=chr2_KI270716v1_random,length=153799>",
-                "##contig=<ID=chr3_GL000221v1_random,length=155397>",
-                "##contig=<ID=chr4_GL000008v2_random,length=209709>",
-                "##contig=<ID=chr5_GL000208v1_random,length=92689>",
-                "##contig=<ID=chr9_KI270717v1_random,length=40062>",
-                "##contig=<ID=chr9_KI270718v1_random,length=38054>",
-                "##contig=<ID=chr9_KI270719v1_random,length=176845>",
-                "##contig=<ID=chr9_KI270720v1_random,length=39050>",
-                "##contig=<ID=chr11_KI270721v1_random,length=100316>",
-                "##contig=<ID=chr14_GL000009v2_random,length=201709>",
-                "##contig=<ID=chr14_GL000225v1_random,length=211173>",
-                "##contig=<ID=chr14_KI270722v1_random,length=194050>",
-                "##contig=<ID=chr14_GL000194v1_random,length=191469>",
-                "##contig=<ID=chr14_KI270723v1_random,length=38115>",
-                "##contig=<ID=chr14_KI270724v1_random,length=39555>",
-                "##contig=<ID=chr14_KI270725v1_random,length=172810>",
-                "##contig=<ID=chr14_KI270726v1_random,length=43739>",
-                "##contig=<ID=chr15_KI270727v1_random,length=448248>",
-                "##contig=<ID=chr16_KI270728v1_random,length=1872759>",
-                "##contig=<ID=chr17_GL000205v2_random,length=185591>",
-                "##contig=<ID=chr17_KI270729v1_random,length=280839>",
-                "##contig=<ID=chr17_KI270730v1_random,length=112551>",
-                "##contig=<ID=chr22_KI270731v1_random,length=150754>",
-                "##contig=<ID=chr22_KI270732v1_random,length=41543>",
-                "##contig=<ID=chr22_KI270733v1_random,length=179772>",
-                "##contig=<ID=chr22_KI270734v1_random,length=165050>",
-                "##contig=<ID=chr22_KI270735v1_random,length=42811>",
-                "##contig=<ID=chr22_KI270736v1_random,length=181920>",
-                "##contig=<ID=chr22_KI270737v1_random,length=103838>",
-                "##contig=<ID=chr22_KI270738v1_random,length=99375>",
-                "##contig=<ID=chr22_KI270739v1_random,length=73985>",
-                "##contig=<ID=chrY_KI270740v1_random,length=37240>",
-                "##contig=<ID=chrUn_KI270302v1,length=2274>",
-                "##contig=<ID=chrUn_KI270304v1,length=2165>",
-                "##contig=<ID=chrUn_KI270303v1,length=1942>",
-                "##contig=<ID=chrUn_KI270305v1,length=1472>",
-                "##contig=<ID=chrUn_KI270322v1,length=21476>",
-                "##contig=<ID=chrUn_KI270320v1,length=4416>",
-                "##contig=<ID=chrUn_KI270310v1,length=1201>",
-                "##contig=<ID=chrUn_KI270316v1,length=1444>",
-                "##contig=<ID=chrUn_KI270315v1,length=2276>",
-                "##contig=<ID=chrUn_KI270312v1,length=998>",
-                "##contig=<ID=chrUn_KI270311v1,length=12399>",
-                "##contig=<ID=chrUn_KI270317v1,length=37690>",
-                "##contig=<ID=chrUn_KI270412v1,length=1179>",
-                "##contig=<ID=chrUn_KI270411v1,length=2646>",
-                "##contig=<ID=chrUn_KI270414v1,length=2489>",
-                "##contig=<ID=chrUn_KI270419v1,length=1029>",
-                "##contig=<ID=chrUn_KI270418v1,length=2145>",
-                "##contig=<ID=chrUn_KI270420v1,length=2321>",
-                "##contig=<ID=chrUn_KI270424v1,length=2140>",
-                "##contig=<ID=chrUn_KI270417v1,length=2043>",
-                "##contig=<ID=chrUn_KI270422v1,length=1445>",
-                "##contig=<ID=chrUn_KI270423v1,length=981>",
-                "##contig=<ID=chrUn_KI270425v1,length=1884>",
-                "##contig=<ID=chrUn_KI270429v1,length=1361>",
-                "##contig=<ID=chrUn_KI270442v1,length=392061>",
-                "##contig=<ID=chrUn_KI270466v1,length=1233>",
-                "##contig=<ID=chrUn_KI270465v1,length=1774>",
-                "##contig=<ID=chrUn_KI270467v1,length=3920>",
-                "##contig=<ID=chrUn_KI270435v1,length=92983>",
-                "##contig=<ID=chrUn_KI270438v1,length=112505>",
-                "##contig=<ID=chrUn_KI270468v1,length=4055>",
-                "##contig=<ID=chrUn_KI270510v1,length=2415>",
-                "##contig=<ID=chrUn_KI270509v1,length=2318>",
-                "##contig=<ID=chrUn_KI270518v1,length=2186>",
-                "##contig=<ID=chrUn_KI270508v1,length=1951>",
-                "##contig=<ID=chrUn_KI270516v1,length=1300>",
-                "##contig=<ID=chrUn_KI270512v1,length=22689>",
-                "##contig=<ID=chrUn_KI270519v1,length=138126>",
-                "##contig=<ID=chrUn_KI270522v1,length=5674>",
-                "##contig=<ID=chrUn_KI270511v1,length=8127>",
-                "##contig=<ID=chrUn_KI270515v1,length=6361>",
-                "##contig=<ID=chrUn_KI270507v1,length=5353>",
-                "##contig=<ID=chrUn_KI270517v1,length=3253>",
-                "##contig=<ID=chrUn_KI270529v1,length=1899>",
-                "##contig=<ID=chrUn_KI270528v1,length=2983>",
-                "##contig=<ID=chrUn_KI270530v1,length=2168>",
-                "##contig=<ID=chrUn_KI270539v1,length=993>",
-                "##contig=<ID=chrUn_KI270538v1,length=91309>",
-                "##contig=<ID=chrUn_KI270544v1,length=1202>",
-                "##contig=<ID=chrUn_KI270548v1,length=1599>",
-                "##contig=<ID=chrUn_KI270583v1,length=1400>",
-                "##contig=<ID=chrUn_KI270587v1,length=2969>",
-                "##contig=<ID=chrUn_KI270580v1,length=1553>",
-                "##contig=<ID=chrUn_KI270581v1,length=7046>",
-                "##contig=<ID=chrUn_KI270579v1,length=31033>",
-                "##contig=<ID=chrUn_KI270589v1,length=44474>",
-                "##contig=<ID=chrUn_KI270590v1,length=4685>",
-                "##contig=<ID=chrUn_KI270584v1,length=4513>",
-                "##contig=<ID=chrUn_KI270582v1,length=6504>",
-                "##contig=<ID=chrUn_KI270588v1,length=6158>",
-                "##contig=<ID=chrUn_KI270593v1,length=3041>",
-                "##contig=<ID=chrUn_KI270591v1,length=5796>",
-                "##contig=<ID=chrUn_KI270330v1,length=1652>",
-                "##contig=<ID=chrUn_KI270329v1,length=1040>",
-                "##contig=<ID=chrUn_KI270334v1,length=1368>",
-                "##contig=<ID=chrUn_KI270333v1,length=2699>",
-                "##contig=<ID=chrUn_KI270335v1,length=1048>",
-                "##contig=<ID=chrUn_KI270338v1,length=1428>",
-                "##contig=<ID=chrUn_KI270340v1,length=1428>",
-                "##contig=<ID=chrUn_KI270336v1,length=1026>",
-                "##contig=<ID=chrUn_KI270337v1,length=1121>",
-                "##contig=<ID=chrUn_KI270363v1,length=1803>",
-                "##contig=<ID=chrUn_KI270364v1,length=2855>",
-                "##contig=<ID=chrUn_KI270362v1,length=3530>",
-                "##contig=<ID=chrUn_KI270366v1,length=8320>",
-                "##contig=<ID=chrUn_KI270378v1,length=1048>",
-                "##contig=<ID=chrUn_KI270379v1,length=1045>",
-                "##contig=<ID=chrUn_KI270389v1,length=1298>",
-                "##contig=<ID=chrUn_KI270390v1,length=2387>",
-                "##contig=<ID=chrUn_KI270387v1,length=1537>",
-                "##contig=<ID=chrUn_KI270395v1,length=1143>",
-                "##contig=<ID=chrUn_KI270396v1,length=1880>",
-                "##contig=<ID=chrUn_KI270388v1,length=1216>",
-                "##contig=<ID=chrUn_KI270394v1,length=970>",
-                "##contig=<ID=chrUn_KI270386v1,length=1788>",
-                "##contig=<ID=chrUn_KI270391v1,length=1484>",
-                "##contig=<ID=chrUn_KI270383v1,length=1750>",
-                "##contig=<ID=chrUn_KI270393v1,length=1308>",
-                "##contig=<ID=chrUn_KI270384v1,length=1658>",
-                "##contig=<ID=chrUn_KI270392v1,length=971>",
-                "##contig=<ID=chrUn_KI270381v1,length=1930>",
-                "##contig=<ID=chrUn_KI270385v1,length=990>",
-                "##contig=<ID=chrUn_KI270382v1,length=4215>",
-                "##contig=<ID=chrUn_KI270376v1,length=1136>",
-                "##contig=<ID=chrUn_KI270374v1,length=2656>",
-                "##contig=<ID=chrUn_KI270372v1,length=1650>",
-                "##contig=<ID=chrUn_KI270373v1,length=1451>",
-                "##contig=<ID=chrUn_KI270375v1,length=2378>",
-                "##contig=<ID=chrUn_KI270371v1,length=2805>",
-                "##contig=<ID=chrUn_KI270448v1,length=7992>",
-                "##contig=<ID=chrUn_KI270521v1,length=7642>",
-                "##contig=<ID=chrUn_GL000195v1,length=182896>",
-                "##contig=<ID=chrUn_GL000219v1,length=179198>",
-                "##contig=<ID=chrUn_GL000220v1,length=161802>",
-                "##contig=<ID=chrUn_GL000224v1,length=179693>",
-                "##contig=<ID=chrUn_KI270741v1,length=157432>",
-                "##contig=<ID=chrUn_GL000226v1,length=15008>",
-                "##contig=<ID=chrUn_GL000213v1,length=164239>",
-                "##contig=<ID=chrUn_KI270743v1,length=210658>",
-                "##contig=<ID=chrUn_KI270744v1,length=168472>",
-                "##contig=<ID=chrUn_KI270745v1,length=41891>",
-                "##contig=<ID=chrUn_KI270746v1,length=66486>",
-                "##contig=<ID=chrUn_KI270747v1,length=198735>",
-                "##contig=<ID=chrUn_KI270748v1,length=93321>",
-                "##contig=<ID=chrUn_KI270749v1,length=158759>",
-                "##contig=<ID=chrUn_KI270750v1,length=148850>",
-                "##contig=<ID=chrUn_KI270751v1,length=150742>",
-                "##contig=<ID=chrUn_KI270752v1,length=27745>",
-                "##contig=<ID=chrUn_KI270753v1,length=62944>",
-                "##contig=<ID=chrUn_KI270754v1,length=40191>",
-                "##contig=<ID=chrUn_KI270755v1,length=36723>",
-                "##contig=<ID=chrUn_KI270756v1,length=79590>",
-                "##contig=<ID=chrUn_KI270757v1,length=71251>",
-                "##contig=<ID=chrUn_GL000214v1,length=137718>",
-                "##contig=<ID=chrUn_KI270742v1,length=186739>",
-                "##contig=<ID=chrUn_GL000216v2,length=176608>",
-                "##contig=<ID=chrUn_GL000218v1,length=161147>",
-                "##contig=<ID=chrEBV,length=171823>",
-                "##contig=<ID=MAP2K3_chr17_22578583_22605165,length=26582>",
-                "##contig=<ID=KCNJ18_chr17_22629421_22688415,length=58994>",
-                "##contig=<ID=KMT2C_chr21_7687010_7731520,length=44510>",
-                "##contig=<ID=KMT2C_chr15_6020392_6062903,length=42511>",
-                "##contig=<ID=KMT2C_chr13_14464876_14502703,length=37827>",
-                "##contig=<ID=KMT2C_chr13_14211849_14228603,length=16754>",
-                "##contig=<ID=KMT2C_chr13_10688343_10754814,length=66471>",
-                "##contig=<ID=KMT2C_chr13_10744786_10790087,length=45301>",
-                "##contig=<ID=KMT2C_chr13_11526357_11569988,length=43631>",
-                "##contig=<ID=KMT2C_chr13_11559977_11592630,length=32653>",
-                "##contig=<ID=KMT2C_chr13_14408161_14474907,length=66746>",
-                "##contig=<ID=KMT2C_chr14_3553442_3620349,length=66907>",
-                "##contig=<ID=KMT2C_chr14_3610318_3640421,length=30103>",
-                "##contig=<ID=KMT2C_chr15_5960377_6027329,length=66952>",
-                "##contig=<ID=KMT2C_chr2_89596961_89613143,length=16182>",
-                "##contig=<ID=KMT2C_chr2_90170767_90210396,length=39629>",
-                "##contig=<ID=KMT2C_chr21_7659652_7674726,length=15074>",
-                "##contig=<ID=KMT2C_chr21_8616365_8659521,length=43156>",
-                "##contig=<ID=KMT2C_chr21_8649510_8682182,length=32672>",
-                "##contig=<ID=KMT2C_chr22_6626735_6693166,length=66431>",
-                "##contig=<ID=KMT2C_chr22_6683135_6713219,length=30084>",
-                "##contig=<ID=KMT2C_chr22_11126384_11167180,length=40796>",
-                "##contig=<ID=KMT2C_chr22_11157169_11189815,length=32646>",
-                "##FILTER=<ID=STRANDBIAS,Description=\"Not sure what this means\">",
-                "##FILTER=<ID=UNRESOLVED,Description=\"An insertion that is longer than the read and thus we cannot predict the full size.\">",
-                "##FORMAT=<ID=DR,Number=1,Type=Integer,Description=\"# high-quality reference reads\">",
-                "##FORMAT=<ID=DV,Number=1,Type=Integer,Description=\"# high-quality variant reads\">",
-                "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">",
-                "##INFO=<ID=VARID,Number=1,Type=String,Description=\"The variant ID of merged samples\">",
-                "##INFO=<ID=FOUNDBY,Number=1,Type=Integer,Description=\"The number of files containing the variant\">",
-                "##INFO=<ID=set,Number=1,Type=String,Description=\"Source VCF for the merged record in SVDB\">",
-                "##INFO=<ID=svdb_origin,Number=1,Type=String,Description=\"pipe separated list of the VCF for the merged record in SVDB\">",
-                "##svdbcmdline=/usr/local/bin/svdb --merge --bnd_distance 1000 --overlap .5 --vcf test_1_reheader.vcf.gz test_2_reheader.vcf.gz",
-                "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\ttest_1\ttest_2",
-                "chr16\t153120\t0:test_1_reheader|0:test_2_reheader\tN\tACAGTGGGGAGGGGGACAGTGGGGAGAGGACAGTAAGGAGGGGACCATGGGAGGAC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=10;STD_quant_start=12.0167;STD_quant_stop=12.6531;Kurtosis_quant_start=7;Kurtosis_quant_stop=6.98752;SVTYPE=INS;SUPTYPE=AL;SVLEN=56;STRANDS=+-;STRANDS2=9,1,9,1;RE=10;REF_strand=12,1;Strandbias_pval=1;AF=0.769231;FOUND_IN=sniffles;PRECISE;VARID=0:test_2_reheader;set=Intersection;FOUNDBY=2;test_1_reheader_CHROM=0|chr16;test_2_reheader_CHROM=0|chr16;test_1_reheader_POS=0|153120;test_2_reheader_POS=0|153120;test_1_reheader_QUAL=0|.;test_2_reheader_QUAL=0|.;test_1_reheader_FILTERS=0|PASS;test_2_reheader_FILTERS=0|PASS;test_1_reheader_SAMPLE=0|test_1|GT:0/1|DR:3|DV:10;test_2_reheader_SAMPLE=0|test_2|GT:1/1|DR:1|DV:12;test_1_reheader_INFO=0|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:10|STD_quant_start:12.0167|STD_quant_stop:12.6531|Kurtosis_quant_start:7|Kurtosis_quant_stop:6.98752|SVTYPE:INS|SUPTYPE:AL|SVLEN:56|STRANDS:+-|STRANDS2:9:1:9:1|RE:10|REF_strand:12:1|Strandbias_pval:1|AF:0.769231|FOUND_IN:sniffles;test_2_reheader_INFO=0|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:2.32379|STD_quant_stop:2.79285|Kurtosis_quant_start:6.71125|Kurtosis_quant_stop:5.50602|SVTYPE:INS|SUPTYPE:AL|SVLEN:56|STRANDS:+-|STRANDS2:7:5:7:5|RE:12|REF_strand:8:5|Strandbias_pval:1|AF:0.923077|FOUND_IN:sniffles;svdb_origin=test_1_reheader|test_2_reheader;SUPP_VEC=11\tGT:DR:DV\t0/1:3:10\t1/1:1:12",
-                "chr16\t160389\t1\tN\tGGTGCCTGGGACGGCTTGTGGGGCACAGGCTGTGAGGGTGCCCGGGACGGCTTGTGGGGCACAGGCTGTGAGGGTGCCCGGGATGGCTTGTGGGGCACAGGCTGCAAGAGGTGCCCGGGACGGCTTGTGGGGCACAGGCTGTGAGGGTGCCTGGGATGGCTTGTGGGGCACAGGTTGTGAGAGGTGCCCGGGATGGCTTGTGGGGCACAGGCTGTGAGGGTGCCTGGGACGGCTTGTGGGGCACAGGCTGTGAGGGTGCCTGGGATGGCTTGTGGGGCACAGGTTGTGAGAGGTGCCTGGGACGGCTTGTGGGGCACAGGTTGTGAGA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=78.5016;STD_quant_stop=35.5514;Kurtosis_quant_start=-1.51958;Kurtosis_quant_stop=-1.47751;SVTYPE=INS;SUPTYPE=AL;SVLEN=328;STRANDS=+-;STRANDS2=9,7,9,7;RE=16;REF_strand=12,8;Strandbias_pval=1;AF=0.8;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=1|chr16;test_2_reheader_POS=1|160389;test_2_reheader_QUAL=1|.;test_2_reheader_FILTERS=1|PASS;test_2_reheader_SAMPLE=1|test_2|GT:0/1|DR:4|DV:16;test_2_reheader_INFO=1|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:78.5016|STD_quant_stop:35.5514|Kurtosis_quant_start:-1.51958|Kurtosis_quant_stop:-1.47751|SVTYPE:INS|SUPTYPE:AL|SVLEN:328|STRANDS:+-|STRANDS2:9:7:9:7|RE:16|REF_strand:12:8|Strandbias_pval:1|AF:0.8|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:4:16",
-                "chr16\t160753\t1\tN\tGGGTGCCCGGGACGGCTTGTGGGGCACAGGCTGTGAGGGTGCCCAGGATGGCTTGTGGGGCACAGGCTGCAAGAGGTGCCCAGGACGGCTTGTGGGGCACAGGTTGTGAGGGTGCCCGGGACGGCTTGTGGGGCACAGGCTGTGA\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=22;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=-1.83884;Kurtosis_quant_stop=-1.35477;SVTYPE=INS;SUPTYPE=AL;SVLEN=145;STRANDS=+-;STRANDS2=17,5,17,5;RE=22;REF_strand=17,5;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=1|chr16;test_1_reheader_POS=1|160753;test_1_reheader_QUAL=1|.;test_1_reheader_FILTERS=1|PASS;test_1_reheader_SAMPLE=1|test_1|GT:1/1|DR:0|DV:22;test_1_reheader_INFO=1|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:22|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:-1.83884|Kurtosis_quant_stop:-1.35477|SVTYPE:INS|SUPTYPE:AL|SVLEN:145|STRANDS:+-|STRANDS2:17:5:17:5|RE:22|REF_strand:17:5|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:22\t./.:.:.",
-                "chr16\t163106\t2\tN\t<DEL>\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=163316;ZMW=11;STD_quant_start=45.2902;STD_quant_stop=46.2731;Kurtosis_quant_start=5.35352;Kurtosis_quant_stop=5.28926;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-210;STRANDS=+-;STRANDS2=6,5,6,5;RE=11;REF_strand=13,9;Strandbias_pval=1;AF=0.5;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=2|chr16;test_1_reheader_POS=2|163106;test_1_reheader_QUAL=2|.;test_1_reheader_FILTERS=2|PASS;test_1_reheader_SAMPLE=2|test_1|GT:0/1|DR:11|DV:11;test_1_reheader_INFO=2|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:163316|ZMW:11|STD_quant_start:45.2902|STD_quant_stop:46.2731|Kurtosis_quant_start:5.35352|Kurtosis_quant_stop:5.28926|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-210|STRANDS:+-|STRANDS2:6:5:6:5|RE:11|REF_strand:13:9|Strandbias_pval:1|AF:0.5|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t0/1:11:11\t./.:.:.",
-                "chr16\t164712\t3\tN\tGGGCGGGAGGCCGCGCTGCTGGGAGCTCACGGCCCCCGCCCCCCGTCCCAGGC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=11;STD_quant_start=11.8195;STD_quant_stop=19.9223;Kurtosis_quant_start=4.35941;Kurtosis_quant_stop=1.66209;SVTYPE=INS;SUPTYPE=AL;SVLEN=52;STRANDS=+-;STRANDS2=6,5,6,5;RE=11;REF_strand=11,9;Strandbias_pval=1;AF=0.55;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=3|chr16;test_1_reheader_POS=3|164712;test_1_reheader_QUAL=3|.;test_1_reheader_FILTERS=3|PASS;test_1_reheader_SAMPLE=3|test_1|GT:0/1|DR:9|DV:11;test_1_reheader_INFO=3|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:11|STD_quant_start:11.8195|STD_quant_stop:19.9223|Kurtosis_quant_start:4.35941|Kurtosis_quant_stop:1.66209|SVTYPE:INS|SUPTYPE:AL|SVLEN:52|STRANDS:+-|STRANDS2:6:5:6:5|RE:11|REF_strand:11:9|Strandbias_pval:1|AF:0.55|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t0/1:9:11\t./.:.:.",
-                "chr16\t182789\t4\tN\tTGAAACACCGTCTCTACTAAAAATACAAAAATTAGCCAGGCATAGTGGCGGGCGCCTGTAATCCCAGCTGTTCGGGAGGCTGAGGCAGGACAATCACTTAAACCAGGGAAGCAGAGGTTGCAGTGAGCTGAGATCGAGCCACTGCACTCCAGCCTGGGCGACAGACCGAGACTGTCTCAAAAAAAAGACCGGGCACGGTGGCTCACGCCTGTAATCCCACCACTTTGGGAGGCTGAGGCGGGCTGATCACGATGTCAGGAGATCTAGACCATCCTGGCCAACATGT\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=12;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=7;Kurtosis_quant_stop=2.73965;SVTYPE=INS;SUPTYPE=AL;SVLEN=286;STRANDS=+-;STRANDS2=5,7,5,7;RE=12;REF_strand=5,7;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=4|chr16;test_1_reheader_POS=4|182789;test_1_reheader_QUAL=4|.;test_1_reheader_FILTERS=4|PASS;test_1_reheader_SAMPLE=4|test_1|GT:1/1|DR:0|DV:12;test_1_reheader_INFO=4|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:12|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:7|Kurtosis_quant_stop:2.73965|SVTYPE:INS|SUPTYPE:AL|SVLEN:286|STRANDS:+-|STRANDS2:5:7:5:7|RE:12|REF_strand:5:7|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:12\t./.:.:.",
-                "chr16\t362984\t2\tN\tTCCCAGGACTTAGCACCGGGGGGTCTCGGGCTGCGGCTGCT\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=3.42053;Kurtosis_quant_start=2;Kurtosis_quant_stop=1.2657;SVTYPE=INS;SUPTYPE=AL;SVLEN=41;STRANDS=+-;STRANDS2=7,5,7,5;RE=12;REF_strand=12,7;Strandbias_pval=1;AF=0.631579;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=2|chr16;test_2_reheader_POS=2|362984;test_2_reheader_QUAL=2|.;test_2_reheader_FILTERS=2|PASS;test_2_reheader_SAMPLE=2|test_2|GT:0/1|DR:7|DV:12;test_2_reheader_INFO=2|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:3.42053|Kurtosis_quant_start:2|Kurtosis_quant_stop:1.2657|SVTYPE:INS|SUPTYPE:AL|SVLEN:41|STRANDS:+-|STRANDS2:7:5:7:5|RE:12|REF_strand:12:7|Strandbias_pval:1|AF:0.631579|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:7:12",
-                "chr16\t370391\t3\tN\tCCCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTTCTCACCCCCTACCCCGGCCCCCGGCTCTCACCCCCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCCCCTACCCCGGCCCCCAGCTCTCACCCCCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCCCCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCTCGGCTCTCACCTCCTACCCCGGCCCCCGGCTCTCACCTCCTACCCCGGCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCCTGCACCTCCTGCCCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCTCCTACCCCGGCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCTCCTAACCCGGCCCCGGCTCTCACCTCCTACCCCGGCCCCGGCTCTCACCCCCTACCCCTGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGCTCTCACCCCCTACCCCGGCCCCCGGCTCTCACCCGCTACCCCGGCCCCCGGGGGGCTCCGCACT\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=1.26491;STD_quant_stop=68.0382;Kurtosis_quant_start=6.78912;Kurtosis_quant_stop=-1.39527;SVTYPE=INS;SUPTYPE=AL;SVLEN=655;STRANDS=+-;STRANDS2=7,7,7,7;RE=13;REF_strand=8,8;Strandbias_pval=1;AF=0.8125;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=3|chr16;test_2_reheader_POS=3|370391;test_2_reheader_QUAL=3|.;test_2_reheader_FILTERS=3|PASS;test_2_reheader_SAMPLE=3|test_2|GT:1/1|DR:3|DV:13;test_2_reheader_INFO=3|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:1.26491|STD_quant_stop:68.0382|Kurtosis_quant_start:6.78912|Kurtosis_quant_stop:-1.39527|SVTYPE:INS|SUPTYPE:AL|SVLEN:655|STRANDS:+-|STRANDS2:7:7:7:7|RE:13|REF_strand:8:8|Strandbias_pval:1|AF:0.8125|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:3:13",
-                "chr16\t397727\t4\tN\tGGGGGGTGGGGGTGGGGGGGTGGGGGATGAGGGGGGTGGGGGTGGGGGTGGGGGGTGAGGGGAGTCGGGGGGTGGGGGTGGGGGTGGGGGGGTGAGGGAGTGGGGGGTGGGGGTGGGGGGGTGGGGGGGTGGGGGATGAGGGGGGTGGGGGTGGGGGTGGGGGGGTGGGAGTGGGGGGTGGGGGTGGGGGTGGGGGGTGAGGGAGTAGGGGGGTGGGGGGTGGGGGTGGGGGGGTGAGGGGAGTGGGGGGTGGGGTGGGGGTGTGGGGGGGTGAGGGAGTGGGGGGTGGGTGTGGGGGGGGTGGGGGATGGGGGGGTGGGGGTGGGGGTGTGGGGGGGTGAGGGAGTGGGGGGTGGGGGTGGGGGTGGGGGGGTGGGGGTCGGGGGGGTGGGGGTGGGGGTGGGGGGGTGAGGGGAGTCGGGGGGTGGGGGTGGGGGGGTGGGGATCGGGGGGTGGGGGTGGGGGTGGGGGGCTGAGGGGAGTA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=8.75214;STD_quant_stop=37.9328;Kurtosis_quant_start=2.18185;Kurtosis_quant_stop=-1.37768;SVTYPE=INS;SUPTYPE=AL;SVLEN=493;STRANDS=+-;STRANDS2=10,3,10,3;RE=13;REF_strand=10,5;Strandbias_pval=0.68599;AF=0.866667;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=4|chr16;test_2_reheader_POS=4|397727;test_2_reheader_QUAL=4|.;test_2_reheader_FILTERS=4|PASS;test_2_reheader_SAMPLE=4|test_2|GT:1/1|DR:2|DV:13;test_2_reheader_INFO=4|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:8.75214|STD_quant_stop:37.9328|Kurtosis_quant_start:2.18185|Kurtosis_quant_stop:-1.37768|SVTYPE:INS|SUPTYPE:AL|SVLEN:493|STRANDS:+-|STRANDS2:10:3:10:3|RE:13|REF_strand:10:5|Strandbias_pval:0.68599|AF:0.866667|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:2:13",
-                "chr16\t534179\t5\tN\tGGGCCGTGGTCCTGTCGTGGGAGGCGACGGTGAGGGCGGCCCGGGGTCCCGACGGGGCCGTGGTCCTGTCGTGGGAGGCGACGGTGAGGGCGGCCCGGGGTCCCGACGGGGCCGTGGTCCTGTCGTGGGAGGCGACGGTGAGGGCGGCCCGGGGTCCCGACG\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=4.9295;Kurtosis_quant_start=2.02731;Kurtosis_quant_stop=-0.62434;SVTYPE=INS;SUPTYPE=AL;SVLEN=216;STRANDS=+-;STRANDS2=8,7,8,7;RE=15;REF_strand=9,6;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=5|chr16;test_2_reheader_POS=5|534179;test_2_reheader_QUAL=5|.;test_2_reheader_FILTERS=5|PASS;test_2_reheader_SAMPLE=5|test_2|GT:1/1|DR:0|DV:15;test_2_reheader_INFO=5|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:4.9295|Kurtosis_quant_start:2.02731|Kurtosis_quant_stop:-0.62434|SVTYPE:INS|SUPTYPE:AL|SVLEN:216|STRANDS:+-|STRANDS2:8:7:8:7|RE:15|REF_strand:9:6|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:15",
-                "chr16\t544781\t6\tN\tCGTCTCCCCCACGCCGCCTCCCCCCACGTCGCCTCCCCCCACGTCGCCTCCCCCACGTCGCCTCCCCCACGTCGCCTCCCCCCACGTCGCCGTCTCCCCCACGTCGCCGTCTCCCCCACGTCGCCGTCTCCCCCACGTCGCCGTCTCCCCCACGTCGCCGTCTCCCCCACGTCGCCTCCCCCACGTCGTCGCCTCCCCCACGCCGCCTCCCCCACGTCGTCGCCTCCCCCACGTCGTCGCCTCCCCCACGTCGCCTCCCCCACGTCGCCTCCCCCACGTCGCCTCCCCCACGTCGCCTCCCCTCACGTCGCCTCCCCCACGTCGTCGCCTCCCCCACGTCGTCGC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=30.5859;STD_quant_stop=36.677;Kurtosis_quant_start=-1.82261;Kurtosis_quant_stop=-0.793895;SVTYPE=INS;SUPTYPE=AL;SVLEN=344;STRANDS=+-;STRANDS2=4,11,4,11;RE=15;REF_strand=5,10;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=6|chr16;test_2_reheader_POS=6|544781;test_2_reheader_QUAL=6|.;test_2_reheader_FILTERS=6|PASS;test_2_reheader_SAMPLE=6|test_2|GT:1/1|DR:0|DV:15;test_2_reheader_INFO=6|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:30.5859|STD_quant_stop:36.677|Kurtosis_quant_start:-1.82261|Kurtosis_quant_stop:-0.793895|SVTYPE:INS|SUPTYPE:AL|SVLEN:344|STRANDS:+-|STRANDS2:4:11:4:11|RE:15|REF_strand:5:10|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:15",
-                "chr16\t550769\t7\tN\tCGGTGAGGGTCCCCGGTCGGTGAGGGCGCCCCGTCAGTGAGGGTCCCGGTCAGTGAGGGCCCCGGTCGGTGAGGGTCCCCGGTCGGTGAGGGCCCCTGTCGGTGAGGGCCCCGGTCGGTGAGGGACCCGGTCGGTGAGGGCCCCCTGTCGGTGAGGGTCCCCTGTCGGTGAGGGCCCCGGTCGGTGAGGGCCCCGGTCGGTGAGGGTCCCCTGTCGGTGAGGGTCCCCTGTCGGTGAGGGTCCCGGTCGGTGAGGGCCCCGGTCGGTGAGGGTGCCCCGT\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=0.316228;Kurtosis_quant_start=4.21639;Kurtosis_quant_stop=4.40429;SVTYPE=INS;SUPTYPE=AL;SVLEN=280;STRANDS=+-;STRANDS2=7,14,7,14;RE=21;REF_strand=8,13;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=7|chr16;test_2_reheader_POS=7|550769;test_2_reheader_QUAL=7|.;test_2_reheader_FILTERS=7|PASS;test_2_reheader_SAMPLE=7|test_2|GT:1/1|DR:0|DV:21;test_2_reheader_INFO=7|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:0.316228|Kurtosis_quant_start:4.21639|Kurtosis_quant_stop:4.40429|SVTYPE:INS|SUPTYPE:AL|SVLEN:280|STRANDS:+-|STRANDS2:7:14:7:14|RE:21|REF_strand:8:13|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:21",
-                "chr16\t571110\t5:test_1_reheader|8:test_2_reheader\tN\tTCTGCCTAGCCTGTGTGTGTGTGTCTGGCTAGCCTGTGTGTGTGTGTGTCTGGCTAGCCTGTGTGTGTGTGTCTGGCTAGCCTGTGTGTGTGTGTGTGTCTGGCTAGCCTGGTGCCCGTGTGTGTGTGTATGTGTGTGTGTGTGTGTGTGTCTGGCTAGCCTGGCGCCCGTGGCTAGCCTGGTGCCCGTGTGTGTGTGTATGTATGTGTCTGGCTAGCCTGGTGCCCGTGGCTAGCCTGGTGCCCGTGTGTGTGTGTGG\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=14;STD_quant_start=0;STD_quant_stop=20.3372;Kurtosis_quant_start=3.69423;Kurtosis_quant_stop=0.410026;SVTYPE=INS;SUPTYPE=AL;SVLEN=361;STRANDS=+-;STRANDS2=9,5,9,5;RE=14;REF_strand=10,5;Strandbias_pval=1;AF=0.933333;FOUND_IN=sniffles;VARID=8:test_2_reheader;set=Intersection;FOUNDBY=2;test_1_reheader_CHROM=5|chr16;test_2_reheader_CHROM=8|chr16;test_1_reheader_POS=5|571110;test_2_reheader_POS=8|571110;test_1_reheader_QUAL=5|.;test_2_reheader_QUAL=8|.;test_1_reheader_FILTERS=5|PASS;test_2_reheader_FILTERS=8|PASS;test_1_reheader_SAMPLE=5|test_1|GT:1/1|DR:1|DV:14;test_2_reheader_SAMPLE=8|test_2|GT:1/1|DR:2|DV:10;test_1_reheader_INFO=5|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:14|STD_quant_start:0|STD_quant_stop:20.3372|Kurtosis_quant_start:3.69423|Kurtosis_quant_stop:0.410026|SVTYPE:INS|SUPTYPE:AL|SVLEN:361|STRANDS:+-|STRANDS2:9:5:9:5|RE:14|REF_strand:10:5|Strandbias_pval:1|AF:0.933333|FOUND_IN:sniffles;test_2_reheader_INFO=8|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:14.7377|STD_quant_stop:58.4166|Kurtosis_quant_start:-0.923674|Kurtosis_quant_stop:-0.801189|SVTYPE:INS|SUPTYPE:AL|SVLEN:260|STRANDS:+-|STRANDS2:6:4:6:4|RE:10|REF_strand:7:5|Strandbias_pval:1|AF:0.833333|FOUND_IN:sniffles;svdb_origin=test_1_reheader|test_2_reheader;SUPP_VEC=11\tGT:DR:DV\t1/1:1:14\t1/1:2:10",
-                "chr16\t579428\t6\tCTAGAGGTGCCCCGGGCCCAGAGACTAGAGATGCCCCGGGCCCGGAGACTAGAGGTGCCCCGGGCCCGGAGACTAGAGGTGCCCCGGGCCCGGAGA\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=579500;ZMW=12;STD_quant_start=0;STD_quant_stop=18.5903;Kurtosis_quant_start=6.24578;Kurtosis_quant_stop=0.048624;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-72;STRANDS=+-;STRANDS2=10,2,10,2;RE=12;REF_strand=14,2;Strandbias_pval=1;AF=0.75;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=6|chr16;test_1_reheader_POS=6|579428;test_1_reheader_QUAL=6|.;test_1_reheader_FILTERS=6|PASS;test_1_reheader_SAMPLE=6|test_1|GT:0/1|DR:4|DV:12;test_1_reheader_INFO=6|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:579500|ZMW:12|STD_quant_start:0|STD_quant_stop:18.5903|Kurtosis_quant_start:6.24578|Kurtosis_quant_stop:0.048624|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-72|STRANDS:+-|STRANDS2:10:2:10:2|RE:12|REF_strand:14:2|Strandbias_pval:1|AF:0.75|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t0/1:4:12\t./.:.:.",
-                "chr16\t584792\t7\tCCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACACCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACACCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACAC\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=584948;ZMW=18;STD_quant_start=31.939;STD_quant_stop=31.9406;Kurtosis_quant_start=-1.32912;Kurtosis_quant_stop=-1.32901;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-156;STRANDS=+-;STRANDS2=13,5,13,5;RE=18;REF_strand=15,5;Strandbias_pval=1;AF=0.9;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=7|chr16;test_1_reheader_POS=7|584792;test_1_reheader_QUAL=7|.;test_1_reheader_FILTERS=7|PASS;test_1_reheader_SAMPLE=7|test_1|GT:1/1|DR:2|DV:18;test_1_reheader_INFO=7|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:584948|ZMW:18|STD_quant_start:31.939|STD_quant_stop:31.9406|Kurtosis_quant_start:-1.32912|Kurtosis_quant_stop:-1.32901|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-156|STRANDS:+-|STRANDS2:13:5:13:5|RE:18|REF_strand:15:5|Strandbias_pval:1|AF:0.9|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:2:18\t./.:.:.",
-                "chr16\t585088\t9\tCCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACACCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACACCCCCAACCTGTGCCTCCCGCTCCCCCCAGCTGCCCACCGGGTCCACCAACAC\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=585245;STD_quant_start=62.5891;STD_quant_stop=62.8665;Kurtosis_quant_start=-2.17881;Kurtosis_quant_stop=-2.17931;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-157;STRANDS=+-;STRANDS2=10,9,10,9;RE=19;REF_strand=9,10;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=9|chr16;test_2_reheader_POS=9|585088;test_2_reheader_QUAL=9|.;test_2_reheader_FILTERS=9|PASS;test_2_reheader_SAMPLE=9|test_2|GT:1/1|DR:0|DV:19;test_2_reheader_INFO=9|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:585245|STD_quant_start:62.5891|STD_quant_stop:62.8665|Kurtosis_quant_start:-2.17881|Kurtosis_quant_stop:-2.17931|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-157|STRANDS:+-|STRANDS2:10:9:10:9|RE:19|REF_strand:9:10|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:19",
-                "chr16\t587368\t8\tN\tTCCCTCCCTTCACTGGGCCTGCTGCCCCAGAGTCCG\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=15;STD_quant_start=19.105;STD_quant_stop=19.3856;Kurtosis_quant_start=-1.34142;Kurtosis_quant_stop=-1.34145;SVTYPE=INS;SUPTYPE=AL;SVLEN=36;STRANDS=+-;STRANDS2=11,4,11,4;RE=15;REF_strand=11,4;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=8|chr16;test_1_reheader_POS=8|587368;test_1_reheader_QUAL=8|.;test_1_reheader_FILTERS=8|PASS;test_1_reheader_SAMPLE=8|test_1|GT:1/1|DR:0|DV:15;test_1_reheader_INFO=8|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:15|STD_quant_start:19.105|STD_quant_stop:19.3856|Kurtosis_quant_start:-1.34142|Kurtosis_quant_stop:-1.34145|SVTYPE:INS|SUPTYPE:AL|SVLEN:36|STRANDS:+-|STRANDS2:11:4:11:4|RE:15|REF_strand:11:4|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:15\t./.:.:.",
-                "chr16\t587440\t10\tN\tTCCCTCCCTTCACTGGGCCTGCTGCCCCAGAGTCCA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=13.2288;STD_quant_stop=12.3329;Kurtosis_quant_start=-1.41139;Kurtosis_quant_stop=-1.41718;SVTYPE=INS;SUPTYPE=AL;SVLEN=36;STRANDS=+-;STRANDS2=8,8,8,8;RE=16;REF_strand=7,9;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=10|chr16;test_2_reheader_POS=10|587440;test_2_reheader_QUAL=10|.;test_2_reheader_FILTERS=10|PASS;test_2_reheader_SAMPLE=10|test_2|GT:1/1|DR:0|DV:16;test_2_reheader_INFO=10|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:13.2288|STD_quant_stop:12.3329|Kurtosis_quant_start:-1.41139|Kurtosis_quant_stop:-1.41718|SVTYPE:INS|SUPTYPE:AL|SVLEN:36|STRANDS:+-|STRANDS2:8:8:8:8|RE:16|REF_strand:7:9|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:16",
-                "chr16\t631644\t9\tN\t<DEL>\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=631732;ZMW=10;STD_quant_start=0;STD_quant_stop=0.316228;Kurtosis_quant_start=-nan;Kurtosis_quant_stop=7;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-88;STRANDS=+-;STRANDS2=4,6,4,6;RE=10;REF_strand=4,6;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=9|chr16;test_1_reheader_POS=9|631644;test_1_reheader_QUAL=9|.;test_1_reheader_FILTERS=9|PASS;test_1_reheader_SAMPLE=9|test_1|GT:1/1|DR:0|DV:10;test_1_reheader_INFO=9|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:631732|ZMW:10|STD_quant_start:0|STD_quant_stop:0.316228|Kurtosis_quant_start:-nan|Kurtosis_quant_stop:7|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-88|STRANDS:+-|STRANDS2:4:6:4:6|RE:10|REF_strand:4:6|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:10\t./.:.:.",
-                "chr16\t631728\t11\tCTTCTCCCACCCCTTCACTGCCTCTCCTTCCATCCTCTCCTCCCACCCTCTCCTCCCATCCACTCCTCCCATCCACTTCTTCCATCCT\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=631816;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=5.03001;Kurtosis_quant_stop=5.89273;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-88;STRANDS=+-;STRANDS2=5,9,5,9;RE=14;REF_strand=5,9;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=11|chr16;test_2_reheader_POS=11|631728;test_2_reheader_QUAL=11|.;test_2_reheader_FILTERS=11|PASS;test_2_reheader_SAMPLE=11|test_2|GT:1/1|DR:0|DV:14;test_2_reheader_INFO=11|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:631816|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:5.03001|Kurtosis_quant_stop:5.89273|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-88|STRANDS:+-|STRANDS2:5:9:5:9|RE:14|REF_strand:5:9|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:14",
-                "chr16\t635398\t12\tN\tGGAAGCCAGGCCCTGAGGCTGGAGACCCTCACC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=15.824;STD_quant_stop=15.9969;Kurtosis_quant_start=-0.648945;Kurtosis_quant_stop=-0.710133;SVTYPE=INS;SUPTYPE=AL;SVLEN=34;STRANDS=+-;STRANDS2=7,8,7,8;RE=15;REF_strand=7,10;Strandbias_pval=1;AF=0.882353;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=12|chr16;test_2_reheader_POS=12|635398;test_2_reheader_QUAL=12|.;test_2_reheader_FILTERS=12|PASS;test_2_reheader_SAMPLE=12|test_2|GT:1/1|DR:2|DV:15;test_2_reheader_INFO=12|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:15.824|STD_quant_stop:15.9969|Kurtosis_quant_start:-0.648945|Kurtosis_quant_stop:-0.710133|SVTYPE:INS|SUPTYPE:AL|SVLEN:34|STRANDS:+-|STRANDS2:7:8:7:8|RE:15|REF_strand:7:10|Strandbias_pval:1|AF:0.882353|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:2:15",
-                "chr16\t660943\t13\tN\tCCCCCTGTTCGGCCCCTCCCCAGGCCCCCCCCCGCCCGGCCTCAGGCCCCGCCCCCTGTTTGGCCCCTCCCCAGGCCC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=5.53173;STD_quant_stop=20.7002;Kurtosis_quant_start=-1.56536;Kurtosis_quant_stop=-1.99031;SVTYPE=INS;SUPTYPE=AL;SVLEN=78;STRANDS=+-;STRANDS2=9,8,9,8;RE=17;REF_strand=8,11;Strandbias_pval=0.738795;AF=0.894737;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=13|chr16;test_2_reheader_POS=13|660943;test_2_reheader_QUAL=13|.;test_2_reheader_FILTERS=13|PASS;test_2_reheader_SAMPLE=13|test_2|GT:1/1|DR:2|DV:17;test_2_reheader_INFO=13|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:5.53173|STD_quant_stop:20.7002|Kurtosis_quant_start:-1.56536|Kurtosis_quant_stop:-1.99031|SVTYPE:INS|SUPTYPE:AL|SVLEN:78|STRANDS:+-|STRANDS2:9:8:9:8|RE:17|REF_strand:8:11|Strandbias_pval:0.738795|AF:0.894737|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:2:17",
-                "chr16\t665215\t14\tCCTCAGTCTGCAGCCTGCTAGGGACGCACGGCCACACTCCTGTCTTTCAG\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=665265;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=-1.16896;Kurtosis_quant_stop=-0.906251;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-50;STRANDS=+-;STRANDS2=11,8,11,8;RE=19;REF_strand=10,9;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=14|chr16;test_2_reheader_POS=14|665215;test_2_reheader_QUAL=14|.;test_2_reheader_FILTERS=14|PASS;test_2_reheader_SAMPLE=14|test_2|GT:1/1|DR:0|DV:19;test_2_reheader_INFO=14|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:665265|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:-1.16896|Kurtosis_quant_stop:-0.906251|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-50|STRANDS:+-|STRANDS2:11:8:11:8|RE:19|REF_strand:10:9|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:19",
-                "chr16\t696679\t10:test_1_reheader|15:test_2_reheader\tN\tATTTATTCATTCATTCATTCATTCAATCATTTTGAGACAGAGCCTTACTCTGTTGCCCAGGTCCCAGGCTGGAGTGCAGTGGCATGATCTCAGCTCACTGTACCC\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=11;STD_quant_start=33.9087;STD_quant_stop=33.6823;Kurtosis_quant_start=-0.537617;Kurtosis_quant_stop=-0.574571;SVTYPE=INS;SUPTYPE=AL;SVLEN=105;STRANDS=+-;STRANDS2=7,4,7,4;RE=11;REF_strand=7,5;Strandbias_pval=1;AF=0.916667;FOUND_IN=sniffles;VARID=15:test_2_reheader;set=Intersection;FOUNDBY=2;test_1_reheader_CHROM=10|chr16;test_2_reheader_CHROM=15|chr16;test_1_reheader_POS=10|696679;test_2_reheader_POS=15|696679;test_1_reheader_QUAL=10|.;test_2_reheader_QUAL=15|.;test_1_reheader_FILTERS=10|PASS;test_2_reheader_FILTERS=15|PASS;test_1_reheader_SAMPLE=10|test_1|GT:1/1|DR:1|DV:11;test_2_reheader_SAMPLE=15|test_2|GT:1/1|DR:2|DV:16;test_1_reheader_INFO=10|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:11|STD_quant_start:33.9087|STD_quant_stop:33.6823|Kurtosis_quant_start:-0.537617|Kurtosis_quant_stop:-0.574571|SVTYPE:INS|SUPTYPE:AL|SVLEN:105|STRANDS:+-|STRANDS2:7:4:7:4|RE:11|REF_strand:7:5|Strandbias_pval:1|AF:0.916667|FOUND_IN:sniffles;test_2_reheader_INFO=15|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:11.6619|STD_quant_stop:14.6424|Kurtosis_quant_start:-1.34064|Kurtosis_quant_stop:-1.42887|SVTYPE:INS|SUPTYPE:AL|SVLEN:105|STRANDS:+-|STRANDS2:11:5:11:5|RE:16|REF_strand:10:8|Strandbias_pval:0.496523|AF:0.888889|FOUND_IN:sniffles;svdb_origin=test_1_reheader|test_2_reheader;SUPP_VEC=11\tGT:DR:DV\t1/1:1:11\t1/1:2:16",
-                "chr16\t760502\t16\tN\tAGCCATGAAACCTGGGCCCGGGCTCCCACTCACACCCCACCCCCACCCAGGGCAGCCGTGAAACCTGGGCCCTGGGCTCCCACCCACGCCCCACACCCACCCAGGGC\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=0.83666;Kurtosis_quant_start=-0.692714;Kurtosis_quant_stop=-0.627032;SVTYPE=INS;SUPTYPE=AL;SVLEN=106;STRANDS=+-;STRANDS2=8,10,8,10;RE=18;REF_strand=9,10;Strandbias_pval=1;AF=0.947368;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=16|chr16;test_2_reheader_POS=16|760502;test_2_reheader_QUAL=16|.;test_2_reheader_FILTERS=16|PASS;test_2_reheader_SAMPLE=16|test_2|GT:1/1|DR:1|DV:18;test_2_reheader_INFO=16|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:0.83666|Kurtosis_quant_start:-0.692714|Kurtosis_quant_stop:-0.627032|SVTYPE:INS|SUPTYPE:AL|SVLEN:106|STRANDS:+-|STRANDS2:8:10:8:10|RE:18|REF_strand:9:10|Strandbias_pval:1|AF:0.947368|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:1:18",
-                "chr16\t763776\t17\tN\tGCATCCCATCCCCCGTCCCCTCCCCCACACCCCTCCCCCACCCCCACGTCCCCTCCCCACCCCTCCCCCACACCCTCCCCCACCCCTCCCCATGTCCCCTCCCCTACCTCCTCCCCCCGCATCCCCTCCCCCC\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=0.774597;Kurtosis_quant_start=0.649167;Kurtosis_quant_stop=0.34025;SVTYPE=INS;SUPTYPE=AL;SVLEN=133;STRANDS=+-;STRANDS2=9,12,9,12;RE=21;REF_strand=9,12;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=17|chr16;test_2_reheader_POS=17|763776;test_2_reheader_QUAL=17|.;test_2_reheader_FILTERS=17|PASS;test_2_reheader_SAMPLE=17|test_2|GT:1/1|DR:0|DV:21;test_2_reheader_INFO=17|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:0.774597|Kurtosis_quant_start:0.649167|Kurtosis_quant_stop:0.34025|SVTYPE:INS|SUPTYPE:AL|SVLEN:133|STRANDS:+-|STRANDS2:9:12:9:12|RE:21|REF_strand:9:12|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:0:21",
-                "chr16\t767829\t18\tN\tGGGTGTGGGAGGGGGGCGCGTGGGGGTGTGTGGGGGGGGGCACGTGGAGGGGGGCGTGTGGGGGGGTGCGTGGAGGAGGGGCGCGTGGAGGA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=20.2855;STD_quant_stop=28.3055;Kurtosis_quant_start=-1.34709;Kurtosis_quant_stop=-1.75793;SVTYPE=INS;SUPTYPE=AL;SVLEN=89;STRANDS=+-;STRANDS2=5,12,5,12;RE=17;REF_strand=8,13;Strandbias_pval=0.734239;AF=0.809524;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=18|chr16;test_2_reheader_POS=18|767829;test_2_reheader_QUAL=18|.;test_2_reheader_FILTERS=18|PASS;test_2_reheader_SAMPLE=18|test_2|GT:1/1|DR:4|DV:17;test_2_reheader_INFO=18|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:20.2855|STD_quant_stop:28.3055|Kurtosis_quant_start:-1.34709|Kurtosis_quant_stop:-1.75793|SVTYPE:INS|SUPTYPE:AL|SVLEN:89|STRANDS:+-|STRANDS2:5:12:5:12|RE:17|REF_strand:8:13|Strandbias_pval:0.734239|AF:0.809524|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:4:17",
-                "chr16\t818868\t11\tN\tTGGTGAAGACTGTAGTGATGGTGATGATGGTGAAGACTGTAGTGATGATGGTGGTGAAGACTGTAGTGATGTTGATATTGGTGATGAAGACTATAGTGATGGTGAAGACTATCGTGATGGTGATGATGATGGTGAAGACTGTAGTGATGGTGATGATGATGGTGAAGACTGTAGTGATGGTGATGATGGTGAAGACTGTAGCGATGATGGTGAACACTGTAGTGATGTTGATATTGGTGATGAAGACTATAGTGATGGTGATGATAGTGAAGACTATCGTGATGGTGATGATGATGGTGAAGACTGTAGTGATGGTGATGATGGTGAAGACTATCGTGATGGTGATGATAATGGTGAAGACTATAGTGATGTTGATGTCGGTGGTGAAGACTGTAGTGATGGTGATGATAGTGAAGACTATCGTGATGGTGATGATGATGGTGAAGACTGTAGTGATGGTGATGATGGTGAAGACTATCGTGATGGTGATGATGATGGTGAAGACTATAGTGATGATGGTGAAGACTGTAGTGATGGTGATGATAGTGGTGAAGACTGTAGTGATGTTAATGGTGAAGGCTATAGTGATGTTGATGGTGGTGAAGACTGTAGCAATGGTTATGATGTTGGTGAAGACAATAGTGATGGTGATGATGGTGAAGACTATAGTGATGGTGATGTTGGTGGTGAAGACTGTAGCGATGGTGATGATGATGGTGAAGACTATAGTGATGATGATGGTGAAGACTATAGTGATGATGATGGTGAAGACCGCCGTGATGGTGATGATGGTGAAGACTGTAGCGATGATGATGGTGAAGACTATAGTGATGCTGATGTTGGTGGTGAAGACTGTAGTGATGGTGATGATGATGGTGAAGACTATAGTGATGATGATGGTGAAGACTATAGTGATGATGATTGTGAAGACCGCCGTGATGGTGATGATGGTGAAGACTGTAGCGATGATGATGGTGAAGACTATAGTGATGTTGATGTTGG\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=13;STD_quant_start=0;STD_quant_stop=14.8661;Kurtosis_quant_start=7;Kurtosis_quant_stop=0.188732;SVTYPE=INS;SUPTYPE=AL;SVLEN=1002;STRANDS=+-;STRANDS2=6,7,6,7;RE=13;REF_strand=10,7;Strandbias_pval=0.71314;AF=0.764706;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=11|chr16;test_1_reheader_POS=11|818868;test_1_reheader_QUAL=11|.;test_1_reheader_FILTERS=11|PASS;test_1_reheader_SAMPLE=11|test_1|GT:0/1|DR:4|DV:13;test_1_reheader_INFO=11|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:13|STD_quant_start:0|STD_quant_stop:14.8661|Kurtosis_quant_start:7|Kurtosis_quant_stop:0.188732|SVTYPE:INS|SUPTYPE:AL|SVLEN:1002|STRANDS:+-|STRANDS2:6:7:6:7|RE:13|REF_strand:10:7|Strandbias_pval:0.71314|AF:0.764706|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t0/1:4:13\t./.:.:.",
-                "chr16\t894226\t12:test_1_reheader|19:test_2_reheader\tN\tCCCACCCGTCCCCCTGTCCACTGGACTATCCGCCCACCCGTCCCCCTGTCCACCGGACCGTCCGCCCACCCGTCCCCATGTCCATCAGACCGTCCGTCCACCTGTCCCCCTGTCCCCTGTCCACCGGACCATTCGCCCACCCATCCCCCTGTCCACCTGGCCATCCGCCCACCTGTCTCCTGTCCACCGGACCGTCCACCCACCCGTCCCCCTGTCCACTGGACTGTCCGCCCACCTGTCCCCCTGTCCCCTGTCCACCGGACTGTCTGCCCACCCGTCCCCCTGTCCACCTGGCCATCCGCCCACCCATCCCCTGTCCACCGGACCGTCCACCCACCCGTCCCCCTGTCCAGCAGAACGTCCACCCACCCGTCCCCCTGTCCACTGGACTGTCCGCCCACCTGTCCCCCTGTCCCCTGTCCACCGGACCGTCTGCCCACCCGTCCCCCTGTCCACCTGGCCATCCGCCCACCCATCCCCTGTCCACTGGACCGTCCACCCACCCGTCCCCCTGTCCAGCGGACCGTCCACCCACCCGTCCCCCTGTCCAGCGGACCGTCCACCCACCCGTCCCCCTGTCCACTGGACCGTCCGCCCACCTGTCCCCCTGTCCACCTGGCAGTGCGCCCACCCATCCCCTGTCCACCGGACCGTCCA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=12;STD_quant_start=6.95701;STD_quant_stop=147.867;Kurtosis_quant_start=-0.254603;Kurtosis_quant_stop=-0.827467;SVTYPE=INS;SUPTYPE=AL;SVLEN=657;STRANDS=+-;STRANDS2=3,9,3,9;RE=12;REF_strand=3,10;Strandbias_pval=1;AF=0.923077;FOUND_IN=sniffles;VARID=19:test_2_reheader;set=Intersection;FOUNDBY=2;test_1_reheader_CHROM=12|chr16;test_2_reheader_CHROM=19|chr16;test_1_reheader_POS=12|894226;test_2_reheader_POS=19|894226;test_1_reheader_QUAL=12|.;test_2_reheader_QUAL=19|.;test_1_reheader_FILTERS=12|PASS;test_2_reheader_FILTERS=19|PASS;test_1_reheader_SAMPLE=12|test_1|GT:1/1|DR:1|DV:12;test_2_reheader_SAMPLE=19|test_2|GT:1/1|DR:0|DV:13;test_1_reheader_INFO=12|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:12|STD_quant_start:6.95701|STD_quant_stop:147.867|Kurtosis_quant_start:-0.254603|Kurtosis_quant_stop:-0.827467|SVTYPE:INS|SUPTYPE:AL|SVLEN:657|STRANDS:+-|STRANDS2:3:9:3:9|RE:12|REF_strand:3:10|Strandbias_pval:1|AF:0.923077|FOUND_IN:sniffles;test_2_reheader_INFO=19|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:114.245|Kurtosis_quant_start:5.8338|Kurtosis_quant_stop:-0.968862|SVTYPE:INS|SUPTYPE:AL|SVLEN:363|STRANDS:+-|STRANDS2:6:7:6:7|RE:13|REF_strand:4:9|Strandbias_pval:0.688168|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader|test_2_reheader;SUPP_VEC=11\tGT:DR:DV\t1/1:1:12\t1/1:0:13",
-                "chr16\t947847\t13\tN\t<DEL>\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=948578;ZMW=10;STD_quant_start=364.033;STD_quant_stop=381.513;Kurtosis_quant_start=0.443181;Kurtosis_quant_stop=-0.065625;SVTYPE=DEL;SUPTYPE=AL,NR;SVLEN=-731;STRANDS=+-;STRANDS2=3,7,3,7;RE=10;REF_strand=5,16;Strandbias_pval=1;AF=0.47619;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=13|chr16;test_1_reheader_POS=13|947847;test_1_reheader_QUAL=13|.;test_1_reheader_FILTERS=13|PASS;test_1_reheader_SAMPLE=13|test_1|GT:0/1|DR:11|DV:10;test_1_reheader_INFO=13|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:948578|ZMW:10|STD_quant_start:364.033|STD_quant_stop:381.513|Kurtosis_quant_start:0.443181|Kurtosis_quant_stop:-0.065625|SVTYPE:DEL|SUPTYPE:AL:NR|SVLEN:-731|STRANDS:+-|STRANDS2:3:7:3:7|RE:10|REF_strand:5:16|Strandbias_pval:1|AF:0.47619|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t0/1:11:10\t./.:.:.",
-                "chr16\t949565\t20\tGACAGAGTCAGAGACAACGACAGAGTCAGAGACGACAGAGTCAGAGACGACAGAGTCAGAGCCAATGACAGAGTCAGCCAATGACAGAGTCAGAGCCAAC\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=949834;STD_quant_start=3.19374;STD_quant_stop=33.8556;Kurtosis_quant_start=1.63091;Kurtosis_quant_stop=1.97922;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-269;STRANDS=+-;STRANDS2=6,4,6,4;RE=10;REF_strand=10,18;Strandbias_pval=0.267395;AF=0.357143;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=20|chr16;test_2_reheader_POS=20|949565;test_2_reheader_QUAL=20|.;test_2_reheader_FILTERS=20|PASS;test_2_reheader_SAMPLE=20|test_2|GT:0/1|DR:18|DV:10;test_2_reheader_INFO=20|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:949834|STD_quant_start:3.19374|STD_quant_stop:33.8556|Kurtosis_quant_start:1.63091|Kurtosis_quant_stop:1.97922|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-269|STRANDS:+-|STRANDS2:6:4:6:4|RE:10|REF_strand:10:18|Strandbias_pval:0.267395|AF:0.357143|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:18:10",
-                "chr16\t952880\t21\tTCCACACAGACACCCACCCCAAACCAGCCTCCTACACGTCCACACAGACACCCACCCCAAACCAGCCTCCTGCACGTCCACACAGACACCCCAAACCAGCCTCCTACATATCCACACAGACACCCCAAACCAGCCTCCTACATATCCACACAGACACCCCAAACCAGCCTCCTACACG\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=953058;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=-nan;Kurtosis_quant_stop=-nan;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-178;STRANDS=+-;STRANDS2=6,4,6,4;RE=10;REF_strand=10,16;Strandbias_pval=0.285266;AF=0.384615;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=21|chr16;test_2_reheader_POS=21|952880;test_2_reheader_QUAL=21|.;test_2_reheader_FILTERS=21|PASS;test_2_reheader_SAMPLE=21|test_2|GT:0/1|DR:16|DV:10;test_2_reheader_INFO=21|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:953058|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:-nan|Kurtosis_quant_stop:-nan|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-178|STRANDS:+-|STRANDS2:6:4:6:4|RE:10|REF_strand:10:16|Strandbias_pval:0.285266|AF:0.384615|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:16:10",
-                "chr16\t953349\t22\tGTTCACACAGACACGGACCCCAAACCAGCCTCCTACACGTCCACACAGACACCCACCCCAAACCAGCCTCCTACACGTTCACACAGACACGGACCCCACACCAGCCTCCTACACGTCCACACAGACACCCACCCCAAACCAGCCTCCTGCACGTCCACACAGACACCCCAAACCAGCCTCCTACATATCCACACAGACACCCCAAACCAGCCTCCTACATATCCACACAGACACCCCAAACCAGCCTCCTACACGTCCACACAGACACCCACTCCAAACCAGCCTCCTACACGTCCACACAGACACCCCAAACCAGCCTCCTACATGTCCACACAGACACCCACCCCAAACCAGCCTCCTACATGTCCACACAGACACCCACCCCAAACCAGCCTCCTACATGTCCACACAGACACCCACCCCAAACCAGCCTCCTACAT\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=953789;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=-1.66902;Kurtosis_quant_stop=-1.66669;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-440;STRANDS=+-;STRANDS2=12,13,12,13;RE=25;REF_strand=10,16;Strandbias_pval=0.577086;AF=0.961538;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=22|chr16;test_2_reheader_POS=22|953349;test_2_reheader_QUAL=22|.;test_2_reheader_FILTERS=22|PASS;test_2_reheader_SAMPLE=22|test_2|GT:1/1|DR:1|DV:25;test_2_reheader_INFO=22|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:953789|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:-1.66902|Kurtosis_quant_stop:-1.66669|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-440|STRANDS:+-|STRANDS2:12:13:12:13|RE:25|REF_strand:10:16|Strandbias_pval:0.577086|AF:0.961538|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:1:25",
-                "chr16\t955473\t23\tN\tACACACACACACACACATCTAAGTGAACCAGACACGTTACATAAAATGCGTGCCTGCAGCAGATGCGGTGTGTGCATACACACACACACATCTAAGTAAACCAGACACGTTACATAAAATGCGTGCCTGCAGCAGACGTAGTGTGTGCATCCACACACACACATCTAAGTAAACTAGACACGTTACATAAAATGCGTGCCCGCAGCAGAGACGGTGTGTGCGT\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=0;STD_quant_stop=1.34164;Kurtosis_quant_start=7;Kurtosis_quant_stop=6.971;SVTYPE=INS;SUPTYPE=AL;SVLEN=223;STRANDS=+-;STRANDS2=7,5,7,5;RE=12;REF_strand=10,17;Strandbias_pval=0.299429;AF=0.444444;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=23|chr16;test_2_reheader_POS=23|955473;test_2_reheader_QUAL=23|.;test_2_reheader_FILTERS=23|PASS;test_2_reheader_SAMPLE=23|test_2|GT:0/1|DR:15|DV:12;test_2_reheader_INFO=23|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:0|STD_quant_stop:1.34164|Kurtosis_quant_start:7|Kurtosis_quant_stop:6.971|SVTYPE:INS|SUPTYPE:AL|SVLEN:223|STRANDS:+-|STRANDS2:7:5:7:5|RE:12|REF_strand:10:17|Strandbias_pval:0.299429|AF:0.444444|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:15:12",
-                "chr16\t960401\t14\tACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAACACTGGATCACAACCCAGACACCATCTCATGGTGACAACACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAACACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAACACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGAC\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=961265;ZMW=13;STD_quant_start=59.9266;STD_quant_stop=171.814;Kurtosis_quant_start=0.952698;Kurtosis_quant_stop=-0.819982;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-864;STRANDS=+-;STRANDS2=5,8,5,8;RE=13;REF_strand=5,8;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=14|chr16;test_1_reheader_POS=14|960401;test_1_reheader_QUAL=14|.;test_1_reheader_FILTERS=14|PASS;test_1_reheader_SAMPLE=14|test_1|GT:1/1|DR:0|DV:13;test_1_reheader_INFO=14|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:961265|ZMW:13|STD_quant_start:59.9266|STD_quant_stop:171.814|Kurtosis_quant_start:0.952698|Kurtosis_quant_stop:-0.819982|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-864|STRANDS:+-|STRANDS2:5:8:5:8|RE:13|REF_strand:5:8|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:13\t./.:.:.",
-                "chr16\t960535\t24\tCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAACACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAGCACGGGATCACGACCCAGACAGACTCACGGTGACAGCACGGGATCACGACCCAGACACAGACTCACGGTGACAG\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=960797;STD_quant_start=33.2521;STD_quant_stop=41.1534;Kurtosis_quant_start=-1.79169;Kurtosis_quant_stop=-1.83499;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-262;STRANDS=+-;STRANDS2=9,11,9,11;RE=20;REF_strand=10,12;Strandbias_pval=1;AF=0.909091;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=24|chr16;test_2_reheader_POS=24|960535;test_2_reheader_QUAL=24|.;test_2_reheader_FILTERS=24|PASS;test_2_reheader_SAMPLE=24|test_2|GT:1/1|DR:2|DV:20;test_2_reheader_INFO=24|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:960797|STD_quant_start:33.2521|STD_quant_stop:41.1534|Kurtosis_quant_start:-1.79169|Kurtosis_quant_stop:-1.83499|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-262|STRANDS:+-|STRANDS2:9:11:9:11|RE:20|REF_strand:10:12|Strandbias_pval:1|AF:0.909091|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:2:20",
-                "chr16\t1076025\t25\tN\tCCCTCCCCCTCCCTTTCCCTCCCTCTCTCCCTCTCTCCCTCCCCGCCTCCATCCCTCTCCCTCTCCCTCCCTCTCTCTCTCCCCTACCCTGTCTTTCTCTCTGCCTCCCCGCCTCCCCTTCCCTCTCCCCATACCCTGTCTTTCTCTCTCCCTCCCCCGCCT\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=42.8567;STD_quant_stop=9.5184;Kurtosis_quant_start=-1.3291;Kurtosis_quant_stop=-0.179408;SVTYPE=INS;SUPTYPE=AL;SVLEN=72;STRANDS=+-;STRANDS2=8,6,8,6;RE=14;REF_strand=7,8;Strandbias_pval=0.715249;AF=0.933333;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=25|chr16;test_2_reheader_POS=25|1076025;test_2_reheader_QUAL=25|.;test_2_reheader_FILTERS=25|PASS;test_2_reheader_SAMPLE=25|test_2|GT:1/1|DR:1|DV:14;test_2_reheader_INFO=25|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:42.8567|STD_quant_stop:9.5184|Kurtosis_quant_start:-1.3291|Kurtosis_quant_stop:-0.179408|SVTYPE:INS|SUPTYPE:AL|SVLEN:72|STRANDS:+-|STRANDS2:8:6:8:6|RE:14|REF_strand:7:8|Strandbias_pval:0.715249|AF:0.933333|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:1:14",
-                "chr16\t1204953\t26\tN\tGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCTCGTCGGGTGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGGCCCAGATCAGTGCCGGGGGGAGGGGTGGGAGCCGCGGGTGGGGGCCCAGATGAGTGCCGGGAGGGGTGGGAGCCGCGGGTGGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGCCCCAGATCAGTGCCGGGGAGGGGTGGGAGCCGCGGGTGGGGCCCCAGATCAGTGCCGGGGAAGGGTGGGAGCCGCGGGT\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=32.3203;STD_quant_stop=55.3371;Kurtosis_quant_start=-0.538991;Kurtosis_quant_stop=-0.472281;SVTYPE=INS;SUPTYPE=AL;SVLEN=414;STRANDS=+-;STRANDS2=8,6,8,6;RE=14;REF_strand=8,7;Strandbias_pval=1;AF=0.933333;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=26|chr16;test_2_reheader_POS=26|1204953;test_2_reheader_QUAL=26|.;test_2_reheader_FILTERS=26|PASS;test_2_reheader_SAMPLE=26|test_2|GT:1/1|DR:1|DV:14;test_2_reheader_INFO=26|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:32.3203|STD_quant_stop:55.3371|Kurtosis_quant_start:-0.538991|Kurtosis_quant_stop:-0.472281|SVTYPE:INS|SUPTYPE:AL|SVLEN:414|STRANDS:+-|STRANDS2:8:6:8:6|RE:14|REF_strand:8:7|Strandbias_pval:1|AF:0.933333|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:1:14",
-                "chr16\t1258685\t15\tN\tTGAGCCCCCTCCCCCACCCTGAGCCCCCTCCCCTGTCTTGAGCCCCTGCTCCATCCTGAGTCCCCTCCCCCACACTGAGCCCCCTCCCCTTTCTTGAGCCCCTCATCCATCCTGAGCCCCTCCTCCATCCTGAGCCCCCTCCCCCATCCTGGGCCCCCTCCCCTTTCTTGAGCCCCCTCCCCCACCCTGAGCCCCCTCCCCTTTCTTGAGCCCCCTCCCCCACCCTGAGCCCCTTCCCCTTTCTTGAGTCCCTCCTCCATCCTGAGCCCCCTCCCCTTTCTTGAGCCCCTCCTCCACCCTCAGCCCCCTCCCCTTTCTTGAGCCCCTCCTCCACCCTCAGCCCCCTCCCCTTTCT\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;ZMW=10;STD_quant_start=65.5301;STD_quant_stop=37.6776;Kurtosis_quant_start=0.447729;Kurtosis_quant_stop=-1.4154;SVTYPE=INS;SUPTYPE=AL;SVLEN=392;STRANDS=+-;STRANDS2=2,8,2,8;RE=10;REF_strand=2,8;Strandbias_pval=1;AF=1;FOUND_IN=sniffles;set=test_1_reheader;FOUNDBY=1;test_1_reheader_CHROM=15|chr16;test_1_reheader_POS=15|1258685;test_1_reheader_QUAL=15|.;test_1_reheader_FILTERS=15|PASS;test_1_reheader_SAMPLE=15|test_1|GT:1/1|DR:0|DV:10;test_1_reheader_INFO=15|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|ZMW:10|STD_quant_start:65.5301|STD_quant_stop:37.6776|Kurtosis_quant_start:0.447729|Kurtosis_quant_stop:-1.4154|SVTYPE:INS|SUPTYPE:AL|SVLEN:392|STRANDS:+-|STRANDS2:2:8:2:8|RE:10|REF_strand:2:8|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader;SUPP_VEC=10\tGT:DR:DV\t1/1:0:10\t./.:.:.",
-                "chr16\t1308390\t27\tTGAGTGAGGGAGGGAATGAGTGAGGGAGGGAATGAG\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;END=1308426;STD_quant_start=0;STD_quant_stop=0;Kurtosis_quant_start=3.5238;Kurtosis_quant_stop=3.10367;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-36;STRANDS=+-;STRANDS2=7,9,7,9;RE=16;REF_strand=9,8;Strandbias_pval=0.731857;AF=0.941176;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=27|chr16;test_2_reheader_POS=27|1308390;test_2_reheader_QUAL=27|.;test_2_reheader_FILTERS=27|PASS;test_2_reheader_SAMPLE=27|test_2|GT:1/1|DR:1|DV:16;test_2_reheader_INFO=27|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|END:1308426|STD_quant_start:0|STD_quant_stop:0|Kurtosis_quant_start:3.5238|Kurtosis_quant_stop:3.10367|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-36|STRANDS:+-|STRANDS2:7:9:7:9|RE:16|REF_strand:9:8|Strandbias_pval:0.731857|AF:0.941176|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:1:16",
-                "chr16\t1345656\t28\tN\tGCAACCCCAGCCTCCCCAGCCTCCCCAGCAACCCCAGCCTCCCCAGCAACCCCAGCCTCCTCA\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr16;STD_quant_start=10.1193;STD_quant_stop=6.64831;Kurtosis_quant_start=7;Kurtosis_quant_stop=6.95485;SVTYPE=INS;SUPTYPE=AL;SVLEN=63;STRANDS=+-;STRANDS2=7,3,7,3;RE=10;REF_strand=7,8;Strandbias_pval=0.413871;AF=0.666667;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=28|chr16;test_2_reheader_POS=28|1345656;test_2_reheader_QUAL=28|.;test_2_reheader_FILTERS=28|PASS;test_2_reheader_SAMPLE=28|test_2|GT:0/1|DR:5|DV:10;test_2_reheader_INFO=28|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr16|STD_quant_start:10.1193|STD_quant_stop:6.64831|Kurtosis_quant_start:7|Kurtosis_quant_stop:6.95485|SVTYPE:INS|SUPTYPE:AL|SVLEN:63|STRANDS:+-|STRANDS2:7:3:7:3|RE:10|REF_strand:7:8|Strandbias_pval:0.413871|AF:0.666667|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:5:10",
-                "chr20\t2659083\t29\tN\tGCAGATCAGAGGCAGGATGTGGCTACCGAGCAGGCAAAGATGATGGGAAAT\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr20;STD_quant_start=0;STD_quant_stop=0.316228;Kurtosis_quant_start=1.58837;Kurtosis_quant_stop=2.27994;SVTYPE=INS;SUPTYPE=AL;SVLEN=51;STRANDS=+-;STRANDS2=7,6,7,6;RE=13;REF_strand=12,16;Strandbias_pval=0.73739;AF=0.464286;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=29|chr20;test_2_reheader_POS=29|2659083;test_2_reheader_QUAL=29|.;test_2_reheader_FILTERS=29|PASS;test_2_reheader_SAMPLE=29|test_2|GT:0/1|DR:15|DV:13;test_2_reheader_INFO=29|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chr20|STD_quant_start:0|STD_quant_stop:0.316228|Kurtosis_quant_start:1.58837|Kurtosis_quant_stop:2.27994|SVTYPE:INS|SUPTYPE:AL|SVLEN:51|STRANDS:+-|STRANDS2:7:6:7:6|RE:13|REF_strand:12:16|Strandbias_pval:0.73739|AF:0.464286|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t0/1:15:13",
-                "chrX\t9964280\t16:test_1_reheader|30:test_2_reheader\tCCTTCCTTCCTTCCTTCCTTCCTTCCTTCCTTCCTTCCTTCCTT\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chrX;END=9964324;ZMW=10;STD_quant_start=3.4785;STD_quant_stop=3.4785;Kurtosis_quant_start=7;Kurtosis_quant_stop=7;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-44;STRANDS=+-;STRANDS2=4,6,4,6;RE=10;REF_strand=7,8;Strandbias_pval=1;AF=0.666667;FOUND_IN=sniffles;VARID=30:test_2_reheader;set=Intersection;FOUNDBY=2;test_1_reheader_CHROM=16|chrX;test_2_reheader_CHROM=30|chrX;test_1_reheader_POS=16|9964280;test_2_reheader_POS=30|9964280;test_1_reheader_QUAL=16|.;test_2_reheader_QUAL=30|.;test_1_reheader_FILTERS=16|PASS;test_2_reheader_FILTERS=30|PASS;test_1_reheader_SAMPLE=16|test_1|GT:0/1|DR:5|DV:10;test_2_reheader_SAMPLE=30|test_2|GT:1/1|DR:0|DV:13;test_1_reheader_INFO=16|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chrX|END:9964324|ZMW:10|STD_quant_start:3.4785|STD_quant_stop:3.4785|Kurtosis_quant_start:7|Kurtosis_quant_stop:7|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-44|STRANDS:+-|STRANDS2:4:6:4:6|RE:10|REF_strand:7:8|Strandbias_pval:1|AF:0.666667|FOUND_IN:sniffles;test_2_reheader_INFO=30|PRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chrX|END:9964324|STD_quant_start:0|STD_quant_stop:0.316228|Kurtosis_quant_start:6.99518|Kurtosis_quant_stop:6.96443|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-44|STRANDS:+-|STRANDS2:6:7:6:7|RE:13|REF_strand:6:7|Strandbias_pval:1|AF:1|FOUND_IN:sniffles;svdb_origin=test_1_reheader|test_2_reheader;SUPP_VEC=11\tGT:DR:DV\t0/1:5:10\t1/1:0:13",
-                "chrX\t12622221\t31\tAGAGGAACAGAAAGTAAAAAGAATAAAAAAGAGTAAAGGAAGCATACAGGTCCTATGAGATACCATCAATTGAATGAATATATGCATTATGGGAATATTAGAAGGAGAAAAGGAAAAAAGGGGAAAAAGCTTATTTAAAGAAATAATGGCTGAAACGTCCTAAATCTTGGAAGGGATATGGACATCCAGATTTATACAAATCAAAGGGTCTCAAGCAGAATCAATCCAAAGACTACTCTAAGACACATTATAACCAAATTTTTAAAAGCCAAACACAGACATAGAATATTGCCCCTAAGAGATATCATTTGAGATATATAAATTACATGAAAAATAATACAAAATAATCACCTTAATGAAGCTCAGTGGGATACAAGAGAACACAGACCACCAAGAAAAACAAAAAGCAATACATAAACAAAATAAAAAGTTTAATAAAGAAATACAGGTCAGGCGTGGTGATTCACATTTGTAATTCCAGCACTTTGGGAGGCCAAGGCAGGCAGATGGCTTTGAGCCCAAAAGTTCAAGACTAGCCTGGGCAACATGGCAAAACCCCATCTCTACAAAAATTAGCCAGATGTGGTGGCCCGAATCTGTAGTCCCAGCAACTTGGGAGGCTGAGGTGGGAGGATGACTTGAGCCCAGGAGGCAGAGGTTTCAGTGAGCCAAGATCACACCACTGCACTGTAGCCTGGGCAACATAGCCAGACCCTGTTTCAAAAAAAGAAAAGAAAAGAAAGGAAAAAGGAAAGGAAGTAATAAGGAAAGGAAAAAGGAAAGGAAGGGAAGGGAAGTGAAGGGAAGGGAAGTGAAGGGAAGGGAAAGGAAGGGAGGAAGAAAGAAAGAAAGAGAGAGAGAGAGAAAGAAAGAAAGAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGAAAGGAAGGAAGGAAGGAAGGAAGGAAGGAAGGAAGGAAGGAAAGAAGGAAAGAAAGAAGGAAAGAAGAAGAAAAGAGGAGAAGAGAGGAGAGGAAAGGAGAGGAGAGGAGAGGAGAGGTGAACTATAAAAAGAACCAAACAGAAATCCTGGAGCTAAAGAATACAATGACAAAACTAAACATTTTAATAGCTTCAACAGCAGACTCAATTATGCAGAAGAATCAGCAAATGTGAAGACAGGCTATTTGAAATTACCCAG\tN\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chrX;END=12623406;STD_quant_start=174.361;STD_quant_stop=172.781;Kurtosis_quant_start=-1.56011;Kurtosis_quant_stop=-1.563;SVTYPE=DEL;SUPTYPE=AL;SVLEN=-1185;STRANDS=+-;STRANDS2=5,5,5,5;RE=10;REF_strand=5,7;Strandbias_pval=1;AF=0.833333;FOUND_IN=sniffles;set=test_2_reheader;FOUNDBY=1;test_2_reheader_CHROM=31|chrX;test_2_reheader_POS=31|12622221;test_2_reheader_QUAL=31|.;test_2_reheader_FILTERS=31|PASS;test_2_reheader_SAMPLE=31|test_2|GT:1/1|DR:2|DV:10;test_2_reheader_INFO=31|IMPRECISE|SVMETHOD:Snifflesv1.0.12|CHR2:chrX|END:12623406|STD_quant_start:174.361|STD_quant_stop:172.781|Kurtosis_quant_start:-1.56011|Kurtosis_quant_stop:-1.563|SVTYPE:DEL|SUPTYPE:AL|SVLEN:-1185|STRANDS:+-|STRANDS2:5:5:5:5|RE:10|REF_strand:5:7|Strandbias_pval:1|AF:0.833333|FOUND_IN:sniffles;svdb_origin=test_2_reheader;SUPP_VEC=01\tGT:DR:DV\t./.:.:.\t1/1:2:10"
-            ],
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                 "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
                 "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-09T16:58:54.899026357"
+        "timestamp": "2025-07-08T15:45:19.139936147"
     },
-    "2 samples - [bam, bai], 'severus', []": {
+    "2 samples, 1 family - sniffes,severus with trf bed, run all callers": {
         "content": [
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=44, phased=false, phasedAutodetect=false]",
-            "d96009d3dcac8a7ddc0af6aa139bae46",
-            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=68, phased=false, phasedAutodetect=false]",
-            "bf1e3bb523498ec33318e5ff77bb7c6b",
-            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=75, phased=false, phasedAutodetect=false]",
-            "19177a1d687b43b7aab3e1b27ba3dd23",
+            "816117c30a5f4b7c4a4655d1f2753c9a",
+            "d1c73886d623380ebfa127a2b5e51540",
             [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                 "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
@@ -650,6 +249,8 @@
                 "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
                 "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
                 "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
                 "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
@@ -666,493 +267,14 @@
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-05-16T15:50:49.752348284"
-    },
-    "2 samples - [bam, bai], 'severus', [] -stub": {
-        "content": [
-            "[test_1_reheader.vcf.gz, test_2_reheader.vcf.gz]",
-            [
-                [
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family"
-                    },
-                    "test_1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                [
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family"
-                    },
-                    "test_2_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "family"
-                    },
-                    "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "family"
-                    },
-                    "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-04-23T09:46:49.828306872"
-    },
-    "1 sample - [bam, bai], 'severus', bed -stub": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "4": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ],
-                "family_tbi": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "family_vcf": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "sample_tbi": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "sample_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-04-23T09:46:29.422017693"
-    },
-    "1 sample - [bam, bai], 'sniffles', [] -stub": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "4": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ],
-                "family_tbi": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "family_vcf": [
-                    [
-                        {
-                            "id": "family"
-                        },
-                        "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "sample_tbi": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "sample_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false,
-                            "family_id": "family"
-                        },
-                        "test_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                    "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                    "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                    "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-04-23T09:45:13.167911759"
-    },
-    "1 sample - [bam, bai], 'sniffles', bed": {
-        "content": [
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]",
-            "7e847abe46139ce0f92d3c5d38e87643",
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]",
-            "7c1d93424b8f4e3fb664f4cabf1418a",
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-05-09T16:58:14.158047526"
-    },
-    "1 sample - [bam, bai], 'severus', bed": {
-        "content": [
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=38, phased=false, phasedAutodetect=false]",
-            "8b9b9caf092b24ab944d34b04b5e4b7a",
-            "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=1, variantCount=38, phased=false, phasedAutodetect=false]",
-            "9d7c4cc3049d3ab4a31a08f9426f415",
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-05-16T15:50:08.781300319"
-    },
-    "1 sample - [bam, bai], 'sniffles', []": {
-        "content": [
-            "7e847abe46139ce0f92d3c5d38e87643",
-            "7c1d93424b8f4e3fb664f4cabf1418a",
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-05-09T16:58:01.00046999"
-    },
-    "2 samples - [bam, bai], 'sniffles', [] -stub": {
-        "content": [
-            "[test_1_reheader.vcf.gz, test_2_reheader.vcf.gz]",
-            [
-                [
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family"
-                    },
-                    "test_1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ],
-                [
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family"
-                    },
-                    "test_2_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "family"
-                    },
-                    "family_svs.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "family"
-                    },
-                    "family_svs.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,14161ce6543467180e1b8d37c57d985e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,4210eef4787e6e0a51bc1f9c163a363e",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,a40cd9e076c01b6a54d8601b0efbd2b6",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,b825295e49a82bc0a128d20b3ed3ba93",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d1a610ea9b05b38b84bd12b3b26b442e",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c",
-                "versions.yml:md5,d6665112b721f1651ae340c644f9a27c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-04-23T09:45:52.106914038"
+        "timestamp": "2025-07-08T16:28:18.8097164"
     }
 }

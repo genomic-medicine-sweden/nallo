@@ -16,7 +16,6 @@ nextflow_pipeline {
                 alignment_processes            = 1
                 snv_calling_processes          = 1
                 phaser                         = "whatshap"
-                sv_caller                      = "sniffles"
                 publish_unannotated_family_svs = true
             }
         }
