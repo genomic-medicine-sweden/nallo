@@ -110,7 +110,13 @@ workflow NALLO {
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
         .collect()
 
+    // Lists from SV calling parameters
+    list_sv_callers_to_run         = params.sv_callers_to_run ? params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() } : []
+    list_sv_callers_to_merge       = params.sv_callers_to_merge ? params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() } : []
+    list_sv_callers_merge_priority = params.sv_callers_merge_priority ? params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() } : []
+
     def cram_output = params.alignment_output_format == 'cram'
+
 
     //
     // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
@@ -496,9 +502,9 @@ workflow NALLO {
             ch_expected_xy_bed,
             ch_expected_xx_bed,
             ch_exclude_bed,
-            params.sv_callers.split(',').collect { it.toLowerCase().trim() },
-            params.sv_caller_priority.split(',').collect { it.toLowerCase().trim() },
-            params.always_run_all_sv_callers
+            list_sv_callers_to_run,
+            list_sv_callers_to_merge,
+            list_sv_callers_merge_priority
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)

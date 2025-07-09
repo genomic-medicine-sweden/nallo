@@ -132,7 +132,6 @@ workflow PIPELINE_INITIALISATION {
             skip_sv_calling          : params.skip_sv_calling,
             skip_sv_annotation       : params.skip_sv_annotation,
             skip_call_paralogs       : params.skip_call_paralogs,
-            skip_cnv_calling         : params.skip_cnv_calling,
             skip_alignment           : params.skip_alignment,
             skip_qc                  : params.skip_qc,
             skip_genome_assembly     : params.skip_genome_assembly,
@@ -546,10 +545,10 @@ def validateWorkflowCompatibility() {
 }
 
 def validateSVCallingParameters() {
-    def sv_callers = params.sv_callers.split(',').collect { it.toLowerCase().trim() }
-    def sv_caller_priority = params.sv_caller_priority.split(',').collect { it.toLowerCase().trim() }
+    def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
+    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
-        error "ERROR: The --sv_caller_priority list must contain the same items as --sv_callers (order may differ)."
+        error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
     }
 }

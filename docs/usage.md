@@ -173,11 +173,13 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
-#### SV calling
+#### Call SVs
 
 This subworkflow depends on the alignment subworkflow.
 
-Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the `--sv_callers` parameter, e.g. `--sv_callers sniffles,hificnv`. The priority of the merging in SVDB is set by `--sv_caller_priority`, e.g. `--sv_caller_priority sniffles,hificnv`.
+Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the `--sv_callers` parameter, e.g. `--sv_callers sniffles,hificnv`. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the `--sv_callers_merge_priority` parameter.
+
+Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
 
 If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
 
@@ -187,7 +189,7 @@ If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires 
 
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`. Combine with `--always_run_all_sv_callers` to always run all SV callers, even though they are not used for annotation and ranking.
+Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_sv_calling`.
 

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            303,
+            280,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -169,9 +169,6 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.21
                 },
-                "SEVERUS": {
-                    "severus": 1.5
-                },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
                 },
@@ -182,11 +179,11 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
-                "SVDB_MERGE": {
+                "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
-                "SVDB_MERGE_SVS_CNVS": {
+                "SVDB_MERGE_BY_FAMILY": {
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
@@ -200,12 +197,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SVDB_MERGE": {
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -647,47 +638,31 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz",
-                "svs/family/FAM/FAM_hificnv_cnvs_merged.vcf.gz.tbi",
-                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz",
-                "svs/family/FAM/FAM_severus_svs_merged.vcf.gz.tbi",
+                "svs/family/FAM/FAM_hificnv_svs_merged.vcf.gz",
+                "svs/family/FAM/FAM_hificnv_svs_merged.vcf.gz.tbi",
                 "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz",
                 "svs/family/FAM/FAM_sniffles_svs_merged.vcf.gz.tbi",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz.tbi",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_merged_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM/FAM_svs_merged_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_merged_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_merged_annotated_ranked_research.vcf.gz.tbi",
                 "svs/family/FAM2",
-                "svs/family/FAM2/FAM2_hificnv_cnvs_merged.vcf.gz",
-                "svs/family/FAM2/FAM2_hificnv_cnvs_merged.vcf.gz.tbi",
-                "svs/family/FAM2/FAM2_severus_svs_merged.vcf.gz",
-                "svs/family/FAM2/FAM2_severus_svs_merged.vcf.gz.tbi",
+                "svs/family/FAM2/FAM2_hificnv_svs_merged.vcf.gz",
+                "svs/family/FAM2/FAM2_hificnv_svs_merged.vcf.gz.tbi",
                 "svs/family/FAM2/FAM2_sniffles_svs_merged.vcf.gz",
                 "svs/family/FAM2/FAM2_sniffles_svs_merged.vcf.gz.tbi",
-                "svs/family/FAM2/FAM2_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
-                "svs/family/FAM2/FAM2_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz.tbi",
-                "svs/family/FAM2/FAM2_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
-                "svs/family/FAM2/FAM2_svs_cnvs_merged_annotated_ranked_research.vcf.gz.tbi",
+                "svs/family/FAM2/FAM2_svs_merged_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM2/FAM2_svs_merged_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM2/FAM2_svs_merged_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM2/FAM2_svs_merged_annotated_ranked_research.vcf.gz.tbi",
                 "svs/sample",
                 "svs/sample/HG002_ONT_A",
-                "svs/sample/HG002_ONT_A/HG002_ONT_A_hificnv_cnvs.vcf.gz",
-                "svs/sample/HG002_ONT_A/HG002_ONT_A_hificnv_cnvs.vcf.gz.tbi",
-                "svs/sample/HG002_ONT_A/HG002_ONT_A_severus_svs.vcf.gz",
-                "svs/sample/HG002_ONT_A/HG002_ONT_A_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_ONT_A/HG002_ONT_A_sniffles_svs.vcf.gz",
                 "svs/sample/HG002_ONT_A/HG002_ONT_A_sniffles_svs.vcf.gz.tbi",
                 "svs/sample/HG002_ONT_B",
-                "svs/sample/HG002_ONT_B/HG002_ONT_B_hificnv_cnvs.vcf.gz",
-                "svs/sample/HG002_ONT_B/HG002_ONT_B_hificnv_cnvs.vcf.gz.tbi",
-                "svs/sample/HG002_ONT_B/HG002_ONT_B_severus_svs.vcf.gz",
-                "svs/sample/HG002_ONT_B/HG002_ONT_B_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_ONT_B/HG002_ONT_B_sniffles_svs.vcf.gz",
                 "svs/sample/HG002_ONT_B/HG002_ONT_B_sniffles_svs.vcf.gz.tbi",
                 "svs/sample/HG002_ONT_C",
-                "svs/sample/HG002_ONT_C/HG002_ONT_C_hificnv_cnvs.vcf.gz",
-                "svs/sample/HG002_ONT_C/HG002_ONT_C_hificnv_cnvs.vcf.gz.tbi",
-                "svs/sample/HG002_ONT_C/HG002_ONT_C_severus_svs.vcf.gz",
-                "svs/sample/HG002_ONT_C/HG002_ONT_C_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG002_ONT_C/HG002_ONT_C_sniffles_svs.vcf.gz",
                 "svs/sample/HG002_ONT_C/HG002_ONT_C_sniffles_svs.vcf.gz.tbi",
                 "visualization_tracks",
@@ -940,76 +915,44 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_hificnv_cnvs_merged.vcf.gz",
+                    "FAM_hificnv_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=35, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM_severus_svs_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=66, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_sniffles_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=72, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
+                    "FAM_svs_merged_annotated_ranked_clinical.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                    "FAM_svs_merged_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=104, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM2_hificnv_cnvs_merged.vcf.gz",
+                    "FAM2_hificnv_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM2_severus_svs_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=66, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_sniffles_svs_merged.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=72, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM2_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
+                    "FAM2_svs_merged_annotated_ranked_clinical.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM2_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                    "FAM2_svs_merged_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=101, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_A_hificnv_cnvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_A_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=67, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_sniffles_svs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=73, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_B_hificnv_cnvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=33, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_B_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=67, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_ONT_B_sniffles_svs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=73, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_C_hificnv_cnvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_C_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=67, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_C_sniffles_svs.vcf.gz",
@@ -1024,6 +967,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-07T10:59:03.733832076"
+        "timestamp": "2025-07-09T14:33:31.433693056"
     }
 }

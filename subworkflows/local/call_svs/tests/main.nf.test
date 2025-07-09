@@ -88,7 +88,7 @@ nextflow_workflow {
                 input[6] = [[],[]]
                 input[7] = ['sniffles']
                 input[8] = ['sniffles']
-                input[9] = false
+                input[9] = ['sniffles']
                 """
             }
         }
@@ -134,8 +134,8 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]
                 input[7] = ['sniffles', 'hificnv', 'severus']
-                input[8] = ['sniffles', 'severus', 'hificnv']
-                input[9] = false
+                input[8] = ['sniffles', 'hificnv', 'severus']
+                input[9] = ['sniffles', 'severus', 'hificnv']
                 """
             }
         }
@@ -155,7 +155,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - sniffes,severus with trf bed, run all callers") {
+    test("2 samples, 1 family - merge sniffes,severus with trf bed, run all callers") {
 
         when {
             workflow {
@@ -180,9 +180,9 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]
-                input[7] = ['sniffles', 'severus']
+                input[7] = ['sniffles', 'severus', 'hificnv']
                 input[8] = ['sniffles', 'severus']
-                input[9] = true
+                input[9] = ['sniffles', 'severus']
                 """
             }
         }
@@ -228,9 +228,9 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]
-                input[7] = ['sniffles', 'severus']
+                input[7] = ['sniffles', 'severus', 'hificnv']
                 input[8] = ['sniffles', 'severus']
-                input[9] = true
+                input[9] = ['sniffles', 'severus']
                 """
             }
         }

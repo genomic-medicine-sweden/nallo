@@ -13,16 +13,16 @@ include { SNIFFLES                           } from '../../../modules/nf-core/sn
 workflow CALL_SVS {
 
     take:
-    ch_bam_bai         // channel: [ val(meta), path(bam), path(bai) ]
-    ch_tandem_repeats  // channel: [ val(meta), path(bed) ]
-    ch_snvs            // channel: [ val(meta), path(vcf) ]
-    ch_fasta           // channel: [ val(meta), path(fasta) ]
-    ch_expected_xy_bed // channel: [ val(meta), path(bed) ]
-    ch_expected_xx_bed // channel: [ val(meta), path(bed) ]
-    ch_exclude_bed     // channel: [ val(meta), path(bed) ]
-    sv_callers         //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority    //    List: [ 'caller3', 'caller1', 'caller2' ]
-    run_all_callers    //    Boolean: true or false
+    ch_bam_bai          // channel: [ val(meta), path(bam), path(bai) ]
+    ch_tandem_repeats   // channel: [ val(meta), path(bed) ]
+    ch_snvs             // channel: [ val(meta), path(vcf) ]
+    ch_fasta            // channel: [ val(meta), path(fasta) ]
+    ch_expected_xy_bed  // channel: [ val(meta), path(bed) ]
+    ch_expected_xx_bed  // channel: [ val(meta), path(bed) ]
+    ch_exclude_bed      // channel: [ val(meta), path(bed) ]
+    sv_callers_to_run   //    List: [ 'caller1', 'caller2', 'caller3' ]
+    sv_callers_to_merge //    List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority     //    List: [ 'caller3', 'caller1', 'caller2' ]
 
     main:
     ch_versions = Channel.empty()
@@ -31,7 +31,7 @@ workflow CALL_SVS {
     //
     // Call SVs with Severus
     //
-    if(sv_callers.contains('severus') || run_all_callers) {
+    if(sv_callers_to_run.contains('severus')) {
 
         SEVERUS (
             ch_bam_bai.map { meta, bam, bai -> [ meta, bam, bai, [], [], [] ] },
@@ -39,7 +39,7 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
-        if(sv_callers.contains('severus')) {
+        if(sv_callers_to_merge.contains('severus')) {
             ch_sv_calls = ch_sv_calls.mix(
                 addCallerToMeta(SEVERUS.out.all_vcf, 'severus')
             )
@@ -49,7 +49,7 @@ workflow CALL_SVS {
     //
     // Call SVs with Sniffles
     //
-    if(sv_callers.contains('sniffles') || run_all_callers) {
+    if(sv_callers_to_run.contains('sniffles')) {
 
         SNIFFLES (
             ch_bam_bai
@@ -66,7 +66,7 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
-        if(sv_callers.contains('sniffles')) {
+        if(sv_callers_to_merge.contains('sniffles')) {
             ch_sv_calls = ch_sv_calls.mix(
                 addCallerToMeta(SNIFFLES.out.vcf, 'sniffles')
             )
@@ -76,7 +76,7 @@ workflow CALL_SVS {
     //
     // Call CNVs with HiFiCNV
     //
-    if(sv_callers.contains('hificnv') || run_all_callers) {
+    if(sv_callers_to_run.contains('hificnv')) {
 
         ch_bam_bai
             .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
@@ -92,7 +92,7 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(HIFICNV.out.versions)
 
-        if(sv_callers.contains('hificnv')) {
+        if(sv_callers_to_merge.contains('hificnv')) {
             ch_sv_calls = ch_sv_calls.mix(
                 addCallerToMeta(HIFICNV.out.vcf, 'hificnv')
             )
