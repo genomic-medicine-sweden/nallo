@@ -181,15 +181,25 @@ Which callers to run and merge into family VCFs that are used for subsequent ann
 
 Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
 
+!!!info "Variant merging strategies"
+
+    SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.
+
+!!!tip "Family-level VCFs per caller"
+
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
 If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
 
-| `hificnv_expected_xy_cn` | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed)) |
-| `hificnv_expected_xx_cn` | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed)) |
+| Parameter                  | Description                                                                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
+| `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_sv_calling`.
 
