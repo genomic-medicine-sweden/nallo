@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram": {
         "content": [
-            233,
+            245,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -56,6 +56,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CLEAN_SNIFFLES": {
+                    "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
                     "cramino": "0.14.5"
@@ -112,6 +115,9 @@
                 },
                 "HIFIASM": {
                     "hifiasm": "0.25.0-r726"
+                },
+                "HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "HIPHASE": {
                     "hiphase": "1.4.0-7bf2743"
@@ -174,6 +180,9 @@
                 },
                 "SEVERUS": {
                     "severus": 1.5
+                },
+                "SNIFFLES": {
+                    "sniffles": "1.0.12"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -637,7 +646,20 @@
                 "svs/sample/HG003/HG003_severus_svs.vcf.gz.tbi",
                 "svs/sample/HG004",
                 "svs/sample/HG004/HG004_severus_svs.vcf.gz",
-                "svs/sample/HG004/HG004_severus_svs.vcf.gz.tbi"
+                "svs/sample/HG004/HG004_severus_svs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002",
+                "visualization_tracks/HG002/HG002_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002/HG002_hificnv.depth.bw",
+                "visualization_tracks/HG002/HG002_hificnv.maf.bw",
+                "visualization_tracks/HG003",
+                "visualization_tracks/HG003/HG003_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG003/HG003_hificnv.depth.bw",
+                "visualization_tracks/HG003/HG003_hificnv.maf.bw",
+                "visualization_tracks/HG004",
+                "visualization_tracks/HG004/HG004_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG004/HG004_hificnv.depth.bw",
+                "visualization_tracks/HG004/HG004_hificnv.maf.bw"
             ],
             [
                 "HG002_haplotype_1.assembly_summary:md5,c5a4179ffddaa2aeb15a36582fdeada4",
@@ -730,7 +752,16 @@
                 "HG003_stats.blocks.gtf.gz:md5,6743c2315bf868ecffefa44f80418e40",
                 "HG003_stats.blocks.gtf.gz.tbi:md5,53b95c424365d917749c385648b58279",
                 "HG004_stats.blocks.gtf.gz:md5,5b837873563535065c0422ac40ea7866",
-                "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4"
+                "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG002_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
+                "HG002_hificnv.depth.bw:md5,c1f3a213a83f7ab13cc082405328e74e",
+                "HG002_hificnv.maf.bw:md5,2d0add7bc6c190df62849e6d3b73e123",
+                "HG003_hificnv.copynum.bedgraph:md5,13936edf036a850659ddbd52f3257cec",
+                "HG003_hificnv.depth.bw:md5,eb205af56ee8deba0ee6ee91cbddde9d",
+                "HG003_hificnv.maf.bw:md5,01058cc29bc7de42f299f6f23760f008",
+                "HG004_hificnv.copynum.bedgraph:md5,7b7112759a210718d03f64628577e02b",
+                "HG004_hificnv.depth.bw:md5,bddf2a44ae94890335e19ab422b65c93",
+                "HG004_hificnv.maf.bw:md5,766dccb8b4ef5c1460b5d19c1ee6bc61"
             ],
             [
                 
@@ -871,6 +902,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T14:58:05.894247415"
+        "timestamp": "2025-07-09T15:20:49.864528659"
     }
 }

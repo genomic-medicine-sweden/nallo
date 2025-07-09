@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            280,
+            278,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -168,6 +168,9 @@
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.21
+                },
+                "SEVERUS": {
+                    "severus": 1.5
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
@@ -638,8 +641,6 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_hificnv_svs.vcf.gz",
-                "svs/family/FAM/FAM_hificnv_svs.vcf.gz.tbi",
                 "svs/family/FAM/FAM_sniffles_svs.vcf.gz",
                 "svs/family/FAM/FAM_sniffles_svs.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz",
@@ -647,8 +648,6 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
                 "svs/family/FAM2",
-                "svs/family/FAM2/FAM2_hificnv_svs.vcf.gz",
-                "svs/family/FAM2/FAM2_hificnv_svs.vcf.gz.tbi",
                 "svs/family/FAM2/FAM2_sniffles_svs.vcf.gz",
                 "svs/family/FAM2/FAM2_sniffles_svs.vcf.gz.tbi",
                 "svs/family/FAM2/FAM2_svs_annotated_ranked_clinical.vcf.gz",
@@ -915,24 +914,16 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_hificnv_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=35, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_sniffles_svs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=72, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=104, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM2_hificnv_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=70, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_sniffles_svs.vcf.gz",
@@ -940,11 +931,11 @@
                 ],
                 [
                     "FAM2_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=101, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=70, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_sniffles_svs.vcf.gz",
@@ -967,6 +958,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T15:01:52.351193051"
+        "timestamp": "2025-07-09T15:23:28.698782934"
     }
 }
