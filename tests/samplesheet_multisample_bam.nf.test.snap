@@ -869,7 +869,7 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=3, variantCount=69, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=129, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -880,6 +880,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T15:48:32.563981172"
+        "timestamp": "2025-07-09T16:04:43.796204317"
     }
 }

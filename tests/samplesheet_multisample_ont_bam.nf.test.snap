@@ -925,11 +925,11 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=70, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=104, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_hificnv_svs.vcf.gz",
@@ -945,11 +945,11 @@
                 ],
                 [
                     "FAM2_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=70, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=101, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -960,6 +960,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T15:51:08.020866361"
+        "timestamp": "2025-07-09T16:07:23.049579713"
     }
 }
