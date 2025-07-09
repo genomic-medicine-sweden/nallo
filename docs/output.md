@@ -247,11 +247,11 @@ In general, annotated variant calls are output per family while unannotated call
     Unannotated family-level VCFs per caller can be output with --publish_unannotated_family_svs.
 
 | Path                                                                           | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
-| ------------------------------------------------------------------------------ | -------------------------------------------------- | ------------------ | ---------------------------------- | --- |
-| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |     |
-| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |     |
+| ------------------------------------------------------------------------------ | -------------------------------------------------- | ------------------ | ---------------------------------- |
+| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
+| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
 | `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                            | Index of the merged VCF file                       | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                            | Index of the merged VCF file                       | :white_check_mark: |                                    |
 
 #### Annotation
 
