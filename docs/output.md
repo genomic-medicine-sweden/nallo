@@ -238,7 +238,7 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
-### SVs
+### SVs (and CNVs)
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks).
 
@@ -248,8 +248,8 @@ In general, annotated variant calls are output per family while unannotated call
 
 | Path                                                                           | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
 | ------------------------------------------------------------------------------ | -------------------------------------------------- | ------------------ | ---------------------------------- |
-| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
-| `svs/sample/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_{sniffles,severus,hificnv}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
 | `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
 | `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                            | Index of the merged VCF file                       | :white_check_mark: |                                    |
 

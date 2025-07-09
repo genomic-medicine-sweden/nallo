@@ -398,10 +398,6 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
-                "svs/sample",
-                "svs/sample/HG002_Revio",
-                "svs/sample/HG002_Revio/HG002_Revio_sniffles_svs.vcf.gz",
-                "svs/sample/HG002_Revio/HG002_Revio_sniffles_svs.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
@@ -413,6 +409,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T15:02:34.220956535"
+        "timestamp": "2025-07-09T15:52:09.135541337"
     }
 }

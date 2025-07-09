@@ -39,11 +39,9 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
-        if(sv_callers_to_merge.contains('severus')) {
-            ch_sv_calls = ch_sv_calls.mix(
-                addCallerToMeta(SEVERUS.out.all_vcf, 'severus')
-            )
-        }
+        ch_sv_calls = ch_sv_calls.mix(
+            addCallerToMeta(SEVERUS.out.all_vcf, 'severus')
+        )
     }
 
     //
@@ -66,11 +64,9 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
-        if(sv_callers_to_merge.contains('sniffles')) {
-            ch_sv_calls = ch_sv_calls.mix(
-                addCallerToMeta(SNIFFLES.out.vcf, 'sniffles')
-            )
-        }
+        ch_sv_calls = ch_sv_calls.mix(
+            addCallerToMeta(SNIFFLES.out.vcf, 'sniffles')
+        )
     }
 
     //
@@ -92,11 +88,9 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(HIFICNV.out.versions)
 
-        if(sv_callers_to_merge.contains('hificnv')) {
-            ch_sv_calls = ch_sv_calls.mix(
-                addCallerToMeta(HIFICNV.out.vcf, 'hificnv')
-            )
-        }
+        ch_sv_calls = ch_sv_calls.mix(
+            addCallerToMeta(HIFICNV.out.vcf, 'hificnv')
+        )
     }
 
     //
@@ -171,9 +165,13 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_CALLER.out.versions)
 
-    // Then merge the family VCFs for each caller into a single family VCF
-    // We need to group by ID, and sort the VCFs by the caller priority for SVDB merge
+    // Then merge the family VCFs for each caller into a single family VCF.
+    // First we need to filter the SV callers to merge,
+    // Then wee need to group by ID, and sort the VCFs by the caller priority for SVDB merge.
     SVDB_MERGE_BY_CALLER.out.vcf
+        .filter { meta, _vcf ->
+            sv_callers_to_merge.contains(meta.sv_caller)
+        }
         .map { meta, vcf ->
             [ meta - meta.subMap('sv_caller'), [ meta.sv_caller, vcf ] ]
         }
