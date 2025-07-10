@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram": {
         "content": [
-            265,
+            269,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -944,6 +944,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-07T10:55:04.437506665"
+        "timestamp": "2025-07-10T11:47:49.686497558"
     }
 }
