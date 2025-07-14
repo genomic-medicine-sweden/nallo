@@ -13,7 +13,6 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 sv_callers                   = "severus,hificnv"
-                sv_callers_to_run            = "severus,hificnv,sniffles"
             }
         }
 

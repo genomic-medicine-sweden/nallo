@@ -17,7 +17,6 @@ nextflow_pipeline {
                 snv_calling_processes          = 1
                 phaser                         = "whatshap"
                 sv_callers                     = "sniffles,hificnv"
-                sv_callers_to_run              = "sniffles,hificnv,severus"
                 publish_unannotated_family_svs = true
             }
         }
