@@ -87,6 +87,9 @@ workflow NALLO {
     ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_methylation_call_regions  = createReferenceChannelFromPath(params.ch_methylation_call_regions, Channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -300,8 +303,8 @@ workflow NALLO {
         //
         SCATTER_GENOME (
             ch_fai,
-            ch_input_bed,             // BED file to scatter
-            !params.target_regions,   // Make bed from fai
+            ch_snv_call_regions,      // BED file to scatter
+            !params.snv_call_regions, // Make bed from fai
             !params.skip_snv_calling,
             params.snv_calling_processes
         )
@@ -499,7 +502,9 @@ workflow NALLO {
             ch_exclude_bed,
             params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            ch_sv_call_regions,
+            params.sv_call_regions
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
@@ -618,7 +623,7 @@ workflow NALLO {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
-            ch_input_bed,
+            ch_methylation_call_regions
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }
