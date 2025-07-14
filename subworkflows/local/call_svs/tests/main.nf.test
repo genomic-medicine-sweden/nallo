@@ -124,11 +124,11 @@ nextflow_workflow {
                 input[4] = Channel.of([
                     [ id: 'xy_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
-                ]).collet()
+                ]).collect()
                 input[5] = Channel.of([
                     [ id: 'xx_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
-                ]).collet()
+                ]).collect()
                 input[6] = Channel.of([
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
