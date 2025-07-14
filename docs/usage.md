@@ -89,13 +89,15 @@ This pipeline comes with three different presets that should be set with the `--
     - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
+### Reference files
+
+All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
+
 ### Subworkflows
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
-#### Required parameters
-
-The only mandatory parameters for all subworkflows are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
+The only mandatory parameters are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
 
 For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`, the pipeline will would to guide you through which files are required:
 
@@ -109,13 +111,13 @@ For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-A thorough description of the required files are provided below.
+Descriptions of the required files are provided below.
 
 #### Skipping subworkflows
 
 If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
 
-For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you
+For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you:
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,10 +127,6 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 ```
 
 Because almost all other subworkflows relies on the mapping subworkflow.
-
-## Reference files and parameters
-
-All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
 
 #### Alignment
 
@@ -349,11 +347,19 @@ hgnc_id
 
 Filtering of variants only happens if any of these three parameters is active.
 
-#### Other highlighted parameters
+### Target regions
 
-- Limit SNV calling to regions in BED file (`--target_regions`).
-- By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
+The `--target_regions` parameter can be used limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+
+!!!warning
+
+    Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compund variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
+### Parallelization
+
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
+
+- By default the SNV-calling, annotation and ranking is split into 13 parallel processes by creating regions from either the reference genome, or `--target_regions`/`--snv_call_regions` if provided. This already speeds up the pipeline significanly, but can also be increased further by setting `--snv_calling_processes` to a different number, or to 1 to turn off parallel processing.
 
 ## Runtime estimates
 
