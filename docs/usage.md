@@ -97,7 +97,7 @@ All parameters are listed in the [parameters section](parameters.md), but the mo
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
-The only mandatory parameters are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
+The only mandatory parameters are `--input` and `--outdir`, all other parameters are determined by the active subworkflows.
 
 For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`, the pipeline will would to guide you through which files are required:
 
@@ -353,7 +353,7 @@ The `--target_regions` parameter can be used limit parts of the analysis to inte
 
 !!!warning
 
-    Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compund variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+    Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
 
 ### Parallelization
 
