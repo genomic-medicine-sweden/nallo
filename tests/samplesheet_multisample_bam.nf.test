@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase --alignment_output_format cram") {
+    test("samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase") {
         tag "samplesheet_multisample_bam"
 
         when {
@@ -15,7 +15,6 @@ nextflow_pipeline {
                 filter_variants_hgnc_ids     = null
                 phaser                       = "hiphase"
                 sv_callers                   = "severus,hificnv"
-                alignment_output_format      = 'cram'
             }
         }
 

@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#721](https://github.com/genomic-medicine-sweden/nallo/pull/721) - Updated `samplesheet_multisample_bam` with HG004 to complete a trio, and added a second family to `samplesheet_multisample_ont_bam` in order to perform more comprehensive testing
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Refactored SV-calling for more flexiblity when choosing callers
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Changed default SV-caller from Severus to Sniffles and HiFiCNV
+- [#724](https://github.com/genomic-medicine-sweden/nallo/pull/724) - Changed the inputs for the FASTQ conversion for the assembly subworkflow to use split BAM files instead of input BAM files when suitable
+- [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Changed cram output test from `samplesheet_multisample_bam` to `samplesheet_target_regions_null` (run on PR towards master), because of slow nf-test
 
 ### `Removed`
 
