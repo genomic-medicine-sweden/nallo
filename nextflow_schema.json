@@ -80,11 +80,6 @@
                     "description": "Skip structural variant annotation",
                     "default": false
                 },
-                "skip_cnv_calling": {
-                    "type": "boolean",
-                    "description": "Skip CNV calling",
-                    "default": false
-                },
                 "skip_call_paralogs": {
                     "type": "boolean",
                     "description": "Skip the calling of specific paralogous genes",
@@ -361,7 +356,7 @@
                 },
                 "publish_unannotated_family_svs": {
                     "type": "boolean",
-                    "description": "Publish unannotated SVs and CNVs per family and caller (these files are only output by default if `--skip_sv_annotation` or `--skip_cnv_calling` are active).",
+                    "description": "Publish unannotated SVs and CNVs per family and caller.",
                     "hidden": true,
                     "fa_icon": "fas fa-users-cog"
                 }
@@ -463,17 +458,35 @@
                     "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
                     "enum": ["revio", "pacbio", "ONT_R10"]
                 },
+                "sv_callers": {
+                    "type": "string",
+                    "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                },
+                "sv_callers_merge_priority": {
+                    "type": "string",
+                    "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                },
+                "sv_callers_to_run": {
+                    "type": "string",
+                    "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                },
+                "sv_callers_to_merge": {
+                    "type": "string",
+                    "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                },
                 "snv_caller": {
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
                     "enum": ["deepvariant"]
-                },
-                "sv_caller": {
-                    "type": "string",
-                    "default": "severus",
-                    "description": "From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`).",
-                    "enum": ["severus", "sniffles"]
                 },
                 "str_caller": {
                     "type": "string",

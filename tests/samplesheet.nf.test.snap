@@ -207,11 +207,11 @@
                     "stranger": "0.9.5",
                     "tabix": 1.22
                 },
-                "SVDB_MERGE": {
+                "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
-                "SVDB_MERGE_SVS_CNVS": {
+                "SVDB_MERGE_BY_FAMILY": {
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
@@ -228,12 +228,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_LONGPHASE_PHASE": {
-                    "tabix": 1.21
-                },
-                "TABIX_SVDB_MERGE": {
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -523,18 +517,10 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz.tbi",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
-                "svs/family/FAM/FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz.tbi",
-                "svs/sample",
-                "svs/sample/HG002_Revio",
-                "svs/sample/HG002_Revio/HG002_Revio_hificnv_cnvs.vcf.gz",
-                "svs/sample/HG002_Revio/HG002_Revio_hificnv_cnvs.vcf.gz.tbi",
-                "svs/sample/HG002_Revio/HG002_Revio_severus_svs.vcf.gz",
-                "svs/sample/HG002_Revio/HG002_Revio_severus_svs.vcf.gz.tbi",
-                "svs/sample/HG002_Revio/HG002_Revio_sniffles_svs.vcf.gz",
-                "svs/sample/HG002_Revio/HG002_Revio_sniffles_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
@@ -655,24 +641,12 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_clinical.vcf.gz",
+                    "FAM_svs_annotated_ranked_clinical.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_svs_cnvs_merged_annotated_ranked_research.vcf.gz",
+                    "FAM_svs_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=79, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_hificnv_cnvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=35, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_severus_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=45, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_Revio_sniffles_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=52, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
