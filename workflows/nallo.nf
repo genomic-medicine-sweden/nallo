@@ -9,28 +9,29 @@ include {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ALIGN_ASSEMBLIES                        } from '../subworkflows/local/align_assemblies'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
-include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
-include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
-include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS_STRDUST          } from '../subworkflows/local/call_repeat_expansions_strdust'
-include { CALL_REPEAT_EXPANSIONS_TRGT             } from '../subworkflows/local/call_repeat_expansions_trgt'
-include { CALL_SVS                                } from '../subworkflows/local/call_svs'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS } from '../subworkflows/local/filter_variants'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SVS  } from '../subworkflows/local/filter_variants'
-include { METHYLATION                             } from '../subworkflows/local/methylation'
-include { PHASING                                 } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
-include { QC_ALIGNED_READS                        } from '../subworkflows/local/qc_aligned_reads'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/rank_variants'
-include { RANK_VARIANTS as RANK_VARIANTS_SVS      } from '../subworkflows/local/rank_variants'
-include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
+include { ALIGN_ASSEMBLIES                            } from '../subworkflows/local/align_assemblies'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV         } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS         } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SVS                                } from '../subworkflows/local/annotate_svs'
+include { ASSEMBLY                                    } from '../subworkflows/local/genome_assembly'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS } from '../subworkflows/local/convert_input_files'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS   } from '../subworkflows/local/convert_input_files'
+include { BAM_INFER_SEX                               } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                               } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS_STRDUST              } from '../subworkflows/local/call_repeat_expansions_strdust'
+include { CALL_REPEAT_EXPANSIONS_TRGT                 } from '../subworkflows/local/call_repeat_expansions_trgt'
+include { CALL_SVS                                    } from '../subworkflows/local/call_svs'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/local/filter_variants'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
+include { METHYLATION                                 } from '../subworkflows/local/methylation'
+include { PHASING                                     } from '../subworkflows/local/phasing'
+include { PREPARE_GENOME                              } from '../subworkflows/local/prepare_genome'
+include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
+include { SHORT_VARIANT_CALLING                       } from '../subworkflows/local/short_variant_calling'
+include { SNV_ANNOTATION                              } from '../subworkflows/local/snv_annotation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,21 +115,13 @@ workflow NALLO {
 
 
     //
-    // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
+    // Prepare references
     //
-    CONVERT_INPUT_FILES (
-        ch_input,
-        !params.skip_genome_assembly, // should bam -> fastq conversion be done
-        !params.skip_alignment        // should fastq -> bam conversion be done
-    )
-    ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
+    if(!params.skip_alignment || !params.skip_genome_assembly) {
 
-    //
-    // Map reads to reference
-    //
-    if (!params.skip_alignment) {
-
-        // Prepare references
+        // The genome assembly alignment needs a fai for cram output,
+        // but we shouldn't need to prepare the vep cache here.
+        // Perhaps PREPARE_GENOME could be modified to handle this case?
         PREPARE_GENOME (
             ch_fasta,
             ch_vep_cache_unprocessed,
@@ -140,19 +133,88 @@ workflow NALLO {
         // Gather indices
         ch_fasta = PREPARE_GENOME.out.fasta
         ch_fai   = PREPARE_GENOME.out.fai
+    }
 
-        // Split input files for alignment
-        if (params.alignment_processes > 1) {
+    // Convert FASTQ to BAM only if alignment or should be done.
+    // Since we assume that the majority of pipeline runs will use BAM files as input,
+    // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
+    if(!params.skip_alignment) {
 
-            SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
-            ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
-        }
+        CONVERT_INPUT_FASTQS (
+            ch_input,
+            false,
+            true
+        )
+        ch_versions = ch_versions.mix(CONVERT_INPUT_FASTQS.out.versions)
+    }
+
+    // To speed up the alignement, we can split the BAM files into smaller chunks.
+    // We can also use the split BAM files for FASTQ conversion to the assembly workflow,
+    // instead of the original BAM files which should allow the assembly to start sooner.
+    //
+    // We could change the name of alignment processes to something more generic, like `--split_input_files`?
+    // If we start running more trios we also need to consider that the parents at the moment needs to be merged
+    // before YAK. So, we could consider adding some logic to handle that case,
+    // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
+    if(!params.skip_alignment && !params.skip_genome_assembly && params.alignment_processes > 1) {
+
+        SPLITUBAM (
+            CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
+        )
+
+        ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
+    }
+
+    //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if(!params.skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
+
+        CONVERT_INPUT_BAMS (
+            !params.skip_alignment && params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_input,
+            true,
+            false
+        )
+        ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
+
+        //Hifiasm assembly
+        ASSEMBLY(
+            CONVERT_INPUT_BAMS.out.fastq // contains all FASTQ files, including those not converted.
+        )
+        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+        ALIGN_ASSEMBLIES (
+            ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            cram_output
+        )
+        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
+    }
+
+    //
+    // Map reads to reference
+    //
+    if (!params.skip_alignment) {
 
         //
         // Align reads (could be a split-align-merge subworkflow)
         //
         MINIMAP2_ALIGN (
-            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FILES.out.bam,
+            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
             PREPARE_GENOME.out.mmi,
             true,
             'bai',
@@ -268,26 +330,6 @@ workflow NALLO {
             cram_output
         )
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
-    }
-
-    //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if(!params.skip_genome_assembly) {
-
-        //Hifiasm assembly
-        ASSEMBLY(
-            CONVERT_INPUT_FILES.out.fastq
-        )
-        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
-
-        ALIGN_ASSEMBLIES (
-            ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output
-        )
-        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
     //

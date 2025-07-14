@@ -1,7 +1,7 @@
 {
     "Test CADD with mock resources": {
         "content": [
-            163,
+            165,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -178,6 +178,9 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_FASTQ": {
                     "samtools": 1.21
                 },
                 "SAMTOOLS_IMPORT": {
@@ -409,6 +412,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-09T15:52:09.135541337"
+        "timestamp": "2025-07-10T11:51:26.228069994"
     }
 }
