@@ -13,7 +13,8 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 target_regions               = null
-                alignment_output_format     = 'cram'
+                sv_callers_to_run            = "severus,hificnv,sniffles"
+                alignment_output_format      = 'cram'
             }
         }
 

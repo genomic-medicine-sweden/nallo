@@ -15,6 +15,7 @@ nextflow_pipeline {
                 filter_variants_hgnc_ids     = null
                 phaser                       = "hiphase"
                 sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
             }
         }
 

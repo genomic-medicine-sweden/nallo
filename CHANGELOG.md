@@ -61,15 +61,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                |
-| ------------- | ---------------------------- |
-| `--sv_caller` | `--sv_callers`               |
-|               | `--sv_callers_to_run`        |
-|               | `--sv_callers_to_merge`      |
-|               | `--methylation_call_regions` |
-|               | `--snv_call_regions`         |
-|               | `--sv_call_regions`          |
-|               | `--qc_regions`               |
+| Old parameter | New parameter                 |
+| ------------- | ----------------------------- |
+| `--sv_caller` | `--sv_callers`                |
+|               | `--sv_callers_to_run`         |
+|               | `--sv_callers_to_merge`       |
+|               | `--sv_callers_merge_priority` |
+|               | `--methylation_call_regions`  |
+|               | `--snv_call_regions`          |
+|               | `--sv_call_regions`           |
+|               | `--qc_regions`                |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
