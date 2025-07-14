@@ -1,7 +1,7 @@
 {
     "Test CADD with mock resources": {
         "content": [
-            174,
+            165,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
