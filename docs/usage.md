@@ -119,7 +119,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -173,19 +173,23 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
-#### SV calling
+#### Call SVs
 
 This subworkflow depends on the alignment subworkflow.
 
+Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the `--sv_callers` parameter, e.g. `--sv_callers sniffles,hificnv`. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the `--sv_callers_merge_priority` parameter.
+
+Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
+
+!!!info "Variant merging strategies"
+
+    SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.
+
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-Turned off with `--skip_sv_calling`.
-
-#### CNV calling
-
-This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
+If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
 
 | Parameter                  | Description                                                                                                                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -195,9 +199,9 @@ This subworkflow depends on the alignment and SNV calling subworkflows, and requ
 
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-Turned off with `--skip_cnv_calling`.
+Turned off with `--skip_sv_calling`.
 
 #### Phasing
 
