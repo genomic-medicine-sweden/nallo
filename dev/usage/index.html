@@ -491,18 +491,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sv-calling" class="md-nav__link">
+  <a href="#call-svs" class="md-nav__link">
     <span class="md-ellipsis">
-      SV calling
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cnv-calling" class="md-nav__link">
-    <span class="md-ellipsis">
-      CNV calling
+      Call SVs
     </span>
   </a>
   
@@ -1011,18 +1002,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sv-calling" class="md-nav__link">
+  <a href="#call-svs" class="md-nav__link">
     <span class="md-ellipsis">
-      SV calling
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cnv-calling" class="md-nav__link">
-    <span class="md-ellipsis">
-      CNV calling
+      Call SVs
     </span>
   </a>
   
@@ -1416,7 +1398,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
 <p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  ...
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
@@ -1474,15 +1456,19 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_snv_calling</code>.</p>
-<h4 id="sv-calling">SV calling</h4>
+<h4 id="call-svs">Call SVs</h4>
 <p>This subworkflow depends on the alignment subworkflow.</p>
+<p>Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the <code>--sv_callers</code> parameter, e.g. <code>--sv_callers sniffles,hificnv</code>. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the <code>--sv_callers_merge_priority</code> parameter.</p>
+<p>Sometimes you might want to run more callers than you use for merging, this can be controlled with the <code>--sv_callers_to_run</code> and <code>--sv_callers_to_merge</code> parameters. By default these are the same as <code>--sv_callers</code> but can be overwritten.</p>
+<div class="admonition info">
+<p class="admonition-title">Variant merging strategies</p>
+<p>SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Family-level VCFs per caller</p>
-</div>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
-<p>Turned off with <code>--skip_sv_calling</code>.</p>
-<h4 id="cnv-calling">CNV calling</h4>
-<p>This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:</p>
+</div>
+<p>If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:</p>
 <table>
 <thead>
 <tr>
@@ -1507,9 +1493,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Family-level VCFs per caller</p>
-</div>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
-<p>Turned off with <code>--skip_cnv_calling</code>.</p>
+</div>
+<p>Turned off with <code>--skip_sv_calling</code>.</p>
 <h4 id="phasing">Phasing</h4>
 <p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.</p>
 <p>Turned off with <code>--skip_phasing</code>.</p>
