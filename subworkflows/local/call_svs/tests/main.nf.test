@@ -36,13 +36,11 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [
                         [ id:'test_1', single_end:false, family_id: 'family', sex: 1 ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                     ],
                     [
                         [ id:'test_2', single_end:false, family_id: 'family', sex: 1 ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
@@ -89,6 +87,8 @@ nextflow_workflow {
                 input[7] = ['sniffles']
                 input[8] = ['sniffles']
                 input[9] = ['sniffles']
+                input[10] = [[],[]]
+                input[11] = false
                 """
             }
         }
@@ -115,27 +115,29 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                input[1] = [
+                input[1] = Channel.of([
                     [ id:'trf' ],
                     file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
-                ]
+                ]).collect()
                 input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [
+                input[4] = Channel.of([
                     [ id: 'xy_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
-                ]
-                input[5] = [
+                ]).collect()
+                input[5] = Channel.of([
                     [ id: 'xx_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
-                ]
-                input[6] = [
+                ]).collect()
+                input[6] = Channel.of([
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
-                ]
+                ]).collect()
                 input[7] = ['sniffles', 'hificnv', 'severus']
                 input[8] = ['sniffles', 'hificnv', 'severus']
                 input[9] = ['sniffles', 'severus', 'hificnv']
+                input[10] = [[],[]]
+                input[11] = false
                 """
             }
         }
@@ -155,34 +157,41 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - merge sniffes,severus with trf bed, run all callers") {
+    test("2 samples, 1 family - merge sniffes,hificnv,severus with trf bed, run all callers and filter") {
 
+        tag "x"
         when {
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
                     .join(MINIMAP2_ALIGN.out.index)
-                input[1] = [
+                input[1] = Channel.of([
                     [ id:'trf' ],
                     file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
-                ]
+                ]).collect()
                 input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [
+                input[4] = Channel.of([
                     [ id: 'xy_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
-                ]
-                input[5] = [
+                ]).collect()
+                input[5] = Channel.of([
                     [ id: 'xx_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
-                ]
-                input[6] = [
+                ]).collect()
+                input[6] = Channel.of([
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
-                ]
+                ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv']
-                input[8] = ['sniffles', 'severus']
-                input[9] = ['sniffles', 'severus']
+                input[8] = ['sniffles', 'severus', 'hificnv']
+                input[9] = ['sniffles', 'severus', 'hificnv']
+                input[10] = Channel.of('chr16\t160752\t160753')
+                    .collectFile(name: "one_variant.bed")
+                    .map { file ->
+                        [ [ id: 'one_variant' ], file ]
+                    }.collect()
+                input[11] = true
                 """
             }
         }
@@ -231,6 +240,8 @@ nextflow_workflow {
                 input[7] = ['sniffles', 'severus', 'hificnv']
                 input[8] = ['sniffles', 'severus']
                 input[9] = ['sniffles', 'severus']
+                input[10] = [[],[]]
+                input[11] = false
                 """
             }
         }

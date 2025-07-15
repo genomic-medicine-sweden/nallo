@@ -2,6 +2,7 @@ include { ADD_FOUND_IN_TAG                   } from '../../../modules/local/add_
 include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
@@ -9,20 +10,24 @@ include { CREATE_SAMPLES_FILE                } from '../../../modules/local/crea
 include { HIFICNV                            } from '../../../modules/local/pacbio/hificnv'
 include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow CALL_SVS {
 
     take:
-    ch_bam_bai          // channel: [ val(meta), path(bam), path(bai) ]
-    ch_tandem_repeats   // channel: [ val(meta), path(bed) ]
-    ch_snvs             // channel: [ val(meta), path(vcf) ]
-    ch_fasta            // channel: [ val(meta), path(fasta) ]
-    ch_expected_xy_bed  // channel: [ val(meta), path(bed) ]
-    ch_expected_xx_bed  // channel: [ val(meta), path(bed) ]
-    ch_exclude_bed      // channel: [ val(meta), path(bed) ]
-    sv_callers_to_run   //    List: [ 'caller1', 'caller2', 'caller3' ]
-    sv_callers_to_merge //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority     //    List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_bam_bai              // channel: [ val(meta), path(bam), path(bai) ]
+    ch_tandem_repeats       // channel: [ val(meta), path(bed) ]
+    ch_snvs                 // channel: [ val(meta), path(vcf) ]
+    ch_fasta                // channel: [ val(meta), path(fasta) ]
+    ch_expected_xy_bed      // channel: [ val(meta), path(bed) ]
+    ch_expected_xx_bed      // channel: [ val(meta), path(bed) ]
+    ch_exclude_bed          // channel: [ val(meta), path(bed) ]
+    sv_callers_to_run       //    List: [ 'caller1', 'caller2', 'caller3' ]
+    sv_callers_to_merge     //    List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority         //    List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_sv_call_regions      // channel: [ val(meta), path(bed) ]
+    filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
 
     main:
     ch_versions = Channel.empty()
@@ -39,8 +44,16 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
+        TABIX_SEVERUS (
+            SEVERUS.out.all_vcf
+        )
+        ch_versions = ch_versions.mix(TABIX_SEVERUS.out.versions)
+
         ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(SEVERUS.out.all_vcf, 'severus')
+            addCallerToMeta(
+                TABIX_SEVERUS.out.gz_tbi,
+                'severus'
+            )
         )
     }
 
@@ -65,7 +78,10 @@ workflow CALL_SVS {
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(SNIFFLES.out.vcf, 'sniffles')
+            addCallerToMeta(
+                BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                'sniffles'
+            )
         )
     }
 
@@ -88,17 +104,42 @@ workflow CALL_SVS {
         )
         ch_versions = ch_versions.mix(HIFICNV.out.versions)
 
+        TABIX_HIFICNV (
+            HIFICNV.out.vcf
+        )
+        ch_versions = ch_versions.mix(TABIX_HIFICNV.out.versions)
+
         ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(HIFICNV.out.vcf, 'hificnv')
+            addCallerToMeta(
+                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                'hificnv'
+            )
         )
     }
 
     //
     // Post-process SV calls
     //
-    ch_sv_calls
-        .multiMap { meta, vcf ->
-            vcf: [ meta, vcf, [] ]
+    if ( filter_calls_on_regions ) {
+
+        BCFTOOLS_VIEW (
+            ch_sv_calls,
+            ch_sv_call_regions.map { _meta, bed -> bed },
+            [],
+            []
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
+
+        ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
+            .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)
+
+    } else {
+        ch_sv_calls_filtered = ch_sv_calls
+    }
+
+    ch_sv_calls_filtered
+        .multiMap { meta, vcf, tbi ->
+            vcf: [ meta, vcf, tbi ]
             sv_caller: meta.sv_caller
         }
         .set { ch_add_found_in_tag_input }
@@ -167,7 +208,7 @@ workflow CALL_SVS {
 
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
-    // Then wee need to group by ID, and sort the VCFs by the caller priority for SVDB merge.
+    // Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
     SVDB_MERGE_BY_CALLER.out.vcf
         .filter { meta, _vcf ->
             sv_callers_to_merge.contains(meta.sv_caller)
@@ -202,7 +243,7 @@ workflow CALL_SVS {
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
-    ch_caller_calls.map { meta, vcf ->
-        [ meta + [ sv_caller: sv_caller ], vcf ]
+    ch_caller_calls.map { meta, vcf, tbi ->
+        [ meta + [ sv_caller: sv_caller ], vcf, tbi ]
     }
 }
