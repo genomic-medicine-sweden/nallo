@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Refactored SV-calling for more flexiblity when choosing callers
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Changed default SV-caller from Severus to Sniffles and HiFiCNV
 - [#724](https://github.com/genomic-medicine-sweden/nallo/pull/724) - Changed the inputs for the FASTQ conversion for the assembly subworkflow to use split BAM files instead of input BAM files when suitable
+- [#728](https://github.com/genomic-medicine-sweden/nallo/pull/728) - Changed to only run CRAM conversion for unphased reads when not phasing reads, since they not output when phasing
 
 ### `Removed`
 
