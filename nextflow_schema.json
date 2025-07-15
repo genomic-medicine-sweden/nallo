@@ -210,7 +210,35 @@
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
-                    "description": "A BED file with regions of interest, used to limit variant calling.",
+                    "description": "A BED file with regions of interest.",
+                    "exists": true
+                },
+                "methylation_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "snv_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "sv_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file containging regions to filter SV calls. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "qc_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in QC. By default this is the same as `target_regions`.",
                     "exists": true
                 },
                 "hificnv_expected_xy_cn": {
