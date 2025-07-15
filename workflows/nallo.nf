@@ -257,7 +257,7 @@ workflow NALLO {
             .set { ch_aligned_bam }
 
         // Publish alignments as CRAM if requested
-        if (cram_output) {
+        if (cram_output && params.skip_phasing) {
             SAMTOOLS_CONVERT (
                 ch_aligned_bam,
                 ch_fasta,
