@@ -85,9 +85,11 @@ workflow NALLO {
     ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
     ch_fasta                     = createReferenceChannelFromPath(params.fasta)
     ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
-    ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -99,7 +101,9 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
+    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
+
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
@@ -309,7 +313,7 @@ workflow NALLO {
         QC_ALIGNED_READS (
             ch_bam_bai,
             ch_fasta,
-            ch_input_bed
+            ch_qc_regions,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
@@ -342,8 +346,8 @@ workflow NALLO {
         //
         SCATTER_GENOME (
             ch_fai,
-            ch_input_bed,             // BED file to scatter
-            !params.target_regions,   // Make bed from fai
+            ch_snv_call_regions,      // BED file to scatter
+            !params.snv_call_regions, // Make bed from fai
             !params.skip_snv_calling,
             params.snv_calling_processes
         )
@@ -541,7 +545,9 @@ workflow NALLO {
             ch_exclude_bed,
             params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            ch_sv_call_regions,
+            params.sv_call_regions
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
@@ -660,7 +666,7 @@ workflow NALLO {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
-            ch_input_bed,
+            ch_methylation_call_regions
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }

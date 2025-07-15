@@ -395,7 +395,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            165,
+            176,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -595,6 +595,9 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.21
                 },
+                "SEVERUS": {
+                    "severus": 1.5
+                },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
                 },
@@ -635,7 +638,13 @@
                 "TABIX_ENSEMBLVEP_SV": {
                     "tabix": 1.21
                 },
+                "TABIX_HIFICNV": {
+                    "tabix": 1.21
+                },
                 "TABIX_LONGPHASE_PHASE": {
+                    "tabix": 1.21
+                },
+                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
