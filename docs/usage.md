@@ -349,7 +349,7 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ### Target regions
 
-The `--target_regions` parameter can be used limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
 
 !!!warning
 
