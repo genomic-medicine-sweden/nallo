@@ -398,6 +398,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reference-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Subworkflows
@@ -408,15 +417,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#required-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Required parameters
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#skipping-subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Skipping subworkflows
@@ -424,26 +424,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-files-and-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference files and parameters
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Reference files and parameters">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#alignment" class="md-nav__link">
@@ -580,10 +560,24 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#other-highlighted-parameters" class="md-nav__link">
+  <a href="#target-regions" class="md-nav__link">
     <span class="md-ellipsis">
-      Other highlighted parameters
+      Target regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallelization
     </span>
   </a>
   
@@ -909,6 +903,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reference-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Subworkflows
@@ -919,15 +922,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#required-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Required parameters
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#skipping-subworkflows" class="md-nav__link">
     <span class="md-ellipsis">
       Skipping subworkflows
@@ -935,26 +929,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-files-and-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference files and parameters
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Reference files and parameters">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#alignment" class="md-nav__link">
@@ -1091,10 +1065,24 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#other-highlighted-parameters" class="md-nav__link">
+  <a href="#target-regions" class="md-nav__link">
     <span class="md-ellipsis">
-      Other highlighted parameters
+      Target regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallelization
     </span>
   </a>
   
@@ -1380,10 +1368,11 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
+<h3 id="reference-files">Reference files</h3>
+<p>All parameters are listed in the <a href="../parameters/">parameters section</a>, but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, <a href="https://github.com/genomic-medicine-sweden/nallorefs">genomic-medicine-sweden/nallorefs</a> can automatically download and prepare the majority of a set of references that works with Nallo. See the <a href="https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs">nallorefs documentation</a> for more information.</p>
 <h3 id="subworkflows">Subworkflows</h3>
 <p>As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.</p>
-<h4 id="required-parameters">Required parameters</h4>
-<p>The only mandatory parameters for all subworkflows are the <code>--input</code> and <code>--outdir</code> parameters, all other parameters are determined by the active subworkflows.</p>
+<p>The only mandatory parameters are <code>--input</code> and <code>--outdir</code>, all other parameters are determined by the active subworkflows.</p>
 <p>For example, if you would run <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv</code>, the pipeline will would to guide you through which files are required:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  --skip_genome_assembly is NOT active, the following files are required: --par_regions
@@ -1393,18 +1382,16 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  ...
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
-<p>A thorough description of the required files are provided below.</p>
+<p>Descriptions of the required files are provided below.</p>
 <h4 id="skipping-subworkflows">Skipping subworkflows</h4>
 <p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
-<p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you</p>
+<p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  ...
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
 <p>Because almost all other subworkflows relies on the mapping subworkflow.</p>
-<h2 id="reference-files-and-parameters">Reference files and parameters</h2>
-<p>All parameters are listed in the <a href="../parameters/">parameters section</a>, but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, <a href="https://github.com/genomic-medicine-sweden/nallorefs">genomic-medicine-sweden/nallorefs</a> can automatically download and prepare the majority of a set of references that works with Nallo. See the <a href="https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs">nallorefs documentation</a> for more information.</p>
 <h4 id="alignment">Alignment</h4>
 <p>The majority of subworkflows depend on the alignment subworkflow which requires <code>--fasta</code> and <code>--somalier_sites</code>.</p>
 <table>
@@ -1702,11 +1689,20 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>14150
 </span></code></pre></div>
 <p>Filtering of variants only happens if any of these three parameters is active.</p>
-<h4 id="other-highlighted-parameters">Other highlighted parameters</h4>
+<h3 id="target-regions">Target regions</h3>
+<p>The <code>--target_regions</code> parameter can be used to limit parts of the analysis to interesting regions: <code>--snv_call_regions</code> and <code>--sv_call_regions</code> which limits the SNV and SV calling, <code>--qc_regions</code> which is passed on to mosdepth, and <code>--methylation_call_regions</code> which limits the methylation pileup regions. These four parmeters are set to the same as <code>--target_regions</code> by default, but can also be set independently.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that when using <code>--snv_call_regions</code> together with <code>--snv_calling_processes &gt; 1</code> and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.</p>
+</div>
+<h3 id="parallelization">Parallelization</h3>
 <ul>
-<li>Limit SNV calling to regions in BED file (<code>--target_regions</code>).</li>
-<li>By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting <code>--snv_calling_processes</code> to a different number.</li>
-<li>By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--alignment_processes</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</li>
+<li>
+<p>By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with <code>--alignment_processes</code>, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.</p>
+</li>
+<li>
+<p>By default the SNV-calling, annotation and ranking is split into 13 parallel processes by creating regions from either the reference genome, or <code>--target_regions</code>/<code>--snv_call_regions</code> if provided. This already speeds up the pipeline significanly, but can also be increased further by setting <code>--snv_calling_processes</code> to a different number, or to 1 to turn off parallel processing.</p>
+</li>
 </ul>
 <h2 id="runtime-estimates">Runtime estimates</h2>
 <p>Version 0.5.1 of the pipeline processed a ~32x coverage PacBio trio (HG002, HG003, HG004) in 5h 52m using 1,033 CPUh, or HG002 only in 5h 54min using 370 CPUh, on a cluster with 68 compute nodes (dual Intel Xeon Gold 6248R, 24 cores @ 3.0GHz). This included all steps of the pipeline except filtering on HGNC IDs with <code>filter_vep</code>, which would currently add approximately 3 hours of total runtime or 3 CPUh per sample.</p>
