@@ -534,8 +534,8 @@ def validateWorkflowCompatibility() {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
 
-    if (params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
-        if (!params.skip_sv_calling && params.skip_snv_calling) {
+    if (!params.skip_sv_calling && params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
+        if (params.skip_snv_calling) {
             error "ERROR: HiFiCNV requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV."
         }
         if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {

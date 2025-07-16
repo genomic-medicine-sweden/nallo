@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Changed default SV-caller from Severus to Sniffles and HiFiCNV
 - [#724](https://github.com/genomic-medicine-sweden/nallo/pull/724) - Changed the inputs for the FASTQ conversion for the assembly subworkflow to use split BAM files instead of input BAM files when suitable
 - [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Changed cram output test from `samplesheet_multisample_bam` to `samplesheet_target_regions_null` (run on PR towards master), because of slow nf-test
+- [#732](https://github.com/genomic-medicine-sweden/nallo/pull/732) - Updated `validateSVCallingParameters()` to fix an issue added in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 
 ### `Removed`
 
