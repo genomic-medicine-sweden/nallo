@@ -482,13 +482,20 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
+    def pacbio_tools = []
+    if (params.phaser.matches('hiphase')) {
+        pacbio_tools += ['HiPhase']
+    }
+    if (params.str_caller.matches('trgt')) {
+        pacbio_tools += ['TRGT']
+    }
+    if (!params.skip_call_paralogs) {
+        pacbio_tools += ['Paraphase']
+    }
     if (params.preset == "ONT_R10") {
-        if (params.phaser.matches('hiphase')) {
-            error "ERROR: The HiPhase license only permits analysis of data from PacBio."
-        }
-        if (params.str_caller.matches('trgt')) {
-            error "ERROR: The TRGT license only permits analysis of data from PacBio."
-        }
+        error "ERROR: ${pacbio_tools.join(', ')} may only be used with PacBio data."
+    } else {
+        log.warn """WARNING: ${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments."""
     }
 }
 
