@@ -56,8 +56,8 @@ nextflow_workflow {
             """
             }
         }
-        run("SNV_ANNOTATION") {
-            script "../../snv_annotation/main.nf"
+        run("ANNOTATE_SNVS") {
+            script "../../annotate_snvs/main.nf"
             process {
                 """
                 input[0] = CALL_SNVS.out.family_bcf
@@ -83,7 +83,7 @@ nextflow_workflow {
             script "../../annotate_consequence_pli/main.nf"
             process {
                 """
-                input[0] = SNV_ANNOTATION.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vcf
                 input[1] = [
                     [ id: 'variant_consequences' ],
                     [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]

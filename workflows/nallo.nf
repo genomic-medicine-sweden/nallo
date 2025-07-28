@@ -31,7 +31,7 @@ include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/lo
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
 include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
-include { SNV_ANNOTATION                              } from '../subworkflows/local/snv_annotation'
+include { ANNOTATE_SNVS                              } from '../subworkflows/local/annotate_snvs'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -390,10 +390,10 @@ workflow NALLO {
     //
     // Annotate SNVs
     //
-    if(!params.skip_snv_annotation) {
+    if(!params.skip_annotate_snvs) {
 
         // Annotates family VCFs per variant call region
-        SNV_ANNOTATION(
+        ANNOTATE_SNVS(
             CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
@@ -407,9 +407,9 @@ workflow NALLO {
             ch_cadd_resources,
             ch_cadd_prescored_indels
         )
-        ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
+        ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
-        SNV_ANNOTATION.out.vcf
+        ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
                 clinical: [ meta + [ set: "clinical" ], vcf ]
                 research: [ meta + [ set: "research" ], vcf ]
