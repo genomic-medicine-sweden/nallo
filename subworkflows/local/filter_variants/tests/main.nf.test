@@ -45,8 +45,8 @@ nextflow_workflow {
             }
         }
 
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
+        run("CALL_SNVS") {
+            script "../../call_snvs/main.nf"
             process {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
@@ -77,7 +77,7 @@ nextflow_workflow {
             script "../../snv_annotation/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[0] = CALL_SNVS.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]

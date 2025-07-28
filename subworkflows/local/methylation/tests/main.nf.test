@@ -36,8 +36,8 @@ nextflow_workflow {
                 """
             }
         }
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
+        run("CALL_SNVS") {
+            script "../../call_snvs/main.nf"
             process {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
@@ -57,8 +57,8 @@ nextflow_workflow {
             script "../../phasing/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.snp_calls_vcf
-                input[1] = SHORT_VARIANT_CALLING.out.snp_calls_tbi
+                input[0] = CALL_SNVS.out.snp_calls_vcf
+                input[1] = CALL_SNVS.out.snp_calls_tbi
                 input[2] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
                             .map { meta, bam, bai ->

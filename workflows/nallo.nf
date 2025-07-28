@@ -30,7 +30,7 @@ include { QC_ALIGNED_READS                            } from '../subworkflows/lo
 include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING                       } from '../subworkflows/local/short_variant_calling'
+include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
 include { SNV_ANNOTATION                              } from '../subworkflows/local/snv_annotation'
 
 /*
@@ -364,26 +364,26 @@ workflow NALLO {
         // This subworkflow calls SNVs with DeepVariant and outputs:
         // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
         // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
-        SHORT_VARIANT_CALLING (
+        CALL_SNVS (
             ch_snv_calling_in,
             ch_fasta,
             ch_fai,
             SCATTER_GENOME.out.bed,
             ch_par
         )
-        ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // SNV QC
-        SHORT_VARIANT_CALLING.out.snp_calls_vcf
-            .join(SHORT_VARIANT_CALLING.out.snp_calls_tbi)
+        CALL_SNVS.out.snp_calls_vcf
+            .join(CALL_SNVS.out.snp_calls_tbi)
             .set { ch_snv_stats_in }
 
         BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
-        SHORT_VARIANT_CALLING.out.family_bcf
-            .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
+        CALL_SNVS.out.family_bcf
+            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -394,7 +394,7 @@ workflow NALLO {
 
         // Annotates family VCFs per variant call region
         SNV_ANNOTATION(
-            SHORT_VARIANT_CALLING.out.family_bcf,
+            CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai.map { name, fai -> [ [ id: name ], fai ] },
@@ -538,7 +538,7 @@ workflow NALLO {
         CALL_SVS (
             ch_bam_bai,
             ch_tandem_repeats,
-            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+            CALL_SNVS.out.snp_calls_vcf,
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
@@ -646,8 +646,8 @@ workflow NALLO {
     if(!params.skip_phasing) {
 
         PHASING (
-            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
-            SHORT_VARIANT_CALLING.out.snp_calls_tbi,
+            CALL_SNVS.out.snp_calls_vcf,
+            CALL_SNVS.out.snp_calls_tbi,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
