@@ -45,8 +45,8 @@ nextflow_workflow {
             }
         }
 
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
+        run("CALL_SNVS") {
+            script "../../call_snvs/main.nf"
             process {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
@@ -73,11 +73,11 @@ nextflow_workflow {
                 """
             }
         }
-        run("SNV_ANNOTATION") {
-            script "../../snv_annotation/main.nf"
+        run("ANNOTATE_SNVS") {
+            script "../../annotate_snvs/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
+                input[0] = CALL_SNVS.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -103,7 +103,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SNV_ANNOTATION.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vcf
                 input[1] = Channel.of([[],[]])
                 input[2] = false
                 """
@@ -127,7 +127,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SNV_ANNOTATION.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vcf
                 input[1] = Channel.of('HGNC:4826')
                     .collectFile(name: 'hgnc_ids.txt')
                     .map { file -> [ [ id: 'hgnc_ids' ], file ] }

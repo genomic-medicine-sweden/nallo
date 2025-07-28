@@ -1,8 +1,8 @@
 nextflow_workflow {
 
-    name "Test Workflow SNV_ANNOTATION"
+    name "Test Workflow ANNOTATE_SNVS"
     script "../main.nf"
-    workflow "SNV_ANNOTATION"
+    workflow "ANNOTATE_SNVS"
     config "./nextflow.config"
 
     setup {
@@ -43,8 +43,8 @@ nextflow_workflow {
                 """
             }
         }
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
+        run("CALL_SNVS") {
+            script "../../call_snvs/main.nf"
             process {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam
@@ -83,7 +83,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -122,7 +122,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = Channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
@@ -163,7 +163,7 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]

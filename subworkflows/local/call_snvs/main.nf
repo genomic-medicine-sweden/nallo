@@ -10,7 +10,7 @@ include { DEEPVARIANT_RUNDEEPVARIANT                  } from '../../../modules/n
 include { DEEPVARIANT_VCFSTATSREPORT                  } from '../../../modules/nf-core/deepvariant/vcfstatsreport/main'
 include { GLNEXUS                                     } from '../../../modules/nf-core/glnexus/main'
 
-workflow SHORT_VARIANT_CALLING {
+workflow CALL_SNVS {
 
     take:
     ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_region_bed) ]

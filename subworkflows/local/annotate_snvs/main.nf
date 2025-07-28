@@ -4,7 +4,7 @@ include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO } from '../../../modules/l
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV            } from '../../../modules/nf-core/ensemblvep/vep/main'
 include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV         } from '../../../modules/nf-core/tabix/tabix/main'
 
-workflow SNV_ANNOTATION {
+workflow ANNOTATE_SNVS {
 
     take:
     ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]

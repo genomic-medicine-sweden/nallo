@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow SHORT_VARIANT_CALLING"
+    name "Test Workflow CALL_SNVS"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "SHORT_VARIANT_CALLING"
+    workflow "CALL_SNVS"
 
     test("1 sample - no bed, fasta, fai, [], []") {
 

@@ -25,13 +25,13 @@ include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/lo
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
 include { METHYLATION                                 } from '../subworkflows/local/methylation'
 include { PHASING                                     } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                              } from '../subworkflows/local/prepare_genome'
+include { PREPARE_REFERENCES                              } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
 include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING                       } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION                              } from '../subworkflows/local/snv_annotation'
+include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
+include { ANNOTATE_SNVS                              } from '../subworkflows/local/annotate_snvs'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,18 +125,18 @@ workflow NALLO {
 
         // The genome assembly alignment needs a fai for cram output,
         // but we shouldn't need to prepare the vep cache here.
-        // Perhaps PREPARE_GENOME could be modified to handle this case?
-        PREPARE_GENOME (
+        // Perhaps PREPARE_REFERENCES could be modified to handle this case?
+        PREPARE_REFERENCES (
             ch_fasta,
             ch_vep_cache_unprocessed,
             params.fasta.endsWith('.gz'),                           // should we unzip fasta
             params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
-        ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
+        ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
 
         // Gather indices
-        ch_fasta = PREPARE_GENOME.out.fasta
-        ch_fai   = PREPARE_GENOME.out.fai
+        ch_fasta = PREPARE_REFERENCES.out.fasta
+        ch_fai   = PREPARE_REFERENCES.out.fai
     }
 
     // Convert FASTQ to BAM only if alignment or should be done.
@@ -219,7 +219,7 @@ workflow NALLO {
         //
         MINIMAP2_ALIGN (
             params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
-            PREPARE_GENOME.out.mmi,
+            PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
             false,
@@ -364,26 +364,26 @@ workflow NALLO {
         // This subworkflow calls SNVs with DeepVariant and outputs:
         // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
         // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
-        SHORT_VARIANT_CALLING (
+        CALL_SNVS (
             ch_snv_calling_in,
             ch_fasta,
             ch_fai,
             SCATTER_GENOME.out.bed,
             ch_par
         )
-        ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // SNV QC
-        SHORT_VARIANT_CALLING.out.snp_calls_vcf
-            .join(SHORT_VARIANT_CALLING.out.snp_calls_tbi)
+        CALL_SNVS.out.snp_calls_vcf
+            .join(CALL_SNVS.out.snp_calls_tbi)
             .set { ch_snv_stats_in }
 
         BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
-        SHORT_VARIANT_CALLING.out.family_bcf
-            .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
+        CALL_SNVS.out.family_bcf
+            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -393,12 +393,12 @@ workflow NALLO {
     if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
-        SNV_ANNOTATION(
-            SHORT_VARIANT_CALLING.out.family_bcf,
+        ANNOTATE_SNVS(
+            CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai.map { name, fai -> [ [ id: name ], fai ] },
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
             (params.cadd_resources && params.cadd_prescored_indels),
@@ -407,9 +407,9 @@ workflow NALLO {
             ch_cadd_resources,
             ch_cadd_prescored_indels
         )
-        ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
+        ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
-        SNV_ANNOTATION.out.vcf
+        ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
                 clinical: [ meta + [ set: "clinical" ], vcf ]
                 research: [ meta + [ set: "research" ], vcf ]
@@ -538,7 +538,7 @@ workflow NALLO {
         CALL_SVS (
             ch_bam_bai,
             ch_tandem_repeats,
-            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
+            CALL_SNVS.out.snp_calls_vcf,
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
@@ -563,7 +563,7 @@ workflow NALLO {
             CALL_SVS.out.family_vcf,
             ch_fasta,
             ch_svdb_sv_databases,
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect()
         )
@@ -646,8 +646,8 @@ workflow NALLO {
     if(!params.skip_phasing) {
 
         PHASING (
-            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
-            SHORT_VARIANT_CALLING.out.snp_calls_tbi,
+            CALL_SNVS.out.snp_calls_vcf,
+            CALL_SNVS.out.snp_calls_tbi,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
