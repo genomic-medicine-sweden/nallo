@@ -396,7 +396,7 @@ workflow NALLO {
     //
     // Annotate SNVs
     //
-    if(!params.skip_annotate_snvs) {
+    if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
