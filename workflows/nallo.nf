@@ -25,7 +25,7 @@ include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/lo
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
 include { METHYLATION                                 } from '../subworkflows/local/methylation'
 include { PHASING                                     } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                              } from '../subworkflows/local/prepare_genome'
+include { PREPARE_REFERENCES                              } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
 include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
@@ -125,18 +125,18 @@ workflow NALLO {
 
         // The genome assembly alignment needs a fai for cram output,
         // but we shouldn't need to prepare the vep cache here.
-        // Perhaps PREPARE_GENOME could be modified to handle this case?
-        PREPARE_GENOME (
+        // Perhaps PREPARE_REFERENCES could be modified to handle this case?
+        PREPARE_REFERENCES (
             ch_fasta,
             ch_vep_cache_unprocessed,
             params.fasta.endsWith('.gz'),                           // should we unzip fasta
             params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
-        ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
+        ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
 
         // Gather indices
-        ch_fasta = PREPARE_GENOME.out.fasta
-        ch_fai   = PREPARE_GENOME.out.fai
+        ch_fasta = PREPARE_REFERENCES.out.fasta
+        ch_fai   = PREPARE_REFERENCES.out.fai
     }
 
     // Convert FASTQ to BAM only if alignment or should be done.
@@ -219,7 +219,7 @@ workflow NALLO {
         //
         MINIMAP2_ALIGN (
             params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
-            PREPARE_GENOME.out.mmi,
+            PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
             false,
@@ -398,7 +398,7 @@ workflow NALLO {
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai.map { name, fai -> [ [ id: name ], fai ] },
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
             (params.cadd_resources && params.cadd_prescored_indels),
@@ -563,7 +563,7 @@ workflow NALLO {
             CALL_SVS.out.family_vcf,
             ch_fasta,
             ch_svdb_sv_databases,
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect()
         )

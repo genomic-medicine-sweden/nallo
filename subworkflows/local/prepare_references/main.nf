@@ -3,7 +3,7 @@ include { MINIMAP2_INDEX           } from '../../../modules/nf-core/minimap2/ind
 include { SAMTOOLS_FAIDX           } from '../../../modules/nf-core/samtools/faidx/main'
 include { UNTAR as UNTAR_VEP_CACHE } from '../../../modules/nf-core/untar/main'
 
-workflow PREPARE_GENOME {
+workflow PREPARE_REFERENCES {
 
     take:
     fasta_in                   // channel: [ val(meta), path(fasta) ]
