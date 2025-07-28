@@ -80,6 +80,13 @@ jobs:
       - name: Clean up Disk space
         if: startsWith(matrix.tag, 'samplesheet') # Bit hacky way to avoid running this on every test
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          android: true
+          dotnet: false
+          haskell: false
+          large-packages: false
+          docker-images: false
+          swap-storage: false
 
       - name: Run nf-test
         uses: ./.github/actions/nf-test
