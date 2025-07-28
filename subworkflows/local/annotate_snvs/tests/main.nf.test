@@ -99,6 +99,47 @@ nextflow_workflow {
                 input[9] = Channel.value([])
                 input[10] = null
                 input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.tbi.get(0).get(1)).name,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bcf, db, vep_cache, '110', filter before vep") {
+
+        when {
+            workflow {
+                """
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                ]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = Channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = true
                 """
             }
         }
@@ -118,6 +159,44 @@ nextflow_workflow {
     }
 
     test("bcf, [], vep_cache, '110' - no echtvar annotation") {
+        tag "h"
+        when {
+            workflow {
+                """
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[1] = Channel.value([])
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = false
+                input[9] = Channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.tbi.get(0).get(1)).name,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep") {
 
         when {
             workflow {
@@ -136,6 +215,7 @@ nextflow_workflow {
                 input[9] = Channel.value([])
                 input[10] = null
                 input[11] = null
+                input[12] = true
                 """
             }
         }
@@ -179,6 +259,59 @@ nextflow_workflow {
                 input[9] = Channel.value([])
                 input[10] = null
                 input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.versions,
+                    workflow.out.tbi,
+                    workflow.out.vcf
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bcf, db, vep_cache, '110', -stub with CADD") {
+
+        options "-stub"
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                ]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = Channel.of([
+                    [ id: 'test' ],
+                    file("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true)
+                ])
+                input[10] = Channel.of([
+                    [ id: 'test' ],
+                    file("$projectDir/assets/", checkIfExists: true)
+                ])
+                input[11] = Channel.of([
+                    [ id: 'test' ],
+                    file("$projectDir/docs/", checkIfExists: true)
+                ])
+                input[12] = false
                 """
             }
         }

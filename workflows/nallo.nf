@@ -365,7 +365,6 @@ workflow NALLO {
         // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
         // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         CALL_SNVS (
-        CALL_SNVS (
             ch_snv_calling_in,
             ch_fasta,
             ch_fai,
@@ -373,11 +372,8 @@ workflow NALLO {
             ch_par
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
-        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // SNV QC
-        CALL_SNVS.out.snp_calls_vcf
-            .join(CALL_SNVS.out.snp_calls_tbi)
         CALL_SNVS.out.snp_calls_vcf
             .join(CALL_SNVS.out.snp_calls_tbi)
             .set { ch_snv_stats_in }
@@ -386,8 +382,6 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
-        CALL_SNVS.out.family_bcf
-            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
         CALL_SNVS.out.family_bcf
             .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
@@ -407,11 +401,12 @@ workflow NALLO {
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
-            (params.cadd_resources && params.cadd_prescored_indels),
+            params.cadd_resources && params.cadd_prescored_indels,
             params.echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
-            ch_cadd_prescored_indels
+            ch_cadd_prescored_indels,
+            params.pre_vep_snv_filter_expression != ''
         )
         ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 

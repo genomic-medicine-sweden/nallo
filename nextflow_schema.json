@@ -615,6 +615,11 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to hifiasm, used for test profile."
+                },
+                "pre_vep_snv_filter_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". Since this filtering takes place during the annotation, the expression applies to both the clinical and the research VCFs."
                 }
             },
             "required": ["preset"]

@@ -1,8 +1,7 @@
 {
-    "bcf, db, vep_cache, '110', -stub": {
+    "bcf, db, vep_cache, '110', -stub with CADD": {
         "content": [
             [
-                "versions.yml:md5,0270a26369a5b97ee19fd15400502442",
                 "versions.yml:md5,6bdd1355c6de060367f50ffb5680d786",
                 "versions.yml:md5,81c3ff9e5e59ed617d4e1f20ffb3f72a",
                 "versions.yml:md5,8da1323d9b58551409825bee6d7d78bd"
