@@ -31,7 +31,7 @@ include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/lo
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
 include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
-include { ANNOTATE_SNVS                              } from '../subworkflows/local/annotate_snvs'
+include { SNV_ANNOTATION                              } from '../subworkflows/local/snv_annotation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -365,6 +365,7 @@ workflow NALLO {
         // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
         // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         CALL_SNVS (
+        CALL_SNVS (
             ch_snv_calling_in,
             ch_fasta,
             ch_fai,
@@ -372,8 +373,11 @@ workflow NALLO {
             ch_par
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
+        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // SNV QC
+        CALL_SNVS.out.snp_calls_vcf
+            .join(CALL_SNVS.out.snp_calls_tbi)
         CALL_SNVS.out.snp_calls_vcf
             .join(CALL_SNVS.out.snp_calls_tbi)
             .set { ch_snv_stats_in }
@@ -382,6 +386,8 @@ workflow NALLO {
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
+        CALL_SNVS.out.family_bcf
+            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
         CALL_SNVS.out.family_bcf
             .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
@@ -393,7 +399,7 @@ workflow NALLO {
     if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
-        ANNOTATE_SNVS(
+        SNV_ANNOTATION(
             CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
