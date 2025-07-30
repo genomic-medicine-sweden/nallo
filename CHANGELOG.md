@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
 - [#737](https://github.com/genomic-medicine-sweden/nallo/pull/737) - Added nf-test for `PREPARE_REFERENCES`
+- [#738](https://github.com/genomic-medicine-sweden/nallo/pull/738) - Added nf-test for `QC_ALIGNED_READS`
 
 ### `Changed`
 
