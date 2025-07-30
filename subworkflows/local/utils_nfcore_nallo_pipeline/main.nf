@@ -598,17 +598,17 @@ def isChild(sample, maternal_ids, paternal_ids) {
     childHasFather (sample, paternal_ids)
 }
 
+def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
+    childHasMother(sample, maternal_ids) &&
+    childHasFather(sample, paternal_ids)
+}
+
 def childHasMother(sample, maternal_ids) {
     isNonZeroNonEmpty(sample.maternal_id) && (sample.maternal_id in maternal_ids)
 }
 
 def childHasFather(sample, paternal_ids) {
     isNonZeroNonEmpty(sample.paternal_id) && (sample.paternal_id in paternal_ids)
-}
-
-def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
-    childHasMother(sample, maternal_ids) &&
-    childHasFather(sample, paternal_ids)
 }
 
 def isFemale(sample) {
