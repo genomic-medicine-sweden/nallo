@@ -32,6 +32,9 @@ tool:
   busybox_awk:
     citation: "BusyBox's awk"
     bibliography: ""
+  cat:
+    citation: "cat (GNU coreutils)"
+    bibliography: ""
   cadd:
     citation: "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)"
     bibliography: "Rentzsch P, Schubach M, Shendure J, Kircher M. CADD-Splice—improving genome-wide variant effect prediction using deep learning-derived splice scores. Genome Med. 2021;13(1):31. doi:10.1186/s13073-021-00835-9"

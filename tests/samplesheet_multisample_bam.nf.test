@@ -13,6 +13,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 filter_variants_hgnc_ids     = null
+                hifiasm_mode                 = 'trio-binning'
                 phaser                       = "hiphase"
                 sv_callers                   = "severus,hificnv"
                 sv_callers_to_run            = "severus,hificnv,sniffles"

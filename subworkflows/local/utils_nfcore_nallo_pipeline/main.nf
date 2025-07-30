@@ -168,7 +168,9 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
     Channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(
+            samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
+        )
         .ifEmpty { error "Error: No samples found in samplesheet." }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
@@ -176,6 +178,7 @@ workflow PIPELINE_INITIALISATION {
         .groupTuple() // group by sample
         .map {
             validateUniqueFilenamesPerSample(it)
+            validateUniqueSampleIDs(it)
         }
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
@@ -205,6 +208,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that mothers are female, and fathers are male
         validateParentalSex(ch_samplesheet)
+
+        // Check that the parents are present in the samplesheet
+        validateParentExistsInFamily(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -282,6 +288,23 @@ def validateUniqueFilenamesPerSample(input) {
     if (fileNames.size() != fileNames.unique().size()) {
         error "Error: Input filenames needs to be unique for each sample."
     }
+
+    return input
+}
+
+//
+// The genome assembly workflow requires that each sample has a unique ID
+//
+def validateUniqueSampleIDs(input) {
+    def sample = input[0]
+    def metas = input[1].collect()
+    def family = metas.collect { it.family_id }.unique()
+
+    if (family.size() > 1) {
+        error "Sample '${sample}' belongs to multiple families: ${family}. " +
+              "Please make sure that each sample belongs to a single family."
+    }
+
     return input
 }
 
@@ -569,6 +592,39 @@ def validateSVCallingParameters() {
     }
 }
 
+//
+// Validate that the parents of a sample exists in the family (required by e.g. genmod)
+//
+def validateParentExistsInFamily(input) {
+    input
+        .map { meta, _reads ->
+            [ meta.family_id, meta ]
+        }
+        .groupTuple()
+        .map { family_id, metas ->
+            def sampleIds = metas.collect { it.id } as Set
+
+            metas.each { meta ->
+                def errors = []
+
+                def maternal_id = meta.maternal_id
+                def paternal_id = meta.paternal_id
+
+                if (isNonZeroNonEmpty(maternal_id) && !(maternal_id in sampleIds)) {
+                    errors <<  "maternal_id set to ${maternal_id}"
+                }
+                if (isNonZeroNonEmpty(paternal_id) && !(paternal_id in sampleIds)) {
+                    errors << "paternal_id set to ${paternal_id}"
+                }
+
+                if (errors) {
+                    error "ERROR: Sample ${meta.id} has " + errors.join(' and ') + ", but they are not present in the family ${family_id}. " +
+                          "Please check the samplesheet and correct the parental IDs, or remove them from the sample."
+                }
+            }
+        }
+}
+
 def validateParentalSex(input) {
     input
         .map { meta, _reads ->
@@ -593,17 +649,42 @@ def addRelationshipsToMeta(samples) {
 
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
+<<<<<<< HEAD
     def parents_ids = maternal_ids + paternal_ids
     def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
                            samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+=======
+>>>>>>> 2f4db44 (Refactor genome assembly)
 
     samples.each { sample ->
         sample.relationship = sample.id in grandparents_ids ? 'unknown' :
                               sample.id in maternal_ids ? 'mother' :
                               sample.id in paternal_ids ? 'father' :
                               isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+
+        sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
+
+        // Find children of this specific parent
+        def children_of_sample = getChildrenForParent(samples, sample.id)
+
+        sample.children = isParent(sample) ? children_of_sample.collect{ it.id }.unique() : []
+
+        // For those children, check if they have a father or mother
+        if (sample.relationship == 'mother') {
+            sample.has_other_parent = children_of_sample.any { child -> childHasFather(child, paternal_ids) }
+        } else if (sample.relationship == 'father') {
+            sample.has_other_parent = children_of_sample.any { child -> childHasMother(child, maternal_ids) }
+        } else {
+            sample.has_other_parent = false
+        }
+
     }
 
+}
+
+def getChildrenForParent(samples, parent_id) {
+    samples
+        .findAll { it.maternal_id == parent_id || it.paternal_id == parent_id }
 }
 
 def isChild(sample, maternal_ids, paternal_ids) {
@@ -625,6 +706,10 @@ def isFemale(sample) {
 
 def isMale(sample) {
     sample.sex == 1
+}
+
+def isParent(sample) {
+    sample.relationship == 'mother' || sample.relationship == 'father'
 }
 
 def boolean isNonZeroNonEmpty(value) {
