@@ -489,13 +489,12 @@ def validatePacBioLicense() {
     if (params.str_caller.matches('trgt')) {
         pacbio_tools += ['TRGT']
     }
-    if (!params.skip_call_paralogs) {
-        pacbio_tools += ['Paraphase']
-    }
+    if (pacbio_tools.isEmpty()) return
     if (params.preset == "ONT_R10") {
-        error "ERROR: ${pacbio_tools.join(', ')} may only be used with PacBio data."
+        log.error "${pacbio_tools.join(', ')} may only be used with PacBio data."
+        System.exit(1)
     } else {
-        log.warn """WARNING: ${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments."""
+        log.warn "${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments. "
     }
 }
 
