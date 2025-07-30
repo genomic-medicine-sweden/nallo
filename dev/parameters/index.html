@@ -604,14 +604,6 @@
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>skip_alignment</code></td>
 <td>Skip read mapping (alignment)</td>
 <td><code>boolean</code></td>
@@ -717,86 +709,326 @@
 <tbody>
 <tr>
 <td><code>input</code></td>
-<td>Path to comma-separated file containing information about the samples in the experiment.</td>
+<td>Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
+<tr>
+<td>in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td>True</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>outdir</code></td>
+<td>The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.</td>
+<td><code>string</code></td>
+<td></td>
+<td>True</td>
+<td></td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify this on the command line for every run.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>multiqc_title</code></td>
+<td>MultiQC report title. Printed as page header, used for filename if not otherwise specified.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>cadd_prescored_indels</code></td>
+<td>Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>cadd_resources</code></td>
+<td>Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>par_regions</code></td>
+<td>Provide a bed file of chrX and chrY PAR regions for DeepVariant</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tandem_repeats</code></td>
+<td>A tandem repeat BED file for sniffles</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>str_bed</code></td>
+<td>A BED file with repeats to be genotyped with TRGT</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>echtvar_snv_databases</code></td>
+<td>Path to a CSV/TSV/JSON/YAML file with echtvar databases to annotate SNVs with.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_sv_databases</code></td>
+<td>Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to a CSV/TSV/JSON/YAML file containing information about the databases used for</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>structural variant annotation.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stranger_repeat_catalog</code></td>
+<td>A variant catalog json-file for stranger</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>variant_consequences_snvs</code></td>
+<td>File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://ensembl.org/info/genome/variation/prediction/predicted_data.html</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>variant_consequences_svs</code></td>
+<td>File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://ensembl.org/info/genome/variation/prediction/predicted_data.html</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vep_cache</code></td>
+<td>A path to the VEP cache location</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>target_regions</code></td>
+<td>A BED file with regions of interest.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>methylation_call_regions</code></td>
+<td>A BED file with regions of interest for the methylation pileups. By default this is the same as <code>target_regions</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>snv_call_regions</code></td>
+<td>A BED file containing regions to limit SNV calling. By default this is the same as <code>target_regions</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sv_call_regions</code></td>
+<td>A BED file containging regions to filter SV calls. By default this is the same as <code>target_regions</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>qc_regions</code></td>
+<td>A BED file with regions of interest used in QC. By default this is the same as <code>target_regions</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>hificnv_expected_xy_cn</code></td>
+<td>A BED file containing expected copy number regions for XY samples.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>hificnv_expected_xx_cn</code></td>
+<td>A BED file containing expected copy number regions for XX samples.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>hificnv_excluded_regions</code></td>
+<td>A BED file specifying regions to exclude with HiFiCNV, such as centromeres.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>genmod_reduced_penetrance</code></td>
+<td>A file with gene ids that have reduced penetrance. For use with genmod.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>genmod_score_config_snvs</code></td>
+<td>A SNV rank model config file for genmod.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>genmod_score_config_svs</code></td>
+<td>A SV rank model config file for genmod.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>somalier_sites</code></td>
+<td>A VCF of known polymorphic sites for somalier</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>peddy_sites</code></td>
+<td>A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>alignment_output_format</code></td>
+<td>Output format for alignment files. Either <code>bam</code> or <code>cram</code></td>
+<td><code>string</code></td>
+<td>bam</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>modules_testdata_base_path</code></td>
+<td>Base URL or local path to location of modules test dataset files</td>
+<td><code>string</code></td>
+<td>https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/</td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>pipelines_testdata_base_path</code></td>
+<td>Base URL or local path to location of pipeline test dataset files</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/</td>
+<td></td>
+<td>True</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>trace_report_suffix</code></td>
+<td>Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
 </tbody>
 </table>
-<details><summary>Help</summary><small>You will need to create a design file with information about the
-samples in your experiment before running the pipeline. Use this parameter to specify its location. It
-has to be a comma-separated file with 3 columns, and a header row.</small></details>
-<p>| <code>string</code> |  |<br />
-True |  |<br />
-| <code>outdir</code> | The output directory where the results will be saved. You have to use absolute paths to<br />
-storage on Cloud infrastructure. | <code>string</code> |  | True |  |<br />
-| <code>email</code> | Email address for completion summary. <details><summary>Help</summary><small>Set this<br />
-parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the<br />
-workflow exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify<br />
-this on the command line for every run.</small></details>| <code>string</code> |  |  |  |<br />
-| <code>multiqc_title</code> | MultiQC report title. Printed as page header, used for filename if not otherwise<br />
-specified. | <code>string</code> |  |  |  |<br />
-| <code>cadd_prescored_indels</code> | Path to a directory containing prescored indels for CADD.  </p>
-<details><summary>Help</summary><small>This folder contains the compressed files and indexes that would
-otherwise be in data/prescored folder as described in  
-https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>
-<p>| <code>string</code> |  |  |  |
-| <code>cadd_resources</code> | Path to a directory containing CADD annotations.  </p>
-<details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise
-be in data/annotation folder as described in  
-https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details>
-<p>| <code>string</code> |  |  |  |
-| <code>par_regions</code> | Provide a bed file of chrX and chrY PAR regions for DeepVariant | <code>string</code> |  |  |  |
-| <code>tandem_repeats</code> | A tandem repeat BED file for sniffles | <code>string</code> |  |  |  |<br />
-| <code>str_bed</code> | A BED file with repeats to be genotyped with TRGT | <code>string</code> |  |  |  |<br />
-| <code>echtvar_snv_databases</code> | Path to a CSV/TSV/JSON/YAML file with echtvar databases to annotate SNVs<br />
-with. | <code>string</code> |  |  |  |<br />
-| <code>svdb_sv_databases</code> | Databases used for structural variant annotation in vcf format.  </p>
-<details><summary>Help</summary><small>Path to a CSV/TSV/JSON/YAML file containing information about  
-the databases used for structural variant annotation.</small></details>
-<p>| <code>string</code> |  |  |  |<br />
-| <code>stranger_repeat_catalog</code> | A variant catalog json-file for stranger | <code>string</code> |  |  |  |<br />
-| <code>variant_consequences_snvs</code> | File containing list of SO terms listed in the order of severity from<br />
-most severe to lease severe for annotating genomic SNVs. For more information check<br />
-https://ensembl.org/info/genome/variation/prediction/predicted_data.html | <code>string</code> |  |  |  |<br />
-| <code>variant_consequences_svs</code> | File containing list of SO terms listed in the order of severity from<br />
-most severe to lease severe for annotating genomic SVs. For more information check<br />
-https://ensembl.org/info/genome/variation/prediction/predicted_data.html | <code>string</code> |  |  |  |<br />
-| <code>vep_cache</code> | A path to the VEP cache location | <code>string</code> |  |  |  |<br />
-| <code>target_regions</code> | A BED file with regions of interest. | <code>string</code> |  |  |  |<br />
-| <code>methylation_call_regions</code> | A BED file with regions of interest for the methylation pileups. By<br />
-default this is the same as <code>target_regions</code>. | <code>string</code> |  |  |  |<br />
-| <code>snv_call_regions</code> | A BED file containing regions to limit SNV calling. By default this is the same
-as <code>target_regions</code>. | <code>string</code> |  |  |  |<br />
-| <code>sv_call_regions</code> | A BED file containging regions to filter SV calls. By default this is the same as
-<code>target_regions</code>. | <code>string</code> |  |  |  |<br />
-| <code>qc_regions</code> | A BED file with regions of interest used in QC. By default this is the same as<br />
-<code>target_regions</code>. | <code>string</code> |  |  |  |<br />
-| <code>hificnv_expected_xy_cn</code> | A BED file containing expected copy number regions for XY samples. |<br />
-<code>string</code> |  |  |  |<br />
-| <code>hificnv_expected_xx_cn</code> | A BED file containing expected copy number regions for XX samples. |<br />
-<code>string</code> |  |  |  |<br />
-| <code>hificnv_excluded_regions</code> | A BED file specifying regions to exclude with HiFiCNV, such as<br />
-centromeres. | <code>string</code> |  |  |  |<br />
-| <code>genmod_reduced_penetrance</code> | A file with gene ids that have reduced penetrance. For use with genmod.
-| <code>string</code> |  |  |  |<br />
-| <code>genmod_score_config_snvs</code> | A SNV rank model config file for genmod. | <code>string</code> |  |  |  |<br />
-| <code>genmod_score_config_svs</code> | A SV rank model config file for genmod. | <code>string</code> |  |  |  |<br />
-| <code>somalier_sites</code> | A VCF of known polymorphic sites for somalier | <code>string</code> |  |  |  |<br />
-| <code>peddy_sites</code> | A file path to a VCF of known polymorphic sites for peddy. You may need to create a<br />
-custom sites file if you have incomplete or targeted data. | <code>string</code> |  |  |  |<br />
-| <code>alignment_output_format</code> | Output format for alignment files. Either <code>bam</code> or <code>cram</code> | <code>string</code> |<br />
-bam |  |  |<br />
-| <code>modules_testdata_base_path</code> | Base URL or local path to location of modules test dataset files |<br />
-<code>string</code> | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |<br />
-| <code>pipelines_testdata_base_path</code> | Base URL or local path to location of pipeline test dataset files |
-<code>string</code> |<br />
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0a
-cda1e464e/ |  | True |<br />
-| <code>trace_report_suffix</code> | Suffix to add to the trace report filename. Default is the date and time in<br />
-the format yyyy-MM-dd_HH-mm-ss. | <code>string</code> |  |  | True |  </p>
 <h2 id="reference-genome-options">Reference genome options</h2>
 <p>Reference genome related files and options required for the workflow.  </p>
 <table>
@@ -845,26 +1077,70 @@ the format yyyy-MM-dd_HH-mm-ss. | <code>string</code> |  |  | True |  </p>
 </tr>
 <tr>
 <td><code>custom_config_base</code></td>
-<td>Base directory for Institutional configs.</td>
+<td>Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
+<tr>
+<td>internet. If you don't need them, then this is not a problem. If you do need them, you should download the files from the repo and tell Nextflow where to find them with this parameter.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://raw.githubusercontent.com/nf-core/configs/master</td>
+<td></td>
+<td>True</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>config_profile_name</code></td>
+<td>Institutional config name.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>config_profile_description</code></td>
+<td>Institutional config description.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>config_profile_contact</code></td>
+<td>Institutional config contact information.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>config_profile_url</code></td>
+<td>Institutional config URL link.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>publish_unannotated_family_svs</code></td>
+<td>Publish unannotated SVs and CNVs per family and caller.</td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
 </tbody>
 </table>
-<details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch  
-the institutional config files from the internet. If you don't need them, then this is not a problem.  
-If you do need them, you should download the files from the repo and tell Nextflow where to find them  
-with this parameter.</small></details>
-<p>| <code>string</code> |<br />
-https://raw.githubusercontent.com/nf-core/configs/master |  | True |<br />
-| <code>config_profile_name</code> | Institutional config name. | <code>string</code> |  |  | True |<br />
-| <code>config_profile_description</code> | Institutional config description. | <code>string</code> |  |  | True |<br />
-| <code>config_profile_contact</code> | Institutional config contact information. | <code>string</code> |  |  | True |<br />
-| <code>config_profile_url</code> | Institutional config URL link. | <code>string</code> |  |  | True |<br />
-| <code>publish_unannotated_family_svs</code> | Publish unannotated SVs and CNVs per family and caller. |<br />
-<code>boolean</code> |  |  | True |  </p>
 <h2 id="generic-options">Generic options</h2>
 <p>Less common options for the pipeline, typically set in a config file.  </p>
 <table>
@@ -889,39 +1165,118 @@ https://raw.githubusercontent.com/nf-core/configs/master |  | True |<br />
 </tr>
 <tr>
 <td><code>publish_dir_mode</code></td>
-<td>Method used to save pipeline results to output directory.</td>
+<td>Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
+<tr>
+<td>output directory. This option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>string</code></td>
+<td>copy</td>
+<td></td>
+<td>True</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>email_on_fail</code></td>
+<td>Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when the pipeline is completed - ONLY sent if</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>the pipeline does not exit successfully.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+<td></td>
+</tr>
+<tr>
+<td><code>plaintext_email</code></td>
+<td>Send plain-text email instead of HTML.</td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>max_multiqc_email_size</code></td>
+<td>File size limit when attaching MultiQC reports to summary emails.</td>
+<td><code>string</code></td>
+<td>25.MB</td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>monochrome_logs</code></td>
+<td>Do not use coloured log outputs.</td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>hook_url</code></td>
+<td>Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details></td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>True</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>multiqc_config</code></td>
+<td>Custom config file to supply to MultiQC.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>multiqc_logo</code></td>
+<td>Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>multiqc_methods_description</code></td>
+<td>Custom MultiQC yaml file containing HTML including a methods description.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>validate_params</code></td>
+<td>Boolean whether to validate parameters against the schema at runtime</td>
+<td><code>boolean</code></td>
+<td>True</td>
+<td></td>
+<td>True</td>
+</tr>
 </tbody>
 </table>
-<details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate  
-files should be saved to the output directory. This option tells the pipeline what method should be  
-used to move these files. See [Nextflow  
-docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details>
-<p>|<br />
-<code>string</code> | copy |  | True |<br />
-| <code>email_on_fail</code> | Email address for completion summary, only when pipeline fails.  </p>
-<details><summary>Help</summary><small>An email address to send a summary email to when the pipeline is
-completed - ONLY sent if the pipeline does not exit successfully.</small></details>
-<p>| <code>string</code> |  |  |<br />
-True |<br />
-| <code>plaintext_email</code> | Send plain-text email instead of HTML. | <code>boolean</code> |  |  | True |<br />
-| <code>max_multiqc_email_size</code> | File size limit when attaching MultiQC reports to summary emails. |<br />
-<code>string</code> | 25.MB |  | True |<br />
-| <code>monochrome_logs</code> | Do not use coloured log outputs. | <code>boolean</code> |  |  | True |<br />
-| <code>hook_url</code> | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming
-hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>|<br />
-<code>string</code> |  |  | True |<br />
-| <code>multiqc_config</code> | Custom config file to supply to MultiQC. | <code>string</code> |  |  | True |<br />
-| <code>multiqc_logo</code> | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC<br />
-config file | <code>string</code> |  |  | True |<br />
-| <code>multiqc_methods_description</code> | Custom MultiQC yaml file containing HTML including a methods<br />
-description. | <code>string</code> |  |  |  |<br />
-| <code>validate_params</code> | Boolean whether to validate parameters against the schema at runtime | <code>boolean</code>
-| True |  | True |  </p>
 <h2 id="workflow-options">Workflow options</h2>
 <p>Workflow options specific to genomic-medicine-sweden/nallo  </p>
 <table>
@@ -938,111 +1293,55 @@ description. | <code>string</code> |  |  |  |<br />
 <tbody>
 <tr>
 <td><code>preset</code></td>
-<td>Enable or disable certain parts of the pipeline by default, depending on data type</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>(<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>)</td>
+<td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>)</td>
 <td><code>string</code></td>
 <td>revio</td>
 <td>True</td>
 <td></td>
-<td></td>
 </tr>
 <tr>
 <td><code>sv_callers</code></td>
-<td>Which SV callers to use. Several callers can be specified, separated by commas (e.g.</td>
+<td>Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>calls when merging them if not overwritten by <code>sv_caller_priority</code>.</td>
+<td>when merging them if not overwritten by <code>sv_caller_priority</code>.</td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>sv_callers_merge_priority</code></td>
-<td>The order of the SV callers in this list will determine the priority of</td>
+<td>The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in <code>sv_callers</code> should also be specified</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>the calls when merging them. All callers that has been specified in <code>sv_callers</code> should also be</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
+<td>here separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>sv_callers_to_run</code></td>
-<td>Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv).</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>By default same as <code>--sv_callers</code></td>
+<td>Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>sv_callers_to_merge</code></td>
-<td>Which SV callers to merge into family VCFs (that are also used for annotation</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
-<td></td>
+<td>Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1068,15 +1367,7 @@ description. | <code>string</code> |  |  |  |<br />
 <td><code>str_caller</code></td>
 <td>Which caller to use for short tandem repeat expansions (TRGT or STRdust).</td>
 <td><code>string</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>trgt</td>
-<td></td>
-<td></td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -1089,26 +1380,10 @@ description. | <code>string</code> |  |  |  |<br />
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>hifiasm_mode</code></td>
 <td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>)</td>
 <td><code>string</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>hifi-only</td>
-<td></td>
-<td></td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -1121,42 +1396,18 @@ description. | <code>string</code> |  |  |  |<br />
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>alignment_processes</code></td>
-<td>If alignment_processes is bigger than 1, input files will be split and</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>aligned in parallel to reduce processing time.</td>
+<td>If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time.</td>
 <td><code>integer</code></td>
 <td>8</td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>snv_calling_processes</code></td>
-<td>If snv_calling_processes is bigger than 1, short variant calling will be</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>done in parallel to reduce processing time.</td>
+<td>If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.</td>
 <td><code>integer</code></td>
 <td>13</td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -1170,99 +1421,51 @@ description. | <code>string</code> |  |  |  |<br />
 </tr>
 <tr>
 <td><code>vep_plugin_files</code></td>
-<td>Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.</td>
+<td>Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.</td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>filter_variants_hgnc_ids</code></td>
-<td>A tsv/csv file with a <code>hgnc_ids</code> column header, and then one numerical</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>HGNC ID per row. E.g. <code>4281</code> or <code>HGNC:4281</code>.</td>
+<td>A tsv/csv file with a <code>hgnc_ids</code> column header, and then one numerical HGNC ID per row. E.g. <code>4281</code> or <code>HGNC:4281</code>.</td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>filter_snvs_expression</code></td>
-<td>An expression that is passed to bcftools view to filter SNVs, e.g.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</td>
+<td>An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ&gt;60'"</td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>filter_svs_expression</code></td>
-<td>An expression that is passed to bcftools view to filter SVs, e.g.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>--filter_svs_expression "-e 'INFO/AQ&gt;60'"</td>
+<td>An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ&gt;60'"</td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>deepvariant_model_type</code></td>
-<td>Sets the model type used for DeepVariant. This is set automatically using</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>--preset</code> by default.</td>
+<td>Sets the model type used for DeepVariant. This is set automatically using <code>--preset</code> by default.</td>
 <td><code>string</code></td>
 <td>PACBIO</td>
 <td></td>
 <td>True</td>
-<td></td>
 </tr>
 <tr>
 <td><code>minimap2_read_mapping_preset</code></td>
-<td>Sets the minimap2-preset (-x) for read alignment. This is set</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>automatically using the pipeline <code>--preset</code> by default.</td>
+<td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default.</td>
 <td><code>string</code></td>
 <td>map-hifi</td>
 <td></td>
 <td>True</td>
-<td></td>
 </tr>
 <tr>
 <td><code>extra_modkit_options</code></td>
@@ -1286,15 +1489,7 @@ description. | <code>string</code> |  |  |  |<br />
 <td><code>string</code></td>
 <td></td>
 <td></td>
-<td></td>
-</tr>
-<tr>
 <td>True</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td><code>extra_hifiasm_options</code></td>
@@ -1303,6 +1498,22 @@ description. | <code>string</code> |  |  |  |<br />
 <td></td>
 <td></td>
 <td>True</td>
+</tr>
+<tr>
+<td><code>pre_vep_snv_filter_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ&gt;60'". Since this filtering takes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>place during the annotation, the expression applies to both the clinical and the research VCFs.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
