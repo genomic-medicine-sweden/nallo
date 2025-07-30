@@ -329,7 +329,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 #### Filter variants
 
-This subworkflow filters SNVs and SVs to generate a "clinical" set of variants. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
+This subworkflow filters SNVs and SVs to generate a "clinical" set of variants before ranking. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
 
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -346,6 +346,10 @@ hgnc_id
 ```
 
 Filtering of variants only happens if any of these three parameters is active.
+
+!!!tip
+
+    The `pre_vep_snv_filter_expression` parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to _both_ the research and clinical VCFs.
 
 ### Target regions
 

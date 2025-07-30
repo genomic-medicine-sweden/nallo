@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Added a find-tests action to find all nf-tests to be run during CI
 - [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Added new parameters for finer-grained control over analysis regions
 - [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
+- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
 - [#737](https://github.com/genomic-medicine-sweden/nallo/pull/737) - Added nf-test for `PREPARE_REFERENCES`
 
 ### `Changed`
@@ -59,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed the CNV calling subworkflow
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed sample-level SV outputs
+- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
 
 ### `Fixed`
 
@@ -68,16 +70,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                 |
-| ------------- | ----------------------------- |
-| `--sv_caller` | `--sv_callers`                |
-|               | `--sv_callers_to_run`         |
-|               | `--sv_callers_to_merge`       |
-|               | `--sv_callers_merge_priority` |
-|               | `--methylation_call_regions`  |
-|               | `--snv_call_regions`          |
-|               | `--sv_call_regions`           |
-|               | `--qc_regions`                |
+| Old parameter | New parameter                     |
+| ------------- | --------------------------------- |
+| `--sv_caller` | `--sv_callers`                    |
+|               | `--sv_callers_to_run`             |
+|               | `--sv_callers_to_merge`           |
+|               | `--sv_callers_merge_priority`     |
+|               | `--methylation_call_regions`      |
+|               | `--snv_call_regions`              |
+|               | `--sv_call_regions`               |
+|               | `--qc_regions`                    |
+|               | `--pre_vep_snv_filter_expression` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

@@ -93,6 +93,7 @@ nextflow_workflow {
                 input[9] = Channel.value([])
                 input[10] = null
                 input[11] = null
+                input[12] = false
             """
             }
         }
