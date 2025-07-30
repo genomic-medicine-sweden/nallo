@@ -568,9 +568,10 @@ def validateParentalSex(input) {
         .map { meta, _reads ->
             def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
 
-            if ((meta.relationship == 'mother' && !isFemaleOrUnknown(meta)) ||
-                (meta.relationship == 'father' && !isMaleOrUnknown(meta))) {
-                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet."
+            if ((meta.relationship == 'mother' && !isFemale(meta)) ||
+                (meta.relationship == 'father' && !isMale(meta))) {
+                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet. " +
+                      "Please check the samplesheet and correct the sex or releationship."
             }
         }
 }
@@ -610,12 +611,12 @@ def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
     childHasFather(sample, paternal_ids)
 }
 
-def isFemaleOrUnknown(sample) {
-    sample.sex == 2 || sample.sex == 0
+def isFemale(sample) {
+    sample.sex == 2
 }
 
-def isMaleOrUnknown(sample) {
-    sample.sex == 1 || sample.sex == 0
+def isMale(sample) {
+    sample.sex == 1
 }
 
 def boolean isNonZeroNonEmpty(value) {
