@@ -60,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed the CNV calling subworkflow
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed sample-level SV outputs
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
+- [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
 
 ### `Fixed`
 
