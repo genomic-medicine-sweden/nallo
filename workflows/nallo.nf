@@ -401,11 +401,12 @@ workflow NALLO {
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
-            (params.cadd_resources && params.cadd_prescored_indels),
+            params.cadd_resources && params.cadd_prescored_indels,
             params.echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
-            ch_cadd_prescored_indels
+            ch_cadd_prescored_indels,
+            params.pre_vep_snv_filter_expression != ''
         )
         ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
