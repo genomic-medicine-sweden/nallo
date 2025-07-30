@@ -175,7 +175,7 @@ workflow PIPELINE_INITIALISATION {
         }
         .groupTuple() // group by sample
         .map {
-            validateInputSamplesheet(it)
+            validateUniqueFilenamesPerSample(it)
         }
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
@@ -185,6 +185,13 @@ workflow PIPELINE_INITIALISATION {
         .flatMap { _sample, meta, reads ->
             reads.collect { return [ meta, it ] }
         }
+        // Add relationships to meta
+        .map { meta, reads -> [ meta.family_id, meta, reads ] }
+        .groupTuple()
+        .map { _family, metas, reads ->
+            [ addRelationShipsToMeta(metas), reads ]
+        }
+        .transpose()
         .set { ch_samplesheet }
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
@@ -195,6 +202,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that the SV calling parameters are valid
         validateSVCallingParameters()
+
+        // Chech that mothers are female, and fathers are male
+        validateParentalSex(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -266,7 +276,7 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 //
 // Validate channels from input samplesheet
 //
-def validateInputSamplesheet(input) {
+def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
     def fileNames = input[2].collect { new File(it.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
@@ -551,4 +561,64 @@ def validateSVCallingParameters() {
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
     }
+}
+
+def validateParentalSex(input) {
+    input
+        .map { meta, _reads ->
+            def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
+
+            if ((meta.relationship == 'mother' && !isFemaleOrUnknown(meta)) ||
+                (meta.relationship == 'father' && !isMaleOrUnknown(meta))) {
+                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet."
+            }
+        }
+}
+
+def getParentalIds(samples, field) {
+    samples.collect { it[field] }.findAll { it != 0 && it }
+}
+
+def addRelationShipsToMeta(samples) {
+    def maternal_ids = getParentalIds(samples, 'maternal_id')
+    def paternal_ids = getParentalIds(samples, 'paternal_id')
+    samples.each { sample ->
+        sample.relationship = sample.id in maternal_ids ? 'mother' :
+                              sample.id in paternal_ids ? 'father' :
+                              isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+
+        sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
+    }
+
+}
+
+def isChild(sample, maternal_ids, paternal_ids) {
+    childHasMother (sample, maternal_ids) ||
+    childHasFather (sample, paternal_ids)
+}
+
+def childHasMother(sample, maternal_ids) {
+    isNonZeroNonEmpty(sample.maternal_id) && (sample.maternal_id in maternal_ids)
+}
+
+def childHasFather(sample, paternal_ids) {
+    isNonZeroNonEmpty(sample.paternal_id) && (sample.paternal_id in paternal_ids)
+}
+
+def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
+    childHasMother(sample, maternal_ids) &&
+    childHasFather(sample, paternal_ids)
+}
+
+def isFemaleOrUnknown(sample) {
+    sample.sex == 2 || sample.sex == 0
+}
+
+def isMaleOrUnknown(sample) {
+    sample.sex == 1 || sample.sex == 0
+}
+
+def boolean isNonZeroNonEmpty(value) {
+    (value instanceof String && value != "" && value != "0") ||
+    (value instanceof Number && value != 0)
 }
