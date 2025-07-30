@@ -535,7 +535,6 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        // If both SV annotation is off, merged variants are output from here
         CALL_SVS (
             ch_bam_bai,
             ch_tandem_repeats,
