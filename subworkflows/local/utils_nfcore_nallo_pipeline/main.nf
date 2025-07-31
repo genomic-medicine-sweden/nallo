@@ -577,7 +577,7 @@ def validateParentalSex(input) {
 }
 
 def getParentalIds(samples, field) {
-    samples.collect { it[field] }.findAll { it != 0 && it }
+    samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
 }
 
 def addRelationShipsToMeta(samples) {

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase": {
         "content": [
-            264,
+            263,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -146,9 +146,6 @@
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
-                },
-                "RELATE_INFER": {
-                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -700,10 +697,10 @@
                 "multiqc_bcftools_stats.txt:md5,9eb66ff9c18947da9234291cee075f7f",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,df4af39e3f160095dc1cc9806546ddfb",
-                "multiqc_general_stats.txt:md5,e89ec56c068046b655177801ac4686aa",
+                "multiqc_general_stats.txt:md5,5bc6803ef0b5e9a854caf8a965d3c4b9",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,a59c50c45256ebd3d8673366bfe13feb",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
-                "somalier_stats.txt:md5,018cf5322938687a3ac6a4222d3b2e7a",
+                "somalier_stats.txt:md5,b930120b5b3d2be0717e51eb33aa05a0",
                 "whatshap-stats-table.txt:md5,7371de64e8c77b90c83906dad6dc9529",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,9e13732788f7691b811b8b574bd673e5",
@@ -732,13 +729,13 @@
                 "HG004.regions.bed.gz.csi:md5,f0b31d73332a08874b4cb117e7240ddf",
                 "FAM.het_check.csv:md5,63131277ecd03f50814837dbbb62a994",
                 "FAM.het_check.png:md5,9d4eed0e449ae9176aa28d65aadc497c",
-                "FAM.html:md5,1f7190206ffae9febbda572822402b63",
+                "FAM.html:md5,5f4ff926217bf10dd601e4e06d3e67f2",
                 "FAM.ped_check.csv:md5,3deddf644e39dc7d758d366d72a85b49",
                 "FAM.ped_check.png:md5,123f6ef3aaef95b3998f034c7d044e36",
                 "FAM.ped_check.rel-difference.csv:md5,b7f4daf0366fe93f4d8e9708b52a2436",
-                "FAM.peddy.ped:md5,8e923d4c1aa0e121e3751ef89e99eae1",
-                "FAM.sex_check.csv:md5,5aadb68faa4f70ce8de3e670f16a1dd5",
-                "FAM.sex_check.png:md5,7ce5abf9248f0f1f0be8d14d682a905f",
+                "FAM.peddy.ped:md5,068344d053849276a8a0bdebf3556ea4",
+                "FAM.sex_check.csv:md5,71ae6b68418d47304a18d72c571d3a7a",
+                "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
                 "HG002_stats.blocks.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_stats.blocks.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
@@ -883,6 +880,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-28T17:11:28.877948874"
+        "timestamp": "2025-07-31T11:52:51.374511259"
     }
 }
