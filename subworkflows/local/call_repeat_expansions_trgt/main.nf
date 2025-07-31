@@ -90,4 +90,3 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     sample_bai  = SAMTOOLS_INDEX.out.bai // channel: [ val(meta), path(bai) ]
     versions = ch_versions               // channel: [ versions.yml ]
 }
-

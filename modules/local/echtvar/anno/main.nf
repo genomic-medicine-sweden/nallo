@@ -45,4 +45,3 @@ process ECHTVAR_ANNO {
     END_VERSIONS
     """
 }
-

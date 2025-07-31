@@ -1,4 +1,4 @@
-[![GitHub Actions CI Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/ci.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/ci.yml)
+[![GitHub Actions CI Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/nf-test.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/nf-test.yml)
 [![GitHub Actions Linting Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13748210.svg)](https://doi.org/10.5281/zenodo.13748210)
@@ -72,8 +72,9 @@ Prepare a samplesheet with input data:
 
 ```
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-NIST,HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
-NIST,HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
+ my_project,HG002,/path/to/HG002.fastq.gz,NIST,HG003,HG004,1,2
+ my_project,HG003,/path/to/HG003.bam,NIST,0,0,1,1
+ my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
 ```
 
 Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline using:
@@ -87,7 +88,7 @@ nextflow run genomic-medicine-sweden/nallo \
     --outdir <OUTDIR>
 ```
 
-For more details and further functionality, please refer to the [documentation](http://genomic-medicine-sweden.github.io/nallo/).
+However, to run most parts of the pipeline you will need to supply additional reference files. For more details and further functionality, please refer to the [documentation](http://genomic-medicine-sweden.github.io/nallo/).
 
 ## Credits
 

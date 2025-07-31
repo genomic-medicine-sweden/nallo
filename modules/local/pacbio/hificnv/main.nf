@@ -77,4 +77,3 @@ process HIFICNV {
     END_VERSIONS
     """
 }
-

@@ -9,29 +9,29 @@ include {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ALIGN_ASSEMBLIES                        } from '../subworkflows/local/align_assemblies'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV     } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS     } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_SVS                            } from '../subworkflows/local/annotate_svs'
-include { ASSEMBLY                                } from '../subworkflows/local/genome_assembly'
-include { CONVERT_INPUT_FILES                     } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                           } from '../subworkflows/local/bam_infer_sex'
-include { CALL_CNVS                               } from '../subworkflows/local/call_cnvs'
-include { CALL_PARALOGS                           } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS_STRDUST          } from '../subworkflows/local/call_repeat_expansions_strdust'
-include { CALL_REPEAT_EXPANSIONS_TRGT             } from '../subworkflows/local/call_repeat_expansions_trgt'
-include { CALL_SVS                                } from '../subworkflows/local/call_svs'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS } from '../subworkflows/local/filter_variants'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SVS  } from '../subworkflows/local/filter_variants'
-include { METHYLATION                             } from '../subworkflows/local/methylation'
-include { PHASING                                 } from '../subworkflows/local/phasing'
-include { PREPARE_GENOME                          } from '../subworkflows/local/prepare_genome'
-include { QC_ALIGNED_READS                        } from '../subworkflows/local/qc_aligned_reads'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV      } from '../subworkflows/local/rank_variants'
-include { RANK_VARIANTS as RANK_VARIANTS_SVS      } from '../subworkflows/local/rank_variants'
-include { SCATTER_GENOME                          } from '../subworkflows/local/scatter_genome'
-include { SHORT_VARIANT_CALLING                   } from '../subworkflows/local/short_variant_calling'
-include { SNV_ANNOTATION                          } from '../subworkflows/local/snv_annotation'
+include { ALIGN_ASSEMBLIES                            } from '../subworkflows/local/align_assemblies'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV         } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS         } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SVS                                } from '../subworkflows/local/annotate_svs'
+include { ASSEMBLY                                    } from '../subworkflows/local/genome_assembly'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS } from '../subworkflows/local/convert_input_files'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS   } from '../subworkflows/local/convert_input_files'
+include { BAM_INFER_SEX                               } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                               } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS_STRDUST              } from '../subworkflows/local/call_repeat_expansions_strdust'
+include { CALL_REPEAT_EXPANSIONS_TRGT                 } from '../subworkflows/local/call_repeat_expansions_trgt'
+include { CALL_SVS                                    } from '../subworkflows/local/call_svs'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/local/filter_variants'
+include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
+include { METHYLATION                                 } from '../subworkflows/local/methylation'
+include { PHASING                                     } from '../subworkflows/local/phasing'
+include { PREPARE_REFERENCES                              } from '../subworkflows/local/prepare_references'
+include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
+include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
+include { ANNOTATE_SNVS                              } from '../subworkflows/local/annotate_snvs'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,9 +85,11 @@ workflow NALLO {
     ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
     ch_fasta                     = createReferenceChannelFromPath(params.fasta)
     ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
-    ch_input_bed                 = createReferenceChannelFromPath(params.target_regions, Channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
-    ch_str_bed                  = createReferenceChannelFromPath(params.str_bed)
+    ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -99,11 +101,13 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
+    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-    ch_svdb_sv_databases         = createReferenceChannelFromPath(params.svdb_sv_databases)
+
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
+    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', Channel.value([]))
     ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
     ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', Channel.value([]))
         .map { it[0].toString() } // only one element per row
@@ -113,47 +117,109 @@ workflow NALLO {
 
     def cram_output = params.alignment_output_format == 'cram'
 
+
     //
-    // Convert FASTQ to BAM (and vice versa if assembly workflow is active)
+    // Prepare references
     //
-    CONVERT_INPUT_FILES (
-        ch_input,
-        !params.skip_genome_assembly, // should bam -> fastq conversion be done
-        !params.skip_alignment        // should fastq -> bam conversion be done
-    )
-    ch_versions = ch_versions.mix(CONVERT_INPUT_FILES.out.versions)
+    if(!params.skip_alignment || !params.skip_genome_assembly) {
+
+        // The genome assembly alignment needs a fai for cram output,
+        // but we shouldn't need to prepare the vep cache here.
+        // Perhaps PREPARE_REFERENCES could be modified to handle this case?
+        PREPARE_REFERENCES (
+            ch_fasta,
+            ch_vep_cache_unprocessed,
+            params.fasta.endsWith('.gz'),                           // should we unzip fasta
+            params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
+        )
+        ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
+
+        // Gather indices
+        ch_fasta = PREPARE_REFERENCES.out.fasta
+        ch_fai   = PREPARE_REFERENCES.out.fai
+    }
+
+    // Convert FASTQ to BAM only if alignment or should be done.
+    // Since we assume that the majority of pipeline runs will use BAM files as input,
+    // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
+    if(!params.skip_alignment) {
+
+        CONVERT_INPUT_FASTQS (
+            ch_input,
+            false,
+            true
+        )
+        ch_versions = ch_versions.mix(CONVERT_INPUT_FASTQS.out.versions)
+    }
+
+    // To speed up the alignement, we can split the BAM files into smaller chunks.
+    // We can also use the split BAM files for FASTQ conversion to the assembly workflow,
+    // instead of the original BAM files which should allow the assembly to start sooner.
+    //
+    // We could change the name of alignment processes to something more generic, like `--split_input_files`?
+    // If we start running more trios we also need to consider that the parents at the moment needs to be merged
+    // before YAK. So, we could consider adding some logic to handle that case,
+    // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
+    if(!params.skip_alignment && !params.skip_genome_assembly && params.alignment_processes > 1) {
+
+        SPLITUBAM (
+            CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
+        )
+
+        ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
+    }
+
+    //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if(!params.skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
+
+        CONVERT_INPUT_BAMS (
+            !params.skip_alignment && params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_input,
+            true,
+            false
+        )
+        ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
+
+        //Hifiasm assembly
+        ASSEMBLY(
+            CONVERT_INPUT_BAMS.out.fastq // contains all FASTQ files, including those not converted.
+        )
+        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+        ALIGN_ASSEMBLIES (
+            ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            cram_output
+        )
+        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
+    }
 
     //
     // Map reads to reference
     //
     if (!params.skip_alignment) {
 
-        // Prepare references
-        PREPARE_GENOME (
-            ch_fasta,
-            ch_vep_cache_unprocessed,
-            params.fasta.endsWith('.gz'),                           // should we unzip fasta
-            params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
-        )
-        ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-
-        // Gather indices
-        ch_fasta = PREPARE_GENOME.out.fasta
-        ch_fai   = PREPARE_GENOME.out.fai
-
-        // Split input files for alignment
-        if (params.alignment_processes > 1) {
-
-            SPLITUBAM ( CONVERT_INPUT_FILES.out.bam )
-            ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
-        }
-
         //
         // Align reads (could be a split-align-merge subworkflow)
         //
         MINIMAP2_ALIGN (
-            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FILES.out.bam,
-            PREPARE_GENOME.out.mmi,
+            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
+            PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
             false,
@@ -195,7 +261,7 @@ workflow NALLO {
             .set { ch_aligned_bam }
 
         // Publish alignments as CRAM if requested
-        if (cram_output) {
+        if (cram_output && params.skip_phasing) {
             SAMTOOLS_CONVERT (
                 ch_aligned_bam,
                 ch_fasta,
@@ -247,7 +313,7 @@ workflow NALLO {
         QC_ALIGNED_READS (
             ch_bam_bai,
             ch_fasta,
-            ch_input_bed
+            ch_qc_regions,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
@@ -271,26 +337,6 @@ workflow NALLO {
     }
 
     //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if(!params.skip_genome_assembly) {
-
-        //Hifiasm assembly
-        ASSEMBLY(
-            CONVERT_INPUT_FILES.out.fastq
-        )
-        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
-
-        ALIGN_ASSEMBLIES (
-            ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output
-        )
-        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
-    }
-
-    //
     // Call SNVs
     //
     if(!params.skip_snv_calling) {
@@ -300,8 +346,8 @@ workflow NALLO {
         //
         SCATTER_GENOME (
             ch_fai,
-            ch_input_bed,             // BED file to scatter
-            !params.target_regions,   // Make bed from fai
+            ch_snv_call_regions,      // BED file to scatter
+            !params.snv_call_regions, // Make bed from fai
             !params.skip_snv_calling,
             params.snv_calling_processes
         )
@@ -318,26 +364,26 @@ workflow NALLO {
         // This subworkflow calls SNVs with DeepVariant and outputs:
         // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
         // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
-        SHORT_VARIANT_CALLING (
+        CALL_SNVS (
             ch_snv_calling_in,
             ch_fasta,
             ch_fai,
             SCATTER_GENOME.out.bed,
             ch_par
         )
-        ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
+        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // SNV QC
-        SHORT_VARIANT_CALLING.out.snp_calls_vcf
-            .join(SHORT_VARIANT_CALLING.out.snp_calls_tbi)
+        CALL_SNVS.out.snp_calls_vcf
+            .join(CALL_SNVS.out.snp_calls_tbi)
             .set { ch_snv_stats_in }
 
         BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
         ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
 
-        SHORT_VARIANT_CALLING.out.family_bcf
-            .join( SHORT_VARIANT_CALLING.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
+        CALL_SNVS.out.family_bcf
+            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -347,23 +393,24 @@ workflow NALLO {
     if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
-        SNV_ANNOTATION(
-            SHORT_VARIANT_CALLING.out.family_bcf,
+        ANNOTATE_SNVS(
+            CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai.map { name, fai -> [ [ id: name ], fai ] },
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
-            (params.cadd_resources && params.cadd_prescored_indels),
+            params.cadd_resources && params.cadd_prescored_indels,
             params.echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
-            ch_cadd_prescored_indels
+            ch_cadd_prescored_indels,
+            params.pre_vep_snv_filter_expression != ''
         )
-        ch_versions = ch_versions.mix(SNV_ANNOTATION.out.versions)
+        ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
-        SNV_ANNOTATION.out.vcf
+        ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
                 clinical: [ meta + [ set: "clinical" ], vcf ]
                 research: [ meta + [ set: "research" ], vcf ]
@@ -488,54 +535,24 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        // If both CNV-calling and SV annotation is off, merged variants are output from here
+        // If both SV annotation is off, merged variants are output from here
         CALL_SVS (
             ch_bam_bai,
-            params.sv_caller,
-            ch_tandem_repeats
-        )
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
-        CALL_SVS.out.family_vcf
-            .set { annotate_svs_in }
-    }
-
-    //
-    // Call CNVs with HiFiCNV
-    //
-    if(!params.skip_cnv_calling) {
-
-        CALL_CNVS (
-            ch_bam_bai.join(SHORT_VARIANT_CALLING.out.snp_calls_vcf, failOnMismatch:true, failOnDuplicate:true),
+            ch_tandem_repeats,
+            CALL_SNVS.out.snp_calls_vcf,
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
-            ch_exclude_bed
+            ch_exclude_bed,
+            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            ch_sv_call_regions,
+            params.sv_call_regions
         )
-        ch_versions = ch_versions.mix(CALL_CNVS.out.versions)
 
-    }
+        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
-    //
-    // Merge SVs and CNVs if we've called both SVs and CNVs
-    //
-    if (!params.skip_cnv_calling && !params.skip_sv_calling) {
-
-        CALL_SVS.out.family_vcf
-            .join(CALL_CNVS.out.family_vcf, failOnMismatch:true, failOnDuplicate:true)
-            .map { meta, svs, cnvs -> [ meta, [ svs, cnvs ] ] }
-            .set { svdb_merge_svs_cnvs_in }
-
-        // If SV annotation is off, merged variants are output from here (should be a merge and index subworkflow)
-        SVDB_MERGE_SVS_CNVS (
-            svdb_merge_svs_cnvs_in,
-            ['svs', 'cnvs'], // Because SVs have better breakpoint resolution, give them priority
-            true
-        )
-        ch_versions = ch_versions.mix(SVDB_MERGE_SVS_CNVS.out.versions)
-
-        SVDB_MERGE_SVS_CNVS.out.vcf
-            .set { annotate_svs_in }
     }
 
     //
@@ -543,12 +560,11 @@ workflow NALLO {
     //
     if (!params.skip_sv_annotation) {
 
-        // If annotation is on, then merged variants are output from here
         ANNOTATE_SVS (
-            annotate_svs_in,
+            CALL_SVS.out.family_vcf,
             ch_fasta,
             ch_svdb_sv_databases,
-            PREPARE_GENOME.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect()
         )
@@ -608,17 +624,22 @@ workflow NALLO {
         ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
-    ch_collect_svs = params.skip_sv_annotation ? annotate_svs_in :
-        params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
-        RANK_VARIANTS_SVS.out.vcf
+    //
+    // Collect and publish SVs
+    //
+    if(!params.skip_sv_calling) {
 
-    // Publish all SVs from here
-    BCFTOOLS_VIEW (
-        ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
-        [],
-        [],
-        []
-    )
+        ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
+            params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
+            RANK_VARIANTS_SVS.out.vcf
+
+        BCFTOOLS_VIEW (
+            ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
+            [],
+            [],
+            []
+        )
+    }
 
     //
     // Phase SNVs and INDELs
@@ -626,8 +647,8 @@ workflow NALLO {
     if(!params.skip_phasing) {
 
         PHASING (
-            SHORT_VARIANT_CALLING.out.snp_calls_vcf,
-            SHORT_VARIANT_CALLING.out.snp_calls_tbi,
+            CALL_SNVS.out.snp_calls_vcf,
+            CALL_SNVS.out.snp_calls_tbi,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
@@ -646,7 +667,7 @@ workflow NALLO {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
-            ch_input_bed,
+            ch_methylation_call_regions
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }

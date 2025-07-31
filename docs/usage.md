@@ -89,13 +89,15 @@ This pipeline comes with three different presets that should be set with the `--
     - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
+### Reference files
+
+All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
+
 ### Subworkflows
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
-#### Required parameters
-
-The only mandatory parameters for all subworkflows are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
+The only mandatory parameters are `--input` and `--outdir`, all other parameters are determined by the active subworkflows.
 
 For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`, the pipeline will would to guide you through which files are required:
 
@@ -109,26 +111,22 @@ For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-A thorough description of the required files are provided below.
+Descriptions of the required files are provided below.
 
 #### Skipping subworkflows
 
 If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
 
-For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you
+For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you:
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 Because almost all other subworkflows relies on the mapping subworkflow.
-
-## Reference files and parameters
-
-All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
 
 #### Alignment
 
@@ -173,19 +171,23 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 Turned off with `--skip_snv_calling`.
 
-#### SV calling
+#### Call SVs
 
 This subworkflow depends on the alignment subworkflow.
 
+Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the `--sv_callers` parameter, e.g. `--sv_callers sniffles,hificnv`. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the `--sv_callers_merge_priority` parameter.
+
+Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
+
+!!!info "Variant merging strategies"
+
+    SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.
+
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-Turned off with `--skip_sv_calling`.
-
-#### CNV calling
-
-This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
+If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
 
 | Parameter                  | Description                                                                                                                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -195,9 +197,9 @@ This subworkflow depends on the alignment and SNV calling subworkflows, and requ
 
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-Turned off with `--skip_cnv_calling`.
+Turned off with `--skip_sv_calling`.
 
 #### Phasing
 
@@ -241,8 +243,8 @@ This subworkflow relies on the alignment and SNV calling, and requires the follo
 | Parameter                            | Description                                                                                                                                                                                                                                                                                                                                                                   |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
-| `vep_plugin_files` <sup>1</sup>      | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                       |
-| `echtvar_snv_databases` <sup>2</sup> | **Optional**: A csv file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                              |
+| `vep_plugin_files` <sup>1</sup>      | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                         |
+| `echtvar_snv_databases` <sup>2</sup> | **Optional**: A CSV/TSV/JSON/YAML file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                |
 | `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
@@ -287,9 +289,9 @@ This subworkflow relies on the alignment subworkflow, and requires the following
 
 | Parameter                        | Description                                                                                                                                                                                                                                                                                                                                        |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `svdb_sv_databases` <sup>1</sup> | Csv file with databases (VCFs) used for structural variant annotation                                                                                                                                                                                                                                                                              |
+| `svdb_sv_databases` <sup>1</sup> | CSV/TSV/JSON/YAML file with databases (VCFs) used for structural variant annotation                                                                                                                                                                                                                                                                |
 | `vep_cache`                      | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                               |
-| `vep_plugin_files` <sup>2</sup>  | A csv file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                            |
+| `vep_plugin_files` <sup>2</sup>  | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                              |
 | `variant_consequences_svs`       | A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
@@ -327,7 +329,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 #### Filter variants
 
-This subworkflow filters SNVs and SVs to generate a "clinical" set of variants. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
+This subworkflow filters SNVs and SVs to generate a "clinical" set of variants before ranking. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
 
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -345,11 +347,23 @@ hgnc_id
 
 Filtering of variants only happens if any of these three parameters is active.
 
-#### Other highlighted parameters
+!!!tip
 
-- Limit SNV calling to regions in BED file (`--target_regions`).
-- By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
+    The `pre_vep_snv_filter_expression` parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to _both_ the research and clinical VCFs.
+
+### Target regions
+
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+
+!!!warning
+
+    Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
+### Parallelization
+
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
+
+- By default the SNV-calling, annotation and ranking is split into 13 parallel processes by creating regions from either the reference genome, or `--target_regions`/`--snv_call_regions` if provided. This already speeds up the pipeline significanly, but can also be increased further by setting `--snv_calling_processes` to a different number, or to 1 to turn off parallel processing.
 
 ## Runtime estimates
 

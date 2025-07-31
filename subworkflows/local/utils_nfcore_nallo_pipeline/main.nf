@@ -78,7 +78,6 @@ workflow PIPELINE_INITIALISATION {
         sv_annotation    : "skip_sv_annotation",
         call_paralogs    : "skip_call_paralogs",
         peddy            : "skip_peddy",
-        cnv_calling      : "skip_cnv_calling",
         phasing          : "skip_phasing",
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
@@ -95,10 +94,9 @@ workflow PIPELINE_INITIALISATION {
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
         sv_calling       : ["mapping"],
-        sv_annotation    : ["mapping", "cnv_calling", "sv_calling"],
+        sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
         snv_annotation   : ["mapping", "snv_calling"],
-        cnv_calling      : ["mapping", "snv_calling"],
         phasing          : ["mapping", "snv_calling"],
         rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
@@ -116,7 +114,6 @@ workflow PIPELINE_INITIALISATION {
         snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
         sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
@@ -135,7 +132,6 @@ workflow PIPELINE_INITIALISATION {
             skip_sv_calling          : params.skip_sv_calling,
             skip_sv_annotation       : params.skip_sv_annotation,
             skip_call_paralogs       : params.skip_call_paralogs,
-            skip_cnv_calling         : params.skip_cnv_calling,
             skip_alignment           : params.skip_alignment,
             skip_qc                  : params.skip_qc,
             skip_genome_assembly     : params.skip_genome_assembly,
@@ -196,6 +192,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that there's no more than one project
         validateSingleProjectPerRun(ch_samplesheet)
+
+        // Check that the SV calling parameters are valid
+        validateSVCallingParameters()
 
     emit:
     samplesheet = ch_samplesheet
@@ -533,5 +532,23 @@ def validateSingleProjectPerRun(ch_samplesheet) {
 def validateWorkflowCompatibility() {
     if (params.str_caller.matches('strdust') && !params.skip_repeat_annotation) {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
+    }
+
+    if (!params.skip_sv_calling && params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
+        if (params.skip_snv_calling) {
+            error "ERROR: HiFiCNV requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV."
+        }
+        if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {
+            error "ERROR: HiFiCNV requires expected XY and XX CN files and excluded regions to be provided. Please provide --hificnv_expected_xy_cn, --hificnv_expected_xx_cn and --hificnv_excluded_regions parameters."
+        }
+    }
+}
+
+def validateSVCallingParameters() {
+    def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
+    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+
+    if (sv_callers.toSet() != sv_caller_priority.toSet()) {
+        error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
     }
 }
