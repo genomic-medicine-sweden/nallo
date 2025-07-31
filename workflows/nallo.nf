@@ -397,7 +397,7 @@ workflow NALLO {
             CALL_SNVS.out.family_bcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
-            ch_fai.map { name, fai -> [ [ id: name ], fai ] },
+            ch_fai,
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
@@ -535,7 +535,6 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        // If both SV annotation is off, merged variants are output from here
         CALL_SVS (
             ch_bam_bai,
             ch_tandem_repeats,
@@ -640,7 +639,6 @@ workflow NALLO {
             []
         )
     }
-
     //
     // Phase SNVs and INDELs
     //

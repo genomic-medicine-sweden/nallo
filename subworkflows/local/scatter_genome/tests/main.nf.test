@@ -48,7 +48,7 @@ nextflow_workflow {
 
     }
 
-    test("fai, [], true, true, 3") {
+    test("fai, [], true, true, 1") {
 
         when {
             workflow {
@@ -57,7 +57,7 @@ nextflow_workflow {
                 input[1] = [[],[]]
                 input[2] = true
                 input[3] = true
-                input[4] = 3
+                input[4] = 1
                 """
             }
         }
@@ -75,18 +75,16 @@ nextflow_workflow {
 
     }
 
-    test("fai, [], bed, true, 3") {
+    test("make bed from fai, don't make intervals, even though we say we want to split it in 2") {
 
         when {
             workflow {
                 """
                 input[0] = SAMTOOLS_FAIDX.out.fai
                 input[1] = [[],[]]
-                input[2] = Channel.of('chr22\t0\t1000')
-                    .collectFile(name: 'chr22.bed', newLine: true)
-                    .map { file -> [ [ id:'chr22' ], file ] }
-                input[3] = true
-                input[4] = 3
+                input[2] = true
+                input[3] = false
+                input[4] = 2
                 """
             }
         }
@@ -97,25 +95,24 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                    workflow.out.bed_intervals,
                 ).match() }
             )
         }
 
     }
 
-    test("[], bed, false, false, 3") {
+    test("[], bed, false, false, 2") {
 
         when {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('chr22\t0\t1000')
-                    .collectFile(name: 'chr22.bed', newLine: true)
+                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')                    .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
                 input[3] = false
-                input[4] = 3
+                input[4] = 2
                 """
             }
         }
@@ -133,7 +130,7 @@ nextflow_workflow {
 
     }
 
-    test("[], bed, false, true, 3") {
+    test("[], bed, false, true, 2") {
 
         when {
             workflow {
@@ -144,7 +141,7 @@ nextflow_workflow {
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
                 input[3] = true
-                input[4] = 3
+                input[4] = 2
                 """
             }
         }
@@ -162,7 +159,27 @@ nextflow_workflow {
 
     }
 
-    test("[], bed, false, true, 0 - should fail") {
+    test("[], bed, false, true, 0 - should fail because split_n < 1") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = true
+                input[4] = 0
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.failed },
+            )
+        }
 
         when {
             workflow {
@@ -186,4 +203,27 @@ nextflow_workflow {
 
     }
 
+    test("[], bed, false, true, 5 - should fail due to too few intervals in bed file") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = true
+                input[4] = 5
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.failed },
+            )
+        }
+
+    }
 }
