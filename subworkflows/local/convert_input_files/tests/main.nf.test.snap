@@ -1,4 +1,65 @@
 {
+    "convert FASTQ to BAM": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_bam"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_ONT.fastq.gz"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test_bam"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                    ]
+                ],
+                "fastq": [
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_ONT.fastq.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-31T10:36:12.536021508"
+    },
     "convert BAM to FASTQ": {
         "content": [
             {
@@ -195,6 +256,55 @@
             "nextflow": "24.10.6"
         },
         "timestamp": "2025-07-29T16:06:07.521051166"
+    },
+    "convert neither BAM to FASTQ nor FASTQ to BAM": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_bam"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_ONT.fastq.gz"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test_bam"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "fastq": [
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/testdata/HG002_ONT.fastq.gz"
+                    ]
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-31T10:44:50.460485827"
     },
     "convert BAM to FASTQ and FASTQ to BAM -stub": {
         "content": [
