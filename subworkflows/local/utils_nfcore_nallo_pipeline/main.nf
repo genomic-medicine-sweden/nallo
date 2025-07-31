@@ -188,7 +188,6 @@ workflow PIPELINE_INITIALISATION {
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }
         .groupTuple()
-        .view()
         .map { _family, metas, reads ->
             [ addRelationShipsToMeta(metas), reads ]
         }
