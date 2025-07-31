@@ -587,27 +587,20 @@ def addRelationShipsToMeta(samples) {
         sample.relationship = sample.id in maternal_ids ? 'mother' :
                               sample.id in paternal_ids ? 'father' :
                               isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
-
-        sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
     }
 
 }
 
 def isChild(sample, maternal_ids, paternal_ids) {
-    childHasMother (sample, maternal_ids) ||
-    childHasFather (sample, paternal_ids)
+    hasMother (sample, maternal_ids) ||
+    hasFather (sample, paternal_ids)
 }
 
-def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
-    childHasMother(sample, maternal_ids) &&
-    childHasFather(sample, paternal_ids)
-}
-
-def childHasMother(sample, maternal_ids) {
+def hasMother(sample, maternal_ids) {
     isNonZeroNonEmpty(sample.maternal_id) && (sample.maternal_id in maternal_ids)
 }
 
-def childHasFather(sample, paternal_ids) {
+def hasFather(sample, paternal_ids) {
     isNonZeroNonEmpty(sample.paternal_id) && (sample.paternal_id in paternal_ids)
 }
 
