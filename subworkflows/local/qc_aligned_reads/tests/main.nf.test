@@ -1,0 +1,142 @@
+nextflow_workflow {
+
+    name "Test Workflow QC_ALIGNED_READS"
+    script "../main.nf"
+    workflow "QC_ALIGNED_READS"
+
+    test("bam, no bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[2] = Channel.of([[],[]])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    file(workflow.out.fastqc_zip.get(0).get(1)).name,
+                    workflow.out.mosdepth_summary,
+                    file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
+                    workflow.out.mosdepth_global_dist,
+                    workflow.out.mosdepth_region_dist,
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bam, bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[2] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    file(workflow.out.fastqc_zip.get(0).get(1)).name,
+                    workflow.out.mosdepth_summary,
+                    file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
+                    workflow.out.mosdepth_global_dist,
+                    workflow.out.mosdepth_region_dist,
+                    workflow.out.versions
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bam, no bed -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[2] = Channel.of([[],[]])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("bam, bed -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[2] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+}

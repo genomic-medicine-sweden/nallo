@@ -12,17 +12,24 @@ workflow QC_ALIGNED_READS {
     main:
     ch_versions = Channel.empty()
 
-    FASTQC ( ch_bam_bai.map { meta, bam, _bai -> [ meta, bam ] } )
+    FASTQC (
+        ch_bam_bai.map { meta, bam, _bai -> [ meta, bam ] }
+    )
     ch_versions = ch_versions.mix(FASTQC.out.versions)
 
-    CRAMINO (ch_bam_bai)
+    CRAMINO (
+        ch_bam_bai
+    )
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     ch_bam_bai
-        .combine( ch_bed.map { it[1] }.toList() ) // toList() enables passing [] if ch_bed is empty
+        .combine( ch_bed.map { _meta, bed -> bed }.toList() ) // toList() enables passing [] if ch_bed is empty
         .set { mosdepth_in }
 
-    MOSDEPTH ( mosdepth_in, ch_fasta )
+    MOSDEPTH (
+        mosdepth_in,
+        ch_fasta
+    )
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     emit:

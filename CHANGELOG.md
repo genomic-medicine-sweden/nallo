@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Added new parameters for finer-grained control over analysis regions
 - [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
+- [#737](https://github.com/genomic-medicine-sweden/nallo/pull/737) - Added nf-test for `PREPARE_REFERENCES`
+- [#738](https://github.com/genomic-medicine-sweden/nallo/pull/738) - Added nf-test for `QC_ALIGNED_READS`
 
 ### `Changed`
 
@@ -59,8 +61,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed the CNV calling subworkflow
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed sample-level SV outputs
-- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow, that previously added an AC entry
+- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
 - [#741](https://github.com/genomic-medicine-sweden/nallo/pull/741) - Removed bcftools filltags from the SNV calling subworkflow, that previosuly added an AC entry
+- [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
 
 ### `Fixed`
 
