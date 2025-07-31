@@ -1,73 +1,48 @@
 {
-    "fai, [], bed, true, 2": {
+    "make bed from fai, don't make intervals, even though we say we want to split it in 2": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "chr22"
+                            "id": "test"
                         },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
+                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
                 "1": [
-                    [
-                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
-                        2
-                    ],
-                    [
-                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
-                        2
-                    ]
+                    
                 ],
                 "2": [
-                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
-                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
-                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be"
+                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
                 ],
                 "bed": [
                     [
                         {
-                            "id": "chr22"
+                            "id": "test"
                         },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
+                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
                 "bed_intervals": [
-                    [
-                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
-                        2
-                    ],
-                    [
-                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
-                        2
-                    ]
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
-                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
-                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be"
+                    "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
                 ]
             },
             [
-                "chr22\t0\t1000",
-                "chr22\t500\t1500",
-                "chr22\t2000\t3000"
+                "chr22\t0\t40001"
             ],
             [
-                [
-                    "chr22\t0\t1500"
-                ],
-                [
-                    "chr22\t2000\t3000"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-29T17:05:10.78976038"
+        "timestamp": "2025-07-31T10:59:57.96913689"
     },
     "[], bed, false, true, 2": {
         "content": [
