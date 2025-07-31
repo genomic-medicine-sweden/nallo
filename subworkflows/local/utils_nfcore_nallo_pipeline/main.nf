@@ -302,7 +302,7 @@ def validateUniqueSampleIDs(input) {
 
     if (family.size() > 1) {
         error "Sample '${sample}' belongs to multiple families: ${family}. " +
-              "Please make sure that each sample belongs to a single family."
+              "Please make sure that there are no duplicate samples in the samplesheet."
     }
 
     return input
