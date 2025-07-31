@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Added new parameters for finer-grained control over analysis regions
 - [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
+- [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
+- [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
 
 ### `Changed`
 
