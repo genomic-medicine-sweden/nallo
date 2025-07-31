@@ -1,0 +1,476 @@
+{
+    "unzip fasta, untar vep cache": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa:md5,a90ab1e088326745c2ae622afc6f197c"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                [
+                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
+                                    [
+                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
+                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
+                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                    ],
+                                    [
+                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
+                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                    ],
+                                    [
+                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
+                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
+                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                    ],
+                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
+                    "versions.yml:md5,84898ecb507328de243b556f1327a78c"
+                ],
+                "fai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                    ]
+                ],
+                "fasta": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa:md5,a90ab1e088326745c2ae622afc6f197c"
+                    ]
+                ],
+                "mmi": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                    ]
+                ],
+                "vep_resources": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                [
+                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
+                                    [
+                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
+                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
+                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                    ],
+                                    [
+                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
+                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                    ],
+                                    [
+                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
+                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
+                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                    ],
+                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
+                    "versions.yml:md5,84898ecb507328de243b556f1327a78c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-29T13:59:21.486640187"
+    },
+    "unzip fasta, untar vep cache -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
+                    "versions.yml:md5,586c5c7ffbdb5170c2a4e0af8f7a14aa",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198"
+                ],
+                "fai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fasta": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mmi": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vep_resources": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                
+                            ]
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
+                    "versions.yml:md5,586c5c7ffbdb5170c2a4e0af8f7a14aa",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-29T14:43:36.069166765"
+    },
+    "don't unzip fasta, don't untar vep cache -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/reference/hg38.test.fa"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            "adaptivecard.json:md5,1b432fa56f544b31a2c57b4e716f8ff2",
+                            "cadd_to_vcf_header_-1.0-.txt:md5,3648556887c78e54313e443656c36057",
+                            "email_template.html:md5,a591a6613c27a9e02adf2df26afcca22",
+                            "email_template.txt:md5,40d7b940f158ba4d039bbd3645cb725a",
+                            "methods_description_template.yml:md5,0c53ccbfedda2e932094a52580f0fd8b",
+                            "multiqc_config.yml:md5,d6ba46ce1f7e3f23b3139937605cb0c2",
+                            "samplesheet.csv:md5,1f38310cab34ad786a64955b7aaabede",
+                            "samplesheet_multisample_bam.csv:md5,230d0a20845c1562669ccde9fa26b852",
+                            "samplesheet_multisample_ont_bam.csv:md5,225e92adbf8544365b72a0d1a20ebc12",
+                            "samplesheet_ont.csv:md5,e924335e51b7de8a6ef941a098f9269f",
+                            "schema_hgnc_ids.json:md5,f2ec4596c61aa99cea0a12094b36e395",
+                            "schema_input.json:md5,b011a4a34bccf2f93725c9594cffa1bd",
+                            "schema_snp_db.json:md5,b486f5a9ce28f748239826e3405e1e0d",
+                            "schema_vep_plugin_files.json:md5,a082b2cf239be4309b1a5d937eda3c3b",
+                            "sendmail_template.txt:md5,77a18a4d4dd64a02b7c440cfeb6e35ad",
+                            "slackreport.json:md5,6aaf8f146c2ce2132cd6827cccc7fb9d",
+                            "software_references.yml:md5,4dfc23481361861b1e250b23db4c342e",
+                            "svdb_query_vcf_schema.json:md5,a02c6bbce70c1c710d22b79f5d5672af",
+                            "vep_plugin_files_schema.json:md5,8aba4d99a6cbe726fb36a35d06ce0360"
+                        ]
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,586c5c7ffbdb5170c2a4e0af8f7a14aa"
+                ],
+                "fai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fasta": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/reference/hg38.test.fa"
+                    ]
+                ],
+                "mmi": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vep_resources": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            "adaptivecard.json:md5,1b432fa56f544b31a2c57b4e716f8ff2",
+                            "cadd_to_vcf_header_-1.0-.txt:md5,3648556887c78e54313e443656c36057",
+                            "email_template.html:md5,a591a6613c27a9e02adf2df26afcca22",
+                            "email_template.txt:md5,40d7b940f158ba4d039bbd3645cb725a",
+                            "methods_description_template.yml:md5,0c53ccbfedda2e932094a52580f0fd8b",
+                            "multiqc_config.yml:md5,d6ba46ce1f7e3f23b3139937605cb0c2",
+                            "samplesheet.csv:md5,1f38310cab34ad786a64955b7aaabede",
+                            "samplesheet_multisample_bam.csv:md5,230d0a20845c1562669ccde9fa26b852",
+                            "samplesheet_multisample_ont_bam.csv:md5,225e92adbf8544365b72a0d1a20ebc12",
+                            "samplesheet_ont.csv:md5,e924335e51b7de8a6ef941a098f9269f",
+                            "schema_hgnc_ids.json:md5,f2ec4596c61aa99cea0a12094b36e395",
+                            "schema_input.json:md5,b011a4a34bccf2f93725c9594cffa1bd",
+                            "schema_snp_db.json:md5,b486f5a9ce28f748239826e3405e1e0d",
+                            "schema_vep_plugin_files.json:md5,a082b2cf239be4309b1a5d937eda3c3b",
+                            "sendmail_template.txt:md5,77a18a4d4dd64a02b7c440cfeb6e35ad",
+                            "slackreport.json:md5,6aaf8f146c2ce2132cd6827cccc7fb9d",
+                            "software_references.yml:md5,4dfc23481361861b1e250b23db4c342e",
+                            "svdb_query_vcf_schema.json:md5,a02c6bbce70c1c710d22b79f5d5672af",
+                            "vep_plugin_files_schema.json:md5,8aba4d99a6cbe726fb36a35d06ce0360"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,586c5c7ffbdb5170c2a4e0af8f7a14aa"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-29T14:51:30.055576092"
+    },
+    "don't unzip fasta, untar vep cache": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/reference/hg38.test.fa"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                [
+                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
+                                    [
+                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
+                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
+                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                    ],
+                                    [
+                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
+                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                    ],
+                                    [
+                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
+                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
+                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                    ],
+                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
+                    "versions.yml:md5,84898ecb507328de243b556f1327a78c"
+                ],
+                "fai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                    ]
+                ],
+                "fasta": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/reference/hg38.test.fa"
+                    ]
+                ],
+                "mmi": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                    ]
+                ],
+                "vep_resources": [
+                    [
+                        {
+                            "id": "vep_cache"
+                        },
+                        [
+                            [
+                                [
+                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
+                                    [
+                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
+                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
+                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                    ],
+                                    [
+                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
+                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                    ],
+                                    [
+                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
+                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
+                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                    ],
+                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
+                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
+                    "versions.yml:md5,84898ecb507328de243b556f1327a78c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-07-29T14:06:23.16468683"
+    }
+}

@@ -16,7 +16,7 @@ workflow PREPARE_REFERENCES {
     ch_fasta = Channel.empty()
 
     // Will not catch cases where fasta is bgzipped
-    if ( gunzip_fasta ) {
+    if (gunzip_fasta) {
         GUNZIP_FASTA ( fasta_in )
             .gunzip
             .collect()
@@ -34,18 +34,22 @@ workflow PREPARE_REFERENCES {
     )
     ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
 
-    MINIMAP2_INDEX ( ch_fasta )
+    MINIMAP2_INDEX (
+        ch_fasta
+    )
     ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions)
 
     if (untar_vep_cache) {
-        UNTAR_VEP_CACHE (ch_vep_cache)
+        UNTAR_VEP_CACHE (
+            ch_vep_cache
+        )
         ch_versions = ch_versions.mix(UNTAR_VEP_CACHE.out.versions)
     }
 
     emit:
-    mmi             = MINIMAP2_INDEX.out.index.collect()                                   // channel: [ val(meta), path(mmi) ]
-    fai             = SAMTOOLS_FAIDX.out.fai.collect()                                     // channel: [ val(meta), path(fai) ]
-    fasta           = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
-    vep_resources   = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]
-    versions        = ch_versions                                                          // channel: [ versions.yml ]
+    mmi           = MINIMAP2_INDEX.out.index.collect()                                   // channel: [ val(meta), path(mmi) ]
+    fai           = SAMTOOLS_FAIDX.out.fai.collect()                                     // channel: [ val(meta), path(fai) ]
+    fasta         = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
+    vep_resources = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]
+    versions      = ch_versions                                                          // channel: [ versions.yml ]
 }
