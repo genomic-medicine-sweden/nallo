@@ -32,7 +32,7 @@ nextflow_workflow {
         }
     }
 
-    test("convert FAST to BAM") {
+    test("convert FASTQ to BAM") {
         when {
             workflow {
                 """
