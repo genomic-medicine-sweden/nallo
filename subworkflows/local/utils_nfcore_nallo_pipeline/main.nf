@@ -494,7 +494,7 @@ def validatePacBioLicense() {
         log.error "${pacbio_tools.join(', ')} may only be used with PacBio data."
         System.exit(1)
     } else {
-        log.warn "${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments. "
+        log.warn "${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments."
     }
 }
 
