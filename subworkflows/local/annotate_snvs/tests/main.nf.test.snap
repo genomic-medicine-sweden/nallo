@@ -37,14 +37,14 @@
                 "versions.yml:md5,8da1323d9b58551409825bee6d7d78bd"
             ],
             "test.vcf.gz.tbi",
-            "70ab3aec3a8df46344eadb1e24c0f033",
+            "86a258992d944b13f9ea2308bfefa060",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=109, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-28T17:00:17.152273801"
+        "timestamp": "2025-07-30T11:18:27.899635439"
     },
     "bcf, db, vep_cache, '110', -stub": {
         "content": [
@@ -84,14 +84,14 @@
                 "versions.yml:md5,fe6d181bee052fa9431323e74c5ae476"
             ],
             "test.vcf.gz.tbi",
-            "296dc466e7e28a5ff803cef48eced2e6",
+            "61bcc566deafdbcc49dc4f1eacfa397a",
             "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=11, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-28T17:03:43.379022836"
+        "timestamp": "2025-07-30T11:23:32.874203087"
     },
     "bcf, db, vep_cache, '110', filter before vep": {
         "content": [
@@ -102,14 +102,14 @@
                 "versions.yml:md5,fe6d181bee052fa9431323e74c5ae476"
             ],
             "test.vcf.gz.tbi",
-            "dfaad9a84dafd14e41310c991e2d5752",
+            "29e0e8c68b142cd1333013b20cb36a74",
             "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=11, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-28T17:01:21.149415039"
+        "timestamp": "2025-07-30T11:20:46.84126129"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
@@ -118,13 +118,13 @@
                 "versions.yml:md5,8da1323d9b58551409825bee6d7d78bd"
             ],
             "test.vcf.gz.tbi",
-            "6c07a31e66ccb7f6913cbec942e16e19",
+            "59756676e6aa8832a42657407eda339d",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=109, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
         },
-        "timestamp": "2025-07-28T17:02:12.581980149"
+        "timestamp": "2025-07-30T11:21:16.158860453"
     }
 }

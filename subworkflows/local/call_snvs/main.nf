@@ -3,7 +3,6 @@
 //
 include { ADD_FOUND_IN_TAG                            } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                  } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
@@ -29,7 +28,13 @@ workflow CALL_SNVS {
         }
         .set { ch_deepvariant_in }
 
-    DEEPVARIANT_RUNDEEPVARIANT ( ch_deepvariant_in, ch_fasta, ch_fai, [[],[]], ch_par_bed )
+    DEEPVARIANT_RUNDEEPVARIANT (
+        ch_deepvariant_in,
+        ch_fasta,
+        ch_fai,
+        [[],[]],
+        ch_par_bed
+    )
     ch_versions = ch_versions.mix(DEEPVARIANT_RUNDEEPVARIANT.out.versions)
 
     // First remove region so we can group per sample
@@ -53,12 +58,17 @@ workflow CALL_SNVS {
         .set{ ch_concat_singlesample_in }
 
     // This creates a singlesample VCF containing ALL regions
-    BCFTOOLS_CONCAT ( ch_concat_singlesample_in )
+    BCFTOOLS_CONCAT (
+        ch_concat_singlesample_in
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
     // Which is then normalized, and ready to be used
     // in processes that require SNVs, but not annotated SNVs
-    BCFTOOLS_NORM_SINGLESAMPLE ( BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] }, ch_fasta )
+    BCFTOOLS_NORM_SINGLESAMPLE (
+        BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        ch_fasta
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
     // This creates one multisample VCF per family, with regions from ONE bed file
@@ -69,16 +79,15 @@ workflow CALL_SNVS {
         .groupTuple() // Groups files from the same family together per region
         .set{ glnexus_in }
 
-    GLNEXUS( glnexus_in, ch_bed )
+    GLNEXUS(
+        glnexus_in,
+        ch_bed
+    )
     ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-
-    // Add allele count tag to multisample bcf
-    BCFTOOLS_FILLTAGS ( GLNEXUS.out.bcf )
-    ch_versions = ch_versions.mix(BCFTOOLS_FILLTAGS.out.versions)
 
     // Annotate with FOUND_IN tag
     ADD_FOUND_IN_TAG (
-        BCFTOOLS_FILLTAGS.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        GLNEXUS.out.bcf.map { meta, vcf -> [ meta, vcf, [] ] },
         "deepvariant"
     )
     ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
@@ -91,7 +100,9 @@ workflow CALL_SNVS {
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
     // This is run before normalization for each sample to mimic run_deepvariant pipeline
-    DEEPVARIANT_VCFSTATSREPORT ( BCFTOOLS_CONCAT.out.vcf )
+    DEEPVARIANT_VCFSTATSREPORT (
+        BCFTOOLS_CONCAT.out.vcf
+    )
     ch_versions = ch_versions.mix(DEEPVARIANT_VCFSTATSREPORT.out.versions)
 
     emit:
