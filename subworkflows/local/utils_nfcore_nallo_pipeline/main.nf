@@ -188,6 +188,7 @@ workflow PIPELINE_INITIALISATION {
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }
         .groupTuple()
+        .view()
         .map { _family, metas, reads ->
             [ addRelationShipsToMeta(metas), reads ]
         }
@@ -581,10 +582,19 @@ def getParentalIds(samples, field) {
 }
 
 def addRelationShipsToMeta(samples) {
+    // This function adds relationships to the samples based on their parental IDs.
+    // We assume we are mainly interested in children, therefore if there was a grandparent, parent, and a child present,
+    // the parent will be set as 'mother' or 'father' rather than as 'child'.
+
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
+    def parents_ids = maternal_ids + paternal_ids
+    def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
+                           samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+
     samples.each { sample ->
-        sample.relationship = sample.id in maternal_ids ? 'mother' :
+        sample.relationship = sample.id in grandparents_ids ? 'unknown' :
+                              sample.id in maternal_ids ? 'mother' :
                               sample.id in paternal_ids ? 'father' :
                               isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
     }
