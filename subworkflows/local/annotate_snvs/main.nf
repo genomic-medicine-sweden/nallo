@@ -1,5 +1,4 @@
 include { ANNOTATE_CADD                               } from '../annotate_cadd/main'
-include { BCFTOOLS_FILLTAGS as BCFTOOLS_FILLTAGS_ANNO } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_VIEW                               } from '../../../modules/nf-core/bcftools/view/main'
 include { ECHTVAR_ANNO                                } from '../../../modules/local/echtvar/anno/main'
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV            } from '../../../modules/nf-core/ensemblvep/vep/main'
