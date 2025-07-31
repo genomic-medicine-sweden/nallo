@@ -3,26 +3,27 @@ include { HIFIASM   } from '../../../modules/nf-core/hifiasm'
 include { YAK_COUNT } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS  } from '../../../modules/nf-core/gfastats/main'
 
-workflow ASSEMBLY {
+workflow GENOME_ASSEMBLY {
 
     take:
-    ch_reads // channel: [ val(meta), fastq ]
+    ch_reads     // channel: [ val(meta), fastq ]
+    trio_binning //    bool: Should we use trio binning mode where possible?
 
     main:
     ch_versions = Channel.empty()
 
-    if (params.hifiasm_mode == 'hifi-only') {
-
+    if (!trio_binning) {
         ch_reads
+            .map { meta, fastq ->
+                [ groupKey(meta, meta.n_files), fastq ]
+            }
             .groupTuple()
             .multiMap { meta, reads ->
                 reads : [ meta, reads, [] ]
                 yak   : [ [], [], [] ]
             }
             .set { ch_hifiasm_in }
-
-    } else if (params.hifiasm_mode == 'trio-binning') {
-
+    } else {
         // First, we need to branch the samples based on their relationship
         ch_reads
             .branch { meta, _reads ->
@@ -41,15 +42,19 @@ workflow ASSEMBLY {
                 [ groupKey(meta, meta.n_files), fastq ]
             }
             .groupTuple()
-            .set { ch_cat_fastq_input }
+            .branch { _meta, fastqs ->
+                cat: fastqs.size() > 1
+                no_cat: fastqs.size() == 1
+            }
+            .set { ch_paired_parents_for_yak }
 
         CAT_FASTQ (
-            ch_cat_fastq_input
+            ch_paired_parents_for_yak.cat
         )
         ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
 
         YAK_COUNT (
-            CAT_FASTQ.out.reads
+            CAT_FASTQ.out.reads.concat(ch_paired_parents_for_yak.no_cat)
         )
         ch_versions = ch_versions.mix(YAK_COUNT.out.versions)
 

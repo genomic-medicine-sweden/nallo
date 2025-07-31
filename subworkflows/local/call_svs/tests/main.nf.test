@@ -159,7 +159,6 @@ nextflow_workflow {
 
     test("2 samples, 1 family - merge sniffes,hificnv,severus with trf bed, run all callers and filter") {
 
-        tag "x"
         when {
             workflow {
                 """

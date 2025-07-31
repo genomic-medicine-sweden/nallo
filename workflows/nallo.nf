@@ -13,7 +13,6 @@ include { ALIGN_ASSEMBLIES                            } from '../subworkflows/lo
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV         } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS         } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_SVS                                } from '../subworkflows/local/annotate_svs'
-include { ASSEMBLY                                    } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS } from '../subworkflows/local/convert_input_files'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS   } from '../subworkflows/local/convert_input_files'
 include { BAM_INFER_SEX                               } from '../subworkflows/local/bam_infer_sex'
@@ -23,6 +22,7 @@ include { CALL_REPEAT_EXPANSIONS_TRGT                 } from '../subworkflows/lo
 include { CALL_SVS                                    } from '../subworkflows/local/call_svs'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/local/filter_variants'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
+include { GENOME_ASSEMBLY                             } from '../subworkflows/local/genome_assembly'
 include { METHYLATION                                 } from '../subworkflows/local/methylation'
 include { PHASING                                     } from '../subworkflows/local/phasing'
 include { PREPARE_REFERENCES                              } from '../subworkflows/local/prepare_references'
@@ -195,13 +195,14 @@ workflow NALLO {
         ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
 
         //Hifiasm assembly
-        ASSEMBLY(
-            CONVERT_INPUT_BAMS.out.fastq // contains all FASTQ files, including those not converted.
+        GENOME_ASSEMBLY(
+            CONVERT_INPUT_BAMS.out.fastq,         // contains all FASTQ files, including those not converted
+            params.hifiasm_mode == "trio-binning" // Should we use trio binning mode?
         )
-        ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+        ch_versions = ch_versions.mix(GENOME_ASSEMBLY.out.versions)
 
         ALIGN_ASSEMBLIES (
-            ASSEMBLY.out.assembled_haplotypes,
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
             ch_fasta,
             ch_fai,
             cram_output
