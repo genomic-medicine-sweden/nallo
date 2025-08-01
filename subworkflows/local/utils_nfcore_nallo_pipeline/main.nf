@@ -580,7 +580,7 @@ def getParentalIds(samples, field) {
     samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
 }
 
-def addRelationShipsToMeta(samples) {
+def addRelationshipsToMeta(samples) {
     // This function adds relationships to the samples based on their parental IDs.
     // We assume we are mainly interested in children, therefore if there was a grandparent, parent, and a child present,
     // the parent will be set as 'mother' or 'father' rather than as 'child'.
