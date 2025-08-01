@@ -203,7 +203,7 @@ workflow PIPELINE_INITIALISATION {
         // Check that the SV calling parameters are valid
         validateSVCallingParameters()
 
-        // Chech that mothers are female, and fathers are male
+        // Check that mothers are female, and fathers are male
         validateParentalSex(ch_samplesheet)
 
     emit:
