@@ -15,12 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#706](https://github.com/genomic-medicine-sweden/nallo/pull/706) - Added a logo to `README.md`
 - [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Added a clean up step to the nf-test CI
 - [#709](https://github.com/genomic-medicine-sweden/nallo/pull/709) - Added nf-test for `ANNOTATE_CADD`
+- [#713](https://github.com/genomic-medicine-sweden/nallo/pull/713) - Added nfcore module yak/counts
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Added a find-tests action to find all nf-tests to be run during CI
 - [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Added new parameters for finer-grained control over analysis regions
 - [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
 - [#737](https://github.com/genomic-medicine-sweden/nallo/pull/737) - Added nf-test for `PREPARE_REFERENCES`
 - [#738](https://github.com/genomic-medicine-sweden/nallo/pull/738) - Added nf-test for `QC_ALIGNED_READS`
+- [#739](https://github.com/genomic-medicine-sweden/nallo/pull/739) - Added nf-test for `CONVERT_INPUT_FILES`
+- [#740](https://github.com/genomic-medicine-sweden/nallo/pull/740) - Added a check/early fail if trying to split the SNV calling into too many parallel processes
+- [#743](https://github.com/genomic-medicine-sweden/nallo/pull/743) - Added warnings about restrictive PacBio licenses, even when running a PacBio preset
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
 
@@ -61,9 +65,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
 - [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCFTOOLS_PLUGINSPLIT`
 - [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
+- [#713](https://github.com/genomic-medicine-sweden/nallo/pull/713) - Removed local yak module
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed the CNV calling subworkflow
 - [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed sample-level SV outputs
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
+- [#741](https://github.com/genomic-medicine-sweden/nallo/pull/741) - Removed bcftools filltags from the SNV calling subworkflow, that previosuly added an AC entry
 - [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
 
 ### `Fixed`
