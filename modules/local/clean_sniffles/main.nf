@@ -1,17 +1,17 @@
 process CLEAN_SNIFFLES {
-    tag "$meta.id"
+    tag "${meta.id}"
 
     conda "conda-forge::python=3.8.3"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/python:3.8.3' :
-        'biocontainers/python:3.8.3' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/python:3.8.3'
+        : 'biocontainers/python:3.8.3'}"
 
     input:
     tuple val(meta), path(vcf)
 
     output:
     tuple val(meta), path("*.vcf"), emit: vcf
-    path "versions.yml" , emit: versions
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,7 +24,7 @@ process CLEAN_SNIFFLES {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        clean_sniffles: \$(echo "$VERSION" )
+        clean_sniffles: \$(echo "${VERSION}" )
     END_VERSIONS
     """
 
@@ -36,7 +36,7 @@ process CLEAN_SNIFFLES {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        clean_sniffles: \$(echo "$VERSION" )
+        clean_sniffles: \$(echo "${VERSION}" )
     END_VERSIONS
     """
 }

@@ -1,21 +1,21 @@
 process ADD_FOUND_IN_TAG {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bcftools:1.20--h8b25389_0':
-        'biocontainers/bcftools:1.20--h8b25389_0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/bcftools:1.20--h8b25389_0'
+        : 'biocontainers/bcftools:1.20--h8b25389_0'}"
 
     input:
     tuple val(meta), path(vcf, stageAs: "?/*"), path(index, stageAs: "?/*")
-    val(variant_caller)
+    val variant_caller
 
     output:
     tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
-    tuple val(meta), path("*.tbi")                    , emit: tbi, optional: true
-    tuple val(meta), path("*.csi")                    , emit: csi, optional: true
-    path "versions.yml"                               , emit: versions
+    tuple val(meta), path("*.tbi"), emit: tbi, optional: true
+    tuple val(meta), path("*.csi"), emit: csi, optional: true
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,17 +24,21 @@ process ADD_FOUND_IN_TAG {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def extension = args2.contains('--output-type b') || args2.contains('-Ob') ? 'bcf.gz' :
-                    args2.contains('--output-type u') || args2.contains('-Ou') ? 'bcf' :
-                    args2.contains('--output-type z') || args2.contains('-Oz') ? 'vcf.gz' :
-                    args2.contains('--output-type v') || args2.contains('-Ov') ? 'vcf' :
-                    'vcf'
+    def extension = args2.contains('--output-type b') || args2.contains('-Ob')
+        ? 'bcf.gz'
+        : args2.contains('--output-type u') || args2.contains('-Ou')
+            ? 'bcf'
+            : args2.contains('--output-type z') || args2.contains('-Oz')
+                ? 'vcf.gz'
+                : args2.contains('--output-type v') || args2.contains('-Ov')
+                    ? 'vcf'
+                    : 'vcf'
 
     """
     bcftools view \\
-        $args \\
-        --threads $task.cpus \\
-        $vcf |\\
+        ${args} \\
+        --threads ${task.cpus} \\
+        ${vcf} |\\
     awk '
         # Print all existing header lines
         /^##/ {
@@ -57,8 +61,8 @@ process ADD_FOUND_IN_TAG {
         }
     ' |\\
     bcftools view \\
-        $args2 \\
-        --threads $task.cpus \\
+        ${args2} \\
+        --threads ${task.cpus} \\
         --output ${prefix}.${extension}
 
     cat <<-END_VERSIONS > versions.yml
@@ -71,15 +75,22 @@ process ADD_FOUND_IN_TAG {
     stub:
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def extension = args2.contains('--output-type b') || args2.contains('-Ob') ? 'bcf.gz' :
-                    args2.contains('--output-type u') || args2.contains('-Ou') ? 'bcf' :
-                    args2.contains('--output-type z') || args2.contains('-Oz') ? "vcf.gz" :
-                    args2.contains('--output-type v') || args2.contains('-Ov') ? 'vcf' :
-                    'vcf'
-    def index_type = args2.contains('--write-index=tbi') || args2.contains('-W=tbi') ? 'tbi' :
-                    args2.contains('--write-index=csi') || args2.contains("-W=csi") ? 'csi' :
-                    args2.contains('--write-index') || args2.contains("-W") ? 'csi' :
-                    ''
+    def extension = args2.contains('--output-type b') || args2.contains('-Ob')
+        ? 'bcf.gz'
+        : args2.contains('--output-type u') || args2.contains('-Ou')
+            ? 'bcf'
+            : args2.contains('--output-type z') || args2.contains('-Oz')
+                ? "vcf.gz"
+                : args2.contains('--output-type v') || args2.contains('-Ov')
+                    ? 'vcf'
+                    : 'vcf'
+    def index_type = args2.contains('--write-index=tbi') || args2.contains('-W=tbi')
+        ? 'tbi'
+        : args2.contains('--write-index=csi') || args2.contains("-W=csi")
+            ? 'csi'
+            : args2.contains('--write-index') || args2.contains("-W")
+                ? 'csi'
+                : ''
     def create_cmd = extension.endsWith('.gz') ? "echo '' | gzip >" : 'touch'
     def create_index = extension.endsWith('.gz') && index_type.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index_type}" : ''
 

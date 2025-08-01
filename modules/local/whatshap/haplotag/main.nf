@@ -1,20 +1,20 @@
 process WHATSHAP_HAPLOTAG {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_medium'
 
     conda "bioconda::whatshap=2.3"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/whatshap:2.3--py38h2494328_0' :
-        'quay.io/biocontainers/whatshap:2.3--py38h2494328_0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/whatshap:2.3--py38h2494328_0'
+        : 'quay.io/biocontainers/whatshap:2.3--py38h2494328_0'}"
 
     input:
-    tuple val(meta),  path(vcf), path(tbi), path(bam), path(bai)
+    tuple val(meta), path(vcf), path(tbi), path(bam), path(bai)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
-    path "versions.yml"           , emit: versions
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -25,10 +25,10 @@ process WHATSHAP_HAPLOTAG {
 
     """
     whatshap haplotag \\
-        $args \\
+        ${args} \\
         -o ${prefix}.bam \\
-        --reference $fasta \\
-        --output-threads $task.cpus \\
+        --reference ${fasta} \\
+        --output-threads ${task.cpus} \\
         ${vcf} \\
         ${bam}
 
@@ -49,5 +49,4 @@ process WHATSHAP_HAPLOTAG {
         whatshap: \$( whatshap --version )
     END_VERSIONS
     """
-
 }

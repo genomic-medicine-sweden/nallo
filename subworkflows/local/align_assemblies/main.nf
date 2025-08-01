@@ -6,7 +6,6 @@ include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/mai
 include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
-
     take:
     ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
@@ -16,43 +15,43 @@ workflow ALIGN_ASSEMBLIES {
     main:
     ch_versions = Channel.empty()
 
-    MINIMAP2_INDEX (
+    MINIMAP2_INDEX(
         ch_fasta
     )
     ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions)
 
-    MINIMAP2_ALIGN (
+    MINIMAP2_ALIGN(
         ch_assembly,
         MINIMAP2_INDEX.out.index.collect(),
         true,
         'bai',
         false,
-        false
+        false,
     )
     ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
-    SAMTOOLS_VIEW (
-        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true),
-        [[],[]],
+    SAMTOOLS_VIEW(
+        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true),
+        [[], []],
         [],
-        false
+        false,
     )
     ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions)
 
-    TAGBAM (
+    TAGBAM(
         SAMTOOLS_VIEW.out.bam
     )
     ch_versions = ch_versions.mix(TAGBAM.out.versions)
 
     TAGBAM.out.bam
-        .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
+        .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
         .groupTuple(size: 2)
         .set { ch_assemblies_per_sample }
 
-    SAMTOOLS_MERGE (
+    SAMTOOLS_MERGE(
         ch_assemblies_per_sample,
-        [[],[]],
-        [[],[]]
+        [[], []],
+        [[], []],
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
@@ -61,7 +60,7 @@ workflow ALIGN_ASSEMBLIES {
         SAMTOOLS_CONVERT(
             SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.bai, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta,
-            ch_fai
+            ch_fai,
         )
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
@@ -69,5 +68,5 @@ workflow ALIGN_ASSEMBLIES {
     emit:
     bam      = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
     bai      = SAMTOOLS_MERGE.out.bai // channel: [ val(meta), path(bai) ]
-    versions = ch_versions            // channel: [ versions.yml ]
+    versions = ch_versions // channel: [ versions.yml ]
 }

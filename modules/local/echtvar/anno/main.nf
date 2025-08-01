@@ -1,23 +1,23 @@
 process ECHTVAR_ANNO {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_single'
 
     container "docker.io/fellen31/echtvar:0.2.2"
 
     input:
-    tuple val(meta),  path(vcf)
-    path(databases)
+    tuple val(meta), path(vcf)
+    path databases
 
     output:
     tuple val(meta), path("*.bcf.gz"), emit: bcf
-    path "versions.yml"              , emit: versions
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args  = task.ext.args ?: ''
-    prefix    = task.ext.prefix ?: "${meta.id}"
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
     def input = databases.collectMany { file -> ["-e", file] }.join(" ")
     """
     echtvar \\

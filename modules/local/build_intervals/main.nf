@@ -1,19 +1,19 @@
 // https://github.com/nf-core/sarek/blob/59026dc07633edb83aab3bfb2f65f79db38437a1/modules/local/build_intervals/main.nf
 
 process BUILD_INTERVALS {
-    tag "$meta.id"
+    tag "${meta.id}"
 
     conda "anaconda::gawk=5.1.0"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/gawk:5.1.0' :
-        'biocontainers/gawk:5.1.0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/gawk:5.1.0'
+        : 'biocontainers/gawk:5.1.0'}"
 
     input:
     tuple val(meta), path(fasta_fai)
 
     output:
-    tuple val(meta), path("${fasta_fai.baseName}.bed") , emit: bed
-    path "versions.yml"                                , emit: versions
+    tuple val(meta), path("${fasta_fai.baseName}.bed"), emit: bed
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
