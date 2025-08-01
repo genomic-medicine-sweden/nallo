@@ -157,6 +157,39 @@ nextflow_function {
         }
     }
 
+    test ("test function addRelationshipsToMeta with child, two parents, one of wich also has two parents") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'father', family_id:'FAM', paternal_id:'grandfather', maternal_id:'grandmother', sex:1],
+                    [id:'mother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'grandfather', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1],
+                    [id:'grandmother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['child'] == 'child'
+                    assert byID['father'] == 'father'
+                    assert byID['mother'] == 'mother'
+                    assert byID['grandfather'] == 'unknown'
+                    assert byID['grandmother'] == 'unknown'
+                }
+            )
+        }
+    }
+
     test ("test function validateParentalSex - should succeed") {
         function "validateParentalSex"
 

@@ -163,6 +163,57 @@
         },
         "timestamp": "2025-07-31T15:02:13.160464079"
     },
+    "test function addRelationshipsToMeta with child, two parents, one of wich also has two parents": {
+        "content": [
+            [
+                {
+                    "id": "child",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "father",
+                    "family_id": "FAM",
+                    "paternal_id": "grandfather",
+                    "maternal_id": "grandmother",
+                    "sex": 1,
+                    "relationship": "father"
+                },
+                {
+                    "id": "mother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother"
+                },
+                {
+                    "id": "grandfather",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "unknown"
+                },
+                {
+                    "id": "grandmother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "unknown"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:12:23.741170484"
+    },
     "test function addRelationShipsToMeta with no relationships": {
         "content": [
             [
