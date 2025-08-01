@@ -7,8 +7,8 @@ nextflow_function {
     tag "utils_nfcore_nallo_pipeline"
     tag "subworkflows/utils_nfcore_nallo_pipeline"
 
-    test ("test function addRelationShipsToMeta with trio") {
-        function "addRelationShipsToMeta"
+    test ("test function addRelationshipsToMeta with trio") {
+        function "addRelationshipsToMeta"
         when {
             function {
                 """
@@ -35,8 +35,8 @@ nextflow_function {
         }
     }
 
-    test ("test function addRelationShipsToMeta with no relationships") {
-        function "addRelationShipsToMeta"
+    test ("test function addRelationshipsToMeta with no relationships") {
+        function "addRelationshipsToMeta"
         when {
             function {
                 """
@@ -63,8 +63,8 @@ nextflow_function {
         }
     }
 
-    test ("test function addRelationShipsToMeta with two siblings of opposite sex, each with children") {
-        function "addRelationShipsToMeta"
+    test ("test function addRelationshipsToMeta with two siblings of opposite sex, each with children") {
+        function "addRelationshipsToMeta"
         when {
             function {
                 """
@@ -95,8 +95,8 @@ nextflow_function {
         }
     }
 
-    test ("test function addRelationShipsToMeta with child, parent and grandparent") {
-        function "addRelationShipsToMeta"
+    test ("test function addRelationshipsToMeta with child, parent and grandparent") {
+        function "addRelationshipsToMeta"
 
         when {
             function {
@@ -124,8 +124,8 @@ nextflow_function {
         }
     }
 
-    test ("test function addRelationShipsToMeta with two siblings, each with their child and one of the siblings has a partner") {
-        function "addRelationShipsToMeta"
+    test ("test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner") {
+        function "addRelationshipsToMeta"
 
         when {
             function {
