@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase": {
         "content": [
-            262,
+            261,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -789,7 +789,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -870,7 +870,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
