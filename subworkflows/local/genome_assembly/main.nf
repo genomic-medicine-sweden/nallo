@@ -13,7 +13,7 @@ workflow ASSEMBLY {
     main:
     ch_versions = Channel.empty()
 
-    if(params.hifiasm_mode == 'hifi-only') {
+    if (params.hifiasm_mode == 'hifi-only') {
 
         ch_reads
             .groupTuple()
@@ -28,7 +28,7 @@ workflow ASSEMBLY {
         )
         ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
-    } else if(params.hifiasm_mode == 'trio-binning') {
+    } else if (params.hifiasm_mode == 'trio-binning') {
         // Multiple trios with different parents may not work?
         ch_reads.groupTuple()
             .map{ meta, _reads -> meta } // Takes meta, then

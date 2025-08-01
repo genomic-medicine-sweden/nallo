@@ -369,7 +369,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
         }
     }
     // Give error if there are any
-    if(errors) {
+    if (errors) {
         def error_string =
             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
             "  " + errors.join("\n  ") + "\n" +
@@ -388,7 +388,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 
     // If the --skip is not set, then the workflow is active, give no error
     def workflowIsActive = !statusMap["workflow"][skip]
-    if(workflowIsActive) {
+    if (workflowIsActive) {
         return
     }
 
@@ -425,7 +425,7 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
         // Get the file path
         def FilePath = statusMap["files"][file]
         // If the workflow that requires the file is active & theres no file available
-        if(WorkflowIsActive && FilePath == null) {
+        if (WorkflowIsActive && FilePath == null) {
             errors << "--$workflowSkip is NOT active, the following files are required: --$file"
         }
     }
@@ -446,8 +446,8 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
 
         def workflowIsSkipped = !statusMap[paramType][skip]
 
-        if(paramType == "workflow") {
-            if(workflowIsSkipped) {
+        if (paramType == "workflow") {
+            if (workflowIsSkipped) {
                 requiredSkips << skip
             }
         }

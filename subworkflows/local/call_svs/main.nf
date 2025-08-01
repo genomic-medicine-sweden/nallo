@@ -36,7 +36,7 @@ workflow CALL_SVS {
     //
     // Call SVs with Severus
     //
-    if(sv_callers_to_run.contains('severus')) {
+    if (sv_callers_to_run.contains('severus')) {
 
         SEVERUS (
             ch_bam_bai.map { meta, bam, bai -> [ meta, bam, bai, [], [], [] ] },
@@ -60,7 +60,7 @@ workflow CALL_SVS {
     //
     // Call SVs with Sniffles
     //
-    if(sv_callers_to_run.contains('sniffles')) {
+    if (sv_callers_to_run.contains('sniffles')) {
 
         SNIFFLES (
             ch_bam_bai
@@ -88,7 +88,7 @@ workflow CALL_SVS {
     //
     // Call CNVs with HiFiCNV
     //
-    if(sv_callers_to_run.contains('hificnv')) {
+    if (sv_callers_to_run.contains('hificnv')) {
 
         ch_bam_bai
             .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)

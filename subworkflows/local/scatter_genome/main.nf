@@ -20,7 +20,7 @@ workflow SCATTER_GENOME {
     //
     // If no BED-file is provided then build intervals from reference
     //
-    if( make_bed_from_fai ) {
+    if (make_bed_from_fai) {
 
         BUILD_INTERVALS (
             ch_fai
@@ -37,9 +37,9 @@ workflow SCATTER_GENOME {
     //
     // Merge overlapping and then split BED regions for SNV calling
     //
-    if( make_bed_intervals ) {
+    if (make_bed_intervals) {
 
-        if( split_n < 1 ) { error "Can't split bed file into less than one file" }
+        if (split_n < 1) { error "Can't split bed file into less than one file" }
 
         // Sort and merge overlapping regions
         BEDTOOLS_SORT (

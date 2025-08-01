@@ -24,7 +24,7 @@ workflow CONVERT_INPUT_FILES {
     ch_bam   = reads_to_convert.bam
     ch_fastq = reads_to_convert.fastq
 
-    if(convert_bam) {
+    if (convert_bam) {
         SAMTOOLS_FASTQ (
             reads_to_convert.bam,
             false
@@ -34,7 +34,7 @@ workflow CONVERT_INPUT_FILES {
         // Mix converted files back in
         ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
     }
-    if(convert_fastq) {
+    if (convert_fastq) {
         SAMTOOLS_IMPORT (
             reads_to_convert.fastq
         )

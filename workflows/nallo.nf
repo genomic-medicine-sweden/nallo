@@ -121,7 +121,7 @@ workflow NALLO {
     //
     // Prepare references
     //
-    if(!params.skip_alignment || !params.skip_genome_assembly) {
+    if (!params.skip_alignment || !params.skip_genome_assembly) {
 
         // The genome assembly alignment needs a fai for cram output,
         // but we shouldn't need to prepare the vep cache here.
@@ -142,7 +142,7 @@ workflow NALLO {
     // Convert FASTQ to BAM only if alignment or should be done.
     // Since we assume that the majority of pipeline runs will use BAM files as input,
     // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if(!params.skip_alignment) {
+    if (!params.skip_alignment) {
 
         CONVERT_INPUT_FASTQS (
             ch_input,
@@ -160,7 +160,7 @@ workflow NALLO {
     // If we start running more trios we also need to consider that the parents at the moment needs to be merged
     // before YAK. So, we could consider adding some logic to handle that case,
     // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if(!params.skip_alignment && !params.skip_genome_assembly && params.alignment_processes > 1) {
+    if (!params.skip_alignment && !params.skip_genome_assembly && params.alignment_processes > 1) {
 
         SPLITUBAM (
             CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
@@ -172,7 +172,7 @@ workflow NALLO {
     //
     // Hifiasm assembly and alignment to reference genome
     //
-    if(!params.skip_genome_assembly) {
+    if (!params.skip_genome_assembly) {
 
         // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
         // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
@@ -326,7 +326,7 @@ workflow NALLO {
     //
     // Call paralogous genes with paraphase
     //
-    if(!params.skip_call_paralogs) {
+    if (!params.skip_call_paralogs) {
         CALL_PARALOGS (
             ch_bam_bai,
             ch_fasta,
@@ -339,7 +339,7 @@ workflow NALLO {
     //
     // Call SNVs
     //
-    if(!params.skip_snv_calling) {
+    if (!params.skip_snv_calling) {
 
         //
         // Make BED intervals, to be used for parallel SNV calling
@@ -390,7 +390,7 @@ workflow NALLO {
     //
     // Annotate SNVs
     //
-    if(!params.skip_snv_annotation) {
+    if (!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
@@ -420,7 +420,7 @@ workflow NALLO {
         ch_clin_research_snvs_vcf.research
             .set { ch_ann_csq_pli_snv_in }
 
-        if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+        if (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS (
                 ch_clin_research_snvs_vcf.clinical,
@@ -448,7 +448,7 @@ workflow NALLO {
     // Ranks family VCFs per variant call region
     // Can only run if samplesheet has affected samples
     //
-    if(!params.skip_rank_variants) {
+    if (!params.skip_rank_variants) {
 
         // Create PED with updated sex - per family
         SOMALIER_PED_FAMILY (
@@ -485,7 +485,7 @@ workflow NALLO {
     //
     // Concatenate and sort SNVs (could be a subworkflow)
     //
-    if(!params.skip_snv_calling) {
+    if (!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
@@ -533,7 +533,7 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if(!params.skip_sv_calling) {
+    if (!params.skip_sv_calling) {
 
         CALL_SVS (
             ch_bam_bai,
@@ -582,7 +582,7 @@ workflow NALLO {
         //
         // Filter SVs
         //
-        if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+        if (params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
 
             FILTER_VARIANTS_SVS (
                 ch_clin_research_svs_vcf.clinical,
@@ -626,7 +626,7 @@ workflow NALLO {
     //
     // Collect and publish SVs
     //
-    if(!params.skip_sv_calling) {
+    if (!params.skip_sv_calling) {
 
         ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
             params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
@@ -642,7 +642,7 @@ workflow NALLO {
     //
     // Phase SNVs and INDELs
     //
-    if(!params.skip_phasing) {
+    if (!params.skip_phasing) {
 
         PHASING (
             CALL_SNVS.out.snp_calls_vcf,
@@ -661,7 +661,7 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit
     //
-    if(!params.skip_methylation_pileups) {
+    if (!params.skip_methylation_pileups) {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
@@ -673,7 +673,7 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    if(!params.skip_repeat_calling) {
+    if (!params.skip_repeat_calling) {
         if (params.str_caller == "trgt") {
             CALL_REPEAT_EXPANSIONS_TRGT (
                 PHASING.out.haplotagged_bam_bai,
@@ -698,7 +698,7 @@ workflow NALLO {
     //
     // Annotate repeat expansions with Stranger
     //
-    if(!params.skip_repeat_annotation) {
+    if (!params.skip_repeat_annotation) {
         STRANGER (
             ch_repeat_expansions,
             ch_stranger_repeat_catalog
