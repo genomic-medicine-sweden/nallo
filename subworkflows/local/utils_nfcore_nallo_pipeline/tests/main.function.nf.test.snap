@@ -1,0 +1,252 @@
+{
+    "test function addRelationshipsToMeta with two siblings of opposite sex, each with children": {
+        "content": [
+            [
+                {
+                    "id": "child_1",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": "mother_1",
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "child_2",
+                    "family_id": "FAM",
+                    "paternal_id": "father_2",
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "mother_1",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother"
+                },
+                {
+                    "id": "father_2",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "father"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:16:02.413348161"
+    },
+    "test function addRelationshipsToMeta with child, parent and grandparent": {
+        "content": [
+            [
+                {
+                    "id": "child",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "father",
+                    "family_id": "FAM",
+                    "paternal_id": "grandfather",
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "father"
+                },
+                {
+                    "id": "grandfather",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "unknown"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:16:06.242725626"
+    },
+    "test function addRelationshipsToMeta with child, two parents, one of wich also has two parents": {
+        "content": [
+            [
+                {
+                    "id": "child",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "father",
+                    "family_id": "FAM",
+                    "paternal_id": "grandfather",
+                    "maternal_id": "grandmother",
+                    "sex": 1,
+                    "relationship": "father"
+                },
+                {
+                    "id": "mother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother"
+                },
+                {
+                    "id": "grandfather",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "unknown"
+                },
+                {
+                    "id": "grandmother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "unknown"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:12:23.741170484"
+    },
+    "test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner": {
+        "content": [
+            [
+                {
+                    "id": "child_1",
+                    "family_id": "FAM",
+                    "paternal_id": "father_1",
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "father_1",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "father"
+                },
+                {
+                    "id": "child_2",
+                    "family_id": "FAM",
+                    "paternal_id": "father_2",
+                    "maternal_id": "mother_2",
+                    "sex": 2,
+                    "relationship": "child"
+                },
+                {
+                    "id": "father_2",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "father"
+                },
+                {
+                    "id": "mother_2",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:16:09.890194692"
+    },
+    "test function addRelationshipsToMeta with trio": {
+        "content": [
+            [
+                {
+                    "id": "HG003",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "father"
+                },
+                {
+                    "id": "HG002",
+                    "family_id": "FAM",
+                    "paternal_id": "HG003",
+                    "maternal_id": "HG004",
+                    "sex": 1,
+                    "relationship": "child"
+                },
+                {
+                    "id": "HG004",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:15:55.325282796"
+    },
+    "test function addRelationshipsToMeta with no relationships": {
+        "content": [
+            [
+                {
+                    "id": "HG003",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "unknown"
+                },
+                {
+                    "id": "HG002",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "unknown"
+                },
+                {
+                    "id": "HG004",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "unknown"
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.6"
+        },
+        "timestamp": "2025-08-01T10:15:58.897441494"
+    }
+}
