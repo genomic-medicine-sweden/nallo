@@ -3,9 +3,9 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
+    tag "samplesheet_stub"
 
     test("Test CADD with mock resources") {
-        tag "samplesheet_stub"
         options "-stub"
 
         when {
@@ -37,7 +37,6 @@ nextflow_pipeline {
     }
 
     test("Test VEP with mock uncompressed cache") {
-        tag "samplesheet_stub"
         options "-stub"
 
         when {
@@ -61,6 +60,78 @@ nextflow_pipeline {
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml"),
                     // All stable path name, with a relative path
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test --skip_genome_assembly") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                input                        = "$projectDir/assets/samplesheet.csv"
+                outdir                       = "$outputDir"
+                skip_genome_assembly         = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert !versions.containsKey('HIFIASM') },
+                { assert versions.containsKey('MINIMAP2_ALIGN') },
+                { assert versions.containsKey('SPLITUBAM') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test --skip_alignment") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                input                        = "$projectDir/assets/samplesheet.csv"
+                outdir                       = "$outputDir"
+                skip_alignment               = true
+                skip_call_paralogs           = true
+                skip_snv_calling             = true
+                skip_qc                      = true
+                skip_sv_calling              = true
+                skip_sv_annotation           = true
+                skip_peddy                   = true
+                skip_snv_annotation          = true
+                skip_phasing                 = true
+                skip_rank_variants           = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_pileups     = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert versions.containsKey('HIFIASM') },
+                { assert !versions.containsKey('MINIMAP2_ALIGN') },
+                { assert !versions.containsKey('SPLITUBAM') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
                     stable_name
                 ).match() }
             )
