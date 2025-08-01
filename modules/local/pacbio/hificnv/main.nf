@@ -1,11 +1,11 @@
 process HIFICNV {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_medium'
 
     conda "bioconda::hificnv=1.0.0"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/hificnv:1.0.0--h9ee0642_0' :
-        'quay.io/biocontainers/hificnv:1.0.0--h9ee0642_0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/hificnv:1.0.0--h9ee0642_0'
+        : 'quay.io/biocontainers/hificnv:1.0.0--h9ee0642_0'}"
 
     input:
     tuple val(meta), path(bam), path(bai), path(maf_vcf), val(sex)
@@ -15,41 +15,43 @@ process HIFICNV {
     tuple val(meta5), path(exclude_bed)
 
     output:
-    tuple val(meta), path("*.vcf.gz")  , emit: vcf
+    tuple val(meta), path("*.vcf.gz"), emit: vcf
     tuple val(meta), path("*.depth.bw"), emit: depth_bw
-    tuple val(meta), path("*.maf.bw")  , emit: maf_bw, optional: true
+    tuple val(meta), path("*.maf.bw"), emit: maf_bw, optional: true
     tuple val(meta), path("*.bedgraph"), emit: cnval
-    tuple val(meta), path("*.log")     , emit: log
-    path "versions.yml"                , emit: versions
+    tuple val(meta), path("*.log"), emit: log
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args    = task.ext.args ?: ''
-    prefix      = task.ext.prefix ?: "${meta.id}"
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
 
-    def expected_cn = (sex == 1 && expected_xy_bed) ? "--expected-cn ${expected_xy_bed}" : (sex == 2 && expected_xx_bed) ? "--expected-cn ${expected_xx_bed}" : ""
+    def expected_cn = sex == 1 && expected_xy_bed ? "--expected-cn ${expected_xy_bed}" : sex == 2 && expected_xx_bed ? "--expected-cn ${expected_xx_bed}" : ""
     def exclude = exclude_bed ? "--exclude ${exclude_bed}" : ""
     def maf = maf_vcf ? "--maf ${maf_vcf}" : ""
 
-    if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    if ("${maf_vcf}" == "${prefix}.vcf.gz") {
+        error("Input and output names are the same, set prefix in module configuration to disambiguate!")
+    }
 
     mv_maf = maf ? "mv hificnv.*.maf.bw ${prefix}.maf.bw" : ''
 
     """
     hificnv \\
-        $args \\
+        ${args} \\
         --bam ${bam} \\
-        $expected_cn \\
-        $exclude \\
-        $maf \\
+        ${expected_cn} \\
+        ${exclude} \\
+        ${maf} \\
         --ref ${fasta} \\
         --threads ${task.cpus}
 
     mv hificnv.*.vcf.gz ${prefix}.vcf.gz
     mv hificnv.*.depth.bw ${prefix}.depth.bw
-    $mv_maf
+    ${mv_maf}
     mv hificnv.*.copynum.bedgraph ${prefix}.copynum.bedgraph
     mv *.log ${prefix}.log
 
@@ -60,14 +62,16 @@ process HIFICNV {
     """
 
     stub:
-    prefix      = task.ext.prefix ?: "${meta.id}"
+    prefix = task.ext.prefix ?: "${meta.id}"
 
-    if ("$maf_vcf" == "${prefix}.vcf.gz") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    if ("${maf_vcf}" == "${prefix}.vcf.gz") {
+        error("Input and output names are the same, set prefix in module configuration to disambiguate!")
+    }
     def maf = maf_vcf ? "touch ${prefix}.maf.bw" : ""
     """
     echo "" | gzip > ${prefix}.vcf.gz
     touch ${prefix}.depth.bw
-    $maf
+    ${maf}
     touch ${prefix}.bedgraph
     touch ${prefix}.log
 

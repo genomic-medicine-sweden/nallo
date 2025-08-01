@@ -1,10 +1,9 @@
-include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
-include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
-include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { BEDTOOLS_SPLIT           } from '../../../modules/nf-core/bedtools/split/main'
+include { BEDTOOLS_MERGE  } from '../../../modules/nf-core/bedtools/merge/main'
+include { BEDTOOLS_SORT   } from '../../../modules/nf-core/bedtools/sort/main'
+include { BUILD_INTERVALS } from '../../../modules/local/build_intervals/main'
+include { BEDTOOLS_SPLIT  } from '../../../modules/nf-core/bedtools/split/main'
 
 workflow SCATTER_GENOME {
-
     take:
     ch_fai             // channel: [optional] [ val(meta), path(fai) ]
     ch_input_bed       // channel: [optional] [ val(meta), path(bed) ]
@@ -22,16 +21,15 @@ workflow SCATTER_GENOME {
     //
     if (make_bed_from_fai) {
 
-        BUILD_INTERVALS (
+        BUILD_INTERVALS(
             ch_fai
         )
         ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
 
-        BUILD_INTERVALS.out.bed
-            .set{ ch_bed }
-    } else {
-        ch_input_bed
-            .set{ ch_bed }
+        BUILD_INTERVALS.out.bed.set { ch_bed }
+    }
+    else {
+        ch_input_bed.set { ch_bed }
     }
 
     //
@@ -39,23 +37,25 @@ workflow SCATTER_GENOME {
     //
     if (make_bed_intervals) {
 
-        if (split_n < 1) { error "Can't split bed file into less than one file" }
+        if (split_n < 1) {
+            error("Can't split bed file into less than one file")
+        }
 
         // Sort and merge overlapping regions
-        BEDTOOLS_SORT (
+        BEDTOOLS_SORT(
             ch_bed,
-            []
+            [],
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
 
-        BEDTOOLS_MERGE (
+        BEDTOOLS_MERGE(
             BEDTOOLS_SORT.out.sorted
         )
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
         BEDTOOLS_SPLIT(
             BEDTOOLS_MERGE.out.bed.map { meta, bed ->
-                [ meta, bed, split_n ]
+                [meta, bed, split_n]
             }
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
@@ -64,7 +64,7 @@ workflow SCATTER_GENOME {
         BEDTOOLS_SPLIT.out.beds
             .map { _meta, beds -> beds }
             .collect()
-            .map{ it -> [ it, it.size() ] }
+            .map { it -> [it, it.size()] }
             .transpose()
             .set { ch_bed_intervals }
 
@@ -76,15 +76,15 @@ workflow SCATTER_GENOME {
             .count()
             .map { count ->
                 if (count != split_n) {
-                    error "Expected ${split_n}, but got ${count} files from splitting the BED file. " +
-                          "This can happen if the input BED file (or fasta file if not using BED) has too few regions to split into ${split_n} parts. " +
-                          "Please check the input files or set `--snv_calling_processes` to ${count}."
+                    error(
+                        "Expected ${split_n}, but got ${count} files from splitting the BED file. " + "This can happen if the input BED file (or fasta file if not using BED) has too few regions to split into ${split_n} parts. " + "Please check the input files or set `--snv_calling_processes` to ${count}."
+                    )
                 }
             }
     }
 
     emit:
-    bed           = ch_bed            // channel: [ val(meta), path(bed) ]
-    bed_intervals = ch_bed_intervals  // channel: [ path(bed), val(num_intervals) ]
-    versions      = ch_versions       // channel: [ versions.yml ]
+    bed           = ch_bed // channel: [ val(meta), path(bed) ]
+    bed_intervals = ch_bed_intervals // channel: [ path(bed), val(num_intervals) ]
+    versions      = ch_versions // channel: [ versions.yml ]
 }

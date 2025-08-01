@@ -3,7 +3,6 @@ include { SOMALIER_RELATE as RELATE_INFER  } from '../../../modules/nf-core/soma
 include { SOMALIER_RELATE as RELATE_RELATE } from '../../../modules/nf-core/somalier/relate/main'
 
 workflow BAM_INFER_SEX {
-
     take:
     ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
     ch_fasta          // channel: [ val(meta), path(fasta) ]
@@ -15,21 +14,21 @@ workflow BAM_INFER_SEX {
     ch_versions = Channel.empty()
 
     // Extract sites
-    SOMALIER_EXTRACT (
+    SOMALIER_EXTRACT(
         ch_bam_bai,
         ch_fasta,
         ch_fai,
-        ch_somalier_sites
+        ch_somalier_sites,
     )
     ch_versions = ch_versions.mix(SOMALIER_EXTRACT.out.versions)
 
     SOMALIER_EXTRACT.out.extract
-        .combine( ch_ped.map { _meta, ped -> ped } )
+        .combine(ch_ped.map { _meta, ped -> ped })
         .filter { meta, _extract, _ped -> meta.sex == 0 }
         .set { ch_relate_infer_in }
 
     // 1. Run somalier relate on one sample at a time to infer sex
-    RELATE_INFER ( ch_relate_infer_in, [] )
+    RELATE_INFER(ch_relate_infer_in, [])
     ch_versions = ch_versions.mix(RELATE_INFER.out.versions)
 
     RELATE_INFER.out.samples_tsv
@@ -42,7 +41,7 @@ workflow BAM_INFER_SEX {
             // Hard error if sex could not be inferred for unknown sex samples
             assert !(it.original_pedigree_sex == "unknown" && (it.sex.toInteger() != 1 && it.sex.toInteger() != 2)) : "ERROR: Sex could not be automatically inferred for ${it.sample_id}. Please inspect manually and set sex in the samplesheet."
 
-            [ it.sample_id, it ]
+            [it.sample_id, it]
         }
         .set { ch_somalier_sex }
 
@@ -56,11 +55,11 @@ workflow BAM_INFER_SEX {
 
     // Update sex with sex from somalier for samples with unknown sex
     ch_samples.unknown_sex
-        .map { meta, bam, bai -> [ meta.id, meta, bam, bai ] }
-        .join( ch_somalier_sex, failOnMismatch:true, failOnDuplicate:true )
+        .map { meta, bam, bai -> [meta.id, meta, bam, bai] }
+        .join(ch_somalier_sex, failOnMismatch: true, failOnDuplicate: true)
         .map { _id, meta, bam, bai, somalier ->
             def updated_sex = (meta.sex == 0 ? somalier.sex.toInteger() : meta.sex)
-            [ meta + [sex: updated_sex], bam, bai ]
+            [meta + [sex: updated_sex], bam, bai]
         }
         .set { ch_updated_sex }
 
@@ -69,19 +68,19 @@ workflow BAM_INFER_SEX {
 
     // 2. Run relate on all samples at once to check relatedness
     SOMALIER_EXTRACT.out.extract
-        .map { meta, extract -> [ [ id: meta.project ], extract ] }
+        .map { meta, extract -> [[id: meta.project], extract] }
         .groupTuple()
-        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
+        .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_relate_relate_in }
 
-    RELATE_RELATE ( ch_relate_relate_in, [] )
+    RELATE_RELATE(ch_relate_relate_in, [])
     ch_versions = ch_versions.mix(RELATE_RELATE.out.versions)
 
     emit:
-    bam              = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
-    bai              = ch_updated_sex.map { meta, _bam, bai -> [ meta, bai ] } // channel: [ val(meta), path(bai) ]
-    bam_bai          = ch_updated_sex                                          // channel: [ val(meta), path(bam), path(bai) ]
-    somalier_samples = RELATE_RELATE.out.samples_tsv                           // channel: [ val(meta), path(samples_tsv) ]
-    somalier_pairs   = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
-    versions = ch_versions                                                     // channel: [ versions.yml ]
+    bam              = ch_updated_sex.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    bai              = ch_updated_sex.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    bam_bai          = ch_updated_sex // channel: [ val(meta), path(bam), path(bai) ]
+    somalier_samples = RELATE_RELATE.out.samples_tsv // channel: [ val(meta), path(samples_tsv) ]
+    somalier_pairs   = RELATE_RELATE.out.pairs_tsv // channel: [ val(meta), path(pairs_tsv) ]
+    versions         = ch_versions // channel: [ versions.yml ]
 }
