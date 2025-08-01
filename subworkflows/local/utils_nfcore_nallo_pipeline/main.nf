@@ -612,11 +612,11 @@ def isChild(sample, maternal_ids, paternal_ids) {
 }
 
 def hasMother(sample, maternal_ids) {
-    isNonZeroNonEmpty(sample.maternal_id) && (sample.maternal_id in maternal_ids)
+    sample.maternal_id in maternal_ids
 }
 
 def hasFather(sample, paternal_ids) {
-    isNonZeroNonEmpty(sample.paternal_id) && (sample.paternal_id in paternal_ids)
+    sample.paternal_id in paternal_ids
 }
 
 def isFemale(sample) {
