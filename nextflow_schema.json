@@ -616,6 +616,11 @@
                     "hidden": true,
                     "description": "Extra options to hifiasm, used for test profile."
                 },
+                "extra_yak_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to yak, used for test profile."
+                },
                 "pre_vep_snv_filter_expression": {
                     "type": "string",
                     "default": "",

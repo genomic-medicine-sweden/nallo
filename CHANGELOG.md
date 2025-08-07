@@ -99,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sv_call_regions`               |
 |               | `--qc_regions`                    |
 |               | `--pre_vep_snv_filter_expression` |
+|               | `--extra_yak_options`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
