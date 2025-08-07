@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#743](https://github.com/genomic-medicine-sweden/nallo/pull/743) - Added warnings about restrictive PacBio licenses, even when running a PacBio preset
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 
 ### `Changed`
 
@@ -59,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#732](https://github.com/genomic-medicine-sweden/nallo/pull/732) - Updated logic associated with `validateSVCallingParameters()` to fix an issue added in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 - [#733](https://github.com/genomic-medicine-sweden/nallo/pull/733) - Reduced the disk space cleanup added to the CI in [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) to reduce the step time
 - [#734](https://github.com/genomic-medicine-sweden/nallo/pull/734) - Renamed subworkflows for more consistent naming
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
 
 ### `Removed`
 
@@ -77,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Fixed tests for `add_found_in_tag`, `call_cnvs`, `create_pedigree_file`, `create_samples_haplotypes_file`, `filter_variants` and `scatter_genome` that were not previously automatically tested in the CI.
   [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Fixed improper `}` character appearing in aligned reads filename when phasing was disabled
 
 ### Parameters
 
