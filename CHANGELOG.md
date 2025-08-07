@@ -251,6 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#639](https://github.com/genomic-medicine-sweden/nallo/pull/639) - Fixed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
 - [#644](https://github.com/genomic-medicine-sweden/nallo/pull/644) - Fixed FastQC ignoring memory parameter
 - [#653](https://github.com/genomic-medicine-sweden/nallo/pull/653) - Fixed merge mistakes when squashing release 0.5.0
+- [#754](https://github.com/genomic-medicine-sweden/nallo/pull/754) - Fixed missing file in .prettierignore
 
 ### Parameters
 
