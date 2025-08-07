@@ -532,7 +532,7 @@
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
                     "enum": ["hifi-only", "trio-binning"],
-                    "default": "hifi-only"
+                    "default": "trio-binning"
                 },
                 "hifiasm_preset": {
                     "type": "string",

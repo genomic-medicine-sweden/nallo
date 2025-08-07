@@ -147,7 +147,11 @@ Turned off with `--skip_qc`.
 
 #### Assembly
 
-This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
+This step assembles genomes and aligns them to a referece genome. The assemblies are then mapped to the reference genome, merged and haplotagged.
+
+By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
+
+It requires no additional files except the reference genome.
 
 Turned off with `--skip_genome_assembly`.
 

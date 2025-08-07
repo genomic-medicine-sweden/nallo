@@ -298,10 +298,10 @@ def validateUniqueFilenamesPerSample(input) {
 def validateUniqueSampleIDs(input) {
     def sample = input[0]
     def metas = input[1].collect()
-    def family = metas.collect { it.family_id }.unique()
+    def families = metas.collect { meta -> meta.family_id }.unique()
 
-    if (family.size() > 1) {
-        error "Sample '${sample}' belongs to multiple families: ${family}. " +
+    if (families.size() > 1) {
+        error "Sample '${sample}' belongs to multiple families: ${families}. " +
               "Please make sure that there are no duplicate samples in the samplesheet."
     }
 
