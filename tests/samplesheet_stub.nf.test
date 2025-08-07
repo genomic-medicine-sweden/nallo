@@ -179,7 +179,7 @@ nextflow_pipeline {
 
     test("Test genome assembly without alignment") {
         options "-stub"
-        tag "x"
+
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'

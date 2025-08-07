@@ -40,6 +40,7 @@ workflow GENOME_ASSEMBLY {
             .set { ch_branched_samples }
 
         // Then, the files from parents of children with both parents will need to be concatenated before yak
+        // in case there are multiple files for the same parent.
         ch_branched_samples.paired_parents
             .map { meta, fastq ->
                 [ groupKey(meta, meta.n_files), fastq ]
@@ -62,7 +63,8 @@ workflow GENOME_ASSEMBLY {
         ch_versions = ch_versions.mix(YAK_COUNT.out.versions)
 
         YAK_COUNT.out.yak
-            // Children should always be a list, because a parent can have multiple children
+            // Because a parent can have multiple children, and meta.children is a list of all children,
+            // we need to return one tuple per child.
             .flatMap { meta, yak ->
                 (meta.children ?: []).collect { child_id ->
                     [child_id, meta, yak]
