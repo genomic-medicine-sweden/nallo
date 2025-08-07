@@ -1,13 +1,45 @@
 {
-    "child with two parents, trio-binning mode": {
+    "two children with two parents, trio-binning mode": {
         "content": [
             {
                 "0": [
                     [
                         {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                    ],
+                    [
+                        {
                             "id": "HG003",
                             "n_files": 1,
                             "relationship": "father",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 1
@@ -19,6 +51,10 @@
                             "id": "HG003",
                             "n_files": 1,
                             "relationship": "father",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 2
@@ -30,6 +66,10 @@
                             "id": "HG004",
                             "n_files": 1,
                             "relationship": "mother",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 1
@@ -41,16 +81,82 @@
                             "id": "HG004",
                             "n_files": 1,
                             "relationship": "mother",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 2
                         },
                         "HG004_haplotype_2.fasta.gz:md5,3cbbafd35aaf785fa3cb2604c38f6f2f"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "second_child_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "second_child_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
                     ]
                 ],
                 "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true
+                        },
+                        "HG002_other.fastq.gz:md5,f9d9d405021d7a64eb59929e90aed241"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true
+                        },
+                        "second_child_other.fastq.gz:md5,f9d9d405021d7a64eb59929e90aed241"
+                    ]
+                ],
+                "2": [
                     "versions.yml:md5,2c13b2225c94411809dff121aa467164",
                     "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
@@ -61,9 +167,41 @@
                 "assembled_haplotypes": [
                     [
                         {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                    ],
+                    [
+                        {
                             "id": "HG003",
                             "n_files": 1,
                             "relationship": "father",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 1
@@ -75,6 +213,10 @@
                             "id": "HG003",
                             "n_files": 1,
                             "relationship": "father",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 2
@@ -86,6 +228,10 @@
                             "id": "HG004",
                             "n_files": 1,
                             "relationship": "mother",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 1
@@ -97,6 +243,278 @@
                             "id": "HG004",
                             "n_files": 1,
                             "relationship": "mother",
+                            "children": [
+                                "HG002",
+                                "second_child"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 2
+                        },
+                        "HG004_haplotype_2.fasta.gz:md5,3cbbafd35aaf785fa3cb2604c38f6f2f"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "second_child_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "second_child_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                    ]
+                ],
+                "two_parent_children": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true
+                        },
+                        "HG002_other.fastq.gz:md5,f9d9d405021d7a64eb59929e90aed241"
+                    ],
+                    [
+                        {
+                            "id": "second_child",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true
+                        },
+                        "second_child_other.fastq.gz:md5,f9d9d405021d7a64eb59929e90aed241"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
+                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-07T12:08:03.62209152"
+    },
+    "child with two parents, trio-binning mode": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 1
+                        },
+                        "HG003_haplotype_1.fasta.gz:md5,7cf7379bc90d4cabea1ae4bad56d9e6d"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 2
+                        },
+                        "HG003_haplotype_2.fasta.gz:md5,372bd5f78974ad2e394130d790ee9ca0"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "n_files": 1,
+                            "relationship": "mother",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 1
+                        },
+                        "HG004_haplotype_1.fasta.gz:md5,e2eaf0517d02d226ab3799cb709216bc"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "n_files": 1,
+                            "relationship": "mother",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 2
+                        },
+                        "HG004_haplotype_2.fasta.gz:md5,3cbbafd35aaf785fa3cb2604c38f6f2f"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
+                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
+                ],
+                "assembled_haplotypes": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": true,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 1
+                        },
+                        "HG003_haplotype_1.fasta.gz:md5,7cf7379bc90d4cabea1ae4bad56d9e6d"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 2
+                        },
+                        "HG003_haplotype_2.fasta.gz:md5,372bd5f78974ad2e394130d790ee9ca0"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "n_files": 1,
+                            "relationship": "mother",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": true,
+                            "haplotype": 1
+                        },
+                        "HG004_haplotype_1.fasta.gz:md5,e2eaf0517d02d226ab3799cb709216bc"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "n_files": 1,
+                            "relationship": "mother",
+                            "children": [
+                                "HG002"
+                            ],
                             "family_id": "NIST",
                             "has_other_parent": true,
                             "haplotype": 2
@@ -107,6 +525,9 @@
                 "versions": [
                     "versions.yml:md5,2c13b2225c94411809dff121aa467164",
                     "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
@@ -116,16 +537,98 @@
                 ]
             },
             [
-                "versions.yml:md5,2c13b2225c94411809dff121aa467164"
+                [
+                    {
+                        "id": "HG002",
+                        "n_files": 1,
+                        "relationship": "child",
+                        "children": [
+                            
+                        ],
+                        "family_id": "NIST",
+                        "two_parents": true,
+                        "haplotype": 1
+                    },
+                    "HG002_haplotype_1.fasta.gz:md5,27b5d0dc68bd7cd9d0b7a2fea33ca1e4"
+                ],
+                [
+                    {
+                        "id": "HG002",
+                        "n_files": 1,
+                        "relationship": "child",
+                        "children": [
+                            
+                        ],
+                        "family_id": "NIST",
+                        "two_parents": true,
+                        "haplotype": 2
+                    },
+                    "HG002_haplotype_2.fasta.gz:md5,62b8128e71e55bef9c06711f29fe2302"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "n_files": 1,
+                        "relationship": "father",
+                        "children": [
+                            "HG002"
+                        ],
+                        "family_id": "NIST",
+                        "has_other_parent": true,
+                        "haplotype": 1
+                    },
+                    "HG003_haplotype_1.fasta.gz:md5,7cf7379bc90d4cabea1ae4bad56d9e6d"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "n_files": 1,
+                        "relationship": "father",
+                        "children": [
+                            "HG002"
+                        ],
+                        "family_id": "NIST",
+                        "has_other_parent": true,
+                        "haplotype": 2
+                    },
+                    "HG003_haplotype_2.fasta.gz:md5,372bd5f78974ad2e394130d790ee9ca0"
+                ],
+                [
+                    {
+                        "id": "HG004",
+                        "n_files": 1,
+                        "relationship": "mother",
+                        "children": [
+                            "HG002"
+                        ],
+                        "family_id": "NIST",
+                        "has_other_parent": true,
+                        "haplotype": 1
+                    },
+                    "HG004_haplotype_1.fasta.gz:md5,e2eaf0517d02d226ab3799cb709216bc"
+                ],
+                [
+                    {
+                        "id": "HG004",
+                        "n_files": 1,
+                        "relationship": "mother",
+                        "children": [
+                            "HG002"
+                        ],
+                        "family_id": "NIST",
+                        "has_other_parent": true,
+                        "haplotype": 2
+                    },
+                    "HG004_haplotype_2.fasta.gz:md5,3cbbafd35aaf785fa3cb2604c38f6f2f"
+                ]
             ],
-            4,
-            11
+            14
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-31T14:17:39.065044596"
+        "timestamp": "2025-08-07T11:56:04.505705832"
     },
     "one sample, hifi-only mode": {
         "content": [
@@ -180,12 +683,163 @@
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
                     "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
                 ]
+            },
+            [
+                "\"GENOME_ASSEMBLY:HIFIASM\":",
+                "    hifiasm: 0.25.0-r726",
+                "\"GENOME_ASSEMBLY:GFASTATS\":",
+                "    gfastats: 1.3.10",
+                "\"GENOME_ASSEMBLY:GFASTATS\":",
+                "    gfastats: 1.3.10"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-07T10:53:15.711017842"
+    },
+    "child with one parent, trio-binning mode": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": false,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,a6c5cbbeff6da2f9bb2e16639f216f25"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": false,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,7c89a495b047249f49c4cd47841b71eb"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": false,
+                            "haplotype": 1
+                        },
+                        "HG003_haplotype_1.fasta.gz:md5,7cf7379bc90d4cabea1ae4bad56d9e6d"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": false,
+                            "haplotype": 2
+                        },
+                        "HG003_haplotype_2.fasta.gz:md5,372bd5f78974ad2e394130d790ee9ca0"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
+                ],
+                "assembled_haplotypes": [
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": false,
+                            "haplotype": 1
+                        },
+                        "HG002_haplotype_1.fasta.gz:md5,a6c5cbbeff6da2f9bb2e16639f216f25"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "n_files": 1,
+                            "relationship": "child",
+                            "children": [
+                                
+                            ],
+                            "family_id": "NIST",
+                            "two_parents": false,
+                            "haplotype": 2
+                        },
+                        "HG002_haplotype_2.fasta.gz:md5,7c89a495b047249f49c4cd47841b71eb"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": false,
+                            "haplotype": 1
+                        },
+                        "HG003_haplotype_1.fasta.gz:md5,7cf7379bc90d4cabea1ae4bad56d9e6d"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "n_files": 1,
+                            "relationship": "father",
+                            "children": [
+                                "HG002"
+                            ],
+                            "family_id": "NIST",
+                            "has_other_parent": false,
+                            "haplotype": 2
+                        },
+                        "HG003_haplotype_2.fasta.gz:md5,372bd5f78974ad2e394130d790ee9ca0"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
+                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
+                ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-31T13:33:42.376445782"
+        "timestamp": "2025-08-07T12:15:00.511059735"
     }
 }

@@ -667,10 +667,10 @@ def addRelationshipsToMeta(samples) {
         sample.children = isParent(sample) ? children_of_sample.collect{ it.id }.unique() : []
 
         // For those children, check if they have a father or mother
-        if (sample.relationship == 'mother') {
-            sample.has_other_parent = children_of_sample.any { child -> childHasFather(child, paternal_ids) }
-        } else if (sample.relationship == 'father') {
-            sample.has_other_parent = children_of_sample.any { child -> childHasMother(child, maternal_ids) }
+        if (isMother(sample)) {
+            sample.has_other_parent = children_of_sample.any { child -> hasFather(child, paternal_ids) }
+        } else if (isFather(sample)) {
+            sample.has_other_parent = children_of_sample.any { child -> hasMother(child, maternal_ids) }
         } else {
             sample.has_other_parent = false
         }
@@ -686,6 +686,11 @@ def getChildrenForParent(samples, parent_id) {
 
 def isChild(sample, maternal_ids, paternal_ids) {
     hasMother (sample, maternal_ids) ||
+    hasFather (sample, paternal_ids)
+}
+
+def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
+    hasMother (sample, maternal_ids) &&
     hasFather (sample, paternal_ids)
 }
 
@@ -705,8 +710,16 @@ def isMale(sample) {
     sample.sex == 1
 }
 
+def isMother(sample) {
+    sample.relationship == 'mother'
+}
+
+def isFather(sample) {
+    sample.relationship == 'father'
+}
+
 def isParent(sample) {
-    sample.relationship == 'mother' || sample.relationship == 'father'
+    isMother(sample) || isFather(sample)
 }
 
 def boolean isNonZeroNonEmpty(value) {
