@@ -649,12 +649,9 @@ def addRelationshipsToMeta(samples) {
 
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
-<<<<<<< HEAD
     def parents_ids = maternal_ids + paternal_ids
     def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
                            samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
-=======
->>>>>>> 2f4db44 (Refactor genome assembly)
 
     samples.each { sample ->
         sample.relationship = sample.id in grandparents_ids ? 'unknown' :
