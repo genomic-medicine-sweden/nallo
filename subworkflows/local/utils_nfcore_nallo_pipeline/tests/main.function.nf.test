@@ -126,7 +126,7 @@ nextflow_function {
 
     test ("test function addRelationshipsToMeta with quattro") {
         function "addRelationshipsToMeta"
-        tag "x"
+
         when {
             function {
                 """

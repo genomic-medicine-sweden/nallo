@@ -180,9 +180,17 @@ workflow PIPELINE_INITIALISATION {
             validateUniqueFilenamesPerSample(it)
             validateUniqueSampleIDs(it)
         }
+        // This adds n_files to the meta so we can use groupKey later.
+        // n_files is the number of files per sample. If we are aligning & splitting the reads,
+        // it's the number of files after splitting.
+        //
+        // Since we now use n_files in both the alignment and the genome assembly steps,
+        // I think it could be better to add it there instead of here.
         .map { sample, metas, reads ->
-            // Add number of files per sample _after_ splitting to meta
-            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.alignment_processes - 1), single_end:true ], reads ]
+
+            def split_alignments = !params.skip_alignment ? Math.max(0, params.alignment_processes - 1) : 0
+
+            [ sample, metas[0] + [n_files: metas.size() + metas.size() * split_alignments, single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
