@@ -78,8 +78,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Fixed tests for `add_found_in_tag`, `call_cnvs`, `create_pedigree_file`, `create_samples_haplotypes_file`, `filter_variants` and `scatter_genome` that were not previously automatically tested in the CI.
-  [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
+- [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Fixed improper `}` character appearing in aligned reads filename when phasing was disabled
+- [#751](https://github.com/genomic-medicine-sweden/nallo/pull/751) - Fixed linting issue in `validatePacBioLicense`
 
 ### Parameters
 
