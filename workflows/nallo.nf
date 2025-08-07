@@ -160,7 +160,7 @@ workflow NALLO {
     // If we start running more trios we also need to consider that the parents at the moment needs to be merged
     // before YAK. So, we could consider adding some logic to handle that case,
     // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if(!params.skip_alignment && !params.skip_genome_assembly && params.alignment_processes > 1) {
+    if(!params.skip_alignment && params.alignment_processes > 1) {
 
         SPLITUBAM (
             CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.

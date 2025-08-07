@@ -175,7 +175,7 @@ workflow PIPELINE_INITIALISATION {
         }
         .groupTuple() // group by sample
         .map {
-            validateInputSamplesheet(it)
+            validateUniqueFilenamesPerSample(it)
         }
         .map { sample, metas, reads ->
             // Add number of files per sample _after_ splitting to meta
@@ -185,6 +185,13 @@ workflow PIPELINE_INITIALISATION {
         .flatMap { _sample, meta, reads ->
             reads.collect { return [ meta, it ] }
         }
+        // Add relationships to meta
+        .map { meta, reads -> [ meta.family_id, meta, reads ] }
+        .groupTuple()
+        .map { _family, metas, reads ->
+            [ addRelationshipsToMeta(metas), reads ]
+        }
+        .transpose()
         .set { ch_samplesheet }
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
@@ -195,6 +202,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that the SV calling parameters are valid
         validateSVCallingParameters()
+
+        // Check that mothers are female, and fathers are male
+        validateParentalSex(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -266,7 +276,7 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 //
 // Validate channels from input samplesheet
 //
-def validateInputSamplesheet(input) {
+def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
     def fileNames = input[2].collect { new File(it.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
@@ -556,4 +566,67 @@ def validateSVCallingParameters() {
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
     }
+}
+
+def validateParentalSex(input) {
+    input
+        .map { meta, _reads ->
+            def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
+
+            if ((meta.relationship == 'mother' && !isFemale(meta)) ||
+                (meta.relationship == 'father' && !isMale(meta))) {
+                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet. " +
+                      "Please check the samplesheet and correct the sex or releationship."
+            }
+        }
+}
+
+def getParentalIds(samples, field) {
+    samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
+}
+
+def addRelationshipsToMeta(samples) {
+    // This function adds relationships to the samples based on their parental IDs.
+    // We assume we are mainly interested in children, therefore if there was a grandparent, parent, and a child present,
+    // the parent will be set as 'mother' or 'father' rather than as 'child'.
+
+    def maternal_ids = getParentalIds(samples, 'maternal_id')
+    def paternal_ids = getParentalIds(samples, 'paternal_id')
+    def parents_ids = maternal_ids + paternal_ids
+    def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
+                           samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+
+    samples.each { sample ->
+        sample.relationship = sample.id in grandparents_ids ? 'unknown' :
+                              sample.id in maternal_ids ? 'mother' :
+                              sample.id in paternal_ids ? 'father' :
+                              isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+    }
+
+}
+
+def isChild(sample, maternal_ids, paternal_ids) {
+    hasMother (sample, maternal_ids) ||
+    hasFather (sample, paternal_ids)
+}
+
+def hasMother(sample, maternal_ids) {
+    sample.maternal_id in maternal_ids
+}
+
+def hasFather(sample, paternal_ids) {
+    sample.paternal_id in paternal_ids
+}
+
+def isFemale(sample) {
+    sample.sex == 2
+}
+
+def isMale(sample) {
+    sample.sex == 1
+}
+
+def boolean isNonZeroNonEmpty(value) {
+    (value instanceof String && value != "" && value != "0") ||
+    (value instanceof Number && value != 0)
 }
