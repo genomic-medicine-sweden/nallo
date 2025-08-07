@@ -11,7 +11,7 @@
                     "relationship": "child",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -24,7 +24,7 @@
                     "relationship": "child",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -74,7 +74,7 @@
                     "relationship": "child",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -100,7 +100,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 }
@@ -124,7 +124,7 @@
                     "relationship": "child",
                     "two_parents": true,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -163,7 +163,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -176,7 +176,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 }
@@ -200,7 +200,7 @@
                     "relationship": "child",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -226,7 +226,7 @@
                     "relationship": "child",
                     "two_parents": true,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -245,7 +245,7 @@
                 },
                 {
                     "id": "mother_2",
-                    "family_id": "FAM",
+                    "family_id": "FAM"
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
@@ -289,7 +289,7 @@
                     "relationship": "child",
                     "two_parents": true,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -326,7 +326,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -339,7 +339,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 },
@@ -352,7 +352,7 @@
                     "relationship": "unknown",
                     "two_parents": false,
                     "children": [
-                        
+
                     ],
                     "has_other_parent": false
                 }
@@ -363,5 +363,70 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-08-07T14:35:40.109137957"
+    },
+    "test function addRelationshipsToMeta with quattro": {
+        "content": [
+            [
+                {
+                    "id": "child",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+
+                    ],
+                    "has_other_parent": false
+                },
+                {
+                    "id": "child_2",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+
+                    ],
+                    "has_other_parent": false
+                },
+                {
+                    "id": "mother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "child",
+                        "child_2"
+                    ],
+                    "has_other_parent": true
+                },
+                {
+                    "id": "father",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child",
+                        "child_2"
+                    ],
+                    "has_other_parent": true
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-07T14:55:26.70536671"
     }
 }
