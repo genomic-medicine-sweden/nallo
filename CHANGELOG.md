@@ -61,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#733](https://github.com/genomic-medicine-sweden/nallo/pull/733) - Reduced the disk space cleanup added to the CI in [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) to reduce the step time
 - [#734](https://github.com/genomic-medicine-sweden/nallo/pull/734) - Renamed subworkflows for more consistent naming
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
+- [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v.3.3.2
 
 ### `Removed`
 
