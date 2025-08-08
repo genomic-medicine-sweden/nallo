@@ -25,6 +25,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         STRDUST.out.vcf.join(STRDUST.out.tbi),
         "STRdust"
     )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     ADD_FOUND_IN_TAG.out.vcf
         .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
