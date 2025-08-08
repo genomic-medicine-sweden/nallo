@@ -94,7 +94,7 @@ nextflow_workflow {
     test("don't unzip fasta, don't untar vep cache -stub") {
 
         options "-stub"
-
+        tag "xy"
         when {
             workflow {
                 """
@@ -104,7 +104,7 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'vep_cache' ],
-                    file("$projectDir/assets", checkIfExists:true)
+                    file("$projectDir/.devcontainer", checkIfExists:true)
                 ])
                 input[2] = false
                 input[3] = false
