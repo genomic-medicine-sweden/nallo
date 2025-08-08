@@ -58,6 +58,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         TRGT_GENOTYPE.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
         "TRGT"
     )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Sort and index bcf
     BCFTOOLS_SORT ( ADD_FOUND_IN_TAG.out.vcf )
