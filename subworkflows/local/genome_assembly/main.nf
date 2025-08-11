@@ -14,19 +14,7 @@ workflow GENOME_ASSEMBLY {
     main:
     ch_versions = Channel.empty()
 
-    if (!trio_binning) {
-        ch_reads
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
-            .multiMap { meta, reads ->
-                reads : [ meta, reads, [] ]
-                yak   : [ [], [], [] ]
-            }
-            .set { ch_hifiasm_in }
-
-    } else {
+    if (trio_binning) {
         // First, we need to branch the samples based on their relationship
         ch_reads
             .branch { meta, _reads ->
@@ -109,6 +97,17 @@ workflow GENOME_ASSEMBLY {
             .multiMap { meta, reads, yak_paternal, yak_maternal ->
                 reads : [ meta, reads, []                  ]
                 yak   : [ meta, yak_paternal, yak_maternal ]
+            }
+            .set { ch_hifiasm_in }
+    } else {
+        ch_reads
+            .map { meta, fastq ->
+                [ groupKey(meta, meta.n_files), fastq ]
+            }
+            .groupTuple()
+            .multiMap { meta, reads ->
+                reads : [ meta, reads, [] ]
+                yak   : [ [], [], [] ]
             }
             .set { ch_hifiasm_in }
     }
