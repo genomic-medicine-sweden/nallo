@@ -164,9 +164,6 @@ nextflow_workflow {
         then {
             def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
             assertAll(
-                // Don't really have a good way to assert that both children are trio-binned,
-                // other than a manual .view() on `ch_with_both_parents`, without adding the
-                // `ch_with_both_parents` intermediate channel to the output.
                 { assert workflow.success },
                 { assert workflow.trace.succeeded().size() == 8 }, // 8 tasks: 2x FASTQ, 2x HIFIASM 4x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 4 },
