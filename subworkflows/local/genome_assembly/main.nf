@@ -88,6 +88,10 @@ workflow GENOME_ASSEMBLY {
             .set { ch_hifiasm_in }
     } else {
         ch_reads
+            .map { meta, fastq ->
+                [ groupKey(meta, meta.n_files), fastq ]
+            }
+            .groupTuple()
             .multiMap { meta, reads ->
                 reads : [ meta, reads, [] ]
                 yak   : [ [], [], [] ]
