@@ -4,7 +4,7 @@ include { YAK_COUNT } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS  } from '../../../modules/nf-core/gfastats/main'
 
 // This subworkflow assembles and outputs haplotypes from a set of reads, using hifiasm and gfastats.
-// It assumes that no sample exists twice in different families.
+// It assumes that while each sample can have multiple files, each sample belongs to one family at most.
 workflow GENOME_ASSEMBLY {
 
     take:
