@@ -671,7 +671,7 @@ def addRelationshipsToMeta(samples) {
         // Find children of this specific parent
         sample.children = []
         sample.has_other_parent = false
-        
+
         if (isParent(sample)){
             sample.children = getChildrenForParent(samples, sample.id).collect{ it.id }
 
