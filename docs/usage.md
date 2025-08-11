@@ -65,20 +65,25 @@ It has to be a comma-separated file with seven columns and a header row, as show
 
 ```console
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-testrun,HG002,/path/to/HG002.fastq.gz,FAM,HG003,0,1,2
-testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
+testrun,HG002,/path/to/HG002_1.bam,NIST,HG003,0,1,2
+testrun,HG002,/path/to/HG002_2.bam,NIST,HG003,0,1,2
+testrun,HG003,/path/to/HG003.fastq.gz,NIST,0,0,2,1
 ```
 
 | Fields        | Description                                                                                                                       |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                    |
 | `sample`      | Custom sample name, cannot contain spaces.                                                                                        |
-| `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                        |
+| `file`        | Absolute path to a BAM or gzipped FASTQ file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                      |
 | `family_id`   | Family ID must be provided and cannot contain spaces. If no family ID is available use the same ID as sample.                     |
 | `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.                                    |
 | `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.                                    |
 | `sex`         | Sex must be provided as 0, 1 or 2 (0=unknown; 1=male; 2=female). If sex is unknown it will be assigned automatically if possible. |
 | `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                               |
+
+!!!tip "Multiple files per sample"
+
+    If you have multiple files per sample these can be added on separate rows. Keeping all columns except `file` identical for each sample. These will be merged after alignment or before assembly.
 
 ### Presets
 
