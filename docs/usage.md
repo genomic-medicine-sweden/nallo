@@ -147,7 +147,7 @@ Turned off with `--skip_qc`.
 
 #### Assembly
 
-This step assembles genomes and aligns them to a referece genome. The assemblies are then mapped to the reference genome, merged and haplotagged.
+This step assembles genomes and aligns them to a reference genome. The assemblies are then merged and haplotagged.
 
 By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
 
