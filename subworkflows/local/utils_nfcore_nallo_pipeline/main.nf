@@ -188,7 +188,7 @@ workflow PIPELINE_INITIALISATION {
         // I think it could be better to add it there instead of here.
         .map { sample, metas, reads ->
 
-            def split_alignments = !params.skip_alignment ? Math.max(1, params.alignment_processes) : 1
+            def split_alignments = params.skip_alignment ? 1 : Math.max(1, params.alignment_processes)
             [ sample, metas[0] + [n_files: metas.size() * split_alignments, single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
