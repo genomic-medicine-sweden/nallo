@@ -32,10 +32,8 @@ workflow GENOME_ASSEMBLY {
             .branch { meta, _reads ->
                 def is_parent = meta.relationship in ['father', 'mother']
                 paired_parents             : is_parent && meta.has_other_parent
-                unpaired_parents           : is_parent && !meta.has_other_parent
                 children_with_both_parents : meta.relationship == 'child' && meta.two_parents
-                children_with_single_parent: meta.relationship == 'child' && !meta.two_parents
-                unknown                    : meta.relationship == 'unknown'
+                other                      : true
             }
             .set { ch_branched_samples }
 
