@@ -151,7 +151,7 @@ This step assembles genomes and aligns them to a reference genome. The assemblie
 
 By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
 
-It requires no additional files except the reference genome.
+No additional files other than the reference genome required.
 
 Turned off with `--skip_genome_assembly`.
 
