@@ -673,13 +673,14 @@ def addRelationshipsToMeta(samples) {
         sample.has_other_parent = false
 
         if (isParent(sample)){
-            sample.children = getChildrenForParent(samples, sample.id).collect{ it.id }
+            def children = getChildrenForParent(samples, sample.id) // Get metadata of children
+            sample.children = children.collect{ meta -> meta.id } // Store children IDs in parent meta
 
             // For those children, check if they have a father or mother
             if (isMother(sample)) {
-                sample.has_other_parent = sample.children.any { child -> hasFather(child, paternal_ids) }
+                sample.has_other_parent = children.any { child -> hasFather(child, paternal_ids) }
             } else if (isFather(sample)) {
-                sample.has_other_parent = sample.children.any { child -> hasMother(child, maternal_ids) }
+                sample.has_other_parent = children.any { child -> hasMother(child, maternal_ids) }
             }
         }
 
