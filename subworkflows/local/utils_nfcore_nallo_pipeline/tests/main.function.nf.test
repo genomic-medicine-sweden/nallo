@@ -124,7 +124,7 @@ nextflow_function {
         }
     }
 
-    test ("test function addRelationshipsToMeta with quattro") {
+    test ("test function addRelationshipsToMeta with quartet") {
         function "addRelationshipsToMeta"
 
         when {
