@@ -17,6 +17,10 @@ workflow GENOME_ASSEMBLY {
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship
         ch_reads
+            .map { meta, fastq ->
+                [ groupKey(meta, meta.n_files), fastq ]
+            }
+            .groupTuple()
             .branch { meta, _reads ->
                 def is_parent = meta.relationship in ['father', 'mother']
                 paired_parents             : is_parent && meta.has_other_parent
@@ -28,10 +32,6 @@ workflow GENOME_ASSEMBLY {
         // Then, the files from parents of children with both parents will need to be concatenated before yak
         // in case there are multiple files for the same parent.
         ch_branched_samples.paired_parents
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .branch { _meta, fastqs ->
                 cat: fastqs.size() > 1
                 no_cat: fastqs.size() == 1
@@ -66,10 +66,6 @@ workflow GENOME_ASSEMBLY {
 
         // Creates the input for trio-binned assemblies (children with both parents)
         ch_branched_samples.children_with_both_parents
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .map { meta, reads -> [ meta.id, meta, reads ] }
             .join(ch_yak_output.paternal)
             .join(ch_yak_output.maternal)
@@ -78,22 +74,13 @@ workflow GENOME_ASSEMBLY {
             }
             .set { ch_with_both_parents }
 
-        // Creates the input for the non-trio binned assemblies
-        // (children with a single parent, parents, and unknown samples)
+        // Create the input for hifiasm by combining the non-trio binned samples with the trio-binned samples.
         ch_branched_samples.other
             .concat(ch_branched_samples.paired_parents)
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .map { meta, fastqs ->
                 [ meta, fastqs, [], [] ]
             }
-            .set { ch_other_cases }
-
-        // Combines the two, and creates the input for hifiasm
-        ch_with_both_parents
-            .concat(ch_other_cases)
+            .concat(ch_with_both_parents)
             .multiMap { meta, reads, yak_paternal, yak_maternal ->
                 reads : [ meta, reads, []                  ]
                 yak   : [ meta, yak_paternal, yak_maternal ]
@@ -101,10 +88,6 @@ workflow GENOME_ASSEMBLY {
             .set { ch_hifiasm_in }
     } else {
         ch_reads
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .multiMap { meta, reads ->
                 reads : [ meta, reads, [] ]
                 yak   : [ [], [], [] ]
