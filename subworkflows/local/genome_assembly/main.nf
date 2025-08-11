@@ -92,10 +92,8 @@ workflow GENOME_ASSEMBLY {
 
         // Creates the input for the non-trio binned assemblies
         // (children with a single parent, parents, and unknown samples)
-        ch_branched_samples.children_with_single_parent
+        ch_branched_samples.other
             .concat(ch_branched_samples.paired_parents)
-            .concat(ch_branched_samples.unpaired_parents)
-            .concat(ch_branched_samples.unknown)
             .map { meta, fastq ->
                 [ groupKey(meta, meta.n_files), fastq ]
             }
