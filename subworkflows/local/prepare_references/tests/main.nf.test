@@ -94,7 +94,6 @@ nextflow_workflow {
     test("don't unzip fasta, don't untar vep cache -stub") {
 
         options "-stub"
-        tag "xy"
         when {
             workflow {
                 """
