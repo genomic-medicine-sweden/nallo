@@ -12,6 +12,7 @@ include {
 include { ALIGN_ASSEMBLIES                            } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV         } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS         } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SNVS                               } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                } from '../subworkflows/local/annotate_svs'
 include { ASSEMBLY                                    } from '../subworkflows/local/genome_assembly'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS } from '../subworkflows/local/convert_input_files'
@@ -20,19 +21,20 @@ include { BAM_INFER_SEX                               } from '../subworkflows/lo
 include { CALL_PARALOGS                               } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST              } from '../subworkflows/local/call_repeat_expansions_strdust'
 include { CALL_REPEAT_EXPANSIONS_TRGT                 } from '../subworkflows/local/call_repeat_expansions_trgt'
+include { CALL_SNVS                                   } from '../subworkflows/local/call_snvs'
 include { CALL_SVS                                    } from '../subworkflows/local/call_svs'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/local/filter_variants'
 include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
+include { GVCF_GLNEXUS_NORM_VARIANTS                  } from '../subworkflows/local/gvcf_glnexus_norm_variants'
 include { METHYLATION                                 } from '../subworkflows/local/methylation'
 include { PHASING                                     } from '../subworkflows/local/phasing'
-include { PREPARE_REFERENCES                              } from '../subworkflows/local/prepare_references'
+include { PREPARE_REFERENCES                          } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
+include { QC_SNVS                                     } from '../subworkflows/local/qc_snvs'
 include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
 include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
-include { CALL_SNVS                       } from '../subworkflows/local/call_snvs'
-include { ANNOTATE_SNVS                              } from '../subworkflows/local/annotate_snvs'
-
+include { VCF_CONCAT_NORM_VARIANTS                    } from '../subworkflows/local/vcf_concat_norm_variants'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -47,7 +49,6 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/l
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_STATS                                    } from '../modules/nf-core/bcftools/stats/main'
 include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
@@ -341,9 +342,7 @@ workflow NALLO {
     //
     if(!params.skip_snv_calling) {
 
-        //
-        // Make BED intervals, to be used for parallel SNV calling
-        //
+        // Make BED intervals, can be used for parallel SNV calling
         SCATTER_GENOME (
             ch_fai,
             ch_snv_call_regions,      // BED file to scatter
@@ -353,37 +352,82 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
-        // Combine to create a bam_bai - interval pair for each sample
+        // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
+        // This uses the whole BAM files for each region instead of splitting them.
         ch_bam_bai
-            .combine( SCATTER_GENOME.out.bed_intervals )
-            .map { meta, bam, bai, bed, intervals ->
-                [ meta + [ num_intervals: intervals ], bam, bai, bed ]
+            .combine(SCATTER_GENOME.out.bed_intervals)
+            .multiMap { meta, bam, bai, bed, intervals ->
+                def call_snvs_meta = meta + [num_intervals: intervals, region: bed]
+                bam: [call_snvs_meta, bam]
+                bai: [call_snvs_meta, bai]
+                bed: [call_snvs_meta, bed]
             }
-            .set{ ch_snv_calling_in }
+            .set { call_snvs_input }
 
-        // This subworkflow calls SNVs with DeepVariant and outputs:
-        // 1. A merged and normalized VCF, containing one sample with all regions, to be used in downstream subworkflows requiring SNVs.
-        // 2. A merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
-        CALL_SNVS (
-            ch_snv_calling_in,
+        CALL_SNVS(
+            call_snvs_input.bam,
+            call_snvs_input.bai,
+            call_snvs_input.bed,
             ch_fasta,
             ch_fai,
-            SCATTER_GENOME.out.bed,
-            ch_par
+            ch_par,
+            "deepvariant",
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
+        CALL_SNVS.out.gvcf
+            .map { meta, gvcf ->
+                [[id: meta.region.name, family_id: meta.family_id], gvcf]
+            }
+            .groupTuple()
+            .set { variants_to_merge_per_family }
+
+        // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
+        GVCF_GLNEXUS_NORM_VARIANTS(
+            variants_to_merge_per_family,
+            SCATTER_GENOME.out.bed, // This contains all regions, but we could probably pass the region BED that actually matches the variants instead...
+            ch_fasta,
+            "deepvariant",
+        )
+        ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
+
+        groupSNVsPerSample(CALL_SNVS.out.vcf)
+            .join(
+                groupSNVsPerSample(CALL_SNVS.out.index),
+                failOnMismatch: true,
+                failOnDuplicate: true,
+            )
+            .map { meta, vcf, tbi ->
+                [meta - meta.subMap('num_intervals'), vcf, tbi]
+            }
+            .set { variants_to_concat_per_sample }
+
+        // Create a concatenated and normalized VCF, containing one sample with all regions.
+        VCF_CONCAT_NORM_VARIANTS(
+            variants_to_concat_per_sample,
+            ch_fasta,
+            "deepvariant",
+        )
+        ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
+
+        sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf
+        sample_snv_index = VCF_CONCAT_NORM_VARIANTS.out.index
+
+        family_snv_vcf   = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
+        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
+
         // SNV QC
-        CALL_SNVS.out.snp_calls_vcf
-            .join(CALL_SNVS.out.snp_calls_tbi)
-            .set { ch_snv_stats_in }
+        QC_SNVS (
+            sample_snv_vcf, // TODO: Can we use the normalized VCF here, for DV vcfstatsreport?
+            sample_snv_vcf,
+            sample_snv_index,
+        )
 
-        BCFTOOLS_STATS ( ch_snv_stats_in, [[],[]], [[],[]], [[],[]], [[],[]], [[],[]] )
-        ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BCFTOOLS_STATS.out.stats.collect{it[1]}.ifEmpty([]))
+        ch_versions = ch_versions.mix(QC_SNVS.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{it[1]}.ifEmpty([]))
 
-        CALL_SNVS.out.family_bcf
-            .join( CALL_SNVS.out.family_csi, failOnMismatch:true, failOnDuplicate:true )
+        family_snv_vcf
+            .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .set { ch_vcf_tbi_per_region }
     }
 
@@ -394,7 +438,7 @@ workflow NALLO {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            CALL_SNVS.out.family_bcf,
+            params.skip_phasing ? family_snv_vcf : PHASING.out.vcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -538,7 +582,7 @@ workflow NALLO {
         CALL_SVS (
             ch_bam_bai,
             ch_tandem_repeats,
-            CALL_SNVS.out.snp_calls_vcf,
+            sample_snv_vcf,
             ch_fasta,
             ch_expected_xy_bed,
             ch_expected_xx_bed,
@@ -639,14 +683,15 @@ workflow NALLO {
             []
         )
     }
+
     //
     // Phase SNVs and INDELs
     //
     if(!params.skip_phasing) {
 
         PHASING (
-            CALL_SNVS.out.snp_calls_vcf,
-            CALL_SNVS.out.snp_calls_tbi,
+            sample_snv_vcf,
+            sample_snv_index,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
@@ -663,6 +708,7 @@ workflow NALLO {
     //
     if(!params.skip_methylation_pileups) {
         METHYLATION (
+            // TODO: Should be haplotag reads
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_methylation_call_regions
@@ -777,8 +823,11 @@ workflow NALLO {
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+def groupSNVsPerSample(input) {
+    input
+        .map { meta, vcf ->
+            def new_meta = meta - meta.subMap('region')
+            [groupKey(new_meta, new_meta.num_intervals), vcf]
+        }
+        .groupTuple()
+}
