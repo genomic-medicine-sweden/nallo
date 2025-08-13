@@ -356,18 +356,13 @@ workflow NALLO {
         // This uses the whole BAM files for each region instead of splitting them.
         ch_bam_bai
             .combine(SCATTER_GENOME.out.bed_intervals)
-            .multiMap { meta, bam, bai, bed, intervals ->
-                def call_snvs_meta = meta + [num_intervals: intervals, region: bed]
-                bam: [call_snvs_meta, bam]
-                bai: [call_snvs_meta, bai]
-                bed: [call_snvs_meta, bed]
+            .map { meta, bam, bai, bed, intervals ->
+                [ meta + [ num_intervals: intervals, region: bed ], bam, bai, bed ]
             }
             .set { call_snvs_input }
 
         CALL_SNVS(
-            call_snvs_input.bam,
-            call_snvs_input.bai,
-            call_snvs_input.bed,
+            call_snvs_input,
             ch_fasta,
             ch_fai,
             ch_par,
@@ -410,6 +405,7 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
+        // These contains RefCalls
         sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf
         sample_snv_index = VCF_CONCAT_NORM_VARIANTS.out.index
 
@@ -438,7 +434,7 @@ workflow NALLO {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            params.skip_phasing ? family_snv_vcf : PHASING.out.vcf,
+            family_snv_vcf,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -708,7 +704,6 @@ workflow NALLO {
     //
     if(!params.skip_methylation_pileups) {
         METHYLATION (
-            // TODO: Should be haplotag reads
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_methylation_call_regions

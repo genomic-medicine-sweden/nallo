@@ -18,7 +18,7 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         ch_vcfs
     )
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
+    BCFTOOLS_CONCAT.out.vcf.view()
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     ADD_FOUND_IN_TAG(
         BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [meta, vcf, []] },

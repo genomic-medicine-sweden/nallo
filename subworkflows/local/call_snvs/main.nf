@@ -5,9 +5,7 @@ include { DEEPVARIANT_RUNDEEPVARIANT } from '../../../modules/nf-core/deepvarian
 
 workflow CALL_SNVS {
     take:
-    ch_bam         // channel: [mandatory] [ val(meta), path(bam) ]
-    ch_bai         // channel: [mandatory] [ val(meta), path(bai) ]
-    ch_bed         // channel: [optional]  [ val(meta), path(call_regions_bed) ]
+    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_regions_bed) ]
     ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai         // channel: [mandatory] [ val(meta), path(fai) ]
     ch_par_bed     // channel: [mandatory] [ val(meta), path(par_bed) ]
@@ -22,13 +20,8 @@ workflow CALL_SNVS {
 
     if (variant_caller.equals("deepvariant")) {
 
-        ch_bam
-            .join(ch_bai, failOnMismatch:true, failOnDuplicate:true)
-            .join(ch_bed, failOnMismatch:true, failOnDuplicate:true)
-            .set { ch_deepvariant_in }
-
         DEEPVARIANT_RUNDEEPVARIANT(
-            ch_deepvariant_in,
+            ch_bam_bai_bed,
             ch_fasta,
             ch_fai,
             [[], []],

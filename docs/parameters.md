@@ -69,7 +69,7 @@ https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `stri
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` | `string` | bam |  |  |  
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |  
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` |  
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0099bf92288ec67af1b8a7b873e6d5ba1e07df89/ |  | True |  
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5b3553fa94fb0d6f9965c5b5309f1b77e3b995b2/ |  | True |  
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |  
 
 ## Reference genome options  
