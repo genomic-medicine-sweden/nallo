@@ -13,7 +13,6 @@ workflow QC_SNVS {
     main:
     ch_versions = Channel.empty()
 
-    // TODO: Is there any reason to not use the normalized VCF here?
     DEEPVARIANT_VCFSTATSREPORT(
         ch_vcf
     )

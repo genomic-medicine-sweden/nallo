@@ -414,7 +414,7 @@ workflow NALLO {
 
         // SNV QC
         QC_SNVS (
-            sample_snv_vcf, // TODO: Can we use the normalized VCF here, for DV vcfstatsreport?
+            VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf, // Can we use the normalized VCF here, for DV vcfstatsreport?
             sample_snv_vcf,
             sample_snv_index,
         )

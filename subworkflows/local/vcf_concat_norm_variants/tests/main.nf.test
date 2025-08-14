@@ -1,0 +1,132 @@
+nextflow_workflow {
+
+    name "Test Workflow VCF_CONCAT_NORM_VARIANTS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "VCF_CONCAT_NORM_VARIANTS"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+    }
+
+    test("1 VCF") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 VCFs") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("1 VCF -stub") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 VCFs -stub") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+}
