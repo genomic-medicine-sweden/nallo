@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 
 ### `Changed`
 

@@ -21,7 +21,7 @@ nextflow_workflow {
     }
 
     test("1 VCF") {
-
+        tag "abc"
         when {
             workflow {
                 """
