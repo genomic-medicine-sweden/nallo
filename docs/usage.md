@@ -83,7 +83,7 @@ testrun,HG003,/path/to/HG003.fastq.gz,NIST,0,0,2,1
 
 !!!tip "Multiple files per sample"
 
-    If you have multiple files per sample these can be added on separate rows. Keeping all columns except `file` identical for each sample. These will be merged after alignment or before assembly.
+    If you have multiple files per sample, they can be added on separate rows. Keep all columns except `file` identical for each sample. The files will be merged after alignment or before assembly.
 
 ### Presets
 
