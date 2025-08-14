@@ -52,9 +52,9 @@ process ADD_FOUND_IN_TAG {
         # Then for all other lines, append FOUND_IN=variant_caller to the INFO field (column 8)
         {
             if (\$8 == ".") {
-                \$8 = "FOUND_IN=deepvariant"
+                \$8 = "FOUND_IN=${variant_caller}"
             } else {
-                \$8 = sprintf("%s;FOUND_IN=deepvariant", \$8)
+                \$8 = sprintf("%s;FOUND_IN=${variant_caller}", \$8)
             }
             print;
         }

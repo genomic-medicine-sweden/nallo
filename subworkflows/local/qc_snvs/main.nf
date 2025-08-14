@@ -34,6 +34,6 @@ workflow QC_SNVS {
 
     emit:
     vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report // channel: [ val(meta), path(html) ]
-    stats          = BCFTOOLS_STATS.out.stats              // channel: [ val(meta), path(stats) ]
+    stats          = BCFTOOLS_STATS.out.stats              // channel: [ val(meta), path(txt) ]
     versions       = ch_versions                           // channel: [ path(versions.yml) ]
 }
