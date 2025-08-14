@@ -82,7 +82,7 @@ workflow GENOME_ASSEMBLY {
             }
             .concat(ch_with_both_parents)
             .multiMap { meta, reads, yak_paternal, yak_maternal ->
-                reads : [ meta, reads, []                  ]
+                reads : [ meta, reads       , []           ]
                 yak   : [ meta, yak_paternal, yak_maternal ]
             }
             .set { ch_hifiasm_in }
