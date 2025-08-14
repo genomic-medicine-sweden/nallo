@@ -258,6 +258,7 @@
                         [
                             "adaptivecard.json:md5,1b432fa56f544b31a2c57b4e716f8ff2",
                             "cadd_to_vcf_header_-1.0-.txt:md5,3648556887c78e54313e443656c36057",
+                            "devcontainer.json:md5,5d0fb65a90fae7521d3d2cd952528f71",
                             "email_template.html:md5,a591a6613c27a9e02adf2df26afcca22",
                             "email_template.txt:md5,40d7b940f158ba4d039bbd3645cb725a",
                             "methods_description_template.yml:md5,0c53ccbfedda2e932094a52580f0fd8b",
@@ -314,6 +315,7 @@
                         [
                             "adaptivecard.json:md5,1b432fa56f544b31a2c57b4e716f8ff2",
                             "cadd_to_vcf_header_-1.0-.txt:md5,3648556887c78e54313e443656c36057",
+                            "devcontainer.json:md5,5d0fb65a90fae7521d3d2cd952528f71",
                             "email_template.html:md5,a591a6613c27a9e02adf2df26afcca22",
                             "email_template.txt:md5,40d7b940f158ba4d039bbd3645cb725a",
                             "methods_description_template.yml:md5,0c53ccbfedda2e932094a52580f0fd8b",

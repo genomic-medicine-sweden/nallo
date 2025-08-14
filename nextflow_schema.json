@@ -538,7 +538,7 @@
                     "type": "string",
                     "description": "Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active.",
                     "enum": ["", "--ont"],
-                    "default": ""
+                    "default": null
                 },
                 "alignment_processes": {
                     "type": "integer",
@@ -574,12 +574,12 @@
                 },
                 "filter_snvs_expression": {
                     "type": "string",
-                    "default": "",
+                    "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "filter_svs_expression": {
                     "type": "string",
-                    "default": "",
+                    "default": null,
                     "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "deepvariant_model_type": {
@@ -623,7 +623,7 @@
                 },
                 "pre_vep_snv_filter_expression": {
                     "type": "string",
-                    "default": "",
+                    "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". Since this filtering takes place during the annotation, the expression applies to both the clinical and the research VCFs."
                 }
             },

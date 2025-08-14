@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Renamed the `ASSEMBLY` subworkflow to `GENOME_ASSEMBLY`
 - [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Changed the default hifiasm strategy to trio-binning whenever parental reads are available
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
+- [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
 
 ### `Removed`
 
@@ -78,13 +79,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
 - [#741](https://github.com/genomic-medicine-sweden/nallo/pull/741) - Removed bcftools filltags from the SNV calling subworkflow, that previosuly added an AC entry
 - [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
+- [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Removed unused components in subworkflows
 
 ### `Fixed`
 
 - [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
 - [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Fixed tests for `add_found_in_tag`, `call_cnvs`, `create_pedigree_file`, `create_samples_haplotypes_file`, `filter_variants` and `scatter_genome` that were not previously automatically tested in the CI.
-  [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
+- [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Fixed improper `}` character appearing in aligned reads filename when phasing was disabled
+- [#751](https://github.com/genomic-medicine-sweden/nallo/pull/751) - Fixed linting issue in `validatePacBioLicense`
+- [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Fixed missing versions for `ADD_FOUND_IN_TAG`
 
 ### Parameters
 
@@ -256,6 +260,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#639](https://github.com/genomic-medicine-sweden/nallo/pull/639) - Fixed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
 - [#644](https://github.com/genomic-medicine-sweden/nallo/pull/644) - Fixed FastQC ignoring memory parameter
 - [#653](https://github.com/genomic-medicine-sweden/nallo/pull/653) - Fixed merge mistakes when squashing release 0.5.0
+- [#754](https://github.com/genomic-medicine-sweden/nallo/pull/754) - Fixed missing file in .prettierignore
 
 ### Parameters
 
