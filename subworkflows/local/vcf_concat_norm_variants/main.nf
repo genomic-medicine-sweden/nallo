@@ -7,7 +7,7 @@ include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/n
 //
 workflow VCF_CONCAT_NORM_VARIANTS {
     take:
-    ch_vcfs        // channel: [mandatory] [ val(meta), path(vcfs) ]
+    ch_vcfs        // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 

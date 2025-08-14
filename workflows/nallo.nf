@@ -386,14 +386,14 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
-        groupSNVsPerSample(CALL_SNVS.out.vcf)
-            .join(
-                groupSNVsPerSample(CALL_SNVS.out.index),
-                failOnMismatch: true,
-                failOnDuplicate: true,
-            )
-            .map { meta, vcf, tbi ->
-                [meta - meta.subMap('num_intervals'), vcf, tbi]
+        CALL_SNVS.out.vcf
+            .map { meta, vcf ->
+                def new_meta = meta - meta.subMap('region')
+                [groupKey(new_meta, new_meta.num_intervals), vcf]
+            }
+            .groupTuple()
+            .map { meta, vcfs ->
+                [meta - meta.subMap('num_intervals'), vcfs]
             }
             .set { variants_to_concat_per_sample }
 
@@ -816,13 +816,4 @@ workflow NALLO {
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
-}
-
-def groupSNVsPerSample(input) {
-    input
-        .map { meta, vcf ->
-            def new_meta = meta - meta.subMap('region')
-            [groupKey(new_meta, new_meta.num_intervals), vcf]
-        }
-        .groupTuple()
 }
