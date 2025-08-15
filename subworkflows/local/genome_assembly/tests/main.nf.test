@@ -61,6 +61,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
                 input[1] = true
                 """
             }
@@ -111,6 +115,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
                 input[1] = true
                 """
             }
@@ -157,6 +165,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
                 input[1] = true
                 """
             }
@@ -215,6 +227,10 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                     ]
                 )
+                .map { meta, fastq ->
+                    [ groupKey(meta, meta.n_files), fastq ]
+                }
+                .groupTuple()
                 input[1] = true
                 """
             }
@@ -263,6 +279,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
                 input[1] = true
                 """
             }
