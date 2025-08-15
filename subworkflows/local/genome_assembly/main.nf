@@ -3,13 +3,13 @@ include { HIFIASM   } from '../../../modules/nf-core/hifiasm'
 include { YAK_COUNT } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS  } from '../../../modules/nf-core/gfastats/main'
 
-// This subworkflow assembles and outputs haplotypes from a set of reads, using hifiasm and gfastats.
+// This subworkflow assembles and outputs haplotypes from a set of reads (grouped per sample), using hifiasm and gfastats.
 // It assumes that while each sample can have multiple files, each sample belongs to one family at most.
 workflow GENOME_ASSEMBLY {
 
     take:
-    ch_reads      // channel: [ val(meta), fastq ]
-    trio_binning  //    bool: Should we use trio binning mode where possible?
+    ch_reads     // channel: [ val(meta), fastqs ]
+    trio_binning //    bool: Should we use trio binning mode where possible?
 
     main:
     ch_versions = Channel.empty()
@@ -17,10 +17,6 @@ workflow GENOME_ASSEMBLY {
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship
         ch_reads
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .branch { meta, _reads ->
                 def is_parent = meta.relationship in ['father', 'mother']
                 paired_parents             : is_parent && meta.has_other_parent
@@ -88,10 +84,6 @@ workflow GENOME_ASSEMBLY {
             .set { ch_hifiasm_in }
     } else {
         ch_reads
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
             .multiMap { meta, reads ->
                 reads : [ meta, reads, [] ]
                 yak   : [ [], [], [] ]

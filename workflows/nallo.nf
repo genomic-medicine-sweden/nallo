@@ -194,9 +194,17 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
 
-        //Hifiasm assembly
+        // contains all FASTQ files, including those not converted
+        CONVERT_INPUT_BAMS.out.fastq
+            .map { meta, fastq ->
+                [ groupKey(meta, meta.n_files), fastq ]
+            }
+            .groupTuple()
+            .set { ch_genome_assembly_input }
+
+        // Hifiasm assembly
         GENOME_ASSEMBLY(
-            CONVERT_INPUT_BAMS.out.fastq,         // contains all FASTQ files, including those not converted
+            ch_genome_assembly_input,
             params.hifiasm_mode == "trio-binning" // Should we use trio binning mode?
         )
         ch_versions = ch_versions.mix(GENOME_ASSEMBLY.out.versions)
