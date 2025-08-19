@@ -1,0 +1,70 @@
+nextflow_workflow {
+
+    name "Test Workflow QC_SNVS"
+    script "../main.nf"
+    workflow "QC_SNVS"
+
+    test("DeepVariant VCF, Normalized VCF and index") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                ])
+                input[2] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+    }
+
+    test("DeepVariant VCF, Normalized VCF and index -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                ])
+                input[2] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+    }
+}

@@ -27,43 +27,6 @@ nextflow_workflow {
                 """
             }
         }
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
-            process {
-                """
-                input[0] = [
-                    [ id: 'test', num_intervals:1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                ]
-                input[1] = GUNZIP.out.gunzip
-                input[2] = true
-                input[3] = 'csi'
-                input[4] = false
-                input[5] = false
-                """
-            }
-        }
-        run("CALL_SNVS") {
-            script "../../call_snvs/main.nf"
-            process {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .join(Channel.of([
-                                [ id: 'test', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkifexists: true)
-                            ]))
-                input[1] = GUNZIP.out.gunzip
-                input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = [
-                    [],[]
-                ]
-                input[4] = [
-                    [],[]
-                ]
-            """
-            }
-        }
         run("UNTAR") {
             script "../../../../modules/nf-core/untar/main.nf"
             process {
@@ -83,7 +46,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -123,7 +89,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -159,11 +128,14 @@ nextflow_workflow {
     }
 
     test("bcf, [], vep_cache, '110' - no echtvar annotation") {
-        tag "h"
+
         when {
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = Channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
@@ -201,7 +173,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = Channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
@@ -243,7 +218,10 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -286,7 +264,10 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = CALL_SNVS.out.family_bcf.map { _meta, bcf -> [ [ id:'test' ], bcf ] }
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]

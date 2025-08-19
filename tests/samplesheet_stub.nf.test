@@ -11,7 +11,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for CADD
@@ -53,7 +53,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for VEP
@@ -95,7 +95,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
@@ -138,7 +138,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
@@ -182,7 +182,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_alignment               = true

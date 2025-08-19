@@ -25,7 +25,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'test', num_intervals:1 ],
+                    [ id: 'HG002', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = PREPARE_REFERENCES.out.fasta
@@ -36,29 +36,19 @@ nextflow_workflow {
                 """
             }
         }
-        run("CALL_SNVS") {
-            script "../../call_snvs/main.nf"
-            process {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .join(Channel.of([
-                                [ id: 'test', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
-                            ]))
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
-                input[4] = [[],[]]
-            """
-            }
-        }
+
         run("PHASING") {
             script "../../phasing/main.nf"
             process {
                 """
-                input[0] = CALL_SNVS.out.snp_calls_vcf
-                input[1] = CALL_SNVS.out.snp_calls_tbi
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[2] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
                             .map { meta, bam, bai ->
