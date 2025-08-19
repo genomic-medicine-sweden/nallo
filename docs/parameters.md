@@ -83,9 +83,8 @@ incomplete or targeted data. | `string` |  |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` |  
 https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |  
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` |  
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9e0f40af8fb3ab7f8a3daecaeb03a0acda1e464e/ |  | True |  
-| `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. |
-`string` |  |  | True |  
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/ |  | True |  
+| `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |  
 
 ## Reference genome options  
 

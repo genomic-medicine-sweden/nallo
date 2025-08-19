@@ -1,0 +1,278 @@
+{
+    "2 VCFs -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,a05f86f77628989fb2870e82e9276474"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,bb95c6bbb767007b3598eab786233c86"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,1b73defba4121ae2e70c49db5de5172f"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ],
+                "bcftools_concat_vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,1b73defba4121ae2e70c49db5de5172f"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,bb95c6bbb767007b3598eab786233c86"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,a05f86f77628989fb2870e82e9276474"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:56:36.281581327"
+    },
+    "2 VCFs": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,a05f86f77628989fb2870e82e9276474"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,bb95c6bbb767007b3598eab786233c86"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,1b73defba4121ae2e70c49db5de5172f"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ],
+                "bcftools_concat_vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,1b73defba4121ae2e70c49db5de5172f"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,bb95c6bbb767007b3598eab786233c86"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,a05f86f77628989fb2870e82e9276474"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:56:25.104241974"
+    },
+    "1 VCF": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,ce1219f6e40f0a819838772321f9237d"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,96078fdf66a8c75b797c2a22ac539c8c"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,266dba05c621383d4c7ebc3cc1b8fa41"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ],
+                "bcftools_concat_vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,266dba05c621383d4c7ebc3cc1b8fa41"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,96078fdf66a8c75b797c2a22ac539c8c"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,ce1219f6e40f0a819838772321f9237d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:56:19.450631792"
+    },
+    "1 VCF -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,ce1219f6e40f0a819838772321f9237d"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,96078fdf66a8c75b797c2a22ac539c8c"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,266dba05c621383d4c7ebc3cc1b8fa41"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ],
+                "bcftools_concat_vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,266dba05c621383d4c7ebc3cc1b8fa41"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz.tbi:md5,96078fdf66a8c75b797c2a22ac539c8c"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_deepvariant_snvs.vcf.gz:md5,ce1219f6e40f0a819838772321f9237d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
+                    "versions.yml:md5,67697e4ae5a2b1d1edf6407ddf0338b9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:56:30.716698665"
+    }
+}

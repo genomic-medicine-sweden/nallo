@@ -1,0 +1,209 @@
+nextflow_workflow {
+
+    name "Test Workflow GVCF_GLNEXUS_NORM_VARIANTS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "GVCF_GLNEXUS_NORM_VARIANTS"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+    }
+
+    test("1 gVCF, without bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = [[],[]]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 gVCFs, without bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = [[],[]]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 gVCFs, with bed") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = [
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
+                ]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("1 gVCF, without bed -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                ])
+                input[1] = [[],[]]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 gVCFs, without bed -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = [[],[]]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 gVCFs, with bed -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'test' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
+                    ]
+                ])
+                input[1] = [
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
+                ]
+                input[2] = GUNZIP.out.gunzip
+                input[3] = 'deepvariant'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                ).match() }
+            )
+        }
+
+    }
+
+}

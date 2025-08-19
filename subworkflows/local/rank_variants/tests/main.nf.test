@@ -23,44 +23,15 @@ nextflow_workflow {
                 """
             }
         }
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
-            process {
-                """
-                input[0] = [
-                    [ id: 'project', num_intervals:1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                ]
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = true
-                input[3] = 'csi'
-                input[4] = false
-                input[5] = false
-                """
-            }
-        }
-        run("CALL_SNVS") {
-            script "../../call_snvs/main.nf"
-            process {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .join(Channel.of([
-                                [ id: 'project', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
-                            ]))
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
-                input[4] = [[],[]]
-            """
-            }
-        }
+
         run("ANNOTATE_SNVS") {
             script "../../annotate_snvs/main.nf"
             process {
                 """
-                input[0] = CALL_SNVS.out.family_bcf
+                input[0] = [
+                    [ id: 'project', num_intervals:1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.bcf', checkIfExists: true)
+                ]
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
@@ -99,7 +70,9 @@ nextflow_workflow {
                 input[0] = [
                     [id:'project'],
                     [
-                        [ id: 'project', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
+                        [ id: 'HG002', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
+                        [ id: 'HG003', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
+                        [ id: 'HG004', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
                     ]
                 ]
                 """

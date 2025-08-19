@@ -1,0 +1,104 @@
+{
+    "DeepVariant VCF, Normalized VCF and index": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,72911683a35afa0270a789d0e204a237"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,60bc939e5312a08c4cec975c94b75c22",
+                    "versions.yml:md5,7d4b1f39fd38d1890ece7f7d534f90ad"
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,72911683a35afa0270a789d0e204a237"
+                    ]
+                ],
+                "vcfstatsreport": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,60bc939e5312a08c4cec975c94b75c22",
+                    "versions.yml:md5,7d4b1f39fd38d1890ece7f7d534f90ad"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:05:00.169909844"
+    },
+    "DeepVariant VCF, Normalized VCF and index -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.visual_report.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,60bc939e5312a08c4cec975c94b75c22",
+                    "versions.yml:md5,7d4b1f39fd38d1890ece7f7d534f90ad"
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcfstatsreport": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.visual_report.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,60bc939e5312a08c4cec975c94b75c22",
+                    "versions.yml:md5,7d4b1f39fd38d1890ece7f7d534f90ad"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-14T14:06:07.994617251"
+    }
+}
