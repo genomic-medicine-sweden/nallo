@@ -532,7 +532,7 @@
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
                     "enum": ["hifi-only", "trio-binning"],
-                    "default": "hifi-only"
+                    "default": "trio-binning"
                 },
                 "hifiasm_preset": {
                     "type": "string",
@@ -615,6 +615,11 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to hifiasm, used for test profile."
+                },
+                "extra_yak_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to yak, used for test profile."
                 },
                 "pre_vep_snv_filter_expression": {
                     "type": "string",

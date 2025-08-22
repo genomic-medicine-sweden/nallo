@@ -124,6 +124,41 @@ nextflow_function {
         }
     }
 
+    test ("test function addRelationshipsToMeta with quartet") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'child_2', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'mother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'father', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+                    def children = function.result.collectEntries { [it.id, it.children] }
+
+                    assert byID['child'] == 'child'
+                    assert byID['child_2'] == 'child'
+                    assert byID['father'] == 'father'
+                    assert byID['mother'] == 'mother'
+
+                    assert children['mother'] == ['child', 'child_2']
+                    assert children['father'] == ['child', 'child_2']
+                }
+            )
+        }
+    }
+
     test ("test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner") {
         function "addRelationshipsToMeta"
 

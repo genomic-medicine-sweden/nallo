@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#743](https://github.com/genomic-medicine-sweden/nallo/pull/743) - Added warnings about restrictive PacBio licenses, even when running a PacBio preset
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
 - [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added nf-test for `GENOME_ASSEMBLY`
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added samplesheet validation requiring unique sample names across all families
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added samplesheet validation requiring parents to exist in family
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 
@@ -61,6 +64,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#732](https://github.com/genomic-medicine-sweden/nallo/pull/732) - Updated logic associated with `validateSVCallingParameters()` to fix an issue added in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 - [#733](https://github.com/genomic-medicine-sweden/nallo/pull/733) - Reduced the disk space cleanup added to the CI in [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) to reduce the step time
 - [#734](https://github.com/genomic-medicine-sweden/nallo/pull/734) - Renamed subworkflows for more consistent naming
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Renamed the `ASSEMBLY` subworkflow to `GENOME_ASSEMBLY`
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Changed the default hifiasm strategy to trio-binning whenever parental reads are available
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
 - [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with emtpy (.) INFO field
@@ -101,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sv_call_regions`               |
 |               | `--qc_regions`                    |
 |               | `--pre_vep_snv_filter_expression` |
+|               | `--extra_yak_options`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

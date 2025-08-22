@@ -1,4 +1,69 @@
 {
+    "test function addRelationshipsToMeta with quartet": {
+        "content": [
+            [
+                {
+                    "id": "child",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
+                },
+                {
+                    "id": "child_2",
+                    "family_id": "FAM",
+                    "paternal_id": "father",
+                    "maternal_id": "mother",
+                    "sex": 1,
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
+                },
+                {
+                    "id": "mother",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 2,
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "child",
+                        "child_2"
+                    ],
+                    "has_other_parent": true
+                },
+                {
+                    "id": "father",
+                    "family_id": "FAM",
+                    "paternal_id": 0,
+                    "maternal_id": 0,
+                    "sex": 1,
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child",
+                        "child_2"
+                    ],
+                    "has_other_parent": true
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-11T13:38:28.60608398"
+    },
     "test function addRelationshipsToMeta with two siblings of opposite sex, each with children": {
         "content": [
             [
@@ -8,7 +73,12 @@
                     "paternal_id": 0,
                     "maternal_id": "mother_1",
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "child_2",
@@ -16,7 +86,12 @@
                     "paternal_id": "father_2",
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "mother_1",
@@ -24,7 +99,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "mother"
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "child_1"
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "father_2",
@@ -32,15 +112,20 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child_2"
+                    ],
+                    "has_other_parent": false
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:16:02.413348161"
+        "timestamp": "2025-08-07T15:24:19.70608758"
     },
     "test function addRelationshipsToMeta with child, parent and grandparent": {
         "content": [
@@ -51,7 +136,12 @@
                     "paternal_id": "father",
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "father",
@@ -59,7 +149,12 @@
                     "paternal_id": "grandfather",
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child"
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "grandfather",
@@ -67,15 +162,20 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:16:06.242725626"
+        "timestamp": "2025-08-07T15:24:23.70284565"
     },
     "test function addRelationshipsToMeta with child, two parents, one of wich also has two parents": {
         "content": [
@@ -86,7 +186,12 @@
                     "paternal_id": "father",
                     "maternal_id": "mother",
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "father",
@@ -94,7 +199,12 @@
                     "paternal_id": "grandfather",
                     "maternal_id": "grandmother",
                     "sex": 1,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": true,
+                    "children": [
+                        "child"
+                    ],
+                    "has_other_parent": true
                 },
                 {
                     "id": "mother",
@@ -102,7 +212,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "mother"
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "child"
+                    ],
+                    "has_other_parent": true
                 },
                 {
                     "id": "grandfather",
@@ -110,7 +225,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "grandmother",
@@ -118,15 +238,20 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:12:23.741170484"
+        "timestamp": "2025-08-07T15:24:36.651316387"
     },
     "test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner": {
         "content": [
@@ -137,7 +262,12 @@
                     "paternal_id": "father_1",
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "father_1",
@@ -145,7 +275,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child_1"
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "child_2",
@@ -153,7 +288,12 @@
                     "paternal_id": "father_2",
                     "maternal_id": "mother_2",
                     "sex": 2,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "father_2",
@@ -161,7 +301,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "child_2"
+                    ],
+                    "has_other_parent": true
                 },
                 {
                     "id": "mother_2",
@@ -169,15 +314,20 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "mother"
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "child_2"
+                    ],
+                    "has_other_parent": true
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:16:09.890194692"
+        "timestamp": "2025-08-07T15:24:31.796868453"
     },
     "test function addRelationshipsToMeta with trio": {
         "content": [
@@ -188,7 +338,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "father"
+                    "relationship": "father",
+                    "two_parents": false,
+                    "children": [
+                        "HG002"
+                    ],
+                    "has_other_parent": true
                 },
                 {
                     "id": "HG002",
@@ -196,7 +351,12 @@
                     "paternal_id": "HG003",
                     "maternal_id": "HG004",
                     "sex": 1,
-                    "relationship": "child"
+                    "relationship": "child",
+                    "two_parents": true,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "HG004",
@@ -204,15 +364,20 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "mother"
+                    "relationship": "mother",
+                    "two_parents": false,
+                    "children": [
+                        "HG002"
+                    ],
+                    "has_other_parent": true
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:15:55.325282796"
+        "timestamp": "2025-08-07T15:24:11.672586331"
     },
     "test function addRelationshipsToMeta with no relationships": {
         "content": [
@@ -223,7 +388,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "HG002",
@@ -231,7 +401,12 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 1,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 },
                 {
                     "id": "HG004",
@@ -239,14 +414,19 @@
                     "paternal_id": 0,
                     "maternal_id": 0,
                     "sex": 2,
-                    "relationship": "unknown"
+                    "relationship": "unknown",
+                    "two_parents": false,
+                    "children": [
+                        
+                    ],
+                    "has_other_parent": false
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T10:15:58.897441494"
+        "timestamp": "2025-08-07T15:24:15.890312721"
     }
 }

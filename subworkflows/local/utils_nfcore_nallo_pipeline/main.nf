@@ -168,7 +168,9 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
     Channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(
+            samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
+        )
         .ifEmpty { error "Error: No samples found in samplesheet." }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
@@ -176,10 +178,18 @@ workflow PIPELINE_INITIALISATION {
         .groupTuple() // group by sample
         .map {
             validateUniqueFilenamesPerSample(it)
+            validateUniqueSampleIDs(it)
         }
+        // This adds n_files to the meta so we can use groupKey later.
+        // n_files is the number of files per sample. If we are aligning & splitting the reads,
+        // it's the number of files after splitting.
+        //
+        // Since we now use n_files in both the alignment and the genome assembly steps,
+        // I think it could be better to add it there instead of here.
         .map { sample, metas, reads ->
-            // Add number of files per sample _after_ splitting to meta
-            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.alignment_processes - 1), single_end:true ], reads ]
+
+            def split_alignments = params.skip_alignment ? 1 : Math.max(1, params.alignment_processes)
+            [ sample, metas[0] + [n_files: metas.size() * split_alignments, single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
@@ -205,6 +215,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that mothers are female, and fathers are male
         validateParentalSex(ch_samplesheet)
+
+        // Check that the parents are present in the samplesheet
+        validateParentExistsInFamily(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -282,6 +295,23 @@ def validateUniqueFilenamesPerSample(input) {
     if (fileNames.size() != fileNames.unique().size()) {
         error "Error: Input filenames needs to be unique for each sample."
     }
+
+    return input
+}
+
+//
+// The genome assembly workflow requires that each sample has a unique ID
+//
+def validateUniqueSampleIDs(input) {
+    def sample = input[0]
+    def metas = input[1].collect()
+    def families = metas.collect { meta -> meta.family_id }.unique()
+
+    if (families.size() > 1) {
+        error "Sample '${sample}' belongs to multiple families: ${families}. " +
+              "Please make sure that there are no duplicate samples in the samplesheet."
+    }
+
     return input
 }
 
@@ -568,6 +598,39 @@ def validateSVCallingParameters() {
     }
 }
 
+//
+// Validate that the parents of a sample exists in the family (required by e.g. genmod)
+//
+def validateParentExistsInFamily(input) {
+    input
+        .map { meta, _reads ->
+            [ meta.family_id, meta ]
+        }
+        .groupTuple()
+        .map { family_id, metas ->
+            def sampleIds = metas.collect { it.id } as Set
+
+            metas.each { meta ->
+                def errors = []
+
+                def maternal_id = meta.maternal_id
+                def paternal_id = meta.paternal_id
+
+                if (isNonZeroNonEmpty(maternal_id) && !(maternal_id in sampleIds)) {
+                    errors <<  "maternal_id set to ${maternal_id}"
+                }
+                if (isNonZeroNonEmpty(paternal_id) && !(paternal_id in sampleIds)) {
+                    errors << "paternal_id set to ${paternal_id}"
+                }
+
+                if (errors) {
+                    error "ERROR: Sample ${meta.id} has " + errors.join(' and ') + ", but they are not present in the family ${family_id}. " +
+                          "Please check the samplesheet and correct the parental IDs, or remove them from the sample."
+                }
+            }
+        }
+}
+
 def validateParentalSex(input) {
     input
         .map { meta, _reads ->
@@ -601,12 +664,41 @@ def addRelationshipsToMeta(samples) {
                               sample.id in maternal_ids ? 'mother' :
                               sample.id in paternal_ids ? 'father' :
                               isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+
+        sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
+
+        // Find children of this specific parent
+        sample.children = []
+        sample.has_other_parent = false
+
+        if (isParent(sample)){
+            def children = getChildrenForParent(samples, sample.id) // Get metadata of children
+            sample.children = children.collect{ meta -> meta.id } // Store children IDs in parent meta
+
+            // For those children, check if they have a father or mother
+            if (isMother(sample)) {
+                sample.has_other_parent = children.any { child -> hasFather(child, paternal_ids) }
+            } else if (isFather(sample)) {
+                sample.has_other_parent = children.any { child -> hasMother(child, maternal_ids) }
+            }
+        }
+
     }
 
 }
 
+def getChildrenForParent(samples, parent_id) {
+    samples
+        .findAll { it.maternal_id == parent_id || it.paternal_id == parent_id }
+}
+
 def isChild(sample, maternal_ids, paternal_ids) {
     hasMother (sample, maternal_ids) ||
+    hasFather (sample, paternal_ids)
+}
+
+def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
+    hasMother (sample, maternal_ids) &&
     hasFather (sample, paternal_ids)
 }
 
@@ -624,6 +716,18 @@ def isFemale(sample) {
 
 def isMale(sample) {
     sample.sex == 1
+}
+
+def isMother(sample) {
+    sample.relationship == 'mother'
+}
+
+def isFather(sample) {
+    sample.relationship == 'father'
+}
+
+def isParent(sample) {
+    isMother(sample) || isFather(sample)
 }
 
 def boolean isNonZeroNonEmpty(value) {

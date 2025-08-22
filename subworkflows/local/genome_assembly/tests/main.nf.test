@@ -1,0 +1,302 @@
+nextflow_workflow {
+
+    name "Test Workflow GENOME_ASSEMBLY"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "GENOME_ASSEMBLY"
+
+    test("one sample, hifi-only mode") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = false
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.assembled_haplotypes.size() == 2 },
+                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("child with two parents, trio-binning mode") {
+
+        setup {
+            run("SAMTOOLS_FASTQ") {
+                script "../../../../modules/nf-core/samtools/fastq/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'HG003', n_files: 1, relationship: 'father', children: ['HG002'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'HG004', n_files: 1, relationship: 'mother', children: ['HG002'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
+                input[1] = true
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 14 }, // 14 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM 6x GFASTATS.
+                { assert workflow.out.assembled_haplotypes.size() == 6 },
+                { assert versions.any { line -> line.contains('YAK_COUNT') } },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("two children with two parents, trio-binning mode") {
+
+        setup {
+            run("SAMTOOLS_FASTQ") {
+                script "../../../../modules/nf-core/samtools/fastq/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'second_child', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                        ],[
+                            [ id: 'HG003', n_files: 1, relationship: 'father', children: ['HG002', 'second_child'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'HG004', n_files: 1, relationship: 'mother', children: ['HG002', 'second_child'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
+                input[1] = true
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+            assertAll(
+                // Don't really have a good way to assert that both children are trio-binned,
+                // other than a manual .view() on `ch_with_both_parents`, without adding the
+                // `ch_with_both_parents` intermediate channel to the output.
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 18 }, // 14 tasks: 4x FASTQ, 2x YAK_COUNT, 4x HIFIASM 8x GFASTATS.
+                { assert workflow.out.assembled_haplotypes.size() == 8 },
+                { assert versions.any { line -> line.contains('YAK_COUNT') } },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("child with one parent, trio-binning mode -stub") {
+
+        options "-stub"
+
+        setup {
+            run("SAMTOOLS_FASTQ") {
+                script "../../../../modules/nf-core/samtools/fastq/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: false ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                        ],[
+                            [ id: 'HG003', n_files: 1, relationship: 'father', children: ['HG002'], family_id: 'NIST', has_other_parent: false ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
+                input[1] = true
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 8 }, // 8 tasks: 2x FASTQ, 2x HIFIASM 4x GFASTATS.
+                { assert workflow.out.assembled_haplotypes.size() == 4 },
+                { assert !versions.any { line -> line.contains('YAK_COUNT') } },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("one sample, hifi-only mode -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = false
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.assembled_haplotypes.size() == 2 },
+                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("one sample, trio-binning mode -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                .map { meta, fastq ->
+                    [ groupKey(meta, meta.n_files), fastq ]
+                }
+                .groupTuple()
+                input[1] = true
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.assembled_haplotypes.size() == 2 },
+                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("child with two parents, trio-binning mode -stub") {
+
+        options "-stub"
+
+        setup {
+            run("SAMTOOLS_FASTQ") {
+                script "../../../../modules/nf-core/samtools/fastq/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'HG003', n_files: 1, relationship: 'father', children: ['HG002'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            [ id: 'HG004', n_files: 1, relationship: 'mother', children: ['HG002'], family_id: 'NIST', has_other_parent: true ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = SAMTOOLS_FASTQ.out.other
+                    .map { meta, fastq ->
+                        [ groupKey(meta, meta.n_files), fastq ]
+                    }
+                    .groupTuple()
+                input[1] = true
+                """
+            }
+        }
+        then {
+            def versions = workflow.out.versions.collect { version_file -> file(version_file).readLines() }.flatten()
+
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 14 }, // 14 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM 6x GFASTATS.
+                { assert workflow.out.assembled_haplotypes.size() == 6 },
+                { assert versions.any { line -> line.contains('YAK_COUNT') } },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}
