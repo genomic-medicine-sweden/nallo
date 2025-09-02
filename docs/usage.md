@@ -91,7 +91,7 @@ This pipeline comes with three different presets that should be set with the `--
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
+    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
 ### Reference files
@@ -152,9 +152,11 @@ Turned off with `--skip_qc`.
 
 #### Assembly
 
-This step assembles genomes and aligns them to a reference genome. The assemblies are then merged and haplotagged.
+This step assembles genomes and aligns them to a reference genome.
 
-By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble the genome into a pair of haplotypes. Stand-alone, it has support for both PacBio and ONT data, or a combination of PacBio and ultra-long ONT reads (or Hi-C reads), but Nallo currently assumes only one data type per run (set by `--preset`). By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
+
+The assemblies are then aligned to the reference genome using [minimap2](https://github.com/lh3/minimap2), merged and haplotagged (with `HP` tags).
 
 No additional files other than the reference genome required.
 
