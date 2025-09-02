@@ -1,0 +1,6 @@
+name: pbcpgtools
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - pb-cpg-tools=2.3.2

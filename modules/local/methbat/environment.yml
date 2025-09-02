@@ -1,0 +1,13 @@
+name: methbat
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python>=3.8
+  - pysam
+  - numpy
+  - pandas
+  - scipy
+  - pip
+  - pip:
+    - git+https://github.com/PacificBiosciences/MethBat.git
