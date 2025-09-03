@@ -1369,7 +1369,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <div class="admonition info">
 <p class="admonition-title">Preset effects on subworkflows</p>
 <ul>
-<li><code>--skip_genome_assembly</code> and <code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
+<li><code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
@@ -1422,8 +1422,9 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>This subworkflow depends on the alignment subworkflow, but requires no additional files.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
 <h4 id="assembly">Assembly</h4>
-<p>This step assembles genomes and aligns them to a reference genome. The assemblies are then merged and haplotagged.</p>
-<p>By default, a pair of haplotype-resolved assemblies are generated using hifiasm with <a href="https://hifiasm.readthedocs.io/en/latest/trio-assembly.html">trio-binning</a> for samples where parental reads are available, otherwise they are assembled using a <a href="https://hifiasm.readthedocs.io/en/latest/pa-assembly.html">hifi-only</a> approach. If you don't wish to use trio-binning, this can be turned off by setting <code>--hifiasm_mode</code> to <code>hifi-only</code>.</p>
+<p>This step assembles genomes and aligns them to a reference genome.</p>
+<p><a href="https://github.com/chhylp123/hifiasm">Hifiasm</a> is used to assemble the genome into a pair of haplotypes. Stand-alone, it has support for both PacBio and ONT data, or a combination of PacBio and ultra-long ONT reads (or Hi-C reads), but Nallo currently assumes only one data type per run (set by <code>--preset</code>). By default, a pair of haplotype-resolved assemblies are generated using hifiasm with <a href="https://hifiasm.readthedocs.io/en/latest/trio-assembly.html">trio-binning</a> for samples where parental reads are available, otherwise they are assembled using a <a href="https://hifiasm.readthedocs.io/en/latest/pa-assembly.html">hifi-only</a> approach. If you don't wish to use trio-binning, this can be turned off by setting <code>--hifiasm_mode</code> to <code>hifi-only</code>.</p>
+<p>The assemblies are then aligned to the reference genome using <a href="https://github.com/lh3/minimap2">minimap2</a>, merged and haplotagged (with <code>HP</code> tags).</p>
 <p>No additional files other than the reference genome required.</p>
 <p>Turned off with <code>--skip_genome_assembly</code>.</p>
 <h4 id="call-paralogs">Call paralogs</h4>
