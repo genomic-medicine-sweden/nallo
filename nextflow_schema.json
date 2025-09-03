@@ -494,7 +494,7 @@
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
-                    "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
                     "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
                 },
