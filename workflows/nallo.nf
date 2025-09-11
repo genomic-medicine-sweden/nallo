@@ -715,7 +715,9 @@ workflow NALLO {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
-            ch_methylation_call_regions
+            ch_fai,
+            ch_methylation_call_regions,
+            params.bigwig_modcodes
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }
