@@ -173,6 +173,11 @@
                         "git_sha": "a532706a19b3d83f14b1d48a6a815ed33eb48b0c",
                         "installed_by": ["modules"]
                     },
+                    "modkit/bedmethyltobigwig": {
+                        "branch": "master",
+                        "git_sha": "6a12858f79d21f89ae9af04a12f4a1da2d5d635a",
+                        "installed_by": ["modules"]
+                    },
                     "modkit/pileup": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
