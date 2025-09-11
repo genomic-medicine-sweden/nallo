@@ -222,6 +222,10 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.
 
+| Parameter         | Description                                                                                                                                                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
+
 Turned off with `--skip_methylation_pileups`.
 
 #### Repeat calling
