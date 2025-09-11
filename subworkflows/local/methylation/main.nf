@@ -26,7 +26,12 @@ workflow METHYLATION {
     TABIX_BGZIPTABIX ( ch_bedmethyl )
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
-    MODKIT_BEDMETHYLTOBIGWIG ( ch_bedmethyl, ch_fai, modcodes)
+    // Only convert files with content
+    ch_bedmethyl
+        .filter { _meta, bed -> bed.size() > 0 }
+        .set { ch_bedmethyl_to_bigwig_in }
+
+    MODKIT_BEDMETHYLTOBIGWIG ( ch_bedmethyl_to_bigwig_in, ch_fai, modcodes)
     ch_versions = ch_versions.mix(MODKIT_BEDMETHYLTOBIGWIG.out.versions)
 
     emit:
