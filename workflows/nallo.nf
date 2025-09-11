@@ -118,7 +118,6 @@ workflow NALLO {
 
     def cram_output = params.alignment_output_format == 'cram'
 
-
     //
     // Prepare references
     //
@@ -166,8 +165,8 @@ workflow NALLO {
         SPLITUBAM (
             CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
         )
-
         ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
+
     }
 
     //
@@ -197,10 +196,7 @@ workflow NALLO {
 
         // contains all FASTQ files, including those not converted
         CONVERT_INPUT_BAMS.out.fastq
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
-            .groupTuple()
+            .groupTuple() // Needs to wait for all files to be split and converted before starting assembly...
             .set { ch_genome_assembly_input }
 
         // Hifiasm assembly
@@ -224,11 +220,21 @@ workflow NALLO {
     //
     if (!params.skip_alignment) {
 
+        (params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam)
+            .set { reads_for_alignment }
+
+        // If we are splitting input files, this needs to wait for all files to be split. But while we do that, the reads can still start to be aligned.
+        // Later, this allows us to combine this meta with the aligned BAMs for merging, without having to wait for all alignment processes to finish.
+        reads_for_alignment
+            .groupTuple()
+            .map { meta, files -> [ meta + [ n_files: files.size() ] ] }
+            .set { reads_grouping_key }
+
         //
         // Align reads (could be a split-align-merge subworkflow)
         //
         MINIMAP2_ALIGN (
-            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
+            reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
@@ -243,11 +249,18 @@ workflow NALLO {
             // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
             // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
             .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
-            .map {
-                meta, bam, bai ->
-                    [ groupKey(meta, meta.n_files), bam, bai ]
+            .combine(reads_grouping_key)
+            .filter { aligned_meta, _bam, _bai, grouping_key_meta ->
+                aligned_meta.id == grouping_key_meta.id
+            }
+            .map { aligned_meta, bam, bai, grouping_key_meta ->
+                [ aligned_meta + [ n_files: grouping_key_meta.n_files ], bam, bai ]
+            }
+            .map { meta, bam, bai ->
+                [ groupKey(meta, meta.n_files), bam, bai ]
             }
             .groupTuple()
+            .view()
             .branch { meta, bam, bai ->
                 single:   meta.n_files <= 1
                     return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM
