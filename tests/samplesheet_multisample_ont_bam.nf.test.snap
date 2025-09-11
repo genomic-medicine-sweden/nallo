@@ -134,9 +134,9 @@
                     "mosdepth": "0.3.10"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.28-r1209",
-                    "paraphase": "3.2.1",
-                    "samtools": 1.21
+                    "minimap2": "2.30-r1287",
+                    "paraphase": "3.3.4",
+                    "samtools": "1.22.1"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -821,35 +821,35 @@
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=14, variantCount=23687, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=14, variantCount=283, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=23687, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=283, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=19992, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_ONT_A_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_B_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=19992, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_ONT_B_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_C_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=19992, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_ONT_C_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=3695, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_phased.vcf.gz",
@@ -960,6 +960,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-14T15:21:25.1177352"
+        "timestamp": "2025-09-11T10:06:27.94184636"
     }
 }

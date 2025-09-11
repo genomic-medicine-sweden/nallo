@@ -70,6 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with emtpy (.) INFO field
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
+- [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
 
 ### `Removed`
 
@@ -92,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Fixed improper `}` character appearing in aligned reads filename when phasing was disabled
 - [#751](https://github.com/genomic-medicine-sweden/nallo/pull/751) - Fixed linting issue in `validatePacBioLicense`
 - [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Fixed missing versions for `ADD_FOUND_IN_TAG`
+- [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
 
 ### Parameters
 
@@ -131,6 +133,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ensemblvep/filtervep | 113         | 113.4       |
 | minimap2             | 2.28        | 2.29        |
 | deepvariant          | 1.8.0       | 1.9.0       |
+| paraphase            | 3.2.1       | 3.3.4       |
+| minimap2 (paraphase) | 2.29        | 2.30        |
+| samtools (paraphase) | 1.21        | 1.22.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
