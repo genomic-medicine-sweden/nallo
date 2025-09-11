@@ -40,6 +40,7 @@ This document describes the pipeline output files and the tools used to generate
 | `methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
 | `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
 | `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: |                     |
+| `methylation/modkit/pileup/{sample}/*.bw`                             | BigWig file with summary counts from specified modifications            | :white_check_mark: | :white_check_mark:  |
 
 ## MultiQC
 
