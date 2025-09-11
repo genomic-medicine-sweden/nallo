@@ -71,7 +71,9 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = [[],[]]
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -92,7 +94,9 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = [[],[]]
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -113,9 +117,11 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -136,9 +142,11 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -160,7 +168,9 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = [[],[]]
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -182,9 +192,11 @@ nextflow_workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -206,7 +218,9 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = [[],[]]
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -228,9 +242,11 @@ nextflow_workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
