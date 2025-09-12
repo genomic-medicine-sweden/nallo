@@ -1,7 +1,0 @@
-Sample	family_id	paternal_id	maternal_id	sex	phenotype	duplicates	het_call_rate	het_ratio	het_mean_depth	het_idr_baf	sex_het_ratio	depth_outlier_het_check	het_count_het_check	het_ratio_het_check	idr_baf_het_check	mean_depth_het_check	median_depth_het_check	p10_het_check	p90_het_check	sampled_sites_het_check	call_rate_het_check	ped_sex_sex_check	hom_ref_count_sex_check	het_count_sex_check	hom_alt_count_sex_check	het_ratio_sex_check	predicted_sex_sex_check	error_sex_check	rel_ped_check	hets_a_ped_check	hets_b_ped_check	shared_hets_ped_check	ibs0_ped_check	ibs2_ped_check	n_ped_check	pedigree_parents_ped_check	pedigree_relatedness_ped_check	predicted_parents_ped_check	parent_error_ped_check	sample_duplication_error_ped_check	rel_difference_ped_check
-HG002	FAM	HG003	HG004	1.0	2.0	HG004	1.0	0.3333333333333333	13.333333333333334	0.0	0.0	False	1.0	0.3333	0.0	13.33	10.0	0.5238	0.5238	3.0	1.0	male	7.0	0.0	16.0	0.0	male	True													
-HG002-HG003																													0.0	1.0	0.0	0.0	0.0	2.0	3.0	True	0.5	True	False	False	0.5
-HG002-HG004																													1.0	1.0	2.0	1.0	0.0	2.0	3.0	True	0.5	True	False	True	-0.5
-HG003	FAM	0.0	0.0	1.0	1.0		1.0	0.0	13.0	0.0	0.0	False	0.0	0.0	0.0	13.0	8.0	0.0	0.0	1.0	1.0	male	12.0	0.0	11.0	0.0	male	True													
-HG003-HG004																													0.0	0.0	2.0	0.0	0.0	1.0	3.0	False	0.0	True	True	False	0.0
-HG004	FAM	0.0	0.0	2.0	1.0	HG002	1.0	0.6666666666666666	12.333333333333334	0.0	1.375	False	2.0	0.6667	0.0	12.33	13.0	0.6842	0.6842	2.0	1.0	female	4.0	11.0	8.0	1.375	female	True													

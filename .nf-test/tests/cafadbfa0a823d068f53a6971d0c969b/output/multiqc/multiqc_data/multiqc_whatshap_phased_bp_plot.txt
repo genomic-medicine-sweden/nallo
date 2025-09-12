@@ -1,2 +1,0 @@
-Sample	Phased Base Pairs
-HG002_Revio	8964.0

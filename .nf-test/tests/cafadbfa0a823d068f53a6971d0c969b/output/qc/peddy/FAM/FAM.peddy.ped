@@ -1,2 +1,0 @@
-#family_id	sample_id	paternal_id	maternal_id	sex	phenotype	het_call_rate	het_ratio	het_mean_depth	het_idr_baf	sex_het_ratio
-FAM	HG002_Revio	0	0	1	2	1.0	0.3333333333333333	13.333333333333334	0.0	0.0

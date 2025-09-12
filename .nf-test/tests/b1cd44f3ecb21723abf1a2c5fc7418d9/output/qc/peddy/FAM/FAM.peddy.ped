@@ -1,3 +1,0 @@
-#family_id	sample_id	paternal_id	maternal_id	sex	phenotype	duplicates	het_call_rate	het_ratio	het_mean_depth	het_idr_baf	sex_het_ratio
-FAM	HG002_ONT_A	0	0	1	2	HG002_ONT_B	1.0	0.3333333333333333	25.333333333333332	0.0	0.0
-FAM	HG002_ONT_B	0	0	1	1	HG002_ONT_A	1.0	0.3333333333333333	25.333333333333332	0.0	0.0

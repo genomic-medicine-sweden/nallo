@@ -1,6 +1,0 @@
-#sample	chromosome	file_name	variants	phased	unphased	singletons	blocks	variant_per_block_median	variant_per_block_avg	variant_per_block_min	variant_per_block_max	variant_per_block_sum	bp_per_block_median	bp_per_block_avg	bp_per_block_min	bp_per_block_max	bp_per_block_sum	heterozygous_variants	heterozygous_snvs	phased_snvs	phased_fraction	phased_snvs_fraction	block_n50
-HG002_Revio	chr16	HG002_Revio_phased.vcf.gz	123	39	37	0	1	39	39.0	39	39	39	8891	8891.0	8891	8891	8891	76	57	30	0.5131578947368421	0.5263157894736842	0
-HG002_Revio	chr20	HG002_Revio_phased.vcf.gz	9	4	1	0	1	4	4.0	4	4	4	73	73.0	73	73	73	5	2	1	0.8	0.5	0
-HG002_Revio	chrX	HG002_Revio_phased.vcf.gz	16	0	0	0	0	nan	nan	0	0	0	nan	nan	0	0	0	0	0	0	0.0	0.0	nan
-HG002_Revio	chr17	HG002_Revio_phased.vcf.gz	18	0	2	0	0	nan	nan	0	0	0	nan	nan	0	0	0	2	2	0	0.0	0.0	nan
-HG002_Revio	ALL	HG002_Revio_phased.vcf.gz	166	43	40	0	2	21.5	21.5	4	39	43	4482.0	4482.0	73	8891	8964	83	61	31	0.5180722891566265	0.5081967213114754	0

@@ -1,2 +1,0 @@
-sample_a,sample_b,rel,hets_a,hets_b,shared_hets,ibs0,ibs2,n,pedigree_parents,pedigree_relatedness,predicted_parents,parent_error,sample_duplication_error,rel_difference
-HG002_ONT_A,HG002_ONT_B,1,1,1,1,0,3,3,False,0,True,True,True,-1

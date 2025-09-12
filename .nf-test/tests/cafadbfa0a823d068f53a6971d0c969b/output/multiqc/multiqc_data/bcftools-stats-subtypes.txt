@@ -1,2 +1,0 @@
-Sample	A>C	A>G	C>A	C>G	C>T	G>A	G>C	G>T	T>A	T>C	T>G
-HG002_Revio_deepvariant_snvs	3.0	24.0	4.0	8.0	16.0	20.0	13.0	4.0	3.0	23.0	4.0

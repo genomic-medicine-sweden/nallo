@@ -1,2 +1,0 @@
-Name	X	Y
-HG002_Revio	14.6	0.39

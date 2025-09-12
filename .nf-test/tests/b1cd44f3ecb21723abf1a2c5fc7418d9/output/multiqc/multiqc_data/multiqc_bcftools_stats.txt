@@ -1,4 +1,0 @@
-Sample	number_of_samples	number_of_records	number_of_no-ALTs	number_of_SNPs	number_of_MNPs	number_of_indels	number_of_others	number_of_multiallelic_sites	number_of_multiallelic_SNP_sites	ts	tv	tstv	ts_1st_ALT	tv_1st_ALT	tstv_1st_ALT	substitution_type_A>C	substitution_type_A>G	substitution_type_A>T	substitution_type_C>A	substitution_type_C>G	substitution_type_C>T	substitution_type_G>A	substitution_type_G>C	substitution_type_G>T	substitution_type_T>A	substitution_type_T>C	substitution_type_T>G
-HG002_ONT_A_deepvariant_snvs	1	288	0	169	0	119	0	0	0	118	51	2.31	118	51	2.31	4	34	1	5	12	28	32	15	4	4	24	6
-HG002_ONT_B_deepvariant_snvs	1	288	0	169	0	119	0	0	0	118	51	2.31	118	51	2.31	4	34	1	5	12	28	32	15	4	4	24	6
-HG002_ONT_C_deepvariant_snvs	1	288	0	169	0	119	0	0	0	118	51	2.31	118	51	2.31	4	34	1	5	12	28	32	15	4	4	24	6

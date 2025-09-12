@@ -1,2 +1,0 @@
-sample_id,depth_outlier,het_count,het_ratio,idr_baf,mean_depth,median_depth,p10,p90,sampled_sites,call_rate
-HG002_Revio,False,1,0.3333,0,13.33,10,0.5238,0.5238,3,1

@@ -1,2 +1,0 @@
-Sample	Top overrepresented sequence	Sum of remaining overrepresented sequences
-HG002_Revio	0.36496350364963503	2.007299270072993

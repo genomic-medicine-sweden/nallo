@@ -1,4 +1,0 @@
-Sample	A>C	A>G	A>T	C>A	C>G	C>T	G>A	G>C	G>T	T>A	T>C	T>G
-HG002_ONT_A_deepvariant_snvs	4.0	34.0	1.0	5.0	12.0	28.0	32.0	15.0	4.0	4.0	24.0	6.0
-HG002_ONT_B_deepvariant_snvs	4.0	34.0	1.0	5.0	12.0	28.0	32.0	15.0	4.0	4.0	24.0	6.0
-HG002_ONT_C_deepvariant_snvs	4.0	34.0	1.0	5.0	12.0	28.0	32.0	15.0	4.0	4.0	24.0	6.0

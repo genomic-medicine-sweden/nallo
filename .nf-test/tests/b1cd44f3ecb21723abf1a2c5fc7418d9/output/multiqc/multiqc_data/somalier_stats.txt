@@ -1,4 +1,0 @@
-Sample	Phenotype	Sex	Father ID	Mother ID	Family ID	Inferred sex	HetVar	HomRefVar	HomAltVar	NA sites	Mean depth	Depth std	Sites depth	Genot depth std	Allele balance	Allele balance std	Allele balance < 0.2, > 0.8	HetVar X	HomRefVar X	HomAltVar X	Sites X	Mean depth X	Sites Y	Mean depth Y
-HG002_ONT_A	2.0	male	0.0	0.0	FAM	1.0	11.0	9.0	7.0	8.0	22.9	5.4	22.9	5.4	0.46	0.39	0.146	0.0	15.0	10.0	25.0	14.56	0.0	0.0
-HG002_ONT_B	1.0	male	0.0	0.0	FAM	1.0	11.0	9.0	7.0	8.0	23.7	5.5	23.7	5.5	0.46	0.4	0.146	0.0	16.0	10.0	26.0	15.46	0.0	0.0
-HG002_ONT_C	2.0	male	0.0	0.0	FAM2	1.0	11.0	9.0	7.0	8.0	22.9	5.4	22.9	5.4	0.46	0.39	0.146	0.0	15.0	10.0	25.0	14.56	0.0	0.0

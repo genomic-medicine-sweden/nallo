@@ -1,4 +1,0 @@
-#sample_a	sample_b	relatedness	ibs0	ibs2	hom_concordance	hets_a	hets_b	hets_ab	shared_hets	hom_alts_a	hom_alts_b	shared_hom_alts	n	x_ibs0	x_ibs2	expected_relatedness
-HG002_ONT_C	HG002_ONT_A	1.000	0	27	1.000	11	11	22	11	7	7	7	27	0	25	-1.0
-HG002_ONT_C	HG002_ONT_B	1.000	0	27	1.000	11	11	22	11	7	7	7	27	0	25	-1.0
-HG002_ONT_A	HG002_ONT_B	1.000	0	27	1.000	11	11	22	11	7	7	7	27	0	25	-1.0

@@ -1,8 +1,0 @@
-Module	Section	Sample Name	Source
-FastQC	all_sections	HG002_Revio	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/7/HG002_Revio_fastqc.zip
-Mosdepth	summary	HG002_Revio	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/6/HG002_Revio.mosdepth.summary.txt
-Mosdepth	genome_results	HG002_Revio	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/5/HG002_Revio.mosdepth.region.dist.txt
-Somalier	all_sections	HG002_Revio	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/3/test.samples.tsv
-Bcftools	stats	HG002_Revio_deepvariant_snvs	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/8/HG002_Revio.bcftools_stats.txt
-WhatsHap	all_sections	HG002_Revio_stats	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/9/HG002_Revio_stats.stats.tsv
-Peddy	all_sections	FAM.peddy.ped	/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/work/a1/19d686a4075a3ba86a45e5950531ac/17/FAM.peddy.ped

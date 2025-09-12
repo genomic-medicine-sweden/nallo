@@ -1,2 +1,0 @@
-sample_id,ped_sex,hom_ref_count,het_count,hom_alt_count,het_ratio,predicted_sex,error
-HG002_Revio,male,0,0,16,0,male,False

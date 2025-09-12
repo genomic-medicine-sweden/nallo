@@ -1,4 +1,0 @@
-sample_id,ped_sex,hom_ref_count,het_count,hom_alt_count,het_ratio,predicted_sex,error
-HG002,male,7,0,16,0,male,False
-HG003,male,12,0,11,0,male,False
-HG004,female,4,11,8,1.375,female,False
