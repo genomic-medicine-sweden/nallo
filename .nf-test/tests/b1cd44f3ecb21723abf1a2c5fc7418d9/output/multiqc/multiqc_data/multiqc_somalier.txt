@@ -1,0 +1,7 @@
+Sample	family_id	paternal_id	maternal_id	sex	phenotype	original_pedigree_sex	gt_depth_mean	gt_depth_sd	depth_mean	depth_sd	ab_mean	ab_std	n_hom_ref	n_het	n_hom_alt	n_unknown	p_middling_ab	X_depth_mean	X_n	X_hom_ref	X_het	X_hom_alt	Y_depth_mean	Y_n	relatedness	ibs0	ibs2	hom_concordance	hets_a	hets_b	hets_ab	shared_hets	hom_alts_a	hom_alts_b	shared_hom_alts	n	x_ibs0	x_ibs2	expected_relatedness
+HG002_ONT_A	FAM	0.0	0.0	1.0	2.0	male	22.9	5.4	22.9	5.4	0.46	0.39	9.0	11.0	7.0	8.0	0.146	14.56	25.0	15.0	0.0	10.0	0.0	0.0															
+HG002_ONT_A*HG002_ONT_B																									1.0	0.0	27.0	1.0	11.0	11.0	22.0	11.0	7.0	7.0	7.0	27.0	0.0	25.0	-1.0
+HG002_ONT_B	FAM	0.0	0.0	1.0	1.0	male	23.7	5.5	23.7	5.5	0.46	0.4	9.0	11.0	7.0	8.0	0.146	15.46	26.0	16.0	0.0	10.0	0.0	0.0															
+HG002_ONT_C	FAM2	0.0	0.0	1.0	2.0	male	22.9	5.4	22.9	5.4	0.46	0.39	9.0	11.0	7.0	8.0	0.146	14.56	25.0	15.0	0.0	10.0	0.0	0.0															
+HG002_ONT_C*HG002_ONT_A																									1.0	0.0	27.0	1.0	11.0	11.0	22.0	11.0	7.0	7.0	7.0	27.0	0.0	25.0	-1.0
+HG002_ONT_C*HG002_ONT_B																									1.0	0.0	27.0	1.0	11.0	11.0	22.0	11.0	7.0	7.0	7.0	27.0	0.0	25.0	-1.0

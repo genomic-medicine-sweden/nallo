@@ -1,0 +1,2 @@
+Sample	chr16	chr17	chr20	chrX
+HG002_Revio	19.69	27.64	19.560000000000002	14.18

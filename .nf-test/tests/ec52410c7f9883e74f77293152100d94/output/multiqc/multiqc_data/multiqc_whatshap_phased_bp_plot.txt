@@ -1,0 +1,4 @@
+Sample	Phased Base Pairs
+HG002	18372.0
+HG003	40353.0
+HG004	98578.0

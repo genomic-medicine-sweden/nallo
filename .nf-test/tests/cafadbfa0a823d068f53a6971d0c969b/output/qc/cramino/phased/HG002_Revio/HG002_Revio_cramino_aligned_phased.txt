@@ -1,0 +1,28 @@
+File name	HG002_Revio_haplotagged.bam
+Number of alignments	1096
+% from total reads	100.00
+Yield [Gb]	0.02
+Mean coverage	0.76
+Yield [Gb] (>25kb)	0.00
+N50	18086
+N75	14868
+Median length	16280.50
+Mean length	16418
+Median identity	99.74
+Mean identity	99.52
+Modal identity	99.9
+Path	HG002_Revio_haplotagged.bam
+Creation time	NA
+Fraction reads phased	0.031021899
+Number of phaseblocks	2
+Total bases phased [Gb]	0.000051239
+Median phaseblock length	25619.5
+N50 phaseblock length	39847
+
+
+# Normalized read count per chromosome
+
+chr16	15.16
+chr17	0.79
+chr20	0.30
+chrX	1.21

@@ -1,0 +1,571 @@
+Sep-11 16:38:17.207 [main] DEBUG nextflow.cli.Launcher - Setting http proxy: ProxyConfig[protocol=http; host=10.248.195.10; port=8080]
+Sep-11 16:38:17.243 [main] DEBUG nextflow.cli.Launcher - Setting https proxy: ProxyConfig[protocol=https; host=10.248.195.10; port=8080]
+Sep-11 16:38:17.244 [main] DEBUG nextflow.cli.Launcher - Setting ftp proxy: ProxyConfig[protocol=ftp; host=10.248.195.10; port=8080]
+Sep-11 16:38:17.245 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/meta/nextflow.log run /home/xschmy/projects/nallo/tests/../main.nf -c /home/xschmy/projects/nallo/nextflow.config -c /home/xschmy/projects/nallo/tests/nextflow.config -params-file /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/meta/params.json -ansi-log false -profile test,singularity -with-trace /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/meta/trace.csv -w /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work -stub
+Sep-11 16:38:17.312 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.5
+Sep-11 16:38:17.352 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/xschmy/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.4,nf-wave@1.12.1
+Sep-11 16:38:17.406 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Sep-11 16:38:17.408 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Sep-11 16:38:17.416 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Sep-11 16:38:17.444 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Sep-11 16:38:17.504 [main] DEBUG nextflow.config.ConfigBuilder - Found config home: /home/xschmy/.nextflow/config
+Sep-11 16:38:17.507 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/xschmy/projects/nallo/nextflow.config
+Sep-11 16:38:17.513 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/xschmy/projects/nallo/nextflow.config
+Sep-11 16:38:17.513 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/xschmy/projects/nallo/tests/nextflow.config
+Sep-11 16:38:17.515 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/xschmy/.nextflow/config
+Sep-11 16:38:17.516 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/xschmy/projects/nallo/nextflow.config
+Sep-11 16:38:17.517 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/xschmy/projects/nallo/nextflow.config
+Sep-11 16:38:17.517 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/xschmy/projects/nallo/tests/nextflow.config
+Sep-11 16:38:17.585 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/xschmy/.nextflow/secrets/store.json
+Sep-11 16:38:17.593 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@417ad4f3] - activable => nextflow.secret.LocalSecretsProvider@417ad4f3
+Sep-11 16:38:17.646 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Sep-11 16:38:18.640 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Sep-11 16:38:22.309 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Sep-11 16:38:23.958 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Sep-11 16:38:24.031 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bih, cluster, cfc_dev, uzl_omics, ifb_core, embl_hd, denbi_qbic, alice, mjolnir_globe, uppmax, giga, incliva, ilifu, ki_luria, uge, icr_alma, rosalind_uge, lugh, mccleary, unibe_ibu, vai, czbiohub_aws, jax, roslin, tes, scw, unc_longleaf, tigem, tubingen_apg, apollo, ipop_up, vsc_calcua, pdc_kth, ceci_nic5, ccga_cau, humantechnopole, stjude, daisybio, eddie, medair, biowulf, apptainer, bi, bigpurple, adcra, cedars, pawsey_setonix, vsc_kul_uhasselt, pawsey_nimbus, ucl_myriad, utd_ganymede, charliecloud, fred_hutch, seattlechildrens, icr_davros, ceres, arm, munin, rosalind, hasta, cfc, uzh, shu_bmrc, ebi_codon_slurm, ebc, ccga_dx, crick, ku_sund_danhead, marvin, shifter, biohpc_gen, mana, mamba, york_viking, unc_lccc, wehi, awsbatch, wustl_htcf, arcc, ceci_dragon2, imperial, maestro, software_license, cannon, genotoul, nci_gadi, abims, eva_grace, janelia, nu_genomics, googlebatch, oist, sahmri, kaust, alliance_canada, mpcdf, leicester, vsc_ugent, create, sage, cambridge, jex, podman, ebi_codon, cheaha, xanadu, nyu_hpc, test, marjorie, computerome, ucd_sonic, seg_globe, mssm, sanger, dkfz, bluebear, pasteur, einstein, ethz_euler, m3c, imb, ucl_cscluster, tuos_stanage, azurebatch, hki, seadragon, crukmi, csiro_petrichor, qmul_apocrita, wave, docker, engaging, gis, hypatia, psmn, eva, unity, cropdiversityhpc, nygc, fgcz, conda, crg, singularity, mpcdf_viper, pe2, dirac, self_hosted_runner, tufts, uw_hyak_pedslabs, binac2, cluster_test, debug, genouest, cbe, unsw_katana, utd_juno, gitpod, phoenix, seawulf, uod_hpc, fub_curta, lovelace, uct_hpc, aws_tower, binac, fsu_draco]
+Sep-11 16:38:24.131 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Sep-11 16:38:24.153 [main] INFO  nextflow.cli.CmdRun - Launching `/home/xschmy/projects/nallo/tests/../main.nf` [chaotic_bell] DSL2 - revision: 9312e09cc0
+Sep-11 16:38:24.155 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins declared=[nf-schema@2.4.2]
+Sep-11 16:38:24.156 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Sep-11 16:38:24.156 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[nf-schema@2.4.2]
+Sep-11 16:38:24.158 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-schema version: 2.4.2
+Sep-11 16:38:24.175 [main] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-schema@2.4.2' resolved
+Sep-11 16:38:24.175 [main] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-schema@2.4.2'
+Sep-11 16:38:24.190 [main] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-schema@2.4.2
+Sep-11 16:38:24.284 [main] DEBUG nextflow.Session - Session UUID: 878d4d11-ee9b-4b8f-a526-29017da57166
+Sep-11 16:38:24.285 [main] DEBUG nextflow.Session - Run name: chaotic_bell
+Sep-11 16:38:24.286 [main] DEBUG nextflow.Session - Executor pool size: 112
+Sep-11 16:38:24.303 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Sep-11 16:38:24.313 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=336; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Sep-11 16:38:24.351 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.5 build 5953
+  Created: 30-06-2025 19:18 UTC (21:18 CEST)
+  System: Linux 4.18.0-553.54.1.el8_10.x86_64
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 17.0.13-internal+0-adhoc..src
+  Encoding: UTF-8 (UTF-8)
+  Process: 1106621@coruscant.medair.lcl [10.248.198.133]
+  CPUs: 112 - Mem: 755.3 GB (24 GB) - Swap: 32 GB (24.2 GB)
+Sep-11 16:38:24.403 [main] DEBUG nextflow.Session - Work-dir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work [nfs]
+Sep-11 16:38:24.467 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Sep-11 16:38:24.483 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-11 16:38:24.493 [main] DEBUG nextflow.Session - Observer factory: ValidationObserverFactory
+Sep-11 16:38:24.508 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Sep-11 16:38:24.561 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Sep-11 16:38:24.581 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 113; maxThreads: 1000
+Sep-11 16:38:24.712 [main] DEBUG nextflow.Session - Session start
+Sep-11 16:38:24.718 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/meta/trace.csv
+Sep-11 16:38:24.734 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.enabled` to true
+Sep-11 16:38:24.735 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.showHiddenParameter` to show_hidden
+Sep-11 16:38:24.736 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.showHidden` to false (Due to --show_hidden)
+Sep-11 16:38:24.737 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.fullParameter` to help_full
+Sep-11 16:38:24.756 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.beforeText` to 
+                                   _                              _ _      _
+   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+ | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+ / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+ \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+ |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+
+
+Sep-11 16:38:24.758 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.afterText` to * The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+Sep-11 16:38:24.761 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.command` to nextflow run genomic-medicine-sweden/nallo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
+Sep-11 16:38:24.766 [main] DEBUG n.validation.config.SummaryConfig - Set `validation.summary.beforeText` to 
+                                   _                              _ _      _
+   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+ | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+ / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+ \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+ |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+
+
+Sep-11 16:38:24.768 [main] DEBUG n.validation.config.SummaryConfig - Set `validation.summary.afterText` to * The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+Sep-11 16:38:25.032 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Sep-11 16:38:26.583 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [samplesheetToList:samplesheetToList]; plugin Id: nf-schema
+Sep-11 16:38:26.597 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.enabled` to true
+Sep-11 16:38:26.597 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.showHiddenParameter` to show_hidden
+Sep-11 16:38:26.597 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.showHidden` to false (Due to --show_hidden)
+Sep-11 16:38:26.597 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.fullParameter` to help_full
+Sep-11 16:38:26.599 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.beforeText` to 
+                                   _                              _ _      _
+   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+ | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+ / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+ \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+ |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+
+
+Sep-11 16:38:26.600 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.afterText` to * The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+Sep-11 16:38:26.601 [main] DEBUG n.validation.config.HelpConfig - Set `validation.help.command` to nextflow run genomic-medicine-sweden/nallo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
+Sep-11 16:38:26.602 [main] DEBUG n.validation.config.SummaryConfig - Set `validation.summary.beforeText` to 
+                                   _                              _ _      _
+   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+ | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+ / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+ \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+ |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+
+
+Sep-11 16:38:26.603 [main] DEBUG n.validation.config.SummaryConfig - Set `validation.summary.afterText` to * The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+Sep-11 16:38:27.060 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [paramsSummaryLog:paramsSummaryLog]; plugin Id: nf-schema
+Sep-11 16:38:27.061 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [validateParameters:validateParameters]; plugin Id: nf-schema
+Sep-11 16:38:27.083 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [paramsSummaryMap:paramsSummaryMap]; plugin Id: nf-schema
+Sep-11 16:38:27.084 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [samplesheetToList:samplesheetToList]; plugin Id: nf-schema
+Sep-11 16:38:46.695 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [paramsSummaryMap:paramsSummaryMap]; plugin Id: nf-schema
+Sep-11 16:38:47.420 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [paramsSummaryLog:paramsSummaryLog]; plugin Id: nf-schema
+Sep-11 16:38:47.422 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [validateParameters:validateParameters]; plugin Id: nf-schema
+Sep-11 16:38:47.426 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [paramsSummaryMap:paramsSummaryMap]; plugin Id: nf-schema
+Sep-11 16:38:47.429 [main] DEBUG nextflow.script.IncludeDef - Loading included plugin extensions with names: [samplesheetToList:samplesheetToList]; plugin Id: nf-schema
+Sep-11 16:38:47.869 [main] INFO  nextflow.Nextflow - 
+                                   _                              _ _      _
+   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+  / _` |/ _ \ '_ \ / _ \| '_ ` _ \| |/ __|____| '_ ` _ \ / _ \/ _` | |/ __| | '_ \ / _ \_____
+ | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+  \__, |\___|_| |_|\___/|_| |_| |_|_|\___|    |_| |_| |_|\___|\__,_|_|\___|_|_| |_|\___|
+  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+ / __\ \ /\ / / _ \/ _` |/ _ \ '_ \  / / '_ \ / _` | | |/ _ \
+ \__ \\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+ |___/ \_/\_/ \___|\__,_|\___|_| |_/_/ |_| |_|\__,_|_|_|\___/
+
+[1mWorkflow skip options[0m
+  [0;34mskip_qc                   : [0;32mtrue[0m
+  [0;34mskip_snv_calling          : [0;32mtrue[0m
+  [0;34mskip_genome_assembly      : [0;32mtrue[0m
+  [0;34mskip_methylation_pileups  : [0;32mtrue[0m
+  [0;34mskip_repeat_calling       : [0;32mtrue[0m
+  [0;34mskip_repeat_annotation    : [0;32mtrue[0m
+  [0;34mskip_peddy                : [0;32mtrue[0m
+  [0;34mskip_phasing              : [0;32mtrue[0m
+  [0;34mskip_snv_annotation       : [0;32mtrue[0m
+  [0;34mskip_sv_calling           : [0;32mtrue[0m
+  [0;34mskip_sv_annotation        : [0;32mtrue[0m
+  [0;34mskip_call_paralogs        : [0;32mtrue[0m
+  [0;34mskip_rank_variants        : [0;32mtrue[0m
+
+[1mInput/output options[0m
+  [0;34minput                     : [0;32m/home/xschmy/projects/nallo/assets/samplesheet.csv[0m
+  [0;34moutdir                    : [0;32m/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/output[0m
+  [0;34mpar_regions               : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/hs38.PAR.bed[0m
+  [0;34mstr_bed                   : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/pathogenic_repeats.hg38.bed[0m
+  [0;34mechtvar_snv_databases     : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/snp_dbs.csv[0m
+  [0;34msvdb_sv_databases         : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/svdb_dbs.csv[0m
+  [0;34mstranger_repeat_catalog   : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/variant_catalog_grch38.json[0m
+  [0;34mvariant_consequences_snvs : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/variant_consequences_v2.txt[0m
+  [0;34mvariant_consequences_svs  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/variant_consequences_v2.txt[0m
+  [0;34mvep_cache                 : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/vep_cache_test_data.tar.gz[0m
+  [0;34mmethylation_call_regions  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/test_data.bed[0m
+  [0;34msnv_call_regions          : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/test_data.bed[0m
+  [0;34msv_call_regions           : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/test_data.bed[0m
+  [0;34mqc_regions                : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/test_data.bed[0m
+  [0;34mhificnv_expected_xy_cn    : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/expected_cn.hg38.XY.bed[0m
+  [0;34mhificnv_expected_xx_cn    : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/expected_cn.hg38.XX.bed[0m
+  [0;34mhificnv_excluded_regions  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/empty.bed[0m
+  [0;34mgenmod_reduced_penetrance : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/reduced_penetrance.tsv[0m
+  [0;34mgenmod_score_config_snvs  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/rank_model_snv.ini[0m
+  [0;34mgenmod_score_config_svs   : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/rank_model_svs.ini[0m
+  [0;34msomalier_sites            : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/somalier_sites.vcf.gz[0m
+  [0;34mpeddy_sites               : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/peddy.sites[0m
+  [0;34mtrace_report_suffix       : [0;32m2025-09-11_16-38-22[0m
+
+[1mReference genome options[0m
+  [0;34mfasta                     : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/hg38.test.fa.gz[0m
+
+[1mInstitutional config options[0m
+  [0;34mconfig_profile_name       : [0;32mTest profile[0m
+  [0;34mconfig_profile_description: [0;32mMinimal test dataset to check pipeline function[0m
+
+[1mWorkflow options[0m
+  [0;34msv_callers_to_run         : [0;32msniffles,hificnv,severus[0m
+  [0;34malignment_processes       : [0;32m2[0m
+  [0;34msnv_calling_processes     : [0;32m2[0m
+  [0;34mvep_plugin_files          : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/vep_plugin_files.csv[0m
+  [0;34mfilter_variants_hgnc_ids  : [0;32mhttps://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/hgnc_ids.tsv[0m
+  [0;34mextra_modkit_options      : [0;32m--seed 1 --sampling-frac 0.1[0m
+  [0;34mextra_vep_options         : [0;32m--plugin SpliceAI,snv=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz,indel=spliceai_21_scores_raw_snv_-v1.3-.vcf.gz[0m
+  [0;34mextra_paraphase_options   : [0;32m--gene hba,OR1D5[0m
+  [0;34mextra_hifiasm_options     : [0;32m-f0 -k30 -w30 -D10 -r1 -N1[0m
+  [0;34mextra_yak_options         : [0;32m-b0[0m
+
+[1mCore Nextflow options[0m
+  [0;34mrunName                   : [0;32mchaotic_bell[0m
+  [0;34mcontainerEngine           : [0;32msingularity[0m
+  [0;34mlaunchDir                 : [0;32m/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958[0m
+  [0;34mworkDir                   : [0;32m/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work[0m
+  [0;34mprojectDir                : [0;32m/home/xschmy/projects/nallo[0m
+  [0;34muserName                  : [0;32mxschmy[0m
+  [0;34mprofile                   : [0;32mtest,singularity[0m
+  [0;34mconfigFiles               : [0;32m/home/xschmy/.nextflow/config, /home/xschmy/projects/nallo/nextflow.config, /home/xschmy/projects/nallo/nextflow.config, /home/xschmy/projects/nallo/tests/nextflow.config[0m
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+-[2m----------------------------------------------------[0m-* The pipeline
+  https://doi.org/10.5281/zenodo.13748210
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/genomic-medicine-sweden/nallo/blob/master/CITATIONS.md
+
+Sep-11 16:38:47.881 [main] DEBUG n.v.parameters.ParameterValidator - Starting parameters validation
+Sep-11 16:38:49.559 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Started validating /home/xschmy/projects/nallo/assets/samplesheet.csv
+Sep-11 16:38:49.963 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Validation of file '/home/xschmy/projects/nallo/assets/samplesheet.csv' passed!
+Sep-11 16:38:50.149 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Started validating /genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/snp_dbs.csv
+Sep-11 16:38:50.411 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Validation of file 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/snp_dbs.csv' passed!
+Sep-11 16:38:53.172 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Started validating /genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/svdb_dbs.csv
+Sep-11 16:38:53.638 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:53.831 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:53.896 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:53.962 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:53.999 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Validation of file 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/svdb_dbs.csv' passed!
+Sep-11 16:38:55.167 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Started validating /genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/vep_plugin_files.csv
+Sep-11 16:38:56.419 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Validation of file 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/vep_plugin_files.csv' passed!
+Sep-11 16:38:56.585 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Started validating /genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/hgnc_ids.tsv
+Sep-11 16:38:56.656 [main] DEBUG n.v.v.evaluators.SchemaEvaluator - Validation of file 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/hgnc_ids.tsv' passed!
+Sep-11 16:38:56.717 [main] DEBUG n.v.parameters.ParameterValidator - Finishing parameters validation
+Sep-11 16:38:56.723 [main] WARN  nextflow.Nextflow - nf-core pipelines do not accept positional arguments. The positional argument `true` has been detected.
+HINT: A common mistake is to provide multiple values separated by spaces e.g. `-profile test, docker`.
+
+Sep-11 16:38:56.767 [main] WARN  nextflow.Nextflow - TRGT may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments.
+Sep-11 16:38:57.624 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:57.667 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:57.732 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:57.796 [main] DEBUG n.file.http.XFileSystemProvider - Remote redirect location: https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz
+Sep-11 16:38:59.087 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA
+Sep-11 16:38:59.120 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA
+Sep-11 16:38:59.153 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.154 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.169 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-11 16:38:59.181 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=112; memory=755.3 GB; capacity=112; pollInterval=100ms; dumpInterval=5m
+Sep-11 16:38:59.187 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Sep-11 16:38:59.249 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.346 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX
+Sep-11 16:38:59.364 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX
+Sep-11 16:38:59.379 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.379 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.381 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.407 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX
+Sep-11 16:38:59.425 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX
+Sep-11 16:38:59.426 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:MINIMAP2_INDEX` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX
+Sep-11 16:38:59.440 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.441 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.442 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.464 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE
+Sep-11 16:38:59.486 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE
+Sep-11 16:38:59.488 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:PREPARE_REFERENCES:UNTAR_VEP_CACHE` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE
+Sep-11 16:38:59.498 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.498 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.500 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.568 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT
+Sep-11 16:38:59.580 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:CONVERT_INPUT_FASTQS:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT
+Sep-11 16:38:59.582 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT
+Sep-11 16:38:59.598 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.598 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.600 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.637 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_medium` matches labels `process_medium` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM
+Sep-11 16:38:59.649 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:NALLO:SPLITUBAM` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM
+Sep-11 16:38:59.660 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.661 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.662 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.700 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_high` matches labels `process_high` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN
+Sep-11 16:38:59.713 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:NALLO:MINIMAP2_ALIGN` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN
+Sep-11 16:38:59.726 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.727 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.728 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.795 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE
+Sep-11 16:38:59.797 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SAMTOOLS_MERGE|SAMTOOLS_INDEX` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE
+Sep-11 16:38:59.808 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:NALLO:SAMTOOLS_MERGE` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE
+Sep-11 16:38:59.823 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.823 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.826 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE': maxForks=0; fair=false; array=0
+Sep-11 16:38:59.919 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED
+Sep-11 16:38:59.930 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:NALLO:SAMPLESHEET_PED` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED
+Sep-11 16:38:59.941 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:38:59.942 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:38:59.943 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED': maxForks=0; fair=false; array=0
+Sep-11 16:39:00.011 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT
+Sep-11 16:39:00.017 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:BAM_INFER_SEX:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT
+Sep-11 16:39:00.028 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:39:00.028 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:39:00.029 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT': maxForks=0; fair=false; array=0
+Sep-11 16:39:00.066 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_INFER
+Sep-11 16:39:00.075 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:BAM_INFER_SEX:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_INFER
+Sep-11 16:39:00.076 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:BAM_INFER_SEX:RELATE_INFER` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_INFER
+Sep-11 16:39:00.086 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:39:00.086 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:39:00.087 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_INFER': maxForks=0; fair=false; array=0
+Sep-11 16:39:00.212 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_low` matches labels `process_low` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE
+Sep-11 16:39:00.223 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:BAM_INFER_SEX:.*` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE
+Sep-11 16:39:00.224 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:.*:BAM_INFER_SEX:RELATE_RELATE` matches process GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE
+Sep-11 16:39:00.235 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:39:00.235 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:39:00.237 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE': maxForks=0; fair=false; array=0
+Sep-11 16:39:00.563 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name GENOMICMEDICINESWEDEN_NALLO:NALLO:MULTIQC
+Sep-11 16:39:00.584 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 16:39:00.584 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 16:39:00.586 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GENOMICMEDICINESWEDEN_NALLO:NALLO:MULTIQC': maxForks=0; fair=false; array=0
+Sep-11 16:39:00.626 [main] DEBUG nextflow.Session - Config process names validation disabled as requested
+Sep-11 16:39:00.632 [main] DEBUG nextflow.Session - Igniting dataflow network (63)
+Sep-11 16:39:00.650 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN
+Sep-11 16:39:00.651 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE
+Sep-11 16:39:00.652 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED
+Sep-11 16:39:00.652 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT
+Sep-11 16:39:00.652 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_INFER
+Sep-11 16:39:00.652 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE
+Sep-11 16:39:00.653 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GENOMICMEDICINESWEDEN_NALLO:NALLO:MULTIQC
+Sep-11 16:39:00.662 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_ff1bd4cbe05644c8: /home/xschmy/projects/nallo/subworkflows/local/annotate_cadd/main.nf
+  Script_96e80f862ae67478: /home/xschmy/projects/nallo/modules/local/create_pedigree_file/main.nf
+  Script_de6fd97b09df19b0: /home/xschmy/projects/nallo/modules/nf-core/multiqc/main.nf
+  Script_9e61b79b569950a4: /home/xschmy/projects/nallo/modules/nf-core/fastqc/main.nf
+  Script_a4de533590b3e699: /home/xschmy/projects/nallo/modules/local/clean_sniffles/main.nf
+  Script_a780234b47eb3af3: /home/xschmy/projects/nallo/modules/nf-core/gunzip/main.nf
+  Script_e83e8693dc96994c: /home/xschmy/projects/nallo/subworkflows/local/scatter_genome/main.nf
+  Script_3e9dbb33f97fe28f: /home/xschmy/projects/nallo/modules/nf-core/samtools/import/main.nf
+  Script_f54241cedf8b66b1: /home/xschmy/projects/nallo/modules/nf-core/yak/count/main.nf
+  Script_aac9d0179e6e6ba3: /home/xschmy/projects/nallo/main.nf
+  Script_c68b3f8526b24250: /home/xschmy/projects/nallo/modules/local/whatshap/phase/main.nf
+  Script_72cdcd84c09c8f34: /home/xschmy/projects/nallo/modules/nf-core/bedtools/sort/main.nf
+  Script_1f9293567d91ab75: /home/xschmy/projects/nallo/subworkflows/local/align_assemblies/main.nf
+  Script_9a694f98b604e3c8: /home/xschmy/projects/nallo/modules/local/add_found_in_tag/main.nf
+  Script_63cdc37a6c8d0755: /home/xschmy/projects/nallo/modules/local/merge_json/main.nf
+  Script_e3bc58084c78a738: /home/xschmy/projects/nallo/modules/nf-core/tabix/bgziptabix/main.nf
+  Script_215f1eb3dbe821b3: /home/xschmy/projects/nallo/subworkflows/local/call_repeat_expansions_strdust/main.nf
+  Script_72c08984ae4388af: /home/xschmy/projects/nallo/modules/local/cramino/main.nf
+  Script_ef7c61302bbc5deb: /home/xschmy/projects/nallo/subworkflows/local/call_repeat_expansions_trgt/main.nf
+  Script_9444c9672b28643d: /home/xschmy/projects/nallo/modules/nf-core/bcftools/sort/main.nf
+  Script_e0e7b45107ecefae: /home/xschmy/projects/nallo/modules/nf-core/bedtools/merge/main.nf
+  Script_d1c3c348a8bb43e0: /home/xschmy/projects/nallo/modules/nf-core/mosdepth/main.nf
+  Script_4cf30dbd6e632201: /home/xschmy/projects/nallo/modules/nf-core/longphase/haplotag/main.nf
+  Script_62410d733023daa0: /home/xschmy/projects/nallo/subworkflows/local/genome_assembly/main.nf
+  Script_05615f2a785284cc: /home/xschmy/projects/nallo/subworkflows/local/bam_infer_sex/main.nf
+  Script_966923c82d5717b5: /home/xschmy/projects/nallo/subworkflows/local/call_snvs/main.nf
+  Script_4a628ef2ddab9aed: /home/xschmy/projects/nallo/modules/nf-core/peddy/main.nf
+  Script_3b5e96889580efec: /home/xschmy/projects/nallo/modules/local/pacbio/hificnv/main.nf
+  Script_3448e763138df75c: /home/xschmy/projects/nallo/modules/nf-core/bcftools/view/main.nf
+  Script_1d417eedc6016852: /home/xschmy/projects/nallo/workflows/nallo.nf
+  Script_de1c7c124fa4c7b4: /home/xschmy/projects/nallo/modules/nf-core/samtools/sort/main.nf
+  Script_1194068ad3766162: /home/xschmy/projects/nallo/modules/nf-core/ensemblvep/filtervep/main.nf
+  Script_c336cb3e9deec805: /home/xschmy/projects/nallo/modules/nf-core/somalier/extract/main.nf
+  Script_e3e2ee3e1b2f8ea1: /home/xschmy/projects/nallo/subworkflows/local/annotate_snvs/main.nf
+  Script_a65a641211d185db: /home/xschmy/projects/nallo/modules/nf-core/modkit/pileup/main.nf
+  Script_79e533d048bf7beb: /home/xschmy/projects/nallo/modules/nf-core/bcftools/merge/main.nf
+  Script_d80cdda20b086f5f: /home/xschmy/projects/nallo/modules/nf-core/longphase/phase/main.nf
+  Script_40116f323c6ad0c6: /home/xschmy/projects/nallo/modules/nf-core/minimap2/index/main.nf
+  Script_1458ba603deef5ca: /home/xschmy/projects/nallo/modules/nf-core/glnexus/main.nf
+  Script_94903505569de6f7: /home/xschmy/projects/nallo/modules/nf-core/bcftools/stats/main.nf
+  Script_c50175f7e153a9c2: /home/xschmy/projects/nallo/subworkflows/local/call_svs/main.nf
+  Script_881607023f7cda54: /home/xschmy/projects/nallo/modules/nf-core/samtools/convert/main.nf
+  Script_560d1b9351137cfc: /home/xschmy/projects/nallo/modules/nf-core/bedtools/split/main.nf
+  Script_feeb48c02c81ef5a: /home/xschmy/projects/nallo/modules/nf-core/splitubam/main.nf
+  Script_ca308a51c60198c3: /home/xschmy/projects/nallo/modules/local/add_most_severe_consequence/main.nf
+  Script_3c6fb6824fe66c5c: /home/xschmy/projects/nallo/subworkflows/local/utils_nfcore_nallo_pipeline/main.nf
+  Script_7a28f626c3a696fc: /home/xschmy/projects/nallo/modules/nf-core/samtools/merge/main.nf
+  Script_674c58e9e864e2a9: /home/xschmy/projects/nallo/subworkflows/local/rank_variants/main.nf
+  Script_aed55ccf8fcf6259: /home/xschmy/projects/nallo/modules/nf-core/tagbam/main.nf
+  Script_4779b6382e5427ab: /home/xschmy/projects/nallo/modules/nf-core/cat/fastq/main.nf
+  Script_a204229c8d52f8df: /home/xschmy/projects/nallo/modules/nf-core/bcftools/concat/main.nf
+  Script_4e340a82283a0ffb: /home/xschmy/projects/nallo/subworkflows/local/phasing/main.nf
+  Script_6714ddf3602e07fa: /home/xschmy/projects/nallo/modules/nf-core/untar/main.nf
+  Script_b480a9cbf000297b: /home/xschmy/projects/nallo/modules/nf-core/sniffles/main.nf
+  Script_581700aed2f28548: /home/xschmy/projects/nallo/modules/local/whatshap/haplotag/main.nf
+  Script_4ea21d9848150fce: /home/xschmy/projects/nallo/modules/nf-core/bcftools/reheader/main.nf
+  Script_b769d838042c7d38: /home/xschmy/projects/nallo/modules/nf-core/severus/main.nf
+  Script_be0f864af1ce23b1: /home/xschmy/projects/nallo/modules/nf-core/cadd/main.nf
+  Script_dedbba5968c49a0d: /home/xschmy/projects/nallo/modules/nf-core/samtools/faidx/main.nf
+  Script_8fdfe2d56681c0af: /home/xschmy/projects/nallo/modules/nf-core/somalier/relate/main.nf
+  Script_6e39a214c72276e8: /home/xschmy/projects/nallo/modules/nf-core/deepvariant/rundeepvariant/main.nf
+  Script_3ff1656b1d66c1f2: /home/xschmy/projects/nallo/modules/nf-core/samtools/index/main.nf
+  Script_caa0ff1598decce6: /home/xschmy/projects/nallo/modules/local/add_most_severe_pli/main.nf
+  Script_035eb6340f688473: /home/xschmy/projects/nallo/subworkflows/local/vcf_concat_norm_variants/main.nf
+  Script_acac632589a5f1f2: /home/xschmy/projects/nallo/modules/local/hiphase/main.nf
+  Script_d19979c490300329: /home/xschmy/projects/nallo/modules/nf-core/deepvariant/vcfstatsreport/main.nf
+  Script_098a4c270dca3c62: /home/xschmy/projects/nallo/modules/nf-core/samtools/view/main.nf
+  Script_cb630c2da652786b: /home/xschmy/projects/nallo/modules/local/echtvar/anno/main.nf
+  Script_00a4ab7a1acf19f7: /home/xschmy/projects/nallo/modules/nf-core/trgt/merge/main.nf
+  Script_beed5bb663a1f043: /home/xschmy/projects/nallo/modules/nf-core/ensemblvep/vep/main.nf
+  Script_8c6cd303ae812c8b: /home/xschmy/projects/nallo/modules/nf-core/minimap2/align/main.nf
+  Script_7698d9b995931be9: /home/xschmy/projects/nallo/subworkflows/local/methylation/main.nf
+  Script_fe34523cbd8db149: /home/xschmy/projects/nallo/modules/nf-core/bcftools/norm/main.nf
+  Script_d87918cefbd426a7: /home/xschmy/projects/nallo/modules/nf-core/stranger/main.nf
+  Script_44a76aeb2c1179f6: /home/xschmy/projects/nallo/modules/nf-core/gfastats/main.nf
+  Script_0db9090e541daeb7: /home/xschmy/projects/nallo/subworkflows/local/qc_aligned_reads/main.nf
+  Script_43c526c9b9bee06e: /home/xschmy/projects/nallo/modules/local/whatshap/stats/main.nf
+  Script_1db56747dad8108b: /home/xschmy/projects/nallo/modules/nf-core/genmod/score/main.nf
+  Script_215a636da7ab24a2: /home/xschmy/projects/nallo/subworkflows/nf-core/utils_nfschema_plugin/main.nf
+  Script_4a9619fda9913413: /home/xschmy/projects/nallo/modules/local/create_samples_file/main.nf
+  Script_5c4e8d4051efa81e: /home/xschmy/projects/nallo/subworkflows/nf-core/utils_nfcore_pipeline/main.nf
+  Script_66c72030fd57a83d: /home/xschmy/projects/nallo/modules/nf-core/genmod/compound/main.nf
+  Script_3550377f69c453d3: /home/xschmy/projects/nallo/modules/nf-core/bcftools/annotate/main.nf
+  Script_ed91049c62642c69: /home/xschmy/projects/nallo/modules/nf-core/svdb/query/main.nf
+  Script_546c711c8eda4f92: /home/xschmy/projects/nallo/subworkflows/local/gvcf_glnexus_norm_variants/main.nf
+  Script_33b646e40ce85772: /home/xschmy/projects/nallo/modules/local/build_intervals/main.nf
+  Script_b2514a6a6d41ae52: /home/xschmy/projects/nallo/modules/local/create_samples_haplotypes_file/main.nf
+  Script_3014c4fa352b3123: /home/xschmy/projects/nallo/modules/nf-core/gawk/main.nf
+  Script_5546e1925f76431e: /home/xschmy/projects/nallo/subworkflows/local/qc_snvs/main.nf
+  Script_dd488988d41dbc8f: /home/xschmy/projects/nallo/subworkflows/local/filter_variants/main.nf
+  Script_9715b06ed6975508: /home/xschmy/projects/nallo/modules/nf-core/trgt/genotype/main.nf
+  Script_1cc829706c044615: /home/xschmy/projects/nallo/modules/nf-core/genmod/annotate/main.nf
+  Script_a0a1b7684d6c7fc4: /home/xschmy/projects/nallo/subworkflows/local/annotate_svs/main.nf
+  Script_fbe1c4a570b38a6c: /home/xschmy/projects/nallo/modules/nf-core/genmod/models/main.nf
+  Script_4f612cfd8c52e8cd: /home/xschmy/projects/nallo/subworkflows/nf-core/utils_nextflow_pipeline/main.nf
+  Script_25fd6aaeb95a2a19: /home/xschmy/projects/nallo/modules/nf-core/bcftools/query/main.nf
+  Script_473c66062f81d7ce: /home/xschmy/projects/nallo/subworkflows/local/convert_input_files/main.nf
+  Script_4c5cce57e3317766: /home/xschmy/projects/nallo/subworkflows/local/annotate_consequence_pli/main.nf
+  Script_e83ae8a650bfe116: /home/xschmy/projects/nallo/modules/nf-core/strdust/main.nf
+  Script_edfcbeafbabcc021: /home/xschmy/projects/nallo/subworkflows/local/call_paralogs/main.nf
+  Script_63fed2b39877680f: /home/xschmy/projects/nallo/modules/nf-core/bcftools/index/main.nf
+  Script_f8aa24d61b684c94: /home/xschmy/projects/nallo/modules/nf-core/svdb/merge/main.nf
+  Script_43e700bcd7d03e23: /home/xschmy/projects/nallo/modules/nf-core/tabix/tabix/main.nf
+  Script_05f61f7af625666a: /home/xschmy/projects/nallo/modules/nf-core/paraphase/main.nf
+  Script_92cb26cdd0e91da1: /home/xschmy/projects/nallo/modules/nf-core/samtools/fastq/main.nf
+  Script_bfe25d5b69ea8854: /home/xschmy/projects/nallo/subworkflows/local/prepare_references/main.nf
+  Script_cc1f6ab9ed30297f: /home/xschmy/projects/nallo/modules/nf-core/modkit/bedmethyltobigwig/main.nf
+  Script_962ba00c29e23f14: /home/xschmy/projects/nallo/modules/nf-core/hifiasm/main.nf
+Sep-11 16:39:00.663 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Sep-11 16:39:00.663 [main] DEBUG nextflow.Session - Session await
+Sep-11 16:39:00.801 [Actor Thread 111] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 2; slices: 1; internal sort time: 0.021 s; external sort time: 0.002 s; total time: 0.023 s
+Sep-11 16:39:00.800 [Actor Thread 101] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.002 s; external sort time: 0.02 s; total time: 0.022 s
+Sep-11 16:39:00.801 [Actor Thread 102] WARN  nextflow.container.SingularityCache - Singularity cache directory has not been defined -- Remote image will be stored in the path: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location
+Sep-11 16:39:00.801 [Actor Thread 102] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/python:3.8.3 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-python-3.8.3.img]
+Sep-11 16:39:00.810 [Actor Thread 111] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/collect-file/d758ea6dcad5b68c27199137725e997d
+Sep-11 16:39:00.810 [Actor Thread 101] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/collect-file/c3a4009a62bcf9a57d6508f0850b2d12
+Sep-11 16:39:00.823 [Actor Thread 111] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/3253118.1.development.q/nxf-2204182435644173654
+Sep-11 16:39:00.823 [Actor Thread 101] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/3253118.1.development.q/nxf-13289880431328107938
+Sep-11 16:39:00.878 [FileTransfer-1] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/HG002_PacBio_Revio.fastq.gz to work dir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/stage-878d4d11-ee9b-4b8f-a526-29017da57166/9e/3404913b78685e519f038120f62483/HG002_PacBio_Revio.fastq.gz
+Sep-11 16:39:00.878 [FileTransfer-2] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/vep_cache_test_data.tar.gz to work dir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/stage-878d4d11-ee9b-4b8f-a526-29017da57166/50/9ca0bfbbf79b76e4b805435396bebf/vep_cache_test_data.tar.gz
+Sep-11 16:39:00.879 [FileTransfer-3] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/hg38.test.fa.gz to work dir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/stage-878d4d11-ee9b-4b8f-a526-29017da57166/3b/dce78c442b7ef33f36eecc0b580401/hg38.test.fa.gz
+Sep-11 16:39:01.053 [Actor Thread 101] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-52-52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa-data.img]
+Sep-11 16:39:01.131 [Actor Thread 111] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-samtools-1.21--h50ea8bc_0.img]
+Sep-11 16:39:01.505 [Actor Thread 102] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/python:3.8.3 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-python-3.8.3.img
+Sep-11 16:39:01.506 [Actor Thread 101] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-52-52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa-data.img
+Sep-11 16:39:01.656 [Actor Thread 111] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-samtools-1.21--h50ea8bc_0.img
+Sep-11 16:39:01.658 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:01.662 [Task submitter] INFO  nextflow.Session - [e2/5b8eea] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA (hg38.test.fa.gz)
+Sep-11 16:39:01.696 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:01.697 [Task submitter] INFO  nextflow.Session - [9b/012b05] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED (test)
+Sep-11 16:39:01.718 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:01.720 [Task submitter] INFO  nextflow.Session - [47/a3df63] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE (vep_cache_test_data.tar.gz)
+Sep-11 16:39:01.739 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:01.741 [Task submitter] INFO  nextflow.Session - [97/6d0690] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT (HG002_Revio)
+Sep-11 16:39:03.369 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:GUNZIP_FASTA (hg38.test.fa.gz); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/e2/5b8eeabcdb71a6ac10a17e396d58ce]
+Sep-11 16:39:03.371 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=336; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Sep-11 16:39:03.373 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/97/6d069014033880ec55eeee8f625a17]
+Sep-11 16:39:03.388 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:UNTAR_VEP_CACHE (vep_cache_test_data.tar.gz); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/47/a3df632d0b6bec3bfcd1b10fd7d580]
+Sep-11 16:39:03.418 [Actor Thread 109] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/minimap2:2.29--h577a1d6_0 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-minimap2-2.29--h577a1d6_0.img]
+Sep-11 16:39:03.490 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:03.491 [Task submitter] INFO  nextflow.Session - [89/046041] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX (hg38.test.fa)
+Sep-11 16:39:03.606 [TaskFinalizer-2] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT > Skipping output binding because one or more optional files are missing: fileoutparam<0:1>
+Sep-11 16:39:03.607 [TaskFinalizer-2] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:CONVERT_INPUT_FASTQS:SAMTOOLS_IMPORT > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Sep-11 16:39:03.641 [Actor Thread 105] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/splitubam:0.1.1--hc9368f3_0 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-splitubam-0.1.1--hc9368f3_0.img]
+Sep-11 16:39:03.715 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED (test); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/9b/012b053660be2ab46eed197905e3dd]
+Sep-11 16:39:04.116 [Actor Thread 109] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/minimap2:2.29--h577a1d6_0 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-minimap2-2.29--h577a1d6_0.img
+Sep-11 16:39:04.117 [Actor Thread 105] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/splitubam:0.1.1--hc9368f3_0 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-splitubam-0.1.1--hc9368f3_0.img
+Sep-11 16:39:04.148 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:04.149 [Task submitter] INFO  nextflow.Session - [9a/42a8e7] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM (HG002_Revio)
+Sep-11 16:39:04.166 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:04.167 [Task submitter] INFO  nextflow.Session - [f1/6bc6ad] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX
+Sep-11 16:39:04.256 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX (hg38.test.fa); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/89/046041923ec75f1e8732f68c9b565c]
+Sep-11 16:39:04.272 [TaskFinalizer-5] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX > Skipping output binding because one or more optional files are missing: fileoutparam<0:1>
+Sep-11 16:39:04.272 [TaskFinalizer-5] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX > Skipping output binding because one or more optional files are missing: fileoutparam<1:1>
+Sep-11 16:39:04.273 [TaskFinalizer-5] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:SAMTOOLS_FAIDX > Skipping output binding because one or more optional files are missing: fileoutparam<3:1>
+Sep-11 16:39:04.819 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:SPLITUBAM (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/9a/42a8e70fa7fcdcb8c380d5b41eb729]
+Sep-11 16:39:04.822 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:PREPARE_REFERENCES:MINIMAP2_INDEX; status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/f1/6bc6ad26c59dde1e98568a73bc1ca6]
+Sep-11 16:39:04.858 [Actor Thread 109] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/66/66dc96eff11ab80dfd5c044e9b3425f52d818847b9c074794cf0c02bfa781661/data [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-66-66dc96eff11ab80dfd5c044e9b3425f52d818847b9c074794cf0c02bfa781661-data.img]
+Sep-11 16:39:05.398 [Actor Thread 109] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/66/66dc96eff11ab80dfd5c044e9b3425f52d818847b9c074794cf0c02bfa781661/data path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-66-66dc96eff11ab80dfd5c044e9b3425f52d818847b9c074794cf0c02bfa781661-data.img
+Sep-11 16:39:05.441 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:05.443 [Task submitter] INFO  nextflow.Session - [51/e4b16b] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio)
+Sep-11 16:39:05.464 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:05.465 [Task submitter] INFO  nextflow.Session - [a5/4495bf] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio)
+Sep-11 16:39:06.221 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/51/e4b16b34b66fb38dd7fc5312a9d321]
+Sep-11 16:39:06.224 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/a5/4495bffb148700efc5605cae88d01e]
+Sep-11 16:39:06.235 [TaskFinalizer-9] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN > Skipping output binding because one or more optional files are missing: fileoutparam<0:1>
+Sep-11 16:39:06.238 [TaskFinalizer-8] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:MINIMAP2_ALIGN > Skipping output binding because one or more optional files are missing: fileoutparam<0:1>
+Sep-11 16:39:06.243 [Actor Thread 98] DEBUG nextflow.extension.GroupTupleOp - GroupTuple dynamic size: key=[id:HG002_Revio, family_id:FAM, paternal_id:0, maternal_id:0, sex:1, phenotype:2, project:test, n_files:2, single_end:true, relationship:unknown, two_parents:false, children:[], has_other_parent:false] size=2
+Sep-11 16:39:06.245 [Actor Thread 98] DEBUG nextflow.extension.GroupTupleOp - GroupTuple dynamic size: key=[id:HG002_Revio, family_id:FAM, paternal_id:0, maternal_id:0, sex:1, phenotype:2, project:test, n_files:2, single_end:true, relationship:unknown, two_parents:false, children:[], has_other_parent:false] size=2
+Sep-11 16:39:06.299 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:06.301 [Task submitter] INFO  nextflow.Session - [8b/649941] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE (HG002_Revio)
+Sep-11 16:39:06.962 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/8b/64994108beb025e61a8d96d2fd9420]
+Sep-11 16:39:06.967 [TaskFinalizer-10] DEBUG nextflow.processor.TaskProcessor - Process `GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE (HG002_Revio)` is unable to find [UnixPath]: `/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/8b/64994108beb025e61a8d96d2fd9420/HG002_Revio.cram` (pattern: `HG002_Revio.cram`)
+Sep-11 16:39:06.976 [TaskFinalizer-10] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE > Skipping output binding because one or more optional files are missing: fileoutparam<1:1>
+Sep-11 16:39:06.977 [TaskFinalizer-10] DEBUG nextflow.processor.TaskProcessor - Process GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMTOOLS_MERGE > Skipping output binding because one or more optional files are missing: fileoutparam<3:1>
+Sep-11 16:39:06.985 [TaskFinalizer-10] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=336; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Sep-11 16:39:07.012 [FileTransfer-4] DEBUG nextflow.file.FilePorter - Copying foreign file https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/reference/somalier_sites.vcf.gz to work dir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/stage-878d4d11-ee9b-4b8f-a526-29017da57166/19/93bba1ecac7edb45ea266df1e71663/somalier_sites.vcf.gz
+Sep-11 16:39:07.041 [Actor Thread 102] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-somalier-0.2.18--hb57907c_0.img]
+Sep-11 16:39:08.029 [Actor Thread 102] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-somalier-0.2.18--hb57907c_0.img
+Sep-11 16:39:08.792 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:08.793 [Task submitter] INFO  nextflow.Session - [ed/2c2a0a] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT (HG002_Revio)
+Sep-11 16:39:14.805 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:SOMALIER_EXTRACT (HG002_Revio); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/ed/2c2a0ab78dee4cdf51623df87c5e17]
+Sep-11 16:39:15.037 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:15.038 [Task submitter] INFO  nextflow.Session - [b8/811f17] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE (test)
+Sep-11 16:39:17.077 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:BAM_INFER_SEX:RELATE_RELATE (test); status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/b8/811f170e11f81274597880611aefc5]
+Sep-11 16:39:17.118 [Actor Thread 109] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/3253118.1.development.q/nxf-8492432652303913459
+Sep-11 16:39:17.120 [Actor Thread 107] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 12; slices: 1; internal sort time: 0.013 s; external sort time: 0.004 s; total time: 0.017 s
+Sep-11 16:39:17.127 [Actor Thread 107] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/collect-file/53c2d5514b3f0c7eebed9071d619222c
+Sep-11 16:39:17.131 [Actor Thread 107] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/3253118.1.development.q/nxf-17805203667969526680
+Sep-11 16:39:17.146 [Actor Thread 107] INFO  nextflow.container.SingularityCache - Pulling Singularity image https://depot.galaxyproject.org/singularity/multiqc:1.28--pyhdfd78af_0 [cache /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-multiqc-1.28--pyhdfd78af_0.img]
+Sep-11 16:39:18.646 [Actor Thread 107] DEBUG nextflow.container.SingularityCache - Singularity pull complete image=https://depot.galaxyproject.org/singularity/multiqc:1.28--pyhdfd78af_0 path=/home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/singularity/depot.galaxyproject.org-singularity-multiqc-1.28--pyhdfd78af_0.img
+Sep-11 16:39:18.680 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 16:39:18.681 [Task submitter] INFO  nextflow.Session - [66/9464aa] Submitted process > GENOMICMEDICINESWEDEN_NALLO:NALLO:MULTIQC
+Sep-11 16:39:26.360 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: GENOMICMEDICINESWEDEN_NALLO:NALLO:MULTIQC; status: COMPLETED; exit: 0; error: -; workDir: /home/xschmy/projects/nallo/.nf-test/tests/cf44d975ddf56fa7e77e18c4095d8958/work/66/9464aaddb69886b75d178f4427d44b]
+Sep-11 16:39:26.396 [main] DEBUG nextflow.Session - Session await > all processes finished
+Sep-11 16:39:26.460 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Sep-11 16:39:26.461 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-11 16:39:26.473 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Sep-11 16:39:26.474 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Sep-11 16:39:26.498 [main] INFO  nextflow.Nextflow - -[0;35m[genomic-medicine-sweden/nallo][0;32m Pipeline completed successfully[0m-
+Sep-11 16:39:26.514 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=13; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=11.4s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=8; peakMemory=30 GB; ]
+Sep-11 16:39:26.514 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Sep-11 16:39:26.528 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Sep-11 16:39:26.595 [main] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-schema@2.4.2'
+Sep-11 16:39:26.596 [main] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-schema
+Sep-11 16:39:26.599 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Sep-11 16:39:26.601 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

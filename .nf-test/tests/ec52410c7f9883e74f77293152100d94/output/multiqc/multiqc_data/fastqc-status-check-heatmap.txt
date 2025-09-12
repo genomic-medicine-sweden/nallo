@@ -1,0 +1,4 @@
+.	Basic Statistics	Per Base Sequence Quality	Per Sequence Quality Scores	Per Base Sequence Content	Per Sequence GC Content	Per Base N Content	Sequence Length Distribution	Sequence Duplication Levels	Overrepresented Sequences	Adapter Content
+HG002	1	1	1	0.5	0.25	1	0.5	1	0.5	0.25
+HG003	1	1	1	0.5	0.25	1	0.5	1	0.5	0.25
+HG004	1	1	1	1	0.25	1	0.5	1	0.5	0.25

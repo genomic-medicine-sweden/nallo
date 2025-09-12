@@ -1,0 +1,28 @@
+File name	HG002_ONT_A_haplotagged.bam
+Number of alignments	1730
+% from total reads	100.00
+Yield [Gb]	0.03
+Mean coverage	1.38
+Yield [Gb] (>25kb)	0.02
+N50	28415
+N75	23384
+Median length	21578.50
+Mean length	18897
+Median identity	98.83
+Mean identity	96.26
+Modal identity	99.3
+Path	HG002_ONT_A_haplotagged.bam
+Creation time	NA
+Fraction reads phased	0.114450864
+Number of phaseblocks	4
+Total bases phased [Gb]	0.005130397
+Median phaseblock length	1388469
+N50 phaseblock length	2352717
+
+
+# Normalized read count per chromosome
+
+chr16	10.64
+chr17	1.07
+chr20	0.33
+chrX	0.93

@@ -1,0 +1,1 @@
+{"pipelines_testdata_base_path":"https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/","sv_callers":"severus,hificnv","input":"/home/xschmy/projects/nallo/assets/samplesheet.csv","sv_callers_to_run":"severus,hificnv,sniffles","outdir":"/home/xschmy/projects/nallo/.nf-test/tests/cafadbfa0a823d068f53a6971d0c969b/output"}

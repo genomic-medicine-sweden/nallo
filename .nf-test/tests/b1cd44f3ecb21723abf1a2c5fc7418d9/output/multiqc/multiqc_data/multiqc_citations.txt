@@ -1,0 +1,7 @@
+10.1093/bioinformatics/btw354                      # MultiQC
+10.1093/bioinformatics/btx699                      # mosdepth
+10.1186/s13073-020-00761-2                         # somalier
+10.1093/gigascience/giab008                        # bcftools
+10.1101/085050                                     # whatshap
+10.1016/j.ajhg.2017.01.017                         # peddy
+

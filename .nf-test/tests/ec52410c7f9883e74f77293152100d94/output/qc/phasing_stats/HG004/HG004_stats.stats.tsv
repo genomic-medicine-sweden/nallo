@@ -1,0 +1,6 @@
+#sample	chromosome	file_name	variants	phased	unphased	singletons	blocks	variant_per_block_median	variant_per_block_avg	variant_per_block_min	variant_per_block_max	variant_per_block_sum	bp_per_block_median	bp_per_block_avg	bp_per_block_min	bp_per_block_max	bp_per_block_sum	heterozygous_variants	heterozygous_snvs	phased_snvs	phased_fraction	phased_snvs_fraction	block_n50
+HG004	chr16	HG004_phased.vcf.gz	168	49	45	0	4	2.0	12.25	2	43	49	11901.5	12787.75	10928	16420	51151	94	72	39	0.5212765957446809	0.5416666666666666	0
+HG004	chr17	HG004_phased.vcf.gz	58	45	1	0	1	45	45.0	45	45	45	19586	19586.0	19586	19586	19586	46	42	42	0.9782608695652174	1.0	0
+HG004	chr20	HG004_phased.vcf.gz	9	2	1	0	1	2	2.0	2	2	2	269	269.0	269	269	269	3	2	1	0.6666666666666666	0.5	0
+HG004	chrX	HG004_phased.vcf.gz	19	2	9	0	1	2	2.0	2	2	2	27572	27572.0	27572	27572	27572	11	11	2	0.18181818181818182	0.18181818181818182	0
+HG004	ALL	HG004_phased.vcf.gz	254	98	56	0	7	2	14.0	2	45	98	12124	14082.57142857143	269	27572	98578	154	127	84	0.6363636363636364	0.6614173228346457	0

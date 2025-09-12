@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta charset="utf-8" />
+		<title>test</title>
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.1.1/rangeslider.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+
+ <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+ <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.1.1/rangeslider.min.js"></script>
+ <script src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+ <style>
+.container {
+  display: table;
+  width: 100%;
+} 
+
+.cchild {
+    display: table-cell;
+    width: 30%;
+}   
+
+.dataTables_filter {
+        display: none;
+}
+.plotdiv {
+}
+body {
+  padding: 4px;
+  justify-content: space-around;
+  align-items: center;
+  color: #404040;
+}
+ </style>
+	</head>
+
+<body>
+	<p id="cite">
+		This output is created by <a href="https://github.com/brentp/peddy">peddy</a>.
+	    Please cite <a href="https://www.sciencedirect.com/science/article/pii/S0002929717300174">the paper</a> if you use this to inform your study.
+	</p>
+
+<div class="plotdiv">
+		<div id="link"></div>
+		<div class="container">
+			<div class="cchild" id="sexplot"> </div>
+			<div class="cchild" id="hetplot"> </div>
+			<div class="cchild" id="pedplot"> </div>
+	</div>
+</div> <!-- plotdiv -->
+
+<span style="float:right">
+Select Y-Axis Display:
+<select name="y_axis" id="y_axis">
+	<option value="ibs2" selected>IBS2</option>
+	<option value="rel" >Coefficient of Relatedness</option>
+</select>
+<a href=FAM.vs.html>Plot of observed vs expected</a>
+</span>
+
+<div class="container" style="width:98%">
+<table id="pedigree" class="cchild stripe row-border" cellspacing="0"></table>
+</div>
+
+<div id="pcaplot"> </div>
+
+
+</body>
+<script>
+
+var HEIGHT = 450;
+
+function getParameterByName(name, url) {
+	if (!url) url = window.location.href;
+	url = url.toLowerCase(); // This is just to avoid case sensitiveness  
+	name = name.replace(/[\[\]]/g, "\\$&").toLowerCase();// This is just to avoid case sensitiveness for query parameter name
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var datas = {'sex': null, 'het': null, 'ped': null}
+
+var sex_data = [{"sample_id":"HG002","ped_sex":"male","hom_ref_count":7,"het_count":0,"hom_alt_count":16,"het_ratio":0.0,"predicted_sex":"male"},{"sample_id":"HG003","ped_sex":"male","hom_ref_count":12,"het_count":0,"hom_alt_count":11,"het_ratio":0.0,"predicted_sex":"male"},{"sample_id":"HG004","ped_sex":"female","hom_ref_count":4,"het_count":11,"hom_alt_count":8,"het_ratio":1.375,"predicted_sex":"female"}]
+
+//marker:{sizemode: 'area', sizeref: 0, size:[]
+var sex_good = {name: "OK", x:[], y:[], text: [], sample: [], mode:'markers', type:'scatter',
+				marker:{color:'#4daf4a', sizemode: 'area', sizeref: 0, size:[], opacity: []}}
+
+var sex_unknown = {name: "unknown", x:[], y:[], text: [], sample: [], mode:'markers', type:'scatter',
+				marker:{color:'#666666', sizemode: 'area', sizeref: 0, size:[], opacity: []}}
+
+var sex_bad = {name: "ERROR", x:[], y:[], text: [], sample: [], mode:'markers', type:'scatter',
+			  marker:{color: '#e41a1c', sizemode: 'area', sizeref: 0, size:[], opacity: []}}
+
+var mean_size = 0;
+var max_seen = 0;
+
+for(i=0; v=sex_data[i], i<sex_data.length; i++){
+	var a = v['ped_sex'] == 'unknown' ? sex_unknown : (v['error'] ? sex_bad : sex_good);
+	mean_size += v['hom_ref_count'];
+
+	max_seen = Math.max(max_seen, v['hom_ref_count'])
+	
+	var xpos = (Math.random() - 0.5) / 2;
+	a['x'].push(v['ped_sex'] == 'male' ? 1 + xpos : v['ped_sex'] == 'female' ? xpos : 0.5 + (Math.random() - 0.5) / 4)
+	a['y'].push(v['het_ratio'].toPrecision(3))
+	a['text'].push("sample: <b>" + v['sample_id'] + "</b>")
+	a['marker']['size'].push(v['hom_ref_count'])
+	a['marker']['opacity'].push(1)
+	a['sample'].push(v['sample_id'])
+}
+
+
+// make sure the smallest point isn't too small.
+for(i=0; i<sex_bad['marker']['size'].length; i++){
+	sex_bad['marker']['size'][i] += (max_seen / 10);
+}
+for(i=0; i<sex_good['marker']['size'].length; i++){
+	sex_good['marker']['size'][i] += (max_seen / 10);
+}
+for(i=0; i<sex_unknown['marker']['size'].length; i++){
+	sex_unknown['marker']['size'][i] += (max_seen / 10);
+}
+
+mean_size /= sex_data.length
+mean_size /= 140;
+
+sex_good['marker']['sizeref'] = mean_size;
+sex_bad['marker']['sizeref'] = mean_size;
+sex_unknown['marker']['sizeref'] = mean_size;
+
+
+
+var sex_layout = {
+  height: HEIGHT,
+  title: "Rate of HET calls on chrX",
+  //width: '50%',
+  xaxis: {
+	title: 'Sex From PED',
+	titlefont: {size: 19},
+	fixedrange: true,
+	tickvals: [0, 0.5, 1],
+	ticktext: ["female", "unknown", "male"],
+	showline: false,
+	tickfont: {size: 12},
+	domain: 0.6,
+	zeroline: false,
+  },
+  yaxis: {
+	title: 'HET / HOM_ALT',
+	titlefont: {size: 19},
+	showline: false,
+	tickfont: {size: 12},
+  },
+  margin: { t: 30 },
+  legend: {x: 0.5, y: 0.9, bgcolor: '#EEE'},
+  hovermode: 'closest'
+};
+
+
+datas['sex'] = [sex_good, sex_unknown, sex_bad];
+Plotly.plot('sexplot', datas['sex'], sex_layout);
+
+
+</script>
+<script>
+
+var het_data = [{"sample_id":"HG002","depth_outlier":false,"het_count":1,"het_ratio":0.333,"idr_baf":0.0,"mean_depth":13.333,"median_depth":10.0,"p10":0.524,"p90":0.524,"sampled_sites":3,"call_rate":1.0},{"sample_id":"HG003","depth_outlier":false,"het_count":0,"het_ratio":0.0,"idr_baf":0.0,"mean_depth":13.0,"median_depth":8.0,"p10":0.0,"p90":0.0,"sampled_sites":1,"call_rate":1.0},{"sample_id":"HG004","depth_outlier":false,"het_count":2,"het_ratio":0.667,"idr_baf":0.0,"mean_depth":12.333,"median_depth":13.0,"p10":0.684,"p90":0.684,"sampled_sites":2,"call_rate":1.0}]
+
+
+var het_good = {name: "OK", x:[], y:[], text: [], sample: [], mode:'markers', type:'scatter',
+				marker:{color:'#4daf4a', sizemode: 'diameter', sizeref: 7, size:[], opacity:[]}}
+var het_depth = {name: "depth-outlier", x:[], y:[], text: [], sample: [], mode:'markers', type:'scatter',
+				marker:{color:'#377eb8', sizemode: 'diameter', sizeref: 7, size:[], opacity:[]}}
+
+for(i=0; v=het_data[i], i<het_data.length; i++){
+	var a = v['depth_outlier'] ? het_depth : het_good;
+
+	a['x'].push(v['median_depth'].toPrecision(3))
+	a['y'].push(v['het_ratio'].toPrecision(3))
+	a['text'].push("sample: <b>" + v['sample_id'] + "<br></b>mean depth:" + v['mean_depth'].toFixed(1) +
+			       "<br>call-rate:" + v['call_rate'].toFixed(2))
+	a['marker']['size'].push(40 + v['call_rate'] * 100)
+	a['marker']['opacity'].push(1)
+	a['sample'].push(v['sample_id'])
+}
+
+var het_layout = {
+  height: HEIGHT,
+  title: "Depth and Heterozygosity",
+  //width: '50%',
+  xaxis: {
+	title: 'Median Depth',
+	titlefont: {size: 19},
+	fixedrange: true,
+	showline: false,
+	tickfont: {size: 12},
+	zeroline: false,
+  },
+  yaxis: {
+	title: 'Proportion of HET calls',
+	titlefont: {size: 19},
+	showline: false,
+	tickfont: {size: 12},
+  },
+  legend: {x: 0.7, y: 0.7, bgcolor: '#EEE'},
+  margin: { t: 30 },
+  hovermode: 'closest'
+};
+
+datas['het'] = [het_good, het_depth]
+Plotly.plot('hetplot', datas['het'], het_layout);
+
+hetplot = document.getElementById('hetplot')
+hetplot.on('plotly_hover', function(data) {
+	var p = data.points[0]
+	var i = p.pointNumber;
+	var sample = p.data.sample[i];
+	Plotly.Fx.hover('sexplot', get_points('sex', sample, ['sample']))
+	Plotly.Fx.hover('pedplot', get_points('ped', sample, ['sample_a', 'sample_b']))
+})
+hetplot.on('plotly_unhover', function(data) {
+		Plotly.Fx.unhover('sexplot');
+		Plotly.Fx.unhover('pedplot');
+		table.rows({selected:true}).deselect()
+})
+
+function get_points(group, samples, keys) {
+	var points = []
+	if(typeof samples === 'string'){
+		samples = [samples];
+	}
+	for(var i=0; i <samples.length;i++){
+		var sample_id=samples[i];
+		for (curveNumber = 0; curveNumber < datas[group].length; curveNumber++){
+			// don't show sites expected to be unrelated.
+			if(group == 'ped' && curveNumber == 0){ continue}
+			var d = datas[group][curveNumber];
+			var key, v;
+			for(var k=0; k<keys.length, key=keys[k]; k++){
+				for(var n=0; n < d[key].length, v=d[key][n]; n++){
+					if(v == sample_id) {
+						points.push({curveNumber: curveNumber, pointNumber: n}) // n or i here?
+					}
+				}
+			}
+		}
+	}
+	return points
+}
+
+sexplot = document.getElementById('sexplot')
+sexplot.on('plotly_hover', function(data) {
+	var p = data.points[0]
+	var i = p.pointNumber;
+	var sample = p.data.sample[i];
+	Plotly.Fx.hover('hetplot', get_points('het', sample, ['sample']))
+	Plotly.Fx.hover('pedplot', get_points('ped', sample, ['sample_a', 'sample_b']))
+})
+sexplot.on('plotly_unhover', function(data) {
+		Plotly.Fx.unhover('hetplot');
+		Plotly.Fx.unhover('pedplot');
+		table.rows({selected:true}).deselect()
+
+})
+
+
+</script>
+
+<script>
+
+axis_lookups = {
+	'ibs0': 'IBS0 (no alleles shared)',
+	'ibs2': 'IBS2 (both alleles shared)',
+    'rel':  'Coefficient Of Relatedness'}
+
+pedX = 'ibs0'
+pedY = 'ibs2'
+
+var ped_data = {"columns":["sample_a","sample_b","rel","hets_a","hets_b","shared_hets","ibs0","ibs2","n","pedigree_parents","pedigree_relatedness","predicted_parents","parent_error","sample_duplication_error","rel_difference"],"index":[2,0,1],"data":[["HG003","HG004",0.0,0,2,0,0,1,3,false,0.0,true,true,false,0.0],["HG002","HG003",0.0,1,0,0,0,2,3,true,0.5,true,false,false,0.5],["HG002","HG004",1.0,1,2,1,0,2,3,true,0.5,true,false,true,-0.5]]}
+var ped_layout = {
+  title: "Expected ('.ped' colors) vs observed ('.vcf' location) allele sharing",
+  height: HEIGHT,
+  //width: '50%',
+  xaxis: {
+	title: axis_lookups[pedX],
+	titlefont: {size: 19},
+	fixedrange: true,
+	showline: false,
+	tickfont: {size: 12},
+  },
+  yaxis: {
+	title: axis_lookups[pedY],
+	titlefont: {size: 19},
+	showline: false,
+	tickfont: {size: 12},
+  },
+  margin: { t: 30 },
+  legend: {x: 0.5, y: 0.9, bgcolor: '#EEE'},
+  hovermode: 'closest'
+};
+
+var peds = {}
+function get_rel_key(r, idx, parentIndex){
+   val = r[idx].toPrecision(3)
+   // differentiate sib-sib from parent-kid
+   if(val == (0.5).toPrecision(3)){
+	   return val + (r[parentIndex] ? " (parent-child)" : " (sib-sib)")
+   }
+   return val
+}
+datas['ped'] = []
+
+
+var column_lookup = ped_data['columns'];
+var prIndex = column_lookup.indexOf('pedigree_relatedness')
+if(prIndex == -1){
+	alert("pedigree_relatedness not found in ped data");
+}
+var pedRelIndex = column_lookup.indexOf('pedigree_relatedness');
+var parentIndex = column_lookup.indexOf('pedigree_parents')
+var nIndex = column_lookup.indexOf('n');
+
+var dIdxs = {'ibs0': column_lookup.indexOf('ibs0'),
+	         'ibs2': column_lookup.indexOf('ibs2'),
+			 'rel': column_lookup.indexOf('rel') }
+var relIndex = dIdxs.rel;
+
+
+var sampleAIndex = column_lookup.indexOf('sample_a');
+var sampleBIndex = column_lookup.indexOf('sample_b');
+
+var CUTOFF = 5000
+var skip0 = ped_data['data'].length > CUTOFF && getParameterByName('all') != "true"
+if (ped_data['data'].length > CUTOFF){
+	jQuery('#link').wrap(function(){
+		var link = jQuery('<a/>')
+		var base = window.location.protocol + "//" + window.location.hostname + window.location.pathname
+		if (skip0){
+			base += "?all=true"
+			link.text("This dataset has a lot of points. Pairs that are unrelated by their relationship in the ped file and by their genotypes are not shown. Click this to show all.")
+		} else {
+			link.text("This dataset has a lot of points. Click this to show only points that are likely to be interesting.")
+		}	
+		link.attr('href', base);
+		return link;
+	})
+}
+
+var xIndex = dIdxs[pedX]
+var yIndex = dIdxs[pedY]
+
+var PED_Y = 'ibs2'
+
+var max_size = 1;
+for(var i=0; i < ped_data['data'].length, p=ped_data['data'][i]; i++){
+
+	if (skip0 && p[pedRelIndex] == 0 && (p[relIndex] < -0.15 || Math.abs(p[relIndex]  - p[pedRelIndex]) < 0.1)){
+		continue;
+	}
+	var k = get_rel_key(p, prIndex, parentIndex);
+
+	if(peds[k] === undefined) {
+		peds[k] = {name: k, x:[], y:[], z: [], parent: [], save_text: [], text: [], sample_a: [], sample_b: [], mode:'markers', type:'scattergl',
+				   marker: {size: [], sizemode: "area", sizeref: 23556/(1 * 100), save_size:[]}, hoverinfo: "text"}
+		// differentiate between parent-kid and sib-sib and use open for <= 0 relatedness
+		if(k.indexOf("sib") > -1){
+			peds[k]["marker"]["symbol"] = "triangle-left"
+		} else if (k.indexOf("parent") > -1){
+			peds[k]["marker"]["symbol"] = "square"
+		} else if (parseFloat(k) <= 0) {
+			peds[k]["marker"]["symbol"] = "circle"
+		}
+
+		datas['ped'].push(peds[k]);
+
+	}
+	peds[k]['x'].push(p[xIndex].toPrecision(3))
+	peds[k]['y'].push(p[yIndex].toPrecision(3))
+	peds[k]['z'].push(Math.max(-0.1, p[relIndex].toPrecision(3)))
+	peds[k]['sample_a'].push(p[sampleAIndex])
+	peds[k]['parent'].push(p[parentIndex])
+	var sz = 50 + p[nIndex];
+    if (sz > max_size){ max_size = sz;}
+	peds[k]['marker']['size'].push(sz)
+	peds[k]['marker']['save_size'].push(sz)
+	peds[k]['sample_b'].push(p[sampleBIndex])
+	var itxt = "<b>" + p[sampleAIndex] + "</b>::<b>" + p[sampleBIndex] + "</b>";
+	peds[k]['text'].push(itxt);
+	peds[k]['save_text'].push(itxt);
+
+}
+for(k in peds){
+    peds[k].marker.sizeref = max_size / 100.
+}
+
+Plotly.plot('pedplot', datas['ped'], ped_layout);
+
+
+</script>
+<script>
+var pedigree = [{"family_id": "FAM", "sample_id": "HG002", "paternal_id": "HG003", "maternal_id": "HG004", "sex": "male", "phenotype": "affected", "duplicates": "HG004", "het_call_rate": "1.0", "het_ratio": "0.3333333333333333", "het_mean_depth": "13.333333333333334", "het_idr_baf": "0.0", "sex_het_ratio": "0.0", "sex_error": "False"}, {"family_id": "FAM", "sample_id": "HG003", "paternal_id": "-9", "maternal_id": "-9", "sex": "male", "phenotype": "unaffected", "duplicates": "", "het_call_rate": "1.0", "het_ratio": "0.0", "het_mean_depth": "13.0", "het_idr_baf": "0.0", "sex_het_ratio": "0.0", "sex_error": "False"}, {"family_id": "FAM", "sample_id": "HG004", "paternal_id": "-9", "maternal_id": "-9", "sex": "female", "phenotype": "unaffected", "duplicates": "HG002", "het_call_rate": "1.0", "het_ratio": "0.6666666666666666", "het_mean_depth": "12.333333333333334", "het_idr_baf": "0.0", "sex_het_ratio": "1.375", "sex_error": "False"}]
+
+// some gymnastics to print in order of usual ped.
+var keys = ['family_id', 'sample_id', 'paternal_id', 'maternal_id', 'sex', 'phenotype']
+var columns = [];
+var found = {}
+for(k=0; k<keys.length; k++){ 
+	found[keys[k]] = true 
+	columns.push({title: keys[k]})
+}
+for(k in pedigree[0]) {
+	if(found[k] === undefined) {
+		columns.push({title: k})
+		keys.push(k)
+	}
+}
+dataSet = [];
+for (var i=0;i<pedigree.length, row=pedigree[i]; i++){
+	var v = [];
+	for (k=0; k<keys.length;k++) { v.push(row[keys[k]]) }
+	dataSet.push(v)
+}
+var table;
+jQuery(document).ready(function(){
+
+		jQuery('#y_axis').change(redraw)
+
+
+		var cols = ""
+		for(i=0;i<columns.length;i++){
+			cols += "<th><input size='" + (columns[i].title.length - 1) + " type='text' placeholder='" + columns[i].title + "' /></th>"
+
+		}
+		jQuery("#pedigree").append('<tfoot><tr>' + cols  + '</tr></tfoot>');
+
+		table = jQuery('#pedigree').DataTable({
+			data: dataSet,
+			buttons: ['copy', 'csv', 'excel', 'print'],
+			dom: 'Bfrtip',
+			columns: columns,
+			paging: false,
+			scrollY: "400px",
+			scrollX: "700px",
+			scrollCollapse: true,
+			select: {style: 'os'},
+		})
+		// https://datatables.net/reference/event/select
+		table.on('select', function(e, dt, type, indexes){
+			var sample_ids = table.rows({selected: true}).data().pluck(1)
+			Plotly.Fx.hover('hetplot', get_points('het', sample_ids, ['sample']))
+			Plotly.Fx.hover('sexplot', get_points('sex', sample_ids, ['sample']))
+			Plotly.Fx.hover('pedplot', get_points('ped', sample_ids, ['sample_a', 'sample_b']))
+		})
+		table.on('deselect', function(e, dt, type, indexes){
+				Plotly.Fx.unhover('hetplot')
+				Plotly.Fx.unhover('sexplot')
+				Plotly.Fx.unhover('pedplot')
+		})
+		table.columns().every(function() {
+			var that = this;
+			jQuery('input', this.footer()).on('keyup change', function() {
+				if (that.search() !== this.value ){
+					that.search(this.value, true, true).draw();
+				}
+
+				redraw()
+			})
+		})
+})
+
+function redraw(all) {
+	// these are the samples that are visible in the table.
+	var samples
+	val = jQuery('#y_axis').val()
+	if(val != PED_Y) {
+		PED_Y = val;
+		for(k in peds){
+			var tmp = peds[k]['y'];
+			peds[k]['y'] = peds[k]['z']
+			peds[k]['z'] = tmp;
+		}
+		ped_layout.yaxis.title = axis_lookups[val];
+	}
+
+
+	if(all == undefined){
+	   samples = table.rows({filter:"applied"}).data().pluck(1)
+	} else {
+	   samples = table.rows().data().pluck(1)
+	}
+	var so = {}
+	for(var i=0;i<samples.length;i++){so[samples[i]] = true;}
+
+	for(var k=0; k<sexplot.data.length;k++){
+		for(i=0;i<sexplot.data[k]['sample'].length; i++){
+			var s=sexplot.data[k]['sample'][i];
+			if(so[s]){
+				sexplot.data[k]['marker']['opacity'][i] = 1;
+			} else {
+				sexplot.data[k]['marker']['opacity'][i] = 0.04;
+			}
+		}
+	}
+	Plotly.redraw(sexplot)
+
+	for(var k=0; k<hetplot.data.length;k++){
+		for(i=0;i<hetplot.data[k]['sample'].length; i++){
+			var s=hetplot.data[k]['sample'][i];
+			if(so[s]){
+				hetplot.data[k]['marker']['opacity'][i] = 1;
+			} else {
+				hetplot.data[k]['marker']['opacity'][i] = 0.04;
+			}
+		}
+	}
+	Plotly.redraw(hetplot)
+
+	for(var k=0; k<pedplot.data.length;k++){
+		var n = Math.max(pedplot.data[k]['sample_a'].length,
+						 pedplot.data[k]['sample_b'].length)
+
+		for(i=0; i<n; i++){
+			var sa = pedplot.data[k]['sample_a'][i];
+			var sb = pedplot.data[k]['sample_b'][i];
+			if(so[sa] || so[sb]){
+				pedplot.data[k]['marker']['size'][i] = pedplot.data[k]['marker']['save_size'][i];
+				pedplot.data[k]['text'][i] = pedplot.data[k]['save_text'][i];
+			} else {
+				pedplot.data[k]['marker']['size'][i] = 0.0;
+				pedplot.data[k]['text'][i] = null;
+			}
+		}
+	}
+	Plotly.redraw(pedplot)
+
+}
+
+</script>
+
+<script>
+var background_pca = {}
+// converted from seaborn palette Set1.
+var pal = ['#e41a1c', '#377eb7', '#4dae4a', '#994ea1', '#ff8100', '#adadad'];
+
+var pca_layout = {
+  height: HEIGHT * 2,
+  title: "PCA projection onto 1000 genomes",
+  width: HEIGHT * 2,
+  xaxis: {
+	title: 'PC1',
+	titlefont: {size: 19},
+	showline: false,
+	tickfont: {size: 12},
+	zeroline: false,
+  },
+  yaxis: {
+	title: 'PC2',
+	titlefont: {size: 19},
+	showline: false,
+	tickfont: {size: 12},
+  },
+  margin: { t: 30 },
+  legend: {x: 0.9, y: 0.01, bgcolor: '#EEE'},
+  hovermode: 'closest'
+};
+
+var pops = ["AFR", "AMR", "EAS", "EUR", "SAS", "UNKNOWN"]
+var pl = {}
+
+var pcas = {}
+for(var i=0; i < pops.length; i++){
+	pl[pops[i]] = i;
+
+	pcas[pops[i]] = {name: pops[i], x:[], y:[], mode: 'markers', type: 'scatter',
+		showlegend: false,
+		marker: {opacity: 0.25, color: pal[i], size:4}, hoverinfo: 'none'} 
+}
+
+
+for(var i=0; i < background_pca.length; i++){
+	var r = background_pca[i];
+	var group = pcas[r['ancestry']]
+	group['x'].push(r['PC1'])
+	group['y'].push(r['PC2'])
+}
+
+var apcas = [];
+for(var i=0; i < pops.length-1; i++){
+	apcas.push(pcas[pops[i]]);
+}
+
+pcas = {}
+// actual samples
+for(var i=0; i < het_data.length; i++){
+	var r = het_data[i];
+	if(pcas[r['ancestry-prediction']] === undefined){
+		pcas[r['ancestry-prediction']] = {text: [], x:[], y:[], mode: 'markers', type: 'scatter',
+			showlegend: true,
+			name: r['ancestry-prediction'],
+			marker: {opacity: 0.9, color: pal[pl[r['ancestry-prediction']]], size:11, symbol: "square"}} 
+	}
+	var group = pcas[r['ancestry-prediction']];
+	group['x'].push(r['PC1'])
+	group['y'].push(r['PC2'])
+	group['text'].push('sample: <b>' + r['sample_id'] + '</b><br>predicted-ancestry: <b>' + r['ancestry-prediction'] + '</b>')
+}
+
+for(var i=0; i < pops.length; i++){
+	if(pcas[pops[i]]===undefined) {
+		apcas.push({text: [], x:[2], y:[-1.5], mode: 'markers', type: 'scatter',
+						visible: "lengendonly",
+						showlegend: true,
+						name: pops[i],
+						marker: {opacity: 0.9, color: pal[i], size:11, symbol: "square"}})
+	} else {
+		apcas.push(pcas[pops[i]]);
+	}
+}
+
+
+Plotly.plot('pcaplot', apcas, pca_layout);
+
+</script>
+
+</html>

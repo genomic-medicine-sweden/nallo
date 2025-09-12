@@ -1,0 +1,4 @@
+Sample	Unique Reads	Duplicate Reads
+HG002	1082.0	25.0
+HG003	1113.0	10.0
+HG004	1163.0	16.0

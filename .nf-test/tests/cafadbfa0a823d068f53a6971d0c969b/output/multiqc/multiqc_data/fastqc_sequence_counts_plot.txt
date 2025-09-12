@@ -1,0 +1,2 @@
+Sample	Unique Reads	Duplicate Reads
+HG002_Revio	1081.0	15.0

@@ -1,0 +1,4 @@
+Sample	Unique Reads	Duplicate Reads
+HG002_ONT_A	1167.0	563.0
+HG002_ONT_B	1168.0	609.0
+HG002_ONT_C	1167.0	563.0

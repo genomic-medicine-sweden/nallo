@@ -1,0 +1,23 @@
+File name	HG002_ONT_B_aligned.bam
+Number of alignments	1777
+% from total reads	100.00
+Yield [Gb]	0.03
+Mean coverage	1.42
+Yield [Gb] (>25kb)	0.02
+N50	28433
+N75	23567
+Median length	21859.00
+Mean length	18976
+Median identity	98.83
+Mean identity	96.29
+Modal identity	99.3
+Path	HG002_ONT_B_aligned.bam
+Creation time	NA
+
+
+# Normalized read count per chromosome
+
+chr16	10.76
+chr17	1.06
+chr20	0.33
+chrX	0.94

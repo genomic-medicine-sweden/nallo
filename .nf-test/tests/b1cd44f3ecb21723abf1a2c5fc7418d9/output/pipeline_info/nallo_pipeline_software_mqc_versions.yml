@@ -1,0 +1,156 @@
+ADD_FOUND_IN_TAG:
+  bcftools: 1.2
+  busybox_awk: 1.36.1
+ADD_MOST_SEVERE_CSQ:
+  add_most_severe_consequence: 1.1
+  python: 3.8.3
+ADD_MOST_SEVERE_PLI:
+  add_most_severe_pli: 1.1
+  python: 3.8.3
+BCFTOOLS_CONCAT:
+  bcftools: 1.21
+BCFTOOLS_MERGE:
+  bcftools: 1.21
+BCFTOOLS_NORM_MULTISAMPLE:
+  bcftools: 1.21
+BCFTOOLS_NORM_SINGLESAMPLE:
+  bcftools: 1.21
+BCFTOOLS_QUERY:
+  bcftools: 1.21
+BCFTOOLS_REHEADER:
+  bcftools: 1.21
+BCFTOOLS_SORT:
+  bcftools: 1.21
+BCFTOOLS_STATS:
+  bcftools: 1.21
+BCFTOOLS_VIEW:
+  bcftools: 1.21
+BEDTOOLS_MERGE:
+  bedtools: 2.31.1
+BEDTOOLS_SORT:
+  bedtools: 2.31.1
+BEDTOOLS_SPLIT:
+  bedtools: 2.31.1
+CLEAN_SNIFFLES:
+  clean_sniffles: 1.0
+CRAMINO:
+  cramino: 0.14.5
+CRAMINO_PHASED:
+  cramino: 0.14.5
+CREATE_SAMPLES_FILE:
+  gawk: 5.1.0
+CREATE_SAMPLES_HAPLOTYPES_FILE:
+  gawk: 5.1.0
+DEEPVARIANT_RUNDEEPVARIANT:
+  deepvariant: 1.9.0
+DEEPVARIANT_VCFSTATSREPORT:
+  deepvariant: 1.8.0
+ECHTVAR_ANNO:
+  echtvar: 0.2.2
+ENSEMBLVEP_FILTERVEP:
+  ensemblvep: 113.0
+ENSEMBLVEP_SNV:
+  ensemblvep: 110.0
+  tabix: 1.17
+ENSEMBLVEP_SV:
+  ensemblvep: 110.0
+  tabix: 1.17
+FASTQC:
+  fastqc: 0.12.1
+GENMOD_ANNOTATE:
+  genmod: 3.10.1
+GENMOD_COMPOUND:
+  genmod: 3.10.1
+GENMOD_MODELS:
+  genmod: 3.10.1
+GENMOD_SCORE:
+  genmod: 3.10.1
+GFASTATS:
+  gfastats: 1.3.10
+GLNEXUS:
+  glnexus: 1.4.3-0-gcecf42e
+GUNZIP_FASTA:
+  gunzip: 1.13
+HIFIASM:
+  hifiasm: 0.25.0-r726
+HIFICNV:
+  hificnv: 1.0.0-36e6461
+MERGE_JSON:
+  merge_json_sample_files_into_family: 1.0
+  python: 3.8.3
+MINIMAP2_ALIGN:
+  minimap2: 2.29-r1283
+  samtools: 1.21
+MINIMAP2_INDEX:
+  minimap2: 2.29-r1283
+MODKIT_BEDMETHYLTOBIGWIG:
+  modkit: 0.5.0
+MODKIT_PILEUP:
+  modkit: 0.3.0
+MOSDEPTH:
+  mosdepth: 0.3.10
+PARAPHASE:
+  minimap2: 2.28-r1209
+  paraphase: 3.2.1
+  samtools: 1.21
+PEDDY:
+  peddy: 0.4.8
+RELATE_RELATE:
+  somalier: 0.2.18
+SAMPLESHEET_PED:
+  create_pedigree_file: 1.0
+  python: 3.8.3
+SAMTOOLS_FAIDX:
+  samtools: 1.21
+SAMTOOLS_FASTQ:
+  samtools: 1.21
+SAMTOOLS_INDEX_WHATSHAP:
+  samtools: 1.21
+SAMTOOLS_MERGE:
+  samtools: 1.21
+SAMTOOLS_VIEW:
+  samtools: 1.21
+SEVERUS:
+  severus: 1.5
+SNIFFLES:
+  sniffles: 1.0.12
+SOMALIER_EXTRACT:
+  somalier: 0.2.18
+SOMALIER_PED_FAMILY:
+  create_pedigree_file: 1.0
+  python: 3.8.3
+SVDB_MERGE_BY_CALLER:
+  svdb: 2.8.2
+  bcftools: 1.21
+SVDB_MERGE_BY_FAMILY:
+  svdb: 2.8.2
+  bcftools: 1.21
+SVDB_QUERY:
+  svdb: 2.8.2
+TABIX_BGZIPTABIX:
+  tabix: 1.21
+TABIX_ENSEMBLVEP_SNV:
+  tabix: 1.21
+TABIX_ENSEMBLVEP_SV:
+  tabix: 1.21
+TABIX_HIFICNV:
+  tabix: 1.21
+TABIX_SEVERUS:
+  tabix: 1.21
+TAGBAM:
+  tagbam: 0.1.0
+UNTAR_VEP_CACHE:
+  untar: 1.34
+WHATSHAP_HAPLOTAG:
+  whatshap: 2.3
+WHATSHAP_PHASE:
+  whatshap: 2.3
+  bgzip: 1.2
+  tabix: 1.2
+WHATSHAP_STATS:
+  whatshap: 2.3
+  bgzip: 1.2
+  tabix: 1.2
+Workflow:
+    genomic-medicine-sweden/nallo: v0.8.0dev
+    Nextflow: 25.04.5

@@ -1,0 +1,6 @@
+#sample	chromosome	file_name	variants	phased	unphased	singletons	blocks	variant_per_block_median	variant_per_block_avg	variant_per_block_min	variant_per_block_max	variant_per_block_sum	bp_per_block_median	bp_per_block_avg	bp_per_block_min	bp_per_block_max	bp_per_block_sum	heterozygous_variants	heterozygous_snvs	phased_snvs	phased_fraction	phased_snvs_fraction	block_n50
+HG002_ONT_C	chr16	HG002_ONT_C_phased.vcf.gz	205	46	51	0	2	23.0	23.0	3	43	46	27772.0	27772.0	8502	47042	55544	97	70	38	0.4742268041237113	0.5428571428571428	0
+HG002_ONT_C	chr17	HG002_ONT_C_phased.vcf.gz	53	2	9	0	1	2	2.0	2	2	2	9402	9402.0	9402	9402	9402	11	11	2	0.18181818181818182	0.18181818181818182	0
+HG002_ONT_C	chr20	HG002_ONT_C_phased.vcf.gz	11	2	0	0	1	2	2.0	2	2	2	55	55.0	55	55	55	2	1	1	1.0	1.0	0
+HG002_ONT_C	chrX	HG002_ONT_C_phased.vcf.gz	16	0	0	0	0	nan	nan	0	0	0	nan	nan	0	0	0	0	0	0	0.0	0.0	nan
+HG002_ONT_C	ALL	HG002_ONT_C_phased.vcf.gz	285	50	60	0	4	2.5	12.5	2	43	50	8952.0	16250.25	55	47042	65001	110	82	41	0.45454545454545453	0.5	0

@@ -1,0 +1,2 @@
+sample_id,ped_sex,hom_ref_count,het_count,hom_alt_count,het_ratio,predicted_sex,error
+HG002_ONT_C,male,0,0,14,0,male,False

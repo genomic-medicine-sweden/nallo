@@ -1,0 +1,4 @@
+sample_id,depth_outlier,het_count,het_ratio,idr_baf,mean_depth,median_depth,p10,p90,sampled_sites,call_rate
+HG002,False,1,0.3333,0,13.33,10,0.5238,0.5238,3,1
+HG003,False,0,0,0,13,8,0,0,1,1
+HG004,False,2,0.6667,0,12.33,13,0.6842,0.6842,2,1

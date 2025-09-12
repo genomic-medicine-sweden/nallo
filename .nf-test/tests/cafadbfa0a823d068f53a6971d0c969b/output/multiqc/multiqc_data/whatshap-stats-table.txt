@@ -1,0 +1,2 @@
+Sample	Input Variants	Heterozygous Variants	Heterozygous SNVs	Unphased Variants	Phased Variants	Phased SNVs	Blocks	Singletons	Total Phased bp	Avg Variants per Block	% Phased Variants	Avg bp per Block	NG50
+HG002_Revio	166	83	61	40	43	31	2	0	8964	21.5	51.80722891566265	4482.0	0
