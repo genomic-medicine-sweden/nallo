@@ -1496,6 +1496,20 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>Turned off with <code>--skip_phasing</code>.</p>
 <h4 id="methylation-pileups">Methylation pileups</h4>
 <p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bigwig_modcodes</code></td>
+<td>A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to <code>h,m</code>, i.e. 5hmC and 5mC. See <a href="https://samtools.github.io/hts-specs/SAMtags.pdf">the SAM specification</a> for a complete list</td>
+</tr>
+</tbody>
+</table>
 <p>Turned off with <code>--skip_methylation_pileups</code>.</p>
 <h4 id="repeat-calling">Repeat calling</h4>
 <p>This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:</p>
