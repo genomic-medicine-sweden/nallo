@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam | --filter_variants_hgnc_ids null --phaser hiphase": {
         "content": [
-            268,
+            277,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -132,6 +132,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MODKIT_BEDMETHYLTOBIGWIG": {
+                    "modkit": "0.5.0"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
@@ -280,24 +283,33 @@
                 "methylation/modkit/pileup/HG002",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bed.gz",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bw",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bed.gz",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bw",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bed.gz",
                 "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bw",
                 "methylation/modkit/pileup/HG003",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bed.gz",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bw",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bed.gz",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bw",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bed.gz",
                 "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bw",
                 "methylation/modkit/pileup/HG004",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bed.gz",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bed.gz.tbi",
+                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bw",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bed.gz",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bed.gz.tbi",
+                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bw",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bed.gz",
                 "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bw",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -661,24 +673,33 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "HG002_modkit_pileup_1.bed.gz:md5,6e590674404b8f9a861168cbb895038f",
+                "HG002_modkit_pileup_1.bed.gz:md5,fc7e0032bc5d43fc4e3eb9bad7986331",
                 "HG002_modkit_pileup_1.bed.gz.tbi:md5,dc4b61cfb8470954419699498d345453",
-                "HG002_modkit_pileup_2.bed.gz:md5,4e2d99eeb8baac37cb6d16b7f03664f3",
+                "HG002_modkit_pileup_1.bw:md5,3242c9d5d1362da01945aee7ec9855b1",
+                "HG002_modkit_pileup_2.bed.gz:md5,ef70a9c0681f4d45de376b2a077bba30",
                 "HG002_modkit_pileup_2.bed.gz.tbi:md5,37cc710b08d97f4afc2d8760efb8ad98",
-                "HG002_modkit_pileup_ungrouped.bed.gz:md5,02a15108a6a94607bf52ca13a46ded86",
+                "HG002_modkit_pileup_2.bw:md5,31fffa2746cfe62d03354dc21efa5048",
+                "HG002_modkit_pileup_ungrouped.bed.gz:md5,039fef342a95a761df79f986ff07fbd4",
                 "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,a69b38c3614a4c90dc9c8a977afb9c4e",
-                "HG003_modkit_pileup_1.bed.gz:md5,57533c5858bb8c5af4ec57afab68631f",
+                "HG002_modkit_pileup_ungrouped.bw:md5,1988649697628c06273124ca641329c4",
+                "HG003_modkit_pileup_1.bed.gz:md5,84ab6bec87640c2c993d77dd3c1a38e6",
                 "HG003_modkit_pileup_1.bed.gz.tbi:md5,3275a6a426a79e9bc2b077da162ebf22",
-                "HG003_modkit_pileup_2.bed.gz:md5,329a5f84c47cb39387ddd7e80d6e2260",
+                "HG003_modkit_pileup_1.bw:md5,c5b37c738a1073182e89d47acaa197d1",
+                "HG003_modkit_pileup_2.bed.gz:md5,192f54b53c36b509f6d2881c9238bd16",
                 "HG003_modkit_pileup_2.bed.gz.tbi:md5,e8c227e24a503d4e10cecb0a0e3ef951",
-                "HG003_modkit_pileup_ungrouped.bed.gz:md5,2da12667ef4f28aa4cedda536644aae4",
+                "HG003_modkit_pileup_2.bw:md5,49bf7a64317781d301a569aced72a502",
+                "HG003_modkit_pileup_ungrouped.bed.gz:md5,57b03203e7b9bf0634f6f9a3b93a85ad",
                 "HG003_modkit_pileup_ungrouped.bed.gz.tbi:md5,8c9b7160ad5cf1666fd85f8c5c0ee251",
-                "HG004_modkit_pileup_1.bed.gz:md5,b40478483c4f3afb7b697141545d619e",
+                "HG003_modkit_pileup_ungrouped.bw:md5,c35a562524a7efb2e6bda0f6eb9aafb1",
+                "HG004_modkit_pileup_1.bed.gz:md5,c088579208dc5a0a90b7362dc187b6c7",
                 "HG004_modkit_pileup_1.bed.gz.tbi:md5,06753a3568de2d274c16eda9cb97347d",
-                "HG004_modkit_pileup_2.bed.gz:md5,f8db9c65c8a3c85fb8b6910a8e8b3e48",
+                "HG004_modkit_pileup_1.bw:md5,109a480ee5d94d9ab84e9a2127f4bd8c",
+                "HG004_modkit_pileup_2.bed.gz:md5,7c8fdaf5ce4d51bd0f288e961c135fea",
                 "HG004_modkit_pileup_2.bed.gz.tbi:md5,e27f27bbf405fb5364d3dfd310938429",
-                "HG004_modkit_pileup_ungrouped.bed.gz:md5,002057abcce51fb913d6cd1d4dd1f292",
+                "HG004_modkit_pileup_2.bw:md5,3338a0e7a317602e7edfdd02e173988b",
+                "HG004_modkit_pileup_ungrouped.bed.gz:md5,100e04224a2c358966f653ae983929eb",
                 "HG004_modkit_pileup_ungrouped.bed.gz.tbi:md5,471e8dd47597aa060b2908cdf1d9da7e",
+                "HG004_modkit_pileup_ungrouped.bw:md5,3708ce37f612f358c33b5260536bbc74",
                 "bcftools-stats-subtypes.txt:md5,45c3ea6791e455ed27afb87004d6d9a0",
                 "bcftools_stats_indel-lengths.txt:md5,fb634f7fecaaa7cdc89109270c336362",
                 "fastqc-status-check-heatmap.txt:md5,ec40321b541ebfb5777662e684261dfc",
@@ -881,8 +902,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.5"
         },
-        "timestamp": "2025-09-11T10:03:40.764768006"
+        "timestamp": "2025-09-11T16:26:36.6663034"
     }
 }

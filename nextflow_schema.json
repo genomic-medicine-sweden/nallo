@@ -220,6 +220,12 @@
                     "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
                     "exists": true
                 },
+                "bigwig_modcodes": {
+                    "type": "string",
+                    "pattern": "^[mhfcCgebTUaAoGnN](,[mhfcCgebTUaAoGnN])*$",
+                    "description": "Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list.",
+                    "default": "h,m"
+                },
                 "snv_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
