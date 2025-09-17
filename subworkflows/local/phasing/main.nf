@@ -12,12 +12,14 @@ include { WHATSHAP_STATS                             } from '../../../modules/lo
 
 workflow PHASING {
     take:
-    ch_vcf       // channel: [ val(meta), path(vcf) ]
-    ch_vcf_index // channel: [ val(meta), path(tbi) ]
-    ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
-    fasta        // channel: [ val(meta), path(fasta) ]
-    fai          // channel: [ val(meta), path(fai) ]
-    cram_output  //    bool: Publish alignments as CRAM (true) or BAM (false)
+    ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf        // channel: [ val(meta), path(vcf) ]
+    ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ]
+    ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
+    fasta            // channel: [ val(meta), path(fasta) ]
+    fai              // channel: [ val(meta), path(fai) ]
+    cram_output      //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = Channel.empty()
@@ -26,8 +28,9 @@ workflow PHASING {
     if (params.phaser.equals("longphase")) {
 
         ch_bam_bai
-            .join( ch_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, bam, bai, snvs -> [ meta, bam, bai, snvs, [], [] ] }
+            .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_sv_vcf , failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
             .set { ch_longphase_phase_in }
 
         LONGPHASE_PHASE (
@@ -71,7 +74,7 @@ workflow PHASING {
     } else if (params.phaser.equals("whatshap")) {
 
         WHATSHAP_PHASE(
-            ch_vcf.join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true ),
+            ch_snv_vcf.join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true ),
             fasta,
             fai
         )
@@ -102,8 +105,8 @@ workflow PHASING {
 
     // Phase variants and haplotag reads with HiPhase
     } else if (params.phaser.equals("hiphase")) {
-        ch_vcf
-            .join( ch_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+        ch_snv_vcf
+            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_hiphase_snv_in }
 
