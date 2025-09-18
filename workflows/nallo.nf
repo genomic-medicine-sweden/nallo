@@ -711,6 +711,8 @@ workflow NALLO {
         PHASING (
             sample_snv_vcf,
             sample_snv_index,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_vcf,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_tbi,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
