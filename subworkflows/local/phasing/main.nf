@@ -29,8 +29,8 @@ workflow PHASING {
 
         ch_bam_bai
             .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_sv_vcf , failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
+            .join( ch_sv_vcf , remainder:true, failOnDuplicate:true ) // Will set svs to null in case there are none
+            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs ?: [], [] ] }
             .set { ch_longphase_phase_in }
 
         LONGPHASE_PHASE (
@@ -105,11 +105,14 @@ workflow PHASING {
 
     // Phase variants and haplotag reads with HiPhase
     } else if (params.phaser.equals("hiphase")) {
+        ch_sv_vcf
+            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
+            .set { ch_sv_joined }
+
         ch_snv_vcf
             .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_sv_vcf, failOnMismatch:true, failOnDuplicate:true)
-            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
-            .map { meta, snvs, snvs_idx, svs, svs_idx -> [ meta, [snvs, svs], [snvs_idx, svs_idx] ] }
+            .concat(ch_sv_joined)
+            .groupTuple()
             .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_hiphase_snv_in }
 
