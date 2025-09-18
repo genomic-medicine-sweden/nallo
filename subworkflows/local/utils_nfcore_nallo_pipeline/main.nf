@@ -522,18 +522,20 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
-    def pacbio_tools = []
-    if (params.phaser.matches('hiphase')) {
-        pacbio_tools += ['HiPhase']
-    }
-    if (params.str_caller.matches('trgt')) {
-        pacbio_tools += ['TRGT']
-    }
-    if (pacbio_tools.isEmpty()) return
+     def pacbioTools = [
+        (params.phaser)         : 'HiPhase',
+        (params.str_caller)     : 'TRGT',
+        (params.sv_callers_to_run): 'sawfish'
+    ].findAll { k, v -> k ==~ v.toLowerCase() }
+     .values() as List
+
+    if (!pacbioTools) return
+
+    def message = "${pacbioTools.join(', ')} may only be used with PacBio data."
     if (params.preset == "ONT_R10") {
-        error("ERROR: ${pacbio_tools.join(', ')} may only be used with PacBio data.")
+        error("ERROR: $message")
     } else {
-        log.warn("${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments.")
+        log.warn("$message Please make sure your data comes from PacBio or one of their instruments.")
     }
 }
 
@@ -580,9 +582,11 @@ def validateWorkflowCompatibility() {
     }
 
     if (!params.skip_sv_calling && params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
+        // TODO: Is this really enforced, or should it be optional?
         if (params.skip_snv_calling) {
             error "ERROR: HiFiCNV requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV."
         }
+        // TODO: Is this really enforced, or should it be optional?
         if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {
             error "ERROR: HiFiCNV requires expected XY and XX CN files and excluded regions to be provided. Please provide --hificnv_expected_xy_cn, --hificnv_expected_xx_cn and --hificnv_excluded_regions parameters."
         }
@@ -592,6 +596,8 @@ def validateWorkflowCompatibility() {
 def validateSVCallingParameters() {
     def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
     def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+
+    //TODO: Sawfish can probably only be run by itself, not together with other callers because of merging.
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."

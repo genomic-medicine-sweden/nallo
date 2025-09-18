@@ -496,25 +496,25 @@
                     "type": "string",
                     "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
                     "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_to_run": {
                     "type": "string",
                     "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_to_merge": {
                     "type": "string",
                     "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "snv_caller": {
                     "type": "string",

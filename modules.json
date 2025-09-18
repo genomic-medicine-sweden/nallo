@@ -250,6 +250,11 @@
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"]
                     },
+                    "sawfish/discover": {
+                        "branch": "master",
+                        "git_sha": "79e07ba4f00ac4a5d571312305b73e92a0caf33c",
+                        "installed_by": ["modules"]
+                    },
                     "severus": {
                         "branch": "master",
                         "git_sha": "b548397f546b85ae02df11dfec3023d744331a35",

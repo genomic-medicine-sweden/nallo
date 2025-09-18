@@ -8,6 +8,7 @@ include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bc
 include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
 include { CREATE_SAMPLES_FILE                } from '../../../modules/local/create_samples_file/main'
 include { HIFICNV                            } from '../../../modules/local/pacbio/hificnv'
+include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
 include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
@@ -113,6 +114,44 @@ workflow CALL_SVS {
             addCallerToMeta(
                 HIFICNV.out.vcf.join(TABIX_HIFICNV.out.tbi, failOnMismatch:true, failOnDuplicate:true),
                 'hificnv'
+            )
+        )
+    }
+
+    //
+    // Call CNVs with HiFiCNV
+    //
+    if(sv_callers_to_run.contains('sawfish')) {
+
+        ch_bam_bai
+            .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
+            .combine(ch_expected_xx_bed)
+            .combine(ch_expected_xy_bed)
+            .multiMap { meta, bam, bai, vcf, xx_meta, xx_bed, xy_meta, xy_bed ->
+                bam_bai: [ meta, bam, bai ]
+                vcf: [ meta, vcf ]
+                expected_copynumber_bed: meta.sex == 1
+                    ? [ xy_meta, xy_bed ]
+                    : [ xx_meta, xx_bed ]
+            }
+            .set { ch_sawfish_discover_input }
+
+        SAWFISH_DISCOVER (
+            ch_sawfish_discover_input.bam_bai,
+            ch_fasta,
+            ch_sawfish_discover_input.expected_copynumber_bed,
+            ch_sawfish_discover_input.vcf,
+            ch_exclude_bed
+        )
+        ch_versions = ch_versions.mix(HIFICNV.out.versions)
+
+        // TODO: Sawfish always needs joint-call after discover. Either, we do joint-call on every sample,
+        // then merge with SVDB, or we do joint-call on families, and skip merging with SVDB.
+        ch_sv_calls = ch_sv_calls.mix(
+            addCallerToMeta(
+                SAWFISH_DISCOVER.out.candidate_sv_bcf
+                    .join(SAWFISH_DISCOVER.out.candidate_sv_bcf_csi, failOnMismatch:true, failOnDuplicate:true),
+                'sawfish'
             )
         )
     }
