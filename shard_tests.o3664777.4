@@ -1,0 +1,53 @@
+/home/xschmy/.conda/envs/nf-core/lib/jvm/bin/java -Djava.net.useSystemProxies=true -jar /home/xschmy/.conda/envs/nf-core/share/nf-test-0.9.2-0/nf-test.jar test --profile +singularity --shard 4/10 --update-snapshot --tag PIPELINE
+
+🚀[1m nf-test 0.9.2[0m
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+Load .nf-test/plugins/nft-bam/0.4.0/nft-bam-0.4.0.jar
+Load .nf-test/plugins/nft-utils/0.0.3/nft-utils-0.0.3.jar
+Load .nf-test/plugins/nft-vcf/1.0.7/nft-vcf-1.0.7.jar
+Warning: Module /home/xschmy/projects/nallo/subworkflows/local/annotate_svs/tests/main.nf.test: Dependency '/home/xschmy/projects/nallo/subworkflows/local/annotate_svs/tests/../../../../modules/nf-core/severus/main' not found.
+Warning: every snapshot that fails during this test run is re-record.
+
+[1mTest pipeline GENOMICMEDICINESWEDEN_NALLO[0m
+
+  [1mTest[0m [3ba918ea] 'Test CADD with mock resources' [31mFAILED[0m (82.039s)
+
+  [31mAssertion failed: 
+  
+  2 of 3 assertions failed
+  [0m
+  [31mNextflow stdout:
+  
+  ERROR ~ Error executing process > 'GENOMICMEDICINESWEDEN_NALLO:NALLO:SAMPLESHEET_PED (1)'
+  
+  Caused by:
+    Failed to pull singularity image
+      command: singularity pull  --name depot.galaxyproject.org-singularity-python-3.8.3.img.pulling.1763977222866 https://depot.galaxyproject.org/singularity/python:3.8.3 > /dev/null
+      status : 255
+      hint   : Try and increase singularity.pullTimeout in the config (current is "20m")
+      message:
+        FATAL:   Error making http request: Head "https://depot.galaxyproject.org/singularity/python:3.8.3": Service Unavailable
+  
+  
+  
+   -- Check '/home/xschmy/projects/nallo/.nf-test/tests/3ba918ea3f3a37f99d78289a17658bef/meta/nextflow.log' file for details
+  ERROR ~ Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting
+  
+   -- Check '/home/xschmy/projects/nallo/.nf-test/tests/3ba918ea3f3a37f99d78289a17658bef/meta/nextflow.log' file for details
+  Nextflow stderr:
+  
+  [33mNextflow 25.10.0 is available - Please consider updating your version to it(B[m
+  [0m
+
+  Snapshots:
+    1 updated [Test CADD with mock resources]
+    Obsolete snapshots can only be checked if all tests of a file are executed successful.
+
+
+Snapshot Summary:
+  1 updated
+
+[1m[31mFAILURE: [0m[0mExecuted 1 tests in 87.562s (1 failed)
+
