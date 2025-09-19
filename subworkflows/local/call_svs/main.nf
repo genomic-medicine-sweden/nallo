@@ -272,6 +272,7 @@ workflow CALL_SVS {
         [],
         true
     )
+    ch_versions = ch_versions.mix(SVDB_MERGE_BY_SAMPLE.out.versions)
 
     ch_vcfs_to_merge
         .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], vcf ] }
