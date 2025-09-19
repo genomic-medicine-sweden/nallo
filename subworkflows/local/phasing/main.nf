@@ -1,11 +1,11 @@
-include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/nf-core/cramino/main'
+include { BCFTOOLS_CONCAT                            } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino/main'
 include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
 include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
 include { SAMTOOLS_CONVERT                           } from '../../../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../../modules/nf-core/samtools/index/main'
-include { TABIX_TABIX as TABIX_LONGPHASE_PHASE       } from '../../../modules/nf-core/tabix/tabix/main'
 include { WHATSHAP_HAPLOTAG                          } from '../../../modules/local/whatshap/haplotag/main'
 include { WHATSHAP_PHASE                             } from '../../../modules/local/whatshap/phase/main'
 include { WHATSHAP_STATS                             } from '../../../modules/local/whatshap/stats/main'
@@ -19,13 +19,14 @@ workflow PHASING {
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
+    phaser           //  string: Phasing tool to use
     cram_output      //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = Channel.empty()
 
     // Phase variants and haplotag reads with Longphase
-    if (params.phaser.equals("longphase")) {
+    if (phaser.equals("longphase")) {
 
         ch_bam_bai
             .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
@@ -40,18 +41,34 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
-        TABIX_LONGPHASE_PHASE (
-            LONGPHASE_PHASE.out.vcf
-        )
-        ch_versions = ch_versions.mix(TABIX_LONGPHASE_PHASE.out.versions)
-
         LONGPHASE_PHASE.out.vcf
-            .join( TABIX_LONGPHASE_PHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcfs -> [ meta, vcfs, [] ] }
+            .set { ch_bcftools_concat_in }
+
+        // Longphase emits 2 VCFs if we supplied svs
+        // Concat all VCFs for each sample for publishing and stats
+        BCFTOOLS_CONCAT( ch_bcftools_concat_in )
+        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+
+        BCFTOOLS_CONCAT.out.vcf
+            .join(BCFTOOLS_CONCAT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
+        // We need to "flatten" the VCF list into separate values in the output tuple if we hav SVs
+        // We can identify which VCF is which by the file name. We should not rely on order in the list
+        LONGPHASE_PHASE.out.vcf
+            .map { meta, vcfs ->
+                vcfs instanceof List
+                    ? vcfs[1].baseName.endsWith("_SV")
+                        ? [ meta, vcfs[0], vcfs[1] ]
+                        : [ meta, vcfs[1], vcfs[0] ]
+                    : [ meta, vcfs, [] ]
+            }
+            .set { ch_phased_vcf }
+
         ch_bam_bai
-            .join( LONGPHASE_PHASE.out.vcf, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, bam, bai, vcf -> [ meta, bam, bai, vcf, [], [] ] }
+            .join( ch_phased_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
             .set { ch_longphase_haplotag_in }
 
         LONGPHASE_HAPLOTAG (
@@ -71,7 +88,7 @@ workflow PHASING {
             .set { ch_bam_bai_haplotagged }
 
     // Phase variants and haplotag reads with whatshap
-    } else if (params.phaser.equals("whatshap")) {
+    } else if (phaser.equals("whatshap")) {
 
         WHATSHAP_PHASE(
             ch_snv_vcf.join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true ),
@@ -104,14 +121,14 @@ workflow PHASING {
             .set { ch_phased_vcf_index }
 
     // Phase variants and haplotag reads with HiPhase
-    } else if (params.phaser.equals("hiphase")) {
+    } else if (phaser.equals("hiphase")) {
         ch_sv_vcf
-            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
+            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_sv_joined }
 
         ch_snv_vcf
             .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .concat(ch_sv_joined)
+            .concat(ch_sv_joined) // HiPhase does not differentiate between SNV and SV VCFs
             .groupTuple()
             .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_hiphase_snv_in }

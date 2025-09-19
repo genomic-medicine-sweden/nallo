@@ -716,6 +716,7 @@ workflow NALLO {
             ch_bam_bai,
             ch_fasta,
             ch_fai,
+            params.phaser,
             cram_output
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
