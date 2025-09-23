@@ -710,8 +710,8 @@ workflow NALLO {
     if(!params.skip_phasing) {
 
         PHASING (
-            sample_snv_vcf,
-            sample_snv_index,
+            BCFTOOLS_SORT.out.vcf,
+            BCFTOOLS_SORT.out.tbi,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_vcf,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_tbi,
             ch_bam_bai,
