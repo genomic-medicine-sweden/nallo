@@ -178,7 +178,7 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 | Parameter     | Description                                                                                                                       |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](ttps://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
+| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
 
 Turned off with `--skip_snv_calling`.
 
