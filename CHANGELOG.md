@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 - [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Added new SV caller Sawfish
 
 ### `Changed`
 
@@ -73,6 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Changed `hificnv_*` parameters to `cnv_*` to reflect that they can be used for both HiFiCNV and Sawfish
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
 
 ### `Removed`
@@ -103,18 +105,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                     |
-| ------------- | --------------------------------- |
-| `--sv_caller` | `--sv_callers`                    |
-|               | `--sv_callers_to_run`             |
-|               | `--sv_callers_to_merge`           |
-|               | `--sv_callers_merge_priority`     |
-|               | `--methylation_call_regions`      |
-|               | `--snv_call_regions`              |
-|               | `--sv_call_regions`               |
-|               | `--qc_regions`                    |
-|               | `--pre_vep_snv_filter_expression` |
-|               | `--extra_yak_options`             |
+| Old parameter                | New parameter                               |
+| ---------------------------- | ------------------------------------------- |
+| `--sv_caller`                | `--sv_callers`                              |
+|                              | `--sv_callers_to_run`                       |
+|                              | `--sv_callers_to_merge`                     |
+|                              | `--sv_callers_merge_priority`               |
+|                              | `--methylation_call_regions`                |
+|                              | `--snv_call_regions`                        |
+|                              | `--sv_call_regions`                         |
+|                              | `--qc_regions`                              |
+|                              | `--pre_vep_snv_filter_expression`           |
+|                              | `--extra_yak_options`                       |
+| `--hificnv_excluded_regions` | `--cnv_excluded_regions`                    |
+| `--hificnv_expected_xx_cn`   | `--cnv_expected_xx_cn`                      |
+| `--hificnv_expected_xy_cn`   | `--cnv_expected_xy_cn`                      |
+|                              | `--force_sawfish_joint_call_single_samples` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -143,6 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | minimap2 (paraphase) | 2.29        | 2.30        |
 | samtools (paraphase) | 1.21        | 1.22.1      |
 | cramino              | 0.14.5      | 1.1.0       |
+| sawfish              |             | 2.1.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -247,19 +247,19 @@
                     "description": "A BED file with regions of interest used in QC. By default this is the same as `target_regions`.",
                     "exists": true
                 },
-                "hificnv_expected_xy_cn": {
+                "cnv_expected_xy_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XY samples.",
                     "exists": true
                 },
-                "hificnv_expected_xx_cn": {
+                "cnv_expected_xx_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XX samples.",
                     "exists": true
                 },
-                "hificnv_excluded_regions": {
+                "cnv_excluded_regions": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",

@@ -142,9 +142,9 @@ workflow PIPELINE_INITIALISATION {
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
-            hificnv_expected_xy_cn   : params.hificnv_expected_xy_cn,
-            hificnv_expected_xx_cn   : params.hificnv_expected_xx_cn,
-            hificnv_excluded_regions : params.hificnv_excluded_regions,
+            cnv_expected_xy_cn   : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn   : params.cnv_expected_xx_cn,
+            cnv_excluded_regions : params.cnv_excluded_regions,
             fasta                    : params.fasta,
             str_bed                  : params.str_bed,
             stranger_repeat_catalog  : params.stranger_repeat_catalog,
@@ -591,7 +591,7 @@ def validateWorkflowCompatibility() {
             error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
         }
         // We could probably change to not enforce this.
-        if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {
+        if (!params.cnv_expected_xy_cn || !params.cnv_expected_xx_cn || !params.cnv_excluded_regions) {
             error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
     }
