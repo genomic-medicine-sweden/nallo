@@ -392,10 +392,10 @@ workflow NALLO {
 
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id], meta.id, gvcf]
+                [[id: meta.region.name, family_id: meta.family_id], gvcf]
             }
             .groupTuple()
-            .map { meta, ids, gvcfs -> [ meta + [ sample_ids: ids ], gvcfs ]}
+            .map { meta, gvcfs -> [ meta, gvcfs ]}
             .set { variants_to_merge_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
@@ -448,7 +448,7 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
 
         ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
             .set { ch_bcftools_concat_in }
 
