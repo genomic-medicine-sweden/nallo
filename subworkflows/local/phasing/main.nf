@@ -1,14 +1,15 @@
-include { BCFTOOLS_CONCAT                            } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino/main'
-include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
-include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
-include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
-include { SAMTOOLS_CONVERT                           } from '../../../modules/nf-core/samtools/convert/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../../modules/nf-core/samtools/index/main'
-include { WHATSHAP_HAPLOTAG                          } from '../../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                             } from '../../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                             } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_LONGPHASE } from '../../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_HIPHASE   } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO as CRAMINO_PHASED                    } from '../../../modules/local/cramino/main'
+include { HIPHASE                                      } from '../../../modules/local/hiphase/main'
+include { LONGPHASE_HAPLOTAG                           } from '../../../modules/nf-core/longphase/haplotag/main'
+include { LONGPHASE_PHASE                              } from '../../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_CONVERT                             } from '../../../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE   } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP    } from '../../../modules/nf-core/samtools/index/main'
+include { WHATSHAP_HAPLOTAG                            } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                               } from '../../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                               } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
@@ -47,11 +48,11 @@ workflow PHASING {
 
         // Longphase emits 2 VCFs if we supplied svs
         // Concat all VCFs for each sample for publishing and stats
-        BCFTOOLS_CONCAT( ch_bcftools_concat_in )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+        BCFTOOLS_CONCAT_LONGPHASE( ch_bcftools_concat_in )
+        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_LONGPHASE.out.versions)
 
-        BCFTOOLS_CONCAT.out.vcf
-            .join(BCFTOOLS_CONCAT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+        BCFTOOLS_CONCAT_LONGPHASE.out.vcf
+            .join(BCFTOOLS_CONCAT_LONGPHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
         // We need to "flatten" the VCF list into separate values in the output tuple if we hav SVs
@@ -122,15 +123,14 @@ workflow PHASING {
 
     // Phase variants and haplotag reads with HiPhase
     } else if (phaser.equals("hiphase")) {
-        ch_sv_vcf
-            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_sv_joined }
 
-        ch_snv_vcf
-            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .concat(ch_sv_joined) // HiPhase does not differentiate between SNV and SV VCFs
+        ch_bam_bai
+            .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
             .groupTuple()
-            .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_sv_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_hiphase_snv_in }
 
         HIPHASE (
@@ -147,6 +147,20 @@ workflow PHASING {
 
         HIPHASE.out.vcfs
             .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
+            .set { ch_phased_snv_index }
+
+        HIPHASE.out.sv_vcfs
+            .join( HIPHASE.out.sv_vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
+            .concat( ch_phased_snv_index )
+            .groupTuple()
+            .set { ch_bcftools_concat_in }
+
+        BCFTOOLS_CONCAT_HIPHASE (
+            ch_bcftools_concat_in
+        )
+
+        BCFTOOLS_CONCAT_HIPHASE.out.vcf
+            .join( BCFTOOLS_CONCAT_HIPHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
     }
