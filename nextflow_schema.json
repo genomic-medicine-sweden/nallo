@@ -570,6 +570,11 @@
                     "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
+                "force_sawfish_joint_call_single_samples": {
+                    "type": "boolean",
+                    "default": null,
+                    "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
+                },
                 "filter_variants_hgnc_ids": {
                     "type": "string",
                     "pattern": "^\\S+\\.(csv|tsv)$",

@@ -192,13 +192,15 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
 !!!info "Variant merging strategies"
 
-    SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.
+    Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.
+
+    Sniffles, Severus and HiFiCNV uses SVDB for both merging steps. Sawfish however, has a built in joint-calling step which always needs to be run, and is used by default instead of SVDB in the first merging step. To force the joint-calling step to only run on one indivdual at a time (and use SVDB to merge into the Sawfish family-level VCF), one can run with `--force_sawfish_joint_call_single_samples`.
 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
+If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:
 
 | Parameter              | Description                                                                                                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

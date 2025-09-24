@@ -526,7 +526,7 @@ def validatePacBioLicense() {
         (params.phaser)         : 'HiPhase',
         (params.str_caller)     : 'TRGT',
         (params.sv_callers_to_run): 'Sawfish'
-    ].findAll { k, v -> k ==~ v.toLowerCase() }
+    ].findAll { k, v -> k?.toLowerCase()?.contains(v.toLowerCase()) }
      .values() as List
 
     if (!pacbioTools) return
@@ -581,7 +581,7 @@ def validateWorkflowCompatibility() {
     }
 
     if (
-        !params.skip_sv_calling && params.sv_callers
+        !params.skip_sv_calling && params.sv_callers_to_run
             .split(',')
             .collect { caller -> caller.toLowerCase().trim() }
             .any { caller -> caller in ['hificnv', 'sawfish'] }
