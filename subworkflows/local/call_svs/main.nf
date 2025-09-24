@@ -36,8 +36,6 @@ workflow CALL_SVS {
     ch_versions = Channel.empty()
     ch_sv_calls = Channel.empty()
 
-    // TODO: Sawfish can't be compatible with the other callers, unless we force joint-calling on single samples as well?
-
     //
     // Call SVs with Severus
     //
@@ -148,32 +146,26 @@ workflow CALL_SVS {
             ch_exclude_bed
         )
         // TODO: figure out why not working
-        //ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
+        ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
         // here directly, and skip doing it later with SVDB merging.
 
-        // TODO: Simplify
-        // TODO: Figure out why not working
-
         SAWFISH_DISCOVER.out.discover_dir
             .join(ch_sawfish_discover_input.bam_bai, failOnMismatch:true, failOnDuplicate:true)
-            .tap { ch_sawfish_joint_call_per_sample_input }
-            .filter { force_sawfish_joint_call_single_samples }
-            // If we force joint-calling, then we just pass all samples separately to the joint-calling step
-            // Otherwise, we add the samples grouped by family
-            .mix (
-                ch_sawfish_joint_call_per_sample_input
-                    .filter { !force_sawfish_joint_call_single_samples }
-                    .map { meta, discover_dir, bam, bai -> [ [ id: meta.family_id, family_id: meta.family_id ], discover_dir, bam, bai ] }
-                    .groupTuple()
-            )
+            .map { meta, discover_dir, bam, bai ->
+                def new_meta = force_sawfish_joint_call_single_samples
+                    ? meta
+                    : [ id: meta.family_id, family_id: meta.family_id ]
+
+                [ new_meta, discover_dir, bam, bai ]
+            }
+            .groupTuple()
             .multiMap { meta, discover_dirs, bams, bais ->
                 dir: [ meta, discover_dirs ]
                 bam_bai: [ meta, bams, bais ]
             }
-            .view()
             .set { ch_sawfish_jointcall_input }
 
         SAWFISH_JOINTCALL (
@@ -285,7 +277,6 @@ workflow CALL_SVS {
     // First merge SV calls from each caller into family VCFs
     // HiFiCNV has a different BND distance from the other callers, set in config
 
-    // TODO: What happens here if we only run sawfish?
     SVDB_MERGE_BY_CALLER (
         ch_svdb_merge_by_caller_input,
         [],
@@ -322,7 +313,6 @@ workflow CALL_SVS {
         }
         .set { ch_svdb_merge_by_family_input }
 
-    // TODO: what happens here if we only run sawfish?
     SVDB_MERGE_BY_FAMILY (
         ch_svdb_merge_by_family_input,
         caller_priority,

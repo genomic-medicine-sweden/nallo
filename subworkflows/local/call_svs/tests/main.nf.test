@@ -160,6 +160,7 @@ nextflow_workflow {
     }
 
     test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter") {
+        tag "noforce"
 
         when {
             workflow {
@@ -213,7 +214,7 @@ nextflow_workflow {
     }
 
     test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter, force sawfish single sample joint-call") {
-        tag "force"
+
         when {
             workflow {
                 """

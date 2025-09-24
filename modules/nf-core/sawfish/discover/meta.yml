@@ -69,26 +69,12 @@ input:
         description: |
           Groovy Map containing additional information
           e.g. [ id:'cnv' ]
-    - cnv_exclude_regions:
+    - cnv_exclude_regions_bed:
         type: file
-        description: Regions of the genome to exclude from CNV analysis, in BED
-          format.
+        description: BED file containing regions to exclude from CNV calling
         pattern: "*.bed"
         ontologies: []
 output:
-  versions:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test' ]`
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-          ontologies:
-            - edam: "http://edamontology.org/format_3750" # YAML
-
   assembly_regions:
     - - meta:
           type: map
@@ -299,6 +285,14 @@ output:
           type: directory
           description: Directory containing all discover output files
           ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: "http://edamontology.org/format_3750" # YAML
+
 authors:
   - "@padraicc"
 maintainers:
