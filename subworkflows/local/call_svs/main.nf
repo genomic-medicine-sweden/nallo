@@ -9,6 +9,7 @@ include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bc
 include { CREATE_SAMPLES_FILE                } from '../../../modules/local/create_samples_file/main'
 include { HIFICNV                            } from '../../../modules/local/pacbio/hificnv'
 include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
 include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
@@ -17,22 +18,25 @@ include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/ta
 workflow CALL_SVS {
 
     take:
-    ch_bam_bai              // channel: [ val(meta), path(bam), path(bai) ]
-    ch_tandem_repeats       // channel: [ val(meta), path(bed) ]
-    ch_snvs                 // channel: [ val(meta), path(vcf) ]
-    ch_fasta                // channel: [ val(meta), path(fasta) ]
-    ch_expected_xy_bed      // channel: [ val(meta), path(bed) ]
-    ch_expected_xx_bed      // channel: [ val(meta), path(bed) ]
-    ch_exclude_bed          // channel: [ val(meta), path(bed) ]
-    sv_callers_to_run       //    List: [ 'caller1', 'caller2', 'caller3' ]
-    sv_callers_to_merge     //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority         //    List: [ 'caller3', 'caller1', 'caller2' ]
-    ch_sv_call_regions      // channel: [ val(meta), path(bed) ]
-    filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
+    ch_bam_bai                              // channel: [ val(meta), path(bam), path(bai) ]
+    ch_tandem_repeats                       // channel: [ val(meta), path(bed) ]
+    ch_snvs                                 // channel: [ val(meta), path(vcf) ]
+    ch_fasta                                // channel: [ val(meta), path(fasta) ]
+    ch_expected_xy_bed                      // channel: [ val(meta), path(bed) ]
+    ch_expected_xx_bed                      // channel: [ val(meta), path(bed) ]
+    ch_exclude_bed                          // channel: [ val(meta), path(bed) ]
+    sv_callers_to_run                       //    List: [ 'caller1', 'caller2', 'caller3' ]
+    sv_callers_to_merge                     //    List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority                         //    List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_sv_call_regions                      // channel: [ val(meta), path(bed) ]
+    filter_calls_on_regions                 //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
+    force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
 
     main:
     ch_versions = Channel.empty()
     ch_sv_calls = Channel.empty()
+
+    // TODO: Sawfish can't be compatible with the other callers, unless we force joint-calling on single samples as well?
 
     //
     // Call SVs with Severus
@@ -119,7 +123,7 @@ workflow CALL_SVS {
     }
 
     //
-    // Call CNVs with HiFiCNV
+    // Call SVs with Sawfish
     //
     if(sv_callers_to_run.contains('sawfish')) {
 
@@ -143,14 +147,48 @@ workflow CALL_SVS {
             ch_sawfish_discover_input.vcf,
             ch_exclude_bed
         )
-        ch_versions = ch_versions.mix(HIFICNV.out.versions)
+        // TODO: figure out why not working
+        //ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
-        // TODO: Sawfish always needs joint-call after discover. Either, we do joint-call on every sample,
-        // then merge with SVDB, or we do joint-call on families, and skip merging with SVDB.
+        // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
+        // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
+        // here directly, and skip doing it later with SVDB merging.
+
+        // TODO: Simplify
+        // TODO: Figure out why not working
+
+        SAWFISH_DISCOVER.out.discover_dir
+            .join(ch_sawfish_discover_input.bam_bai, failOnMismatch:true, failOnDuplicate:true)
+            .tap { ch_sawfish_joint_call_per_sample_input }
+            .filter { force_sawfish_joint_call_single_samples }
+            // If we force joint-calling, then we just pass all samples separately to the joint-calling step
+            // Otherwise, we add the samples grouped by family
+            .mix (
+                ch_sawfish_joint_call_per_sample_input
+                    .filter { !force_sawfish_joint_call_single_samples }
+                    .map { meta, discover_dir, bam, bai -> [ [ id: meta.family_id, family_id: meta.family_id ], discover_dir, bam, bai ] }
+                    .groupTuple()
+            )
+            .multiMap { meta, discover_dirs, bams, bais ->
+                dir: [ meta, discover_dirs ]
+                bam_bai: [ meta, bams, bais ]
+            }
+            .view()
+            .set { ch_sawfish_jointcall_input }
+
+        SAWFISH_JOINTCALL (
+            ch_sawfish_jointcall_input.dir,
+            ch_fasta,
+            ch_sawfish_jointcall_input.bam_bai,
+            [[],[]]
+
+        )
+        ch_versions = ch_versions.mix(SAWFISH_JOINTCALL.out.versions)
+
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                SAWFISH_DISCOVER.out.candidate_sv_bcf
-                    .join(SAWFISH_DISCOVER.out.candidate_sv_bcf_csi, failOnMismatch:true, failOnDuplicate:true),
+                SAWFISH_JOINTCALL.out.vcf
+                    .join(SAWFISH_JOINTCALL.out.tbi, failOnMismatch:true, failOnDuplicate:true),
                 'sawfish'
             )
         )
@@ -233,11 +271,21 @@ workflow CALL_SVS {
         .join ( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
         .concat ( ch_found_in_tagged_vcf.no_reheader )
         .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], vcf ] }
+        .set { reheadered_vcfs }
+
+    reheadered_vcfs
+        // In this step, unless we have force joint-called single samples with Sawfish
+        // the VCFs from Sawfish are already on family level and will be added back after SVDB
+        .filter { meta, _vcf ->
+            meta.sv_caller != 'sawfish' || (meta.sv_caller == 'sawfish' && force_sawfish_joint_call_single_samples)
+        }
         .groupTuple()
         .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
     // HiFiCNV has a different BND distance from the other callers, set in config
+
+    // TODO: What happens here if we only run sawfish?
     SVDB_MERGE_BY_CALLER (
         ch_svdb_merge_by_caller_input,
         [],
@@ -245,10 +293,19 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_CALLER.out.versions)
 
+
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
     // Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
+
     SVDB_MERGE_BY_CALLER.out.vcf
+        // Add back sawfish if we didn't force joint-calling on single samples
+        .mix(
+            reheadered_vcfs
+                .filter { meta, _vcf ->
+                    meta.sv_caller == 'sawfish' && !force_sawfish_joint_call_single_samples
+                }
+        )
         .filter { meta, _vcf ->
             sv_callers_to_merge.contains(meta.sv_caller)
         }
@@ -265,6 +322,7 @@ workflow CALL_SVS {
         }
         .set { ch_svdb_merge_by_family_input }
 
+    // TODO: what happens here if we only run sawfish?
     SVDB_MERGE_BY_FAMILY (
         ch_svdb_merge_by_family_input,
         caller_priority,

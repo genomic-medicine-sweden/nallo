@@ -596,7 +596,8 @@ workflow NALLO {
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
             ch_sv_call_regions,
-            params.sv_call_regions
+            params.sv_call_regions,
+            params.force_sawfish_joint_call_single_samples,
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)

@@ -525,17 +525,16 @@ def validatePacBioLicense() {
      def pacbioTools = [
         (params.phaser)         : 'HiPhase',
         (params.str_caller)     : 'TRGT',
-        (params.sv_callers_to_run): 'sawfish'
+        (params.sv_callers_to_run): 'Sawfish'
     ].findAll { k, v -> k ==~ v.toLowerCase() }
      .values() as List
 
     if (!pacbioTools) return
 
-    def message = "${pacbioTools.join(', ')} may only be used with PacBio data."
     if (params.preset == "ONT_R10") {
-        error("ERROR: $message")
+        error("ERROR: ${pacbioTools.join(', ')} may only be used with PacBio data.")
     } else {
-        log.warn("$message Please make sure your data comes from PacBio or one of their instruments.")
+        log.warn("${pacbioTools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments.")
     }
 }
 
@@ -581,14 +580,19 @@ def validateWorkflowCompatibility() {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
 
-    if (!params.skip_sv_calling && params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
-        // TODO: Is this really enforced, or should it be optional?
+    if (
+        !params.skip_sv_calling && params.sv_callers
+            .split(',')
+            .collect { caller -> caller.toLowerCase().trim() }
+            .any { caller -> caller in ['hificnv', 'sawfish'] }
+    ) {
+        // We could probably change to not enforce this.
         if (params.skip_snv_calling) {
-            error "ERROR: HiFiCNV requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV."
+            error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
         }
-        // TODO: Is this really enforced, or should it be optional?
+        // We could probably change to not enforce this.
         if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {
-            error "ERROR: HiFiCNV requires expected XY and XX CN files and excluded regions to be provided. Please provide --hificnv_expected_xy_cn, --hificnv_expected_xx_cn and --hificnv_excluded_regions parameters."
+            error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
     }
 }
