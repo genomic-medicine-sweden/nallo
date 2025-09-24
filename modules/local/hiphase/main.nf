@@ -6,27 +6,30 @@ process HIPHASE {
     container "quay.io/biocontainers/hiphase:1.4.0--h9ee0642_0"
 
     input:
-    tuple val(meta), path(vcfs), path(vcf_indices), path(bams), path(bais)
+    tuple val(meta), val(samples), path(bams), path(bais), path(snvs), path(snv_indices), path(svs), path(sv_indices)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     val(output_bam)
 
     output:
-    tuple val(meta), path("*.vcf.gz")      , emit: vcfs
-    tuple val(meta), path("*.tbi")         , emit: vcfs_tbi     , optional: true
-    tuple val(meta), path("*.csi")         , emit: vcfs_csi     , optional: true
-    tuple val(meta), path("*.summary.tsv") , emit: summary_tsv  , optional: true
-    tuple val(meta), path("*.summary.csv") , emit: summary_csv  , optional: true
-    tuple val(meta), path("*.blocks.tsv")  , emit: blocks_tsv   , optional: true
-    tuple val(meta), path("*.blocks.csv")  , emit: blocks_csv   , optional: true
-    tuple val(meta), path("*.stats.tsv")   , emit: stats_tsv    , optional: true
-    tuple val(meta), path("*.stats.csv")   , emit: stats_csv    , optional: true
-    tuple val(meta), path("*.haplotag.tsv"), emit: haplotag_tsv , optional: true
-    tuple val(meta), path("*.haplotag.csv"), emit: haplotag_csv , optional: true
-    tuple val(meta), path("*.bam")         , emit: bams         , optional: true
-    tuple val(meta), path("*.bam.bai")     , emit: bais         , optional: true
-    tuple val(meta), path("*.bam.csi")     , emit: read_csis    , optional: true
-    path "versions.yml"                    , emit: versions
+    tuple val(meta), path("*_snv.vcf.gz")    , emit: vcfs
+    tuple val(meta), path("*_sv.vcf.gz")     , emit: sv_vcfs      , optional: true
+    tuple val(meta), path("*_snv.vcf.gz.tbi"), emit: vcfs_tbi     , optional: true
+    tuple val(meta), path("*_snv.vcf.gz.csi"), emit: vcfs_csi     , optional: true
+    tuple val(meta), path("*_sv.vcf.gz.tbi") , emit: sv_vcfs_tbi  , optional: true
+    tuple val(meta), path("*_sv.vcf.gz.csi") , emit: sv_vcfs_csi  , optional: true
+    tuple val(meta), path("*.summary.tsv")   , emit: summary_tsv  , optional: true
+    tuple val(meta), path("*.summary.csv")   , emit: summary_csv  , optional: true
+    tuple val(meta), path("*.blocks.tsv")    , emit: blocks_tsv   , optional: true
+    tuple val(meta), path("*.blocks.csv")    , emit: blocks_csv   , optional: true
+    tuple val(meta), path("*.stats.tsv")     , emit: stats_tsv    , optional: true
+    tuple val(meta), path("*.stats.csv")     , emit: stats_csv    , optional: true
+    tuple val(meta), path("*.haplotag.tsv")  , emit: haplotag_tsv , optional: true
+    tuple val(meta), path("*.haplotag.csv")  , emit: haplotag_csv , optional: true
+    tuple val(meta), path("*.bam")           , emit: bams         , optional: true
+    tuple val(meta), path("*.bam.bai")       , emit: bais         , optional: true
+    tuple val(meta), path("*.bam.csi")       , emit: read_csis    , optional: true
+    path "versions.yml"                      , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -38,12 +41,20 @@ process HIPHASE {
     def bamNames = []
     def vcfNames = []
 
-    def vcf_args = vcfs.collectMany { file ->
+    def sample_args = samples.collect { "--sample \"$it\"" }.join(" ")
+    def snv_args = snvs.collectMany { file ->
         [
             "--vcf",
             file,
             "--output-vcf",
-            "${prefix}_phased.vcf.gz"
+            "${prefix}_snv_phased.vcf.gz"
+        ] }.join(" ")
+    def sv_args = svs.collectMany { file ->
+        [
+            "--vcf",
+            file,
+            "--output-vcf",
+            "${prefix}_sv_phased.vcf.gz"
         ] }.join(" ")
 
     def bam_args = bams.collectMany { file ->
@@ -54,7 +65,7 @@ process HIPHASE {
             output_bam ? "${prefix}_haplotagged.bam" : ''
         ] }.join(" ")
 
-    vcfs.each { vcf ->
+    snvs.each { vcf ->
         vcfNames.add(vcf.getName())
     }
 
@@ -79,8 +90,10 @@ process HIPHASE {
         $args \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
+        ${sample_args} \\
         ${bam_args} \\
-        ${vcf_args}
+        ${snv_args} \\
+        ${sv_args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
