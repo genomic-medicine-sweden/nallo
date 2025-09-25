@@ -40,7 +40,7 @@
 - Call SVs with [Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) or [Sawfish](https://github.com/PacificBiosciences/sawfish) (PacBio only)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 - Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (PacBio only) or [STRdust](https://github.com/wdecoster/STRdust)
-- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
+- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase) (PacBio only)
 
 ##### Phasing and methylation
 

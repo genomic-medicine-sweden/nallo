@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
 - [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Changed `hificnv_*` parameters to `cnv_*` to reflect that they can be used for both HiFiCNV and Sawfish
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Clarified PacBio software licence warning. Changed to only warn instead of error for `--preset ONT_R10`.
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
 
 ### `Removed`

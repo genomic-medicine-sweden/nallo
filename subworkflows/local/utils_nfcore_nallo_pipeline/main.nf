@@ -528,17 +528,17 @@ def validatePacBioLicense() {
         (params.sv_callers)         : 'Sawfish',
         (params.sv_callers_to_run)  : 'Sawfish',
         (params.sv_callers_to_merge): 'Sawfish',
-    ].findAll { k, v -> k.contains(v.toLowerCase()) }
+        (!params.skip_call_paralogs): 'Paraphase',
+    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
     if (!pacbioTools) return
 
-    def licenceMessage = "The software licence of ${pacbioTools.join(', ')} states that you may only use the software to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio."
-    if (params.preset == "ONT_R10"){
-        error("ERROR: $licenceMessage Please run without `--preset ONT_R10` if your data is from PacBio.")
-    } else {
-        log.warn("$licenceMessage Please make sure your data comes from PacBio or one of their instruments.")
-    }
+    log.warn(
+        "The software licence of ${pacbioTools.join(', ')} states that you may only use the software " +
+        "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " +
+        "Please make sure your data comes from PacBio or one of their instruments."
+    )
 }
 
 // Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
