@@ -319,9 +319,14 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
+    ch_family_caller_vcf = force_sawfish_joint_call_single_samples ?
+        SVDB_MERGE_BY_CALLER.out.vcf : SVDB_MERGE_BY_CALLER.out.vcf.mix(SAWFISH_JOINTCALL.out.vcf)
+    ch_family_caller_tbi = force_sawfish_joint_call_single_samples ?
+        SVDB_MERGE_BY_CALLER.out.tbi : SVDB_MERGE_BY_CALLER.out.tbi.mix(SAWFISH_JOINTCALL.out.tbi)
+
     emit:
-    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_caller_vcf = ch_family_caller_vcf         // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi = ch_family_caller_tbi         // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
     family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
     versions          = ch_versions                  // channel: [ path(versions.yml) ]

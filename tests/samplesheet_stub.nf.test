@@ -234,11 +234,11 @@ nextflow_pipeline {
                 skip_rank_variants                      = true
                 skip_repeat_annotation                  = true
                 skip_repeat_calling                     = true
-                skip_snv_calling                        = true
                 skip_snv_annotation                     = true
                 skip_sv_annotation                      = true
-                skip_sv_calling                         = true
-                sv_callers                              = "sawfish"
+                sv_callers_to_run                       = "sawfish"
+                sv_callers_to_merge                     = "sawfish"
+                sv_callers_merge_priority               = "sawfish"
                 force_sawfish_joint_call_single_samples = true
             }
         }
@@ -249,7 +249,9 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert !versions.containsKey('SVDB_MERGE_BY_FAMILY') },
+                { assert versions.containsKey('SVDB_MERGE_BY_FAMILY') },
+                { assert versions.containsKey('SAWFISH_DISCOVER') },
+                { assert versions.containsKey('SAWFISH_JOINTCALL') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
