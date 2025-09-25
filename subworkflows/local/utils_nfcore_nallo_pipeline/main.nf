@@ -142,9 +142,9 @@ workflow PIPELINE_INITIALISATION {
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
-            cnv_expected_xy_cn   : params.cnv_expected_xy_cn,
-            cnv_expected_xx_cn   : params.cnv_expected_xx_cn,
-            cnv_excluded_regions : params.cnv_excluded_regions,
+            cnv_expected_xy_cn       : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn       : params.cnv_expected_xx_cn,
+            cnv_excluded_regions     : params.cnv_excluded_regions,
             fasta                    : params.fasta,
             str_bed                  : params.str_bed,
             stranger_repeat_catalog  : params.stranger_repeat_catalog,
@@ -523,18 +523,21 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 
 def validatePacBioLicense() {
      def pacbioTools = [
-        (params.phaser)         : 'HiPhase',
-        (params.str_caller)     : 'TRGT',
-        (params.sv_callers_to_run): 'Sawfish'
-    ].findAll { k, v -> k?.toLowerCase()?.contains(v.toLowerCase()) }
+        (params.phaser)             : 'HiPhase',
+        (params.str_caller)         : 'TRGT',
+        (params.sv_callers)         : 'Sawfish',
+        (params.sv_callers_to_run)  : 'Sawfish',
+        (params.sv_callers_to_merge): 'Sawfish',
+    ].findAll { k, v -> k.contains(v.toLowerCase()) }
      .values() as List
 
     if (!pacbioTools) return
 
-    if (params.preset == "ONT_R10") {
-        error("ERROR: ${pacbioTools.join(', ')} may only be used with PacBio data.")
+    def licenceMessage = "The software licence of ${pacbioTools.join(', ')} states that you may only use the software to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio."
+    if (params.preset == "ONT_R10"){
+        error("ERROR: $licenceMessage Please run without `--preset ONT_R10` if your data is from PacBio.")
     } else {
-        log.warn("${pacbioTools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments.")
+        log.warn("$licenceMessage Please make sure your data comes from PacBio or one of their instruments.")
     }
 }
 
@@ -600,8 +603,6 @@ def validateWorkflowCompatibility() {
 def validateSVCallingParameters() {
     def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
     def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
-
-    //TODO: Sawfish can probably only be run by itself, not together with other callers because of merging.
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."

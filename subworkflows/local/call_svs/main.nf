@@ -145,7 +145,6 @@ workflow CALL_SVS {
             ch_sawfish_discover_input.vcf,
             ch_exclude_bed
         )
-        // TODO: figure out why not working
         ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
