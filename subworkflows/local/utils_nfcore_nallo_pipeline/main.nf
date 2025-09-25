@@ -535,7 +535,7 @@ def validatePacBioLicense() {
     if (!pacbioTools) return
 
     log.warn(
-        "The software licence of ${pacbioTools.join(', ')} states that you may only use the software " +
+        "The software license of ${pacbioTools.join(', ')} states that you may only use the software " +
         "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " +
         "Please make sure your data comes from PacBio or one of their instruments."
     )
