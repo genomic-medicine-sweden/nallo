@@ -14,8 +14,8 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 filter_variants_hgnc_ids     = null
                 phaser                       = "hiphase"
-                sv_callers                   = "severus,sawfish"
-                sv_callers_to_run            = "severus,sawfish,sniffles"
+                sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
             }
         }
 
