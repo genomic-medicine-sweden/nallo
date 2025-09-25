@@ -319,10 +319,16 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
-    ch_family_caller_vcf = force_sawfish_joint_call_single_samples ?
-        SVDB_MERGE_BY_CALLER.out.vcf : SVDB_MERGE_BY_CALLER.out.vcf.mix(SAWFISH_JOINTCALL.out.vcf)
-    ch_family_caller_tbi = force_sawfish_joint_call_single_samples ?
-        SVDB_MERGE_BY_CALLER.out.tbi : SVDB_MERGE_BY_CALLER.out.tbi.mix(SAWFISH_JOINTCALL.out.tbi)
+    ch_family_caller_vcf = Channel.empty()
+    ch_family_caller_tbi = Channel.empty()
+
+    if (sv_callers_to_run.contains('sawfish') && !force_sawfish_joint_call_single_samples) {
+        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf).mix(SAWFISH_JOINTCALL.out.vcf)
+        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi).mix(SAWFISH_JOINTCALL.out.tbi)
+    } else {
+        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf)
+        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi)
+    }
 
     emit:
     family_caller_vcf = ch_family_caller_vcf         // channel: [ val(meta), path(vcf) ]
