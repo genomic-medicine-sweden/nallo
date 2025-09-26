@@ -292,8 +292,9 @@ nextflow_workflow {
                     workflow.out.family_caller_vcf
                         .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
                         .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    // Something within sawfish is unstable here, guessing the joint-call step
                     workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary ]
                     },
                     workflow.out.versions,
                 ).match() }

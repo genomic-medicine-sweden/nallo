@@ -42,7 +42,7 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_VIEW": {
+                "BCFTOOLS_VIEW_FILTER_SVS": {
                     "bcftools": 1.21
                 },
                 "BEDTOOLS_MERGE": {
