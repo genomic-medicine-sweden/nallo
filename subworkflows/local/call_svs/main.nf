@@ -167,6 +167,7 @@ workflow CALL_SVS {
             }
             .set { ch_sawfish_jointcall_input }
 
+        // TODO: Sawfish joint-call module needs to sort the order in which VCFs are input to be deterministic
         SAWFISH_JOINTCALL (
             ch_sawfish_jointcall_input.dir,
             ch_fasta,
