@@ -1,19 +1,20 @@
-include { ADD_FOUND_IN_TAG                   } from '../../../modules/local/add_found_in_tag/main'
-include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
-include { CREATE_SAMPLES_FILE                } from '../../../modules/local/create_samples_file/main'
-include { HIFICNV                            } from '../../../modules/local/pacbio/hificnv'
-include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
+include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_FILTER_SVS } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
+include { CREATE_SAMPLES_FILE                       } from '../../../modules/local/create_samples_file/main'
+include { HIFICNV                                   } from '../../../modules/local/pacbio/hificnv'
+include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SAWFISH    } from '../../../modules/nf-core/bcftools/view/main'
 
 workflow CALL_SVS {
 
@@ -150,7 +151,6 @@ workflow CALL_SVS {
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
         // here directly, and skip doing it later with SVDB merging.
-
         SAWFISH_DISCOVER.out.discover_dir
             .join(ch_sawfish_discover_input.bam_bai, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, discover_dir, bam, bai ->
@@ -190,16 +190,16 @@ workflow CALL_SVS {
     //
     if ( filter_calls_on_regions ) {
 
-        BCFTOOLS_VIEW (
+        BCFTOOLS_VIEW_FILTER_SVS (
             ch_sv_calls,
             ch_sv_call_regions.map { _meta, bed -> bed },
             [],
             []
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_FILTER_SVS.out.versions)
 
-        ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
-            .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)
+        ch_sv_calls_filtered = BCFTOOLS_VIEW_FILTER_SVS.out.vcf
+            .join(BCFTOOLS_VIEW_FILTER_SVS.out.tbi, failOnMismatch:true, failOnDuplicate:true)
 
     } else {
         ch_sv_calls_filtered = ch_sv_calls
@@ -275,7 +275,6 @@ workflow CALL_SVS {
 
     // First merge SV calls from each caller into family VCFs
     // HiFiCNV has a different BND distance from the other callers, set in config
-
     SVDB_MERGE_BY_CALLER (
         ch_svdb_merge_by_caller_input,
         [],
@@ -283,11 +282,25 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_CALLER.out.versions)
 
+    // If we're not force joint-calling single samples with Sawfish, and therefore relying on joint-call do to family merging,
+    // we would like to the output files when saving unannotated family SVs to be as similar to the SVDB output as possible.
+    // Including naming and FOUND_IN annotation, and not VCFv4.4 format which joint-call produces, in order for nf-test to be able to parse it.
+    // The easiest solution I found for this would be to add a "dummy" process here, instead of trying to get and rename only Sawfish VCFs from ADD_FOUND_IN_TAG.
+    if (!force_sawfish_joint_call_single_samples) {
+        BCFTOOLS_VIEW_SAWFISH (
+            reheadered_vcfs
+                .map { meta, vcf -> [ meta, vcf, [] ] }
+                .filter { meta, _vcf, _tbi -> meta.sv_caller == 'sawfish' },
+            [],
+            [],
+            [],
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_SAWFISH.out.versions)
+    }
 
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
     // Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
-
     SVDB_MERGE_BY_CALLER.out.vcf
         // Add back sawfish if we didn't force joint-calling on single samples
         .mix(
@@ -323,8 +336,8 @@ workflow CALL_SVS {
     ch_family_caller_tbi = Channel.empty()
 
     if (sv_callers_to_run.contains('sawfish') && !force_sawfish_joint_call_single_samples) {
-        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf).mix(SAWFISH_JOINTCALL.out.vcf)
-        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi).mix(SAWFISH_JOINTCALL.out.tbi)
+        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf).mix(BCFTOOLS_VIEW_SAWFISH.out.vcf)
+        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi).mix(BCFTOOLS_VIEW_SAWFISH.out.tbi)
     } else {
         ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf)
         ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi)
