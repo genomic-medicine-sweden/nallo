@@ -1,6 +1,7 @@
 include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
 include { TABIX_BGZIPTABIX         } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
+include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
 
 workflow METHYLATION {
 
@@ -18,16 +19,17 @@ workflow METHYLATION {
     MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)
     ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
 
+    BEDTOOLS_SORT (
+        MODKIT_PILEUP.out.bed.transpose(),
+        []
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
 
-    MODKIT_PILEUP.out.bed
-        .transpose()
-        .set { ch_bedmethyl }
-
-    TABIX_BGZIPTABIX ( ch_bedmethyl )
+    TABIX_BGZIPTABIX ( BEDTOOLS_SORT.out.sorted )
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     // Only convert files with content
-    ch_bedmethyl
+    BEDTOOLS_SORT.out.sorted
         .filter { _meta, bed -> bed.size() > 0 }
         .set { ch_bedmethyl_to_bigwig_in }
 
