@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 - [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
+- [#773](https://github.com/genomic-medicine-sweden/nallo/pull/773) - Added `BEDTOOLS_SORT` step to methylation subworkflow.
 
 ### `Changed`
 
@@ -98,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Fixed the preset documentation not taking into account ONT assembly that was added in 0.5.0
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
 - [#770](https://github.com/genomic-medicine-sweden/nallo/pull/770) - Fixed broken link for GRCh38 PAR file in docs
+- [#773](https://github.com/genomic-medicine-sweden/nallo/pull/773) - Fixed crash due to unsorted bed in methylation workflow
 
 ### Parameters
 
