@@ -61,10 +61,10 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "0.14.5"
+                    "cramino": "1.1.0"
                 },
                 "CRAMINO_PHASED": {
-                    "cramino": "0.14.5"
+                    "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.1.0"
@@ -727,12 +727,12 @@
                 "somalier_stats.txt:md5,b930120b5b3d2be0717e51eb33aa05a0",
                 "whatshap-stats-table.txt:md5,7371de64e8c77b90c83906dad6dc9529",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
-                "HG002_cramino_aligned_phased.arrow:md5,9e13732788f7691b811b8b574bd673e5",
-                "HG003_cramino_aligned_phased.arrow:md5,7bd95ef011ec80630578187cbb7450e6",
-                "HG004_cramino_aligned_phased.arrow:md5,392015826ddada009d57530c97c74067",
-                "HG002_cramino_aligned.arrow:md5,9e13732788f7691b811b8b574bd673e5",
-                "HG003_cramino_aligned.arrow:md5,7bd95ef011ec80630578187cbb7450e6",
-                "HG004_cramino_aligned.arrow:md5,392015826ddada009d57530c97c74067",
+                "HG002_cramino_aligned_phased.arrow:md5,651a6bba9dd79996461752c63deef0e9",
+                "HG003_cramino_aligned_phased.arrow:md5,0d592c579116e4095e741ba522dbb916",
+                "HG004_cramino_aligned_phased.arrow:md5,15c7cf620a1c484a91a2b85964ae2626",
+                "HG002_cramino_aligned.arrow:md5,651a6bba9dd79996461752c63deef0e9",
+                "HG003_cramino_aligned.arrow:md5,0d592c579116e4095e741ba522dbb916",
+                "HG004_cramino_aligned.arrow:md5,15c7cf620a1c484a91a2b85964ae2626",
                 "HG002.mosdepth.global.dist.txt:md5,aa394781132ba66a1da3a764d09e6e42",
                 "HG002.mosdepth.region.dist.txt:md5,2afebde47a6bd76df27cf75dc87e82f0",
                 "HG002.mosdepth.summary.txt:md5,564614604e67402e44a9788bfb2ff9b0",
@@ -902,8 +902,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-09-11T16:26:36.6663034"
+        "timestamp": "2025-09-30T16:32:39.418297971"
     }
 }
