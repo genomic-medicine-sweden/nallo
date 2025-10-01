@@ -392,10 +392,10 @@ workflow NALLO {
 
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id], meta.id, gvcf]
             }
             .groupTuple()
-            .map { meta, gvcfs -> [ meta, gvcfs ]}
+            .map { meta, ids, gvcfs -> [ meta + [ sample_ids: ids ], gvcfs ]}
             .set { variants_to_merge_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
@@ -446,23 +446,7 @@ workflow NALLO {
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .set { ch_vcf_tbi_per_region }
-
-        ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
-            .set { ch_bcftools_concat_in }
-
-        // Concat into family VCFs per family with all regions
-        BCFTOOLS_CONCAT (
-            ch_bcftools_concat_in
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
-        // Sort and publish
-        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
     }
-
 
     //
     // Annotate SNVs
@@ -558,6 +542,27 @@ workflow NALLO {
         RANK_VARIANTS_SNV.out.vcf
             .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_vcf_tbi_per_region }
+    }
+
+    //
+    // Concatenate and sort SNVs (could be a subworkflow)
+    //
+    if(!params.skip_snv_calling) {
+
+        ch_vcf_tbi_per_region
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_bcftools_concat_in }
+
+        // Concat into family VCFs per family with all regions
+        BCFTOOLS_CONCAT (
+            ch_bcftools_concat_in
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+
+        // Sort and publish
+        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
+        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
     }
 
     //
@@ -705,8 +710,8 @@ workflow NALLO {
     if(!params.skip_phasing) {
 
         PHASING (
-            BCFTOOLS_SORT.out.vcf,
-            BCFTOOLS_SORT.out.tbi,
+            sample_snv_vcf,
+            sample_snv_index,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_vcf,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_tbi,
             ch_bam_bai,
