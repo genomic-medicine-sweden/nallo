@@ -542,7 +542,7 @@
                 },
                 "hifiasm_preset": {
                     "type": "string",
-                    "description": "Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active.",
+                    "description": "Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active.",
                     "enum": ["", "--ont"],
                     "default": null
                 },

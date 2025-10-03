@@ -125,7 +125,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). | `string` | trgt |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | trio-binning |  |  |
-| `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active. | `string` | None |  |  |
+| `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. | `string` | None |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
