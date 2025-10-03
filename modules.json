@@ -84,7 +84,8 @@
                     "cramino": {
                         "branch": "master",
                         "git_sha": "b4a9c2108ce130bf7c98e8f8294ab335614d3b46",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/cramino/cramino.diff"
                     },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",
