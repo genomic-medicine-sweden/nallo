@@ -261,6 +261,11 @@
                         "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
                         "installed_by": ["modules"]
                     },
+                    "sentieon/gvcftyper": {
+                        "branch": "master",
+                        "git_sha": "256557155b2439c5d551f1a668bf6a7ff6b10f93",
+                        "installed_by": ["modules"]
+                    },
                     "severus": {
                         "branch": "master",
                         "git_sha": "98a699d12b141aeb3d5da5c98ebd69a320ff350d",
