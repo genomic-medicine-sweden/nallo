@@ -73,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
+- [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
 
 ### `Removed`
 
@@ -141,6 +142,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | paraphase            | 3.2.1       | 3.3.4       |
 | minimap2 (paraphase) | 2.29        | 2.30        |
 | samtools (paraphase) | 1.21        | 1.22.1      |
+| cramino              | 0.14.5      | 1.1.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

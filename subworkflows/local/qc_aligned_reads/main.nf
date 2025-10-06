@@ -1,4 +1,4 @@
-include { CRAMINO  } from '../../../modules/local/cramino/main'
+include { CRAMINO  } from '../../../modules/nf-core/cramino/main'
 include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { FASTQC   } from '../../../modules/nf-core/fastqc/main'
 

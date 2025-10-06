@@ -1,0 +1,29 @@
+Changes in component 'nf-core/cramino'
+'modules/nf-core/cramino/environment.yml' is unchanged
+'modules/nf-core/cramino/main.nf' is unchanged
+Changes in 'cramino/meta.yml':
+--- modules/nf-core/cramino/meta.yml
++++ modules/nf-core/cramino/meta.yml
+@@ -26,7 +26,7 @@
+         description: BAM/CRAM file
+         pattern: "*.{bam,cram}"
+         ontologies: []
+-    - bai: 
++    - bai:
+         type: file
+         description: Index of BAM/CRAM file
+         pattern: "*.{bai,crai,csi}"
+@@ -61,7 +61,7 @@
+           description: Arrow file containing summary statistics of the long-read data
+           pattern: "*.arrow"
+           ontologies: []
+-    
++
+ authors:
+   - "@inemesb"
+ maintainers:
+
+'modules/nf-core/cramino/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/cramino/tests/nextflow.config' is unchanged
+'modules/nf-core/cramino/tests/main.nf.test' is unchanged
+************************************************************
