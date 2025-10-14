@@ -4,7 +4,6 @@ nextflow_workflow {
     script "../main.nf"
     config "./nextflow.config"
     workflow "PHASING"
-    options '-dump-channels'
 
     setup {
         run("GUNZIP") {
@@ -120,6 +119,56 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam', checkIfExists: true),
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam.bai', checkIfExists: true)
                 ])
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'hiphase'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - WhatsHap") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'whatshap'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - HiPhase") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
                 input[5] = GUNZIP.out.gunzip
                 input[6] = SAMTOOLS_FAIDX.out.fai
                 input[7] = 'hiphase'
