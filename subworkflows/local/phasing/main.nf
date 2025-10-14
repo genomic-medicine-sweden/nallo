@@ -163,15 +163,26 @@ workflow PHASING {
     // Phase variants and haplotag reads with whatshap
     } else if (phaser.equals("whatshap")) {
 
+        ch_bam_bai
+            .map { meta, bam, bai -> [ [ id : meta.family_id ], meta.id, bam, bai ] }
+            .groupTuple()
+            .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais]}
+            .set { ch_bam_bai_grouped }
+
+        ch_snv_vcf
+            .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
+            .set { ch_whatshap_phase_in}
+
         WHATSHAP_PHASE(
-            ch_snv_vcf.join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true ),
+            ch_whatshap_phase_in,
             fasta,
             fai
         )
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
         WHATSHAP_PHASE.out.vcf_tbi
-            .join( ch_bam_bai, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_bam_bai_grouped, failOnMismatch:true, failOnDuplicate:true )
+            .transpose()
             .set { ch_whatshap_haplotag_in }
 
         WHATSHAP_HAPLOTAG (
@@ -199,6 +210,7 @@ workflow PHASING {
         ch_bam_bai
             .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
             .groupTuple()
+            .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais ]}
             .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
             .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .join( ch_sv_vcf, failOnMismatch:true, failOnDuplicate:true )

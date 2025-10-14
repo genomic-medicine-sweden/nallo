@@ -395,7 +395,7 @@ workflow NALLO {
                 [[id: meta.region.name, family_id: meta.family_id], meta.id, gvcf]
             }
             .groupTuple()
-            .map { meta, ids, gvcfs -> [ meta + [ sample_ids: ids.sort() ], gvcfs ]}
+            .map { meta, ids, gvcfs -> [ meta + [ sample_ids: ids.toSet() ], gvcfs ]}
             .set { variants_to_merge_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.

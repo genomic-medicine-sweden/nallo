@@ -277,7 +277,7 @@ workflow CALL_SVS {
     ch_vcfs_to_merge
         .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], meta.id, vcf ] }
         .groupTuple()
-        .map { meta, sample_ids, vcfs -> [ meta + [ sample_ids: sample_ids.sort() ], vcfs ] }
+        .map { meta, sample_ids, vcfs -> [ meta + [ sample_ids: sample_ids.toSet() ], vcfs ] }
         .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
