@@ -2,7 +2,8 @@ include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_LONGPHASE     } from '../../../modu
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_HIPHASE       } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNV } from '../../../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SV  } from '../../../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE       } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV   } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV    } from '../../../modules/nf-core/bcftools/merge/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SNV       } from '../../../modules/local/create_split_file/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SV        } from '../../../modules/local/create_split_file/main'
 include { CRAMINO as CRAMINO_PHASED                        } from '../../../modules/local/cramino/main'
@@ -104,40 +105,49 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
+        // We need to "flatten" the VCF list into separate values in the output tuple if we have SVs
+        // We can identify which VCF is which by the file name. We should not rely on order in the list
         LONGPHASE_PHASE.out.vcf
-            .map { meta, vcfs -> [ meta, vcfs, [] ]}
+            .map { meta, vcfs ->
+                vcfs instanceof List
+                    ? vcfs[1].simpleName.endsWith("_SV")
+                        ? [ meta, vcfs[0], vcfs[1] ]
+                        : [ meta, vcfs[1], vcfs[0] ]
+                    : [ meta, vcfs, [] ]
+            }
+            .set { ch_phased_vcf }
+
+        // We must merge phased SV and SNV VCFs separately
+
+        ch_phased_vcf
+            .map { meta, snv, sv -> [ [ id: meta.family_id ], snv, sv ] }
+            .groupTuple()
+            .multiMap { meta, snvs, svs ->
+                snv : [ meta, snvs, [] ]
+                sv  : [ meta, svs , [] ]
+            }
+            .set { ch_bcftools_merge_in }
+
+        BCFTOOLS_MERGE_LONGPHASE_SNV (ch_bcftools_merge_in.snv, [], [], [])
+        ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SNV.out.versions)
+
+        BCFTOOLS_MERGE_LONGPHASE_SV (ch_bcftools_merge_in.sv, [], [], [])
+        ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
+
+        BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
+            .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
+            .mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
+                .join(BCFTOOLS_MERGE_LONGPHASE_SV.out.index, failOnMismatch: true, failOnDuplicate: true)
+            )
+            .groupTuple()
             .set { ch_bcftools_concat_in }
 
         BCFTOOLS_CONCAT_LONGPHASE( ch_bcftools_concat_in )
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_LONGPHASE.out.versions)
 
         BCFTOOLS_CONCAT_LONGPHASE.out.vcf
-            .map { meta, vcfs -> [ [ id : meta.family_id ], meta.id, vcfs, ] }
-            .groupTuple()
-            .map { meta, ids, vcfs -> [ meta + [ sample_ids : ids ], vcfs.flatten() ]}
-            .set { ch_bcftools_merge_in }
-
-        // Longphase emits 2 VCFs if we supplied svs
-        // Concat all VCFs for each sample for publishing and stats
-        BCFTOOLS_MERGE_LONGPHASE ( ch_bcftools_merge_in, [], [], [] )
-        ch_versions = ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE.out.versions)
-
-        BCFTOOLS_MERGE_LONGPHASE.out.vcf
-            .join(BCFTOOLS_MERGE_LONGPHASE.out.index, failOnMismatch:true, failOnDuplicate:true )
+            .join( BCFTOOLS_CONCAT_LONGPHASE.out.tbi )
             .set { ch_phased_vcf_index }
-
-        // However, haplotag requires the VCFs to stay separate
-        // We need to "flatten" the VCF list into separate values in the output tuple if we have SVs
-        // We can identify which VCF is which by the file name. We should not rely on order in the list
-        LONGPHASE_PHASE.out.vcf
-            .map { meta, vcfs ->
-                vcfs instanceof List
-                    ? vcfs[1].baseName.endsWith("_SV")
-                        ? [ meta, vcfs[0], vcfs[1] ]
-                        : [ meta, vcfs[1], vcfs[0] ]
-                    : [ meta, vcfs, [] ]
-            }
-            .set { ch_phased_vcf }
 
         ch_bam_bai
             .join( ch_phased_vcf, failOnMismatch:true, failOnDuplicate:true )
