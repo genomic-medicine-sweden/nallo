@@ -164,12 +164,12 @@ workflow PHASING {
     } else if (phaser.equals("whatshap")) {
 
         ch_bam_bai
-            .map { meta, bam, bai -> [ [ id : meta.family_id ], meta.id, bam, bai ] }
+            .map { meta, bam, bai -> [ [ id : meta.family_id ], bam, bai ] }
             .groupTuple()
-            .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais]}
             .set { ch_bam_bai_grouped }
 
         ch_snv_vcf
+            .map { meta, vcf -> [ [ id: meta.id ], vcf ] }
             .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_whatshap_phase_in}
 
@@ -180,9 +180,10 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
-        WHATSHAP_PHASE.out.vcf_tbi
-            .join( ch_bam_bai_grouped, failOnMismatch:true, failOnDuplicate:true )
-            .transpose()
+        ch_bam_bai
+            .map { meta, bam, bai -> [ [ id : meta.family_id ], meta, bam, bai ] }
+            .combine( WHATSHAP_PHASE.out.vcf_tbi, by: 0)
+            .map { _meta, full_meta, bam, bai, vcf, tbi -> [ full_meta, vcf, tbi, bam, bai ] }
             .set { ch_whatshap_haplotag_in }
 
         WHATSHAP_HAPLOTAG (
