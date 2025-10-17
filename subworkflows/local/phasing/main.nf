@@ -236,7 +236,7 @@ workflow PHASING {
 
         HIPHASE.out.sv_vcfs
             .join( HIPHASE.out.sv_vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
-            .concat( ch_phased_snv_index )
+            .mix( ch_phased_snv_index )
             .groupTuple()
             .set { ch_bcftools_concat_in }
 
