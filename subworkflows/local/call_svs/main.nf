@@ -2,7 +2,7 @@ include { ADD_FOUND_IN_TAG                          } from '../../../modules/loc
 include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_FILTER_SVS } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW                             } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
@@ -14,7 +14,6 @@ include { SEVERUS                                   } from '../../../modules/nf-
 include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SAWFISH    } from '../../../modules/nf-core/bcftools/view/main'
 
 workflow CALL_SVS {
 
@@ -191,16 +190,16 @@ workflow CALL_SVS {
     //
     if ( filter_calls_on_regions ) {
 
-        BCFTOOLS_VIEW_FILTER_SVS (
+        BCFTOOLS_VIEW (
             ch_sv_calls,
             ch_sv_call_regions.map { _meta, bed -> bed },
             [],
             []
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_FILTER_SVS.out.versions)
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
-        ch_sv_calls_filtered = BCFTOOLS_VIEW_FILTER_SVS.out.vcf
-            .join(BCFTOOLS_VIEW_FILTER_SVS.out.tbi, failOnMismatch:true, failOnDuplicate:true)
+        ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
+            .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)
 
     } else {
         ch_sv_calls_filtered = ch_sv_calls
@@ -266,16 +265,13 @@ workflow CALL_SVS {
         .set { reheadered_vcfs }
 
     reheadered_vcfs
-        // In this step, unless we have force joint-called single samples with Sawfish
-        // the VCFs from Sawfish are already on family level and will be added back after SVDB
-        .filter { meta, _vcf ->
-            meta.sv_caller != 'sawfish' || (meta.sv_caller == 'sawfish' && force_sawfish_joint_call_single_samples)
-        }
         .groupTuple()
         .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
-    // HiFiCNV has a different BND distance from the other callers, set in config
+    // HiFiCNV has a different BND distance from the other callers,
+    // Sawfish is not really merged (run with --no_intra), unless we are force joint-calling single samples and using SVDB for merging.
+    // These options are set in the config-
     SVDB_MERGE_BY_CALLER (
         ch_svdb_merge_by_caller_input,
         [],
@@ -283,33 +279,10 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_CALLER.out.versions)
 
-    // If we're not force joint-calling single samples with Sawfish, and therefore relying on joint-call do to family merging,
-    // we would like to the output files when saving unannotated family SVs to be as similar to the SVDB output as possible.
-    // Including naming and FOUND_IN annotation, and not VCFv4.4 format which joint-call produces, in order for nf-test to be able to parse it.
-    // The easiest solution I found for this would be to add a "dummy" process here, instead of trying to get and rename only Sawfish VCFs from ADD_FOUND_IN_TAG.
-    if (!force_sawfish_joint_call_single_samples) {
-        BCFTOOLS_VIEW_SAWFISH (
-            reheadered_vcfs
-                .map { meta, vcf -> [ meta, vcf, [] ] }
-                .filter { meta, _vcf, _tbi -> meta.sv_caller == 'sawfish' },
-            [],
-            [],
-            [],
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_SAWFISH.out.versions)
-    }
-
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
     // Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
     SVDB_MERGE_BY_CALLER.out.vcf
-        // Add back sawfish if we didn't force joint-calling on single samples
-        .mix(
-            reheadered_vcfs
-                .filter { meta, _vcf ->
-                    meta.sv_caller == 'sawfish' && !force_sawfish_joint_call_single_samples
-                }
-        )
         .filter { meta, _vcf ->
             sv_callers_to_merge.contains(meta.sv_caller)
         }
@@ -333,20 +306,9 @@ workflow CALL_SVS {
     )
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
-    ch_family_caller_vcf = Channel.empty()
-    ch_family_caller_tbi = Channel.empty()
-
-    if (sv_callers_to_run.contains('sawfish') && !force_sawfish_joint_call_single_samples) {
-        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf).mix(BCFTOOLS_VIEW_SAWFISH.out.vcf)
-        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi).mix(BCFTOOLS_VIEW_SAWFISH.out.tbi)
-    } else {
-        ch_family_caller_vcf = ch_family_caller_vcf.mix(SVDB_MERGE_BY_CALLER.out.vcf)
-        ch_family_caller_tbi = ch_family_caller_tbi.mix(SVDB_MERGE_BY_CALLER.out.tbi)
-    }
-
     emit:
-    family_caller_vcf = ch_family_caller_vcf         // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = ch_family_caller_tbi         // channel: [ val(meta), path(tbi) ]
+    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
     family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
     versions          = ch_versions                  // channel: [ path(versions.yml) ]

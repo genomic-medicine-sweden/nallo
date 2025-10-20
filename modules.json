@@ -257,7 +257,7 @@
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "8fac647072836597a9bf2c8ae327a6ddaf5fe95a",
+                        "git_sha": "7177f8387ef2c4e2123cb011dad271b84848eea2",
                         "installed_by": ["modules"]
                     },
                     "severus": {
