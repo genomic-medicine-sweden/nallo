@@ -100,13 +100,8 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
@@ -163,13 +158,8 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
@@ -227,13 +217,8 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
@@ -285,16 +270,10 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    // Sawfish reorders samples sometimes, so we can't have a stable MD5 here
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary ]
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
                     workflow.out.versions,
                 ).match() }
@@ -348,16 +327,10 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    // Sawfish reorders samples sometimes, so we can't have a stable MD5 here
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary ]
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
                     workflow.out.versions,
                 ).match() }
@@ -410,13 +383,8 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    // nft-vcf can't parse VCFv4.4: https://github.com/seppinho/nft-vcf/issues/14
                     workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (sawfish):', meta, file(vcf).name ] },
-                    workflow.out.family_caller_vcf
-                        .findAll { meta, vcf -> meta.sv_caller != 'sawfish' }
-                        .collect { meta, vcf -> [ 'family_caller_vcf (not sawfish):', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },

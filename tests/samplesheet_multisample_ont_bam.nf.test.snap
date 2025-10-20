@@ -42,9 +42,6 @@
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_VIEW_FILTER_SVS": {
-                    "bcftools": 1.21
-                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -902,6 +899,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-01T09:59:47.57273891"
+        "timestamp": "2025-10-20T14:25:57.955590565"
     }
 }
