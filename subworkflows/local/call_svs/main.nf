@@ -261,9 +261,6 @@ workflow CALL_SVS {
         .join ( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
         .concat ( ch_found_in_tagged_vcf.no_reheader )
         .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], vcf ] }
-        .set { reheadered_vcfs }
-
-    reheadered_vcfs
         .groupTuple()
         .set { ch_svdb_merge_by_caller_input }
 
