@@ -260,7 +260,6 @@ workflow NALLO {
                 [ groupKey(meta, meta.n_files), bam, bai ]
             }
             .groupTuple()
-            .view()
             .branch { meta, bam, bai ->
                 single:   meta.n_files <= 1
                     return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM
