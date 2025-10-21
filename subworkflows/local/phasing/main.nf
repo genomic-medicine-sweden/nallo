@@ -196,6 +196,18 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
+        WHATSHAP_PHASE.out.vcf_tbi
+            .multiMap { meta, vcf, tbi ->
+                vcf : [ meta, vcf ]
+                tbi : [ meta, tbi ]
+            }
+            .set { ch_whatshap_out_split }
+
+        ch_phased_family_snvs = ch_whatshap_out_split.vcf
+        ch_phased_family_snvs_tbi = ch_whatshap_out_split.tbi
+        ch_phased_family_svs = Channel.empty()
+        ch_phased_family_svs_tbi = Channel.empty()
+
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.family_id ], meta, bam, bai ] }
             .combine( WHATSHAP_PHASE.out.vcf_tbi, by: 0)
@@ -241,6 +253,11 @@ workflow PHASING {
             true
         )
         ch_versions = ch_versions.mix(HIPHASE.out.versions)
+
+        ch_phased_family_snvs = HIPHASE.out.vcfs
+        ch_phased_family_snvs_tbi = HIPHASE.out.vcfs_tbi
+        ch_phased_family_svs = HIPHASE.out.sv_vcfs
+        ch_phased_family_svs_tbi = HIPHASE.out.sv_vcfs_tbi
 
         HIPHASE.out.bams
             .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
