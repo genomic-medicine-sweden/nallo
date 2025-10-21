@@ -180,9 +180,13 @@ workflow PIPELINE_INITIALISATION {
             validateUniqueFilenamesPerSample(it)
             validateUniqueSampleIDs(it)
         }
+        // Add single_end information to meta
+        .map { sample, metas, reads ->
+            [ sample, metas[0] + [ single_end:true ], reads ]
+        }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
-            reads.collect { return [ meta, it ] }
+            reads.collect { return [ meta + [ single_end:true ], it ] }
         }
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }

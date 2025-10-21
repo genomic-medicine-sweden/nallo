@@ -260,16 +260,15 @@ workflow NALLO {
                 [ groupKey(meta, meta.n_files), bam, bai ]
             }
             .groupTuple()
-            .branch { meta, bam, bai ->
-                single:   meta.n_files <= 1
-                    return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM
-                multiple: meta.n_files > 1
-            }
             .set { bam_to_merge }
 
-        // Merge files if we have multiple files per sample
+        // Merge files - even if we only have one file per sample.
+        // This is because sometimes we need to output unphased BAM files. We can no longer output single files
+        // from the alignment process, because they would need to be renamed, based on n_files, which is no longer
+        // available to the alignment process. Because that would mean having to wait for all samples to be alinged
+        // before moving on to subsequent steps.
         SAMTOOLS_MERGE (
-            bam_to_merge.multiple.map { meta, bam, _bai -> [ meta, bam ] },
+            bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
             [[],[]],
             [[],[]]
         )
@@ -278,7 +277,6 @@ workflow NALLO {
         // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
-            .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { ch_aligned_bam }
 
