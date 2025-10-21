@@ -131,8 +131,14 @@ workflow PHASING {
         BCFTOOLS_MERGE_LONGPHASE_SNV (ch_bcftools_merge_in.snv, [], [], [])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SNV.out.versions)
 
+        ch_phased_family_snvs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
+        ch_phased_family_snvs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.tbi
+
         BCFTOOLS_MERGE_LONGPHASE_SV (ch_bcftools_merge_in.sv, [], [], [])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
+
+        ch_phased_family_svs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
+        ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.tbi
 
         BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
             .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
@@ -278,7 +284,11 @@ workflow PHASING {
     ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions)
 
     emit:
-    haplotagged_bam_bai = ch_bam_bai_haplotagged   // channel: [ val(meta), path(bam), path(bai) ]
-    stats               = WHATSHAP_STATS.out.stats // channel: [ val(meta), path(txt) ]
-    versions            = ch_versions              // channel: [ path(versions.yml) ]
+    phased_family_snvs     = ch_phased_family_snvs      // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_phased_family_snvs_tbi  // Channel: [ val(meta), path(tbi) ]
+    phased_family_svs      = ch_phased_family_svs       // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi  = ch_phased_family_svs_tbi   // Channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged     // channel: [ val(meta), path(bam), path(bai) ]
+    stats                  = WHATSHAP_STATS.out.stats   // channel: [ val(meta), path(txt) ]
+    versions               = ch_versions                // channel: [ path(versions.yml) ]
 }
