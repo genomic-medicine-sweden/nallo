@@ -57,7 +57,7 @@ https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></detail
 | `qc_regions` | A BED file with regions of interest used in QC. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `cnv_expected_xy_cn` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
 | `cnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
-| `cnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
+| `cnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres. | `string` |  |  |  |
 | `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
