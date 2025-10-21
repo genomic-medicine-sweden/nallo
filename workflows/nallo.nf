@@ -196,7 +196,7 @@ workflow NALLO {
 
         // contains all FASTQ files, including those not converted
         CONVERT_INPUT_BAMS.out.fastq
-            .groupTuple() // Needs to wait for all files to be split and converted before starting assembly...
+            .groupTuple()
             .set { ch_genome_assembly_input }
 
         // Hifiasm assembly
