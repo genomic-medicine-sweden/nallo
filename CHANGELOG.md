@@ -123,26 +123,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                 | Old version | New version |
-| -------------------- | ----------- | ----------- |
-| bedtools/split       |             | 2.31.1      |
-| severus              | 1.3         | 1.5         |
-| strdust              | 0.11.1      | 0.11.4      |
-| hifiasm              | 0.24.0      | 0.25.0      |
-| echtvar/anno         | 0.2.0       | 0.2.2       |
-| genmod               | 3.9         | 3.10.1      |
-| gunzip               | 1.1         | 1.13        |
-| tabix                | 1.2         | 1.21        |
-| multiqc              | 1.25.1      | 1.28        |
-| bcftools             | 1.2         | 1.21        |
-| samtools             | 1.2         | 1.21        |
-| ensemblvep/filtervep | 113         | 113.4       |
-| minimap2             | 2.28        | 2.29        |
-| deepvariant          | 1.8.0       | 1.9.0       |
-| paraphase            | 3.2.1       | 3.3.4       |
-| minimap2 (paraphase) | 2.29        | 2.30        |
-| samtools (paraphase) | 1.21        | 1.22.1      |
-| cramino              | 0.14.5      | 1.1.0       |
+| Tool                     | Old version | New version |
+| ------------------------ | ----------- | ----------- |
+| bedtools/split           |             | 2.31.1      |
+| severus                  | 1.3         | 1.5         |
+| strdust                  | 0.11.1      | 0.11.4      |
+| hifiasm                  | 0.24.0      | 0.25.0      |
+| echtvar/anno             | 0.2.0       | 0.2.2       |
+| genmod                   | 3.9         | 3.10.1      |
+| gunzip                   | 1.1         | 1.13        |
+| tabix                    | 1.2         | 1.21        |
+| multiqc                  | 1.25.1      | 1.28        |
+| bcftools                 | 1.2         | 1.21        |
+| samtools                 | 1.2         | 1.21        |
+| ensemblvep/filtervep     | 113         | 113.4       |
+| minimap2                 | 2.28        | 2.29        |
+| deepvariant              | 1.8.0       | 1.9.0       |
+| paraphase                | 3.2.1       | 3.3.4       |
+| minimap2 (paraphase)     | 2.29        | 2.30        |
+| samtools (paraphase)     | 1.21        | 1.22.1      |
+| cramino                  | 0.14.5      | 1.1.0       |
+| modkit/bedmethyltobigwig |             | 0.5.1-rc1   |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
