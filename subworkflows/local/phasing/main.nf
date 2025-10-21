@@ -205,8 +205,8 @@ workflow PHASING {
 
         ch_phased_family_snvs = ch_whatshap_out_split.vcf
         ch_phased_family_snvs_tbi = ch_whatshap_out_split.tbi
-        ch_phased_family_svs = Channel.empty()
-        ch_phased_family_svs_tbi = Channel.empty()
+        ch_phased_family_svs = ch_sv_vcf
+        ch_phased_family_svs_tbi = ch_sv_vcf_index
 
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.family_id ], meta, bam, bai ] }
