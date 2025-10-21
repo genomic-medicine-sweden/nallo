@@ -448,14 +448,72 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+
+    //
+    // Call SVs
+    //
+    if(!params.skip_sv_calling) {
+
+        CALL_SVS (
+            ch_bam_bai,
+            ch_tandem_repeats,
+            sample_snv_vcf,
+            ch_fasta,
+            ch_expected_xy_bed,
+            ch_expected_xx_bed,
+            ch_exclude_bed,
+            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            ch_sv_call_regions,
+            params.sv_call_regions
+        )
+
+        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
+
+    }
+
+    //
+    // Phase SNVs and INDELs
+    //
+    if(!params.skip_phasing) {
+
+        PHASING (
+            family_snv_vcf,
+            family_snv_index,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_vcf,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_tbi,
+            ch_bam_bai,
+            ch_fasta,
+            ch_fai,
+            params.phaser,
+            cram_output
+        )
+        ch_versions = ch_versions.mix(PHASING.out.versions)
+
+        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
+
+        ch_snv_vcf_for_annotation = PHASING.out.phased_family_snvs
+        ch_snv_index_for_annotation = PHASING.out.phased_family_snvs_tbi
+        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
+        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
+
+    } else {
+        ch_snv_vcf_for_annotation = family_snv_vcf
+        ch_snv_index_for_annotation = family_snv_index
+        if (!params.skip_sv_calling) {
+            ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
+            ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
+        }
+    }
+
     //
     // Annotate SNVs
-    //
     if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            family_snv_vcf,
+            ch_snv_vcf_for_annotation,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -593,37 +651,12 @@ workflow NALLO {
     }
 
     //
-    // Call SVs
-    //
-    if(!params.skip_sv_calling) {
-
-        CALL_SVS (
-            ch_bam_bai,
-            ch_tandem_repeats,
-            sample_snv_vcf,
-            ch_fasta,
-            ch_expected_xy_bed,
-            ch_expected_xx_bed,
-            ch_exclude_bed,
-            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
-            ch_sv_call_regions,
-            params.sv_call_regions,
-            params.force_sawfish_joint_call_single_samples,
-        )
-
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
-    }
-
-    //
     // Annotate SVs
     //
     if (!params.skip_sv_annotation) {
 
         ANNOTATE_SVS (
-            CALL_SVS.out.family_vcf,
+            ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
@@ -692,7 +725,7 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
+        ch_collect_svs = params.skip_sv_annotation ? ch_sv_vcf_for_annotation :
             params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
             RANK_VARIANTS_SVS.out.vcf
 
@@ -702,28 +735,6 @@ workflow NALLO {
             [],
             []
         )
-    }
-
-    //
-    // Phase SNVs and INDELs
-    //
-    if(!params.skip_phasing) {
-
-        PHASING (
-            sample_snv_vcf,
-            sample_snv_index,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_vcf,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.sample_tbi,
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            params.phaser,
-            cram_output
-        )
-        ch_versions = ch_versions.mix(PHASING.out.versions)
-
-        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
-
     }
 
     //
