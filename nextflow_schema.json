@@ -262,7 +262,7 @@
                 "cnv_excluded_regions": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres.",
                     "exists": true
                 },
                 "genmod_reduced_penetrance": {
