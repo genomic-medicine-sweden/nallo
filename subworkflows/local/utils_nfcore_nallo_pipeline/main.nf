@@ -186,7 +186,7 @@ workflow PIPELINE_INITIALISATION {
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
-            reads.collect { return [ meta + [ single_end:true ], it ] }
+            reads.collect { return [ meta, it ] }
         }
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }
