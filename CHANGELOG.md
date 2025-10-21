@@ -100,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
 - [#770](https://github.com/genomic-medicine-sweden/nallo/pull/770) - Fixed broken link for GRCh38 PAR file in docs
 - [#775](https://github.com/genomic-medicine-sweden/nallo/pull/775) - Fixed docs for `hifiasm_preset` parameter
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Fixed input files with fewer reads than `--alignment_processes` causing silent fails ([#757](https://github.com/genomic-medicine-sweden/nallo/issues/757))
 
 ### Parameters
 
