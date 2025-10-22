@@ -288,7 +288,7 @@
                         "meanQuality": 60,
                         "readCount": 118,
                         "duplicateReadCount": 0,
-                        "sorted": true
+                        "sorted": false
                     }
                 ]
             ],
@@ -343,7 +343,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T12:02:15.694030441"
+        "timestamp": "2025-10-22T13:28:12.251056467"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -399,7 +399,7 @@
                         "meanQuality": 60,
                         "readCount": 89,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ],
                 [
@@ -536,7 +536,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T12:02:52.979507714"
+        "timestamp": "2025-10-22T13:28:48.29510706"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -943,7 +943,7 @@
                         "meanQuality": 60,
                         "readCount": 118,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ]
             ],
@@ -972,7 +972,7 @@
                         "meanQuality": 60,
                         "readCount": 118,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ]
             ],
@@ -1028,6 +1028,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T11:31:48.384187127"
+        "timestamp": "2025-10-22T13:28:30.012934788"
     }
 }
