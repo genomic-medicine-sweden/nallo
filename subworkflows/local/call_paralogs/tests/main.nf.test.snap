@@ -286,9 +286,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 118,
-                        "duplicateReadCount": 0,
-                        "sorted": false
+                        "readCount": 118
                     }
                 ]
             ],
@@ -343,7 +341,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T13:28:12.251056467"
+        "timestamp": "2025-10-22T15:31:39.2767069"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -361,9 +359,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 118,
-                        "duplicateReadCount": 0,
-                        "sorted": false
+                        "readCount": 118
                     }
                 ],
                 [
@@ -379,9 +375,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 123,
-                        "duplicateReadCount": 0,
-                        "sorted": false
+                        "readCount": 123
                     }
                 ],
                 [
@@ -397,9 +391,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 89,
-                        "duplicateReadCount": 0,
-                        "sorted": false
+                        "readCount": 89
                     }
                 ],
                 [
@@ -415,9 +407,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 118,
-                        "duplicateReadCount": 0,
-                        "sorted": false
+                        "readCount": 118
                     }
                 ]
             ],
@@ -536,7 +526,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T15:17:05.249926507"
+        "timestamp": "2025-10-22T15:32:13.83050503"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -941,9 +931,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 118,
-                        "duplicateReadCount": 0,
-                        "sorted": true
+                        "readCount": 118
                     }
                 ]
             ],
@@ -970,9 +958,7 @@
                         "maxQuality": 60,
                         "minQuality": 60,
                         "meanQuality": 60,
-                        "readCount": 118,
-                        "duplicateReadCount": 0,
-                        "sorted": true
+                        "readCount": 118
                     }
                 ]
             ],
@@ -1028,6 +1014,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T13:28:30.012934788"
+        "timestamp": "2025-10-22T15:31:55.349562087"
     }
 }

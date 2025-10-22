@@ -79,7 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 - [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nf-core modules
-- [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nft-bam to 0.6.0
 
 ### `Removed`
 
