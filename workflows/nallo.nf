@@ -22,8 +22,6 @@ include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subw
 include { CALL_REPEAT_EXPANSIONS_TRGT                            } from '../subworkflows/local/call_repeat_expansions_trgt'
 include { CALL_SNVS                                              } from '../subworkflows/local/call_snvs'
 include { CALL_SVS                                               } from '../subworkflows/local/call_svs'
-include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
-include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { GENOME_ASSEMBLY                                        } from '../subworkflows/local/genome_assembly'
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
 include { METHYLATION                                            } from '../subworkflows/local/methylation'
@@ -34,6 +32,8 @@ include { QC_SNVS                                                } from '../subw
 include { RANK_VARIANTS as RANK_VARIANTS_SNV                     } from '../subworkflows/local/rank_variants'
 include { RANK_VARIANTS as RANK_VARIANTS_SVS                     } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
+include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
+include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
