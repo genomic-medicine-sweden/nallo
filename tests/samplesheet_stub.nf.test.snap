@@ -844,7 +844,7 @@
     },
     "Test alignment without genome assembly and --alignment_processes 1": {
         "content": [
-            10,
+            11,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -868,6 +868,9 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": 1.21
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.21
+                },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
                 },
@@ -881,8 +884,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam",
-                "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -900,8 +903,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-01T16:08:36.610705863"
+        "timestamp": "2025-10-21T11:17:32.94819866"
     }
 }

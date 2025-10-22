@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Changed to always run samtools merge, even if there is only one input file
 - [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 
@@ -103,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
 - [#770](https://github.com/genomic-medicine-sweden/nallo/pull/770) - Fixed broken link for GRCh38 PAR file in docs
 - [#775](https://github.com/genomic-medicine-sweden/nallo/pull/775) - Fixed docs for `hifiasm_preset` parameter
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Fixed input files with fewer reads than `--alignment_processes` causing silent fails ([#757](https://github.com/genomic-medicine-sweden/nallo/issues/757))
 
 ### Parameters
 
