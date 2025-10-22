@@ -560,13 +560,11 @@
                 "fastqc_sequence_counts_plot.txt:md5,25b4d3968f13fd3e15284f9f3bcd62c8",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,c4dfa700498dff483434a3e6c75bebbe",
                 "fastqc_sequence_length_distribution_plot.txt:md5,7e4cc131a6475eab8598972f297595e6",
-                "llms-full.txt:md5,121860a39185a4f16cae1359b36f5ec8",
                 "mosdepth-coverage-per-contig-multi.txt:md5,d10ccaf62d94408c435aeaa5e3a088ea",
                 "mosdepth-cumcoverage-dist-id.txt:md5,0cba1bf21758dafe9ea1da2ee9545873",
                 "mosdepth_cov_dist.txt:md5,0d1980709a18c32a772b8631c4cf9ac3",
                 "mosdepth_cumcov_dist.txt:md5,0d1980709a18c32a772b8631c4cf9ac3",
                 "mosdepth_perchrom.txt:md5,fae013ef7d37aca43480454e92c883ec",
-                "multiqc.parquet:md5,d0ed7e7be08e8f15132f81e3300fa803",
                 "multiqc_bcftools_stats.txt:md5,57c32c4333d9d3de838bcfa08c2bea50",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,e161ebe339a5f08291ea046cfa154929",
@@ -670,6 +668,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T12:17:57.107732169"
+        "timestamp": "2025-10-22T14:53:02.333507089"
     }
 }
