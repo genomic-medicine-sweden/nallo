@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 - [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
+- [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Added a stub test where sample and family ID is the same
 
 ### `Changed`
 
@@ -74,6 +75,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Changed to always run samtools merge, even if there is only one input file
+- [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
+- [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 - [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nf-core modules
 - [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nft-bam to 0.6.0
 
@@ -102,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
 - [#770](https://github.com/genomic-medicine-sweden/nallo/pull/770) - Fixed broken link for GRCh38 PAR file in docs
 - [#775](https://github.com/genomic-medicine-sweden/nallo/pull/775) - Fixed docs for `hifiasm_preset` parameter
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Fixed input files with fewer reads than `--alignment_processes` causing silent fails ([#757](https://github.com/genomic-medicine-sweden/nallo/issues/757))
 
 ### Parameters
 
@@ -125,43 +130,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                 | Old version | New version |
-| -------------------- | ----------- | ----------- |
-| bedtools/split       |             | 2.31.1      |
-| severus              | 1.3         | 1.5         |
-| strdust              | 0.11.1      | 0.11.4      |
-| hifiasm              | 0.24.0      | 0.25.0      |
-| echtvar/anno         | 0.2.0       | 0.2.2       |
-| genmod               | 3.9         | 3.10.1      |
-| gunzip               | 1.1         | 1.13        |
-| tabix                | 1.2         | 1.21        |
-| multiqc              | 1.25.1      | 1.28        |
-| bcftools/annotate    | 1.2         | 1.22        |
-| bcftools/concat      | 1.2         | 1.22        |
-| bcftools/index       | 1.2         | 1.22        |
-| bcftools/merge       | 1.2         | 1.22        |
-| bcftools/norm        | 1.2         | 1.22        |
-| bcftools/query       | 1.2         | 1.22        |
-| bcftools/reheader    | 1.2         | 1.22        |
-| bcftools/sort        | 1.2         | 1.22        |
-| bcftools/stats       | 1.2         | 1.22        |
-| bcftools/view        | 1.2         | 1.22        |
-| samtools/convert     | 1.2         | 1.22.1      |
-| samtools/faidx       | 1.2         | 1.22.1      |
-| samtools/fastq       | 1.2         | 1.22.1      |
-| samtools/import      | 1.2         | 1.22.1      |
-| samtools/index       | 1.2         | 1.22.1      |
-| samtools/merge       | 1.2         | 1.22.1      |
-| samtools/sort        | 1.2         | 1.22.1      |
-| samtools/view        | 1.2         | 1.22.1      |
-| ensemblvep/filtervep | 113         | 115.2       |
-| minimap2             | 2.28        | 2.29        |
-| deepvariant          | 1.8.0       | 1.9.0       |
-| paraphase            | 3.2.1       | 3.3.4       |
-| minimap2 (paraphase) | 2.29        | 2.30        |
-| multiqc              | 1.28        | 1.31        |
-| samtools (paraphase) | 1.21        | 1.22.1      |
-| cramino              | 0.14.5      | 1.1.0       |
+| Tool                     | Old version | New version |
+| ------------------------ | ----------- | ----------- |
+| bedtools/split           |             | 2.31.1      |
+| severus                  | 1.3         | 1.5         |
+| strdust                  | 0.11.1      | 0.11.4      |
+| hifiasm                  | 0.24.0      | 0.25.0      |
+| echtvar/anno             | 0.2.0       | 0.2.2       |
+| genmod                   | 3.9         | 3.10.1      |
+| gunzip                   | 1.1         | 1.13        |
+| tabix                    | 1.2         | 1.21        |
+| multiqc                  | 1.25.1      | 1.28        |
+| bcftools/annotate        | 1.2         | 1.22        |
+| bcftools/concat          | 1.2         | 1.22        |
+| bcftools/index           | 1.2         | 1.22        |
+| bcftools/merge           | 1.2         | 1.22        |
+| bcftools/norm            | 1.2         | 1.22        |
+| bcftools/query           | 1.2         | 1.22        |
+| bcftools/reheader        | 1.2         | 1.22        |
+| bcftools/sort            | 1.2         | 1.22        |
+| bcftools/stats           | 1.2         | 1.22        |
+| bcftools/view            | 1.2         | 1.22        |
+| samtools/convert         | 1.2         | 1.22.1      |
+| samtools/faidx           | 1.2         | 1.22.1      |
+| samtools/fastq           | 1.2         | 1.22.1      |
+| samtools/import          | 1.2         | 1.22.1      |
+| samtools/index           | 1.2         | 1.22.1      |
+| samtools/merge           | 1.2         | 1.22.1      |
+| samtools/sort            | 1.2         | 1.22.1      |
+| samtools/view            | 1.2         | 1.22.1      |
+| ensemblvep/filtervep     | 113         | 115.2       |
+| minimap2                 | 2.28        | 2.29        |
+| deepvariant              | 1.8.0       | 1.9.0       |
+| paraphase                | 3.2.1       | 3.3.4       |
+| minimap2 (paraphase)     | 2.29        | 2.30        |
+| multiqc                  | 1.28        | 1.31        |
+| samtools (paraphase)     | 1.21        | 1.22.1      |
+| cramino                  | 0.14.5      | 1.1.0       |
+| modkit/bedmethyltobigwig |             | 0.5.1-rc1   |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            320,
+            322,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -128,7 +128,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.5.0"
+                    "modkit": "0.5.1"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
