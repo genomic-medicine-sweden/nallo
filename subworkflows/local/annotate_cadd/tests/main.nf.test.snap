@@ -7,17 +7,17 @@
                         {
                             "id": "test",
                             "family_id": "test",
-                            "sex": "1"
+                            "sex": 1
                         },
                         "rename_chrnames_ann.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "1": [
+                1: [
                     [
                         {
                             "id": "test",
                             "family_id": "test",
-                            "sex": "1"
+                            "sex": 1
                         },
                         "rename_chrnames_ann.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -36,7 +36,7 @@
                         {
                             "id": "test",
                             "family_id": "test",
-                            "sex": "1"
+                            "sex": 1
                         },
                         "rename_chrnames_ann.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -46,7 +46,7 @@
                         {
                             "id": "test",
                             "family_id": "test",
-                            "sex": "1"
+                            "sex": 1
                         },
                         "rename_chrnames_ann.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
