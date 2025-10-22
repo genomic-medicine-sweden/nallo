@@ -144,7 +144,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bcftools/sort        | 1.2         | 1.22        |
 | bcftools/stats       | 1.2         | 1.22        |
 | bcftools/view        | 1.2         | 1.22        |
-| samtools             | 1.2         | 1.21        |
+| samtools/convert     | 1.2         | 1.22.1      |
+| samtools/faidx       | 1.2         | 1.22.1      |
+| samtools/fastq       | 1.2         | 1.22.1      |
+| samtools/import      | 1.2         | 1.22.1      |
+| samtools/index       | 1.2         | 1.22.1      |
+| samtools/merge       | 1.2         | 1.22.1      |
+| samtools/sort        | 1.2         | 1.22.1      |
+| samtools/view        | 1.2         | 1.22.1      |
 | ensemblvep/filtervep | 113         | 113.4       |
 | minimap2             | 2.28        | 2.29        |
 | deepvariant          | 1.8.0       | 1.9.0       |
