@@ -72,6 +72,7 @@ workflow ANNOTATE_CADD {
 
     ANNOTATE_INDELS (
         ch_annotate_indels_in,
+        [],
         ch_header.map { _meta, header -> header },
         CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt }
     )

@@ -105,7 +105,7 @@
                     "gfastats": "1.3.10"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.1-0-g68e25e5"
+                    "glnexus": "1.4.3-0-gcecf42e"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -737,13 +737,13 @@
                 "fastqc_sequence_counts_plot.txt:md5,33ff45bd73c6797677511253a596e00a",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,11ca5b87ce1917839238b49aa349dda3",
                 "fastqc_sequence_length_distribution_plot.txt:md5,1499fcb3837a993547c8e7f7d65f3de3",
-                "llms-full.txt:md5,2db4916ac45ce3f6f51e93ada69a415c",
+                "llms-full.txt:md5,3ee9bb7be2234289a385913eff9ec755",
                 "mosdepth-coverage-per-contig-multi.txt:md5,c50c800daf4b5effe006996208d55630",
                 "mosdepth-cumcoverage-dist-id.txt:md5,f315a9350f87b084f060f0cdddb4cfd7",
                 "mosdepth_cov_dist.txt:md5,f0aaedf9d54cdde0e9842d638cb4fbbd",
                 "mosdepth_cumcov_dist.txt:md5,f0aaedf9d54cdde0e9842d638cb4fbbd",
                 "mosdepth_perchrom.txt:md5,ed0038754b6e6c6695c734f0d3b77c17",
-                "multiqc.parquet:md5,23fe9af6b28b6c578b7643782619747c",
+                "multiqc.parquet:md5,da9faebd8b38e450d5d996ba70f9b306",
                 "multiqc_bcftools_stats.txt:md5,f62924c16aa9ca823a779ff873d46290",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,36de4d688329683ad0b103c728afad97",
@@ -985,6 +985,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T11:18:58.781770387"
+        "timestamp": "2025-10-22T12:23:11.857382472"
     }
 }

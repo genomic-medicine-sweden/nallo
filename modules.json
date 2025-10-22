@@ -160,7 +160,7 @@
                     },
                     "longphase/haplotag": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "155db467ba6b0cf689de42c2e6a514ec98bb9bb3",
                         "installed_by": ["modules"]
                     },
                     "longphase/phase": {

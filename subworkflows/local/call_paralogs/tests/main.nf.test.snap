@@ -288,7 +288,7 @@
                         "meanQuality": 60,
                         "readCount": 118,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ]
             ],
@@ -343,7 +343,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T11:26:01.355540133"
+        "timestamp": "2025-10-22T12:02:15.694030441"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -363,7 +363,7 @@
                         "meanQuality": 60,
                         "readCount": 118,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ],
                 [
@@ -381,7 +381,7 @@
                         "meanQuality": 60,
                         "readCount": 123,
                         "duplicateReadCount": 0,
-                        "sorted": true
+                        "sorted": false
                     }
                 ],
                 [
@@ -536,7 +536,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T11:32:08.072374064"
+        "timestamp": "2025-10-22T12:02:52.979507714"
     },
     "four sample, two families - cram output - stub": {
         "content": [
