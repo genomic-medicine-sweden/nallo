@@ -152,7 +152,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/merge       | 1.2         | 1.22.1      |
 | samtools/sort        | 1.2         | 1.22.1      |
 | samtools/view        | 1.2         | 1.22.1      |
-| ensemblvep/filtervep | 113         | 113.4       |
+| ensemblvep/filtervep | 113         | 115.2       |
 | minimap2             | 2.28        | 2.29        |
 | deepvariant          | 1.8.0       | 1.9.0       |
 | paraphase            | 3.2.1       | 3.3.4       |

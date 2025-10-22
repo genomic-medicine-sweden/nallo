@@ -98,7 +98,7 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "7452092e1a296442f2989bff9801797f28c28aaf",
+                        "git_sha": "0567eee9276d4a358e5f9f01c810a149fbd241f8",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/vep": {
