@@ -38,7 +38,7 @@ process SAMTOOLS_MERGE {
         $args \\
         ${reference} \\
         ${prefix}.${file_type}##idx##${prefix}.${file_type}.bai \\
-+       $input
+        $input
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

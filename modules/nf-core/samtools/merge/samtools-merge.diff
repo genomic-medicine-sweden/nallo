@@ -35,7 +35,7 @@ Changes in 'samtools/merge/main.nf':
 -        ${prefix}.${file_type} \\
 -        $input_files
 +        ${prefix}.${file_type}##idx##${prefix}.${file_type}.bai \\
-++       $input
++        $input
  
      cat <<-END_VERSIONS > versions.yml
      "${task.process}":
