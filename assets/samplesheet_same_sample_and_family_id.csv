@@ -1,0 +1,2 @@
+project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
+test,HG002_Revio,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/testdata/HG002_PacBio_Revio.fastq.gz,HG002_Revio,0,0,1,2
