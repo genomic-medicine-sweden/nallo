@@ -150,6 +150,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | deepvariant          | 1.8.0       | 1.9.0       |
 | paraphase            | 3.2.1       | 3.3.4       |
 | minimap2 (paraphase) | 2.29        | 2.30        |
+| multiqc              | 1.28        | 1.31        |
 | samtools (paraphase) | 1.21        | 1.22.1      |
 | cramino              | 0.14.5      | 1.1.0       |
 
