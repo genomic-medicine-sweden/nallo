@@ -121,7 +121,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.5.0"
+                    "modkit": "0.5.1"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.3.0"
@@ -897,8 +897,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-20T14:25:57.955590565"
+        "timestamp": "2025-10-21T15:47:37.172925238"
     }
 }

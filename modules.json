@@ -182,7 +182,8 @@
                     "modkit/bedmethyltobigwig": {
                         "branch": "master",
                         "git_sha": "6a12858f79d21f89ae9af04a12f4a1da2d5d635a",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/modkit/bedmethyltobigwig/modkit-bedmethyltobigwig.diff"
                     },
                     "modkit/pileup": {
                         "branch": "master",
