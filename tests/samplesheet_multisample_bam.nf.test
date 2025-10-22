@@ -16,6 +16,8 @@ nextflow_pipeline {
                 phaser                       = "hiphase"
                 sv_callers                   = "severus,hificnv"
                 sv_callers_to_run            = "severus,hificnv,sniffles"
+                filter_snvs_expression       = "-i 'AQ>20'"
+                filter_svs_expression        = "-i \'SVTYPE=\"INS\"\'"
             }
         }
 
