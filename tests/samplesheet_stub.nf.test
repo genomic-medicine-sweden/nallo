@@ -221,7 +221,7 @@ nextflow_pipeline {
 
     test("Test sawfish with force_sawfish_joint_call_single_samples true") {
         options "-stub"
-        
+
         when {
             params {
                 pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
@@ -240,6 +240,8 @@ nextflow_pipeline {
                 sv_callers_to_merge                     = "sawfish"
                 sv_callers_merge_priority               = "sawfish"
                 force_sawfish_joint_call_single_samples = true
+            }
+        }
 
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
@@ -258,7 +260,7 @@ nextflow_pipeline {
             )
         }
     }
-    
+
     test("Test family id same as sample id") {
         options "-stub"
 
@@ -269,7 +271,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
             }
         }
-        
+
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
