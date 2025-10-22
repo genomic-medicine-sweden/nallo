@@ -1,0 +1,27 @@
+Changes in component 'nf-core/samtools/convert'
+'modules/nf-core/samtools/convert/environment.yml' is unchanged
+Changes in 'samtools/convert/main.nf':
+--- modules/nf-core/samtools/convert/main.nf
++++ modules/nf-core/samtools/convert/main.nf
+@@ -26,13 +26,15 @@
+     def args = task.ext.args  ?: ''
+     def prefix = task.ext.prefix ?: "${meta.id}"
+     def output_extension = input.getExtension() == "bam" ? "cram" : "bam"
+-
++    // nft-bam incompatible with CRAM version 3.1
++    def cram_version = output_extension == "cram" ? "-O cram,version=3.0" : ""
+     """
+     samtools view \\
+         --threads ${task.cpus} \\
+         --reference ${fasta} \\
+         $args \\
+         $input \\
++        $cram_version \\
+         -o ${prefix}.${output_extension}
+ 
+     samtools index -@${task.cpus} ${prefix}.${output_extension}
+
+'modules/nf-core/samtools/convert/meta.yml' is unchanged
+'modules/nf-core/samtools/convert/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/samtools/convert/tests/main.nf.test' is unchanged
+************************************************************

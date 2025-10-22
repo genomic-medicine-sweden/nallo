@@ -74,6 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
+- [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nf-core modules
+- [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nft-bam to 0.6.0
 
 ### `Removed`
 

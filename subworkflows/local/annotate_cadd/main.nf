@@ -45,7 +45,8 @@ workflow ANNOTATE_CADD {
     RENAME_CHRNAMES (
         rename_chrnames_in,
         [],
-        REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt }
+        [],
+        REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
     ch_versions = ch_versions.mix(RENAME_CHRNAMES.out.versions)
 
