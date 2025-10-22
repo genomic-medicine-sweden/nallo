@@ -134,7 +134,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | gunzip               | 1.1         | 1.13        |
 | tabix                | 1.2         | 1.21        |
 | multiqc              | 1.25.1      | 1.28        |
-| bcftools             | 1.2         | 1.21        |
+| bcftools/annotate    | 1.2         | 1.22        |
+| bcftools/concat      | 1.2         | 1.22        |
+| bcftools/index       | 1.2         | 1.22        |
+| bcftools/merge       | 1.2         | 1.22        |
+| bcftools/norm        | 1.2         | 1.22        |
+| bcftools/query       | 1.2         | 1.22        |
+| bcftools/reheader    | 1.2         | 1.22        |
+| bcftools/sort        | 1.2         | 1.22        |
+| bcftools/stats       | 1.2         | 1.22        |
+| bcftools/view        | 1.2         | 1.22        |
 | samtools             | 1.2         | 1.21        |
 | ensemblvep/filtervep | 113         | 113.4       |
 | minimap2             | 2.28        | 2.29        |

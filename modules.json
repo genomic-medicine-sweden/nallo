@@ -7,52 +7,52 @@
                 "nf-core": {
                     "bcftools/annotate": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/concat": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/index": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/merge": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/norm": {
                         "branch": "master",
-                        "git_sha": "39fed2e840a805454a64dda9c2ef64c00e2c6781",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/query": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/reheader": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/stats": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bcftools/view": {
                         "branch": "master",
-                        "git_sha": "c9c3ef86c1892413b3c86fb38c4e39fd7288512f",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
                     "bedtools/merge": {
