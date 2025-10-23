@@ -4,6 +4,7 @@ include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNV } from '../../../modu
 include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SV  } from '../../../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV   } from '../../../modules/nf-core/bcftools/merge/main'
 include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV    } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_SORT                                    } from '../../../modules/nf-core/bcftools/sort/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SNV       } from '../../../modules/local/create_split_file/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SV        } from '../../../modules/local/create_split_file/main'
 include { CRAMINO as CRAMINO_PHASED                        } from '../../../modules/local/cramino/main'
@@ -91,7 +92,7 @@ workflow PHASING {
             .transpose()
             .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
             .join(ch_snv_split_names, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, file, sample -> [ meta + [ sample_id: sample ], file ] }
+            .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
             .set { ch_split_snv_vcf }
 
         BCFTOOLS_PLUGINSPLIT_SV (
@@ -106,13 +107,13 @@ workflow PHASING {
             .transpose()
             .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
             .join(ch_sv_split_names, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, file, sample -> [ meta + [ sample_id: sample ], file ] }
+            .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
             .set { ch_split_sv_vcf }
 
-        ch_bam_bai.dump()
+        ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
             .join( ch_split_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_split_sv_vcf , remainder:true, failOnDuplicate:true ) // Will set svs to null in case there are none
+            .join( ch_split_sv_vcf, remainder:true, failOnDuplicate:true ) // Will set svs to null in case there are none
             .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs ?: [], [] ] }
             .set { ch_longphase_phase_in }
 
@@ -123,41 +124,37 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
-        // We need to "flatten" the VCF list into separate values in the output tuple if we have SVs
-        // We can identify which VCF is which by the file name. We should not rely on order in the list
-        LONGPHASE_PHASE.out.vcf
-            .map { meta, vcfs ->
-                vcfs instanceof List
-                    ? vcfs[1].simpleName.endsWith("_SV")
-                        ? [ meta, vcfs[0], vcfs[1] ]
-                        : [ meta, vcfs[1], vcfs[0] ]
-                    : [ meta, vcfs, [] ]
+        // Sort all phased VCFs, ignoring varian types.
+        BCFTOOLS_SORT( LONGPHASE_PHASE.out.vcf.transpose() )
+        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
+
+
+        // Separate phased SV and SNV VCFs and group by family
+        BCFTOOLS_SORT.out.vcf
+            .join (BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, vcf, tbi ->
+                [ meta + [ id: meta.family_id, sv: vcf.simpleName.endsWith("_SV")], vcf, tbi ]
+            }
+            .groupTuple()
+            .branch { meta, _vcf, _tbi ->
+                sv: meta.sv
+                snv: !meta.sv
             }
             .set { ch_phased_vcf }
 
-        // We must merge phased SV and SNV VCFs separately
-
-        ch_phased_vcf
-            .map { meta, snv, sv -> [ [ id: meta.family_id ], snv, sv ] }
-            .groupTuple()
-            .multiMap { meta, snvs, svs ->
-                snv : [ meta, snvs, [] ]
-                sv  : [ meta, svs , [] ]
-            }
-            .set { ch_bcftools_merge_in }
-
-        BCFTOOLS_MERGE_LONGPHASE_SNV (ch_bcftools_merge_in.snv, [], [], [])
+        BCFTOOLS_MERGE_LONGPHASE_SNV (ch_phased_vcf.snv, fasta, fai, [ [], [] ])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SNV.out.versions)
 
         ch_phased_family_snvs = BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
         ch_phased_family_snvs_tbi = BCFTOOLS_MERGE_LONGPHASE_SNV.out.index
 
-        BCFTOOLS_MERGE_LONGPHASE_SV (ch_bcftools_merge_in.sv, [], [], [])
+        BCFTOOLS_MERGE_LONGPHASE_SV (ch_phased_vcf.sv, fasta, fai, [ [], [] ])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
 
         ch_phased_family_svs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
         ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.index
 
+        // Concatenate SNV and SV phased VCFs for Whatshap stats
         BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
             .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
             .mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
@@ -173,13 +170,19 @@ workflow PHASING {
             .join( BCFTOOLS_CONCAT_LONGPHASE.out.tbi )
             .set { ch_phased_vcf_index }
 
-        ch_bam_bai
-            .join( ch_phased_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
-            .set { ch_longphase_haplotag_in }
+        // Haplotag reads
+        LONGPHASE_PHASE.out.vcf
+            .map { meta, vcfs ->
+                vcfs instanceof List
+                    ? vcfs[1].endsWith("_SV")
+                        ? [ meta, vcfs[0], vcfs[1], [] ]
+                        : [ meta, vcfs[1], vcfs[0], [] ]
+                    : [ meta, vcfs, [], [] ]
+            }
+            .set { ch_vcfs_for_haplotag }
 
         LONGPHASE_HAPLOTAG (
-            ch_longphase_haplotag_in,
+            ch_bam_bai.join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true),
             fasta,
             fai
         )
