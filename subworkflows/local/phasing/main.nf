@@ -37,61 +37,79 @@ workflow PHASING {
 
         ch_snv_vcf
             .map { meta, _vcf -> [ meta, meta.sample_ids ] }
-            .set { ch_family_samples }
+            .set { ch_create_split_file_snv_in }
+
+        ch_sv_vcf
+            .map { meta, _vcf -> [ meta, meta.sample_ids ] }
+            .set { ch_create_split_file_sv_in }
 
         // Create sample files for bcftools +split
-        CREATE_SPLIT_FILE_SNV ( ch_family_samples, "_snv" )
-        CREATE_SPLIT_FILE_SV ( ch_family_samples, "_sv" )
+        CREATE_SPLIT_FILE_SNV ( ch_create_split_file_snv_in, "_snv" )
+        CREATE_SPLIT_FILE_SV ( ch_create_split_file_sv_in, "_sv" )
 
         // Collect the files' content into channels
         // We must merge the sample IDs based on file names later
         // And this allows us to forego any assumptions about the filenames
         CREATE_SPLIT_FILE_SNV.out.txt
-            .splitCsv(sep: "\t", elem: 1)
-            .set { ch_snv_split_names }
+            .splitCsv(sep: "\t", elem: 1, header: ['sample', 'dash', 'basename'])
+            .map { meta, row -> [ meta + [ basename: row.basename ], row.sample ] }
+            .set { ch_snv_split_names } // [ [region, family, samples, basename], sample ]
 
         CREATE_SPLIT_FILE_SV.out.txt
-            .splitCsv(sep: "\t", elem: 1)
-            .set { ch_sv_split_names }
+            .splitCsv(sep: "\t", elem: 1, header: ['sample', 'dash', 'basename'])
+            .map { meta, row -> [ meta + [ basename: row.basename ], row.sample ] }
+            .set { ch_sv_split_names } // [ [region, family, samples, basename], sample ]
 
         ch_snv_vcf
             .join(ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
+            .join(CREATE_SPLIT_FILE_SNV.out.txt, failOnMismatch:true, failOnDuplicate:true)
+            .multiMap { meta, vcf, tbi, txt ->
+                vcf_tbi: [ meta, vcf, tbi ]
+                txt    : txt
+            }
             .set { ch_snv }
 
         ch_sv_vcf
             .join(ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
+            .join(CREATE_SPLIT_FILE_SV.out.txt, failOnMismatch:true, failOnDuplicate:true)
+            .multiMap { meta, vcf, tbi, txt ->
+                vcf_tbi: [ meta, vcf, tbi ]
+                txt    : txt
+            }
             .set { ch_sv }
 
 
         BCFTOOLS_PLUGINSPLIT_SNV (
-            ch_snv,
-            CREATE_SPLIT_FILE_SNV.out.txt,
+            ch_snv.vcf_tbi,
+            ch_snv.txt,
             [],
             [],
             []
         )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNV.out.versions)
         BCFTOOLS_PLUGINSPLIT_SNV.out.vcf
             .transpose()
-            .map { meta, file -> [ file.simpleName, meta, file ]}
-            .join(ch_snv_split_names, by: [0, 1], failOnMismatch: true, failOnDuplicate: true)
-            .map { _filename, meta, file, sample -> [ meta - meta.subMap("id") + [ id: sample, family_id: meta.id ], file ] }
+            .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
+            .join(ch_snv_split_names, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, file, sample -> [ meta + [ sample_id: sample ], file ] }
             .set { ch_split_snv_vcf }
 
         BCFTOOLS_PLUGINSPLIT_SV (
-            ch_sv,
-            CREATE_SPLIT_FILE_SV.out.txt,
+            ch_sv.vcf_tbi,
+            ch_sv.txt,
             [],
             [],
             []
         )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SV.out.versions)
         BCFTOOLS_PLUGINSPLIT_SV.out.vcf
             .transpose()
-            .map { meta, file -> [ file.simpleName, meta, file ]}
-            .join(ch_sv_split_names, by: [0, 1], failOnMismatch: true, failOnDuplicate: true)
-            .map { _filename, meta, file, sample -> [ meta - meta.subMap("id") + [ id: sample, family_id: meta.id ], file ] }
+            .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
+            .join(ch_sv_split_names, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, file, sample -> [ meta + [ sample_id: sample ], file ] }
             .set { ch_split_sv_vcf }
 
-        ch_bam_bai
+        ch_bam_bai.dump()
             .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
             .join( ch_split_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
             .join( ch_split_sv_vcf , remainder:true, failOnDuplicate:true ) // Will set svs to null in case there are none
@@ -131,14 +149,14 @@ workflow PHASING {
         BCFTOOLS_MERGE_LONGPHASE_SNV (ch_bcftools_merge_in.snv, [], [], [])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SNV.out.versions)
 
-        ch_phased_family_snvs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
-        ch_phased_family_snvs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.tbi
+        ch_phased_family_snvs = BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
+        ch_phased_family_snvs_tbi = BCFTOOLS_MERGE_LONGPHASE_SNV.out.index
 
         BCFTOOLS_MERGE_LONGPHASE_SV (ch_bcftools_merge_in.sv, [], [], [])
         ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
 
         ch_phased_family_svs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
-        ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.tbi
+        ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.index
 
         BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
             .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)

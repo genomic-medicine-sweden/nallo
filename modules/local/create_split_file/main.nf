@@ -3,7 +3,8 @@ process CREATE_SPLIT_FILE {
     label 'process_single'
 
     input:
-    tuple val(meta), val(sample_ids), val(suffix)
+    tuple val(meta), val(sample_ids)
+    val suffix
 
     output:
     tuple val(meta), path("*.txt"), emit: txt
