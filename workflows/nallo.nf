@@ -95,9 +95,9 @@ workflow NALLO {
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
     ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
-    ch_expected_xy_bed           = createReferenceChannelFromPath(params.hificnv_expected_xy_cn)
-    ch_expected_xx_bed           = createReferenceChannelFromPath(params.hificnv_expected_xx_cn)
-    ch_exclude_bed               = createReferenceChannelFromPath(params.hificnv_excluded_regions)
+    ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
+    ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
+    ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
@@ -117,7 +117,6 @@ workflow NALLO {
         .collect()
 
     def cram_output = params.alignment_output_format == 'cram'
-
 
     //
     // Prepare references
@@ -166,8 +165,8 @@ workflow NALLO {
         SPLITUBAM (
             CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
         )
-
         ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
+
     }
 
     //
@@ -197,9 +196,6 @@ workflow NALLO {
 
         // contains all FASTQ files, including those not converted
         CONVERT_INPUT_BAMS.out.fastq
-            .map { meta, fastq ->
-                [ groupKey(meta, meta.n_files), fastq ]
-            }
             .groupTuple()
             .set { ch_genome_assembly_input }
 
@@ -224,11 +220,21 @@ workflow NALLO {
     //
     if (!params.skip_alignment) {
 
+        (params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam)
+            .set { reads_for_alignment }
+
+        // If we are splitting input files, this needs to wait for all files to be split. But while we do that, the reads can still start to be aligned.
+        // Later, this allows us to combine this meta with the aligned BAMs for merging, without having to wait for all alignment processes to finish.
+        reads_for_alignment
+            .groupTuple()
+            .map { meta, files -> [ meta + [ n_files: files.size() ] ] }
+            .set { reads_grouping_key }
+
         //
         // Align reads (could be a split-align-merge subworkflow)
         //
         MINIMAP2_ALIGN (
-            params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam,
+            reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
@@ -243,21 +249,26 @@ workflow NALLO {
             // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
             // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
             .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
-            .map {
-                meta, bam, bai ->
-                    [ groupKey(meta, meta.n_files), bam, bai ]
+            .combine(reads_grouping_key)
+            .filter { aligned_meta, _bam, _bai, grouping_key_meta ->
+                aligned_meta.id == grouping_key_meta.id
+            }
+            .map { aligned_meta, bam, bai, grouping_key_meta ->
+                [ aligned_meta + [ n_files: grouping_key_meta.n_files ], bam, bai ]
+            }
+            .map { meta, bam, bai ->
+                [ groupKey(meta, meta.n_files), bam, bai ]
             }
             .groupTuple()
-            .branch { meta, bam, bai ->
-                single:   meta.n_files <= 1
-                    return [ meta, bam[0], bai[0] ]  // bam is a list (of one BAM) so return just the one BAM
-                multiple: meta.n_files > 1
-            }
             .set { bam_to_merge }
 
-        // Merge files if we have multiple files per sample
+        // Merge files - even if we only have one file per sample.
+        // This is because sometimes we need to output unphased BAM files. We can no longer output single files
+        // from the alignment process, because they would need to be renamed, based on n_files, which is no longer
+        // available to the alignment process. Because that would mean having to wait for all samples to be alinged
+        // before moving on to subsequent steps.
         SAMTOOLS_MERGE (
-            bam_to_merge.multiple.map { meta, bam, _bai -> [ meta, bam ] },
+            bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
             [[],[]],
             [[],[]]
         )
@@ -266,7 +277,6 @@ workflow NALLO {
         // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
-            .concat(bam_to_merge.single)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { ch_aligned_bam }
 
@@ -596,7 +606,8 @@ workflow NALLO {
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
             ch_sv_call_regions,
-            params.sv_call_regions
+            params.sv_call_regions,
+            params.force_sawfish_joint_call_single_samples,
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)

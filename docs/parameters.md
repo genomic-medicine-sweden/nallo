@@ -55,9 +55,9 @@ https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></detail
 | `snv_call_regions` | A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `sv_call_regions` | A BED file containging regions to filter SV calls. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `qc_regions` | A BED file with regions of interest used in QC. By default this is the same as `target_regions`. | `string` |  |  |  |
-| `hificnv_expected_xy_cn` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
-| `hificnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
-| `hificnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV, such as centromeres. | `string` |  |  |  |
+| `cnv_expected_xy_cn` | A BED file containing expected copy number regions for XY samples. | `string` |  |  |  |
+| `cnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
+| `cnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres. | `string` |  |  |  |
 | `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |

@@ -179,7 +179,7 @@ nextflow_pipeline {
 
     test("Test genome assembly without alignment") {
         options "-stub"
-        tag "x"
+
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
@@ -210,6 +210,74 @@ nextflow_pipeline {
                 { assert versions.containsKey('HIFIASM') },
                 { assert !versions.containsKey('SPLITUBAM') },
                 { assert !stable_name.contains('aligned_reads') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test sawfish with force_sawfish_joint_call_single_samples true") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
+                input                                   = "$projectDir/assets/samplesheet.csv"
+                outdir                                  = "$outputDir"
+                skip_call_paralogs                      = true
+                skip_methylation_pileups                = true
+                skip_peddy                              = true
+                skip_phasing                            = true
+                skip_rank_variants                      = true
+                skip_repeat_annotation                  = true
+                skip_repeat_calling                     = true
+                skip_snv_annotation                     = true
+                skip_sv_annotation                      = true
+                sv_callers_to_run                       = "sawfish"
+                sv_callers_to_merge                     = "sawfish"
+                sv_callers_merge_priority               = "sawfish"
+                force_sawfish_joint_call_single_samples = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert versions.containsKey('SVDB_MERGE_BY_FAMILY') },
+                { assert versions.containsKey('SAWFISH_DISCOVER') },
+                { assert versions.containsKey('SAWFISH_JOINTCALL') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test family id same as sample id") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
+                input                        = "$projectDir/assets/samplesheet_same_sample_and_family_id.csv"
+                outdir                       = "$outputDir"
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
