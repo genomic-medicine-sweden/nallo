@@ -92,6 +92,7 @@ This pipeline comes with three different presets that should be set with the `--
 !!!info "Preset effects on subworkflows"
 
     - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
+    - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
 
 ### Reference files
@@ -192,19 +193,21 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
 !!!info "Variant merging strategies"
 
-    SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.
+    Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.
+
+    Sniffles, Severus and HiFiCNV uses SVDB for both merging steps. Sawfish however, has a built in joint-calling step which always needs to be run, and is used by default instead of SVDB in the first merging step. To force the joint-calling step to only run on one indivdual at a time (and use SVDB to merge into the Sawfish family-level VCF), one can run with `--force_sawfish_joint_call_single_samples`.
 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:
+If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:
 
-| Parameter                  | Description                                                                                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
-| `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
-| `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+| Parameter              | Description                                                                                                                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
+| `cnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
+| `cnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
 !!!tip "Family-level VCFs per caller"
 

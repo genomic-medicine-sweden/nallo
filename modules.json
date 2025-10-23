@@ -251,6 +251,16 @@
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
                         "installed_by": ["modules"]
                     },
+                    "sawfish/discover": {
+                        "branch": "master",
+                        "git_sha": "9f8be1a09379cbf3f026ba7fa24ca74613ab5dea",
+                        "installed_by": ["modules"]
+                    },
+                    "sawfish/jointcall": {
+                        "branch": "master",
+                        "git_sha": "7177f8387ef2c4e2123cb011dad271b84848eea2",
+                        "installed_by": ["modules"]
+                    },
                     "severus": {
                         "branch": "master",
                         "git_sha": "b548397f546b85ae02df11dfec3023d744331a35",
