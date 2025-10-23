@@ -51,6 +51,7 @@ include { BCFTOOLS_CONCAT                                   } from '../modules/n
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
@@ -507,8 +508,23 @@ workflow NALLO {
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
 
-        ch_snv_vcf_for_annotation = PHASING.out.phased_family_snvs
-        ch_snv_index_for_annotation = PHASING.out.phased_family_snvs_tbi
+        PHASING.out.phased_family_snvs
+            .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
+            .combine(SCATTER_GENOME.out.bed)
+            .multiMap { meta, vcf, tbi, bed, _num_intervals ->
+                vcf: [ meta + [ id: bed.baseName ], vcf, tbi ]
+                bed : bed
+            }
+            .set { ch_phased_scatter_in }
+
+        BCFTOOLS_VIEW_PHASING (
+            ch_phased_scatter_in.vcf,
+            ch_phased_scatter_in.bed,
+            [],
+            []
+        )
+        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+        ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
         ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
 
