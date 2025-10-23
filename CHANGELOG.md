@@ -81,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Changed to always run samtools merge, even if there is only one input file
 - [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
+- [#784](https://github.com/genomic-medicine-sweden/nallo/pull/784) - Updated metro map
 
 ### `Removed`
 
