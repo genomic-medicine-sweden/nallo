@@ -83,6 +83,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
 - [#784](https://github.com/genomic-medicine-sweden/nallo/pull/784) - Updated metro map
 - [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nf-core modules
+- [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed local subworflow filter_variants to nf-core vcf_filter_bcftools_ensemblvep
+- [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed `samplesheet_multisample_bam` test to include `filter_snvs_expression` and `filter_svs_expression`, and moved `filter_variants_hgnc_ids = null` to `samplesheet_multisample_ont_bam`
 
 ### `Removed`
 

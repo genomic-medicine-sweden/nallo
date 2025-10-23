@@ -30,9 +30,6 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -143,7 +140,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T14:59:07.604604511"
+        "timestamp": "2025-10-23T17:25:00.362919836"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -154,22 +151,22 @@
                     "busybox_awk": "1.36.1"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.21
+                    "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
@@ -187,7 +184,7 @@
                     "deepvariant": "1.9.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.8.0"
+                    "deepvariant": "1.9.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -221,19 +218,19 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAWFISH_DISCOVER": {
                     "sawfish": "2.1.1"
@@ -341,7 +338,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-23T09:13:13.313243797"
+        "timestamp": "2025-10-23T17:26:15.542701419"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -403,7 +400,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T11:20:29.566488639"
+        "timestamp": "2025-10-23T17:25:50.072583657"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -570,7 +567,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T14:58:40.620464756"
+        "timestamp": "2025-10-23T17:24:33.221824431"
     },
     "Test family id same as sample id": {
         "content": [
@@ -969,7 +966,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T15:00:36.542358436"
+        "timestamp": "2025-10-23T17:26:55.819641407"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1037,7 +1034,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T14:59:23.444231544"
+        "timestamp": "2025-10-23T17:25:15.973420882"
     },
     "Test alignment without genome assembly and --alignment_processes 1": {
         "content": [
@@ -1102,6 +1099,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-22T12:24:45.286108174"
+        "timestamp": "2025-10-23T17:25:32.462769195"
     }
 }

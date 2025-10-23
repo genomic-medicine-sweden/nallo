@@ -9,32 +9,32 @@ include {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ALIGN_ASSEMBLIES                            } from '../subworkflows/local/align_assemblies'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV         } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS         } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_SNVS                               } from '../subworkflows/local/annotate_snvs'
-include { ANNOTATE_SVS                                } from '../subworkflows/local/annotate_svs'
-include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS } from '../subworkflows/local/convert_input_files'
-include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS   } from '../subworkflows/local/convert_input_files'
-include { BAM_INFER_SEX                               } from '../subworkflows/local/bam_infer_sex'
-include { CALL_PARALOGS                               } from '../subworkflows/local/call_paralogs'
-include { CALL_REPEAT_EXPANSIONS_STRDUST              } from '../subworkflows/local/call_repeat_expansions_strdust'
-include { CALL_REPEAT_EXPANSIONS_TRGT                 } from '../subworkflows/local/call_repeat_expansions_trgt'
-include { CALL_SNVS                                   } from '../subworkflows/local/call_snvs'
-include { CALL_SVS                                    } from '../subworkflows/local/call_svs'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SNVS     } from '../subworkflows/local/filter_variants'
-include { FILTER_VARIANTS as FILTER_VARIANTS_SVS      } from '../subworkflows/local/filter_variants'
-include { GENOME_ASSEMBLY                             } from '../subworkflows/local/genome_assembly'
-include { GVCF_GLNEXUS_NORM_VARIANTS                  } from '../subworkflows/local/gvcf_glnexus_norm_variants'
-include { METHYLATION                                 } from '../subworkflows/local/methylation'
-include { PHASING                                     } from '../subworkflows/local/phasing'
-include { PREPARE_REFERENCES                          } from '../subworkflows/local/prepare_references'
-include { QC_ALIGNED_READS                            } from '../subworkflows/local/qc_aligned_reads'
-include { QC_SNVS                                     } from '../subworkflows/local/qc_snvs'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV          } from '../subworkflows/local/rank_variants'
-include { RANK_VARIANTS as RANK_VARIANTS_SVS          } from '../subworkflows/local/rank_variants'
-include { SCATTER_GENOME                              } from '../subworkflows/local/scatter_genome'
-include { VCF_CONCAT_NORM_VARIANTS                    } from '../subworkflows/local/vcf_concat_norm_variants'
+include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
+include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
+include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS              } from '../subworkflows/local/convert_input_files'
+include { BAM_INFER_SEX                                          } from '../subworkflows/local/bam_infer_sex'
+include { CALL_PARALOGS                                          } from '../subworkflows/local/call_paralogs'
+include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subworkflows/local/call_repeat_expansions_strdust'
+include { CALL_REPEAT_EXPANSIONS_TRGT                            } from '../subworkflows/local/call_repeat_expansions_trgt'
+include { CALL_SNVS                                              } from '../subworkflows/local/call_snvs'
+include { CALL_SVS                                               } from '../subworkflows/local/call_svs'
+include { GENOME_ASSEMBLY                                        } from '../subworkflows/local/genome_assembly'
+include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
+include { METHYLATION                                            } from '../subworkflows/local/methylation'
+include { PHASING                                                } from '../subworkflows/local/phasing'
+include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
+include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
+include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
+include { RANK_VARIANTS as RANK_VARIANTS_SNV                     } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS as RANK_VARIANTS_SVS                     } from '../subworkflows/local/rank_variants'
+include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
+include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
+include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
+include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -42,27 +42,27 @@ include { VCF_CONCAT_NORM_VARIANTS                    } from '../subworkflows/lo
 */
 
 // local
-include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED           } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED              } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY       } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
-include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
-include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
-include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
-include { PEDDY                                             } from '../modules/nf-core/peddy/main'
-include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
-include { STRANGER                                          } from '../modules/nf-core/stranger/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
-include { paramsSummaryMap                                  } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
-include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                                        } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT                                          } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW                                          } from '../modules/nf-core/bcftools/view/main'
+include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
+include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
+include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
+include { STRANGER                                               } from '../modules/nf-core/stranger/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
+include { paramsSummaryMap                                       } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -485,7 +485,8 @@ workflow NALLO {
             FILTER_VARIANTS_SNVS (
                 ch_clin_research_snvs_vcf.clinical,
                 ch_hgnc_ids,
-                params.filter_variants_hgnc_ids
+                params.filter_snvs_expression,
+                params.filter_variants_hgnc_ids,
             )
             ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
@@ -648,7 +649,8 @@ workflow NALLO {
             FILTER_VARIANTS_SVS (
                 ch_clin_research_svs_vcf.clinical,
                 ch_hgnc_ids,
-                params.filter_variants_hgnc_ids
+                params.filter_svs_expression,
+                params.filter_variants_hgnc_ids,
             )
             ch_versions = ch_versions.mix(FILTER_VARIANTS_SVS.out.versions)
 
