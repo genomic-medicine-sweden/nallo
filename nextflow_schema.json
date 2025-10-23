@@ -247,22 +247,22 @@
                     "description": "A BED file with regions of interest used in QC. By default this is the same as `target_regions`.",
                     "exists": true
                 },
-                "hificnv_expected_xy_cn": {
+                "cnv_expected_xy_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XY samples.",
                     "exists": true
                 },
-                "hificnv_expected_xx_cn": {
+                "cnv_expected_xx_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XX samples.",
                     "exists": true
                 },
-                "hificnv_excluded_regions": {
+                "cnv_excluded_regions": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres.",
                     "exists": true
                 },
                 "genmod_reduced_penetrance": {
@@ -496,25 +496,25 @@
                     "type": "string",
                     "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
                     "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_to_run": {
                     "type": "string",
                     "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "sv_callers_to_merge": {
                     "type": "string",
                     "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|severus)(,(sniffles|hificnv|severus))*$"
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
                 },
                 "snv_caller": {
                     "type": "string",
@@ -569,6 +569,11 @@
                     "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
                     "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
+                },
+                "force_sawfish_joint_call_single_samples": {
+                    "type": "boolean",
+                    "default": null,
+                    "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
                 },
                 "filter_variants_hgnc_ids": {
                     "type": "string",

@@ -95,9 +95,9 @@ workflow NALLO {
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
     ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
-    ch_expected_xy_bed           = createReferenceChannelFromPath(params.hificnv_expected_xy_cn)
-    ch_expected_xx_bed           = createReferenceChannelFromPath(params.hificnv_expected_xx_cn)
-    ch_exclude_bed               = createReferenceChannelFromPath(params.hificnv_excluded_regions)
+    ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
+    ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
+    ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
@@ -607,7 +607,8 @@ workflow NALLO {
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
             ch_sv_call_regions,
-            params.sv_call_regions
+            params.sv_call_regions,
+            params.force_sawfish_joint_call_single_samples,
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)

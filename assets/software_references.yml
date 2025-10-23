@@ -110,9 +110,12 @@ tool:
   samtools:
     citation: "SAMtools (Danecek et al. 2021)"
     bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"
+  sawfish:
+    citation: "Sawfish (Saunders et al. 2025)"
+    bibliography: "Christopher T Saunders, James M Holt, Daniel N Baker, Juniper A Lake, Jonathan R Belyeu, Zev Kronenberg, William J Rowell, Michael A Eberle, Sawfish: improving long-read structural variant discovery and genotyping with local haplotype modeling, Bioinformatics, Volume 41, Issue 4, April 2025, btaf136, https://doi.org/10.1093/bioinformatics/btaf136"
   sniffles:
     citation: "Sniffles (Sedlazeck et al. 2018)"
-    bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461–468 (2018). https://doi.org/10.1038/s41592-018-0001-7"
+    bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461-468 (2018). https://doi.org/10.1038/s41592-018-0001-7"
   severus:
     citation: "Severus (Keskus et al. 2024)"
     bibliography: "Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756"
