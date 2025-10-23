@@ -47,22 +47,23 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modu
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                                        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT                                          } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_VIEW                                          } from '../modules/nf-core/bcftools/view/main'
-include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
-include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
-include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
-include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
-include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { STRANGER                                               } from '../modules/nf-core/stranger/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
-include { paramsSummaryMap                                       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
-include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
+include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
+include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                             } from '../modules/nf-core/peddy/main'
+include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
+include { STRANGER                                          } from '../modules/nf-core/stranger/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
+include { paramsSummaryMap                                  } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -478,9 +479,22 @@ workflow NALLO {
     //
     if(!params.skip_phasing) {
 
+
+        family_snv_vcf
+            .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
+            .map { meta, vcf, tbi ->
+                [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
+            }
+            .groupTuple()
+            .set { ch_bcftools_concat_phasing_in }
+
+        BCFTOOLS_CONCAT_PHASING (
+            ch_bcftools_concat_phasing_in
+        )
+
         PHASING (
-            family_snv_vcf,
-            family_snv_index,
+            BCFTOOLS_CONCAT_PHASING.out.vcf,
+            BCFTOOLS_CONCAT_PHASING.out.tbi,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_vcf,
             params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
