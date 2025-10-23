@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
 - [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Added new SV caller Sawfish
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Added a stub test where sample and family ID is the same
 
 ### `Changed`
@@ -74,6 +75,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Changed `hificnv_*` parameters to `cnv_*` to reflect that they can be used for both HiFiCNV and Sawfish
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Clarified PacBio software licence warning. Changed to only warn instead of error for `--preset ONT_R10`.
 - [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
 - [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Changed to always run samtools merge, even if there is only one input file
 - [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
@@ -108,18 +111,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                     |
-| ------------- | --------------------------------- |
-| `--sv_caller` | `--sv_callers`                    |
-|               | `--sv_callers_to_run`             |
-|               | `--sv_callers_to_merge`           |
-|               | `--sv_callers_merge_priority`     |
-|               | `--methylation_call_regions`      |
-|               | `--snv_call_regions`              |
-|               | `--sv_call_regions`               |
-|               | `--qc_regions`                    |
-|               | `--pre_vep_snv_filter_expression` |
-|               | `--extra_yak_options`             |
+| Old parameter                | New parameter                               |
+| ---------------------------- | ------------------------------------------- |
+| `--sv_caller`                | `--sv_callers`                              |
+|                              | `--sv_callers_to_run`                       |
+|                              | `--sv_callers_to_merge`                     |
+|                              | `--sv_callers_merge_priority`               |
+|                              | `--methylation_call_regions`                |
+|                              | `--snv_call_regions`                        |
+|                              | `--sv_call_regions`                         |
+|                              | `--qc_regions`                              |
+|                              | `--pre_vep_snv_filter_expression`           |
+|                              | `--extra_yak_options`                       |
+| `--hificnv_excluded_regions` | `--cnv_excluded_regions`                    |
+| `--hificnv_expected_xx_cn`   | `--cnv_expected_xx_cn`                      |
+| `--hificnv_expected_xy_cn`   | `--cnv_expected_xy_cn`                      |
+|                              | `--force_sawfish_joint_call_single_samples` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -149,6 +156,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools (paraphase)     | 1.21        | 1.22.1      |
 | cramino                  | 0.14.5      | 1.1.0       |
 | modkit/bedmethyltobigwig |             | 0.5.1-rc1   |
+| sawfish                  |             | 2.1.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

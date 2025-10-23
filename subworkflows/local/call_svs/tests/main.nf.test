@@ -40,7 +40,7 @@ nextflow_workflow {
                     ],
                     [
                         [ id:'test_2', single_end:false, family_id: 'family', sex: 1 ], // meta map
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
                     ]
                 )
                 input[1] = GUNZIP.out.gunzip
@@ -89,6 +89,7 @@ nextflow_workflow {
                 input[9] = ['sniffles']
                 input[10] = [[],[]]
                 input[11] = false
+                input[12] = false
                 """
             }
         }
@@ -99,8 +100,69 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample, 1 family - sawfish") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .filter { meta, bam, bai -> meta.id == 'test_1' }
+                input[1] = Channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                    .filter { meta, vcf -> meta.id == 'test_1' }
+                input[3] = GUNZIP.out.gunzip
+                input[4] = Channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = Channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = Channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sawfish']
+                input[8] = ['sawfish']
+                input[9] = ['sawfish']
+                input[10] = Channel.of('chr16\t160752\t160753')
+                    .collectFile(name: "one_variant.bed")
+                    .map { file ->
+                        [ [ id: 'one_variant' ], file ]
+                    }.collect()
+                input[11] = false
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
                     workflow.out.versions,
                 ).match() }
             )
@@ -108,7 +170,66 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - sniffes,severus,hificnv with trf bed") {
+    test("1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .filter { meta, bam, bai -> meta.id == 'test_1' }
+                input[1] = Channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                    .filter { meta, vcf -> meta.id == 'test_1' }
+                input[3] = GUNZIP.out.gunzip
+                input[4] = Channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = Channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = Channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sawfish']
+                input[8] = ['sawfish']
+                input[9] = ['sawfish']
+                input[10] = Channel.of('chr16\t160752\t160753')
+                    .collectFile(name: "one_variant.bed")
+                    .map { file ->
+                        [ [ id: 'one_variant' ], file ]
+                    }.collect()
+                input[11] = false
+                input[12] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed") {
 
         when {
             workflow {
@@ -133,11 +254,12 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
-                input[7] = ['sniffles', 'hificnv', 'severus']
-                input[8] = ['sniffles', 'hificnv', 'severus']
-                input[9] = ['sniffles', 'severus', 'hificnv']
+                input[7] = ['sniffles', 'hificnv', 'severus', 'sawfish']
+                input[8] = ['sniffles', 'hificnv', 'severus', 'sawfish']
+                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[10] = [[],[]]
                 input[11] = false
+                input[12] = false
                 """
             }
         }
@@ -148,8 +270,11 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
                     workflow.out.versions,
                 ).match() }
             )
@@ -157,7 +282,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - merge sniffes,hificnv,severus with trf bed, run all callers and filter") {
+    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter") {
 
         when {
             workflow {
@@ -182,15 +307,16 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
-                input[7] = ['sniffles', 'severus', 'hificnv']
-                input[8] = ['sniffles', 'severus', 'hificnv']
-                input[9] = ['sniffles', 'severus', 'hificnv']
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[8] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[10] = Channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
                 input[11] = true
+                input[12] = false
                 """
             }
         }
@@ -201,8 +327,67 @@ nextflow_workflow {
                 { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.family_caller_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter, force sawfish single sample joint-call") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = Channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = Channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = Channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = Channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[8] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[10] = Channel.of('chr16\t160752\t160753')
+                    .collectFile(name: "one_variant.bed")
+                    .map { file ->
+                        [ [ id: 'one_variant' ], file ]
+                    }.collect()
+                input[11] = true
+                input[12] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
                     workflow.out.versions,
                 ).match() }
             )
@@ -241,6 +426,58 @@ nextflow_workflow {
                 input[9] = ['sniffles', 'severus']
                 input[10] = [[],[]]
                 input[11] = false
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .filter { meta, bam, bai -> meta.id == 'test_1' }
+                input[1] = Channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                    .filter { meta, vcf -> meta.id == 'test_1' }
+                input[3] = GUNZIP.out.gunzip
+                input[4] = Channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = Channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = Channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sawfish']
+                input[8] = ['sawfish']
+                input[9] = ['sawfish']
+                input[10] = Channel.of('chr16\t160752\t160753')
+                    .collectFile(name: "one_variant.bed")
+                    .map { file ->
+                        [ [ id: 'one_variant' ], file ]
+                    }.collect()
+                input[11] = false
+                input[12] = false
                 """
             }
         }
