@@ -1370,6 +1370,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p class="admonition-title">Preset effects on subworkflows</p>
 <ul>
 <li><code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
+<li><code>--skip_call_paralogs</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
 <li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
@@ -1457,13 +1458,14 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>Sometimes you might want to run more callers than you use for merging, this can be controlled with the <code>--sv_callers_to_run</code> and <code>--sv_callers_to_merge</code> parameters. By default these are the same as <code>--sv_callers</code> but can be overwritten.</p>
 <div class="admonition info">
 <p class="admonition-title">Variant merging strategies</p>
-<p>SV and CNV calls first merged per family and caller. This is done so that different callers can have different merge parameters. Then, the family-caller files are merged into one final family file. This can then be annotated, ranked and filtered.</p>
+<p>Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.</p>
+<p>Sniffles, Severus and HiFiCNV uses SVDB for both merging steps. Sawfish however, has a built in joint-calling step which always needs to be run, and is used by default instead of SVDB in the first merging step. To force the joint-calling step to only run on one indivdual at a time (and use SVDB to merge into the Sawfish family-level VCF), one can run with <code>--force_sawfish_joint_call_single_samples</code>.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Family-level VCFs per caller</p>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
 </div>
-<p>If HiFiCNV is used, it also depends on the SNV calling subworkflow and requires the following files:</p>
+<p>If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:</p>
 <table>
 <thead>
 <tr>
@@ -1473,15 +1475,15 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </thead>
 <tbody>
 <tr>
-<td><code>hificnv_expected_xy_cn</code></td>
+<td><code>cnv_expected_xy_cn</code></td>
 <td>Expected XY copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed">expected_cn.hg38.XY.bed</a>)</td>
 </tr>
 <tr>
-<td><code>hificnv_expected_xx_cn</code></td>
+<td><code>cnv_expected_xx_cn</code></td>
 <td>Expected XX copy number regions for your reference genome (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed">expected_cn.hg38.XX.bed</a>)</td>
 </tr>
 <tr>
-<td><code>hificnv_excluded_regions</code></td>
+<td><code>cnv_excluded_regions</code></td>
 <td>BED file specifying regions to exclude (e.g. <a href="https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz">cnv.excluded_regions.hg38.bed.gz</a>)</td>
 </tr>
 </tbody>
