@@ -8,7 +8,6 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
 
-<h1 align="center">Nallo</h1>
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/nallo_dark.png">
@@ -38,10 +37,10 @@
 ##### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
-- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) or [Sawfish](https://github.com/PacificBiosciences/sawfish) (PacBio only)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
-- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only) or [STRdust](https://github.com/wdecoster/STRdust)
-- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
+- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (PacBio only) or [STRdust](https://github.com/wdecoster/STRdust)
+- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase) (PacBio only)
 
 ##### Phasing and methylation
 

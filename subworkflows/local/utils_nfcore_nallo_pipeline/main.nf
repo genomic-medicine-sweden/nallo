@@ -142,9 +142,9 @@ workflow PIPELINE_INITIALISATION {
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
-            hificnv_expected_xy_cn   : params.hificnv_expected_xy_cn,
-            hificnv_expected_xx_cn   : params.hificnv_expected_xx_cn,
-            hificnv_excluded_regions : params.hificnv_excluded_regions,
+            cnv_expected_xy_cn       : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn       : params.cnv_expected_xx_cn,
+            cnv_excluded_regions     : params.cnv_excluded_regions,
             fasta                    : params.fasta,
             str_bed                  : params.str_bed,
             stranger_repeat_catalog  : params.stranger_repeat_catalog,
@@ -180,16 +180,9 @@ workflow PIPELINE_INITIALISATION {
             validateUniqueFilenamesPerSample(it)
             validateUniqueSampleIDs(it)
         }
-        // This adds n_files to the meta so we can use groupKey later.
-        // n_files is the number of files per sample. If we are aligning & splitting the reads,
-        // it's the number of files after splitting.
-        //
-        // Since we now use n_files in both the alignment and the genome assembly steps,
-        // I think it could be better to add it there instead of here.
+        // Add single_end information to meta
         .map { sample, metas, reads ->
-
-            def split_alignments = params.skip_alignment ? 1 : Math.max(1, params.alignment_processes)
-            [ sample, metas[0] + [n_files: metas.size() * split_alignments, single_end:true ], reads ]
+            [ sample, metas[0] + [ single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
@@ -522,19 +515,23 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
-    def pacbio_tools = []
-    if (params.phaser.matches('hiphase')) {
-        pacbio_tools += ['HiPhase']
-    }
-    if (params.str_caller.matches('trgt')) {
-        pacbio_tools += ['TRGT']
-    }
-    if (pacbio_tools.isEmpty()) return
-    if (params.preset == "ONT_R10") {
-        error("ERROR: ${pacbio_tools.join(', ')} may only be used with PacBio data.")
-    } else {
-        log.warn("${pacbio_tools.join(', ')} may only be used with PacBio data. Please make sure your data comes from PacBio or one of their instruments.")
-    }
+     def pacbioTools = [
+        (params.phaser)             : 'HiPhase',
+        (params.str_caller)         : 'TRGT',
+        (params.sv_callers)         : 'Sawfish',
+        (params.sv_callers_to_run)  : 'Sawfish',
+        (params.sv_callers_to_merge): 'Sawfish',
+        (!params.skip_call_paralogs): 'Paraphase',
+    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
+     .values() as List
+
+    if (!pacbioTools) return
+
+    log.warn(
+        "The software license of ${pacbioTools.join(', ')} states that you may only use the software " +
+        "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " +
+        "Please make sure your data comes from PacBio or one of their instruments."
+    )
 }
 
 // Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
@@ -579,12 +576,19 @@ def validateWorkflowCompatibility() {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
 
-    if (!params.skip_sv_calling && params.sv_callers.split(',').collect { it.toLowerCase().trim() }.contains('hificnv')) {
+    if (
+        !params.skip_sv_calling && params.sv_callers_to_run
+            .split(',')
+            .collect { caller -> caller.toLowerCase().trim() }
+            .any { caller -> caller in ['hificnv', 'sawfish'] }
+    ) {
+        // We could probably change to not enforce this.
         if (params.skip_snv_calling) {
-            error "ERROR: HiFiCNV requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV."
+            error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
         }
-        if (!params.hificnv_expected_xy_cn || !params.hificnv_expected_xx_cn || !params.hificnv_excluded_regions) {
-            error "ERROR: HiFiCNV requires expected XY and XX CN files and excluded regions to be provided. Please provide --hificnv_expected_xy_cn, --hificnv_expected_xx_cn and --hificnv_excluded_regions parameters."
+        // We could probably change to not enforce this.
+        if (!params.cnv_expected_xy_cn || !params.cnv_expected_xx_cn || !params.cnv_excluded_regions) {
+            error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
     }
 }

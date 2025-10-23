@@ -182,7 +182,8 @@
                     "modkit/bedmethyltobigwig": {
                         "branch": "master",
                         "git_sha": "6a12858f79d21f89ae9af04a12f4a1da2d5d635a",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/modkit/bedmethyltobigwig/modkit-bedmethyltobigwig.diff"
                     },
                     "modkit/pileup": {
                         "branch": "master",
@@ -248,6 +249,16 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "installed_by": ["modules"]
+                    },
+                    "sawfish/discover": {
+                        "branch": "master",
+                        "git_sha": "9f8be1a09379cbf3f026ba7fa24ca74613ab5dea",
+                        "installed_by": ["modules"]
+                    },
+                    "sawfish/jointcall": {
+                        "branch": "master",
+                        "git_sha": "7177f8387ef2c4e2123cb011dad271b84848eea2",
                         "installed_by": ["modules"]
                     },
                     "severus": {

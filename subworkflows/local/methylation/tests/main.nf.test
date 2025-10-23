@@ -25,7 +25,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'HG002', num_intervals:1 ],
+                    [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = PREPARE_REFERENCES.out.fasta

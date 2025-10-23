@@ -1,33 +1,36 @@
-include { ADD_FOUND_IN_TAG                   } from '../../../modules/local/add_found_in_tag/main'
-include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
-include { CREATE_SAMPLES_FILE                } from '../../../modules/local/create_samples_file/main'
-include { HIFICNV                            } from '../../../modules/local/pacbio/hificnv'
-include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
+include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                             } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
+include { CREATE_SAMPLES_FILE                       } from '../../../modules/local/create_samples_file/main'
+include { HIFICNV                                   } from '../../../modules/local/pacbio/hificnv'
+include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow CALL_SVS {
 
     take:
-    ch_bam_bai              // channel: [ val(meta), path(bam), path(bai) ]
-    ch_tandem_repeats       // channel: [ val(meta), path(bed) ]
-    ch_snvs                 // channel: [ val(meta), path(vcf) ]
-    ch_fasta                // channel: [ val(meta), path(fasta) ]
-    ch_expected_xy_bed      // channel: [ val(meta), path(bed) ]
-    ch_expected_xx_bed      // channel: [ val(meta), path(bed) ]
-    ch_exclude_bed          // channel: [ val(meta), path(bed) ]
-    sv_callers_to_run       //    List: [ 'caller1', 'caller2', 'caller3' ]
-    sv_callers_to_merge     //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority         //    List: [ 'caller3', 'caller1', 'caller2' ]
-    ch_sv_call_regions      // channel: [ val(meta), path(bed) ]
-    filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
+    ch_bam_bai                              // channel: [ val(meta), path(bam), path(bai) ]
+    ch_tandem_repeats                       // channel: [ val(meta), path(bed) ]
+    ch_snvs                                 // channel: [ val(meta), path(vcf) ]
+    ch_fasta                                // channel: [ val(meta), path(fasta) ]
+    ch_expected_xy_bed                      // channel: [ val(meta), path(bed) ]
+    ch_expected_xx_bed                      // channel: [ val(meta), path(bed) ]
+    ch_exclude_bed                          // channel: [ val(meta), path(bed) ]
+    sv_callers_to_run                       //    List: [ 'caller1', 'caller2', 'caller3' ]
+    sv_callers_to_merge                     //    List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority                         //    List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_sv_call_regions                      // channel: [ val(meta), path(bed) ]
+    filter_calls_on_regions                 //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
+    force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
 
     main:
     ch_versions = Channel.empty()
@@ -118,6 +121,70 @@ workflow CALL_SVS {
     }
 
     //
+    // Call SVs with Sawfish
+    //
+    if(sv_callers_to_run.contains('sawfish')) {
+
+        ch_bam_bai
+            .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
+            .combine(ch_expected_xx_bed)
+            .combine(ch_expected_xy_bed)
+            .multiMap { meta, bam, bai, vcf, xx_meta, xx_bed, xy_meta, xy_bed ->
+                bam_bai: [ meta, bam, bai ]
+                vcf: [ meta, vcf ]
+                expected_copynumber_bed: meta.sex == 1
+                    ? [ xy_meta, xy_bed ]
+                    : [ xx_meta, xx_bed ]
+            }
+            .set { ch_sawfish_discover_input }
+
+        SAWFISH_DISCOVER (
+            ch_sawfish_discover_input.bam_bai,
+            ch_fasta,
+            ch_sawfish_discover_input.expected_copynumber_bed,
+            ch_sawfish_discover_input.vcf,
+            ch_exclude_bed
+        )
+        ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
+
+        // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
+        // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
+        // here directly, and skip doing it later with SVDB merging.
+        SAWFISH_DISCOVER.out.discover_dir
+            .join(ch_sawfish_discover_input.bam_bai, failOnMismatch:true, failOnDuplicate:true)
+            .map { meta, discover_dir, bam, bai ->
+                def new_meta = force_sawfish_joint_call_single_samples
+                    ? meta
+                    : [ id: meta.family_id, family_id: meta.family_id ]
+
+                [ new_meta, discover_dir, bam, bai ]
+            }
+            .groupTuple()
+            .multiMap { meta, discover_dirs, bams, bais ->
+                dir: [ meta, discover_dirs ]
+                bam_bai: [ meta, bams, bais ]
+            }
+            .set { ch_sawfish_jointcall_input }
+
+        SAWFISH_JOINTCALL (
+            ch_sawfish_jointcall_input.dir,
+            ch_fasta,
+            ch_sawfish_jointcall_input.bam_bai,
+            [[],[]]
+
+        )
+        ch_versions = ch_versions.mix(SAWFISH_JOINTCALL.out.versions)
+
+        ch_sv_calls = ch_sv_calls.mix(
+            addCallerToMeta(
+                SAWFISH_JOINTCALL.out.vcf
+                    .join(SAWFISH_JOINTCALL.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                'sawfish'
+            )
+        )
+    }
+
+    //
     // Post-process SV calls
     //
     if ( filter_calls_on_regions ) {
@@ -198,7 +265,9 @@ workflow CALL_SVS {
         .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
-    // HiFiCNV has a different BND distance from the other callers, set in config
+    // HiFiCNV has a different BND distance from the other callers,
+    // Sawfish is not really merged (run with --no_intra), unless we are force joint-calling single samples and using SVDB for merging.
+    // These options are set in the config-
     SVDB_MERGE_BY_CALLER (
         ch_svdb_merge_by_caller_input,
         [],
