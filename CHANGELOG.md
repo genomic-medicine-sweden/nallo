@@ -115,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#775](https://github.com/genomic-medicine-sweden/nallo/pull/775) - Fixed docs for `hifiasm_preset` parameter
 - [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Fixed input files with fewer reads than `--alignment_processes` causing silent fails ([#757](https://github.com/genomic-medicine-sweden/nallo/issues/757))
 - [#782](https://github.com/genomic-medicine-sweden/nallo/pull/782) - Fixed `null` in SNV filename when running with `--skip_snv_annotation --skip_rank_variants`
+- [#788](https://github.com/genomic-medicine-sweden/nallo/pull/788) - Fix nf-core pipelines download not working in newer versions (3.4.1+)
 
 ### Parameters
 
