@@ -42,4 +42,4 @@ template:
   org: genomic-medicine-sweden
   outdir: .
   skip_features: []
-  version: 0.8.0dev
+  version: 0.8.0

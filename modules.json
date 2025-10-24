@@ -253,17 +253,17 @@
                     },
                     "sawfish/discover": {
                         "branch": "master",
-                        "git_sha": "9f8be1a09379cbf3f026ba7fa24ca74613ab5dea",
+                        "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
                         "installed_by": ["modules"]
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "7177f8387ef2c4e2123cb011dad271b84848eea2",
+                        "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
                         "installed_by": ["modules"]
                     },
                     "severus": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "98a699d12b141aeb3d5da5c98ebd69a320ff350d",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/severus/severus.diff"
                     },
@@ -332,12 +332,12 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
                         "installed_by": ["modules"]
                     },
                     "untar": {
