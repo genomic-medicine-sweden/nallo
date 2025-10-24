@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.8.0dev - [xxxx-xx-xx]
+## 0.8.0 - [2025-10-24]
 
 ### `Added`
 
@@ -143,7 +143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Tool                     | Old version | New version |
 | ------------------------ | ----------- | ----------- |
 | bedtools/split           |             | 2.31.1      |
-| severus                  | 1.3         | 1.5         |
+| severus                  | 1.3         | 1.6         |
 | strdust                  | 0.11.1      | 0.11.4      |
 | hifiasm                  | 0.24.0      | 0.25.0      |
 | echtvar/anno             | 0.2.0       | 0.2.2       |
@@ -180,7 +180,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools (paraphase)     | 1.21        | 1.22.1      |
 | cramino                  | 0.14.5      | 1.1.0       |
 | modkit/bedmethyltobigwig |             | 0.5.1-rc1   |
-| sawfish                  |             | 2.1.1       |
+| sawfish/discover         |             | 2.2         |
+| sawfish/jointcall        |             | 2.2         |
+| trgt/merge               | 3.0.0       | 4.0.0       |
+| trgt/genotype            | 3.0.0       | 4.0.0       |
+| whatshap/haplotag        | 2.3         | 2.8         |
+| whatshap/phase           | 2.3         | 2.8         |
+| whatshap/stats           | 2.3         | 2.8         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
