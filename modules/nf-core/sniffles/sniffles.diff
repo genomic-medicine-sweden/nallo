@@ -1,5 +1,4 @@
 Changes in component 'nf-core/sniffles'
-'modules/nf-core/sniffles/meta.yml' is unchanged
 'modules/nf-core/sniffles/environment.yml' is unchanged
 Changes in 'sniffles/main.nf':
 --- modules/nf-core/sniffles/main.nf
@@ -89,7 +88,8 @@ Changes in 'sniffles/main.nf':
      """
  }
 
-'modules/nf-core/sniffles/tests/main.nf.test' is unchanged
+'modules/nf-core/sniffles/meta.yml' is unchanged
 'modules/nf-core/sniffles/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/sniffles/tests/nextflow.config' is unchanged
+'modules/nf-core/sniffles/tests/main.nf.test' is unchanged
 ************************************************************

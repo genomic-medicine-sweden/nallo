@@ -1,5 +1,4 @@
 Changes in component 'nf-core/somalier/extract'
-'modules/nf-core/somalier/extract/meta.yml' is unchanged
 Changes in 'somalier/extract/environment.yml':
 --- modules/nf-core/somalier/extract/environment.yml
 +++ modules/nf-core/somalier/extract/environment.yml
@@ -25,6 +24,7 @@ Changes in 'somalier/extract/main.nf':
      input:
      tuple val(meta), path(input), path(input_index)
 
-'modules/nf-core/somalier/extract/tests/main.nf.test' is unchanged
+'modules/nf-core/somalier/extract/meta.yml' is unchanged
 'modules/nf-core/somalier/extract/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/somalier/extract/tests/main.nf.test' is unchanged
 ************************************************************

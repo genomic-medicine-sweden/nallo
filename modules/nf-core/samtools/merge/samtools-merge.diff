@@ -1,35 +1,34 @@
 Changes in component 'nf-core/samtools/merge'
-'modules/nf-core/samtools/merge/meta.yml' is unchanged
 'modules/nf-core/samtools/merge/environment.yml' is unchanged
 Changes in 'samtools/merge/main.nf':
 --- modules/nf-core/samtools/merge/main.nf
 +++ modules/nf-core/samtools/merge/main.nf
-@@ -8,14 +8,14 @@
-         'biocontainers/samtools:1.21--h50ea8bc_0' }"
+@@ -8,7 +8,7 @@
+         'biocontainers/samtools:1.22.1--h96c455f_0' }"
  
      input:
 -    tuple val(meta), path(input_files, stageAs: "?/*")
 +    tuple val(meta), path(input_files)
      tuple val(meta2), path(fasta)
      tuple val(meta3), path(fai)
- 
-     output:
+     tuple val(meta4), path(gzi)
+@@ -17,6 +17,7 @@
      tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
      tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
--    tuple val(meta), path("*.csi")         , optional:true, emit: csi
+     tuple val(meta), path("*.csi")         , optional:true, emit: csi
 +    tuple val(meta), path("*.bai")         , optional:true, emit: bai
      tuple val(meta), path("*.crai")        , optional:true, emit: crai
      path  "versions.yml"                                  , emit: versions
  
-@@ -27,6 +27,7 @@
+@@ -27,6 +28,7 @@
      def args = task.ext.args   ?: ''
      prefix   = task.ext.prefix ?: "${meta.id}"
      def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
 +    def input = (input_files.collect().size() > 1) ? input_files.sort { it.name } : input_files
      def reference = fasta ? "--reference ${fasta}" : ""
      """
-     samtools \\
-@@ -34,8 +35,8 @@
+     # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
+@@ -35,8 +37,8 @@
          --threads ${task.cpus-1} \\
          $args \\
          ${reference} \\
@@ -40,7 +39,7 @@ Changes in 'samtools/merge/main.nf':
  
      cat <<-END_VERSIONS > versions.yml
      "${task.process}":
-@@ -47,7 +48,7 @@
+@@ -48,7 +50,7 @@
      def args = task.ext.args   ?: ''
      prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
      def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
@@ -50,7 +49,8 @@ Changes in 'samtools/merge/main.nf':
      """
      touch ${prefix}.${file_type}
 
-'modules/nf-core/samtools/merge/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/merge/meta.yml' is unchanged
 'modules/nf-core/samtools/merge/tests/main.nf.test.snap' is unchanged
-'modules/nf-core/samtools/merge/tests/index.config' is unchanged
+'modules/nf-core/samtools/merge/tests/nextflow.config' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test' is unchanged
 ************************************************************

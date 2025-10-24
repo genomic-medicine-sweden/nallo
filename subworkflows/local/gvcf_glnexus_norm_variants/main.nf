@@ -17,7 +17,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_versions = Channel.empty()
 
     GLNEXUS(
-        ch_gvcfs,
+        ch_gvcfs.map { meta, gvcfs -> [meta, gvcfs, []] },
         ch_bed,
     )
     ch_versions = ch_versions.mix(GLNEXUS.out.versions)

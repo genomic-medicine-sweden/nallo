@@ -4,8 +4,8 @@ process SAMTOOLS_CONVERT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
+        'https://depot.galaxyproject.org/singularity/samtools:1.22.1--h96c455f_0' :
+        'biocontainers/samtools:1.22.1--h96c455f_0' }"
 
     input:
     tuple val(meta), path(input), path(index)
@@ -26,13 +26,15 @@ process SAMTOOLS_CONVERT {
     def args = task.ext.args  ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def output_extension = input.getExtension() == "bam" ? "cram" : "bam"
-
+    // nft-bam incompatible with CRAM version 3.1
+    def cram_version = output_extension == "cram" ? "-O cram,version=3.0" : ""
     """
     samtools view \\
         --threads ${task.cpus} \\
         --reference ${fasta} \\
         $args \\
         $input \\
+        $cram_version \\
         -o ${prefix}.${output_extension}
 
     samtools index -@${task.cpus} ${prefix}.${output_extension}

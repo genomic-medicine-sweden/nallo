@@ -270,7 +270,8 @@ workflow NALLO {
         SAMTOOLS_MERGE (
             bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
             [[],[]],
-            [[],[]]
+            [[],[]],
+            [[],[]],
         )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 

@@ -13,7 +13,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                        "test_fastq.bam:md5,ca2d9f4b73085ade55f4065ee928cb91"
                     ]
                 ],
                 "1": [
@@ -25,7 +25,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f"
                 ],
                 "bam": [
                     [
@@ -38,7 +38,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                        "test_fastq.bam:md5,ca2d9f4b73085ade55f4065ee928cb91"
                     ]
                 ],
                 "fastq": [
@@ -50,15 +50,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-31T10:36:12.536021508"
+        "timestamp": "2025-10-22T11:01:43.064049108"
     },
     "convert BAM to FASTQ": {
         "content": [
@@ -86,7 +86,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7"
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ],
                 "bam": [
                     [
@@ -111,15 +111,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7"
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-29T16:03:48.837045521"
+        "timestamp": "2025-10-22T11:01:36.124934445"
     },
     "convert BAM to FASTQ and FASTQ to BAM": {
         "content": [
@@ -135,7 +135,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                        "test_fastq.bam:md5,ca2d9f4b73085ade55f4065ee928cb91"
                     ]
                 ],
                 "1": [
@@ -153,8 +153,8 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7",
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ],
                 "bam": [
                     [
@@ -167,7 +167,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,028eb2162af5bc295b6888af0f732979"
+                        "test_fastq.bam:md5,ca2d9f4b73085ade55f4065ee928cb91"
                     ]
                 ],
                 "fastq": [
@@ -185,16 +185,16 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7",
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-29T16:06:40.375371334"
+        "timestamp": "2025-10-22T11:01:51.256988888"
     },
     "convert neither BAM to FASTQ nor FASTQ to BAM": {
         "content": [
@@ -277,8 +277,8 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7",
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ],
                 "bam": [
                     [
@@ -309,15 +309,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c688783029643ca3fd84ba740c99c2a7",
-                    "versions.yml:md5,f6a244a66e7dc41043ae81b21857bda2"
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-29T16:16:49.102813896"
+        "timestamp": "2025-10-22T11:02:03.442212961"
     }
 }

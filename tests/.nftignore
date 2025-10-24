@@ -3,6 +3,8 @@ assembly/**/*.{bam,bai,cram,crai}
 cnv_calling/**/*.log
 multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/multiqc_data/BETA-multiqc.parquet
+multiqc/multiqc_data/multiqc.parquet
+multiqc/multiqc_data/llms-full.txt
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
 multiqc/multiqc_data/multiqc_software_versions.txt

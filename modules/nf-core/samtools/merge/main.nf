@@ -4,21 +4,22 @@ process SAMTOOLS_MERGE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
+        'https://depot.galaxyproject.org/singularity/samtools:1.22.1--h96c455f_0' :
+        'biocontainers/samtools:1.22.1--h96c455f_0' }"
 
     input:
     tuple val(meta), path(input_files)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
+    tuple val(meta4), path(gzi)
 
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
     tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
+    tuple val(meta), path("*.csi")         , optional:true, emit: csi
     tuple val(meta), path("*.bai")         , optional:true, emit: bai
     tuple val(meta), path("*.crai")        , optional:true, emit: crai
     path  "versions.yml"                                  , emit: versions
-
 
     when:
     task.ext.when == null || task.ext.when
@@ -30,6 +31,7 @@ process SAMTOOLS_MERGE {
     def input = (input_files.collect().size() > 1) ? input_files.sort { it.name } : input_files
     def reference = fasta ? "--reference ${fasta}" : ""
     """
+    # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
     samtools \\
         merge \\
         --threads ${task.cpus-1} \\

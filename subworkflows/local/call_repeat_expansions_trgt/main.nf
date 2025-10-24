@@ -36,11 +36,14 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     // Sort and index bam
     SAMTOOLS_SORT (
         TRGT_GENOTYPE.out.bam,
-        [[],[]]
+        [[],[]],
+        '',
     )
     ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions)
 
-    SAMTOOLS_INDEX ( SAMTOOLS_SORT.out.bam )
+    SAMTOOLS_INDEX (
+        SAMTOOLS_SORT.out.bam
+    )
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     // Publish spanning reads as CRAM if requested
@@ -61,7 +64,9 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Sort and index bcf
-    BCFTOOLS_SORT ( ADD_FOUND_IN_TAG.out.vcf )
+    BCFTOOLS_SORT (
+        ADD_FOUND_IN_TAG.out.vcf
+    )
     ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
     BCFTOOLS_SORT.out.vcf
@@ -77,7 +82,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
     ch_versions = ch_versions.mix(TRGT_MERGE.out.versions)
 
-    BCFTOOLS_INDEX(
+    BCFTOOLS_INDEX (
         TRGT_MERGE.out.vcf
     )
     ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)

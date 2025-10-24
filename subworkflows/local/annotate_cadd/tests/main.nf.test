@@ -55,7 +55,7 @@ nextflow_workflow {
                 """
                 input[0] = SAMTOOLS_FAIDX.out.fai
                 input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index
                 input[3] = Channel.of([
                     [ id: 'test' ],
                     file("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true)
