@@ -207,12 +207,12 @@ workflow PHASING {
     } else if (phaser.equals("whatshap")) {
 
         ch_bam_bai
-            .map { meta, bam, bai -> [ [ id : meta.family_id ], bam, bai ] }
+            .map { meta, bam, bai -> [ [ id : meta.family_id, family_id : meta.family_id ], bam, bai ] }
             .groupTuple()
             .set { ch_bam_bai_grouped }
 
         ch_snv_vcf
-            .map { meta, vcf -> [ [ id: meta.id ], vcf ] }
+            .map { meta, vcf -> [ [ id: meta.id, family_id : meta.family_id ], vcf ] }
             .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_whatshap_phase_in}
 
