@@ -87,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed `samplesheet_multisample_bam` test to include `filter_snvs_expression` and `filter_svs_expression`, and moved `filter_variants_hgnc_ids = null` to `samplesheet_multisample_ont_bam`
 - [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Updated more modules
 - [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Prep release 0.8.0
+- [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Updated parameters.md, removed autoformatting which brakes the document
 
 ### `Removed`
 
@@ -100,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#741](https://github.com/genomic-medicine-sweden/nallo/pull/741) - Removed bcftools filltags from the SNV calling subworkflow, that previosuly added an AC entry
 - [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
 - [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Removed unused components in subworkflows
+- [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Removed autoformatting from parameters docs which broke the document
 
 ### `Fixed`
 
