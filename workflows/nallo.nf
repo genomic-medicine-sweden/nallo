@@ -510,9 +510,9 @@ workflow NALLO {
 
         PHASING.out.phased_family_snvs
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
-            .combine(SCATTER_GENOME.out.bed)
+            .combine(SCATTER_GENOME.out.bed_intervals)
             .multiMap { meta, vcf, tbi, bed, _num_intervals ->
-                vcf: [ meta + [ id: bed.baseName ], vcf, tbi ]
+                vcf: [ meta + [ id : bed.name ], vcf, tbi ]
                 bed : bed
             }
             .set { ch_phased_scatter_in }
