@@ -25,7 +25,6 @@ process WHATSHAP_STATS {
     """
     whatshap stats \\
         $args \\
-        --sample ${meta.id} \\
         --tsv ${prefix}.stats.tsv \\
         --gtf ${prefix}.blocks.gtf \\
         $vcf
