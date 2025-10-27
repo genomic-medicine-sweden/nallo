@@ -124,8 +124,12 @@ workflow PHASING {
         )
         ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
-        // Sort all phased VCFs, ignoring varian types.
-        BCFTOOLS_SORT( LONGPHASE_PHASE.out.vcf.transpose() )
+        LONGPHASE_PHASE.out.vcf
+            .transpose()
+            .map { meta, vcf -> [ meta + [ sv : vcf.simpleName.endsWith("_SV") ], vcf ] }
+            .set { ch_bcftools_sort_in }
+        // Sort all phased VCFs, ignoring variant types.
+        BCFTOOLS_SORT( ch_bcftools_sort_in )
         ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
 
@@ -133,7 +137,7 @@ workflow PHASING {
         BCFTOOLS_SORT.out.vcf
             .join (BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
-                [ meta + [ id: meta.family_id, sv: vcf.simpleName.endsWith("_SV")], vcf, tbi ]
+                [ meta + [ id: meta.family_id ], vcf, tbi ]
             }
             .groupTuple()
             .branch { meta, _vcf, _tbi ->
@@ -160,6 +164,7 @@ workflow PHASING {
             .mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
                 .join(BCFTOOLS_MERGE_LONGPHASE_SV.out.index, failOnMismatch: true, failOnDuplicate: true)
             )
+            .map { meta, vcf, tbi -> [ meta - meta.subMap("sv"), vcf, tbi ] }
             .groupTuple()
             .set { ch_bcftools_concat_in }
 
@@ -180,6 +185,7 @@ workflow PHASING {
                     : [ meta, vcfs, [], [] ]
             }
             .set { ch_vcfs_for_haplotag }
+
 
         LONGPHASE_HAPLOTAG (
             ch_bam_bai.join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true),
