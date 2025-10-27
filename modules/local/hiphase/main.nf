@@ -6,7 +6,7 @@ process HIPHASE {
     container "quay.io/biocontainers/hiphase:1.4.0--h9ee0642_0"
 
     input:
-    tuple val(meta), val(samples), path(bams), path(bais), path(snvs), path(snv_indices), path(svs), path(sv_indices)
+    tuple val(meta), path(bams), path(bais), path(snvs), path(snv_indices), path(svs), path(sv_indices)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     val(output_bam)
@@ -41,7 +41,6 @@ process HIPHASE {
     def bamNames = []
     def vcfNames = []
 
-    def sample_args = samples.collect { "--sample \"$it\"" }.join(" ")
     def snv_args = snvs.collectMany { file ->
         [
             "--vcf",
@@ -90,7 +89,6 @@ process HIPHASE {
         $args \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
-        ${sample_args} \\
         ${bam_args} \\
         ${snv_args} \\
         ${sv_args}
