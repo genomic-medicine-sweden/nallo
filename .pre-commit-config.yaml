@@ -13,6 +13,7 @@ repos:
         exclude: |
           (?x)^(
               .*ro-crate-metadata.json$|
+              docs/parameters.md|
               modules/nf-core/.*|
               subworkflows/nf-core/.*|
               .*\.snap$
@@ -21,6 +22,7 @@ repos:
         exclude: |
           (?x)^(
               .*ro-crate-metadata.json$|
+              docs/parameters.md|
               modules/nf-core/.*|
               subworkflows/nf-core/.*|
               .*\.snap$
