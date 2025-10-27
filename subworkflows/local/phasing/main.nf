@@ -263,14 +263,22 @@ workflow PHASING {
     // Phase variants and haplotag reads with HiPhase
     } else if (phaser.equals("hiphase")) {
 
+        ch_snv_vcf
+            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcf, tbi -> [ [id : meta.family_id, sample_ids: meta.sample_ids], vcf, tbi ] }
+            .set { ch_snv_vcf_tbi }
+
+        ch_sv_vcf
+            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcf, tbi -> [ [id : meta.family_id, sample_ids: meta.sample_ids], vcf, tbi ] }
+            .set { ch_sv_vcf_tbi }
+
         ch_bam_bai
             .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
             .groupTuple()
             .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais ]}
-            .join( ch_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_sv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true ).dump(tag: 'bam_snv')
+            .join( ch_sv_vcf_tbi.dump(tag: 'svs'), failOnMismatch: true, failOnDuplicate:true ).dump()
             .set { ch_hiphase_snv_in }
 
         HIPHASE (
