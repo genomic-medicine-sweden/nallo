@@ -2,6 +2,7 @@
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
             251,
+            287,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -172,6 +173,10 @@
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
+                "SVDB_MERGE_BY_SAMPLE": {
+                    "svdb": "2.8.2",
+                    "bcftools": 1.21
+                },
                 "SVDB_QUERY": {
                     "svdb": "2.8.2"
                 },
@@ -216,14 +221,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_ONT_A",
-                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam",
-                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai",
                 "aligned_reads/HG002_ONT_B",
-                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
-                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
                 "aligned_reads/HG002_ONT_C",
-                "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam",
-                "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_ONT_A",
@@ -245,39 +244,11 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
-                "methylation",
-                "methylation/modkit",
-                "methylation/modkit/pileup",
-                "methylation/modkit/pileup/HG002_ONT_A",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bw",
-                "methylation/modkit/pileup/HG002_ONT_B",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bw",
-                "methylation/modkit/pileup/HG002_ONT_C",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bw",
+                "bcftools",
+                "bcftools/test_data_chunk.00001.bed_FAM.vcf.gz",
+                "bcftools/test_data_chunk.00001.bed_FAM.vcf.gz.tbi",
+                "bcftools/test_data_chunk.00001.bed_FAM2.vcf.gz",
+                "bcftools/test_data_chunk.00001.bed_FAM2.vcf.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -438,15 +409,12 @@
                 "pedigree/family/FAM.ped",
                 "pedigree/family/FAM2.ped",
                 "phased_variants",
-                "phased_variants/HG002_ONT_A",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_B",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_C",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz.tbi",
+                "phased_variants/FAM",
+                "phased_variants/FAM/FAM_phased.vcf.gz",
+                "phased_variants/FAM/FAM_phased.vcf.gz.tbi",
+                "phased_variants/FAM2",
+                "phased_variants/FAM2/FAM2_phased.vcf.gz",
+                "phased_variants/FAM2/FAM2_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
                 "qc",
@@ -458,16 +426,6 @@
                 "qc/bcftools_stats/HG002_ONT_C",
                 "qc/bcftools_stats/HG002_ONT_C/HG002_ONT_C.bcftools_stats.txt",
                 "qc/cramino",
-                "qc/cramino/phased",
-                "qc/cramino/phased/HG002_ONT_A",
-                "qc/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG002_ONT_A/HG002_ONT_A_cramino_aligned_phased.txt",
-                "qc/cramino/phased/HG002_ONT_B",
-                "qc/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG002_ONT_B/HG002_ONT_B_cramino_aligned_phased.txt",
-                "qc/cramino/phased/HG002_ONT_C",
-                "qc/cramino/phased/HG002_ONT_C/HG002_ONT_C_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG002_ONT_C/HG002_ONT_C_cramino_aligned_phased.txt",
                 "qc/cramino/unphased",
                 "qc/cramino/unphased/HG002_ONT_A",
                 "qc/cramino/unphased/HG002_ONT_A/HG002_ONT_A_cramino_aligned.arrow",
@@ -541,42 +499,20 @@
                 "qc/peddy/FAM2/FAM2.sex_check.png",
                 "qc/peddy/FAM2/FAM2.vs.html",
                 "qc/phasing_stats",
-                "qc/phasing_stats/HG002_ONT_A",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv",
-                "qc/phasing_stats/HG002_ONT_B",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv",
-                "qc/phasing_stats/HG002_ONT_C",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.stats.tsv",
+                "qc/phasing_stats/FAM",
+                "qc/phasing_stats/FAM/FAM_stats.blocks.gtf.gz",
+                "qc/phasing_stats/FAM/FAM_stats.blocks.gtf.gz.tbi",
+                "qc/phasing_stats/FAM/FAM_stats.stats.tsv",
+                "qc/phasing_stats/FAM2",
+                "qc/phasing_stats/FAM2/FAM2_stats.blocks.gtf.gz",
+                "qc/phasing_stats/FAM2/FAM2_stats.blocks.gtf.gz.tbi",
+                "qc/phasing_stats/FAM2/FAM2_stats.stats.tsv",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
                 "qc/somalier/relate/test/test.samples.tsv",
-                "repeats",
-                "repeats/family",
-                "repeats/family/FAM",
-                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz",
-                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz.tbi",
-                "repeats/family/FAM2",
-                "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz",
-                "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz.tbi",
-                "repeats/sample",
-                "repeats/sample/HG002_ONT_A",
-                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz",
-                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz.tbi",
-                "repeats/sample/HG002_ONT_B",
-                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz",
-                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz.tbi",
-                "repeats/sample/HG002_ONT_C",
-                "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz",
-                "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -636,33 +572,10 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,bace18a8e6dcf7f3dc1a1c95202bc0f2",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,70c46e9a12938cc7ff2e1a56de0e57d9",
-                "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,508d0e7519d89b56afa767d2a7f9765f",
-                "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,3449677d26967205a7e3d6a6e69cb547",
-                "HG002_ONT_A_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
-                "HG002_ONT_A_modkit_pileup_2.bed.gz:md5,e59dd6d3037b816bfa54cf0d1f92c2a2",
-                "HG002_ONT_A_modkit_pileup_2.bed.gz.tbi:md5,4674639e3c2b62e5c58c28df7bebc2ca",
-                "HG002_ONT_A_modkit_pileup_2.bw:md5,a170155fef4ea3c786c600733bac76e9",
-                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz:md5,eac49868df1b5d25c13506ed2a95ed0c",
-                "HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi:md5,56036f5eaa0f67e9b2bc7c0d55952131",
-                "HG002_ONT_A_modkit_pileup_ungrouped.bw:md5,765acc78b12b93291a5450af565f89c3",
-                "HG002_ONT_B_modkit_pileup_1.bed.gz:md5,508d0e7519d89b56afa767d2a7f9765f",
-                "HG002_ONT_B_modkit_pileup_1.bed.gz.tbi:md5,3449677d26967205a7e3d6a6e69cb547",
-                "HG002_ONT_B_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
-                "HG002_ONT_B_modkit_pileup_2.bed.gz:md5,e59dd6d3037b816bfa54cf0d1f92c2a2",
-                "HG002_ONT_B_modkit_pileup_2.bed.gz.tbi:md5,4674639e3c2b62e5c58c28df7bebc2ca",
-                "HG002_ONT_B_modkit_pileup_2.bw:md5,a170155fef4ea3c786c600733bac76e9",
-                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz:md5,162ef6866969907a772d8ccadef1bc38",
-                "HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi:md5,bdd86cb943b9aa147030d5837997501a",
-                "HG002_ONT_B_modkit_pileup_ungrouped.bw:md5,59c1327aba15c4272587c9bf34c0e9d2",
-                "HG002_ONT_C_modkit_pileup_1.bed.gz:md5,508d0e7519d89b56afa767d2a7f9765f",
-                "HG002_ONT_C_modkit_pileup_1.bed.gz.tbi:md5,3449677d26967205a7e3d6a6e69cb547",
-                "HG002_ONT_C_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
-                "HG002_ONT_C_modkit_pileup_2.bed.gz:md5,e59dd6d3037b816bfa54cf0d1f92c2a2",
-                "HG002_ONT_C_modkit_pileup_2.bed.gz.tbi:md5,4674639e3c2b62e5c58c28df7bebc2ca",
-                "HG002_ONT_C_modkit_pileup_2.bw:md5,a170155fef4ea3c786c600733bac76e9",
-                "HG002_ONT_C_modkit_pileup_ungrouped.bed.gz:md5,eac49868df1b5d25c13506ed2a95ed0c",
-                "HG002_ONT_C_modkit_pileup_ungrouped.bed.gz.tbi:md5,56036f5eaa0f67e9b2bc7c0d55952131",
-                "HG002_ONT_C_modkit_pileup_ungrouped.bw:md5,765acc78b12b93291a5450af565f89c3",
+                "test_data_chunk.00001.bed_FAM.vcf.gz:md5,164be5403bb07242e056251cf89ceff0",
+                "test_data_chunk.00001.bed_FAM.vcf.gz.tbi:md5,9c86f683271ca3aa2b1c649b70a81829",
+                "test_data_chunk.00001.bed_FAM2.vcf.gz:md5,67c3a48d14098258a1210e09d67fd9d2",
+                "test_data_chunk.00001.bed_FAM2.vcf.gz.tbi:md5,e7b9061f589253313d4c95f3af1ea585",
                 "bcftools-stats-subtypes.txt:md5,9b562e3289ae0a8ecf0fb83fdf42bcc1",
                 "bcftools_stats_indel-lengths.txt:md5,00a64900414fe2633d77fa0e42a0eb21",
                 "fastqc-status-check-heatmap.txt:md5,d0e1151d2a0c5002e2bcfa9e3ceccbd9",
@@ -684,11 +597,11 @@
                 "multiqc_bcftools_stats.txt:md5,f62924c16aa9ca823a779ff873d46290",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,36de4d688329683ad0b103c728afad97",
-                "multiqc_general_stats.txt:md5,4df3377b444f2efab296f92800868e89",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,23f4b769ab4d846015ddd3704dff16b7",
+                "multiqc_general_stats.txt:md5,3e3f92e9b2054b87a0cf0dbb8d92cca4",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,9a6cc560383ceed14307cf65fcf6ac1e",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,6520c753b4bdeadeaa78416661b350c7",
-                "whatshap-stats-table.txt:md5,ddf60f94459c1d227530d813da670977",
+                "whatshap-stats-table.txt:md5,ef0583bc88e4d58c52bd4064e4a1903a",
                 "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
@@ -697,6 +610,9 @@
                 "HG002_ONT_A_cramino_aligned.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
                 "HG002_ONT_B_cramino_aligned.arrow:md5,b54516c7bc3aa8afa988f0db47eed13b",
                 "HG002_ONT_C_cramino_aligned.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
+                "HG002_ONT_A_cramino_aligned.arrow:md5,140a737907f2b3df30eb6bb741c527ae",
+                "HG002_ONT_B_cramino_aligned.arrow:md5,7aefe58edd7ad67a1cf3c7e17c4167bc",
+                "HG002_ONT_C_cramino_aligned.arrow:md5,140a737907f2b3df30eb6bb741c527ae",
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,14bcc32136e2146095ad21e40b2bc6a1",
                 "HG002_ONT_A.mosdepth.region.dist.txt:md5,8c2be7b8a518ccdddfd44dc5ae18b783",
                 "HG002_ONT_A.mosdepth.summary.txt:md5,2c8117fc445598a1c7225304f2907c54",
@@ -735,12 +651,10 @@
                 "FAM2.sex_check.csv:md5,79b718a56051d3c47009f1c8fe7e8448",
                 "FAM2.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM2.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_ONT_A_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
-                "HG002_ONT_A_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
-                "HG002_ONT_B_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
-                "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
-                "HG002_ONT_C_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
-                "HG002_ONT_C_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "FAM_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
+                "FAM_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "FAM2_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
+                "FAM2_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
                 "HG002_ONT_A_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
@@ -752,18 +666,6 @@
                 "HG002_ONT_C_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5"
             ],
             [
-                [
-                    "HG002_ONT_A_haplotagged.bam",
-                    "6ca64c3624f7f74920df36872ed4c6ad"
-                ],
-                [
-                    "HG002_ONT_B_haplotagged.bam",
-                    "ae488d52571d4698081e77681149ab82"
-                ],
-                [
-                    "HG002_ONT_C_haplotagged.bam",
-                    "6ca64c3624f7f74920df36872ed4c6ad"
-                ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
                     "39a588e85995bc46dcedb09c5aee2275"
@@ -784,34 +686,52 @@
                 [
                     "HG002_ONT_A_phased.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
+                    "test_data_chunk.00001.bed_FAM.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=128, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_B_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
+                    "test_data_chunk.00001.bed_FAM2.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=128, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_C_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=14, variantCount=283, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_repeat_expansions.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
+                    "FAM2_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=283, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM2_repeat_expansions.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                    "HG002_ONT_A_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_A_strdust.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                    "HG002_ONT_A_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_ONT_B_strdust.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                    "HG002_ONT_B_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_C_strdust.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
+                    "HG002_ONT_B_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_ONT_C_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG002_ONT_C_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=272, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=128, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM2_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=128, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
@@ -867,7 +787,14 @@
                 ]
             ],
             [
-                
+                [
+                    "test_data_chunk.00001.bed_FAM.vcf.gz",
+                    "f0ced932ba0ee2568ae77357474fffbf"
+                ],
+                [
+                    "test_data_chunk.00001.bed_FAM2.vcf.gz",
+                    "508a179a8e99107438733ffad58ee76d"
+                ]
             ]
         ],
         "meta": {
