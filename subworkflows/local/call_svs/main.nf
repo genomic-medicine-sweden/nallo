@@ -263,18 +263,6 @@ workflow CALL_SVS {
         .set { ch_vcfs_to_merge }
 
     ch_vcfs_to_merge
-        .map { meta, vcf, _tbi -> [ meta - meta.subMap('sv_caller'), vcf ]}
-        .groupTuple()
-        .set { ch_svdb_merge_by_sample_input }
-
-    SVDB_MERGE_BY_SAMPLE (
-        ch_svdb_merge_by_sample_input,
-        [],
-        true
-    )
-    ch_versions = ch_versions.mix(SVDB_MERGE_BY_SAMPLE.out.versions)
-
-    ch_vcfs_to_merge
         .map { meta, vcf, _tbi -> [ [ id : meta.family_id, family_id : meta.family_id, sv_caller : meta.sv_caller ], meta.id, vcf ] }
         .groupTuple()
         .map { meta, ids, vcfs -> [ meta + [ sample_ids: ids.toSet() ], vcfs ] }
@@ -319,8 +307,6 @@ workflow CALL_SVS {
     ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
     emit:
-    sample_vcf        = SVDB_MERGE_BY_SAMPLE.out.vcf
-    sample_tbi        = SVDB_MERGE_BY_SAMPLE.out.tbi
     family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
     family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
