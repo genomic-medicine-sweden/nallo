@@ -7,7 +7,7 @@ include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV    } from '../../../modu
 include { BCFTOOLS_SORT                                    } from '../../../modules/nf-core/bcftools/sort/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SNV       } from '../../../modules/local/create_split_file/main'
 include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SV        } from '../../../modules/local/create_split_file/main'
-include { CRAMINO as CRAMINO_PHASED                        } from '../../../modules/local/cramino/main'
+include { CRAMINO as CRAMINO_PHASED                        } from '../../../modules/nf-core/cramino/main'
 include { HIPHASE                                          } from '../../../modules/local/hiphase/main'
 include { LONGPHASE_HAPLOTAG                               } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE                                  } from '../../../modules/nf-core/longphase/phase/main'
@@ -206,6 +206,7 @@ workflow PHASING {
     // Phase variants and haplotag reads with whatshap
     } else if (phaser.equals("whatshap")) {
 
+        // Fix metadata to group by family
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.family_id, family_id : meta.family_id ], bam, bai ] }
             .groupTuple()
