@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.8.0 - [2025-10-24]
+## 0.8.0 - [2025-10-28]
 
 ### `Added`
 
@@ -87,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed `samplesheet_multisample_bam` test to include `filter_snvs_expression` and `filter_svs_expression`, and moved `filter_variants_hgnc_ids = null` to `samplesheet_multisample_ont_bam`
 - [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Updated more modules
 - [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Prep release 0.8.0
+- [#791](https://github.com/genomic-medicine-sweden/nallo/pull/791) - Changed `YAK_COUNT` label back to `process_high`
 
 ### `Removed`
 
