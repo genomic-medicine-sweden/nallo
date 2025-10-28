@@ -89,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Prep release 0.8.0
 - [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Updated parameters.md, removed autoformatting which brakes the document
 - [#791](https://github.com/genomic-medicine-sweden/nallo/pull/791) - Changed `YAK_COUNT` label back to `process_high`
+- [#792](https://github.com/genomic-medicine-sweden/nallo/pull/792) - Changed `YAK_COUNT` label back to `process_high`, correctly
 
 ### `Removed`
 
