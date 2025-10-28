@@ -572,7 +572,6 @@
                 },
                 "force_sawfish_joint_call_single_samples": {
                     "type": "boolean",
-                    "default": null,
                     "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
                 },
                 "filter_variants_hgnc_ids": {
@@ -635,7 +634,7 @@
                 "pre_vep_snv_filter_expression": {
                     "type": "string",
                     "default": null,
-                    "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". Since this filtering takes place during the annotation, the expression applies to both the clinical and the research VCFs."
+                    "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". The expression applies to both the clinical and the research VCFs."
                 }
             },
             "required": ["preset"]
