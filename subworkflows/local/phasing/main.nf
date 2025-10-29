@@ -22,8 +22,8 @@ workflow PHASING {
     take:
     ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
     ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
-    ch_sv_vcf        // channel: [ val(meta), path(vcf) ]
-    ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf        // channel: [ val(meta), path(vcf) ] Optional
+    ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ] Optional
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
@@ -36,6 +36,8 @@ workflow PHASING {
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
+        // Even though the SV channels can be empty, it is easier to pretend they are not
+        // All the operations below are no-ops in case the channels are empty
         ch_snv_vcf
             .map { meta, _vcf -> [ meta, meta.sample_ids ] }
             .set { ch_create_split_file_snv_in }
@@ -103,17 +105,24 @@ workflow PHASING {
             []
         )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SV.out.versions)
+
+        // The SV splitting might have not produced any output if there were no SVs
+        // If it is empty, we create a new channel with the metas from the SNVs and empty lists
         BCFTOOLS_PLUGINSPLIT_SV.out.vcf
             .transpose()
             .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
             .join(ch_sv_split_names, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
+            .ifEmpty {
+                ch_split_snv_vcf
+                    .map { meta, _vcf -> [ meta, [] ] }
+            }
             .set { ch_split_sv_vcf }
 
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
             .join( ch_split_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_split_sv_vcf, remainder:true, failOnDuplicate:true ) // Will set svs to null in case there are none
+            .join( ch_split_sv_vcf, failOnMismatch:true, failOnDuplicate:true ) // Will set svs to null in case there are none
             .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs ?: [], [] ] }
             .set { ch_longphase_phase_in }
 
