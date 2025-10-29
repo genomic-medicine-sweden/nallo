@@ -260,12 +260,8 @@ workflow CALL_SVS {
     BCFTOOLS_REHEADER.out.vcf
         .join ( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
         .concat ( ch_found_in_tagged_vcf.no_reheader )
-        .set { ch_vcfs_to_merge }
-
-    ch_vcfs_to_merge
-        .map { meta, vcf, _tbi -> [ [ id : meta.family_id, family_id : meta.family_id, sv_caller : meta.sv_caller ], meta.id, vcf ] }
+        .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], vcf ] }
         .groupTuple()
-        .map { meta, ids, vcfs -> [ meta + [ sample_ids: ids.toSet() ], vcfs ] }
         .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
