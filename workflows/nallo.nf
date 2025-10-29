@@ -2,6 +2,7 @@ include { samplesheetToList } from 'plugin/nf-schema'
 include {
     createReferenceChannelFromPath
     createReferenceChannelFromSamplesheet
+    buildFamilyToSampleMap
 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -468,7 +469,8 @@ workflow NALLO {
             params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
             params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
             ch_sv_call_regions,
-            params.sv_call_regions
+            params.sv_call_regions,
+            params.force_sawfish_joint_call_single_samples,
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
@@ -480,11 +482,12 @@ workflow NALLO {
     //
     if(!params.skip_phasing) {
 
+        family_map = buildFamilyToSampleMap(ch_input)
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, vcf, tbi ->
-                [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
+                [ groupKey(meta + [id : meta.family_id, sample_ids : family_map[meta.family_id] ], params.snv_calling_processes), vcf, tbi ]
             }
             .groupTuple()
             .set { ch_bcftools_concat_phasing_in }
@@ -493,11 +496,21 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
 
+        if (params.skip_sv_calling) {
+            ch_sv_phasing_in = Channel.empty()
+            ch_sv_tbi_phasing_in = Channel.empty()
+        } else {
+            ch_sv_phasing_in = CALL_SVS.out.family_vcf
+                .map { meta, vcf -> [ meta + [sample_ids : family_map[meta.family_id] ], vcf ] }
+            ch_sv_tbi_phasing_in = CALL_SVS.out.family_tbi
+                .map { meta, tbi -> [ meta + [sample_ids : family_map[meta.family_id] ], tbi ] }
+        }
+
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_vcf,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_tbi,
+            ch_sv_phasing_in,
+            ch_sv_tbi_phasing_in,
             ch_bam_bai,
             ch_fasta,
             ch_fai,
