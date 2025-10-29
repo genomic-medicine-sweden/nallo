@@ -308,6 +308,18 @@ def validateUniqueSampleIDs(input) {
     return input
 }
 
+// Build map of family IDs to sets of sample IDs
+def buildFamilyToSampleMap(ch_samplesheet) {
+    return ch_samplesheet
+        .map { meta, _reads -> [ meta.family_id, meta.id ] }
+        .groupTuple()
+        .map { family_id, sample_ids -> [ family_id, sample_ids.toSet() ] }
+        .reduce(new HashMap<String, Set<String>>()) { map, pair ->
+            map[pair[0]] = pair[1]
+            return map
+        }
+}
+
 //
 // Generate methods description for MultiQC
 //
