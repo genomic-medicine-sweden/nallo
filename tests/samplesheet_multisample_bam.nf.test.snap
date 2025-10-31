@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            313,
+            316,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -242,7 +242,7 @@
                     "tabix": 1.22
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.8.0"
+                    "genomic-medicine-sweden/nallo": "v0.8.1"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r56"
@@ -918,9 +918,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-24T09:49:52.016507828"
+        "timestamp": "2025-10-31T15:31:13.688836514"
     }
 }
