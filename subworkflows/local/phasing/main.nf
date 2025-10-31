@@ -44,8 +44,7 @@ workflow PHASING {
         ch_versions = ch_versions.mix(TABIX_LONGPHASE_PHASE.out.versions)
 
         LONGPHASE_PHASE.out.vcf
-            .join( TABIX_LONGPHASE_PHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_phased_vcf_index }
+            .set { ch_phased_vcf }
 
         ch_bam_bai
             .join( LONGPHASE_PHASE.out.vcf, failOnMismatch:true, failOnDuplicate:true )
@@ -99,7 +98,8 @@ workflow PHASING {
             .set { ch_bam_bai_haplotagged }
 
         WHATSHAP_PHASE.out.vcf_tbi
-            .set { ch_phased_vcf_index }
+            .map { meta, vcf, _tbi -> [ meta, vcf ] }
+            .set { ch_phased_vcf }
 
     // Phase variants and haplotag reads with HiPhase
     } else if (params.phaser.equals("hiphase")) {
@@ -120,19 +120,24 @@ workflow PHASING {
             .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
-        BCFTOOLS_SORT (
-            HIPHASE.out.vcfs,
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_phased_vcf_index }
+        HIPHASE.out.vcfs
+            .set { ch_phased_vcf }
 
     }
 
+    BCFTOOLS_SORT (
+        ch_phased_vcf
+    )
+    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
+
+    BCFTOOLS_SORT.out.vcf
+        .join( BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+        .set { ch_phased_sorted_vcf_index }
+
     // Phasing stats
-    WHATSHAP_STATS ( ch_phased_vcf_index )
+    WHATSHAP_STATS (
+        ch_phased_sorted_vcf_index
+    )
     ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
 
     if (cram_output) {
