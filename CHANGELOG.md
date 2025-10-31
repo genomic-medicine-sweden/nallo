@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#796](https://github.com/genomic-medicine-sweden/nallo/pull/796) - Fixed sorting of phase blocks GTF file
+- [#796](https://github.com/genomic-medicine-sweden/nallo/pull/796) - Fixed sorting of phase blocks GTF file (backported from 0.7.1)
 
 ## 0.8.0 - [2025-10-28]
 
@@ -209,6 +209,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.7.2 - [2025-10-31]
+
+### `Fixed`
+
+- [#796](https://github.com/genomic-medicine-sweden/nallo/pull/796) - Fixed sorting of phase blocks GTF file
 
 ## 0.7.1 - [2025-07-01]
 
