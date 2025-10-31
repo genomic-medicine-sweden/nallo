@@ -85,4 +85,3 @@ workflow BAM_INFER_SEX {
     somalier_pairs   = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
     versions = ch_versions                                                     // channel: [ versions.yml ]
 }
-

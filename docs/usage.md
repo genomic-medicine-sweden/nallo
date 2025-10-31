@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. Install Nextflow (>=24.04.2) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
+1. Install Nextflow (>=24.10.5) using the instructions [here.](https://nextflow.io/docs/latest/getstarted.html#installation)
 2. Install one of the following technologies for full pipeline reproducibility: Docker, Singularity, Podman, Shifter or Charliecloud.
 
 !!!warning
@@ -65,20 +65,25 @@ It has to be a comma-separated file with seven columns and a header row, as show
 
 ```console
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-testrun,HG002,/path/to/HG002.fastq.gz,FAM,HG003,0,1,2
-testrun,HG003,/path/to/HG003.bam,FAM,0,0,2,1
+testrun,HG002,/path/to/HG002_1.bam,NIST,HG003,0,1,2
+testrun,HG002,/path/to/HG002_2.bam,NIST,HG003,0,1,2
+testrun,HG003,/path/to/HG003.fastq.gz,NIST,0,0,2,1
 ```
 
 | Fields        | Description                                                                                                                       |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                    |
 | `sample`      | Custom sample name, cannot contain spaces.                                                                                        |
-| `file`        | Absolute path to gzipped FASTQ or BAM file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                        |
+| `file`        | Absolute path to a BAM or gzipped FASTQ file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                      |
 | `family_id`   | Family ID must be provided and cannot contain spaces. If no family ID is available use the same ID as sample.                     |
 | `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.                                    |
 | `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.                                    |
 | `sex`         | Sex must be provided as 0, 1 or 2 (0=unknown; 1=male; 2=female). If sex is unknown it will be assigned automatically if possible. |
 | `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                               |
+
+!!!tip "Multiple files per sample"
+
+    If you have multiple files per sample, they can be added on separate rows. Keep all columns except `file` identical for each sample. The files will be merged after alignment or before assembly.
 
 ### Presets
 
@@ -86,16 +91,19 @@ This pipeline comes with three different presets that should be set with the `--
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_genome_assembly` and `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
+    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
+    - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
     - `--skip_methylation_pileups` will be set to `true` for `pacbio`
+
+### Reference files
+
+All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
 
 ### Subworkflows
 
 As indicated above, this pipeline is divided into multiple subworkflows, each with their own input requirements and outputs. By default all subworkflows are active, and thus all mandatory input files are required.
 
-#### Required parameters
-
-The only mandatory parameters for all subworkflows are the `--input` and `--outdir` parameters, all other parameters are determined by the active subworkflows.
+The only mandatory parameters are `--input` and `--outdir`, all other parameters are determined by the active subworkflows.
 
 For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv`, the pipeline will would to guide you through which files are required:
 
@@ -109,26 +117,22 @@ For example, if you would run `nextflow run genomic-medicine-sweden/nallo -profi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-A thorough description of the required files are provided below.
+Descriptions of the required files are provided below.
 
 #### Skipping subworkflows
 
 If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.
 
-For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you
+For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment` will tell you:
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_cnv_calling --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 Because almost all other subworkflows relies on the mapping subworkflow.
-
-## Reference files and parameters
-
-All parameters are listed in the [parameters section](parameters.md), but the most useful parameters needed to run the pipeline described with example files in more detail below. Since Nallo can require many different resources for a complete run, [genomic-medicine-sweden/nallorefs](https://github.com/genomic-medicine-sweden/nallorefs) can automatically download and prepare the majority of a set of references that works with Nallo. See the [nallorefs documentation](https://github.com/genomic-medicine-sweden/nallorefs/tree/master/docs) for more information.
 
 #### Alignment
 
@@ -149,7 +153,13 @@ Turned off with `--skip_qc`.
 
 #### Assembly
 
-This subworkflow contains both genome assembly and alignment of assemblies to the reference genome. The genome assembly assemblies the genome into two haplotypes and converts it to fasta. The align assemblies subworkflow then maps the reads to the reference genome, merges and haplotags them, and requires no additional files except the reference genome.
+This step assembles genomes and aligns them to a reference genome.
+
+[Hifiasm](https://github.com/chhylp123/hifiasm) is used to assemble the genome into a pair of haplotypes. Stand-alone, it has support for both PacBio and ONT data, or a combination of PacBio and ultra-long ONT reads (or Hi-C reads), but Nallo currently assumes only one data type per run (set by `--preset`). By default, a pair of haplotype-resolved assemblies are generated using hifiasm with [trio-binning](https://hifiasm.readthedocs.io/en/latest/trio-assembly.html) for samples where parental reads are available, otherwise they are assembled using a [hifi-only](https://hifiasm.readthedocs.io/en/latest/pa-assembly.html) approach. If you don't wish to use trio-binning, this can be turned off by setting `--hifiasm_mode` to `hifi-only`.
+
+The assemblies are then aligned to the reference genome using [minimap2](https://github.com/lh3/minimap2), merged and haplotagged (with `HP` tags).
+
+No additional files other than the reference genome required.
 
 Turned off with `--skip_genome_assembly`.
 
@@ -167,37 +177,43 @@ Turned off with `--skip_call_paralogs`.
 
 This subworkflow depends on the alignment subworkflow, and requires PARs.
 
-| Parameter     | Description                                                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](ttps://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
+| Parameter     | Description                                                                                                                        |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
 
 Turned off with `--skip_snv_calling`.
 
-#### SV calling
+#### Call SVs
 
 This subworkflow depends on the alignment subworkflow.
 
+Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the `--sv_callers` parameter, e.g. `--sv_callers sniffles,hificnv`. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the `--sv_callers_merge_priority` parameter.
+
+Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
+
+!!!info "Variant merging strategies"
+
+    Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.
+
+    Sniffles, Severus and HiFiCNV uses SVDB for both merging steps. Sawfish however, has a built in joint-calling step which always needs to be run, and is used by default instead of SVDB in the first merging step. To force the joint-calling step to only run on one indivdual at a time (and use SVDB to merge into the Sawfish family-level VCF), one can run with `--force_sawfish_joint_call_single_samples`.
+
 !!!tip "Family-level VCFs per caller"
 
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
+If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:
+
+| Parameter              | Description                                                                                                                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
+| `cnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
+| `cnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+
+!!!tip "Family-level VCFs per caller"
+
+    Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_sv_calling`.
-
-#### CNV calling
-
-This subworkflow depends on the alignment and SNV calling subworkflows, and requires the following additional files:
-
-| Parameter                  | Description                                                                                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hificnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
-| `hificnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
-| `hificnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
-
-!!!tip "Family-level VCFs per caller"
-
-Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
-
-Turned off with `--skip_cnv_calling`.
 
 #### Phasing
 
@@ -208,6 +224,10 @@ Turned off with `--skip_phasing`.
 #### Methylation pileups
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.
+
+| Parameter         | Description                                                                                                                                                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
 
 Turned off with `--skip_methylation_pileups`.
 
@@ -242,7 +262,7 @@ This subworkflow relies on the alignment and SNV calling, and requires the follo
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
 | `vep_plugin_files` <sup>1</sup>      | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                         |
-| `echtvar_snv_databases` <sup>2</sup> | A CSV/TSV/JSON/YAML file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                              |
+| `echtvar_snv_databases` <sup>2</sup> | **Optional**: A CSV/TSV/JSON/YAML file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                |
 | `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
@@ -327,7 +347,7 @@ This subworkflow ranks SVs, and relies on the mapping, SV calling and SV annotat
 
 #### Filter variants
 
-This subworkflow filters SNVs and SVs. It required at least the alignment and SNV calling workflows, but most of the time also the SNV annotation and ranking workflows.
+This subworkflow filters SNVs and SVs to generate a "clinical" set of variants before ranking. It requires the SNV and SV annotation subworkflows, and so also the alignment, SNV and SV calling subworkflows.
 
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -345,11 +365,23 @@ hgnc_id
 
 Filtering of variants only happens if any of these three parameters is active.
 
-#### Other highlighted parameters
+!!!tip
 
-- Limit SNV calling to regions in BED file (`--target_regions`).
-- By default SNV-calling is split into 13 parallel processes, this speeds up the variant calling significantly. Change this by setting `--snv_calling_processes` to a different number.
+    The `pre_vep_snv_filter_expression` parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to _both_ the research and clinical VCFs.
+
+### Target regions
+
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+
+!!!warning
+
+    Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
+### Parallelization
+
 - By default the pipeline splits the input files into 8 pieces, performs parallel alignment and then merges the files. This can be changed to a different number with `--alignment_processes`, or turned off by supplying a value of 1. Parallel alignment comes with some additional overhead, but can speed up the pipeline significantly.
+
+- By default the SNV-calling, annotation and ranking is split into 13 parallel processes by creating regions from either the reference genome, or `--target_regions`/`--snv_call_regions` if provided. This already speeds up the pipeline significanly, but can also be increased further by setting `--snv_calling_processes` to a different number, or to 1 to turn off parallel processing.
 
 ## Runtime estimates
 

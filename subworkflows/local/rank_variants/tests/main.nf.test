@@ -6,8 +6,8 @@ nextflow_workflow {
     workflow "RANK_VARIANTS"
 
     setup {
-        run("PREPARE_GENOME") {
-            script "../../prepare_genome/main.nf"
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
             process {
                 """
                 input[0] = Channel.of([
@@ -23,58 +23,31 @@ nextflow_workflow {
                 """
             }
         }
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
+
+        run("ANNOTATE_SNVS") {
+            script "../../annotate_snvs/main.nf"
             process {
                 """
                 input[0] = [
                     [ id: 'project', num_intervals:1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.bcf', checkIfExists: true)
                 ]
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = true
-                input[3] = 'csi'
-                input[4] = false
-                input[5] = false
-                """
-            }
-        }
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
-            process {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .join(Channel.of([
-                                [ id: 'project', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
-                            ]))
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
-                input[4] = [[],[]]
-            """
-            }
-        }
-        run("SNV_ANNOTATION") {
-            script "../../snv_annotation/main.nf"
-            process {
-                """
-                input[0] = SHORT_VARIANT_CALLING.out.family_bcf
                 input[1] = [
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
                 ]
-                input[2] = PREPARE_GENOME.out.fasta
-                input[3] = PREPARE_GENOME.out.fai
-                input[4] = PREPARE_GENOME.out.vep_resources.map { meta, cache -> cache }
+                input[2] = PREPARE_REFERENCES.out.fasta
+                input[3] = PREPARE_REFERENCES.out.fai
+                input[4] = PREPARE_REFERENCES.out.vep_resources.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
-                input[8] = Channel.value([])
-                input[9] = null
+                input[8] = true
+                input[9] = Channel.value([])
                 input[10] = null
+                input[11] = null
+                input[12] = false
                 """
             }
         }
@@ -82,7 +55,7 @@ nextflow_workflow {
             script "../../annotate_consequence_pli/main.nf"
             process {
                 """
-                input[0] = SNV_ANNOTATION.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vcf
                 input[1] = [
                     [ id: 'variant_consequences' ],
                     [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]
@@ -97,7 +70,9 @@ nextflow_workflow {
                 input[0] = [
                     [id:'project'],
                     [
-                        [ id: 'project', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
+                        [ id: 'HG002', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
+                        [ id: 'HG003', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
+                        [ id: 'HG004', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ],
                     ]
                 ]
                 """

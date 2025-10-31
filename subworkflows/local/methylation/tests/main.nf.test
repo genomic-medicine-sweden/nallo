@@ -6,8 +6,8 @@ nextflow_workflow {
     workflow "METHYLATION"
 
     setup {
-        run("PREPARE_GENOME") {
-            script "../../prepare_genome/main.nf"
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
             process {
                 """
                 input[0] = Channel.of([
@@ -25,10 +25,10 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'test', num_intervals:1 ],
+                    [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
-                input[1] = PREPARE_GENOME.out.fasta
+                input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = true
                 input[3] = 'csi'
                 input[4] = false
@@ -36,36 +36,26 @@ nextflow_workflow {
                 """
             }
         }
-        run("SHORT_VARIANT_CALLING") {
-            script "../../short_variant_calling/main.nf"
-            process {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .join(Channel.of([
-                                [ id: 'test', num_intervals:1 ],
-                                file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
-                            ]))
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = PREPARE_GENOME.out.fai
-                input[3] = [[],[]]
-                input[4] = [[],[]]
-            """
-            }
-        }
+
         run("PHASING") {
             script "../../phasing/main.nf"
             process {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.snp_calls_vcf
-                input[1] = SHORT_VARIANT_CALLING.out.snp_calls_tbi
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
                 input[2] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
                             .map { meta, bam, bai ->
                                 [ [ id : meta.id ], bam, bai ]
                             }
-                input[3] = PREPARE_GENOME.out.fasta
-                input[4] = PREPARE_GENOME.out.fai
+                input[3] = PREPARE_REFERENCES.out.fasta
+                input[4] = PREPARE_REFERENCES.out.fai
                 input[5] = false
                 """
             }
@@ -80,8 +70,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = [[],[]]
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -101,8 +93,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = [[],[]]
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -122,10 +116,12 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -145,10 +141,12 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -169,8 +167,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = [[],[]]
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -191,10 +191,12 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }
@@ -215,8 +217,10 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = [[],[]]
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
                 """
             }
         }
@@ -237,10 +241,12 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
-                input[1] = PREPARE_GENOME.out.fasta
-                input[2] = Channel.of('chr20\t2650000\t2660000')
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
                 """
             }
         }

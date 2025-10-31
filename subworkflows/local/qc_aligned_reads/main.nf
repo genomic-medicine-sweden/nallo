@@ -1,4 +1,4 @@
-include { CRAMINO  } from '../../../modules/local/cramino/main'
+include { CRAMINO  } from '../../../modules/nf-core/cramino/main'
 include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { FASTQC   } from '../../../modules/nf-core/fastqc/main'
 
@@ -12,17 +12,24 @@ workflow QC_ALIGNED_READS {
     main:
     ch_versions = Channel.empty()
 
-    FASTQC ( ch_bam_bai.map { meta, bam, _bai -> [ meta, bam ] } )
+    FASTQC (
+        ch_bam_bai.map { meta, bam, _bai -> [ meta, bam ] }
+    )
     ch_versions = ch_versions.mix(FASTQC.out.versions)
 
-    CRAMINO (ch_bam_bai)
+    CRAMINO (
+        ch_bam_bai
+    )
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     ch_bam_bai
-        .combine( ch_bed.map { it[1] }.toList() ) // toList() enables passing [] if ch_bed is empty
+        .combine( ch_bed.map { _meta, bed -> bed }.toList() ) // toList() enables passing [] if ch_bed is empty
         .set { mosdepth_in }
 
-    MOSDEPTH ( mosdepth_in, ch_fasta )
+    MOSDEPTH (
+        mosdepth_in,
+        ch_fasta
+    )
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     emit:
@@ -32,4 +39,3 @@ workflow QC_ALIGNED_READS {
     mosdepth_region_dist = MOSDEPTH.out.regions_txt // channel: [ val(meta), path(txt) ]
     versions             = ch_versions              // channel: [ versions.yml ]
 }
-

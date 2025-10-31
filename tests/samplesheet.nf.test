@@ -9,9 +9,11 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/45aa1918fc8486dbbdc153932ff7b8b0964bd0ea/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
+                sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
             }
         }
 
@@ -31,7 +33,7 @@ nextflow_pipeline {
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),

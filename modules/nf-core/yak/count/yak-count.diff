@@ -1,0 +1,18 @@
+Changes in component 'nf-core/yak/count'
+'modules/nf-core/yak/count/environment.yml' is unchanged
+Changes in 'yak/count/main.nf':
+--- modules/nf-core/yak/count/main.nf
++++ modules/nf-core/yak/count/main.nf
+@@ -1,6 +1,6 @@
+ process YAK_COUNT {
+     tag "$meta.id"
+-    label 'process_low'
++    label 'process_high'
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+
+'modules/nf-core/yak/count/meta.yml' is unchanged
+'modules/nf-core/yak/count/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/yak/count/tests/main.nf.test' is unchanged
+************************************************************

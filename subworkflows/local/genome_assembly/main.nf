@@ -1,116 +1,109 @@
-include { CAT_FASTQ as CAT_FASTQ_PATERNAL } from '../../../modules/nf-core/cat/fastq/main'
-include { CAT_FASTQ as CAT_FASTQ_MATERNAL } from '../../../modules/nf-core/cat/fastq/main'
-include { HIFIASM                         } from '../../../modules/nf-core/hifiasm'
-include { YAK as YAK_PATERNAL             } from '../../../modules/local/yak/main'
-include { YAK as YAK_MATERNAL             } from '../../../modules/local/yak/main'
-include { GFASTATS                        } from '../../../modules/nf-core/gfastats/main'
+include { CAT_FASTQ } from '../../../modules/nf-core/cat/fastq/main'
+include { HIFIASM   } from '../../../modules/nf-core/hifiasm'
+include { YAK_COUNT } from '../../../modules/nf-core/yak/count/main'
+include { GFASTATS  } from '../../../modules/nf-core/gfastats/main'
 
-workflow ASSEMBLY {
+// This subworkflow assembles and outputs haplotypes from a set of reads (grouped per sample), using hifiasm and gfastats.
+// It assumes that while each sample can have multiple files, each sample belongs to one family at most.
+workflow GENOME_ASSEMBLY {
 
     take:
-    ch_reads // channel: [ val(meta), fastq ]
+    ch_reads     // channel: [ val(meta), fastqs ]
+    trio_binning //    bool: Should we use trio binning mode where possible?
 
     main:
     ch_versions = Channel.empty()
-    ch_hifiasm_empty = Channel.value([ [], [], [] ])
 
-    if(params.hifiasm_mode == 'hifi-only') {
-
+    if (trio_binning) {
+        // First, we need to branch the samples based on their relationship
         ch_reads
-            .groupTuple()
-            .map { meta, reads -> [ meta, reads, [] ] }
-            .set { hifiasm_in }
-
-        HIFIASM ( hifiasm_in, ch_hifiasm_empty, ch_hifiasm_empty )
-        ch_versions = ch_versions.mix(HIFIASM.out.versions)
-
-    } else if(params.hifiasm_mode == 'trio-binning') {
-        // Multiple trios with different parents may not work?
-        ch_reads.groupTuple()
-            .map{ meta, _reads -> meta } // Takes meta, then
-            // combine to create all possible combinations of [ meta, meta ]
-            // but keep only the id of the second meta [ meta, meta.id ]
-            .combine(ch_reads.groupTuple().map{ meta, reads -> [meta.id, reads] })
-            // This creates [ meta, [ meta.id, reads] ], where
-            // meta.id comes from the meta of the reads, and a combination between these
-            // and every other sample meta in the samplesheet is created
-            //
-            // From this we can extract kids (or rather the primary patient), moms, and dads:
-            //
-            // If any sample has the id of another sample as paternal_id, then that is a dad
-            // If any sample has the id of another sample as maternal_id, then that is a mom
-            // If any sample has the id of another sample as id, then that is a kid (should be one
-            // combination like this for every sample)
-            // This means that everyone is a kid (even parents), but not every kid has parents
-            .branch{ kid_meta, sample_id, _reads ->
-                kid: sample_id == kid_meta.id
-                mom: sample_id == kid_meta.maternal_id
-                dad: sample_id == kid_meta.paternal_id
+            .branch { meta, _reads ->
+                def is_parent = meta.relationship in ['father', 'mother']
+                paired_parents             : is_parent && meta.has_other_parent
+                children_with_both_parents : meta.relationship == 'child' && meta.two_parents
+                other                      : true
             }
-            .set{branch_result}
+            .set { ch_branched_samples }
 
-        branch_result
-            .kid.map{ meta, _sample_id, reads -> [ meta, reads ] }
-            // Then we join the kids, together with dads and moms
-            .join(branch_result.dad.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true) // failOnMismatch:true, failOnDuplicate:true ?
-            .join(branch_result.mom.map { meta, _sample_id, reads -> [ meta, reads ] }, remainder: true) // failOnMismatch:true, failOnDuplicate:true ?
-            // Since every sample is still a considered a kid,
-            // we check if they have both parents, and is therefore a trio
-            .branch{ kid_meta, kid_reads, dad_reads, mom_reads ->
-                is_trio: dad_reads != null && mom_reads != null
-                    return tuple ( kid_meta, kid_reads, dad_reads, mom_reads )
-                no_trio: dad_reads == null || mom_reads == null
-                    return tuple ( kid_meta, kid_reads, [], [] )
+        // Then, the files from parents of children with both parents will need to be concatenated before yak
+        // in case there are multiple files for the same parent.
+        ch_branched_samples.paired_parents
+            .branch { _meta, fastqs ->
+                cat: fastqs.size() > 1
+                no_cat: fastqs.size() == 1
             }
-        .set{ ch_samples }
+            .set { ch_paired_parents_for_yak }
 
-        // We keep using kid_meta for the parental reads, since they need to go together into hifiasm
-        trio_kids = ch_samples.is_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
-        trio_dads = ch_samples.is_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
-        trio_moms = ch_samples.is_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
+        CAT_FASTQ (
+            ch_paired_parents_for_yak.cat
+        )
+        ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
 
-        // These can be someone elses mom or dad (parents)
-        non_trio_kids = ch_samples.no_trio.map{ kid_meta, kid_reads, _dad_reads, _mom_reads -> [ kid_meta, kid_reads ] }
-        // Should just be a kid_meta with empty reads
-        non_trio_dads = ch_samples.no_trio.map{ kid_meta, _kid_reads, dad_reads, _mom_reads -> [ kid_meta, dad_reads ] }
-        non_trio_moms = ch_samples.no_trio.map{ kid_meta, _kid_reads, _dad_reads, mom_reads -> [ kid_meta, mom_reads ] }
+        YAK_COUNT (
+            CAT_FASTQ.out.reads.concat(ch_paired_parents_for_yak.no_cat)
+        )
+        ch_versions = ch_versions.mix(YAK_COUNT.out.versions)
 
-        // Parental samples needs to be merged before YAK
-        // For now merge every sample, even if there's only one copy of reads
-        CAT_FASTQ_PATERNAL ( trio_dads )
-        ch_versions = ch_versions.mix(CAT_FASTQ_PATERNAL.out.versions)
-        CAT_FASTQ_MATERNAL ( trio_moms )
-        ch_versions = ch_versions.mix(CAT_FASTQ_MATERNAL.out.versions)
+        YAK_COUNT.out.yak
+            // Because a parent can have multiple children, and meta.children is a list of all children,
+            // we need to return one tuple per child.
+            .flatMap { meta, yak ->
+                (meta.children ?: []).collect { child_id ->
+                    [child_id, meta, yak]
+                }
+            }
+            .branch { child_id, meta, yak ->
+                paternal: meta.relationship == 'father'
+                    return [ child_id, yak ]
+                maternal: meta.relationship == 'mother'
+                    return [ child_id, yak ]
+            }
+            .set { ch_yak_output }
 
-        // Then run YAK
-        YAK_PATERNAL( CAT_FASTQ_PATERNAL.out.reads )
-        ch_versions = ch_versions.mix(YAK_PATERNAL.out.versions)
+        // Creates the input for trio-binned assemblies (children with both parents)
+        ch_branched_samples.children_with_both_parents
+            .map { meta, reads -> [ meta.id, meta, reads ] }
+            .join(ch_yak_output.paternal)
+            .join(ch_yak_output.maternal)
+            .map { _id, meta, reads, yak_paternal, yak_maternal ->
+                [ meta, reads, yak_paternal, yak_maternal ]
+            }
+            .set { ch_with_both_parents }
 
-        YAK_MATERNAL( CAT_FASTQ_MATERNAL.out.reads )
-        ch_versions = ch_versions.mix(YAK_MATERNAL.out.versions)
-
-        paternal_yak_or_empty = YAK_PATERNAL.out.yak.concat(non_trio_dads)
-        maternal_yak_or_empty = YAK_MATERNAL.out.yak.concat(non_trio_moms)
-
-        trio_kids
-            .concat(non_trio_kids)
-            .join(paternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
-            .join(maternal_yak_or_empty, failOnMismatch:true, failOnDuplicate:true)
-            .multiMap { meta, reads, paternal_yak, maternal_yak ->
-                reads : [meta, reads, []                 ]
-                yak   : [meta, paternal_yak, maternal_yak]
+        // Create the input for hifiasm by combining the non-trio binned samples with the trio-binned samples.
+        ch_branched_samples.other
+            .concat(ch_branched_samples.paired_parents)
+            .map { meta, fastqs ->
+                [ meta, fastqs, [], [] ]
+            }
+            .concat(ch_with_both_parents)
+            .multiMap { meta, reads, yak_paternal, yak_maternal ->
+                reads : [ meta, reads       , []           ]
+                yak   : [ meta, yak_paternal, yak_maternal ]
             }
             .set { ch_hifiasm_in }
-
-        HIFIASM ( ch_hifiasm_in.reads, ch_hifiasm_in.yak, ch_hifiasm_empty )
-        ch_versions = ch_versions.mix(HIFIASM.out.versions)
+    } else {
+        ch_reads
+            .multiMap { meta, reads ->
+                reads : [ meta, reads, [] ]
+                yak   : [ [], [], [] ]
+            }
+            .set { ch_hifiasm_in }
     }
 
-    HIFIASM.out.paternal_contigs
+    HIFIASM (
+        ch_hifiasm_in.reads,
+        ch_hifiasm_in.yak,
+        [[],[],[]],
+        [[],[]]
+    )
+    ch_versions = ch_versions.mix(HIFIASM.out.versions)
+
+    HIFIASM.out.hap1_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
         .set { ch_gfastats_paternal_in }
 
-    HIFIASM.out.maternal_contigs
+    HIFIASM.out.hap2_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
         .set { ch_gfastats_maternal_in }
 
@@ -130,4 +123,3 @@ workflow ASSEMBLY {
     assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
     versions = ch_versions                       // channel: [ versions.yml ]
 }
-

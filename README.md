@@ -1,21 +1,29 @@
-[![GitHub Actions CI Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/ci.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/ci.yml)
+[![GitHub Actions CI Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/nf-test.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/nf-test.yml)
 [![GitHub Actions Linting Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13748210.svg)](https://doi.org/10.5281/zenodo.13748210)
-[![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A524.04.2-23aa62.svg)](https://www.nextflow.io/)
+[![Nextflow](https://img.shields.io/badge/version-%E2%89%A524.10.5-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.3.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.3.2)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/genomic-medicine-sweden/nallo)
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/nallo_dark.png">
+    <img width=250px alt="Nallo logo" src="docs/images/nallo_light.png">
+  </picture>
+</p>
 
 ## Introduction
 
 **genomic-medicine-sweden/nallo** is a bioinformatics analysis pipeline for long-reads from both PacBio and (targeted) ONT-data, focused on rare-disease. Heavily influenced by best-practice pipelines such as [nf-core/sarek](https://nf-co.re/sarek), [nf-core/raredisease](https://nf-co.re/raredisease), [nf-core/nanoseq](https://github.com/nf-core/nanoseq), [PacBio Human WGS Workflow](https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake), [epi2me-labs/wf-human-variation](https://github.com/epi2me-labs/wf-human-variation) and [brentp/rare-disease-wf](https://github.com/brentp/rare-disease-wf).
 
-<picture align="center">
-    <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
-  </picture>
-
 ## Pipeline summary
+
+<picture align="center">
+  <img alt="genomic-medicine-sweden/nallo workflow" src="docs/images/nallo_metromap.png">
+</picture>
 
 ##### QC
 
@@ -29,10 +37,10 @@
 ##### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
-- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) or [Sawfish](https://github.com/PacificBiosciences/sawfish) (PacBio only)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
-- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (HiFi only) or [STRdust](https://github.com/wdecoster/STRdust)
-- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase)
+- Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (PacBio only) or [STRdust](https://github.com/wdecoster/STRdust)
+- Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase) (PacBio only)
 
 ##### Phasing and methylation
 
@@ -64,8 +72,9 @@ Prepare a samplesheet with input data:
 
 ```
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-NIST,HG002,/path/to/HG002.fastq.gz,FAM1,HG003,HG004,1,2
-NIST,HG005,/path/to/HG005.bam,FAM1,HG003,HG004,2,1
+ my_project,HG002,/path/to/HG002.fastq.gz,NIST,HG003,HG004,1,2
+ my_project,HG003,/path/to/HG003.bam,NIST,0,0,1,1
+ my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
 ```
 
 Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline using:
@@ -79,7 +88,7 @@ nextflow run genomic-medicine-sweden/nallo \
     --outdir <OUTDIR>
 ```
 
-For more details and further functionality, please refer to the [documentation](http://genomic-medicine-sweden.github.io/nallo/).
+However, to run most parts of the pipeline you will need to supply additional reference files. For more details and further functionality, please refer to the [documentation](http://genomic-medicine-sweden.github.io/nallo/).
 
 ## Credits
 

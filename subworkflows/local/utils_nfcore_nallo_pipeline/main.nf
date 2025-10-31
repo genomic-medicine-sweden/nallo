@@ -78,7 +78,6 @@ workflow PIPELINE_INITIALISATION {
         sv_annotation    : "skip_sv_annotation",
         call_paralogs    : "skip_call_paralogs",
         peddy            : "skip_peddy",
-        cnv_calling      : "skip_cnv_calling",
         phasing          : "skip_phasing",
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
@@ -95,10 +94,9 @@ workflow PIPELINE_INITIALISATION {
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
         sv_calling       : ["mapping"],
-        sv_annotation    : ["mapping", "cnv_calling", "sv_calling"],
+        sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
         snv_annotation   : ["mapping", "snv_calling"],
-        cnv_calling      : ["mapping", "snv_calling"],
         phasing          : ["mapping", "snv_calling"],
         rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
@@ -113,10 +111,9 @@ workflow PIPELINE_INITIALISATION {
         mapping          : ["fasta", "somalier_sites"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
         snv_calling      : ["fasta", "par_regions"],
-        snv_annotation   : ["echtvar_snv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+        snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
         sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        cnv_calling      : ["hificnv_expected_xy_cn", "hificnv_expected_xx_cn", "hificnv_excluded_regions"],
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
@@ -135,7 +132,6 @@ workflow PIPELINE_INITIALISATION {
             skip_sv_calling          : params.skip_sv_calling,
             skip_sv_annotation       : params.skip_sv_annotation,
             skip_call_paralogs       : params.skip_call_paralogs,
-            skip_cnv_calling         : params.skip_cnv_calling,
             skip_alignment           : params.skip_alignment,
             skip_qc                  : params.skip_qc,
             skip_genome_assembly     : params.skip_genome_assembly,
@@ -146,9 +142,9 @@ workflow PIPELINE_INITIALISATION {
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
-            hificnv_expected_xy_cn   : params.hificnv_expected_xy_cn,
-            hificnv_expected_xx_cn   : params.hificnv_expected_xx_cn,
-            hificnv_excluded_regions : params.hificnv_excluded_regions,
+            cnv_expected_xy_cn       : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn       : params.cnv_expected_xx_cn,
+            cnv_excluded_regions     : params.cnv_excluded_regions,
             fasta                    : params.fasta,
             str_bed                  : params.str_bed,
             stranger_repeat_catalog  : params.stranger_repeat_catalog,
@@ -172,22 +168,33 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
     Channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(
+            samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
+        )
+        .ifEmpty { error "Error: No samples found in samplesheet." }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
         .groupTuple() // group by sample
         .map {
-            validateInputSamplesheet(it)
+            validateUniqueFilenamesPerSample(it)
+            validateUniqueSampleIDs(it)
         }
+        // Add single_end information to meta
         .map { sample, metas, reads ->
-            // Add number of files per sample _after_ splitting to meta
-            [ sample, metas[0] + [n_files: metas.size() + metas.size() * Math.max(0, params.alignment_processes - 1), single_end:true ], reads ]
+            [ sample, metas[0] + [ single_end:true ], reads ]
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
             reads.collect { return [ meta, it ] }
         }
+        // Add relationships to meta
+        .map { meta, reads -> [ meta.family_id, meta, reads ] }
+        .groupTuple()
+        .map { _family, metas, reads ->
+            [ addRelationshipsToMeta(metas), reads ]
+        }
+        .transpose()
         .set { ch_samplesheet }
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
@@ -195,6 +202,15 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that there's no more than one project
         validateSingleProjectPerRun(ch_samplesheet)
+
+        // Check that the SV calling parameters are valid
+        validateSVCallingParameters()
+
+        // Check that mothers are female, and fathers are male
+        validateParentalSex(ch_samplesheet)
+
+        // Check that the parents are present in the samplesheet
+        validateParentExistsInFamily(ch_samplesheet)
 
     emit:
     samplesheet = ch_samplesheet
@@ -266,12 +282,29 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 //
 // Validate channels from input samplesheet
 //
-def validateInputSamplesheet(input) {
+def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
     def fileNames = input[2].collect { new File(it.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
         error "Error: Input filenames needs to be unique for each sample."
     }
+
+    return input
+}
+
+//
+// The genome assembly workflow requires that each sample has a unique ID
+//
+def validateUniqueSampleIDs(input) {
+    def sample = input[0]
+    def metas = input[1].collect()
+    def families = metas.collect { meta -> meta.family_id }.unique()
+
+    if (families.size() > 1) {
+        error "Sample '${sample}' belongs to multiple families: ${families}. " +
+              "Please make sure that there are no duplicate samples in the samplesheet."
+    }
+
     return input
 }
 
@@ -482,14 +515,23 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 }
 
 def validatePacBioLicense() {
-    if (params.preset == "ONT_R10") {
-        if (params.phaser.matches('hiphase')) {
-            error "ERROR: The HiPhase license only permits analysis of data from PacBio."
-        }
-        if (params.str_caller.matches('trgt')) {
-            error "ERROR: The TRGT license only permits analysis of data from PacBio."
-        }
-    }
+     def pacbioTools = [
+        (params.phaser)             : 'HiPhase',
+        (params.str_caller)         : 'TRGT',
+        (params.sv_callers)         : 'Sawfish',
+        (params.sv_callers_to_run)  : 'Sawfish',
+        (params.sv_callers_to_merge): 'Sawfish',
+        (!params.skip_call_paralogs): 'Paraphase',
+    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
+     .values() as List
+
+    if (!pacbioTools) return
+
+    log.warn(
+        "The software license of ${pacbioTools.join(', ')} states that you may only use the software " +
+        "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " +
+        "Please make sure your data comes from PacBio or one of their instruments."
+    )
 }
 
 // Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
@@ -533,4 +575,166 @@ def validateWorkflowCompatibility() {
     if (params.str_caller.matches('strdust') && !params.skip_repeat_annotation) {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
+
+    if (
+        !params.skip_sv_calling && params.sv_callers_to_run
+            .split(',')
+            .collect { caller -> caller.toLowerCase().trim() }
+            .any { caller -> caller in ['hificnv', 'sawfish'] }
+    ) {
+        // We could probably change to not enforce this.
+        if (params.skip_snv_calling) {
+            error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
+        }
+        // We could probably change to not enforce this.
+        if (!params.cnv_expected_xy_cn || !params.cnv_expected_xx_cn || !params.cnv_excluded_regions) {
+            error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
+        }
+    }
+}
+
+def validateSVCallingParameters() {
+    def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
+    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+
+    if (sv_callers.toSet() != sv_caller_priority.toSet()) {
+        error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
+    }
+}
+
+//
+// Validate that the parents of a sample exists in the family (required by e.g. genmod)
+//
+def validateParentExistsInFamily(input) {
+    input
+        .map { meta, _reads ->
+            [ meta.family_id, meta ]
+        }
+        .groupTuple()
+        .map { family_id, metas ->
+            def sampleIds = metas.collect { it.id } as Set
+
+            metas.each { meta ->
+                def errors = []
+
+                def maternal_id = meta.maternal_id
+                def paternal_id = meta.paternal_id
+
+                if (isNonZeroNonEmpty(maternal_id) && !(maternal_id in sampleIds)) {
+                    errors <<  "maternal_id set to ${maternal_id}"
+                }
+                if (isNonZeroNonEmpty(paternal_id) && !(paternal_id in sampleIds)) {
+                    errors << "paternal_id set to ${paternal_id}"
+                }
+
+                if (errors) {
+                    error "ERROR: Sample ${meta.id} has " + errors.join(' and ') + ", but they are not present in the family ${family_id}. " +
+                          "Please check the samplesheet and correct the parental IDs, or remove them from the sample."
+                }
+            }
+        }
+}
+
+def validateParentalSex(input) {
+    input
+        .map { meta, _reads ->
+            def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
+
+            if ((meta.relationship == 'mother' && !isFemale(meta)) ||
+                (meta.relationship == 'father' && !isMale(meta))) {
+                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet. " +
+                      "Please check the samplesheet and correct the sex or releationship."
+            }
+        }
+}
+
+def getParentalIds(samples, field) {
+    samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
+}
+
+def addRelationshipsToMeta(samples) {
+    // This function adds relationships to the samples based on their parental IDs.
+    // We assume we are mainly interested in children, therefore if there was a grandparent, parent, and a child present,
+    // the parent will be set as 'mother' or 'father' rather than as 'child'.
+
+    def maternal_ids = getParentalIds(samples, 'maternal_id')
+    def paternal_ids = getParentalIds(samples, 'paternal_id')
+    def parents_ids = maternal_ids + paternal_ids
+    def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
+                           samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+
+    samples.each { sample ->
+        sample.relationship = sample.id in grandparents_ids ? 'unknown' :
+                              sample.id in maternal_ids ? 'mother' :
+                              sample.id in paternal_ids ? 'father' :
+                              isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+
+        sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
+
+        // Find children of this specific parent
+        sample.children = []
+        sample.has_other_parent = false
+
+        if (isParent(sample)){
+            def children = getChildrenForParent(samples, sample.id) // Get metadata of children
+            sample.children = children.collect{ meta -> meta.id } // Store children IDs in parent meta
+
+            // For those children, check if they have a father or mother
+            if (isMother(sample)) {
+                sample.has_other_parent = children.any { child -> hasFather(child, paternal_ids) }
+            } else if (isFather(sample)) {
+                sample.has_other_parent = children.any { child -> hasMother(child, maternal_ids) }
+            }
+        }
+
+    }
+
+}
+
+def getChildrenForParent(samples, parent_id) {
+    samples
+        .findAll { it.maternal_id == parent_id || it.paternal_id == parent_id }
+}
+
+def isChild(sample, maternal_ids, paternal_ids) {
+    hasMother (sample, maternal_ids) ||
+    hasFather (sample, paternal_ids)
+}
+
+def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
+    hasMother (sample, maternal_ids) &&
+    hasFather (sample, paternal_ids)
+}
+
+def hasMother(sample, maternal_ids) {
+    sample.maternal_id in maternal_ids
+}
+
+def hasFather(sample, paternal_ids) {
+    sample.paternal_id in paternal_ids
+}
+
+def isFemale(sample) {
+    sample.sex == 2
+}
+
+def isMale(sample) {
+    sample.sex == 1
+}
+
+def isMother(sample) {
+    sample.relationship == 'mother'
+}
+
+def isFather(sample) {
+    sample.relationship == 'father'
+}
+
+def isParent(sample) {
+    isMother(sample) || isFather(sample)
+}
+
+def boolean isNonZeroNonEmpty(value) {
+    (value instanceof String && value != "" && value != "0") ||
+    (value instanceof Number && value != 0)
 }

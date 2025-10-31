@@ -1,0 +1,154 @@
+nextflow_workflow {
+
+    name "Test Workflow CONVERT_INPUT_FILES"
+    script "../main.nf"
+    workflow "CONVERT_INPUT_FILES"
+
+    test("convert BAM to FASTQ") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_bam' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'test_fastq' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = true
+                input[2] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bam.size() == 1 },
+                { assert workflow.out.fastq.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("convert FASTQ to BAM") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_bam' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'test_fastq' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = false
+                input[2] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.fastq.size() == 1 },
+                { assert workflow.out.bam.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("convert BAM to FASTQ and FASTQ to BAM") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_bam' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'test_fastq' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = true
+                input[2] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bam.size() == 2 },
+                { assert workflow.out.fastq.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("convert neither BAM to FASTQ nor FASTQ to BAM") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_bam' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'test_fastq' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = false
+                input[2] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bam.size() == 1 },
+                { assert workflow.out.fastq.size() == 1 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("convert BAM to FASTQ and FASTQ to BAM -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_bam' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'test_fastq' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.fastq.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = true
+                input[2] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.bam.size() == 2 },
+                { assert workflow.out.fastq.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "1 sample - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "test",
+                            "sex": 1
+                        },
+                        "rename_chrnames_ann.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "test",
+                            "sex": 1
+                        },
+                        "rename_chrnames_ann.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a",
+                    "versions.yml:md5,43689963f80fac1f15861b144f2c217b",
+                    "versions.yml:md5,457a734ccb40d752d1ed0f804dfdefa5",
+                    "versions.yml:md5,8bd330c3d52c6227c294d82b35e39bdc",
+                    "versions.yml:md5,9c99528881382100093a6b3d6813c6bb",
+                    "versions.yml:md5,b869f1605e2f022a8d364d081fdc348e",
+                    "versions.yml:md5,e731cf5c84718f20c8455f0fd2e8b89d"
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "test",
+                            "sex": 1
+                        },
+                        "rename_chrnames_ann.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "test",
+                            "sex": 1
+                        },
+                        "rename_chrnames_ann.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a",
+                    "versions.yml:md5,43689963f80fac1f15861b144f2c217b",
+                    "versions.yml:md5,457a734ccb40d752d1ed0f804dfdefa5",
+                    "versions.yml:md5,8bd330c3d52c6227c294d82b35e39bdc",
+                    "versions.yml:md5,9c99528881382100093a6b3d6813c6bb",
+                    "versions.yml:md5,b869f1605e2f022a8d364d081fdc348e",
+                    "versions.yml:md5,e731cf5c84718f20c8455f0fd2e8b89d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-10-22T13:17:28.752327377"
+    }
+}

@@ -85,6 +85,7 @@
         "copynum",
         "Corcoran",
         "cpus",
+        "crai",
         "cramino",
         "Cristóbal",
         "csis",
@@ -168,6 +169,7 @@
         "Harshil",
         "Helland",
         "Heng",
+        "heterozygosity",
         "hgnc",
         "hgvs",
         "Hifiasm",
@@ -274,6 +276,7 @@
         "paraphase",
         "Pastinen",
         "pbsv",
+        "peddy",
         "Pedersen",
         "pedfile",
         "Peltzer",
@@ -356,6 +359,7 @@
         "sprintf",
         "SPRQ",
         "STRANDBIAS",
+        "strdust",
         "subworkflow",
         "subworkflows",
         "SVDB",
@@ -410,5 +414,7 @@
         "Yuelin",
         "Zenodo",
         "Zhao"
-    ]
+    ],
+
+    "markdown.styles": ["public/vscode_markdown.css"]
 }

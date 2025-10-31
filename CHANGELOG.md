@@ -3,6 +3,203 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.0 - [2025-10-28]
+
+### `Added`
+
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Added `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Added a test without `--filter_variants_hgnc_ids`
+- [#691](https://github.com/genomic-medicine-sweden/nallo/pull/691) - Added samplesheet validation requiring at least one sample, and require each row to be unique
+- [#692](https://github.com/genomic-medicine-sweden/nallo/pull/692) - Added the capability to run the pipeline in `-stub` mode
+- [#705](https://github.com/genomic-medicine-sweden/nallo/pull/705) - Add stub pipeline test for `cadd_prescored_indels` and `cadd_resources` with mock resources
+- [#706](https://github.com/genomic-medicine-sweden/nallo/pull/706) - Added a logo to `README.md`
+- [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Added a clean up step to the nf-test CI
+- [#709](https://github.com/genomic-medicine-sweden/nallo/pull/709) - Added nf-test for `ANNOTATE_CADD`
+- [#713](https://github.com/genomic-medicine-sweden/nallo/pull/713) - Added nfcore module yak/counts
+- [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Added a find-tests action to find all nf-tests to be run during CI
+- [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Added new parameters for finer-grained control over analysis regions
+- [#727](https://github.com/genomic-medicine-sweden/nallo/pull/727) - Added a stub test with mock uncompressed VEP cache
+- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Added a new `pre_vep_snv_filter_expression` parameter in order to filter variants during the annotation
+- [#737](https://github.com/genomic-medicine-sweden/nallo/pull/737) - Added nf-test for `PREPARE_REFERENCES`
+- [#738](https://github.com/genomic-medicine-sweden/nallo/pull/738) - Added nf-test for `QC_ALIGNED_READS`
+- [#739](https://github.com/genomic-medicine-sweden/nallo/pull/739) - Added nf-test for `CONVERT_INPUT_FILES`
+- [#740](https://github.com/genomic-medicine-sweden/nallo/pull/740) - Added a check/early fail if trying to split the SNV calling into too many parallel processes
+- [#743](https://github.com/genomic-medicine-sweden/nallo/pull/743) - Added warnings about restrictive PacBio licenses, even when running a PacBio preset
+- [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added relationships to sample meta
+- [#745](https://github.com/genomic-medicine-sweden/nallo/pull/745) - Added samplesheet validations for parents requiring known and correct sex
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added nf-test for `GENOME_ASSEMBLY`
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added samplesheet validation requiring unique sample names across all families
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Added samplesheet validation requiring parents to exist in family
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Added stub tests for skipping alignment and genome assembly
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Added new `QC_SNVS`, `GVCF_GLNEXUS_NORM_VARIANTS` and `VCF_CONCAT_NORM_VARIANTS` subworkflows by splitting up `CALL_SNVS`
+- [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Added new SV caller Sawfish
+- [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Added a stub test where sample and family ID is the same
+
+### `Changed`
+
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Changed `SPLIT_BED_CHUNKS` to `BEDTOOLS_SPLIT` in the `SCATTER_GENOME` workflow
+- [#656](https://github.com/genomic-medicine-sweden/nallo/pull/656) - Updated version to 0.7.0dev
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Updated genmod to 3.10.1
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Changed filtering from after ranking variants to between annotation and ranking. This ensures the correct `most_severe_consequence` and `most_severe_pli` are added to the filtered (clinical) and unfiltered (research) variants
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Changed the unfiltered and filtered output files to `_research` and `_clinical`
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Changed to publish all family level SVs from a single final process
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed bcftools stats to run on unannotated variants instead of annotated (and ranked) variants
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the output directory of bcftools stats to `qc/bcftools_stats`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Changed the SNV outputs per sample to unannotated calls, matching the behavior of SVs
+- [#677](https://github.com/genomic-medicine-sweden/nallo/pull/677) - Changed `echtvar_snv_databases` from required to an optional parameter
+- [#678](https://github.com/genomic-medicine-sweden/nallo/pull/678) - Updated modules
+- [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680) - Updated more modules
+- [#685](https://github.com/genomic-medicine-sweden/nallo/pull/685) - Updated patch for VEP missed in [#680](https://github.com/genomic-medicine-sweden/nallo/pull/680)
+- [#703](https://github.com/genomic-medicine-sweden/nallo/pull/703) - Updated `SNV_ANNOTATION` test `meta.id` field to mitigate presumable bug in nf-test
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Simplified HiPhase saveAs logic
+- [#708](https://github.com/genomic-medicine-sweden/nallo/pull/708) - Refactored repeat annotation
+- [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) - Updated DeepVariant to 1.9.0
+- [#712](https://github.com/genomic-medicine-sweden/nallo/pull/712) - Bump version to 0.8.0dev
+- [#717](https://github.com/genomic-medicine-sweden/nallo/pull/717) - Use family ID in `RankScore` repeat annotation
+- [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Updated nf-core template to v3.3.1
+- [#721](https://github.com/genomic-medicine-sweden/nallo/pull/721) - Updated `samplesheet_multisample_bam` with HG004 to complete a trio, and added a second family to `samplesheet_multisample_ont_bam` in order to perform more comprehensive testing
+- [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Refactored SV-calling for more flexiblity when choosing callers
+- [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Changed default SV-caller from Severus to Sniffles and HiFiCNV
+- [#724](https://github.com/genomic-medicine-sweden/nallo/pull/724) - Changed the inputs for the FASTQ conversion for the assembly subworkflow to use split BAM files instead of input BAM files when suitable
+- [#726](https://github.com/genomic-medicine-sweden/nallo/pull/726) - Changed cram output test from `samplesheet_multisample_bam` to `samplesheet_target_regions_null` (run on PR towards master), because of slow nf-test
+- [#728](https://github.com/genomic-medicine-sweden/nallo/pull/728) - Changed to only run CRAM conversion for unphased reads when not phasing reads, since they are not published when phasing
+- [#732](https://github.com/genomic-medicine-sweden/nallo/pull/732) - Updated logic associated with `validateSVCallingParameters()` to fix an issue added in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
+- [#733](https://github.com/genomic-medicine-sweden/nallo/pull/733) - Reduced the disk space cleanup added to the CI in [#707](https://github.com/genomic-medicine-sweden/nallo/pull/707) to reduce the step time
+- [#734](https://github.com/genomic-medicine-sweden/nallo/pull/734) - Renamed subworkflows for more consistent naming
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Renamed the `ASSEMBLY` subworkflow to `GENOME_ASSEMBLY`
+- [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Changed the default hifiasm strategy to trio-binning whenever parental reads are available
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
+- [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with emtpy (.) INFO field
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
+- [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
+- [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Changed `hificnv_*` parameters to `cnv_*` to reflect that they can be used for both HiFiCNV and Sawfish
+- [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Clarified PacBio software licence warning. Changed to only warn instead of error for `--preset ONT_R10`.
+- [#774](https://github.com/genomic-medicine-sweden/nallo/pull/774) - Changed local cramino module to nf-core cramino module
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Changed to always run samtools merge, even if there is only one input file
+- [#780](https://github.com/genomic-medicine-sweden/nallo/pull/780) - Updated modkit/bedmethyltobigwig to release candidate version, otherwise crashing due to unsorted bed
+- [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Changed bcftools reheader prefix in SV-calling workflow to remedy a mistake introduced in [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723)
+- [#784](https://github.com/genomic-medicine-sweden/nallo/pull/784) - Updated metro map
+- [#785](https://github.com/genomic-medicine-sweden/nallo/pull/785) - Updated nf-core modules
+- [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed local subworflow filter_variants to nf-core vcf_filter_bcftools_ensemblvep
+- [#786](https://github.com/genomic-medicine-sweden/nallo/pull/786) - Changed `samplesheet_multisample_bam` test to include `filter_snvs_expression` and `filter_svs_expression`, and moved `filter_variants_hgnc_ids = null` to `samplesheet_multisample_ont_bam`
+- [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Updated more modules
+- [#787](https://github.com/genomic-medicine-sweden/nallo/pull/787) - Prep release 0.8.0
+- [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Updated parameters.md, removed autoformatting which brakes the document
+- [#791](https://github.com/genomic-medicine-sweden/nallo/pull/791) - Changed `YAK_COUNT` label back to `process_high`
+- [#792](https://github.com/genomic-medicine-sweden/nallo/pull/792) - Changed `YAK_COUNT` label back to `process_high`, correctly
+
+### `Removed`
+
+- [#654](https://github.com/genomic-medicine-sweden/nallo/pull/654) - Removed local module `SPLIT_BED_CHUNKS`
+- [#672](https://github.com/genomic-medicine-sweden/nallo/pull/672) - Removed `BCFTOOLS_PLUGINSPLIT`
+- [#704](https://github.com/genomic-medicine-sweden/nallo/pull/704) - Removed HiPhase stats, blocks and summary files and sorting of variants
+- [#713](https://github.com/genomic-medicine-sweden/nallo/pull/713) - Removed local yak module
+- [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed the CNV calling subworkflow
+- [#723](https://github.com/genomic-medicine-sweden/nallo/pull/723) - Removed sample-level SV outputs
+- [#736](https://github.com/genomic-medicine-sweden/nallo/pull/736) - Removed bcftools filltags from the SNV annotation subworkflow that added an AC entry
+- [#741](https://github.com/genomic-medicine-sweden/nallo/pull/741) - Removed bcftools filltags from the SNV calling subworkflow, that previosuly added an AC entry
+- [#742](https://github.com/genomic-medicine-sweden/nallo/pull/742) - Removed local module bcftools fillfromfasta that is no longer used in the pipeline
+- [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Removed unused components in subworkflows
+- [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Removed autoformatting from parameters docs which broke the document
+
+### `Fixed`
+
+- [#671](https://github.com/genomic-medicine-sweden/nallo/pull/671) - Fixed chrM/MT mismatches in the variant ranking ([#499](https://github.com/genomic-medicine-sweden/nallo/issues/499))
+- [#718](https://github.com/genomic-medicine-sweden/nallo/pull/718) - Fixed tests for `add_found_in_tag`, `call_cnvs`, `create_pedigree_file`, `create_samples_haplotypes_file`, `filter_variants` and `scatter_genome` that were not previously automatically tested in the CI.
+- [#731](https://github.com/genomic-medicine-sweden/nallo/pull/731) - Fixed invalid example samplesheet in README
+- [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Fixed improper `}` character appearing in aligned reads filename when phasing was disabled
+- [#751](https://github.com/genomic-medicine-sweden/nallo/pull/751) - Fixed linting issue in `validatePacBioLicense`
+- [#756](https://github.com/genomic-medicine-sweden/nallo/pull/756) - Fixed missing versions for `ADD_FOUND_IN_TAG`
+- [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Fixed the preset documentation not taking into account ONT assembly that was added in 0.5.0
+- [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Fixed missing samples/haplotypes in paraphase VCFs ([#764](https://github.com/genomic-medicine-sweden/nallo/issues/764))
+- [#770](https://github.com/genomic-medicine-sweden/nallo/pull/770) - Fixed broken link for GRCh38 PAR file in docs
+- [#775](https://github.com/genomic-medicine-sweden/nallo/pull/775) - Fixed docs for `hifiasm_preset` parameter
+- [#779](https://github.com/genomic-medicine-sweden/nallo/pull/779) - Fixed input files with fewer reads than `--alignment_processes` causing silent fails ([#757](https://github.com/genomic-medicine-sweden/nallo/issues/757))
+- [#782](https://github.com/genomic-medicine-sweden/nallo/pull/782) - Fixed `null` in SNV filename when running with `--skip_snv_annotation --skip_rank_variants`
+- [#788](https://github.com/genomic-medicine-sweden/nallo/pull/788) - Fix nf-core pipelines download not working in newer versions (3.4.1+)
+
+### Parameters
+
+| Old parameter                | New parameter                               |
+| ---------------------------- | ------------------------------------------- |
+| `--sv_caller`                | `--sv_callers`                              |
+|                              | `--sv_callers_to_run`                       |
+|                              | `--sv_callers_to_merge`                     |
+|                              | `--sv_callers_merge_priority`               |
+|                              | `--methylation_call_regions`                |
+|                              | `--snv_call_regions`                        |
+|                              | `--sv_call_regions`                         |
+|                              | `--qc_regions`                              |
+|                              | `--pre_vep_snv_filter_expression`           |
+|                              | `--extra_yak_options`                       |
+| `--hificnv_excluded_regions` | `--cnv_excluded_regions`                    |
+| `--hificnv_expected_xx_cn`   | `--cnv_expected_xx_cn`                      |
+| `--hificnv_expected_xy_cn`   | `--cnv_expected_xy_cn`                      |
+|                              | `--force_sawfish_joint_call_single_samples` |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool                     | Old version | New version |
+| ------------------------ | ----------- | ----------- |
+| bedtools/split           |             | 2.31.1      |
+| severus                  | 1.3         | 1.6         |
+| strdust                  | 0.11.1      | 0.11.4      |
+| hifiasm                  | 0.24.0      | 0.25.0      |
+| echtvar/anno             | 0.2.0       | 0.2.2       |
+| genmod                   | 3.9         | 3.10.1      |
+| gunzip                   | 1.1         | 1.13        |
+| tabix                    | 1.2         | 1.21        |
+| multiqc                  | 1.25.1      | 1.28        |
+| bcftools/annotate        | 1.2         | 1.22        |
+| bcftools/concat          | 1.2         | 1.22        |
+| bcftools/index           | 1.2         | 1.22        |
+| bcftools/merge           | 1.2         | 1.22        |
+| bcftools/norm            | 1.2         | 1.22        |
+| bcftools/query           | 1.2         | 1.22        |
+| bcftools/reheader        | 1.2         | 1.22        |
+| bcftools/sort            | 1.2         | 1.22        |
+| bcftools/stats           | 1.2         | 1.22        |
+| bcftools/view            | 1.2         | 1.22        |
+| samtools/convert         | 1.2         | 1.22.1      |
+| samtools/faidx           | 1.2         | 1.22.1      |
+| samtools/fastq           | 1.2         | 1.22.1      |
+| samtools/import          | 1.2         | 1.22.1      |
+| samtools/index           | 1.2         | 1.22.1      |
+| samtools/merge           | 1.2         | 1.22.1      |
+| samtools/sort            | 1.2         | 1.22.1      |
+| samtools/view            | 1.2         | 1.22.1      |
+| ensemblvep/filtervep     | 113         | 115.2       |
+| minimap2                 | 2.28        | 2.29        |
+| deepvariant              | 1.8.0       | 1.9.0       |
+| paraphase                | 3.2.1       | 3.3.4       |
+| longphase/haplotag       | 1.7.3       | 2.0         |
+| longphase/phase          | 1.7.3       | 2.0         |
+| minimap2 (paraphase)     | 2.29        | 2.30        |
+| multiqc                  | 1.28        | 1.31        |
+| samtools (paraphase)     | 1.21        | 1.22.1      |
+| cramino                  | 0.14.5      | 1.1.0       |
+| modkit/bedmethyltobigwig |             | 0.5.1-rc1   |
+| sawfish/discover         |             | 2.2         |
+| sawfish/jointcall        |             | 2.2         |
+| trgt/merge               | 3.0.0       | 4.0.0       |
+| trgt/genotype            | 3.0.0       | 4.0.0       |
+| whatshap/haplotag        | 2.3         | 2.8         |
+| whatshap/phase           | 2.3         | 2.8         |
+| whatshap/stats           | 2.3         | 2.8         |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.7.1 - [2025-07-01]
 
 ### `Changed`
@@ -75,10 +272,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Changed phase block output format from tsv to gtf
+- [#676](https://github.com/genomic-medicine-sweden/nallorefs/pull/676) - Changed to `max_sv_size 999999999` in VEP config
 
 ### `Fixed`
 
 - [#657](https://github.com/genomic-medicine-sweden/nallo/pull/657) - Fixed bug in whatshap stats in full-sized data ([#655](https://github.com/genomic-medicine-sweden/nallo/issues/655))
+- [#676](https://github.com/genomic-medicine-sweden/nallorefs/pull/676) - Fixed pipeline failing due to variants ending up with no CSQ, since `max_sv_size` in VEP was too low ([#605](https://github.com/genomic-medicine-sweden/nallorefs/pull/605))
 
 ## 0.6.0 - [2025-04-09]
 
@@ -127,6 +326,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#639](https://github.com/genomic-medicine-sweden/nallo/pull/639) - Fixed `groupTuple` bottleneck in `ALIGN_ASSEMBLIES`
 - [#644](https://github.com/genomic-medicine-sweden/nallo/pull/644) - Fixed FastQC ignoring memory parameter
 - [#653](https://github.com/genomic-medicine-sweden/nallo/pull/653) - Fixed merge mistakes when squashing release 0.5.0
+- [#754](https://github.com/genomic-medicine-sweden/nallo/pull/754) - Fixed missing file in .prettierignore
 
 ### Parameters
 

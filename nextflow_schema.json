@@ -80,11 +80,6 @@
                     "description": "Skip structural variant annotation",
                     "default": false
                 },
-                "skip_cnv_calling": {
-                    "type": "boolean",
-                    "description": "Skip CNV calling",
-                    "default": false
-                },
                 "skip_call_paralogs": {
                     "type": "boolean",
                     "description": "Skip the calling of specific paralogous genes",
@@ -215,25 +210,59 @@
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
-                    "description": "A BED file with regions of interest, used to limit variant calling.",
+                    "description": "A BED file with regions of interest.",
                     "exists": true
                 },
-                "hificnv_expected_xy_cn": {
+                "methylation_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "bigwig_modcodes": {
+                    "type": "string",
+                    "pattern": "^[mhfcCgebTUaAoGnN](,[mhfcCgebTUaAoGnN])*$",
+                    "description": "Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list.",
+                    "default": "h,m"
+                },
+                "snv_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "sv_call_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file containging regions to filter SV calls. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "qc_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in QC. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
+                "cnv_expected_xy_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XY samples.",
                     "exists": true
                 },
-                "hificnv_expected_xx_cn": {
+                "cnv_expected_xx_cn": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A BED file containing expected copy number regions for XX samples.",
                     "exists": true
                 },
-                "hificnv_excluded_regions": {
+                "cnv_excluded_regions": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "A BED file specifying regions to exclude with HiFiCNV, such as centromeres.",
+                    "description": "A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres.",
                     "exists": true
                 },
                 "genmod_reduced_penetrance": {
@@ -287,7 +316,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/45aa1918fc8486dbbdc153932ff7b8b0964bd0ea/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -361,7 +390,7 @@
                 },
                 "publish_unannotated_family_svs": {
                     "type": "boolean",
-                    "description": "Publish unannotated SVs and CNVs per family and caller (these files are only output by default if `--skip_sv_annotation` or `--skip_cnv_calling` are active).",
+                    "description": "Publish unannotated SVs and CNVs per family and caller.",
                     "hidden": true,
                     "fa_icon": "fas fa-users-cog"
                 }
@@ -463,17 +492,35 @@
                     "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
                     "enum": ["revio", "pacbio", "ONT_R10"]
                 },
+                "sv_callers": {
+                    "type": "string",
+                    "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                },
+                "sv_callers_merge_priority": {
+                    "type": "string",
+                    "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`.",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                },
+                "sv_callers_to_run": {
+                    "type": "string",
+                    "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                },
+                "sv_callers_to_merge": {
+                    "type": "string",
+                    "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as `--sv_callers`",
+                    "default": "sniffles,hificnv",
+                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                },
                 "snv_caller": {
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
                     "enum": ["deepvariant"]
-                },
-                "sv_caller": {
-                    "type": "string",
-                    "default": "severus",
-                    "description": "From which SV caller to merge (with CNVs), annotate, rank and filter variants from (`severus` or `sniffles`).",
-                    "enum": ["severus", "sniffles"]
                 },
                 "str_caller": {
                     "type": "string",
@@ -491,13 +538,13 @@
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
                     "enum": ["hifi-only", "trio-binning"],
-                    "default": "hifi-only"
+                    "default": "trio-binning"
                 },
                 "hifiasm_preset": {
                     "type": "string",
-                    "description": "Hifiasm preset, is set to `--ont` when `--profile ONT_R10` is active.",
+                    "description": "Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active.",
                     "enum": ["", "--ont"],
-                    "default": ""
+                    "default": null
                 },
                 "alignment_processes": {
                     "type": "integer",
@@ -523,6 +570,10 @@
                     "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
+                "force_sawfish_joint_call_single_samples": {
+                    "type": "boolean",
+                    "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
+                },
                 "filter_variants_hgnc_ids": {
                     "type": "string",
                     "pattern": "^\\S+\\.(csv|tsv)$",
@@ -533,12 +584,12 @@
                 },
                 "filter_snvs_expression": {
                     "type": "string",
-                    "default": "",
+                    "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "filter_svs_expression": {
                     "type": "string",
-                    "default": "",
+                    "default": null,
                     "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
                 },
                 "deepvariant_model_type": {
@@ -574,6 +625,16 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to hifiasm, used for test profile."
+                },
+                "extra_yak_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to yak, used for test profile."
+                },
+                "pre_vep_snv_filter_expression": {
+                    "type": "string",
+                    "default": null,
+                    "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". The expression applies to both the clinical and the research VCFs."
                 }
             },
             "required": ["preset"]

@@ -6,7 +6,7 @@ process GLNEXUS {
     container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc
 
     input:
-    tuple val(meta), path(gvcfs)
+    tuple val(meta), path(gvcfs), path(custom_config)
     tuple val(meta2), path(bed)
 
     output:

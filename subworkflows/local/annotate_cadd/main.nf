@@ -8,7 +8,6 @@ include { BCFTOOLS_VIEW                        } from '../../../modules/nf-core/
 include { CADD                                 } from '../../../modules/nf-core/cadd/main'
 include { GAWK as REFERENCE_TO_CADD_CHRNAMES   } from '../../../modules/nf-core/gawk/main'
 include { GAWK as CADD_TO_REFERENCE_CHRNAMES   } from '../../../modules/nf-core/gawk/main'
-include { TABIX_TABIX as TABIX_ANNOTATE        } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_TABIX as TABIX_CADD            } from '../../../modules/nf-core/tabix/tabix/main'
 
 workflow ANNOTATE_CADD {
@@ -16,7 +15,7 @@ workflow ANNOTATE_CADD {
     take:
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vcf                   // channel: [mandatory] [ val(meta), path(vcfs) ]
-    ch_index                 // channel: [mandatory] [ val(meta), path(tbis) ]
+    ch_index                 // channel: [optional]  [ val(meta), path(tbis) ]
     ch_header                // channel: [mandatory] [ val(meta), path(txt) ]
     ch_cadd_resources        // channel: [mandatory] [ val(meta), path(dir) ]
     ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(dir) ]
@@ -24,10 +23,18 @@ workflow ANNOTATE_CADD {
     main:
     ch_versions = Channel.empty()
 
-    REFERENCE_TO_CADD_CHRNAMES ( ch_fai , [] )
+    REFERENCE_TO_CADD_CHRNAMES (
+        ch_fai,
+        [],
+        false
+    )
     ch_versions = ch_versions.mix(REFERENCE_TO_CADD_CHRNAMES.out.versions)
 
-    CADD_TO_REFERENCE_CHRNAMES ( ch_fai , [] )
+    CADD_TO_REFERENCE_CHRNAMES (
+        ch_fai,
+        [],
+        false
+    )
     ch_versions = ch_versions.mix(CADD_TO_REFERENCE_CHRNAMES.out.versions)
 
     ch_vcf
@@ -38,7 +45,8 @@ workflow ANNOTATE_CADD {
     RENAME_CHRNAMES (
         rename_chrnames_in,
         [],
-        REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt }
+        [],
+        REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
     ch_versions = ch_versions.mix(RENAME_CHRNAMES.out.versions)
 
@@ -64,6 +72,7 @@ workflow ANNOTATE_CADD {
 
     ANNOTATE_INDELS (
         ch_annotate_indels_in,
+        [],
         ch_header.map { _meta, header -> header },
         CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt }
     )

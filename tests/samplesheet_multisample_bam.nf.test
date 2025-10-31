@@ -4,16 +4,19 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_bam | --phaser hiphase | --alignment_output_format cram") {
+    test("samplesheet_multisample_bam") {
         tag "samplesheet_multisample_bam"
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/45aa1918fc8486dbbdc153932ff7b8b0964bd0ea/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
-                alignment_output_format      = 'cram'
+                sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
+                filter_snvs_expression       = "-i 'AQ>20'"
+                filter_svs_expression        = "-i \'SVTYPE=\"INS\"\'"
             }
         }
 
@@ -33,7 +36,7 @@ nextflow_pipeline {
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),

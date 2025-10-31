@@ -1,5 +1,4 @@
-include { BCFTOOLS_SORT                              } from '../../../modules/nf-core/bcftools/sort/main'
-include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/local/cramino/main'
+include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/nf-core/cramino/main'
 include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
 include { LONGPHASE_HAPLOTAG                         } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE                            } from '../../../modules/nf-core/longphase/phase/main'
@@ -18,7 +17,7 @@ workflow PHASING {
     ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
     fasta        // channel: [ val(meta), path(fasta) ]
     fai          // channel: [ val(meta), path(fai) ]
-    cram_output   // bool: Publish alignments as CRAM (true) or BAM (false)
+    cram_output  //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = Channel.empty()
@@ -120,13 +119,8 @@ workflow PHASING {
             .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_bai_haplotagged }
 
-        BCFTOOLS_SORT (
-            HIPHASE.out.vcfs,
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+        HIPHASE.out.vcfs
+            .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
     }

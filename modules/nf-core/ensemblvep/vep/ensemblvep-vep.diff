@@ -1,34 +1,35 @@
-Changes in module 'nf-core/ensemblvep/vep'
-'modules/nf-core/ensemblvep/vep/meta.yml' is unchanged
+Changes in component 'nf-core/ensemblvep/vep'
+Changes in 'ensemblvep/vep/environment.yml':
+--- modules/nf-core/ensemblvep/vep/environment.yml
++++ modules/nf-core/ensemblvep/vep/environment.yml
+@@ -5,4 +5,4 @@
+   - bioconda
+ dependencies:
+   # renovate: datasource=conda depName=bioconda/ensembl-vep
+-  - bioconda::ensembl-vep=115.2=pl5321h2a3209d_1
++  - bioconda::ensembl-vep=110.0
+
 Changes in 'ensemblvep/vep/main.nf':
 --- modules/nf-core/ensemblvep/vep/main.nf
 +++ modules/nf-core/ensemblvep/vep/main.nf
-@@ -4,8 +4,8 @@
+@@ -3,9 +3,9 @@
+     label 'process_medium'
  
      conda "${moduleDir}/environment.yml"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://depot.galaxyproject.org/singularity/ensembl-vep:113.0--pl5321h2a3209d_0' :
--        'biocontainers/ensembl-vep:113.0--pl5321h2a3209d_0' }"
+-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/4b/4b5a8c173dc9beaa93effec76b99687fc926b1bd7be47df5d6ce19d7d6b4d6b7/data'
+-        : 'community.wave.seqera.io/library/ensembl-vep:115.2--90ec797ecb088e9a'}"
++    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
 +        'https://depot.galaxyproject.org/singularity/ensembl-vep:110.0--pl5321h2a3209d_0' :
 +        'biocontainers/ensembl-vep:110.0--pl5321h2a3209d_0' }"
  
      input:
      tuple val(meta), path(vcf), path(custom_extra_files)
 
-Changes in 'ensemblvep/vep/environment.yml':
---- modules/nf-core/ensemblvep/vep/environment.yml
-+++ modules/nf-core/ensemblvep/vep/environment.yml
-@@ -2,4 +2,4 @@
-   - conda-forge
-   - bioconda
- dependencies:
--  - bioconda::ensembl-vep=113.0
-+  - bioconda::ensembl-vep=110.0
-
-'modules/nf-core/ensemblvep/vep/tests/tags.yml' is unchanged
+'modules/nf-core/ensemblvep/vep/meta.yml' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/vcf.config' is unchanged
 'modules/nf-core/ensemblvep/vep/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/ensemblvep/vep/tests/nextflow.config' is unchanged
-'modules/nf-core/ensemblvep/vep/tests/tab.gz.config' is unchanged
 'modules/nf-core/ensemblvep/vep/tests/main.nf.test' is unchanged
-'modules/nf-core/ensemblvep/vep/tests/vcf.config' is unchanged
+'modules/nf-core/ensemblvep/vep/tests/tab.gz.config' is unchanged
 ************************************************************

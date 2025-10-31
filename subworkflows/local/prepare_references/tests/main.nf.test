@@ -1,0 +1,123 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_REFERENCES"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "PREPARE_REFERENCES"
+
+    test("unzip fasta, untar vep cache") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ])
+                input[2] = true
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("don't unzip fasta, untar vep cache") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ])
+                input[2] = false
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("unzip fasta, untar vep cache -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ])
+                input[2] = true
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("don't unzip fasta, don't untar vep cache -stub") {
+
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'vep_cache' ],
+                    file("$projectDir/.devcontainer", checkIfExists:true)
+                ])
+                input[2] = false
+                input[3] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+}

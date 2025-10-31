@@ -2,10 +2,10 @@ process WHATSHAP_STATS {
     tag "$meta.id"
     label 'process_single'
 
-    conda "bioconda::whatshap=2.3"
+    conda "bioconda::whatshap=2.8"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/whatshap:2.3--py38h2494328_0' :
-        'quay.io/biocontainers/whatshap:2.3--py38h2494328_0' }"
+        'https://depot.galaxyproject.org/singularity/whatshap:2.8--py39h2de1943_0' :
+        'quay.io/biocontainers/whatshap:2.8--py39h2de1943_0' }"
 
     input:
     tuple val(meta), path(vcf), path(tbi)

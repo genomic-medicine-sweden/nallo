@@ -1,0 +1,266 @@
+{
+    "bam, bed": {
+        "content": [
+            "test_fastqc.zip",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.mosdepth.summary.txt:md5,c6f3547ee8ce125096a21677ae97e43a"
+                ]
+            ],
+            [
+                "chrom\tlength\tbases\tmean\tmin\tmax",
+                "chr16\t90338345\t8580917\t0.09\t0\t23",
+                "chr16_region\t16298\t316330\t19.41\t2\t23",
+                "chr17\t83257441\t979557\t0.01\t0\t33",
+                "chr17_region\t20000\t551855\t27.59\t2\t33",
+                "chr20\t64444167\t327152\t0.01\t0\t20",
+                "chr20_region\t700\t13558\t19.37\t9\t20",
+                "chrX\t156040895\t8500695\t0.05\t0\t21",
+                "chrX_region\t70\t992\t14.17\t8\t21",
+                "total\t394080848\t18388321\t0.05\t0\t33",
+                "total_region\t37068\t882735\t23.81\t2\t33"
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.mosdepth.global.dist.txt:md5,1b353aa02fc9121c06cea48fe2a16415"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.mosdepth.region.dist.txt:md5,89591b0844b8c63a0e605dc858282be3"
+                ]
+            ],
+            [
+                "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T13:32:11.308231888"
+    },
+    "bam, no bed -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                    "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                    "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+                ],
+                "fastqc_zip": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_global_dist": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_region_dist": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_summary": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                    "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                    "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T13:32:16.127699768"
+    },
+    "bam, bed -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                    "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                    "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+                ],
+                "fastqc_zip": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_global_dist": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_region_dist": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_summary": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                    "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                    "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T13:32:20.893370402"
+    },
+    "bam, no bed": {
+        "content": [
+            "test_fastqc.zip",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.mosdepth.summary.txt:md5,b12f1f248fcad00f611ac920cfa2ed2f"
+                ]
+            ],
+            [
+                "chrom\tlength\tbases\tmean\tmin\tmax",
+                "chr16\t90338345\t8580917\t0.09\t0\t23",
+                "chr17\t83257441\t979557\t0.01\t0\t33",
+                "chr20\t64444167\t327152\t0.01\t0\t20",
+                "chrX\t156040895\t8500695\t0.05\t0\t21",
+                "total\t394080848\t18388321\t0.05\t0\t33"
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.mosdepth.global.dist.txt:md5,1b353aa02fc9121c06cea48fe2a16415"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                "versions.yml:md5,0951dae621aa73a1f29ac596cbe43036",
+                "versions.yml:md5,23fb577573ece3ce6a239d078a748e47",
+                "versions.yml:md5,936ced879d9045e21135dcfa30b323ab"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-10-01T13:32:04.293029859"
+    }
+}

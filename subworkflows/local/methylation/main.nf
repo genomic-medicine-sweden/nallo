@@ -1,12 +1,15 @@
-include { MODKIT_PILEUP    } from '../../../modules/nf-core/modkit/pileup/main'
-include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
+include { TABIX_BGZIPTABIX         } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
 
 workflow METHYLATION {
 
     take:
     ch_bam_bai             // channel: [ val(meta), bam, bai ]
     ch_fasta               // channel: [ val(meta), fasta ]
+    ch_fai                 // channel: [ val(meta), fai ]
     ch_bed                 // channel: [ val(meta), bed ]
+    modcodes               // String or List
 
     main:
     ch_versions = Channel.empty()
@@ -18,14 +21,22 @@ workflow METHYLATION {
 
     MODKIT_PILEUP.out.bed
         .transpose()
-        .set { ch_bgzip_modkit_pileup_in }
+        .set { ch_bedmethyl }
 
-    TABIX_BGZIPTABIX ( ch_bgzip_modkit_pileup_in )
+    TABIX_BGZIPTABIX ( ch_bedmethyl )
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
+
+    // Only convert files with content
+    ch_bedmethyl
+        .filter { _meta, bed -> bed.size() > 0 }
+        .set { ch_bedmethyl_to_bigwig_in }
+
+    MODKIT_BEDMETHYLTOBIGWIG ( ch_bedmethyl_to_bigwig_in, ch_fai, modcodes)
+    ch_versions = ch_versions.mix(MODKIT_BEDMETHYLTOBIGWIG.out.versions)
 
     emit:
     bed      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, bed, _tbi -> [ meta, bed ] } // channel: [ val(meta), path(bed) ]
     tbi      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
+    bigwig   = MODKIT_BEDMETHYLTOBIGWIG.out.bw
     versions = ch_versions // channel: [ versions.yml ]
 }
-

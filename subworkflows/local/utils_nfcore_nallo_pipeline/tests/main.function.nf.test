@@ -1,0 +1,287 @@
+nextflow_function {
+
+    name "Test Functions"
+    script "../main.nf"
+    tag "subworkflows"
+    tag "subworkflows_local"
+    tag "utils_nfcore_nallo_pipeline"
+    tag "subworkflows/utils_nfcore_nallo_pipeline"
+
+    test ("test function addRelationshipsToMeta with trio") {
+        function "addRelationshipsToMeta"
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'HG003', family_id:'FAM', paternal_id:0      , maternal_id:0      , sex:1],
+                    [id:'HG002', family_id:'FAM', paternal_id:'HG003', maternal_id:'HG004', sex:1],
+                    [id:'HG004', family_id:'FAM', paternal_id:0      , maternal_id:0      , sex:2]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['HG002'] == 'child'
+                    assert byID['HG003'] == 'father'
+                    assert byID['HG004'] == 'mother'
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with no relationships") {
+        function "addRelationshipsToMeta"
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1],
+                    [id:'HG002', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1],
+                    [id:'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['HG002'] == 'unknown'
+                    assert byID['HG003'] == 'unknown'
+                    assert byID['HG004'] == 'unknown'
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with two siblings of opposite sex, each with children") {
+        function "addRelationshipsToMeta"
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child_1', family_id:'FAM', paternal_id:0, maternal_id:'mother_1', sex:1],
+                    [id:'child_2', family_id:'FAM', paternal_id:'father_2', maternal_id:0, sex:1],
+                    [id:'mother_1', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'father_2', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    // This shoudl be okay with the genome assembly since each child only has one parent,
+                    // even though the parents are within the same family/case
+                    assert byID['child_1'] == 'child'
+                    assert byID['child_2'] == 'child'
+                    assert byID['mother_1'] == 'mother'
+                    assert byID['father_2'] == 'father'
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with child, parent and grandparent") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child', family_id:'FAM', paternal_id:'father', maternal_id:0, sex:1],
+                    [id:'father', family_id:'FAM', paternal_id:'grandfather', maternal_id:0, sex:2],
+                    [id:'grandfather', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['child'] == 'child'
+                    assert byID['father'] == 'father'
+                    assert byID['grandfather'] == 'unknown'
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with quartet") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'child_2', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'mother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'father', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+                    def children = function.result.collectEntries { [it.id, it.children] }
+
+                    assert byID['child'] == 'child'
+                    assert byID['child_2'] == 'child'
+                    assert byID['father'] == 'father'
+                    assert byID['mother'] == 'mother'
+
+                    assert children['mother'] == ['child', 'child_2']
+                    assert children['father'] == ['child', 'child_2']
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child_1', family_id:'FAM', paternal_id:'father_1', maternal_id:0, sex:1],
+                    [id:'father_1', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'child_2', family_id:'FAM', paternal_id:'father_2', maternal_id:'mother_2', sex:2],
+                    [id:'father_2', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'mother_2', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['child_1'] == 'child'
+                    assert byID['father_1'] == 'father'
+                    assert byID['child_2'] == 'child'
+                    assert byID['father_2'] == 'father'
+                    assert byID['mother_2'] == 'mother'
+                }
+            )
+        }
+    }
+
+    test ("test function addRelationshipsToMeta with child, two parents, one of wich also has two parents") {
+        function "addRelationshipsToMeta"
+
+        when {
+            function {
+                """
+                input[0] = [
+                    [id:'child', family_id:'FAM', paternal_id:'father', maternal_id:'mother', sex:1],
+                    [id:'father', family_id:'FAM', paternal_id:'grandfather', maternal_id:'grandmother', sex:1],
+                    [id:'mother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                    [id:'grandfather', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1],
+                    [id:'grandmother', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2],
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success },
+                { assert snapshot(function.result).match() },
+                {
+                    def byID = function.result.collectEntries { [it.id, it.relationship] }
+
+                    assert byID['child'] == 'child'
+                    assert byID['father'] == 'father'
+                    assert byID['mother'] == 'mother'
+                    assert byID['grandfather'] == 'unknown'
+                    assert byID['grandmother'] == 'unknown'
+                }
+            )
+        }
+    }
+
+    test ("test function validateParentalSex - should succeed") {
+        function "validateParentalSex"
+
+        when {
+            function {
+                """
+                input[0] = Channel.of(
+                    [
+                        [id:'child', relationship:'child', sex:1],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ],
+                    [
+                        [id:'father', relationship:'father', sex:1],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ],
+                    [
+                        [id:'mother', relationship:'mother', sex:2],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ]
+                )
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success }
+            )
+        }
+    }
+    test ("test function validateParentalSex should give error") {
+        function "validateParentalSex"
+
+        when {
+            function {
+                """
+                input[0] = Channel.of(
+                    [
+                        [id:'child', relationship:'child', sex:1],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ],
+                    [
+                        [id:'father', relationship:'father', sex:2],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ],
+                    [
+                        [id:'mother', relationship:'mother', sex:1],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam')
+                    ]
+                )
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.failed },
+                { assert function.stdout.any { it.contains("ERROR") } }
+            )
+        }
+    }
+}
