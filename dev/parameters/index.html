@@ -564,9 +564,9 @@
 
 
 <h1 id="genomic-medicine-swedennallo-pipeline-parameters">genomic-medicine-sweden/nallo pipeline parameters</h1>
-<p>Long-read variant calling pipeline</p>
+<p>Long-read variant calling pipeline  </p>
 <h2 id="workflow-skip-options">Workflow skip options</h2>
-<p>Allows skipping certain parts of the pipeline</p>
+<p>Allows skipping certain parts of the pipeline  </p>
 <table>
 <thead>
 <tr>
@@ -694,7 +694,7 @@
 </tbody>
 </table>
 <h2 id="inputoutput-options">Input/output options</h2>
-<p>Define where the pipeline should find input data and save output data.</p>
+<p>Define where the pipeline should find input data and save output data.  </p>
 <table>
 <thead>
 <tr>
@@ -709,14 +709,14 @@
 <tbody>
 <tr>
 <td><code>input</code></td>
-<td>Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It</td>
+<td>Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>has to be a comma-separated file with 3 columns, and a header row.</small></details></td>
+<td>to be a comma-separated file with 3 columns, and a header row.</small></details></td>
 <td><code>string</code></td>
 <td></td>
 <td>True</td>
@@ -733,14 +733,14 @@
 </tr>
 <tr>
 <td><code>email</code></td>
-<td>Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify this</td>
+<td>Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify this on</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>on the command line for every run.</small></details></td>
+<td>the command line for every run.</small></details></td>
 <td><code>string</code></td>
 <td></td>
 <td></td>
@@ -774,13 +774,13 @@
 <tr>
 <td><code>cadd_resources</code></td>
 <td>Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
-<td></td>
+<td><code>string</code></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>string</code></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -876,6 +876,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>bigwig_modcodes</code></td>
+<td>Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list.</td>
+<td><code>string</code></td>
+<td>h,m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>snv_call_regions</code></td>
 <td>A BED file containing regions to limit SNV calling. By default this is the same as <code>target_regions</code>.</td>
 <td><code>string</code></td>
@@ -965,7 +973,7 @@
 </tr>
 <tr>
 <td><code>alignment_output_format</code></td>
-<td>Output format for alignment files. Either <code>bam</code> or <code>cram</code></td>
+<td>Output format for alignment files. Either <code>bam</code> or <code>cram</code> (accepted: <code>bam</code>|<code>cram</code>)</td>
 <td><code>string</code></td>
 <td>bam</td>
 <td></td>
@@ -998,7 +1006,7 @@
 </tbody>
 </table>
 <h2 id="reference-genome-options">Reference genome options</h2>
-<p>Reference genome related files and options required for the workflow.</p>
+<p>Reference genome related files and options required for the workflow.  </p>
 <table>
 <thead>
 <tr>
@@ -1022,7 +1030,7 @@
 </tbody>
 </table>
 <h2 id="institutional-config-options">Institutional config options</h2>
-<p>Parameters used to describe centralised config profiles. These should not be edited.</p>
+<p>Parameters used to describe centralised config profiles. These should not be edited.  </p>
 <table>
 <thead>
 <tr>
@@ -1045,14 +1053,14 @@
 </tr>
 <tr>
 <td><code>custom_config_base</code></td>
-<td>Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the internet. If you don't need them, then this is not a problem. If you do need them, you should</td>
+<td>Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the internet. If you don't need them, then this is not a problem. If you do need them, you should download</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>download the files from the repo and tell Nextflow where to find them with this parameter.</small></details></td>
+<td>the files from the repo and tell Nextflow where to find them with this parameter.</small></details></td>
 <td><code>string</code></td>
 <td>https://raw.githubusercontent.com/nf-core/configs/master</td>
 <td></td>
@@ -1102,7 +1110,7 @@
 </tbody>
 </table>
 <h2 id="generic-options">Generic options</h2>
-<p>Less common options for the pipeline, typically set in a config file.</p>
+<p>Less common options for the pipeline, typically set in a config file.  </p>
 <table>
 <thead>
 <tr>
@@ -1125,14 +1133,14 @@
 </tr>
 <tr>
 <td><code>publish_dir_mode</code></td>
-<td>Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files.</td>
+<td>Method used to save pipeline results to output directory. (accepted: <code>symlink</code>|<code>rellink</code>|<code>link</code>|<code>copy</code>|<code>copyNoFollow</code>|<code>move</code>) <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
+<td>option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
 <td><code>string</code></td>
 <td>copy</td>
 <td></td>
@@ -1214,7 +1222,7 @@
 </tbody>
 </table>
 <h2 id="workflow-options">Workflow options</h2>
-<p>Workflow options specific to genomic-medicine-sweden/nallo</p>
+<p>Workflow options specific to genomic-medicine-sweden/nallo  </p>
 <table>
 <thead>
 <tr>
@@ -1229,7 +1237,7 @@
 <tbody>
 <tr>
 <td><code>preset</code></td>
-<td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>)</td>
+<td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>) (accepted: <code>revio</code>|<code>pacbio</code>|<code>ONT_R10</code>)</td>
 <td><code>string</code></td>
 <td>revio</td>
 <td>True</td>
@@ -1246,8 +1254,16 @@
 <tr>
 <td><code>sv_callers_merge_priority</code></td>
 <td>The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in <code>sv_callers</code> should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code>.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -1269,7 +1285,7 @@
 </tr>
 <tr>
 <td><code>snv_caller</code></td>
-<td>Which short variant software to use (<code>deepvariant</code>)</td>
+<td>Which short variant software to use (<code>deepvariant</code>) (accepted: <code>deepvariant</code>)</td>
 <td><code>string</code></td>
 <td>deepvariant</td>
 <td></td>
@@ -1277,7 +1293,7 @@
 </tr>
 <tr>
 <td><code>str_caller</code></td>
-<td>Which caller to use for short tandem repeat expansions (TRGT or STRdust).</td>
+<td>Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: <code>trgt</code>|<code>strdust</code>)</td>
 <td><code>string</code></td>
 <td>trgt</td>
 <td></td>
@@ -1285,7 +1301,7 @@
 </tr>
 <tr>
 <td><code>phaser</code></td>
-<td>Which phasing software to use (<code>longphase</code>, <code>whatshap</code>, <code>hiphase</code>)</td>
+<td>Which phasing software to use (<code>longphase</code>, <code>whatshap</code>, <code>hiphase</code>) (accepted: <code>longphase</code>|<code>whatshap</code>|<code>hiphase</code>)</td>
 <td><code>string</code></td>
 <td>longphase</td>
 <td></td>
@@ -1293,7 +1309,7 @@
 </tr>
 <tr>
 <td><code>hifiasm_mode</code></td>
-<td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>)</td>
+<td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>) (accepted: <code>hifi-only</code>|<code>trio-binning</code>)</td>
 <td><code>string</code></td>
 <td>trio-binning</td>
 <td></td>
@@ -1301,7 +1317,7 @@
 </tr>
 <tr>
 <td><code>hifiasm_preset</code></td>
-<td>Hifiasm preset, is set to <code>--ont</code> when <code>--preset ONT_R10</code> is active.</td>
+<td>Hifiasm preset, is set to <code>--ont</code> when <code>--preset ONT_R10</code> is active. (accepted: <code>`\|</code>--ont`)</td>
 <td><code>string</code></td>
 <td>None</td>
 <td></td>
@@ -1340,6 +1356,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>force_sawfish_joint_call_single_samples</code></td>
+<td>Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead.</td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>filter_variants_hgnc_ids</code></td>
 <td>A tsv/csv file with a <code>hgnc_ids</code> column header, and then one numerical HGNC ID per row. E.g. <code>4281</code> or <code>HGNC:4281</code>.</td>
 <td><code>string</code></td>
@@ -1365,7 +1389,7 @@
 </tr>
 <tr>
 <td><code>deepvariant_model_type</code></td>
-<td>Sets the model type used for DeepVariant. This is set automatically using <code>--preset</code> by default.</td>
+<td>Sets the model type used for DeepVariant. This is set automatically using <code>--preset</code> by default. (accepted: <code>PACBIO</code>|<code>ONT_R104</code>)</td>
 <td><code>string</code></td>
 <td>PACBIO</td>
 <td></td>
@@ -1373,7 +1397,7 @@
 </tr>
 <tr>
 <td><code>minimap2_read_mapping_preset</code></td>
-<td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default.</td>
+<td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default. (accepted: <code>map-hifi</code>|<code>map-ont</code>|<code>lr:hq</code>|<code>lr:hqae</code>)</td>
 <td><code>string</code></td>
 <td>map-hifi</td>
 <td></td>
@@ -1421,7 +1445,7 @@
 </tr>
 <tr>
 <td><code>pre_vep_snv_filter_expression</code></td>
-<td>An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ&gt;60'". Since this filtering takes place during the annotation, the expression applies to both the clinical and the research VCFs.</td>
+<td>An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ&gt;60'". The expression applies to both the clinical and the research VCFs.</td>
 <td><code>string</code></td>
 <td>None</td>
 <td></td>
