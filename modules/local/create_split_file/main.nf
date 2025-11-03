@@ -18,10 +18,5 @@ process CREATE_SPLIT_FILE {
     """
     echo -e "$outfile_text" > ${prefix}.txt
     """
-
-    stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    """
-    touch ${prefix}.txt
-    """
+    // Not adding stub because the output is used for joining by Nextflow and would fail if missing
 }
