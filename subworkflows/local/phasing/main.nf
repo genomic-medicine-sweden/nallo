@@ -1,22 +1,19 @@
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_LONGPHASE     } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_HIPHASE       } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SNV } from '../../../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_PLUGINSPLIT as BCFTOOLS_PLUGINSPLIT_SV  } from '../../../modules/nf-core/bcftools/pluginsplit/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV   } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV    } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_SORT                                    } from '../../../modules/nf-core/bcftools/sort/main'
-include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SNV       } from '../../../modules/local/create_split_file/main'
-include { CREATE_SPLIT_FILE as CREATE_SPLIT_FILE_SV        } from '../../../modules/local/create_split_file/main'
-include { CRAMINO as CRAMINO_PHASED                        } from '../../../modules/nf-core/cramino/main'
-include { HIPHASE                                          } from '../../../modules/local/hiphase/main'
-include { LONGPHASE_HAPLOTAG                               } from '../../../modules/nf-core/longphase/haplotag/main'
-include { LONGPHASE_PHASE                                  } from '../../../modules/nf-core/longphase/phase/main'
-include { SAMTOOLS_CONVERT                                 } from '../../../modules/nf-core/samtools/convert/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE       } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP        } from '../../../modules/nf-core/samtools/index/main'
-include { WHATSHAP_HAPLOTAG                                } from '../../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                                   } from '../../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                                   } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT                                } from '../../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV  } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_SORT                                  } from '../../../modules/nf-core/bcftools/sort/main'
+include { CRAMINO as CRAMINO_PHASED                      } from '../../../modules/nf-core/cramino/main'
+include { HIPHASE                                        } from '../../../modules/local/hiphase/main'
+include { LONGPHASE_HAPLOTAG                                 } from '../../../modules/nf-core/longphase/haplotag/main'
+include { LONGPHASE_PHASE                                    } from '../../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_CONVERT                                   } from '../../../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE         } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP          } from '../../../modules/nf-core/samtools/index/main'
+include { SPLIT_MULTISAMPLE_VCF as SPLIT_MULTISAMPLE_VCF_SNV } from '../../../subworkflows/local/split_multisample_vcf/main'
+include { SPLIT_MULTISAMPLE_VCF as SPLIT_MULTISAMPLE_VCF_SV  } from '../../../subworkflows/local/split_multisample_vcf/main'
+include { WHATSHAP_HAPLOTAG                                  } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                                     } from '../../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                                     } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
@@ -28,6 +25,7 @@ workflow PHASING {
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
     phaser           //  string: Phasing tool to use
+    phase_with_svs   //    bool: Whether to include SVs in phasing (true) or not (false)
     cram_output      //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
@@ -36,95 +34,36 @@ workflow PHASING {
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
-        // Even though the SV channels can be empty, it is easier to pretend they are not
-        // All the operations below are no-ops in case the channels are empty
-        ch_snv_vcf
-            .map { meta, _vcf -> [ meta, meta.sample_ids ] }
-            .set { ch_create_split_file_snv_in }
-
-        ch_sv_vcf
-            .map { meta, _vcf -> [ meta, meta.sample_ids ] }
-            .set { ch_create_split_file_sv_in }
-
-        // Create sample files for bcftools +split
-        CREATE_SPLIT_FILE_SNV ( ch_create_split_file_snv_in, "_snv" )
-        CREATE_SPLIT_FILE_SV ( ch_create_split_file_sv_in, "_sv" )
-
-        // Collect the files' content into channels
-        // We must merge the sample IDs based on file names later
-        // And this allows us to forego any assumptions about the filenames
-        CREATE_SPLIT_FILE_SNV.out.txt
-            .splitCsv(sep: "\t", elem: 1, header: ['sample', 'dash', 'basename'])
-            .map { meta, row -> [ meta + [ basename: row.basename ], row.sample ] }
-            .set { ch_snv_split_names } // [ [region, family, samples, basename], sample ]
-
-        CREATE_SPLIT_FILE_SV.out.txt
-            .splitCsv(sep: "\t", elem: 1, header: ['sample', 'dash', 'basename'])
-            .map { meta, row -> [ meta + [ basename: row.basename ], row.sample ] }
-            .set { ch_sv_split_names } // [ [region, family, samples, basename], sample ]
-
-        ch_snv_vcf
-            .join(ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
-            .join(CREATE_SPLIT_FILE_SNV.out.txt, failOnMismatch:true, failOnDuplicate:true)
-            .multiMap { meta, vcf, tbi, txt ->
-                vcf_tbi: [ meta, vcf, tbi ]
-                txt    : txt
-            }
-            .set { ch_snv }
-
-        ch_sv_vcf
-            .join(ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true)
-            .join(CREATE_SPLIT_FILE_SV.out.txt, failOnMismatch:true, failOnDuplicate:true)
-            .multiMap { meta, vcf, tbi, txt ->
-                vcf_tbi: [ meta, vcf, tbi ]
-                txt    : txt
-            }
-            .set { ch_sv }
-
-
-        BCFTOOLS_PLUGINSPLIT_SNV (
-            ch_snv.vcf_tbi,
-            ch_snv.txt,
-            [],
-            [],
-            []
+        // The VCF channels are missing meta information for downstream subworkflows. So we preserve it during the join.
+        SPLIT_MULTISAMPLE_VCF_SNV (
+            ch_snv_vcf,
+            "_snv"
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SNV.out.versions)
-        BCFTOOLS_PLUGINSPLIT_SNV.out.vcf
-            .transpose()
-            .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
-            .join(ch_snv_split_names, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
-            .set { ch_split_snv_vcf }
-
-        BCFTOOLS_PLUGINSPLIT_SV (
-            ch_sv.vcf_tbi,
-            ch_sv.txt,
-            [],
-            [],
-            []
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT_SV.out.versions)
-
-        // The SV splitting might have not produced any output if there were no SVs
-        // If it is empty, we create a new channel with the metas from the SNVs and empty lists
-        BCFTOOLS_PLUGINSPLIT_SV.out.vcf
-            .transpose()
-            .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
-            .join(ch_sv_split_names, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
-            .ifEmpty {
-                ch_split_snv_vcf
-                    .map { meta, _vcf -> [ meta, [] ] }
-            }
-            .set { ch_split_sv_vcf }
+        ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF_SNV.out.versions)
 
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
-            .join( ch_split_snv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .join( ch_split_sv_vcf, failOnMismatch:true, failOnDuplicate:true ) // Will set svs to null in case there are none
-            .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs ?: [], [] ] }
-            .set { ch_longphase_phase_in }
+            .join( SPLIT_MULTISAMPLE_VCF_SNV.out.split_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .set { ch_bam_vcf }
+
+        if (phase_with_svs) {
+
+            SPLIT_MULTISAMPLE_VCF_SV (
+                ch_sv_vcf,
+                "_sv"
+            )
+            ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF_SV.out.versions)
+
+            ch_bam_vcf
+                .join( SPLIT_MULTISAMPLE_VCF_SV.out.split_vcf, failOnMismatch:true, failOnDuplicate:true )
+                .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs, [] ] }
+                .set { ch_longphase_phase_in }
+
+        } else {
+            ch_bam_vcf
+                .map { _meta, meta2, bam, bai, snvs -> [ meta2, bam, bai, snvs, [], [] ] }
+                .set { ch_longphase_phase_in }
+        }
 
         LONGPHASE_PHASE (
             ch_longphase_phase_in,
@@ -161,40 +100,55 @@ workflow PHASING {
         ch_phased_family_snvs = BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
         ch_phased_family_snvs_tbi = BCFTOOLS_MERGE_LONGPHASE_SNV.out.index
 
-        BCFTOOLS_MERGE_LONGPHASE_SV (ch_phased_vcf.sv, fasta, fai, [ [], [] ])
-        ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
+        // Although the following SV operations would be safe to run unconditionally,
+        // we check whether we have any SVs to phase to avoid unnecessary concatenation
+        if (phase_with_svs) {
+            BCFTOOLS_MERGE_LONGPHASE_SV (ch_phased_vcf.sv, fasta, fai, [ [], [] ])
+            ch_versions.mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.versions)
 
-        ch_phased_family_svs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
-        ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.index
+            ch_phased_family_svs = BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
+            ch_phased_family_svs_tbi = BCFTOOLS_MERGE_LONGPHASE_SV.out.index
 
-        // Concatenate SNV and SV phased VCFs for Whatshap stats
-        BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
-            .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
-                .join(BCFTOOLS_MERGE_LONGPHASE_SV.out.index, failOnMismatch: true, failOnDuplicate: true)
-            )
-            .map { meta, vcf, tbi -> [ meta - meta.subMap("sv"), vcf, tbi ] }
-            .groupTuple()
-            .set { ch_bcftools_concat_in }
+            // Concatenate SNV and SV phased VCFs for Whatshap stats
+            // If there are no phased SVs, we mix in an empty channel implicitly
+            BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
+                .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .mix(BCFTOOLS_MERGE_LONGPHASE_SV.out.vcf
+                    .join(BCFTOOLS_MERGE_LONGPHASE_SV.out.index, failOnMismatch: true, failOnDuplicate: true)
+                )
+                .map { meta, vcf, tbi -> [ meta - meta.subMap("sv"), vcf, tbi ] }
+                .groupTuple()
+                .set { ch_bcftools_concat_in }
 
-        BCFTOOLS_CONCAT_LONGPHASE( ch_bcftools_concat_in )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT_LONGPHASE.out.versions)
+            BCFTOOLS_CONCAT( ch_bcftools_concat_in )
+            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
-        BCFTOOLS_CONCAT_LONGPHASE.out.vcf
-            .join( BCFTOOLS_CONCAT_LONGPHASE.out.tbi )
-            .set { ch_phased_vcf_index }
+            BCFTOOLS_CONCAT.out.vcf
+                .join( BCFTOOLS_CONCAT.out.tbi )
+                .set { ch_phased_vcf_index }
+        } else {
+            ch_phased_family_svs = ch_sv_vcf
+            ch_phased_family_svs_tbi = ch_sv_vcf_index
 
-        // Haplotag reads
-        LONGPHASE_PHASE.out.vcf
-            .map { meta, vcfs ->
-                vcfs instanceof List
-                    ? vcfs[1].endsWith("_SV")
+            BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
+                .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .set { ch_bcftools_concat_in }
+        }
+
+        // New if block here because this is concerned with haplotagging
+        if (phase_with_svs) {
+            LONGPHASE_PHASE.out.vcf
+                .map { meta, vcfs ->
+                    vcfs[1].simpleName.endsWith("_SV")
                         ? [ meta, vcfs[0], vcfs[1], [] ]
                         : [ meta, vcfs[1], vcfs[0], [] ]
-                    : [ meta, vcfs, [], [] ]
-            }
-            .set { ch_vcfs_for_haplotag }
-
+                }
+                .set { ch_vcfs_for_haplotag }
+        } else {
+            LONGPHASE_PHASE.out.vcf
+                .map { meta, vcf -> [ meta, vcf, [], [] ] }
+                .set { ch_vcfs_for_haplotag }
+        }
 
         LONGPHASE_HAPLOTAG (
             ch_bam_bai.join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true),
@@ -217,12 +171,12 @@ workflow PHASING {
 
         // Fix metadata to group by family
         ch_bam_bai
-            .map { meta, bam, bai -> [ [ id : meta.family_id, family_id : meta.family_id ], bam, bai ] }
+            .map { meta, bam, bai -> [ [ id : meta.family_id ], bam, bai ] }
             .groupTuple()
             .set { ch_bam_bai_grouped }
 
         ch_snv_vcf
-            .map { meta, vcf -> [ [ id: meta.id, family_id : meta.family_id ], vcf ] }
+            .map { meta, vcf -> [ [ id: meta.id ], vcf ] }
             .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_whatshap_phase_in}
 
@@ -275,21 +229,28 @@ workflow PHASING {
 
         ch_snv_vcf
             .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, vcf, tbi -> [ [id : meta.family_id, sample_ids: meta.sample_ids], vcf, tbi ] }
             .set { ch_snv_vcf_tbi }
-
-        ch_sv_vcf
-            .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, vcf, tbi -> [ [id : meta.family_id, sample_ids: meta.sample_ids], vcf, tbi ] }
-            .set { ch_sv_vcf_tbi }
 
         ch_bam_bai
             .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
             .groupTuple()
             .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais ]}
-            .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true ).dump(tag: 'bam_snv')
-            .join( ch_sv_vcf_tbi.dump(tag: 'svs'), failOnMismatch: true, failOnDuplicate:true ).dump()
-            .set { ch_hiphase_snv_in }
+            .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true )
+            .set { ch_hiphase_bam_snv }
+
+        if (phase_with_svs) {
+            ch_sv_vcf
+                .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
+                .set { ch_sv_vcf_tbi }
+
+            ch_hiphase_bam_snv
+                .join( ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate:true )
+                .set { ch_hiphase_snv_in }
+        } else {
+            ch_hiphase_bam_snv
+                .map { meta, bams, bais, snv_vcf, snv_tbi -> [ meta, bams, bais, snv_vcf, snv_tbi, [] , [] ] }
+                .set { ch_hiphase_snv_in }
+        }
 
         HIPHASE (
             ch_hiphase_snv_in,
@@ -301,31 +262,40 @@ workflow PHASING {
 
         ch_phased_family_snvs = HIPHASE.out.vcfs
         ch_phased_family_snvs_tbi = HIPHASE.out.vcfs_tbi
-        ch_phased_family_svs = HIPHASE.out.sv_vcfs
-        ch_phased_family_svs_tbi = HIPHASE.out.sv_vcfs_tbi
+        ch_phased_family_svs = phase_with_svs ? HIPHASE.out.sv_vcfs : ch_sv_vcf
+        ch_phased_family_svs_tbi = phase_with_svs ? HIPHASE.out.sv_vcfs_tbi : ch_sv_vcf_index
 
         HIPHASE.out.bams
             .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
+            .transpose()
+            .combine(ch_bam_bai)
+            .filter { _meta_phased, bam_phased, _bai_phased, meta_orig, _bam_orig, _bai_orig ->
+                bam_phased.simpleName.startsWith(meta_orig.id)
+            } // join does not allow arbitrary predicates, so we get the cross product and filter
+            .map { _meta_phased, bam_phased, bai_phased, meta_orig, _bam_orig, _bai_orig ->
+                [ meta_orig, bam_phased, bai_phased ]
+            }
             .set { ch_bam_bai_haplotagged }
 
         HIPHASE.out.vcfs
             .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_phased_snv_index }
-
-        HIPHASE.out.sv_vcfs
-            .join( HIPHASE.out.sv_vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
-            .mix( ch_phased_snv_index )
-            .groupTuple()
-            .set { ch_bcftools_concat_in }
-
-        BCFTOOLS_CONCAT_HIPHASE (
-            ch_bcftools_concat_in
-        )
-
-        BCFTOOLS_CONCAT_HIPHASE.out.vcf
-            .join( BCFTOOLS_CONCAT_HIPHASE.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
+        if (phase_with_svs) {
+            HIPHASE.out.sv_vcfs
+                .join( HIPHASE.out.sv_vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
+                .mix( ch_phased_vcf_index )
+                .groupTuple()
+                .set { ch_bcftools_concat_in }
+
+            BCFTOOLS_CONCAT (
+                ch_bcftools_concat_in
+            )
+            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+            BCFTOOLS_CONCAT.out.vcf
+                .join( BCFTOOLS_CONCAT.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+                .set { ch_phased_vcf_index }
+        }
     }
 
     // Phasing stats
