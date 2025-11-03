@@ -12,24 +12,24 @@ process HIPHASE {
     val(output_bam)
 
     output:
-    tuple val(meta), path("*_snv.vcf.gz")    , emit: vcfs
-    tuple val(meta), path("*_sv.vcf.gz")     , emit: sv_vcfs      , optional: true
-    tuple val(meta), path("*_snv.vcf.gz.tbi"), emit: vcfs_tbi     , optional: true
-    tuple val(meta), path("*_snv.vcf.gz.csi"), emit: vcfs_csi     , optional: true
-    tuple val(meta), path("*_sv.vcf.gz.tbi") , emit: sv_vcfs_tbi  , optional: true
-    tuple val(meta), path("*_sv.vcf.gz.csi") , emit: sv_vcfs_csi  , optional: true
-    tuple val(meta), path("*.summary.tsv")   , emit: summary_tsv  , optional: true
-    tuple val(meta), path("*.summary.csv")   , emit: summary_csv  , optional: true
-    tuple val(meta), path("*.blocks.tsv")    , emit: blocks_tsv   , optional: true
-    tuple val(meta), path("*.blocks.csv")    , emit: blocks_csv   , optional: true
-    tuple val(meta), path("*.stats.tsv")     , emit: stats_tsv    , optional: true
-    tuple val(meta), path("*.stats.csv")     , emit: stats_csv    , optional: true
-    tuple val(meta), path("*.haplotag.tsv")  , emit: haplotag_tsv , optional: true
-    tuple val(meta), path("*.haplotag.csv")  , emit: haplotag_csv , optional: true
-    tuple val(meta), path("*.bam")           , emit: bams         , optional: true
-    tuple val(meta), path("*.bam.bai")       , emit: bais         , optional: true
-    tuple val(meta), path("*.bam.csi")       , emit: read_csis    , optional: true
-    path "versions.yml"                      , emit: versions
+    tuple val(meta), path("*_snv_phased.vcf.gz")    , emit: vcfs
+    tuple val(meta), path("*_sv_phased.vcf.gz")     , emit: sv_vcfs      , optional: true
+    tuple val(meta), path("*_snv_phased.vcf.gz.tbi"), emit: vcfs_tbi     , optional: true
+    tuple val(meta), path("*_snv_phased.vcf.gz.csi"), emit: vcfs_csi     , optional: true
+    tuple val(meta), path("*_sv_phased.vcf.gz.tbi") , emit: sv_vcfs_tbi  , optional: true
+    tuple val(meta), path("*_sv_phased.vcf.gz.csi") , emit: sv_vcfs_csi  , optional: true
+    tuple val(meta), path("*.summary.tsv")          , emit: summary_tsv  , optional: true
+    tuple val(meta), path("*.summary.csv")          , emit: summary_csv  , optional: true
+    tuple val(meta), path("*.blocks.tsv")           , emit: blocks_tsv   , optional: true
+    tuple val(meta), path("*.blocks.csv")           , emit: blocks_csv   , optional: true
+    tuple val(meta), path("*.stats.tsv")            , emit: stats_tsv    , optional: true
+    tuple val(meta), path("*.stats.csv")            , emit: stats_csv    , optional: true
+    tuple val(meta), path("*.haplotag.tsv")         , emit: haplotag_tsv , optional: true
+    tuple val(meta), path("*.haplotag.csv")         , emit: haplotag_csv , optional: true
+    tuple val(meta), path("*.bam")                  , emit: bams         , optional: true
+    tuple val(meta), path("*.bam.bai")              , emit: bais         , optional: true
+    tuple val(meta), path("*.bam.csi")              , emit: read_csis    , optional: true
+    path "versions.yml"                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -61,7 +61,7 @@ process HIPHASE {
             "--bam",
             file,
             output_bam ? '--output-bam' : '',
-            output_bam ? "${prefix}_haplotagged.bam" : ''
+            output_bam ? "${file.baseName}_haplotagged.bam" : ''
         ] }.join(" ")
 
     snvs.each { vcf ->
