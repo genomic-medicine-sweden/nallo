@@ -395,10 +395,9 @@ workflow NALLO {
 
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id], meta.id, gvcf]
+                [[id: meta.region.name, family_id: meta.family_id], gvcf]
             }
             .groupTuple()
-            .map { meta, ids, gvcfs -> [ meta + [ sample_ids: ids.toSet() ], gvcfs ]}
             .set { variants_to_merge_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
@@ -482,14 +481,27 @@ workflow NALLO {
     //
     if(!params.skip_phasing) {
 
-        family_map = buildFamilyToSampleMap(ch_input)
+        ch_input
+            .map { meta, _files -> [ meta.family_id, meta.id ] }
+            .groupTuple()
+            .map { family_id, sample_ids ->
+                [ family_id, sample_ids.toSet() ]
+            }
+            .set { ch_family_to_samples }
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, vcf, tbi ->
-                [ groupKey(meta + [id : meta.family_id, sample_ids : family_map[meta.family_id] ], params.snv_calling_processes), vcf, tbi ]
+                [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
             }
             .groupTuple()
+            .map { meta, vcfs, tbis ->
+                [ meta.id, vcfs, tbis ]
+            }
+            .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+            .map { family_id, vcfs, tbis, sample_ids ->
+                [ [ id : family_id, sample_ids : sample_ids ], vcfs, tbis ]
+            }
             .set { ch_bcftools_concat_phasing_in }
 
         BCFTOOLS_CONCAT_PHASING (
@@ -501,9 +513,17 @@ workflow NALLO {
             ch_sv_tbi_phasing_in = Channel.empty()
         } else {
             ch_sv_phasing_in = CALL_SVS.out.family_vcf
-                .map { meta, vcf -> [ meta + [sample_ids : family_map[meta.family_id] ], vcf ] }
+                .map { meta, vcf -> [ meta.id, meta, vcf ] }
+                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+                .map { _family_id, meta, vcf, sample_ids ->
+                    [ meta + [ sample_ids : sample_ids ], vcf ]
+                }
             ch_sv_tbi_phasing_in = CALL_SVS.out.family_tbi
-                .map { meta, tbi -> [ meta + [sample_ids : family_map[meta.family_id] ], tbi ] }
+                .map { meta, tbi -> [ meta.id, meta, tbi ] }
+                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+                .map { _family_id, meta, tbi, sample_ids ->
+                    [ meta + [ sample_ids : sample_ids ], tbi ]
+                }
         }
 
         PHASING (
@@ -515,6 +535,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             params.phaser,
+            !params.skip_sv_calling,
             cram_output
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
@@ -525,7 +546,7 @@ workflow NALLO {
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
             .combine(SCATTER_GENOME.out.bed_intervals)
             .multiMap { meta, vcf, tbi, bed, _num_intervals ->
-                vcf: [ meta + [ id : bed.name ], vcf, tbi ]
+                vcf: [ meta + [ id : bed.name, family_id: meta.id ], vcf, tbi ]
                 bed : bed
             }
             .set { ch_phased_scatter_in }
@@ -542,8 +563,11 @@ workflow NALLO {
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
 
     } else {
-        ch_snv_vcf_for_annotation = family_snv_vcf
-        ch_snv_index_for_annotation = family_snv_index
+        // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
+        if (!params.skip_snv_calling) {
+            ch_snv_vcf_for_annotation = family_snv_vcf
+            ch_snv_index_for_annotation = family_snv_index
+        }
         if (!params.skip_sv_calling) {
             ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
             ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
