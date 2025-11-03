@@ -2,7 +2,6 @@ include { samplesheetToList } from 'plugin/nf-schema'
 include {
     createReferenceChannelFromPath
     createReferenceChannelFromSamplesheet
-    buildFamilyToSampleMap
 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
