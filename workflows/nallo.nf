@@ -47,22 +47,24 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modu
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                                        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT                                          } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_VIEW                                          } from '../modules/nf-core/bcftools/view/main'
-include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
-include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
-include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
-include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
-include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { STRANGER                                               } from '../modules/nf-core/stranger/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
-include { paramsSummaryMap                                       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
-include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
+include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
+include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                             } from '../modules/nf-core/peddy/main'
+include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
+include { STRANGER                                          } from '../modules/nf-core/stranger/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
+include { paramsSummaryMap                                  } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -447,14 +449,137 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+
+    //
+    // Call SVs
+    //
+    if(!params.skip_sv_calling) {
+
+        CALL_SVS (
+            ch_bam_bai,
+            ch_tandem_repeats,
+            sample_snv_vcf,
+            ch_fasta,
+            ch_expected_xy_bed,
+            ch_expected_xx_bed,
+            ch_exclude_bed,
+            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            ch_sv_call_regions,
+            params.sv_call_regions,
+            params.force_sawfish_joint_call_single_samples,
+        )
+
+        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
+
+    }
+
+    //
+    // Phase SNVs and INDELs
+    //
+    if(!params.skip_phasing) {
+
+        ch_input
+            .map { meta, _files -> [ meta.family_id, meta.id ] }
+            .groupTuple()
+            .map { family_id, sample_ids ->
+                [ family_id, sample_ids.toSet() ]
+            }
+            .set { ch_family_to_samples }
+
+        family_snv_vcf
+            .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
+            .map { meta, vcf, tbi ->
+                [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
+            }
+            .groupTuple()
+            .map { meta, vcfs, tbis ->
+                [ meta.id, vcfs, tbis ]
+            }
+            .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+            .map { family_id, vcfs, tbis, sample_ids ->
+                [ [ id : family_id, sample_ids : sample_ids ], vcfs, tbis ]
+            }
+            .set { ch_bcftools_concat_phasing_in }
+
+        BCFTOOLS_CONCAT_PHASING (
+            ch_bcftools_concat_phasing_in
+        )
+
+        if (params.skip_sv_calling) {
+            ch_sv_phasing_in = Channel.empty()
+            ch_sv_tbi_phasing_in = Channel.empty()
+        } else {
+            ch_sv_phasing_in = CALL_SVS.out.family_vcf
+                .map { meta, vcf -> [ meta.id, meta, vcf ] }
+                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+                .map { _family_id, meta, vcf, sample_ids ->
+                    [ meta + [ sample_ids : sample_ids ], vcf ]
+                }
+            ch_sv_tbi_phasing_in = CALL_SVS.out.family_tbi
+                .map { meta, tbi -> [ meta.id, meta, tbi ] }
+                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+                .map { _family_id, meta, tbi, sample_ids ->
+                    [ meta + [ sample_ids : sample_ids ], tbi ]
+                }
+        }
+
+        PHASING (
+            BCFTOOLS_CONCAT_PHASING.out.vcf,
+            BCFTOOLS_CONCAT_PHASING.out.tbi,
+            ch_sv_phasing_in,
+            ch_sv_tbi_phasing_in,
+            ch_bam_bai,
+            ch_fasta,
+            ch_fai,
+            params.phaser,
+            !params.skip_sv_calling,
+            cram_output
+        )
+        ch_versions = ch_versions.mix(PHASING.out.versions)
+
+        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
+
+        PHASING.out.phased_family_snvs
+            .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
+            .combine(SCATTER_GENOME.out.bed_intervals)
+            .multiMap { meta, vcf, tbi, bed, _num_intervals ->
+                vcf: [ meta + [ id : bed.name, family_id: meta.id ], vcf, tbi ]
+                bed : bed
+            }
+            .set { ch_phased_scatter_in }
+
+        BCFTOOLS_VIEW_PHASING (
+            ch_phased_scatter_in.vcf,
+            ch_phased_scatter_in.bed,
+            [],
+            []
+        )
+        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+        ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
+        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
+        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
+
+    } else {
+        // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
+        if (!params.skip_snv_calling) {
+            ch_snv_vcf_for_annotation = family_snv_vcf
+            ch_snv_index_for_annotation = family_snv_index
+        }
+        if (!params.skip_sv_calling) {
+            ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
+            ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
+        }
+    }
+
     //
     // Annotate SNVs
-    //
     if(!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            family_snv_vcf,
+            ch_snv_vcf_for_annotation,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -549,14 +674,14 @@ workflow NALLO {
     if(!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
             .set { ch_bcftools_concat_in }
 
         // Concat into family VCFs per family with all regions
         BCFTOOLS_CONCAT (
-                ch_bcftools_concat_in
-            )
+            ch_bcftools_concat_in
+        )
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
         // Sort and publish
@@ -592,37 +717,12 @@ workflow NALLO {
     }
 
     //
-    // Call SVs
-    //
-    if(!params.skip_sv_calling) {
-
-        CALL_SVS (
-            ch_bam_bai,
-            ch_tandem_repeats,
-            sample_snv_vcf,
-            ch_fasta,
-            ch_expected_xy_bed,
-            ch_expected_xx_bed,
-            ch_exclude_bed,
-            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
-            ch_sv_call_regions,
-            params.sv_call_regions,
-            params.force_sawfish_joint_call_single_samples,
-        )
-
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
-    }
-
-    //
     // Annotate SVs
     //
     if (!params.skip_sv_annotation) {
 
         ANNOTATE_SVS (
-            CALL_SVS.out.family_vcf,
+            ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
@@ -691,7 +791,7 @@ workflow NALLO {
     //
     if(!params.skip_sv_calling) {
 
-        ch_collect_svs = params.skip_sv_annotation ? CALL_SVS.out.family_vcf :
+        ch_collect_svs = params.skip_sv_annotation ? ch_sv_vcf_for_annotation :
             params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
             RANK_VARIANTS_SVS.out.vcf
 
@@ -701,25 +801,6 @@ workflow NALLO {
             [],
             []
         )
-    }
-
-    //
-    // Phase SNVs and INDELs
-    //
-    if(!params.skip_phasing) {
-
-        PHASING (
-            sample_snv_vcf,
-            sample_snv_index,
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            cram_output
-        )
-        ch_versions = ch_versions.mix(PHASING.out.versions)
-
-        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
-
     }
 
     //
