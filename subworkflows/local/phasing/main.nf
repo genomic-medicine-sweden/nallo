@@ -132,7 +132,7 @@ workflow PHASING {
 
             BCFTOOLS_MERGE_LONGPHASE_SNV.out.vcf
                 .join(BCFTOOLS_MERGE_LONGPHASE_SNV.out.index, failOnMismatch: true, failOnDuplicate: true)
-                .set { ch_bcftools_concat_in }
+                .set { ch_phased_vcf_index }
         }
 
         // New if block here because this is concerned with haplotagging
