@@ -159,8 +159,6 @@ nextflow_workflow {
     }
 
     test("1 sample - [] phased - stub") {
-
-        tag "q"
         options "-stub"
         when {
             params {

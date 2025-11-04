@@ -96,11 +96,7 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
-<<<<<<< HEAD
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
-=======
-                    "genomic-medicine-sweden/nallo": "v0.8.1"
->>>>>>> upstream/master
                 }
             },
             [
