@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            181,
+            180,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -18,9 +18,6 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_CONCAT_LONGPHASE": {
-                    "bcftools": 1.21
-                },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
                 },
@@ -33,10 +30,7 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT_SNV": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_PLUGINSPLIT_SV": {
+                "BCFTOOLS_PLUGINSPLIT": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_QUERY": {
@@ -218,10 +212,6 @@
                     "bcftools": 1.21
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
-                },
-                "SVDB_MERGE_BY_SAMPLE": {
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
@@ -555,19 +545,19 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
-                "test_data_chunk.00001.bed_FAM.vcf.gz:md5,8e6ebb325a66f4bae499f43c093f9ea8",
-                "test_data_chunk.00001.bed_FAM.vcf.gz.tbi:md5,f254cca1f4b51fe6739caa859f6cf13d",
-                "test_data_chunk.00002.bed_FAM.vcf.gz:md5,d8fd78e384cb246326d49ff8507fbf9e",
-                "test_data_chunk.00002.bed_FAM.vcf.gz.tbi:md5,8f9c6d04df17976b40e2d2db6cc94c48",
-                "HG002_Revio_modkit_pileup_1.bed.gz:md5,379b8256903e9aa0261ad97c0c5123dd",
-                "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,10d883000cb05bc52343c020c7d7ac46",
-                "HG002_Revio_modkit_pileup_1.bw:md5,096f02ef6253a50ddceb6bb060ba993d",
-                "HG002_Revio_modkit_pileup_2.bed.gz:md5,347c540e3b17d2cb941b32ca0cb61807",
-                "HG002_Revio_modkit_pileup_2.bed.gz.tbi:md5,c567b9339fd71ae500b2877ff7ebaa68",
-                "HG002_Revio_modkit_pileup_2.bw:md5,ad579f7f55a2b8510e25e55b22732e6f",
-                "HG002_Revio_modkit_pileup_ungrouped.bed.gz:md5,6d132c9870c7882f617643474c3bb17a",
-                "HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi:md5,3e929323b0359aacc0e45e28ba49a5c0",
-                "HG002_Revio_modkit_pileup_ungrouped.bw:md5,96f4588f216048b0998386120117d084",
+                "test_data_chunk.00001.bed_FAM.vcf.gz:md5,1f6ac30e94b0eb2c8bcdfca13c1a5121",
+                "test_data_chunk.00001.bed_FAM.vcf.gz.tbi:md5,203482d24e3d8ecc4230981feaa88d43",
+                "test_data_chunk.00002.bed_FAM.vcf.gz:md5,9d3b9a3739b92d6184844bbd4dc1959b",
+                "test_data_chunk.00002.bed_FAM.vcf.gz.tbi:md5,f4d8e362e9dfa557f8b3aebbc441308a",
+                "HG002_Revio_modkit_pileup_1.bed.gz:md5,8647d6ebc53d48a713c4f84efd0f095b",
+                "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,7ea9d1d2fac383334b8213f9b8b6cac8",
+                "HG002_Revio_modkit_pileup_1.bw:md5,1200cca5fc04a5acc27a705b7ea17e9b",
+                "HG002_Revio_modkit_pileup_2.bed.gz:md5,4266f4d24af3baee7580408ff2c82537",
+                "HG002_Revio_modkit_pileup_2.bed.gz.tbi:md5,a3aa8e21c7c94f497c9069467a7eb48b",
+                "HG002_Revio_modkit_pileup_2.bw:md5,8bb1e846d1f158e2d408a79b1bbfcc50",
+                "HG002_Revio_modkit_pileup_ungrouped.bed.gz:md5,87a4bc64fe9833c603e1d15384df77e4",
+                "HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi:md5,d859731119268f30dd3c84626bfd8ced",
+                "HG002_Revio_modkit_pileup_ungrouped.bw:md5,7ee8bd400e8493e0af67630df5f945c0",
                 "bcftools-stats-subtypes.txt:md5,3b484f760ba5b4dc48a5df427f58728f",
                 "bcftools_stats_indel-lengths.txt:md5,97cd79876adc626e08a25a60e5542618",
                 "fastqc-status-check-heatmap.txt:md5,f98c3e5395cfd3061b3228a97ba86043",
@@ -612,10 +602,8 @@
                 "FAM.sex_check.csv:md5,763950d0eff48b64da29a6a883d6b11c",
                 "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_Revio_stats.blocks.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5",
-                "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,933f9fc7187546737fa664b160594cab",
                 "FAM_stats.blocks.gtf.gz:md5,d9daf7ca3c1ffce789c265b95c8574df",
-                "FAM_stats.blocks.gtf.gz.tbi:md5,1ae23c16642f9ee2c3b71a4d877f9429",
+                "FAM_stats.blocks.gtf.gz.tbi:md5,1b1b2bd68b728507620f640611ef13f3",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
                 "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b"
@@ -708,7 +696,7 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.5"
         },
         "timestamp": "2025-10-31T09:22:12.987590118"
     }
