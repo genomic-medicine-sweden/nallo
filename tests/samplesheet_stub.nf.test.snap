@@ -96,7 +96,11 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
+<<<<<<< HEAD
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
+=======
+                    "genomic-medicine-sweden/nallo": "v0.8.1"
+>>>>>>> upstream/master
                 }
             },
             [
@@ -571,7 +575,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            161,
+            162,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,

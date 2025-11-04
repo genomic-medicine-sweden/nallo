@@ -102,7 +102,11 @@
             },
             "mentions": [
                 {
+<<<<<<< HEAD
                     "@id": "#cc819218-8e07-4f92-91ae-7975c4e8c74d"
+=======
+                    "@id": "#dd8a4642-77cd-4de4-ac40-bdba862ee17a"
+>>>>>>> upstream/master
                 }
             ],
             "name": "genomic-medicine-sweden/nallo"
@@ -135,7 +139,11 @@
                 }
             ],
             "dateCreated": "",
+<<<<<<< HEAD
             "dateModified": "2025-10-31T09:09:57Z",
+=======
+            "dateModified": "2025-10-31T10:55:06Z",
+>>>>>>> upstream/master
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
                 "nf-core",
@@ -160,10 +168,17 @@
             },
             "url": [
                 "https://github.com/genomic-medicine-sweden/nallo",
+<<<<<<< HEAD
                 "https://nf-co.re/genomic-medicine-sweden/nallo/dev/"
             ],
             "version": [
                 "0.9.0dev"
+=======
+                "https://nf-co.re/genomic-medicine-sweden/nallo/0.8.1/"
+            ],
+            "version": [
+                "0.8.1"
+>>>>>>> upstream/master
             ]
         },
         {
@@ -179,11 +194,19 @@
             "version": "!>=24.10.5"
         },
         {
+<<<<<<< HEAD
             "@id": "#cc819218-8e07-4f92-91ae-7975c4e8c74d",
             "@type": "TestSuite",
             "instance": [
                 {
                     "@id": "#b2fcd637-22fb-4145-bc48-cddc0a39ecb8"
+=======
+            "@id": "#dd8a4642-77cd-4de4-ac40-bdba862ee17a",
+            "@type": "TestSuite",
+            "instance": [
+                {
+                    "@id": "#8e515063-4d1b-4c4f-b776-12b858044f9e"
+>>>>>>> upstream/master
                 }
             ],
             "mainEntity": {
@@ -192,7 +215,11 @@
             "name": "Test suite for genomic-medicine-sweden/nallo"
         },
         {
+<<<<<<< HEAD
             "@id": "#b2fcd637-22fb-4145-bc48-cddc0a39ecb8",
+=======
+            "@id": "#8e515063-4d1b-4c4f-b776-12b858044f9e",
+>>>>>>> upstream/master
             "@type": "TestInstance",
             "name": "GitHub Actions workflow for testing genomic-medicine-sweden/nallo",
             "resource": "repos/genomic-medicine-sweden/nallo/actions/workflows/nf-test.yml",
@@ -328,7 +355,7 @@
         {
             "@id": "https://orcid.org/0000-0002-9594-0710",
             "@type": "Person",
-            "email": "52530259+fellen31@users.noreply.github.com",
+            "email": "felix.lenner@scilifelab.se",
             "name": "Felix Lenner"
         }
     ]
