@@ -67,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#766](https://github.com/genomic-medicine-sweden/nallo/pull/766) - Added bigWig output to methylation subworkflow.
 - [#768](https://github.com/genomic-medicine-sweden/nallo/pull/768) - Added new SV caller Sawfish
 - [#781](https://github.com/genomic-medicine-sweden/nallo/pull/781) - Added a stub test where sample and family ID is the same
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added SV phasing
 
 ### `Changed`
 
@@ -122,6 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#789](https://github.com/genomic-medicine-sweden/nallo/pull/789) - Updated parameters.md, removed autoformatting which brakes the document
 - [#791](https://github.com/genomic-medicine-sweden/nallo/pull/791) - Changed `YAK_COUNT` label back to `process_high`
 - [#792](https://github.com/genomic-medicine-sweden/nallo/pull/792) - Changed `YAK_COUNT` label back to `process_high`, correctly
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Moved phasing subworkflow to run before annotation
 
 ### `Removed`
 
