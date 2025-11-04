@@ -47,7 +47,7 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
@@ -159,6 +159,8 @@ nextflow_workflow {
     }
 
     test("1 sample - [] phased - stub") {
+
+        tag "q"
         options "-stub"
         when {
             params {
