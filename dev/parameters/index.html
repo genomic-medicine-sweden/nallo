@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
     
     
       
@@ -564,9 +564,9 @@
 
 
 <h1 id="genomic-medicine-swedennallo-pipeline-parameters">genomic-medicine-sweden/nallo pipeline parameters</h1>
-<p>Long-read variant calling pipeline  </p>
+<p>Long-read variant calling pipeline</p>
 <h2 id="workflow-skip-options">Workflow skip options</h2>
-<p>Allows skipping certain parts of the pipeline  </p>
+<p>Allows skipping certain parts of the pipeline</p>
 <table>
 <thead>
 <tr>
@@ -694,7 +694,7 @@
 </tbody>
 </table>
 <h2 id="inputoutput-options">Input/output options</h2>
-<p>Define where the pipeline should find input data and save output data.  </p>
+<p>Define where the pipeline should find input data and save output data.</p>
 <table>
 <thead>
 <tr>
@@ -709,18 +709,10 @@
 <tbody>
 <tr>
 <td><code>input</code></td>
-<td>Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>to be a comma-separated file with 3 columns, and a header row.</small></details></td>
+<td>Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.</small></details></td>
 <td><code>string</code></td>
 <td></td>
 <td>True</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -733,16 +725,8 @@
 </tr>
 <tr>
 <td><code>email</code></td>
-<td>Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify this on</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>the command line for every run.</small></details></td>
+<td>Email address for completion summary. <details><summary>Help</summary><small>Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (<code>~/.nextflow/config</code>) then you don't need to specify this on the command line for every run.</small></details></td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -757,16 +741,8 @@
 </tr>
 <tr>
 <td><code>cadd_prescored_indels</code></td>
-<td>Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
+<td>Path to a directory containing prescored indels for CADD. <details><summary>Help</summary><small>This folder contains the compressed files and indexes that would otherwise be in data/prescored folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
 <td><code>string</code></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -775,14 +751,6 @@
 <td><code>cadd_resources</code></td>
 <td>Path to a directory containing CADD annotations. <details><summary>Help</summary><small>This folder contains the uncompressed files that would otherwise be in data/annotation folder as described in https://github.com/kircherlab/CADD-scripts/#manual-installation.</small></details></td>
 <td><code>string</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1006,7 +974,7 @@
 </tbody>
 </table>
 <h2 id="reference-genome-options">Reference genome options</h2>
-<p>Reference genome related files and options required for the workflow.  </p>
+<p>Reference genome related files and options required for the workflow.</p>
 <table>
 <thead>
 <tr>
@@ -1030,7 +998,7 @@
 </tbody>
 </table>
 <h2 id="institutional-config-options">Institutional config options</h2>
-<p>Parameters used to describe centralised config profiles. These should not be edited.  </p>
+<p>Parameters used to describe centralised config profiles. These should not be edited.</p>
 <table>
 <thead>
 <tr>
@@ -1053,19 +1021,11 @@
 </tr>
 <tr>
 <td><code>custom_config_base</code></td>
-<td>Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the internet. If you don't need them, then this is not a problem. If you do need them, you should download</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>the files from the repo and tell Nextflow where to find them with this parameter.</small></details></td>
+<td>Base directory for Institutional configs. <details><summary>Help</summary><small>If you're running offline, Nextflow will not be able to fetch the institutional config files from the internet. If you don't need them, then this is not a problem. If you do need them, you should download the files from the repo and tell Nextflow where to find them with this parameter.</small></details></td>
 <td><code>string</code></td>
 <td>https://raw.githubusercontent.com/nf-core/configs/master</td>
 <td></td>
 <td>True</td>
-<td></td>
 </tr>
 <tr>
 <td><code>config_profile_name</code></td>
@@ -1110,7 +1070,7 @@
 </tbody>
 </table>
 <h2 id="generic-options">Generic options</h2>
-<p>Less common options for the pipeline, typically set in a config file.  </p>
+<p>Less common options for the pipeline, typically set in a config file.</p>
 <table>
 <thead>
 <tr>
@@ -1133,19 +1093,11 @@
 </tr>
 <tr>
 <td><code>publish_dir_mode</code></td>
-<td>Method used to save pipeline results to output directory. (accepted: <code>symlink</code>|<code>rellink</code>|<code>link</code>|<code>copy</code>|<code>copyNoFollow</code>|<code>move</code>) <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
+<td>Method used to save pipeline results to output directory. (accepted: <code>symlink</code>|<code>rellink</code>|<code>link</code>|<code>copy</code>|<code>copyNoFollow</code>|<code>move</code>) <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
 <td><code>string</code></td>
 <td>copy</td>
 <td></td>
 <td>True</td>
-<td></td>
 </tr>
 <tr>
 <td><code>email_on_fail</code></td>
@@ -1222,7 +1174,7 @@
 </tbody>
 </table>
 <h2 id="workflow-options">Workflow options</h2>
-<p>Workflow options specific to genomic-medicine-sweden/nallo  </p>
+<p>Workflow options specific to genomic-medicine-sweden/nallo</p>
 <table>
 <thead>
 <tr>
@@ -1245,7 +1197,7 @@
 </tr>
 <tr>
 <td><code>sv_callers</code></td>
-<td>Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by <code>sv_caller_priority</code>.</td>
+<td>Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by <code>sv_caller_priority</code>.</td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
 <td></td>
@@ -1253,23 +1205,15 @@
 </tr>
 <tr>
 <td><code>sv_callers_merge_priority</code></td>
-<td>The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in <code>sv_callers</code> should also be specified here separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code>.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
+<td>The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in <code>sv_callers</code> should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as <code>--sv_callers</code>.</td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
-<td></td>
-<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>sv_callers_to_run</code></td>
-<td>Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
+<td>Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as <code>--sv_callers</code></td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
 <td></td>
@@ -1277,7 +1221,7 @@
 </tr>
 <tr>
 <td><code>sv_callers_to_merge</code></td>
-<td>Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv). By default same as <code>--sv_callers</code></td>
+<td>Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as <code>--sv_callers</code></td>
 <td><code>string</code></td>
 <td>sniffles,hificnv</td>
 <td></td>
