@@ -571,7 +571,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            161,
+            162,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
