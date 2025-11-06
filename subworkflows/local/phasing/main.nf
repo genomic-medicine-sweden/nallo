@@ -1,19 +1,18 @@
-include { BCFTOOLS_CONCAT                                    } from '../../../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV     } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV      } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_SORT                                      } from '../../../modules/nf-core/bcftools/sort/main'
-include { CRAMINO as CRAMINO_PHASED                          } from '../../../modules/nf-core/cramino/main'
-include { HIPHASE                                            } from '../../../modules/local/hiphase/main'
-include { LONGPHASE_HAPLOTAG                                 } from '../../../modules/nf-core/longphase/haplotag/main'
-include { LONGPHASE_PHASE                                    } from '../../../modules/nf-core/longphase/phase/main'
-include { SAMTOOLS_CONVERT                                   } from '../../../modules/nf-core/samtools/convert/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE         } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP          } from '../../../modules/nf-core/samtools/index/main'
-include { SPLIT_MULTISAMPLE_VCF as SPLIT_MULTISAMPLE_VCF_SNV } from '../../../subworkflows/local/split_multisample_vcf/main'
-include { SPLIT_MULTISAMPLE_VCF as SPLIT_MULTISAMPLE_VCF_SV  } from '../../../subworkflows/local/split_multisample_vcf/main'
-include { WHATSHAP_HAPLOTAG                                  } from '../../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                                     } from '../../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                                     } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT                                } from '../../../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SNV } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_MERGE as BCFTOOLS_MERGE_LONGPHASE_SV  } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_SORT                                  } from '../../../modules/nf-core/bcftools/sort/main'
+include { CRAMINO as CRAMINO_PHASED                      } from '../../../modules/nf-core/cramino/main'
+include { HIPHASE                                        } from '../../../modules/local/hiphase/main'
+include { LONGPHASE_HAPLOTAG                             } from '../../../modules/nf-core/longphase/haplotag/main'
+include { LONGPHASE_PHASE                                } from '../../../modules/nf-core/longphase/phase/main'
+include { SAMTOOLS_CONVERT                               } from '../../../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_LONGPHASE     } from '../../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP      } from '../../../modules/nf-core/samtools/index/main'
+include { SPLIT_MULTISAMPLE_VCF                          } from '../../../subworkflows/local/split_multisample_vcf/main'
+include { WHATSHAP_HAPLOTAG                              } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_PHASE                                 } from '../../../modules/local/whatshap/phase/main'
+include { WHATSHAP_STATS                                 } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
@@ -34,28 +33,37 @@ workflow PHASING {
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
-        // The VCF channels are missing meta information for downstream subworkflows. So we preserve it during the join.
-        SPLIT_MULTISAMPLE_VCF_SNV (
-            ch_snv_vcf,
-            "_snv"
+        ch_snv_vcf
+            .map { meta, vcf -> [ meta + [variant_type: 'snv'], vcf ] }
+            .set { ch_split_in }
+
+        if (phase_with_svs) {
+            ch_sv_vcf
+                .map { meta, vcf -> [ meta + [variant_type: 'sv'], vcf ] }
+                .mix(ch_split_in)
+                .set { ch_split_in }
+        }
+
+        SPLIT_MULTISAMPLE_VCF (
+            ch_split_in
         )
-        ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF_SNV.out.versions)
+        ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF.out.versions)
+
+        SPLIT_MULTISAMPLE_VCF.out.split_vcf
+            .branch { meta, _vcf ->
+                sv: meta.variant_type == 'sv'
+                snv: meta.variant_type == 'snv'
+            }
+            .set { ch_split_vcfs }
 
         ch_bam_bai
             .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
-            .join( SPLIT_MULTISAMPLE_VCF_SNV.out.split_vcf, failOnMismatch:true, failOnDuplicate:true )
+            .join( ch_split_vcfs.snv, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_bam_vcf }
 
         if (phase_with_svs) {
-
-            SPLIT_MULTISAMPLE_VCF_SV (
-                ch_sv_vcf,
-                "_sv"
-            )
-            ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF_SV.out.versions)
-
             ch_bam_vcf
-                .join( SPLIT_MULTISAMPLE_VCF_SV.out.split_vcf, failOnMismatch:true, failOnDuplicate:true )
+                .join( ch_split_vcfs.sv, failOnMismatch:true, failOnDuplicate:true )
                 .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs, [] ] }
                 .set { ch_longphase_phase_in }
 

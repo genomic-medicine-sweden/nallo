@@ -4,26 +4,39 @@ include { CREATE_SPLIT_FILE     } from '../../../modules/local/create_split_file
 workflow SPLIT_MULTISAMPLE_VCF {
     take:
     ch_vcf       // channel: [ val(meta), path(vcf) ]
-    suffix       // string: suffix for split file naming (e.g., "_snv" or "_sv")
 
     main:
     ch_versions = Channel.empty()
 
-    // Create sample files for bcftools +split
+    // Preparing info for splitting
+    // Stripping sample IDs from meta for eaiser joining and because it doesn't make sense in single-sample VCFs
+    // We also convert sample IDs to list to make transpose work correctly
     ch_vcf
-        .map { meta, _vcf -> [ meta, meta.sample_ids ] }
-        .set { ch_create_split_file_in }
+        .map { meta, _vcf -> [ meta - meta.subMap('sample_ids'), meta.sample_ids.toList() ]}
+        .transpose()
+        .map { meta, sample_id -> [ meta, sample_id, sample_id + '_' + meta.variant_type ]}
+        .set { ch_split_info }
 
-    CREATE_SPLIT_FILE ( ch_create_split_file_in, suffix )
+    // Convert to format that makes it easy to join and retrieve sample IDs later
+    ch_split_info
+        .map { meta, sample_id, basename -> [ meta + [basename: basename], sample_id ] }
+        .set { ch_split_names }
 
-    // Collect the files' content into channels
-    CREATE_SPLIT_FILE.out.txt
-        .splitCsv(sep: "\t", elem: 1, header: ['sample', 'dash', 'basename'])
-        .map { meta, row -> [ meta + [ basename: row.basename ], row.sample ] }
-        .set { ch_split_names } // [ [region, family, samples, basename], sample ]
+    ch_split_info
+        .collectFile { meta, sample_id, basename -> [
+            "${meta.id}_${meta.variant_type}.tsv",
+            "${sample_id}\t-\t${basename}"
+        ]}
+        .map { file ->
+            def components = file.simpleName.tokenize('_')
+            def meta = [ id: components[0], variant_type: components[1] ]
+            return [ meta, file ]
+        }
+        .set { ch_split_files }
 
     ch_vcf
-        .join(CREATE_SPLIT_FILE.out.txt, failOnMismatch:true, failOnDuplicate:true)
+        .map { meta, vcf -> [ meta - meta.subMap('sample_ids'), vcf ] }
+        .join(ch_split_files, failOnMismatch:true, failOnDuplicate:true)
         .multiMap { meta, vcf, txt ->
             vcf : [ meta, vcf, [] ]
             txt : txt
@@ -42,8 +55,8 @@ workflow SPLIT_MULTISAMPLE_VCF {
     BCFTOOLS_PLUGINSPLIT.out.vcf
         .transpose()
         .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
-        .join(ch_split_names, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, file, sample -> [ [ id : sample, family_id : meta.id ], file ] }
+        .join(ch_split_names.dump(tag: 'names'), failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, file, sample -> [ [ id : sample, family_id : meta.id, variant_type: meta.variant_type], file ] }
         .set { ch_split_vcf }
 
     emit:
