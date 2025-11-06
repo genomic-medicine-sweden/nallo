@@ -1,0 +1,180 @@
+nextflow_workflow {
+
+    name "Test Workflow PHASING"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "PHASING"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                input[1] = [[],[]]
+                input[2] = false
+                """
+            }
+        }
+
+    test ("1 sample - SNVs only - WhatsHap") {
+        when {
+
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)]
+                ])
+                input[1] = Channel.of([
+                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)]
+                ])
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.of([
+                    [ id : 'HG002', family_id: 'FAM' ],
+                    file('/home/xschmy/projects/nallo/HG002_PacBio_Revio_nohp.bam', checkIfExists: true),
+                    file('/home/xschmy/projects/nallo/HG002_PacBio_Revio_nohp.bam.bai', checkIfExists: true)
+                ])
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'hiphase'
+                input[8] = false
+                input[9] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - longphase") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.of([
+                    [ id : 'default' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam.bai', checkIfExists: true)
+                ])
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'longphase'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - WhatsHap") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.of([
+                    [ id : 'default' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam.bai', checkIfExists: true)
+                ])
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'whatshap'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - HiPhase") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.of([
+                    [ id : 'default' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test.sorted.bam.bai', checkIfExists: true)
+                ])
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'hiphase'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+
+    test ("1 sample - SNVs only - HiPhase") {
+        when {
+
+            workflow {
+                """
+                input[0] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[5] = GUNZIP.out.gunzip
+                input[6] = SAMTOOLS_FAIDX.out.fai
+                input[7] = 'hiphase'
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}
