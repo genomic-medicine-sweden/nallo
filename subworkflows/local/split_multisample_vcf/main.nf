@@ -1,5 +1,8 @@
 include { BCFTOOLS_PLUGINSPLIT } from '../../../modules/nf-core/bcftools/pluginsplit/main'
 
+// Splits mutli-sample VCFs into single-sample VCFs
+// Requires the meta map to contain a 'sample_ids' key with a set of sample IDs in each VCF
+// and a 'variant_type' key with the variant type (e.g. 'snv', 'sv')
 workflow SPLIT_MULTISAMPLE_VCF {
     take:
     ch_vcf       // channel: [ val(meta), path(vcf) ]
