@@ -1,5 +1,4 @@
 include { BCFTOOLS_PLUGINSPLIT } from '../../../modules/nf-core/bcftools/pluginsplit/main'
-include { CREATE_SPLIT_FILE     } from '../../../modules/local/create_split_file/main'
 
 workflow SPLIT_MULTISAMPLE_VCF {
     take:
@@ -23,7 +22,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
         .set { ch_split_names }
 
     ch_split_info
-        .collectFile { meta, sample_id, basename -> [
+        .collectFile(newLine: true) { meta, sample_id, basename -> [
             "${meta.id}_${meta.variant_type}.tsv",
             "${sample_id}\t-\t${basename}"
         ]}
@@ -52,7 +51,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
     )
     ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
 
-    BCFTOOLS_PLUGINSPLIT.out.vcf
+    BCFTOOLS_PLUGINSPLIT.out.vcf.dump()
         .transpose()
         .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
         .join(ch_split_names.dump(tag: 'names'), failOnMismatch: true, failOnDuplicate: true)
