@@ -1,0 +1,619 @@
+{
+    "1 sample - SNVs only - HiPhase - Revio": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_haplotagged.bam:md5,e31576421250728fb30ff29745561d91",
+                        "test_1_haplotagged.bam.bai:md5,5dba47572001154d66226485ab880606"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_haplotagged.bam:md5,97fd23b105da61b5bac9f2647a5119d7",
+                        "test_2_haplotagged.bam.bai:md5,d0e6c48b5e23233c5be346f51ea2d6fd"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_stats.stats.tsv:md5,76e2197e206f7f247e16ba94c6425e1d"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_stats.stats.tsv:md5,e870835ef768719227ad55581a24495d"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_haplotagged.bam:md5,e31576421250728fb30ff29745561d91",
+                        "test_1_haplotagged.bam.bai:md5,5dba47572001154d66226485ab880606"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_haplotagged.bam:md5,97fd23b105da61b5bac9f2647a5119d7",
+                        "test_2_haplotagged.bam.bai:md5,d0e6c48b5e23233c5be346f51ea2d6fd"
+                    ]
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_stats.stats.tsv:md5,76e2197e206f7f247e16ba94c6425e1d"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_stats.stats.tsv:md5,e870835ef768719227ad55581a24495d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-22T09:41:40.052166096"
+    },
+    "1 sample - SNVs only - longphase": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,fb54cf42cd6ac5e11133d60109b3f268",
+                        "default_haplotagged.bam.bai:md5,598e96b32d21f055cc4ff93b524c52ed"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,90a08ca9a2f2990bb976ac53238ab7ee"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,19e3a637447faa1662a1f19db4b088a8",
+                    "versions.yml:md5,262a7511afb70847805cd90181c37fd7",
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,fb54cf42cd6ac5e11133d60109b3f268",
+                        "default_haplotagged.bam.bai:md5,598e96b32d21f055cc4ff93b524c52ed"
+                    ]
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,90a08ca9a2f2990bb976ac53238ab7ee"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,19e3a637447faa1662a1f19db4b088a8",
+                    "versions.yml:md5,262a7511afb70847805cd90181c37fd7",
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-30T09:14:06.308049452"
+    },
+    "1 sample - SNVs only - HiPhase": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,0843f86684701cdbfc89085e5d517f3c",
+                        "default_haplotagged.bam.bai:md5,8a4237d6dfadacad76f75de20ecbefd3"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,2b971035ef6e6f575a0f4cb0c6d46927"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,0843f86684701cdbfc89085e5d517f3c",
+                        "default_haplotagged.bam.bai:md5,8a4237d6dfadacad76f75de20ecbefd3"
+                    ]
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,2b971035ef6e6f575a0f4cb0c6d46927"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-30T09:44:27.639020274"
+    },
+    "1 sample - SNVs only - WhatsHap - grouped": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_snv_phased.vcf.gz:md5,f4601ee2c371db1b6484ea66ea75d131"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_snv_phased.vcf.gz.tbi:md5,95ba0fff7b1797a7386ea2abf04f5783"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_nohp_haplotagged.bam:md5,b34c7ddaab1054d39a70e9dc408202c2",
+                        "HG002_PacBio_Revio_nohp_haplotagged.bam.bai:md5,58db86a8fd19dd895338e64d5d76fda2"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_stats.stats.tsv:md5,f5f8386434e2f480deaaee2f3525c7f6"
+                    ]
+                ],
+                "6": [
+                    "versions.yml:md5,0c214311618271735eb9328845b87db7",
+                    "versions.yml:md5,1ae9edad154b9bc1ad89c9673ca59dd8",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_nohp_haplotagged.bam:md5,b34c7ddaab1054d39a70e9dc408202c2",
+                        "HG002_PacBio_Revio_nohp_haplotagged.bam.bai:md5,58db86a8fd19dd895338e64d5d76fda2"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_snv_phased.vcf.gz:md5,f4601ee2c371db1b6484ea66ea75d131"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_snv_phased.vcf.gz.tbi:md5,95ba0fff7b1797a7386ea2abf04f5783"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sample_ids": [
+                                "HG002"
+                            ]
+                        },
+                        "FAM_stats.stats.tsv:md5,f5f8386434e2f480deaaee2f3525c7f6"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0c214311618271735eb9328845b87db7",
+                    "versions.yml:md5,1ae9edad154b9bc1ad89c9673ca59dd8",
+                    "versions.yml:md5,b250e68bf2bd0bfe468b6d5328cd256b"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-04T15:44:27.739716123"
+    },
+    "1 sample - SNVs only - WhatsHap - Revio": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_haplotagged.bam:md5,3b6d9293204bc53a65054ea48bf4a67e",
+                        "test_1_haplotagged.bam.bai:md5,72ede53bbccd0b11e2303bc29661da5e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_haplotagged.bam:md5,9d807f8e1c63e7ed86f14cae11ddaf95",
+                        "test_2_haplotagged.bam.bai:md5,bae4765da95cdb094332df731c833087"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_stats.stats.tsv:md5,a6c17af420dee14e19cce3db84bfa038"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_stats.stats.tsv:md5,56eedaea45e75d28d32e3d552716b076"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_haplotagged.bam:md5,3b6d9293204bc53a65054ea48bf4a67e",
+                        "test_1_haplotagged.bam.bai:md5,72ede53bbccd0b11e2303bc29661da5e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_haplotagged.bam:md5,9d807f8e1c63e7ed86f14cae11ddaf95",
+                        "test_2_haplotagged.bam.bai:md5,bae4765da95cdb094332df731c833087"
+                    ]
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_stats.stats.tsv:md5,a6c17af420dee14e19cce3db84bfa038"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_stats.stats.tsv:md5,56eedaea45e75d28d32e3d552716b076"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-22T09:36:18.534187357"
+    },
+    "1 sample - SNVs + SVs - longphase": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "haplotagged_bam_bai": [
+                    
+                ],
+                "stats": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-22T11:11:50.3505546"
+    },
+    "1 sample - SNVs + SVs - HiPhase": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "haplotagged_bam_bai": [
+                    
+                ],
+                "stats": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-22T11:19:58.34620306"
+    },
+    "1 sample - SNVs only - WhatsHap": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,ab058fd006cd7f0ca1d31ad34a826043",
+                        "default_haplotagged.bam.bai:md5,a6c93129670ceba1ec9afdaf80651218"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,2b971035ef6e6f575a0f4cb0c6d46927"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_haplotagged.bam:md5,ab058fd006cd7f0ca1d31ad34a826043",
+                        "default_haplotagged.bam.bai:md5,a6c93129670ceba1ec9afdaf80651218"
+                    ]
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "default"
+                        },
+                        "default_stats.stats.tsv:md5,2b971035ef6e6f575a0f4cb0c6d46927"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,45708dc37916fd5362b8f536fc4049b6",
+                    "versions.yml:md5,8cd433c767e5edf5c7a608826be5eb35",
+                    "versions.yml:md5,9059e7dcf3b7bb12f4598991465432b2",
+                    "versions.yml:md5,daab3dab3d7610b1ca6e6785183213c0",
+                    "versions.yml:md5,e8b7f17762d77b47f236d9a3f6c6ef93"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-30T09:38:00.923772626"
+    },
+    "1 sample - SNVs only - longphase - Revio": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7"
+                ],
+                "haplotagged_bam_bai": [
+                    
+                ],
+                "stats": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,389e2b6a15a047ec5928914c7d71fae2",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7",
+                    "versions.yml:md5,85d8bbbc6624c1ef677821cecc16eaf7"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-09-22T09:31:24.309259926"
+    }
+}
