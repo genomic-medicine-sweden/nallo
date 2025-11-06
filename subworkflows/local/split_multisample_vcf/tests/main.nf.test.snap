@@ -1,0 +1,287 @@
+{
+    "2 samples, 2 variant types": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG002_sv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG003_sv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf",
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ],
+                "split_vcf": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG002_sv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG003_sv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf",
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-06T13:57:42.670156115"
+    },
+    "1 sample, 1 variant type": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ],
+                "split_vcf": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-06T12:06:41.537407678"
+    },
+    "1 sample, 2 variant types": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf",
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ],
+                "split_vcf": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ],
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "sv"
+                        },
+                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf",
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-06T12:07:17.355442529"
+    },
+    "2 samples, 1 variant type, family ID = sample ID": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,e9b2f94cd25543dd381aed0bcdc68950"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,503e8f4406f878d3e2bd1adc98d3739f"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ],
+                "split_vcf": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,e9b2f94cd25543dd381aed0bcdc68950"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,503e8f4406f878d3e2bd1adc98d3739f"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-06T13:58:04.066100326"
+    },
+    "2 samples, 1 variant type": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,0f147f931155edbd3c225bdcc8921bd4"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,c911fb05acc3c9785d0c2799cb592646"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ],
+                "split_vcf": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG002_snv.vcf:md5,0f147f931155edbd3c225bdcc8921bd4"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "variant_type": "snv"
+                        },
+                        "HG003_snv.vcf:md5,c911fb05acc3c9785d0c2799cb592646"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,9705d254550bd67b7bed7ae02d446dcf"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-06T13:57:21.374552309"
+    }
+}

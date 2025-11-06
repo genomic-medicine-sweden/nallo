@@ -1,0 +1,139 @@
+nextflow_workflow {
+
+    name "Test Workflow SPLIT_MULTISAMPLE_VCF"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "SPLIT_MULTISAMPLE_VCF"
+
+    setup {
+        run("BCFTOOLS_MERGE") {
+            script "../../../../modules/nf-core/bcftools/merge/main.nf"
+            process {
+            """
+            input[0] = Channel.of([
+                [ id: 'FAM', sample_ids: ['HG002','HG003'], variant_type: 'snv'],
+                [
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ],
+                [
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                ]
+            ])
+            input[1] = [[],[]]
+            input[2] = [[],[]]
+            input[3] = [[],[]]
+            """
+            }
+        }
+    }
+
+    test("1 sample, 1 variant type") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'snv'],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+                { assert workflow.out.split_vcf.size() == 1 },
+                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+
+            )
+        }
+    }
+
+    // Pretend that the two files contain different variants. It doesn't matter that they are the same file for this test.
+    test("1 sample, 2 variant types") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'snv'],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'sv'],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+                { assert workflow.out.split_vcf.size() == 2 },
+                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+
+            )
+        }
+    }
+
+    test("2 samples, 1 variant type") {
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+                { assert workflow.out.split_vcf.size() == 2 },
+                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+
+            )
+        }
+    }
+
+    test("2 samples, 2 variant types") {
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                    .map { meta, vcf -> [ meta + [ variant_type: 'sv' ], vcf ] }
+                    .mix(BCFTOOLS_MERGE.out.vcf)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+                { assert workflow.out.split_vcf.size() == 4 },
+                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+            )
+        }
+    }
+
+    test("2 samples, 1 variant type, family ID = sample ID") {
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf ] }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+                { assert workflow.out.split_vcf.size() == 2 },
+                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+            )
+        }
+    }
+}
