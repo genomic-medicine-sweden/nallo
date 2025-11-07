@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "longphase"
+description: Phase variants and haplotag reads using LongPhase
+keywords:
+  - phasing
+  - haplotyping
+  - long-read
+  - structural variants
+  - SNVs
+components:
+  - bcftools/merge
+  - bcftools/sort
+  - longphase/haplotag
+  - longphase/phase
+  - samtools/index
+  - split_multisample_vcf
+input:
+  - ch_snv_vcf:
+      type: file
+      description: |
+        Channel containing SNV VCF files
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - ch_sv_vcf:
+      type: file
+      description: |
+        Channel containing SV VCF files (optional)
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - ch_bam_bai:
+      type: file
+      description: |
+        Channel containing BAM files and their indexes
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - fasta:
+      type: file
+      description: |
+        Channel containing reference genome FASTA file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fa,fasta}"
+  - fai:
+      type: file
+      description: |
+        Channel containing reference genome FASTA index
+        Structure: [ val(meta), path(fai) ]
+      pattern: "*.fai"
+  - phase_with_svs:
+      type: boolean
+      description: Whether to include structural variants in phasing
+output:
+  - phased_family_snvs:
+      type: file
+      description: |
+        Channel containing phased SNV VCF files per family
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - phased_family_snvs_tbi:
+      type: file
+      description: |
+        Channel containing phased SNV VCF index files per family
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - phased_family_svs:
+      type: file
+      description: |
+        Channel containing phased SV VCF files per family (when phase_with_svs is true)
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - phased_family_svs_tbi:
+      type: file
+      description: |
+        Channel containing phased SV VCF index files per family (when phase_with_svs is true)
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - haplotagged_bam_bai:
+      type: file
+      description: |
+        Channel containing haplotagged BAM files with their indexes
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@Schmytzi"
+maintainers:
+  - "@Schmytzi"
