@@ -520,7 +520,7 @@
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
-                    "enum": ["deepvariant"]
+                    "enum": ["deepvariant", "sentieon"]
                 },
                 "str_caller": {
                     "type": "string",
