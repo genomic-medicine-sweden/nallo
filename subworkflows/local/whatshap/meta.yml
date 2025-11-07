@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "whatshap"
+description: Phase variants and haplotag reads using WhatsHap
+keywords:
+  - phasing
+  - long-read
+  - WhatsHap
+components:
+  - samtools/index
+  - whatshap/haplotag
+  - whatshap/phase
+input:
+  - ch_snv_vcf:
+      type: file
+      description: |
+        Channel containing family SNV VCF files
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - ch_bam_bai:
+      type: file
+      description: |
+        Channel containing individual BAM files and their indexes
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - fasta:
+      type: file
+      description: |
+        Channel containing reference genome FASTA file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fa,fasta}"
+  - fai:
+      type: file
+      description: |
+        Channel containing reference genome FASTA index
+        Structure: [ val(meta), path(fai) ]
+      pattern: "*.fai"
+output:
+  - phased_family_snvs:
+      type: file
+      description: |
+        Channel containing phased family SNV VCF files per family
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - phased_family_snvs_tbi:
+      type: file
+      description: |
+        Channel containing phased family SNV VCF index files per family
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - haplotagged_bam_bai:
+      type: file
+      description: |
+        Channel containing haplotagged individual BAM files with their indexes
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@Schmytzi"
+maintainers:
+  - "@Schmytzi"

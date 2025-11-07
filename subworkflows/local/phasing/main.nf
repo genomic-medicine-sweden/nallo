@@ -1,12 +1,10 @@
-include { BCFTOOLS_CONCAT                            } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO as CRAMINO_PHASED                  } from '../../../modules/nf-core/cramino/main'
-include { HIPHASE                                    } from '../../../modules/local/hiphase/main'
-include { LONGPHASE                                  } from '../../../subworkflows/local/longphase/main'
-include { SAMTOOLS_CONVERT                           } from '../../../modules/nf-core/samtools/convert/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_WHATSHAP  } from '../../../modules/nf-core/samtools/index/main'
-include { WHATSHAP_HAPLOTAG                          } from '../../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE                             } from '../../../modules/local/whatshap/phase/main'
-include { WHATSHAP_STATS                             } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT           } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO as CRAMINO_PHASED } from '../../../modules/nf-core/cramino/main'
+include { HIPHASE                   } from '../../../modules/local/hiphase/main'
+include { LONGPHASE                 } from '../../../subworkflows/local/longphase/main'
+include { SAMTOOLS_CONVERT          } from '../../../modules/nf-core/samtools/convert/main'
+include { WHATSHAP                  } from '../../../subworkflows/local/whatshap/main'
+include { WHATSHAP_STATS            } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
@@ -67,59 +65,21 @@ workflow PHASING {
 
     } else if (phaser.equals("whatshap")) {
 
-        // Fix metadata to group by family
-        ch_bam_bai
-            .map { meta, bam, bai -> [ [ id : meta.family_id ], bam, bai ] }
-            .groupTuple()
-            .set { ch_bam_bai_grouped }
-
-        ch_snv_vcf
-            .map { meta, vcf -> [ [ id: meta.id ], vcf ] }
-            .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_whatshap_phase_in}
-
-        WHATSHAP_PHASE(
-            ch_whatshap_phase_in,
+        WHATSHAP(
+            ch_snv_vcf,
+            ch_bam_bai,
             fasta,
             fai
         )
-        ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
-        WHATSHAP_PHASE.out.vcf_tbi
-            .multiMap { meta, vcf, tbi ->
-                vcf : [ meta, vcf ]
-                tbi : [ meta, tbi ]
-            }
-            .set { ch_whatshap_out_split }
-
-        ch_phased_family_snvs = ch_whatshap_out_split.vcf
-        ch_phased_family_snvs_tbi = ch_whatshap_out_split.tbi
-        ch_phased_family_svs = ch_sv_vcf
-        ch_phased_family_svs_tbi = ch_sv_vcf_index
-
-        ch_bam_bai
-            .map { meta, bam, bai -> [ [ id : meta.family_id ], meta, bam, bai ] }
-            .combine( WHATSHAP_PHASE.out.vcf_tbi, by: 0)
-            .map { _meta, full_meta, bam, bai, vcf, tbi -> [ full_meta, vcf, tbi, bam, bai ] }
-            .set { ch_whatshap_haplotag_in }
-
-        WHATSHAP_HAPLOTAG (
-            ch_whatshap_haplotag_in,
-            fasta,
-            fai
-        )
-        ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions)
-
-        SAMTOOLS_INDEX_WHATSHAP (
-            WHATSHAP_HAPLOTAG.out.bam
-        )
-        ch_versions = ch_versions.mix(SAMTOOLS_INDEX_WHATSHAP.out.versions)
-
-        WHATSHAP_HAPLOTAG.out.bam
-            .join( SAMTOOLS_INDEX_WHATSHAP.out.bai, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_bam_bai_haplotagged }
-
-        WHATSHAP_PHASE.out.vcf_tbi
+        ch_versions = ch_versions.mix(WHATSHAP.out.versions)
+        ch_phased_family_snvs     = WHATSHAP.out.phased_family_snvs
+        ch_phased_family_snvs_tbi = WHATSHAP.out.phased_family_snvs_tbi
+        ch_phased_family_svs      = ch_sv_vcf
+        ch_phased_family_svs_tbi  = ch_sv_vcf_index
+        ch_bam_bai_haplotagged    = WHATSHAP.out.haplotagged_bam_bai
+        WHATSHAP.out.phased_family_snvs
+            .join( WHATSHAP.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_phased_vcf_index }
 
     // Phase variants and haplotag reads with HiPhase

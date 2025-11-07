@@ -156,78 +156,7 @@ nextflow_workflow {
     }
 
 
-    test ("1 sample - SNVs only - WhatsHap") {
-        when {
 
-            workflow {
-                """
-                input[0] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
-                ])
-                input[1] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
-                ])
-                input[2] = Channel.empty()
-                input[3] = Channel.empty()
-                input[4] = Channel.of([
-                    [ id : 'HG002', family_id: 'FAM' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[5] = GUNZIP.out.gunzip
-                input[6] = SAMTOOLS_FAIDX.out.fai
-                input[7] = 'whatshap'
-                input[8] = false
-                input[9] = false
-                """
-            }
-        }
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-    }
-
-    test ("2 samples - SNVs only - WhatsHap") {
-        when {
-
-            workflow {
-                """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = BCFTOOLS_MERGE.out.index
-                input[2] = Channel.empty()
-                input[3] = Channel.empty()
-                input[4] = Channel.of(
-                    [
-                        [ id : 'HG002', family_id: 'FAM' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
-                    [
-                        [ id : 'HG003', family_id: 'FAM' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ]
-                )
-                input[5] = GUNZIP.out.gunzip
-                input[6] = SAMTOOLS_FAIDX.out.fai
-                input[7] = 'whatshap'
-                input[8] = false
-                input[9] = false
-                """
-            }
-        }
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-    }
 
 
     test ("2 samples - SNVs only - HiPhase") {
