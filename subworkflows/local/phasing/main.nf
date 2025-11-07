@@ -1,6 +1,6 @@
 include { BCFTOOLS_CONCAT           } from '../../../modules/nf-core/bcftools/concat/main'
 include { CRAMINO as CRAMINO_PHASED } from '../../../modules/nf-core/cramino/main'
-include { HIPHASE                   } from '../../../modules/local/hiphase/main'
+include { HIPHASE                   } from '../../../subworkflows/local/hiphase/main'
 include { LONGPHASE                 } from '../../../subworkflows/local/longphase/main'
 include { SAMTOOLS_CONVERT          } from '../../../modules/nf-core/samtools/convert/main'
 include { WHATSHAP                  } from '../../../subworkflows/local/whatshap/main'
@@ -85,61 +85,26 @@ workflow PHASING {
     // Phase variants and haplotag reads with HiPhase
     } else if (phaser.equals("hiphase")) {
 
-        ch_snv_vcf
-            .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_snv_vcf_tbi }
-
-        ch_bam_bai
-            .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
-            .groupTuple()
-            .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais ]}
-            .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_hiphase_bam_snv }
-
-        if (phase_with_svs) {
-            ch_sv_vcf
-                .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
-                .set { ch_sv_vcf_tbi }
-
-            ch_hiphase_bam_snv
-                .join( ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate:true )
-                .set { ch_hiphase_snv_in }
-        } else {
-            ch_hiphase_bam_snv
-                .map { meta, bams, bais, snv_vcf, snv_tbi -> [ meta, bams, bais, snv_vcf, snv_tbi, [] , [] ] }
-                .set { ch_hiphase_snv_in }
-        }
-
         HIPHASE (
-            ch_hiphase_snv_in,
+            ch_snv_vcf,
+            ch_snv_vcf_index,
+            ch_sv_vcf,
+            ch_sv_vcf_index,
+            ch_bam_bai,
             fasta,
             fai,
-            true
+            phase_with_svs
         )
         ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
-        ch_phased_family_snvs = HIPHASE.out.vcfs
-        ch_phased_family_snvs_tbi = HIPHASE.out.vcfs_tbi
-        ch_phased_family_svs = phase_with_svs ? HIPHASE.out.sv_vcfs : ch_sv_vcf
-        ch_phased_family_svs_tbi = phase_with_svs ? HIPHASE.out.sv_vcfs_tbi : ch_sv_vcf_index
-
-        HIPHASE.out.bams
-            .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
-            .transpose()
-            .combine(ch_bam_bai)
-            .filter { _meta_phased, bam_phased, _bai_phased, meta_orig, _bam_orig, _bai_orig ->
-                bam_phased.simpleName.startsWith(meta_orig.id)
-            } // join does not allow arbitrary predicates, so we get the cross product and filter
-            .map { _meta_phased, bam_phased, bai_phased, meta_orig, _bam_orig, _bai_orig ->
-                [ meta_orig, bam_phased, bai_phased ]
-            }
-            .set { ch_bam_bai_haplotagged }
-
-        HIPHASE.out.vcfs
-            .join( HIPHASE.out.vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_phased_vcf_index }
+        ch_phased_family_snvs     = HIPHASE.out.phased_snvs
+        ch_phased_family_snvs_tbi = HIPHASE.out.phased_snvs_tbi
+        ch_phased_family_svs      = HIPHASE.out.phased_svs
+        ch_phased_family_svs_tbi  = HIPHASE.out.phased_svs_tbi
+        ch_bam_bai_haplotagged    = HIPHASE.out.haplotagged_bam_bai
 
         if (phase_with_svs) {
+
             HIPHASE.out.sv_vcfs
                 .join( HIPHASE.out.sv_vcfs_tbi, failOnMismatch:true, failOnDuplicate:true )
                 .mix( ch_phased_vcf_index )

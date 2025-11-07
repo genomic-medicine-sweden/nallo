@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "hiphase"
+description: Phase variants and haplotag reads using HiPhase
+keywords:
+  - phasing
+  - hiphase
+  - long-read sequencing
+  - haplotagging
+components:
+  - hiphase
+input:
+  - ch_snv_vcf:
+      type: file
+      description: |
+        Channel containing sample information (meta) and SNV VCF file
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - ch_snv_vcf_index:
+      type: file
+      description: |
+        Channel containing sample information (meta) and SNV VCF index file
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - ch_sv_vcf:
+      type: file
+      description: |
+        Channel containing sample information (meta) and SV VCF file (optional)
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - ch_sv_vcf_index:
+      type: file
+      description: |
+        Channel containing sample information (meta) and SV VCF index file (optional)
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - ch_bam_bai:
+      type: file
+      description: |
+        Channel containing sample information (meta), BAM and BAI files
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - fasta:
+      type: file
+      description: |
+        Channel containing sample information (meta) and reference FASTA file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fa,fas,fasta}"
+  - fai:
+      type: file
+      description: |
+        Channel containing sample information (meta) and reference FASTA index file
+        Structure: [ val(meta), path(fai) ]
+      pattern: "*.fai"
+  - phase_with_svs:
+      type: boolean
+      description: Whether to include structural variants in phasing
+output:
+  - phased_snvs:
+      type: file
+      description: |
+        Channel containing sample information (meta) and phased SNV VCF file
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - phased_snvs_tbi:
+      type: file
+      description: |
+        Channel containing sample information (meta) and phased SNV VCF index file
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - phased_svs:
+      type: file
+      description: |
+        Channel containing sample information (meta) and phased SV VCF file
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf,vcf.gz}"
+  - phased_svs_tbi:
+      type: file
+      description: |
+        Channel containing sample information (meta) and phased SV VCF index file
+        Structure: [ val(meta), path(tbi) ]
+      pattern: "*.{tbi,csi}"
+  - haplotagged_bam_bai:
+      type: file
+      description: |
+        Channel containing sample information (meta), haplotagged BAM and BAI files
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@Schmytzi"
+maintainers:
+  - "@Schmytzi"
