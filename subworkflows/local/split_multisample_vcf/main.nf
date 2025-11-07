@@ -54,10 +54,10 @@ workflow SPLIT_MULTISAMPLE_VCF {
     )
     ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
 
-    BCFTOOLS_PLUGINSPLIT.out.vcf.dump()
+    BCFTOOLS_PLUGINSPLIT.out.vcf
         .transpose()
         .map { meta, file -> [ meta + [ basename: file.simpleName ], file ]}
-        .join(ch_split_names.dump(tag: 'names'), failOnMismatch: true, failOnDuplicate: true)
+        .join(ch_split_names, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, file, sample -> [ [ id : sample, family_id : meta.id, variant_type: meta.variant_type], file ] }
         .set { ch_split_vcf }
 
