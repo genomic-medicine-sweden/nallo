@@ -386,7 +386,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_par,
-            "deepvariant",
+            params.snv_caller,
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
@@ -421,7 +421,7 @@ workflow NALLO {
         VCF_CONCAT_NORM_VARIANTS(
             variants_to_concat_per_sample,
             ch_fasta,
-            "deepvariant",
+            params.snv_caller,
         )
         ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
