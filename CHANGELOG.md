@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 
 ### `Changed`
 
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Updated stranger and moved it to `ANNOTATE_REPEAT_EXPANSIONS`
 - [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
 - [#838](https://github.com/genomic-medicine-sweden/nallo/pull/838) - Updated github nf-test action to add cleanup for singularity tests that pull docker containers
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Updated SNV calling, joint-calling, and normalization workflows to branch on the selected SNV caller and emit caller-specific filenames
 
 ### `Removed`
 
@@ -82,6 +85,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                              | `--extra_methbat_profile_options`           |
 |                              | `--methbat_regions`                         |
 |                              | `--strdrop_training_set_json`               |
+|               | `--sentieon_model_bundle`                   |
+|               | `--sentieon_tech`                           |
+|               | `--sentieon_male_haploid_bed`               |
+|               | `--sentieon_male_diploid_bed`               |
+|               | `--sentieon_female_diploid_bed`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -102,6 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
+| sentieon/gvcftyper |             | 202503.01   |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
