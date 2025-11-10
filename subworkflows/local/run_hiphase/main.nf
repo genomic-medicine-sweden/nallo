@@ -1,6 +1,6 @@
-include { HIPHASE as HIPHASE_TOOL } from '../../../modules/local/hiphase/main'
+include { HIPHASE } from '../../../modules/local/hiphase/main'
 
-workflow HIPHASE {
+workflow RUN_HIPHASE {
     take:
     ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
     ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
@@ -43,17 +43,17 @@ workflow HIPHASE {
     }
 
     // Run HiPhase
-    HIPHASE_TOOL (
+    HIPHASE (
         ch_hiphase_input,
         fasta,
         fai,
         true
     )
-    ch_versions = ch_versions.mix(HIPHASE_TOOL.out.versions)
+    ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
     // Prepare haplotagged BAM output by matching with original metadata
-    HIPHASE_TOOL.out.bams
-        .join( HIPHASE_TOOL.out.bais, failOnMismatch:true, failOnDuplicate:true )
+    HIPHASE.out.bams
+        .join( HIPHASE.out.bais, failOnMismatch:true, failOnDuplicate:true )
         .transpose()
         .combine(ch_bam_bai)
         .filter { _meta_phased, bam_phased, _bai_phased, meta_orig, _bam_orig, _bai_orig ->
@@ -65,10 +65,10 @@ workflow HIPHASE {
         .set { ch_haplotagged_bam_bai }
 
     emit:
-    phased_snvs             = HIPHASE_TOOL.out.vcfs                                           // channel: [ val(meta), path(vcf) ]
-    phased_snvs_tbi         = HIPHASE_TOOL.out.vcfs_tbi                                       // channel: [ val(meta), path(tbi) ]
-    phased_svs              = phase_with_svs ? HIPHASE_TOOL.out.sv_vcfs : ch_sv_vcf           // channel: [ val(meta), path(vcf) ]
-    phased_svs_tbi          = phase_with_svs ? HIPHASE_TOOL.out.sv_vcfs_tbi : ch_sv_vcf_index // channel: [ val(meta), path(tbi) ]
+    phased_snvs             = HIPHASE.out.vcfs                                           // channel: [ val(meta), path(vcf) ]
+    phased_snvs_tbi         = HIPHASE.out.vcfs_tbi                                       // channel: [ val(meta), path(tbi) ]
+    phased_svs              = phase_with_svs ? HIPHASE.out.sv_vcfs : ch_sv_vcf           // channel: [ val(meta), path(vcf) ]
+    phased_svs_tbi          = phase_with_svs ? HIPHASE.out.sv_vcfs_tbi : ch_sv_vcf_index // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai     = ch_haplotagged_bam_bai                                          // channel: [ val(meta), path(bam), path(bai) ]
     versions                = ch_versions                                                     // channel: [ path(versions.yml) ]
 }

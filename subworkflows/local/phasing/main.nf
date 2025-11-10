@@ -1,6 +1,6 @@
 include { BCFTOOLS_CONCAT           } from '../../../modules/nf-core/bcftools/concat/main'
 include { CRAMINO as CRAMINO_PHASED } from '../../../modules/nf-core/cramino/main'
-include { HIPHASE                   } from '../../../subworkflows/local/hiphase/main'
+include { RUN_HIPHASE               } from '../../../subworkflows/local/hiphase/main'
 include { LONGPHASE                 } from '../../../subworkflows/local/longphase/main'
 include { SAMTOOLS_CONVERT          } from '../../../modules/nf-core/samtools/convert/main'
 include { WHATSHAP                  } from '../../../subworkflows/local/whatshap/main'
@@ -60,7 +60,7 @@ workflow PHASING {
     // Phase variants and haplotag reads with HiPhase
     } else if (phaser.equals("hiphase")) {
 
-        HIPHASE (
+        RUN_HIPHASE (
             ch_snv_vcf,
             ch_snv_vcf_index,
             ch_sv_vcf,
@@ -70,13 +70,13 @@ workflow PHASING {
             fai,
             phase_with_svs
         )
-        ch_versions = ch_versions.mix(HIPHASE.out.versions)
+        ch_versions = ch_versions.mix(RUN_HIPHASE.out.versions)
 
-        ch_phased_family_snvs     = HIPHASE.out.phased_snvs
-        ch_phased_family_snvs_tbi = HIPHASE.out.phased_snvs_tbi
-        ch_phased_family_svs      = HIPHASE.out.phased_svs
-        ch_phased_family_svs_tbi  = HIPHASE.out.phased_svs_tbi
-        ch_bam_bai_haplotagged    = HIPHASE.out.haplotagged_bam_bai
+        ch_phased_family_snvs     = RUN_HIPHASE.out.phased_snvs
+        ch_phased_family_snvs_tbi = RUN_HIPHASE.out.phased_snvs_tbi
+        ch_phased_family_svs      = RUN_HIPHASE.out.phased_svs
+        ch_phased_family_svs_tbi  = RUN_HIPHASE.out.phased_svs_tbi
+        ch_bam_bai_haplotagged    = RUN_HIPHASE.out.haplotagged_bam_bai
     }
 
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
