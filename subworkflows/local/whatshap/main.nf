@@ -35,7 +35,7 @@ workflow WHATSHAP {
             vcf : [ meta, vcf ]
             tbi : [ meta, tbi ]
         }
-        .set { ch_whatshap_out_split }
+        .set { ch_snv_outputs }
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.
     // Using combine instead of join because the VCFs are family-level, not sample-level
@@ -44,7 +44,7 @@ workflow WHATSHAP {
     ch_bam_bai
         .map { meta, bam, bai -> [ [ id : meta.family_id ], meta, bam, bai ] }
         .combine(WHATSHAP_PHASE.out.vcf_tbi, by: 0)
-        .map { _meta, full_meta, bam, bai, vcf, tbi -> [ full_meta, vcf, tbi, bam, bai ] }
+        .map { _family_meta, sample_meta, bam, bai, vcf, tbi -> [ sample_meta, vcf, tbi, bam, bai ] }
         .set { ch_whatshap_haplotag_in }
 
     WHATSHAP_HAPLOTAG (
@@ -64,8 +64,8 @@ workflow WHATSHAP {
         .set { ch_bam_bai_haplotagged }
 
     emit:
-    phased_family_snvs     = ch_whatshap_out_split.vcf  // channel: [ val(meta), path(vcf) ]
-    phased_family_snvs_tbi = ch_whatshap_out_split.tbi  // channel: [ val(meta), path(tbi) ]
+    phased_family_snvs     = ch_snv_outputs.vcf  // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_snv_outputs.tbi  // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai    = ch_bam_bai_haplotagged     // channel: [ val(meta), path(bam), path(bai) ]
     versions               = ch_versions                // channel: [ path(versions.yml) ]
 }
