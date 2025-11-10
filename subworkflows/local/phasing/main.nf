@@ -41,6 +41,7 @@ workflow PHASING {
         ch_phased_family_svs_tbi  = phase_with_svs ? LONGPHASE.out.phased_family_svs_tbi : ch_sv_vcf_index
         ch_bam_bai_haplotagged    = LONGPHASE.out.haplotagged_bam_bai
 
+    // Phase variants and haplotag reads with WhatsHap
     } else if (phaser.equals("whatshap")) {
 
         WHATSHAP(
@@ -49,8 +50,8 @@ workflow PHASING {
             fasta,
             fai
         )
-
         ch_versions = ch_versions.mix(WHATSHAP.out.versions)
+
         ch_phased_family_snvs     = WHATSHAP.out.phased_family_snvs
         ch_phased_family_snvs_tbi = WHATSHAP.out.phased_family_snvs_tbi
         ch_phased_family_svs      = ch_sv_vcf
