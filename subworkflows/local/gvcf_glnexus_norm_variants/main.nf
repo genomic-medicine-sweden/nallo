@@ -9,11 +9,11 @@ include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs       // channel: [mandatory] [ val(meta), path(gvcfs)]
-    ch_gvcf_tbis   // channel: [mandatory] [ val(meta), path(gvcfs)]
+    ch_gvcfs       // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_gvcf_tbis   // channel: [mandatory] [ val(meta), path(tbis)      ]
     ch_bed         // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai
+    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai         // channel: [mandatory] [ val(meta), path(fai)       ]
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 
     main:
