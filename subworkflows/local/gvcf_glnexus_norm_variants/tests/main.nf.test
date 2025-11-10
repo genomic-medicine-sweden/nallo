@@ -30,8 +30,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                 ])
                 input[1] = [[],[]]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[2] = [[],[]]
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
@@ -60,8 +62,10 @@ nextflow_workflow {
                     ]
                 ])
                 input[1] = [[],[]]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[2] = [[],[]]
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
@@ -89,12 +93,14 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [
+                input[1] = [[],[]]
+                input[2] = [
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
                 ]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
@@ -122,8 +128,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                 ])
                 input[1] = [[],[]]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[2] = [[],[]]
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
@@ -154,8 +162,10 @@ nextflow_workflow {
                     ]
                 ])
                 input[1] = [[],[]]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[2] = [[],[]]
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
@@ -185,12 +195,14 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [
+                input[1] = [[],[]]
+                input[2] = [
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
                 ]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = 'deepvariant'
+                input[3] = GUNZIP.out.gunzip
+                input[4] = [[],[]]
+                input[5] = 'deepvariant'
                 """
             }
         }
