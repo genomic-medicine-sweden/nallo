@@ -1,10 +1,10 @@
-include { BCFTOOLS_CONCAT           } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO as CRAMINO_PHASED } from '../../../modules/nf-core/cramino/main'
-include { RUN_HIPHASE               } from '../../../subworkflows/local/hiphase/main'
-include { LONGPHASE                 } from '../../../subworkflows/local/longphase/main'
-include { SAMTOOLS_CONVERT          } from '../../../modules/nf-core/samtools/convert/main'
-include { WHATSHAP                  } from '../../../subworkflows/local/whatshap/main'
-include { WHATSHAP_STATS            } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT  } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO          } from '../../../modules/nf-core/cramino/main'
+include { RUN_HIPHASE      } from '../../../subworkflows/local/run_hiphase/main'
+include { LONGPHASE        } from '../../../subworkflows/local/longphase/main'
+include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
+include { WHATSHAP         } from '../../../subworkflows/local/whatshap/main'
+include { WHATSHAP_STATS   } from '../../../modules/local/whatshap/stats/main'
 
 workflow PHASING {
     take:
@@ -114,8 +114,8 @@ workflow PHASING {
     }
 
     // Phasing QC
-    CRAMINO_PHASED ( ch_bam_bai_haplotagged )
-    ch_versions = ch_versions.mix(CRAMINO_PHASED.out.versions)
+    CRAMINO ( ch_bam_bai_haplotagged )
+    ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
     phased_family_snvs     = ch_phased_family_snvs      // channel: [ val(meta), path(vcf) ]
