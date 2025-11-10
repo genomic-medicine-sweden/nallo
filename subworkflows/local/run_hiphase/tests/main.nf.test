@@ -1,8 +1,8 @@
 nextflow_workflow {
 
-    name "Test Subworkflow HIPHASE"
+    name "Test Subworkflow RUN_HIPHASE"
     script "../main.nf"
-    workflow "HIPHASE"
+    workflow "RUN_HIPHASE"
     config "./nextflow.config"
 
     setup {
