@@ -488,49 +488,27 @@ workflow NALLO {
             }
             .set { ch_family_to_samples }
 
+        // Grouping SNV VCFs per family to concatenate before phasing.
+        // Right now they are split by calling regions but we need whole-genome VCFs for phasing.
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, vcf, tbi ->
                 [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
             }
             .groupTuple()
-            .map { meta, vcfs, tbis ->
-                [ meta.id, vcfs, tbis ]
-            }
-            .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
-            .map { family_id, vcfs, tbis, sample_ids ->
-                [ [ id : family_id, sample_ids : sample_ids ], vcfs, tbis ]
-            }
             .set { ch_bcftools_concat_phasing_in }
 
         BCFTOOLS_CONCAT_PHASING (
             ch_bcftools_concat_phasing_in
         )
 
-        if (params.skip_sv_calling) {
-            ch_sv_phasing_in = Channel.empty()
-            ch_sv_tbi_phasing_in = Channel.empty()
-        } else {
-            ch_sv_phasing_in = CALL_SVS.out.family_vcf
-                .map { meta, vcf -> [ meta.id, meta, vcf ] }
-                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
-                .map { _family_id, meta, vcf, sample_ids ->
-                    [ meta + [ sample_ids : sample_ids ], vcf ]
-                }
-            ch_sv_tbi_phasing_in = CALL_SVS.out.family_tbi
-                .map { meta, tbi -> [ meta.id, meta, tbi ] }
-                .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
-                .map { _family_id, meta, tbi, sample_ids ->
-                    [ meta + [ sample_ids : sample_ids ], tbi ]
-                }
-        }
-
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            ch_sv_phasing_in,
-            ch_sv_tbi_phasing_in,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_vcf,
+            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
+            ch_family_to_samples,
             ch_fasta,
             ch_fai,
             params.phaser,
@@ -539,8 +517,9 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
-        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{_meta, txt -> txt}.ifEmpty([]))
 
+        // Scatter whole-genome phased SNV VCFs back into regions for annotation
         PHASING.out.phased_family_snvs
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
             .combine(SCATTER_GENOME.out.bed_intervals)
