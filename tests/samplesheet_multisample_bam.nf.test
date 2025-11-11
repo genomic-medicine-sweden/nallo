@@ -6,7 +6,6 @@ nextflow_pipeline {
 
     test("samplesheet_multisample_bam") {
         tag "samplesheet_multisample_bam"
-        options '-dump-channels'
 
         when {
             params {
