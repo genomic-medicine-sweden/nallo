@@ -11,6 +11,7 @@ workflow LONGPHASE {
     ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
     ch_sv_vcf        // channel: [ val(meta), path(vcf) ] Optional
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
+    ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
     phase_with_svs   // bool: Whether to include SVs in phasing (true) or not (false)
@@ -19,12 +20,12 @@ workflow LONGPHASE {
     ch_versions = Channel.empty()
 
     ch_snv_vcf
-        .map { meta, vcf -> [ meta + [variant_type: 'snv'], vcf ] }
+        .map { meta, vcf -> [ meta, vcf, "snv"] }
         .set { ch_snv_with_type }
 
     if (phase_with_svs) {
         ch_sv_vcf
-            .map { meta, vcf -> [ meta + [variant_type: 'sv'], vcf ] }
+            .map { meta, vcf -> [ meta, vcf, "sv" ] }
             .mix( ch_snv_with_type )
             .set { ch_split_in }
     } else {
@@ -32,16 +33,17 @@ workflow LONGPHASE {
     }
 
     SPLIT_MULTISAMPLE_VCF (
-        ch_split_in
+        ch_split_in,
+        ch_family_to_samples
     )
     ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF.out.versions)
 
     SPLIT_MULTISAMPLE_VCF.out.split_vcf
-        .branch { meta, vcf ->
-            sv: meta.variant_type == 'sv'
-                [meta - meta.subMap('variant_type'), vcf ]
-            snv: meta.variant_type == 'snv'
-                [meta - meta.subMap('variant_type'), vcf ]
+        .branch { meta, vcf, variant_type ->
+            sv: variant_type == 'sv'
+                [ meta - meta.subMap('variant_type'), vcf ]
+            snv: variant_type == 'snv'
+                [ meta - meta.subMap('variant_type'), vcf ]
         }
         .set { ch_split_vcfs }
 
