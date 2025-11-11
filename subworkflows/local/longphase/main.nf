@@ -41,9 +41,9 @@ workflow LONGPHASE {
     SPLIT_MULTISAMPLE_VCF.out.split_vcf
         .branch { meta, vcf, variant_type ->
             sv: variant_type == 'sv'
-                [ meta - meta.subMap('variant_type'), vcf ]
+                [ meta, vcf ]
             snv: variant_type == 'snv'
-                [ meta - meta.subMap('variant_type'), vcf ]
+                [ meta, vcf ]
         }
         .set { ch_split_vcfs }
 
