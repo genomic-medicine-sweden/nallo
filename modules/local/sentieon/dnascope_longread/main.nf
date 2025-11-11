@@ -23,7 +23,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    tuple val(meta), path("${prefix}.g.vcf.gz.tbi"), emit: gvcf_tbi
 
    script:
-   prefix = bed ? "${meta.id}_${bed}" : "${meta.id}"
+   prefix = task.ext.prefix ?: "${meta.id}"
 
    def diploid_intersect_cmd = ""
    def haploid_intersect_cmd = ""
@@ -36,7 +36,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    }
 
    def haploid_bed_arg = haploid_intersect_cmd ? "--haploid_bed haploid_regions.bed" : ""
-   def diploid_bed_arg = diploid_intersect_cmd ? "--bed diploid_regions.bed" : ["--bed", ${bed}].join(' ')
+   def diploid_bed_arg = diploid_intersect_cmd ? "--bed diploid_regions.bed" : ["--bed", bed].join(' ')
 
    """
    ${haploid_intersect_cmd}
