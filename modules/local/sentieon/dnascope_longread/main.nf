@@ -55,6 +55,34 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
         --skip_cnv \\
         --skip_svs \\
     ${prefix}.vcf.gz
+
+   cat <<-END_VERSIONS > versions.yml
+   "${task.process}":
+       sentieon-cli: 1.4.0-f9c8811
+       sentieon: \$(echo \$(sentieon driver --version 2>&1) | sed -e "s/sentieon-genomics-//g")
+       bedtools: \$(bedtools --version | sed -e "s/bedtools v//g")
+       samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
+       bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
+   END_VERSIONS
+   """
+
+   stub:
+   prefix = bed ? "${meta.id}_${bed}" : "${meta.id}"
+
+   """
+   touch ${prefix}.vcf.gz
+   touch ${prefix}.vcf.gz.tbi
+   touch ${prefix}.g.vcf.gz
+   touch ${prefix}.g.vcf.gz.tbi
+
+   cat <<-END_VERSIONS > versions.yml
+   "${task.process}":
+       sentieon-cli: 1.4.0-f9c8811
+       sentieon: \$(echo \$(sentieon driver --version 2>&1) | sed -e "s/sentieon-genomics-//g")
+       bedtools: \$(bedtools --version | sed -e "s/bedtools v//g")
+       samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
+       bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
+   END_VERSIONS
    """
 
 }
