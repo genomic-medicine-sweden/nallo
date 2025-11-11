@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`\_
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 
 ### `Changed`
@@ -36,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
 - [#838](https://github.com/genomic-medicine-sweden/nallo/pull/838) - Updated github nf-test action to add cleanup for singularity tests that pull docker containers
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Updated SNV calling, joint-calling, and normalization workflows to branch on the selected SNV caller and emit caller-specific filenames
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Updated the SNV calling, and the joint-calling/normalization workflow to branch on the selected SNV caller and emit caller-specific filenames
 
 ### `Removed`
 
@@ -111,6 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
 | sentieon/gvcftyper |             | 202503.01   |
+| sentieon/dnascope-longread |             | 1.4.0-lrRPA-fix |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
