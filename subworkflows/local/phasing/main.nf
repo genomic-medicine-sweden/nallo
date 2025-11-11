@@ -13,6 +13,7 @@ workflow PHASING {
     ch_sv_vcf        // channel: [ val(meta), path(vcf) ] Optional
     ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ] Optional
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
+    ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
     phaser           //  string: Phasing tool to use
@@ -29,6 +30,7 @@ workflow PHASING {
             ch_snv_vcf,
             ch_sv_vcf,
             ch_bam_bai,
+            ch_family_to_samples,
             fasta,
             fai,
             phase_with_svs
