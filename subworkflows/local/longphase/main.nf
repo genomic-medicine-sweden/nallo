@@ -1,6 +1,6 @@
 
+include { BCFTOOLS_INDEX        } from '../../../modules/nf-core/bcftools/index/main'
 include { BCFTOOLS_MERGE        } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_SORT         } from '../../../modules/nf-core/bcftools/sort/main'
 include { LONGPHASE_HAPLOTAG    } from '../../../modules/nf-core/longphase/haplotag/main'
 include { LONGPHASE_PHASE       } from '../../../modules/nf-core/longphase/phase/main'
 include { SAMTOOLS_INDEX        } from '../../../modules/nf-core/samtools/index/main'
@@ -74,14 +74,14 @@ workflow LONGPHASE {
     LONGPHASE_PHASE.out.snv_vcf
         .map { meta, vcf -> [ meta + [ variant_type: 'snv'], vcf ] }
         .mix ( LONGPHASE_PHASE.out.sv_vcf.map { meta, vcf -> [ meta + [ variant_type: 'sv'], vcf ] })
-        .set { ch_bcftools_sort_in }
+        .set { ch_bcftools_index_in }
 
     // Sort all phased VCFs, ignoring variant types.
-    BCFTOOLS_SORT( ch_bcftools_sort_in )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
+    BCFTOOLS_INDEX( ch_bcftools_index_in )
+    ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
-    BCFTOOLS_SORT.out.vcf
-        .join (BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+    ch_bcftools_index_in.out.vcf
+        .join (BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [ meta + [ id: meta.family_id ] - meta.subMap('family_id'), vcf, tbi ] }
         .groupTuple()
         .set { ch_phased_vcf }

@@ -41,6 +41,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
         }
         .set { ch_split_files }
 
+    // Join VCFs and split files and then split them to ensure correct ordering
     ch_vcf_vartype
         .map { meta, vcf, variant_type -> [ [id : meta.id, variant_type: variant_type ], meta, vcf ] }
         .join(ch_split_files, failOnMismatch:true, failOnDuplicate:true)
