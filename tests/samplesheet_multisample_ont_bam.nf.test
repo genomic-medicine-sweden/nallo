@@ -3,7 +3,6 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
-    options "-dump-channels"
 
     test("samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs") {
         tag "samplesheet_multisample_ont_bam"
