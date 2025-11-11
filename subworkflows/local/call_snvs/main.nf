@@ -1,8 +1,8 @@
 //
 // Workflow to call SNVs
 //
-include { DEEPVARIANT_RUNDEEPVARIANT   } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
-include { DNASCOPE_LONGREAD_CALL_SNVS  } from '../../../modules/local/sentieon/dnascope_longread/main'
+include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
 
 workflow CALL_SNVS {
     take:
@@ -37,7 +37,7 @@ workflow CALL_SNVS {
 
     } else if (variant_caller.equals("sentieon")) {
 
-    DNASCOPE_LONGREAD_CALL_SNVS(
+    DNASCOPE_LONGREAD(
             ch_bam_bai_bed,
             ch_fasta,
             ch_fai,
@@ -47,10 +47,10 @@ workflow CALL_SNVS {
             params.sentieon_male_diploid_bed,
             params.sentieon_male_haploid_bed,
         )
-        ch_vcf        = DNASCOPE_LONGREAD_CALL_SNVS.out.vcf
-        ch_index      = DNASCOPE_LONGREAD_CALL_SNVS.out.vcf_tbi
-        ch_gvcf       = DNASCOPE_LONGREAD_CALL_SNVS.out.gvcf
-        ch_gvcf_index = DNASCOPE_LONGREAD_CALL_SNVS.out.gvcf_tbi
+        ch_vcf        = DNASCOPE_LONGREAD.out.vcf
+        ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
+        ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
+        ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }
 
 
