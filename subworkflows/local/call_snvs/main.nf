@@ -47,13 +47,14 @@ workflow CALL_SNVS {
             params.sentieon_male_diploid_bed,
             params.sentieon_male_haploid_bed,
         )
+        ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
+
         ch_vcf        = DNASCOPE_LONGREAD.out.vcf
         ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
         ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
         ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }
 
-    ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
 
     emit:
     vcf        = ch_vcf        // channel: [ val(meta), path(vcf) ]
