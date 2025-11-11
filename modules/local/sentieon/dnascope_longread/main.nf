@@ -37,7 +37,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    }
 
    def haploid_bed_arg = haploid_intersect_cmd ? "--haploid_bed haploid_regions.bed" : ""
-   def diploid_bed_arg = diploid_intersect_cmd ? "--bed diploid_regions.bed" : ["--bed", bed].join(' ')
+   def diploid_bed_arg = diploid_intersect_cmd ? "--bed diploid_regions.bed" : "--bed ${bed}"
 
    """
    ${haploid_intersect_cmd}
