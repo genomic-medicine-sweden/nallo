@@ -48,6 +48,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         )
 
         ch_merged_family_gvcf = SENTIEON_GVCFTYPER.out.vcf_gz
+        ch_versions = ch_versions.mix(SENTIEON_GVCFTYPER.out.versions)
 
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
