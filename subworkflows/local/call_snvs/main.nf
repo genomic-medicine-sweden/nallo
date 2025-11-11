@@ -61,4 +61,3 @@ workflow CALL_SNVS {
     gvcf_index = ch_gvcf_index // channel: [ val(meta), path(tbi) ]
     versions   = ch_versions   // channel: [ path(versions.yml) ]
 }
-
