@@ -68,7 +68,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    """
 
    stub:
-   prefix = bed ? "${meta.id}_${bed}" : "${meta.id}"
+   prefix = task.ext.prefix ?: "${meta.id}"
 
    """
    touch ${prefix}.vcf.gz
