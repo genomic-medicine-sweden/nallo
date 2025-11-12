@@ -33,7 +33,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'FAM', sample_ids: ['HG002', 'HG003'].toSet() ],
+                    [ id: 'FAM'],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
@@ -57,7 +57,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
@@ -92,6 +92,37 @@ nextflow_workflow {
                     ],
                     [
                         [ id : 'HG003', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("2 samples - family ID equal to sample ID") {
+        when {
+
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf ] }
+                input[1] = Channel.of(
+                    [
+                        [ id : 'HG002', family_id: 'HG002' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'HG002' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
