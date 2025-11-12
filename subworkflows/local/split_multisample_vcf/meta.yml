@@ -27,6 +27,11 @@ output:
         - variant_type: preserved from input
         Structure: [ val(meta), path(vcf) ]
       pattern: "*.{vcf,vcf.gz}"
+  - ch_family_to_samples:
+      type: Tuple<String, List<String>>
+      description: |
+        Channel containing family IDs and sets of associated sample IDs
+        Structure: [ val(family_id), val(sample_ids) ]
   - versions:
       type: file
       description: |

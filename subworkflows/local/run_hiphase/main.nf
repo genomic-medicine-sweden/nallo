@@ -21,10 +21,10 @@ workflow RUN_HIPHASE {
 
     // Group BAM files by family and join with SNV VCF
     ch_bam_bai
-        .map { meta, bam, bai -> [ [id : meta.family_id ], meta.id, bam, bai ]}
+        .map { meta, bam, bai -> [ [id : meta.family_id ], bam, bai ]}
         .groupTuple()
-        .map { meta, ids, bams, bais -> [ meta + [sample_ids: ids.toSet() ], bams, bais ]}.dump(tag:"Grouped BAMs")
-        .join( ch_snv_vcf_tbi.dump(tag: 'VCFs'), failOnMismatch:true, failOnDuplicate:true )
+        .map { meta, bams, bais -> [ meta, bams, bais ]}
+        .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true )
         .set { ch_hiphase_bam_snv }
 
     // Prepare input based on whether SVs are included
@@ -52,7 +52,7 @@ workflow RUN_HIPHASE {
     ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
     // Prepare haplotagged BAM output by matching with original metadata
-    // The HiPhase output channels only contain family IDs and sets of sample IDs
+    // The HiPhase output channels only contain family IDs
     // We need to match the haplotagged BAMs back to the original sample metadata
     // as to not lose information downstream processes might depend on.
     HIPHASE.out.bams

@@ -484,7 +484,7 @@ workflow NALLO {
             .map { meta, _files -> [ meta.family_id, meta.id ] }
             .groupTuple()
             .map { family_id, sample_ids ->
-                [ family_id, sample_ids.toSet() ]
+                [ family_id, sample_ids.unique() ]
             }
             .set { ch_family_to_samples }
 
