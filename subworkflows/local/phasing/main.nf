@@ -7,17 +7,17 @@ include { QC_PHASING       } from '../../../subworkflows/local/qc_phasing/main'
 
 workflow PHASING {
     take:
-    ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
-    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
-    ch_sv_vcf        // channel: [ val(meta), path(vcf) ] Optional
-    ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ] Optional
-    ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
+    ch_snv_vcf           // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf_index     // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf            // channel: [ val(meta), path(vcf) ] Optional
+    ch_sv_vcf_index      // channel: [ val(meta), path(tbi) ] Optional
+    ch_bam_bai           // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
-    fasta            // channel: [ val(meta), path(fasta) ]
-    fai              // channel: [ val(meta), path(fai) ]
-    phaser           //  string: Phasing tool to use
-    phase_with_svs   //    bool: Whether to include SVs in phasing (true) or not (false)
-    cram_output      //    bool: Publish alignments as CRAM (true) or BAM (false)
+    fasta                // channel: [ val(meta), path(fasta) ]
+    fai                  // channel: [ val(meta), path(fai) ]
+    phaser               //  string: Phasing tool to use
+    phase_with_svs       //    bool: Whether to include SVs in phasing (true) or not (false)
+    cram_output          //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = Channel.empty()
