@@ -6,7 +6,7 @@ include { BCFTOOLS_PLUGINSPLIT } from '../../../modules/nf-core/bcftools/plugins
 workflow SPLIT_MULTISAMPLE_VCF {
     take:
     ch_vcf_vartype       // channel: [ val(meta), path(vcf), val(variant_type) ]
-    ch_family_to_samples // channel: [ val(family_id), val(set_of_sample_ids) ]
+    ch_family_to_samples // channel: [ val(family_id), val(list_of_sample_ids) ]
 
     main:
     ch_versions = Channel.empty()
@@ -17,7 +17,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
     ch_vcf_vartype
         .map { meta, vcf, variant_type -> [ meta.id, meta, vcf, variant_type ] }
         .combine(ch_family_to_samples, by:0) // We can have multiple VCFs per family (e.g. SNVs and SVs)
-        .map { _family_id, meta, _vcf, variant_type, sample_ids -> [ meta, variant_type, sample_ids.toList() ]}
+        .map { _family_id, meta, _vcf, variant_type, sample_ids -> [ meta, variant_type, sample_ids ]}
         .transpose()
         .map { meta, variant_type, sample_id -> [ meta, sample_id, variant_type, sample_id + '_' + variant_type ]}
         .set { ch_split_info }

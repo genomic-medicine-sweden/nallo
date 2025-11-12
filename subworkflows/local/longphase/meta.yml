@@ -33,6 +33,11 @@ input:
         Channel containing BAM files and their indexes
         Structure: [ val(meta), path(bam), path(bai) ]
       pattern: "*.{bam,cram}"
+  - ch_family_to_samples:
+      type: Tuple<String, List<String>>
+      description: |
+        Channel containing family IDs and sets of associated sample IDs
+        Structure: [ val(family_id), val(sample_ids) ]
   - fasta:
       type: file
       description: |
