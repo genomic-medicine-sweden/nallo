@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: qc_phasing
+description: |
+  Quality control and analysis of phased variants and haplotags.
+
+  This subworkflow performs post-phasing QC by:
+  1. Optionally concatenating phased SNV and SV VCFs for comprehensive statistics
+  2. Generating phasing statistics per sample using WhatsHap
+  3. Generating haplotagging statistics from BAM files using Cramino
+
+keywords:
+  - phasing
+  - quality-control
+  - whatshap
+  - cramino
+
+components:
+  - bcftools/concat
+  - cramino
+  - whatshap/stats
+
+input:
+  - ch_phased_family_snvs:
+      type: file
+      description: |
+        Phased SNV VCF files per family.
+        Structure: [ val(meta), path(vcf) ]
+  - ch_phased_family_snvs_tbi:
+      type: file
+      description: |
+        Tabix indices for phased SNV VCFs.
+        Structure: [ val(meta), path(tbi) ]
+  - ch_phased_family_svs:
+      type: file
+      description: |
+        Phased SV VCF files per family (optional).
+        Structure: [ val(meta), path(vcf) ]
+  - ch_phased_family_svs_tbi:
+      type: file
+      description: |
+        Tabix indices for phased SV VCFs (optional).
+        Structure: [ val(meta), path(tbi) ]
+  - ch_bam_bai_haplotagged:
+      type: file
+      description: |
+        Haplotagged BAM files with indices.
+        Structure: [ val(meta), path(bam), path(bai) ]
+  - ch_family_to_samples:
+      type: Tuple<String, List<String>>
+      description: |
+        Mapping of family IDs to sample IDs.
+        Structure: [ val(family_id), val(list_of_sample_ids) ]
+  - phase_with_svs:
+      type: boolean
+      description: |
+        Whether SVs were included in phasing (true) or not (false).
+        Controls whether SNV and SV VCFs are concatenated.
+
+output:
+  - phasing_stats:
+      type: file
+      description: WhatsHap phasing statistics per sample
+  - phasing_blocks:
+      type: file
+      description: WhatsHap phasing blocks per sample
+  - phasing_blocks_index:
+      type: file
+      description: Tabix index for phasing blocks
+  - haplotagging_stats:
+      type: file
+      description: Cramino haplotagging statistics from BAM files
+
+authors:
+  - "@xschmy"
