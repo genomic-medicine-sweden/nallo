@@ -1,10 +1,9 @@
-include { BCFTOOLS_CONCAT  } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO          } from '../../../modules/nf-core/cramino/main'
 include { RUN_HIPHASE      } from '../../../subworkflows/local/run_hiphase/main'
 include { LONGPHASE        } from '../../../subworkflows/local/longphase/main'
 include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
 include { WHATSHAP         } from '../../../subworkflows/local/whatshap/main'
-include { WHATSHAP_STATS   } from '../../../modules/local/whatshap/stats/main'
+include { QC_PHASING       } from '../../../subworkflows/local/qc_phasing/main'
+
 
 workflow PHASING {
     take:
@@ -82,30 +81,15 @@ workflow PHASING {
         ch_bam_bai_haplotagged    = RUN_HIPHASE.out.haplotagged_bam_bai
     }
 
-    // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
-    if (phase_with_svs) {
-        ch_phased_family_snvs
-            .join(ch_phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .mix(ch_phased_family_svs
-                .join(ch_phased_family_svs_tbi, failOnMismatch: true, failOnDuplicate: true)
-            )
-            .groupTuple()
-            .set { ch_bcftools_concat_in }
-
-        BCFTOOLS_CONCAT( ch_bcftools_concat_in )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
-        BCFTOOLS_CONCAT.out.vcf
-            .join( BCFTOOLS_CONCAT.out.tbi )
-            .set { ch_phased_vcf_index }
-    } else {
-        ch_phased_family_snvs
-            .join(ch_phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_phased_vcf_index }
-    }
-    // Phasing stats
-    WHATSHAP_STATS ( ch_phased_vcf_index )
-    ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
+    QC_PHASING (
+        ch_phased_family_snvs,
+        ch_phased_family_snvs_tbi,
+        ch_phased_family_svs,
+        ch_phased_family_svs_tbi,
+        ch_bam_bai_haplotagged,
+        ch_family_to_samples,
+        phase_with_svs
+    )
 
     if (cram_output) {
         SAMTOOLS_CONVERT (
@@ -116,16 +100,16 @@ workflow PHASING {
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
-    // Phasing QC
-    CRAMINO ( ch_bam_bai_haplotagged )
-    ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phased_family_snvs     = ch_phased_family_snvs      // channel: [ val(meta), path(vcf) ]
-    phased_family_snvs_tbi = ch_phased_family_snvs_tbi  // Channel: [ val(meta), path(tbi) ]
-    phased_family_svs      = ch_phased_family_svs       // channel: [ val(meta), path(vcf) ]
-    phased_family_svs_tbi  = ch_phased_family_svs_tbi   // Channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai    = ch_bam_bai_haplotagged     // channel: [ val(meta), path(bam), path(bai) ]
-    stats                  = WHATSHAP_STATS.out.stats   // channel: [ val(meta), path(txt) ]
-    versions               = ch_versions                // channel: [ path(versions.yml) ]
+    phased_family_snvs     = ch_phased_family_snvs               // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_phased_family_snvs_tbi           // Channel: [ val(meta), path(tbi) ]
+    phased_family_svs      = ch_phased_family_svs                // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi  = ch_phased_family_svs_tbi            // Channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged              // channel: [ val(meta), path(bam), path(bai) ]
+    stats                  = QC_PHASING.out.phasing_stats        // channel: [ val(meta), path("*.stats.tsv") ]
+    blocks                 = QC_PHASING.out.phasing_blocks       // channel: [ val(meta), path("*.blocks.gtf.gz") ]
+    blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats     = QC_PHASING.out.haplotagging_stats   // channel: [ val(meta), path("*.stats.tsv") ]
+    versions               = ch_versions                         // channel: [ path(versions.yml) ]
 }
