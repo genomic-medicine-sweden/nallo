@@ -6,11 +6,17 @@ include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../mod
 
 workflow CALL_SNVS {
     take:
-    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_regions_bed) ]
-    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai         // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_par_bed     // channel: [mandatory] [ val(meta), path(par_bed) ]
-    variant_caller //  string: which variant caller to use, i.e. "deepvariant"
+    ch_bam_bai_bed               // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_regions_bed) ]
+    ch_fasta                     // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                       // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_par_bed                   // channel: [mandatory] [ val(meta), path(par_bed) ]
+    sentieon_model_bundle        // channel: [mandatory] [ val(meta), path(model_bundle) ]
+    sentieon_female_diploid_bed  // channel: [mandatory] [ val(meta), path(female_diploid_bed) ]
+    sentieon_male_diploid_bed    // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
+    sentieon_male_haploid_bed    // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
+    variant_caller               // string: which variant caller to use, i.e. "deepvariant"
+    sentieon_tech                // string: which sequencing tech produced the reads (sentieon)
+
 
     main:
     ch_versions   = Channel.empty()
