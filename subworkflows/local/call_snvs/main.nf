@@ -1,6 +1,8 @@
 //
 // Workflow to call SNVs
 //
+
+include { BEDTOOLS_INTERSECT as CREATE_HAPLOID_REGIONS_BED  } from '../../../modules/nf-core/bedtools/intersect/main'
 include { BEDTOOLS_INTERSECT as CREATE_DIPLOID_REGIONS_BED  } from '../../../modules/nf-core/bedtools/intersect/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
