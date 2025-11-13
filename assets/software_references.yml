@@ -50,6 +50,12 @@ tool:
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
     bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
+  sentieon:
+    citation: "Sentieon Genomics Tools (Freed et al. 2017)"
+    bibliography: "Freed D, Aldana R, Weber JA, Edwards JS. The Sentieon Genomics Tools - A fast and accurate solution to variant calling from next-generation sequence data. bioRxiv. 2017. doi:10.1101/115717."
+  sentieon-cli:
+    citation: "Sentieon DNAscope LongRead (Freed et al. 2022)"
+    bibliography: "Donald Freed, William J. Rowell, Aaron M. Wenger, Zhipan Li.  Sentieon DNAscope LongRead – A highly Accurate, Fast, and Efficient Pipeline for Germline Variant Calling from PacBio HiFi reads. bioRxiv 2022.06.01.494452. https://doi.org/10.1101/2022.06.01.494452"
   echtvar:
     citation: "Echtvar (Pedersen & de Ridder 2023)"
     bibliography: "Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931"

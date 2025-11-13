@@ -114,7 +114,12 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_run` | Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_merge` | Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
-| `snv_caller` | Which short variant software to use (`deepvariant`) (accepted: `deepvariant`) | `string` | deepvariant |  |  |
+| `snv_caller` | Which short variant software to use (`deepvariant` or `sentieon`). Set to `sentieon` to run Sentieon DNAscope long-read calling. (accepted: `deepvariant`\|`sentieon`) | `string` | deepvariant |  |  |
+| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Only used when `--snv_caller sentieon`. | `string` |  |  |  |
+| `sentieon_tech` | Sequencing technology used with Sentieon DNAscope (`HiFi` or `ONT`). Defaults to `HiFi` unless overwritten or the ONT preset is used. (accepted: `HiFi`\|`ONT`) | `string` | HiFi |  |  |
+| `sentieon_male_haploid_bed` | BED file restricting haploid regions for male samples when using Sentieon DNAscope. | `string` |  |  |  |
+| `sentieon_male_diploid_bed` | BED file restricting diploid regions for male samples when using Sentieon DNAscope. | `string` |  |  |  |
+| `sentieon_female_diploid_bed` | BED file restricting diploid regions for female samples when using Sentieon DNAscope. | `string` |  |  |  |
 | `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: `trgt`\|`strdust`) | `string` | trgt |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
