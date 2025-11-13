@@ -81,29 +81,33 @@ workflow NALLO {
 
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
-    ch_cadd_header               = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
-    ch_cadd_resources            = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
-    ch_fasta                     = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
-    ch_par                       = createReferenceChannelFromPath(params.par_regions)
-    ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
-    ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
-    ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
-    ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
-    ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
-    ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
-    ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
-    ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
-    ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
-    ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
-    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
-    ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
+    ch_cadd_header                 = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
+    ch_cadd_resources              = createReferenceChannelFromPath(params.cadd_resources)
+    ch_cadd_prescored_indels       = createReferenceChannelFromPath(params.cadd_prescored_indels)
+    ch_fasta                       = createReferenceChannelFromPath(params.fasta)
+    ch_tandem_repeats              = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
+    ch_par                         = createReferenceChannelFromPath(params.par_regions)
+    ch_str_bed                     = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions            = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_sv_call_regions             = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_methylation_call_regions    = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
+    ch_stranger_repeat_catalog     = createReferenceChannelFromPath(params.stranger_repeat_catalog)
+    ch_variant_consequences_snvs   = createReferenceChannelFromPath(params.variant_consequences_snvs)
+    ch_variant_consequences_svs    = createReferenceChannelFromPath(params.variant_consequences_svs)
+    ch_vep_cache_unprocessed       = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
+    ch_expected_xy_bed             = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
+    ch_expected_xx_bed             = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
+    ch_exclude_bed                 = createReferenceChannelFromPath(params.cnv_excluded_regions)
+    ch_genmod_reduced_penetrance   = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
+    ch_genmod_score_config_snvs    = createReferenceChannelFromPath(params.genmod_score_config_snvs)
+    ch_genmod_score_config_svs     = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_peddy_sites                 = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
+    ch_qc_regions                  = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
+    ch_somalier_sites              = createReferenceChannelFromPath(params.somalier_sites)
+    ch_sentieon_model_bundle       = createReferenceChannelFromPath(params.sentieon_model_bundle, Channel.value([], []))
+    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.ch_sentieon_female_diploid_bed, Channel.value([], []))
+    ch_sentieon_male_diploid_bed   = createReferenceChannelFromPath(params.ch_sentieon_male_diploid_bed, Channel.value([], []))
+    ch_sentieon_male_haploid_bed   = createReferenceChannelFromPath(params.ch_sentieon_male_haploid_bed, Channel.value([], []))
 
 
     // Channels from (optional) input samplesheets validated by schema
@@ -386,7 +390,12 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_par,
+            ch_sentieon_model_bundle,
+            ch_sentieon_female_diploid_bed,
+            ch_sentieon_male_diploid_bed,
+            ch_sentieon_male_haploid_bed,
             params.snv_caller,
+            params.sentieon_tech,
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 

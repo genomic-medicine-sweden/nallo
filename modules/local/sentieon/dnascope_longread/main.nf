@@ -7,14 +7,14 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    container "docker.io/clinicalgenomicslund/dnascope-longread:1.4.0-lrRPA-f9c8811"
 
    input:
-   tuple val(meta), path(bam), path(bai), path(interval_bed)
+   tuple val(meta),  path(bam), path(bai), path(interval_bed)
    tuple val(meta2), path(fasta)
    tuple val(meta3), path(fai)
-   path(model_bundle)
+   tuple val(meta4), path(model_bundle)
+   tuple val(meta5), path(female_diploid_bed)
+   tuple val(meta6), path(male_diploid_bed)
+   tuple val(meta7), path(male_haploid_bed)
    val(tech)
-   path(female_diploid_bed)
-   path(male_diploid_bed)
-   path(male_haploid_bed)
 
    output:
    tuple val(meta), path("${prefix}.vcf.gz")      , emit: vcf
