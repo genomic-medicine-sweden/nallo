@@ -20,7 +20,7 @@ workflow PHASING {
     cram_output          //    bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions            = Channel.empty()
+    ch_versions            = channel.empty()
 
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
