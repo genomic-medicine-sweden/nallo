@@ -1,6 +1,7 @@
 //
 // Workflow to call SNVs
 //
+include { BEDTOOLS_INTERSECT as CREATE_DIPLOID_REGIONS_BED  } from '../../../modules/nf-core/bedtools/intersect/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
 
@@ -43,15 +44,56 @@ workflow CALL_SNVS {
 
     } else if (variant_caller.equals("sentieon")) {
 
-    DNASCOPE_LONGREAD(
-            ch_bam_bai_bed,
+        ch_bam_bai_bed
+            .map { meta, bam, bai, _bed ->
+                [ meta, bam, bai ]
+            }
+            .set { ch_bam_bai }
+
+        ch_bam_bai_bed
+            .branch {
+            meta, _bam, _bai, _bed ->
+            male: meta.sex == 1
+            female: meta.sex == 2
+            }
+            .set { ch_bam_bai_bed_branched_by_sex }
+
+
+        ch_bam_bai_bed_branched_by_sex
+            .male
+            .map { meta, _bam, _bai, intervals_bed ->
+                [meta, intervals_bed ]
+            }
+            .combine {
+                ch_sentieon_male_diploid_bed.map{ _meta, diploid_intervals_bed ->
+                    [ diploid_intervals_bed ] }
+            }
+            .set { ch_male_diploid_intersect_in }
+
+        CREATE_DIPLOID_REGIONS_BED(
+            ch_male_diploid_intersect_in,
+            [[], []],
+        )
+
+        ch_bam_bai
+            .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
+            .map {
+                meta, bam, bai, bed ->
+                [meta, bam, bai, bed, []]
+            }
+            .set {
+                ch_dnascope_in
+            }
+
+        DNASCOPE_LONGREAD(
+            ch_dnascope_in,
             ch_fasta,
             ch_fai,
-            sentieon_model_bundle,
+            ch_sentieon_model_bundle,
             sentieon_tech,
-            sentieon_female_diploid_bed,
-            sentieon_male_diploid_bed,
-            sentieon_male_haploid_bed,
+            ch_sentieon_female_diploid_bed,
+            ch_sentieon_male_diploid_bed,
+            ch_sentieon_male_haploid_bed,
         )
         ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
 
