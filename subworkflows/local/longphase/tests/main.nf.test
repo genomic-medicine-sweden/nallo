@@ -33,7 +33,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'FAM', sample_ids: ['HG002', 'HG003'].toSet() ],
+                    [ id: 'FAM' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
@@ -57,7 +57,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = Channel.empty()
@@ -66,9 +66,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = GUNZIP.out.gunzip
-                input[4] = SAMTOOLS_FAIDX.out.fai
-                input[5] = false
+                input[3] = Channel.of(['FAM', [ 'HG002' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = false
                 """
             }
         }
@@ -98,9 +99,10 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[3] = GUNZIP.out.gunzip
-                input[4] = SAMTOOLS_FAIDX.out.fai
-                input[5] = false
+                input[3] = Channel.of(['FAM', [ 'HG002', 'HG003' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = false
                 """
             }
         }
