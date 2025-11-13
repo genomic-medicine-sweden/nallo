@@ -13,7 +13,7 @@ workflow QC_PHASING {
     phase_with_svs            // bool: Whether SVs were included in phasing (true) or not (false)
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
     if (phase_with_svs) {
@@ -43,11 +43,11 @@ workflow QC_PHASING {
     // duplicating the VCF and TBI paths as needed.
 
     ch_phased_vcf_index
-        .map { meta, vcf, tbi -> [ [ id : meta.family_id ], vcf, tbi ] }
+        .map { meta, vcf, tbi -> [ meta.id, meta, vcf, tbi ] }
         .join( ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true )
         .transpose() // go from set of samples to one sample per item, duplicating the rest
-        .map { meta, vcf, tbi, sample_id ->
-            [ [ id: sample_id, family_id: meta.id ], vcf, tbi ]
+        .map { family_id, meta, vcf, tbi, sample_id ->
+            [ meta + [ id: sample_id, family_id: family_id ], vcf, tbi ]
         }
         .set { ch_phased_vcf_index }
 
