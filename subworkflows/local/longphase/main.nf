@@ -17,7 +17,7 @@ workflow LONGPHASE {
     phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_snv_vcf
         .map { meta, vcf -> [ meta, vcf, "snv"] }
@@ -80,7 +80,7 @@ workflow LONGPHASE {
     BCFTOOLS_INDEX( ch_bcftools_index_in )
     ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
-    ch_bcftools_index_in.out.vcf
+    ch_bcftools_index_in
         .join (BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [ meta + [ id: meta.family_id ] - meta.subMap('family_id'), vcf, tbi ] }
         .groupTuple()
@@ -126,8 +126,12 @@ workflow LONGPHASE {
             .set { ch_vcfs_for_haplotag }
     }
 
+    ch_bam_bai
+        .join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true)
+        .set { ch_longphase_haplotag_in }
+
     LONGPHASE_HAPLOTAG (
-        ch_bam_bai.join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true),
+        ch_longphase_haplotag_in,
         fasta,
         fai
     )
