@@ -12,10 +12,10 @@ workflow RUN_HIPHASE {
     phase_with_svs   // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Prepare SNV VCF with index
-    ch_snv_vcf.dump(tag: 'SNV VCFs')
+    ch_snv_vcf
         .join( ch_snv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
         .set { ch_snv_vcf_tbi }
 
@@ -23,7 +23,6 @@ workflow RUN_HIPHASE {
     ch_bam_bai
         .map { meta, bam, bai -> [ [id : meta.family_id ], bam, bai ]}
         .groupTuple()
-        .map { meta, bams, bais -> [ meta, bams, bais ]}
         .join( ch_snv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true )
         .set { ch_hiphase_bam_snv }
 
@@ -33,8 +32,8 @@ workflow RUN_HIPHASE {
             .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_sv_vcf_tbi }
 
-        ch_hiphase_bam_snv
-            .join( ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate:true )
+        ch_hiphase_bam_snv.dump(tag:"bam_snv")
+            .join( ch_sv_vcf_tbi.dump(tag:"sv"), failOnMismatch: true, failOnDuplicate:true )
             .set { ch_hiphase_input }
     } else {
         ch_hiphase_bam_snv
