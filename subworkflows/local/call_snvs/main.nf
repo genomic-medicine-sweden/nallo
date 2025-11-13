@@ -93,9 +93,6 @@ workflow CALL_SNVS {
             ch_fai,
             ch_sentieon_model_bundle,
             sentieon_tech,
-            ch_sentieon_female_diploid_bed,
-            ch_sentieon_male_diploid_bed,
-            ch_sentieon_male_haploid_bed,
         )
         ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
 
