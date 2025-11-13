@@ -11,7 +11,7 @@ nextflow_workflow {
             process {
             """
             input[0] = Channel.of([
-                [ id: 'FAM', sample_ids: ['HG002','HG003'], variant_type: 'snv'],
+                [ id: 'FAM' ],
                 [
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
@@ -34,9 +34,11 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'snv'],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    [ id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                    "snv"
                 ])
+                input[1] = Channel.of([ 'FAM', [ 'HG002' ] ])
                 """
             }
         }
@@ -45,7 +47,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() },
                 { assert workflow.out.split_vcf.size() == 1 },
-                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+                { assert workflow.out.split_vcf.every { meta, vcf, _vartype -> path(vcf).vcf.sampleCount == 1 } }
 
             )
         }
@@ -58,14 +60,17 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'snv'],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                        [ id: 'FAM', sample_ids: ['HG002']],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                        "snv"
                     ],
                     [
-                        [ id: 'FAM', sample_ids: ['HG002'], variant_type: 'sv'],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                        [ id: 'FAM', sample_ids: ['HG002']],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                        "sv"
                     ]
                 )
+                input[1] = Channel.of([ 'FAM', [ 'HG002' ] ])
                 """
             }
         }
@@ -74,7 +79,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() },
                 { assert workflow.out.split_vcf.size() == 2 },
-                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+                { assert workflow.out.split_vcf.every { meta, vcf, _vartype -> path(vcf).vcf.sampleCount == 1 } }
 
             )
         }
@@ -84,7 +89,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta, vcf, "snv" ]}
+                input[1] = Channel.of([ 'FAM', [ 'HG002', 'HG003' ] ])
                 """
             }
         }
@@ -93,7 +99,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() },
                 { assert workflow.out.split_vcf.size() == 2 },
-                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+                { assert workflow.out.split_vcf.every { meta, vcf, _vartype -> path(vcf).vcf.sampleCount == 1 } }
 
             )
         }
@@ -104,8 +110,9 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
-                    .map { meta, vcf -> [ meta + [ variant_type: 'sv' ], vcf ] }
-                    .mix(BCFTOOLS_MERGE.out.vcf)
+                    .map { meta, vcf -> [ meta, vcf, "snv" ] }
+                    .mix(BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta, vcf, "sv" ] })
+                input[1] = Channel.of([ 'FAM', [ 'HG002', 'HG003' ] ])
                 """
             }
         }
@@ -114,7 +121,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() },
                 { assert workflow.out.split_vcf.size() == 4 },
-                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+                { assert workflow.out.split_vcf.every { meta, vcf, _vartype -> path(vcf).vcf.sampleCount == 1 } }
             )
         }
     }
@@ -123,8 +130,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf ] }
+                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf, "snv" ] }
+                input[1] = Channel.of([ 'HG002', [ 'HG002', 'HG003' ] ])
                 """
+
             }
         }
         then {
@@ -132,7 +141,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() },
                 { assert workflow.out.split_vcf.size() == 2 },
-                { assert workflow.out.split_vcf.every { meta, vcf -> path(vcf).vcf.sampleCount == 1 } }
+                { assert workflow.out.split_vcf.every { meta, vcf, _vartype -> path(vcf).vcf.sampleCount == 1 } }
             )
         }
     }

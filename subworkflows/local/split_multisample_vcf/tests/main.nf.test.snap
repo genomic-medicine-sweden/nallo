@@ -6,34 +6,34 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                        "HG002_snv.vcf:md5,48c2dd29cbd70b130136a61f8e66be00",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG002_sv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                        "HG002_sv.vcf:md5,48c2dd29cbd70b130136a61f8e66be00",
+                        "sv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG003_snv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                        "HG003_snv.vcf:md5,e08f60d5326ce2cd71e5600ed89852c9",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG003_sv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                        "HG003_sv.vcf:md5,e08f60d5326ce2cd71e5600ed89852c9",
+                        "sv"
                     ]
                 ],
                 "1": [
@@ -44,34 +44,34 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                        "HG002_snv.vcf:md5,48c2dd29cbd70b130136a61f8e66be00",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG002_sv.vcf:md5,f4a83a3a935f28d6562266ba634d77b6"
+                        "HG002_sv.vcf:md5,48c2dd29cbd70b130136a61f8e66be00",
+                        "sv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG003_snv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                        "HG003_snv.vcf:md5,e08f60d5326ce2cd71e5600ed89852c9",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG003_sv.vcf:md5,f5a732cf33cdcbc71648b54c9c61cbd7"
+                        "HG003_sv.vcf:md5,e08f60d5326ce2cd71e5600ed89852c9",
+                        "sv"
                     ]
                 ],
                 "versions": [
@@ -84,7 +84,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-06T13:57:42.670156115"
+        "timestamp": "2025-11-13T09:42:44.170460263"
     },
     "1 sample, 1 variant type": {
         "content": [
@@ -93,10 +93,10 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "snv"
                     ]
                 ],
                 "1": [
@@ -106,10 +106,10 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "snv"
                     ]
                 ],
                 "versions": [
@@ -121,7 +121,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-06T12:06:41.537407678"
+        "timestamp": "2025-11-13T09:29:06.767989602"
     },
     "1 sample, 2 variant types": {
         "content": [
@@ -130,18 +130,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "sv"
                     ]
                 ],
                 "1": [
@@ -152,18 +152,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_snv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "sv"
+                            "family_id": "FAM"
                         },
-                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278"
+                        "HG002_sv.vcf:md5,5f8d136fefd4af0d2e3c0e1204e69278",
+                        "sv"
                     ]
                 ],
                 "versions": [
@@ -176,7 +176,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-06T12:07:17.355442529"
+        "timestamp": "2025-11-13T09:29:22.363874079"
     },
     "2 samples, 1 variant type, family ID = sample ID": {
         "content": [
@@ -185,18 +185,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002",
-                            "variant_type": "snv"
+                            "family_id": "HG002"
                         },
-                        "HG002_snv.vcf:md5,e9b2f94cd25543dd381aed0bcdc68950"
+                        "HG002_snv.vcf:md5,37e0dd45da26cb15a14579039b725b3d",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "HG002",
-                            "variant_type": "snv"
+                            "family_id": "HG002"
                         },
-                        "HG003_snv.vcf:md5,503e8f4406f878d3e2bd1adc98d3739f"
+                        "HG003_snv.vcf:md5,2f327000759776864ddd0959875e2b7c",
+                        "snv"
                     ]
                 ],
                 "1": [
@@ -206,18 +206,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002",
-                            "variant_type": "snv"
+                            "family_id": "HG002"
                         },
-                        "HG002_snv.vcf:md5,e9b2f94cd25543dd381aed0bcdc68950"
+                        "HG002_snv.vcf:md5,37e0dd45da26cb15a14579039b725b3d",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "HG002",
-                            "variant_type": "snv"
+                            "family_id": "HG002"
                         },
-                        "HG003_snv.vcf:md5,503e8f4406f878d3e2bd1adc98d3739f"
+                        "HG003_snv.vcf:md5,2f327000759776864ddd0959875e2b7c",
+                        "snv"
                     ]
                 ],
                 "versions": [
@@ -229,7 +229,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-06T13:58:04.066100326"
+        "timestamp": "2025-11-13T09:43:05.855527045"
     },
     "2 samples, 1 variant type": {
         "content": [
@@ -238,18 +238,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,0f147f931155edbd3c225bdcc8921bd4"
+                        "HG002_snv.vcf:md5,0131d4ce4024b0e84e3d25e5517138be",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG003_snv.vcf:md5,c911fb05acc3c9785d0c2799cb592646"
+                        "HG003_snv.vcf:md5,d2819538d7d4d2c13b74080b4f806366",
+                        "snv"
                     ]
                 ],
                 "1": [
@@ -259,18 +259,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG002_snv.vcf:md5,0f147f931155edbd3c225bdcc8921bd4"
+                        "HG002_snv.vcf:md5,0131d4ce4024b0e84e3d25e5517138be",
+                        "snv"
                     ],
                     [
                         {
                             "id": "HG003",
-                            "family_id": "FAM",
-                            "variant_type": "snv"
+                            "family_id": "FAM"
                         },
-                        "HG003_snv.vcf:md5,c911fb05acc3c9785d0c2799cb592646"
+                        "HG003_snv.vcf:md5,d2819538d7d4d2c13b74080b4f806366",
+                        "snv"
                     ]
                 ],
                 "versions": [
@@ -282,6 +282,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-06T13:57:21.374552309"
+        "timestamp": "2025-11-13T09:42:22.920824316"
     }
 }
