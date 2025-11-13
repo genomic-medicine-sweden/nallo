@@ -1,0 +1,152 @@
+nextflow_workflow {
+
+    name "Test Workflow QC_PHASING"
+    script "../main.nf"
+    workflow "QC_PHASING"
+    config "./nextflow.config"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                input[1] = [[],[]]
+                input[2] = false
+                """
+            }
+        }
+
+        run("BCFTOOLS_MERGE") {
+            script "../../../../modules/nf-core/bcftools/merge/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: 'FAM' ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                ]
+                input[1] = [[],[]]
+                input[2] = [[],[]]
+                input[3] = [[],[]]
+                """
+            }
+        }
+
+        run("LONGPHASE") {
+            script "../../../../subworkflows/local/longphase/main.nf"
+            process {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[1] = Channel.empty()
+                input[2] = Channel.of(
+                    [
+                        [ id : 'HG002', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[3] = Channel.of([
+                    'FAM',
+                    ['HG002', 'HG003']
+                ])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = false
+                """
+            }
+        }
+    }
+
+    test("2 samples - SNVs only") {
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = Channel.of([
+                    'FAM',
+                    ['HG002', 'HG003']
+                ])
+                input[6] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // Making sure that we process all samples
+                { assert workflow.out.phasing_stats.size() == 2 },
+                { assert workflow.out.phasing_blocks.size() == 2 },
+                { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { // Making sure that the smaples are actually different
+                    with(workflow.out.phasing_stats) {
+                        assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
+                    }
+                },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("2 samples - SNVs only - stub") {
+
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = Channel.of([
+                    'FAM',
+                    ['HG002', 'HG003']
+                ])
+                input[6] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.phasing_stats.size() == 2 },
+                { assert workflow.out.phasing_blocks.size() == 2 },
+                { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}
