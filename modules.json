@@ -61,6 +61,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules", "vcf_filter_bcftools_ensemblvep"]
                     },
+                    "bedtools/intersect": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "bedtools/merge": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
