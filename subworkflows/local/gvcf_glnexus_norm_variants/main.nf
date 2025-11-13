@@ -29,22 +29,21 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_merged_family_gvcf = GLNEXUS.out.bcf
         ch_versions = ch_versions.mix(GLNEXUS.out.versions)
 
-    } else if(variant_caller.equals("sentieon")) {
+    } else if (variant_caller.equals("sentieon")) {
 
         ch_gvcfs
             .join(ch_gvcf_tbis)
-            .map{
-                meta, gvcfs, tbis   ->
+            .map { meta, gvcfs, tbis ->
                 [meta, gvcfs, tbis, []]
             }
-            .set{ch_gvcftyper_in}
+            .set { ch_gvcftyper_in }
 
         SENTIEON_GVCFTYPER(
             ch_gvcftyper_in,
             ch_fasta,
             ch_fai,
             [[], []],
-            [[], []]
+            [[], []],
         )
 
         ch_merged_family_gvcf = SENTIEON_GVCFTYPER.out.vcf_gz
