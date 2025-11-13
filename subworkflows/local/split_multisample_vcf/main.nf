@@ -9,7 +9,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
     ch_family_to_samples // channel: [ val(family_id), val(list_of_sample_ids) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Preparing info for splitting
     // Stripping sample IDs from meta for eaiser joining and because it doesn't make sense in single-sample VCFs
