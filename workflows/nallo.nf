@@ -493,7 +493,7 @@ workflow NALLO {
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, vcf, tbi ->
-                [ groupKey(meta + [id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
+                [ groupKey([id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
             }
             .groupTuple()
             .set { ch_bcftools_concat_phasing_in }
@@ -505,8 +505,8 @@ workflow NALLO {
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_vcf,
-            params.skip_sv_calling ? Channel.empty() : CALL_SVS.out.family_tbi,
+            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
+            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
             ch_family_to_samples,
             ch_fasta,
