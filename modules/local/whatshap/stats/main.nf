@@ -22,9 +22,11 @@ process WHATSHAP_STATS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def sample_arg = args.contains('--sample') ? '' : "--sample ${meta.id}"
     """
     whatshap stats \\
         $args \\
+        $sample_arg \\
         --tsv ${prefix}.stats.tsv \\
         --gtf ${prefix}.blocks.gtf \\
         $vcf
