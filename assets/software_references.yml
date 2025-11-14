@@ -107,6 +107,9 @@ tool:
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
+  rhocall:
+    citation: "Rhocall (Nilsson et al. 2016)"
+    bibliography: ""
   samtools:
     citation: "SAMtools (Danecek et al. 2021)"
     bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"

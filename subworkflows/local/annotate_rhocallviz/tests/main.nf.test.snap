@@ -1,0 +1,144 @@
+{
+    "two sample -stub": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,25239e4ccee3cd25ebd74f2568ae6404",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,da352d7c5a4d9ea570d6d115de6e77fc",
+                    "versions.yml:md5,eda483d9fbcdd93bf992e67daeddc8bb",
+                    "versions.yml:md5,edb630628eb129f564e3cc630909698c"
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "chromograph_plots_directory": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,25239e4ccee3cd25ebd74f2568ae6404",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,da352d7c5a4d9ea570d6d115de6e77fc",
+                    "versions.yml:md5,eda483d9fbcdd93bf992e67daeddc8bb",
+                    "versions.yml:md5,edb630628eb129f564e3cc630909698c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-12T12:19:40.106899374"
+    },
+    "two samples": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,bb31c116fbe937be83e02f6edee53290",
+                    "versions.yml:md5,c6ebfe842b7390b2d98f309aa516cd66",
+                    "versions.yml:md5,e5aa524abde294935d55ee9f32645b0f",
+                    "versions.yml:md5,f08e845025300ba19ed0610470569120"
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "chromograph_plots_directory": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,bb31c116fbe937be83e02f6edee53290",
+                    "versions.yml:md5,c6ebfe842b7390b2d98f309aa516cd66",
+                    "versions.yml:md5,e5aa524abde294935d55ee9f32645b0f",
+                    "versions.yml:md5,f08e845025300ba19ed0610470569120"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-12T12:19:25.56179756"
+    }
+}
