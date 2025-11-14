@@ -52,7 +52,7 @@ workflow ANNOTATE_RHOCALLVIZ {
     ch_versions = ch_versions.mix(RHOCALL_VIZ.out.versions)
 
     CHROMOGRAPH_AUTOZYG(
-        RHOCALL_VIZ.out.bed,
+        RHOCALL_VIZ.out.bed.view(),
         [[], []],
         [[], []],
         [[], []],
