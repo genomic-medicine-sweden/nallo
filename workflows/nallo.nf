@@ -36,6 +36,8 @@ include { SCATTER_GENOME                                         } from '../subw
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -553,22 +555,19 @@ workflow NALLO {
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
-            .set { ch_bcftools_concat_in }
+            .set { ch_concat_sort_input }
 
-        // Concat into family VCFs per family with all regions
-        BCFTOOLS_CONCAT (
-                ch_bcftools_concat_in
-            )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+        // Concat into family VCFs per family with all regions, sort and publish
+        CONCAT_SORT_RANKED_SNVS (
+            ch_concat_sort_input
+        )
+        ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
-        // Sort and publish
-        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
-
+        // TODO: This should be only annotated variants!
         if (!params.skip_rhocallviz_annotation) {
 
-            BCFTOOLS_SORT.out.vcf
-                .join(BCFTOOLS_SORT.out.tbi)
+            CONCAT_SORT_RANKED_SNVS.out.vcf
+                .join(CONCAT_SORT_RANKED_SNVS.out.tbi)
                 .filter { meta, _vcf, _tbi -> meta.set == "research" }
                 .set { ch_bcftools_pluginsplit_input }
 
