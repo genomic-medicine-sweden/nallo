@@ -114,9 +114,9 @@ workflow NALLO {
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
     ch_sentieon_model_bundle       = createReferenceChannelFromPath(params.sentieon_model_bundle, Channel.value([], []))
-    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.ch_sentieon_female_diploid_bed, Channel.value([], []))
-    ch_sentieon_male_diploid_bed   = createReferenceChannelFromPath(params.ch_sentieon_male_diploid_bed, Channel.value([], []))
-    ch_sentieon_male_haploid_bed   = createReferenceChannelFromPath(params.ch_sentieon_male_haploid_bed, Channel.value([], []))
+    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, Channel.value([], []))
+    ch_sentieon_male_diploid_bed   = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, Channel.value([], []))
+    ch_sentieon_male_haploid_bed   = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, Channel.value([], []))
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
