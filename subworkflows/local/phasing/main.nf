@@ -88,7 +88,7 @@ workflow PHASING {
         ch_phased_family_svs_tbi,
         ch_bam_bai_haplotagged,
         ch_family_to_samples,
-        phase_with_svs
+        phase_with_svs && !phaser.equals("whatshap")
     )
 
     if (cram_output) {
