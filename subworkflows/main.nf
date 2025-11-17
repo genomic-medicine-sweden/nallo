@@ -2,13 +2,14 @@ include { GENS_OUTPUT } from './gens_output'
 
 params.outdir = params.outdir ?: 'results'
 
-workflow MAIN {
+
+workflow {
 
     def bam_fp = "/home/jakob/data/hg002_chr21_subsamp01_subset.bam"
     def bam_bai_fp = "/home/jakob/data/hg002_chr21_subsamp01_subset.bam.bai"
     def gvcf_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz"
     def gvcf_tbi_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz.tbi"
-    def baf_positions_fp = ""
+    def baf_positions_fp = "/home/jakob/data/gnomad_hg38.0.05.txt"
 
     def meta = [ id: 'SAMPLE1', sex: 'M', cohort: 'test' ]
 
@@ -28,6 +29,8 @@ workflow MAIN {
             file(baf_positions_fp),
         )
     ).set { ch_gvcf }
+
+    print("hi")
 
     GENS_OUTPUT(
         ch_bam,

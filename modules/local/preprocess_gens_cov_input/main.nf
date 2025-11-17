@@ -16,17 +16,19 @@ process PREPROCESS_GENS_COV_INPUT {
 
     script:
     // FIXME: Should this be done in a Python util?
+    // zcat $mosdepth_file | \
+    //     awk '{ 
+    //         val = $4 +0
+    //         rounded = (val - int(val) >= 0.5) ? int(val) + 1 :int(val)
+    //         $4 = rounded
+    //         $2 = $2 + 1
+    //         OFS = "\t"
+    //         print $1, $2, $3, $4
+    //     }' > ${meta.id}.tmp
     """
-    zcat $mosdepth_file | \
-        awk '{ 
-            val = $4 +0
-            rounded = (val - int(val) >= 0.5) ? int(val) + 1 :int(val)
-            $4 = rounded
-            $2 = $2 + 1
-            OFS = "\t"
-            print $1, $2, $3, $4
-        }' > ${meta.id}.tmp
     
+    echo "Hi" > ${meta.id}.tmp
+
     sed "s/SAMPLE_NAME/${meta.id}/" ${mosdepth_header_template} > ${meta.id}.sample
     cat ${meta.id}.sample > ${meta.id}.tsv
     cat ${meta.id}.tmp >> ${meta.id}.tsv
