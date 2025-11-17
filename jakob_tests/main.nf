@@ -1,4 +1,4 @@
-include { GENS_OUTPUT } from './gens_output'
+include { GENS_OUTPUT } from '../subworkflows/local/prepare_gens_outputs/main'
 
 params.outdir = params.outdir ?: 'results'
 
@@ -46,7 +46,7 @@ workflow {
 
     ch_cov.view { it -> "cov_bed_tbi: $it" }
     ch_baf.view { it -> "baf_bed_tbi: $it" }
-    GENS_OUTPUT.out.versions.view { "versions: $it" }
+    GENS_OUTPUT.out.versions.view { it -> "versions: $it" }
 }
 
 process PUBLISH_GENS_OUTPUT {

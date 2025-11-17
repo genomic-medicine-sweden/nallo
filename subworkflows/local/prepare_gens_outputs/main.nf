@@ -1,6 +1,6 @@
-include { MOSDEPTH } from '../modules/nf-core/mosdepth/main'
-include { GENERATE_GENS_DATA } from '../modules/local/generate_gens_data/main'
-include { PREPROCESS_GENS_COV_INPUT } from '../modules/local/preprocess_gens_cov_input/main'
+include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
+include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
+include { PREPROCESS_GENS_COV_INPUT } from '../../../modules/local/preprocess_gens_cov_input/main'
 
 // Thinking point: Do we want upd? meta? here
 
