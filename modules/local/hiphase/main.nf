@@ -6,7 +6,7 @@ process HIPHASE {
     container "quay.io/biocontainers/hiphase:1.4.0--h9ee0642_0"
 
     input:
-    tuple val(meta), path(bams), path(bais), path(snvs), path(snv_indices), path(svs), path(sv_indices)
+    tuple val(meta), path(bams), path(bais), path(snvs), path(snv_idx), path(svs), path(sv_idx), val(samples)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     val(output_bam)
@@ -64,6 +64,8 @@ process HIPHASE {
             output_bam ? "${file.baseName}_haplotagged.bam" : ''
         ] }.join(" ")
 
+    def sample_args = samples.collect { sample -> "--sample-name $sample" }.join(" ")
+
     snvs.each { vcf ->
         vcfNames.add(vcf.getName())
     }
@@ -89,6 +91,7 @@ process HIPHASE {
         $args \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
+        $sample_args \\
         ${bam_args} \\
         ${snv_args} \\
         ${sv_args}
