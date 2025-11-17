@@ -68,6 +68,7 @@ workflow PHASING {
             ch_sv_vcf,
             ch_sv_vcf_index,
             ch_bam_bai,
+            ch_family_to_samples,
             fasta,
             fai,
             phase_with_svs
