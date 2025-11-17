@@ -33,4 +33,10 @@ process PREPROCESS_GENS_COV_INPUT {
     cat ${meta.id}.sample > ${meta.id}.tsv
     cat ${meta.id}.tmp >> ${meta.id}.tsv
     """
+
+    stub:
+    """
+    touch versions.yml
+    touch ${meta.id}.tsv
+    """
 }

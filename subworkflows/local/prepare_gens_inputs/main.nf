@@ -4,10 +4,11 @@ include { PREPROCESS_GENS_COV_INPUT } from '../../../modules/local/preprocess_ge
 
 // Thinking point: Do we want upd? meta? here
 
-workflow GENS_OUTPUT {
+workflow PREPARE_GENS_INPUTS {
     take:
-    ch_bam  // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf // channel: [mandatory] [ val(meta), path(gvcf), path(gvcf_tbi), path(baf_positions) ]
+    ch_bam          // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_gvcf         // channel: [mandatory] [ val(meta), path(gvcf), path(gvcf_tbi), path(baf_positions) ]
+    gatk_header     // channel: [mandatory] [ path(txt) ]
 
     main:
     ch_versions = channel.empty()
@@ -30,7 +31,8 @@ workflow GENS_OUTPUT {
 
     // Aha, need my own process here importing GAWK of course
     PREPROCESS_GENS_COV_INPUT(
-        MOSDEPTH.out.regions_bed
+        MOSDEPTH.out.regions_bed,
+        gatk_header,
     )
 
     ch_gens_input = PREPROCESS_GENS_COV_INPUT.out.output.join(ch_gvcf)

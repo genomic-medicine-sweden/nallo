@@ -1,4 +1,4 @@
-include { GENS_OUTPUT } from '../subworkflows/local/prepare_gens_outputs/main'
+include { PREPARE_GENS_INPUTS } from '../subworkflows/local/prepare_gens_inputs/main'
 
 params.outdir = params.outdir ?: 'results'
 
@@ -10,6 +10,7 @@ workflow {
     def gvcf_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz"
     def gvcf_tbi_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz.tbi"
     def baf_positions_fp = "/home/jakob/data/gnomad_hg38.0.05.txt"
+    def gatk_header_fp = "/home/jakob/data/header_tsv_gatk_mosdepth"
 
     def meta = [ id: 'SAMPLE1', sex: 'M', cohort: 'test' ]
 
@@ -32,24 +33,25 @@ workflow {
 
     print("hi")
 
-    GENS_OUTPUT(
+    PREPARE_GENS_INPUTS(
         ch_bam,
-        ch_gvcf
+        ch_gvcf,
+        gatk_header_fp
     )
 
-    ch_cov = GENS_OUTPUT.out.cov_bed_tbi
-    ch_baf = GENS_OUTPUT.out.baf_bed_tbi
+    ch_cov = PREPARE_GENS_INPUTS.out.cov_bed_tbi
+    ch_baf = PREPARE_GENS_INPUTS.out.baf_bed_tbi
 
     ch_cov_baf = ch_cov.join(ch_baf)
 
-    PUBLISH_GENS_OUTPUT(ch_cov_baf)
+    PUBLISH_GENS_INPUTS(ch_cov_baf)
 
     ch_cov.view { it -> "cov_bed_tbi: $it" }
     ch_baf.view { it -> "baf_bed_tbi: $it" }
-    GENS_OUTPUT.out.versions.view { it -> "versions: $it" }
+    PREPARE_GENS_INPUTS.out.versions.view { it -> "versions: $it" }
 }
 
-process PUBLISH_GENS_OUTPUT {
+process PUBLISH_GENS_INPUTS {
     publishDir "${params.outdir}/gens", mode: "copy"
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -57,10 +59,12 @@ process PUBLISH_GENS_OUTPUT {
         'ubuntu:22.04' }"
 
     input:
-    tuple val(meta), path(cov_bed_tbi), path(baf_bed_tbi)
+    tuple val(meta), path(cov_bed), path(cov_bed_tbi), path(baf_bed), path(baf_bed_tbi)
 
     script:
     """
+    rm $cov_bed_tbi
+    rm $baf_bed_tbi
     ln -s $cov_bed_tbi
     ln -s $baf_bed_tbi
     """
