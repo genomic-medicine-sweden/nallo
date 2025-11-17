@@ -2,13 +2,16 @@ include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
 include { PREPROCESS_GENS_COV_INPUT } from '../../../modules/local/preprocess_gens_cov_input/main'
 
+include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+
 // Thinking point: Do we want upd? meta? here
 
 workflow PREPARE_GENS_INPUTS {
     take:
-    ch_bam          // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf         // channel: [mandatory] [ val(meta), path(gvcf), path(gvcf_tbi), path(baf_positions) ]
-    gatk_header     // channel: [mandatory] [ path(txt) ]
+    ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcf), path(gvcf_tbi), path(baf_positions) ]
+    gatk_header         // channel: [mandatory] [ path(txt) ]
+    panel_of_normals    // channel: [mandatory] [ path(hd5) ]
 
     main:
     ch_versions = channel.empty()
@@ -24,14 +27,33 @@ workflow PREPARE_GENS_INPUTS {
     // -t 4 (?)
     // --by 100 (yes)
     // $SAMPLE_ID ?
+
+    ch_mosdepth_in.view()
+    ch_empty_fasta.view()
+
+    // To configure
+    // mosdepth -n --fast-mode -t 4 --by 100 test hg002_chr21_subsamp01_subset.bam
     MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
+
+    MOSDEPTH.out.regions_bed.view()
 
     // What output?
     // Some proper configuration needed here
 
-    // Aha, need my own process here importing GAWK of course
-    PREPROCESS_GENS_COV_INPUT(
+    GATK4_DENOISEREADCOUNTS(
         MOSDEPTH.out.regions_bed,
+        panel_of_normals
+        // meta, pon
+    )
+
+    // PlotDenoisedCopyRatios
+    // Cleanup
+
+    // Consider using GATK4_DENOISEREADCOUNTS.out.standardized as well here
+    // Also worth considering showing the raw data or normalized raw
+    // without the PoN
+    PREPROCESS_GENS_COV_INPUT(
+        GATK4_DENOISEREADCOUNTS.out.standardized,
         gatk_header,
     )
 

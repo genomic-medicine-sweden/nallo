@@ -1,5 +1,7 @@
 include { PREPARE_GENS_INPUTS } from '../subworkflows/local/prepare_gens_inputs/main'
 
+
+
 params.outdir = params.outdir ?: 'results'
 
 
@@ -30,8 +32,6 @@ workflow {
             file(baf_positions_fp),
         )
     ).set { ch_gvcf }
-
-    print("hi")
 
     PREPARE_GENS_INPUTS(
         ch_bam,
@@ -67,5 +67,11 @@ process PUBLISH_GENS_INPUTS {
     rm $baf_bed_tbi
     ln -s $cov_bed_tbi
     ln -s $baf_bed_tbi
+    """
+
+    stub:
+    """
+    touch $cov_bed_tbi
+    touch $baf_bed_tbi
     """
 }
