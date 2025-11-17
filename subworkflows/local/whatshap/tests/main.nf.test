@@ -12,7 +12,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test' ],
-                    file('/home/xschmy/projects/nallo/hg38.test.fa.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
                 """
             }
