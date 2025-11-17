@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            320,
+            322,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -61,9 +61,6 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CRAMINO_PHASED": {
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
@@ -242,11 +239,6 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
-                "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
-                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
                 },
@@ -287,11 +279,6 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/test_data_chunk.00001.bed_FAM.vcf.gz",
-                "bcftools/test_data_chunk.00001.bed_FAM.vcf.gz.tbi",
-                "bcftools/test_data_chunk.00002.bed_FAM.vcf.gz",
-                "bcftools/test_data_chunk.00002.bed_FAM.vcf.gz.tbi",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -606,10 +593,18 @@
                 "qc/peddy/FAM/FAM.sex_check.png",
                 "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
-                "qc/phasing_stats/FAM",
-                "qc/phasing_stats/FAM/FAM_stats.blocks.gtf.gz",
-                "qc/phasing_stats/FAM/FAM_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/FAM/FAM_stats.stats.tsv",
+                "qc/phasing_stats/HG002",
+                "qc/phasing_stats/HG002/HG002_stats.blocks.gtf.gz",
+                "qc/phasing_stats/HG002/HG002_stats.blocks.gtf.gz.tbi",
+                "qc/phasing_stats/HG002/HG002_stats.stats.tsv",
+                "qc/phasing_stats/HG003",
+                "qc/phasing_stats/HG003/HG003_stats.blocks.gtf.gz",
+                "qc/phasing_stats/HG003/HG003_stats.blocks.gtf.gz.tbi",
+                "qc/phasing_stats/HG003/HG003_stats.stats.tsv",
+                "qc/phasing_stats/HG004",
+                "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz",
+                "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz.tbi",
+                "qc/phasing_stats/HG004/HG004_stats.stats.tsv",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -682,10 +677,6 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "test_data_chunk.00001.bed_FAM.vcf.gz:md5,5f595821107d8d9764544a8b981d2f3e",
-                "test_data_chunk.00001.bed_FAM.vcf.gz.tbi:md5,271450b2f8bb224019bd6c63275c0cdf",
-                "test_data_chunk.00002.bed_FAM.vcf.gz:md5,58a984cd76badd1ff7cb5f36d2378ee8",
-                "test_data_chunk.00002.bed_FAM.vcf.gz.tbi:md5,11d62248c2d575b10d2131f2f8826a34",
                 "HG002_modkit_pileup_1.bed.gz:md5,fc7e0032bc5d43fc4e3eb9bad7986331",
                 "HG002_modkit_pileup_1.bed.gz.tbi:md5,dc4b61cfb8470954419699498d345453",
                 "HG002_modkit_pileup_1.bw:md5,3242c9d5d1362da01945aee7ec9855b1",
@@ -734,11 +725,11 @@
                 "multiqc_bcftools_stats.txt:md5,9eb66ff9c18947da9234291cee075f7f",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,df4af39e3f160095dc1cc9806546ddfb",
-                "multiqc_general_stats.txt:md5,44bff187e681f712de432af2ef3fb72b",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,d49ea3cd5606030b55271108874aa912",
+                "multiqc_general_stats.txt:md5,7e01529aa0c0e91c40716f706a00efc4",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,455bc44179ffcbdcbb3e11fca76bab51",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,b930120b5b3d2be0717e51eb33aa05a0",
-                "whatshap-stats-table.txt:md5,7cad095e519777957a6b02874eb33737",
+                "whatshap-stats-table.txt:md5,29397e2c0790187a48d1533eb2637e49",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,651a6bba9dd79996461752c63deef0e9",
                 "HG003_cramino_aligned_phased.arrow:md5,0d592c579116e4095e741ba522dbb916",
@@ -774,8 +765,12 @@
                 "FAM.sex_check.csv:md5,71ae6b68418d47304a18d72c571d3a7a",
                 "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
-                "FAM_stats.blocks.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
-                "FAM_stats.blocks.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
+                "HG002_stats.blocks.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
+                "HG002_stats.blocks.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
+                "HG003_stats.blocks.gtf.gz:md5,3abd6413706e4867978bf86ba258ced9",
+                "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
+                "HG004_stats.blocks.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
+                "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
                 "HG002_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_hificnv.depth.bw:md5,c1f3a213a83f7ab13cc082405328e74e",
                 "HG002_hificnv.maf.bw:md5,2d0add7bc6c190df62849e6d3b73e123",
@@ -828,14 +823,6 @@
                 
             ],
             [
-                [
-                    "test_data_chunk.00001.bed_FAM.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=3, variantCount=56, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "test_data_chunk.00002.bed_FAM.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr20], sampleCount=3, variantCount=158, phased=false, phasedAutodetect=false]"
-                ],
                 [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]"
@@ -918,20 +905,13 @@
                 ]
             ],
             [
-                [
-                    "test_data_chunk.00001.bed_FAM.vcf.gz",
-                    "7a698a668f3f20873818caa836630ba4"
-                ],
-                [
-                    "test_data_chunk.00002.bed_FAM.vcf.gz",
-                    "f6f4cf1924d22dfd32e49a354c914cd3"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-10-31T09:38:23.988245027"
+        "timestamp": "2025-11-17T15:55:14.673283045"
     }
 }
