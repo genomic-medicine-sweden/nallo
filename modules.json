@@ -170,7 +170,7 @@
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "c83276742fdcd6d0abac0d8f32048a98ea97971c",
+                        "git_sha": "47983538e45e539f783ed8ab0d1c96d39df2af8f",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
