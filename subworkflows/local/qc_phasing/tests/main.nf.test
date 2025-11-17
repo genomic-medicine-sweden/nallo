@@ -70,7 +70,7 @@ nextflow_workflow {
                     ]
                 )
                 input[3] = Channel.of([
-                    'FAM',
+                    [ id: 'FAM' ],
                     ['HG002', 'HG003']
                 ])
                 input[4] = GUNZIP.out.gunzip
@@ -130,7 +130,7 @@ nextflow_workflow {
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
                 input[5] = Channel.of([
-                    'FAM',
+                    [ id: 'FAM' ],
                     ['HG002', 'HG003']
                 ])
                 input[6] = false

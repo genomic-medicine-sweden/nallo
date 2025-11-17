@@ -2,14 +2,15 @@ include { HIPHASE } from '../../../modules/local/hiphase/main'
 
 workflow RUN_HIPHASE {
     take:
-    ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
-    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
-    ch_sv_vcf        // channel: [ val(meta), path(vcf) ] Optional
-    ch_sv_vcf_index  // channel: [ val(meta), path(tbi) ] Optional
-    ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
-    fasta            // channel: [ val(meta), path(fasta) ]
-    fai              // channel: [ val(meta), path(fai) ]
-    phase_with_svs   // bool: Whether to include SVs in phasing (true) or not (false)
+    ch_snv_vcf           // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf_index     // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf            // channel: [ val(meta), path(vcf) ] Optional
+    ch_sv_vcf_index      // channel: [ val(meta), path(tbi) ] Optional
+    ch_bam_bai           // channel: [ val(meta), path(bam), path(bai) ]
+    ch_family_to_samples // channel: [ val(family_id), val( [ sample_ids ] ) ]
+    fasta                // channel: [ val(meta), path(fasta) ]
+    fai                  // channel: [ val(meta), path(fai) ]
+    phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
     ch_versions = channel.empty()
@@ -32,18 +33,23 @@ workflow RUN_HIPHASE {
             .join( ch_sv_vcf_index, failOnMismatch:true, failOnDuplicate:true )
             .set { ch_sv_vcf_tbi }
 
-        ch_hiphase_bam_snv.dump(tag:"bam_snv")
-            .join( ch_sv_vcf_tbi.dump(tag:"sv"), failOnMismatch: true, failOnDuplicate:true )
-            .set { ch_hiphase_input }
+        ch_hiphase_bam_snv
+            .join( ch_sv_vcf_tbi, failOnMismatch:true, failOnDuplicate:true )
+            .set { ch_bam_vcf }
+        ch_bam_vcf
     } else {
         ch_hiphase_bam_snv
             .map { meta, bams, bais, snv_vcf, snv_tbi -> [ meta, bams, bais, snv_vcf, snv_tbi, [] , [] ] }
-            .set { ch_hiphase_input }
+            .set { ch_bam_vcf }
     }
 
+    // Adding sample IDs to input tuples
+    ch_bam_vcf
+        .join( ch_family_to_samples, failOnMismatch:true, failOnDuplicate:true )
+        .set { ch_hiphase_in }
     // Run HiPhase
     HIPHASE (
-        ch_hiphase_input,
+        ch_hiphase_in,
         fasta,
         fai,
         true

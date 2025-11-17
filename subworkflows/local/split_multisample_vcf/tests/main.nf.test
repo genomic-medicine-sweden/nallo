@@ -38,7 +38,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                     "snv"
                 ])
-                input[1] = Channel.of([ 'FAM', [ 'HG002' ] ])
+                input[1] = Channel.of([ [ id : 'FAM' ], [ 'HG002' ] ])
                 """
             }
         }
@@ -70,7 +70,7 @@ nextflow_workflow {
                         "sv"
                     ]
                 )
-                input[1] = Channel.of([ 'FAM', [ 'HG002' ] ])
+                input[1] = Channel.of([ [ id : 'FAM' ], [ 'HG002' ] ])
                 """
             }
         }
@@ -90,7 +90,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta, vcf, "snv" ]}
-                input[1] = Channel.of([ 'FAM', [ 'HG002', 'HG003' ] ])
+                input[1] = Channel.of([ [ id : 'FAM' ], [ 'HG002', 'HG003' ] ])
                 """
             }
         }
@@ -112,7 +112,7 @@ nextflow_workflow {
                 input[0] = BCFTOOLS_MERGE.out.vcf
                     .map { meta, vcf -> [ meta, vcf, "snv" ] }
                     .mix(BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta, vcf, "sv" ] })
-                input[1] = Channel.of([ 'FAM', [ 'HG002', 'HG003' ] ])
+                input[1] = Channel.of([ [ id : 'FAM' ], [ 'HG002', 'HG003' ] ])
                 """
             }
         }
@@ -131,7 +131,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf, "snv" ] }
-                input[1] = Channel.of([ 'HG002', [ 'HG002', 'HG003' ] ])
+                input[1] = Channel.of([ [ id : 'HG002' ], [ 'HG002', 'HG003' ] ])
                 """
 
             }

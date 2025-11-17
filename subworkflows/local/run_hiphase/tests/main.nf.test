@@ -12,7 +12,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test' ],
-                    file('/home/xschmy/projects/nallo/hg38.test.fa.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -33,7 +33,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'FAM', sample_ids: ['HG002', 'HG003'].toSet() ],
+                    [ id: 'FAM' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
@@ -57,11 +57,11 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
-                    [ id: 'FAM', sample_ids: ['HG002'].toSet() ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = Channel.empty()
@@ -71,9 +71,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[5] = GUNZIP.out.gunzip
-                input[6] = SAMTOOLS_FAIDX.out.fai
-                input[7] = false
+                input[5] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ] ])
+                input[6] = GUNZIP.out.gunzip
+                input[7] = SAMTOOLS_FAIDX.out.fai
+                input[8] = false
                 """
             }
         }
@@ -106,9 +107,10 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[5] = GUNZIP.out.gunzip
-                input[6] = SAMTOOLS_FAIDX.out.fai
-                input[7] = false
+                input[5] = Channel.of([ [ id : 'FAM' ], [ 'HG002', 'HG003' ] ])
+                input[6] = GUNZIP.out.gunzip
+                input[7] = SAMTOOLS_FAIDX.out.fai
+                input[8] = false
                 """
             }
         }
