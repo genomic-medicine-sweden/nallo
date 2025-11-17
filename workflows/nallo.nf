@@ -484,7 +484,7 @@ workflow NALLO {
             .map { meta, _files -> [ meta.family_id, meta.id ] }
             .groupTuple()
             .map { family_id, sample_ids ->
-                [ family_id, sample_ids.unique() ]
+                [ [ id : family_id ], sample_ids.unique() ]
             }
             .set { ch_family_to_samples }
 
@@ -493,9 +493,12 @@ workflow NALLO {
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, vcf, tbi ->
-                [ groupKey([id : meta.family_id], params.snv_calling_processes), vcf, tbi ]
+                [ groupKey([ id: meta.family_id ], params.snv_calling_processes), vcf, tbi ]
             }
             .groupTuple()
+            .map { key, vcfs, tbis ->
+                [ key.getGroupTarget(), vcfs, tbis ]
+            }
             .set { ch_bcftools_concat_phasing_in }
 
         BCFTOOLS_CONCAT_PHASING (
