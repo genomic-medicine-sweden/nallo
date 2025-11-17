@@ -49,6 +49,10 @@ workflow MAIN {
 process PUBLISH_GENS_OUTPUT {
     publishDir "${params.outdir}/gens", mode: "copy"
 
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/ubuntu:22.04' :
+        'ubuntu:22.04' }"
+
     input:
     tuple val(meta), path(cov_bed_tbi), path(baf_bed_tbi)
 
