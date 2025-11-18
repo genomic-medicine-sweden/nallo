@@ -24,7 +24,8 @@ process GENERATE_GENS_DATA {
         --coverage ${coverage} \\
         --gvcf ${gvcf} \\
         --baf_positions ${baf_positions} \\
-        --bgzip_tabix_output
+        --bgzip_tabix_output \\
+        --outdir .
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
