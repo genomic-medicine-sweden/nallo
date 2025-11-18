@@ -34,7 +34,7 @@ process MOSDEPTH_TO_GATK_FORMAT {
     # grep -vP "^\w+_|^chrE" ${meta.id}_all.body > ${meta.id}_target.body
     # grep -E '^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)\t' ${meta.id}_all.body > ${meta.id}_target.body
 
-    cat ${meta.id}.header ${meta.id}_target.body > ${meta.id}.tsv
+    cat ${meta.id}.header ${meta.id}.body > ${meta.id}.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
