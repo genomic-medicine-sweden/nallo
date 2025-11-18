@@ -5,12 +5,16 @@ params.outdir = params.outdir ?: 'results'
 
 workflow {
 
-    def bam_fp = "/home/jakob/data/hg002_chr21_subsamp01_subset.bam"
-    def bam_bai_fp = "/home/jakob/data/hg002_chr21_subsamp01_subset.bam.bai"
-    def gvcf_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz"
-    def gvcf_tbi_fp = "/home/jakob/data/hg002_chr21.dnascope.gvcf.gz.tbi"
-    def baf_positions_fp = "/home/jakob/data/gnomad_hg38.0.05.txt"
-    def gatk_header_fp = "/home/jakob/data/header_tsv_gatk_mosdepth"
+    def base = "/data/bnf/dev/jakob/proj/251118_gens_nallo"
+
+    // We start with just getting the short read subsamples through
+    // Then, switch to using long read based data
+    def bam_fp = "${base}/hg002_chr21_chr_prefixed.bam"
+    def bam_bai_fp = "${bam_fp}.csi"
+    def gvcf_fp = "${base}/hg002_chr21_chr_prefix.gvcf.gz"
+    def gvcf_tbi_fp = "${gvcf_fp}.tbi"
+    def baf_positions_fp = "${base}/gnomad_hg38.0.05.txt"
+    def gatk_header_fp = "${base}/header_tsv_gatk_mosdepth"
     def pon = "/fs2/viktor/LRS/gens/own_samples_mixed/50_100_hg38_5p_mosdepth.hdf5"
 
     def meta = [ id: 'SAMPLE1', sex: 'M', cohort: 'test' ]

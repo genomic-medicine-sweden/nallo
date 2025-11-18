@@ -1,10 +1,7 @@
 include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
 include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
-
 include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-
-// Thinking point: Do we want upd? meta? here
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -20,34 +17,17 @@ workflow PREPARE_GENS_INPUTS {
     ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
     ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
 
-    // FIXME: Some questions to Viktor to be asked
-    // Configure mosdepth to run with flags
-    // -n (?)
-    // --fast-mode (?)
-    // -t 4 (?)
-    // --by 100 (yes)
-    // $SAMPLE_ID ?
-
-    ch_mosdepth_in.view()
-    ch_empty_fasta.view()
-
-    // To configure
-    // mosdepth -n --fast-mode -t 4 --by 100 test hg002_chr21_subsamp01_subset.bam
     MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    // FIXME: Convert to GATK format
-
     MOSDEPTH_TO_GATK_FORMAT(
-        MOSDEPTH.out.per_base_bed,
+        MOSDEPTH.out.regions_bed,
         gatk_header,
     )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
     // BGZIP
     // Tabix
-
-    // MOSDEPTH.out.regions_bed.view()
 
     // What output?
     // Some proper configuration needed here
