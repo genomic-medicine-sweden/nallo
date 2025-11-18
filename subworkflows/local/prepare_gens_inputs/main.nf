@@ -41,9 +41,14 @@ workflow PREPARE_GENS_INPUTS {
     // What output?
     // Some proper configuration needed here
 
+    channel
+        .fromPath(panel_of_normals)
+        .map { f -> tuple([], f) }
+        .set { ch_pon }
+
     GATK4_DENOISEREADCOUNTS(
         MOSDEPTH.out.regions_bed,
-        panel_of_normals
+        ch_pon
         // meta, pon
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
