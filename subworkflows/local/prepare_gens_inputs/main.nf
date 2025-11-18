@@ -26,12 +26,6 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
-    // BGZIP
-    // Tabix
-
-    // What output?
-    // Some proper configuration needed here
-
     channel
         .fromPath(panel_of_normals)
         .map { f -> tuple([], f) }
@@ -44,13 +38,6 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
-    // PlotDenoisedCopyRatios
-    // Cleanup
-
-    // Consider using GATK4_DENOISEREADCOUNTS.out.standardized as well here
-    // Also worth considering showing the raw data or normalized raw
-    // without the PoN
-
     // FIXME: What output
     ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
 
@@ -59,10 +46,6 @@ workflow PREPARE_GENS_INPUTS {
         ch_gens_input
     )
     ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
-
-    // mosdepth
-    // awk to GATK format
-    // Python script
 
     // FIXME: Do we want a "without normal" cov output as well?
     emit:

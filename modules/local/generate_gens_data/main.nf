@@ -2,7 +2,7 @@ process GENERATE_GENS_DATA {
     tag "$meta.id"
     label 'process_single'
 
-    container 'clinicalgenomicslund/generate_gens_data:1.1.1'
+    container 'clinicalgenomicslund/generate_gens_data:1.1.2'
 
     input:
     tuple val(meta), path(coverage), path(gvcf), path(gvcf_tbi), path(baf_positions)
