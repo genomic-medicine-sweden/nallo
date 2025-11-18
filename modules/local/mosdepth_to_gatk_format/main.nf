@@ -11,7 +11,7 @@ process MOSDEPTH_TO_GATK_FORMAT {
     path(mosdepth_header_template)
 
     output:
-    tuple val(meta), path("${meta.id}.tsv"), emit: output
+    tuple val(meta), path("*.tsv"), emit: output
     path "versions.yml", emit: versions
 
     script:
@@ -21,13 +21,14 @@ process MOSDEPTH_TO_GATK_FORMAT {
 
     # Round mosdepth output to nearest integer
     # Position starting at 1
-    zcat $mosdepth_file |\
-        awk 'BEGIN {OFS="\t"} 
-        {
-            $4 = int($4 + 0.5)
-            $2++
-            print $1, $2, $3, $4
-        }' > ${meta.id}.body
+    gzip -cd $mosdepth_file |\
+        awk '
+            BEGIN {OFS="\t"}
+            { 
+            \$4 = int(\$4 + 0.5)
+            \$2++
+            print \$1, \$2, \$3, \$4}
+        ' > ${meta.id}.body
 
     cat ${meta.id}.header ${meta.id}.body > ${meta.id}.tsv
 

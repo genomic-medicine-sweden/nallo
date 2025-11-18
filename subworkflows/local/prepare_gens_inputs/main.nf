@@ -44,6 +44,9 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
+    // BGZIP
+    // Tabix
+
     // MOSDEPTH.out.regions_bed.view()
 
     // What output?
