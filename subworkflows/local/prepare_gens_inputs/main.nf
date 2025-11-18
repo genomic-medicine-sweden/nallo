@@ -34,6 +34,7 @@ workflow PREPARE_GENS_INPUTS {
     // To configure
     // mosdepth -n --fast-mode -t 4 --by 100 test hg002_chr21_subsamp01_subset.bam
     MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
+    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     MOSDEPTH.out.regions_bed.view()
 
@@ -45,6 +46,7 @@ workflow PREPARE_GENS_INPUTS {
         panel_of_normals
         // meta, pon
     )
+    ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
     // PlotDenoisedCopyRatios
     // Cleanup
@@ -56,6 +58,7 @@ workflow PREPARE_GENS_INPUTS {
         GATK4_DENOISEREADCOUNTS.out.standardized,
         gatk_header,
     )
+    ch_versions = ch_versions.mix(PREPROCESS_GENS_COV_INPUT.out.versions)
 
     ch_gens_input = PREPROCESS_GENS_COV_INPUT.out.output.join(ch_gvcf)
 
@@ -63,6 +66,7 @@ workflow PREPARE_GENS_INPUTS {
     GENERATE_GENS_DATA(
         ch_gens_input
     )
+    ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
 
     // mosdepth
     // awk to GATK format

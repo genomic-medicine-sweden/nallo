@@ -1,0 +1,70 @@
+nextflow_workflow {
+    
+    name "Test Workflow PREPARE_GENS_INPUTS"
+    script "../main.nf"
+    workflow "PREPARE_GENS_INPUTS"
+
+    options "-stub"
+
+    test("bam, gvcf, baf positions and panel of normals") {
+        when {
+            workflow {
+                """
+                def meta = [ id: 'HG002', single_end: false ]
+
+                input[0] = channel.of([
+                    meta,
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true)
+                ])
+
+                input[1] = Channel.of([
+                    meta,
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv", checkIfExists: true)
+                ])
+
+                input[2] = Channel.value(
+                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gatk_header_template.txt", checkIfExists: true)
+                )
+
+                input[3] = Channel.value([
+                    [ id: 'pon' ],
+                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5", checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            def cov = workflow.out.cov_bed_tbi
+            def baf = workflow.out.baf_bed_tbi
+
+            assertAll(
+                { assert workflow.success },
+                { assert cov.size() == 1 },
+                { assert baf.size() == 1 },
+                { assert workflow.out.versions == [] },
+                {
+                    def covEntry = cov[0]
+                    assert covEntry[0].id == 'HG002'
+                    assert file(covEntry[1]).getName() == 'HG002.cov.bed.gz'
+                    assert file(covEntry[2]).getName() == 'HG002.cov.bed.gz.tbi'
+                    assert path(covEntry[1].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
+                    assert path(covEntry[2].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
+                    true
+                },
+                {
+                    def bafEntry = baf[0]
+                    assert bafEntry[0].id == 'HG002'
+                    assert file(bafEntry[1]).getName() == 'HG002.baf.bed.gz'
+                    assert file(bafEntry[2]).getName() == 'HG002.baf.bed.gz.tbi'
+                    assert path(bafEntry[1].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
+                    assert path(bafEntry[2].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
+                    true
+                }
+            )
+        }
+    }
+}

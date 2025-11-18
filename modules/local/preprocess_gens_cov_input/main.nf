@@ -12,7 +12,7 @@ process PREPROCESS_GENS_COV_INPUT {
 
     output:
     tuple val(meta), path("${meta.id}.tsv"), emit: output
-    path "versions.yml"
+    path "versions.yml", emit: versions
 
     script:
     // FIXME: Should this be done in a Python util?
@@ -32,11 +32,20 @@ process PREPROCESS_GENS_COV_INPUT {
     sed "s/SAMPLE_NAME/${meta.id}/" ${mosdepth_header_template} > ${meta.id}.sample
     cat ${meta.id}.sample > ${meta.id}.tsv
     cat ${meta.id}.tmp >> ${meta.id}.tsv
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        gawk: \$(gawk --version | head -n 1 | sed 's/GNU Awk //; s/,.*//')
+    END_VERSIONS
     """
 
     stub:
     """
-    touch versions.yml
     touch ${meta.id}.tsv
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        gawk: \$(gawk --version | head -n 1 | sed 's/GNU Awk //; s/,.*//')
+    END_VERSIONS
     """
 }
