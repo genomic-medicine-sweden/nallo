@@ -58,7 +58,7 @@ workflow PREPARE_GENS_INPUTS {
         .set { ch_pon }
 
     GATK4_DENOISEREADCOUNTS(
-        MOSDEPTH.out.regions_bed,
+        MOSDEPTH_TO_GATK_FORMAT.out.output,
         ch_pon
         // meta, pon
     )
