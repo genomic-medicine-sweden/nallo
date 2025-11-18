@@ -28,10 +28,11 @@ process MOSDEPTH_TO_GATK_FORMAT {
             \$4 = int(\$4 + 0.5)
             \$2++
             print \$1, \$2, \$3, \$4}
-        ' > ${meta.id}_all.body
+        ' > ${meta.id}.body
 
     # Skip special chromosomes. Gens only accepts chr1-22, chrX, chrY, chrM
-    grep -E '^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)\t' ${meta.id}_all.body > ${meta.id}_target.body
+    # grep -vP "^\w+_|^chrE" ${meta.id}_all.body > ${meta.id}_target.body
+    # grep -E '^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)\t' ${meta.id}_all.body > ${meta.id}_target.body
 
     cat ${meta.id}.header ${meta.id}_target.body > ${meta.id}.tsv
 
