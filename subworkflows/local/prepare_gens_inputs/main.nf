@@ -1,6 +1,6 @@
 include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
-include { PREPROCESS_GENS_COV_INPUT } from '../../../modules/local/preprocess_gens_cov_input/main'
+include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
 
 include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 
@@ -36,7 +36,15 @@ workflow PREPARE_GENS_INPUTS {
     MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    MOSDEPTH.out.regions_bed.view()
+    // FIXME: Convert to GATK format
+
+    MOSDEPTH_TO_GATK_FORMAT(
+        MOSDEPTH.out.per_base_bed,
+        gatk_header,
+    )
+    ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
+
+    // MOSDEPTH.out.regions_bed.view()
 
     // What output?
     // Some proper configuration needed here
@@ -59,13 +67,9 @@ workflow PREPARE_GENS_INPUTS {
     // Consider using GATK4_DENOISEREADCOUNTS.out.standardized as well here
     // Also worth considering showing the raw data or normalized raw
     // without the PoN
-    PREPROCESS_GENS_COV_INPUT(
-        GATK4_DENOISEREADCOUNTS.out.standardized,
-        gatk_header,
-    )
-    ch_versions = ch_versions.mix(PREPROCESS_GENS_COV_INPUT.out.versions)
 
-    ch_gens_input = PREPROCESS_GENS_COV_INPUT.out.output.join(ch_gvcf)
+    // FIXME: What output
+    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
 
     // Input: meta, coverage, gvcf
     GENERATE_GENS_DATA(

@@ -1,4 +1,4 @@
-process PREPROCESS_GENS_COV_INPUT {
+process MOSDEPTH_TO_GATK_FORMAT {
     tag "$meta.id"
     label 'process_single'
 
@@ -15,23 +15,21 @@ process PREPROCESS_GENS_COV_INPUT {
     path "versions.yml", emit: versions
 
     script:
-    // FIXME: Should this be done in a Python util?
-    // zcat $mosdepth_file | \
-    //     awk '{ 
-    //         val = $4 +0
-    //         rounded = (val - int(val) >= 0.5) ? int(val) + 1 :int(val)
-    //         $4 = rounded
-    //         $2 = $2 + 1
-    //         OFS = "\t"
-    //         print $1, $2, $3, $4
-    //     }' > ${meta.id}.tmp
     """
-    
-    echo "Hi" > ${meta.id}.tmp
+    # Insert sample name into header template
+    sed "s/SAMPLE_NAME/${meta.id}/" ${mosdepth_header_template} > ${meta.id}.header
 
-    sed "s/SAMPLE_NAME/${meta.id}/" ${mosdepth_header_template} > ${meta.id}.sample
-    cat ${meta.id}.sample > ${meta.id}.tsv
-    cat ${meta.id}.tmp >> ${meta.id}.tsv
+    # Round mosdepth output to nearest integer
+    # Position starting at 1
+    zcat $mosdepth_file |\
+        awk 'BEGIN {OFS="\t"} 
+        {
+            $4 = int($4 + 0.5)
+            $2++
+            print $1, $2, $3, $4
+        }' > ${meta.id}.body
+
+    cat ${meta.id}.header ${meta.id}.body > ${meta.id}.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
