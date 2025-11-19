@@ -11,7 +11,7 @@ workflow {
     // Then, switch to using long read based data
     def bam_fp = "${base}/HG002-mini_aligned.bam"
     def bam_bai_fp = "${bam_fp}.bai"
-    def gvcf_fp = "${base}/hg002_chr21_chr_prefix.gvcf.gz"
+    def gvcf_fp = "${base}/split_vcfs"
     def gvcf_tbi_fp = "${gvcf_fp}.tbi"
     def baf_positions_fp = "${base}/gnomad_hg38.0.05.txt"
     def gatk_header_fp = "${base}/header_tsv_gatk_mosdepth"

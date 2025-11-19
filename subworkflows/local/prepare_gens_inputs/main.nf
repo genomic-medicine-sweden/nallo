@@ -54,6 +54,8 @@ workflow PREPARE_GENS_INPUTS {
     // FIXME: What output
     ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
 
+    ch_gens_input.view()
+
     // Input: meta, coverage, gvcf
     GENERATE_GENS_DATA(
         ch_gens_input
