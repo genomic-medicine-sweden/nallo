@@ -407,6 +407,9 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
+        // FIXME: Why am I not seeing any output
+        CALL_SNVS.out.gvcf.view()
+
         if (params.prepare_gens_input) {
 
             def missingGensParams = [
@@ -419,7 +422,7 @@ workflow NALLO {
                 error "The following parameters are required when --prepare_gens_input is enabled: ${missingGensParams.join(', ')}"
             }
 
-            CALL_SNVS.out.gvcf.view()
+
 
             // FIXME: Will need to look over this
             CALL_SNVS.out.gvcf
@@ -431,14 +434,14 @@ workflow NALLO {
             def ch_gens_gatk_header_template = Channel.value(file(params.gens_gatk_header_template, checkIfExists: true))
             def ch_gens_panel_of_normals = Channel.value(file(params.gens_panel_of_normals, checkIfExists: true))
 
-            PREPARE_GENS_INPUTS(
-                ch_bam_bai,
-                ch_gvcfs_to_concat_per_sample,
-                ch_gens_baf_positions,
-                ch_gens_gatk_header_template,
-                ch_gens_panel_of_normals
-            )
-            ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+            // PREPARE_GENS_INPUTS(
+            //    ch_bam_bai,
+            //    ch_gvcfs_to_concat_per_sample,
+            //    ch_gens_baf_positions,
+            //    ch_gens_gatk_header_template,
+            //    ch_gens_panel_of_normals
+            //)
+            //ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }
 
         CALL_SNVS.out.vcf

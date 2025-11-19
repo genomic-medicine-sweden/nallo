@@ -17,6 +17,12 @@ workflow PREPARE_GENS_INPUTS {
     main:
     ch_versions = channel.empty()
 
+    ch_bam.view()
+    ch_gvcfs.view()
+    baf_positions.view()
+    gatk_header.view()
+    panel_of_normals.view()
+
     //ch_gvcfs.view()
 
     // ChatGPT in progress
