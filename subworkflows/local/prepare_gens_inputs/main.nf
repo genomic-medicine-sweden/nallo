@@ -4,6 +4,9 @@ include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/m
 include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 
+// Calculate the GATK header from this instead
+// samtools view -H sample.bam > header.sam
+
 
 // FIXME: Dealing with multiple samples
 workflow PREPARE_GENS_INPUTS {
