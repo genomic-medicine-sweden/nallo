@@ -574,6 +574,11 @@
                     "type": "boolean",
                     "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
                 },
+                "prepare_gens_input": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Prepare coverage (given a panel of normals) and B-allele frequency data for downstream Gens input."
+                },
                 "filter_variants_hgnc_ids": {
                     "type": "string",
                     "pattern": "^\\S+\\.(csv|tsv)$",

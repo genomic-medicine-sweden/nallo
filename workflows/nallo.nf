@@ -26,6 +26,7 @@ include { GENOME_ASSEMBLY                                        } from '../subw
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
 include { METHYLATION                                            } from '../subworkflows/local/methylation'
 include { PHASING                                                } from '../subworkflows/local/phasing'
+include { PREPARE_GENS_INPUTS                                    } from '../subworkflows/local/prepare_gens_inputs'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
@@ -405,6 +406,20 @@ workflow NALLO {
             "deepvariant",
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
+
+        if (params.prepare_gens_input) {
+
+            CALL_SNVS.out.gvcf.view()
+
+            // FIXME: Will need to look over this
+            CALL_SNVS.out.gvcf
+                .join(CALL_SNVS.out.gvcf_index)
+                .groupTuple()
+                .set { ch_gvcfs_to_concat_per_sample }
+
+            PREPARE_GENS_INPUTS(ch_gvcfs_to_concat_per_sample)
+            ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+        }
 
         CALL_SNVS.out.vcf
             .map { meta, vcf ->
