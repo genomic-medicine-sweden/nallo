@@ -45,6 +45,9 @@ workflow {
     //     )
     // ).set { ch_gvcf }
 
+    //ch_bam.view()
+    //ch_vcfs_grouped.view()
+
     PREPARE_GENS_INPUTS(
         ch_bam,
         ch_vcfs_grouped,
@@ -53,16 +56,16 @@ workflow {
         pon
     )
 
-    ch_cov = PREPARE_GENS_INPUTS.out.cov_bed_tbi
-    ch_baf = PREPARE_GENS_INPUTS.out.baf_bed_tbi
+    //ch_cov = PREPARE_GENS_INPUTS.out.cov_bed_tbi
+    //ch_baf = PREPARE_GENS_INPUTS.out.baf_bed_tbi
 
-    ch_cov_baf = ch_cov.join(ch_baf)
+    //ch_cov_baf = ch_cov.join(ch_baf)
 
-    PUBLISH_GENS_INPUTS(ch_cov_baf)
+    //PUBLISH_GENS_INPUTS(ch_cov_baf)
 
-    ch_cov.view { it -> "cov_bed_tbi: $it" }
-    ch_baf.view { it -> "baf_bed_tbi: $it" }
-    PREPARE_GENS_INPUTS.out.versions.view { it -> "versions: $it" }
+    //ch_cov.view { it -> "cov_bed_tbi: $it" }
+    //ch_baf.view { it -> "baf_bed_tbi: $it" }
+    //PREPARE_GENS_INPUTS.out.versions.view { it -> "versions: $it" }
 }
 
 process PUBLISH_GENS_INPUTS {
