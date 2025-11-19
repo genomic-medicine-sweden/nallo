@@ -11,8 +11,8 @@ workflow {
     // Then, switch to using long read based data
     def bam_fp = "${base}/HG002-mini_aligned.bam"
     def bam_bai_fp = "${bam_fp}.bai"
-    def gvcf_fp = "${base}/split_vcfs"
-    def gvcf_tbi_fp = "${gvcf_fp}.tbi"
+    def gvcf_dir = "${base}/split_vcfs"
+    // def gvcf_tbi_fp = "${gvcf_fp}.tbi"
     def baf_positions_fp = "${base}/gnomad_hg38.0.05.txt"
     def gatk_header_fp = "${base}/header_tsv_gatk_mosdepth"
     def pon = "/fs2/viktor/LRS/gens/own_samples_mixed/50_100_hg38_5p_mosdepth.hdf5"
@@ -27,18 +27,28 @@ workflow {
         )
     ).set { ch_bam }
 
-    channel.of(
-        tuple(
-            meta,
-            file(gvcf_fp),
-            file(gvcf_tbi_fp),
-            file(baf_positions_fp),
-        )
-    ).set { ch_gvcf }
+    channel
+        .fromPath("${gvcf_dir}/*.vcf.gz")
+        .map { vcf ->
+            def tbi = file(vcf.toString() + ".tbi")
+            tuple(meta, tuple(vcf, tbi))
+        }
+        .groupTuple()
+        .set { ch_vcfs_grouped }
+
+    // channel.of(
+    //     tuple(
+    //         meta,
+    //         file(gvcf_fp),
+    //         file(gvcf_tbi_fp),
+    //         file(baf_positions_fp),
+    //     )
+    // ).set { ch_gvcf }
 
     PREPARE_GENS_INPUTS(
         ch_bam,
-        ch_gvcf,
+        ch_vcfs_grouped,
+        baf_positions_fp,
         gatk_header_fp,
         pon
     )

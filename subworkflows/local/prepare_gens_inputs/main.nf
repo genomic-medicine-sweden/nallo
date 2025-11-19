@@ -1,19 +1,25 @@
+include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
 include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
 include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 
+
 workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcf), path(gvcf_tbi), path(baf_positions) ]
+    ch_gvcfs            // channel: [mandatory] [ val(meta), path(gvcf) ]
+    baf_positions       // channel: [mandatory] [ path(gz) ]
     gatk_header         // channel: [mandatory] [ path(txt) ]
     panel_of_normals    // channel: [mandatory] [ path(hd5) ]
 
     main:
     ch_versions = channel.empty()
 
-    // meta, bam, bai, bed
+    BCFTOOLS_CONCAT(
+        ch_gvcfs.map { meta, gvcfs -> [meta, gvcfs, []] }
+    )
+
     ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
     ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
 
@@ -26,9 +32,10 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
-    channel
-        .fromPath(panel_of_normals)
-        .map { f -> tuple([], f) }
+    MOSDEPTH_TO_GATK_FORMAT.out.output
+        .map { meta, _tsv -> meta }
+        .cross(panel_of_normals)
+        .map { meta, pon -> tuple(meta, pon) }
         .set { ch_pon }
 
     GATK4_DENOISEREADCOUNTS(
@@ -38,14 +45,13 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
-    // FIXME: What output
-    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
-
-    ch_gens_input.view()
+    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized
+        .join(BCFTOOLS_CONCAT.out.vcf)
 
     // Input: meta, coverage, gvcf
     GENERATE_GENS_DATA(
-        ch_gens_input
+        ch_gens_input,
+        baf_positions
     )
     ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
 

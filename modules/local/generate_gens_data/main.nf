@@ -5,7 +5,8 @@ process GENERATE_GENS_DATA {
     container 'clinicalgenomicslund/generate_gens_data:1.1.2'
 
     input:
-    tuple val(meta), path(coverage), path(gvcf), path(gvcf_tbi), path(baf_positions)
+    tuple val(meta), path(coverage), path(gvcf), path(gvcf_tbi)
+    path(baf_positions)
 
     output:
     tuple val(meta), path("*cov.bed.gz"), path("*cov.bed.gz.tbi"), emit: cov_bed_tbi
