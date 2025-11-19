@@ -239,6 +239,15 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
+When `--prepare_gens_input` is enabled, the pipeline prepares coverage and B-allele frequency files that can be ingested by downstream Gens workflows.
+
+| Path                                    | Description                                                  |
+| --------------------------------------- | ------------------------------------------------------------ |
+| `gens/{sample}/{sample}.cov.bed.gz`     | Coverage data transformed with the supplied panel of normals |
+| `gens/{sample}/{sample}.cov.bed.gz.tbi` | Index of the coverage BED file                               |
+| `gens/{sample}/{sample}.baf.bed.gz`     | B-allele frequency estimates at the provided positions       |
+| `gens/{sample}/{sample}.baf.bed.gz.tbi` | Index of the BAF BED file                                    |
+
 ### SVs (and CNVs)
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.

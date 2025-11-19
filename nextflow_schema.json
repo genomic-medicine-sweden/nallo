@@ -293,6 +293,25 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "gens_baf_positions": {
+                    "type": "string",
+                    "description": "Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "gens_gatk_header_template": {
+                    "type": "string",
+                    "description": "Template header used when converting mosdepth output to the GATK coverage format for Gens inputs.",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "gens_panel_of_normals": {
+                    "type": "string",
+                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(hd5|hdf5)$",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",

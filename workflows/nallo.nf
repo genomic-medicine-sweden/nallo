@@ -409,6 +409,16 @@ workflow NALLO {
 
         if (params.prepare_gens_input) {
 
+            def missingGensParams = [
+                params.gens_baf_positions ? null : '--gens_baf_positions',
+                params.gens_gatk_header_template ? null : '--gens_gatk_header_template',
+                params.gens_panel_of_normals ? null : '--gens_panel_of_normals',
+            ].findAll { it }
+
+            if (missingGensParams) {
+                error "The following parameters are required when --prepare_gens_input is enabled: ${missingGensParams.join(', ')}"
+            }
+
             CALL_SNVS.out.gvcf.view()
 
             // FIXME: Will need to look over this
@@ -417,7 +427,17 @@ workflow NALLO {
                 .groupTuple()
                 .set { ch_gvcfs_to_concat_per_sample }
 
-            PREPARE_GENS_INPUTS(ch_gvcfs_to_concat_per_sample)
+            def ch_gens_baf_positions = Channel.value((file(params.gens_baf_positions, checkIfExists: true)))
+            def ch_gens_gatk_header_template = Channel.value(file(params.gens_gatk_header_template, checkIfExists: true))
+            def ch_gens_panel_of_normals = Channel.value(file(params.gens_panel_of_normals, checkIfExists: true))
+
+            PREPARE_GENS_INPUTS(
+                ch_bam_bai,
+                ch_gvcfs_to_concat_per_sample,
+                ch_gens_baf_positions,
+                ch_gens_gatk_header_template,
+                ch_gens_panel_of_normals
+            )
             ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }
 

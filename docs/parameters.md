@@ -57,6 +57,9 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
+| `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
+| `gens_gatk_header_template` | Header template used when converting mosdepth output to the GATK coverage format for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
+| `gens_panel_of_normals` | Panel-of-normals file (`.hd5`/`.hdf5`) used to standardize coverage for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
@@ -124,6 +127,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
+| `prepare_gens_input` | Prepare coverage (given a panel of normals) and B-allele frequency data for downstream Gens input. Requires `--gens_baf_positions`, `--gens_gatk_header_template`, and `--gens_panel_of_normals`. | `boolean` | False |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
 | `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
 | `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
