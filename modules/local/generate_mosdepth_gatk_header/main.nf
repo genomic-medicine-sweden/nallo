@@ -16,8 +16,8 @@ process GENERATE_MOSDEPTH_GATK_HEADER {
     script:
     """
     samtools view -H ${bam} > bam_header.txt
-    printf "@RG\tID:GATKCopyNumber\tSM:${meta.id}\n" >> bam_header.txt
-    printf "CONTIG\tSTART\tEND\tCOUNT\n" >> bam_header.txt
+    printf "@RG\\tID:GATKCopyNumber\\tSM:${meta.id}\\n" >> bam_header.txt
+    printf "CONTIG\\tSTART\\tEND\\tCOUNT\\n" >> bam_header.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
