@@ -66,7 +66,7 @@ tool:
     citation: "gawk"
     bibliography: ""
   generate_gens_data:
-    citation: "generate_gens_data (Willforss, 2025)"
+    citation: "generate_gens_data"
     bibliography: ""
   genmod:
     citation: "Genmod (Magnusson et al. 2018)"
