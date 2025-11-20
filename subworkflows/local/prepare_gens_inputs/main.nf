@@ -26,21 +26,6 @@ workflow PREPARE_GENS_INPUTS {
     gatk_header.view()
     panel_of_normals.view()
 
-    //ch_gvcfs.view()
-
-    // ChatGPT in progress
-    // 1. Flatten ?
-    // 2. Group ?
-
-    // ch_remapped = ch_gvcfs.map { meta, pairs -> 
-    //     def vcfs = pairs.collect { it -> it[0] }
-    //     def tbis = pairs.collect { it -> it[1] }
-    //     tuple(meta, vcfs, tbis)
-    // }
-
-
-    // ch_remapped.view { it -> "ch_remapped ${it}" }
-
     // FIXME: Looks like the nesting is not correct yet [meta, (vcf, tbi), (vcf, tbi)] vs [meta, (vcfs), (tbi)]
     BCFTOOLS_CONCAT(ch_gvcfs)
 
