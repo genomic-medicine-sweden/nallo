@@ -42,6 +42,7 @@ workflow PREPARE_GENS_INPUTS {
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
 
+    // print("Using pon", use_pon)
 
     // PON path
     if (use_pon) {
@@ -64,19 +65,14 @@ workflow PREPARE_GENS_INPUTS {
 
     ch_gens_input = ch_cov.join(ch_vcf_tbi)
 
-    // Input: meta, coverage, gvcf
     GENERATE_GENS_DATA(
         ch_gens_input,
         baf_positions
     )
     ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
 
-    GENERATE_GENS_DATA.out.cov_bed_tbi.view()
-    GENERATE_GENS_DATA.out.baf_bed_tbi.view()
-    
-    // FIXME: Do we want a "without normal" cov output as well?
     emit:
-    //cov_bed_tbi = GENERATE_GENS_DATA.out.cov_bed_tbi
-    //baf_bed_tbi = GENERATE_GENS_DATA.out.baf_bed_tbi
+    cov_bed_tbi = GENERATE_GENS_DATA.out.cov_bed_tbi
+    baf_bed_tbi = GENERATE_GENS_DATA.out.baf_bed_tbi
     versions = ch_versions
 }
