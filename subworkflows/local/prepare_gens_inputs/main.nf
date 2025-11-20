@@ -15,7 +15,7 @@ workflow PREPARE_GENS_INPUTS {
     ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
     ch_baf_positions       // channel: [mandatory] [ path(gz) ]
     // FIXME: Calculate from BAM instead
-    ch_gatk_header         // channel: [mandatory] [ path(txt) ]
+    gatk_header         // value: [mandatory] [ path(txt) ]
     ch_panel_of_normals    // channel: [mandatory] [ path(hd5) ]
 
     main:
@@ -26,28 +26,30 @@ workflow PREPARE_GENS_INPUTS {
     //ch_gvcfs.view()
     //ch_baf_positions.view()
     //ch_gatk_header.view()
-    /ch_panel_of_normals.view()
+    //ch_panel_of_normals.view()
 
-    // FIXME: Looks like the nesting is not correct yet [meta, (vcf, tbi), (vcf, tbi)] vs [meta, (vcfs), (tbi)]
-    //BCFTOOLS_CONCAT(ch_gvcfs)
+    BCFTOOLS_CONCAT(ch_gvcfs)
+    ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
 
-    //ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
-    // ch_vcf_tbi.view()
+    ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
+    ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
 
-    // BCFTOOLS_CONCAT.out.vcf.view()
-    // BCFTOOLS_CONCAT.out.tbi.view()
+    MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
+    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    //ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
-    //ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
+    MOSDEPTH.out.regions_bed.view { it -> "Mosdepth: ${it}" }
+    //ch_gatk_header.view { it -> "gatk header: ${it}" }
 
-    //MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
-    //ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
+    MOSDEPTH.out.regions_bed
+        .map { meta, regions_bed -> tuple(meta, regions_bed, gatk_header) }
+        .set { ch_mosdepth_to_gatk_in }
 
-    //MOSDEPTH_TO_GATK_FORMAT(
-    //    MOSDEPTH.out.regions_bed,
-    //    ch_gatk_header,
-    //)
-    //ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
+    ch_mosdepth_to_gatk_in.view { it -> "ch_mosdepth_to_gatk_in ${it}" }
+
+    MOSDEPTH_TO_GATK_FORMAT(ch_mosdepth_to_gatk_in)
+    ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
+
+    MOSDEPTH_TO_GATK_FORMAT.out.output.view()
 
     //MOSDEPTH_TO_GATK_FORMAT.out.output
     //    .combine(ch_panel_of_normals)

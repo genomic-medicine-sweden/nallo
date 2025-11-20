@@ -7,8 +7,7 @@ process MOSDEPTH_TO_GATK_FORMAT {
         'biocontainers/gawk:5.3.0' }"
     
     input:
-    tuple val(meta), path(mosdepth_file)
-    path(mosdepth_header_template)
+    tuple val(meta), path(mosdepth_file), path(mosdepth_header_template)
 
     output:
     tuple val(meta), path("*.tsv"), emit: output
