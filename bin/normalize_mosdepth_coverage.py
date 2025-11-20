@@ -73,7 +73,7 @@ def calculate_mean(coverages: Iterable[float]) -> float:
 def write_normalized_output(
     headers: List[str],
     rows: List[Tuple[str, int, int, float]],
-    median: float,
+    mean: float,
     output: Path,
 ) -> None:
     with output.open("w", encoding="utf-8") as handle:
@@ -87,7 +87,7 @@ def write_normalized_output(
                 continue
                 # log2_ratio = float("-inf")
             else:
-                log2_ratio = math.log2(coverage / median)
+                log2_ratio = math.log2(coverage / mean)
             handle.write(f"{contig}\t{start}\t{end}\t{log2_ratio}\n")
 
 
