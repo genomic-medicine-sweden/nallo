@@ -82,8 +82,10 @@ def write_normalized_output(
             handle.write(f"{header_line}\n")
 
         for contig, start, end, coverage in rows:
-            if coverage <= 0:
-                log2_ratio = float("-inf")
+            if coverage == 0:
+                # Skip those with 0 coverage
+                continue
+                # log2_ratio = float("-inf")
             else:
                 log2_ratio = math.log2(coverage / median)
             handle.write(f"{contig}\t{start}\t{end}\t{log2_ratio}\n")
