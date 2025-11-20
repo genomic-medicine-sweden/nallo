@@ -20,13 +20,12 @@ nextflow_workflow {
 
                 input[1] = Channel.of([
                     meta,
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
-                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv", checkIfExists: true)
+                    [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true)],
+                    [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)]
                 ])
 
                 input[2] = Channel.value(
-                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gatk_header_template.txt", checkIfExists: true)
+                    file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv", checkIfExists: true)
                 )
 
                 input[3] = Channel.value([

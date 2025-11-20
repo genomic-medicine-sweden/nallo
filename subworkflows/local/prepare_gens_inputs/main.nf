@@ -3,6 +3,7 @@ include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
 include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
 include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+include { GENERATE_MOSDEPTH_GATK_HEADER } from '../../../modules/local/generate_mosdepth_gatk_header/main.nf'
 
 // Calculate the GATK header from this instead
 // samtools view -H sample.bam > header.sam
@@ -34,8 +35,12 @@ workflow PREPARE_GENS_INPUTS {
     MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
+    GENERATE_MOSDEPTH_GATK_HEADER(ch_bam)
+    ch_versions = ch_versions.mix(GENERATE_MOSDEPTH_GATK_HEADER.out.versions)
+
     MOSDEPTH.out.regions_bed
-        .map { meta, regions_bed -> tuple(meta, regions_bed, gatk_header) }
+        .join(GENERATE_MOSDEPTH_GATK_HEADER.out.header)
+        // .map { meta, regions_bed -> tuple(meta, regions_bed, gatk_header) }
         .set { ch_mosdepth_to_gatk_in }
 
     MOSDEPTH_TO_GATK_FORMAT(ch_mosdepth_to_gatk_in)
