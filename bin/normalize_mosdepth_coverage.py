@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import math
 from pathlib import Path
+from statistics import mean
 from typing import Iterable, List, Tuple
 
 VERSION = "0.1.0"
@@ -65,13 +66,14 @@ def read_coverage_table(
     return headers, rows
 
 
-def calculate_median(coverages: Iterable[float]) -> float:
-    sorted_cov = sorted(coverages)
-    n = len(sorted_cov)
-    mid = n // 2
-    if n % 2:
-        return sorted_cov[mid]
-    return (sorted_cov[mid - 1] + sorted_cov[mid]) / 2
+def calculate_mean(coverages: Iterable[float]) -> float:
+    return mean(coverages)
+    # sorted_cov = sorted(coverages)
+    # n = len(sorted_cov)
+    # mid = n // 2
+    # if n % 2:
+    #     return sorted_cov[mid]
+    # return (sorted_cov[mid - 1] + sorted_cov[mid]) / 2
 
 
 def write_normalized_output(
@@ -97,9 +99,9 @@ def main() -> None:
     args = parse_args()
 
     headers, rows = read_coverage_table(args.input)
-    median = calculate_median([row[3] for row in rows])
+    median = calculate_mean([row[3] for row in rows])
     if median <= 0:
-        raise ValueError(f"Median coverage must be positive, got {median}")
+        raise ValueError(f"Mean coverage must be positive, got {median}")
 
     write_normalized_output(headers, rows, median, args.output)
 
