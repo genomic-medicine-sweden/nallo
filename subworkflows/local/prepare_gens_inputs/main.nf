@@ -21,37 +21,38 @@ workflow PREPARE_GENS_INPUTS {
     main:
     ch_versions = channel.empty()
 
+    // These looks OK
     //ch_bam.view()
     //ch_gvcfs.view()
-    //baf_positions.view()
-    //gatk_header.view()
-    //panel_of_normals.view()
+    //ch_baf_positions.view()
+    //ch_gatk_header.view()
+    /ch_panel_of_normals.view()
 
     // FIXME: Looks like the nesting is not correct yet [meta, (vcf, tbi), (vcf, tbi)] vs [meta, (vcfs), (tbi)]
-    BCFTOOLS_CONCAT(ch_gvcfs)
+    //BCFTOOLS_CONCAT(ch_gvcfs)
 
-    ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
+    //ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
     // ch_vcf_tbi.view()
 
     // BCFTOOLS_CONCAT.out.vcf.view()
     // BCFTOOLS_CONCAT.out.tbi.view()
 
-    ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
-    ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
+    //ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
+    //ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
 
-    MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
-    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
+    //MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
+    //ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    MOSDEPTH_TO_GATK_FORMAT(
-        MOSDEPTH.out.regions_bed,
-        ch_gatk_header,
-    )
-    ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
+    //MOSDEPTH_TO_GATK_FORMAT(
+    //    MOSDEPTH.out.regions_bed,
+    //    ch_gatk_header,
+    //)
+    //ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
-    MOSDEPTH_TO_GATK_FORMAT.out.output
-        .combine(ch_panel_of_normals)
-        .map { meta, _tsv, pon -> tuple(meta, pon) }
-        .set { ch_pon }
+    //MOSDEPTH_TO_GATK_FORMAT.out.output
+    //    .combine(ch_panel_of_normals)
+    //    .map { meta, _tsv, pon -> tuple(meta, pon) }
+    //    .set { ch_pon }
 
     //MOSDEPTH_TO_GATK_FORMAT.out.output
     //    .map { meta, _tsv -> meta }
@@ -59,16 +60,16 @@ workflow PREPARE_GENS_INPUTS {
     //    .map { meta, pon -> tuple(meta, pon) }
     //    .set { ch_pon }
 
-    MOSDEPTH_TO_GATK_FORMAT.out.output.view()
-    ch_pon.view()
-    GATK4_DENOISEREADCOUNTS(
-        MOSDEPTH_TO_GATK_FORMAT.out.output,
-        ch_pon
-        // meta, pon
-    )
-    ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
+    //MOSDEPTH_TO_GATK_FORMAT.out.output.view()
+    //ch_pon.view()
+    //GATK4_DENOISEREADCOUNTS(
+    //    MOSDEPTH_TO_GATK_FORMAT.out.output,
+    //    ch_pon
+    //    // meta, pon
+    //)
+    //ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
-    GATK4_DENOISEREADCOUNTS.out.standardized.view()
+    //GATK4_DENOISEREADCOUNTS.out.standardized.view()
 
     //ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized
     //    .join(ch_vcf_tbi)
