@@ -422,7 +422,7 @@ workflow NALLO {
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
                 .map { meta, gvcf, gvcf_index -> 
-                    def sample_meta = meta - meta.subMap('region')
+                    def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
                     [ sample_meta, gvcf, gvcf_index ]
                 }
                 .groupTuple()
