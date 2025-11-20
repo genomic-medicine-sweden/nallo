@@ -17,21 +17,15 @@ description = (
 )
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=description)
-    parser.add_argument(
-        "--input", required=True, type=Path, help="Mosdepth coverage TSV file"
-    )
-    parser.add_argument(
-        "--output",
-        required=True,
-        type=Path,
-        help="Path to write normalized coverage TSV",
-    )
-    parser.add_argument(
-        "--version", action="version", version=f"normalize_mosdepth_coverage {VERSION}"
-    )
-    return parser.parse_args()
+def main() -> None:
+    args = parse_args()
+
+    headers, rows = read_coverage_table(args.input)
+    mean = calculate_mean([row[3] for row in rows])
+    if mean <= 0:
+        raise ValueError(f"Mean coverage must be positive, got {mean}")
+
+    write_normalized_output(headers, rows, mean, args.output)
 
 
 def read_coverage_table(
@@ -83,9 +77,9 @@ def write_normalized_output(
     output: Path,
 ) -> None:
     with output.open("w", encoding="utf-8") as handle:
+        headers.insert(len(headers) - 1, f"@median_coverage\t{median}\n")
         for header_line in headers:
             handle.write(f"{header_line}\n")
-        handle.write(f"@median_coverage\t{median}\n")
 
         for contig, start, end, coverage in rows:
             if coverage <= 0:
@@ -95,15 +89,22 @@ def write_normalized_output(
             handle.write(f"{contig}\t{start}\t{end}\t{log2_ratio}\n")
 
 
-def main() -> None:
-    args = parse_args()
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument(
+        "--input", required=True, type=Path, help="Mosdepth coverage TSV file"
+    )
+    parser.add_argument(
+        "--output",
+        required=True,
+        type=Path,
+        help="Path to write normalized coverage TSV",
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"normalize_mosdepth_coverage {VERSION}"
+    )
+    return parser.parse_args()
 
-    headers, rows = read_coverage_table(args.input)
-    median = calculate_mean([row[3] for row in rows])
-    if median <= 0:
-        raise ValueError(f"Mean coverage must be positive, got {median}")
-
-    write_normalized_output(headers, rows, median, args.output)
 
 
 if __name__ == "__main__":
