@@ -434,22 +434,13 @@ workflow NALLO {
             //def ch_gens_gatk_header_template = Channel.fromPath(params.gens_gatk_header_template, checkIfExists: true)
             //def ch_gens_panel_of_normals = Channel.fromPath(params.gens_panel_of_normals, checkIfExists: true)
 
-            if (params.gens_use_pon) {
-                PREPARE_GENS_INPUTS(
-                    params.gens_use_pon,
-                    ch_bam_bai,
-                    ch_gvcfs_to_concat_per_sample,
-                    params.gens_baf_positions,
-                    params.gens_panel_of_normals
-                )
-            } else {
-                PREPARE_GENS_INPUTS(
-                    params.gens_use_pon,
-                    ch_bam_bai,
-                    ch_gvcfs_to_concat_per_sample,
-                    params.gens_baf_positions
-                )
-            }
+            PREPARE_GENS_INPUTS(
+                params.gens_use_pon,
+                ch_bam_bai,
+                ch_gvcfs_to_concat_per_sample,
+                params.gens_baf_positions,
+                params.gens_panel_of_normals
+            )
             ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }
 
