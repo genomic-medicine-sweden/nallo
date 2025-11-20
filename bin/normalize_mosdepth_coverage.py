@@ -77,7 +77,7 @@ def write_normalized_output(
     output: Path,
 ) -> None:
     with output.open("w", encoding="utf-8") as handle:
-        headers.insert(len(headers) - 1, f"@median_coverage\t{median}\n")
+        # headers.insert(len(headers) - 1, f"@median_coverage\t{median}\n")
         for header_line in headers:
             handle.write(f"{header_line}\n")
 
