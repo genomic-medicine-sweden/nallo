@@ -12,7 +12,7 @@ include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoise
 workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcfs            // channel: [mandatory] [ val(meta), path(gvcf) ]
+    ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
     baf_positions       // channel: [mandatory] [ path(gz) ]
     gatk_header         // channel: [mandatory] [ path(txt) ]
     panel_of_normals    // channel: [mandatory] [ path(hd5) ]
@@ -26,17 +26,17 @@ workflow PREPARE_GENS_INPUTS {
     // 1. Flatten ?
     // 2. Group ?
 
-    ch_remapped = ch_gvcfs.map { meta, pairs -> 
-        def vcfs = pairs.collect { it -> it[0] }
-        def tbis = pairs.collect { it -> it[1] }
-        tuple(meta, vcfs, tbis)
-    }
+    // ch_remapped = ch_gvcfs.map { meta, pairs -> 
+    //     def vcfs = pairs.collect { it -> it[0] }
+    //     def tbis = pairs.collect { it -> it[1] }
+    //     tuple(meta, vcfs, tbis)
+    // }
 
 
     // ch_remapped.view { it -> "ch_remapped ${it}" }
 
     // FIXME: Looks like the nesting is not correct yet [meta, (vcf, tbi), (vcf, tbi)] vs [meta, (vcfs), (tbi)]
-    BCFTOOLS_CONCAT(ch_remapped)
+    BCFTOOLS_CONCAT(ch_gvcfs)
 
     ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
     // ch_vcf_tbi.view()

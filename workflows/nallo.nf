@@ -424,8 +424,14 @@ workflow NALLO {
             // FIXME: Will need to look over this
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
+                .map { meta, gvcf, gvcf_index -> 
+                    def sample_meta = meta - meta.subMap('region')
+                    [ sample_meta, gvcf, gvcf_index ]
+                }
                 .groupTuple()
                 .set { ch_gvcfs_to_concat_per_sample }
+
+            ch_gvcfs_to_concat_per_sample.view()
 
             def ch_gens_baf_positions = Channel.value((file(params.gens_baf_positions, checkIfExists: true)))
             def ch_gens_gatk_header_template = Channel.value(file(params.gens_gatk_header_template, checkIfExists: true))
