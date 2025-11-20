@@ -65,6 +65,9 @@ tool:
   gawk:
     citation: "gawk"
     bibliography: ""
+  generate_gens_data:
+    citation: "generate_gens_data (Willforss, 2025)"
+    bibliography: ""
   genmod:
     citation: "Genmod (Magnusson et al. 2018)"
     bibliography: "Magnusson M, Hughes T, Glabilloy, Bitdeli Chef. genmod: Version 3.7.3. Published online November 15, 2018. doi:10.5281/ZENODO.3841142"
