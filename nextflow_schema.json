@@ -297,16 +297,14 @@
                     "type": "string",
                     "description": "Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.",
                     "format": "file-path",
-                    "exists": true,
-                    "default": null
+                    "exists": true
                 },
                 "gens_panel_of_normals": {
                     "type": "string",
                     "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs.",
                     "format": "file-path",
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
-                    "exists": true,
-                    "default": null
+                    "exists": true
                 },
                 "peddy_sites": {
                     "type": "string",
