@@ -409,14 +409,8 @@ workflow NALLO {
 
         if (params.prepare_gens_input) {
 
-            def missingGensParams = [
-                params.gens_baf_positions ? null : '--gens_baf_positions',
-                params.gens_gatk_header_template ? null : '--gens_gatk_header_template',
-                params.gens_panel_of_normals ? null : '--gens_panel_of_normals',
-            ].findAll { it }
-
-            if (missingGensParams) {
-                error "The following parameters are required when --prepare_gens_input is enabled: ${missingGensParams.join(', ')}"
+            if (!params.gens_baf_positions) {
+                error "The parameter --gens_baf_positions is required when --prepare_gens_input is enabled"
             }
 
             CALL_SNVS.out.gvcf
