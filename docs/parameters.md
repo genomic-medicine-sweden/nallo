@@ -58,7 +58,6 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
-| `gens_gatk_header_template` | Header template used when converting mosdepth output to the GATK coverage format for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
 | `gens_panel_of_normals` | Panel-of-normals file (`.hd5`/`.hdf5`) used to standardize coverage for Gens inputs. | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
