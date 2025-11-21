@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - New workflow for generating input data to Gens.
+
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
@@ -17,8 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter           |
+| ------------- | ----------------------- |
+|               | skip_prepare_gens_input |
+|               | gens_baf_positions      |
+|               | gens_panel_of_normals   |
+|               | gens_use_pon            |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -27,8 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool  | Old version | New version |
+| ----- | ----------- | ----------- |
+| gatk4 |             | 4.6.2.0     |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

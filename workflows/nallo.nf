@@ -26,6 +26,7 @@ include { GENOME_ASSEMBLY                                        } from '../subw
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
 include { METHYLATION                                            } from '../subworkflows/local/methylation'
 include { PHASING                                                } from '../subworkflows/local/phasing'
+include { PREPARE_GENS_INPUTS                                    } from '../subworkflows/local/prepare_gens_inputs'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
@@ -405,6 +406,35 @@ workflow NALLO {
             "deepvariant",
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
+
+        if (!params.skip_prepare_gens_input) {
+
+            if (!params.gens_baf_positions) {
+                error "The parameter --gens_baf_positions is required when --prepare_gens_input is enabled"
+            }
+
+            if (params.gens_use_pon && !params.gens_panel_of_normals) {
+                error "The parameter --gens_panel_of_normals is required when --gens_use_pon is enabled"
+            }
+
+            CALL_SNVS.out.gvcf
+                .join(CALL_SNVS.out.gvcf_index)
+                .map { meta, gvcf, gvcf_index -> 
+                    def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                    [ sample_meta, gvcf, gvcf_index ]
+                }
+                .groupTuple()
+                .set { ch_gvcfs_to_concat_per_sample }
+
+            PREPARE_GENS_INPUTS(
+                ch_bam_bai,
+                ch_gvcfs_to_concat_per_sample,
+                params.gens_baf_positions,
+                params.gens_panel_of_normals,
+                params.gens_use_pon
+            )
+            ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+        }
 
         CALL_SNVS.out.vcf
             .map { meta, vcf ->

@@ -22,6 +22,7 @@ Allows skipping certain parts of the pipeline
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
+| `skip_prepare_gens_input` | Skip ranking of short variants | `boolean` | True |  |  |
 
 ## Input/output options
 
@@ -57,6 +58,9 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
+| `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. Required when `--prepare_gens_input` is enabled. | `string` |  |  |  |
+| `gens_panel_of_normals` | Panel-of-normals file (`.hd5`/`.hdf5`) used to standardize coverage for Gens inputs. | `string` |  |  |  |
+| `gens_use_pon` | Flag to enable using the panel of normals when preparing Gens inputs. | `boolean` | True |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |

@@ -1,0 +1,94 @@
+include { PREPARE_GENS_INPUTS } from '../subworkflows/local/prepare_gens_inputs/main'
+
+params.outdir = params.outdir ?: 'results'
+
+
+workflow {
+
+    def base = "/data/bnf/dev/jakob/proj/251118_gens_nallo"
+
+    // We start with just getting the short read subsamples through
+    // Then, switch to using long read based data
+    def bam_fp = "${base}/HG002-mini_aligned.bam"
+    def bam_bai_fp = "${bam_fp}.bai"
+    def gvcf_dir = "${base}/split_vcfs"
+    // def gvcf_tbi_fp = "${gvcf_fp}.tbi"
+    def baf_positions_fp = "${base}/gnomad_hg38.0.05.txt"
+    def gatk_header_fp = "${base}/header_tsv_gatk_mosdepth"
+    def pon = "/fs2/viktor/LRS/gens/own_samples_mixed/50_100_hg38_5p_mosdepth.hdf5"
+
+    def meta = [ id: 'SAMPLE1', sex: 'M', cohort: 'test' ]
+
+    channel.of(
+        tuple(
+            meta,
+            file(bam_fp),
+            file(bam_bai_fp)
+        )
+    ).set { ch_bam }
+
+    channel
+        .fromPath("${gvcf_dir}/*.vcf.gz")
+        .map { vcf ->
+            def tbi = file(vcf.toString() + ".tbi")
+            tuple(meta, tuple(vcf, tbi))
+        }
+        .groupTuple()
+        .set { ch_vcfs_grouped }
+
+    // channel.of(
+    //     tuple(
+    //         meta,
+    //         file(gvcf_fp),
+    //         file(gvcf_tbi_fp),
+    //         file(baf_positions_fp),
+    //     )
+    // ).set { ch_gvcf }
+
+    //ch_bam.view()
+    //ch_vcfs_grouped.view()
+
+    PREPARE_GENS_INPUTS(
+        ch_bam,
+        ch_vcfs_grouped,
+        baf_positions_fp,
+        gatk_header_fp,
+        pon
+    )
+
+    //ch_cov = PREPARE_GENS_INPUTS.out.cov_bed_tbi
+    //ch_baf = PREPARE_GENS_INPUTS.out.baf_bed_tbi
+
+    //ch_cov_baf = ch_cov.join(ch_baf)
+
+    //PUBLISH_GENS_INPUTS(ch_cov_baf)
+
+    //ch_cov.view { it -> "cov_bed_tbi: $it" }
+    //ch_baf.view { it -> "baf_bed_tbi: $it" }
+    //PREPARE_GENS_INPUTS.out.versions.view { it -> "versions: $it" }
+}
+
+process PUBLISH_GENS_INPUTS {
+    publishDir "${params.outdir}/gens", mode: "copy"
+
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/ubuntu:22.04' :
+        'ubuntu:22.04' }"
+
+    input:
+    tuple val(meta), path(cov_bed), path(cov_bed_tbi), path(baf_bed), path(baf_bed_tbi)
+
+    script:
+    """
+    rm $cov_bed_tbi
+    rm $baf_bed_tbi
+    ln -s $cov_bed_tbi
+    ln -s $baf_bed_tbi
+    """
+
+    stub:
+    """
+    touch $cov_bed_tbi
+    touch $baf_bed_tbi
+    """
+}

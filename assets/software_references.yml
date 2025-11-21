@@ -59,8 +59,14 @@ tool:
   fastqc:
     citation: "FastQC (Andrews 2010)"
     bibliography: "Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
+  gatk4:
+    citation: "GATK (Van der Auwera & O'Connor 2020)"
+    bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."
   gawk:
     citation: "gawk"
+    bibliography: ""
+  generate_gens_data:
+    citation: "generate_gens_data"
     bibliography: ""
   genmod:
     citation: "Genmod (Magnusson et al. 2018)"

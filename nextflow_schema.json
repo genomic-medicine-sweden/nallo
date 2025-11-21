@@ -89,6 +89,11 @@
                     "type": "boolean",
                     "description": "Skip ranking of short variants",
                     "default": false
+                },
+                "skip_prepare_gens_input": {
+                    "type": "boolean",
+                    "description": "Skip preparing input data for Gens",
+                    "default": true
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -292,6 +297,24 @@
                     "description": "A VCF of known polymorphic sites for somalier",
                     "format": "file-path",
                     "exists": true
+                },
+                "gens_baf_positions": {
+                    "type": "string",
+                    "description": "Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "gens_panel_of_normals": {
+                    "type": "string",
+                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals).",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(hd5|hdf5)$",
+                    "exists": true
+                },
+                "gens_use_pon": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable using the panel of normals when preparing Gens inputs."
                 },
                 "peddy_sites": {
                     "type": "string",
