@@ -10,9 +10,9 @@ workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
-    baf_positions       // value: [mandatory] [ path(gz) ]
-    panel_of_normals    // value: [optional] [ path(hd5) ]
-    use_pon             // value: [mandatory] [ boolean ]
+    baf_positions       // value:   [mandatory] [ path(gz) ]
+    panel_of_normals    // value:   [optional] [ path(hd5) ]
+    use_pon             // value:   [mandatory] [ boolean ]
 
     main:
     ch_versions = channel.empty()
@@ -30,7 +30,6 @@ workflow PREPARE_GENS_INPUTS {
     ch_versions = ch_versions.mix(GENERATE_MOSDEPTH_GATK_HEADER.out.versions)
     MOSDEPTH.out.regions_bed
         .join(GENERATE_MOSDEPTH_GATK_HEADER.out.header)
-        // .map { meta, regions_bed -> tuple(meta, regions_bed, gatk_header) }
         .set { ch_mosdepth_to_gatk_in }
     MOSDEPTH_TO_GATK_FORMAT(ch_mosdepth_to_gatk_in)
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
@@ -43,7 +42,6 @@ workflow PREPARE_GENS_INPUTS {
         GATK4_DENOISEREADCOUNTS(
             MOSDEPTH_TO_GATK_FORMAT.out.output,
             ch_pon
-            // meta, pon
         )
         ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
         GATK4_DENOISEREADCOUNTS.out.standardized

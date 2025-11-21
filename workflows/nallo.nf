@@ -407,7 +407,7 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
-        if (params.prepare_gens_input) {
+        if (!params.skip_prepare_gens_input) {
 
             if (!params.gens_baf_positions) {
                 error "The parameter --gens_baf_positions is required when --prepare_gens_input is enabled"

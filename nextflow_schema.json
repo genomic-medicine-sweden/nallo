@@ -89,6 +89,11 @@
                     "type": "boolean",
                     "description": "Skip ranking of short variants",
                     "default": false
+                },
+                "skip_prepare_gens_input": {
+                    "type": "boolean",
+                    "description": "Skip preparing input data for Gens",
+                    "default": true
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -301,7 +306,7 @@
                 },
                 "gens_panel_of_normals": {
                     "type": "string",
-                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs.",
+                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals).",
                     "format": "file-path",
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
                     "exists": true
@@ -591,11 +596,6 @@
                 "force_sawfish_joint_call_single_samples": {
                     "type": "boolean",
                     "description": "Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead."
-                },
-                "prepare_gens_input": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Prepare coverage and B-allele frequency data for downstream Gens input. Requires --gens_baf_positions and, when --gens_use_pon is enabled, --gens_panel_of_normals."
                 },
                 "filter_variants_hgnc_ids": {
                     "type": "string",

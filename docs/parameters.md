@@ -22,7 +22,7 @@ Allows skipping certain parts of the pipeline
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
-| `skip_gens_input` | Skip ranking of short variants | `boolean` | True |  |  |
+| `skip_prepare_gens_input` | Skip ranking of short variants | `boolean` | True |  |  |
 
 ## Input/output options
 

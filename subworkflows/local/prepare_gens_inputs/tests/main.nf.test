@@ -1,3 +1,6 @@
+// FIXME: Look through and test this
+// FIXME: Run both with and without pon stubs
+
 nextflow_workflow {
     
     name "Test Workflow PREPARE_GENS_INPUTS"
