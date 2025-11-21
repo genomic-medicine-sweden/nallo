@@ -6,19 +6,12 @@ include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoise
 include { GENERATE_MOSDEPTH_GATK_HEADER } from '../../../modules/local/generate_mosdepth_gatk_header/main.nf'
 include { NORMALIZE_MOSDEPTH_COVERAGE } from '../../../modules/local/normalize_mosdepth_coverage/main.nf'
 
-// Calculate the GATK header from this instead
-// samtools view -H sample.bam > header.sam
-
-
-// FIXME: Dealing with multiple samples
 workflow PREPARE_GENS_INPUTS {
     take:
-    use_pon             // value: [mandatory] [ val(boolean) ]
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
     baf_positions       // value: [mandatory] [ path(gz) ]
-    // FIXME: Calculate from BAM instead
-    panel_of_normals    // value: [mandatory] [ path(hd5) ]
+    panel_of_normals    // value: [optional] [ path(hd5) ]
 
     main:
     ch_versions = channel.empty()
@@ -45,7 +38,7 @@ workflow PREPARE_GENS_INPUTS {
     // print("Using pon", use_pon)
 
     // PON path
-    if (use_pon) {
+    if (panel_of_normals) {
         MOSDEPTH_TO_GATK_FORMAT.out.output
             .map { meta, _tsv -> tuple(meta, panel_of_normals) }
             .set { ch_pon }

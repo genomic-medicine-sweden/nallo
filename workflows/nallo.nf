@@ -428,14 +428,7 @@ workflow NALLO {
                 .groupTuple()
                 .set { ch_gvcfs_to_concat_per_sample }
 
-            // ch_gvcfs_to_concat_per_sample.view()
-
-            //def ch_gens_baf_positions = Channel.fromPath(params.gens_baf_positions, checkIfExists: true)
-            //def ch_gens_gatk_header_template = Channel.fromPath(params.gens_gatk_header_template, checkIfExists: true)
-            //def ch_gens_panel_of_normals = Channel.fromPath(params.gens_panel_of_normals, checkIfExists: true)
-
             PREPARE_GENS_INPUTS(
-                params.gens_use_pon,
                 ch_bam_bai,
                 ch_gvcfs_to_concat_per_sample,
                 params.gens_baf_positions,
