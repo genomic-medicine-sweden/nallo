@@ -413,6 +413,10 @@ workflow NALLO {
                 error "The parameter --gens_baf_positions is required when --prepare_gens_input is enabled"
             }
 
+            if (params.gens_use_pon && !params.gens_panel_of_normals) {
+                error "The parameter --gens_panel_of_normals is required when --gens_use_pon is enabled"
+            }
+
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
                 .map { meta, gvcf, gvcf_index -> 
@@ -426,7 +430,8 @@ workflow NALLO {
                 ch_bam_bai,
                 ch_gvcfs_to_concat_per_sample,
                 params.gens_baf_positions,
-                params.gens_panel_of_normals
+                params.gens_panel_of_normals,
+                params.gens_use_pon
             )
             ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }

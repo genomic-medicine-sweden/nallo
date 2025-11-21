@@ -12,6 +12,7 @@ workflow PREPARE_GENS_INPUTS {
     ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
     baf_positions       // value: [mandatory] [ path(gz) ]
     panel_of_normals    // value: [optional] [ path(hd5) ]
+    use_pon             // value: [mandatory] [ boolean ]
 
     main:
     ch_versions = channel.empty()
@@ -34,11 +35,8 @@ workflow PREPARE_GENS_INPUTS {
     MOSDEPTH_TO_GATK_FORMAT(ch_mosdepth_to_gatk_in)
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
-
-    // print("Using pon", use_pon)
-
     // PON path
-    if (panel_of_normals) {
+    if (use_pon) {
         MOSDEPTH_TO_GATK_FORMAT.out.output
             .map { meta, _tsv -> tuple(meta, panel_of_normals) }
             .set { ch_pon }

@@ -306,6 +306,11 @@
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
                     "exists": true
                 },
+                "gens_use_pon": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable using the panel of normals when preparing Gens inputs."
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
@@ -590,7 +595,7 @@
                 "prepare_gens_input": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Prepare coverage (given a panel of normals) and B-allele frequency data for downstream Gens input."
+                    "description": "Prepare coverage and B-allele frequency data for downstream Gens input. Requires --gens_baf_positions and, when --gens_use_pon is enabled, --gens_panel_of_normals."
                 },
                 "filter_variants_hgnc_ids": {
                     "type": "string",
