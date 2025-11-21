@@ -168,6 +168,11 @@
                         "git_sha": "c83276742fdcd6d0abac0d8f32048a98ea97971c",
                         "installed_by": ["modules"]
                     },
+                    "methbat/profile": {
+                        "branch": "master",
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
+                        "installed_by": ["modules"]
+                    },
                     "minimap2/align": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -202,6 +207,11 @@
                     "paraphase": {
                         "branch": "master",
                         "git_sha": "9e18969a158f93bd689de80a9dfe05c9d67d023a",
+                        "installed_by": ["modules"]
+                    },
+                    "pbcpgtools/alignedbamtocpgscores": {
+                        "branch": "master",
+                        "git_sha": "e67cda6276a94d7eafa2d38acefd001562ad2c2b",
                         "installed_by": ["modules"]
                     },
                     "peddy": {
