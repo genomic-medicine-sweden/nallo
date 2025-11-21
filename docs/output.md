@@ -239,11 +239,11 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
-When `--prepare_gens_input` is enabled, the pipeline prepares coverage and B-allele frequency files that can be ingested by downstream Gens workflows.
+When `--prepare_gens_input` is enabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.
 
 | Path                                    | Description                                                  |
 | --------------------------------------- | ------------------------------------------------------------ |
-| `gens/{sample}/{sample}.cov.bed.gz`     | Coverage data transformed with the supplied panel of normals |
+| `gens/{sample}/{sample}.cov.bed.gz`     | Coverage data normalized either against a panel of normal or the samples median value |
 | `gens/{sample}/{sample}.cov.bed.gz.tbi` | Index of the coverage BED file                               |
 | `gens/{sample}/{sample}.baf.bed.gz`     | B-allele frequency estimates at the provided positions       |
 | `gens/{sample}/{sample}.baf.bed.gz.tbi` | Index of the BAF BED file                                    |

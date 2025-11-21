@@ -22,6 +22,7 @@ Allows skipping certain parts of the pipeline
 | `skip_sv_annotation` | Skip structural variant annotation | `boolean` | False |  |  |
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
+| `skip_gens_input` | Skip ranking of short variants | `boolean` | True |  |  |
 
 ## Input/output options
 
@@ -127,7 +128,6 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
-| `prepare_gens_input` | Prepare coverage and B-allele frequency data for downstream Gens input. Requires `--gens_baf_positions` and if `--gens_use_pon` is enabled also requires `--gens_panel_of_normals`. | `boolean` | False |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
 | `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
 | `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
