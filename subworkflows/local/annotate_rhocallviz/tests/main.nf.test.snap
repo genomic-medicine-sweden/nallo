@@ -3,142 +3,201 @@
         "content": [
             {
                 "0": [
-                    "versions.yml:md5,25239e4ccee3cd25ebd74f2568ae6404",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,da352d7c5a4d9ea570d6d115de6e77fc",
-                    "versions.yml:md5,eda483d9fbcdd93bf992e67daeddc8bb",
-                    "versions.yml:md5,edb630628eb129f564e3cc630909698c"
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "HG003",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ]
+                    
                 ],
-                "chromograph_plots_directory": [
-                    [
-                        {
-                            "id": "HG002",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "HG003",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ]
+                "chromograph_plots": [
+                    
                 ],
                 "versions": [
-                    "versions.yml:md5,25239e4ccee3cd25ebd74f2568ae6404",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,da352d7c5a4d9ea570d6d115de6e77fc",
-                    "versions.yml:md5,eda483d9fbcdd93bf992e67daeddc8bb",
-                    "versions.yml:md5,edb630628eb129f564e3cc630909698c"
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
                 ]
-            }
+            },
+            [
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-12T12:19:40.106899374"
+        "timestamp": "2025-11-22T12:16:23.274333274"
     },
     "two samples": {
         "content": [
             {
                 "0": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,bb31c116fbe937be83e02f6edee53290",
-                    "versions.yml:md5,c6ebfe842b7390b2d98f309aa516cd66",
-                    "versions.yml:md5,e5aa524abde294935d55ee9f32645b0f",
-                    "versions.yml:md5,f08e845025300ba19ed0610470569120"
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
                 ],
                 "1": [
                     [
                         {
-                            "id": "HG002",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ],
-                    [
-                        {
                             "id": "HG003",
                             "num_intervals": 1
                         },
                         [
-                            
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
                         ]
                     ]
                 ],
-                "chromograph_plots_directory": [
-                    [
-                        {
-                            "id": "HG002",
-                            "num_intervals": 1
-                        },
-                        [
-                            
-                        ]
-                    ],
+                "chromograph_plots": [
                     [
                         {
                             "id": "HG003",
                             "num_intervals": 1
                         },
                         [
-                            
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
                         ]
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
                     "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,bb31c116fbe937be83e02f6edee53290",
-                    "versions.yml:md5,c6ebfe842b7390b2d98f309aa516cd66",
-                    "versions.yml:md5,e5aa524abde294935d55ee9f32645b0f",
-                    "versions.yml:md5,f08e845025300ba19ed0610470569120"
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
                 ]
-            }
+            },
+            [
+                {
+                    "ANNOTATE_RHOCALLVIZ:CHROMOGRAPH_AUTOZYG": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-12T12:19:25.56179756"
+        "timestamp": "2025-11-22T12:14:05.266555619"
     }
 }

@@ -35,7 +35,7 @@ process RHOCALL_VIZ {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        rhocall: \$(echo \$(rhocall --version 2>&1) | sed 's/rhocall, version //' )
+        rhocall: \$(rhocall --version | sed 's/rhocall, version //')
     END_VERSIONS
     """
 
@@ -48,7 +48,7 @@ process RHOCALL_VIZ {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        rhocall: \$(echo \$(rhocall --version 2>&1) | sed 's/rhocall, version //' )
+        rhocall: \$(rhocall --version | sed 's/rhocall, version //')
     END_VERSIONS
     """
 }

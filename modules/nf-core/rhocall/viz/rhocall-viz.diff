@@ -1,0 +1,29 @@
+Changes in component 'nf-core/rhocall/viz'
+'modules/nf-core/rhocall/viz/environment.yml' is unchanged
+Changes in 'rhocall/viz/main.nf':
+--- modules/nf-core/rhocall/viz/main.nf
++++ modules/nf-core/rhocall/viz/main.nf
+@@ -35,7 +35,7 @@
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+-        rhocall: \$(echo \$(rhocall --version 2>&1) | sed 's/rhocall, version //' )
++        rhocall: \$(rhocall --version | sed 's/rhocall, version //')
+     END_VERSIONS
+     """
+ 
+@@ -48,7 +48,7 @@
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+-        rhocall: \$(echo \$(rhocall --version 2>&1) | sed 's/rhocall, version //' )
++        rhocall: \$(rhocall --version | sed 's/rhocall, version //')
+     END_VERSIONS
+     """
+ }
+
+'modules/nf-core/rhocall/viz/meta.yml' is unchanged
+'modules/nf-core/rhocall/viz/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/rhocall/viz/tests/nextflow.config' is unchanged
+'modules/nf-core/rhocall/viz/tests/main.nf.test' is unchanged
+************************************************************
