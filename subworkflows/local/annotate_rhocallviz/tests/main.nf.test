@@ -1,0 +1,107 @@
+nextflow_workflow {
+
+    name "Test Workflow ANNOTATE_RHOCALLVIZ"
+    script "../main.nf"
+    workflow "ANNOTATE_RHOCALLVIZ"
+    config "./nextflow.config"
+
+    setup {
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = [
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ]
+                input[2] = true
+                input[3] = true
+                """
+            }
+        }
+
+        run("ANNOTATE_SNVS") {
+            script "../../annotate_snvs/main.nf"
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG002', num_intervals:1 ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', num_intervals:1 ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)
+                ]
+                input[2] = PREPARE_REFERENCES.out.fasta
+                input[3] = PREPARE_REFERENCES.out.fai
+                input[4] = PREPARE_REFERENCES.out.vep_resources.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = Channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+    }
+    // Looks like our test-data isn't enough to generate chromograph plots, but at least the directory is output
+    test("two samples") {
+
+        when {
+            workflow {
+                """
+                input[0] = ANNOTATE_SNVS.out.vcf
+                input[1] = ANNOTATE_SNVS.out.tbi
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("two sample -stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = ANNOTATE_SNVS.out.vcf
+                input[1] = ANNOTATE_SNVS.out.tbi
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+}

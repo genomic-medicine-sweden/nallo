@@ -12,6 +12,7 @@ include {
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_RHOCALLVIZ                                    } from '../subworkflows/local/annotate_rhocallviz'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
@@ -35,6 +36,8 @@ include { SCATTER_GENOME                                         } from '../subw
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -48,6 +51,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT                                        } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT                                   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                          } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW                                          } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
@@ -493,6 +497,7 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
 
+        // This is really only required for ranking, could consider moving it there?
         ANN_CSQ_PLI_SNV (
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
@@ -504,6 +509,44 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
 
     }
+
+    //
+    // Concatenate and sort annotated SNVs for chromograph
+    //
+    // TODO: Make skip_rhocallviz_annotation rely on skip_snv_annotation.
+    if(!params.skip_rhocallviz_annotation) {
+
+        // Take the unfiltered and not variants variants annotated with most severe consequence and pLI
+        ANNOTATE_SNVS.out.vcf
+            .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_concat_sort_annotated_snvs_input }
+
+        CONCAT_SORT_ANNOTATED_SNVS (
+            ch_concat_sort_annotated_snvs_input
+        )
+
+        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+            .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+            .set { ch_bcftools_pluginsplit_input }
+
+        BCFTOOLS_PLUGINSPLIT(
+            ch_bcftools_pluginsplit_input,
+            [],
+            [],
+            [],
+            [],
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+
+        ANNOTATE_RHOCALLVIZ(
+            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf),
+            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi)
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+    }
+
 
     //
     // Ranks family VCFs per variant call region
@@ -544,33 +587,31 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort SNVs (could be a subworkflow)
+    // Concatenate and sort ranked SNVs
     //
     if(!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
-            .set { ch_bcftools_concat_in }
+            .set { ch_concat_sort_input }
 
-        // Concat into family VCFs per family with all regions
-        BCFTOOLS_CONCAT (
-                ch_bcftools_concat_in
-            )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+        // Concat into family VCFs per family with all regions, sort and publish
+        CONCAT_SORT_RANKED_SNVS (
+            ch_concat_sort_input
+        )
+        ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
-        // Sort and publish
-        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
     }
+
 
     //
     // Run Peddy
     //
     if (!params.skip_snv_calling && !params.skip_peddy) {
 
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi )
+        CONCAT_SORT_RANKED_SNVS.out.vcf
+            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
             .filter { meta, _vcf, _tbi -> meta.set == "research" }
             .set { ch_peddy_in }
 
@@ -841,4 +882,13 @@ workflow NALLO {
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
+}
+
+def fromMultisampleToSampleMeta(multisample_channel) {
+    multisample_channel
+        .transpose()
+        .map { meta, vcf ->
+            def new_meta = meta + [ id: vcf.simpleName ]
+                [ new_meta, vcf ]
+        }
 }
