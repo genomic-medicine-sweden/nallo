@@ -497,6 +497,7 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
 
+        // This is really only required for ranking, could consider moving it there?
         ANN_CSQ_PLI_SNV (
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
@@ -508,6 +509,44 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
 
     }
+
+    //
+    // Concatenate and sort annotated SNVs for chromograph
+    //
+    // TODO: Make skip_rhocallviz_annotation rely on skip_snv_annotation.
+    if(!params.skip_rhocallviz_annotation) {
+
+        // Take the unfiltered and not variants variants annotated with most severe consequence and pLI
+        ANNOTATE_SNVS.out.vcf
+            .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_concat_sort_annotated_snvs_input }
+
+        CONCAT_SORT_ANNOTATED_SNVS (
+            ch_concat_sort_annotated_snvs_input
+        )
+
+        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+            .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+            .set { ch_bcftools_pluginsplit_input }
+
+        BCFTOOLS_PLUGINSPLIT(
+            ch_bcftools_pluginsplit_input,
+            [],
+            [],
+            [],
+            [],
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+
+        ANNOTATE_RHOCALLVIZ(
+            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf),
+            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi)
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+    }
+
 
     //
     // Ranks family VCFs per variant call region
@@ -548,7 +587,7 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort SNVs (could be a subworkflow)
+    // Concatenate and sort ranked SNVs
     //
     if(!params.skip_snv_calling) {
 
@@ -563,29 +602,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
-        // TODO: This should be only annotated variants!
-        if (!params.skip_rhocallviz_annotation) {
-
-            CONCAT_SORT_RANKED_SNVS.out.vcf
-                .join(CONCAT_SORT_RANKED_SNVS.out.tbi)
-                .filter { meta, _vcf, _tbi -> meta.set == "research" }
-                .set { ch_bcftools_pluginsplit_input }
-
-            BCFTOOLS_PLUGINSPLIT(
-                ch_bcftools_pluginsplit_input,
-                [],
-                [],
-                [],
-                [],
-            )
-            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
-
-            ANNOTATE_RHOCALLVIZ(
-                fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf),
-                fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi)
-            )
-            ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
-        }
     }
 
 
@@ -594,8 +610,8 @@ workflow NALLO {
     //
     if (!params.skip_snv_calling && !params.skip_peddy) {
 
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi )
+        CONCAT_SORT_RANKED_SNVS.out.vcf
+            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
             .filter { meta, _vcf, _tbi -> meta.set == "research" }
             .set { ch_peddy_in }
 

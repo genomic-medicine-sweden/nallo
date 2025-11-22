@@ -2,7 +2,7 @@ include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT   } from '../../../modules/nf-core/bcftools/sort/main'
 
 //
-// Workflow to concatenate and normalize variants
+// Workflow to concatenate and sort variants
 //
 workflow VCF_CONCAT_SORT_VARIANTS {
     take:

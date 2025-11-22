@@ -10,13 +10,13 @@ include { CHROMOGRAPH as CHROMOGRAPH_AUTOZYG        } from '../../../modules/nf-
 workflow ANNOTATE_RHOCALLVIZ {
     take:
     ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_tbi // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_tbi // channel: [mandatory] [ val(meta), path(tbi) ]
 
     main:
     ch_versions = channel.empty()
 
     ch_vcf
-        .join(ch_tbi)
+        .join(ch_tbi, failOnMismatch:true, failOnDuplicate:true)
         .set { ch_vcf_tbi }
 
     BCFTOOLS_ROH(
@@ -52,7 +52,7 @@ workflow ANNOTATE_RHOCALLVIZ {
     ch_versions = ch_versions.mix(RHOCALL_VIZ.out.versions)
 
     CHROMOGRAPH_AUTOZYG(
-        RHOCALL_VIZ.out.bed.view(),
+        RHOCALL_VIZ.out.bed,
         [[], []],
         [[], []],
         [[], []],
