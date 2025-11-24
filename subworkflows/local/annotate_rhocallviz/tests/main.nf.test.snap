@@ -3,71 +3,7 @@
         "content": [
             {
                 "0": [
-                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
-                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
-                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
-                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
-                ],
-                "1": [
-                    
-                ],
-                "chromograph_plots": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
-                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
-                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
-                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
-                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
-                ]
-            },
-            [
-                {
-                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
-                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
-                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
-                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
-                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                }
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-11-22T12:16:23.274333274"
-    },
-    "two samples": {
-        "content": [
-            {
-                "0": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
@@ -79,74 +15,141 @@
                 "1": [
                     [
                         {
-                            "id": "HG003",
+                            "id": "HG002",
                             "num_intervals": 1
                         },
                         [
-                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
+                            "HG002_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
-                    ]
-                ],
-                "chromograph_plots": [
+                    ],
                     [
                         {
                             "id": "HG003",
                             "num_intervals": 1
                         },
                         [
-                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
+                            "HG003_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "chromograph_plots": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG002_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,67a6a684c48f86e4060b528132552420",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
                     "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
@@ -157,6 +160,11 @@
                 ]
             },
             [
+                {
+                    "ANNOTATE_RHOCALLVIZ:CHROMOGRAPH_AUTOZYG": {
+                        "chromograph": "1.3.1"
+                    }
+                },
                 {
                     "ANNOTATE_RHOCALLVIZ:CHROMOGRAPH_AUTOZYG": {
                         "chromograph": "1.3.1"
@@ -198,6 +206,149 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-22T12:14:05.266555619"
+        "timestamp": "2025-11-24T11:01:41.272180514"
+    },
+    "two samples": {
+        "content": [
+            {
+                "0": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
+                        ]
+                    ]
+                ],
+                "chromograph_plots": [
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
+                    "versions.yml:md5,67a6a684c48f86e4060b528132552420",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,6f9a9379f7d1775b0288c06827db7f4d",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,75b10a672fd7a0b820d00260230c95d7",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59",
+                    "versions.yml:md5,a5c2994606c32c7d14750b43a4b2ce59"
+                ]
+            },
+            [
+                {
+                    "ANNOTATE_RHOCALLVIZ:CHROMOGRAPH_AUTOZYG": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:CHROMOGRAPH_AUTOZYG": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "ANNOTATE_RHOCALLVIZ:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-24T10:55:20.147165336"
     }
 }

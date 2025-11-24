@@ -1,0 +1,27 @@
+Changes in component 'nf-core/chromograph'
+'modules/nf-core/chromograph/environment.yml' is unchanged
+Changes in 'chromograph/main.nf':
+--- modules/nf-core/chromograph/main.nf
++++ modules/nf-core/chromograph/main.nf
+@@ -18,7 +18,7 @@
+     tuple val(meta7), path(sites)
+ 
+     output:
+-    tuple val(meta), path("*.png"), emit: plots
++    tuple val(meta), path("*.png"), emit: plots, optional: true
+     path "versions.yml", emit: versions
+ 
+     when:
+@@ -75,5 +75,5 @@
+ // Helper function to generate touch commands
+ def touchCmd(euploidy, input_file) {
+     def chrs = euploidy ? (1..22) + ['X', 'Y', 'M'] : [1]
+-    input_file ? chrs.collect { chr -> "touch ${input_file}_chr${chr}.png" }.join('\n') : ''
++    input_file ? chrs.collect { chr -> "touch ${input_file}_chr${chr}.png" }.join(' ') : ''
+ }
+
+'modules/nf-core/chromograph/meta.yml' is unchanged
+'modules/nf-core/chromograph/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/chromograph/tests/nextflow.config' is unchanged
+'modules/nf-core/chromograph/tests/main.nf.test' is unchanged
+************************************************************

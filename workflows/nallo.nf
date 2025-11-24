@@ -511,12 +511,10 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort annotated SNVs for chromograph
+    // Concatenate and sort annotated SNVs for chromograph - requires an AF-tag, e.g. gnomad_af
     //
-    // TODO: Make skip_rhocallviz_annotation rely on skip_snv_annotation.
     if(!params.skip_rhocallviz_annotation) {
 
-        // Take the unfiltered and not variants variants annotated with most severe consequence and pLI
         ANNOTATE_SNVS.out.vcf
             .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }

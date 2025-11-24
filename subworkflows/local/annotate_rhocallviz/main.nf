@@ -16,7 +16,7 @@ workflow ANNOTATE_RHOCALLVIZ {
     ch_versions = channel.empty()
 
     ch_vcf
-        .join(ch_tbi, failOnMismatch:true, failOnDuplicate:true)
+        .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_vcf_tbi }
 
     BCFTOOLS_ROH(
@@ -52,12 +52,7 @@ workflow ANNOTATE_RHOCALLVIZ {
     ch_versions = ch_versions.mix(RHOCALL_VIZ.out.versions)
 
     CHROMOGRAPH_AUTOZYG(
-        RHOCALL_VIZ.out.bed
-            // Workaround while chromograph is updated to handle empty inputs gracefully (HG002 test data fails here)
-            // Downside is the stub won't work... TODO: FIXME
-            .filter { _meta, bed ->
-                bed.readLines().size() > 1
-            },
+        RHOCALL_VIZ.out.bed,
         [[], []],
         [[], []],
         [[], []],
