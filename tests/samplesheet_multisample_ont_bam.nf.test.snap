@@ -246,8 +246,8 @@
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
                 "bcftools",
-                "bcftools/FAM.vcf",
-                "bcftools/FAM2.vcf",
+                "bcftools/FAM2_concat.bcf.gz",
+                "bcftools/FAM_concat.bcf.gz",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -639,8 +639,8 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,bace18a8e6dcf7f3dc1a1c95202bc0f2",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,70c46e9a12938cc7ff2e1a56de0e57d9",
-                "FAM.vcf:md5,b1292a51a55302e2f56dfccc6a87c53d",
-                "FAM2.vcf:md5,ddc64e3805f2f16ab83ffbbc1ccdadf7",
+                "FAM2_concat.bcf.gz:md5,6e00e31528a9ba1d90b5e316260f58fa",
+                "FAM_concat.bcf.gz:md5,c725cad43b14b54b069f19554e3eb498",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,508d0e7519d89b56afa767d2a7f9765f",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz.tbi:md5,3449677d26967205a7e3d6a6e69cb547",
                 "HG002_ONT_A_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
@@ -879,6 +879,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T14:32:23.337842979"
+        "timestamp": "2025-11-24T15:27:39.537948818"
     }
 }

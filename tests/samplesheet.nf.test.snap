@@ -269,7 +269,7 @@
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "bcftools",
-                "bcftools/FAM.vcf",
+                "bcftools/FAM_concat.bcf.gz",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -540,7 +540,7 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
-                "FAM.vcf:md5,e9077bddee1fd69584e5e938e4a05433",
+                "FAM_concat.bcf.gz:md5,c51bdab74a60c9d8be0e52dd202d057a",
                 "HG002_Revio_modkit_pileup_1.bed.gz:md5,e58d14a8d28a156117c125dd93cf1cb9",
                 "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,808bff5abd9c80d848e5d380f0015095",
                 "HG002_Revio_modkit_pileup_1.bw:md5,1430263589787fd56cf66cff63b6bc92",
@@ -671,6 +671,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T14:27:14.409399558"
+        "timestamp": "2025-11-24T15:21:54.060859686"
     }
 }

@@ -53,6 +53,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_rhocallviz_annotation": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip rhocall viz annotation. Requires annotation with an AF-tag, set with `--bcftools_roh_af_tag` and `--rhocallviz_af_tag`.",
+                    "default": true
+                },
                 "skip_peddy": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -635,6 +641,26 @@
                     "type": "string",
                     "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". The expression applies to both the clinical and the research VCFs."
+                },
+                "bcftools_roh_af_tag": {
+                    "type": "string",
+                    "default": "gnomad_af",
+                    "description": "AF-tag that variants have been annotated with for use in the rhocall viz subworkflow. This needs to be added either via echtvar or VEP."
+                },
+                "rhocallviz_af_tag": {
+                    "type": "string",
+                    "default": "gnomad_af",
+                    "description": "AF-tag that variants have been annotated with for use in the rhocall viz subworkflow. This needs to be added either via echtvar or VEP."
+                },
+                "rhocallviz_min_af": {
+                    "type": "number",
+                    "default": 0.0001,
+                    "description": "Minimum allele frequency for variants to be included in rhocall viz."
+                },
+                "rhocallviz_min_qual": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "Minimum quality for variants to be included in rhocall viz."
                 }
             },
             "required": ["preset"]

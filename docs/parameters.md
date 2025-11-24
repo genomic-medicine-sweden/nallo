@@ -15,6 +15,7 @@ Allows skipping certain parts of the pipeline
 | `skip_methylation_pileups` | Skip generation of methylation pileups | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
+| `skip_rhocallviz_annotation` | Skip rhocall viz annotation. Requires annotation with an AF-tag, set with `--bcftools_roh_af_tag` and `--rhocallviz_af_tag`. | `boolean` | True |  |  |
 | `skip_peddy` | Skip peddy | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
@@ -135,3 +136,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |
+| `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the rhocall viz subworkflow. This needs to be added either via echtvar or VEP. | `string` | gnomad_af |  |  |
+| `rhocallviz_af_tag` | AF-tag that variants have been annotated with for use in the rhocall viz subworkflow. This needs to be added either via echtvar or VEP. | `string` | gnomad_af |  |  |
+| `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz. | `number` | 0.0001 |  |  |
+| `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz. | `number` | 10 |  |  |

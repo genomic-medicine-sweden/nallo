@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `ANNOTATE_RHOCALLVIZ` to generate chromograph plots of autozygosity
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
+
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 
 ### `Removed`
 
@@ -17,8 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                  |
+| ------------- | ------------------------------ |
+|               | `--bcftools_roh_af_tag`        |
+|               | `--skip_rhocallviz_annotation` |
+|               | `--rhocallviz_af_tag`          |
+|               | `--rhocallviz_min_qual`        |
+|               | `--rhocallviz_min_af`          |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -27,8 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                 | Old version | New version |
+| -------------------- | ----------- | ----------- |
+| chromograph          |             | 1.3.1       |
+| bcftools/pluginsplit |             | 1.22        |
+| bcftools/roh         |             | 1.22        |
+| rhocall/viz          |             | 0.5.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
