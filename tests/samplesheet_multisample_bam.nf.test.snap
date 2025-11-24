@@ -280,8 +280,6 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/FAM_concat.bcf.gz",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -684,7 +682,6 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "FAM_concat.bcf.gz:md5,26471ad45151e99a21dbc82dd6308615",
                 "HG002_modkit_pileup_1.bed.gz:md5,fc7e0032bc5d43fc4e3eb9bad7986331",
                 "HG002_modkit_pileup_1.bed.gz.tbi:md5,dc4b61cfb8470954419699498d345453",
                 "HG002_modkit_pileup_1.bw:md5,3242c9d5d1362da01945aee7ec9855b1",
@@ -924,6 +921,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:24:46.705704009"
+        "timestamp": "2025-11-24T16:53:02.36996377"
     }
 }

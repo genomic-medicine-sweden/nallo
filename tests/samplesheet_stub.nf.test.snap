@@ -104,8 +104,6 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
-                "bcftools",
-                "bcftools/FAM_concat.bcf.gz",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -142,7 +140,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:51:30.071120799"
+        "timestamp": "2025-11-24T16:56:36.887479122"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -278,8 +276,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/FAM_concat.bcf.gz",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -342,7 +338,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:53:04.881686098"
+        "timestamp": "2025-11-24T16:58:01.227359867"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -535,8 +531,6 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
-                "bcftools",
-                "bcftools/FAM_concat.bcf.gz",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -573,7 +567,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:50:53.568754784"
+        "timestamp": "2025-11-24T16:56:06.679963214"
     },
     "Test family id same as sample id": {
         "content": [
@@ -840,8 +834,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/HG002_Revio_concat.bcf.gz",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -974,7 +966,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:53:48.920139089"
+        "timestamp": "2025-11-24T16:58:45.163922587"
     },
     "Test alignment without genome assembly": {
         "content": [
