@@ -48,19 +48,19 @@ workflow LONGPHASE {
         .set { ch_split_vcfs }
 
     ch_bam_bai
-        .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
+        .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], bam, bai ] }
         .join( ch_split_vcfs.snv, failOnMismatch:true, failOnDuplicate:true )
         .set { ch_bam_vcf }
 
     if (phase_with_svs) {
         ch_bam_vcf
             .join( ch_split_vcfs.sv, failOnMismatch:true, failOnDuplicate:true )
-            .map { _meta, meta2, bam, bai, snvs, svs -> [ meta2, bam, bai, snvs, svs, [] ] }
+            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
             .set { ch_longphase_phase_in }
 
     } else {
         ch_bam_vcf
-            .map { _meta, meta2, bam, bai, snvs -> [ meta2, bam, bai, snvs, [], [] ] }
+            .map { meta, bam, bai, snvs -> [ meta, bam, bai, snvs, [], [] ] }
             .set { ch_longphase_phase_in }
     }
 
@@ -126,8 +126,13 @@ workflow LONGPHASE {
             .set { ch_vcfs_for_haplotag }
     }
 
+    // Making sure to keep the full meta we get in case downstream processes need it
     ch_bam_bai
+        .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
         .join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true)
+        .map { _join_key, full_meta, bam, bai, vcf_snvs, vcf_svs, vcf_mods ->
+            [ full_meta, bam, bai, vcf_snvs, vcf_svs, vcf_mods ]
+        }
         .set { ch_longphase_haplotag_in }
 
     LONGPHASE_HAPLOTAG (
