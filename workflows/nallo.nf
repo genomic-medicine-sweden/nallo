@@ -104,6 +104,7 @@ workflow NALLO {
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
     ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
+    ch_regions                   = createReferenceChannelFromPath(params.methbat_regions)
 
 
     // Channels from (optional) input samplesheets validated by schema
@@ -731,7 +732,8 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_methylation_call_regions,
-            params.bigwig_modcodes
+            params.bigwig_modcodes,
+            ch_regions
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }
