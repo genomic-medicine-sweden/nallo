@@ -33,11 +33,7 @@ workflow SPLIT_MULTISAMPLE_VCF {
             "${meta.id}_${variant_type}.tsv",
             "${sample_id}\t-\t${basename}"
         ]}
-        .map { file ->
-            def components = file.simpleName.tokenize('_')
-            def meta = [ id: components[0], variant_type: components[1] ]
-            return [ meta, file ]
-        }
+        .map{file -> extractInfoFromFilename(file)}
         .set { ch_split_files }
 
     // Join VCFs and split files and then split them to ensure correct ordering
@@ -69,4 +65,15 @@ workflow SPLIT_MULTISAMPLE_VCF {
     emit:
     split_vcf = ch_split_vcf  // channel: [ val(meta), path(vcf), val(variant_type) ]
     versions  = ch_versions   // channel: [ path(versions.yml) ]
+}
+
+
+def extractInfoFromFilename(file) {
+    def component_matcher = file.simpleName =~ '^(.+)_([^_]+)$'
+    // Explicitly match so that we can access groups
+    if (!component_matcher.matches()){
+        error "Failed to parse split info filename: ${file.simpleName}"
+    }
+    def meta = [ id: component_matcher.group(1), variant_type: component_matcher.group(2) ]
+    return tuple(meta, file)
 }
