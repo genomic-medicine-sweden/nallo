@@ -113,4 +113,370 @@ nextflow_workflow {
             )
         }
     }
+
+    test ("1 sample - SNVs + SVs") {
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = SAWFISH_JOINTCALL.out.vcf
+                input[2] = Channel.of([
+                    [ id : 'HG002', family_id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("2 samples - SNVs + SVs") {
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[1] = SAWFISH_JOINTCALL.out.vcf
+                input[2] = Channel.of(
+                    [
+                        [ id : 'HG002', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs only - stub") {
+        options "-stub"
+        when {
+
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.empty()
+                input[2] = Channel.of([
+                    [ id : 'HG002', family_id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("2 samples - SNVs only - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[1] = Channel.empty()
+                input[2] = Channel.of(
+                    [
+                        [ id : 'HG002', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("1 sample - SNVs + SVs - stub") {
+        options "-stub"
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = SAWFISH_JOINTCALL.out.vcf
+                input[2] = Channel.of([
+                    [ id : 'HG002', family_id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test ("2 samples - SNVs + SVs - stub") {
+        options "-stub"
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[1] = SAWFISH_JOINTCALL.out.vcf
+                input[2] = Channel.of(
+                    [
+                        [ id : 'HG002', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[4] = GUNZIP.out.gunzip
+                input[5] = SAMTOOLS_FAIDX.out.fai
+                input[6] = true
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
 }
