@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            254,
+            257,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -192,6 +192,9 @@
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
+                },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -615,6 +618,10 @@
                 "svs/family/FAM2/FAM2_sniffles_svs.vcf.gz.tbi",
                 "svs/family/FAM2/FAM2_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM2/FAM2_svs_annotated_ranked_research.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_ONT_A_chromograph_coverage.wig",
+                "tiddit/HG002_ONT_B_chromograph_coverage.wig",
+                "tiddit/HG002_ONT_C_chromograph_coverage.wig",
                 "visualization_tracks",
                 "visualization_tracks/HG002_ONT_A",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.copynum.bedgraph",
@@ -741,6 +748,9 @@
                 "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
                 "HG002_ONT_C_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
                 "HG002_ONT_C_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "HG002_ONT_A_chromograph_coverage.wig:md5,f42df87e3788d98944adea78c02b92cb",
+                "HG002_ONT_B_chromograph_coverage.wig:md5,7949c34f29c0f9de13815c0b6b3c272b",
+                "HG002_ONT_C_chromograph_coverage.wig:md5,f42df87e3788d98944adea78c02b92cb",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
                 "HG002_ONT_A_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
@@ -874,6 +884,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:55:30.964667496"
+        "timestamp": "2025-11-26T16:27:20.487348583"
     }
 }

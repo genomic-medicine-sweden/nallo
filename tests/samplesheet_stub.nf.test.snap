@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            54,
+            55,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -95,6 +95,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
                 }
@@ -133,18 +136,21 @@
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
-                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:56:36.887479122"
+        "timestamp": "2025-11-26T16:28:28.224037163"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            54,
+            55,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -255,6 +261,9 @@
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -331,14 +340,17 @@
                 "svs/family",
                 "svs/family/FAM",
                 "svs/family/FAM/FAM_svs.vcf.gz",
-                "svs/family/FAM/FAM_svs.vcf.gz.tbi"
+                "svs/family/FAM/FAM_svs.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:58:01.227359867"
+        "timestamp": "2025-11-26T16:29:48.464137717"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -400,11 +412,11 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:52:37.887306363"
+        "timestamp": "2025-11-26T16:37:12.618190804"
     },
     "Test CADD with mock resources": {
         "content": [
-            67,
+            68,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -519,6 +531,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -560,18 +575,21 @@
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
-                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:56:06.679963214"
+        "timestamp": "2025-11-26T16:27:58.284202525"
     },
     "Test family id same as sample id": {
         "content": [
-            162,
+            163,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -802,6 +820,9 @@
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "TRGT_GENOTYPE": {
                     "trgt": "4.0.0-429afcd"
                 },
@@ -955,6 +976,9 @@
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
@@ -966,11 +990,11 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:58:45.163922587"
+        "timestamp": "2025-11-26T16:30:31.921627561"
     },
     "Test alignment without genome assembly": {
         "content": [
-            13,
+            14,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -1003,6 +1027,9 @@
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -1027,18 +1054,21 @@
                 "qc/somalier/relate/test",
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
-                "qc/somalier/relate/test/test.samples.tsv"
+                "qc/somalier/relate/test/test.samples.tsv",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:51:55.258528318"
+        "timestamp": "2025-11-26T16:28:48.450913487"
     },
     "Test alignment without genome assembly and --alignment_processes 1": {
         "content": [
-            11,
+            12,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -1068,6 +1098,9 @@
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -1092,13 +1125,16 @@
                 "qc/somalier/relate/test",
                 "qc/somalier/relate/test/test.html",
                 "qc/somalier/relate/test/test.pairs.tsv",
-                "qc/somalier/relate/test/test.samples.tsv"
+                "qc/somalier/relate/test/test.samples.tsv",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.bed",
+                "tiddit/HG002_Revio_chromograph_coverage.wig"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T15:52:19.387196525"
+        "timestamp": "2025-11-26T16:29:07.362773424"
     }
 }

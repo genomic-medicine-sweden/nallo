@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            316,
+            319,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -226,6 +226,9 @@
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
+                },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "4.0.0-429afcd"
@@ -661,6 +664,10 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_chromograph_coverage.wig",
+                "tiddit/HG003_chromograph_coverage.wig",
+                "tiddit/HG004_chromograph_coverage.wig",
                 "visualization_tracks",
                 "visualization_tracks/HG002",
                 "visualization_tracks/HG002/HG002_hificnv.copynum.bedgraph",
@@ -776,6 +783,9 @@
                 "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
                 "HG004_stats.blocks.gtf.gz:md5,5b837873563535065c0422ac40ea7866",
                 "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG002_chromograph_coverage.wig:md5,b404958f7d70b4b2b0b5fdae140fd195",
+                "HG003_chromograph_coverage.wig:md5,4a8facd904f6a1501231998d72b4742c",
+                "HG004_chromograph_coverage.wig:md5,5223fc794f4225daf09d4ec3668ea3b4",
                 "HG002_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_hificnv.depth.bw:md5,c1f3a213a83f7ab13cc082405328e74e",
                 "HG002_hificnv.maf.bw:md5,2d0add7bc6c190df62849e6d3b73e123",
@@ -921,6 +931,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:53:02.36996377"
+        "timestamp": "2025-11-26T16:24:48.542900287"
     }
 }

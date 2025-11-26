@@ -187,6 +187,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 skip_alignment               = true
                 skip_call_paralogs           = true
+                skip_chromograph             = true
                 skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_calling              = true

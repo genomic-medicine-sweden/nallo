@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            170,
+            171,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -235,6 +235,9 @@
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
+                },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "4.0.0-429afcd"
@@ -529,6 +532,8 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
+                "tiddit",
+                "tiddit/HG002_Revio_chromograph_coverage.wig",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
@@ -593,6 +598,7 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_stats.blocks.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,933f9fc7187546737fa664b160594cab",
+                "HG002_Revio_chromograph_coverage.wig:md5,9d2e3de9421f87135f1754bfd44611a6",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
                 "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b"
@@ -668,6 +674,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-24T16:50:25.997427469"
+        "timestamp": "2025-11-26T16:22:08.10925894"
     }
 }

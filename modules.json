@@ -353,7 +353,7 @@
                     },
                     "tiddit/cov": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "f5667101797c3cd51c9dd2913261527897954ab6",
                         "installed_by": ["modules"]
                     },
                     "trgt/genotype": {

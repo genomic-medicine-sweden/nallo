@@ -94,6 +94,71 @@
         },
         "timestamp": "2025-11-26T11:47:59.233731802"
     },
+    "two samples - plot autozygosity -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T16:18:24.457434353"
+    },
     "two samples - plot all": {
         "content": [
             {
@@ -300,6 +365,43 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-11-26T11:40:51.621373189"
+    },
+    "two samples - plot coverage -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T16:18:14.548468814"
     },
     "two samples - plot all -stub": {
         "content": [
@@ -623,6 +725,36 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-11-26T11:41:08.504868678"
+    },
+    "two samples - plot nothing -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T16:18:32.559491666"
     },
     "two samples - plot coverage": {
         "content": [
