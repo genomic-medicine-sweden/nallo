@@ -21,13 +21,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter           |
-| ------------- | ----------------------- |
-|               | `--bcftools_roh_af_tag` |
-|               | `--skip_chromograph`    |
-|               | `--rhocallviz_af_tag`   |
-|               | `--rhocallviz_min_qual` |
-|               | `--rhocallviz_min_af`   |
+| Old parameter | New parameter                     |
+| ------------- | --------------------------------- |
+|               | `--skip_chromograph`              |
+|               | `--bcftools_roh_af_tag`           |
+|               | `--chromograph_af_tag`            |
+|               | `--plot_chromograph_coverage`     |
+|               | `--plot_chromograph_autozygosity` |
+|               | `--rhocallviz_af_tag`             |
+|               | `--rhocallviz_min_af`             |
+|               | `--rhocallviz_min_qual`           |
+|               | `--tiddit_bin_size`               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
