@@ -351,6 +351,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "tiddit/cov": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "trgt/genotype": {
                         "branch": "master",
                         "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",

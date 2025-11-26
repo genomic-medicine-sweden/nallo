@@ -70,40 +70,40 @@ workflow PIPELINE_INITIALISATION {
     // Define subworkflows and their associated "--skip"
     //
     def workflowSkips = [
-        assembly             : "skip_genome_assembly",
-        mapping              : "skip_alignment",
-        snv_calling          : "skip_snv_calling",
-        snv_annotation       : "skip_snv_annotation",
-        sv_calling           : "skip_sv_calling",
-        sv_annotation        : "skip_sv_annotation",
-        call_paralogs        : "skip_call_paralogs",
-        peddy                : "skip_peddy",
-        phasing              : "skip_phasing",
-        rank_variants        : "skip_rank_variants",
-        repeat_calling       : "skip_repeat_calling",
-        repeat_annotation    : "skip_repeat_annotation",
-        rhocallviz_annotation: "skip_rhocallviz_annotation",
-        methylation          : "skip_methylation_pileups",
-        qc                   : "skip_qc",
+        assembly         : "skip_genome_assembly",
+        mapping          : "skip_alignment",
+        snv_calling      : "skip_snv_calling",
+        snv_annotation   : "skip_snv_annotation",
+        sv_calling       : "skip_sv_calling",
+        sv_annotation    : "skip_sv_annotation",
+        call_paralogs    : "skip_call_paralogs",
+        peddy            : "skip_peddy",
+        phasing          : "skip_phasing",
+        rank_variants    : "skip_rank_variants",
+        repeat_calling   : "skip_repeat_calling",
+        repeat_annotation: "skip_repeat_annotation",
+        chromograph      : "skip_chromograph",
+        methylation      : "skip_methylation_pileups",
+        qc               : "skip_qc",
     ]
 
     //
     //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
     //
     def workflowDependencies = [
-        call_paralogs        : ["mapping"],
-        snv_calling          : ["mapping"],
-        qc                   : ["mapping"],
-        sv_calling           : ["mapping"],
-        sv_annotation        : ["mapping", "sv_calling"],
-        peddy                : ["mapping", "snv_calling"],
-        snv_annotation       : ["mapping", "snv_calling"],
-        phasing              : ["mapping", "snv_calling"],
-        rank_variants        : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
-        repeat_calling       : ["mapping", "snv_calling", "phasing"],
-        repeat_annotation    : ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        rhocallviz_annotation: ["mapping", "snv_calling", "snv_annotation"],
-        methylation          : ["mapping", "snv_calling"]
+        call_paralogs    : ["mapping"],
+        chromograph      : ["mapping"],
+        snv_calling      : ["mapping"],
+        qc               : ["mapping"],
+        sv_calling       : ["mapping"],
+        sv_annotation    : ["mapping", "sv_calling"],
+        peddy            : ["mapping", "snv_calling"],
+        snv_annotation   : ["mapping", "snv_calling"],
+        phasing          : ["mapping", "snv_calling"],
+        rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
+        repeat_calling   : ["mapping", "snv_calling", "phasing"],
+        repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+        methylation      : ["mapping", "snv_calling"]
     ]
 
     //
@@ -123,21 +123,21 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
-            skip_snv_calling          : params.skip_snv_calling,
-            skip_peddy                : params.skip_peddy,
-            skip_phasing              : params.skip_phasing,
-            skip_methylation_pileups  : params.skip_methylation_pileups,
-            skip_rank_variants        : params.skip_rank_variants,
-            skip_repeat_calling       : params.skip_repeat_calling,
-            skip_repeat_annotation    : params.skip_repeat_annotation,
-            skip_rhocallviz_annotation: params.skip_rhocallviz_annotation,
-            skip_snv_annotation       : params.skip_snv_annotation,
-            skip_sv_calling           : params.skip_sv_calling,
-            skip_sv_annotation        : params.skip_sv_annotation,
-            skip_call_paralogs        : params.skip_call_paralogs,
-            skip_alignment            : params.skip_alignment,
-            skip_qc                   : params.skip_qc,
-            skip_genome_assembly      : params.skip_genome_assembly,
+            skip_snv_calling        : params.skip_snv_calling,
+            skip_peddy              : params.skip_peddy,
+            skip_phasing            : params.skip_phasing,
+            skip_methylation_pileups: params.skip_methylation_pileups,
+            skip_rank_variants      : params.skip_rank_variants,
+            skip_repeat_calling     : params.skip_repeat_calling,
+            skip_repeat_annotation  : params.skip_repeat_annotation,
+            skip_chromograph        : params.skip_chromograph,
+            skip_snv_annotation     : params.skip_snv_annotation,
+            skip_sv_calling         : params.skip_sv_calling,
+            skip_sv_annotation      : params.skip_sv_annotation,
+            skip_call_paralogs      : params.skip_call_paralogs,
+            skip_alignment          : params.skip_alignment,
+            skip_qc                 : params.skip_qc,
+            skip_genome_assembly    : params.skip_genome_assembly,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -174,7 +174,7 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-        .ifEmpty { error "Error: No samples found in samplesheet." }
+        //.ifEmpty { error "Error: No samples found in samplesheet." }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }

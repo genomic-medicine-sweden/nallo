@@ -1,0 +1,664 @@
+{
+    "two samples - plot autozygosity": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T11:47:50.179816426"
+    },
+    "two samples - plot nothing": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T11:47:59.233731802"
+    },
+    "two samples - plot all": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
+                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
+                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
+                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
+                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ],
+                "chromograph_plots": [
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                            "HG003_rhocallviz_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
+                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
+                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
+                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
+                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T11:40:51.621373189"
+    },
+    "two samples - plot all -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG002_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ],
+                "chromograph_plots": [
+                    [
+                        {
+                            "id": "HG002",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG002_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG002_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "num_intervals": 1
+                        },
+                        [
+                            "HG003_rhocallviz.bed_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr1.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr10.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr11.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr12.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr13.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr14.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr15.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr16.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr17.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr18.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr19.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr2.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr20.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr21.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr22.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr3.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr4.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr5.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr6.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr7.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr8.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chr9.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrM.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrX.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_ROH": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RHOCALL_VIZ": {
+                        "rhocall": "0.5.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
+                        "bcftools": 1.22
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T11:41:08.504868678"
+    },
+    "two samples - plot coverage": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f",
+                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                },
+                {
+                    "CHROMOGRAPH:TIDDIT_COV": {
+                        "tiddit": "3.9.3"
+                    }
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-11-26T11:47:39.398438865"
+    }
+}

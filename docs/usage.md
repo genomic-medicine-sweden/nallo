@@ -292,7 +292,7 @@ Turned off with `--skip_snv_annotation`.
 
 !!!tip
 
-    If variants are annotated with allele frequecies, these can be used in the `annotate_rhocallviz` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). This subworkflow is off by default (since the pipeline doesn't require annotation with allele frequencies). Therefore, it can be _turned on_ by setting `--skip_annotate_rhocall=false`.
+    If variants are annotated with allele frequecies, these can be used in the `chromograph` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). By default only coverage plots are generated, since the pipeline doesn't require annotation with allele frequencies. Annotate variants with allele frequencies (e.g. from gnomAD), and set the tag using `--chromograph_af_tag`.
 
 #### Rank SNVs and INDELs
 

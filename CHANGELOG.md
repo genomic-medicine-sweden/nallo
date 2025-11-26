@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `ANNOTATE_RHOCALLVIZ` to generate chromograph plots of autozygosity
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 
 ### `Changed`
@@ -21,13 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                  |
-| ------------- | ------------------------------ |
-|               | `--bcftools_roh_af_tag`        |
-|               | `--skip_rhocallviz_annotation` |
-|               | `--rhocallviz_af_tag`          |
-|               | `--rhocallviz_min_qual`        |
-|               | `--rhocallviz_min_af`          |
+| Old parameter | New parameter           |
+| ------------- | ----------------------- |
+|               | `--bcftools_roh_af_tag` |
+|               | `--skip_chromograph`    |
+|               | `--rhocallviz_af_tag`   |
+|               | `--rhocallviz_min_qual` |
+|               | `--rhocallviz_min_af`   |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

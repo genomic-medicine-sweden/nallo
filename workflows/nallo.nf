@@ -12,11 +12,11 @@ include {
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_RHOCALLVIZ                                    } from '../subworkflows/local/annotate_rhocallviz'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS              } from '../subworkflows/local/convert_input_files'
+include { CHROMOGRAPH                                            } from '../subworkflows/local/chromograph'
 include { BAM_INFER_SEX                                          } from '../subworkflows/local/bam_infer_sex'
 include { CALL_PARALOGS                                          } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subworkflows/local/call_repeat_expansions_strdust'
@@ -513,7 +513,7 @@ workflow NALLO {
     //
     // Concatenate and sort annotated SNVs for chromograph - requires an AF-tag, e.g. gnomad_af
     //
-    if(!params.skip_rhocallviz_annotation) {
+    if(!params.skip_chromograph && params.plot_chromograph_autozygosity && !params.skip_snv_annotation) {
 
         ANNOTATE_SNVS.out.vcf
             .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -524,25 +524,39 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS (
             ch_concat_sort_annotated_snvs_input
         )
+        ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
 
         CONCAT_SORT_ANNOTATED_SNVS.out.vcf
             .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
             .set { ch_bcftools_pluginsplit_input }
 
-        BCFTOOLS_PLUGINSPLIT(
-            ch_bcftools_pluginsplit_input,
-            [],
-            [],
-            [],
-            [],
-        )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+        // Bcftools +split needs a samples file when running in stub-mode
+        createSamplesFileFromInput(ch_input)
+            .join( ch_bcftools_pluginsplit_input, failOnMismatch:true, failOnDuplicate:true )
+            .multiMap { meta, samples_file, vcf, tbi ->
+                vcf_tbi: [ meta, vcf, tbi ]
+                samples: samples_file
+            }
+            .set { ch_bcftools_pluginsplit_input }
 
-        ANNOTATE_RHOCALLVIZ(
-            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf),
-            fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi)
+        BCFTOOLS_PLUGINSPLIT(
+            ch_bcftools_pluginsplit_input.vcf_tbi,
+            ch_bcftools_pluginsplit_input.samples,
+            [],
+            [],
+            [],
         )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+    }
+    if(!params.skip_chromograph) {
+        CHROMOGRAPH(
+            ch_bam_bai,
+            params.plot_chromograph_autozygosity ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf) : [[],[]],
+            params.plot_chromograph_autozygosity ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi) : [[],[]],
+            params.plot_chromograph_coverage,
+            params.plot_chromograph_autozygosity,
+        )
+        ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
 
 
@@ -585,7 +599,7 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort ranked SNVs
+    // Concatenate and sort ranked SNVs, sort and publish
     //
     if(!params.skip_snv_calling) {
 
@@ -594,14 +608,12 @@ workflow NALLO {
             .groupTuple(size: params.snv_calling_processes)
             .set { ch_concat_sort_input }
 
-        // Concat into family VCFs per family with all regions, sort and publish
         CONCAT_SORT_RANKED_SNVS (
             ch_concat_sort_input
         )
         ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
     }
-
 
     //
     // Run Peddy
@@ -888,5 +900,18 @@ def fromMultisampleToSampleMeta(multisample_channel) {
         .map { meta, vcf ->
             def new_meta = meta + [ id: vcf.simpleName ]
                 [ new_meta, vcf ]
+        }
+}
+
+def createSamplesFileFromInput(input) {
+    input
+        .map { meta, _files -> [ meta.family_id, meta.id ] }
+        .unique()
+        .groupTuple()
+        .map { family_id, sample_ids ->
+            def samples_file = file("${workDir}/tmp/${family_id}.txt")
+            def ids_in_family = sample_ids.collect()
+            samples_file.text = ids_in_family.join('\n')
+            return [ [ id: family_id ], samples_file ]
         }
 }
