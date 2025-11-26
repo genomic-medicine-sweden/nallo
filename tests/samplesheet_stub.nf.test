@@ -133,7 +133,7 @@ nextflow_pipeline {
         }
     }
 
-    test("Test alignment without genome assembly and --alignment_processes 1") {
+    test("Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage") {
         options "-stub"
 
         when {
@@ -143,6 +143,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
                 alignment_processes          = 1
+                plot_chromograph_coverage    = false
                 // Skip irrelevant steps
                 skip_call_paralogs           = true
                 skip_snv_calling             = true

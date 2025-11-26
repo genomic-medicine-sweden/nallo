@@ -97,7 +97,7 @@ nextflow_workflow {
     }
 
     test("two samples - plot coverage") {
-
+        tag "autozyg"
         when {
             workflow {
                 """

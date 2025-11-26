@@ -531,7 +531,7 @@ workflow NALLO {
             .set { ch_bcftools_pluginsplit_input }
 
         // Bcftools +split needs a samples file when running in stub-mode
-        createSamplesFileFromInput(ch_input)
+        createSamplesFileFromSamplesheet(ch_input)
             .join( ch_bcftools_pluginsplit_input, failOnMismatch:true, failOnDuplicate:true )
             .multiMap { meta, samples_file, vcf, tbi ->
                 vcf_tbi: [ meta, vcf, tbi ]
@@ -548,6 +548,7 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
     }
+
     if(!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
@@ -903,7 +904,7 @@ def fromMultisampleToSampleMeta(multisample_channel) {
         }
 }
 
-def createSamplesFileFromInput(input) {
+def createSamplesFileFromSamplesheet(input) {
     input
         .map { meta, _files -> [ meta.family_id, meta.id ] }
         .unique()

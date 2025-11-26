@@ -498,7 +498,7 @@
                 },
                 "chromograph_af_tag": {
                     "type": "string",
-                    "description": "AF-tag to use for the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work."
+                    "description": "AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work."
                 },
                 "preset": {
                     "type": "string",
@@ -661,17 +661,17 @@
                 },
                 "rhocallviz_af_tag": {
                     "type": "string",
-                    "description": "AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag."
+                    "description": "AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag."
                 },
                 "rhocallviz_min_af": {
                     "type": "number",
                     "default": 0.0001,
-                    "description": "Minimum allele frequency for variants to be included with rhocall viz in the chromograph subworkflow."
+                    "description": "Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow."
                 },
                 "rhocallviz_min_qual": {
                     "type": "number",
                     "default": 10.0,
-                    "description": "Minimum quality for variants to be included with rhocall viz in the chromograph subworkflow."
+                    "description": "Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow."
                 },
                 "tiddit_bin_size": {
                     "type": "integer",

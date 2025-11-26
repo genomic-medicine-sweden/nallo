@@ -110,8 +110,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag. | `string` |  |  |  |
-| `chromograph_af_tag` | AF-tag to use for the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
+| `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`. | `string` |  |  |  |
+| `chromograph_af_tag` | AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) (accepted: `revio`\|`pacbio`\|`ONT_R10`) | `string` | revio | True |  |
 | `sv_callers` | Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
@@ -140,7 +140,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `plot_chromograph_autozygosity` | Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag. | `boolean` |  |  |  |
 | `plot_chromograph_coverage` | Whether to plot chromograph coverage plots in the chromograph subworkflow. | `boolean` | True |  |  |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |
-| `rhocallviz_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag. | `string` |  |  |  |
-| `rhocallviz_min_af` | Minimum allele frequency for variants to be included with rhocall viz in the chromograph subworkflow. | `number` | 0.0001 |  |  |
-| `rhocallviz_min_qual` | Minimum quality for variants to be included with rhocall viz in the chromograph subworkflow. | `number` | 10.0 |  |  |
+| `rhocallviz_af_tag` | AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag. | `string` |  |  |  |
+| `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
+| `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
 | `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |
