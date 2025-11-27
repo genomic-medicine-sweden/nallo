@@ -104,9 +104,18 @@ process HIPHASE {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def sv_command = svs ? "echo '' | gzip > ${prefix}_sv_phased.vcf.gz" : ""
+    def sv_tbi_command = svs ? "touch ${prefix}_sv_phased.vcf.gz.tbi" :  ""
 
     """
-    touch ${prefix}.vcf.gz
+    echo '' | gzip > ${prefix}_snv_phased.vcf.gz
+    touch ${prefix}_snv_phased.vcf.gz.tbi
+    touch ${prefix}_haplotagged.bam
+    touch ${prefix}_haplotagged.bam.bai
+
+    ${sv_command}
+    ${sv_tbi_command}
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
