@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            171,
+            172,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -156,6 +156,9 @@
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
+                "RUN_CHROMOGRAPH": {
+                    "chromograph": "1.3.1"
+                },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
@@ -271,6 +274,35 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "images",
+                "images/chromograph",
+                "images/chromograph/sample",
+                "images/chromograph/sample/[]",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr1.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr10.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr11.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr12.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr13.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr14.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr15.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr16.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr17.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr18.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr19.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr2.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr20.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr21.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr22.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr3.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr4.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr5.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr6.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr7.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr8.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chr9.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chrM.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chrX.png",
+                "images/chromograph/sample/[]/HG002_Revio_chromograph_coverage_chrY.png",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -532,8 +564,6 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
-                "tiddit",
-                "tiddit/HG002_Revio_chromograph_coverage.wig",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
@@ -543,6 +573,31 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
+                "HG002_Revio_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr16.png:md5,0196500d17da98eff13384afe49b181e",
+                "HG002_Revio_chromograph_coverage_chr17.png:md5,cf6ef51fdb529b9d0353c7b9e269349d",
+                "HG002_Revio_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr20.png:md5,71d84604c097c8eca700c315d5a7f144",
+                "HG002_Revio_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_chromograph_coverage_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_Revio_chromograph_coverage_chrX.png:md5,ee3d9645a73b7c48971bdd8a6bf7c4ef",
+                "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_Revio_modkit_pileup_1.bed.gz:md5,e58d14a8d28a156117c125dd93cf1cb9",
                 "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,808bff5abd9c80d848e5d380f0015095",
                 "HG002_Revio_modkit_pileup_1.bw:md5,1430263589787fd56cf66cff63b6bc92",
@@ -598,7 +653,6 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_stats.blocks.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,933f9fc7187546737fa664b160594cab",
-                "HG002_Revio_chromograph_coverage.wig:md5,9d2e3de9421f87135f1754bfd44611a6",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
                 "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b"
@@ -671,9 +725,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-26T16:22:08.10925894"
+        "timestamp": "2025-11-26T17:54:48.144328175"
     }
 }

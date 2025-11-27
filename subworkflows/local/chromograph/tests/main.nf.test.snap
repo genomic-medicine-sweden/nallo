@@ -1127,38 +1127,6 @@
                             
                         ],
                         [
-                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
-                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
-                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
-                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
-                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
-                        ]
-                    ],
-                    [
-                        [
-                            
-                        ],
-                        [
                             "HG002_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1184,6 +1152,38 @@
                             "HG002_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chrX.png:md5,982ca8fec934f7e3e4af055b93b8aa22",
                             "HG002_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
+                        ]
+                    ],
+                    [
+                        [
+                            
+                        ],
+                        [
+                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
+                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
+                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
+                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
+                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ],
@@ -1199,38 +1199,6 @@
                             
                         ],
                         [
-                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
-                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
-                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
-                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
-                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
-                        ]
-                    ],
-                    [
-                        [
-                            
-                        ],
-                        [
                             "HG002_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1256,6 +1224,38 @@
                             "HG002_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG002_tiddit_cov_chrX.png:md5,982ca8fec934f7e3e4af055b93b8aa22",
                             "HG002_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
+                        ]
+                    ],
+                    [
+                        [
+                            
+                        ],
+                        [
+                            "HG003_tiddit_cov_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr16.png:md5,6ac0894684abb7cb041420d216a49cdf",
+                            "HG003_tiddit_cov_chr17.png:md5,74032df92e1bc83fa099b0904c7535ee",
+                            "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr20.png:md5,8c2f75f705ef627df78370b00ace479a",
+                            "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                            "HG003_tiddit_cov_chrX.png:md5,5d5b79b8fdf0e57e0c7fc9ceffbbebf7",
+                            "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ],
@@ -1290,9 +1290,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-26T17:32:48.168439589"
+        "timestamp": "2025-11-26T17:52:35.893631234"
     }
 }
