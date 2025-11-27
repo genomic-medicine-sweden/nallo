@@ -84,7 +84,7 @@ workflow CHROMOGRAPH {
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
             if(!autozyg_meta || !coverage_meta)
                 return true
-            autozyg_meta.id != coverage_meta.id
+            autozyg_meta.id == coverage_meta.id
         }
         .multiMap { autozyg_meta, autozyg, coverage_meta, coverage ->
             autozyg: [autozyg_meta, autozyg]
