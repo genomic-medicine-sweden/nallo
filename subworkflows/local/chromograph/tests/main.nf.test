@@ -30,10 +30,6 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id: 'HG002', num_intervals:1 ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
-                    ],
-                    [
                         [ id: 'HG003', num_intervals:1 ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
                     ]
@@ -59,17 +55,12 @@ nextflow_workflow {
         }
     }
 
-    test("two samples - plot all") {
+    test("plot all") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -88,7 +79,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.chromograph_plots.flatten().collect().sort(),
                     workflow.out.versions.collect{ path(it).yaml }
                 ).match() }
             )
@@ -96,17 +87,12 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot coverage") {
-        tag "coverage"
+    test("plot coverage") {
+
         when {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -133,17 +119,12 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot autozygosity") {
+    test("plot autozygosity") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -170,17 +151,12 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot nothing") {
+    test("plot nothing") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -207,7 +183,7 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot all -stub") {
+    test("plot all -stub") {
 
         options "-stub"
 
@@ -215,11 +191,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -246,7 +217,7 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot coverage -stub") {
+    test("plot coverage -stub") {
 
         options "-stub"
 
@@ -254,11 +225,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -285,7 +251,7 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot autozygosity -stub") {
+    test("plot autozygosity -stub") {
 
         options "-stub"
 
@@ -293,11 +259,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
@@ -324,7 +285,7 @@ nextflow_workflow {
 
     }
 
-    test("two samples - plot nothing -stub") {
+    test("plot nothing -stub") {
 
         options "-stub"
 
@@ -332,11 +293,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [
-                        [ id: 'HG002' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
                     [
                         [ id: 'HG003' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),

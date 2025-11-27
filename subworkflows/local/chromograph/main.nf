@@ -1,5 +1,5 @@
 //
-// A subworkflow to plot binned coverag and zygosity regions.
+// A subworkflow to plot binned coverage and zygosity regions.
 //
 
 include { BCFTOOLS_ROH                              } from '../../../modules/nf-core/bcftools/roh/main'
@@ -86,7 +86,6 @@ workflow CHROMOGRAPH {
                 return true
             autozyg_meta.id != coverage_meta.id
         }
-        .view()
         .multiMap { autozyg_meta, autozyg, coverage_meta, coverage ->
             autozyg: [autozyg_meta, autozyg]
             coverage: [coverage_meta, coverage]
