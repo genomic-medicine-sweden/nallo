@@ -79,7 +79,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.chromograph_plots.flatten().collect().sort(),
+                    workflow.out,
                     workflow.out.versions.collect{ path(it).yaml }
                 ).match() }
             )
