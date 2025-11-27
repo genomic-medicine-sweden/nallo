@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            316,
+            322,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -16,7 +16,7 @@
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
@@ -61,9 +61,6 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CRAMINO_PHASED": {
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
@@ -178,6 +175,12 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": "1.22.1"
                 },
+                "SAWFISH_DISCOVER": {
+                    "sawfish": "2.2.0"
+                },
+                "SAWFISH_JOINTCALL": {
+                    "sawfish": "2.2.0"
+                },
                 "SEVERUS": {
                     "severus": 1.6
                 },
@@ -236,11 +239,6 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
-                "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
-                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
                 },
@@ -250,15 +248,16 @@
             },
             [
                 "aligned_reads",
+                "aligned_reads/FAM",
+                "aligned_reads/FAM/HG002_aligned_haplotagged.bam",
+                "aligned_reads/FAM/HG002_aligned_haplotagged.bam.bai",
+                "aligned_reads/FAM/HG003_aligned_haplotagged.bam",
+                "aligned_reads/FAM/HG003_aligned_haplotagged.bam.bai",
+                "aligned_reads/FAM/HG004_aligned_haplotagged.bam",
+                "aligned_reads/FAM/HG004_aligned_haplotagged.bam.bai",
                 "aligned_reads/HG002",
-                "aligned_reads/HG002/HG002_haplotagged.bam",
-                "aligned_reads/HG002/HG002_haplotagged.bam.bai",
                 "aligned_reads/HG003",
-                "aligned_reads/HG003/HG003_haplotagged.bam",
-                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
                 "aligned_reads/HG004",
-                "aligned_reads/HG004/HG004_haplotagged.bam",
-                "aligned_reads/HG004/HG004_haplotagged.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002",
@@ -506,15 +505,11 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "phased_variants",
-                "phased_variants/HG002",
-                "phased_variants/HG002/HG002_phased.vcf.gz",
-                "phased_variants/HG002/HG002_phased.vcf.gz.tbi",
-                "phased_variants/HG003",
-                "phased_variants/HG003/HG003_phased.vcf.gz",
-                "phased_variants/HG003/HG003_phased.vcf.gz.tbi",
-                "phased_variants/HG004",
-                "phased_variants/HG004/HG004_phased.vcf.gz",
-                "phased_variants/HG004/HG004_phased.vcf.gz.tbi",
+                "phased_variants/FAM",
+                "phased_variants/FAM/FAM_snv_phased.vcf.gz",
+                "phased_variants/FAM/FAM_snv_phased.vcf.gz.tbi",
+                "phased_variants/FAM/FAM_sv_phased.vcf.gz",
+                "phased_variants/FAM/FAM_sv_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
                 "qc",
@@ -691,24 +686,24 @@
                 "HG002_modkit_pileup_ungrouped.bed.gz:md5,039fef342a95a761df79f986ff07fbd4",
                 "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,a69b38c3614a4c90dc9c8a977afb9c4e",
                 "HG002_modkit_pileup_ungrouped.bw:md5,1988649697628c06273124ca641329c4",
-                "HG003_modkit_pileup_1.bed.gz:md5,84ab6bec87640c2c993d77dd3c1a38e6",
-                "HG003_modkit_pileup_1.bed.gz.tbi:md5,3275a6a426a79e9bc2b077da162ebf22",
-                "HG003_modkit_pileup_1.bw:md5,c5b37c738a1073182e89d47acaa197d1",
-                "HG003_modkit_pileup_2.bed.gz:md5,192f54b53c36b509f6d2881c9238bd16",
-                "HG003_modkit_pileup_2.bed.gz.tbi:md5,e8c227e24a503d4e10cecb0a0e3ef951",
-                "HG003_modkit_pileup_2.bw:md5,49bf7a64317781d301a569aced72a502",
+                "HG003_modkit_pileup_1.bed.gz:md5,bf3b3bc94aaa03df491000206ecd1dc4",
+                "HG003_modkit_pileup_1.bed.gz.tbi:md5,f7789205be934a9d1edd546fd372c0c4",
+                "HG003_modkit_pileup_1.bw:md5,dd41146a47c6637ce2b0e8090deac4c1",
+                "HG003_modkit_pileup_2.bed.gz:md5,43a529391f485dfbafc71310ef3d554d",
+                "HG003_modkit_pileup_2.bed.gz.tbi:md5,9d0ef6a82cb7a9316846c877fb4a419b",
+                "HG003_modkit_pileup_2.bw:md5,7820b700c7ecb42515e446c6b9a5219e",
                 "HG003_modkit_pileup_ungrouped.bed.gz:md5,57b03203e7b9bf0634f6f9a3b93a85ad",
                 "HG003_modkit_pileup_ungrouped.bed.gz.tbi:md5,8c9b7160ad5cf1666fd85f8c5c0ee251",
                 "HG003_modkit_pileup_ungrouped.bw:md5,c35a562524a7efb2e6bda0f6eb9aafb1",
                 "HG004_modkit_pileup_1.bed.gz:md5,c088579208dc5a0a90b7362dc187b6c7",
                 "HG004_modkit_pileup_1.bed.gz.tbi:md5,06753a3568de2d274c16eda9cb97347d",
                 "HG004_modkit_pileup_1.bw:md5,109a480ee5d94d9ab84e9a2127f4bd8c",
-                "HG004_modkit_pileup_2.bed.gz:md5,7c8fdaf5ce4d51bd0f288e961c135fea",
-                "HG004_modkit_pileup_2.bed.gz.tbi:md5,e27f27bbf405fb5364d3dfd310938429",
-                "HG004_modkit_pileup_2.bw:md5,3338a0e7a317602e7edfdd02e173988b",
-                "HG004_modkit_pileup_ungrouped.bed.gz:md5,100e04224a2c358966f653ae983929eb",
-                "HG004_modkit_pileup_ungrouped.bed.gz.tbi:md5,471e8dd47597aa060b2908cdf1d9da7e",
-                "HG004_modkit_pileup_ungrouped.bw:md5,3708ce37f612f358c33b5260536bbc74",
+                "HG004_modkit_pileup_2.bed.gz:md5,c602a272da16c8686b6b6b78a0e1fd0b",
+                "HG004_modkit_pileup_2.bed.gz.tbi:md5,8567fe9b99bb0e364332b76ca2cb68b5",
+                "HG004_modkit_pileup_2.bw:md5,57870ae5f411525157cf9e9cd9a96925",
+                "HG004_modkit_pileup_ungrouped.bed.gz:md5,2ab903b034d2dd4b2afa73b576abd625",
+                "HG004_modkit_pileup_ungrouped.bed.gz.tbi:md5,916631c1ed1bcd3b22135bad6fa15cfe",
+                "HG004_modkit_pileup_ungrouped.bw:md5,d884b5b79a9578ba76035bb992916305",
                 "bcftools-stats-subtypes.txt:md5,45c3ea6791e455ed27afb87004d6d9a0",
                 "bcftools_stats_indel-lengths.txt:md5,fb634f7fecaaa7cdc89109270c336362",
                 "fastqc-status-check-heatmap.txt:md5,ec40321b541ebfb5777662e684261dfc",
@@ -730,11 +725,11 @@
                 "multiqc_bcftools_stats.txt:md5,9eb66ff9c18947da9234291cee075f7f",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,df4af39e3f160095dc1cc9806546ddfb",
-                "multiqc_general_stats.txt:md5,5bc6803ef0b5e9a854caf8a965d3c4b9",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,a59c50c45256ebd3d8673366bfe13feb",
+                "multiqc_general_stats.txt:md5,7e01529aa0c0e91c40716f706a00efc4",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,455bc44179ffcbdcbb3e11fca76bab51",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,b930120b5b3d2be0717e51eb33aa05a0",
-                "whatshap-stats-table.txt:md5,7371de64e8c77b90c83906dad6dc9529",
+                "whatshap-stats-table.txt:md5,29397e2c0790187a48d1533eb2637e49",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,651a6bba9dd79996461752c63deef0e9",
                 "HG003_cramino_aligned_phased.arrow:md5,0d592c579116e4095e741ba522dbb916",
@@ -772,9 +767,9 @@
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
                 "HG002_stats.blocks.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_stats.blocks.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
-                "HG003_stats.blocks.gtf.gz:md5,6743c2315bf868ecffefa44f80418e40",
+                "HG003_stats.blocks.gtf.gz:md5,3abd6413706e4867978bf86ba258ced9",
                 "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
-                "HG004_stats.blocks.gtf.gz:md5,5b837873563535065c0422ac40ea7866",
+                "HG004_stats.blocks.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
                 "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
                 "HG002_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_hificnv.depth.bw:md5,c1f3a213a83f7ab13cc082405328e74e",
@@ -788,15 +783,15 @@
             ],
             [
                 [
-                    "HG002_haplotagged.bam",
+                    "HG002_aligned_haplotagged.bam",
                     "eff15e019423d52b9edda2b3f3f82eb8"
                 ],
                 [
-                    "HG003_haplotagged.bam",
+                    "HG003_aligned_haplotagged.bam",
                     "cfc3683ad3c3a3dfc2c078c99feee07e"
                 ],
                 [
-                    "HG004_haplotagged.bam",
+                    "HG004_aligned_haplotagged.bam",
                     "f8d0293e3cbd0352129a26519ee62a11"
                 ],
                 [
@@ -825,7 +820,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -857,16 +852,12 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "HG002_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]"
+                    "FAM_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]"
                 ],
                 [
-                    "HG003_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=161, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG004_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=263, phased=false, phasedAutodetect=false]"
+                    "FAM_sv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=38, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_repeats_annotated.vcf.gz",
@@ -906,21 +897,21 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=5, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=30, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=35, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
         },
-        "timestamp": "2025-10-31T09:38:23.988245027"
+        "timestamp": "2025-11-27T09:14:29.870833253"
     }
 }

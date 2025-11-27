@@ -50,38 +50,39 @@ nextflow_workflow {
                 """
             }
         }
-
-        run("LONGPHASE") {
-            script "../../../../subworkflows/local/longphase/main.nf"
-            process {
-                """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = Channel.empty()
-                input[2] = Channel.of(
-                    [
-                        [ id : 'HG002', family_id: 'FAM' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ],
-                    [
-                        [ id : 'HG003', family_id: 'FAM' ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                    ]
-                )
-                input[3] = Channel.of([
-                    [ id: 'FAM' ],
-                    ['HG002', 'HG003']
-                ])
-                input[4] = GUNZIP.out.gunzip
-                input[5] = SAMTOOLS_FAIDX.out.fai
-                input[6] = false
-                """
-            }
-        }
     }
 
     test("2 samples - SNVs only") {
+        setup {
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = Channel.empty()
+                    input[2] = Channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = Channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = false
+                    """
+                }
+            }
+        }
         when {
             workflow {
                 """
@@ -91,7 +92,7 @@ nextflow_workflow {
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
                 input[5] = Channel.of([
-                    'FAM',
+                    [ id: 'FAM'],
                     ['HG002', 'HG003']
                 ])
                 input[6] = false
@@ -107,7 +108,122 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
-                { // Making sure that the smaples are actually different
+                { // Making sure that the samples are actually different
+                    with(workflow.out.phasing_stats) {
+                        assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
+                    }
+                },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("2 samples - SNVs + SVs") {
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = SAWFISH_JOINTCALL.out.vcf
+                    input[2] = Channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = Channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = true
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = Channel.of([
+                    [ id : 'FAM'],
+                    ['HG002', 'HG003']
+                ])
+                input[6] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // Making sure that we process all samples
+                { assert workflow.out.phasing_stats.size() == 2 },
+                { assert workflow.out.phasing_blocks.size() == 2 },
+                { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { // Making sure that the samples are actually different
                     with(workflow.out.phasing_stats) {
                         assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
                     }
@@ -121,6 +237,36 @@ nextflow_workflow {
     test("2 samples - SNVs only - stub") {
 
         options "-stub"
+        setup {
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = Channel.empty()
+                    input[2] = Channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = Channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = false
+                    """
+                }
+            }
+        }
         when {
             workflow {
                 """
@@ -148,5 +294,116 @@ nextflow_workflow {
                 { assert snapshot(workflow.out).match() }
             )
         }
+    }
+
+    test("2 samples - SNVs + SVs - stub") {
+        options "-stub"
+        setup {
+            run("SAWFISH_DISCOVER") {
+                script "../../../../modules/nf-core/sawfish/discover/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                        [
+                            [ id : 'HG002' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [[],[]]
+                    input[3] = [[],[]]
+                    input[4] = [[],[]]
+                    """
+                }
+            }
+            run("SAWFISH_JOINTCALL") {
+                script "../../../../modules/nf-core/sawfish/jointcall/main.nf"
+                process {
+                    """
+                    input[0] = SAWFISH_DISCOVER.out.discover_dir
+                                    .map { it[1] }
+                                    .collect()
+                                    .map { dirs -> tuple([ id:'FAM' ], dirs) }
+
+                    input[1] = GUNZIP.out.gunzip
+                    input[2] = [
+                        [ id : 'FAM' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    ]
+                    input[3] = [ [], [] ]
+                    """
+                }
+            }
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = SAWFISH_JOINTCALL.out.vcf
+                    input[2] = Channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = Channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = true
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = Channel.of([
+                    [ id: 'FAM'],
+                    ['HG002', 'HG003']
+                ])
+                input[6] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // Making sure that we process all samples
+                { assert workflow.out.phasing_stats.size() == 2 },
+                { assert workflow.out.phasing_blocks.size() == 2 },
+                { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
     }
 }

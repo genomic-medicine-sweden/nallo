@@ -262,7 +262,7 @@ nextflow_pipeline {
     }
 
     test("Test family id same as sample id") {
-        options "-stub"
+        options "-stub -dump-channels"
 
         when {
             params {

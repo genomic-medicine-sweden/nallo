@@ -42,8 +42,8 @@ workflow QC_PHASING {
     // Therefore, we join with the known samples per family and create one item per sample,
     // duplicating the VCF and TBI paths as needed.
 
-    ch_phased_vcf_index
-        .join( ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true )
+    ch_phased_vcf_index.dump(tag: 'VCF')
+        .join( ch_family_to_samples.dump(tag:'family'), failOnMismatch: true, failOnDuplicate: true )
         .transpose() // go from set of samples to one sample per item, duplicating the rest
         .map { meta, vcf, tbi, sample_id ->
             [ meta + [ id: sample_id, family_id: meta.id ], vcf, tbi ]

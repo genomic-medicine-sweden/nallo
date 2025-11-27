@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
+    options "-dump-channels"
 
     test("test profile") {
         tag "samplesheet"
