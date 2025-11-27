@@ -514,7 +514,6 @@ workflow NALLO {
     // Concatenate and sort annotated SNVs for chromograph - requires an AF-tag, e.g. gnomad_af
     //
     def split_family_vcf_for_chromograph = !params.skip_chromograph && params.plot_chromograph_autozygosity && !params.skip_snv_annotation
-
     if(split_family_vcf_for_chromograph) {
 
         ANNOTATE_SNVS.out.vcf
@@ -557,7 +556,8 @@ workflow NALLO {
             split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf) : [[],[]],
             split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi) : [[],[]],
             params.plot_chromograph_coverage,
-            params.plot_chromograph_autozygosity,
+            false
+            //params.plot_chromograph_autozygosity,
         )
         ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
