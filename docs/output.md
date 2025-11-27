@@ -299,8 +299,9 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Images
 
-[Chromograph](https://github.com/Clinical-Genomics/chromograph) is used to generate plots with regions of autozygosity.
+[Chromograph](https://github.com/Clinical-Genomics/chromograph) is used to generate plots with regions of autozygosity and coverage.
 
-| Path                                                                                  | Description                        |
-| ------------------------------------------------------------------------------------- | ---------------------------------- |
-| `images/chromograph/sample/{sample}/{sample}_chromograph_autozyg_chr{1-22,X,Y,M}.png` | Per-chromosome plots in PNG format |
+| Path                                                                                   | Description                        |
+| -------------------------------------------------------------------------------------- | ---------------------------------- |
+| `images/chromograph/sample/{sample}/{sample}_chromograph_autozyg_chr{1-22,X,Y,M}.png`  | Per-chromosome plots in PNG format |
+| `images/chromograph/sample/{sample}/{sample}_chromograph_coverage_chr{1-22,X,Y,M}.png` | Per-chromosome plots in PNG format |
