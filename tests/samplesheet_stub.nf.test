@@ -138,7 +138,6 @@ nextflow_pipeline {
 
     test("Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage") {
         options "-stub"
-        tag "skip"
         when {
             params {
                 pipelines_testdata_base_path  = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
