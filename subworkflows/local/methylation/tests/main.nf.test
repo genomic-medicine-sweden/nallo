@@ -20,22 +20,6 @@ nextflow_workflow {
                 """
             }
         }
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
-            process {
-                """
-                input[0] = [
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                ]
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = true
-                input[3] = 'csi'
-                input[4] = false
-                input[5] = false
-                """
-            }
-        }
 
         run("PHASING") {
             script "../../phasing/main.nf"
@@ -49,11 +33,11 @@ nextflow_workflow {
                     [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
-                            .map { meta, bam, bai ->
-                                [ [ id : meta.id ], bam, bai ]
-                            }
+                input[2] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[3] = PREPARE_REFERENCES.out.fasta
                 input[4] = PREPARE_REFERENCES.out.fai
                 input[5] = false
@@ -74,13 +58,22 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
             )
         }
     }
@@ -92,18 +85,31 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
             )
         }
     }
@@ -122,13 +128,22 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
             )
         }
     }
@@ -140,20 +155,33 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
             )
         }
     }
@@ -171,6 +199,10 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
@@ -197,6 +229,10 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
@@ -216,11 +252,19 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }
@@ -240,13 +284,21 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = Channel.of('chr20\t2650000\t2660000')
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
                 """
             }
         }

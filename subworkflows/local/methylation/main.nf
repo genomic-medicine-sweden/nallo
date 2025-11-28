@@ -53,11 +53,13 @@ workflow METHYLATION {
     ch_versions = ch_versions.mix(MODKIT_BEDMETHYLTOBIGWIG.out.versions)
 
     emit:
-    cpg_scores     = ch_methbat_profile_in              // channel: [ val(meta), path(files) ]
-    region_profile = METHBAT_PROFILE.out.region_profile // channel: [ val(meta), path(tsv) ]
-    asm_bed        = METHBAT_PROFILE.out.asm_bed        // channel: [ val(meta), path(bed) ]
-    bed            = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, bed, _tbi -> [ meta, bed ] } // channel: [ val(meta), path(bed) ]
-    tbi            = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
-    bigwig         = MODKIT_BEDMETHYLTOBIGWIG.out.bw
-    versions       = ch_versions // channel: [ versions.yml ]
+    region_profile        = METHBAT_PROFILE.out.region_profile                                   // channel: [ val(meta), path(tsv) ]
+    asm_bed               = METHBAT_PROFILE.out.asm_bed                                          // channel: [ val(meta), path(bed) ]
+    bed                   = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, bed, _tbi -> [ meta, bed ] } // channel: [ val(meta), path(bed) ]
+    tbi                   = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
+    modkit_bigwig         = MODKIT_BEDMETHYLTOBIGWIG.out.bw                                      // channel: [ val(meta), path(bw) ]
+    pbcpg_biwgig_combined = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bigwig                 // channel: [ val(meta), path(combined.bw) ]
+    pbcpg_biwgig_hap1     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bigwig                     // channel: [ val(meta), path(hap1.bw) ]
+    pbcpg_biwgig_hap2     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bigwig                     // channel: [ val(meta), path(hap2.bw) ]
+    versions              = ch_versions                                                          // channel: [ versions.yml ]
 }
