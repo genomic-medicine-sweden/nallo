@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
-- [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Remove flag vcf_stats_report in conf/modules/call_snvs.config
+- [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
 
 ### `Fixed`
 
