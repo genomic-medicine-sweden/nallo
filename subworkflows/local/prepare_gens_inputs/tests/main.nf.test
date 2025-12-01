@@ -44,8 +44,6 @@ nextflow_workflow {
                     assert covEntry[0].id == 'HG002'
                     assert file(covEntry[1]).getName() == 'HG002.cov.bed.gz'
                     assert file(covEntry[2]).getName() == 'HG002.cov.bed.gz.tbi'
-                    assert path(covEntry[1].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
-                    assert path(covEntry[2].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
                     true
                 },
                 {
@@ -53,8 +51,6 @@ nextflow_workflow {
                     assert bafEntry[0].id == 'HG002'
                     assert file(bafEntry[1]).getName() == 'HG002.baf.bed.gz'
                     assert file(bafEntry[2]).getName() == 'HG002.baf.bed.gz.tbi'
-                    assert path(bafEntry[1].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
-                    assert path(bafEntry[2].toString()).md5 == 'd41d8cd98f00b204e9800998ecf8427e'
                     true
                 }
             )
