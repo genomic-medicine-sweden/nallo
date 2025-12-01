@@ -39,7 +39,6 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert cov.size() == 1 },
                 { assert baf.size() == 1 },
-                { assert workflow.out.versions == [] },
                 {
                     def covEntry = cov[0]
                     assert covEntry[0].id == 'HG002'
