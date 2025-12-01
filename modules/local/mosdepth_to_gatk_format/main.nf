@@ -1,11 +1,11 @@
 process MOSDEPTH_TO_GATK_FORMAT {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_single'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/gawk:5.3.0' :
-        'biocontainers/gawk:5.3.0' }"
-    
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/gawk:5.3.0'
+        : 'biocontainers/gawk:5.3.0'}"
+
     input:
     tuple val(meta), path(mosdepth_file), path(mosdepth_header_template)
 
@@ -20,7 +20,7 @@ process MOSDEPTH_TO_GATK_FORMAT {
 
     # Round mosdepth output to nearest integer
     # Position starting at 1
-    gzip -cd $mosdepth_file |\
+    gzip -cd ${mosdepth_file} |\
         awk '
             BEGIN {OFS="\t"}
             { 
