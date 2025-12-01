@@ -23,7 +23,7 @@ process MOSDEPTH_TO_GATK_FORMAT {
     gzip -cd ${mosdepth_file} |\
         awk '
             BEGIN {OFS="\t"}
-            { 
+            {
             \$4 = int(\$4 + 0.5)
             \$2++
             print \$1, \$2, \$3, \$4}
