@@ -733,7 +733,9 @@ workflow NALLO {
             ch_fai,
             ch_methylation_call_regions,
             params.bigwig_modcodes,
-            ch_regions
+            ch_regions,
+            params.run_methbat,
+            params.run_modkit
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }

@@ -213,6 +213,13 @@
                     "description": "A BED file with regions of interest.",
                     "exists": true
                 },
+                "methbat_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv$",
+                    "format": "file-path",
+                    "description": "A TSV file with background regions for methbat.",
+                    "exists": true
+                },
                 "methylation_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
@@ -546,6 +553,16 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
+                "methbat_male_label": {
+                    "type": "string",
+                    "description": "Label used for male samples in methbat.",
+                    "default": "MALE"
+                },
+                "methbat_female_label": {
+                    "type": "string",
+                    "description": "Label used for female samples in methbat.",
+                    "default": "FEMALE"
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
@@ -605,6 +622,11 @@
                     "hidden": true,
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
+                },
+                "extra_methbat_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to methbat."
                 },
                 "extra_modkit_options": {
                     "type": "string",
