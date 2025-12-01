@@ -27,7 +27,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nall
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow GENOMICMEDICINESWEDEN_NALLO {
-getGenomeAttribute
     take:
     samplesheet // channel: samplesheet read in from --input
 
