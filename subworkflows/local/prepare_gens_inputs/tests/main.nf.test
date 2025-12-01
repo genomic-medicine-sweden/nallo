@@ -9,8 +9,7 @@ nextflow_workflow {
 
     options "-stub"
 
-    // Pon path
-    test("bam, gvcf, baf positions and panel of normals") {
+    test("Generate Gens input using PON") {
         when {
             workflow {
                 """
@@ -58,8 +57,7 @@ nextflow_workflow {
         }
     }
 
-    // No pon path
-    test("bam, gvcf, baf positions and panel of normals") {
+    test("Generate Gens input without using PON") {
         when {
             workflow {
                 """
