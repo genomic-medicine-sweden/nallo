@@ -35,6 +35,8 @@ nextflow_workflow {
                     [ id: 'pon' ],
                     file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5", checkIfExists: true)
                 ])
+
+                input[4] = Channel.value(true)
                 """
             }
         }
