@@ -16,7 +16,6 @@
 include { NALLO  } from './workflows/nallo'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,7 +27,7 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_nall
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow GENOMICMEDICINESWEDEN_NALLO {
-
+getGenomeAttribute
     take:
     samplesheet // channel: samplesheet read in from --input
 
