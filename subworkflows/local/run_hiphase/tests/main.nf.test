@@ -189,7 +189,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.phased_snvs,
+                    workflow.out.phased_snvs_tbi,
+                    path(workflow.out.phased_svs.get(0).get(1)).linesGzip.drop(2),
+                    workflow.out.phased_svs_tbi,
+                    workflow.out.haplotagged_bam_bai,
+                    workflow.out.versions
+                ).match() }
             )
         }
     }
@@ -275,7 +282,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.phased_snvs,
+                    workflow.out.phased_snvs_tbi,
+                    path(workflow.out.phased_svs.get(0).get(1)).linesGzip.drop(2), // VCF4.4 is unsupported by nft-vcf and header is unstable because of timestamp in second line
+                    workflow.out.phased_svs_tbi,
+                    workflow.out.haplotagged_bam_bai,
+                    workflow.out.versions
+                ).match() }
             )
         }
     }

@@ -113,7 +113,13 @@ nextflow_workflow {
                         assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
                     }
                 },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.versions,
+                    workflow.out.phasing_stats,
+                    workflow.out.phasing_blocks,
+                    workflow.out.phasing_blocks_index,
+                    workflow.out.haplotagging_stats.collect { meta, file -> path(file).readLines()[0..-2]} // Last line contains timestamp
+                ).match() }
             )
         }
 
@@ -228,7 +234,13 @@ nextflow_workflow {
                         assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
                     }
                 },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.versions,
+                    workflow.out.phasing_stats,
+                    workflow.out.phasing_blocks,
+                    workflow.out.phasing_blocks_index,
+                    workflow.out.haplotagging_stats.collect { meta, file -> path(file).readLines()[0..-2]} // Last line contains timestamp
+                ).match() }
             )
         }
 
