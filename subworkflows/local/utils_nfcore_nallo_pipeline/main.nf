@@ -171,7 +171,7 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-        // .ifEmpty { error "Error: No samples found in samplesheet." }
+        .tap { ch_unprocessed_samplesheet }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
@@ -196,6 +196,8 @@ workflow PIPELINE_INITIALISATION {
         }
         .transpose()
         .set { ch_samplesheet }
+
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -557,6 +559,11 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
             }
         }
+}
+
+def validateNonEmptySamplesheet(ch_samplesheet) {
+    ch_samplesheet
+        .ifEmpty { error("ERROR: No samples found in samplesheet.") }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
