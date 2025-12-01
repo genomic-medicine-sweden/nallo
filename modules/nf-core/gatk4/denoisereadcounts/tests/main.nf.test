@@ -1,4 +1,4 @@
-nextflow_process {
+prenextflow_process {
 
     name "Test Process GATK4_DENOISEREADCOUNTS"
     script "../main.nf"
