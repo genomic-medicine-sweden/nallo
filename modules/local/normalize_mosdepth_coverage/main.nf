@@ -4,8 +4,8 @@ process NORMALIZE_MOSDEPTH_COVERAGE {
 
     conda "conda-forge::python=3.11"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/python:3.11' :
-        'python:3.11' }"
+        'https://depot.galaxyproject.org/singularity/python:3.8.3' :
+        'biocontainers/python:3.8.3' }"
 
     input:
     tuple val(meta), path(mosdepth_tsv)
