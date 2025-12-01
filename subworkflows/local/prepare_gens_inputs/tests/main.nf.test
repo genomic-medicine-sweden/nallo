@@ -14,23 +14,18 @@ nextflow_workflow {
             workflow {
                 """
                 def meta = [ id: 'HG002', single_end: false ]
-
                 input[0] = Channel.of([
                     meta,
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true)
                 ])
-
                 input[1] = Channel.of([
                     meta,
                     [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)],
                     [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)]
                 ])
-
                 input[2] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv"
-
                 input[3] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5"
-
                 input[4] = true
                 """
             }
