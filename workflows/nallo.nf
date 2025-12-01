@@ -24,7 +24,8 @@ include { CALL_SNVS                                              } from '../subw
 include { CALL_SVS                                               } from '../subworkflows/local/call_svs'
 include { GENOME_ASSEMBLY                                        } from '../subworkflows/local/genome_assembly'
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
-include { METHYLATION                                            } from '../subworkflows/local/methylation'
+include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
+include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
 include { PHASING                                                } from '../subworkflows/local/phasing'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
@@ -724,20 +725,26 @@ workflow NALLO {
     }
 
     //
-    // Create methylation pileups with modkit
+    // Create methylation pileups with modkit or create methylation profile with methbat
     //
     if(!params.skip_methylation_pileups) {
-        METHYLATION (
-            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_methylation_call_regions,
-            params.bigwig_modcodes,
-            ch_regions,
-            params.run_methbat,
-            params.run_modkit
+        if (params.run_modkit) {
+            CALL_METHYLATION_MODKIT (
+                !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_methylation_call_regions,
+                params.bigwig_modcodes
         )
-        ch_versions = ch_versions.mix(METHYLATION.out.versions)
+            ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
+        } 
+        if (params.run_methbat) {
+            CALL_METHYLATION_METHBAT (
+                !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+                ch_regions
+            )
+            ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
+        }
     }
 
     //

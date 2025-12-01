@@ -7,133 +7,66 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                    ]
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
-                    
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
                     ]
                 ],
-                "pbcpg_biwgig_hap1": [
+                "bigwig": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
                     ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
-            },
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:01:58.870279864"
+        "timestamp": "2025-12-01T14:40:19.47483835"
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -143,96 +76,46 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
                     
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "bigwig": [
                     
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
         ],
@@ -240,7 +123,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:03:00.024350752"
+        "timestamp": "2025-12-01T14:33:27.181410455"
     },
     "1 sample - [] unphased - stub": {
         "content": [
@@ -250,96 +133,46 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
                     
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "bigwig": [
                     
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
         ],
@@ -347,7 +180,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:51.838103779"
+        "timestamp": "2025-12-01T14:33:18.201033775"
     },
     "1 sample - [] phased - stub": {
         "content": [
@@ -357,96 +190,46 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
                     
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "bigwig": [
                     
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
         ],
@@ -454,7 +237,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:35.537562335"
+        "timestamp": "2025-12-01T14:33:01.266577318"
     },
     "1 sample - [] unphased": {
         "content": [
@@ -464,113 +247,66 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                    ]
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
-                    ]
-                ],
-                "6": [
-                    
-                ],
-                "7": [
-                    
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
-                    
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
                     ]
                 ],
-                "pbcpg_biwgig_hap1": [
-                    
-                ],
-                "pbcpg_biwgig_hap2": [
-                    
-                ],
-                "region_profile": [
+                "bigwig": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
                     ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
-            },
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:07.523737339"
+        "timestamp": "2025-12-01T14:40:34.288363247"
     },
     "1 sample - bed phased": {
         "content": [
@@ -580,133 +316,66 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                    ]
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
-                    
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
                     ]
                 ],
-                "pbcpg_biwgig_hap1": [
+                "bigwig": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
                     ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
-            },
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:17.853017479"
+        "timestamp": "2025-12-01T14:40:43.74235766"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -716,96 +385,46 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
                     
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "bigwig": [
                     
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
         ],
@@ -813,7 +432,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:43.94611031"
+        "timestamp": "2025-12-01T14:33:09.831581549"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -823,112 +442,65 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                    ]
                 ],
                 "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
-                    ]
-                ],
-                "6": [
-                    
-                ],
-                "7": [
-                    
-                ],
-                "8": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
-                ],
-                "asm_bed": [
-                    
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
-                    
-                ],
-                "modkit_bigwig": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
                     ]
                 ],
-                "pbcpg_biwgig_hap1": [
-                    
-                ],
-                "pbcpg_biwgig_hap2": [
-                    
-                ],
-                "region_profile": [
+                "bigwig": [
                     [
                         {
                             "id": "HG002"
                         },
-                        "HG002.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
                     ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                    ]
                 ],
                 "versions": [
-                    "versions.yml:md5,6e6d920bd4df76bf738ac6075ef7f121",
-                    "versions.yml:md5,a51b6387ef858467c06e29efb017848a"
+                    "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
-            },
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T11:02:26.421068902"
+        "timestamp": "2025-12-01T14:40:54.022442849"
     }
 }

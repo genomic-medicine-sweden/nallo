@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow METHYLATION"
+    name "Test Workflow CALL_METHYLATION_MODKIT"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "METHYLATION"
+    workflow "CALL_METHYLATION_MODKIT"
 
     setup {
         run("PREPARE_REFERENCES") {
@@ -58,24 +58,13 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                        workflow.out,
-                        file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
-                    ).match()}
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -96,24 +85,13 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                        workflow.out,
-                        file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
-                    ).match()}
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -132,24 +110,13 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                        workflow.out,
-                        file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
-                    ).match()}
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -172,24 +139,13 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                        workflow.out,
-                        file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
-                    ).match()}
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -207,12 +163,6 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
@@ -239,12 +189,6 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
@@ -273,12 +217,6 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }
@@ -309,12 +247,6 @@ nextflow_workflow {
                             .collectFile(name: 'chr20.bed', newLine: true)
                             .map{ file -> [ [ id:'chr20'], file ] }
                 input[4] = 'h,m'
-                input[5] = Channel.of([
-                    [ id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
-                ])
-                input[6] = true
-                input[7] = false
                 """
             }
         }

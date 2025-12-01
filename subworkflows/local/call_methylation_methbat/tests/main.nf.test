@@ -1,0 +1,175 @@
+nextflow_workflow {
+
+    name "Test Workflow CALL_METHYLATION_METHBAT"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "CALL_METHYLATION_METHBAT"
+
+    setup {
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.empty()
+                input[2] = true
+                input[3] = false
+                """
+            }
+        }
+
+        run("PHASING") {
+            script "../../phasing/main.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                ])
+                input[2] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[3] = PREPARE_REFERENCES.out.fasta
+                input[4] = PREPARE_REFERENCES.out.fai
+                input[5] = false
+                """
+            }
+        }
+    }
+
+    test("1 sample - phased") {
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
+            )
+        }
+    }
+
+    test("1 sample - unphased") {
+        when {
+            params {
+                skip_phasing = true
+            }
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
+            )
+        }
+    }
+
+    test("1 sample - bed phased") {
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = Channel.of('chr20\t2650000\t2660000')
+                            .collectFile(name: 'chr20.bed', newLine: true)
+                            .map{ file -> [ [ id:'chr20'], file ] }
+                input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[6] = true
+                input[7] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        workflow.out,
+                        file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                    ).match()}
+            )
+        }
+    }
+
+    test("1 sample - phased - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = false
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = [[],[]]
+                input[4] = 'h,m'
+                input[5] = Channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[6] = true
+                input[7] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+}
