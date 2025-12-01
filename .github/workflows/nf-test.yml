@@ -59,7 +59,7 @@ jobs:
           - isMain: false
             tag: "samplesheet_target_regions_null"
         NXF_VER:
-          - "24.10.5"
+          - "25.04.0"
           - "latest-everything"
     env:
       NXF_ANSI_LOG: false
