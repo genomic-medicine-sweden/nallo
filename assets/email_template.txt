@@ -1,10 +1,10 @@
 Run Name: $runName
 
 <% if (success){
-    out << "## fellen31/skierfe execution completed successfully! ##"
+    out << "## genomic-medicine-sweden/nallo execution completed successfully! ##"
 } else {
     out << """####################################################
-## fellen31/skierfe execution completed unsuccessfully! ##
+## genomic-medicine-sweden/nallo execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -27,5 +27,5 @@ Pipeline Configuration:
 <% out << summary.collect{ k,v -> " - $k: $v" }.join("\n") %>
 
 --
-fellen31/skierfe
-https://github.com/fellen31/skierfe
+genomic-medicine-sweden/nallo
+https://github.com/genomic-medicine-sweden/nallo

@@ -1,15 +1,45 @@
-repository_type: pipeline
 lint:
   files_exist:
-  - CODE_OF_CONDUCT.md
-  - assets/nf-core-skierfe_logo_light.png
-  - docs/images/nf-core-skierfe_logo_light.png
-  - docs/images/nf-core-skierfe_logo_dark.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/awstest.yml
-  - .github/workflows/awsfulltest.yml
-  nextflow_config:
-  - manifest.name
-  - manifest.homePage
+    - CITATIONS.md
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+    - conf/modules.config
+    - conf/igenomes_ignored.config
+    - conf/igenomes.config
+    - conf/test.config
+    - conf/test_full.config
+    - tests/default.config
+    - tests/default.nf.test
+  files_unchanged:
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-nallo_logo_light.png
+    - docs/README.md
+    - docs/images/nf-core-nallo_logo_light.png
+    - docs/images/nf-core-nallo_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/CONTRIBUTING.md
+    - .prettierignore
+  modules_config: false
   multiqc_config:
-  - report_comment
+    - report_comment
+  nextflow_config:
+    - manifest.name
+    - manifest.homePage
+nf_core_version: 3.5.1
+repository_type: pipeline
+template:
+  author: Felix Lenner
+  description: Long-read variant calling pipeline
+  force: false
+  is_nfcore: false
+  name: nallo
+  org: genomic-medicine-sweden
+  outdir: .
+  skip_features: []
+  version: 0.9.0dev

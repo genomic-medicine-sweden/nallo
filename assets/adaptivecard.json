@@ -17,7 +17,7 @@
                         "size": "Large",
                         "weight": "Bolder",
                         "color": "<% if (success) { %>Good<% } else { %>Attention<%} %>",
-                        "text": "fellen31/skierfe v${version} - ${runName}",
+                        "text": "genomic-medicine-sweden/nallo v${version} - ${runName}",
                         "wrap": true
                     },
                     {
