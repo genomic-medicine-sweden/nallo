@@ -25,7 +25,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ]
                 input[1] = PREPARE_REFERENCES.out.fasta
@@ -49,14 +49,16 @@ nextflow_workflow {
                     [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = MINIMAP2_ALIGN.out.bam
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = MINIMAP2_ALIGN.out.bam
                             .join(MINIMAP2_ALIGN.out.index)
-                            .map { meta, bam, bai ->
-                                [ [ id : meta.id ], bam, bai ]
-                            }
-                input[3] = PREPARE_REFERENCES.out.fasta
-                input[4] = PREPARE_REFERENCES.out.fai
-                input[5] = false
+                input[5] = Channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[6] = PREPARE_REFERENCES.out.fasta
+                input[7] = PREPARE_REFERENCES.out.fai
+                input[8] = 'longphase'
+                input[9] = false
+                input[10] = false
                 """
             }
         }

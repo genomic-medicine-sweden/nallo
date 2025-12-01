@@ -4,6 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     config "./nextflow.config"
     workflow "SPLIT_MULTISAMPLE_VCF"
+    options "--dump-channels"
 
     setup {
         run("BCFTOOLS_MERGE") {
@@ -60,12 +61,12 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of(
                     [
-                        [ id: 'FAM', sample_ids: ['HG002']],
+                        [ id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                         "snv"
                     ],
                     [
-                        [ id: 'FAM', sample_ids: ['HG002']],
+                        [ id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                         "sv"
                     ]
