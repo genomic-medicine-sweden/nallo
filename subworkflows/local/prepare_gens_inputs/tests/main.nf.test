@@ -9,6 +9,7 @@ nextflow_workflow {
 
     options "-stub"
 
+    // Pon path
     test("bam, gvcf, baf positions and panel of normals") {
         when {
             workflow {
@@ -27,6 +28,55 @@ nextflow_workflow {
                 input[2] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv"
                 input[3] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5"
                 input[4] = true
+                """
+            }
+        }
+
+        then {
+            def cov = workflow.out.cov_bed_tbi
+            def baf = workflow.out.baf_bed_tbi
+
+            assertAll(
+                { assert workflow.success },
+                { assert cov.size() == 1 },
+                { assert baf.size() == 1 },
+                {
+                    def covEntry = cov[0]
+                    assert covEntry[0].id == 'HG002'
+                    assert file(covEntry[1]).getName() == 'HG002.cov.bed.gz'
+                    assert file(covEntry[2]).getName() == 'HG002.cov.bed.gz.tbi'
+                    true
+                },
+                {
+                    def bafEntry = baf[0]
+                    assert bafEntry[0].id == 'HG002'
+                    assert file(bafEntry[1]).getName() == 'HG002.baf.bed.gz'
+                    assert file(bafEntry[2]).getName() == 'HG002.baf.bed.gz.tbi'
+                    true
+                }
+            )
+        }
+    }
+
+    // No pon path
+    test("bam, gvcf, baf positions and panel of normals") {
+        when {
+            workflow {
+                """
+                def meta = [ id: 'HG002', single_end: false ]
+                input[0] = Channel.of([
+                    meta,
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    meta,
+                    [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)],
+                    [file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)]
+                ])
+                input[2] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv"
+                input[3] = null
+                input[4] = false
                 """
             }
         }
