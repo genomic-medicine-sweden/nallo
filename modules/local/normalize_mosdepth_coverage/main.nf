@@ -39,7 +39,7 @@ process NORMALIZE_MOSDEPTH_COVERAGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        normalize_mosdepth_coverage: \$(normalize_mosdepth_coverage.py --version)
+        normalize_coverage_without_pon: \$(normalize_coverage_without_pon.py --version)
         python: \$(python --version | sed 's/Python //')
     END_VERSIONS
     """
