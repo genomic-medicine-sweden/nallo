@@ -289,10 +289,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
-    genomeExistsError()
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 }
-
 //
 // Validate channels from input samplesheet
 //
