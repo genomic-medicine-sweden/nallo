@@ -10,30 +10,43 @@ from typing import Iterable, List, Tuple
 VERSION = "0.1.0"
 
 description = """
-Normalize mosdepth coverage to log2 ratios compared to its own median coverage.
+Normalize coverage to log2 ratios compared to its own median coverage.
+
+Expected input format is a tab delimited bed file with four columns:
+
+chr start end coverage
 """
+
+COVERAGE_COL_INDEX = 3
 
 
 def main() -> None:
     args = parse_args()
 
     headers, rows = read_coverage_table(args.input)
-    # Column format:
-    # chr start end count
-    coverage_col = 3
-    cov_vals = [row[coverage_col] for row in rows]
-    print("Total number bins:", cov_vals)
+    cov_vals = [row[COVERAGE_COL_INDEX] for row in rows]
+    print("Total number of bins:", len(cov_vals))
     median = calculate_median(cov_vals)
+    print("Median coverage:", median)
     if median <= 0:
         raise ValueError(f"Mean coverage must be positive, got {median}")
 
     write_normalized_output(headers, rows, median, args.output)
 
 
+def calculate_median(coverages: Iterable[float]) -> float:
+    sorted_cov = sorted(coverages)
+    n = len(sorted_cov)
+    mid = n // 2
+    if n % 2:
+        return sorted_cov[mid]
+    return (sorted_cov[mid - 1] + sorted_cov[mid]) / 2
+
+
 def read_coverage_table(
     path: Path,
 ) -> Tuple[List[str], List[Tuple[str, int, int, float]]]:
-    """Read a mosdepth coverage table, returning headers and coverage rows."""
+    """Read a coverage table, returning headers and coverage rows."""
     headers: List[str] = []
     rows: List[Tuple[str, int, int, float]] = []
 
@@ -62,15 +75,6 @@ def read_coverage_table(
     return headers, rows
 
 
-def calculate_median(coverages: Iterable[float]) -> float:
-    sorted_cov = sorted(coverages)
-    n = len(sorted_cov)
-    mid = n // 2
-    if n % 2:
-        return sorted_cov[mid]
-    return (sorted_cov[mid - 1] + sorted_cov[mid]) / 2
-
-
 def write_normalized_output(
     headers: List[str],
     rows: List[Tuple[str, int, int, float]],
@@ -78,16 +82,13 @@ def write_normalized_output(
     output: Path,
 ) -> None:
     with output.open("w", encoding="utf-8") as handle:
-        print("Median coverage:", median_cov)
         for header_line in headers:
             handle.write(f"{header_line}\n")
 
         for contig, start, end, coverage in rows:
+            # Skip those with 0 coverage
             if coverage == 0:
-                # Skip those with 0 coverage
                 continue
-                # FIXME: Decide if they should be skipped or output as -inf
-                # log2_ratio = float("-inf")
             else:
                 log2_ratio = math.log2(coverage / median_cov)
             handle.write(f"{contig}\t{start}\t{end}\t{log2_ratio}\n")
@@ -96,7 +97,10 @@ def write_normalized_output(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-        "--input", required=True, type=Path, help="Mosdepth coverage TSV file"
+        "--input",
+        required=True,
+        type=Path,
+        help="Four column coverage file (format: chr, start, end, value)",
     )
     parser.add_argument(
         "--output",
@@ -104,11 +108,8 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="Path to write normalized coverage TSV",
     )
-    parser.add_argument(
-        "--version", action="version", version=f"normalize_mosdepth_coverage {VERSION}"
-    )
+    parser.add_argument("--version", action="version", version=VERSION)
     return parser.parse_args()
-
 
 
 if __name__ == "__main__":

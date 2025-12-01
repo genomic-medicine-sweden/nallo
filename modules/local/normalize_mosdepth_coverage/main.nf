@@ -21,13 +21,13 @@ process NORMALIZE_MOSDEPTH_COVERAGE {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    normalize_mosdepth_coverage.py \
+    normalize_coverage_without_pon.py \
         --input ${mosdepth_tsv} \
         --output ${prefix}.normalized.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        normalize_mosdepth_coverage: \$(normalize_mosdepth_coverage.py --version | sed 's/normalize_mosdepth_coverage //')
+        normalize_coverage_without_pon: \$(normalize_coverage_without_pon.py --version)
         python: \$(python --version | sed 's/Python //')
     END_VERSIONS
     """
@@ -39,7 +39,7 @@ process NORMALIZE_MOSDEPTH_COVERAGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        normalize_mosdepth_coverage: \$(normalize_mosdepth_coverage.py --version | sed 's/normalize_mosdepth_coverage //')
+        normalize_mosdepth_coverage: \$(normalize_mosdepth_coverage.py --version)
         python: \$(python --version | sed 's/Python //')
     END_VERSIONS
     """

@@ -409,14 +409,6 @@ workflow NALLO {
 
         if (!params.skip_prepare_gens_input) {
 
-            if (!params.gens_baf_positions) {
-                error "The parameter --gens_baf_positions is required when --prepare_gens_input is enabled"
-            }
-
-            if (params.gens_use_pon && !params.gens_panel_of_normals) {
-                error "The parameter --gens_panel_of_normals is required when --gens_use_pon is enabled"
-            }
-
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
                 .map { meta, gvcf, gvcf_index -> 

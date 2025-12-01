@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Generate Gens coverage and BAF data files."""
+"""
+Generate Gens coverage and BAF data files.
+
+Find the latest version in the Gens repo (in utils dir)
+
+https://github.com/SMD-Bioinformatics-Lund/gens
+"""
 
 from __future__ import annotations
 
