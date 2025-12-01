@@ -93,7 +93,7 @@
                 "skip_prepare_gens_input": {
                     "type": "boolean",
                     "description": "Skip preparing input data for Gens",
-                    "default": true
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
