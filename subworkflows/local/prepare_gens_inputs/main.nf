@@ -3,8 +3,9 @@ include { MOSDEPTH }                      from '../../../modules/nf-core/mosdept
 include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
 include { MOSDEPTH_TO_GATK_FORMAT }       from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-include { GENERATE_MOSDEPTH_GATK_HEADER } from '../../../modules/local/generate_mosdepth_gatk_header/main.nf'
 include { NORMALIZE_MOSDEPTH_COVERAGE }   from '../../../modules/local/normalize_mosdepth_coverage/main.nf'
+include { GAWK }                        from '../../../modules/nf-core/gawk/main'
+include { SAMTOOLS_VIEW }               from '../../../modules/nf-core/samtools/view/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -36,13 +37,23 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    GENERATE_MOSDEPTH_GATK_HEADER(
-        ch_bam
+    SAMTOOLS_VIEW(
+        ch_bam,
+        [[],[]],
+        [],
+        false
     )
-    ch_versions = ch_versions.mix(GENERATE_MOSDEPTH_GATK_HEADER.out.versions)
+    ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions)
+
+    GAWK(
+        SAMTOOLS_VIEW.out.sam,
+        [],
+        false
+    )
+    ch_versions = ch_versions.mix(GAWK.out.versions)
 
     MOSDEPTH.out.regions_bed
-        .join(GENERATE_MOSDEPTH_GATK_HEADER.out.header)
+        .join(GAWK.out.output)
         .set { ch_mosdepth_to_gatk_in }
 
     MOSDEPTH_TO_GATK_FORMAT(
