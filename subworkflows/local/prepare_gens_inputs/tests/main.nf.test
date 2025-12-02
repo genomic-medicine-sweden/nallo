@@ -37,22 +37,7 @@ nextflow_workflow {
 
             assertAll(
                 { assert workflow.success },
-                { assert cov.size() == 1 },
-                { assert baf.size() == 1 },
-                {
-                    def covEntry = cov[0]
-                    assert covEntry[0].id == 'HG002'
-                    assert file(covEntry[1]).getName() == 'HG002.cov.bed.gz'
-                    assert file(covEntry[2]).getName() == 'HG002.cov.bed.gz.tbi'
-                    true
-                },
-                {
-                    def bafEntry = baf[0]
-                    assert bafEntry[0].id == 'HG002'
-                    assert file(bafEntry[1]).getName() == 'HG002.baf.bed.gz'
-                    assert file(bafEntry[2]).getName() == 'HG002.baf.bed.gz.tbi'
-                    true
-                }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
