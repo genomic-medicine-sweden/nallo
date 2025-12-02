@@ -17,41 +17,65 @@ workflow PREPARE_GENS_INPUTS {
     main:
     ch_versions = channel.empty()
 
-    BCFTOOLS_CONCAT(ch_gvcfs)
-    ch_vcf_tbi = BCFTOOLS_CONCAT.out.vcf.join(BCFTOOLS_CONCAT.out.tbi)
+    BCFTOOLS_CONCAT(
+        ch_gvcfs
+    )
+    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+    
+    BCFTOOLS_CONCAT.out.vcf
+        .join(BCFTOOLS_CONCAT.out.tbi)
+        .set { ch_vcf_tbi }
 
-    ch_mosdepth_in = ch_bam.map { meta, bam, bai -> tuple(meta, bam, bai, []) }
-    ch_empty_fasta = ch_bam.map { meta, _bam, _bai -> tuple(meta, []) }
+    ch_bam
+        .map { meta, bam, bai -> tuple(meta, bam, bai, []) }
+        .set { ch_mosdepth_in }
 
-    MOSDEPTH(ch_mosdepth_in, ch_empty_fasta)
+    MOSDEPTH(
+        ch_mosdepth_in,
+        [[],[]]
+    )
     ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
-    GENERATE_MOSDEPTH_GATK_HEADER(ch_bam)
+    GENERATE_MOSDEPTH_GATK_HEADER(
+        ch_bam
+    )
     ch_versions = ch_versions.mix(GENERATE_MOSDEPTH_GATK_HEADER.out.versions)
+    
     MOSDEPTH.out.regions_bed
         .join(GENERATE_MOSDEPTH_GATK_HEADER.out.header)
         .set { ch_mosdepth_to_gatk_in }
-    MOSDEPTH_TO_GATK_FORMAT(ch_mosdepth_to_gatk_in)
+    
+    MOSDEPTH_TO_GATK_FORMAT(
+        ch_mosdepth_to_gatk_in
+    )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
     if (use_pon) {
         MOSDEPTH_TO_GATK_FORMAT.out.output
-            .map { meta, _tsv -> tuple(meta, panel_of_normals) }
+            .map { meta, _tsv -> [ meta, panel_of_normals ] }
             .set { ch_pon }
+            
         GATK4_DENOISEREADCOUNTS(
             MOSDEPTH_TO_GATK_FORMAT.out.output,
             ch_pon
         )
         ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
-        GATK4_DENOISEREADCOUNTS.out.standardized
+       
+         GATK4_DENOISEREADCOUNTS.out.standardized
             .set { ch_cov }
     } else {
-        NORMALIZE_MOSDEPTH_COVERAGE(MOSDEPTH_TO_GATK_FORMAT.out.output)
+        NORMALIZE_MOSDEPTH_COVERAGE(
+            MOSDEPTH_TO_GATK_FORMAT.out.output
+        )
+        ch_versions = ch_versions.mix(NORMALIZE_MOSDEPTH_COVERAGE.out.versions)
+        
         NORMALIZE_MOSDEPTH_COVERAGE.out.normalized
             .set { ch_cov }
     }
 
-    ch_gens_input = ch_cov.join(ch_vcf_tbi)
+    ch_cov
+        .join(ch_vcf_tbi)
+        .set { ch_gens_input }
 
     GENERATE_GENS_DATA(
         ch_gens_input,
