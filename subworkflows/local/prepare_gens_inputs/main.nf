@@ -21,7 +21,7 @@ workflow PREPARE_GENS_INPUTS {
         ch_gvcfs
     )
     ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-    
+
     BCFTOOLS_CONCAT.out.vcf
         .join(BCFTOOLS_CONCAT.out.tbi)
         .set { ch_vcf_tbi }
@@ -40,11 +40,11 @@ workflow PREPARE_GENS_INPUTS {
         ch_bam
     )
     ch_versions = ch_versions.mix(GENERATE_MOSDEPTH_GATK_HEADER.out.versions)
-    
+
     MOSDEPTH.out.regions_bed
         .join(GENERATE_MOSDEPTH_GATK_HEADER.out.header)
         .set { ch_mosdepth_to_gatk_in }
-    
+
     MOSDEPTH_TO_GATK_FORMAT(
         ch_mosdepth_to_gatk_in
     )
@@ -54,13 +54,13 @@ workflow PREPARE_GENS_INPUTS {
         MOSDEPTH_TO_GATK_FORMAT.out.output
             .map { meta, _tsv -> [ meta, panel_of_normals ] }
             .set { ch_pon }
-            
+
         GATK4_DENOISEREADCOUNTS(
             MOSDEPTH_TO_GATK_FORMAT.out.output,
             ch_pon
         )
         ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
-       
+
          GATK4_DENOISEREADCOUNTS.out.standardized
             .set { ch_cov }
     } else {
@@ -68,7 +68,7 @@ workflow PREPARE_GENS_INPUTS {
             MOSDEPTH_TO_GATK_FORMAT.out.output
         )
         ch_versions = ch_versions.mix(NORMALIZE_MOSDEPTH_COVERAGE.out.versions)
-        
+
         NORMALIZE_MOSDEPTH_COVERAGE.out.normalized
             .set { ch_cov }
     }
