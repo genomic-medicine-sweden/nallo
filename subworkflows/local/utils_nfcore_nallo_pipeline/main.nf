@@ -84,7 +84,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation: "skip_repeat_annotation",
         methylation      : "skip_methylation_pileups",
         qc               : "skip_qc",
-        gens             : "skip_gens"
+        gens             : "skip_gens",
     ]
 
     //
@@ -103,7 +103,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation      : ["mapping", "snv_calling"],
-        gens             : ["mapping", "snv_calling"]
+        gens             : ["mapping", "snv_calling"],
     ]
 
     //
@@ -119,7 +119,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
-        gens             : ["gens_baf_positions", "gens_panel_of_normals"] // PON not required if self-normalizing, but this is likely a rarely taken path
+        gens             : ["gens_baf_positions", "gens_panel_of_normals"],
     ]
 
     def parameterStatus = [
@@ -138,7 +138,7 @@ workflow PIPELINE_INITIALISATION {
             skip_alignment           : params.skip_alignment,
             skip_qc                  : params.skip_qc,
             skip_genome_assembly     : params.skip_genome_assembly,
-            skip_gens                : params.skip_prepare_gens_input
+            skip_gens                : params.skip_prepare_gens_input,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -159,7 +159,7 @@ workflow PIPELINE_INITIALISATION {
             variant_consequences_svs : params.variant_consequences_svs,
             vep_plugin_files         : params.vep_plugin_files,
             gens_baf_positions       : params.gens_baf_positions,
-            gens_panel_of_normals    : params.gens_panel_of_normals
+            gens_panel_of_normals    : params.gens_panel_of_normals,
         ]
     ]
 

@@ -1,10 +1,10 @@
-include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
-include { MOSDEPTH } from '../../../modules/nf-core/mosdepth/main'
-include { GENERATE_GENS_DATA } from '../../../modules/local/generate_gens_data/main'
-include { MOSDEPTH_TO_GATK_FORMAT } from '../../../modules/local/mosdepth_to_gatk_format/main'
-include { GATK4_DENOISEREADCOUNTS } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+include { BCFTOOLS_CONCAT }               from '../../../modules/nf-core/bcftools/concat/main'
+include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
+include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
+include { MOSDEPTH_TO_GATK_FORMAT }       from '../../../modules/local/mosdepth_to_gatk_format/main'
+include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GENERATE_MOSDEPTH_GATK_HEADER } from '../../../modules/local/generate_mosdepth_gatk_header/main.nf'
-include { NORMALIZE_MOSDEPTH_COVERAGE } from '../../../modules/local/normalize_mosdepth_coverage/main.nf'
+include { NORMALIZE_MOSDEPTH_COVERAGE }   from '../../../modules/local/normalize_mosdepth_coverage/main.nf'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -84,7 +84,7 @@ workflow PREPARE_GENS_INPUTS {
     ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
 
     emit:
-    cov_bed_tbi = GENERATE_GENS_DATA.out.cov_bed_tbi
-    baf_bed_tbi = GENERATE_GENS_DATA.out.baf_bed_tbi
-    versions = ch_versions
+    cov_bed_tbi = GENERATE_GENS_DATA.out.cov_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    baf_bed_tbi = GENERATE_GENS_DATA.out.baf_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    versions = ch_versions                           // channel: [ path(versions.yml) ]
 }
