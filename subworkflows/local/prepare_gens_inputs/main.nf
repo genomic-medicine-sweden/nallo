@@ -9,7 +9,7 @@ include { NORMALIZE_MOSDEPTH_COVERAGE }   from '../../../modules/local/normalize
 workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcfs            // channel: [mandatory] [ val(meta), tuple(path(gvcfs)), tuple(path(tbis))]
+    ch_gvcfs            // channel: [mandatory] [ val(meta), [path(gvcfs)], [path(tbis)] ]
     baf_positions       // value:   [mandatory] [ path(gz) ]
     panel_of_normals    // value:   [optional]  [ path(hd5) ]
     use_pon             // value:   [mandatory] [ boolean ]
