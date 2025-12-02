@@ -47,7 +47,7 @@ process GENERATE_GENS_DATA {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        generate_gens_data: \$(echo \$(generate_gens_data.py --version) )
+        generate_gens_data: \$(generate_gens_data.py --version)
     END_VERSIONS
     """
 }
