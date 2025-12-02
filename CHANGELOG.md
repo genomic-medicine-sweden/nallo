@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - New workflow for generating input data to Gens.
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data to Gens.
 
 ### `Changed`
 
