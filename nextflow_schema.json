@@ -306,7 +306,7 @@
                 },
                 "gens_panel_of_normals": {
                     "type": "string",
-                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals).",
+                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs.",
                     "format": "file-path",
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
                     "exists": true
