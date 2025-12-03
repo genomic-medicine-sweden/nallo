@@ -7,7 +7,19 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
+                        "HG002_modkit_pileup_1.bed.gz:md5,39a7395319371f9bdcaa6d6e79359d51"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bed.gz:md5,71f7ccc78a6b8b387c74b99d63494d9b"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz:md5,9f75da4c10993c41e787465f7297b849"
                     ]
                 ],
                 "1": [
@@ -15,7 +27,19 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                        "HG002_modkit_pileup_1.bed.gz.tbi:md5,028a81e05c8faab4fe95f62efc82765b"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bed.gz.tbi:md5,9560d36458884e962e7ae3f00229e763"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,1f8cb3018ddb1688cc5e4e4f45e29f42"
                     ]
                 ],
                 "2": [
@@ -23,12 +47,28 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                        "HG002_modkit_pileup_1.bw:md5,c95b7eea5cb35141f62387f9f5a414e2"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bw:md5,ca64aceb95740faa1149862c935cb57f"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bw:md5,c7cc02706de42d0166b8b3507848c488"
                     ]
                 ],
                 "3": [
                     "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
                     "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
                     "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
@@ -36,7 +76,19 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
+                        "HG002_modkit_pileup_1.bed.gz:md5,39a7395319371f9bdcaa6d6e79359d51"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bed.gz:md5,71f7ccc78a6b8b387c74b99d63494d9b"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz:md5,9f75da4c10993c41e787465f7297b849"
                     ]
                 ],
                 "bigwig": [
@@ -44,7 +96,19 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                        "HG002_modkit_pileup_1.bw:md5,c95b7eea5cb35141f62387f9f5a414e2"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bw:md5,ca64aceb95740faa1149862c935cb57f"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bw:md5,c7cc02706de42d0166b8b3507848c488"
                     ]
                 ],
                 "tbi": [
@@ -52,12 +116,28 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                        "HG002_modkit_pileup_1.bed.gz.tbi:md5,028a81e05c8faab4fe95f62efc82765b"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_2.bed.gz.tbi:md5,9560d36458884e962e7ae3f00229e763"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,1f8cb3018ddb1688cc5e4e4f45e29f42"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
                     "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
                     "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
@@ -66,7 +146,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:40:19.47483835"
+        "timestamp": "2025-12-01T16:26:00.334012919"
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -76,7 +156,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -84,7 +164,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -99,7 +179,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -110,7 +190,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -123,7 +203,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:33:27.181410455"
+        "timestamp": "2025-12-01T16:27:04.28113267"
     },
     "1 sample - [] unphased - stub": {
         "content": [
@@ -133,7 +213,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -141,7 +221,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -156,7 +236,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -167,7 +247,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -180,7 +260,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:33:18.201033775"
+        "timestamp": "2025-12-01T16:26:56.158787307"
     },
     "1 sample - [] phased - stub": {
         "content": [
@@ -190,7 +270,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -198,7 +278,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -213,7 +293,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -224,7 +304,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -237,7 +317,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:33:01.266577318"
+        "timestamp": "2025-12-01T16:26:39.552886205"
     },
     "1 sample - [] unphased": {
         "content": [
@@ -247,7 +327,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
+                        "HG002_modkit_pileup.bed.gz:md5,27240652e5176182b37480df285a48e0"
                     ]
                 ],
                 "1": [
@@ -255,7 +335,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,eb706f9d13b2a906f575822857ad8063"
                     ]
                 ],
                 "2": [
@@ -263,7 +343,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                        "HG002_modkit_pileup.bw:md5,4316908c7707fb2fec20b869068fdd4c"
                     ]
                 ],
                 "3": [
@@ -276,7 +356,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,43800f3f8c665f9827fafd1fb77b1ce9"
+                        "HG002_modkit_pileup.bed.gz:md5,27240652e5176182b37480df285a48e0"
                     ]
                 ],
                 "bigwig": [
@@ -284,7 +364,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,400d135c20abf6d3ed0f5c58535d5b54"
+                        "HG002_modkit_pileup.bw:md5,4316908c7707fb2fec20b869068fdd4c"
                     ]
                 ],
                 "tbi": [
@@ -292,7 +372,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,b4a9dd9f56b6a0ee2cb552cf5375dbb7"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,eb706f9d13b2a906f575822857ad8063"
                     ]
                 ],
                 "versions": [
@@ -306,7 +386,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:40:34.288363247"
+        "timestamp": "2025-12-01T16:26:12.741592044"
     },
     "1 sample - bed phased": {
         "content": [
@@ -316,7 +396,13 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
+                        "HG002_modkit_pileup_1.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz:md5,e99e8dca4f6c34e383306af4cede3491"
                     ]
                 ],
                 "1": [
@@ -324,7 +410,13 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                        "HG002_modkit_pileup_1.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,bb41f6eb867952a8bc01aeaaf41dde32"
                     ]
                 ],
                 "2": [
@@ -332,12 +424,13 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                        "HG002_modkit_pileup_ungrouped.bw:md5,960281ac778f84d096cc4ac0cb52ab8e"
                     ]
                 ],
                 "3": [
                     "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
                     "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
                     "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ],
                 "bed": [
@@ -345,7 +438,13 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
+                        "HG002_modkit_pileup_1.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz:md5,e99e8dca4f6c34e383306af4cede3491"
                     ]
                 ],
                 "bigwig": [
@@ -353,7 +452,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                        "HG002_modkit_pileup_ungrouped.bw:md5,960281ac778f84d096cc4ac0cb52ab8e"
                     ]
                 ],
                 "tbi": [
@@ -361,12 +460,19 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                        "HG002_modkit_pileup_1.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                    ],
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,bb41f6eb867952a8bc01aeaaf41dde32"
                     ]
                 ],
                 "versions": [
                     "versions.yml:md5,1cdf9d58a0c8291d3879cfb026d380d1",
                     "versions.yml:md5,71f54d8daace0dd6f13c0422f8004d1d",
+                    "versions.yml:md5,8772892965b7ee3aed511b8705478d16",
                     "versions.yml:md5,8772892965b7ee3aed511b8705478d16"
                 ]
             }
@@ -375,7 +481,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:40:43.74235766"
+        "timestamp": "2025-12-01T16:26:22.215868551"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -385,7 +491,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -393,7 +499,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -408,7 +514,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -419,7 +525,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -432,7 +538,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:33:09.831581549"
+        "timestamp": "2025-12-01T16:26:48.111230008"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -442,7 +548,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
+                        "HG002_modkit_pileup.bed.gz:md5,79a2692c0de081deb116039df261cc1d"
                     ]
                 ],
                 "1": [
@@ -450,7 +556,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,f381aad34d1ad3988223df414a515ea1"
                     ]
                 ],
                 "2": [
@@ -458,7 +564,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                        "HG002_modkit_pileup.bw:md5,960281ac778f84d096cc4ac0cb52ab8e"
                     ]
                 ],
                 "3": [
@@ -471,7 +577,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz:md5,a058724497087123bbc80b9526bd0664"
+                        "HG002_modkit_pileup.bed.gz:md5,79a2692c0de081deb116039df261cc1d"
                     ]
                 ],
                 "bigwig": [
@@ -479,7 +585,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bw:md5,9ed0d7103a079e67463993a51c1b999d"
+                        "HG002_modkit_pileup.bw:md5,960281ac778f84d096cc4ac0cb52ab8e"
                     ]
                 ],
                 "tbi": [
@@ -487,7 +593,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002.bed.gz.tbi:md5,ee8f742c3d902c581dd6f3cea2358529"
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,f381aad34d1ad3988223df414a515ea1"
                     ]
                 ],
                 "versions": [
@@ -501,6 +607,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T14:40:54.022442849"
+        "timestamp": "2025-12-01T16:26:31.087304224"
     }
 }
