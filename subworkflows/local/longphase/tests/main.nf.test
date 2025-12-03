@@ -178,7 +178,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.phased_family_snvs,
                     workflow.out.phased_family_snvs_tbi,
-                    path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(2),
+                    path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(3).join('\n').md5(), // VCF4.4 is unsupported by nft-vcf and header is unstable because of timestamp in third line
                     workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
                     workflow.out.versions
