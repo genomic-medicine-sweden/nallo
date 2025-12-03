@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            316,
+            301,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -129,18 +129,15 @@
                     "merge_json_sample_files_into_family": 1.0,
                     "python": "3.8.3"
                 },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.16.1-8a0a24c"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283",
                     "samtools": 1.21
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.5.1"
-                },
-                "MODKIT_PILEUP": {
-                    "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
@@ -149,6 +146,9 @@
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
                     "samtools": "1.22.1"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -281,38 +281,35 @@
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
                 "methylation",
-                "methylation/modkit",
-                "methylation/modkit/pileup",
-                "methylation/modkit/pileup/HG002",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002/HG002_modkit_pileup_ungrouped.bw",
-                "methylation/modkit/pileup/HG003",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG003/HG003_modkit_pileup_ungrouped.bw",
-                "methylation/modkit/pileup/HG004",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG004/HG004_modkit_pileup_ungrouped.bw",
+                "methylation/pileup",
+                "methylation/pileup/HG002",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG003",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG004",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/HG002",
+                "methylation/profile/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/HG003",
+                "methylation/profile/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/HG004",
+                "methylation/profile/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -666,14 +663,23 @@
                 "visualization_tracks/HG002/HG002_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002/HG002_hificnv.depth.bw",
                 "visualization_tracks/HG002/HG002_hificnv.maf.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
                 "visualization_tracks/HG003",
                 "visualization_tracks/HG003/HG003_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG003/HG003_hificnv.depth.bw",
                 "visualization_tracks/HG003/HG003_hificnv.maf.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
                 "visualization_tracks/HG004",
                 "visualization_tracks/HG004/HG004_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG004/HG004_hificnv.depth.bw",
-                "visualization_tracks/HG004/HG004_hificnv.maf.bw"
+                "visualization_tracks/HG004/HG004_hificnv.maf.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
                 "HG002_haplotype_1.assembly_summary:md5,7aba5d24e4d11776dc7a2c94cb3663fb",
@@ -682,33 +688,27 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "HG002_modkit_pileup_1.bed.gz:md5,fc7e0032bc5d43fc4e3eb9bad7986331",
-                "HG002_modkit_pileup_1.bed.gz.tbi:md5,dc4b61cfb8470954419699498d345453",
-                "HG002_modkit_pileup_1.bw:md5,3242c9d5d1362da01945aee7ec9855b1",
-                "HG002_modkit_pileup_2.bed.gz:md5,ef70a9c0681f4d45de376b2a077bba30",
-                "HG002_modkit_pileup_2.bed.gz.tbi:md5,37cc710b08d97f4afc2d8760efb8ad98",
-                "HG002_modkit_pileup_2.bw:md5,31fffa2746cfe62d03354dc21efa5048",
-                "HG002_modkit_pileup_ungrouped.bed.gz:md5,039fef342a95a761df79f986ff07fbd4",
-                "HG002_modkit_pileup_ungrouped.bed.gz.tbi:md5,a69b38c3614a4c90dc9c8a977afb9c4e",
-                "HG002_modkit_pileup_ungrouped.bw:md5,1988649697628c06273124ca641329c4",
-                "HG003_modkit_pileup_1.bed.gz:md5,84ab6bec87640c2c993d77dd3c1a38e6",
-                "HG003_modkit_pileup_1.bed.gz.tbi:md5,3275a6a426a79e9bc2b077da162ebf22",
-                "HG003_modkit_pileup_1.bw:md5,c5b37c738a1073182e89d47acaa197d1",
-                "HG003_modkit_pileup_2.bed.gz:md5,192f54b53c36b509f6d2881c9238bd16",
-                "HG003_modkit_pileup_2.bed.gz.tbi:md5,e8c227e24a503d4e10cecb0a0e3ef951",
-                "HG003_modkit_pileup_2.bw:md5,49bf7a64317781d301a569aced72a502",
-                "HG003_modkit_pileup_ungrouped.bed.gz:md5,57b03203e7b9bf0634f6f9a3b93a85ad",
-                "HG003_modkit_pileup_ungrouped.bed.gz.tbi:md5,8c9b7160ad5cf1666fd85f8c5c0ee251",
-                "HG003_modkit_pileup_ungrouped.bw:md5,c35a562524a7efb2e6bda0f6eb9aafb1",
-                "HG004_modkit_pileup_1.bed.gz:md5,c088579208dc5a0a90b7362dc187b6c7",
-                "HG004_modkit_pileup_1.bed.gz.tbi:md5,06753a3568de2d274c16eda9cb97347d",
-                "HG004_modkit_pileup_1.bw:md5,109a480ee5d94d9ab84e9a2127f4bd8c",
-                "HG004_modkit_pileup_2.bed.gz:md5,7c8fdaf5ce4d51bd0f288e961c135fea",
-                "HG004_modkit_pileup_2.bed.gz.tbi:md5,e27f27bbf405fb5364d3dfd310938429",
-                "HG004_modkit_pileup_2.bw:md5,3338a0e7a317602e7edfdd02e173988b",
-                "HG004_modkit_pileup_ungrouped.bed.gz:md5,100e04224a2c358966f653ae983929eb",
-                "HG004_modkit_pileup_ungrouped.bed.gz.tbi:md5,471e8dd47597aa060b2908cdf1d9da7e",
-                "HG004_modkit_pileup_ungrouped.bw:md5,3708ce37f612f358c33b5260536bbc74",
+                "HG002_pbcpgtools.combined.bed.gz:md5,4dfb1c7a865feb275abb70a637c57cb4",
+                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,a411647a2c5f24c2a40acdbbdd5381aa",
+                "HG002_pbcpgtools.hap1.bed.gz:md5,09a9b0d80cc4ff3d8e40af28084a6559",
+                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,9c544c3de74ce2ca350198c0e4432b10",
+                "HG002_pbcpgtools.hap2.bed.gz:md5,d7498d07840d5ca6be5168945cad1974",
+                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,3541b793140b8be9f659fc4926054c31",
+                "HG003_pbcpgtools.combined.bed.gz:md5,18d84366826a0559ce91be45b01c9d2e",
+                "HG003_pbcpgtools.combined.bed.gz.tbi:md5,d60b2272602e3583b33921c3c5cf55aa",
+                "HG003_pbcpgtools.hap1.bed.gz:md5,76848a78c1219c8341f4411f4fe1f688",
+                "HG003_pbcpgtools.hap1.bed.gz.tbi:md5,78a0bd5db9f560e91e9669911c1d3c6f",
+                "HG003_pbcpgtools.hap2.bed.gz:md5,47d1df73c8348c2d53879d2a42616553",
+                "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,bdfb8fe0bb120e60669167a99c8f97d3",
+                "HG004_pbcpgtools.combined.bed.gz:md5,b0bd29d87d5116d21d40ed939a2b0f9e",
+                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,a389d7596f9c83e098825842fc9794e0",
+                "HG004_pbcpgtools.hap1.bed.gz:md5,385a8bf8d07353d6b47d51637f00f3f3",
+                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,de3c3c19a2421effa5f31d22c98e6223",
+                "HG004_pbcpgtools.hap2.bed.gz:md5,a29221082193a610b8fcf69e9940ade1",
+                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,34a9af5e5848e3691b3d0c07f456b04b",
+                "HG002_methbat_profile.tsv:md5,f65d39d3970ee26c4b359d23da6389b3",
+                "HG003_methbat_profile.tsv:md5,f774bb6b4d60b13d190c97a044aca20e",
+                "HG004_methbat_profile.tsv:md5,a679f731fed10315c384f9bfdc56f099",
                 "bcftools-stats-subtypes.txt:md5,45c3ea6791e455ed27afb87004d6d9a0",
                 "bcftools_stats_indel-lengths.txt:md5,fb634f7fecaaa7cdc89109270c336362",
                 "fastqc-status-check-heatmap.txt:md5,ec40321b541ebfb5777662e684261dfc",
@@ -779,12 +779,21 @@
                 "HG002_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_hificnv.depth.bw:md5,c1f3a213a83f7ab13cc082405328e74e",
                 "HG002_hificnv.maf.bw:md5,2d0add7bc6c190df62849e6d3b73e123",
+                "HG002_pbcpgtools.combined.bw:md5,0d940a9dba8792c9c8423156da931f03",
+                "HG002_pbcpgtools.hap1.bw:md5,a49d72870f98a83081213e6087ddec82",
+                "HG002_pbcpgtools.hap2.bw:md5,2c18df74c17546fce0f74689f06e0631",
                 "HG003_hificnv.copynum.bedgraph:md5,13936edf036a850659ddbd52f3257cec",
                 "HG003_hificnv.depth.bw:md5,eb205af56ee8deba0ee6ee91cbddde9d",
                 "HG003_hificnv.maf.bw:md5,01058cc29bc7de42f299f6f23760f008",
+                "HG003_pbcpgtools.combined.bw:md5,562a3898986c9a92fb5d7f9eef63e784",
+                "HG003_pbcpgtools.hap1.bw:md5,4f4d1b9265ecb1c8726eebb02aaea417",
+                "HG003_pbcpgtools.hap2.bw:md5,145a9294b02695070ac567940cda79fe",
                 "HG004_hificnv.copynum.bedgraph:md5,7b7112759a210718d03f64628577e02b",
                 "HG004_hificnv.depth.bw:md5,bddf2a44ae94890335e19ab422b65c93",
-                "HG004_hificnv.maf.bw:md5,766dccb8b4ef5c1460b5d19c1ee6bc61"
+                "HG004_hificnv.maf.bw:md5,766dccb8b4ef5c1460b5d19c1ee6bc61",
+                "HG004_pbcpgtools.combined.bw:md5,353b9a770b115630ab8fadd9e0f59338",
+                "HG004_pbcpgtools.hap1.bw:md5,22d376ce82828c6f54248633db2c721a",
+                "HG004_pbcpgtools.hap2.bw:md5,71ca819ab6951575d8dead7e27875e03"
             ],
             [
                 [
@@ -825,7 +834,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -914,13 +923,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-31T09:38:23.988245027"
+        "timestamp": "2025-12-03T14:59:43.780013025"
     }
 }

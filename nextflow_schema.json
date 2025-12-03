@@ -553,6 +553,16 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
+                "run_methbat": {
+                    "type": "boolean",
+                    "description": "Run methbat for methylation analysis when '--preset revio' is active.",
+                    "default": false
+                },
+                "run_modkit": {
+                    "type": "boolean",
+                    "description": "Run modkit for methylation analysis when --preset 'ONT_R10' is active.",
+                    "default": false
+                },
                 "methbat_male_label": {
                     "type": "string",
                     "description": "Label used for male samples in methbat.",

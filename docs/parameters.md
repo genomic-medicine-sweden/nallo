@@ -120,6 +120,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. | `string` | None |  |  |
+| `run_methbat` | Run methbat for methylation analysis when '--preset revio' is active. | `boolean` | False |  |  |
+| `run_modkit` | Run modkit for methylation analysis when --preset 'ONT_R10' is active. | `boolean` | False |  |  |
 | `methbat_male_label` | Label used for male samples in methbat. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat. | `string` | FEMALE |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
