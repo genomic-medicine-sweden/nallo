@@ -82,7 +82,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
         repeat_annotation: "skip_repeat_annotation",
-        methylation      : "skip_methylation_pileups",
+        methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
     ]
 
@@ -124,7 +124,7 @@ workflow PIPELINE_INITIALISATION {
             skip_snv_calling         : params.skip_snv_calling,
             skip_peddy               : params.skip_peddy,
             skip_phasing             : params.skip_phasing,
-            skip_methylation_pileups : params.skip_methylation_pileups,
+            skip_methylation_calling : params.skip_methylation_calling,
             skip_rank_variants       : params.skip_rank_variants,
             skip_repeat_calling      : params.skip_repeat_calling,
             skip_repeat_annotation   : params.skip_repeat_annotation,

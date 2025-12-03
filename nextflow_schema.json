@@ -35,7 +35,7 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_pileups": {
+                "skip_methylation_calling": {
                     "type": "boolean",
                     "description": "Skip generation of methylation pileups",
                     "fa_icon": "fas fa-fast-forward",
@@ -217,10 +217,10 @@
                     "type": "string",
                     "pattern": "^\\S+\\.tsv$",
                     "format": "file-path",
-                    "description": "A TSV file with background regions for methbat.",
+                    "description": "A tsv file with only regions of interest (https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv), or with both regions and background cohort values (https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with the 'methbat build' function.",
                     "exists": true
                 },
-                "methylation_call_regions": {
+                "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",

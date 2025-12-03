@@ -29,18 +29,33 @@ This document describes the pipeline output files and the tools used to generate
 | `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`          | Summary statistics for haplotype 1/paternal haplotype                                             |
 | `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary`         | Summary statistics for haplotype 2/maternal haplotype                                             |
 
-## Methylation pileups
+## Methylation
 
-[Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.
+[Modkit](https://github.com/nanoporetech/modkit), [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools), and [Methbat](https://github.com/PacificBiosciences/MethBat) are used for methylation analysis.
 
-| Path                                                                  | Description                                                             | Alignment          | Alignment & phasing |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_1.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 1) |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_2.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 2) |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bw`                             | BigWig file with summary counts from specified modifications            | :white_check_mark: | :white_check_mark:  |
+### Methylation pileups
+
+[Modkit](https://github.com/nanoporetech/modkit) (ONT only) [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bedMethyl and BigWig files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, output pileups are also given per haplotype.
+
+| Path                                                           | Description                                                             | Alignment          | Alignment & phasing |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/pileup/{sample}/*.modkit_pileup_1.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 1) |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.modkit_pileup_2.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 2) |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
+| `methylation/pileup/{sample}/*_pbcpgtools.combined.bed.gz`     | bed file with summary counts from all reads                             | :white_check_mark: | :white_check_mark:  |
+| `methylation/pileup/{sample}/*_pbcpgtools.hap1.bed.gz`         | bed file with summary counts from haplotagged reads (haplotype 1)       |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*_pbcpgtools.hap2.bed.gz`         | bed file with summary counts from haplotagged reads (haplotype 2)       |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: | :white_check_mark:  |
+| `visualization_tracks/{sample}/*.bw`                           | BigWig file with summary counts from specified modifications            | :white_check_mark: | :white_check_mark:  |
+
+### Methylation profile
+
+[Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values. 
+
+| Path                                                       | Description                                        |
+| ---------------------------------------------------------- | -------------------------------------------------- |
+| `methylation/profile/{sample}/*_methbat_profile.tsv`       | tsv file with methylation profile of input regions |
 
 ## MultiQC
 

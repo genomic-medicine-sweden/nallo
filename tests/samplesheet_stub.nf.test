@@ -28,7 +28,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
-                skip_methylation_pileups     = true
+                skip_methylation_calling     = true
             }
         }
 
@@ -69,7 +69,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
-                skip_methylation_pileups     = true
+                skip_methylation_calling     = true
             }
         }
 
@@ -111,7 +111,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
-                skip_methylation_pileups     = true
+                skip_methylation_calling     = true
             }
         }
 
@@ -155,7 +155,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
-                skip_methylation_pileups     = true
+                skip_methylation_calling     = true
             }
         }
 
@@ -197,7 +197,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
-                skip_methylation_pileups     = true
+                skip_methylation_calling     = true
             }
         }
 
@@ -228,7 +228,7 @@ nextflow_pipeline {
                 input                                   = "$projectDir/assets/samplesheet.csv"
                 outdir                                  = "$outputDir"
                 skip_call_paralogs                      = true
-                skip_methylation_pileups                = true
+                skip_methylation_calling                = true
                 skip_peddy                              = true
                 skip_phasing                            = true
                 skip_rank_variants                      = true

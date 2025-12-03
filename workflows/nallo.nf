@@ -91,7 +91,7 @@ workflow NALLO {
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
     ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
     ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
+    ch_modkit_call_regions       = createReferenceChannelFromPath(params.modkit_call_regions, Channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -105,7 +105,7 @@ workflow NALLO {
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
     ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-    ch_regions                   = createReferenceChannelFromPath(params.methbat_regions)
+    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
 
 
     // Channels from (optional) input samplesheets validated by schema
@@ -727,21 +727,21 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit or create methylation profile with methbat
     //
-    if(!params.skip_methylation_pileups) {
+    if(!params.skip_methylation_calling) {
         if (params.run_modkit) {
             CALL_METHYLATION_MODKIT (
                 !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
                 ch_fasta,
                 ch_fai,
-                ch_methylation_call_regions,
+                ch_modkit_call_regions,
                 params.bigwig_modcodes
-        )
+            )
             ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
         } 
         if (params.run_methbat) {
             CALL_METHYLATION_METHBAT (
                 !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
-                ch_regions
+                ch_methbat_regions
             )
             ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
         }
