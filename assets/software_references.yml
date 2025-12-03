@@ -107,6 +107,9 @@ tool:
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
+  sambamba:
+    citation: "Sambamba (Tarasov et al. 2015)"
+    bibliography: "Artem Tarasov, Albert J. Vilella, Edwin Cuppen, Isaac J. Nijman, Pjotr Prins, Sambamba: fast processing of NGS alignment formats, Bioinformatics, Volume 31, Issue 12, June 2015, Pages 2032-2034, https://doi.org/10.1093/bioinformatics/btv098"
   samtools:
     citation: "SAMtools (Danecek et al. 2021)"
     bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"

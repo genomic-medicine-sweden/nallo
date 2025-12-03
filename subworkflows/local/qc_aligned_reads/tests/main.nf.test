@@ -4,7 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     workflow "QC_ALIGNED_READS"
 
-    test("bam, no bed") {
+    test("bam, no bed, run sambamba depth") {
 
         when {
             workflow {
@@ -19,6 +19,8 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
                 input[2] = Channel.of([[],[]])
+                input[3] = Channel.of([[],[]])
+                input[4] = true
                 """
             }
         }
@@ -57,6 +59,11 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
+                input[3] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                input[4] = false
                 """
             }
         }
@@ -77,7 +84,7 @@ nextflow_workflow {
 
     }
 
-    test("bam, no bed -stub") {
+    test("bam, no bed, run sambamba depth -stub") {
 
         options "-stub"
 
@@ -94,6 +101,8 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
                 input[2] = Channel.of([[],[]])
+                input[3] = Channel.of([[],[]])
+                input[4] = true
                 """
             }
         }
@@ -127,6 +136,11 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
+                input[3] = Channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                input[4] = false
                 """
             }
         }

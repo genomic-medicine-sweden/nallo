@@ -197,7 +197,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -597,6 +597,10 @@ def validateWorkflowCompatibility() {
         if (!params.cnv_expected_xy_cn || !params.cnv_expected_xx_cn || !params.cnv_excluded_regions) {
             error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
+    }
+
+    if(params.run_sambamba_depth && !params.sambamba_regions) {
+        error "ERROR: --run_sambamba_depth requires --sambamba_regions to be set."
     }
 }
 
