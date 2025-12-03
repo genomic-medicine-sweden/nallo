@@ -1,0 +1,68 @@
+{
+    "Generate Gens input without using PON": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,420608f8412dcfec786a76a00de40c48",
+                    "versions.yml:md5,52d8b1e5431a06c433ea086bf4fd4bf9",
+                    "versions.yml:md5,9cbd0d325be3c7f1154eaf2aa93cc748"
+                ],
+                "baf_bed_tbi": [
+                    
+                ],
+                "cov_bed_tbi": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,420608f8412dcfec786a76a00de40c48",
+                    "versions.yml:md5,52d8b1e5431a06c433ea086bf4fd4bf9",
+                    "versions.yml:md5,9cbd0d325be3c7f1154eaf2aa93cc748"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-12-03T11:57:00.001440914"
+    },
+    "Generate Gens input using PON": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,07924b82b1d2710a4db692524a79d436",
+                    "versions.yml:md5,468c12dffaab22033caeae26665601f6",
+                    "versions.yml:md5,afacfef5b21a5bf856533de94d437f0c"
+                ],
+                "baf_bed_tbi": [
+                    
+                ],
+                "cov_bed_tbi": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,07924b82b1d2710a4db692524a79d436",
+                    "versions.yml:md5,468c12dffaab22033caeae26665601f6",
+                    "versions.yml:md5,afacfef5b21a5bf856533de94d437f0c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-12-03T11:56:47.447129004"
+    }
+}
