@@ -337,7 +337,7 @@ workflow NALLO {
             ch_fasta,
             ch_mosdepth_regions,
             ch_sambamba_regions,
-            params.run_sambamba_depth,
+            !params.skip_sambamba_depth,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )

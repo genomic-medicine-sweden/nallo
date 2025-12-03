@@ -25,13 +25,14 @@ process SAMBAMBA_DEPTH {
     if (!['region','window','base'].contains(mode)) {
         error "Mode needs to be one of: region, window, base"
     }
-    bed_arg = bed ? "--regions ${bed}" : ''
+    def bed_arg = bed ? "--regions ${bed}" : ''
+
     """
     sambamba \\
         depth \\
         $mode \\
-        $args \\
         $bed_arg \\
+        $args \\
         -t $task.cpus \\
         -o ${prefix}.bed \\
         $bam

@@ -82,6 +82,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
         repeat_annotation: "skip_repeat_annotation",
+        sambamba_depth   : "skip_sambamba_depth",
         methylation      : "skip_methylation_pileups",
         qc               : "skip_qc",
     ]
@@ -93,6 +94,7 @@ workflow PIPELINE_INITIALISATION {
         call_paralogs    : ["mapping"],
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
+        sambamba_depth   : ["mapping"],
         sv_calling       : ["mapping"],
         sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
@@ -110,6 +112,7 @@ workflow PIPELINE_INITIALISATION {
     def fileDependencies = [
         mapping          : ["fasta", "somalier_sites"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
+        sambamba_depth   : ["sambamba_depth_regions"],
         snv_calling      : ["fasta", "par_regions"],
         snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
@@ -124,6 +127,7 @@ workflow PIPELINE_INITIALISATION {
             skip_snv_calling         : params.skip_snv_calling,
             skip_peddy               : params.skip_peddy,
             skip_phasing             : params.skip_phasing,
+            skip_sambamba_depth      : params.skip_sambamba_depth,
             skip_methylation_pileups : params.skip_methylation_pileups,
             skip_rank_variants       : params.skip_rank_variants,
             skip_repeat_calling      : params.skip_repeat_calling,
@@ -139,6 +143,7 @@ workflow PIPELINE_INITIALISATION {
         files: [
             par_regions              : params.par_regions,
             echtvar_snv_databases    : params.echtvar_snv_databases,
+            sambamba_depth_regions   : params.sambamba_depth_regions,
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
@@ -599,9 +604,6 @@ def validateWorkflowCompatibility() {
         }
     }
 
-    if(params.run_sambamba_depth && !params.sambamba_regions) {
-        error "ERROR: --run_sambamba_depth requires --sambamba_regions to be set."
-    }
 }
 
 def validateSVCallingParameters() {

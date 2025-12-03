@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate regions inputs for mosdepth and sambamba depth which both uses qc_regions as default
+
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
 
 ### `Removed`
 
@@ -21,8 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter              |
+| ------------- | -------------------------- |
+| ------------- | `--mosdepth_d4_output`     |
+| ------------- | `--mosdepth_regions`       |
+| ------------- | `--sambamba_depth_regions` |
+| ------------- | `--skip_sambamba_depth`    |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
