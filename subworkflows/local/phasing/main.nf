@@ -1,4 +1,4 @@
-include { RUN_HIPHASE      } from '../../../subworkflows/local/run_hiphase/main'
+include { HIPHASE          } from '../../../subworkflows/local/hiphase/main'
 include { LONGPHASE        } from '../../../subworkflows/local/longphase/main'
 include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
 include { WHATSHAP         } from '../../../subworkflows/local/whatshap/main'
@@ -62,7 +62,7 @@ workflow PHASING {
     // Phase variants and haplotag reads with HiPhase
     } else if (phaser.equals("hiphase")) {
 
-        RUN_HIPHASE (
+        HIPHASE (
             ch_snv_vcf,
             ch_snv_vcf_index,
             ch_sv_vcf,

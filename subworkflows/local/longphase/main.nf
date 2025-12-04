@@ -1,4 +1,3 @@
-
 include { BCFTOOLS_INDEX        } from '../../../modules/nf-core/bcftools/index/main'
 include { BCFTOOLS_MERGE        } from '../../../modules/nf-core/bcftools/merge/main'
 include { LONGPHASE_HAPLOTAG    } from '../../../modules/nf-core/longphase/haplotag/main'
@@ -20,81 +19,82 @@ workflow LONGPHASE {
     ch_versions = channel.empty()
 
     ch_snv_vcf
-        .map { meta, vcf -> [ meta, vcf, "snv"] }
+        .map { meta, vcf -> [meta, vcf, "snv"] }
         .set { ch_snv_with_type }
 
     if (phase_with_svs) {
         ch_sv_vcf
-            .map { meta, vcf -> [ meta, vcf, "sv" ] }
-            .mix( ch_snv_with_type )
+            .map { meta, vcf -> [meta, vcf, "sv"] }
+            .mix(ch_snv_with_type)
             .set { ch_split_in }
-    } else {
+    }
+    else {
         ch_split_in = ch_snv_with_type
     }
 
-    SPLIT_MULTISAMPLE_VCF (
+    SPLIT_MULTISAMPLE_VCF(
         ch_split_in,
-        ch_family_to_samples
+        ch_family_to_samples,
     )
     ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF.out.versions)
 
     SPLIT_MULTISAMPLE_VCF.out.split_vcf
         .branch { meta, vcf, variant_type ->
             sv: variant_type == 'sv'
-                [ meta, vcf ]
+            [meta, vcf]
             snv: variant_type == 'snv'
-                [ meta, vcf ]
+            [meta, vcf]
         }
         .set { ch_split_vcfs }
 
     ch_bam_bai
-        .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], bam, bai ] }
-        .join( ch_split_vcfs.snv, failOnMismatch:true, failOnDuplicate:true )
+        .map { meta, bam, bai -> [[id: meta.id, family_id: meta.family_id], bam, bai] }
+        .join(ch_split_vcfs.snv, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bam_vcf }
 
     if (phase_with_svs) {
         ch_bam_vcf
-            .join( ch_split_vcfs.sv, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, bam, bai, snvs, svs -> [ meta, bam, bai, snvs, svs, [] ] }
+            .join(ch_split_vcfs.sv, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, bam, bai, snvs, svs -> [meta, bam, bai, snvs, svs, []] }
             .set { ch_longphase_phase_in }
-
-    } else {
+    }
+    else {
         ch_bam_vcf
-            .map { meta, bam, bai, snvs -> [ meta, bam, bai, snvs, [], [] ] }
+            .map { meta, bam, bai, snvs -> [meta, bam, bai, snvs, [], []] }
             .set { ch_longphase_phase_in }
     }
 
-    LONGPHASE_PHASE (
+    LONGPHASE_PHASE(
         ch_longphase_phase_in,
         fasta,
-        fai
+        fai,
     )
     ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
     LONGPHASE_PHASE.out.snv_vcf
-        .map { meta, vcf -> [ meta + [ variant_type: 'snv'], vcf ] }
-        .mix ( LONGPHASE_PHASE.out.sv_vcf.map { meta, vcf -> [ meta + [ variant_type: 'sv'], vcf ] })
+        .map { meta, vcf -> [meta + [variant_type: 'snv'], vcf] }
+        .mix(LONGPHASE_PHASE.out.sv_vcf.map { meta, vcf -> [meta + [variant_type: 'sv'], vcf] })
         .set { ch_bcftools_index_in }
 
-    // Sort all phased VCFs, ignoring variant types.
-    BCFTOOLS_INDEX( ch_bcftools_index_in )
+    // Index all phased VCFs, ignoring variant types.
+    BCFTOOLS_INDEX(ch_bcftools_index_in)
     ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
     ch_bcftools_index_in
-        .join (BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, tbi -> [ meta + [ id: meta.family_id ] - meta.subMap('family_id'), vcf, tbi ] }
+        .join(BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, vcf, tbi -> [meta + [id: meta.family_id] - meta.subMap('family_id'), vcf, tbi] }
         .groupTuple()
         .set { ch_phased_vcf }
 
-    BCFTOOLS_MERGE (ch_phased_vcf, fasta, fai, [ [], [] ])
+    BCFTOOLS_MERGE(ch_phased_vcf, fasta, fai, [[], []])
     ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     BCFTOOLS_MERGE.out.vcf
         .branch { meta, vcf ->
             snv: meta.variant_type == 'snv'
-                [ meta - meta.subMap('variant_type'), vcf ]
-            sv:  meta.variant_type == 'sv'
-                [ meta - meta.subMap('variant_type'), vcf ]
+            [meta - meta.subMap('variant_type'), vcf]
+            sv: meta.variant_type == 'sv'
+            [meta - meta.subMap('variant_type'), vcf]
         }
         .set { ch_phased_family_vcfs }
 
@@ -102,9 +102,9 @@ workflow LONGPHASE {
     BCFTOOLS_MERGE.out.index
         .branch { meta, tbi ->
             snv: meta.variant_type == 'snv'
-                [ meta - meta.subMap('variant_type'), tbi ]
-            sv:  meta.variant_type == 'sv'
-                [ meta - meta.subMap('variant_type'), tbi ]
+            [meta - meta.subMap('variant_type'), tbi]
+            sv: meta.variant_type == 'sv'
+            [meta - meta.subMap('variant_type'), tbi]
         }
         .set { ch_phased_family_vcf_index }
 
@@ -117,45 +117,46 @@ workflow LONGPHASE {
     // Haplotagging
     if (phase_with_svs) {
         LONGPHASE_PHASE.out.snv_vcf
-            .join( LONGPHASE_PHASE.out.sv_vcf, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, snvs, svs -> [ meta, snvs, svs, [] ] }
+            .join(LONGPHASE_PHASE.out.sv_vcf, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, snvs, svs -> [meta, snvs, svs, []] }
             .set { ch_vcfs_for_haplotag }
-    } else {
+    }
+    else {
         LONGPHASE_PHASE.out.snv_vcf
-            .map { meta, vcf -> [ meta, vcf, [], [] ] }
+            .map { meta, vcf -> [meta, vcf, [], []] }
             .set { ch_vcfs_for_haplotag }
     }
 
     // Making sure to keep the full meta we get in case downstream processes need it
     ch_bam_bai
-        .map { meta, bam, bai -> [ [ id : meta.id, family_id : meta.family_id ], meta, bam, bai ] }
-        .join(ch_vcfs_for_haplotag, failOnMismatch:true, failOnDuplicate:true)
+        .map { meta, bam, bai -> [[id: meta.id, family_id: meta.family_id], meta, bam, bai] }
+        .join(ch_vcfs_for_haplotag, failOnMismatch: true, failOnDuplicate: true)
         .map { _join_key, full_meta, bam, bai, vcf_snvs, vcf_svs, vcf_mods ->
-            [ full_meta, bam, bai, vcf_snvs, vcf_svs, vcf_mods ]
+            [full_meta, bam, bai, vcf_snvs, vcf_svs, vcf_mods]
         }
         .set { ch_longphase_haplotag_in }
 
-    LONGPHASE_HAPLOTAG (
+    LONGPHASE_HAPLOTAG(
         ch_longphase_haplotag_in,
         fasta,
-        fai
+        fai,
     )
     ch_versions = ch_versions.mix(LONGPHASE_HAPLOTAG.out.versions)
 
-    SAMTOOLS_INDEX (
+    SAMTOOLS_INDEX(
         LONGPHASE_HAPLOTAG.out.bam
     )
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     LONGPHASE_HAPLOTAG.out.bam
-        .join( SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true )
+        .join(SAMTOOLS_INDEX.out.bai, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bam_bai_haplotagged }
 
     emit:
-    phased_family_snvs     = ch_phased_family_snvs      // channel: [ val(meta), path(vcf) ]
-    phased_family_snvs_tbi = ch_phased_family_snvs_tbi  // channel: [ val(meta), path(tbi) ]
-    phased_family_svs      = ch_phased_family_svs       // channel: [ val(meta), path(vcf) ]
-    phased_family_svs_tbi  = ch_phased_family_svs_tbi   // channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai    = ch_bam_bai_haplotagged     // channel: [ val(meta), path(bam), path(bai) ]
-    versions               = ch_versions                // channel: [ path(versions.yml) ]
+    phased_family_snvs = ch_phased_family_snvs         // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_phased_family_snvs_tbi // channel: [ val(meta), path(tbi) ]
+    phased_family_svs = ch_phased_family_svs           // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi = ch_phased_family_svs_tbi   // channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai = ch_bam_bai_haplotagged       // channel: [ val(meta), path(bam), path(bai) ]
+    versions = ch_versions                             // channel: [ path(versions.yml) ]
 }

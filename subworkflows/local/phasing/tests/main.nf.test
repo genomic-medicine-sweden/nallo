@@ -1,8 +1,0 @@
-nextflow_workflow {
-
-    name "Test Workflow PHASING"
-    script "../main.nf"
-    config "./nextflow.config"
-    workflow "PHASING"
-
-}

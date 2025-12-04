@@ -1,6 +1,6 @@
-include { BCFTOOLS_CONCAT  } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO          } from '../../../modules/nf-core/cramino/main'
-include { WHATSHAP_STATS   } from '../../../modules/local/whatshap/stats/main'
+include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO         } from '../../../modules/nf-core/cramino/main'
+include { WHATSHAP_STATS  } from '../../../modules/local/whatshap/stats/main'
 
 workflow QC_PHASING {
     take:
@@ -19,19 +19,20 @@ workflow QC_PHASING {
     if (phase_with_svs) {
         ch_phased_family_snvs
             .join(ch_phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .mix(ch_phased_family_svs
-                .join(ch_phased_family_svs_tbi, failOnMismatch: true, failOnDuplicate: true)
+            .mix(
+                ch_phased_family_svs.join(ch_phased_family_svs_tbi, failOnMismatch: true, failOnDuplicate: true)
             )
             .groupTuple()
             .set { ch_bcftools_concat_in }
 
-        BCFTOOLS_CONCAT( ch_bcftools_concat_in )
+        BCFTOOLS_CONCAT(ch_bcftools_concat_in)
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
         BCFTOOLS_CONCAT.out.vcf
-            .join( BCFTOOLS_CONCAT.out.tbi )
+            .join(BCFTOOLS_CONCAT.out.tbi)
             .set { ch_phased_vcf_index }
-    } else {
+    }
+    else {
         ch_phased_family_snvs
             .join(ch_phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_phased_vcf_index }
@@ -42,25 +43,24 @@ workflow QC_PHASING {
     // Therefore, we join with the known samples per family and create one item per sample,
     // duplicating the VCF and TBI paths as needed.
 
-    ch_phased_vcf_index.dump(tag: 'VCF')
-        .join( ch_family_to_samples.dump(tag:'family'), failOnMismatch: true, failOnDuplicate: true )
-        .transpose() // go from set of samples to one sample per item, duplicating the rest
+    ch_phased_vcf_index
+        .join(ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true)
+        .transpose()
         .map { meta, vcf, tbi, sample_id ->
-            [ meta + [ id: sample_id, family_id: meta.id ], vcf, tbi ]
+            [meta + [id: sample_id, family_id: meta.id], vcf, tbi]
         }
         .set { ch_phased_vcf_index }
 
 
-    WHATSHAP_STATS ( ch_phased_vcf_index )
+    WHATSHAP_STATS(ch_phased_vcf_index)
     ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
 
-    CRAMINO ( ch_bam_bai_haplotagged )
+    CRAMINO(ch_bam_bai_haplotagged)
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phasing_stats          = WHATSHAP_STATS.out.stats
-    phasing_blocks         = WHATSHAP_STATS.out.blocks
-    phasing_blocks_index   = WHATSHAP_STATS.out.blocks_index
-    haplotagging_stats     = CRAMINO.out.stats
-
+    phasing_stats = WHATSHAP_STATS.out.stats               // channel: [ val(meta), path(stats) ]
+    phasing_blocks = WHATSHAP_STATS.out.blocks             // channel: [ val(meta), path(blocks) ]
+    phasing_blocks_index = WHATSHAP_STATS.out.blocks_index // channel: [ val(meta), path(blocks_index) ]
+    haplotagging_stats = CRAMINO.out.stats                 // channel: [ val(meta), path(stats) ]
 }
