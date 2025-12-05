@@ -8,8 +8,7 @@ workflow QC_ALIGNED_READS {
     ch_fasta           // channel: [ val(meta), fasta ]
     ch_mosdepth_bed    // channel: [ val(meta), bed ]
     ch_sambamba_bed    // channel: [ val(meta), bed ]
-
-    run_sambamba_depth //    bool:
+    run_sambamba_depth //    bool: Should sambamba depth be run?
 
     main:
     ch_sambamba_depth_bed = channel.empty()

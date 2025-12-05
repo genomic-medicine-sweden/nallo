@@ -233,7 +233,7 @@
                     "description": "A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`.",
                     "exists": true
                 },
-                "mosdepth_d4_format": {
+                "mosdepth_d4_output": {
                     "type": "boolean",
                     "description": "Should mosdepth output d4-files.",
                     "fa_icon": "fas fa-users-cog",
