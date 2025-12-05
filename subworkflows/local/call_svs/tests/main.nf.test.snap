@@ -124,8 +124,8 @@
                         "sv_caller": "sniffles"
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]",
-                    "7c1d93424b8f4e3fb664f4cabf1418a"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
+                    "47564207b58a0048af453ae1be48584e"
                 ]
             ],
             [
@@ -135,8 +135,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]",
-                    "2d074e24069ab4ad2294b015d0074947"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
+                    "bd1ce4755a2d16663fac3966712b4f64"
                 ]
             ],
             [
@@ -153,9 +153,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-10-23T10:05:15.661995334"
+        "timestamp": "2025-12-05T11:39:13.419785408"
     },
     "1 sample, 1 family - sawfish": {
         "content": [
