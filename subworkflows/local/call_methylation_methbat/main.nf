@@ -22,7 +22,7 @@ workflow CALL_METHYLATION_METHBAT {
         .groupTuple()
         .set { ch_methbat_profile_in }
 
-    METHBAT_PROFILE ( ch_methbat_profile_in, ch_regions ) 
+    METHBAT_PROFILE ( ch_methbat_profile_in, ch_regions )
     ch_versions = ch_versions.mix(METHBAT_PROFILE.out.versions)
 
     emit:

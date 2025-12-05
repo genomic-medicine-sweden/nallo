@@ -737,7 +737,7 @@ workflow NALLO {
                 params.bigwig_modcodes
             )
             ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
-        } 
+        }
         if (params.run_methbat) {
             CALL_METHYLATION_METHBAT (
                 !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,

@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT` subworkflows, with new nf-core modules pb-cpg-tools/alignedbamtocpgscores and methbat/profile.
+
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Changed `METHYLATION` subworkflow by splitting to `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT`.
 
 ### `Removed`
 
@@ -22,8 +25,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter                | New parameter                |
+| ---------------------------- | ---------------------------- |
+| `--methylation_call_regions` | `--modkit_call_regions`      |
+| `--skip_methylation_pileups` | `--skip_methylation_calling` |
+|                              | `--methbat_male_label`       |
+|                              | `--methbat_female_label`     |
+|                              | `--run_methbat`              |
+|                              | `--run_modkit`               |
+|                              | `--extra_methbat_options`    |
+|                              | `--methbat_regions`          |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -32,8 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                             | Old version | New version |
+| -------------------------------- | ----------- | ----------- |
+| methbat/profile                  |             | 0.16.1      |
+| pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
