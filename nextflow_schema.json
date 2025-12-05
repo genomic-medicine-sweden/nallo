@@ -236,8 +236,8 @@
                 "mosdepth_d4_format": {
                     "type": "boolean",
                     "description": "Should mosdepth output d4-files.",
-                    "default": false,
-                    "fa_icon": "fas fa-users-cog"
+                    "fa_icon": "fas fa-users-cog",
+                    "default": false
                 },
                 "bigwig_modcodes": {
                     "type": "string",
@@ -317,7 +317,7 @@
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
                 },
-                "sambamba_depth_regions": {
+                "sambamba_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",

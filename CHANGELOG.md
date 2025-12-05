@@ -25,12 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter              |
-| ------------- | -------------------------- |
-| ------------- | `--mosdepth_d4_output`     |
-| ------------- | `--mosdepth_regions`       |
-| ------------- | `--sambamba_depth_regions` |
-| ------------- | `--skip_sambamba_depth`    |
+| Old parameter | New parameter           |
+| ------------- | ----------------------- |
+|               | `--mosdepth_d4_output`  |
+|               | `--mosdepth_regions`    |
+|               | `--sambamba_regions`    |
+|               | `--skip_sambamba_depth` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

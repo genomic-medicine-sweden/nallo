@@ -112,7 +112,7 @@ workflow PIPELINE_INITIALISATION {
     def fileDependencies = [
         mapping          : ["fasta", "somalier_sites"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
-        sambamba_depth   : ["sambamba_depth_regions"],
+        sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
         snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
@@ -143,7 +143,7 @@ workflow PIPELINE_INITIALISATION {
         files: [
             par_regions              : params.par_regions,
             echtvar_snv_databases    : params.echtvar_snv_databases,
-            sambamba_depth_regions   : params.sambamba_depth_regions,
+            sambamba_regions         : params.sambamba_regions,
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
@@ -202,7 +202,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)

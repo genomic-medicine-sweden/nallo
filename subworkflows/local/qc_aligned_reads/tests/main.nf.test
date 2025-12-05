@@ -4,7 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     workflow "QC_ALIGNED_READS"
 
-    test("bam, no bed, run sambamba depth") {
+    test("bam, no bed") {
 
         when {
             workflow {
@@ -20,7 +20,7 @@ nextflow_workflow {
                 ])
                 input[2] = Channel.of([[],[]])
                 input[3] = Channel.of([[],[]])
-                input[4] = true
+                input[4] = false
                 """
             }
         }
@@ -63,7 +63,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
-                input[4] = false
+                input[4] = true
                 """
             }
         }
@@ -84,7 +84,7 @@ nextflow_workflow {
 
     }
 
-    test("bam, no bed, run sambamba depth -stub") {
+    test("bam, no bed -stub") {
 
         options "-stub"
 
@@ -102,7 +102,7 @@ nextflow_workflow {
                 ])
                 input[2] = Channel.of([[],[]])
                 input[3] = Channel.of([[],[]])
-                input[4] = true
+                input[4] = false
                 """
             }
         }
@@ -140,7 +140,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
-                input[4] = false
+                input[4] = true
                 """
             }
         }
