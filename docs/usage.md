@@ -225,9 +225,9 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is ran with --preset ONT_R10, while methbat is ran with --preset revio.
 
-| Parameter         | Description                                                                                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
+| Parameter         | Description                                                                                                                                                                                                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list                                                                              |
 | `methbat_regions` | A tsv file with [only regions of interest](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv), or with [both regions and background cohort values](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with the 'methbat build' function. |
 
 Turned off with `--skip_methylation_calling`.
@@ -381,6 +381,7 @@ The `--target_regions` parameter can be used to limit parts of the analysis to i
 !!!warning
 
     Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
 !!!tip
 
     When running with the revio preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with `--methbat_regions`.

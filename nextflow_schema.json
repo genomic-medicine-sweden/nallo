@@ -555,13 +555,11 @@
                 },
                 "run_methbat": {
                     "type": "boolean",
-                    "description": "Run methbat for methylation analysis when '--preset revio' is active.",
-                    "default": false
+                    "description": "Run methbat for methylation analysis when '--preset revio' is active."
                 },
                 "run_modkit": {
                     "type": "boolean",
-                    "description": "Run modkit for methylation analysis when --preset 'ONT_R10' is active.",
-                    "default": false
+                    "description": "Run modkit for methylation analysis when --preset 'ONT_R10' is active."
                 },
                 "methbat_male_label": {
                     "type": "string",
