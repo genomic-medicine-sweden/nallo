@@ -1,3 +1,4 @@
+.DS_Store
 aligned_reads/**/*.{bam,bai,cram,crai}
 assembly/**/*.{bam,bai,cram,crai}
 cnv_calling/**/*.log

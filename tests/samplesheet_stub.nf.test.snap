@@ -109,7 +109,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
@@ -140,7 +140,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:14:41.753309803"
+        "timestamp": "2025-12-05T10:35:25.627918476"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -284,7 +284,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
@@ -344,21 +344,69 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:18:04.824343078"
+        "timestamp": "2025-12-05T10:36:42.399032076"
     },
     "Test genome assembly without alignment": {
         "content": [
-            0,
-            null,
+            16,
+            {
+                "GFASTATS": {
+                    "gfastats": "1.3.10"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "HIFIASM": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_VIEW": {
+                    "samtools": "1.22.1"
+                },
+                "TAGBAM": {
+                    "tagbam": "0.1.0"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                }
+            },
             [
-                "pipeline_info"
+                "assembly",
+                "assembly/sample",
+                "assembly/sample/HG002_Revio",
+                "assembly/sample/HG002_Revio/HG002_Revio.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/stats",
+                "assembly/stats/HG002_Revio",
+                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
+                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T16:55:44.400008509"
+        "timestamp": "2025-12-05T10:52:00.315559287"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -494,7 +542,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
@@ -525,7 +573,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:16:19.937483107"
+        "timestamp": "2025-12-05T10:34:56.65014647"
     },
     "Test family id same as sample id": {
         "content": [
@@ -829,7 +877,7 @@
                 "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.csi",
                 "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
@@ -930,7 +978,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:18:48.7738161"
+        "timestamp": "2025-12-05T10:37:26.423224051"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -984,7 +1032,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/somalier",
                 "qc/somalier/relate",
@@ -998,7 +1046,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:14:59.420854223"
+        "timestamp": "2025-12-05T10:35:44.79552982"
     },
     "Test alignment without genome assembly and --alignment_processes 1": {
         "content": [
@@ -1049,7 +1097,7 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/somalier",
                 "qc/somalier/relate",
@@ -1063,6 +1111,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-03T17:17:25.309434276"
+        "timestamp": "2025-12-05T10:36:02.902557858"
     }
 }

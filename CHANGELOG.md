@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
+- [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 
 ### `Removed`
 
