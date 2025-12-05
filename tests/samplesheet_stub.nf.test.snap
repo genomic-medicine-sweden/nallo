@@ -214,7 +214,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMBAMBA_DEPTH": {
-                    "sambamba": null
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -344,7 +344,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-05T10:36:42.399032076"
+        "timestamp": "2025-12-05T12:24:15.35470893"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -729,7 +729,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMBAMBA_DEPTH": {
-                    "sambamba": null
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -978,7 +978,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-05T10:37:26.423224051"
+        "timestamp": "2025-12-05T12:24:58.856602477"
     },
     "Test alignment without genome assembly": {
         "content": [

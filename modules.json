@@ -211,7 +211,7 @@
                     },
                     "sambamba/depth": {
                         "branch": "master",
-                        "git_sha": "b093f74ddc3ada57a84a209f0e4fb3871bacf2ad",
+                        "git_sha": "ca6da11b05740de461b1e2714037345c0f856201",
                         "installed_by": ["modules"]
                     },
                     "samtools/convert": {
