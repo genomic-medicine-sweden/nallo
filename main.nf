@@ -27,7 +27,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nall
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow GENOMICMEDICINESWEDEN_NALLO {
-
     take:
     samplesheet // channel: samplesheet read in from --input
 
@@ -39,7 +38,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     NALLO (
         samplesheet
     )
-
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
@@ -61,7 +59,10 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input
+        params.input,
+        params.help,
+        params.help_full,
+        params.show_hidden
     )
 
     //
@@ -70,7 +71,6 @@ workflow {
     GENOMICMEDICINESWEDEN_NALLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
-
     //
     // SUBWORKFLOW: Run completion tasks
     //

@@ -36,7 +36,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('CADD') },
@@ -78,7 +78,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('ENSEMBLVEP_SNV') },
@@ -121,7 +121,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert !versions.containsKey('HIFIASM') },
@@ -165,7 +165,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert !versions.containsKey('HIFIASM') },
@@ -208,7 +208,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('HIFIASM') },
@@ -251,7 +251,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('SVDB_MERGE_BY_FAMILY') },
@@ -280,7 +280,7 @@ nextflow_pipeline {
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(

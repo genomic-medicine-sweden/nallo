@@ -622,7 +622,7 @@
                 "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz",
                 "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz.tbi",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_ONT_A",
