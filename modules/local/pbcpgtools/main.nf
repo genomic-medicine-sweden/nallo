@@ -3,9 +3,7 @@ process PBCPGTOOLS {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pb-cpg-tools:2.3.2--pyhdfd78af_0':
-        'biocontainers/pb-cpg-tools:2.3.2--pyhdfd78af_0' }"
+    container "quay.io/biocontainers/pb-cpg-tools:3.0.0--h9ee0642_0"
 
     input:
     tuple val(meta), path(bam), path(bai)
@@ -13,11 +11,11 @@ process PBCPGTOOLS {
     val(tool)
 
     output:
-    tuple val(meta), path("*.bed"),     emit: bed,     optional: true
-    tuple val(meta), path("*.bigwig"),  emit: bigwig,  optional: true
-    tuple val(meta), path("*.tsv"),     emit: tsv,     optional: true
-    tuple val(meta), path("*.txt"),     emit: txt,     optional: true
-    path "versions.yml",                emit: versions
+    tuple val(meta), path("*.combined.bed.gz"), path("*.combined.bw"),  emit: bed_and_bw
+    //tuple val(meta), path("*.combined.bw"),     emit: bigwig
+    tuple val(meta), path("*.tsv"),             emit: tsv,      optional: true
+    tuple val(meta), path("*.txt"),             emit: txt,      optional: true
+    path "versions.yml",                        emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -32,22 +30,13 @@ process PBCPGTOOLS {
             aligned_bam_to_cpg_scores \\
                 --bam ${bam} \\
                 --ref ${reference} \\
-                --output-prefix ${prefix} \\
-                ${args}
+                --output-prefix ${prefix}
             ;;
         "cpg_pileup")
             cpg_pileup \\
                 --bam ${bam} \\
                 --ref ${reference} \\
-                --output-prefix ${prefix} \\
-                ${args}
-            ;;
-        "calculate_pmd")
-            calculate_pmd \\
-                --bam ${bam} \\
-                --ref ${reference} \\
-                --output-prefix ${prefix} \\
-                ${args}
+                --output-prefix ${prefix}
             ;;
         *)
             echo "Unknown pb-cpg-tools command: ${tool}"
@@ -64,8 +53,8 @@ process PBCPGTOOLS {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.bed
-    touch ${prefix}.bigwig
+    touch ${prefix}.bed.gz
+    touch ${prefix}.bw
     touch ${prefix}.tsv
     touch ${prefix}.txt
 

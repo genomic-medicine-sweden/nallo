@@ -1,66 +1,86 @@
 //
-// PacBio DNA methylation analysis using pb-cpg-tools and MethBat
+// PacBio Methylation Analysis
 //
 
 include { PBCPGTOOLS } from '../../../modules/local/pbcpgtools/main'
-include { METHBAT    } from '../../../modules/local/methbat/main'
+include { METHBAT_PROFILE } from '../../../modules/local/methbat/main'
+include { METHBAT_COMPARE } from '../../../modules/local/methbat/main'
 
 workflow PACBIO_METHYLATION_ANALYSIS {
 
     take:
-    ch_bam_bai      // channel: [ val(meta), path(bam), path(bai) ]
-    ch_reference    // channel: [ val(meta), path(fasta) ]
-    ch_regions      // channel: path(bed) - optional regions file
+    ch_bam_bai
+    ch_reference
+    ch_regions
 
     main:
-
     ch_versions = Channel.empty()
 
-    //
-    // MODULE: Run pb-cpg-tools for CpG score calculation
-    //
-    PBCPGTOOLS (
+    //-----------------------------------------------
+    // 1️⃣ Run pb-cpg-tools to generate CpG scores
+    //-----------------------------------------------
+    PBCPGTOOLS(
         ch_bam_bai,
         ch_reference,
         'aligned_bam_to_cpg_scores'
     )
     ch_versions = ch_versions.mix(PBCPGTOOLS.out.versions)
 
-    //
-    // MODULE: Run pb-cpg-tools for CpG pileup
-    //
-    PBCPGTOOLS_PILEUP = PBCPGTOOLS.cloneWithName('PBCPGTOOLS_PILEUP')
-    PBCPGTOOLS_PILEUP (
-        ch_bam_bai,
-        ch_reference,
-        'cpg_pileup'
+    //-----------------------------------------------
+    // 2️⃣ Prepare MethBat input channel
+    //-----------------------------------------------
+    ch_regions_final = (
+        params.regions
+            ? Channel.value(file(params.regions))
+            : ch_regions.map { it ? file(it) : null }
     )
+        .map { r ->
+            (r instanceof List && r.isEmpty()) ? null :
+            (r == "" ? null : r)
+        }
+        .ifEmpty { Channel.value(null) }
 
-    //
-    // MODULE: Run pb-cpg-tools for PMD calculation
-    //
-    PBCPGTOOLS_PMD = PBCPGTOOLS.cloneWithName('PBCPGTOOLS_PMD')
-    PBCPGTOOLS_PMD (
-        ch_bam_bai,
-        ch_reference,
-        'calculate_pmd'
-    )
+    ch_methbat_input =
+    PBCPGTOOLS.out.bed_and_bw
+        .map { meta, bedgz, bw ->
+            tuple(meta.id, bedgz, bw)
+        }
+        .combine(ch_regions_final)
 
-    //
-    // MODULE: Run MethBat for methylation calling
-    //
-    METHBAT (
-        ch_bam_bai,
-        ch_reference,
-        ch_regions
-    )
-    ch_versions = ch_versions.mix(METHBAT.out.versions)
+    METHBAT_PROFILE(ch_methbat_input)
+
+    ch_versions = ch_versions.mix(METHBAT_PROFILE.out.versions)
+
+    //-----------------------------------------------
+    // 4️⃣ Collect profiles for cohort-level comparison
+    //-----------------------------------------------
+    ch_cohort_profiles = METHBAT_PROFILE.out.profile
+        | collect
+        | filter { it.size() > 1 }          // only run compare if ≥2 samples
+        | map { profiles ->
+            def out = file("cohort_profiles.txt")
+            out.withWriter { w ->
+                profiles.each { p -> w << p.text }
+            }
+            return out
+        }
+
+    //-----------------------------------------------
+    // 5️⃣ Optional MethBat cohort comparison (commented)
+    //-----------------------------------------------
+    /*
+    ch_methbat_compare_out = ch_cohort_profiles
+        | map { cohort_file -> tuple(cohort_file, params.baseline, params.compare) }
+        | ifEmpty { Channel.empty() }
+        | METHBAT_COMPARE
+
+    ch_versions = ch_versions.mix(ch_methbat_compare_out.out.versions)
+    */
 
     emit:
-    cpg_scores          = PBCPGTOOLS.out.bed           // channel: [ val(meta), path(bed) ]
-    cpg_pileup          = PBCPGTOOLS_PILEUP.out.tsv    // channel: [ val(meta), path(tsv) ]
-    pmd_scores          = PBCPGTOOLS_PMD.out.txt       // channel: [ val(meta), path(txt) ]
-    methylation_calls   = METHBAT.out.methylation_calls // channel: [ val(meta), path(tsv) ]
-    methbat_summary     = METHBAT.out.summary          // channel: [ val(meta), path(txt) ]
-    versions            = ch_versions                  // channel: [ versions.yml ]
+        cpg_scores        = PBCPGTOOLS.out.bed_and_bw
+                                .map { meta, bedgz, bw -> tuple(meta, bedgz) }
+        methylation_calls = METHBAT_PROFILE.out.profile
+        versions          = ch_versions
 }
+

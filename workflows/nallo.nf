@@ -91,6 +91,7 @@ workflow NALLO {
     ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
     ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
     ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
+    ch_pacbio_regions = createReferenceChannelFromPath(params.pacbio_regions, Channel.value(null))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -715,7 +716,8 @@ workflow NALLO {
         METHYLATION (
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
-            ch_methylation_call_regions
+            ch_methylation_call_regions,
+            ch_pacbio_regions
         )
         ch_versions = ch_versions.mix(METHYLATION.out.versions)
     }

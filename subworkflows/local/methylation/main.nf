@@ -8,9 +8,11 @@ workflow METHYLATION {
     ch_bam_bai             // channel: [ val(meta), bam, bai ]
     ch_fasta               // channel: [ val(meta), fasta ]
     ch_bed                 // channel: [ val(meta), bed ]
+    ch_regions
 
     main:
     ch_versions = Channel.empty()
+    ch_regions = Channel.empty()
 
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)
@@ -29,7 +31,8 @@ workflow METHYLATION {
     PACBIO_METHYLATION_ANALYSIS (
         ch_bam_bai,
         ch_fasta,
-        ch_bed
+        //ch_bed,
+        ch_regions
     )
     ch_versions = ch_versions.mix(PACBIO_METHYLATION_ANALYSIS.out.versions)
 
@@ -37,9 +40,9 @@ workflow METHYLATION {
     bed                 = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, bed, _tbi -> [ meta, bed ] } // channel: [ val(meta), path(bed) ]
     tbi                 = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
     cpg_scores          = PACBIO_METHYLATION_ANALYSIS.out.cpg_scores          // channel: [ val(meta), path(bed) ]
-    cpg_pileup          = PACBIO_METHYLATION_ANALYSIS.out.cpg_pileup          // channel: [ val(meta), path(tsv) ]
-    pmd_scores          = PACBIO_METHYLATION_ANALYSIS.out.pmd_scores          // channel: [ val(meta), path(txt) ]
+    // cpg_pileup          = PACBIO_METHYLATION_ANALYSIS.out.cpg_pileup          // channel: [ val(meta), path(tsv) ]
+    // pmd_scores          = PACBIO_METHYLATION_ANALYSIS.out.pmd_scores          // channel: [ val(meta), path(txt) ]
     methylation_calls   = PACBIO_METHYLATION_ANALYSIS.out.methylation_calls   // channel: [ val(meta), path(tsv) ]
-    methbat_summary     = PACBIO_METHYLATION_ANALYSIS.out.methbat_summary     // channel: [ val(meta), path(txt) ]
+    //methbat_summary     = PACBIO_METHYLATION_ANALYSIS.out.methbat_summary     // channel: [ val(meta), path(txt) ]
     versions            = ch_versions // channel: [ versions.yml ]
 }

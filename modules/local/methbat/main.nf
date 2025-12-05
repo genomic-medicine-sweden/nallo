@@ -1,56 +1,75 @@
-process METHBAT {
-    tag "$meta.id"
-    label 'process_medium'
+process METHBAT_PROFILE {
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/methbat:0.1.0--pyhdfd78af_0':
-        'biocontainers/methbat:0.1.0--pyhdfd78af_0' }"
+    tag "$prefix"
+    label 'process_medium'    
+
+    conda "bioconda::methbat=0.16.1"
+    container "quay.io/biocontainers-methbat:0.17.0--h9ee0642_0"
 
     input:
-    tuple val(meta), path(bam), path(bai)
-    tuple val(meta2), path(reference)
-    path(bed_regions), stageAs: "regions.bed"
+    tuple val(prefix), path(bedgz), path(bw), path(regions)
 
     output:
-    tuple val(meta), path("*.tsv"),         emit: methylation_calls
-    tuple val(meta), path("*.bed"),         emit: bed,              optional: true
-    tuple val(meta), path("*.summary.txt"), emit: summary
-    path "versions.yml",                    emit: versions
-
-    when:
-    task.ext.when == null || task.ext.when
+    path("${prefix}.meth_region_stats.tsv"), emit: profile
+    path "versions.yml", emit: versions
 
     script:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def regions_arg = bed_regions ? "--regions ${bed_regions}" : ""
-    
-    """
-    methbat \\
-        --bam ${bam} \\
-        --ref ${reference} \\
-        --output-prefix ${prefix} \\
-        ${regions_arg} \\
-        --threads ${task.cpus} \\
-        ${args}
+    def region_cmd = regions ? "--input-regions ${regions}" : ""
 
+    """
+    mkdir -p ${prefix}
+
+    cp ${bedgz} ${prefix}/${prefix}.combined.bed.gz
+    gunzip -f ${prefix}/${prefix}.combined.bed.gz
+
+    cp ${bw} ${prefix}/${prefix}.combined.bw
+    
+    ${regions ? "cp ${regions} ${prefix}/regions.bed" : ""}
+
+    # Run MethBat without cd; use full paths
+    methbat profile \
+        --input-prefix ${prefix}/${prefix} \
+        ${regions ? "--input-regions ${prefix}/regions.bed" : ""} \
+        --output-region-profile ${prefix}.meth_region_stats.tsv \
+        --profile-label ALL
+    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        methbat: \$(methbat --version 2>&1 | grep -o 'MethBat [0-9.]*' | cut -d' ' -f2 || echo "0.1.0")
+        methbat: \$(methbat --version 2>&1 | grep -o 'MethBat [0-9.]*' | cut -d' ' -f2 || echo "unknown")
     END_VERSIONS
     """
+}
 
-    stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
+
+
+process METHBAT_COMPARE {
+    tag "cohort_methbat"
+    label 'process_medium'
+
+    conda "bioconda::methbat=0.16.1"
+    container "quay.io/biocontainers/methbat:0.16.1--h9ee0642_0"
+
+    input:
+    path cohort_profiles      // list/array of paths
+    val baseline_category
+    val compare_category
+
+    output:
+    path "comparison_results.tsv", emit: comparison
+    path "versions.yml",          emit: versions
+
+    script:
+
     """
-    touch ${prefix}.methylation_calls.tsv
-    touch ${prefix}.regions.bed
-    touch ${prefix}.summary.txt
+    methbat compare \
+        --input-profile ${cohort_profiles.join(' ')} \
+        --output-comparison comparison_results.tsv \
+        --baseline-category ${baseline_category} \
+        --compare-category ${compare_category}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        methbat: 0.1.0
+        methbat: \$(methbat --version 2>&1 | grep -o 'MethBat [0-9.]*' | cut -d' ' -f2 || echo "0.16.1")
     END_VERSIONS
     """
 }

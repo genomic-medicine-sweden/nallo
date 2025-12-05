@@ -10,3 +10,6 @@ null/
 version?current=*
 extras/
 test/
+.vscode/
+instructions.md
+samplesheet.csv
