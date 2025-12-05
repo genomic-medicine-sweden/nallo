@@ -11,6 +11,7 @@
 include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
 include { samplesheetToList         } from 'plugin/nf-schema'
+include { paramsHelp                } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
 include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
@@ -18,7 +19,9 @@ include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     SUBWORKFLOW TO INITIALISE PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 workflow PIPELINE_INITIALISATION {
@@ -30,10 +33,13 @@ workflow PIPELINE_INITIALISATION {
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
     input             //  string: Path to input samplesheet
+    help              // boolean: Display help message and exit
+    help_full         // boolean: Show the full help message
+    show_hidden       // boolean: Show hidden parameters in the help message
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -48,10 +54,31 @@ workflow PIPELINE_INITIALISATION {
     //
     // Validate parameters and generate parameter summary to stdout
     //
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+    nallo_gms_logo = """
+    \033[0;34m                                   _                              _ _      _
+    \033[0;34m   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+    \033[0;34m  / _` |/ _ \\ '_ \\ / _ \\| '_ ` _ \\| |/ __|____| '_ ` _ \\ / _ \\/ _` | |/ __| | '_ \\ / _ \\_____
+    \033[0;34m | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+    \033[0;34m  \\__, |\\___|_| |_|\\___/|_| |_| |_|_|\\___|    |_| |_| |_|\\___|\\__,_|_|\\___|_|_| |_|\\___|
+    \033[0;34m  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+    \033[0;34m / __\\ \\ /\\ / / _ \\/ _` |/ _ \\ '_ \\  / / '_ \\ / _` | | |/ _ \\
+    \033[0;34m \\__ \\\\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+    \033[0;34m |___/ \\_/\\_/ \\___|\\__,_|\\___|_| |_/_/ |_| |_|\\__,_|_|_|\\___/
+    \033[0;34m
+    """
+
     UTILS_NFSCHEMA_PLUGIN (
         workflow,
         validate_params,
-        null
+        null,
+        help,
+        help_full,
+        show_hidden,
+        nallo_gms_logo,
+        "",
+        command
     )
 
     //
@@ -171,7 +198,7 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-    //    .ifEmpty { error "Error: No samples found in samplesheet." }
+        .tap { ch_unprocessed_samplesheet }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
@@ -196,6 +223,8 @@ workflow PIPELINE_INITIALISATION {
         }
         .transpose()
         .set { ch_samplesheet }
+
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -273,12 +302,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-
 def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
-
 }
-
 //
 // Validate channels from input samplesheet
 //
@@ -557,6 +583,11 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
             }
         }
+}
+
+def validateNonEmptySamplesheet(ch_samplesheet) {
+    ch_samplesheet
+        .ifEmpty { error("ERROR: No samples found in samplesheet.") }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {

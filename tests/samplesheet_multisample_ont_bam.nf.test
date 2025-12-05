@@ -40,7 +40,7 @@ nextflow_pipeline {
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             // software versions
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml")
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
                 { assert !versions.containsKey('SPLITUBAM') },

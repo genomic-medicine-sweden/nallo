@@ -10,10 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 
 ### `Removed`
 
+- [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
+
 ### `Fixed`
+
+- [#808](https://github.com/genomic-medicine-sweden/nallo/pull/808) - Fixed no samples found in samplesheet error overriding actual errors
 
 ### Parameters
 
