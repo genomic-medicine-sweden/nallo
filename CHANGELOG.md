@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
-- [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README
+- [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 
 ### `Removed`
 
