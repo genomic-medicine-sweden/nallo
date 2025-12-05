@@ -516,7 +516,7 @@
                 "phased_variants/HG004/HG004_phased.vcf.gz",
                 "phased_variants/HG004/HG004_phased.vcf.gz.tbi",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002",
@@ -825,7 +825,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -914,13 +914,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-31T09:38:23.988245027"
+        "timestamp": "2025-12-01T16:40:29.644779632"
     }
 }
