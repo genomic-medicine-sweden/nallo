@@ -691,13 +691,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#visualization-tracks" class="md-nav__link">
+  <a href="#visualization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Visualization Tracks
+        Visualization
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualization-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualization tracks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1100,13 +1128,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#visualization-tracks" class="md-nav__link">
+  <a href="#visualization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Visualization Tracks
+        Visualization
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualization-tracks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualization tracks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Images
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1936,7 +1992,8 @@
 <p class="admonition-title">Tip</p>
 <p>Filtered variants are output alongside unfiltered variants as additional files.</p>
 </div>
-<h2 id="visualization-tracks">Visualization Tracks</h2>
+<h2 id="visualization">Visualization</h2>
+<h3 id="visualization-tracks">Visualization tracks</h3>
 <p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.</p>
 <table>
 <thead>
@@ -1957,6 +2014,26 @@
 <tr>
 <td><code>visualization_tracks/{sample}/*.maf.bw</code></td>
 <td>Minor allele frequencies in BigWig format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="images">Images</h3>
+<p><a href="https://github.com/Clinical-Genomics/chromograph">Chromograph</a> is used to generate plots with regions of autozygosity and coverage.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>images/chromograph/sample/{sample}/{sample}_chromograph_autozyg_chr{1-22,X,Y,M}.png</code></td>
+<td>Per-chromosome plots in PNG format</td>
+</tr>
+<tr>
+<td><code>images/chromograph/sample/{sample}/{sample}_chromograph_coverage_chr{1-22,X,Y,M}.png</code></td>
+<td>Per-chromosome plots in PNG format</td>
 </tr>
 </tbody>
 </table>

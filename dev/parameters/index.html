@@ -693,6 +693,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>skip_chromograph</code></td>
+<td>Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set.</td>
+<td><code>boolean</code></td>
+<td>False</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>skip_peddy</code></td>
 <td>Skip peddy</td>
 <td><code>boolean</code></td>
@@ -1016,7 +1024,7 @@
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/</td>
 <td></td>
 <td>True</td>
 </tr>
@@ -1245,6 +1253,22 @@
 </thead>
 <tbody>
 <tr>
+<td><code>bcftools_roh_af_tag</code></td>
+<td>AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to <code>--chromograph_af_tag</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>chromograph_af_tag</code></td>
+<td>AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>preset</code></td>
 <td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>) (accepted: <code>revio</code>|<code>pacbio</code>|<code>ONT_R10</code>)</td>
 <td><code>string</code></td>
@@ -1445,10 +1469,58 @@
 <td>True</td>
 </tr>
 <tr>
+<td><code>plot_chromograph_autozygosity</code></td>
+<td>Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless <code>--bcftools_roh_af_tag</code> and <code>--rhocallviz_af_tag</code> have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag.</td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>plot_chromograph_coverage</code></td>
+<td>Whether to plot chromograph coverage plots in the chromograph subworkflow.</td>
+<td><code>boolean</code></td>
+<td>True</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>pre_vep_snv_filter_expression</code></td>
 <td>An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ&gt;60'". The expression applies to both the clinical and the research VCFs.</td>
 <td><code>string</code></td>
 <td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>rhocallviz_af_tag</code></td>
+<td>AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to <code>--chromograph_af_tag. |</code>string`</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>rhocallviz_min_af</code></td>
+<td>Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow.</td>
+<td><code>number</code></td>
+<td>0.0001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>rhocallviz_min_qual</code></td>
+<td>Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow.</td>
+<td><code>number</code></td>
+<td>10.0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tiddit_bin_size</code></td>
+<td>Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow.</td>
+<td><code>integer</code></td>
+<td>500</td>
 <td></td>
 <td></td>
 </tr>
