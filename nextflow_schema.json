@@ -53,6 +53,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_chromograph": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set.",
+                    "default": false
+                },
                 "skip_peddy": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -469,7 +475,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -498,6 +504,14 @@
             "description": "Workflow options specific to genomic-medicine-sweden/nallo",
             "default": "",
             "properties": {
+                "bcftools_roh_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`."
+                },
+                "chromograph_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work."
+                },
                 "preset": {
                     "type": "string",
                     "default": "revio",
@@ -643,10 +657,38 @@
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
                 },
+                "plot_chromograph_autozygosity": {
+                    "type": "boolean",
+                    "description": "Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag."
+                },
+                "plot_chromograph_coverage": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to plot chromograph coverage plots in the chromograph subworkflow."
+                },
                 "pre_vep_snv_filter_expression": {
                     "type": "string",
                     "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". The expression applies to both the clinical and the research VCFs."
+                },
+                "rhocallviz_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag."
+                },
+                "rhocallviz_min_af": {
+                    "type": "number",
+                    "default": 0.0001,
+                    "description": "Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow."
+                },
+                "rhocallviz_min_qual": {
+                    "type": "number",
+                    "default": 10.0,
+                    "description": "Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow."
+                },
+                "tiddit_bin_size": {
+                    "type": "integer",
+                    "default": 500,
+                    "description": "Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow."
                 }
             },
             "required": ["preset"]
