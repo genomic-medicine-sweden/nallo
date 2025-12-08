@@ -46,6 +46,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/roh": {
+                        "branch": "master",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/sort": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
@@ -84,6 +89,11 @@
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "chromograph": {
+                        "branch": "master",
+                        "git_sha": "60f6e8c8a8b18612a5f74a097c856659af31a97c",
                         "installed_by": ["modules"]
                     },
                     "cramino": {
@@ -215,6 +225,12 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "rhocall/viz": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/rhocall/viz/rhocall-viz.diff"
+                    },
                     "samtools/convert": {
                         "branch": "master",
                         "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
@@ -336,6 +352,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "tiddit/cov": {
+                        "branch": "master",
+                        "git_sha": "f5667101797c3cd51c9dd2913261527897954ab6",
+                        "installed_by": ["modules"]
+                    },
                     "trgt/genotype": {
                         "branch": "master",
                         "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
@@ -369,12 +390,12 @@
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "271e7fc14eb1320364416d996fb077421f3faed2",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {
                         "branch": "master",
-                        "git_sha": "dcd088f483cede0c3df4034d405126f05a764cc7",
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
                         "installed_by": ["subworkflows"]
                     },
                     "vcf_filter_bcftools_ensemblvep": {

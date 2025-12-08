@@ -39,6 +39,9 @@
                 "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_ROH": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
@@ -46,6 +49,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_UNCOMPRESS": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -156,6 +162,12 @@
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
+                "RHOCALL_VIZ": {
+                    "rhocall": "0.5.1"
+                },
+                "RUN_CHROMOGRAPH": {
+                    "chromograph": "1.3.1"
+                },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
@@ -230,6 +242,9 @@
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "TRGT_GENOTYPE": {
                     "trgt": "4.0.0-429afcd"
                 },
@@ -255,6 +270,10 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "images",
+                "images/chromograph",
+                "images/chromograph/sample",
+                "images/chromograph/sample/HG002_Revio",
                 "methylation",
                 "methylation/modkit",
                 "methylation/modkit/pileup",
@@ -431,7 +450,7 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",

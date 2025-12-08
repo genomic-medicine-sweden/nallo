@@ -16,6 +16,7 @@ include { ANNOTATE_SNVS                                          } from '../subw
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS              } from '../subworkflows/local/convert_input_files'
+include { CHROMOGRAPH                                            } from '../subworkflows/local/chromograph'
 include { BAM_INFER_SEX                                          } from '../subworkflows/local/bam_infer_sex'
 include { CALL_PARALOGS                                          } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subworkflows/local/call_repeat_expansions_strdust'
@@ -35,6 +36,8 @@ include { SCATTER_GENOME                                         } from '../subw
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -49,6 +52,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 // nf-core
 include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_PLUGINSPLIT                                   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
@@ -600,6 +604,7 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
 
+        // This is really only required for ranking, could consider moving it there?
         ANN_CSQ_PLI_SNV (
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
@@ -611,6 +616,59 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
 
     }
+
+    //
+    // Concatenate and sort annotated SNVs for chromograph - requires an AF-tag, e.g. gnomad_af
+    //
+    def split_family_vcf_for_chromograph = !params.skip_chromograph && params.plot_chromograph_autozygosity && !params.skip_snv_annotation
+
+    if(split_family_vcf_for_chromograph) {
+
+        ANNOTATE_SNVS.out.vcf
+            .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_concat_sort_annotated_snvs_input }
+
+        CONCAT_SORT_ANNOTATED_SNVS (
+            ch_concat_sort_annotated_snvs_input
+        )
+        ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
+
+        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+            .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+            .set { ch_bcftools_pluginsplit_input }
+
+        // Bcftools +split needs a samples file when running in stub-mode
+        createSamplesFileFromSamplesheet(ch_input)
+            .join( ch_bcftools_pluginsplit_input, failOnMismatch:true, failOnDuplicate:true )
+            .multiMap { meta, samples_file, vcf, tbi ->
+                vcf_tbi: [ meta, vcf, tbi ]
+                samples: samples_file
+            }
+            .set { ch_bcftools_pluginsplit_input }
+
+        BCFTOOLS_PLUGINSPLIT(
+            ch_bcftools_pluginsplit_input.vcf_tbi,
+            ch_bcftools_pluginsplit_input.samples,
+            [],
+            [],
+            [],
+        )
+        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+    }
+
+    if(!params.skip_chromograph) {
+        CHROMOGRAPH(
+            ch_bam_bai,
+            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf) : [[],[]],
+            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi) : [[],[]],
+            params.plot_chromograph_coverage,
+            params.plot_chromograph_autozygosity,
+        )
+        ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
+    }
+
 
     //
     // Ranks family VCFs per variant call region
@@ -651,24 +709,20 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort SNVs (could be a subworkflow)
+    // Concatenate and sort ranked SNVs, sort and publish
     //
     if(!params.skip_snv_calling) {
 
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
-            .set { ch_bcftools_concat_in }
+            .set { ch_concat_sort_input }
 
-        // Concat into family VCFs per family with all regions
-        BCFTOOLS_CONCAT (
-            ch_bcftools_concat_in
+        CONCAT_SORT_RANKED_SNVS (
+            ch_concat_sort_input
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+        ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
-        // Sort and publish
-        BCFTOOLS_SORT ( BCFTOOLS_CONCAT.out.vcf )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
     }
 
     //
@@ -676,8 +730,8 @@ workflow NALLO {
     //
     if (!params.skip_snv_calling && !params.skip_peddy) {
 
-        BCFTOOLS_SORT.out.vcf
-            .join( BCFTOOLS_SORT.out.tbi )
+        CONCAT_SORT_RANKED_SNVS.out.vcf
+            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
             .filter { meta, _vcf, _tbi -> meta.set == "research" }
             .set { ch_peddy_in }
 
@@ -838,10 +892,28 @@ workflow NALLO {
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name:  'nallo_'  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
+            name:  'nallo_software_'  + 'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
@@ -849,25 +921,25 @@ workflow NALLO {
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config        = Channel.fromPath(
+    ch_multiqc_config        = channel.fromPath(
         "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
     ch_multiqc_custom_config = params.multiqc_config ?
-        Channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        Channel.empty()
+        channel.fromPath(params.multiqc_config, checkIfExists: true) :
+        channel.empty()
     ch_multiqc_logo          = params.multiqc_logo ?
-        Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        Channel.empty()
+        channel.fromPath(params.multiqc_logo, checkIfExists: true) :
+        channel.empty()
 
     summary_params      = paramsSummaryMap(
         workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary = Channel.value(paramsSummaryMultiqc(summary_params))
+    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
     ch_multiqc_files = ch_multiqc_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
 
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
         file(params.multiqc_methods_description, checkIfExists: true) :
         file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.of(
+    ch_methods_description                = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
     ch_methods_description_citation       = citationBibliographyText(
@@ -904,4 +976,33 @@ workflow NALLO {
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
 }
+
+def fromMultisampleToSampleMeta(multisample_channel) {
+    multisample_channel
+        .transpose()
+        .map { meta, vcf ->
+            def new_meta = meta + [ id: vcf.simpleName ]
+                [ new_meta, vcf ]
+        }
+}
+
+def createSamplesFileFromSamplesheet(input) {
+    input
+        .map { meta, _files -> [ meta.family_id, meta.id ] }
+        .unique()
+        .groupTuple()
+        .map { family_id, sample_ids ->
+            def samples_file = file("${workDir}/tmp/${family_id}.txt")
+            def ids_in_family = sample_ids.collect()
+            samples_file.text = ids_in_family.join('\n')
+            return [ [ id: family_id ], samples_file ]
+        }
+}
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    THE END
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/

@@ -436,7 +436,7 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "pipeline_info",
-                "pipeline_info/nallo_pipeline_software_mqc_versions.yml",
+                "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",

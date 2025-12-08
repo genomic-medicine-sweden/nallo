@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/Schmytzi/gms-test-datasets/0ee6ddec1e1e30ec0e8d57070c14d93f6b4095fc/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0ee6ddec1e1e30ec0e8d57070c14d93f6b4095fc/'
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
@@ -41,7 +41,7 @@ nextflow_pipeline {
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml"),
+                    removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml"),
                     // All stable path name, with a relative path
                     stable_name,
                     // All files with stable contents

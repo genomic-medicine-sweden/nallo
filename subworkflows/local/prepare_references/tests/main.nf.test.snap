@@ -256,7 +256,8 @@
                             "id": "vep_cache"
                         },
                         [
-                            "devcontainer.json:md5,5d0fb65a90fae7521d3d2cd952528f71"
+                            "devcontainer.json:md5,005dc85bc8d9dda494b741234dfe48c0",
+                            "setup.sh:md5,b92e5662743198a705138dc677e61016"
                         ]
                     ]
                 ],
@@ -294,7 +295,8 @@
                             "id": "vep_cache"
                         },
                         [
-                            "devcontainer.json:md5,5d0fb65a90fae7521d3d2cd952528f71"
+                            "devcontainer.json:md5,005dc85bc8d9dda494b741234dfe48c0",
+                            "setup.sh:md5,b92e5662743198a705138dc677e61016"
                         ]
                     ]
                 ],
