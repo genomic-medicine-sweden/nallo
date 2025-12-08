@@ -4,6 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     config "./nextflow.config"
     workflow "SPLIT_MULTISAMPLE_VCF"
+    options "-dump-channels"
 
     setup {
         run("BCFTOOLS_MERGE") {
