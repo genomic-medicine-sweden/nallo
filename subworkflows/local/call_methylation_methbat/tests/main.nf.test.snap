@@ -7,7 +7,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002_methbat_profile.tsv:md5,a53fc318345a1b0285722e9dec41673b"
                     ]
                 ],
                 "1": [
@@ -18,7 +18,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "3": [
@@ -26,7 +26,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "4": [
@@ -34,7 +34,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "5": [
@@ -49,7 +49,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -57,7 +57,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -65,7 +65,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "region_profile": [
@@ -73,7 +73,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002_methbat_profile.tsv:md5,a53fc318345a1b0285722e9dec41673b"
                     ]
                 ],
                 "versions": [
@@ -81,6 +81,18 @@
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ],
             [
                 [
                     "chrom",
@@ -115,7 +127,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:10:55.202866247"
+        "timestamp": "2025-12-08T15:09:07.612102381"
     },
     "1 sample - unphased": {
         "content": [
@@ -136,7 +148,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "3": [
@@ -157,7 +169,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -180,6 +192,18 @@
                 ]
             },
             [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ],
+            [
                 [
                     "chrom",
                     "start",
@@ -213,7 +237,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:11:04.457866713"
+        "timestamp": "2025-12-08T15:09:16.365581808"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -223,7 +247,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4be99127616b5ce8e6b42275d120996e"
+                        "HG002_methbat_profile.tsv:md5,4af2e74ea1071d89847e44890844197e"
                     ]
                 ],
                 "1": [
@@ -234,7 +258,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "3": [
@@ -242,7 +266,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "4": [
@@ -250,7 +274,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "5": [
@@ -265,7 +289,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -273,7 +297,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -281,7 +305,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "region_profile": [
@@ -289,7 +313,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4be99127616b5ce8e6b42275d120996e"
+                        "HG002_methbat_profile.tsv:md5,4af2e74ea1071d89847e44890844197e"
                     ]
                 ],
                 "versions": [
@@ -297,6 +321,18 @@
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ],
             [
                 [
                     "chrom",
@@ -349,7 +385,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:15:10.166626279"
+        "timestamp": "2025-12-08T15:09:25.944531903"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -432,13 +468,25 @@
                     "versions.yml:md5,67b1e7716f21340235291d19f475f185",
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
-            }
+            },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:11:32.566260489"
+        "timestamp": "2025-12-08T15:09:53.285119666"
     },
     "1 sample - bed phased": {
         "content": [
@@ -448,7 +496,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002_methbat_profile.tsv:md5,a53fc318345a1b0285722e9dec41673b"
                     ]
                 ],
                 "1": [
@@ -456,7 +504,7 @@
                         {
                             "id": "HG002"
                         },
-                        "test.bed:md5,48eb0a3e90a85a81388496982647798b"
+                        "test.bed:md5,3978a8db6d6d757366109e041b5e4312"
                     ]
                 ],
                 "2": [
@@ -464,7 +512,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "3": [
@@ -472,7 +520,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "4": [
@@ -480,7 +528,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "5": [
@@ -492,7 +540,7 @@
                         {
                             "id": "HG002"
                         },
-                        "test.bed:md5,48eb0a3e90a85a81388496982647798b"
+                        "test.bed:md5,3978a8db6d6d757366109e041b5e4312"
                     ]
                 ],
                 "pbcpg_biwgig_combined": [
@@ -500,7 +548,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,445520d5523f6f568e550957d7720214"
+                        "HG002_pbcpgtools.combined.bw:md5,ff6cce5334be6365a08c1e8af77f293c"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -508,7 +556,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,d1fa61457274addcfd0b2a661ef865a5"
+                        "HG002_pbcpgtools.hap1.bw:md5,4b4370a40c0b68c0831d7cd31026b852"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -516,7 +564,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,a02407bf3517a42444f70829f3b911ae"
+                        "HG002_pbcpgtools.hap2.bw:md5,9517b57f840a6ca46544ebdb31751a29"
                     ]
                 ],
                 "region_profile": [
@@ -524,7 +572,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,681f4c7d427d72333b3fec31c4b3061e"
+                        "HG002_methbat_profile.tsv:md5,a53fc318345a1b0285722e9dec41673b"
                     ]
                 ],
                 "versions": [
@@ -532,6 +580,18 @@
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ],
             [
                 [
                     "chrom",
@@ -566,7 +626,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:11:15.002874562"
+        "timestamp": "2025-12-08T15:09:35.848253187"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -659,13 +719,25 @@
                     "versions.yml:md5,67b1e7716f21340235291d19f475f185",
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
-            }
+            },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:11:40.800613942"
+        "timestamp": "2025-12-08T15:10:01.535964408"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -691,7 +763,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "3": [
@@ -717,7 +789,7 @@
                         {
                             "id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,678ec18e53be71c27b3b0958743c7685"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -739,6 +811,18 @@
                     "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
+            [
+                {
+                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
+                        "methbat": "0.16.1-8a0a24c"
+                    }
+                },
+                {
+                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                        "pbcpgtools": "3.0.0"
+                    }
+                }
+            ],
             [
                 [
                     "chrom",
@@ -773,6 +857,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.7"
         },
-        "timestamp": "2025-12-01T17:11:24.012333117"
+        "timestamp": "2025-12-08T15:09:44.606434679"
     }
 }

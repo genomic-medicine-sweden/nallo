@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
-- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT` subworkflows, with new nf-core modules pb-cpg-tools/alignedbamtocpgscores and methbat/profile.
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
-- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Changed `METHYLATION` subworkflow by splitting to `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT`.
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Renamed `METHYLATION` subworkflow to `CALL_METHYLATION_MODKIT` and changed output structure
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 
 ### `Removed`
@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                              | `--methbat_female_label`          |
 |                              | `--run_methbat`                   |
 |                              | `--run_modkit`                    |
-|                              | `--extra_methbat_options`         |
+|                              | `--extra_methbat_profile_options` |
 |                              | `--methbat_regions`               |
 
 > [!NOTE]

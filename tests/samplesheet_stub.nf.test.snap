@@ -665,9 +665,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.7"
         },
-        "timestamp": "2025-11-27T15:46:53.733199764"
+        "timestamp": "2025-12-08T14:39:29.887228524"
     },
     "Test family id same as sample id": {
         "content": [

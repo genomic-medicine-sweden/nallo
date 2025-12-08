@@ -779,26 +779,25 @@ workflow NALLO {
     }
 
     //
-    // Create methylation pileups with modkit or create methylation profile with methbat
+    // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if(!params.skip_methylation_calling) {
-        if (params.run_modkit) {
-            CALL_METHYLATION_MODKIT (
-                !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
-                ch_fasta,
-                ch_fai,
-                ch_modkit_call_regions,
-                params.bigwig_modcodes
-            )
-            ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
-        }
-        if (params.run_methbat) {
-            CALL_METHYLATION_METHBAT (
-                !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
-                ch_methbat_regions
-            )
-            ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
-        }
+    if(!params.skip_methylation_calling && params.run_modkit) {
+        CALL_METHYLATION_MODKIT(
+            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            ch_fasta,
+            ch_fai,
+            ch_modkit_call_regions,
+            params.bigwig_modcodes
+        )
+        ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
+    }
+
+    if (!params.skip_methylation_calling && params.run_methbat) {
+        CALL_METHYLATION_METHBAT(
+            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            ch_methbat_regions
+        )
+        ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
 
     //
