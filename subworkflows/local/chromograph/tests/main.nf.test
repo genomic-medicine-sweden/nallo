@@ -1,0 +1,322 @@
+nextflow_workflow {
+
+    name "Test Workflow CHROMOGRAPH"
+    script "../main.nf"
+    workflow "CHROMOGRAPH"
+    config "./nextflow.config"
+
+    setup {
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = [
+                    [ id: 'vep_cache' ],
+                    file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
+                ]
+                input[2] = true
+                input[3] = true
+                """
+            }
+        }
+
+        run("ANNOTATE_SNVS") {
+            script "../../annotate_snvs/main.nf"
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003', num_intervals:1 ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = [
+                    file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)
+                ]
+                input[2] = PREPARE_REFERENCES.out.fasta
+                input[3] = PREPARE_REFERENCES.out.fai
+                input[4] = PREPARE_REFERENCES.out.vep_resources.map { meta, cache -> cache }
+                input[5] = Channel.value('110')
+                input[6] = Channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = Channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+    }
+
+    test("plot all") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = true
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot coverage") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = true
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot autozygosity") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = false
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot nothing") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = false
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot all -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = true
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot coverage -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = true
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot autozygosity -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = false
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("plot nothing -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'HG003' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = ANNOTATE_SNVS.out.vcf
+                input[2] = ANNOTATE_SNVS.out.tbi
+                input[3] = false
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+
+    }
+
+}

@@ -38,6 +38,10 @@ tool:
   cadd:
     citation: "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)"
     bibliography: "Rentzsch P, Schubach M, Shendure J, Kircher M. CADD-Splice—improving genome-wide variant effect prediction using deep learning-derived splice scores. Genome Med. 2021;13(1):31. doi:10.1186/s13073-021-00835-9"
+  chromograph:
+    citation: "chromograph (Laaksonen et al. 2019)"
+    bibliography: ""
+
   clean_sniffles:
     citation: "clean_sniffles (Eisfeldt 2024)"
     bibliography: ""
@@ -113,6 +117,9 @@ tool:
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
+  rhocall:
+    citation: "Rhocall (Nilsson et al. 2016)"
+    bibliography: ""
   samtools:
     citation: "SAMtools (Danecek et al. 2021)"
     bibliography: "Danecek P, Bonfield JK, Liddle J, et al. Twelve years of SAMtools and BCFtools. GigaScience. 2021;10(2):giab008. doi:10.1093/gigascience/giab008"
@@ -145,6 +152,9 @@ tool:
     bibliography: "Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011;27(5):718-719. doi:10.1093/bioinformatics/btq671"
   tagbam:
     citation: "Felix Lenner (2025)"
+    bibliography: ""
+  tiddit:
+    citation: "TIDDIT (Eisfeldt et al. 2013)"
     bibliography: ""
   trgt:
     citation: "TRGT (Dolzhenko et al. 2024)"

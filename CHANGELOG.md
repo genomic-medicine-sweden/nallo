@@ -7,13 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT` subworkflows, with new nf-core modules pb-cpg-tools/alignedbamtocpgscores and methbat/profile.
 
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Changed `METHYLATION` subworkflow by splitting to `CALL_METHYLATION_METHBAT` and `CALL_METHYLATION_MODKIT`.
+- [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 
 ### `Removed`
 
@@ -25,16 +29,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter                | New parameter                |
-| ---------------------------- | ---------------------------- |
-| `--methylation_call_regions` | `--modkit_call_regions`      |
-| `--skip_methylation_pileups` | `--skip_methylation_calling` |
-|                              | `--methbat_male_label`       |
-|                              | `--methbat_female_label`     |
-|                              | `--run_methbat`              |
-|                              | `--run_modkit`               |
-|                              | `--extra_methbat_options`    |
-|                              | `--methbat_regions`          |
+| Old parameter                | New parameter                     |
+| ---------------------------- | --------------------------------- |
+|                              | `--skip_chromograph`              |
+|                              | `--bcftools_roh_af_tag`           |
+|                              | `--chromograph_af_tag`            |
+|                              | `--plot_chromograph_coverage`     |
+|                              | `--plot_chromograph_autozygosity` |
+|                              | `--rhocallviz_af_tag`             |
+|                              | `--rhocallviz_min_af`             |
+|                              | `--rhocallviz_min_qual`           |
+|                              | `--tiddit_bin_size`               |
+| `--methylation_call_regions` | `--modkit_call_regions`           |
+| `--skip_methylation_pileups` | `--skip_methylation_calling`      |
+|                              | `--methbat_male_label`            |
+|                              | `--methbat_female_label`          |
+|                              | `--run_methbat`                   |
+|                              | `--run_modkit`                    |
+|                              | `--extra_methbat_options`         |
+|                              | `--methbat_regions`               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -45,6 +58,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool                             | Old version | New version |
 | -------------------------------- | ----------- | ----------- |
+| chromograph                      |             | 1.3.1       |
+| bcftools/pluginsplit             |             | 1.22        |
+| bcftools/roh                     |             | 1.22        |
+| rhocall/viz                      |             | 0.5.1       |
+| tiddit                           |             | 3.9.3       |
 | methbat/profile                  |             | 0.16.1      |
 | pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
 

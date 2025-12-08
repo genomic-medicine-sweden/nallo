@@ -15,6 +15,7 @@ Allows skipping certain parts of the pipeline
 | `skip_methylation_calling` | Skip generation of methylation pileups | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
+| `skip_chromograph` | Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set. | `boolean` | False |  |  |
 | `skip_peddy` | Skip peddy | `boolean` | False |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
@@ -110,7 +111,9 @@ Workflow options specific to genomic-medicine-sweden/nallo
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) | `string` | revio | True |  |
+| `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`. | `string` |  |  |  |
+| `chromograph_af_tag` | AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
+| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) (accepted: `revio`\|`pacbio`\|`ONT_R10`) | `string` | revio | True |  |
 | `sv_callers` | Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_run` | Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
@@ -140,4 +143,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
+| `plot_chromograph_autozygosity` | Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag. | `boolean` |  |  |  |
+| `plot_chromograph_coverage` | Whether to plot chromograph coverage plots in the chromograph subworkflow. | `boolean` | True |  |  |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |
+| `rhocallviz_af_tag` | AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag. | `string` |  |  |  |
+| `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
+| `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
+| `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |

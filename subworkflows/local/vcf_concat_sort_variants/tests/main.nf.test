@@ -1,0 +1,90 @@
+nextflow_workflow {
+
+    name "Test Workflow VCF_CONCAT_SORT_VARIANTS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "VCF_CONCAT_SORT_VARIANTS"
+
+    test("one family with multiple VCFS, one family with single VCF") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_1' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz', checkIfExists: true),
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz.tbi', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz.tbi', checkIfExists: true),
+                        ]
+                    ],
+                    [
+                        [ id: 'test_2' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                        ]
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("two samples -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id: 'test_1' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz', checkIfExists: true),
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz.tbi', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chrX.vcf.gz.tbi', checkIfExists: true),
+                        ]
+                    ],
+                    [
+                        [ id: 'test_2' ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                        ],
+                        [
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                        ]
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+}

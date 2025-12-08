@@ -18,6 +18,7 @@ nextflow_pipeline {
                 cadd_resources               = "$projectDir/assets"
                 cadd_prescored_indels        = "$projectDir/docs"
                 // Skip irrelevant steps
+                skip_chromograph             = true
                 skip_genome_assembly         = true
                 skip_call_paralogs           = true
                 skip_qc                      = true
@@ -59,6 +60,7 @@ nextflow_pipeline {
                 // Mock inputs for VEP
                 vep_cache                    = "$projectDir/assets"
                 // Skip irrelevant steps
+                skip_chromograph             = true
                 skip_genome_assembly         = true
                 skip_call_paralogs           = true
                 skip_qc                      = true
@@ -101,6 +103,7 @@ nextflow_pipeline {
                 skip_genome_assembly         = true
                 // Skip irrelevant steps
                 skip_call_paralogs           = true
+                skip_chromograph             = true
                 skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_calling              = true
@@ -133,9 +136,8 @@ nextflow_pipeline {
         }
     }
 
-    test("Test alignment without genome assembly and --alignment_processes 1") {
+    test("Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage") {
         options "-stub"
-
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/9738b4e326524fa4a3d43a3b738d645a7fbd04b2/'
@@ -143,19 +145,20 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
                 alignment_processes          = 1
+                plot_chromograph_autozygosity = false
                 // Skip irrelevant steps
-                skip_call_paralogs           = true
-                skip_snv_calling             = true
-                skip_qc                      = true
-                skip_sv_calling              = true
-                skip_sv_annotation           = true
-                skip_peddy                   = true
-                skip_snv_annotation          = true
-                skip_phasing                 = true
-                skip_rank_variants           = true
-                skip_repeat_calling          = true
-                skip_repeat_annotation       = true
-                skip_methylation_calling     = true
+                skip_call_paralogs            = true
+                skip_snv_calling              = true
+                skip_qc                       = true
+                skip_sv_calling               = true
+                skip_sv_annotation            = true
+                skip_peddy                    = true
+                skip_snv_annotation           = true
+                skip_phasing                  = true
+                skip_rank_variants            = true
+                skip_repeat_calling           = true
+                skip_repeat_annotation        = true
+                skip_methylation_calling      = true
             }
         }
 
@@ -187,6 +190,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 skip_alignment               = true
                 skip_call_paralogs           = true
+                skip_chromograph             = true
                 skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_calling              = true
@@ -228,6 +232,7 @@ nextflow_pipeline {
                 input                                   = "$projectDir/assets/samplesheet.csv"
                 outdir                                  = "$outputDir"
                 skip_call_paralogs                      = true
+                skip_chromograph                        = true
                 skip_methylation_calling                = true
                 skip_peddy                              = true
                 skip_phasing                            = true

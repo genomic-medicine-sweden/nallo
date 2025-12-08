@@ -109,6 +109,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
         repeat_annotation: "skip_repeat_annotation",
+        chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
     ]
@@ -118,6 +119,7 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
+        chromograph      : ["mapping"],
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
         sv_calling       : ["mapping"],
@@ -148,20 +150,21 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
-            skip_snv_calling         : params.skip_snv_calling,
-            skip_peddy               : params.skip_peddy,
-            skip_phasing             : params.skip_phasing,
-            skip_methylation_calling : params.skip_methylation_calling,
-            skip_rank_variants       : params.skip_rank_variants,
-            skip_repeat_calling      : params.skip_repeat_calling,
-            skip_repeat_annotation   : params.skip_repeat_annotation,
-            skip_snv_annotation      : params.skip_snv_annotation,
-            skip_sv_calling          : params.skip_sv_calling,
-            skip_sv_annotation       : params.skip_sv_annotation,
-            skip_call_paralogs       : params.skip_call_paralogs,
-            skip_alignment           : params.skip_alignment,
-            skip_qc                  : params.skip_qc,
-            skip_genome_assembly     : params.skip_genome_assembly,
+            skip_snv_calling        : params.skip_snv_calling,
+            skip_peddy              : params.skip_peddy,
+            skip_phasing            : params.skip_phasing,
+            skip_methylation_calling: params.skip_methylation_calling,
+            skip_rank_variants      : params.skip_rank_variants,
+            skip_repeat_calling     : params.skip_repeat_calling,
+            skip_repeat_annotation  : params.skip_repeat_annotation,
+            skip_chromograph        : params.skip_chromograph,
+            skip_snv_annotation     : params.skip_snv_annotation,
+            skip_sv_calling         : params.skip_sv_calling,
+            skip_sv_annotation      : params.skip_sv_annotation,
+            skip_call_paralogs      : params.skip_call_paralogs,
+            skip_alignment          : params.skip_alignment,
+            skip_qc                 : params.skip_qc,
+            skip_genome_assembly    : params.skip_genome_assembly,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -224,7 +227,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)

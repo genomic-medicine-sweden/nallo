@@ -140,7 +140,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-01T16:44:05.69093745"
+        "timestamp": "2025-11-27T15:47:22.297513529"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -338,7 +338,107 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-01T16:47:47.524736226"
+        "timestamp": "2025-11-27T15:48:45.039068309"
+    },
+    "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
+        "content": [
+            13,
+            {
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "RUN_CHROMOGRAPH": {
+                    "chromograph": "1.3.1"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_IMPORT": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002_Revio",
+                "aligned_reads/HG002_Revio/HG002_Revio.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "images",
+                "images/chromograph",
+                "images/chromograph/sample",
+                "images/chromograph/sample/HG002_Revio",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr1.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr10.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr11.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr12.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr13.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr14.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr15.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr16.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr17.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr18.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr19.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr2.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr20.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr21.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr22.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr3.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr4.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr5.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr6.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr7.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr8.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr9.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrM.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-05T18:28:11.943219607"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -397,10 +497,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
+            "nf-test": "0.9.3",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-01T16:47:20.432478242"
+        "timestamp": "2025-11-26T16:37:12.618190804"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -567,11 +667,11 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-01T16:43:36.010070625"
+        "timestamp": "2025-11-27T15:46:53.733199764"
     },
     "Test family id same as sample id": {
         "content": [
-            162,
+            170,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -600,10 +700,16 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_PLUGINSPLIT": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_ROH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -613,6 +719,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_UNCOMPRESS": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -725,6 +834,12 @@
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
+                "RHOCALL_VIZ": {
+                    "rhocall": "0.5.1"
+                },
+                "RUN_CHROMOGRAPH": {
+                    "chromograph": "1.3.1"
+                },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
@@ -805,6 +920,9 @@
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.3"
+                },
                 "TRGT_GENOTYPE": {
                     "trgt": "4.0.0-429afcd"
                 },
@@ -837,6 +955,60 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "images",
+                "images/chromograph",
+                "images/chromograph/sample",
+                "images/chromograph/sample/HG002_Revio",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr1.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr10.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr11.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr12.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr13.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr14.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr15.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr16.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr17.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr18.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr19.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr2.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr20.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr21.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr22.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr3.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr4.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr5.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr6.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr7.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr8.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr9.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrM.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrX.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrY.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr1.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr10.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr11.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr12.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr13.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr14.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr15.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr16.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr17.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr18.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr19.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr2.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr20.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr21.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr22.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr3.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr4.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr5.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr6.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr7.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr8.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr9.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrM.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
+                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002_Revio",
@@ -1045,71 +1217,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-12-01T16:44:25.040241575"
-    },
-    "Test alignment without genome assembly and --alignment_processes 1": {
-        "content": [
-            11,
-            {
-                "GUNZIP_FASTA": {
-                    "gunzip": 1.13
-                },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
-                },
-                "RELATE_RELATE": {
-                    "somalier": "0.2.18"
-                },
-                "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_IMPORT": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
-                },
-                "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
-                },
-                "UNTAR_VEP_CACHE": {
-                    "untar": 1.34
-                },
-                "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
-                }
-            },
-            [
-                "aligned_reads",
-                "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio.bai",
-                "aligned_reads/HG002_Revio/HG002_Revio.bam",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "pipeline_info",
-                "pipeline_info/nallo_software_mqc_versions.yml",
-                "qc",
-                "qc/somalier",
-                "qc/somalier/relate",
-                "qc/somalier/relate/test",
-                "qc/somalier/relate/test/test.html",
-                "qc/somalier/relate/test/test.pairs.tsv",
-                "qc/somalier/relate/test/test.samples.tsv"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-12-01T16:44:43.898235793"
+        "timestamp": "2025-11-27T15:47:39.674638327"
     }
 }

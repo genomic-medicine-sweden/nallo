@@ -295,6 +295,10 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 Turned off with `--skip_snv_annotation`.
 
+!!!tip
+
+    If variants are annotated with allele frequecies, these can be used in the `chromograph` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). By default only coverage plots are generated, since the pipeline doesn't require annotation with allele frequencies. Annotate variants with allele frequencies (e.g. from gnomAD), and set the tag using `--chromograph_af_tag`.
+
 #### Rank SNVs and INDELs
 
 This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:
