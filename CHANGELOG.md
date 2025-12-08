@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file instead of svgz
 
 ### `Removed`
 
