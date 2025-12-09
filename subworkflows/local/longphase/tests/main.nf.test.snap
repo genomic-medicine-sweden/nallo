@@ -6,7 +6,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,bf55df451aeb00c5af30b38844c5fd50"
+                    "FAM_phased_snv.vcf.gz:md5,64c15447f5d4ea4028f81fa92a7cdd3d"
                 ]
             ],
             [
@@ -14,16 +14,16 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,60cbf29d58d8386439fdc134ad84b1e4"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,d3c11c1580d43abf6c0d23ea178dc638"
                 ]
             ],
-            "b89441e8fcadef5e42a7e9c04dfeb57e",
+            "9e04b217b8362bf9ae62d6f15337ad2c",
             [
                 [
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_sv.vcf.gz.tbi:md5,9ed06cd46ac22119da3deb9c59ad1289"
+                    "FAM_phased_sv.vcf.gz.tbi:md5,a969ba56ffe566139de370b55d255d03"
                 ]
             ],
             [
@@ -52,7 +52,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-08T17:41:21.051153729"
+        "timestamp": "2025-12-09T09:33:13.36959353"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -325,7 +325,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,ea67bd87c5172ad7182ce1dddbf16b44"
+                    "FAM_phased_snv.vcf.gz:md5,e0bda1de59536254bd0c7b01fbd7209c"
                 ]
             ],
             [
@@ -333,11 +333,11 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,60d71ab813e82673431101020e7d4d48"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,ccab1f4cea00c8168f94882041dc56f3"
                 ]
             ],
             [
-                "##fileDate=20251208",
+                "##fileDate=20251209",
                 "##reference=file://hg38.test.fa",
                 "##source=\"sawfish 2.2.0\"",
                 "##sawfish_cmdline=\"sawfish joint-call --threads 2 --ref hg38.test.fa --sample HG002 --sample HG003 --output-dir FAM\"",
@@ -398,8 +398,6 @@
                 "##FORMAT=<ID=PS,Number=1,Type=Integer,Description=\"Phase set identifier\">",
                 "##INFO=<ID=AC,Number=A,Type=Integer,Description=\"Allele count in genotypes\">",
                 "##INFO=<ID=AN,Number=1,Type=Integer,Description=\"Total number of alleles in called genotypes\">",
-                "##bcftools_viewVersion=1.22+htslib-1.22.1",
-                "##bcftools_viewCommand=view --output HG002.sv.vcf.gz --output-type z --samples HG002 --threads 2 FAM_genotyped.sv.vcf.gz; Date=Mon Dec  8 17:41:51 2025",
                 "##longphaseVersion=2.0",
                 "##commandline=\"phase --pb --indels --threads 2 -o HG002_phased --reference hg38.test.fa --snp-file HG002.snv.vcf.gz -b HG002_PacBio_Revio.bam --sv-file HG002.sv.vcf.gz \"",
                 "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tHG002\tHG003",
@@ -598,7 +596,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_sv.vcf.gz.tbi:md5,a137240fae7192ec7e2ad395d9ef45d8"
+                    "FAM_phased_sv.vcf.gz.tbi:md5,4cd7295dd2f0389bde4004a2a1249264"
                 ]
             ],
             [
@@ -642,7 +640,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-08T17:41:56.168924468"
+        "timestamp": "2025-12-09T09:33:49.102621115"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -652,7 +650,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,56c62f1710f7996327a18309f68425eb"
+                        "FAM_phased_snv.vcf.gz:md5,4e65f685a7c9058c7348504f56f28b48"
                     ]
                 ],
                 "1": [
@@ -660,7 +658,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,0ee126ec940222e0d3618ad4b0dad6e9"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,e761ccf5e02543bef059e3f5af1c6988"
                     ]
                 ],
                 "2": [
@@ -723,7 +721,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,56c62f1710f7996327a18309f68425eb"
+                        "FAM_phased_snv.vcf.gz:md5,4e65f685a7c9058c7348504f56f28b48"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -731,7 +729,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,0ee126ec940222e0d3618ad4b0dad6e9"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,e761ccf5e02543bef059e3f5af1c6988"
                     ]
                 ],
                 "phased_family_svs": [
@@ -759,7 +757,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-08T17:40:49.080788635"
+        "timestamp": "2025-12-09T09:32:40.168539794"
     },
     "1 sample - SNVs only - stub": {
         "content": [
@@ -860,7 +858,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,26751bd719c57c1895996102ac8f7c0e"
+                        "FAM_phased_snv.vcf.gz:md5,cf22475f9076dc86e382b66ab344d371"
                     ]
                 ],
                 "1": [
@@ -868,7 +866,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c94dfe0387fe613d76dfb8364741c643"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,731444ba89914662c7008f1acd5d2903"
                     ]
                 ],
                 "2": [
@@ -910,7 +908,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,26751bd719c57c1895996102ac8f7c0e"
+                        "FAM_phased_snv.vcf.gz:md5,cf22475f9076dc86e382b66ab344d371"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -918,7 +916,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c94dfe0387fe613d76dfb8364741c643"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,731444ba89914662c7008f1acd5d2903"
                     ]
                 ],
                 "phased_family_svs": [
@@ -941,7 +939,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-08T17:40:29.775044007"
+        "timestamp": "2025-12-09T09:32:20.309452004"
     },
     "2 samples - SNVs only - stub": {
         "content": [
