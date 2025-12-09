@@ -66,6 +66,13 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "4": [
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
+                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -129,6 +136,13 @@
                         },
                         "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
+                ],
+                "versions": [
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
                 ]
             }
         ],
@@ -136,11 +150,17 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-24T14:16:00.343752381"
+        "timestamp": "2025-12-09T15:57:07.291262676"
     },
     "2 samples - SNVs + SVs": {
         "content": [
-            null,
+            [
+                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
+            ],
             [
                 [
                     {
@@ -264,11 +284,16 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-01T15:16:52.930214128"
+        "timestamp": "2025-12-09T15:56:20.190232122"
     },
     "2 samples - SNVs only": {
         "content": [
-            null,
+            [
+                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
+            ],
             [
                 [
                     {
@@ -392,7 +417,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-01T15:15:19.514163453"
+        "timestamp": "2025-12-09T15:55:41.797502277"
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -461,6 +486,12 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "4": [
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
+                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -524,6 +555,12 @@
                         },
                         "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
+                ],
+                "versions": [
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
                 ]
             }
         ],
@@ -531,6 +568,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-13T11:10:06.057172111"
+        "timestamp": "2025-12-09T15:56:41.166807217"
     }
 }
