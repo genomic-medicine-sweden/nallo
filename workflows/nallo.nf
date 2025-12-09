@@ -50,11 +50,10 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modu
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT                                   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT                                   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_VIEW                                     } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
@@ -831,7 +830,7 @@ workflow NALLO {
             params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
             RANK_VARIANTS_SVS.out.vcf
 
-        BCFTOOLS_VIEW (
+        BCFTOOLS_VIEW_SV (
             ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
             [],
             [],

@@ -63,4 +63,5 @@ workflow QC_PHASING {
     phasing_blocks = WHATSHAP_STATS.out.blocks             // channel: [ val(meta), path(blocks) ]
     phasing_blocks_index = WHATSHAP_STATS.out.blocks_index // channel: [ val(meta), path(blocks_index) ]
     haplotagging_stats = CRAMINO.out.stats                 // channel: [ val(meta), path(stats) ]
+    versions = ch_versions                                 // channel: [ path(versions.yml) ]
 }

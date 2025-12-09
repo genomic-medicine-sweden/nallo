@@ -91,6 +91,7 @@ workflow PHASING {
         ch_family_to_samples,
         phase_with_svs && !phaser.equals("whatshap")
     )
+    ch_versions = ch_versions.mix(QC_PHASING.out.versions)
 
     if (cram_output) {
         SAMTOOLS_CONVERT (

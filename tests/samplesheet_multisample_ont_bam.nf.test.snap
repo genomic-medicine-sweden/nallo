@@ -219,6 +219,11 @@
                     "bgzip": 1.22,
                     "tabix": 1.22
                 },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.8,
+                    "bgzip": 1.22,
+                    "tabix": 1.22
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.9.0dev"
                 }
@@ -227,10 +232,13 @@
                 "aligned_reads",
                 "aligned_reads/HG002_ONT_A",
                 "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam",
+                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai",
                 "aligned_reads/HG002_ONT_B",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
+                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
                 "aligned_reads/HG002_ONT_C",
                 "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam",
+                "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_ONT_A",
@@ -1165,6 +1173,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-09T09:09:36.041306549"
+        "timestamp": "2025-12-09T15:42:28.399273313"
     }
 }
