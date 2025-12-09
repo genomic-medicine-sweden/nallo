@@ -600,13 +600,6 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "pedigree/family/FAM2.ped",
-                "phased_variants",
-                "phased_variants/FAM",
-                "phased_variants/FAM/FAM_phased.vcf.gz",
-                "phased_variants/FAM/FAM_phased.vcf.gz.tbi",
-                "phased_variants/FAM2",
-                "phased_variants/FAM2/FAM2_phased.vcf.gz",
-                "phased_variants/FAM2/FAM2_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -1092,14 +1085,6 @@
             ],
             [
                 [
-                    "FAM_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=128, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "FAM2_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=128, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_repeat_expansions.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
@@ -1180,6 +1165,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-11-27T09:14:12.269996183"
+        "timestamp": "2025-12-09T09:09:36.041306549"
     }
 }

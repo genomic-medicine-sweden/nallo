@@ -73,13 +73,13 @@ workflow PHASING {
             fai,
             phase_with_svs
         )
-        ch_versions = ch_versions.mix(RUN_HIPHASE.out.versions)
+        ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
-        ch_phased_family_snvs     = RUN_HIPHASE.out.phased_snvs
-        ch_phased_family_snvs_tbi = RUN_HIPHASE.out.phased_snvs_tbi
-        ch_phased_family_svs      = RUN_HIPHASE.out.phased_svs
-        ch_phased_family_svs_tbi  = RUN_HIPHASE.out.phased_svs_tbi
-        ch_bam_bai_haplotagged    = RUN_HIPHASE.out.haplotagged_bam_bai
+        ch_phased_family_snvs     = HIPHASE.out.phased_snvs
+        ch_phased_family_snvs_tbi = HIPHASE.out.phased_snvs_tbi
+        ch_phased_family_svs      = HIPHASE.out.phased_svs
+        ch_phased_family_svs_tbi  = HIPHASE.out.phased_svs_tbi
+        ch_bam_bai_haplotagged    = HIPHASE.out.haplotagged_bam_bai
     }
 
     QC_PHASING (
