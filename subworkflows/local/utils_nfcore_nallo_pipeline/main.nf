@@ -626,7 +626,7 @@ def validateWorkflowCompatibility() {
         }
     }
 
-    if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers != 'sawfish') {
+    if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
         error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
     }
 }
