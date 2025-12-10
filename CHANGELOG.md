@@ -39,8 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--rhocallviz_min_af`             |
 |               | `--rhocallviz_min_qual`           |
 |               | `--tiddit_bin_size`               |
-|               | `--genmod_compound_penalty`       |
-|               | `--genmod_compound_threshold`     |
+|               | `--genmod_compound_snv_penalty`   |
+|               | `--genmod_compound_snv_threshold` |
+|               | `--genmod_compound_sv_penalty`    |
+|               | `--genmod_compound_sv_threshold`  |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

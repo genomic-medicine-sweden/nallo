@@ -140,8 +140,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
-| `genmod_compound_penalty` | Genmod compound penalty applied together with `--genmod_compound_threshold`. | `number` | 6 |  |  |
-| `genmod_compound_threshold` | Genmod compound threshold for model-dependent penalty if no compounds with passing score. | `number` | 6 |  |  |
+| `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs applied together with `--genmod_compound_snv_threshold`. | `number` | 6 |  |  |
+| `genmod_compound_snv_threshold` | Genmod compound threshold for SNVs model-dependent penalty if no compounds with passing score. | `number` | 6 |  |  |
+| `genmod_compound_sv_penalty` | Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`. | `number` | 6 |  |  |
+| `genmod_compound_sv_threshold` | Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score. | `number` | 6 |  |  |
 | `plot_chromograph_autozygosity` | Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag. | `boolean` |  |  |  |
 | `plot_chromograph_coverage` | Whether to plot chromograph coverage plots in the chromograph subworkflow. | `boolean` | True |  |  |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |

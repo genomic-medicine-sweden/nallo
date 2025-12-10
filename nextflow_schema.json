@@ -657,15 +657,25 @@
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
                 },
-                "genmod_compound_penalty": {
+                "genmod_compound_snv_penalty": {
                     "type": "number",
                     "default": 6,
-                    "description": "Genmod compound penalty applied together with `--genmod_compound_threshold`."
+                    "description": "Genmod compound penalty for SNVs applied together with `--genmod_compound_snv_threshold`."
                 },
-                "genmod_compound_threshold": {
+                "genmod_compound_snv_threshold": {
                     "type": "number",
                     "default": 6,
-                    "description": "Genmod compound threshold for model-dependent penalty if no compounds with passing score."
+                    "description": "Genmod compound threshold for SNVs model-dependent penalty if no compounds with passing score."
+                },
+                "genmod_compound_sv_penalty": {
+                    "type": "number",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`."
+                },
+                "genmod_compound_sv_threshold": {
+                    "type": "number",
+                    "default": 6,
+                    "description": "Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score."
                 },
                 "plot_chromograph_autozygosity": {
                     "type": "boolean",
