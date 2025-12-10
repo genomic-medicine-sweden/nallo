@@ -69,15 +69,13 @@ This document describes the pipeline output files and the tools used to generate
 
 [LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/), or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used for phasing.
 
-| Path                                                              | Description                   |
-| ----------------------------------------------------------------- | ----------------------------- |
-| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags  |
-| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file    |
-| `phased_variants/{sample}/*.vcf.gz`                               | VCF file with phased variants |
-| `phased_variants/{sample}/*.vcf.gz.tbi`                           | Index of the VCF file         |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz`                       | Phase block file              |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz.tbi`                   | Index of block file           |
-| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file       |
+| Path                                                              | Description                  |
+| ----------------------------------------------------------------- | ---------------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file   |
+| `qc/phasing_stats/{sample}/*.blocks.gtf.gz`                       | Phase block file             |
+| `qc/phasing_stats/{sample}/*.blocks.gtf.gz.tbi`                   | Index of block file          |
+| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file      |
 
 ## QC
 

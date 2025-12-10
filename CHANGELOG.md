@@ -7,18 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added co-phasing of SNVs and SVs for HiPhase and Longphase
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Moved phasing subworkflow to run before annotation
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 
 ### `Removed`
 
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Removed output of phased variants without annotation
 - [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
 
 ### `Fixed`
@@ -49,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Tool                 | Old version | New version |
 | -------------------- | ----------- | ----------- |
 | chromograph          |             | 1.3.1       |
+| bcftools/concat      | 1.22        | 1.21        |
 | bcftools/pluginsplit |             | 1.22        |
 | bcftools/roh         |             | 1.22        |
 | rhocall/viz          |             | 0.5.1       |
