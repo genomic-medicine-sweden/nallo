@@ -16,7 +16,7 @@
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -137,10 +137,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-27T15:47:22.297513529"
+        "timestamp": "2025-12-10T16:00:11.731231485"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -151,7 +151,7 @@
                     "busybox_awk": "1.36.1"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -335,10 +335,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-27T15:48:45.039068309"
+        "timestamp": "2025-12-10T16:01:47.372216001"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -435,10 +435,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-05T18:28:11.943219607"
+        "timestamp": "2025-12-10T16:00:57.306346287"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -498,9 +498,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.6"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-26T16:37:12.618190804"
+        "timestamp": "2025-12-10T16:01:19.54880683"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -522,7 +522,7 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -664,14 +664,14 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-08T14:39:29.887228524"
+        "timestamp": "2025-12-10T15:59:34.680484678"
     },
     "Test family id same as sample id": {
         "content": [
-            170,
+            178,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -686,7 +686,7 @@
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
@@ -737,9 +737,6 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CRAMINO_PHASED": {
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
@@ -856,9 +853,6 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_INDEX_LONGPHASE": {
-                    "samtools": "1.22.1"
-                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.22.1"
                 },
@@ -909,9 +903,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_LONGPHASE_PHASE": {
                     "tabix": 1.21
                 },
                 "TABIX_SEVERUS": {
@@ -1042,11 +1033,6 @@
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/HG002_Revio.ped",
-                "phased_variants",
-                "phased_variants/HG002_Revio",
-                "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz",
-                "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.csi",
-                "phased_variants/HG002_Revio/HG002_Revio_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -1146,10 +1132,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-03T15:05:27.589739484"
+        "timestamp": "2025-12-10T16:02:37.083982498"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1214,9 +1200,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-27T15:47:39.674638327"
+        "timestamp": "2025-12-10T16:00:36.652965144"
     }
 }

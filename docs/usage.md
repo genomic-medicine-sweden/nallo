@@ -217,7 +217,16 @@ Turned off with `--skip_sv_calling`.
 
 #### Phasing
 
-This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.
+This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment, SNV calling subworkflows, but requires no additional files.
+
+If SVs were called, they are phased together with SNVs if supported by the selected phaser.
+The phaser can be chosen using the `--phaser` argument. See the following table for capabilites:
+
+| Phaser    | Parameter Value | Supports SV phasing | Supported SV callers |
+| --------- | --------------- | ------------------- | -------------------- |
+| Longphase | `longphase`     | Yes                 | Any                  |
+| WhatsHap  | `whatshap`      | No                  |                      |
+| HiPhase   | `hiphase`       | Yes                 | Sawfish only         |
 
 Turned off with `--skip_phasing`.
 
@@ -259,7 +268,9 @@ Turned off with `--skip_repeat_annotation`.
 
 #### SNV annotation
 
-This subworkflow relies on the alignment and SNV calling, and requires the following additional files:
+This subworkflow relies on the alignment and SNV calling. If phasing is enabled, phased SNVs will be annotated.
+
+The following additional files are required:
 
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
@@ -312,7 +323,9 @@ Turned off with `--skip_rank_variants`.
 
 #### SV annotation
 
-This subworkflow relies on the alignment subworkflow, and requires the following additional files:
+This subworkflow relies on the alignment and SV calling subworkflows. If SV phasing is enabled, phased SVs will be annotated.
+
+The following additional files are required:
 
 | Parameter                        | Description                                                                                                                                                                                                                                                                                                                                        |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

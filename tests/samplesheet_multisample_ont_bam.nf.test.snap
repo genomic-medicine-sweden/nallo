@@ -16,7 +16,7 @@
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -64,9 +64,6 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CRAMINO_PHASED": {
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
@@ -157,7 +154,7 @@
                 "SAMTOOLS_FASTQ": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_INDEX_WHATSHAP": {
+                "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGE": {
@@ -551,16 +548,6 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "pedigree/family/FAM2.ped",
-                "phased_variants",
-                "phased_variants/HG002_ONT_A",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_B",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_C",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -898,11 +885,11 @@
                 "multiqc_bcftools_stats.txt:md5,3635c247ddaf1b57bd607d873d0981b5",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,638664d7aa86a48fb5842bd5fd9405c9",
-                "multiqc_general_stats.txt:md5,2116c0ce9649d058b238fffc95c74faa",
+                "multiqc_general_stats.txt:md5,afeb7c05ca6795be569d2a11f8f7d9a9",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,7bbc5c16828ce33a7f57ea8402d4f02a",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,7485e32537bc4e3388e1215904842c68",
-                "whatshap-stats-table.txt:md5,115548267091e79b96b661a6943c8537",
+                "whatshap-stats-table.txt:md5,00acb81579e43641af223ad585ca3088",
                 "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
@@ -1005,18 +992,6 @@
             ],
             [
                 [
-                    "HG002_ONT_A_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_B_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=197, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_C_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_repeat_expansions.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
@@ -1094,9 +1069,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-08T13:57:28.599355853"
+        "timestamp": "2025-12-10T15:58:55.697076393"
     }
 }

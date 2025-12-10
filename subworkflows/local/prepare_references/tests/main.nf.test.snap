@@ -308,9 +308,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-01T15:47:18.69169952"
+        "timestamp": "2025-12-08T17:47:34.401069967"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -435,8 +435,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.5"
         },
-        "timestamp": "2025-10-22T11:08:45.442286967"
+        "timestamp": "2025-12-08T17:47:05.133264202"
     }
 }

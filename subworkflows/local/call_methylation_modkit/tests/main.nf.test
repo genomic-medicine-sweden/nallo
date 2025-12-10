@@ -33,14 +33,19 @@ nextflow_workflow {
                     [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = Channel.of([
-                    [ id: 'HG002' ],
+                input[2] = Channel.empty()
+                input[3] = Channel.empty()
+                input[4] = Channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = PREPARE_REFERENCES.out.fasta
-                input[4] = PREPARE_REFERENCES.out.fai
-                input[5] = false
+                input[5] = Channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[6] = PREPARE_REFERENCES.out.fasta
+                input[7] = PREPARE_REFERENCES.out.fai
+                input[8] = 'longphase'
+                input[9] = false
+                input[10] = false
                 """
             }
         }
