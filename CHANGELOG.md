@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
+- [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 
 ### `Changed`
 
@@ -38,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--rhocallviz_min_af`             |
 |               | `--rhocallviz_min_qual`           |
 |               | `--tiddit_bin_size`               |
+|               | `--genmod_compound_penalty`       |
+|               | `--genmod_compound_threshold`     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
