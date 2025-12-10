@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added SV phasing
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added co-phasing of SNVs and SVs for HiPhase and Longphase
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 
@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Removed output of phased variants without annotation
 - [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
 
 ### `Fixed`
