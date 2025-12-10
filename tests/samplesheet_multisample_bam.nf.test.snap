@@ -271,16 +271,15 @@
             },
             [
                 "aligned_reads",
-                "aligned_reads/FAM",
-                "aligned_reads/FAM/HG002_aligned_haplotagged.bam",
-                "aligned_reads/FAM/HG002_aligned_haplotagged.bam.bai",
-                "aligned_reads/FAM/HG003_aligned_haplotagged.bam",
-                "aligned_reads/FAM/HG003_aligned_haplotagged.bam.bai",
-                "aligned_reads/FAM/HG004_aligned_haplotagged.bam",
-                "aligned_reads/FAM/HG004_aligned_haplotagged.bam.bai",
                 "aligned_reads/HG002",
+                "aligned_reads/HG002/HG002_haplotagged.bam",
+                "aligned_reads/HG002/HG002_haplotagged.bam.bai",
                 "aligned_reads/HG003",
+                "aligned_reads/HG003/HG003_haplotagged.bam",
+                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
                 "aligned_reads/HG004",
+                "aligned_reads/HG004/HG004_haplotagged.bam",
+                "aligned_reads/HG004/HG004_haplotagged.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002",
@@ -1006,15 +1005,15 @@
             ],
             [
                 [
-                    "HG002_aligned_haplotagged.bam",
+                    "HG002_haplotagged.bam",
                     "eff15e019423d52b9edda2b3f3f82eb8"
                 ],
                 [
-                    "HG003_aligned_haplotagged.bam",
+                    "HG003_haplotagged.bam",
                     "cfc3683ad3c3a3dfc2c078c99feee07e"
                 ],
                 [
-                    "HG004_aligned_haplotagged.bam",
+                    "HG004_haplotagged.bam",
                     "f8d0293e3cbd0352129a26519ee62a11"
                 ],
                 [
@@ -1127,6 +1126,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.5"
         },
-        "timestamp": "2025-12-09T15:42:45.676670763"
+        "timestamp": "2025-12-10T10:40:31.272014842"
     }
 }
