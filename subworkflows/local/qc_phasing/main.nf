@@ -1,6 +1,6 @@
 include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
 include { CRAMINO         } from '../../../modules/nf-core/cramino/main'
-include { WHATSHAP_STATS  } from '../../../modules/local/whatshap/stats/main'
+include { WHATSHAP_STATS  } from '../../../modules/nf-core/whatshap/stats/main'
 
 workflow QC_PHASING {
     take:
