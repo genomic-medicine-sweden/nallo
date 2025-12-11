@@ -705,7 +705,7 @@
                     "type": "integer",
                     "description": "Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`. For families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
                 },
-                "genmod_compound_trop_sv_threshold": {
+                "genmod_compound_trio_sv_threshold": {
                     "type": "integer",
                     "description": "Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score. For families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
                 },
