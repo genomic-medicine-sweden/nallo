@@ -551,7 +551,7 @@ def validatePacBioLicense() {
         (params.sv_callers_to_run)  : 'Sawfish',
         (params.sv_callers_to_merge): 'Sawfish',
         (!params.skip_call_paralogs): 'Paraphase',
-    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
+    ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
     if (!pacbioTools) return

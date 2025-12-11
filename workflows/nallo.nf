@@ -51,8 +51,8 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT                                   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
@@ -634,34 +634,36 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
 
-        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-            .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
-            .set { ch_bcftools_pluginsplit_input }
-
-        // Bcftools +split needs a samples file when running in stub-mode
-        createSamplesFileFromSamplesheet(ch_input)
-            .join( ch_bcftools_pluginsplit_input, failOnMismatch:true, failOnDuplicate:true )
-            .multiMap { meta, samples_file, vcf, tbi ->
-                vcf_tbi: [ meta, vcf, tbi ]
-                samples: samples_file
+        // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
+        ch_input
+            .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
+            .unique()
+            .combine(
+                CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                    .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+            )
+            .filter { sample_info, vcf_meta, _vcf, _tbi ->
+                sample_info.family_id == vcf_meta.id
             }
-            .set { ch_bcftools_pluginsplit_input }
+            .map { sample_info, _vcf_meta, vcf, tbi ->
+                [sample_info, vcf, tbi]
+            }
+            .set { ch_bcftools_view_chromograph_input }
 
-        BCFTOOLS_PLUGINSPLIT(
-            ch_bcftools_pluginsplit_input.vcf_tbi,
-            ch_bcftools_pluginsplit_input.samples,
+        BCFTOOLS_VIEW_CHROMOGRAPH(
+            ch_bcftools_view_chromograph_input,
             [],
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_CHROMOGRAPH.out.versions)
     }
 
     if(!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
-            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf) : [[],[]],
-            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi) : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[],[]],
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
@@ -976,28 +978,6 @@ workflow NALLO {
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
-}
-
-def fromMultisampleToSampleMeta(multisample_channel) {
-    multisample_channel
-        .transpose()
-        .map { meta, vcf ->
-            def new_meta = meta + [ id: vcf.simpleName ]
-                [ new_meta, vcf ]
-        }
-}
-
-def createSamplesFileFromSamplesheet(input) {
-    input
-        .map { meta, _files -> [ meta.family_id, meta.id ] }
-        .unique()
-        .groupTuple()
-        .map { family_id, sample_ids ->
-            def samples_file = file("${workDir}/tmp/${family_id}.txt")
-            def ids_in_family = sample_ids.collect()
-            samples_file.text = ids_in_family.join('\n')
-            return [ [ id: family_id ], samples_file ]
-        }
 }
 
 /*
