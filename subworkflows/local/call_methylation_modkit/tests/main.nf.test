@@ -82,7 +82,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -134,7 +134,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -214,7 +214,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
@@ -242,7 +242,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
