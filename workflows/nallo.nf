@@ -589,8 +589,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV (
-            ANN_CSQ_PLI_SNV.out.vcf,
-            ch_snv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs
         )
@@ -732,8 +732,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS (
-            ANN_CSQ_PLI_SVS.out.vcf,
-            ch_sv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
@@ -935,6 +935,23 @@ def createSamplesFileFromSamplesheet(input) {
             def ids_in_family = sample_ids.collect()
             samples_file.text = ids_in_family.join('\n')
             return [ [ id: family_id ], samples_file ]
+        }
+}
+
+def addChildWithTwoParentsToMeta(input, samplesheet) {
+    samplesheet
+        .map { meta, _files ->
+            [ meta.family_id, meta ]
+        }
+        .groupTuple()
+        .map { family_id, metas ->
+            [ id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents } ]
+        }
+        .combine(input)
+        .filter { family_meta, vcf_meta, _file -> vcf_meta.family_id == family_meta.id }
+        .map { family_meta, vcf_meta, file ->
+            def new_meta = vcf_meta + [ child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family ]
+            [ new_meta, file]
         }
 }
 
