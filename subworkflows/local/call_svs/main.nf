@@ -33,8 +33,8 @@ workflow CALL_SVS {
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
 
     main:
-    ch_versions = Channel.empty()
-    ch_sv_calls = Channel.empty()
+    ch_versions = channel.empty()
+    ch_sv_calls = channel.empty()
 
     //
     // Call SVs with Severus

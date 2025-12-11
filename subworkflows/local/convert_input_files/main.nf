@@ -12,7 +12,7 @@ workflow CONVERT_INPUT_FILES {
     convert_fastq //    bool: Should FASTQ files be converted to BAM
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_input
         .branch { _meta, reads ->

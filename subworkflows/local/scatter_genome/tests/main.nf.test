@@ -108,7 +108,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')                    .collectFile(name: 'chr22.bed', newLine: true)
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')                    .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
                 input[3] = false
@@ -136,7 +136,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
@@ -165,7 +165,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
@@ -185,7 +185,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
@@ -209,7 +209,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = Channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false

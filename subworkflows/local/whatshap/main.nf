@@ -10,7 +10,7 @@ workflow WHATSHAP {
     fai        // channel: [ val(meta), path(fai) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Fix metadata to group by family
     ch_bam_bai

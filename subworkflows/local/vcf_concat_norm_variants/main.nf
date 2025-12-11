@@ -12,7 +12,7 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     BCFTOOLS_CONCAT(
         ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] },

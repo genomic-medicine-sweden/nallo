@@ -13,7 +13,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [ [ 'id': 'project' ],
                     [
                         [id:'HG002.Revio', family_id:'family', paternal_id:0, maternal_id:0, sex:0, phenotype:2, project:'project', n_files:1, single_end:true]
@@ -39,7 +39,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [ [ 'id': 'test' ],
                     [
                         [id:'HG002_Revio_AB', family_id:'FAM2', paternal_id:0, maternal_id:0, sex:0, phenotype:1, project:'test', n_files:1, single_end:true],
@@ -71,7 +71,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [ [ 'id': 'project' ],
                     [
                         [id:'HG002.Revio', family_id:'family', paternal_id:0, maternal_id:0, sex:0, phenotype:2, project:'project', n_files:1, single_end:true]
