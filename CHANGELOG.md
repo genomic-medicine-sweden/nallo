@@ -28,21 +28,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                     |
-| ------------- | --------------------------------- |
-|               | `--skip_chromograph`              |
-|               | `--bcftools_roh_af_tag`           |
-|               | `--chromograph_af_tag`            |
-|               | `--plot_chromograph_coverage`     |
-|               | `--plot_chromograph_autozygosity` |
-|               | `--rhocallviz_af_tag`             |
-|               | `--rhocallviz_min_af`             |
-|               | `--rhocallviz_min_qual`           |
-|               | `--tiddit_bin_size`               |
-|               | `--genmod_compound_snv_penalty`   |
-|               | `--genmod_compound_snv_threshold` |
-|               | `--genmod_compound_sv_penalty`    |
-|               | `--genmod_compound_sv_threshold`  |
+| Old parameter | New parameter                               |
+| ------------- | ------------------------------------------- |
+|               | `--skip_chromograph`                        |
+|               | `--bcftools_roh_af_tag`                     |
+|               | `--chromograph_af_tag`                      |
+|               | `--plot_chromograph_coverage`               |
+|               | `--plot_chromograph_autozygosity`           |
+|               | `--rhocallviz_af_tag`                       |
+|               | `--rhocallviz_min_af`                       |
+|               | `--rhocallviz_min_qual`                     |
+|               | `--tiddit_bin_size`                         |
+|               | `--genmod_compound_snv_penalty`             |
+|               | `--genmod_compound_snv_threshold`           |
+|               | `--genmod_compound_sv_penalty`              |
+|               | `--genmod_compound_sv_threshold`            |
+|               | `--genmod_compound_singleton_snv_penalty`   |
+|               | `--genmod_compound_singleton_snv_threshold` |
+|               | `--genmod_compound_singleton_sv_penalty`    |
+|               | `--genmod_compound_singleton_sv_threshold`  |
+|               | `--genmod_compound_trio_snv_penalty`        |
+|               | `--genmod_compound_trio_snv_threshold`      |
+|               | `--genmod_compound_trio_sv_penalty`         |
+|               | `--genmod_compound_trio_sv_threshold`       |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
