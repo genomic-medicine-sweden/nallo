@@ -941,17 +941,17 @@ def createSamplesFileFromSamplesheet(input) {
 def addChildWithTwoParentsToMeta(input, samplesheet) {
     samplesheet
         .map { meta, _files ->
-            [ meta.family_id, meta ]
+            [meta.family_id, meta]
         }
         .groupTuple()
         .map { family_id, metas ->
-            [ id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents } ]
+            [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
         }
         .combine(input)
         .filter { family_meta, vcf_meta, _file -> vcf_meta.family_id == family_meta.id }
         .map { family_meta, vcf_meta, file ->
-            def new_meta = vcf_meta + [ child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family ]
-            [ new_meta, file]
+            def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
+            [new_meta, file]
         }
 }
 
