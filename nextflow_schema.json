@@ -660,54 +660,54 @@
                 "genmod_compound_snv_penalty": {
                     "type": "integer",
                     "default": 6,
-                    "description": "Genmod compound penalty for SNVs applied together with `--genmod_compound_snv_threshold`."
+                    "description": "Genmod compound penalty for SNVs."
                 },
                 "genmod_compound_snv_threshold": {
                     "type": "integer",
                     "default": 9,
-                    "description": "Genmod compound threshold for SNVs model-dependent penalty if no compounds with passing score."
+                    "description": "Genmod compound threshold for SNVs."
                 },
                 "genmod_compound_sv_penalty": {
                     "type": "integer",
                     "default": 6,
-                    "description": "Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`."
+                    "description": "Genmod compound penalty for SVs."
                 },
                 "genmod_compound_sv_threshold": {
                     "type": "integer",
                     "default": 9,
-                    "description": "Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score."
+                    "description": "Genmod compound threshold for SVs."
                 },
                 "genmod_compound_singleton_snv_penalty": {
                     "type": "integer",
-                    "description": "Genmod compound penalty for SNVs applied together with `--genmod_compound_snv_threshold`. For families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
+                    "description": "Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
                 },
                 "genmod_compound_singleton_snv_threshold": {
                     "type": "integer",
-                    "description": "Genmod compound threshold for SNVs model-dependent penalty if no compounds with passing score. For families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
+                    "description": "Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
                 },
                 "genmod_compound_singleton_sv_penalty": {
                     "type": "integer",
-                    "description": "Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`. For families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
+                    "description": "Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
                 },
                 "genmod_compound_singleton_sv_threshold": {
                     "type": "integer",
-                    "description": "Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score. For families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
+                    "description": "Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
                 },
                 "genmod_compound_trio_snv_penalty": {
                     "type": "integer",
-                    "description": "Genmod compound penalty for SNVs applied together with `--genmod_compound_snv_threshold`. For families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
+                    "description": "Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
                 },
                 "genmod_compound_trio_snv_threshold": {
                     "type": "integer",
-                    "description": "Genmod compound threshold for SNVs model-dependent penalty if no compounds with passing score. For families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
+                    "description": "Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
                 },
                 "genmod_compound_trio_sv_penalty": {
                     "type": "integer",
-                    "description": "Genmod compound penalty for SVs applied together with `--genmod_compound_sv_threshold`. For families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
+                    "description": "Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
                 },
                 "genmod_compound_trio_sv_threshold": {
                     "type": "integer",
-                    "description": "Genmod compound threshold for SVs model-dependent penalty if no compounds with passing score. For families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
+                    "description": "Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
                 },
                 "plot_chromograph_autozygosity": {
                     "type": "boolean",
