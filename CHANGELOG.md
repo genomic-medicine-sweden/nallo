@@ -52,14 +52,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                 | Old version | New version |
-| -------------------- | ----------- | ----------- |
-| chromograph          |             | 1.3.1       |
-| bcftools/concat      | 1.22        | 1.21        |
-| bcftools/pluginsplit |             | 1.22        |
-| bcftools/roh         |             | 1.22        |
-| rhocall/viz          |             | 0.5.1       |
-| tiddit               |             | 3.9.3       |
+| Tool            | Old version | New version |
+| --------------- | ----------- | ----------- |
+| chromograph     |             | 1.3.1       |
+| bcftools/concat | 1.22        | 1.21        |
+| bcftools/roh    |             | 1.22        |
+| rhocall/viz     |             | 0.5.1       |
+| tiddit          |             | 3.9.3       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
