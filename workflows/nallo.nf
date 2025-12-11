@@ -589,8 +589,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV (
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input),
-            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs
         )
@@ -732,8 +732,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS (
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input),
-            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
@@ -938,7 +938,12 @@ def createSamplesFileFromSamplesheet(input) {
         }
 }
 
-def addChildWithTwoParentsToMeta(input, samplesheet) {
+def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
+    //
+    // Check if a family has a child with two parents,
+    // and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
+    // This is used to determine compound ranking thresholds and penalties in genmod.
+    //
     samplesheet
         .map { meta, _files ->
             [meta.family_id, meta]
@@ -948,7 +953,7 @@ def addChildWithTwoParentsToMeta(input, samplesheet) {
             [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
         }
         .combine(input)
-        .filter { family_meta, vcf_meta, _file -> vcf_meta.family_id == family_meta.id }
+        .filter { family_meta, vcf_meta, _file -> vcf_meta[family_id_key] == family_meta.id }
         .map { family_meta, vcf_meta, file ->
             def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
             [new_meta, file]
