@@ -51,7 +51,7 @@
                     },
                     "family_svdb_merge_by_family.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
-                    "39419bd66f5a653d18fc0f325904dd9b"
+                    "9f6a24ace1e63e25ee9d4869e9088a9d"
                 ]
             ],
             [
@@ -112,7 +112,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-10-24T09:37:49.432839121"
+        "timestamp": "2025-12-12T10:48:59.403887486"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
