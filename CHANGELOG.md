@@ -20,11 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Renamed `METHYLATION` subworkflow to `CALL_METHYLATION_MODKIT` and changed output structure
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
+- [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
 
 ### `Removed`
 
 - [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Removed output of phased variants without annotation
 - [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Removed .svgz version of metromap
 
 ### `Fixed`
 
