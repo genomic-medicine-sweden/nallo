@@ -17,7 +17,7 @@ workflow RANK_VARIANTS {
     ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     GENMOD_ANNOTATE ( ch_vcf )
     ch_versions = ch_versions.mix(GENMOD_ANNOTATE.out.versions)

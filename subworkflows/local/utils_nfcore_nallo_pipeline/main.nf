@@ -197,7 +197,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-    Channel
+    channel
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
@@ -395,7 +395,7 @@ def citationBibliographyText(ch_versions, references_yaml, description) {
 
     def unwantedReferences = ['genomic-medicine-sweden/nallo', 'Nextflow']
     // These are not collected in ch_versions but should be referenced
-    def baseTools = Channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
+    def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     ch_versions
         .map { module_yaml -> extractSoftwareFromVersions(module_yaml) }
@@ -534,13 +534,13 @@ def findKeysForValue(def valueToFind, Map map) {
 
 // Utility function to create channels from references
 def createReferenceChannelFromPath(param, defaultValue = '') {
-    return param ? Channel.fromPath(param, checkIfExists: true)
+    return param ? channel.fromPath(param, checkIfExists: true)
         .map { [ [ id: it.simpleName ], it ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
 def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
-    return param ? Channel.fromList(samplesheetToList(param, schema)) : defaultValue
+    return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
 def validatePacBioLicense() {

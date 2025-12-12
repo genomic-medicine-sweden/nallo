@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
 - [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
 - [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
+- [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
 
 ### `Removed`
 
