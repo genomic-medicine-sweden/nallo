@@ -11,7 +11,7 @@ workflow QC_SNVS {
     ch_normalized_index // channel: [mandatory] [ val(meta), path(vcf) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     DEEPVARIANT_VCFSTATSREPORT(
         ch_vcf

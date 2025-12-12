@@ -81,8 +81,8 @@ workflow NALLO {
     ch_input
 
     main:
-    ch_versions      = Channel.empty()
-    ch_multiqc_files = Channel.empty()
+    ch_versions      = channel.empty()
+    ch_multiqc_files = channel.empty()
 
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
@@ -90,32 +90,32 @@ workflow NALLO {
     ch_cadd_resources            = createReferenceChannelFromPath(params.cadd_resources)
     ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
     ch_fasta                     = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
+    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
     ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
+    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
+    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, channel.value([[],[]]))
     ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
     ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
     ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
-    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
+    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
 
 
     // Channels from (optional) input samplesheets validated by schema
-    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
-    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', Channel.value([]))
-    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
-    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', Channel.value([]))
+    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
+    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
+    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
+    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
         .map { it[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
@@ -891,7 +891,7 @@ workflow NALLO {
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path

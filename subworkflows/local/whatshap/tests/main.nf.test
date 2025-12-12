@@ -56,11 +56,11 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
@@ -84,7 +84,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -115,7 +115,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf ] }
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'HG002' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),

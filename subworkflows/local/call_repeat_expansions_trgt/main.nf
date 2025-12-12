@@ -18,7 +18,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_bam_bai
         .map { meta, bam, bai -> [ meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX' ] }
