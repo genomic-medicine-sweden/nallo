@@ -35,7 +35,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Methylation pileups
 
-[Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bed and BigWig files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV.
+[Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bed files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files or BigWig [visualization tracks](#visualization-tracks), for example in IGV.
 
 | Path                                                                  | Description                                                                       | Alignment          | Alignment & phasing |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
@@ -47,7 +47,6 @@ This document describes the pipeline output files and the tools used to generate
 | `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
 | `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
 | `methylation/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
-| `visualization_tracks/{sample}/*.bw`                                  | BigWig files with summary counts for the corresponding bed files                  | :white_check_mark: | :white_check_mark:  |
 
 ### Methylation profile
 
@@ -302,7 +301,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Visualization tracks
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, while [Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) are used for methylation analysis, but these also produce tracks that can be visualized in for example IGV.
 
 | Path                                                                | Description                                                                         |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |

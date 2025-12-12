@@ -12,7 +12,7 @@ Allows skipping certain parts of the pipeline
 | `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
-| `skip_methylation_calling` | Skip generation of methylation pileups | `boolean` | False |  |  |
+| `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set. | `boolean` | False |  |  |
@@ -126,8 +126,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
-| `run_methbat` | Run methbat for methylation analysis when `--preset revio` is active. | `boolean` |  |  |  |
-| `run_modkit` | Run modkit for methylation analysis when `--preset ONT_R10` is active. | `boolean` |  |  |  |
+| `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |
+| `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |

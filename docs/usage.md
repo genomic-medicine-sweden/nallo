@@ -232,12 +232,12 @@ Turned off with `--skip_phasing`.
 
 #### Methylation calling
 
-This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10`is active, while methbat is run when `--preset revio` is active.
+This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-| Parameter         | Description                                                                                                                                                                                                                                                                                                                          |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list                                                                                          |
-| `methbat_regions` | A tsv file with only regions of interest, example [here](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv), or with both regions and background cohort values, example [here](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build |
+| Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list                                                                                  |
+| `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
 
 Turned off with `--skip_methylation_calling`.
 
