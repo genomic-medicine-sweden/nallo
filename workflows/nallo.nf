@@ -938,12 +938,10 @@ def createSamplesFileFromSamplesheet(input) {
         }
 }
 
+// Check if a family has a child with two parents,
+// and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
+// This is used to determine compound ranking thresholds and penalties in genmod.
 def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
-    //
-    // Check if a family has a child with two parents,
-    // and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
-    // This is used to determine compound ranking thresholds and penalties in genmod.
-    //
     samplesheet
         .map { meta, _files ->
             [meta.family_id, meta]
