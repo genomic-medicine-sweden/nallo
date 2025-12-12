@@ -116,7 +116,6 @@ workflow NALLO {
     ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', Channel.value([]))
     ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
     ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', Channel.value([]))
-        .view()
         .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
