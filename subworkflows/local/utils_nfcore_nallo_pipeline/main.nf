@@ -227,7 +227,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -591,6 +591,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 def validateNonEmptySamplesheet(ch_samplesheet) {
     ch_samplesheet
         .ifEmpty { error("ERROR: No samples found in samplesheet.") }
+        .filter { it != null }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
