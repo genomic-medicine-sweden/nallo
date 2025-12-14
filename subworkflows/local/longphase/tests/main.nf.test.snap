@@ -18,14 +18,7 @@
                 ]
             ],
             "9e04b217b8362bf9ae62d6f15337ad2c",
-            [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_sv.vcf.gz.tbi:md5,a969ba56ffe566139de370b55d255d03"
-                ]
-            ],
+            "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
                     {
@@ -49,10 +42,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-09T09:33:13.36959353"
+        "timestamp": "2025-12-14T16:44:38.416816724"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -337,14 +330,7 @@
                 ]
             ],
             "8f42089e7c3c173dd72daab2a6efd834",
-            [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_sv.vcf.gz.tbi:md5,4cd7295dd2f0389bde4004a2a1249264"
-                ]
-            ],
+            "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
                     {
@@ -383,10 +369,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-10T10:59:53.242550457"
+        "timestamp": "2025-12-14T16:44:53.222954392"
     },
     "2 samples - SNVs only": {
         "content": [
