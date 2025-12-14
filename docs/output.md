@@ -69,15 +69,13 @@ This document describes the pipeline output files and the tools used to generate
 
 [LongPhase](https://github.com/twolinin/longphase), [WhatsHap](https://whatshap.readthedocs.io/en/latest/), or [HiPhase](https://github.com/PacificBiosciences/HiPhase) are used for phasing.
 
-| Path                                                              | Description                   |
-| ----------------------------------------------------------------- | ----------------------------- |
-| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags  |
-| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file    |
-| `phased_variants/{sample}/*.vcf.gz`                               | VCF file with phased variants |
-| `phased_variants/{sample}/*.vcf.gz.tbi`                           | Index of the VCF file         |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz`                       | Phase block file              |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz.tbi`                   | Index of block file           |
-| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file       |
+| Path                                                              | Description                  |
+| ----------------------------------------------------------------- | ---------------------------- |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags |
+| `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file   |
+| `qc/phasing_stats/{sample}/*.blocks.gtf.gz`                       | Phase block file             |
+| `qc/phasing_stats/{sample}/*.blocks.gtf.gz.tbi`                   | Index of block file          |
+| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file      |
 
 ## QC
 
@@ -285,7 +283,9 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
-## Visualization Tracks
+## Visualization
+
+### Visualization tracks
 
 [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
 
@@ -294,3 +294,12 @@ In general, annotated variant calls are output per family while unannotated call
 | `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
 | `visualization_tracks/{sample}/*.depth.bw`         | Depth track in BigWig format              |
 | `visualization_tracks/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
+
+### Images
+
+[Chromograph](https://github.com/Clinical-Genomics/chromograph) is used to generate plots with regions of autozygosity and coverage.
+
+| Path                                                                                   | Description                        |
+| -------------------------------------------------------------------------------------- | ---------------------------------- |
+| `images/chromograph/sample/{sample}/{sample}_chromograph_autozyg_chr{1-22,X,Y,M}.png`  | Per-chromosome plots in PNG format |
+| `images/chromograph/sample/{sample}/{sample}_chromograph_coverage_chr{1-22,X,Y,M}.png` | Per-chromosome plots in PNG format |

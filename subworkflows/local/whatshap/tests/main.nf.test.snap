@@ -1,0 +1,261 @@
+{
+    "1 sample": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz:md5,00246f8d64ebe60d5fda65c381b17bbe"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz.tbi:md5,66702ffe7c05e33b5ba3fc077699fb38"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_haplotagged.bam:md5,6e261dccd6b070bfe49c5b4791abfdcd",
+                        "HG002_haplotagged.bam.bai:md5,e4e8f7bfaf1b7813ec1be97a712cc528"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_haplotagged.bam:md5,6e261dccd6b070bfe49c5b4791abfdcd",
+                        "HG002_haplotagged.bam.bai:md5,e4e8f7bfaf1b7813ec1be97a712cc528"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz:md5,00246f8d64ebe60d5fda65c381b17bbe"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz.tbi:md5,66702ffe7c05e33b5ba3fc077699fb38"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-27T09:59:16.911786314"
+    },
+    "2 samples": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz:md5,d71d9be377d546e0a1cc332eb81d2c40"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz.tbi:md5,bbcb5d967bf7c32266c2e0841e11ff7e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_haplotagged.bam:md5,7cf10cffa5e410b16fcba7a1d12225af",
+                        "HG002_haplotagged.bam.bai:md5,0ff79ce762f3d907e55fb374071739e0"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_haplotagged.bam:md5,ec15c9b4e7b5f902af970b8cee0630f4",
+                        "HG003_haplotagged.bam.bai:md5,e61bb079081261a7f8cea1752bca3254"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_haplotagged.bam:md5,7cf10cffa5e410b16fcba7a1d12225af",
+                        "HG002_haplotagged.bam.bai:md5,0ff79ce762f3d907e55fb374071739e0"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_haplotagged.bam:md5,ec15c9b4e7b5f902af970b8cee0630f4",
+                        "HG003_haplotagged.bam.bai:md5,e61bb079081261a7f8cea1752bca3254"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz:md5,d71d9be377d546e0a1cc332eb81d2c40"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased.vcf.gz.tbi:md5,bbcb5d967bf7c32266c2e0841e11ff7e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-27T10:58:40.571233831"
+    },
+    "2 samples - family ID equal to sample ID": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_phased.vcf.gz:md5,a602e38aa7bc2324618cccdb1e1e7b0f"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_phased.vcf.gz.tbi:md5,3781bbe9e56f192bca149c57de1bc190"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_haplotagged.bam:md5,8c9f498f124a1fb2e3625161bde405a7",
+                        "HG002_haplotagged.bam.bai:md5,39732abaf0bf91a9234a7d774d1b415f"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002"
+                        },
+                        "HG003_haplotagged.bam:md5,69f46ef4874f674943c5ec9a52a4d285",
+                        "HG003_haplotagged.bam.bai:md5,e1dcacd3f513ccde757d1e6a8b6ca3e7"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_haplotagged.bam:md5,8c9f498f124a1fb2e3625161bde405a7",
+                        "HG002_haplotagged.bam.bai:md5,39732abaf0bf91a9234a7d774d1b415f"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002"
+                        },
+                        "HG003_haplotagged.bam:md5,69f46ef4874f674943c5ec9a52a4d285",
+                        "HG003_haplotagged.bam.bai:md5,e1dcacd3f513ccde757d1e6a8b6ca3e7"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_phased.vcf.gz:md5,a602e38aa7bc2324618cccdb1e1e7b0f"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_phased.vcf.gz.tbi:md5,3781bbe9e56f192bca149c57de1bc190"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,e17a571b30ffd30df9b4ae27d0cf562f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.5"
+        },
+        "timestamp": "2025-11-27T10:59:20.811320239"
+    }
+}

@@ -7,18 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added co-phasing of SNVs and SVs for HiPhase and Longphase
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
-- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate regions inputs for mosdepth and sambamba depth which both uses qc_regions as default
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
 
 ### `Changed`
 
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Moved phasing subworkflow to run before annotation
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
+- [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
+- [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
+- [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
+- [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
 
 ### `Removed`
 
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Removed output of phased variants without annotation
 - [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Removed .svgz version of metromap
 
 ### `Fixed`
 
@@ -26,12 +38,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter           |
-| ------------- | ----------------------- |
-|               | `--mosdepth_d4_output`  |
-|               | `--mosdepth_regions`    |
-|               | `--sambamba_regions`    |
-|               | `--skip_sambamba_depth` |
+| Old parameter | New parameter                     |
+| ------------- | --------------------------------- |
+|               | `--skip_chromograph`              |
+|               | `--bcftools_roh_af_tag`           |
+|               | `--chromograph_af_tag`            |
+|               | `--plot_chromograph_coverage`     |
+|               | `--plot_chromograph_autozygosity` |
+|               | `--rhocallviz_af_tag`             |
+|               | `--rhocallviz_min_af`             |
+|               | `--rhocallviz_min_qual`           |
+|               | `--tiddit_bin_size`               |
+|               | `--mosdepth_d4_output`            |
+|               | `--mosdepth_regions`              |
+|               | `--sambamba_regions`              |
+|               | `--skip_sambamba_depth`           |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -40,8 +61,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool            | Old version | New version |
+| --------------- | ----------- | ----------- |
+| chromograph     |             | 1.3.1       |
+| bcftools/concat | 1.22        | 1.21        |
+| bcftools/roh    |             | 1.22        |
+| rhocall/viz     |             | 0.5.1       |
+| tiddit          |             | 3.9.3       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

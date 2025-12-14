@@ -98,6 +98,7 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowSkips = [
         assembly         : "skip_genome_assembly",
+        sambamba_depth   : "skip_sambamba_depth",
         mapping          : "skip_alignment",
         snv_calling      : "skip_snv_calling",
         snv_annotation   : "skip_snv_annotation",
@@ -109,7 +110,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
         repeat_annotation: "skip_repeat_annotation",
-        sambamba_depth   : "skip_sambamba_depth",
+        chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_pileups",
         qc               : "skip_qc",
     ]
@@ -119,6 +120,7 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
+        chromograph      : ["mapping"],
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
         sambamba_depth   : ["mapping"],
@@ -132,6 +134,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation      : ["mapping", "snv_calling"]
     ]
+
 
     //
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
@@ -151,21 +154,22 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
-            skip_snv_calling         : params.skip_snv_calling,
-            skip_peddy               : params.skip_peddy,
-            skip_phasing             : params.skip_phasing,
-            skip_sambamba_depth      : params.skip_sambamba_depth,
-            skip_methylation_pileups : params.skip_methylation_pileups,
-            skip_rank_variants       : params.skip_rank_variants,
-            skip_repeat_calling      : params.skip_repeat_calling,
-            skip_repeat_annotation   : params.skip_repeat_annotation,
-            skip_snv_annotation      : params.skip_snv_annotation,
-            skip_sv_calling          : params.skip_sv_calling,
-            skip_sv_annotation       : params.skip_sv_annotation,
-            skip_call_paralogs       : params.skip_call_paralogs,
-            skip_alignment           : params.skip_alignment,
-            skip_qc                  : params.skip_qc,
-            skip_genome_assembly     : params.skip_genome_assembly,
+            skip_snv_calling        : params.skip_snv_calling,
+            skip_peddy              : params.skip_peddy,
+            skip_phasing            : params.skip_phasing,
+            skip_methylation_pileups: params.skip_methylation_pileups,
+            skip_rank_variants      : params.skip_rank_variants,
+            skip_repeat_calling     : params.skip_repeat_calling,
+            skip_repeat_annotation  : params.skip_repeat_annotation,
+            skip_chromograph        : params.skip_chromograph,
+            skip_sambamba_depth     : params.skip_sambamba_depth,
+            skip_snv_annotation     : params.skip_snv_annotation,
+            skip_sv_calling         : params.skip_sv_calling,
+            skip_sv_annotation      : params.skip_sv_annotation,
+            skip_call_paralogs      : params.skip_call_paralogs,
+            skip_alignment          : params.skip_alignment,
+            skip_qc                 : params.skip_qc,
+            skip_genome_assembly    : params.skip_genome_assembly,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -199,7 +203,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-    Channel
+    channel
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
@@ -229,7 +233,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -397,7 +401,7 @@ def citationBibliographyText(ch_versions, references_yaml, description) {
 
     def unwantedReferences = ['genomic-medicine-sweden/nallo', 'Nextflow']
     // These are not collected in ch_versions but should be referenced
-    def baseTools = Channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
+    def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     ch_versions
         .map { module_yaml -> extractSoftwareFromVersions(module_yaml) }
@@ -536,13 +540,13 @@ def findKeysForValue(def valueToFind, Map map) {
 
 // Utility function to create channels from references
 def createReferenceChannelFromPath(param, defaultValue = '') {
-    return param ? Channel.fromPath(param, checkIfExists: true)
+    return param ? channel.fromPath(param, checkIfExists: true)
         .map { [ [ id: it.simpleName ], it ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
 def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
-    return param ? Channel.fromList(samplesheetToList(param, schema)) : defaultValue
+    return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
 def validatePacBioLicense() {
@@ -553,7 +557,7 @@ def validatePacBioLicense() {
         (params.sv_callers_to_run)  : 'Sawfish',
         (params.sv_callers_to_merge): 'Sawfish',
         (!params.skip_call_paralogs): 'Paraphase',
-    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
+    ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
     if (!pacbioTools) return
@@ -628,6 +632,9 @@ def validateWorkflowCompatibility() {
         }
     }
 
+    if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
+        error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
+    }
 }
 
 def validateSVCallingParameters() {

@@ -9,15 +9,15 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.vcf.gz', checkIfExists: true),
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                 ])
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                 ])
@@ -42,15 +42,15 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.vcf.gz', checkIfExists: true),
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
                 ])
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                 ])

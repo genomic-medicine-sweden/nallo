@@ -13,9 +13,9 @@ workflow SCATTER_GENOME {
     split_n            // integer: split bed into n regions
 
     main:
-    ch_versions = Channel.empty()
-    ch_bed = Channel.empty()
-    ch_bed_intervals = Channel.empty()
+    ch_versions = channel.empty()
+    ch_bed = channel.empty()
+    ch_bed_intervals = channel.empty()
 
     //
     // If no BED-file is provided then build intervals from reference
