@@ -486,8 +486,6 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.summary.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz.csi",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
                 "qc/peddy",
@@ -594,8 +592,6 @@
                 "HG002_Revio.mosdepth.global.dist.txt:md5,3c7c62c7460d2e1e69622776f36b343c",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,42ed9c66cd4a8fdeaf334583ccf1c887",
                 "HG002_Revio.mosdepth.summary.txt:md5,df1a1b683edec908d1fe38c02b02eacf",
-                "HG002_Revio.per-base.bed.gz:md5,886cc866ac680da38acd31766e80b23a",
-                "HG002_Revio.per-base.bed.gz.csi:md5,ca8e6209e2e41adcfd953cc1500dbebc",
                 "HG002_Revio.regions.bed.gz:md5,bf110d79b8cc8b18cf864633d111d9aa",
                 "HG002_Revio.regions.bed.gz.csi:md5,2eb89f3ecd281aba81990ec42fbf60fe",
                 "FAM.het_check.csv:md5,b6d2e382394507724fbfac5f16fedd29",
@@ -682,6 +678,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-14T16:06:06.103083585"
+        "timestamp": "2025-12-14T16:55:38.512347182"
     }
 }

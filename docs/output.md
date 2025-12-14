@@ -99,7 +99,7 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/mosdepth/{sample}/{sample}.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
-| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format                                                                                           | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |
 | `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
 | `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
 
@@ -116,7 +116,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Sambamba
 
-[sambamba depth](https://lomereiter.github.io/sambamba/) run in the `region` mode is used to summarize coverage information which can be used together with [chanjo](https://github.com/Clinical-Genomics/chanjo) for coverage analysis.
+[`sambamba depth region`](https://lomereiter.github.io/sambamba/) is used to summarize coverage information when `--sambamba_regions` is provided. The output BED file can be used together with [chanjo](https://github.com/Clinical-Genomics/chanjo) for coverage analysis.
 
 | Path                                                     | Description                        |
 | -------------------------------------------------------- | ---------------------------------- |
