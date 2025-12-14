@@ -79,7 +79,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## QC
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth), and [somalier](https://github.com/brentp/somalier) are used for read quality control.
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth), [somalier](https://github.com/brentp/somalier) and [sambamba](https://lomereiter.github.io/sambamba/) are used for read quality control.
 
 ### FastQC
 
@@ -113,6 +113,14 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/cramino/phased/{sample}/*.txt`     | Summary information in text format                                                                   |
 | `qc/cramino/unphased/{sample}/*.arrow` | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
 | `qc/cramino/unphased/{sample}/*.txt`   | Summary information in text format                                                                   |
+
+### Sambamba
+
+[sambamba depth](https://lomereiter.github.io/sambamba/) run in the `region` mode is used to summarize coverage information which can be used together with [chanjo](https://github.com/Clinical-Genomics/chanjo) for coverage analysis.
+
+| Path                                                     | Description                        |
+| -------------------------------------------------------- | ---------------------------------- |
+| `qc/sambamba_depth/{sample}/{sample}_sambamba_depth.bed` | BED file with coverage information |
 
 ### Somalier
 
