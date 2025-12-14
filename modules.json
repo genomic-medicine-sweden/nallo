@@ -317,6 +317,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "strdrop/call": {
+                        "branch": "master",
+                        "git_sha": "743c8dfe0bdb692f10d4b346da1676f2cc8abf22",
+                        "installed_by": ["modules"]
+                    },
                     "strdust": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
