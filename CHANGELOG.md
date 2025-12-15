@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#808](https://github.com/genomic-medicine-sweden/nallo/pull/808) - Fixed no samples found in samplesheet error overriding actual errors
+- [#828](https://github.com/genomic-medicine-sweden/nallo/pull/828) - Fixed no samples found in samplesheet error overriding actual errors
 
 ### Parameters
 
