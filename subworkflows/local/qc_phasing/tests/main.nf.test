@@ -59,8 +59,8 @@ nextflow_workflow {
                 process {
                     """
                     input[0] = BCFTOOLS_MERGE.out.vcf
-                    input[1] = Channel.empty()
-                    input[2] = Channel.of(
+                    input[1] = channel.empty()
+                    input[2] = channel.of(
                         [
                             [ id : 'HG002', family_id: 'FAM' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -72,7 +72,7 @@ nextflow_workflow {
                             file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                         ]
                     )
-                    input[3] = Channel.of([
+                    input[3] = channel.of([
                         [ id: 'FAM' ],
                         ['HG002', 'HG003']
                     ])
@@ -91,7 +91,7 @@ nextflow_workflow {
                 input[2] = LONGPHASE.out.phased_family_svs
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
-                input[5] = Channel.of([
+                input[5] = channel.of([
                     [ id: 'FAM'],
                     ['HG002', 'HG003']
                 ])
@@ -131,7 +131,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/sawfish/discover/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id : 'HG002' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -181,7 +181,7 @@ nextflow_workflow {
                     """
                     input[0] = BCFTOOLS_MERGE.out.vcf
                     input[1] = SAWFISH_JOINTCALL.out.vcf
-                    input[2] = Channel.of(
+                    input[2] = channel.of(
                         [
                             [ id : 'HG002', family_id: 'FAM' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -193,7 +193,7 @@ nextflow_workflow {
                             file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                         ]
                     )
-                    input[3] = Channel.of([
+                    input[3] = channel.of([
                         [ id: 'FAM' ],
                         ['HG002', 'HG003']
                     ])
@@ -212,7 +212,7 @@ nextflow_workflow {
                 input[2] = LONGPHASE.out.phased_family_svs
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
-                input[5] = Channel.of([
+                input[5] = channel.of([
                     [ id : 'FAM'],
                     ['HG002', 'HG003']
                 ])
@@ -255,8 +255,8 @@ nextflow_workflow {
                 process {
                     """
                     input[0] = BCFTOOLS_MERGE.out.vcf
-                    input[1] = Channel.empty()
-                    input[2] = Channel.of(
+                    input[1] = channel.empty()
+                    input[2] = channel.of(
                         [
                             [ id : 'HG002', family_id: 'FAM' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -268,7 +268,7 @@ nextflow_workflow {
                             file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                         ]
                     )
-                    input[3] = Channel.of([
+                    input[3] = channel.of([
                         [ id: 'FAM' ],
                         ['HG002', 'HG003']
                     ])
@@ -287,7 +287,7 @@ nextflow_workflow {
                 input[2] = LONGPHASE.out.phased_family_svs
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
-                input[5] = Channel.of([
+                input[5] = channel.of([
                     [ id: 'FAM' ],
                     ['HG002', 'HG003']
                 ])
@@ -315,7 +315,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/sawfish/discover/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id : 'HG002' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -365,7 +365,7 @@ nextflow_workflow {
                     """
                     input[0] = BCFTOOLS_MERGE.out.vcf
                     input[1] = SAWFISH_JOINTCALL.out.vcf
-                    input[2] = Channel.of(
+                    input[2] = channel.of(
                         [
                             [ id : 'HG002', family_id: 'FAM' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -377,7 +377,7 @@ nextflow_workflow {
                             file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                         ]
                     )
-                    input[3] = Channel.of([
+                    input[3] = channel.of([
                         [ id: 'FAM' ],
                         ['HG002', 'HG003']
                     ])
@@ -396,7 +396,7 @@ nextflow_workflow {
                 input[2] = LONGPHASE.out.phased_family_svs
                 input[3] = LONGPHASE.out.phased_family_svs_tbi
                 input[4] = LONGPHASE.out.haplotagged_bam_bai
-                input[5] = Channel.of([
+                input[5] = channel.of([
                     [ id: 'FAM'],
                     ['HG002', 'HG003']
                 ])

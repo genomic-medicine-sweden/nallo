@@ -25,7 +25,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
                 ])
@@ -51,7 +51,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
@@ -80,7 +80,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
                 ])
@@ -106,7 +106,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm_chr20.vcf.gz', checkIfExists: true),
