@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            275,
+            276,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -16,7 +16,7 @@
                     "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.21
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -25,9 +25,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_PLUGINSPLIT": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_QUERY": {
@@ -48,6 +45,9 @@
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
                     "bcftools": 1.22
                 },
@@ -64,9 +64,6 @@
                     "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CRAMINO_PHASED": {
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
@@ -157,7 +154,7 @@
                 "SAMTOOLS_FASTQ": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_INDEX_WHATSHAP": {
+                "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGE": {
@@ -611,16 +608,6 @@
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
                 "pedigree/family/FAM2.ped",
-                "phased_variants",
-                "phased_variants/HG002_ONT_A",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz",
-                "phased_variants/HG002_ONT_A/HG002_ONT_A_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_B",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz",
-                "phased_variants/HG002_ONT_B/HG002_ONT_B_phased.vcf.gz.tbi",
-                "phased_variants/HG002_ONT_C",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz",
-                "phased_variants/HG002_ONT_C/HG002_ONT_C_phased.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -1008,11 +995,11 @@
                 "multiqc_bcftools_stats.txt:md5,f62924c16aa9ca823a779ff873d46290",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,36de4d688329683ad0b103c728afad97",
-                "multiqc_general_stats.txt:md5,4df3377b444f2efab296f92800868e89",
+                "multiqc_general_stats.txt:md5,19df2dcc9487ceff003dc3bacdd551f1",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,23f4b769ab4d846015ddd3704dff16b7",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,6520c753b4bdeadeaa78416661b350c7",
-                "whatshap-stats-table.txt:md5,ddf60f94459c1d227530d813da670977",
+                "whatshap-stats-table.txt:md5,4c6a5a338ae7651600610580a54fd3cf",
                 "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
@@ -1106,18 +1093,6 @@
             ],
             [
                 [
-                    "HG002_ONT_A_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_B_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_C_phased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=288, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_repeat_expansions.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
@@ -1198,6 +1173,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-11-27T16:22:32.234070458"
+        "timestamp": "2025-12-11T18:15:43.86329315"
     }
 }

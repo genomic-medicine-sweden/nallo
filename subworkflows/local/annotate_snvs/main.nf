@@ -22,7 +22,7 @@ workflow ANNOTATE_SNVS {
     pre_vep_filter            //    bool: [mandatory] should filtering be done before annotating with CADD and VEP
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Annotate with chosen databases
     if (annotate_echtvar) {

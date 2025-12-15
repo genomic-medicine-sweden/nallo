@@ -10,7 +10,7 @@ nextflow_workflow {
             script "../../../../modules/nf-core/hifiasm/main.nf"
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'hg38' ],
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/fastq/test_hifi.fastq.gz', checkIfExists: true),
                     []

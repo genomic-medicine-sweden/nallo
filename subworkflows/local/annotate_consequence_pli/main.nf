@@ -12,7 +12,7 @@ workflow ANNOTATE_CSQ_PLI {
     ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ADD_MOST_SEVERE_CSQ (ch_vcf, ch_variant_consequences)
     ch_versions = ch_versions.mix(ADD_MOST_SEVERE_CSQ.out.versions)

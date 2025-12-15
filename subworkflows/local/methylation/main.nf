@@ -12,7 +12,7 @@ workflow METHYLATION {
     modcodes               // String or List
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)

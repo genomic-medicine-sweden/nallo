@@ -56,7 +56,7 @@ nextflow_workflow {
                 """
                 input[0] = SEVERUS.out.all_vcf
                 input[1] = GUNZIP.out.gunzip
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     'https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz',
                     'AF',
                     'AC',
@@ -64,8 +64,8 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[4] = Channel.value('110')
-                input[5] = Channel.of([
+                input[4] = channel.value('110')
+                input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])
                 """
@@ -94,7 +94,7 @@ nextflow_workflow {
                 """
                 input[0] = SEVERUS.out.all_vcf
                 input[1] = GUNZIP.out.gunzip
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     'https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz',
                     'AF',
                     'AC',
@@ -102,8 +102,8 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[4] = Channel.value('110')
-                input[5] = Channel.of([
+                input[4] = channel.value('110')
+                input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])
                 """

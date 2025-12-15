@@ -10,7 +10,7 @@ workflow QC_ALIGNED_READS {
     ch_bed     // channel: [ val(meta), bed ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     FASTQC (
         ch_bam_bai.map { meta, bam, _bai -> [ meta, bam ] }

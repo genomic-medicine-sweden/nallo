@@ -9,12 +9,12 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/f16b1fe5c410aa1a50d71126673f39de147b9eea/'
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
-                sv_callers                   = "severus,hificnv"
-                sv_callers_to_run            = "severus,hificnv,sniffles"
+                sv_callers                   = "sawfish"
+                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
                 filter_snvs_expression       = "-i 'AQ>20'"
                 filter_svs_expression        = "-i \'SVTYPE=\"INS\"\'"
             }

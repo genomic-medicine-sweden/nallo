@@ -12,11 +12,11 @@ workflow CALL_SNVS {
     variant_caller //  string: which variant caller to use, i.e. "deepvariant"
 
     main:
-    ch_versions   = Channel.empty()
-    ch_vcf        = Channel.empty()
-    ch_index      = Channel.empty()
-    ch_gvcf       = Channel.empty()
-    ch_gvcf_index = Channel.empty()
+    ch_versions   = channel.empty()
+    ch_vcf        = channel.empty()
+    ch_index      = channel.empty()
+    ch_gvcf       = channel.empty()
+    ch_gvcf_index = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
 
