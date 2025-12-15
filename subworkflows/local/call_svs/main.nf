@@ -289,8 +289,8 @@ workflow CALL_SVS {
             sort: { a, b ->
                 caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0]) }
         )
-        .map { meta, caller_vcf ->
-            def vcf_paths = caller_vcf.collect { it[1] }
+        .map { meta, callers_vcfs ->
+            def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
             [ meta, vcf_paths ]
         }
         .set { ch_svdb_merge_by_family_input }
