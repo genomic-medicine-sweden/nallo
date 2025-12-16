@@ -503,6 +503,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sambamba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sambamba
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#somalier" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -933,6 +944,17 @@
     <span class="md-ellipsis">
       
         Cramino
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sambamba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sambamba
       
     </span>
   </a>
@@ -1410,7 +1432,7 @@
 </tbody>
 </table>
 <h2 id="qc">QC</h2>
-<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, <a href="https://github.com/wdecoster/cramino">cramino</a>, <a href="https://github.com/brentp/mosdepth">mosdepth</a>, and <a href="https://github.com/brentp/somalier">somalier</a> are used for read quality control.</p>
+<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, <a href="https://github.com/wdecoster/cramino">cramino</a>, <a href="https://github.com/brentp/mosdepth">mosdepth</a>, <a href="https://github.com/brentp/somalier">somalier</a> and <a href="https://lomereiter.github.io/sambamba/">sambamba</a> are used for read quality control.</p>
 <h3 id="fastqc">FastQC</h3>
 <p><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> provides general quality metrics for sequenced reads, including information on quality score distribution, per-base sequence content (%A/T/G/C), adapter contamination, and overrepresented sequences. For more details, refer to the <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/">FastQC help pages</a>.</p>
 <table>
@@ -1463,7 +1485,7 @@
 </tr>
 <tr>
 <td><code>qc/mosdepth/{sample}/{sample}.per-base.d4</code></td>
-<td>Per-base depth in d4 format</td>
+<td>Per-base depth in d4 format. Output if <code>--mosdepth_d4_output</code> is set</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
@@ -1506,6 +1528,22 @@
 <tr>
 <td><code>qc/cramino/unphased/{sample}/*.txt</code></td>
 <td>Summary information in text format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sambamba">Sambamba</h3>
+<p><a href="https://lomereiter.github.io/sambamba/"><code>sambamba depth region</code></a> is used to summarize coverage information when <code>--sambamba_regions</code> is provided. The output BED file can be used together with <a href="https://github.com/Clinical-Genomics/chanjo">chanjo</a> for coverage analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qc/sambamba_depth/{sample}/{sample}_sambamba_depth.bed</code></td>
+<td>BED file with coverage information</td>
 </tr>
 </tbody>
 </table>

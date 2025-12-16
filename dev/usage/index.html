@@ -1617,7 +1617,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </table>
 <p>Turned off with <code>--skip_alignment</code>.</p>
 <h4 id="qc">QC</h4>
-<p>This subworkflow depends on the alignment subworkflow, but requires no additional files.</p>
+<p>This subworkflow depends on the alignment subworkflow, but requires no additional files by default. Analysis regions for mosdepth and sambamba depth can be set by providing a BED file to <code>--qc_regions</code>, or <code>--mosdepth_regions</code> and <code>--sambamba_regions</code> separately.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
 <h4 id="assembly">Assembly</h4>
 <p>This step assembles genomes and aligns them to a reference genome.</p>
@@ -1953,7 +1953,7 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <p>The <code>pre_vep_snv_filter_expression</code> parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to <em>both</em> the research and clinical VCFs.</p>
 </div>
 <h3 id="target-regions">Target regions</h3>
-<p>The <code>--target_regions</code> parameter can be used to limit parts of the analysis to interesting regions: <code>--snv_call_regions</code> and <code>--sv_call_regions</code> which limits the SNV and SV calling, <code>--qc_regions</code> which is passed on to mosdepth, and <code>--methylation_call_regions</code> which limits the methylation pileup regions. These four parmeters are set to the same as <code>--target_regions</code> by default, but can also be set independently.</p>
+<p>The <code>--target_regions</code> parameter can be used to limit parts of the analysis to interesting regions: <code>--snv_call_regions</code> and <code>--sv_call_regions</code> which limits the SNV and SV calling, <code>--qc_regions</code> which is passed on to <code>--mosdepth_regions</code> (mosdepth) and <code>--sambamba_regions</code> (sambamba depth), and <code>--methylation_call_regions</code> which limits the methylation pileup regions. These four parameters are set to the same as <code>--target_regions</code> by default, but can also be set independently.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Note that when using <code>--snv_call_regions</code> together with <code>--snv_calling_processes &gt; 1</code> and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.</p>
