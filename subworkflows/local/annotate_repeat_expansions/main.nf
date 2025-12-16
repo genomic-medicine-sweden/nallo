@@ -6,16 +6,20 @@ workflow ANNOTATE_REPEAT_EXPANSIONS {
     strdrop_training_set_json // channel: [ val(meta), path(json) ]
     strdrop_training_set_vcfs // channel: [ val(meta), [ path(vcf) ] ]
     stranger_variant_catalog  // channel: [ val(meta), path(json) ]
+    run_strdrop               //    bool: should strdrop be run before stranger
 
     main:
-    STRDROP_CALL(
-        vcf,
-        strdrop_training_set_json,
-        strdrop_training_set_vcfs,
-    )
+
+    if (run_strdrop) {
+        STRDROP_CALL(
+            vcf,
+            strdrop_training_set_json,
+            strdrop_training_set_vcfs,
+        )
+    }
 
     STRANGER(
-        STRDROP_CALL.out.vcf,
+        run_strdrop ? STRDROP_CALL.out.vcf : vcf,
         stranger_variant_catalog,
     )
 
