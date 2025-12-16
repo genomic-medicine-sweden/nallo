@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 
 ### `Changed`
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Renamed `METHYLATION` subworkflow to `CALL_METHYLATION_MODKIT` and changed output structure
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 - [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
 - [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
@@ -40,33 +42,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                               |
-| ------------- | ------------------------------------------- |
-|               | `--skip_chromograph`                        |
-|               | `--bcftools_roh_af_tag`                     |
-|               | `--chromograph_af_tag`                      |
-|               | `--plot_chromograph_coverage`               |
-|               | `--plot_chromograph_autozygosity`           |
-|               | `--rhocallviz_af_tag`                       |
-|               | `--rhocallviz_min_af`                       |
-|               | `--rhocallviz_min_qual`                     |
-|               | `--tiddit_bin_size`                         |
-|               | `--genmod_compound_snv_penalty`             |
-|               | `--genmod_compound_snv_threshold`           |
-|               | `--genmod_compound_sv_penalty`              |
-|               | `--genmod_compound_sv_threshold`            |
-|               | `--genmod_compound_singleton_snv_penalty`   |
-|               | `--genmod_compound_singleton_snv_threshold` |
-|               | `--genmod_compound_singleton_sv_penalty`    |
-|               | `--genmod_compound_singleton_sv_threshold`  |
-|               | `--genmod_compound_trio_snv_penalty`        |
-|               | `--genmod_compound_trio_snv_threshold`      |
-|               | `--genmod_compound_trio_sv_penalty`         |
-|               | `--genmod_compound_trio_sv_threshold`       |
-|               | `--mosdepth_d4_output`                      |
-|               | `--mosdepth_regions`                        |
-|               | `--sambamba_regions`                        |
-|               | `--skip_sambamba_depth`                     |
+| Old parameter                | New parameter                               |
+| ---------------------------- | ------------------------------------------- |
+|                              | `--skip_chromograph`                        |
+|                              | `--bcftools_roh_af_tag`                     |
+|                              | `--chromograph_af_tag`                      |
+|                              | `--plot_chromograph_coverage`               |
+|                              | `--plot_chromograph_autozygosity`           |
+|                              | `--rhocallviz_af_tag`                       |
+|                              | `--rhocallviz_min_af`                       |
+|                              | `--rhocallviz_min_qual`                     |
+|                              | `--tiddit_bin_size`                         |
+|                              | `--genmod_compound_snv_penalty`             |
+|                              | `--genmod_compound_snv_threshold`           |
+|                              | `--genmod_compound_sv_penalty`              |
+|                              | `--genmod_compound_sv_threshold`            |
+|                              | `--genmod_compound_singleton_snv_penalty`   |
+|                              | `--genmod_compound_singleton_snv_threshold` |
+|                              | `--genmod_compound_singleton_sv_penalty`    |
+|                              | `--genmod_compound_singleton_sv_threshold`  |
+|                              | `--genmod_compound_trio_snv_penalty`        |
+|                              | `--genmod_compound_trio_snv_threshold`      |
+|                              | `--genmod_compound_trio_sv_penalty`         |
+|                              | `--genmod_compound_trio_sv_threshold`       |
+|                              | `--mosdepth_d4_output`                      |
+|                              | `--mosdepth_regions`                        |
+|                              | `--sambamba_regions`                        |
+|                              | `--skip_sambamba_depth`                     |
+| `--methylation_call_regions` | `--modkit_call_regions`                     |
+| `--skip_methylation_pileups` | `--skip_methylation_calling`                |
+|                              | `--methbat_male_label`                      |
+|                              | `--methbat_female_label`                    |
+|                              | `--run_methbat`                             |
+|                              | `--run_modkit`                              |
+|                              | `--extra_methbat_profile_options`           |
+|                              | `--methbat_regions`                         |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -75,13 +85,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool            | Old version | New version |
-| --------------- | ----------- | ----------- |
-| chromograph     |             | 1.3.1       |
-| bcftools/concat | 1.22        | 1.21        |
-| bcftools/roh    |             | 1.22        |
-| rhocall/viz     |             | 0.5.1       |
-| tiddit          |             | 3.9.3       |
+| Tool                             | Old version | New version |
+| -------------------------------- | ----------- | ----------- |
+| chromograph                      |             | 1.3.1       |
+| bcftools/concat                  | 1.22        | 1.21        |
+| bcftools/roh                     |             | 1.22        |
+| rhocall/viz                      |             | 0.5.1       |
+| tiddit                           |             | 3.9.3       |
+| methbat/profile                  |             | 0.16.1      |
+| pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

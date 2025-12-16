@@ -35,9 +35,9 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_pileups": {
+                "skip_methylation_calling": {
                     "type": "boolean",
-                    "description": "Skip generation of methylation pileups",
+                    "description": "Skip methylation calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
@@ -224,7 +224,14 @@
                     "description": "A BED file with regions of interest.",
                     "exists": true
                 },
-                "methylation_call_regions": {
+                "methbat_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv$",
+                    "format": "file-path",
+                    "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
+                    "exists": true
+                },
+                "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
@@ -597,6 +604,24 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
+                "run_methbat": {
+                    "type": "boolean",
+                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
+                },
+                "run_modkit": {
+                    "type": "boolean",
+                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                },
+                "methbat_male_label": {
+                    "type": "string",
+                    "description": "Label used for male samples in methbat profile.",
+                    "default": "MALE"
+                },
+                "methbat_female_label": {
+                    "type": "string",
+                    "description": "Label used for female samples in methbat profile.",
+                    "default": "FEMALE"
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
@@ -656,6 +681,11 @@
                     "hidden": true,
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
+                },
+                "extra_methbat_profile_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to methbat profile."
                 },
                 "extra_modkit_options": {
                     "type": "string",

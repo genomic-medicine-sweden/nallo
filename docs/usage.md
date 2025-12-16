@@ -93,7 +93,7 @@ This pipeline comes with three different presets that should be set with the `--
 
     - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
-    - `--skip_methylation_pileups` will be set to `true` for `pacbio`
+    - `--skip_methylation_calling` will be set to `true` for `pacbio`
 
 ### Reference files
 
@@ -127,7 +127,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_calling
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -230,15 +230,20 @@ The phaser can be chosen using the `--phaser` argument. See the following table 
 
 Turned off with `--skip_phasing`.
 
-#### Methylation pileups
+#### Methylation calling
 
-This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.
+This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-| Parameter         | Description                                                                                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
+| Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list                                                                                  |
+| `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
 
-Turned off with `--skip_methylation_pileups`.
+Turned off with `--skip_methylation_calling`.
+
+!!!tip
+
+    By default, samples are compared to the background cohort with the same sex as found in the sample metadata. If the background cohort tsv file does not contain MALE and FEMALE labels, this can be changed with `--methbat_male_label` and `--methbat_female_label`. Additional labels can be added with --profile-label through the `--extra_methbat_profile_options` parameter.
 
 #### Repeat calling
 
@@ -388,11 +393,15 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ### Target regions
 
-The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to `--mosdepth_regions` (mosdepth) and `--sambamba_regions` (sambamba depth), and `--methylation_call_regions` which limits the methylation pileup regions. These four parameters are set to the same as `--target_regions` by default, but can also be set independently.
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to `--mosdepth_regions` (mosdepth) and `--sambamba_regions` (sambamba depth), and `--modkit_call_regions` which limits the methylation pileup regions. These four parameters are set to the same as `--target_regions` by default, but can also be set independently.
 
 !!!warning
 
     Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
+!!!note
+
+    When running with the `revio` preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with `--methbat_regions`.
 
 ### Parallelization
 

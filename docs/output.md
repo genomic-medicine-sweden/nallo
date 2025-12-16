@@ -29,18 +29,32 @@ This document describes the pipeline output files and the tools used to generate
 | `assembly/stats/{sample}/{sample}_haplotype_1.assembly_summary`          | Summary statistics for haplotype 1/paternal haplotype                                             |
 | `assembly/stats/${sample}/{sample}_haplotype_2.assembly_summary`         | Summary statistics for haplotype 2/maternal haplotype                                             |
 
-## Methylation pileups
+## Methylation
 
-[Modkit](https://github.com/nanoporetech/modkit) is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.
+[Modkit](https://github.com/nanoporetech/modkit), [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools), and [Methbat](https://github.com/PacificBiosciences/MethBat) are used for methylation analysis.
 
-| Path                                                                  | Description                                                             | Alignment          | Alignment & phasing |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_1.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 1) |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_2.bed.gz`         | bedMethyl file with summary counts from haplotagged reads (haplotype 2) |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz` | bedMethyl file for ungrouped reads                                      |                    | :white_check_mark:  |
-| `methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz`           | bedMethyl file with summary counts from all reads                       | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bed.gz.tbi`                     | Index of the corresponding bedMethyl files                              | :white_check_mark: |                     |
-| `methylation/modkit/pileup/{sample}/*.bw`                             | BigWig file with summary counts from specified modifications            | :white_check_mark: | :white_check_mark:  |
+### Methylation pileups
+
+[Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bed files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files or BigWig [visualization tracks](#visualization-tracks), for example in IGV.
+
+| Path                                                                  | Description                                                                       | Alignment          | Alignment & phasing |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_ungrouped.bed.gz` | Bed file for ungrouped reads from modkit                                          |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz`           | Bed file with summary counts from all reads from modkit                           | :white_check_mark: |                     |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz`     | Bed file with summary counts from all reads from pbcpgtools                       | :white_check_mark: | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
+
+### Methylation profile
+
+[Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values.
+
+| Path                                                        | Description                                        |
+| ----------------------------------------------------------- | -------------------------------------------------- |
+| `methylation/profile/{sample}/{sample}_methbat_profile.tsv` | Tsv file with methylation profile of input regions |
 
 ## MultiQC
 
@@ -295,13 +309,19 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Visualization tracks
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, while [Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) are used for methylation analysis, but these also produce tracks that can be visualized in for example IGV.
 
-| Path                                               | Description                               |
-| -------------------------------------------------- | ----------------------------------------- |
-| `visualization_tracks/{sample}/*.copynum.bedgraph` | Copy number in bedgraph format            |
-| `visualization_tracks/{sample}/*.depth.bw`         | Depth track in BigWig format              |
-| `visualization_tracks/{sample}/*.maf.bw`           | Minor allele frequencies in BigWig format |
+| Path                                                                | Description                                                                         |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph`   | Copy number in bedgraph format                                                      |
+| `visualization_tracks/{sample}/{sample}_hificnv.depth.bw`           | Depth track in BigWig format                                                        |
+| `visualization_tracks/{sample}/{sample}_hificnv.maf.bw`             | Minor allele frequencies in BigWig format                                           |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_ungrouped.bw` | BigWig file with summary counts for ungrouped reads from modkit                     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_1.bw`         | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_2.bw`         | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw`     | BigWig file with summary counts for ungrouped reads from pbcpgtools                 |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw`         | BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw`         | BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools |
 
 ### Images
 
