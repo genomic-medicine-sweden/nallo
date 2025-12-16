@@ -87,7 +87,43 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.versions).match() }
+                // stranger INFO tags are unstable: https://github.com/Clinical-Genomics/stranger/issues/109
+                // strdrop header line is malformed: https://github.com/dnil/strdrop/issues/29
+                { assert snapshot(
+                    file(workflow.out.vcf.get(0).get(1)).name,
+                    file(workflow.out.tbi.get(0).get(1)).name,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("vcf -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+                input[1] = [[],[]]
+                input[2] = CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf
+                    .map { meta, vcf ->
+                        [[ id: 'traning_set' ], vcf]
+                    }
+                    .groupTuple()
+                input[3] = Channel.of([
+                    [ id: 'stranger_variant_catalog' ],
+                    file(params.pipelines_testdata_base_path + 'reference/variant_catalog_grch38.json')
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
             )
         }
 
