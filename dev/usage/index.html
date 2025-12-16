@@ -538,10 +538,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methylation-pileups" class="md-nav__link">
+  <a href="#methylation-calling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Methylation pileups
+        Methylation calling
       
     </span>
   </a>
@@ -1140,10 +1140,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methylation-pileups" class="md-nav__link">
+  <a href="#methylation-calling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Methylation pileups
+        Methylation calling
       
     </span>
   </a>
@@ -1568,7 +1568,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <ul>
 <li><code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
 <li><code>--skip_call_paralogs</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
-<li><code>--skip_methylation_pileups</code> will be set to <code>true</code> for <code>pacbio</code></li>
+<li><code>--skip_methylation_calling</code> will be set to <code>true</code> for <code>pacbio</code></li>
 </ul>
 </div>
 <h3 id="reference-files">Reference files</h3>
@@ -1590,7 +1590,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>If you want to skip a subworkflow, you will need to explicitly state to skip all subworkflows that rely on it.</p>
 <p>For example, <code>nextflow run genomic-medicine-sweden/nallo -profile docker --outdir results --input samplesheet.csv --skip_alignment</code> will tell you:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_calling
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  ...
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </span></code></pre></div>
@@ -1725,8 +1725,8 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 </tbody>
 </table>
 <p>Turned off with <code>--skip_phasing</code>.</p>
-<h4 id="methylation-pileups">Methylation pileups</h4>
-<p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.</p>
+<h4 id="methylation-calling">Methylation calling</h4>
+<p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when <code>--preset ONT_R10</code> is active, while methbat is run when <code>--preset revio</code> is active.</p>
 <table>
 <thead>
 <tr>
@@ -1739,9 +1739,17 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <td><code>bigwig_modcodes</code></td>
 <td>A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to <code>h,m</code>, i.e. 5hmC and 5mC. See <a href="https://samtools.github.io/hts-specs/SAMtags.pdf">the SAM specification</a> for a complete list</td>
 </tr>
+<tr>
+<td><code>methbat_regions</code></td>
+<td>A tsv file with only regions of interest (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv">example</a>), or with both regions and background cohort values (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv">example</a>), made with methbat build</td>
+</tr>
 </tbody>
 </table>
-<p>Turned off with <code>--skip_methylation_pileups</code>.</p>
+<p>Turned off with <code>--skip_methylation_calling</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By default, samples are compared to the background cohort with the same sex as found in the sample metadata. If the background cohort tsv file does not contain MALE and FEMALE labels, this can be changed with <code>--methbat_male_label</code> and <code>--methbat_female_label</code>. Additional labels can be added with --profile-label through the <code>--extra_methbat_profile_options</code> parameter.</p>
+</div>
 <h4 id="repeat-calling">Repeat calling</h4>
 <p>This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:</p>
 <table>
@@ -1953,10 +1961,14 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <p>The <code>pre_vep_snv_filter_expression</code> parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to <em>both</em> the research and clinical VCFs.</p>
 </div>
 <h3 id="target-regions">Target regions</h3>
-<p>The <code>--target_regions</code> parameter can be used to limit parts of the analysis to interesting regions: <code>--snv_call_regions</code> and <code>--sv_call_regions</code> which limits the SNV and SV calling, <code>--qc_regions</code> which is passed on to <code>--mosdepth_regions</code> (mosdepth) and <code>--sambamba_regions</code> (sambamba depth), and <code>--methylation_call_regions</code> which limits the methylation pileup regions. These four parameters are set to the same as <code>--target_regions</code> by default, but can also be set independently.</p>
+<p>The <code>--target_regions</code> parameter can be used to limit parts of the analysis to interesting regions: <code>--snv_call_regions</code> and <code>--sv_call_regions</code> which limits the SNV and SV calling, <code>--qc_regions</code> which is passed on to <code>--mosdepth_regions</code> (mosdepth) and <code>--sambamba_regions</code> (sambamba depth), and <code>--modkit_call_regions</code> which limits the methylation pileup regions. These four parameters are set to the same as <code>--target_regions</code> by default, but can also be set independently.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Note that when using <code>--snv_call_regions</code> together with <code>--snv_calling_processes &gt; 1</code> and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When running with the <code>revio</code> preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with <code>--methbat_regions</code>.</p>
 </div>
 <h3 id="parallelization">Parallelization</h3>
 <ul>

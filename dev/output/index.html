@@ -414,6 +414,18 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#methylation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methylation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methylation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#methylation-pileups" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -421,6 +433,22 @@
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methylation-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methylation profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -862,6 +890,18 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#methylation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methylation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methylation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#methylation-pileups" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -869,6 +909,22 @@
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methylation-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methylation profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1289,8 +1345,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="methylation-pileups">Methylation pileups</h2>
-<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> is used to create methylation pileups, producing bedMethyl files for both haplotagged and ungrouped reads. Additionally, methylation information can be viewed in the BAM files, for example in IGV. When phasing is on, modkit outputs pileups per haplotype.</p>
+<h2 id="methylation">Methylation</h2>
+<p><a href="https://github.com/nanoporetech/modkit">Modkit</a>, <a href="https://github.com/PacificBiosciences/pb-CpG-tools">pb-CpG-tools</a>, and <a href="https://github.com/PacificBiosciences/MethBat">Methbat</a> are used for methylation analysis.</p>
+<h3 id="methylation-pileups">Methylation pileups</h3>
+<p><a href="https://github.com/nanoporetech/modkit">Modkit</a> or <a href="https://github.com/PacificBiosciences/pb-CpG-tools">pb-CpG-tools</a> (Revio only) is used to create methylation pileups, producing bed files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files or BigWig <a href="#visualization-tracks">visualization tracks</a>, for example in IGV.</p>
 <table>
 <thead>
 <tr>
@@ -1302,40 +1360,68 @@
 </thead>
 <tbody>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_1.bed.gz</code></td>
-<td>bedMethyl file with summary counts from haplotagged reads (haplotype 1)</td>
+<td><code>methylation/pileup/{sample}/{sample}.modkit_pileup_1.bed.gz</code></td>
+<td>Bed file with summary counts from haplotagged reads (haplotype 1) from modkit</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_2.bed.gz</code></td>
-<td>bedMethyl file with summary counts from haplotagged reads (haplotype 2)</td>
+<td><code>methylation/pileup/{sample}/{sample}.modkit_pileup_2.bed.gz</code></td>
+<td>Bed file with summary counts from haplotagged reads (haplotype 2) from modkit</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup_ungrouped.bed.gz</code></td>
-<td>bedMethyl file for ungrouped reads</td>
+<td><code>methylation/pileup/{sample}/{sample}.modkit_pileup_ungrouped.bed.gz</code></td>
+<td>Bed file for ungrouped reads from modkit</td>
 <td></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.modkit_pileup.bed.gz</code></td>
-<td>bedMethyl file with summary counts from all reads</td>
+<td><code>methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz</code></td>
+<td>Bed file with summary counts from all reads from modkit</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td></td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.bed.gz.tbi</code></td>
-<td>Index of the corresponding bedMethyl files</td>
+<td><code>methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz</code></td>
+<td>Bed file with summary counts from all reads from pbcpgtools</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
-<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 </tr>
 <tr>
-<td><code>methylation/modkit/pileup/{sample}/*.bw</code></td>
-<td>BigWig file with summary counts from specified modifications</td>
+<td><code>methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz</code></td>
+<td>Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz</code></td>
+<td>Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools</td>
+<td></td>
+<td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+<tr>
+<td><code>methylation/pileup/{sample}/*.bed.gz.tbi</code></td>
+<td>Index of the corresponding bed files</td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
 <td><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="methylation-profile">Methylation profile</h3>
+<p><a href="https://github.com/PacificBiosciences/MethBat">Methbat</a> is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>methylation/profile/{sample}/{sample}_methbat_profile.tsv</code></td>
+<td>Tsv file with methylation profile of input regions</td>
 </tr>
 </tbody>
 </table>
@@ -2024,7 +2110,7 @@
 </div>
 <h2 id="visualization">Visualization</h2>
 <h3 id="visualization-tracks">Visualization tracks</h3>
-<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, but it also produces copy number, depth, and MAF tracks that can be visualized in for example IGV.</p>
+<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, while <a href="https://github.com/nanoporetech/modkit">Modkit</a> or <a href="https://github.com/PacificBiosciences/pb-CpG-tools">pb-CpG-tools</a> are used for methylation analysis, but these also produce tracks that can be visualized in for example IGV.</p>
 <table>
 <thead>
 <tr>
@@ -2034,16 +2120,40 @@
 </thead>
 <tbody>
 <tr>
-<td><code>visualization_tracks/{sample}/*.copynum.bedgraph</code></td>
+<td><code>visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph</code></td>
 <td>Copy number in bedgraph format</td>
 </tr>
 <tr>
-<td><code>visualization_tracks/{sample}/*.depth.bw</code></td>
+<td><code>visualization_tracks/{sample}/{sample}_hificnv.depth.bw</code></td>
 <td>Depth track in BigWig format</td>
 </tr>
 <tr>
-<td><code>visualization_tracks/{sample}/*.maf.bw</code></td>
+<td><code>visualization_tracks/{sample}/{sample}_hificnv.maf.bw</code></td>
 <td>Minor allele frequencies in BigWig format</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_modkit_pileup_ungrouped.bw</code></td>
+<td>BigWig file with summary counts for ungrouped reads from modkit</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_modkit_pileup_1.bw</code></td>
+<td>BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_modkit_pileup_2.bw</code></td>
+<td>BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw</code></td>
+<td>BigWig file with summary counts for ungrouped reads from pbcpgtools</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw</code></td>
+<td>BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw</code></td>
+<td>BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools</td>
 </tr>
 </tbody>
 </table>
