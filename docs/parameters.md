@@ -17,6 +17,7 @@ Allows skipping certain parts of the pipeline
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set. | `boolean` | False |  |  |
 | `skip_peddy` | Skip peddy | `boolean` | False |  |  |
+| `skip_sambamba_depth` | Skip sambamba depth. True unless `--sambamba_regions` is provided. | `boolean` |  |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
 | `skip_sv_calling` | Skip structural variant calling | `boolean` | False |  |  |
@@ -47,6 +48,8 @@ Define where the pipeline should find input data and save output data.
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `target_regions` | A BED file with regions of interest. | `string` |  |  |  |
 | `methylation_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
+| `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
+| `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
 | `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | h,m |  |  |
 | `snv_call_regions` | A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `sv_call_regions` | A BED file containging regions to filter SV calls. By default this is the same as `target_regions`. | `string` |  |  |  |
@@ -59,6 +62,7 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
+| `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
 
@@ -101,7 +105,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/f16b1fe5c410aa1a50d71126673f39de147b9eea/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |

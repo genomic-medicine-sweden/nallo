@@ -107,7 +107,8 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
-    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, channel.value([[],[]]))
+    ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
+    ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
 
 
@@ -339,7 +340,9 @@ workflow NALLO {
         QC_ALIGNED_READS (
             ch_bam_bai,
             ch_fasta,
-            ch_qc_regions,
+            ch_mosdepth_regions,
+            ch_sambamba_regions,
+            !params.skip_sambamba_depth,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]) )

@@ -109,6 +109,7 @@ nextflow_pipeline {
                 skip_sv_calling              = true
                 skip_sv_annotation           = true
                 skip_peddy                   = true
+                skip_sambamba_depth          = true
                 skip_snv_annotation          = true
                 skip_phasing                 = true
                 skip_rank_variants           = true
@@ -201,6 +202,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
+                skip_sambamba_depth          = true
                 skip_methylation_pileups     = true
             }
         }
