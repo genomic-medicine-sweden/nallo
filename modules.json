@@ -319,7 +319,7 @@
                     },
                     "strdrop/call": {
                         "branch": "master",
-                        "git_sha": "743c8dfe0bdb692f10d4b346da1676f2cc8abf22",
+                        "git_sha": "214528c6fc6a96fb9d51fb9f7abbe949019dfcee",
                         "installed_by": ["modules"]
                     },
                     "strdust": {
