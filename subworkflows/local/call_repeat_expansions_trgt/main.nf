@@ -77,6 +77,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
             def xy_ids = sample_metas
                 .findAll { sample_meta -> sample_meta.sex == 1 }
                 .collect { sample_meta -> sample_meta.id }
+                .sort()
 
             [meta + [xy_samples: xy_ids], vcf, tbi]
         }
