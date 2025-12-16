@@ -259,6 +259,11 @@ This subworkflow relies on the alignment, SNV calling, phasing and repeat callin
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stranger_repeat_catalog` | a variant catalog matching your reference (e.g. [stranger_repeat_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/stranger_repeat_catalog_grch38.json)) |
 
+Additionally, `--strdrop_training_set_json` can be supplied if [strdrop](https://github.com/dnil/strdrop) should be used to flag coverage drops:
+
+| Parameter | Description |
+| `strdrop_training_set_json` | A JSON file containing the training set for strdrop |
+
 Turned off with `--skip_repeat_annotation`.
 
 #### SNV annotation

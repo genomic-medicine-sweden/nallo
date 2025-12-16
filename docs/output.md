@@ -188,7 +188,7 @@ In general, annotated variant calls are output per family while unannotated call
 ### Repeats
 
 [TRGT](https://github.com/PacificBiosciences/trgt) or [STRdust](https://github.com/wdecoster/STRdust) are used to call repeats.
-[Stranger](https://github.com/Clinical-Genomics/stranger) is used to annotate repeats.
+[Strdrop](https://github.com/dnil/strdrop) and [stranger](https://github.com/Clinical-Genomics/stranger) are used to annotate repeats.
 
 | Path                                                                      | Description                               | STRdust, Call repeats only | TRGT, Call repeats only | TRGT, Call & annotate repeats |
 | ------------------------------------------------------------------------- | ----------------------------------------- | -------------------------- | ----------------------- | ----------------------------- |

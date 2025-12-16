@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
 
 ### `Changed`
 
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
 - [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
 - [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Updated stranger and moved it to `ANNOTATE_REPEAT_EXPANSIONS`
 
 ### `Removed`
 
@@ -67,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--mosdepth_regions`                        |
 |               | `--sambamba_regions`                        |
 |               | `--skip_sambamba_depth`                     |
+|               | `--strdrop_training_set_json`               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -82,6 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | bcftools/roh    |             | 1.22        |
 | rhocall/viz     |             | 0.5.1       |
 | tiddit          |             | 3.9.3       |
+| strdrop         |             | 0.3.1       |
+| stranger        | 0.9.5       | 0.10.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

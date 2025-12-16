@@ -885,8 +885,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -1136,7 +1136,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-14T16:15:03.832186104"
+        "timestamp": "2025-12-16T15:09:29.254892251"
     },
     "Test alignment without genome assembly": {
         "content": [

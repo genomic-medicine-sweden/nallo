@@ -317,6 +317,13 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "strdrop_training_set_json": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.json$",
+                    "description": "A JSON file containing the training set for strdrop",
+                    "format": "file-path",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
@@ -500,7 +507,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/f16b1fe5c410aa1a50d71126673f39de147b9eea/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
