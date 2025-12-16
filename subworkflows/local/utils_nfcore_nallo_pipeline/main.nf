@@ -29,10 +29,10 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    _monochrome_logs  // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    _input            //  string: Path to input samplesheet
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
@@ -212,9 +212,9 @@ workflow PIPELINE_INITIALISATION {
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
         .groupTuple() // group by sample
-        .map {
-            validateUniqueFilenamesPerSample(it)
-            validateUniqueSampleIDs(it)
+        .map { id_meta_reads ->
+            validateUniqueFilenamesPerSample(id_meta_reads)
+            validateUniqueSampleIDs(id_meta_reads)
         }
         // Add single_end information to meta
         .map { sample, metas, reads ->
@@ -222,7 +222,7 @@ workflow PIPELINE_INITIALISATION {
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
-            reads.collect { return [ meta, it ] }
+            reads.collect { read -> return [ meta, read ] }
         }
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }
@@ -233,7 +233,7 @@ workflow PIPELINE_INITIALISATION {
         .transpose()
         .set { ch_samplesheet }
 
-        //validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -319,7 +319,7 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 //
 def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
-    def fileNames = input[2].collect { new File(it.toString()).name }
+    def fileNames = input[2].collect { input_path -> new File(input_path.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
         error "Error: Input filenames needs to be unique for each sample."
     }
@@ -378,15 +378,15 @@ def extractSoftwareFromVersions(module_yaml_file) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def yamlData = yaml.load(module_yaml_file)
     // Extract all software (keys) from a module yaml
-    def softwareInModule = yamlData.values().collect { it.keySet() }.flatten()
+    def softwareInModule = yamlData.values().collect { software_and_version -> software_and_version.keySet() }.flatten()
     return softwareInModule
 }
 
 def generateReferenceHTML(tool_list, description) {
     def items = tool_list
-        .collect { it.trim() }
-        .unique()              // samtools and bcftools share reference
-        .findAll { it != "" }  // some tools does not have a reference, e.g. awk, gunzip
+        .collect { citation -> citation.trim() }
+        .unique()                                // e.g. samtools and bcftools share citation
+        .findAll { citation -> citation != "" }  // some tools does not have a citation, e.g. awk, gunzip
 
     if (description == 'citation') {
         return "  <p>Tools used in the workflow included: ${items.join(', ')}.</p>"
@@ -461,14 +461,14 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     }
 
     // Get all other workflows that are required for a certain workflow
-    def requiredWorkflows = combinationsMap.findAll { it.value.contains(currentWorkflow) }.keySet()
+    def requiredWorkflows = combinationsMap.findAll { workflow_with_dependencies -> workflow_with_dependencies.value.contains(currentWorkflow) }.keySet()
     // If no direct dependencies are found or combinationsMap does not contain the workflow, return an empty list
     if (!requiredWorkflows) {
         return []
     }
     // Collect the required --skips that are not active for the current workflow
     def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
-        .collect { [ '--', it ].join('') }
+        .collect { skip_parameter -> [ '--', skip_parameter ].join('') }
         .join(" ")
     // If all required sets are set, give no error
     if (!dependencyString) {
@@ -541,7 +541,7 @@ def findKeysForValue(def valueToFind, Map map) {
 // Utility function to create channels from references
 def createReferenceChannelFromPath(param, defaultValue = '') {
     return param ? channel.fromPath(param, checkIfExists: true)
-        .map { [ [ id: it.simpleName ], it ] }
+        .map { file_path -> [ [ id: file_path.simpleName ], file_path ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
@@ -597,6 +597,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 def validateNonEmptySamplesheet(ch_samplesheet) {
     ch_samplesheet
         .ifEmpty { error("ERROR: No samples found in samplesheet.") }
+        .filter { it != null }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
@@ -638,8 +639,8 @@ def validateWorkflowCompatibility() {
 }
 
 def validateSVCallingParameters() {
-    def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
-    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+    def sv_callers = params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() }
+    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() }
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
@@ -656,7 +657,7 @@ def validateParentExistsInFamily(input) {
         }
         .groupTuple()
         .map { family_id, metas ->
-            def sampleIds = metas.collect { it.id } as Set
+            def sampleIds = metas.collect { meta -> meta.id } as Set
 
             metas.each { meta ->
                 def errors = []
@@ -692,8 +693,8 @@ def validateParentalSex(input) {
         }
 }
 
-def getParentalIds(samples, field) {
-    samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
+def getParentalIds(samples, parental_id_type) {
+    samples.collect { sample -> sample[parental_id_type] }.findAll { parental_id -> isNonZeroNonEmpty(parental_id) }
 }
 
 def addRelationshipsToMeta(samples) {
@@ -704,8 +705,8 @@ def addRelationshipsToMeta(samples) {
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
     def parents_ids = maternal_ids + paternal_ids
-    def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
-                           samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+    def grandparents_ids = samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.maternal_id } +
+                           samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.paternal_id }
 
     samples.each { sample ->
         sample.relationship = sample.id in grandparents_ids ? 'unknown' :
@@ -737,7 +738,7 @@ def addRelationshipsToMeta(samples) {
 
 def getChildrenForParent(samples, parent_id) {
     samples
-        .findAll { it.maternal_id == parent_id || it.paternal_id == parent_id }
+        .findAll { sample -> sample.maternal_id == parent_id || sample.paternal_id == parent_id }
 }
 
 def isChild(sample, maternal_ids, paternal_ids) {

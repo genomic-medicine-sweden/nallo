@@ -682,6 +682,58 @@
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
                 },
+                "genmod_compound_snv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SNVs."
+                },
+                "genmod_compound_snv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SNVs."
+                },
+                "genmod_compound_sv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SVs."
+                },
+                "genmod_compound_sv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SVs."
+                },
+                "genmod_compound_singleton_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_singleton_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_singleton_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_singleton_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
+                "genmod_compound_trio_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_trio_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_trio_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_trio_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
                 "plot_chromograph_autozygosity": {
                     "type": "boolean",
                     "description": "Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag."

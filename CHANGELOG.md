@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
+- [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 
 ### `Changed`
 
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
 - [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
 - [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
+- [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
 
 ### `Removed`
 
@@ -34,25 +36,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
-- [#808](https://github.com/genomic-medicine-sweden/nallo/pull/808) - Fixed no samples found in samplesheet error overriding actual errors
+- [#828](https://github.com/genomic-medicine-sweden/nallo/pull/828) - Fixed no samples found in samplesheet error overriding actual errors
 
 ### Parameters
 
-| Old parameter | New parameter                     |
-| ------------- | --------------------------------- |
-|               | `--skip_chromograph`              |
-|               | `--bcftools_roh_af_tag`           |
-|               | `--chromograph_af_tag`            |
-|               | `--plot_chromograph_coverage`     |
-|               | `--plot_chromograph_autozygosity` |
-|               | `--rhocallviz_af_tag`             |
-|               | `--rhocallviz_min_af`             |
-|               | `--rhocallviz_min_qual`           |
-|               | `--tiddit_bin_size`               |
-|               | `--mosdepth_d4_output`            |
-|               | `--mosdepth_regions`              |
-|               | `--sambamba_regions`              |
-|               | `--skip_sambamba_depth`           |
+| Old parameter | New parameter                               |
+| ------------- | ------------------------------------------- |
+|               | `--skip_chromograph`                        |
+|               | `--bcftools_roh_af_tag`                     |
+|               | `--chromograph_af_tag`                      |
+|               | `--plot_chromograph_coverage`               |
+|               | `--plot_chromograph_autozygosity`           |
+|               | `--rhocallviz_af_tag`                       |
+|               | `--rhocallviz_min_af`                       |
+|               | `--rhocallviz_min_qual`                     |
+|               | `--tiddit_bin_size`                         |
+|               | `--genmod_compound_snv_penalty`             |
+|               | `--genmod_compound_snv_threshold`           |
+|               | `--genmod_compound_sv_penalty`              |
+|               | `--genmod_compound_sv_threshold`            |
+|               | `--genmod_compound_singleton_snv_penalty`   |
+|               | `--genmod_compound_singleton_snv_threshold` |
+|               | `--genmod_compound_singleton_sv_penalty`    |
+|               | `--genmod_compound_singleton_sv_threshold`  |
+|               | `--genmod_compound_trio_snv_penalty`        |
+|               | `--genmod_compound_trio_snv_threshold`      |
+|               | `--genmod_compound_trio_sv_penalty`         |
+|               | `--genmod_compound_trio_sv_threshold`       |
+|               | `--mosdepth_d4_output`                      |
+|               | `--mosdepth_regions`                        |
+|               | `--sambamba_regions`                        |
+|               | `--skip_sambamba_depth`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

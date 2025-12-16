@@ -117,7 +117,7 @@ workflow NALLO {
     ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
     ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
     ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
-        .map { it[0].toString() } // only one element per row
+        .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
         .collect()
@@ -323,8 +323,8 @@ workflow NALLO {
             ch_samplesheet_pedfile
         )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
         // Set files with updated meta for subsequent processes
         ch_bam     = BAM_INFER_SEX.out.bam
@@ -345,10 +345,10 @@ workflow NALLO {
             !params.skip_sambamba_depth,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]) )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]) )
 
     }
 
@@ -448,7 +448,7 @@ workflow NALLO {
         )
 
         ch_versions = ch_versions.mix(QC_SNVS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{ _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
@@ -469,9 +469,9 @@ workflow NALLO {
             ch_expected_xy_bed,
             ch_expected_xx_bed,
             ch_exclude_bed,
-            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
+            params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
+            params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_sv_call_regions,
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
@@ -700,8 +700,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV (
-            ANN_CSQ_PLI_SNV.out.vcf,
-            ch_snv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs
         )
@@ -745,14 +745,14 @@ workflow NALLO {
             ch_peddy_sites
         )
         ch_versions = ch_versions.mix(PEDDY.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
     }
 
@@ -818,8 +818,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS (
-            ANN_CSQ_PLI_SVS.out.vcf,
-            ch_sv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
@@ -981,6 +981,26 @@ workflow NALLO {
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
+}
+
+// Check if a family has a child with two parents,
+// and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
+// This is used to determine compound ranking thresholds and penalties in genmod.
+def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
+    samplesheet
+        .map { meta, _files ->
+            [meta.family_id, meta]
+        }
+        .groupTuple()
+        .map { family_id, metas ->
+            [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
+        }
+        .combine(input)
+        .filter { family_meta, vcf_meta, _file -> vcf_meta[family_id_key] == family_meta.id }
+        .map { family_meta, vcf_meta, file ->
+            def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
+            [new_meta, file]
+        }
 }
 
 /*

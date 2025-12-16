@@ -144,6 +144,18 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
+| `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs. | `integer` | 6 |  |  |
+| `genmod_compound_snv_threshold` | Genmod compound threshold for SNVs. | `integer` | 9 |  |  |
+| `genmod_compound_sv_penalty` | Genmod compound penalty for SVs. | `integer` | 6 |  |  |
+| `genmod_compound_sv_threshold` | Genmod compound threshold for SVs. | `integer` | 9 |  |  |
+| `genmod_compound_singleton_snv_penalty` | Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_singleton_snv_threshold` | Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_singleton_sv_penalty` | Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_singleton_sv_threshold` | Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_trio_snv_penalty` | Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_trio_snv_threshold` | Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_trio_sv_penalty` | Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_trio_sv_threshold` | Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`. | `integer` |  |  |  |
 | `plot_chromograph_autozygosity` | Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag. | `boolean` |  |  |  |
 | `plot_chromograph_coverage` | Whether to plot chromograph coverage plots in the chromograph subworkflow. | `boolean` | True |  |  |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |
