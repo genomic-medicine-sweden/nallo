@@ -68,7 +68,7 @@
                 "skip_sambamba_depth": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip sambamba depth. False by default, if `--sambamba_regions` is not provided."
+                    "description": "Skip sambamba depth. True unless `--sambamba_regions` is provided."
                 },
                 "skip_phasing": {
                     "type": "boolean",
