@@ -111,6 +111,9 @@ tool:
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
+  sambamba:
+    citation: "Sambamba (Tarasov et al. 2015)"
+    bibliography: "Artem Tarasov, Albert J. Vilella, Edwin Cuppen, Isaac J. Nijman, Pjotr Prins, Sambamba: fast processing of NGS alignment formats, Bioinformatics, Volume 31, Issue 12, June 2015, Pages 2032-2034, https://doi.org/10.1093/bioinformatics/btv098"
   rhocall:
     citation: "Rhocall (Nilsson et al. 2016)"
     bibliography: ""

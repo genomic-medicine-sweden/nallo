@@ -79,7 +79,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## QC
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth), and [somalier](https://github.com/brentp/somalier) are used for read quality control.
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [cramino](https://github.com/wdecoster/cramino), [mosdepth](https://github.com/brentp/mosdepth), [somalier](https://github.com/brentp/somalier) and [sambamba](https://lomereiter.github.io/sambamba/) are used for read quality control.
 
 ### FastQC
 
@@ -99,7 +99,7 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/mosdepth/{sample}/{sample}.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
-| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format                                                                                           | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |
 | `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
 | `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
 
@@ -113,6 +113,14 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/cramino/phased/{sample}/*.txt`     | Summary information in text format                                                                   |
 | `qc/cramino/unphased/{sample}/*.arrow` | Read length and quality in [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html) format |
 | `qc/cramino/unphased/{sample}/*.txt`   | Summary information in text format                                                                   |
+
+### Sambamba
+
+[`sambamba depth region`](https://lomereiter.github.io/sambamba/) is used to summarize coverage information when `--sambamba_regions` is provided. The output BED file can be used together with [chanjo](https://github.com/Clinical-Genomics/chanjo) for coverage analysis.
+
+| Path                                                     | Description                        |
+| -------------------------------------------------------- | ---------------------------------- |
+| `qc/sambamba_depth/{sample}/{sample}_sambamba_depth.bed` | BED file with coverage information |
 
 ### Somalier
 

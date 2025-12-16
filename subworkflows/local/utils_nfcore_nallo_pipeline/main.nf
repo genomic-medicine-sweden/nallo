@@ -98,6 +98,7 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowSkips = [
         assembly         : "skip_genome_assembly",
+        sambamba_depth   : "skip_sambamba_depth",
         mapping          : "skip_alignment",
         snv_calling      : "skip_snv_calling",
         snv_annotation   : "skip_snv_annotation",
@@ -122,6 +123,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph      : ["mapping"],
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
+        sambamba_depth   : ["mapping"],
         sv_calling       : ["mapping"],
         sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
@@ -133,12 +135,14 @@ workflow PIPELINE_INITIALISATION {
         methylation      : ["mapping", "snv_calling"]
     ]
 
+
     //
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
         mapping          : ["fasta", "somalier_sites"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
+        sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
         snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
@@ -158,6 +162,7 @@ workflow PIPELINE_INITIALISATION {
             skip_repeat_calling     : params.skip_repeat_calling,
             skip_repeat_annotation  : params.skip_repeat_annotation,
             skip_chromograph        : params.skip_chromograph,
+            skip_sambamba_depth     : params.skip_sambamba_depth,
             skip_snv_annotation     : params.skip_snv_annotation,
             skip_sv_calling         : params.skip_sv_calling,
             skip_sv_annotation      : params.skip_sv_annotation,
@@ -169,6 +174,7 @@ workflow PIPELINE_INITIALISATION {
         files: [
             par_regions              : params.par_regions,
             echtvar_snv_databases    : params.echtvar_snv_databases,
+            sambamba_regions         : params.sambamba_regions,
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,

@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added co-phasing of SNVs and SVs for HiPhase and Longphase
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 
 ### `Changed`
@@ -17,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
 - [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Moved phasing subworkflow to run before annotation
 - [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
 - [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
 - [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
 - [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
@@ -60,6 +63,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--genmod_compound_trio_snv_threshold`      |
 |               | `--genmod_compound_trio_sv_penalty`         |
 |               | `--genmod_compound_trio_sv_threshold`       |
+|               | `--mosdepth_d4_output`                      |
+|               | `--mosdepth_regions`                        |
+|               | `--sambamba_regions`                        |
+|               | `--skip_sambamba_depth`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

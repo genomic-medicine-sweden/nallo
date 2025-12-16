@@ -65,6 +65,11 @@
                     "description": "Skip peddy",
                     "default": false
                 },
+                "skip_sambamba_depth": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip sambamba depth. True unless `--sambamba_regions` is provided."
+                },
                 "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -226,6 +231,19 @@
                     "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
                     "exists": true
                 },
+                "mosdepth_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`.",
+                    "exists": true
+                },
+                "mosdepth_d4_output": {
+                    "type": "boolean",
+                    "description": "Should mosdepth output d4-files.",
+                    "fa_icon": "fas fa-users-cog",
+                    "default": false
+                },
                 "bigwig_modcodes": {
                     "type": "string",
                     "pattern": "^[mhfcCgebTUaAoGnN](,[mhfcCgebTUaAoGnN])*$",
@@ -303,6 +321,13 @@
                     "type": "string",
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
+                "sambamba_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`.",
+                    "exists": true
                 },
                 "alignment_output_format": {
                     "type": "string",
