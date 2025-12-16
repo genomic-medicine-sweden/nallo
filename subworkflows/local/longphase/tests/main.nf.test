@@ -56,17 +56,17 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = Channel.empty()
-                input[2] = Channel.of([
+                input[1] = channel.empty()
+                input[2] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = false
@@ -86,8 +86,8 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = Channel.empty()
-                input[2] = Channel.of(
+                input[1] = channel.empty()
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -99,7 +99,7 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = false
@@ -155,17 +155,17 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = SAWFISH_JOINTCALL.out.vcf
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = true
@@ -179,7 +179,7 @@ nextflow_workflow {
                     workflow.out.phased_family_snvs,
                     workflow.out.phased_family_snvs_tbi,
                     path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(3).join('\n').md5(), // VCF4.4 is unsupported by nft-vcf and header is unstable because of timestamp in third line
-                    workflow.out.phased_family_svs_tbi,
+                    file(workflow.out.phased_family_svs_tbi.get(0).get(1)).name,
                     workflow.out.haplotagged_bam_bai,
                     workflow.out.versions
                 ).match() }
@@ -193,7 +193,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/sawfish/discover/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id : 'HG002' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -243,7 +243,7 @@ nextflow_workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
                 input[1] = SAWFISH_JOINTCALL.out.vcf
-                input[2] = Channel.of(
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -255,7 +255,7 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = true
@@ -269,7 +269,7 @@ nextflow_workflow {
                     workflow.out.phased_family_snvs,
                     workflow.out.phased_family_snvs_tbi,
                     path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(3).join('\n').md5(), // VCF4.4 is unsupported by nft-vcf and header is unstable because of timestamp in third line
-                    workflow.out.phased_family_svs_tbi,
+                    file(workflow.out.phased_family_svs_tbi.get(0).get(1)).name,
                     workflow.out.haplotagged_bam_bai,
                     workflow.out.versions
                 ).match() }
@@ -283,17 +283,17 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = Channel.empty()
-                input[2] = Channel.of([
+                input[1] = channel.empty()
+                input[2] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = false
@@ -314,8 +314,8 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = Channel.empty()
-                input[2] = Channel.of(
+                input[1] = channel.empty()
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -327,7 +327,7 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = false
@@ -384,17 +384,17 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = SAWFISH_JOINTCALL.out.vcf
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = true
@@ -416,7 +416,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/sawfish/discover/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id : 'HG002' ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -466,7 +466,7 @@ nextflow_workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
                 input[1] = SAWFISH_JOINTCALL.out.vcf
-                input[2] = Channel.of(
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -478,7 +478,7 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[3] = Channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
+                input[3] = channel.of([ [ id: 'FAM' ], [ 'HG002', 'HG003' ]])
                 input[4] = GUNZIP.out.gunzip
                 input[5] = SAMTOOLS_FAIDX.out.fai
                 input[6] = true

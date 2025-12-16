@@ -12,8 +12,8 @@ workflow PREPARE_REFERENCES {
     untar_vep_cache            // boolean: should we untar vep cache
 
     main:
-    ch_versions = Channel.empty()
-    ch_fasta = Channel.empty()
+    ch_versions = channel.empty()
+    ch_fasta = channel.empty()
 
     // Will not catch cases where fasta is bgzipped
     if (gunzip_fasta) {

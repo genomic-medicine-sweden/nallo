@@ -147,7 +147,7 @@ Turned off with `--skip_alignment`.
 
 #### QC
 
-This subworkflow depends on the alignment subworkflow, but requires no additional files.
+This subworkflow depends on the alignment subworkflow, but requires no additional files by default. Analysis regions for mosdepth and sambamba depth can be set by providing a BED file to `--qc_regions`, or `--mosdepth_regions` and `--sambamba_regions` separately.
 
 Turned off with `--skip_qc`.
 
@@ -393,7 +393,7 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ### Target regions
 
-The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--modkit_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to `--mosdepth_regions` (mosdepth) and `--sambamba_regions` (sambamba depth), and `--modkit_call_regions` which limits the methylation pileup regions. These four parameters are set to the same as `--target_regions` by default, but can also be set independently.
 
 !!!warning
 

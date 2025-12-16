@@ -31,11 +31,6 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
-                    "bcftools/pluginsplit": {
-                        "branch": "master",
-                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
-                        "installed_by": ["modules"]
-                    },
                     "bcftools/query": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
@@ -233,6 +228,11 @@
                     "peddy": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "sambamba/depth": {
+                        "branch": "master",
+                        "git_sha": "ca6da11b05740de461b1e2714037345c0f856201",
                         "installed_by": ["modules"]
                     },
                     "rhocall/viz": {

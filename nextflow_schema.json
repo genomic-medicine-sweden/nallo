@@ -65,6 +65,11 @@
                     "description": "Skip peddy",
                     "default": false
                 },
+                "skip_sambamba_depth": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip sambamba depth. True unless `--sambamba_regions` is provided."
+                },
                 "skip_phasing": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -233,6 +238,19 @@
                     "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
                     "exists": true
                 },
+                "mosdepth_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`.",
+                    "exists": true
+                },
+                "mosdepth_d4_output": {
+                    "type": "boolean",
+                    "description": "Should mosdepth output d4-files.",
+                    "fa_icon": "fas fa-users-cog",
+                    "default": false
+                },
                 "bigwig_modcodes": {
                     "type": "string",
                     "pattern": "^[mhfcCgebTUaAoGnN](,[mhfcCgebTUaAoGnN])*$",
@@ -310,6 +328,13 @@
                     "type": "string",
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
+                "sambamba_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`.",
+                    "exists": true
                 },
                 "alignment_output_format": {
                     "type": "string",
@@ -686,6 +711,58 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
+                },
+                "genmod_compound_snv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SNVs."
+                },
+                "genmod_compound_snv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SNVs."
+                },
+                "genmod_compound_sv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SVs."
+                },
+                "genmod_compound_sv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SVs."
+                },
+                "genmod_compound_singleton_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_singleton_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_singleton_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_singleton_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
+                "genmod_compound_trio_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_trio_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_trio_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_trio_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
                 },
                 "plot_chromograph_autozygosity": {
                     "type": "boolean",

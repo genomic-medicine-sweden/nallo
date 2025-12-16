@@ -140,11 +140,11 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:00:11.731231485"
+        "timestamp": "2025-12-16T16:06:49.242481314"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            54,
+            55,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -212,6 +212,9 @@
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -312,6 +315,9 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.summary.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz.csi",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_Revio",
+                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -338,7 +344,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:01:47.372216001"
+        "timestamp": "2025-12-16T16:08:27.105933044"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -438,7 +444,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:00:57.306346287"
+        "timestamp": "2025-12-16T16:07:31.522231646"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -500,7 +506,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:01:19.54880683"
+        "timestamp": "2025-12-16T16:07:52.193851108"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -667,11 +673,11 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T15:59:34.680484678"
+        "timestamp": "2025-12-16T16:06:17.891762901"
     },
     "Test family id same as sample id": {
         "content": [
-            178,
+            179,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -700,9 +706,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
@@ -719,6 +722,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -836,6 +842,9 @@
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -1086,6 +1095,9 @@
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_Revio",
+                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -1135,7 +1147,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:02:37.083982498"
+        "timestamp": "2025-12-16T16:09:16.053248357"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1203,6 +1215,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:00:36.652965144"
+        "timestamp": "2025-12-16T16:07:09.957053634"
     }
 }

@@ -10,7 +10,7 @@ nextflow_workflow {
             script "../../prepare_references/main.nf"
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
@@ -38,13 +38,13 @@ nextflow_workflow {
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
                 input[4] = PREPARE_REFERENCES.out.vep_resources.map { meta, cache -> cache }
-                input[5] = Channel.value('110')
-                input[6] = Channel.of([
+                input[5] = channel.value('110')
+                input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
                 input[7] = false
                 input[8] = true
-                input[9] = Channel.value([])
+                input[9] = channel.value([])
                 input[10] = null
                 input[11] = null
                 input[12] = false
@@ -87,11 +87,11 @@ nextflow_workflow {
                 """
                 input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'genmod_score_config_snvs' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])
@@ -119,11 +119,11 @@ nextflow_workflow {
                 """
                 input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'genmod_score_config_snvs' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])

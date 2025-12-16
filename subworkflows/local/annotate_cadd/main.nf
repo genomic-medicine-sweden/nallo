@@ -21,7 +21,7 @@ workflow ANNOTATE_CADD {
     ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(dir) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     REFERENCE_TO_CADD_CHRNAMES (
         ch_fai,

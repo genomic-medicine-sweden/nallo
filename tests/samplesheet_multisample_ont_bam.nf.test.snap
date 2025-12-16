@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            275,
+            279,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -27,9 +27,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
@@ -46,6 +43,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -143,6 +143,9 @@
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -601,21 +604,18 @@
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.mosdepth.summary.txt",
-                "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.per-base.d4",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz",
                 "qc/mosdepth/HG002_ONT_A/HG002_ONT_A.regions.bed.gz.csi",
                 "qc/mosdepth/HG002_ONT_B",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.mosdepth.summary.txt",
-                "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.per-base.d4",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz",
                 "qc/mosdepth/HG002_ONT_B/HG002_ONT_B.regions.bed.gz.csi",
                 "qc/mosdepth/HG002_ONT_C",
                 "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.mosdepth.summary.txt",
-                "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.per-base.d4",
                 "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.regions.bed.gz",
                 "qc/mosdepth/HG002_ONT_C/HG002_ONT_C.regions.bed.gz.csi",
                 "qc/peddy",
@@ -654,6 +654,13 @@
                 "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz",
                 "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_ONT_A",
+                "qc/sambamba_depth/HG002_ONT_A/HG002_ONT_A_sambamba_depth.bed",
+                "qc/sambamba_depth/HG002_ONT_B",
+                "qc/sambamba_depth/HG002_ONT_B/HG002_ONT_B_sambamba_depth.bed",
+                "qc/sambamba_depth/HG002_ONT_C",
+                "qc/sambamba_depth/HG002_ONT_C/HG002_ONT_C_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -877,15 +884,15 @@
                 "fastqc_sequence_counts_plot.txt:md5,c416dcd4b4ae6fd9302e618f5799a94d",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,7846fffe6105666f6c357de464ed35ef",
                 "fastqc_sequence_length_distribution_plot.txt:md5,a9817ecb4236a3fadb9b94d120999365",
-                "mosdepth-coverage-per-contig-multi.txt:md5,65f7f55ed09d31ac522399d65d1ae10a",
-                "mosdepth-cumcoverage-dist-id.txt:md5,56c3e854b401b9881b73ba57a5c731e6",
-                "mosdepth_cov_dist.txt:md5,68556deb917bec67f4829e0a1bdb1d50",
-                "mosdepth_cumcov_dist.txt:md5,68556deb917bec67f4829e0a1bdb1d50",
-                "mosdepth_perchrom.txt:md5,2f4c9da00743bb49d99b4bf00755d478",
+                "mosdepth-coverage-per-contig-multi.txt:md5,6ee481c7fc3851843f6332be6b2c17fe",
+                "mosdepth-cumcoverage-dist-id.txt:md5,3949845d5d70e6d841015bd99fd66ce5",
+                "mosdepth_cov_dist.txt:md5,cccadce3937371bf3cbce5d0efe1d413",
+                "mosdepth_cumcov_dist.txt:md5,cccadce3937371bf3cbce5d0efe1d413",
+                "mosdepth_perchrom.txt:md5,f55e593197ab9cf7bc7befd8d42ce29a",
                 "multiqc_bcftools_stats.txt:md5,3635c247ddaf1b57bd607d873d0981b5",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,638664d7aa86a48fb5842bd5fd9405c9",
-                "multiqc_general_stats.txt:md5,afeb7c05ca6795be569d2a11f8f7d9a9",
+                "multiqc_general_stats.txt:md5,bcf197bcaa67a23e3e8f13260676db48",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,7bbc5c16828ce33a7f57ea8402d4f02a",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,7485e32537bc4e3388e1215904842c68",
@@ -899,23 +906,20 @@
                 "HG002_ONT_B_cramino_aligned.arrow:md5,fa91b910a968bd0c8def84fe288e3bb0",
                 "HG002_ONT_C_cramino_aligned.arrow:md5,60f312bc1ebf1eb0d4758fc59bcdf155",
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,14bcc32136e2146095ad21e40b2bc6a1",
-                "HG002_ONT_A.mosdepth.region.dist.txt:md5,8c2be7b8a518ccdddfd44dc5ae18b783",
-                "HG002_ONT_A.mosdepth.summary.txt:md5,2c8117fc445598a1c7225304f2907c54",
-                "HG002_ONT_A.per-base.d4:md5,763c96b682b7857799e553d6e95ddddf",
-                "HG002_ONT_A.regions.bed.gz:md5,3c39fa1dce5616638a3f12c6444e43cf",
-                "HG002_ONT_A.regions.bed.gz.csi:md5,239ddab6fb3be39147565895ebdc8adb",
+                "HG002_ONT_A.mosdepth.region.dist.txt:md5,33af27722b03c06c4b5fc898d44b7034",
+                "HG002_ONT_A.mosdepth.summary.txt:md5,8d6056c8c5adef2a635231cb803a0285",
+                "HG002_ONT_A.regions.bed.gz:md5,d18b379af40c47f1c0fc5daaf32fddae",
+                "HG002_ONT_A.regions.bed.gz.csi:md5,b9d96565ebb4f93effb63658dd80f4e2",
                 "HG002_ONT_B.mosdepth.global.dist.txt:md5,6b109ee9544ff8406ad1527d2f1a36ea",
-                "HG002_ONT_B.mosdepth.region.dist.txt:md5,39ecf5be1f147c88531f21153ea62f3b",
-                "HG002_ONT_B.mosdepth.summary.txt:md5,eb73290f149c224c447e100928bcad6f",
-                "HG002_ONT_B.per-base.d4:md5,f61ad5ffa6d04aa6e5c7d0a604045127",
-                "HG002_ONT_B.regions.bed.gz:md5,312f40a75c58f158ff07f98edc31e200",
-                "HG002_ONT_B.regions.bed.gz.csi:md5,6540464dfb97b542305cf03dcb8f8b77",
+                "HG002_ONT_B.mosdepth.region.dist.txt:md5,f3d53e9846322d85e066cd7e25cb9c1b",
+                "HG002_ONT_B.mosdepth.summary.txt:md5,c566e84ff1f9684cd2acffb0d96881db",
+                "HG002_ONT_B.regions.bed.gz:md5,0d119f35a59aa6086cf5db122d871b72",
+                "HG002_ONT_B.regions.bed.gz.csi:md5,8f972dae17349629bddf2cdeb0b17ea8",
                 "HG002_ONT_C.mosdepth.global.dist.txt:md5,14bcc32136e2146095ad21e40b2bc6a1",
-                "HG002_ONT_C.mosdepth.region.dist.txt:md5,8c2be7b8a518ccdddfd44dc5ae18b783",
-                "HG002_ONT_C.mosdepth.summary.txt:md5,2c8117fc445598a1c7225304f2907c54",
-                "HG002_ONT_C.per-base.d4:md5,763c96b682b7857799e553d6e95ddddf",
-                "HG002_ONT_C.regions.bed.gz:md5,3c39fa1dce5616638a3f12c6444e43cf",
-                "HG002_ONT_C.regions.bed.gz.csi:md5,239ddab6fb3be39147565895ebdc8adb",
+                "HG002_ONT_C.mosdepth.region.dist.txt:md5,33af27722b03c06c4b5fc898d44b7034",
+                "HG002_ONT_C.mosdepth.summary.txt:md5,8d6056c8c5adef2a635231cb803a0285",
+                "HG002_ONT_C.regions.bed.gz:md5,d18b379af40c47f1c0fc5daaf32fddae",
+                "HG002_ONT_C.regions.bed.gz.csi:md5,b9d96565ebb4f93effb63658dd80f4e2",
                 "FAM.het_check.csv:md5,2f163743b21f66533a48ad66c70b5ef0",
                 "FAM.het_check.png:md5,be72cdf4ff919a5d7a26cdbd2cf8028e",
                 "FAM.html:md5,44ffbdc8c8804e11796ad7baa5a0f5c8",
@@ -942,6 +946,9 @@
                 "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,00bb69da27ff283832694efbb69ff1c2",
                 "HG002_ONT_C_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
                 "HG002_ONT_C_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "HG002_ONT_A_sambamba_depth.bed:md5,44e7c66549c2a9f5f3826136dce8cf0a",
+                "HG002_ONT_B_sambamba_depth.bed:md5,10ee1428503d20627944cbcd7cc233b4",
+                "HG002_ONT_C_sambamba_depth.bed:md5,789586b61f1b89840f11f6302f772936",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
                 "HG002_ONT_A_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
@@ -1072,6 +1079,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T15:58:55.697076393"
+        "timestamp": "2025-12-16T16:05:42.092501161"
     }
 }

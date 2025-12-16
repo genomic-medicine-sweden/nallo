@@ -15,7 +15,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of('test_vcf_file_sample')
+                input[0] = channel.of('test_vcf_file_sample')
                     .collectFile(name: 'test.txt')
                     .map { file -> [ [ id: 'test' ], file ] }
                 """
@@ -37,7 +37,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of('test_vcf_file_sample')
+                input[0] = channel.of('test_vcf_file_sample')
                     .collectFile(name: 'test.txt')
                     .map { file -> [ [ id: 'test' ], file ] }
                 """

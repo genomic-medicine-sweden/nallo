@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            325,
+            330,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -30,9 +30,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
@@ -49,6 +46,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -167,6 +167,9 @@
                 },
                 "RUN_HIPHASE": {
                     "hiphase": "1.4.0-7bf2743"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -682,21 +685,18 @@
                 "qc/mosdepth/HG002/HG002.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002/HG002.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002/HG002.mosdepth.summary.txt",
-                "qc/mosdepth/HG002/HG002.per-base.d4",
                 "qc/mosdepth/HG002/HG002.regions.bed.gz",
                 "qc/mosdepth/HG002/HG002.regions.bed.gz.csi",
                 "qc/mosdepth/HG003",
                 "qc/mosdepth/HG003/HG003.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG003/HG003.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG003/HG003.mosdepth.summary.txt",
-                "qc/mosdepth/HG003/HG003.per-base.d4",
                 "qc/mosdepth/HG003/HG003.regions.bed.gz",
                 "qc/mosdepth/HG003/HG003.regions.bed.gz.csi",
                 "qc/mosdepth/HG004",
                 "qc/mosdepth/HG004/HG004.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG004/HG004.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG004/HG004.mosdepth.summary.txt",
-                "qc/mosdepth/HG004/HG004.per-base.d4",
                 "qc/mosdepth/HG004/HG004.regions.bed.gz",
                 "qc/mosdepth/HG004/HG004.regions.bed.gz.csi",
                 "qc/peddy",
@@ -724,6 +724,13 @@
                 "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz",
                 "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG004/HG004_stats.stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002",
+                "qc/sambamba_depth/HG002/HG002_sambamba_depth.bed",
+                "qc/sambamba_depth/HG003",
+                "qc/sambamba_depth/HG003/HG003_sambamba_depth.bed",
+                "qc/sambamba_depth/HG004",
+                "qc/sambamba_depth/HG004/HG004_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -878,7 +885,7 @@
                 "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG004_chromograph_autozyg_chrX.png:md5,5bd250cf8c350bd08bf4504c50c5528f",
+                "HG004_chromograph_autozyg_chrX.png:md5,4043f9dd0efed4d0dcc3fdc92678d2e8",
                 "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
@@ -939,15 +946,15 @@
                 "fastqc_sequence_counts_plot.txt:md5,4e58474bd4eb32e9215212d954dfca13",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,988bc597c4efcc6fe9b83836fa1cf88e",
                 "fastqc_sequence_length_distribution_plot.txt:md5,3d66ea3020c5d040ebc3d63c7c431a53",
-                "mosdepth-coverage-per-contig-multi.txt:md5,2ef2d25e7ff9bf6bef91b761b11edb07",
-                "mosdepth-cumcoverage-dist-id.txt:md5,ed020e5f214b1a0e2c9481bf7590ccb9",
-                "mosdepth_cov_dist.txt:md5,734f78de08e74a7ea8093e70f3609983",
-                "mosdepth_cumcov_dist.txt:md5,734f78de08e74a7ea8093e70f3609983",
-                "mosdepth_perchrom.txt:md5,97a37719ebe450c8c0b55f802c03466f",
+                "mosdepth-coverage-per-contig-multi.txt:md5,26c1817c656427cff8707235cf73e493",
+                "mosdepth-cumcoverage-dist-id.txt:md5,3854784b4f1a0ef80fad5ab5e1088396",
+                "mosdepth_cov_dist.txt:md5,6255c64e367fd16ce9a7af1412a48afc",
+                "mosdepth_cumcov_dist.txt:md5,6255c64e367fd16ce9a7af1412a48afc",
+                "mosdepth_perchrom.txt:md5,ac1c99ba478b474c94aa3a4ffbd77ded",
                 "multiqc_bcftools_stats.txt:md5,93f18535a07855bf4d0da097603845dd",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,1e6ac77b00af0b9c6864c8b589860137",
-                "multiqc_general_stats.txt:md5,ef0c48559ecd704c27c20e2c5d25e4d8",
+                "multiqc_general_stats.txt:md5,5f6892f7fc90ddc9ddf537e486b00662",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,cc666ebe9ef079dd8141117a08dc8f99",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,dae75ddc6021785e0e0cd0c351905ca3",
@@ -960,23 +967,20 @@
                 "HG003_cramino_aligned.arrow:md5,0d592c579116e4095e741ba522dbb916",
                 "HG004_cramino_aligned.arrow:md5,15c7cf620a1c484a91a2b85964ae2626",
                 "HG002.mosdepth.global.dist.txt:md5,9a37dbbab6b60bba139e6fa379d72acb",
-                "HG002.mosdepth.region.dist.txt:md5,2d7d3a08de6f89ab1bf3f370422996f3",
-                "HG002.mosdepth.summary.txt:md5,c317ae9c1173bb63ba71b74e4e6bf2c8",
-                "HG002.per-base.d4:md5,7db0143a6647ad9f782429d229098546",
-                "HG002.regions.bed.gz:md5,20008cab39c346192b7a831889939bda",
-                "HG002.regions.bed.gz.csi:md5,442e9300f55dafa573f13569c1d7fca5",
+                "HG002.mosdepth.region.dist.txt:md5,413ef2dab45d3b468c20e1264cabb928",
+                "HG002.mosdepth.summary.txt:md5,f94a92cdd8f3d31bd32d2340375ec5fd",
+                "HG002.regions.bed.gz:md5,f96ae5d11bdf45f94f4766453114fc62",
+                "HG002.regions.bed.gz.csi:md5,e522ffd072acc1ad48bd5a925a09a34e",
                 "HG003.mosdepth.global.dist.txt:md5,45727d41bf31bcff132fb19264b7120f",
-                "HG003.mosdepth.region.dist.txt:md5,674dde91cd6d60c373d5661feea28cd3",
-                "HG003.mosdepth.summary.txt:md5,4dc447bd443fb4473a7b0b8910c1e5e7",
-                "HG003.per-base.d4:md5,491afcb6b305d252b96710b2a35b46d3",
-                "HG003.regions.bed.gz:md5,d2e677014b37c24a16a908d118e35c2b",
-                "HG003.regions.bed.gz.csi:md5,d2eef0edece6291bc35736ba06b25efe",
+                "HG003.mosdepth.region.dist.txt:md5,45727d41bf31bcff132fb19264b7120f",
+                "HG003.mosdepth.summary.txt:md5,16c0ae60e655bb9e4f6ec576ad1a74f8",
+                "HG003.regions.bed.gz:md5,6b17487d3067ab00a7f32f0544d84c41",
+                "HG003.regions.bed.gz.csi:md5,1c577d490590845ff7c859a7768e1020",
                 "HG004.mosdepth.global.dist.txt:md5,c95b6204aa286fbe4c1edfb96c539ee5",
-                "HG004.mosdepth.region.dist.txt:md5,2936e6a168b80eaa4d882eb37b985bae",
-                "HG004.mosdepth.summary.txt:md5,b7949cd856c17b7df6e46f143cbc9453",
-                "HG004.per-base.d4:md5,f412f54650b75d94fb970780bef60895",
-                "HG004.regions.bed.gz:md5,f998a3999b9dcc4bb0e61646ff8b98ed",
-                "HG004.regions.bed.gz.csi:md5,f0b31d73332a08874b4cb117e7240ddf",
+                "HG004.mosdepth.region.dist.txt:md5,0c69c1a45c7edb367b756489aa13b705",
+                "HG004.mosdepth.summary.txt:md5,2eb3fbea87457cd404e8d62bed93a84e",
+                "HG004.regions.bed.gz:md5,35c700ee66cc0d76012ace6387d14ab0",
+                "HG004.regions.bed.gz.csi:md5,54790a598ec7305cbfcf82e98ea51d2b",
                 "FAM.het_check.csv:md5,1659a56de32f7be486d5610df2f92176",
                 "FAM.het_check.png:md5,9d4eed0e449ae9176aa28d65aadc497c",
                 "FAM.html:md5,5ea34b6d90d31bb07e80451243b871fc",
@@ -993,6 +997,9 @@
                 "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
                 "HG004_stats.blocks.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
                 "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG002_sambamba_depth.bed:md5,d51c953d6f90c54eff946b058caf46c9",
+                "HG003_sambamba_depth.bed:md5,7c93de77f515eab7c14188547b9c2bad",
+                "HG004_sambamba_depth.bed:md5,847e789fad6341c4be4f56dcbb68dfdc",
                 "HG002_hificnv.copynum.bedgraph:md5,7629bd194132872a1c2baf247cfcdf31",
                 "HG002_hificnv.depth.bw:md5,471606be8f70676216a048235e51b5af",
                 "HG002_hificnv.maf.bw:md5,6ee2a3e0dfd47c67b9d12db8e525326e",
@@ -1135,6 +1142,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T15:55:44.31975803"
+        "timestamp": "2025-12-16T16:02:27.635080875"
     }
 }

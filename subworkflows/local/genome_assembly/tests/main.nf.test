@@ -9,7 +9,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
@@ -38,7 +38,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/samtools/fastq/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
@@ -89,7 +89,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/samtools/fastq/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
@@ -147,7 +147,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/samtools/fastq/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: false ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
@@ -192,7 +192,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
@@ -221,7 +221,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'test_fastq', n_files: 1, relationship: 'unknown' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
@@ -256,7 +256,7 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/samtools/fastq/main.nf"
                 process {
                     """
-                    input[0] = Channel.of(
+                    input[0] = channel.of(
                         [
                             [ id: 'HG002', n_files: 1, relationship: 'child', children: [], family_id: 'NIST', two_parents: true ],
                             file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
