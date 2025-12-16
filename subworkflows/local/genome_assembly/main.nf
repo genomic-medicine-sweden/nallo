@@ -12,7 +12,7 @@ workflow GENOME_ASSEMBLY {
     trio_binning //    bool: Should we use trio binning mode where possible?
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship

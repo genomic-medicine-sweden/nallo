@@ -13,7 +13,7 @@ workflow ANNOTATE_SVS {
     ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_sv_dbs
         .multiMap { filename, in_freq_info_key, in_allele_count_info_key, out_freq_info_key, out_allele_count_info_key ->

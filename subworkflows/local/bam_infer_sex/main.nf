@@ -12,7 +12,7 @@ workflow BAM_INFER_SEX {
     ch_ped            // channel: [ val(meta), path(ped) ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Extract sites
     SOMALIER_EXTRACT (
