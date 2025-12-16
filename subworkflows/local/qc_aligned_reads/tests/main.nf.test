@@ -59,7 +59,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
@@ -136,7 +136,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])

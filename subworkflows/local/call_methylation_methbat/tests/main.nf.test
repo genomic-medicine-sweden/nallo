@@ -10,11 +10,11 @@ nextflow_workflow {
             script "../../prepare_references/main.nf"
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = Channel.empty()
+                input[1] = channel.empty()
                 input[2] = true
                 input[3] = false
                 """
@@ -25,22 +25,22 @@ nextflow_workflow {
             script "../../phasing/main.nf"
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = Channel.empty()
-                input[3] = Channel.empty()
-                input[4] = Channel.of([
+                input[2] = channel.empty()
+                input[3] = channel.empty()
+                input[4] = channel.of([
                     [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[5] = Channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[5] = channel.of( [ [ id : 'HG002' ], 'HG002' ] )
                 input[6] = PREPARE_REFERENCES.out.fasta
                 input[7] = PREPARE_REFERENCES.out.fai
                 input[8] = 'longphase'
@@ -59,7 +59,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -87,12 +87,12 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -121,7 +121,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -150,7 +150,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -178,12 +178,12 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'HG002', family_id: 'HG002' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -213,7 +213,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])
@@ -240,7 +240,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = PHASING.out.haplotagged_bam_bai
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'methbat_regions_id' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
                 ])

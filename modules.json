@@ -230,16 +230,16 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
-                    "sambamba/depth": {
-                        "branch": "master",
-                        "git_sha": "ca6da11b05740de461b1e2714037345c0f856201",
-                        "installed_by": ["modules"]
-                    },
                     "rhocall/viz": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/rhocall/viz/rhocall-viz.diff"
+                    },
+                    "sambamba/depth": {
+                        "branch": "master",
+                        "git_sha": "ca6da11b05740de461b1e2714037345c0f856201",
+                        "installed_by": ["modules"]
                     },
                     "samtools/convert": {
                         "branch": "master",
