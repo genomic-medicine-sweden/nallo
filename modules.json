@@ -374,12 +374,12 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
+                        "git_sha": "22bb4dcead991fd34f807fb72bb4071c2216ee24",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
+                        "git_sha": "7ba90804ac43ed961b6ce8a8dcc06d283142f648",
                         "installed_by": ["modules"]
                     },
                     "untar": {

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            331,
+            330,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -17,9 +17,6 @@
                 },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
-                },
-                "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -255,10 +252,10 @@
                     "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -1049,15 +1046,15 @@
                 ],
                 [
                     "HG002_spanning_trgt.bam",
-                    "60519e7c5a45f99ec47d40a970f881d0"
+                    "149447b190be7a1ca5b4f8c76d9fc334"
                 ],
                 [
                     "HG003_spanning_trgt.bam",
-                    "b1236435af435b4a04432003c59c5c5b"
+                    "c2391f5eae9d1633c90d6b6004991b90"
                 ],
                 [
                     "HG004_spanning_trgt.bam",
-                    "373549bf3259239efbd1c6fdda76ada"
+                    "77f8d4125207842ade00c4f5a6074f9a"
                 ]
             ],
             [
@@ -1094,11 +1091,11 @@
                 ],
                 [
                     "HG002_trgt.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_trgt.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG004_trgt.vcf.gz",
@@ -1141,6 +1138,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T09:41:03.52254994"
+        "timestamp": "2025-12-17T10:05:18.782005495"
     }
 }

@@ -30,7 +30,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         ch_fai,
         ch_bed,
     )
-    ch_versions = ch_versions.mix(TRGT_GENOTYPE.out.versions)
 
     // Sort and index bam
     SAMTOOLS_SORT(
@@ -88,18 +87,12 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         [[], []],
         [[], []],
     )
-    ch_versions = ch_versions.mix(TRGT_MERGE.out.versions)
-
-    BCFTOOLS_INDEX(
-        TRGT_MERGE.out.vcf
-    )
-    ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
     emit:
     sample_vcf = BCFTOOLS_SORT.out.vcf  // channel: [ val(meta), path(vcf) ]
     sample_tbi = BCFTOOLS_SORT.out.tbi  // channel: [ val(meta), path(tbi) ]
     family_vcf = TRGT_MERGE.out.vcf     // channel: [ val(meta), path(vcf) ]
-    family_tbi = BCFTOOLS_INDEX.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_tbi = TRGT_MERGE.out.index   // channel: [ val(meta), path(tbi) ]
     sample_bam = SAMTOOLS_SORT.out.bam  // channel: [ val(meta), path(bam) ]
     sample_bai = SAMTOOLS_INDEX.out.bai // channel: [ val(meta), path(bai) ]
     versions   = ch_versions            // channel: [ versions.yml ]
