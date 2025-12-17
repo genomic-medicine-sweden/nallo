@@ -138,9 +138,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:13:03.901106929"
+        "timestamp": "2025-12-16T16:06:49.242481314"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -342,9 +342,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:14:14.26173437"
+        "timestamp": "2025-12-16T16:08:27.105933044"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -442,9 +442,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:23:37.852798341"
+        "timestamp": "2025-12-16T16:07:31.522231646"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -504,9 +504,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:23:57.177725364"
+        "timestamp": "2025-12-16T16:07:52.193851108"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -671,9 +671,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:12:33.712747494"
+        "timestamp": "2025-12-16T16:06:17.891762901"
     },
     "Test family id same as sample id": {
         "content": [
@@ -811,14 +811,14 @@
                     "merge_json_sample_files_into_family": 1.0,
                     "python": "3.8.3"
                 },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.16.1-8a0a24c"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MODKIT_PILEUP": {
-                    "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
@@ -827,6 +827,9 @@
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
                     "samtools": "1.22.1"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -1007,12 +1010,17 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
                 "methylation",
-                "methylation/modkit",
-                "methylation/modkit/pileup",
-                "methylation/modkit/pileup/HG002_Revio",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.log",
+                "methylation/pileup",
+                "methylation/pileup/HG002_Revio",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/HG002_Revio",
+                "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1129,14 +1137,17 @@
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-16T15:09:29.254892251"
+        "timestamp": "2025-12-16T16:09:16.053248357"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1202,8 +1213,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-14T16:23:15.273702312"
+        "timestamp": "2025-12-16T16:07:09.957053634"
     }
 }

@@ -26,7 +26,8 @@ include { CALL_SNVS                                              } from '../subw
 include { CALL_SVS                                               } from '../subworkflows/local/call_svs'
 include { GENOME_ASSEMBLY                                        } from '../subworkflows/local/genome_assembly'
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
-include { METHYLATION                                            } from '../subworkflows/local/methylation'
+include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
+include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
 include { PHASING                                                } from '../subworkflows/local/phasing'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
@@ -95,7 +96,7 @@ workflow NALLO {
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
     ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
     ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, channel.value([[],[]]))
+    ch_modkit_call_regions       = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
@@ -107,10 +108,11 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
+    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
     ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json, channel.value([[],[]]))
+
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -844,17 +846,25 @@ workflow NALLO {
     }
 
     //
-    // Create methylation pileups with modkit
+    // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if(!params.skip_methylation_pileups) {
-        METHYLATION (
+    if(!params.skip_methylation_calling && params.run_modkit) {
+        CALL_METHYLATION_MODKIT(
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_fai,
-            ch_methylation_call_regions,
+            ch_modkit_call_regions,
             params.bigwig_modcodes
         )
-        ch_versions = ch_versions.mix(METHYLATION.out.versions)
+        ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
+    }
+
+    if (!params.skip_methylation_calling && params.run_methbat) {
+        CALL_METHYLATION_METHBAT(
+            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            ch_methbat_regions
+        )
+        ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
 
     //

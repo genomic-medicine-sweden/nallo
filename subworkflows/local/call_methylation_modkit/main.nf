@@ -2,7 +2,7 @@ include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileu
 include { TABIX_BGZIPTABIX         } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
 
-workflow METHYLATION {
+workflow CALL_METHYLATION_MODKIT {
 
     take:
     ch_bam_bai             // channel: [ val(meta), bam, bai ]

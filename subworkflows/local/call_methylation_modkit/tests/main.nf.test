@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow METHYLATION"
+    name "Test Workflow CALL_METHYLATION_MODKIT"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "METHYLATION"
+    workflow "CALL_METHYLATION_MODKIT"
 
     setup {
         run("PREPARE_REFERENCES") {
@@ -17,22 +17,6 @@ nextflow_workflow {
                 input[1] = channel.empty()
                 input[2] = true
                 input[3] = false
-                """
-            }
-        }
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
-            process {
-                """
-                input[0] = [
-                    [ id: 'HG002', family_id: 'HG002' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                ]
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = true
-                input[3] = 'csi'
-                input[4] = false
-                input[5] = false
                 """
             }
         }
@@ -51,8 +35,11 @@ nextflow_workflow {
                 ])
                 input[2] = channel.empty()
                 input[3] = channel.empty()
-                input[4] = MINIMAP2_ALIGN.out.bam
-                            .join(MINIMAP2_ALIGN.out.index)
+                input[4] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[5] = channel.of( [ [ id : 'HG002' ], 'HG002' ] )
                 input[6] = PREPARE_REFERENCES.out.fasta
                 input[7] = PREPARE_REFERENCES.out.fai
@@ -94,7 +81,11 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
@@ -142,7 +133,11 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = channel.of('chr20\t2650000\t2660000')
@@ -218,7 +213,11 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = [[],[]]
@@ -242,7 +241,11 @@ nextflow_workflow {
             }
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index)
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = channel.of('chr20\t2650000\t2660000')

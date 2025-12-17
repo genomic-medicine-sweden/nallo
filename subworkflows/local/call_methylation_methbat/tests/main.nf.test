@@ -1,0 +1,261 @@
+nextflow_workflow {
+
+    name "Test Workflow CALL_METHYLATION_METHBAT"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "CALL_METHYLATION_METHBAT"
+
+    setup {
+        run("PREPARE_REFERENCES") {
+            script "../../prepare_references/main.nf"
+            process {
+                """
+                input[0] = channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[1] = channel.empty()
+                input[2] = true
+                input[3] = false
+                """
+            }
+        }
+
+        run("PHASING") {
+            script "../../phasing/main.nf"
+            process {
+                """
+                input[0] = channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                ])
+                input[2] = channel.empty()
+                input[3] = channel.empty()
+                input[4] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[5] = channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[6] = PREPARE_REFERENCES.out.fasta
+                input[7] = PREPARE_REFERENCES.out.fai
+                input[8] = 'longphase'
+                input[9] = false
+                input[10] = false
+                """
+            }
+        }
+    }
+
+    test("1 sample - phased") {
+        when {
+            params{
+                extra_methbat_profile_args = ""
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml },
+                    file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - unphased") {
+        when {
+            params{
+                extra_methbat_profile_args = ""
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml },
+                    file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - phased - withlabels") {
+        when {
+            params{
+                extra_methbat_profile_args = "--profile-label MALE --profile-label FEMALE"
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml },
+                    file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed phased") {
+        when {
+            params{
+                extra_methbat_profile_args = "--output-asm-bed test.bed"
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml },
+                    file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed unphased") {
+        when {
+            params{
+                extra_methbat_profile_args = "--output-asm-bed test.bed"
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'HG002' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml },
+                    file(workflow.out.region_profile[0][1])
+                        .readLines()
+                        .collect { line -> line.split('\t')[0..6] }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - phased - stub") {
+        options "-stub"
+        when {
+            params{
+                extra_methbat_profile_args = ""
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - bed phased - stub") {
+        options "-stub"
+        when {
+            params{
+                extra_methbat_profile_args = "--output-asm-bed test.bed"
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methbat_regions_id' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out,
+                    workflow.out.versions.collect{ path(it).yaml }
+                ).match() }
+            )
+        }
+    }
+
+}

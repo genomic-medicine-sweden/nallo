@@ -44,7 +44,8 @@
 ##### Phasing and methylation
 
 - Phase and haplotag reads with [LongPhase](https://github.com/twolinin/longphase), [whatshap](https://github.com/whatshap/whatshap) or [HiPhase](https://github.com/PacificBiosciences/HiPhase)
-- Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit)
+- Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit) or [pbcpgtools](https://github.com/PacificBiosciences/pb-CpG-tools) (PacBio only)
+- Rare methylation analaysis with [methbat profile](https://github.com/PacificBiosciences/MethBat) (PacBio only)
 
 ##### Annotation
 
