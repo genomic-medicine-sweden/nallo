@@ -18,9 +18,6 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
                 },
@@ -216,8 +213,11 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -252,10 +252,10 @@
                     "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -1046,15 +1046,15 @@
                 ],
                 [
                     "HG002_spanning_trgt.bam",
-                    "60519e7c5a45f99ec47d40a970f881d0"
+                    "149447b190be7a1ca5b4f8c76d9fc334"
                 ],
                 [
                     "HG003_spanning_trgt.bam",
-                    "b1236435af435b4a04432003c59c5c5b"
+                    "c2391f5eae9d1633c90d6b6004991b90"
                 ],
                 [
                     "HG004_spanning_trgt.bam",
-                    "373549bf3259239efbd1c6fdda76ada"
+                    "77f8d4125207842ade00c4f5a6074f9a"
                 ]
             ],
             [
@@ -1090,16 +1090,12 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=3, variantCount=3, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_trgt.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_trgt.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG004_trgt.vcf.gz",
@@ -1140,8 +1136,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-16T16:02:27.635080875"
+        "timestamp": "2025-12-17T10:05:18.782005495"
     }
 }

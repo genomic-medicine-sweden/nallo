@@ -50,7 +50,7 @@
 ##### Annotation
 
 - Annotate SNVs and INDELs with databases of choice, e.g. [gnomAD](https://gnomad.broadinstitute.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [CADD](https://cadd.gs.washington.edu) with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
-- Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger) (TRGT only)
+- Annotate repeat expansions with [strdrop](https://github.com/dnil/strdrop) and [stranger](https://github.com/Clinical-Genomics/stranger) (TRGT only)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
 ##### Ranking

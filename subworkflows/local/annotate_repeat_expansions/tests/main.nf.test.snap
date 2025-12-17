@@ -1,0 +1,212 @@
+{
+    "stranger -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T16:25:52.845292161"
+    },
+    "stranger and strdrop with json": {
+        "content": [
+            "family_stranger.vcf.gz",
+            "family_stranger.vcf.gz.tbi"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T14:35:08.725687636"
+    },
+    "stranger and strdrop": {
+        "content": [
+            "family_stranger.vcf.gz",
+            "family_stranger.vcf.gz.tbi"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T11:12:50.470916675"
+    },
+    "stranger and strdrop with json -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T16:26:12.873877402"
+    },
+    "stranger": {
+        "content": [
+            "family_stranger.vcf.gz",
+            "family_stranger.vcf.gz.tbi"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T11:12:40.093732823"
+    },
+    "stranger and strdrop -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "xy_samples": [
+                                "HG002",
+                                "HG003"
+                            ]
+                        },
+                        "family_stranger.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-12-16T16:26:03.205278697"
+    }
+}

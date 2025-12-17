@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
 
 ### `Changed`
 
@@ -29,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
 - [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
 - [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Updated stranger and moved it to `ANNOTATE_REPEAT_EXPANSIONS`
 - [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
 
 ### `Removed`
@@ -78,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                              | `--run_modkit`                              |
 |                              | `--extra_methbat_profile_options`           |
 |                              | `--methbat_regions`                         |
+|                              | `--strdrop_training_set_json`               |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -95,6 +98,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | tiddit                           |             | 3.9.3       |
 | methbat/profile                  |             | 0.16.1      |
 | pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
+| strdrop                          |             | 0.3.1       |
+| stranger                         | 0.9.5       | 0.10.0      |
+| trgt                             | 4.0.0       | 5.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

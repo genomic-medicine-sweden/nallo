@@ -12,6 +12,7 @@ include {
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_REPEAT_EXPANSIONS                             } from '../subworkflows/local/annotate_repeat_expansions'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
@@ -62,7 +63,6 @@ include { SAMTOOLS_CONVERT                                  } from '../modules/n
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
-include { STRANGER                                          } from '../modules/nf-core/stranger/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -108,11 +108,11 @@ workflow NALLO {
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
+    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
     ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
-
+    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -896,11 +896,13 @@ workflow NALLO {
     // Annotate repeat expansions with Stranger
     //
     if(!params.skip_repeat_annotation) {
-        STRANGER (
+        ANNOTATE_REPEAT_EXPANSIONS(
             ch_repeat_expansions,
-            ch_stranger_repeat_catalog
+            ch_strdrop_training_set_json,
+            [[], []],
+            ch_stranger_repeat_catalog,
+            params.strdrop_training_set_json
         )
-        ch_versions = ch_versions.mix(STRANGER.out.versions)
     }
 
     //

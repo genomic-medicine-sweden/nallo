@@ -213,8 +213,11 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -249,10 +252,10 @@
                     "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -645,10 +648,6 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=2, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_Revio_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
@@ -679,8 +678,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-16T15:59:17.870835139"
+        "timestamp": "2025-12-17T10:02:08.262061996"
     }
 }
