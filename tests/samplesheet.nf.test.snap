@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            182,
+            183,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -213,8 +213,11 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -629,25 +632,54 @@
                 ]
             ],
             [
-
+                
             ],
             [
-
+                [
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=289, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=12, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG002_Revio_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_trgt.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=61, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=123, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_Revio_deepvariant_snvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_annotated_ranked_clinical.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=3, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=12, phased=false, phasedAutodetect=false]"
+                ]
             ],
             [
-
-            ],
-            [
-
-            ],
-            [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-16T15:59:17.870835139"
+        "timestamp": "2025-12-17T09:37:56.175740764"
     }
 }

@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -40,7 +40,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -73,7 +73,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -84,7 +84,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -126,7 +126,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -137,7 +137,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -148,7 +148,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -159,7 +159,7 @@
                             "id": "test",
                             "single_end": false,
                             "family_id": "family",
-                            "sex": "1:md5,e2c5d8e49cb66bd021aace0edb39debe"
+                            "sex": 1
                         },
                         "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]

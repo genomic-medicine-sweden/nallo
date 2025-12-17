@@ -112,7 +112,7 @@ workflow NALLO {
     ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-
+    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
