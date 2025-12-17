@@ -378,8 +378,19 @@ def extractSoftwareFromVersions(module_yaml_file) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def yamlData = yaml.load(module_yaml_file)
     // Extract all software (keys) from a module yaml
+
     def softwareInModule = yamlData.values().collect { software_and_version -> software_and_version.keySet() }.flatten()
     return softwareInModule
+}
+
+def extractSoftwareFromTopics(topics_channel) {
+    topics_channel
+       .map { toolBlockText ->
+            toolBlockText
+                .readLines()
+                .drop(1) // Drop process name
+                .collect { line -> line.trim().split(':')[0] }
+    }
 }
 
 def generateReferenceHTML(tool_list, description) {
@@ -395,7 +406,7 @@ def generateReferenceHTML(tool_list, description) {
     }
 }
 
-def citationBibliographyText(ch_versions, references_yaml, description) {
+def citationBibliographyText(ch_versions, ch_topic_versions_string, references_yaml, description) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def softwareReferences = yaml.load(references_yaml.text).tool
 
@@ -405,6 +416,7 @@ def citationBibliographyText(ch_versions, references_yaml, description) {
 
     ch_versions
         .map { module_yaml -> extractSoftwareFromVersions(module_yaml) }
+        .concat(extractSoftwareFromTopics(ch_topic_versions_string))
         .flatten() // split multi-tool modules
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }
@@ -597,7 +609,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 def validateNonEmptySamplesheet(ch_samplesheet) {
     ch_samplesheet
         .ifEmpty { error("ERROR: No samples found in samplesheet.") }
-        .filter { it != null }
+        .filter { it -> it != null }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
