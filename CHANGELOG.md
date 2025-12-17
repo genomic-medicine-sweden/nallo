@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
 - [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
 - [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
+- [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
 
 ### `Removed`
 

@@ -957,12 +957,12 @@ workflow NALLO {
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
     ch_methods_description_citation       = citationBibliographyText(
-        ch_versions,
+        ch_versions, topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'citation'
     )
     ch_methods_description_bibliography   = citationBibliographyText(
-        ch_versions,
+        ch_versions, topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'bibliography'
     )
