@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Updated stranger and moved it to `ANNOTATE_REPEAT_EXPANSIONS`
 - [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
+- [#837](https://github.com/genomic-medicine-sweden/nallo/pull/837) - Updated github nn-test action to add cleanup for singularity tests that pull docker containers
 
 ### `Removed`
 
