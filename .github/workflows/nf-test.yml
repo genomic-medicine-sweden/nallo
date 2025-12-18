@@ -63,19 +63,14 @@ jobs:
           - "latest-everything"
         include:
           - tag: "samplesheet"
-            profile: "singularity"
             runCleanup: true
           - tag: "samplesheet_multisample_bam"
-            profile: "singularity"
             runCleanup: true
           - tag: "samplesheet_multisample_ont_bam"
-            profile: "singularity"
             runCleanup: true
           - tag: "samplesheet_stub"
-            profile: "singularity"
             runCleanup: true
           - tag: "samplesheet_target_regions_null"
-            profile: "singularity"
             runCleanup: true
           - tag: "call_svs"
             profile: "singularity"
