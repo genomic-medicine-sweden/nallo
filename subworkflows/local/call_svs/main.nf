@@ -50,11 +50,10 @@ workflow CALL_SVS {
         TABIX_SEVERUS (
             SEVERUS.out.all_vcf
         )
-        ch_versions = ch_versions.mix(TABIX_SEVERUS.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                TABIX_SEVERUS.out.gz_tbi,
+                TABIX_SEVERUS.out.gz_index,
                 'severus'
             )
         )
@@ -110,11 +109,10 @@ workflow CALL_SVS {
         TABIX_HIFICNV (
             HIFICNV.out.vcf
         )
-        ch_versions = ch_versions.mix(TABIX_HIFICNV.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.index, failOnMismatch:true, failOnDuplicate:true),
                 'hificnv'
             )
         )
