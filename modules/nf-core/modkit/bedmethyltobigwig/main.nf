@@ -3,7 +3,9 @@ process MODKIT_BEDMETHYLTOBIGWIG {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "docker.io/fellen31/modkit:v0.5.1-rc1"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/ont-modkit:0.6.0--hcdda2d0_0':
+        'biocontainers/ont-modkit:0.6.0--hcdda2d0_0' }"
 
     input:
     tuple val(meta),  path(bedmethyl)

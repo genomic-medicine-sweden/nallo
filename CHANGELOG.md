@@ -102,6 +102,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
+| modkit/bedmethyltobigwig         | 0.5.1-rc1   | 0.6.0       |
+| modkit/pileup                    | 0.3.0       | 0.6.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
