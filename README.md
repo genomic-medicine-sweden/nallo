@@ -44,12 +44,13 @@
 ##### Phasing and methylation
 
 - Phase and haplotag reads with [LongPhase](https://github.com/twolinin/longphase), [whatshap](https://github.com/whatshap/whatshap) or [HiPhase](https://github.com/PacificBiosciences/HiPhase)
-- Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit)
+- Create methylation pileups with [modkit](https://github.com/nanoporetech/modkit) or [pbcpgtools](https://github.com/PacificBiosciences/pb-CpG-tools) (PacBio only)
+- Rare methylation analaysis with [methbat profile](https://github.com/PacificBiosciences/MethBat) (PacBio only)
 
 ##### Annotation
 
 - Annotate SNVs and INDELs with databases of choice, e.g. [gnomAD](https://gnomad.broadinstitute.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [CADD](https://cadd.gs.washington.edu) with [echtvar](https://github.com/brentp/echtvar) and [VEP](https://github.com/Ensembl/ensembl-vep)
-- Annotate repeat expansions with [stranger](https://github.com/Clinical-Genomics/stranger) (TRGT only)
+- Annotate repeat expansions with [strdrop](https://github.com/dnil/strdrop) and [stranger](https://github.com/Clinical-Genomics/stranger) (TRGT only)
 - Annotate SVs with [SVDB](https://github.com/J35P312/SVDB) and [VEP](https://github.com/Ensembl/ensembl-vep)
 
 ##### Ranking

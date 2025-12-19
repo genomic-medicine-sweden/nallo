@@ -61,6 +61,29 @@ jobs:
         NXF_VER:
           - "25.04.0"
           - "latest-everything"
+        include:
+          - tag: "samplesheet"
+            runCleanup: true
+          - tag: "samplesheet_multisample_bam"
+            runCleanup: true
+          - tag: "samplesheet_multisample_ont_bam"
+            runCleanup: true
+          - tag: "samplesheet_stub"
+            runCleanup: true
+          - tag: "samplesheet_target_regions_null"
+            runCleanup: true
+          - tag: "call_svs"
+            profile: "singularity"
+            runCleanup: true
+          - tag: "qc_snvs"
+            profile: "singularity"
+            runCleanup: true
+          - tag: "call_snvs"
+            profile: "singularity"
+            runCleanup: true
+          - tag: "annotate_cadd"
+            profile: "singularity"
+            runCleanup: true
     env:
       NXF_ANSI_LOG: false
       TOTAL_SHARDS: ${{ needs.nf-test-changes.outputs.total_shards }}
@@ -71,7 +94,7 @@ jobs:
           fetch-depth: 0
 
       - name: Clean up Disk space
-        if: startsWith(matrix.tag, 'samplesheet') # Bit hacky way to avoid running this on every test
+        if: matrix.runCleanup
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
         with:
           android: true

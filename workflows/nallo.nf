@@ -12,6 +12,7 @@ include {
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_REPEAT_EXPANSIONS                             } from '../subworkflows/local/annotate_repeat_expansions'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subworkflows/local/convert_input_files'
@@ -25,7 +26,8 @@ include { CALL_SNVS                                              } from '../subw
 include { CALL_SVS                                               } from '../subworkflows/local/call_svs'
 include { GENOME_ASSEMBLY                                        } from '../subworkflows/local/genome_assembly'
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
-include { METHYLATION                                            } from '../subworkflows/local/methylation'
+include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
+include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
 include { PHASING                                                } from '../subworkflows/local/phasing'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
@@ -51,8 +53,8 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_PLUGINSPLIT                                   } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
@@ -61,7 +63,6 @@ include { SAMTOOLS_CONVERT                                  } from '../modules/n
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                             } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
-include { STRANGER                                          } from '../modules/nf-core/stranger/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -81,8 +82,8 @@ workflow NALLO {
     ch_input
 
     main:
-    ch_versions      = Channel.empty()
-    ch_multiqc_files = Channel.empty()
+    ch_versions      = channel.empty()
+    ch_multiqc_files = channel.empty()
 
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
@@ -90,33 +91,35 @@ workflow NALLO {
     ch_cadd_resources            = createReferenceChannelFromPath(params.cadd_resources)
     ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
     ch_fasta                     = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, Channel.value([[],[]]))
+    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[],[]]))
     ch_par                       = createReferenceChannelFromPath(params.par_regions)
     ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, Channel.value([[],[]]))
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
     ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_methylation_call_regions  = createReferenceChannelFromPath(params.methylation_call_regions, Channel.value([[],[]]))
+    ch_modkit_call_regions       = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[],[]]))
     ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
     ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
     ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, Channel.value([[],[]]))
+    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, channel.value([[],[]]))
     ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
     ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
     ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
     ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, Channel.value([[],[]]))
-    ch_qc_regions                = createReferenceChannelFromPath(params.qc_regions, Channel.value([[],[]]))
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
+    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
+    ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
+    ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
-
+    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
 
     // Channels from (optional) input samplesheets validated by schema
-    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', Channel.value([[],[]]))
-    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', Channel.value([]))
-    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', Channel.value([]))
-    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', Channel.value([]))
-        .map { it[0].toString() } // only one element per row
+    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
+    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
+    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
+    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
+        .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
         .collect()
@@ -322,8 +325,8 @@ workflow NALLO {
             ch_samplesheet_pedfile
         )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
         // Set files with updated meta for subsequent processes
         ch_bam     = BAM_INFER_SEX.out.bam
@@ -339,13 +342,15 @@ workflow NALLO {
         QC_ALIGNED_READS (
             ch_bam_bai,
             ch_fasta,
-            ch_qc_regions,
+            ch_mosdepth_regions,
+            ch_sambamba_regions,
+            !params.skip_sambamba_depth,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { it[1] }.ifEmpty([]) )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { it[1] } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { it[1] }.ifEmpty([]) )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]) )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics } )
+        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]) )
 
     }
 
@@ -445,7 +450,7 @@ workflow NALLO {
         )
 
         ch_versions = ch_versions.mix(QC_SNVS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{it[1]}.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{ _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
@@ -466,9 +471,9 @@ workflow NALLO {
             ch_expected_xy_bed,
             ch_expected_xx_bed,
             ch_exclude_bed,
-            params.sv_callers_to_run.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() },
+            params.sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
+            params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
+            params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_sv_call_regions,
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
@@ -634,34 +639,36 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
 
-        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-            .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
-            .set { ch_bcftools_pluginsplit_input }
-
-        // Bcftools +split needs a samples file when running in stub-mode
-        createSamplesFileFromSamplesheet(ch_input)
-            .join( ch_bcftools_pluginsplit_input, failOnMismatch:true, failOnDuplicate:true )
-            .multiMap { meta, samples_file, vcf, tbi ->
-                vcf_tbi: [ meta, vcf, tbi ]
-                samples: samples_file
+        // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
+        ch_input
+            .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
+            .unique()
+            .combine(
+                CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                    .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+            )
+            .filter { sample_info, vcf_meta, _vcf, _tbi ->
+                sample_info.family_id == vcf_meta.id
             }
-            .set { ch_bcftools_pluginsplit_input }
+            .map { sample_info, _vcf_meta, vcf, tbi ->
+                [sample_info, vcf, tbi]
+            }
+            .set { ch_bcftools_view_chromograph_input }
 
-        BCFTOOLS_PLUGINSPLIT(
-            ch_bcftools_pluginsplit_input.vcf_tbi,
-            ch_bcftools_pluginsplit_input.samples,
+        BCFTOOLS_VIEW_CHROMOGRAPH(
+            ch_bcftools_view_chromograph_input,
             [],
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_PLUGINSPLIT.out.versions)
+        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_CHROMOGRAPH.out.versions)
     }
 
     if(!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
-            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.vcf) : [[],[]],
-            split_family_vcf_for_chromograph ? fromMultisampleToSampleMeta(BCFTOOLS_PLUGINSPLIT.out.tbi) : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[],[]],
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
@@ -695,8 +702,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV (
-            ANN_CSQ_PLI_SNV.out.vcf,
-            ch_snv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs
         )
@@ -740,14 +747,14 @@ workflow NALLO {
             ch_peddy_sites
         )
         ch_versions = ch_versions.mix(PEDDY.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{it[1]}.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{it[1]}.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
     }
 
@@ -813,8 +820,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS (
-            ANN_CSQ_PLI_SVS.out.vcf,
-            ch_sv_ranking_ped_file,
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
@@ -839,17 +846,25 @@ workflow NALLO {
     }
 
     //
-    // Create methylation pileups with modkit
+    // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if(!params.skip_methylation_pileups) {
-        METHYLATION (
+    if(!params.skip_methylation_calling && params.run_modkit) {
+        CALL_METHYLATION_MODKIT(
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_fai,
-            ch_methylation_call_regions,
+            ch_modkit_call_regions,
             params.bigwig_modcodes
         )
-        ch_versions = ch_versions.mix(METHYLATION.out.versions)
+        ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
+    }
+
+    if (!params.skip_methylation_calling && params.run_methbat) {
+        CALL_METHYLATION_METHBAT(
+            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            ch_methbat_regions
+        )
+        ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
 
     //
@@ -881,17 +896,19 @@ workflow NALLO {
     // Annotate repeat expansions with Stranger
     //
     if(!params.skip_repeat_annotation) {
-        STRANGER (
+        ANNOTATE_REPEAT_EXPANSIONS(
             ch_repeat_expansions,
-            ch_stranger_repeat_catalog
+            ch_strdrop_training_set_json,
+            [[], []],
+            ch_stranger_repeat_catalog,
+            params.strdrop_training_set_json
         )
-        ch_versions = ch_versions.mix(STRANGER.out.versions)
     }
 
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -942,12 +959,12 @@ workflow NALLO {
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
     ch_methods_description_citation       = citationBibliographyText(
-        ch_versions,
+        ch_versions, topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'citation'
     )
     ch_methods_description_bibliography   = citationBibliographyText(
-        ch_versions,
+        ch_versions, topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'bibliography'
     )
@@ -978,25 +995,23 @@ workflow NALLO {
 
 }
 
-def fromMultisampleToSampleMeta(multisample_channel) {
-    multisample_channel
-        .transpose()
-        .map { meta, vcf ->
-            def new_meta = meta + [ id: vcf.simpleName ]
-                [ new_meta, vcf ]
+// Check if a family has a child with two parents,
+// and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
+// This is used to determine compound ranking thresholds and penalties in genmod.
+def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
+    samplesheet
+        .map { meta, _files ->
+            [meta.family_id, meta]
         }
-}
-
-def createSamplesFileFromSamplesheet(input) {
-    input
-        .map { meta, _files -> [ meta.family_id, meta.id ] }
-        .unique()
         .groupTuple()
-        .map { family_id, sample_ids ->
-            def samples_file = file("${workDir}/tmp/${family_id}.txt")
-            def ids_in_family = sample_ids.collect()
-            samples_file.text = ids_in_family.join('\n')
-            return [ [ id: family_id ], samples_file ]
+        .map { family_id, metas ->
+            [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
+        }
+        .combine(input)
+        .filter { family_meta, vcf_meta, _file -> vcf_meta[family_id_key] == family_meta.id }
+        .map { family_meta, vcf_meta, file ->
+            def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
+            [new_meta, file]
         }
 }
 

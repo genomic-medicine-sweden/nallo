@@ -35,9 +35,9 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_pileups": {
+                "skip_methylation_calling": {
                     "type": "boolean",
-                    "description": "Skip generation of methylation pileups",
+                    "description": "Skip methylation calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
@@ -64,6 +64,11 @@
                     "fa_icon": "fas fa-fast-forward",
                     "description": "Skip peddy",
                     "default": false
+                },
+                "skip_sambamba_depth": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip sambamba depth. True unless `--sambamba_regions` is provided."
                 },
                 "skip_phasing": {
                     "type": "boolean",
@@ -219,12 +224,32 @@
                     "description": "A BED file with regions of interest.",
                     "exists": true
                 },
-                "methylation_call_regions": {
+                "methbat_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv$",
+                    "format": "file-path",
+                    "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
+                    "exists": true
+                },
+                "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
                     "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
                     "exists": true
+                },
+                "mosdepth_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`.",
+                    "exists": true
+                },
+                "mosdepth_d4_output": {
+                    "type": "boolean",
+                    "description": "Should mosdepth output d4-files.",
+                    "fa_icon": "fas fa-users-cog",
+                    "default": false
                 },
                 "bigwig_modcodes": {
                     "type": "string",
@@ -299,10 +324,24 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "strdrop_training_set_json": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.json$",
+                    "description": "A JSON file containing the training set for strdrop",
+                    "format": "file-path",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
+                "sambamba_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`.",
+                    "exists": true
                 },
                 "alignment_output_format": {
                     "type": "string",
@@ -475,7 +514,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/f16b1fe5c410aa1a50d71126673f39de147b9eea/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -572,6 +611,24 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
+                "run_methbat": {
+                    "type": "boolean",
+                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
+                },
+                "run_modkit": {
+                    "type": "boolean",
+                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                },
+                "methbat_male_label": {
+                    "type": "string",
+                    "description": "Label used for male samples in methbat profile.",
+                    "default": "MALE"
+                },
+                "methbat_female_label": {
+                    "type": "string",
+                    "description": "Label used for female samples in methbat profile.",
+                    "default": "FEMALE"
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
@@ -632,6 +689,11 @@
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
                 },
+                "extra_methbat_profile_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to methbat profile."
+                },
                 "extra_modkit_options": {
                     "type": "string",
                     "hidden": true,
@@ -656,6 +718,58 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
+                },
+                "genmod_compound_snv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SNVs."
+                },
+                "genmod_compound_snv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SNVs."
+                },
+                "genmod_compound_sv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SVs."
+                },
+                "genmod_compound_sv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SVs."
+                },
+                "genmod_compound_singleton_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_singleton_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_singleton_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_singleton_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
+                "genmod_compound_trio_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_trio_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_trio_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_trio_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
                 },
                 "plot_chromograph_autozygosity": {
                     "type": "boolean",

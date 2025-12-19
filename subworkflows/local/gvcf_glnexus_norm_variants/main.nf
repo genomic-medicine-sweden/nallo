@@ -14,7 +14,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     GLNEXUS(
         ch_gvcfs.map { meta, gvcfs -> [meta, gvcfs, []] },

@@ -14,7 +14,7 @@ workflow ALIGN_ASSEMBLIES {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     MINIMAP2_INDEX (
         ch_fasta

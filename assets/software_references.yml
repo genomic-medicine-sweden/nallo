@@ -93,6 +93,9 @@ tool:
   merge_json_sample_files_into_family:
     citation: "Renevey (2025)"
     bibliography: ""
+  methbat:
+    citation: "methbat"
+    bibliography: ""
   minimap2:
     citation: "Minimap2 (Li 2018)"
     bibliography: "Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191"
@@ -105,12 +108,18 @@ tool:
   paraphase:
     citation: "Paraphase (Chen et al. 2023)"
     bibliography: "Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294"
+  pbcpgtools:
+    citation: "pbcpgtools"
+    bibliography: ""
   peddy:
     citation: "Peddy (Pedersen & Quinlan 2017)"
     bibliography: Pedersen BS, Quinlan AR. Who’s Who? Detecting and Resolving Sample Anomalies in Human DNA Sequencing Studies with Peddy. The American Journal of Human Genetics, Volume 100, Issue 3,  March 2017, Pages 406-413, http://dx.doi.org/10.1016/j.ajhg.2017.01.017
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
+  sambamba:
+    citation: "Sambamba (Tarasov et al. 2015)"
+    bibliography: "Artem Tarasov, Albert J. Vilella, Edwin Cuppen, Isaac J. Nijman, Pjotr Prins, Sambamba: fast processing of NGS alignment formats, Bioinformatics, Volume 31, Issue 12, June 2015, Pages 2032-2034, https://doi.org/10.1093/bioinformatics/btv098"
   rhocall:
     citation: "Rhocall (Nilsson et al. 2016)"
     bibliography: ""
@@ -135,6 +144,9 @@ tool:
   stranger:
     citation: "Stranger (Nilsson & Magnusson 2021)"
     bibliography: "Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873"
+  strdrop:
+    citation: "strdrop (Nilsson et. al. 2025)"
+    bibliography: ""
   strdust:
     citation: "STRdust (De Coster et al. 2024)"
     bibliography: "De Coster W, Höijer I, Bruggeman I, D'Hert S, Melin M, Ameur A, Rademakers R. Visualization and analysis of medically relevant tandem repeats in nanopore sequencing of control cohorts with pathSTR. Genome Res 34, 2074-2080 (2024). https://doi.org/10.1101/gr.279265.124"

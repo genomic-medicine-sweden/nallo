@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 target_regions               = null
@@ -30,7 +30,7 @@ nextflow_pipeline {
             // cram_files: Stable cram files
             def cram_files       = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
-            def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
+            def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(

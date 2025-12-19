@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            190,
+            186,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -30,9 +30,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
@@ -49,6 +46,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -135,18 +135,15 @@
                     "merge_json_sample_files_into_family": 1.0,
                     "python": "3.8.3"
                 },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.16.1-8a0a24c"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283",
                     "samtools": 1.21
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.5.1"
-                },
-                "MODKIT_PILEUP": {
-                    "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
@@ -155,6 +152,9 @@
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
                     "samtools": "1.22.1"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -167,6 +167,9 @@
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -213,8 +216,11 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -249,10 +255,10 @@
                     "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -263,7 +269,7 @@
                     "tabix": 1.22
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -285,18 +291,17 @@
                 "images/chromograph/sample",
                 "images/chromograph/sample/HG002_Revio",
                 "methylation",
-                "methylation/modkit",
-                "methylation/modkit/pileup",
-                "methylation/modkit/pileup/HG002_Revio",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_1.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_1.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_1.bw",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_2.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_2.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_2.bw",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_ungrouped.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup_ungrouped.bw",
+                "methylation/pileup",
+                "methylation/pileup/HG002_Revio",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/HG002_Revio",
+                "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -486,7 +491,6 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.global.dist.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.region.dist.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.mosdepth.summary.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.d4",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
                 "qc/peddy",
@@ -506,6 +510,9 @@
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_Revio",
+                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -545,20 +552,21 @@
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ],
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
-                "HG002_Revio_modkit_pileup_1.bed.gz:md5,8b684b515fe5de76b7870cb769583da1",
-                "HG002_Revio_modkit_pileup_1.bed.gz.tbi:md5,0b2b342ecb54be66c888711420717499",
-                "HG002_Revio_modkit_pileup_1.bw:md5,288858f0f8d3d64b77cebf512fbd6346",
-                "HG002_Revio_modkit_pileup_2.bed.gz:md5,72ea3915f572cbdd5026220d784d8ae2",
-                "HG002_Revio_modkit_pileup_2.bed.gz.tbi:md5,0a531b67b05bb7e2bd68b7f3f7304fb0",
-                "HG002_Revio_modkit_pileup_2.bw:md5,a7cb06b8aa35e6fd315e03da638017a6",
-                "HG002_Revio_modkit_pileup_ungrouped.bed.gz:md5,87a4bc64fe9833c603e1d15384df77e4",
-                "HG002_Revio_modkit_pileup_ungrouped.bed.gz.tbi:md5,d859731119268f30dd3c84626bfd8ced",
-                "HG002_Revio_modkit_pileup_ungrouped.bw:md5,7ee8bd400e8493e0af67630df5f945c0",
+                "HG002_Revio_pbcpgtools.combined.bed.gz:md5,0a1ff6f11f3f0101671beff686e72b94",
+                "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,e644f22a1dffe1108bef1ae49e3c2714",
+                "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,381c86983d948c320e0ce258783ca4f3",
+                "HG002_Revio_pbcpgtools.hap1.bed.gz.tbi:md5,1c6e78c31d1ba57ecbd7fafcd01ed2a6",
+                "HG002_Revio_pbcpgtools.hap2.bed.gz:md5,5a510360e9e0010e04e88710f4592b51",
+                "HG002_Revio_pbcpgtools.hap2.bed.gz.tbi:md5,b387101a407c42b102f63a867dd8089b",
+                "HG002_Revio_methbat_profile.tsv:md5,3411dd21e10d51f3d675ff238fd7d6b3",
                 "bcftools-stats-subtypes.txt:md5,3b484f760ba5b4dc48a5df427f58728f",
                 "bcftools_stats_indel-lengths.txt:md5,97cd79876adc626e08a25a60e5542618",
                 "fastqc-status-check-heatmap.txt:md5,f98c3e5395cfd3061b3228a97ba86043",
@@ -572,15 +580,15 @@
                 "fastqc_sequence_counts_plot.txt:md5,25b4d3968f13fd3e15284f9f3bcd62c8",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,c4dfa700498dff483434a3e6c75bebbe",
                 "fastqc_sequence_length_distribution_plot.txt:md5,7e4cc131a6475eab8598972f297595e6",
-                "mosdepth-coverage-per-contig-multi.txt:md5,d10ccaf62d94408c435aeaa5e3a088ea",
-                "mosdepth-cumcoverage-dist-id.txt:md5,0cba1bf21758dafe9ea1da2ee9545873",
-                "mosdepth_cov_dist.txt:md5,0d1980709a18c32a772b8631c4cf9ac3",
-                "mosdepth_cumcov_dist.txt:md5,0d1980709a18c32a772b8631c4cf9ac3",
-                "mosdepth_perchrom.txt:md5,fae013ef7d37aca43480454e92c883ec",
+                "mosdepth-coverage-per-contig-multi.txt:md5,16117c9ace8187447edd0665b44e2ec3",
+                "mosdepth-cumcoverage-dist-id.txt:md5,fd8e66eaf55241818873d00ff024956f",
+                "mosdepth_cov_dist.txt:md5,853db3a05a517a87c5a2835061921915",
+                "mosdepth_cumcov_dist.txt:md5,853db3a05a517a87c5a2835061921915",
+                "mosdepth_perchrom.txt:md5,0cec0f6518248d7523b63513ac6e48b5",
                 "multiqc_bcftools_stats.txt:md5,57c32c4333d9d3de838bcfa08c2bea50",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,e161ebe339a5f08291ea046cfa154929",
-                "multiqc_general_stats.txt:md5,d3511c10c01c7214816ff70be1ff6fc4",
+                "multiqc_general_stats.txt:md5,f22f6ef2f1f418b2c7f7f4c6941cc183",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,903cc5ed124305e09b70e33bb51a117a",
                 "somalier_stats.txt:md5,8a19330afe2498d81a7bc4eb83be7f46",
                 "whatshap-stats-table.txt:md5,eb3cadb580aef2de4e7054e7da12d2c2",
@@ -588,11 +596,10 @@
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,26d64b49e322d3456dc39bd40432e3ae",
                 "HG002_Revio_cramino_aligned.arrow:md5,26d64b49e322d3456dc39bd40432e3ae",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,3c7c62c7460d2e1e69622776f36b343c",
-                "HG002_Revio.mosdepth.region.dist.txt:md5,a0a0a5c7c3bf8df5714e55dc3e2bca68",
-                "HG002_Revio.mosdepth.summary.txt:md5,0d8f38cd2d3fc5628f9ce0459910e5f9",
-                "HG002_Revio.per-base.d4:md5,7d8a5353e74182061ad47b674f45821b",
-                "HG002_Revio.regions.bed.gz:md5,17847656151e04ca722bb3408b93fa0d",
-                "HG002_Revio.regions.bed.gz.csi:md5,4d3db2729c0a352d82d2089033feebfa",
+                "HG002_Revio.mosdepth.region.dist.txt:md5,42ed9c66cd4a8fdeaf334583ccf1c887",
+                "HG002_Revio.mosdepth.summary.txt:md5,df1a1b683edec908d1fe38c02b02eacf",
+                "HG002_Revio.regions.bed.gz:md5,bf110d79b8cc8b18cf864633d111d9aa",
+                "HG002_Revio.regions.bed.gz.csi:md5,2eb89f3ecd281aba81990ec42fbf60fe",
                 "FAM.het_check.csv:md5,b6d2e382394507724fbfac5f16fedd29",
                 "FAM.het_check.png:md5,af43516f0ecdb236b95f27d28bf45944",
                 "FAM.html:md5,3fad9d116d51d9f4102c69bc2bc8b4f7",
@@ -605,9 +612,13 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_stats.blocks.gtf.gz:md5,6c11b4b4968798b723404260fc4bd416",
                 "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,8fa5c992ac19848ceb499f871cf5e692",
+                "HG002_Revio_sambamba_depth.bed:md5,d6a27c9870da274f20c9de584551608c",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
-                "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b"
+                "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b",
+                "HG002_Revio_pbcpgtools.combined.bw:md5,bd4f1ff82f672cae21a3974ae2657a4a",
+                "HG002_Revio_pbcpgtools.hap1.bw:md5,fafec287f9da25011316a1d0a1b61b8d",
+                "HG002_Revio_pbcpgtools.hap2.bw:md5,4a04f48687c4a511468fe180dea23ac2"
             ],
             [
                 
@@ -640,10 +651,6 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
-                    "FAM_repeats_annotated.vcf.gz",
-                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=2, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "HG002_Revio_trgt.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
                 ],
@@ -673,9 +680,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-09T15:40:06.36623656"
+        "timestamp": "2025-12-17T14:16:26.947355053"
     }
 }

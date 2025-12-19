@@ -15,7 +15,7 @@ workflow CALL_PARALOGS {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     PARAPHASE (
         bam_bai,
@@ -90,8 +90,8 @@ workflow CALL_PARALOGS {
     emit:
     bam      = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam) ]
     bai      = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai) ]
-    cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : Channel.empty() // channel: [ val(meta), path(cram) ]
-    crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : Channel.empty() // channel: [ val(meta), path(crai) ]
+    cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
     json     = MERGE_JSON.out.json                                       // channel: [ val(meta), path(json) ]
     vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
     tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]

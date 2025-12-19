@@ -33,8 +33,8 @@ workflow CALL_SVS {
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
 
     main:
-    ch_versions = Channel.empty()
-    ch_sv_calls = Channel.empty()
+    ch_versions = channel.empty()
+    ch_sv_calls = channel.empty()
 
     //
     // Call SVs with Severus
@@ -289,8 +289,8 @@ workflow CALL_SVS {
             sort: { a, b ->
                 caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0]) }
         )
-        .map { meta, caller_vcf ->
-            def vcf_paths = caller_vcf.collect { it[1] }
+        .map { meta, callers_vcfs ->
+            def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
             [ meta, vcf_paths ]
         }
         .set { ch_svdb_merge_by_family_input }

@@ -34,12 +34,12 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'HG002', family_id: 'NIST' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
@@ -79,12 +79,12 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'HG002', family_id: 'NIST' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
@@ -124,12 +124,12 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'HG002', family_id: 'NIST' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -189,12 +189,12 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'HG002', family_id: 'NIST' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -237,12 +237,12 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0bc64ba6327c35a3ccf883d574fd00be55168457/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id: 'HG002', family_id: 'NIST' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),

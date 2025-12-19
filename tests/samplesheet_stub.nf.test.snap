@@ -96,7 +96,7 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -137,14 +137,14 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-11-27T09:11:52.040833406"
+        "timestamp": "2025-12-17T14:12:32.320429266"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            54,
+            55,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -213,6 +213,9 @@
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
+                },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
@@ -259,7 +262,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -312,6 +315,9 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.summary.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz.csi",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_Revio",
+                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -335,10 +341,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-09T15:46:42.283233167"
+        "timestamp": "2025-12-17T14:14:00.822418521"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -382,7 +388,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -435,10 +441,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-08T21:14:00.781642166"
+        "timestamp": "2025-12-17T14:13:12.029328679"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -475,7 +481,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -498,9 +504,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-11-26T16:37:12.618190804"
+        "timestamp": "2025-12-17T14:13:33.145585899"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -623,7 +629,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -664,14 +670,14 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-11-27T09:12:32.095473985"
+        "timestamp": "2025-12-17T14:12:02.326206668"
     },
     "Test family id same as sample id": {
         "content": [
-            178,
+            179,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -700,9 +706,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_PLUGINSPLIT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
@@ -719,6 +722,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -805,14 +811,14 @@
                     "merge_json_sample_files_into_family": 1.0,
                     "python": "3.8.3"
                 },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.16.1-8a0a24c"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MODKIT_PILEUP": {
-                    "modkit": "0.3.0"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
@@ -821,6 +827,9 @@
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
                     "samtools": "1.22.1"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -833,6 +842,9 @@
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -876,8 +888,11 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.9.5",
-                    "tabix": 1.22
+                    "stranger": "0.10.0",
+                    "tabix": "1.22.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "svdb": "2.8.2",
@@ -912,10 +927,10 @@
                     "tiddit": "3.9.3"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "4.0.0-429afcd"
+                    "trgt": "5.0.0-e9acee0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -926,7 +941,7 @@
                     "tabix": 1.22
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -998,12 +1013,17 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
                 "methylation",
-                "methylation/modkit",
-                "methylation/modkit/pileup",
-                "methylation/modkit/pileup/HG002_Revio",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.bed.gz.tbi",
-                "methylation/modkit/pileup/HG002_Revio/HG002_Revio_modkit_pileup.log",
+                "methylation/pileup",
+                "methylation/pileup/HG002_Revio",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/HG002_Revio",
+                "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1078,6 +1098,9 @@
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
                 "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002_Revio",
+                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -1117,14 +1140,17 @@
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-09T15:49:09.723743198"
+        "timestamp": "2025-12-17T14:14:51.3699634"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1165,7 +1191,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.9.0"
                 }
             },
             [
@@ -1189,9 +1215,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-11-27T15:47:39.674638327"
+        "timestamp": "2025-12-17T14:12:51.139142414"
     }
 }
