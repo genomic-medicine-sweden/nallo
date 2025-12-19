@@ -146,7 +146,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -231,6 +231,7 @@
                     "svdb": "2.8.2"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -240,9 +241,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -596,7 +594,7 @@
                 "HG002_Revio.mosdepth.region.dist.txt:md5,42ed9c66cd4a8fdeaf334583ccf1c887",
                 "HG002_Revio.mosdepth.summary.txt:md5,df1a1b683edec908d1fe38c02b02eacf",
                 "HG002_Revio.regions.bed.gz:md5,bf110d79b8cc8b18cf864633d111d9aa",
-                "HG002_Revio.regions.bed.gz.csi:md5,2eb89f3ecd281aba81990ec42fbf60fe",
+                "HG002_Revio.regions.bed.gz.csi:md5,5b0f39e2b7c55646edaf2dd19cf47f6b",
                 "FAM.het_check.csv:md5,b6d2e382394507724fbfac5f16fedd29",
                 "FAM.het_check.png:md5,af43516f0ecdb236b95f27d28bf45944",
                 "FAM.html:md5,3fad9d116d51d9f4102c69bc2bc8b4f7",
@@ -680,6 +678,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:05:36.955408732"
+        "timestamp": "2025-12-19T10:56:25.310024651"
     }
 }

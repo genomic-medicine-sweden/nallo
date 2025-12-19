@@ -140,7 +140,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -231,6 +231,7 @@
                     "svdb": "2.8.2"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -240,9 +241,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -970,17 +968,17 @@
                 "HG002.mosdepth.region.dist.txt:md5,413ef2dab45d3b468c20e1264cabb928",
                 "HG002.mosdepth.summary.txt:md5,f94a92cdd8f3d31bd32d2340375ec5fd",
                 "HG002.regions.bed.gz:md5,f96ae5d11bdf45f94f4766453114fc62",
-                "HG002.regions.bed.gz.csi:md5,e522ffd072acc1ad48bd5a925a09a34e",
+                "HG002.regions.bed.gz.csi:md5,b17d7b884e559f6bb5af6b39c36f8a4f",
                 "HG003.mosdepth.global.dist.txt:md5,45727d41bf31bcff132fb19264b7120f",
                 "HG003.mosdepth.region.dist.txt:md5,45727d41bf31bcff132fb19264b7120f",
                 "HG003.mosdepth.summary.txt:md5,16c0ae60e655bb9e4f6ec576ad1a74f8",
                 "HG003.regions.bed.gz:md5,6b17487d3067ab00a7f32f0544d84c41",
-                "HG003.regions.bed.gz.csi:md5,1c577d490590845ff7c859a7768e1020",
+                "HG003.regions.bed.gz.csi:md5,bceea4b8a8c1220ba585b511745ef67b",
                 "HG004.mosdepth.global.dist.txt:md5,c95b6204aa286fbe4c1edfb96c539ee5",
                 "HG004.mosdepth.region.dist.txt:md5,0c69c1a45c7edb367b756489aa13b705",
                 "HG004.mosdepth.summary.txt:md5,2eb3fbea87457cd404e8d62bed93a84e",
                 "HG004.regions.bed.gz:md5,35c700ee66cc0d76012ace6387d14ab0",
-                "HG004.regions.bed.gz.csi:md5,54790a598ec7305cbfcf82e98ea51d2b",
+                "HG004.regions.bed.gz.csi:md5,b8afe2c870325832a4a2127e114f8311",
                 "FAM.het_check.csv:md5,1659a56de32f7be486d5610df2f92176",
                 "FAM.het_check.png:md5,9d4eed0e449ae9176aa28d65aadc497c",
                 "FAM.html:md5,5ea34b6d90d31bb07e80451243b871fc",
@@ -1138,6 +1136,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:08:41.388595713"
+        "timestamp": "2025-12-19T10:59:35.167451595"
     }
 }

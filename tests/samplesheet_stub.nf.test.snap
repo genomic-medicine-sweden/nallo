@@ -90,6 +90,7 @@
                     "splitubam": "0.1.1"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -106,6 +107,7 @@
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -140,7 +142,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:12:32.320429266"
+        "timestamp": "2025-12-19T11:03:47.145591985"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -208,7 +210,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -281,6 +283,7 @@
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -344,7 +347,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:14:00.822418521"
+        "timestamp": "2025-12-19T11:05:16.454354969"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -427,6 +430,7 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -444,7 +448,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:13:12.029328679"
+        "timestamp": "2025-12-19T11:04:27.769922868"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -496,6 +500,7 @@
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -506,7 +511,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:13:33.145585899"
+        "timestamp": "2025-12-19T11:04:48.241634732"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -617,6 +622,7 @@
                     "splitubam": "0.1.1"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_CADD": {
@@ -639,6 +645,7 @@
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -673,7 +680,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:12:02.326206668"
+        "timestamp": "2025-12-19T11:03:16.707332072"
     },
     "Test family id same as sample id": {
         "content": [
@@ -821,7 +828,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -906,6 +913,7 @@
                     "svdb": "2.8.2"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -915,9 +923,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1026,6 +1031,7 @@
                 "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "paraphase",
@@ -1150,7 +1156,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:14:51.3699634"
+        "timestamp": "2025-12-19T11:06:06.499856209"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1201,6 +1207,7 @@
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -1218,6 +1225,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:12:51.139142414"
+        "timestamp": "2025-12-19T11:04:06.809098619"
     }
 }
