@@ -3,9 +3,8 @@ include { MOSDEPTH }                      from '../../../modules/nf-core/mosdept
 include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
 include { MOSDEPTH_TO_GATK_FORMAT }       from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-include { NORMALIZE_MOSDEPTH_COVERAGE }   from '../../../modules/local/normalize_mosdepth_coverage/main.nf'
-include { GAWK }                        from '../../../modules/nf-core/gawk/main'
-include { SAMTOOLS_VIEW }               from '../../../modules/nf-core/samtools/view/main'
+include { GAWK }                          from '../../../modules/nf-core/gawk/main'
+include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtools/view/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -13,7 +12,6 @@ workflow PREPARE_GENS_INPUTS {
     ch_gvcfs            // channel: [mandatory] [ val(meta), [path(gvcfs)], [path(tbis)] ]
     baf_positions       // value:   [mandatory] [ path(gz) ]
     panel_of_normals    // value:   [optional]  [ path(hd5) ]
-    use_pon             // value:   [mandatory] [ boolean ]
 
     main:
     ch_versions = channel.empty()
@@ -61,28 +59,18 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(MOSDEPTH_TO_GATK_FORMAT.out.versions)
 
-    if (use_pon) {
-        MOSDEPTH_TO_GATK_FORMAT.out.output
-            .map { meta, _tsv -> [ meta, panel_of_normals ] }
-            .set { ch_pon }
+    MOSDEPTH_TO_GATK_FORMAT.out.output
+        .map { meta, _tsv -> [ meta, panel_of_normals ] }
+        .set { ch_pon }
 
-        GATK4_DENOISEREADCOUNTS(
-            MOSDEPTH_TO_GATK_FORMAT.out.output,
-            ch_pon
-        )
-        ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
+    GATK4_DENOISEREADCOUNTS(
+        MOSDEPTH_TO_GATK_FORMAT.out.output,
+        ch_pon
+    )
+    ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
-         GATK4_DENOISEREADCOUNTS.out.standardized
-            .set { ch_cov }
-    } else {
-        NORMALIZE_MOSDEPTH_COVERAGE(
-            MOSDEPTH_TO_GATK_FORMAT.out.output
-        )
-        ch_versions = ch_versions.mix(NORMALIZE_MOSDEPTH_COVERAGE.out.versions)
-
-        NORMALIZE_MOSDEPTH_COVERAGE.out.normalized
-            .set { ch_cov }
-    }
+        GATK4_DENOISEREADCOUNTS.out.standardized
+        .set { ch_cov }
 
     ch_cov
         .join(ch_vcf_tbi)

@@ -342,11 +342,6 @@
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
                     "exists": true
                 },
-                "gens_use_pon": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Enable using the panel of normals when preparing Gens inputs."
-                },
                 "strdrop_training_set_json": {
                     "type": "string",
                     "pattern": "^\\S+\\.json$",
