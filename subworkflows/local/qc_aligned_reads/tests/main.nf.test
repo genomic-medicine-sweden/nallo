@@ -9,16 +9,18 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
-                input[2] = Channel.of([[],[]])
+                input[2] = channel.of([[],[]])
+                input[3] = channel.of([[],[]])
+                input[4] = false
                 """
             }
         }
@@ -44,19 +46,24 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                input[4] = true
                 """
             }
         }
@@ -84,16 +91,18 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
-                input[2] = Channel.of([[],[]])
+                input[2] = channel.of([[],[]])
+                input[3] = channel.of([[],[]])
+                input[4] = false
                 """
             }
         }
@@ -114,19 +123,24 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[1] = Channel.of([
+                input[1] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
-                input[2] = Channel.of([
+                input[2] = channel.of([
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
+                input[4] = true
                 """
             }
         }

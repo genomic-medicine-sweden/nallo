@@ -12,10 +12,12 @@ Allows skipping certain parts of the pipeline
 | `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
-| `skip_methylation_pileups` | Skip generation of methylation pileups | `boolean` | False |  |  |
+| `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
+| `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
 | `skip_peddy` | Skip peddy | `boolean` | False |  |  |
+| `skip_sambamba_depth` | Skip sambamba depth. True unless `--sambamba_regions` is provided. | `boolean` |  |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |
 | `skip_snv_annotation` | Skip short variant annotation | `boolean` | False |  |  |
 | `skip_sv_calling` | Skip structural variant calling | `boolean` | False |  |  |
@@ -45,7 +47,10 @@ Define where the pipeline should find input data and save output data.
 | `variant_consequences_svs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `target_regions` | A BED file with regions of interest. | `string` |  |  |  |
-| `methylation_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
+| `methbat_regions` | A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build | `string` |  |  |  |
+| `modkit_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
+| `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
+| `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
 | `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | h,m |  |  |
 | `snv_call_regions` | A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `sv_call_regions` | A BED file containging regions to filter SV calls. By default this is the same as `target_regions`. | `string` |  |  |  |
@@ -57,11 +62,11 @@ Define where the pipeline should find input data and save output data.
 | `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
+| `strdrop_training_set_json` | A JSON file containing the training set for strdrop | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
+| `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/ |  | True |
-| `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 
 ## Reference genome options
 
@@ -102,6 +107,11 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/ |  | True |
+| `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
+| `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
+| `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
+| `show_hidden` | Display hidden parameters in the help message (only works when --help or --help_full are provided). | `boolean` |  |  |  |
 
 ## Workflow options
 
@@ -109,6 +119,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
+| `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`. | `string` |  |  |  |
+| `chromograph_af_tag` | AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
 | `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) (accepted: `revio`\|`pacbio`\|`ONT_R10`) | `string` | revio | True |  |
 | `sv_callers` | Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
@@ -119,6 +131,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
+| `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |
+| `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
+| `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
+| `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
@@ -129,9 +145,28 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. (accepted: `PACBIO`\|`ONT_R104`) | `string` | PACBIO |  | True |
 | `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. (accepted: `map-hifi`\|`map-ont`\|`lr:hq`\|`lr:hqae`) | `string` | map-hifi |  | True |
+| `extra_methbat_profile_options` | Extra options to methbat profile. | `string` |  |  | True |
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
+| `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs. | `integer` | 6 |  |  |
+| `genmod_compound_snv_threshold` | Genmod compound threshold for SNVs. | `integer` | 9 |  |  |
+| `genmod_compound_sv_penalty` | Genmod compound penalty for SVs. | `integer` | 6 |  |  |
+| `genmod_compound_sv_threshold` | Genmod compound threshold for SVs. | `integer` | 9 |  |  |
+| `genmod_compound_singleton_snv_penalty` | Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_singleton_snv_threshold` | Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_singleton_sv_penalty` | Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_singleton_sv_threshold` | Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_trio_snv_penalty` | Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_trio_snv_threshold` | Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`. | `integer` |  |  |  |
+| `genmod_compound_trio_sv_penalty` | Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`. | `integer` |  |  |  |
+| `genmod_compound_trio_sv_threshold` | Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`. | `integer` |  |  |  |
+| `plot_chromograph_autozygosity` | Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag. | `boolean` |  |  |  |
+| `plot_chromograph_coverage` | Whether to plot chromograph coverage plots in the chromograph subworkflow. | `boolean` | True |  |  |
 | `pre_vep_snv_filter_expression` | An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression "-e 'INFO/AQ>60'". The expression applies to both the clinical and the research VCFs. | `string` | None |  |  |
+| `rhocallviz_af_tag` | AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag. | `string` |  |  |  |
+| `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
+| `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
+| `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |

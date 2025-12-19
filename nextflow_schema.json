@@ -35,9 +35,9 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_methylation_pileups": {
+                "skip_methylation_calling": {
                     "type": "boolean",
-                    "description": "Skip generation of methylation pileups",
+                    "description": "Skip methylation calling",
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
@@ -53,11 +53,21 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_chromograph": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false."
+                },
                 "skip_peddy": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
                     "description": "Skip peddy",
                     "default": false
+                },
+                "skip_sambamba_depth": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip sambamba depth. True unless `--sambamba_regions` is provided."
                 },
                 "skip_phasing": {
                     "type": "boolean",
@@ -213,12 +223,32 @@
                     "description": "A BED file with regions of interest.",
                     "exists": true
                 },
-                "methylation_call_regions": {
+                "methbat_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.tsv$",
+                    "format": "file-path",
+                    "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
+                    "exists": true
+                },
+                "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
                     "format": "file-path",
                     "description": "A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`.",
                     "exists": true
+                },
+                "mosdepth_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`.",
+                    "exists": true
+                },
+                "mosdepth_d4_output": {
+                    "type": "boolean",
+                    "description": "Should mosdepth output d4-files.",
+                    "fa_icon": "fas fa-users-cog",
+                    "default": false
                 },
                 "bigwig_modcodes": {
                     "type": "string",
@@ -293,10 +323,24 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "strdrop_training_set_json": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.json$",
+                    "description": "A JSON file containing the training set for strdrop",
+                    "format": "file-path",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
                     "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                },
+                "sambamba_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`.",
+                    "exists": true
                 },
                 "alignment_output_format": {
                     "type": "string",
@@ -310,19 +354,6 @@
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of modules test dataset files",
                     "default": "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/",
-                    "hidden": true
-                },
-                "pipelines_testdata_base_path": {
-                    "type": "string",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/",
-                    "hidden": true
-                },
-                "trace_report_suffix": {
-                    "type": "string",
-                    "fa_icon": "far calendar",
-                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
                 }
             }
@@ -477,6 +508,31 @@
                     "default": true,
                     "fa_icon": "fas fa-check-square",
                     "hidden": true
+                },
+                "pipelines_testdata_base_path": {
+                    "type": "string",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
+                    "hidden": true
+                },
+                "trace_report_suffix": {
+                    "type": "string",
+                    "fa_icon": "far calendar",
+                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
+                    "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message."
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message."
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
         },
@@ -486,6 +542,14 @@
             "description": "Workflow options specific to genomic-medicine-sweden/nallo",
             "default": "",
             "properties": {
+                "bcftools_roh_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`."
+                },
+                "chromograph_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work."
+                },
                 "preset": {
                     "type": "string",
                     "default": "revio",
@@ -545,6 +609,24 @@
                     "description": "Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active.",
                     "enum": ["", "--ont"],
                     "default": null
+                },
+                "run_methbat": {
+                    "type": "boolean",
+                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
+                },
+                "run_modkit": {
+                    "type": "boolean",
+                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                },
+                "methbat_male_label": {
+                    "type": "string",
+                    "description": "Label used for male samples in methbat profile.",
+                    "default": "MALE"
+                },
+                "methbat_female_label": {
+                    "type": "string",
+                    "description": "Label used for female samples in methbat profile.",
+                    "default": "FEMALE"
                 },
                 "alignment_processes": {
                     "type": "integer",
@@ -606,6 +688,11 @@
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
                 },
+                "extra_methbat_profile_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to methbat profile."
+                },
                 "extra_modkit_options": {
                     "type": "string",
                     "hidden": true,
@@ -631,10 +718,90 @@
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
                 },
+                "genmod_compound_snv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SNVs."
+                },
+                "genmod_compound_snv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SNVs."
+                },
+                "genmod_compound_sv_penalty": {
+                    "type": "integer",
+                    "default": 6,
+                    "description": "Genmod compound penalty for SVs."
+                },
+                "genmod_compound_sv_threshold": {
+                    "type": "integer",
+                    "default": 9,
+                    "description": "Genmod compound threshold for SVs."
+                },
+                "genmod_compound_singleton_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_singleton_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_singleton_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_singleton_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with an affected individual without two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
+                "genmod_compound_trio_snv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_penalty`."
+                },
+                "genmod_compound_trio_snv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SNVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_snv_threshold`."
+                },
+                "genmod_compound_trio_sv_penalty": {
+                    "type": "integer",
+                    "description": "Genmod compound penalty for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_penalty`."
+                },
+                "genmod_compound_trio_sv_threshold": {
+                    "type": "integer",
+                    "description": "Genmod compound threshold for SVs. Applied in families with at least one affected individual with two parents. By default same as `--genmod_compound_sv_threshold`."
+                },
+                "plot_chromograph_autozygosity": {
+                    "type": "boolean",
+                    "description": "Whether to plot chromograph autozygosity plots in the chromograph subworkflow. This requires SNVs to be annotated with allele frequencies, and is therefore false by default unless `--bcftools_roh_af_tag` and `--rhocallviz_af_tag` have been set, in which case it is assumed that the user has annotated the SNVs with the correct tag."
+                },
+                "plot_chromograph_coverage": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to plot chromograph coverage plots in the chromograph subworkflow."
+                },
                 "pre_vep_snv_filter_expression": {
                     "type": "string",
                     "default": null,
                     "description": "An expression that is passed to bcftools view to filter SNVs before being annotated with VEP, e.g. --pre_vep_snv_filter_expression \"-e 'INFO/AQ>60'\". The expression applies to both the clinical and the research VCFs."
+                },
+                "rhocallviz_af_tag": {
+                    "type": "string",
+                    "description": "AF-tag that variants have been annotated with, for use in the chromograph subworkflow. By default set to `--chromograph_af_tag."
+                },
+                "rhocallviz_min_af": {
+                    "type": "number",
+                    "default": 0.0001,
+                    "description": "Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow."
+                },
+                "rhocallviz_min_qual": {
+                    "type": "number",
+                    "default": 10.0,
+                    "description": "Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow."
+                },
+                "tiddit_bin_size": {
+                    "type": "integer",
+                    "default": 500,
+                    "description": "Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow."
                 }
             },
             "required": ["preset"]

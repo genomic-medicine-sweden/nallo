@@ -38,6 +38,10 @@ tool:
   cadd:
     citation: "CADD (Rentzsch et al. 2019, Rentzsch et al. 2021)"
     bibliography: "Rentzsch P, Schubach M, Shendure J, Kircher M. CADD-Splice—improving genome-wide variant effect prediction using deep learning-derived splice scores. Genome Med. 2021;13(1):31. doi:10.1186/s13073-021-00835-9"
+  chromograph:
+    citation: "chromograph (Laaksonen et al. 2019)"
+    bibliography: ""
+
   clean_sniffles:
     citation: "clean_sniffles (Eisfeldt 2024)"
     bibliography: ""
@@ -89,6 +93,9 @@ tool:
   merge_json_sample_files_into_family:
     citation: "Renevey (2025)"
     bibliography: ""
+  methbat:
+    citation: "methbat"
+    bibliography: ""
   minimap2:
     citation: "Minimap2 (Li 2018)"
     bibliography: "Heng Li, Minimap2: pairwise alignment for nucleotide sequences, Bioinformatics, Volume 34, Issue 18, September 2018, Pages 3094–3100, https://doi.org/10.1093/bioinformatics/bty191"
@@ -101,11 +108,20 @@ tool:
   paraphase:
     citation: "Paraphase (Chen et al. 2023)"
     bibliography: "Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294"
+  pbcpgtools:
+    citation: "pbcpgtools"
+    bibliography: ""
   peddy:
     citation: "Peddy (Pedersen & Quinlan 2017)"
     bibliography: Pedersen BS, Quinlan AR. Who’s Who? Detecting and Resolving Sample Anomalies in Human DNA Sequencing Studies with Peddy. The American Journal of Human Genetics, Volume 100, Issue 3,  March 2017, Pages 406-413, http://dx.doi.org/10.1016/j.ajhg.2017.01.017
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
+    bibliography: ""
+  sambamba:
+    citation: "Sambamba (Tarasov et al. 2015)"
+    bibliography: "Artem Tarasov, Albert J. Vilella, Edwin Cuppen, Isaac J. Nijman, Pjotr Prins, Sambamba: fast processing of NGS alignment formats, Bioinformatics, Volume 31, Issue 12, June 2015, Pages 2032-2034, https://doi.org/10.1093/bioinformatics/btv098"
+  rhocall:
+    citation: "Rhocall (Nilsson et al. 2016)"
     bibliography: ""
   samtools:
     citation: "SAMtools (Danecek et al. 2021)"
@@ -128,6 +144,9 @@ tool:
   stranger:
     citation: "Stranger (Nilsson & Magnusson 2021)"
     bibliography: "Nilsson D, Magnusson M. moonso/stranger v0.7.1. Published online February 18, 2021. doi:10.5281/ZENODO.4548873"
+  strdrop:
+    citation: "strdrop (Nilsson et. al. 2025)"
+    bibliography: ""
   strdust:
     citation: "STRdust (De Coster et al. 2024)"
     bibliography: "De Coster W, Höijer I, Bruggeman I, D'Hert S, Melin M, Ameur A, Rademakers R. Visualization and analysis of medically relevant tandem repeats in nanopore sequencing of control cohorts with pathSTR. Genome Res 34, 2074-2080 (2024). https://doi.org/10.1101/gr.279265.124"
@@ -139,6 +158,9 @@ tool:
     bibliography: "Li H. Tabix: fast retrieval of sequence features from generic TAB-delimited files. Bioinformatics. 2011;27(5):718-719. doi:10.1093/bioinformatics/btq671"
   tagbam:
     citation: "Felix Lenner (2025)"
+    bibliography: ""
+  tiddit:
+    citation: "TIDDIT (Eisfeldt et al. 2013)"
     bibliography: ""
   trgt:
     citation: "TRGT (Dolzhenko et al. 2024)"

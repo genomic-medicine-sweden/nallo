@@ -11,6 +11,7 @@
 include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap          } from 'plugin/nf-schema'
 include { samplesheetToList         } from 'plugin/nf-schema'
+include { paramsHelp                } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
 include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
@@ -18,7 +19,9 @@ include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     SUBWORKFLOW TO INITIALISE PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 workflow PIPELINE_INITIALISATION {
@@ -26,14 +29,17 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    _monochrome_logs  // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    _input            //  string: Path to input samplesheet
+    help              // boolean: Display help message and exit
+    help_full         // boolean: Show the full help message
+    show_hidden       // boolean: Show hidden parameters in the help message
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -48,10 +54,31 @@ workflow PIPELINE_INITIALISATION {
     //
     // Validate parameters and generate parameter summary to stdout
     //
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+    nallo_gms_logo = """
+    \033[0;34m                                   _                              _ _      _
+    \033[0;34m   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
+    \033[0;34m  / _` |/ _ \\ '_ \\ / _ \\| '_ ` _ \\| |/ __|____| '_ ` _ \\ / _ \\/ _` | |/ __| | '_ \\ / _ \\_____
+    \033[0;34m | (_| |  __/ | | | (_) | | | | | | | (_|_____| | | | | |  __/ (_| | | (__| | | | |  __/_____|
+    \033[0;34m  \\__, |\\___|_| |_|\\___/|_| |_| |_|_|\\___|    |_| |_| |_|\\___|\\__,_|_|\\___|_|_| |_|\\___|
+    \033[0;34m  |___/      _____  __| | ___ _ __    / / __   __ _| | | ___
+    \033[0;34m / __\\ \\ /\\ / / _ \\/ _` |/ _ \\ '_ \\  / / '_ \\ / _` | | |/ _ \\
+    \033[0;34m \\__ \\\\ V  V /  __/ (_| |  __/ | | |/ /| | | | (_| | | | (_) |
+    \033[0;34m |___/ \\_/\\_/ \\___|\\__,_|\\___|_| |_/_/ |_| |_|\\__,_|_|_|\\___/
+    \033[0;34m
+    """
+
     UTILS_NFSCHEMA_PLUGIN (
         workflow,
         validate_params,
-        null
+        null,
+        help,
+        help_full,
+        show_hidden,
+        nallo_gms_logo,
+        "",
+        command
     )
 
     //
@@ -71,6 +98,7 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowSkips = [
         assembly         : "skip_genome_assembly",
+        sambamba_depth   : "skip_sambamba_depth",
         mapping          : "skip_alignment",
         snv_calling      : "skip_snv_calling",
         snv_annotation   : "skip_snv_annotation",
@@ -82,7 +110,8 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : "skip_rank_variants",
         repeat_calling   : "skip_repeat_calling",
         repeat_annotation: "skip_repeat_annotation",
-        methylation      : "skip_methylation_pileups",
+        chromograph      : "skip_chromograph",
+        methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
     ]
 
@@ -91,8 +120,10 @@ workflow PIPELINE_INITIALISATION {
     //
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
+        chromograph      : ["mapping"],
         snv_calling      : ["mapping"],
         qc               : ["mapping"],
+        sambamba_depth   : ["mapping"],
         sv_calling       : ["mapping"],
         sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
@@ -104,12 +135,14 @@ workflow PIPELINE_INITIALISATION {
         methylation      : ["mapping", "snv_calling"]
     ]
 
+
     //
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
         mapping          : ["fasta", "somalier_sites"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
+        sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
         snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
@@ -121,24 +154,27 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
-            skip_snv_calling         : params.skip_snv_calling,
-            skip_peddy               : params.skip_peddy,
-            skip_phasing             : params.skip_phasing,
-            skip_methylation_pileups : params.skip_methylation_pileups,
-            skip_rank_variants       : params.skip_rank_variants,
-            skip_repeat_calling      : params.skip_repeat_calling,
-            skip_repeat_annotation   : params.skip_repeat_annotation,
-            skip_snv_annotation      : params.skip_snv_annotation,
-            skip_sv_calling          : params.skip_sv_calling,
-            skip_sv_annotation       : params.skip_sv_annotation,
-            skip_call_paralogs       : params.skip_call_paralogs,
-            skip_alignment           : params.skip_alignment,
-            skip_qc                  : params.skip_qc,
-            skip_genome_assembly     : params.skip_genome_assembly,
+            skip_snv_calling        : params.skip_snv_calling,
+            skip_peddy              : params.skip_peddy,
+            skip_phasing            : params.skip_phasing,
+            skip_methylation_calling: params.skip_methylation_calling,
+            skip_rank_variants      : params.skip_rank_variants,
+            skip_repeat_calling     : params.skip_repeat_calling,
+            skip_repeat_annotation  : params.skip_repeat_annotation,
+            skip_chromograph        : params.skip_chromograph,
+            skip_sambamba_depth     : params.skip_sambamba_depth,
+            skip_snv_annotation     : params.skip_snv_annotation,
+            skip_sv_calling         : params.skip_sv_calling,
+            skip_sv_annotation      : params.skip_sv_annotation,
+            skip_call_paralogs      : params.skip_call_paralogs,
+            skip_alignment          : params.skip_alignment,
+            skip_qc                 : params.skip_qc,
+            skip_genome_assembly    : params.skip_genome_assembly,
         ],
         files: [
             par_regions              : params.par_regions,
             echtvar_snv_databases    : params.echtvar_snv_databases,
+            sambamba_regions         : params.sambamba_regions,
             svdb_sv_databases        : params.svdb_sv_databases,
             somalier_sites           : params.somalier_sites,
             vep_cache                : params.vep_cache,
@@ -167,18 +203,18 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through params.input
     //
-    Channel
+    channel
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-        .ifEmpty { error "Error: No samples found in samplesheet." }
+        .tap { ch_unprocessed_samplesheet }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
         .groupTuple() // group by sample
-        .map {
-            validateUniqueFilenamesPerSample(it)
-            validateUniqueSampleIDs(it)
+        .map { id_meta_reads ->
+            validateUniqueFilenamesPerSample(id_meta_reads)
+            validateUniqueSampleIDs(id_meta_reads)
         }
         // Add single_end information to meta
         .map { sample, metas, reads ->
@@ -186,7 +222,7 @@ workflow PIPELINE_INITIALISATION {
         }
         // Convert back to [ meta, reads ]
         .flatMap { _sample, meta, reads ->
-            reads.collect { return [ meta, it ] }
+            reads.collect { read -> return [ meta, read ] }
         }
         // Add relationships to meta
         .map { meta, reads -> [ meta.family_id, meta, reads ] }
@@ -196,6 +232,8 @@ workflow PIPELINE_INITIALISATION {
         }
         .transpose()
         .set { ch_samplesheet }
+
+        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -273,18 +311,15 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-
 def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
-
 }
-
 //
 // Validate channels from input samplesheet
 //
 def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
-    def fileNames = input[2].collect { new File(it.toString()).name }
+    def fileNames = input[2].collect { input_path -> new File(input_path.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
         error "Error: Input filenames needs to be unique for each sample."
     }
@@ -343,15 +378,26 @@ def extractSoftwareFromVersions(module_yaml_file) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def yamlData = yaml.load(module_yaml_file)
     // Extract all software (keys) from a module yaml
-    def softwareInModule = yamlData.values().collect { it.keySet() }.flatten()
+
+    def softwareInModule = yamlData.values().collect { software_and_version -> software_and_version.keySet() }.flatten()
     return softwareInModule
+}
+
+def extractSoftwareFromTopics(topics_channel) {
+    topics_channel
+       .map { toolBlockText ->
+            toolBlockText
+                .readLines()
+                .drop(1) // Drop process name
+                .collect { line -> line.trim().split(':')[0] }
+    }
 }
 
 def generateReferenceHTML(tool_list, description) {
     def items = tool_list
-        .collect { it.trim() }
-        .unique()              // samtools and bcftools share reference
-        .findAll { it != "" }  // some tools does not have a reference, e.g. awk, gunzip
+        .collect { citation -> citation.trim() }
+        .unique()                                // e.g. samtools and bcftools share citation
+        .findAll { citation -> citation != "" }  // some tools does not have a citation, e.g. awk, gunzip
 
     if (description == 'citation') {
         return "  <p>Tools used in the workflow included: ${items.join(', ')}.</p>"
@@ -360,16 +406,17 @@ def generateReferenceHTML(tool_list, description) {
     }
 }
 
-def citationBibliographyText(ch_versions, references_yaml, description) {
+def citationBibliographyText(ch_versions, ch_topic_versions_string, references_yaml, description) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def softwareReferences = yaml.load(references_yaml.text).tool
 
     def unwantedReferences = ['genomic-medicine-sweden/nallo', 'Nextflow']
     // These are not collected in ch_versions but should be referenced
-    def baseTools = Channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
+    def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     ch_versions
         .map { module_yaml -> extractSoftwareFromVersions(module_yaml) }
+        .concat(extractSoftwareFromTopics(ch_topic_versions_string))
         .flatten() // split multi-tool modules
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }
@@ -426,14 +473,14 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     }
 
     // Get all other workflows that are required for a certain workflow
-    def requiredWorkflows = combinationsMap.findAll { it.value.contains(currentWorkflow) }.keySet()
+    def requiredWorkflows = combinationsMap.findAll { workflow_with_dependencies -> workflow_with_dependencies.value.contains(currentWorkflow) }.keySet()
     // If no direct dependencies are found or combinationsMap does not contain the workflow, return an empty list
     if (!requiredWorkflows) {
         return []
     }
     // Collect the required --skips that are not active for the current workflow
     def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
-        .collect { [ '--', it ].join('') }
+        .collect { skip_parameter -> [ '--', skip_parameter ].join('') }
         .join(" ")
     // If all required sets are set, give no error
     if (!dependencyString) {
@@ -505,13 +552,13 @@ def findKeysForValue(def valueToFind, Map map) {
 
 // Utility function to create channels from references
 def createReferenceChannelFromPath(param, defaultValue = '') {
-    return param ? Channel.fromPath(param, checkIfExists: true)
-        .map { [ [ id: it.simpleName ], it ] }
+    return param ? channel.fromPath(param, checkIfExists: true)
+        .map { file_path -> [ [ id: file_path.simpleName ], file_path ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
 def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
-    return param ? Channel.fromList(samplesheetToList(param, schema)) : defaultValue
+    return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
 def validatePacBioLicense() {
@@ -522,7 +569,7 @@ def validatePacBioLicense() {
         (params.sv_callers_to_run)  : 'Sawfish',
         (params.sv_callers_to_merge): 'Sawfish',
         (!params.skip_call_paralogs): 'Paraphase',
-    ].findAll { k, v -> k instanceof Boolean ? k : k.toString().contains(v.toLowerCase())  }
+    ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
     if (!pacbioTools) return
@@ -559,6 +606,12 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
         }
 }
 
+def validateNonEmptySamplesheet(ch_samplesheet) {
+    ch_samplesheet
+        .ifEmpty { error("ERROR: No samples found in samplesheet.") }
+        .filter { it -> it != null }
+}
+
 def validateSingleProjectPerRun(ch_samplesheet) {
     ch_samplesheet
         .map { meta, _reads -> meta.project }
@@ -591,11 +644,15 @@ def validateWorkflowCompatibility() {
             error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
     }
+
+    if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
+        error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
+    }
 }
 
 def validateSVCallingParameters() {
-    def sv_callers = params.sv_callers_to_merge.split(',').collect { it.toLowerCase().trim() }
-    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { it.toLowerCase().trim() }
+    def sv_callers = params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() }
+    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() }
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
@@ -612,7 +669,7 @@ def validateParentExistsInFamily(input) {
         }
         .groupTuple()
         .map { family_id, metas ->
-            def sampleIds = metas.collect { it.id } as Set
+            def sampleIds = metas.collect { meta -> meta.id } as Set
 
             metas.each { meta ->
                 def errors = []
@@ -648,8 +705,8 @@ def validateParentalSex(input) {
         }
 }
 
-def getParentalIds(samples, field) {
-    samples.collect { it[field] }.findAll { isNonZeroNonEmpty(it) }
+def getParentalIds(samples, parental_id_type) {
+    samples.collect { sample -> sample[parental_id_type] }.findAll { parental_id -> isNonZeroNonEmpty(parental_id) }
 }
 
 def addRelationshipsToMeta(samples) {
@@ -660,8 +717,8 @@ def addRelationshipsToMeta(samples) {
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
     def parents_ids = maternal_ids + paternal_ids
-    def grandparents_ids = samples.findAll { it.id in parents_ids }.collect { it.maternal_id } +
-                           samples.findAll { it.id in parents_ids }.collect { it.paternal_id }
+    def grandparents_ids = samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.maternal_id } +
+                           samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.paternal_id }
 
     samples.each { sample ->
         sample.relationship = sample.id in grandparents_ids ? 'unknown' :
@@ -693,7 +750,7 @@ def addRelationshipsToMeta(samples) {
 
 def getChildrenForParent(samples, parent_id) {
     samples
-        .findAll { it.maternal_id == parent_id || it.paternal_id == parent_id }
+        .findAll { sample -> sample.maternal_id == parent_id || sample.paternal_id == parent_id }
 }
 
 def isChild(sample, maternal_ids, paternal_ids) {
