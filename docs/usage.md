@@ -93,7 +93,7 @@ This pipeline comes with three different presets that should be set with the `--
 
     - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
     - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
-    - `--skip_methylation_pileups` will be set to `true` for `pacbio`
+    - `--skip_methylation_calling` will be set to `true` for `pacbio`
 
 ### Reference files
 
@@ -127,7 +127,7 @@ For example, `nextflow run genomic-medicine-sweden/nallo -profile docker --outdi
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_pileups
+  --skip_alignment is active, the pipeline has to be run with: --skip_qc --skip_genome_assembly --skip_call_paralogs --skip_snv_calling --skip_snv_annotation --skip_sv_calling --skip_phasing --skip_rank_variants --skip_repeat_calling --skip_repeat_annotation --skip_methylation_calling
   ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -147,7 +147,7 @@ Turned off with `--skip_alignment`.
 
 #### QC
 
-This subworkflow depends on the alignment subworkflow, but requires no additional files.
+This subworkflow depends on the alignment subworkflow, but requires no additional files by default. Analysis regions for mosdepth and sambamba depth can be set by providing a BED file to `--qc_regions`, or `--mosdepth_regions` and `--sambamba_regions` separately.
 
 Turned off with `--skip_qc`.
 
@@ -217,19 +217,33 @@ Turned off with `--skip_sv_calling`.
 
 #### Phasing
 
-This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment and SNV calling subworkflows, but requires no additional files.
+This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment, SNV calling subworkflows, but requires no additional files.
+
+If SVs were called, they are phased together with SNVs if supported by the selected phaser.
+The phaser can be chosen using the `--phaser` argument. See the following table for capabilites:
+
+| Phaser    | Parameter Value | Supports SV phasing | Supported SV callers |
+| --------- | --------------- | ------------------- | -------------------- |
+| Longphase | `longphase`     | Yes                 | Any                  |
+| WhatsHap  | `whatshap`      | No                  |                      |
+| HiPhase   | `hiphase`       | Yes                 | Sawfish only         |
 
 Turned off with `--skip_phasing`.
 
-#### Methylation pileups
+#### Methylation calling
 
-This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files.
+This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-| Parameter         | Description                                                                                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
+| Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list                                                                                  |
+| `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
 
-Turned off with `--skip_methylation_pileups`.
+Turned off with `--skip_methylation_calling`.
+
+!!!tip
+
+    By default, samples are compared to the background cohort with the same sex as found in the sample metadata. If the background cohort tsv file does not contain MALE and FEMALE labels, this can be changed with `--methbat_male_label` and `--methbat_female_label`. Additional labels can be added with --profile-label through the `--extra_methbat_profile_options` parameter.
 
 #### Repeat calling
 
@@ -250,11 +264,18 @@ This subworkflow relies on the alignment, SNV calling, phasing and repeat callin
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stranger_repeat_catalog` | a variant catalog matching your reference (e.g. [stranger_repeat_catalog_grch38.json](https://github.com/Clinical-Genomics/stranger/raw/main/stranger/resources/stranger_repeat_catalog_grch38.json)) |
 
+Additionally, `--strdrop_training_set_json` must be supplied when [strdrop](https://github.com/dnil/strdrop) is used to annotate drops in coverage at STR loci in TRGT vcf files:
+
+| Parameter | Description |
+| `strdrop_training_set_json` | A JSON file containing the training set for strdrop |
+
 Turned off with `--skip_repeat_annotation`.
 
 #### SNV annotation
 
-This subworkflow relies on the alignment and SNV calling, and requires the following additional files:
+This subworkflow relies on the alignment and SNV calling. If phasing is enabled, phased SNVs will be annotated.
+
+The following additional files are required:
 
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
@@ -290,6 +311,10 @@ cadd,/path/to/cadd.v1.6.hg38.zip
 
 Turned off with `--skip_snv_annotation`.
 
+!!!tip
+
+    If variants are annotated with allele frequecies, these can be used in the `chromograph` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). By default only coverage plots are generated, since the pipeline doesn't require annotation with allele frequencies. Annotate variants with allele frequencies (e.g. from gnomAD), and set the tag using `--chromograph_af_tag`.
+
 #### Rank SNVs and INDELs
 
 This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:
@@ -303,7 +328,9 @@ Turned off with `--skip_rank_variants`.
 
 #### SV annotation
 
-This subworkflow relies on the alignment subworkflow, and requires the following additional files:
+This subworkflow relies on the alignment and SV calling subworkflows. If SV phasing is enabled, phased SVs will be annotated.
+
+The following additional files are required:
 
 | Parameter                        | Description                                                                                                                                                                                                                                                                                                                                        |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -371,11 +398,15 @@ Filtering of variants only happens if any of these three parameters is active.
 
 ### Target regions
 
-The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to mosdepth, and `--methylation_call_regions` which limits the methylation pileup regions. These four parmeters are set to the same as `--target_regions` by default, but can also be set independently.
+The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to `--mosdepth_regions` (mosdepth) and `--sambamba_regions` (sambamba depth), and `--modkit_call_regions` which limits the methylation pileup regions. These four parameters are set to the same as `--target_regions` by default, but can also be set independently.
 
 !!!warning
 
     Note that when using `--snv_call_regions` together with `--snv_calling_processes > 1` and you are interested in ranking compound variants, make sure that the regions in your BED file doesn't break any genes, since genmod relies on the variants being in the same file. Because of this, Nallo will not split entries in the BED file any further.
+
+!!!note
+
+    When running with the `revio` preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with `--methbat_regions`.
 
 ### Parallelization
 
@@ -389,7 +420,7 @@ Version 0.5.1 of the pipeline processed a ~32x coverage PacBio trio (HG002, HG00
 
 ## Reproducibility
 
-It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
+It is a good idea to specify the pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
 First, go to the [genomic-medicine-sweden/nallo releases page](https://github.com/genomic-medicine-sweden/nallo/releases) and find the latest pipeline version - numeric only (eg. `0.2.0`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 0.2.0`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
@@ -413,7 +444,7 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
-The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
+The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to check if your system is supported, please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
 Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
@@ -432,7 +463,7 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `shifter`
   - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
 - `charliecloud`
-  - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
+  - A generic configuration profile to be used with [Charliecloud](https://charliecloud.io/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 - `wave`
@@ -454,15 +485,15 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 ### Resource requests
 
-Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher requests (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
+Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
 To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
 
 ### Custom Containers
 
-In some cases you may wish to change which container a step of the pipeline uses for a particular tool. By default nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However in some cases the pipeline specified version maybe out of date.
+In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
 
-To use a different container from the default container specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
 
 ### Custom Tool Arguments
 

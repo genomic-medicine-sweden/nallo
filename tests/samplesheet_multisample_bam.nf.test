@@ -9,12 +9,12 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/4645adc45ba1ea0363b19ba3ef3c52d62193816f/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/'
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
-                sv_callers                   = "severus,hificnv"
-                sv_callers_to_run            = "severus,hificnv,sniffles"
+                sv_callers                   = "sawfish"
+                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
                 filter_snvs_expression       = "-i 'AQ>20'"
                 filter_svs_expression        = "-i \'SVTYPE=\"INS\"\'"
             }
@@ -32,7 +32,7 @@ nextflow_pipeline {
             // cram_files: Stable cram files
             def cram_files       = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.cram'])
             // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
-            def all_vcf_files    = getAllFilesFromDir(params.outdir, include: ['**/*.vcf.gz'])
+            def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
             assertAll(
@@ -41,7 +41,7 @@ nextflow_pipeline {
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nallo_pipeline_software_mqc_versions.yml"),
+                    removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml"),
                     // All stable path name, with a relative path
                     stable_name,
                     // All files with stable contents

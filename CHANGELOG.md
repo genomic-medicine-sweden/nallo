@@ -3,23 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.9.0dev - [XXXX-XX-XX]
+## TBD
 
 ### `Added`
 
 - [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data to Gens.
-
-### `Changed`
-
-- [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
-
-### `Removed`
-
-- [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
-
-### `Fixed`
-
-- [#808](https://github.com/genomic-medicine-sweden/nallo/pull/808) - Fixed no samples found in samplesheet error overriding actual errors
 
 ### Parameters
 
@@ -30,6 +18,93 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--gens_panel_of_normals`   |
 |               | `--gens_use_pon`            |
 
+### Module updates
+
+| Tool  | Old version | New version |
+| ----- | ----------- | ----------- |
+| gatk4 |             | 4.6.2.0     |
+
+## 0.9.0 - [2025-12-18]
+
+### `Added`
+
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Added co-phasing of SNVs and SVs for HiPhase and Longphase
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `CHROMOGRAPH` to generate chromograph plots of autozygosity
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Added new subworkflow `VCF_CONCAT_SORT` to concatenate and sort variants
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added sambamba depth to `QC_ALIGNED_READS`
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Added separate region inputs for mosdepth and sambamba depth that both use `--qc_regions` as default
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
+- [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
+
+
+### `Changed`
+
+- [#795](https://github.com/genomic-medicine-sweden/nallo/pull/795) - Updated version to 0.9.0dev
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Moved phasing subworkflow to run before annotation
+- [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) - Updated testdata and tests with gnomad allele frequencies in SNV annotation
+- [#804](https://github.com/genomic-medicine-sweden/nallo/pull/804) - Changed to only output d4-file from mosdepth when `--mosdepth_d4_output` is set, due to bugs in the d4-format
+- [#813](https://github.com/genomic-medicine-sweden/nallo/pull/813) - Updated nf-core template to 3.5.1
+- [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Renamed `METHYLATION` subworkflow to `CALL_METHYLATION_MODKIT` and changed output structure
+- [#821](https://github.com/genomic-medicine-sweden/nallo/pull/821) - Updated README to fix mistakes after template merge
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Updated metromap and added .ai file
+- [#826](https://github.com/genomic-medicine-sweden/nallo/pull/826) - Updated `HIPHASE` tests because of unstable snapshots
+- [#827](https://github.com/genomic-medicine-sweden/nallo/pull/827) - Updated the chromograph implementation added in [#803](https://github.com/genomic-medicine-sweden/nallo/pull/803) to fix resume issues
+- [#829](https://github.com/genomic-medicine-sweden/nallo/pull/829) - Updated all `Channel` to `channel`
+- [#830](https://github.com/genomic-medicine-sweden/nallo/pull/830) - Updated implicit to explicit closure parameters
+- [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Updated stranger and moved it to `ANNOTATE_REPEAT_EXPANSIONS`
+- [#832](https://github.com/genomic-medicine-sweden/nallo/pull/832) - Updated citations and bibliography texts generation to work with topics channels
+- [#838](https://github.com/genomic-medicine-sweden/nallo/pull/838) - Updated github nf-test action to add cleanup for singularity tests that pull docker containers
+
+### `Removed`
+
+- [#800](https://github.com/genomic-medicine-sweden/nallo/pull/800) - Removed output of phased variants without annotation
+- [#812](https://github.com/genomic-medicine-sweden/nallo/pull/812) - Removed unnecessary flag vcf_stats_report in `DEEPVARIANT_RUNDEEPVARIANT`
+- [#822](https://github.com/genomic-medicine-sweden/nallo/pull/822) - Removed .svgz version of metromap
+
+### `Fixed`
+
+- [#828](https://github.com/genomic-medicine-sweden/nallo/pull/828) - Fixed no samples found in samplesheet error overriding actual errors
+
+### Parameters
+
+| Old parameter                | New parameter                               |
+| ---------------------------- | ------------------------------------------- |
+|                              | `--skip_chromograph`                        |
+|                              | `--bcftools_roh_af_tag`                     |
+|                              | `--chromograph_af_tag`                      |
+|                              | `--plot_chromograph_coverage`               |
+|                              | `--plot_chromograph_autozygosity`           |
+|                              | `--rhocallviz_af_tag`                       |
+|                              | `--rhocallviz_min_af`                       |
+|                              | `--rhocallviz_min_qual`                     |
+|                              | `--tiddit_bin_size`                         |
+|                              | `--genmod_compound_snv_penalty`             |
+|                              | `--genmod_compound_snv_threshold`           |
+|                              | `--genmod_compound_sv_penalty`              |
+|                              | `--genmod_compound_sv_threshold`            |
+|                              | `--genmod_compound_singleton_snv_penalty`   |
+|                              | `--genmod_compound_singleton_snv_threshold` |
+|                              | `--genmod_compound_singleton_sv_penalty`    |
+|                              | `--genmod_compound_singleton_sv_threshold`  |
+|                              | `--genmod_compound_trio_snv_penalty`        |
+|                              | `--genmod_compound_trio_snv_threshold`      |
+|                              | `--genmod_compound_trio_sv_penalty`         |
+|                              | `--genmod_compound_trio_sv_threshold`       |
+|                              | `--mosdepth_d4_output`                      |
+|                              | `--mosdepth_regions`                        |
+|                              | `--sambamba_regions`                        |
+|                              | `--skip_sambamba_depth`                     |
+| `--methylation_call_regions` | `--modkit_call_regions`                     |
+| `--skip_methylation_pileups` | `--skip_methylation_calling`                |
+|                              | `--methbat_male_label`                      |
+|                              | `--methbat_female_label`                    |
+|                              | `--run_methbat`                             |
+|                              | `--run_modkit`                              |
+|                              | `--extra_methbat_profile_options`           |
+|                              | `--methbat_regions`                         |
+|                              | `--strdrop_training_set_json`               |
+
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
@@ -37,9 +112,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool  | Old version | New version |
-| ----- | ----------- | ----------- |
-| gatk4 |             | 4.6.2.0     |
+| Tool                             | Old version | New version |
+| -------------------------------- | ----------- | ----------- |
+| chromograph                      |             | 1.3.1       |
+| bcftools/concat                  | 1.22        | 1.21        |
+| bcftools/roh                     |             | 1.22        |
+| rhocall/viz                      |             | 0.5.1       |
+| tiddit                           |             | 3.9.3       |
+| methbat/profile                  |             | 0.16.1      |
+| pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
+| strdrop                          |             | 0.3.1       |
+| stranger                         | 0.9.5       | 0.10.0      |
+| trgt                             | 4.0.0       | 5.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

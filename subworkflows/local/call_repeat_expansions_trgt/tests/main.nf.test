@@ -37,14 +37,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
@@ -77,14 +77,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = Channel.of([
+                input[3] = channel.of([
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])

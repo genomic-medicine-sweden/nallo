@@ -12,8 +12,9 @@
                     },
                     "bcftools/concat": {
                         "branch": "master",
-                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
-                        "installed_by": ["modules"]
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/bcftools/concat/bcftools-concat.diff"
                     },
                     "bcftools/index": {
                         "branch": "master",
@@ -36,6 +37,11 @@
                         "installed_by": ["modules"]
                     },
                     "bcftools/reheader": {
+                        "branch": "master",
+                        "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
+                        "installed_by": ["modules"]
+                    },
+                    "bcftools/roh": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
@@ -78,6 +84,11 @@
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "chromograph": {
+                        "branch": "master",
+                        "git_sha": "60f6e8c8a8b18612a5f74a097c856659af31a97c",
                         "installed_by": ["modules"]
                     },
                     "cramino": {
@@ -170,7 +181,12 @@
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "c83276742fdcd6d0abac0d8f32048a98ea97971c",
+                        "git_sha": "47983538e45e539f783ed8ab0d1c96d39df2af8f",
+                        "installed_by": ["modules"]
+                    },
+                    "methbat/profile": {
+                        "branch": "master",
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
@@ -209,9 +225,25 @@
                         "git_sha": "9e18969a158f93bd689de80a9dfe05c9d67d023a",
                         "installed_by": ["modules"]
                     },
+                    "pbcpgtools/alignedbamtocpgscores": {
+                        "branch": "master",
+                        "git_sha": "e67cda6276a94d7eafa2d38acefd001562ad2c2b",
+                        "installed_by": ["modules"]
+                    },
                     "peddy": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
+                    "rhocall/viz": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/rhocall/viz/rhocall-viz.diff"
+                    },
+                    "sambamba/depth": {
+                        "branch": "master",
+                        "git_sha": "ca6da11b05740de461b1e2714037345c0f856201",
                         "installed_by": ["modules"]
                     },
                     "samtools/convert": {
@@ -297,7 +329,12 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "72717e1f3feabaa57a6a71ba5a85d9c4ceeba514",
+                        "installed_by": ["modules"]
+                    },
+                    "strdrop/call": {
+                        "branch": "master",
+                        "git_sha": "214528c6fc6a96fb9d51fb9f7abbe949019dfcee",
                         "installed_by": ["modules"]
                     },
                     "strdust": {
@@ -335,14 +372,19 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "tiddit/cov": {
+                        "branch": "master",
+                        "git_sha": "f5667101797c3cd51c9dd2913261527897954ab6",
+                        "installed_by": ["modules"]
+                    },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
+                        "git_sha": "22bb4dcead991fd34f807fb72bb4071c2216ee24",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "90b580b94df4385e8b76fe5d1aba48d94f1015eb",
+                        "git_sha": "7ba90804ac43ed961b6ce8a8dcc06d283142f648",
                         "installed_by": ["modules"]
                     },
                     "untar": {
@@ -368,12 +410,12 @@
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
-                        "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                        "git_sha": "271e7fc14eb1320364416d996fb077421f3faed2",
                         "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {
                         "branch": "master",
-                        "git_sha": "dcd088f483cede0c3df4034d405126f05a764cc7",
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
                         "installed_by": ["subworkflows"]
                     },
                     "vcf_filter_bcftools_ensemblvep": {
