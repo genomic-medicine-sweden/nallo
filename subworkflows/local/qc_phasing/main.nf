@@ -1,6 +1,7 @@
-include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO         } from '../../../modules/nf-core/cramino/main'
-include { WHATSHAP_STATS  } from '../../../modules/nf-core/whatshap/stats/main'
+include { BCFTOOLS_CONCAT  } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO          } from '../../../modules/nf-core/cramino/main'
+include { WHATSHAP_STATS   } from '../../../modules/nf-core/whatshap/stats/main'
+include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow QC_PHASING {
     take:
@@ -25,17 +26,13 @@ workflow QC_PHASING {
             .groupTuple()
             .set { ch_bcftools_concat_in }
 
-        BCFTOOLS_CONCAT(ch_bcftools_concat_in)
+        BCFTOOLS_CONCAT(ch_bcftools_concat_in).vcf
+                                              .set { ch_phased_vcf }
         ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
-        BCFTOOLS_CONCAT.out.vcf
-            .join(BCFTOOLS_CONCAT.out.tbi)
-            .set { ch_phased_vcf_index }
     }
     else {
         ch_phased_family_snvs
-            .join(ch_phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_phased_vcf_index }
+            .set { ch_phased_vcf }
     }
 
     // At this point, we have exactly one phased VCF per family.
@@ -43,25 +40,39 @@ workflow QC_PHASING {
     // Therefore, we join with the known samples per family and create one item per sample,
     // duplicating the VCF and TBI paths as needed.
 
-    ch_phased_vcf_index
+    ch_phased_vcf
         .join(ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true)
         .transpose()
-        .map { meta, vcf, tbi, sample_id ->
-            [meta + [id: sample_id, family_id: meta.id], vcf, tbi]
+        .map { meta, vcf, sample_id ->
+            [meta + [id: sample_id, family_id: meta.id], vcf]
         }
-        .set { ch_phased_vcf_index }
+        .set { ch_phased_vcf }
 
 
-    WHATSHAP_STATS(ch_phased_vcf_index)
-    ch_versions = ch_versions.mix(WHATSHAP_STATS.out.versions)
+    WHATSHAP_STATS(
+                ch_phased_vcf,
+                true,
+                true,
+                false,
+                )
+
+    TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
+    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
+
+    TABIX_BGZIPTABIX.out.gz_tbi
+                        .map { meta, blocks_gz, _blocks_tbi -> [meta, blocks_gz] }
+                        .set { ch_phasing_blocks_gz }
+    TABIX_BGZIPTABIX.out.gz_tbi
+                        .map { meta, _blocks_gz, blocks_tbi -> [meta, blocks_tbi] }
+                        .set { ch_phasing_blocks_tbi }
 
     CRAMINO(ch_bam_bai_haplotagged)
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phasing_stats = WHATSHAP_STATS.out.stats               // channel: [ val(meta), path(stats) ]
-    phasing_blocks = WHATSHAP_STATS.out.blocks             // channel: [ val(meta), path(blocks) ]
-    phasing_blocks_index = WHATSHAP_STATS.out.blocks_index // channel: [ val(meta), path(blocks_index) ]
-    haplotagging_stats = CRAMINO.out.stats                 // channel: [ val(meta), path(stats) ]
-    versions = ch_versions                                 // channel: [ path(versions.yml) ]
+    phasing_stats = WHATSHAP_STATS.out.tsv       // channel: [ val(meta), path(stats) ]
+    phasing_blocks = ch_phasing_blocks_gz        // channel: [ val(meta), path(blocks) ]
+    phasing_blocks_index = ch_phasing_blocks_tbi // channel: [ val(meta), path(blocks_index) ]
+    haplotagging_stats = CRAMINO.out.stats       // channel: [ val(meta), path(stats) ]
+    versions = ch_versions                       // channel: [ path(versions.yml) ]
 }
