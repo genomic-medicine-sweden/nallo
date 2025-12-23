@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
+- [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
 
 ### `Removed`
 
