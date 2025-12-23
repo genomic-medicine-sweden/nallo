@@ -8,14 +8,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -24,14 +24,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "2": [
@@ -40,14 +40,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -67,8 +67,8 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
@@ -95,14 +95,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "phasing_blocks_index": [
@@ -111,14 +111,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "phasing_stats": [
@@ -127,19 +127,19 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
@@ -147,16 +147,16 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-09T15:57:07.291262676"
+        "timestamp": "2025-12-23T13:34:51.848649329"
     },
     "2 samples - SNVs + SVs": {
         "content": [
             [
-                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                 "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                 "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                 "versions.yml:md5,d89ac644c793527f288741cb4ae53add"
@@ -167,14 +167,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.stats.tsv:md5,32fca9c42cfc084b86c29d09d57cb141"
+                    "HG002_stats.tsv:md5,32fca9c42cfc084b86c29d09d57cb141"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.stats.tsv:md5,120cdbfe1c4e57c33637bdf696ff446b"
+                    "HG003_stats.tsv:md5,120cdbfe1c4e57c33637bdf696ff446b"
                 ]
             ],
             [
@@ -183,14 +183,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.blocks.gtf.gz:md5,eed0933dd750d3ad44209bc0a828cd6c"
+                    "HG002_stats.gtf.gz:md5,eed0933dd750d3ad44209bc0a828cd6c"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.blocks.gtf.gz:md5,6db0a5f2102f4b832bed24716905be57"
+                    "HG003_stats.gtf.gz:md5,6db0a5f2102f4b832bed24716905be57"
                 ]
             ],
             [
@@ -199,14 +199,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.blocks.gtf.gz.tbi:md5,903ba2954a5f616dd8ae490712736746"
+                    "HG002_stats.gtf.gz.tbi:md5,903ba2954a5f616dd8ae490712736746"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.blocks.gtf.gz.tbi:md5,1a6cf1bb012ecaa9201417fc7acda32f"
+                    "HG003_stats.gtf.gz.tbi:md5,1a6cf1bb012ecaa9201417fc7acda32f"
                 ]
             ],
             [
@@ -281,16 +281,16 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-09T15:56:20.190232122"
+        "timestamp": "2025-12-23T13:34:30.437197193"
     },
     "2 samples - SNVs only": {
         "content": [
             [
-                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                 "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                 "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
             ],
@@ -300,14 +300,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.stats.tsv:md5,18bc787471275b3d6af0cc153ae7c443"
+                    "HG002_stats.tsv:md5,18bc787471275b3d6af0cc153ae7c443"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.stats.tsv:md5,d0292f612dfaa8b543df1fa84ac11e6c"
+                    "HG003_stats.tsv:md5,d0292f612dfaa8b543df1fa84ac11e6c"
                 ]
             ],
             [
@@ -316,14 +316,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.blocks.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5"
+                    "HG002_stats.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.blocks.gtf.gz:md5,ed17d6e421d985da8194c20622dcbd24"
+                    "HG003_stats.gtf.gz:md5,ed17d6e421d985da8194c20622dcbd24"
                 ]
             ],
             [
@@ -332,14 +332,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.blocks.gtf.gz.tbi:md5,933f9fc7187546737fa664b160594cab"
+                    "HG002_stats.gtf.gz.tbi:md5,933f9fc7187546737fa664b160594cab"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a"
+                    "HG003_stats.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a"
                 ]
             ],
             [
@@ -414,10 +414,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-09T15:55:41.797502277"
+        "timestamp": "2025-12-23T13:34:13.848133954"
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -428,14 +428,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -444,14 +444,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "2": [
@@ -460,14 +460,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -487,8 +487,8 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
                 ],
@@ -514,14 +514,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stats.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "phasing_blocks_index": [
@@ -530,14 +530,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.blocks.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "phasing_stats": [
@@ -546,28 +546,28 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_stats.stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
-                    "versions.yml:md5,16e4a100204613c3fce792b28704b10f",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
+                    "versions.yml:md5,b22ea2ab3c3889f020853f08d80e2a22",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-09T15:56:41.166807217"
+        "timestamp": "2025-12-23T13:34:40.147333949"
     }
 }

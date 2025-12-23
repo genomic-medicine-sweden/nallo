@@ -48,7 +48,6 @@ workflow QC_PHASING {
         }
         .set { ch_phased_vcf }
 
-
     WHATSHAP_STATS(
                 ch_phased_vcf,
                 true,
