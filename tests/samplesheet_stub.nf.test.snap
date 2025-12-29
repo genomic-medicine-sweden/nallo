@@ -342,9 +342,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T14:14:00.822418521"
+        "timestamp": "2025-12-29T11:22:22.255821863"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -1093,9 +1093,9 @@
                 "qc/peddy/HG002_Revio/HG002_Revio.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.gtf",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.log",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.tsv",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -1148,7 +1148,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-22T17:05:49.637810078"
+        "timestamp": "2025-12-29T11:23:13.96710061"
     },
     "Test alignment without genome assembly": {
         "content": [

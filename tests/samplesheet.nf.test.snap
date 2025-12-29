@@ -502,9 +502,9 @@
                 "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.gtf",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.log",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.tsv",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -605,9 +605,9 @@
                 "FAM.sex_check.csv:md5,763950d0eff48b64da29a6a883d6b11c",
                 "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_Revio_stats.gtf:md5,1ec42859dc0bbc91ff9abacb8f9d6981",
-                "HG002_Revio_stats.log:md5,f3e64bc7f4d26e8e9efa72fca0bb248d",
-                "HG002_Revio_stats.tsv:md5,07de1ed637d51e97a13b0bbfd1115c73",
+                "HG002_Revio_whatshap_stats.gtf.gz:md5,1ec42859dc0bbc91ff9abacb8f9d6981",
+                "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,da0533a8ee3319413270dd3c65d6ea7d",
+                "HG002_Revio_whatshap_stats.tsv:md5,07de1ed637d51e97a13b0bbfd1115c73",
                 "HG002_Revio_sambamba_depth.bed:md5,d6a27c9870da274f20c9de584551608c",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
@@ -679,6 +679,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-22T16:56:03.310743522"
+        "timestamp": "2025-12-29T11:11:22.351826441"
     }
 }
