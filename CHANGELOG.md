@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.1 - [2026-01-07]
+
+### `Fixed`
+
+- [#848](https://github.com/genomic-medicine-sweden/nallo/pull/848) - Updated genmod to 3.10.2 to avoid KeyErrors in genmod compound
+
+### Module updates
+
+| Tool   | Old version | New version |
+| ------ | ----------- | ----------- |
+| genmod | 3.10.1      | 3.10.2      |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.9.0 - [2025-12-19]
 
 ### `Added`
