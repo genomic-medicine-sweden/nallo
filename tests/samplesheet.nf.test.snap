@@ -99,16 +99,16 @@
                     "fastqc": "0.12.1"
                 },
                 "GENMOD_ANNOTATE": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_COMPOUND": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_MODELS": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_SCORE": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GFASTATS": {
                     "gfastats": "1.3.10"
@@ -266,7 +266,7 @@
                     "tabix": 1.22
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0"
+                    "genomic-medicine-sweden/nallo": "v0.9.1"
                 }
             },
             [
@@ -680,6 +680,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T14:05:36.955408732"
+        "timestamp": "2025-12-30T15:18:30.758777055"
     }
 }
