@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.9.1 - [2026-01-05]
 
-### `Fixed`
+### `Changed`
 
 - [#848](https://github.com/genomic-medicine-sweden/nallo/pull/848) - Updated genmod to 3.10.2 to avoid KeyErrors in genmod compound
 
