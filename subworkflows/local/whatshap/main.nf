@@ -25,9 +25,9 @@ workflow WHATSHAP {
         .set { ch_snv_vcf_tbi }
 
     fasta
-       .map { meta, fasta_path -> [meta, fasta_path] }
-       .join(fai, failOnMismatch: true, failOnDuplicate: true)
-       .set { ch_fasta_fai }
+        .map { meta, fasta_path -> [meta, fasta_path] }
+        .join(fai, failOnMismatch: true, failOnDuplicate: true)
+        .set { ch_fasta_fai }
 
     WHATSHAP_PHASE(
         ch_snv_vcf_tbi,
@@ -65,8 +65,8 @@ workflow WHATSHAP {
         .set { ch_bam_bai_haplotagged }
 
     emit:
-    phased_family_snvs = WHATSHAP_PHASE.out.vcf     // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs     = WHATSHAP_PHASE.out.vcf // channel: [ val(meta), path(vcf) ]
     phased_family_snvs_tbi = WHATSHAP_PHASE.out.tbi // channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai = ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
-    versions = ch_versions                          // channel: [ path(versions.yml) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged // channel: [ val(meta), path(bam), path(bai) ]
+    versions               = ch_versions            // channel: [ path(versions.yml) ]
 }
