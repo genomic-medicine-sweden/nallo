@@ -1,6 +1,6 @@
 include { SAMTOOLS_INDEX    } from '../../../modules/nf-core/samtools/index/main'
 include { WHATSHAP_HAPLOTAG } from '../../../modules/local/whatshap/haplotag/main'
-include { WHATSHAP_PHASE    } from '../../../modules/local/whatshap/phase/main'
+include { WHATSHAP_PHASE    } from '../../../modules/nf-core/whatshap/phase/main'
 
 workflow WHATSHAP {
     take:
