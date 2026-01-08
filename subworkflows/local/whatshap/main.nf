@@ -5,7 +5,7 @@ include { WHATSHAP_PHASE    } from '../../../modules/nf-core/whatshap/phase/main
 workflow WHATSHAP {
     take:
     ch_snv_vcf       // channel: [ val(meta), path(vcf) ]
-    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
+    ch_snv_index // channel: [ val(meta), path(tbi) ]
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
@@ -21,7 +21,7 @@ workflow WHATSHAP {
 
     ch_snv_vcf
         .map { meta, vcf -> [[id: meta.id], vcf] }
-        .join(ch_snv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
+        .join(ch_snv_index, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_snv_vcf_tbi }
 
     fasta
