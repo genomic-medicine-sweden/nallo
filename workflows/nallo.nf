@@ -433,7 +433,6 @@ workflow NALLO {
                 ch_gvcfs_to_concat_per_sample,
                 params.gens_baf_positions,
                 params.gens_panel_of_normals,
-                params.gens_use_pon,
             )
             ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }

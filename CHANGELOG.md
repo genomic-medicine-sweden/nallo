@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--skip_prepare_gens_input` |
 |               | `--gens_baf_positions`      |
 |               | `--gens_panel_of_normals`   |
-|               | `--gens_use_pon`            |
 
 ### Module updates
 
