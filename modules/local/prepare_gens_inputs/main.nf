@@ -11,7 +11,7 @@ process PREPAREGENSINPUTDATA {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'oras://community.wave.seqera.io/library/pip_gens-input-data-tools:97f213f547c014d1':
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/90/902de3e3c7bf48ca1ece3dfc74eec40431a264c9ca50c182910702e1518fe265/data':
         'community.wave.seqera.io/library/pip_gens-input-data-tools:ad7b7f1a90b0d4ca' }"
 
     input:
