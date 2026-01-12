@@ -25,7 +25,7 @@ process PREPAREGENSINPUTDATA {
     tuple val(meta), path("*.cov.bed.gz.tbi") , emit: cov_tbi
     tuple val(meta), path("*.baf.bed.gz")     , emit: baf_gz
     tuple val(meta), path("*.baf.bed.gz.tbi") , emit: baf_tbi
-    path "versions.yml"                       , emit: versions
+    path "versions.yml"                       , emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -48,21 +48,22 @@ process PREPAREGENSINPUTDATA {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(new_gens_command.py --version)
+        preparegensinputdata: \$(new_gens_command.py --version | sed 's/^v//')
     END_VERSIONS
     """
+    // FIXME: Check if the version is clean (i.e. trim v)
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.cov.bed.gz
+    echo "" | gzip > ${prefix}.cov.bed.gz
     touch ${prefix}.cov.bed.gz.tbi
-    touch ${prefix}.baf.bed.gz
+    echo "" | gzip > ${prefix}.baf.bed.gz
     touch ${prefix}.baf.bed.gz.tbi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(new_gens_command.py --version)
+        preparegensinputdata: \$(new_gens_command.py --version | sed 's/^v//')
     END_VERSIONS
     """
 }
