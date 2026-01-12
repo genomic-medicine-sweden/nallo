@@ -17,7 +17,7 @@ process PREPAREGENSINPUTDATA {
     input:
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(gvcf), path(gvcf_tbi), path(read_counts_gz)
+    tuple val(meta), path(read_counts_gz), path(gvcf), path(gvcf_tbi)
     path baf_positions
 
     output:
@@ -38,7 +38,7 @@ process PREPAREGENSINPUTDATA {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    generate_gens_data.py \\
+    new_gens_command.py \\
         --coverage $read_counts_gz \\
         --gvcf $gvcf \\
         --label $prefix \\
@@ -48,7 +48,7 @@ process PREPAREGENSINPUTDATA {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(generate_gens_data.py --version)
+        preparegensinputdata: \$(new_gens_command.py --version)
     END_VERSIONS
     """
 
@@ -62,7 +62,7 @@ process PREPAREGENSINPUTDATA {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(generate_gens_data.py --version)
+        preparegensinputdata: \$(new_gens_command.py --version)
     END_VERSIONS
     """
 }
