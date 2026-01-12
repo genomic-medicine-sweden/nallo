@@ -17,8 +17,7 @@ process PREPAREGENSINPUTDATA {
     input:
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(read_counts_gz)
-    tuple val(meta2), path(gvcf)
+    tuple val(meta), path(gvcf), path(gvcf_tbi), path(read_counts_gz)
     path baf_positions
 
     output:
