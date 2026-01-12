@@ -25,7 +25,7 @@ process PREPAREGENSINPUTDATA {
     tuple val(meta), path("*.cov.bed.gz.tbi") , emit: cov_tbi
     tuple val(meta), path("*.baf.bed.gz")     , emit: baf_gz
     tuple val(meta), path("*.baf.bed.gz.tbi") , emit: baf_tbi
-    path "versions.yml"                       , emit: versions, topic: versions
+    path "versions.yml"                       , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -37,24 +37,25 @@ process PREPAREGENSINPUTDATA {
 
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def python_base = "/opt/conda/lib/python3.14/site-packages/gens_input_data_tools"
     """
-    new_gens_command.py \\
+    python3 $python_base/generate_cov_and_baf.py \\
         --coverage $read_counts_gz \\
         --gvcf $gvcf \\
         --label $prefix \\
         --baf_positions $baf_positions \\
         $args \\
-        --outdir \$PWD
+        --outdir .
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(new_gens_command.py --version | sed 's/^v//')
+        preparegensinputdata: \$(python3 $python_base/generate_cov_and_baf.py --version)
     END_VERSIONS
     """
-    // FIXME: Check if the version is clean (i.e. trim v)
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def python_base = "/opt/conda/lib/python3.14/site-packages/gens_input_data_tools"
     """
     echo "" | gzip > ${prefix}.cov.bed.gz
     touch ${prefix}.cov.bed.gz.tbi
@@ -63,7 +64,7 @@ process PREPAREGENSINPUTDATA {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        preparegensinputdata: \$(new_gens_command.py --version | sed 's/^v//')
+        preparegensinputdata: \$(python3 $python_base/generate_cov_and_baf.py --version)
     END_VERSIONS
     """
 }
