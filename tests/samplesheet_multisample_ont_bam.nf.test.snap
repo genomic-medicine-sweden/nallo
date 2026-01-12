@@ -218,9 +218,7 @@
                     "whatshap": 2.8
                 },
                 "WHATSHAP_PHASE": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
@@ -996,7 +994,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1073,13 +1071,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:24:46.761608098"
+        "timestamp": "2026-01-12T14:28:08.698513488"
     }
 }
