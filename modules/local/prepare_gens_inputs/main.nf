@@ -11,8 +11,8 @@ process PREPAREGENSINPUTDATA {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/90/902de3e3c7bf48ca1ece3dfc74eec40431a264c9ca50c182910702e1518fe265/data':
-        'community.wave.seqera.io/library/pip_gens-input-data-tools:ad7b7f1a90b0d4ca' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/29/2931cf8e5eac90d974b42ec069b4268fd7f8aefa37b46fa18eb342a4802a967d/data':
+        'community.wave.seqera.io/library/tabix_pip_gens-input-data-tools:acc3fd1b79233d2d' }"
 
     input:
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
@@ -44,6 +44,7 @@ process PREPAREGENSINPUTDATA {
         --gvcf $gvcf \\
         --label $prefix \\
         --baf_positions $baf_positions \\
+        --bgzip_tabix_output \\
         $args \\
         --outdir .
 
