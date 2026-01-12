@@ -1,6 +1,7 @@
 include { BCFTOOLS_CONCAT }               from '../../../modules/nf-core/bcftools/concat/main'
 include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
-include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
+// include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
+include { PREPAREGENSINPUTDATA }          from '../../../modules/local/prepare_gens_inputs/main'
 include { MOSDEPTH_TO_GATK_FORMAT }       from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK }                          from '../../../modules/nf-core/gawk/main'
@@ -76,14 +77,19 @@ workflow PREPARE_GENS_INPUTS {
         .join(ch_vcf_tbi)
         .set { ch_gens_input }
 
-    GENERATE_GENS_DATA(
+    PREPAREGENSINPUTDATA(
         ch_gens_input,
         baf_positions
     )
-    ch_versions = ch_versions.mix(GENERATE_GENS_DATA.out.versions)
+
+    // GENERATE_GENS_DATA(
+    //     ch_gens_input,
+    //     baf_positions
+    // )
+    ch_versions = ch_versions.mix(PREPAREGENSINPUTDATA.out.versions)
 
     emit:
-    cov_bed_tbi = GENERATE_GENS_DATA.out.cov_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
-    baf_bed_tbi = GENERATE_GENS_DATA.out.baf_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    cov_bed_tbi = PREPAREGENSINPUTDATA.out.cov_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    baf_bed_tbi = PREPAREGENSINPUTDATA.out.baf_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
     versions = ch_versions                           // channel: [ path(versions.yml) ]
 }
