@@ -56,8 +56,7 @@
                 "skip_chromograph": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
-                    "description": "Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set.",
-                    "default": false
+                    "description": "Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false."
                 },
                 "skip_peddy": {
                     "type": "boolean",

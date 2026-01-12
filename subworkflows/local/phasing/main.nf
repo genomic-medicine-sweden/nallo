@@ -15,9 +15,9 @@ workflow PHASING {
     ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
     fasta                // channel: [ val(meta), path(fasta) ]
     fai                  // channel: [ val(meta), path(fai) ]
-    phaser               //  string: Phasing tool to use
-    phase_with_svs       //    bool: Whether to include SVs in phasing (true) or not (false)
-    cram_output          //    bool: Publish alignments as CRAM (true) or BAM (false)
+    phaser               // string: Phasing tool to use
+    phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
+    cram_output          // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     ch_versions            = channel.empty()

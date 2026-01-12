@@ -15,7 +15,7 @@ Allows skipping certain parts of the pipeline
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
-| `skip_chromograph` | Skip chromograph image generation. False by default, but true if neither plot_chromograph_coverage nor plot_chromograph_autozygosity is set. | `boolean` | False |  |  |
+| `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
 | `skip_peddy` | Skip peddy | `boolean` | False |  |  |
 | `skip_sambamba_depth` | Skip sambamba depth. True unless `--sambamba_regions` is provided. | `boolean` |  |  |  |
 | `skip_phasing` | Skip phasing of variants and haplotagging of reads | `boolean` | False |  |  |

@@ -24,7 +24,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ----- | ----------- | ----------- |
 | gatk4 |             | 4.6.2.0     |
 
-## 0.9.0 - [2025-12-18]
+## 0.10.0dev - [XXXX-XX-XX]
+
+### `Added`
+
+### `Changed`
+
+- [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
+- [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
+
+### `Removed`
+
+### `Fixed`
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool | Old version | New version |
+| ---- | ----------- | ----------- |
+
+## 0.9.1 - [2026-01-05]
+
+### `Changed`
+
+- [#848](https://github.com/genomic-medicine-sweden/nallo/pull/848) - Updated genmod to 3.10.2 to avoid KeyErrors in genmod compound
+
+### Module updates
+
+| Tool   | Old version | New version |
+| ------ | ----------- | ----------- |
+| genmod | 3.10.1      | 3.10.2      |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.9.0 - [2025-12-19]
 
 ### `Added`
 
