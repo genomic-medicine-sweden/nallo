@@ -15,6 +15,9 @@ workflow PREPARE_GENS_INPUTS {
     panel_of_normals    // value:   [optional]  [ path(hd5) ]
 
     main:
+
+    print(">>> Inside prepare gens inputs")
+
     ch_versions = channel.empty()
 
     BCFTOOLS_CONCAT(
@@ -77,10 +80,16 @@ workflow PREPARE_GENS_INPUTS {
         .join(ch_vcf_tbi)
         .set { ch_gens_input }
 
+    print(">>> Before prepare gens input data")
+
     PREPAREGENSINPUTDATA(
         ch_gens_input,
         baf_positions
     )
+
+    print(">>> After prepare gens input data")
+    PREPAREGENSINPUTDATA.out.cov_gz.view()
+    PREPAREGENSINPUTDATA.out.cov_tbi.view()
 
     // GENERATE_GENS_DATA(
     //     ch_gens_input,
@@ -88,8 +97,14 @@ workflow PREPARE_GENS_INPUTS {
     // )
     ch_versions = ch_versions.mix(PREPAREGENSINPUTDATA.out.versions)
 
+    ch_cov_gz_tbi = PREPAREGENSINPUTDATA.out.cov_gz.join(PREPAREGENSINPUTDATA.out.cov_tbi)
+    ch_baf_gz_tbi = PREPAREGENSINPUTDATA.out.baf_gz.join(PREPAREGENSINPUTDATA.out.baf_tbi)
+
+    ch_cov_gz_tbi.view()
+    ch_baf_gz_tbi.view()
+
     emit:
-    cov_bed_tbi = PREPAREGENSINPUTDATA.out.cov_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
-    baf_bed_tbi = PREPAREGENSINPUTDATA.out.baf_bed_tbi // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    cov_bed_tbi = ch_cov_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    baf_bed_tbi = ch_baf_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
     versions = ch_versions                           // channel: [ path(versions.yml) ]
 }

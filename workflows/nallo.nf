@@ -419,6 +419,8 @@ workflow NALLO {
 
         if (!params.skip_prepare_gens_input) {
 
+            print(">>> Inside skip_prepare_gens_input")
+
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
                 .map { meta, gvcf, gvcf_index ->
@@ -427,6 +429,8 @@ workflow NALLO {
                 }
                 .groupTuple()
                 .set { ch_gvcfs_to_concat_per_sample }
+
+            print(">>> Before prep gens inputs")
 
             PREPARE_GENS_INPUTS(
                 ch_bam_bai,

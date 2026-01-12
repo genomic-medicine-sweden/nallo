@@ -15,6 +15,7 @@ process PREPAREGENSINPUTDATA {
         'community.wave.seqera.io/library/pip_gens-input-data-tools:ad7b7f1a90b0d4ca' }"
 
     input:
+    print(">>> In inputs for prepare gens input data")
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
     tuple val(meta), path(read_counts_gz)
