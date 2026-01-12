@@ -22,9 +22,9 @@ process PREPAREGENSINPUTDATA {
 
     output:
     tuple val(meta), path("*.cov.bed.gz")     , emit: cov_gz
-    tuple val(meta), path("*.cov.bed.gz.tbi") , emit: cov_gz_tbi
+    tuple val(meta), path("*.cov.bed.gz.tbi") , emit: cov_tbi
     tuple val(meta), path("*.baf.bed.gz")     , emit: baf_gz
-    tuple val(meta), path("*.baf.bed.gz.tbi") , emit: baf_gz_tbi
+    tuple val(meta), path("*.baf.bed.gz.tbi") , emit: baf_tbi
     path "versions.yml"                       , emit: versions
 
     when:
