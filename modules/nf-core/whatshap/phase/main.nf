@@ -4,7 +4,7 @@ process WHATSHAP_PHASE {
 
     conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://community.wave.seqera.io/library/whatshap:2.8--c3862a4b2ad0f978'
+        ? 'oras://community.wave.seqera.io/library/whatshap:2.8--c3862a4b2ad0f978'
         : 'community.wave.seqera.io/library/whatshap:2.8--7fe530bc624a3e5a'}"
 
     input:
@@ -36,13 +36,8 @@ process WHATSHAP_PHASE {
         ${vcf} \\
         ${bam}
 
-    bgzip \\
-       -@ $task.cpus \\
-       ${prefix}.vcf
-
-    tabix \\
-        -p vcf \\
-        ${prefix}.vcf.gz
+    bgzip ${prefix}.vcf
+    tabix -p vcf ${prefix}.vcf.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
