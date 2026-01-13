@@ -49,7 +49,7 @@ nextflow_workflow {
                 """
             }
         }
-    }
+}
 
     test ("1 sample") {
         when {
@@ -61,12 +61,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = channel.of([
+                    [ id: 'FAM' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                ])
+                input[2] = channel.of([
                     [ id : 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[2] = GUNZIP.out.gunzip
-                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[3] = GUNZIP.out.gunzip
+                input[4] = SAMTOOLS_FAIDX.out.fai
                 """
             }
         }
@@ -84,7 +88,8 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = channel.of(
+                input[1] = BCFTOOLS_MERGE.out.index
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -96,8 +101,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[2] = GUNZIP.out.gunzip
-                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[3] = GUNZIP.out.gunzip
+                input[4] = SAMTOOLS_FAIDX.out.fai
                 """
             }
         }
@@ -114,8 +119,9 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [ meta + [ id: 'HG002' ], vcf ] }
-                input[1] = channel.of(
+                input[0] = BCFTOOLS_MERGE.out.vcf
+                input[1] = BCFTOOLS_MERGE.out.index
+                input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'HG002' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
@@ -127,8 +133,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[2] = GUNZIP.out.gunzip
-                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[3] = GUNZIP.out.gunzip
+                input[4] = SAMTOOLS_FAIDX.out.fai
                 """
             }
         }
