@@ -390,7 +390,7 @@
                     },
                     "whatshap/phase": {
                         "branch": "master",
-                        "git_sha": "b505bd8278f5a8d10fd6b1c11c17468420039929",
+                        "git_sha": "235626655327b9624300a99cc1751b118a4fd027",
                         "installed_by": ["modules"]
                     },
                     "whatshap/stats": {
