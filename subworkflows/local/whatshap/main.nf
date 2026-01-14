@@ -36,7 +36,6 @@ workflow WHATSHAP {
         ch_bam_bai_grouped,
         ch_fasta_fai,
     )
-    ch_versions = ch_versions.mix(WHATSHAP_PHASE.out.versions)
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.
     // Using combine instead of join because the VCFs are family-level, not sample-level
