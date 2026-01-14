@@ -30,7 +30,6 @@
                 ],
                 "3": [
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ],
                 "haplotagged_bam_bai": [
@@ -61,7 +60,6 @@
                 ],
                 "versions": [
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ]
             }
@@ -70,7 +68,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-12T15:50:42.335389779"
+        "timestamp": "2026-01-14T09:58:10.778943332"
     },
     "2 samples": {
         "content": [
@@ -112,7 +110,6 @@
                 "3": [
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ],
@@ -153,7 +150,6 @@
                 "versions": [
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
                     "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
                     "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ]
@@ -163,7 +159,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-13T10:07:56.911577593"
+        "timestamp": "2026-01-14T09:58:23.355823129"
     },
     "2 samples - family ID equal to sample ID": {
         "content": [
@@ -188,7 +184,7 @@
                     
                 ],
                 "3": [
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     
@@ -210,7 +206,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,37062f0a2c9502caebfc28c8912a7069"
+                    
                 ]
             }
         ],
@@ -218,6 +214,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-13T10:08:06.580054644"
+        "timestamp": "2026-01-14T09:58:33.060460771"
     }
 }
