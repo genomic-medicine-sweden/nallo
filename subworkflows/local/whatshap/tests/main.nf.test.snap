@@ -167,46 +167,82 @@
                 "0": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
-                        "FAM_phased.vcf.gz:md5,de9d78290b6361adfbd718da292348a7"
+                        "HG002_phased.vcf.gz:md5,8bafec680bc3f7b47e5f611fe572aecf"
                     ]
                 ],
                 "1": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
-                        "FAM_phased.vcf.gz.tbi:md5,3781bbe9e56f192bca149c57de1bc190"
+                        "HG002_phased.vcf.gz.tbi:md5,7b73a4b9b3577ed2cf168f21fc19d982"
                     ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_haplotagged.bam:md5,48693687bac5acae8e42c6d877b07805",
+                        "HG002_haplotagged.bam.bai:md5,39732abaf0bf91a9234a7d774d1b415f"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002"
+                        },
+                        "HG003_haplotagged.bam:md5,01f9b49d5e915c698e93ed0af1c99efe",
+                        "HG003_haplotagged.bam.bai:md5,e1dcacd3f513ccde757d1e6a8b6ca3e7"
+                    ]
                 ],
                 "3": [
-                    
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ],
                 "haplotagged_bam_bai": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_haplotagged.bam:md5,48693687bac5acae8e42c6d877b07805",
+                        "HG002_haplotagged.bam.bai:md5,39732abaf0bf91a9234a7d774d1b415f"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "HG002"
+                        },
+                        "HG003_haplotagged.bam:md5,01f9b49d5e915c698e93ed0af1c99efe",
+                        "HG003_haplotagged.bam.bai:md5,e1dcacd3f513ccde757d1e6a8b6ca3e7"
+                    ]
                 ],
                 "phased_family_snvs": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
-                        "FAM_phased.vcf.gz:md5,de9d78290b6361adfbd718da292348a7"
+                        "HG002_phased.vcf.gz:md5,8bafec680bc3f7b47e5f611fe572aecf"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
-                        "FAM_phased.vcf.gz.tbi:md5,3781bbe9e56f192bca149c57de1bc190"
+                        "HG002_phased.vcf.gz.tbi:md5,7b73a4b9b3577ed2cf168f21fc19d982"
                     ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,2eb95b0ff2fe985a87f6dcdc8fc5f1b7",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1",
+                    "versions.yml:md5,49043cb4c23c7753203300ff09197fb1"
                 ]
             }
         ],
@@ -214,6 +250,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-14T09:58:33.060460771"
+        "timestamp": "2026-01-14T15:49:31.46692782"
     }
 }

@@ -119,8 +119,8 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = BCFTOOLS_MERGE.out.index
+                input[0] = BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [[id: 'HG002'], vcf] }
+                input[1] = BCFTOOLS_MERGE.out.index.map { meta, vcf -> [[id: 'HG002'], vcf] }
                 input[2] = channel.of(
                     [
                         [ id : 'HG002', family_id: 'HG002' ],
