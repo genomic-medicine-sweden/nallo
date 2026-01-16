@@ -32,7 +32,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
         -r ${fasta} \\
         -i ${bam} \\
         -m ${model_bundle} \\
-        --bed ${diploid_intervals_bed}' \\
+        --bed ${diploid_intervals_bed} \\
         ${haploid_bed_arg} \\
         --gvcf \\
         --skip_mosdepth \\
