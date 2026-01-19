@@ -97,8 +97,8 @@ workflow CALL_SNVS {
 
         ch_bam_bai
             .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
-            .map { meta, bam, bai, _diploid_meta, bed ->
-                [meta, bam, bai, bed, []]
+            .map { meta, bam, bai, bed ->
+                [ meta, bam, bai, bed, [] ]
             }
             .set {
                 ch_dnascope_in
