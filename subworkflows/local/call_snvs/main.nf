@@ -110,7 +110,7 @@ workflow CALL_SNVS {
         CREATE_HAPLOID_REGIONS_BED.out.intersect
             .map {
                 meta, bed ->
-                if(bed && bed.size > 0) {
+                if(bed && bed.size() > 0) {
                     [ meta, bed ]
                 } else {
                     [ meta, [] ]
