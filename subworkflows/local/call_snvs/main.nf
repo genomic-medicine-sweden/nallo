@@ -53,34 +53,40 @@ workflow CALL_SNVS {
             .set { ch_bam_bai }
 
         ch_bam_bai_bed
+            .map { meta, _bam, _bai, bed ->
+                [ meta, bed ]
+            }
             .branch {
-            meta, _bam, _bai, _bed ->
-            male: meta.sex == 1
-            female: meta.sex == 2
+                meta, _bam, _bai, _bed ->
+                male: meta.sex == 1
+                female: meta.sex == 2
             }
-            .set { ch_bam_bai_bed_branched_by_sex }
+            .set { ch_bed }
 
 
-        ch_bam_bai_bed_branched_by_sex
-            .male
-            .map { meta, _bam, _bai, intervals_bed ->
-                [meta, intervals_bed ]
-            }
-            .combine {
-                ch_sentieon_male_diploid_bed.map{ _meta, diploid_intervals_bed ->
-                    [ diploid_intervals_bed ] }
-            }
+        ch_sentieon_male_diploid_bed
+            .map { _meta, male_diploid_call_regions -> [ male_diploid_call_regions ] }
+            .combine(ch_bed.male)
             .set { ch_male_diploid_intersect_in }
 
+        ch_sentieon_female_diploid_bed
+            .map { _meta, female_diploid_call_regions -> [ female_diploid_call_regions ] }
+            .combine(ch_bed.female)
+            .set { ch_female_diploid_intersect_in }
+
+        ch_male_diploid_intersect_in
+            .mix(ch_female_diploid_intersect_in)
+            .set { ch_diploid_intersect_in }
+
         CREATE_DIPLOID_REGIONS_BED(
-            ch_male_diploid_intersect_in,
+            ch_diploid_intersect_in,
             [[], []],
         )
+        ch_versions = ch_versions.mix(CREATE_DIPLOID_REGIONS_BED.out.versions)
 
         ch_bam_bai
             .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
-            .map {
-                meta, bam, bai, bed ->
+            .map { meta, bam, bai, _diploid_meta, bed ->
                 [meta, bam, bai, bed, []]
             }
             .set {
