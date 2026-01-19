@@ -95,28 +95,28 @@ workflow CALL_SNVS {
         )
         ch_versions = ch_versions.mix(CREATE_DIPLOID_REGIONS_BED.out.versions)
 
-        // ch_bam_bai
-        //     .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
-        //     .map { meta, bam, bai, _diploid_meta, bed ->
-        //         [meta, bam, bai, bed, []]
-        //     }
-        //     .set {
-        //         ch_dnascope_in
-        //     }
+        ch_bam_bai
+            .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
+            .map { meta, bam, bai, _diploid_meta, bed ->
+                [meta, bam, bai, bed, []]
+            }
+            .set {
+                ch_dnascope_in
+            }
 
-        // DNASCOPE_LONGREAD(
-        //     ch_dnascope_in,
-        //     ch_fasta,
-        //     ch_fai,
-        //     ch_sentieon_model_bundle,
-        //     sentieon_tech,
-        // )
-        // ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
+        DNASCOPE_LONGREAD(
+            ch_dnascope_in,
+            ch_fasta,
+            ch_fai,
+            ch_sentieon_model_bundle,
+            sentieon_tech,
+        )
+        ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
 
-        // ch_vcf        = DNASCOPE_LONGREAD.out.vcf
-        // ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
-        // ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
-        // ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
+        ch_vcf        = DNASCOPE_LONGREAD.out.vcf
+        ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
+        ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
+        ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }
 
 
