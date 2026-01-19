@@ -105,6 +105,7 @@ jobs:
           swap-storage: false
 
       - name: Run nf-test
+        if: matrix.profile != ''
         uses: ./.github/actions/nf-test
         env:
           NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
