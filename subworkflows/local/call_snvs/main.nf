@@ -95,11 +95,35 @@ workflow CALL_SNVS {
         )
         ch_versions = ch_versions.mix(CREATE_DIPLOID_REGIONS_BED.out.versions)
 
+
+        ch_sentieon_male_haploid_bed
+            .map { _meta, male_haploid_call_regions ->  male_haploid_call_regions }
+            .combine(ch_bed.male)
+            .map { male_diploid_call_regions, meta, call_regions -> [meta, call_regions, male_diploid_call_regions] }
+            .set { ch_haploid_intersect_in }
+
+        CREATE_HAPLOID_REGIONS_BED(
+            ch_haploid_intersect_in,
+            [[], []],
+        )
+
+        CREATE_HAPLOID_REGIONS_BED.out.intersect
+            .map {
+                meta, bed ->
+                if(bed && bed.size > 0) {
+                    [ meta, bed ]
+                } else {
+                    [ meta, [] ]
+                }
+            }
+            .mix(
+                ch_bed.female.map{ meta, _bed -> [meta, []] }
+            )
+            .set { ch_haploid_regions_out }
+
         ch_bam_bai
             .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
-            .map { meta, bam, bai, bed ->
-                [ meta, bam, bai, bed, [] ]
-            }
+            .join(ch_haploid_regions_out)
             .set {
                 ch_dnascope_in
             }
