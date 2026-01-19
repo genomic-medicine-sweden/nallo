@@ -64,6 +64,7 @@ workflow CALL_SNVS {
             .set { ch_bed }
 
 
+        ch_bed.male.view()
         ch_sentieon_male_diploid_bed.view()
 
         ch_sentieon_male_diploid_bed
