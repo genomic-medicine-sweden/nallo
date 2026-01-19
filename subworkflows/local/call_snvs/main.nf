@@ -57,7 +57,7 @@ workflow CALL_SNVS {
                 [ meta, bed ]
             }
             .branch {
-                meta, _bam, _bai, _bed ->
+                meta, _bed ->
                 male: meta.sex == 1
                 female: meta.sex == 2
             }
