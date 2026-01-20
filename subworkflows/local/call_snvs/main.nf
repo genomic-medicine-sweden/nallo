@@ -96,6 +96,7 @@ workflow CALL_SNVS {
             ch_haploid_intersect_in,
             [[], []],
         )
+        ch_versions = ch_versions.mix(CREATE_HAPLOID_REGIONS_BED.out.versions)
 
         CREATE_HAPLOID_REGIONS_BED.out.intersect
             .map {
