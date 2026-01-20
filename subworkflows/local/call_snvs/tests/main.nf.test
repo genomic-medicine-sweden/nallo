@@ -25,7 +25,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -67,7 +72,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -125,7 +135,12 @@ nextflow_workflow {
                     [ id:'par_bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -161,7 +176,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -198,7 +218,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -243,7 +268,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -300,7 +330,12 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
@@ -360,7 +395,12 @@ nextflow_workflow {
                     [ id:'par_bed'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ]
-                input[4] = "deepvariant"
+                input[4] = [[],[]]
+                input[5] = [[],[]]
+                input[6] = [[],[]]
+                input[7] = [[],[]]
+                input[8] = "deepvariant"
+                input[9] = "HiFi"
                 """
             }
         }
