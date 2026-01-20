@@ -66,17 +66,17 @@ workflow CALL_SNVS {
         ch_sentieon_male_diploid_bed
             .map { _meta, male_diploid_call_regions ->  male_diploid_call_regions }
             .combine(ch_bed.male)
-            .map { male_diploid_call_regions, meta, call_regions -> [meta, call_regions, male_diploid_call_regions] }
+            .map { male_diploid_call_regions, meta, call_regions -> [ meta, call_regions, male_diploid_call_regions ] }
             .set { ch_male_diploid_intersect_in }
 
-        // ch_sentieon_female_diploid_bed
-        //     .map { _meta, female_diploid_call_regions -> female_diploid_call_regions }
-        //     .combine(ch_bed.female)
-        //     .map { female_diploid_call_regions, meta, call_regions -> [meta, call_regions, female_diploid_call_regions] }
-        //     .set { ch_female_diploid_intersect_in }
+        ch_sentieon_female_diploid_bed
+            .map { _meta, female_diploid_call_regions -> female_diploid_call_regions }
+            .combine(ch_bed.female)
+            .map { female_diploid_call_regions, meta, call_regions -> [ meta, call_regions, female_diploid_call_regions ] }
+            .set { ch_female_diploid_intersect_in }
 
         ch_male_diploid_intersect_in
-            // .mix(ch_female_diploid_intersect_in)
+            .mix(ch_female_diploid_intersect_in)
             .set { ch_diploid_intersect_in }
 
         CREATE_DIPLOID_REGIONS_BED(
