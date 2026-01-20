@@ -63,21 +63,11 @@ workflow CALL_SNVS {
             }
             .set { ch_bed }
 
-
-        ch_bed.male.view()
-        ch_sentieon_male_diploid_bed.view()
-
         ch_sentieon_male_diploid_bed
             .map { _meta, male_diploid_call_regions ->  male_diploid_call_regions }
             .combine(ch_bed.male)
-            .set { ch_foo }
-
-        ch_foo.view()
-
-        ch_foo.map { male_diploid_call_regions, meta, call_regions -> [meta, call_regions, male_diploid_call_regions] }
+            .map { male_diploid_call_regions, meta, call_regions -> [meta, call_regions, male_diploid_call_regions] }
             .set { ch_male_diploid_intersect_in }
-
-        ch_male_diploid_intersect_in.view()
 
         // ch_sentieon_female_diploid_bed
         //     .map { _meta, female_diploid_call_regions -> female_diploid_call_regions }
