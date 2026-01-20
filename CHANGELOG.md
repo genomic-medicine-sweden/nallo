@@ -133,11 +133,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                              | `--extra_methbat_profile_options`           |
 |                              | `--methbat_regions`                         |
 |                              | `--strdrop_training_set_json`               |
-|               | `--sentieon_model_bundle`                   |
-|               | `--sentieon_tech`                           |
-|               | `--sentieon_male_haploid_bed`               |
-|               | `--sentieon_male_diploid_bed`               |
-|               | `--sentieon_female_diploid_bed`             |
+|                              | `--sentieon_model_bundle`                   |
+|                              | `--sentieon_tech`                           |
+|                              | `--sentieon_male_haploid_bed`               |
+|                              | `--sentieon_male_diploid_bed`               |
+|                              | `--sentieon_female_diploid_bed`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -146,20 +146,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                             | Old version | New version |
-| -------------------------------- | ----------- | ----------- |
-| chromograph                      |             | 1.3.1       |
-| bcftools/concat                  | 1.22        | 1.21        |
-| bcftools/roh                     |             | 1.22        |
-| rhocall/viz                      |             | 0.5.1       |
-| tiddit                           |             | 3.9.3       |
-| methbat/profile                  |             | 0.16.1      |
-| pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
-| strdrop                          |             | 0.3.1       |
-| stranger                         | 0.9.5       | 0.10.0      |
-| trgt                             | 4.0.0       | 5.0.0       |
-| sentieon/gvcftyper |             | 202503.01   |
-| sentieon/dnascope-longread |             | 1.4.0-lrRPA-fix |
+| Tool                             | Old version | New version     |
+| -------------------------------- | ----------- | --------------- |
+| chromograph                      |             | 1.3.1           |
+| bcftools/concat                  | 1.22        | 1.21            |
+| bcftools/roh                     |             | 1.22            |
+| rhocall/viz                      |             | 0.5.1           |
+| tiddit                           |             | 3.9.3           |
+| methbat/profile                  |             | 0.16.1          |
+| pbcpgtools/alignedbamtocpgscores |             | 3.0.0           |
+| strdrop                          |             | 0.3.1           |
+| stranger                         | 0.9.5       | 0.10.0          |
+| trgt                             | 4.0.0       | 5.0.0           |
+| sentieon/gvcftyper               |             | 202503.01       |
+| sentieon/dnascope-longread       |             | 1.4.0-lrRPA-fix |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
