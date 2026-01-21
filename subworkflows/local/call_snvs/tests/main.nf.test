@@ -438,22 +438,22 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = [[],[]]
-                input[4] = [
+                input[4] = channel.of([
                     [ id:'sentieon_model_bundle' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
-                ]
-                input[5] = [
+                ])
+                input[5] = channel.of([
                     [ id:'female_diploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
-                ]
-                input[6] = [
+                ])
+                input[6] = channel.of([
                     [ id:'male_diploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
-                ]
-                input[7] = [
+                ])
+                input[7] = channel.of([
                     [ id:'male_haploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
-                ]
+                ])
                 input[8] = "sentieon"
                 input[9] = "HiFi"
                 """
