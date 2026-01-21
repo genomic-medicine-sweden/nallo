@@ -418,6 +418,8 @@ nextflow_workflow {
 
     test("1 sample male - sentieon diploid and haploid beds -stub") {
 
+        tag "sentieon"
+
         options "-stub"
 
         when {
