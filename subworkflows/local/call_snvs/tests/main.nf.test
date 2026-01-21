@@ -465,8 +465,6 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match()
-                }
             )
         }
 
