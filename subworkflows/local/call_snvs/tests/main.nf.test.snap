@@ -651,6 +651,123 @@
         },
         "timestamp": "2025-08-13T13:56:31.758994204"
     },
+    "1 sample male - sentieon diploid and haploid beds -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.vcf.gz"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.g.vcf.gz"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,64912c4623b3db3535f0e5186c49cdd4",
+                    "versions.yml:md5,cda336247c5df15aebbee75a2acdb80a",
+                    "versions.yml:md5,e31b28c1c5a2b317006861995c06af2e"
+                ],
+                "gvcf": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.g.vcf.gz"
+                    ]
+                ],
+                "gvcf_index": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "fam1",
+                            "single_end": false,
+                            "num_intervals": 1,
+                            "sex": 1
+                        },
+                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.vcf.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,64912c4623b3db3535f0e5186c49cdd4",
+                    "versions.yml:md5,cda336247c5df15aebbee75a2acdb80a",
+                    "versions.yml:md5,e31b28c1c5a2b317006861995c06af2e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-21T14:18:03.696905338"
+    },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
             {

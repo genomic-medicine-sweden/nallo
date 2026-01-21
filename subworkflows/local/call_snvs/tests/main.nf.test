@@ -442,7 +442,7 @@ nextflow_workflow {
                 input[3] = [[],[]]
                 input[4] = channel.of([
                     [ id:'sentieon_model_bundle' ],
-                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
                 ])
                 input[5] = channel.of([
                     [ id:'female_diploid_bed' ],
