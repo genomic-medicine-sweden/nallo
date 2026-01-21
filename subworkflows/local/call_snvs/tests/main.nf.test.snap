@@ -42,9 +42,7 @@
                         "test_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ],
+                "4": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"],
                 "gvcf": [
                     [
                         {
@@ -85,9 +83,7 @@
                         "test_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ]
+                "versions": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"]
             }
         ],
         "meta": {
@@ -597,9 +593,7 @@
                         "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ],
+                "4": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"],
                 "gvcf": [
                     [
                         {
@@ -640,9 +634,7 @@
                         "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ]
+                "versions": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"]
             }
         ],
         "meta": {
@@ -663,7 +655,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.vcf.gz"
+                        "test.vcf.gz"
                     ]
                 ],
                 "1": [
@@ -687,7 +679,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.g.vcf.gz"
+                        "test.g.vcf.gz"
                     ]
                 ],
                 "3": [
@@ -716,7 +708,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.g.vcf.gz"
+                        "test.g.vcf.gz"
                     ]
                 ],
                 "gvcf_index": [
@@ -752,7 +744,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "/data/bnf/dev/alkc/proj/nallo/.nf-test/tests/edb7168d3921ccfa8a41b31d286424a1/work/44/855ae52276d93d112eaf1b0ddb044c/test.vcf.gz"
+                        "test.vcf.gz"
                     ]
                 ],
                 "versions": [
@@ -974,9 +966,7 @@
                         "test_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ],
+                "4": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"],
                 "gvcf": [
                     [
                         {
@@ -1017,9 +1007,7 @@
                         "test_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
-                ]
+                "versions": ["versions.yml:md5,25dd934fccabb2b990ac1d8905603348"]
             }
         ],
         "meta": {
