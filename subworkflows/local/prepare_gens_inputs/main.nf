@@ -9,7 +9,7 @@ include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtool
 workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcfs            // channel: [mandatory] [ val(meta), [path(gvcfs)], [path(tbis)] ]
+    ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
     baf_positions       // value:   [mandatory] [ path(gz) ]
     panel_of_normals    // value:   [optional]  [ path(hd5) ]
 
@@ -19,14 +19,14 @@ workflow PREPARE_GENS_INPUTS {
 
     ch_versions = channel.empty()
 
-    BCFTOOLS_CONCAT(
-        ch_gvcfs
-    )
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+    // BCFTOOLS_CONCAT(
+    //     ch_gvcfs
+    // )
+    // ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
-    BCFTOOLS_CONCAT.out.vcf
-        .join(BCFTOOLS_CONCAT.out.tbi)
-        .set { ch_vcf_tbi }
+    // BCFTOOLS_CONCAT.out.vcf
+    //     .join(BCFTOOLS_CONCAT.out.tbi)
+    //     .set { ch_vcf_tbi }
 
     ch_bam
         .map { meta, bam, bai -> tuple(meta, bam, bai, []) }
@@ -76,7 +76,7 @@ workflow PREPARE_GENS_INPUTS {
         .set { ch_cov }
 
     ch_cov
-        .join(ch_vcf_tbi)
+        .join(ch_gvcf)
         .set { ch_gens_input }
 
     print(">>> Before prepare gens input data")
