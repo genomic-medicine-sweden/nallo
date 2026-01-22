@@ -14,7 +14,6 @@ workflow VCF_CONCAT_SORT_VARIANTS {
     BCFTOOLS_CONCAT(
         ch_vcfs_tbis
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
     BCFTOOLS_SORT(
         BCFTOOLS_CONCAT.out.vcf

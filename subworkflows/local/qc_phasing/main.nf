@@ -27,7 +27,6 @@ workflow QC_PHASING {
             .set { ch_bcftools_concat_in }
 
         BCFTOOLS_CONCAT(ch_bcftools_concat_in).vcf.set { ch_phased_vcf }
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
     }
     else {
         ch_phased_family_snvs.set { ch_phased_vcf }
