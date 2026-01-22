@@ -63,7 +63,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     BCFTOOLS_SORT(
         ADD_FOUND_IN_TAG.out.vcf
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
     BCFTOOLS_SORT.out.vcf

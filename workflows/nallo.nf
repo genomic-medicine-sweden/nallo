@@ -637,7 +637,6 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS (
             ch_concat_sort_annotated_snvs_input
         )
-        ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
 
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_input
@@ -707,7 +706,6 @@ workflow NALLO {
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs
         )
-        ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
         RANK_VARIANTS_SNV.out.vcf
             .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -727,7 +725,6 @@ workflow NALLO {
         CONCAT_SORT_RANKED_SNVS (
             ch_concat_sort_input
         )
-        ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
 
     }
 
@@ -825,7 +822,6 @@ workflow NALLO {
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs
         )
-        ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
     //
