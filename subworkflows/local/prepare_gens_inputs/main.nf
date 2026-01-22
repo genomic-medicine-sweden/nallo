@@ -43,7 +43,9 @@ workflow PREPARE_GENS_INPUTS {
         .set { ch_mosdepth_to_gatk_in }
 
     MOSDEPTH_GATK_FORMAT(
-        ch_mosdepth_to_gatk_in
+        ch_mosdepth_to_gatk_in,
+        [],
+        false
     )
 
     MOSDEPTH_GATK_FORMAT.out.output
