@@ -57,7 +57,6 @@ workflow CALL_PARALOGS {
         [],
         []
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     // Create rename file for bcftools reheader, e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1
     CREATE_SAMPLES_HAPLOTYPES_FILE (

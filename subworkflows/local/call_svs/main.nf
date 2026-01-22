@@ -236,7 +236,6 @@ workflow CALL_SVS {
         [],
         []
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
