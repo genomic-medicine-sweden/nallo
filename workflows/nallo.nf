@@ -660,7 +660,6 @@ workflow NALLO {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_CHROMOGRAPH.out.versions)
     }
 
     if(!params.skip_chromograph) {

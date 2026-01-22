@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
 - [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
+- [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
+- [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-schema to 2.6.1
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 
 ### `Removed`
