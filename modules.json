@@ -195,12 +195,12 @@
                     },
                     "modkit/bedmethyltobigwig": {
                         "branch": "master",
-                        "git_sha": "f7ce6a825ab399196389a3a5222cdebdd5901be4",
+                        "git_sha": "3d81317a30d1016b533982d6b84df07713ae520a",
                         "installed_by": ["modules"]
                     },
                     "modkit/pileup": {
                         "branch": "master",
-                        "git_sha": "f7ce6a825ab399196389a3a5222cdebdd5901be4",
+                        "git_sha": "3d81317a30d1016b533982d6b84df07713ae520a",
                         "installed_by": ["modules"]
                     },
                     "mosdepth": {
