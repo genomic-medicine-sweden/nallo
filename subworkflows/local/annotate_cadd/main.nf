@@ -54,7 +54,6 @@ workflow ANNOTATE_CADD {
         [],
         [],
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
     CADD(BCFTOOLS_VIEW.out.vcf, ch_cadd_resources, ch_cadd_prescored_indels)
     ch_versions = ch_versions.mix(CADD.out.versions)

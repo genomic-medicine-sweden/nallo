@@ -192,7 +192,6 @@ workflow CALL_SVS {
             [],
             []
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
         ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
             .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)

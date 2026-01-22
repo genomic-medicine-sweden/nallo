@@ -44,7 +44,6 @@ workflow ANNOTATE_SNVS {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
     }
 
     //

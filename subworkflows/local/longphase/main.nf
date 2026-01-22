@@ -36,7 +36,6 @@ workflow LONGPHASE {
         ch_split_in,
         ch_family_to_samples,
     )
-    ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF.out.versions)
 
     SPLIT_MULTISAMPLE_VCF.out.split_vcf
         .branch { meta, vcf, variant_type ->

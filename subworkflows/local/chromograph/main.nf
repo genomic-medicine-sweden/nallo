@@ -58,7 +58,6 @@ workflow CHROMOGRAPH {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_UNCOMPRESS.out.versions)
 
         BCFTOOLS_VIEW_UNCOMPRESS.out.vcf
             .join(BCFTOOLS_ROH.out.roh)
