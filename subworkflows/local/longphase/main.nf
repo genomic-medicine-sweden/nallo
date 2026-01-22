@@ -78,7 +78,6 @@ workflow LONGPHASE {
 
     // Index all phased VCFs, ignoring variant types.
     BCFTOOLS_INDEX(ch_bcftools_index_in)
-    ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
     ch_bcftools_index_in
         .join(BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)

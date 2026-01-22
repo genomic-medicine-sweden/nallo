@@ -5,7 +5,6 @@ include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/mai
 include { ADD_FOUND_IN_TAG } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_SORT    } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE       } from '../../../modules/nf-core/trgt/merge/main'
-include { BCFTOOLS_INDEX   } from '../../../modules/nf-core/bcftools/index/main'
 
 workflow CALL_REPEAT_EXPANSIONS_TRGT {
     take:
