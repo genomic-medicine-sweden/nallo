@@ -51,7 +51,6 @@ workflow CHROMOGRAPH {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_ROH.out.versions)
 
         BCFTOOLS_VIEW_UNCOMPRESS(
             ch_vcf_tbi,
