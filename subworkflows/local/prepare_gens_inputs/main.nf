@@ -57,6 +57,7 @@ workflow PREPARE_GENS_INPUTS {
         .join(GAWK.out.output)
         .set { ch_mosdepth_to_gatk_in }
 
+    // FIXME: Replace this one with built-in commands?
     MOSDEPTH_TO_GATK_FORMAT(
         ch_mosdepth_to_gatk_in
     )
@@ -90,7 +91,7 @@ workflow PREPARE_GENS_INPUTS {
     PREPARECOVANDBAF.out.cov_gz.view()
     PREPARECOVANDBAF.out.cov_tbi.view()
 
-    ch_versions = ch_versions.mix(PREPARECOVANDBAF.out.versions_preparecovandbaf)
+    ch_versions = ch_versions.mix(PREPARECOVANDBAF.out.versions)
 
     ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz.join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz.join(PREPARECOVANDBAF.out.baf_tbi)
