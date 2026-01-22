@@ -25,8 +25,8 @@ nextflow_workflow {
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv")
-                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5")
+                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gnomad_hg38_chr20_90000_to_100000.0.05.txt.gz")
+                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/test_pon.hdf5")
                 """
             }
         }
@@ -56,8 +56,8 @@ nextflow_workflow {
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv")
-                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5")
+                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gnomad_hg38_chr20_90000_to_100000.0.05.txt.gz")
+                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/test_pon.hdf5")
                 """
             }
         }
