@@ -47,7 +47,6 @@ workflow ANNOTATE_CADD {
         [],
         REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
-    ch_versions = ch_versions.mix(RENAME_CHRNAMES.out.versions)
 
     BCFTOOLS_VIEW(
         RENAME_CHRNAMES.out.vcf.map { meta, vcf -> [meta, vcf, []] },
@@ -74,7 +73,6 @@ workflow ANNOTATE_CADD {
         ch_header.map { _meta, header -> header },
         CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
-    ch_versions = ch_versions.mix(ANNOTATE_INDELS.out.versions)
 
     emit:
     vcf      = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
