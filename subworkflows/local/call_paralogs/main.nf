@@ -85,7 +85,6 @@ workflow CALL_PARALOGS {
         [[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
     bam      = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam) ]

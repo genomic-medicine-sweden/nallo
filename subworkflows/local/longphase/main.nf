@@ -86,7 +86,6 @@ workflow LONGPHASE {
         .set { ch_phased_vcf }
 
     BCFTOOLS_MERGE(ch_phased_vcf, fasta, fai, [[], []])
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     BCFTOOLS_MERGE.out.vcf
         .branch { meta, vcf ->
