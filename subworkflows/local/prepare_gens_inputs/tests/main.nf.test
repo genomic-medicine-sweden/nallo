@@ -15,14 +15,13 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                def meta = [ id: 'HG002', single_end: false ]
                 input[0] = Channel.of([
-                    meta,
+                    [ id: 'HG002', single_end: false ],
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
-                    meta,
+                    [ id: 'HG002', single_end: false ],
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
@@ -47,14 +46,13 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                def meta = [ id: 'HG002', single_end: false ]
                 input[0] = Channel.of([
-                    meta,
+                    [ id: 'HG002', single_end: false ],
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
-                    meta,
+                    [ id: 'HG002', single_end: false ],
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
                     file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
