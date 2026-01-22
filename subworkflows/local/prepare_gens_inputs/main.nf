@@ -15,18 +15,7 @@ workflow PREPARE_GENS_INPUTS {
 
     main:
 
-    print(">>> Inside prepare gens inputs")
-
     ch_versions = channel.empty()
-
-    // BCFTOOLS_CONCAT(
-    //     ch_gvcfs
-    // )
-    // ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
-
-    // BCFTOOLS_CONCAT.out.vcf
-    //     .join(BCFTOOLS_CONCAT.out.tbi)
-    //     .set { ch_vcf_tbi }
 
     ch_bam
         .map { meta, bam, bai -> tuple(meta, bam, bai, []) }

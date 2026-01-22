@@ -19,6 +19,7 @@ include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subw
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS              } from '../subworkflows/local/convert_input_files'
 include { CHROMOGRAPH                                            } from '../subworkflows/local/chromograph'
 include { BAM_INFER_SEX                                          } from '../subworkflows/local/bam_infer_sex'
+include { BCFTOOLS_CONCAT                                        } from '../modules/nf-core/bcftools/concat/main'
 include { CALL_PARALOGS                                          } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subworkflows/local/call_repeat_expansions_strdust'
 include { CALL_REPEAT_EXPANSIONS_TRGT                            } from '../subworkflows/local/call_repeat_expansions_trgt'
@@ -419,8 +420,6 @@ workflow NALLO {
 
         if (!params.skip_prepare_gens_input) {
 
-            print(">>> Inside skip_prepare_gens_input")
-
             CALL_SNVS.out.gvcf
                 .join(CALL_SNVS.out.gvcf_index)
                 .map { meta, gvcf, gvcf_index ->
@@ -428,13 +427,20 @@ workflow NALLO {
                     [sample_meta, gvcf, gvcf_index]
                 }
                 .groupTuple()
-                .set { ch_gvcfs_to_concat_per_sample }
+                .set { ch_gvcfs }
 
-            print(">>> Before prep gens inputs")
+            BCFTOOLS_CONCAT(
+                ch_gvcfs
+            )
+            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
+
+            BCFTOOLS_CONCAT.out.vcf
+                .join(BCFTOOLS_CONCAT.out.tbi)
+                .set { ch_gvcf_tbi }
 
             PREPARE_GENS_INPUTS(
                 ch_bam_bai,
-                ch_gvcfs_to_concat_per_sample,
+                ch_gvcf_tbi,
                 params.gens_baf_positions,
                 params.gens_panel_of_normals,
             )
