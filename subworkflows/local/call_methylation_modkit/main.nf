@@ -48,20 +48,8 @@ workflow CALL_METHYLATION_MODKIT {
 
 def gzNotEmptyBySize(file_path) {
     File gzipFile = file_path.toFile()
-
-    // A valid gzip file is at least ~18 bytes (header + footer)
-    if (gzipFile.length() < 18) {
-        return false
-    }
-
-    gzipFile.withInputStream { inputStream ->
-        // ISIZE is stored in the last 4 bytes of the gzip file
-        long footerOffset = gzipFile.length() - 4
-        inputStream.skip(footerOffset)
-
-        def footerStream = new DataInputStream(inputStream)
-        int uncompressedSize = footerStream.readInt()
-
-        return uncompressedSize > 0
+    // A valid gzip file should be at least 20 bytes (header + footer)
+    if (gzipFile.length() > 20) {
+        return true
     }
 }

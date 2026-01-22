@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            273,
+            282,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -122,6 +122,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MODKIT_BEDMETHYLTOBIGWIG": {
+                    "modkit": "0.6.1"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.6.1"
@@ -706,14 +709,23 @@
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.depth.bw",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.maf.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp2.bw",
                 "visualization_tracks/HG002_ONT_B",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.depth.bw",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp2.bw",
                 "visualization_tracks/HG002_ONT_C",
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.depth.bw",
-                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw",
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bw"
             ],
             [
                 "HG002_ONT_A_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
@@ -906,12 +918,21 @@
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
                 "HG002_ONT_A_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
+                "HG002_ONT_A_modkit_pileup_combined.bw:md5,0980ac348080c89cc9ed4f9fa174dd42",
+                "HG002_ONT_A_modkit_pileup_hp1.bw:md5,ce13ae03382f473ed2fee04c5317c8ee",
+                "HG002_ONT_A_modkit_pileup_hp2.bw:md5,6a74230f7000aac32e6177c365761337",
                 "HG002_ONT_B_hificnv.copynum.bedgraph:md5,040f5a41c1169d4b9dff2e9c3e9cd2b3",
                 "HG002_ONT_B_hificnv.depth.bw:md5,9b459913585ea2c3070f1c0d377caa91",
                 "HG002_ONT_B_hificnv.maf.bw:md5,aca3b7e15e02c0bf4004f7d4e21e15eb",
+                "HG002_ONT_B_modkit_pileup_combined.bw:md5,4c6283447e8b3cd55b1f269b3c4c8cc6",
+                "HG002_ONT_B_modkit_pileup_hp1.bw:md5,eb8aefac383bc146c98cc4940ea767de",
+                "HG002_ONT_B_modkit_pileup_hp2.bw:md5,6f25e072e9dfb3a4f05fbcd47a41b3b9",
                 "HG002_ONT_C_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
                 "HG002_ONT_C_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
-                "HG002_ONT_C_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5"
+                "HG002_ONT_C_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
+                "HG002_ONT_C_modkit_pileup_combined.bw:md5,0980ac348080c89cc9ed4f9fa174dd42",
+                "HG002_ONT_C_modkit_pileup_hp1.bw:md5,ce13ae03382f473ed2fee04c5317c8ee",
+                "HG002_ONT_C_modkit_pileup_hp2.bw:md5,6a74230f7000aac32e6177c365761337"
             ],
             [
                 [
@@ -1024,6 +1045,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-01-22T15:18:13.416840297"
+        "timestamp": "2026-01-22T15:52:59.830072583"
     }
 }
