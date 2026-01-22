@@ -48,8 +48,8 @@ workflow CALL_METHYLATION_MODKIT {
 
 def gzNotEmptyBySize(file_path) {
     File gzipFile = file_path.toFile()
-    // A valid gzip file should be at least 20 bytes (header + footer)
-    if (gzipFile.length() > 20) {
+    // When modkit produces an emty file, its size seems to be 168 bytes
+    if (gzipFile.length() > 168) {
         return true
     }
 }

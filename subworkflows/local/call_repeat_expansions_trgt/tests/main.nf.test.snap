@@ -7,15 +7,14 @@
             [
                 "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
                 "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T10:00:26.40612154"
+        "timestamp": "2026-01-22T16:33:38.869065423"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
@@ -89,8 +88,7 @@
                 "6": [
                     "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
                     "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
                 ],
                 "family_tbi": [
                     [
@@ -161,8 +159,7 @@
                 "versions": [
                     "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
                     "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
                 ]
             }
         ],
@@ -170,6 +167,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-17T10:00:35.075461449"
+        "timestamp": "2026-01-22T16:33:48.024362133"
     }
 }
