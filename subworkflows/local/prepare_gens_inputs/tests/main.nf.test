@@ -23,8 +23,8 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     meta,
-                    [file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true)],
-                    [file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)]
+                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
+                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv"
                 input[3] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5"
@@ -55,8 +55,8 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     meta,
-                    [file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true)],
-                    [file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)]
+                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
+                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/baf_positions.tsv"
                 input[3] = "$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/panel_of_normals.hd5"
