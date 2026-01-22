@@ -251,7 +251,6 @@ workflow CALL_SVS {
         ch_bcftools_reheader_input,
         [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     // Merge the reheadered SV calls with the ones that didn't need reheadering
     BCFTOOLS_REHEADER.out.vcf
