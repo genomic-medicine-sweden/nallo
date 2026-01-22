@@ -29,7 +29,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         ch_fasta,
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
     emit:
     vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
