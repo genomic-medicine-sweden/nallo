@@ -69,10 +69,6 @@ workflow PREPARE_GENS_INPUTS {
         baf_positions
     )
 
-    print(">>> After prepare gens input data")
-    PREPARECOVANDBAF.out.cov_gz.view()
-    PREPARECOVANDBAF.out.cov_tbi.view()
-
     ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz.join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz.join(PREPARECOVANDBAF.out.baf_tbi)
 
