@@ -11,10 +11,15 @@ workflow CALL_METHYLATION_MODKIT {
     modcodes   // String or List
 
     main:
+    ch_fasta
+        .combine(ch_fai.map { _meta, fai -> fai })
+        .collect()
+        .set{ ch_fasta_fai }
+
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP(
         ch_bam_bai,
-        ch_fasta.combine(ch_fai.map { _meta, fai -> fai }),
+        ch_fasta_fai,
         ch_bed,
     )
 

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            265,
+            273,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -367,6 +367,8 @@
                 "images/chromograph/sample/HG002_ONT_C/HG002_ONT_C_chromograph_coverage_chrY.png",
                 "methylation",
                 "methylation/pileup",
+                "methylation/pileup/HG002_ONT_A",
+                "methylation/pileup/HG002_ONT_B",
                 "methylation/pileup/HG002_ONT_C",
                 "multiqc",
                 "multiqc/multiqc_data",
@@ -1022,6 +1024,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-01-22T14:41:14.745303251"
+        "timestamp": "2026-01-22T15:18:13.416840297"
     }
 }
