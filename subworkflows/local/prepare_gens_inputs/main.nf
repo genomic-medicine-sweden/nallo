@@ -64,8 +64,6 @@ workflow PREPARE_GENS_INPUTS {
         .join(ch_gvcf)
         .set { ch_gens_input }
 
-    print(">>> Before prepare gens input data")
-
     PREPARECOVANDBAF(
         ch_gens_input,
         baf_positions
@@ -75,16 +73,10 @@ workflow PREPARE_GENS_INPUTS {
     PREPARECOVANDBAF.out.cov_gz.view()
     PREPARECOVANDBAF.out.cov_tbi.view()
 
-    ch_versions = ch_versions.mix(PREPARECOVANDBAF.out.versions)
-
     ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz.join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz.join(PREPARECOVANDBAF.out.baf_tbi)
-
-    ch_cov_gz_tbi.view()
-    ch_baf_gz_tbi.view()
 
     emit:
     cov_bed_tbi = ch_cov_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
     baf_bed_tbi = ch_baf_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
-    versions = ch_versions                           // channel: [ path(versions.yml) ]
 }

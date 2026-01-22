@@ -432,7 +432,6 @@ workflow NALLO {
             BCFTOOLS_CONCAT(
                 ch_gvcfs
             )
-            ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
             BCFTOOLS_CONCAT.out.vcf
                 .join(BCFTOOLS_CONCAT.out.tbi)
@@ -444,7 +443,6 @@ workflow NALLO {
                 params.gens_baf_positions,
                 params.gens_panel_of_normals,
             )
-            ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
         }
 
         CALL_SNVS.out.vcf
