@@ -153,6 +153,11 @@
                         "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
                         "installed_by": ["modules"]
                     },
+                    "gens/preparecovandbaf": {
+                        "branch": "master",
+                        "git_sha": "8d801223814a5a728dc2d8e506df17b84bc5e88b",
+                        "installed_by": ["modules"]
+                    },
                     "gfastats": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",

@@ -1,7 +1,6 @@
 include { BCFTOOLS_CONCAT }               from '../../../modules/nf-core/bcftools/concat/main'
 include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
-// include { GENERATE_GENS_DATA }            from '../../../modules/local/generate_gens_data/main'
-include { PREPAREGENSINPUTDATA }          from '../../../modules/local/prepare_gens_inputs/main'
+include { PREPARECOVANDBAF }              from '../../../modules/nf-core/gens/preparecovandbaf/main'
 include { MOSDEPTH_TO_GATK_FORMAT }       from '../../../modules/local/mosdepth_to_gatk_format/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK }                          from '../../../modules/nf-core/gawk/main'
@@ -82,23 +81,19 @@ workflow PREPARE_GENS_INPUTS {
 
     print(">>> Before prepare gens input data")
 
-    PREPAREGENSINPUTDATA(
+    PREPARECOVANDBAF(
         ch_gens_input,
         baf_positions
     )
 
     print(">>> After prepare gens input data")
-    PREPAREGENSINPUTDATA.out.cov_gz.view()
-    PREPAREGENSINPUTDATA.out.cov_tbi.view()
+    PREPARECOVANDBAF.out.cov_gz.view()
+    PREPARECOVANDBAF.out.cov_tbi.view()
 
-    // GENERATE_GENS_DATA(
-    //     ch_gens_input,
-    //     baf_positions
-    // )
-    ch_versions = ch_versions.mix(PREPAREGENSINPUTDATA.out.versions)
+    ch_versions = ch_versions.mix(PREPARECOVANDBAF.out.versions_preparecovandbaf)
 
-    ch_cov_gz_tbi = PREPAREGENSINPUTDATA.out.cov_gz.join(PREPAREGENSINPUTDATA.out.cov_tbi)
-    ch_baf_gz_tbi = PREPAREGENSINPUTDATA.out.baf_gz.join(PREPAREGENSINPUTDATA.out.baf_tbi)
+    ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz.join(PREPARECOVANDBAF.out.cov_tbi)
+    ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz.join(PREPARECOVANDBAF.out.baf_tbi)
 
     ch_cov_gz_tbi.view()
     ch_baf_gz_tbi.view()
