@@ -129,22 +129,22 @@
                     },
                     "genmod/annotate": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
                         "installed_by": ["modules"]
                     },
                     "genmod/compound": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
                         "installed_by": ["modules"]
                     },
                     "genmod/models": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
                         "installed_by": ["modules"]
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
@@ -385,6 +385,11 @@
                         "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
+                    },
+                    "whatshap/stats": {
+                        "branch": "master",
+                        "git_sha": "bfab71f4d68c1aaff09335a3433e7b2836918b2a",
+                        "installed_by": ["modules"]
                     },
                     "yak/count": {
                         "branch": "master",

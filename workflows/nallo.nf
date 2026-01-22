@@ -856,7 +856,6 @@ workflow NALLO {
             ch_modkit_call_regions,
             params.bigwig_modcodes
         )
-        ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
     }
 
     if (!params.skip_methylation_calling && params.run_methbat) {

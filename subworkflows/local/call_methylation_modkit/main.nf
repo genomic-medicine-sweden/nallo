@@ -11,15 +11,12 @@ workflow CALL_METHYLATION_MODKIT {
     modcodes   // String or List
 
     main:
-    ch_versions = channel.empty()
-
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP(
         ch_bam_bai,
         ch_fasta.combine(ch_fai.map { _meta, fai -> fai }),
         ch_bed,
     )
-    ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
 
     MODKIT_PILEUP.out.bedgz
         .transpose()
@@ -37,13 +34,11 @@ workflow CALL_METHYLATION_MODKIT {
         ch_fai,
         modcodes
     )
-    ch_versions = ch_versions.mix(MODKIT_BEDMETHYLTOBIGWIG.out.versions)
 
     emit:
     bed      = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
     tbi      = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
     bigwig   = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
-    versions = ch_versions                     // channel: [ versions.yml ]
 }
 
 def gzNotEmptyBySize(file_path) {

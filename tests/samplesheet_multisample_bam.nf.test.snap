@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            330,
+            333,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -99,16 +99,16 @@
                     "fastqc": "0.12.1"
                 },
                 "GENMOD_ANNOTATE": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_COMPOUND": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_MODELS": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GENMOD_SCORE": {
-                    "genmod": "3.10.1"
+                    "genmod": "3.10.2"
                 },
                 "GFASTATS": {
                     "gfastats": "1.3.10"
@@ -259,12 +259,10 @@
                     "untar": 1.34
                 },
                 "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.0"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r56"
@@ -711,17 +709,17 @@
                 "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002",
-                "qc/phasing_stats/HG002/HG002_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002/HG002_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002/HG002_stats.stats.tsv",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
                 "qc/phasing_stats/HG003",
-                "qc/phasing_stats/HG003/HG003_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG003/HG003_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG003/HG003_stats.stats.tsv",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
                 "qc/phasing_stats/HG004",
-                "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG004/HG004_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG004/HG004_stats.stats.tsv",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002",
                 "qc/sambamba_depth/HG002/HG002_sambamba_depth.bed",
@@ -989,12 +987,15 @@
                 "FAM.sex_check.csv:md5,71ae6b68418d47304a18d72c571d3a7a",
                 "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
-                "HG002_stats.blocks.gtf.gz:md5,9a0fb275eeb8ed73091366b00942b1f1",
-                "HG002_stats.blocks.gtf.gz.tbi:md5,f0ea816f0b7327d559d0706816943cf8",
-                "HG003_stats.blocks.gtf.gz:md5,3abd6413706e4867978bf86ba258ced9",
-                "HG003_stats.blocks.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
-                "HG004_stats.blocks.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
-                "HG004_stats.blocks.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG002_whatshap_stats.gtf.gz:md5,9a0fb275eeb8ed73091366b00942b1f1",
+                "HG002_whatshap_stats.gtf.gz.tbi:md5,f0ea816f0b7327d559d0706816943cf8",
+                "HG002_whatshap_stats.tsv:md5,958e3f38fb04543f3ec9aed2feacbf5a",
+                "HG003_whatshap_stats.gtf.gz:md5,3abd6413706e4867978bf86ba258ced9",
+                "HG003_whatshap_stats.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
+                "HG003_whatshap_stats.tsv:md5,de75cb0003d5ee292547fcd47ff12208",
+                "HG004_whatshap_stats.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
+                "HG004_whatshap_stats.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG004_whatshap_stats.tsv:md5,72a0794ee540a0342f72c0be505cbca6",
                 "HG002_sambamba_depth.bed:md5,d51c953d6f90c54eff946b058caf46c9",
                 "HG003_sambamba_depth.bed:md5,7c93de77f515eab7c14188547b9c2bad",
                 "HG004_sambamba_depth.bed:md5,847e789fad6341c4be4f56dcbb68dfdc",
@@ -1136,6 +1137,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-12-19T10:59:35.167451595"
+        "timestamp": "2026-01-22T14:33:15.012017988"
     }
 }
