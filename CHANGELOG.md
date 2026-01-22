@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
+- [#858](https://github.com/genomic-medicine-sweden/nallo/pull/858) - Removed validation for empty samplesheet, because it obfuscates other errors
+
 ### `Fixed`
 
 ### Parameters
