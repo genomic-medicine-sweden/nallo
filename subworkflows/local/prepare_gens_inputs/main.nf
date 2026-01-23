@@ -13,12 +13,13 @@ workflow PREPARE_GENS_INPUTS {
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
     baf_positions       // value:   [mandatory] [ path(gz) ]
-    panel_of_normals    // value:   [optional]  [ path(hd5) ]
+    panel_of_normals    // value:   [mandatory] [ path(hd5) ]
+    mosdepth_bins       // value:   [mandatory] [ path(bed) ]
 
     main:
 
     ch_bam
-        .map { meta, bam, bai -> tuple(meta, bam, bai, []) }
+        .map { meta, bam, bai -> tuple(meta, bam, bai, mosdepth_bins) }
         .set { ch_mosdepth_in }
 
     // Prepare the header
