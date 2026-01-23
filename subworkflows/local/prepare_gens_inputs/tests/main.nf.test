@@ -17,16 +17,16 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam', checkIfExists: true),
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gnomad_hg38_chr20_90000_to_100000.0.05.txt.gz")
-                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/test_pon.hdf5")
+                input[2] = file("/trannel/dev/jakob/src/test-datasets/testdata/gnomad_0.05_subset.txt")
+                input[3] = file("/trannel/dev/jakob/src/test-datasets/testdata/pon.hdf5")
                 """
             }
         }
@@ -48,16 +48,16 @@ nextflow_workflow {
                 """
                 input[0] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam', checkIfExists: true),
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_region.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz', checkIfExists: true),
-                    file('$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/hg002_chr20_90000_to_100000.dnascope.gvcf.gz.tbi', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/gnomad_hg38_chr20_90000_to_100000.0.05.txt.gz")
-                input[3] = file("$projectDir/subworkflows/local/prepare_gens_inputs/tests/assets/test_pon.hdf5")
+                input[2] = file("/trannel/dev/jakob/src/test-datasets/testdata/gnomad_0.05_subset.txt")
+                input[3] = file("/trannel/dev/jakob/src/test-datasets/testdata/pon.hdf5")
                 """
             }
         }
