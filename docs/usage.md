@@ -181,7 +181,7 @@ By default the pipeline uses [DeepVariant](https://github.com/google/deepvariant
 
 | Parameter     | Description                                                                                                                                             |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) Used by DeepVariant. |
+| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)). Used by DeepVariant. |
 
 Additional inputs are required for Sentieon DNAscope:
 
