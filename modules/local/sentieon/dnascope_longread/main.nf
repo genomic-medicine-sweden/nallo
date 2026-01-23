@@ -54,9 +54,9 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    prefix = task.ext.prefix ?: "${meta.id}"
 
    """
-   echo | bgzip > ${prefix}.vcf.gz
+   echo "" | bgzip > ${prefix}.vcf.gz
    touch ${prefix}.vcf.gz.tbi
-   echo | bgzip > ${prefix}.g.vcf.gz
+   echo "" | bgzip > ${prefix}.g.vcf.gz
    touch ${prefix}.g.vcf.gz.tbi
 
    cat <<-END_VERSIONS > versions.yml
