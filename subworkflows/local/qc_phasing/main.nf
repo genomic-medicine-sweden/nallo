@@ -12,9 +12,11 @@ workflow QC_PHASING {
     ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples      // channel: [ val(family_id), val(list_of_sample_ids) ]
     phase_with_svs            //    bool: Whether SVs were included in phasing (true) or not (false)
+    snv_variant_caller        //  string: Which snv variant caller was used e.g. "deepvariant"
 
     main:
     ch_versions = channel.empty()
+    ch_phasing_stats = channel.empty()
 
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
     if (phase_with_svs) {
@@ -46,12 +48,22 @@ workflow QC_PHASING {
         }
         .set { ch_phased_vcf }
 
-    WHATSHAP_STATS(
-        ch_phased_vcf,
-        true,
-        true,
-        false,
-    )
+
+    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
+    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424 for more
+    // details.
+    if(!snv_variant_caller.equals("sentieon")) {
+
+        WHATSHAP_STATS(
+            ch_phased_vcf,
+            true,
+            true,
+            false,
+        )
+
+        ch_phasing_stats = WHATSHAP_STATS.out.tsv
+
+    }
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
@@ -67,7 +79,7 @@ workflow QC_PHASING {
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
+    phasing_stats        = ch_phasing_stats       // channel: [ val(meta), path(stats) ]
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
     phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(gtf_index) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]

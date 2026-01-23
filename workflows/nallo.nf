@@ -542,7 +542,8 @@ workflow NALLO {
             ch_fai,
             params.phaser,
             !params.skip_sv_calling,
-            cram_output
+            cram_output,
+            params.snv_caller
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
