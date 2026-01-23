@@ -1,0 +1,20 @@
+Changes in component 'nf-core/gawk'
+'modules/nf-core/gawk/meta.yml' is unchanged
+Changes in 'gawk/main.nf':
+--- modules/nf-core/gawk/main.nf
++++ modules/nf-core/gawk/main.nf
+@@ -56,7 +56,7 @@
+ 
+     stub:
+     prefix = task.ext.prefix ?: "${meta.id}"
+-    suffix = task.ext.suffix ?: "${input.getExtension()}"
++    suffix = task.ext.suffix ?: "${input.collect{ it -> it.getExtension()}.get(0)}" // use the first extension of the input files
+     def create_cmd = suffix.endsWith("gz") ? "echo '' | gzip >" : "touch"
+ 
+     """
+
+'modules/nf-core/gawk/environment.yml' is unchanged
+'modules/nf-core/gawk/tests/main.nf.test' is unchanged
+'modules/nf-core/gawk/tests/nextflow.config' is unchanged
+'modules/nf-core/gawk/tests/main.nf.test.snap' is unchanged
+************************************************************
