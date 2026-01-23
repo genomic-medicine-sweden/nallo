@@ -126,7 +126,6 @@ workflow CALL_SNVS {
             ch_sentieon_model_bundle,
             sentieon_tech,
         )
-        ch_versions = ch_versions.mix(DNASCOPE_LONGREAD.out.versions)
 
         ch_vcf        = DNASCOPE_LONGREAD.out.vcf
         ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
