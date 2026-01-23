@@ -341,6 +341,13 @@
                     "pattern": "^\\S+\\.(hd5|hdf5)$",
                     "exists": true
                 },
+                "gens_coverage_bins": {
+                    "type": "string",
+                    "description": "Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(bed)$",
+                    "exists": true
+                },
                 "strdrop_training_set_json": {
                     "type": "string",
                     "pattern": "^\\S+\\.json$",

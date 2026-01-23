@@ -1,11 +1,11 @@
 include { BCFTOOLS_CONCAT }               from '../../../modules/nf-core/bcftools/concat/main'
-include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
-include { PREPARECOVANDBAF }              from '../../../modules/nf-core/gens/preparecovandbaf/main'
+include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK as MOSDEPTH_GATK_HEADER }  from '../../../modules/nf-core/gawk/main'
 include { GAWK as MOSDEPTH_GATK_FORMAT }  from '../../../modules/nf-core/gawk/main'
+include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
+include { PREPARECOVANDBAF }              from '../../../modules/nf-core/gens/preparecovandbaf/main'
 include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtools/view/main'
-include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
 include { TABIX_BGZIP }                   from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow PREPARE_GENS_INPUTS {
@@ -74,10 +74,12 @@ workflow PREPARE_GENS_INPUTS {
         baf_positions
     )
 
-    ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz.join(PREPARECOVANDBAF.out.cov_tbi)
-    ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz.join(PREPARECOVANDBAF.out.baf_tbi)
+    ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz
+        .join(PREPARECOVANDBAF.out.cov_tbi)
+    ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz
+        .join(PREPARECOVANDBAF.out.baf_tbi)
 
     emit:
-    cov_bed_tbi = ch_cov_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
-    baf_bed_tbi = ch_baf_gz_tbi                      // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    cov_bed_tbi = ch_cov_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]
+    baf_bed_tbi = ch_baf_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]
 }

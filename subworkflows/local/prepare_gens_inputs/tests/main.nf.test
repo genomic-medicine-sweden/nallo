@@ -1,6 +1,4 @@
-// FIXME: Look through and test this
-// FIXME: Run both with and without pon stubs
-
+// FIXME: Use the pipelines_testdata_base_path paths for all data
 nextflow_workflow {
 
     name "Test Workflow PREPARE_GENS_INPUTS"

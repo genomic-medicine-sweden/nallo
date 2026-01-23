@@ -152,7 +152,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
-        gens             : ["gens_baf_positions", "gens_panel_of_normals"],
+        gens             : ["gens_baf_positions", "gens_panel_of_normals", "gens_coverage_bins"],
     ]
 
     def parameterStatus = [
@@ -196,6 +196,7 @@ workflow PIPELINE_INITIALISATION {
             vep_plugin_files         : params.vep_plugin_files,
             gens_baf_positions       : params.gens_baf_positions,
             gens_panel_of_normals    : params.gens_panel_of_normals,
+            gens_coverage_bins       : params.gens_coverage_bins,
         ]
     ]
 

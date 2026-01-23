@@ -442,7 +442,7 @@ workflow NALLO {
                 ch_gvcf_tbi,
                 params.gens_baf_positions,
                 params.gens_panel_of_normals,
-                params.mosdepth_bins,
+                params.gens_coverage_bins,
             )
         }
 

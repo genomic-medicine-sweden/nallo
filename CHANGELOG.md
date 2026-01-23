@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data to Gens.
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data (coverage and B-allele frequencies) to Gens.
 
 ### Parameters
 
@@ -16,12 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--skip_prepare_gens_input` |
 |               | `--gens_baf_positions`      |
 |               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
 
 ### Module updates
 
-| Tool  | Old version | New version |
-| ----- | ----------- | ----------- |
-| gatk4 |             | 4.6.2.0     |
+| Tool                  | Old version | New version |
+| --------------------- | ----------- | ----------- |
+| gatk4                 |             | 4.6.2.0     |
+| gens/preparecovandbaf |             | 1.4.0       |
+| cat/cat               |             | 2.8         |
 
 ## 0.10.0dev - [XXXX-XX-XX]
 
@@ -84,7 +87,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
-
 
 ### `Changed`
 

@@ -65,6 +65,7 @@ Define where the pipeline should find input data and save output data.
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. Required when `--skip_gens_input` is disabled. | `string` |  |  |  |
 | `gens_panel_of_normals` | Panel-of-normals file (`.hd5`/`.hdf5`) used to standardize coverage for Gens inputs. | `string` |  |  |  |
+| `gens_coverage_bins` | Bed-file with bins for which to calculate coverage. This bed-file should be the same as used when preparing the panel of normals. | `string` |  |  |  |
 | `strdrop_training_set_json` | A JSON file containing the training set for strdrop | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
