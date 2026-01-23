@@ -21,55 +21,53 @@ workflow PREPARE_GENS_INPUTS {
         .map { meta, bam, bai -> tuple(meta, bam, bai, []) }
         .set { ch_mosdepth_in }
 
-    MOSDEPTH(
-        ch_mosdepth_in,
-        [[],[]]
-    )
-
+    // Prepare the header
     SAMTOOLS_VIEW(
         ch_bam,
         [[],[]],
         [],
         false
     )
-
     MOSDEPTH_GATK_HEADER(
         SAMTOOLS_VIEW.out.sam,
         [],
         false
     )
-
     TABIX_BGZIP(MOSDEPTH_GATK_HEADER.out.output)
 
-    TABIX_BGZIP.out.output
-        .join(MOSDEPTH.out.regions_bed)
-        .map { meta, header, body -> tuple(meta, [header, body]) }
-        .set { ch_mosdepth_gatk_concat_in  }
-
-    CAT_CAT(ch_mosdepth_gatk_concat_in)
-
+    // Prepare the body
+    MOSDEPTH(
+        ch_mosdepth_in,
+        [[],[]]
+    )
     MOSDEPTH_GATK_FORMAT(
-        CAT_CAT.out.file_out,
+        MOSDEPTH.out.regions_bed,
         [],
         false
     )
 
-    MOSDEPTH_GATK_FORMAT.out.output
+    // Prepare GATK inputs
+    TABIX_BGZIP.out.output
+        .join(MOSDEPTH_GATK_FORMAT.out.output)
+        .map { meta, header, body -> tuple(meta, [header, body]) }
+        .set { ch_cat_input }
+    CAT_CAT(ch_cat_input)
+    CAT_CAT.out.file_out
         .map { meta, _tsv -> [ meta, panel_of_normals ] }
         .set { ch_pon }
 
+    // Calculate coverage
     GATK4_DENOISEREADCOUNTS(
-        MOSDEPTH_GATK_FORMAT.out.output,
+        CAT_CAT.out.file_out,
         ch_pon
     )
-
     GATK4_DENOISEREADCOUNTS.out.standardized
         .set { ch_cov }
-
     ch_cov
         .join(ch_gvcf)
         .set { ch_gens_input }
 
+    // Generate final outputs
     PREPARECOVANDBAF(
         ch_gens_input,
         baf_positions
