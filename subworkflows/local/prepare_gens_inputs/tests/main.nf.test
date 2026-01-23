@@ -22,8 +22,8 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                    file('/trannel/dev/jakob/src/test-datasets/testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file('/trannel/dev/jakob/src/test-datasets/testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = file("/trannel/dev/jakob/src/test-datasets/testdata/gnomad_0.05_subset.txt")
                 input[3] = file("/trannel/dev/jakob/src/test-datasets/testdata/pon.hdf5")
@@ -53,8 +53,8 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                    file('/trannel/dev/jakob/src/test-datasets/testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file('/trannel/dev/jakob/src/test-datasets/testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = file("/trannel/dev/jakob/src/test-datasets/testdata/gnomad_0.05_subset.txt")
                 input[3] = file("/trannel/dev/jakob/src/test-datasets/testdata/pon.hdf5")
