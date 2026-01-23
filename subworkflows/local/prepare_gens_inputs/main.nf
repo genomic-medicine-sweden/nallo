@@ -4,9 +4,9 @@ include { PREPARECOVANDBAF }              from '../../../modules/nf-core/gens/pr
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK as MOSDEPTH_GATK_HEADER }  from '../../../modules/nf-core/gawk/main'
 include { GAWK as MOSDEPTH_GATK_FORMAT }  from '../../../modules/nf-core/gawk/main'
-include { GAWK as MOSDEPTH_GATK_CONCAT }  from '../../../modules/nf-core/gawk/main'
 include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtools/view/main'
 include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
+include { TABIX_BGZIP }                   from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -39,8 +39,10 @@ workflow PREPARE_GENS_INPUTS {
         false
     )
 
-    MOSDEPTH.out.regions_bed
-        .join(MOSDEPTH_GATK_HEADER.out.output)
+    TABIX_BGZIP(MOSDEPTH_GATK_HEADER.out.output)
+
+    TABIX_BGZIP.out.output
+        .join(MOSDEPTH.out.regions_bed)
         .map { meta, header, body -> tuple(meta, [header, body]) }
         .set { ch_mosdepth_gatk_concat_in  }
 
