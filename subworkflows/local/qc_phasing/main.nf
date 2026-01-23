@@ -12,7 +12,7 @@ workflow QC_PHASING {
     ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples      // channel: [ val(family_id), val(list_of_sample_ids) ]
     phase_with_svs            //    bool: Whether SVs were included in phasing (true) or not (false)
-    snv_variant_caller        //  string: Which snv variant caller was used e.g. "deepvariant"
+    run_whatshap_stats        //    bool: Whether to run WHATSHAP_STATS (true) or not (false)
 
     main:
     ch_versions = channel.empty()
@@ -48,11 +48,7 @@ workflow QC_PHASING {
         }
         .set { ch_phased_vcf }
 
-
-    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
-    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424 for more
-    // details.
-    if(!snv_variant_caller.equals("sentieon")) {
+    if(run_whatshap_stats) {
 
         WHATSHAP_STATS(
             ch_phased_vcf,

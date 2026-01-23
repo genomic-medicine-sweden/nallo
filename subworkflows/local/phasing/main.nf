@@ -83,6 +83,12 @@ workflow PHASING {
         ch_bam_bai_haplotagged    = HIPHASE.out.haplotagged_bam_bai
     }
 
+
+    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
+    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424 for more
+    // details.
+    run_whatshap_stats = snv_variant_caller.equals("sentieon")
+
     QC_PHASING (
         ch_phased_family_snvs,
         ch_phased_family_snvs_tbi,
@@ -91,7 +97,7 @@ workflow PHASING {
         ch_bam_bai_haplotagged,
         ch_family_to_samples,
         phase_with_svs && !phaser.equals("whatshap"),
-        snv_variant_caller
+        run_whatshap_stats
     )
     ch_versions = ch_versions.mix(QC_PHASING.out.versions)
 
