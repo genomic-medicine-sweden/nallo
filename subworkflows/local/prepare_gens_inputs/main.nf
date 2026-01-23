@@ -6,6 +6,7 @@ include { GAWK as MOSDEPTH_GATK_HEADER }  from '../../../modules/nf-core/gawk/ma
 include { GAWK as MOSDEPTH_GATK_FORMAT }  from '../../../modules/nf-core/gawk/main'
 include { GAWK as MOSDEPTH_GATK_CONCAT }  from '../../../modules/nf-core/gawk/main'
 include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtools/view/main'
+include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -43,14 +44,10 @@ workflow PREPARE_GENS_INPUTS {
         .map { meta, header, body -> tuple(meta, [header, body]) }
         .set { ch_mosdepth_gatk_concat_in  }
 
-    MOSDEPTH_GATK_CONCAT(
-        ch_mosdepth_gatk_concat_in,
-        [],
-        false
-    )
+    CAT_CAT(ch_mosdepth_gatk_concat_in)
 
     MOSDEPTH_GATK_FORMAT(
-        MOSDEPTH_GATK_CONCAT.out.output,
+        CAT_CAT.out.file_out,
         [],
         false
     )
