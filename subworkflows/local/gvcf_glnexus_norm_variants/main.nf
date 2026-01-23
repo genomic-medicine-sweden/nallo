@@ -32,7 +32,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     } else if (variant_caller.equals("sentieon")) {
 
         ch_gvcfs
-            .join(ch_gvcf_tbis)
+            .join(ch_gvcf_tbis, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcfs, tbis ->
                 [meta, gvcfs, tbis, []]
             }
