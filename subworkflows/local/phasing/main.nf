@@ -47,6 +47,7 @@ workflow PHASING {
 
         WHATSHAP(
             ch_snv_vcf,
+            ch_snv_vcf_index,
             ch_bam_bai,
             fasta,
             fai
