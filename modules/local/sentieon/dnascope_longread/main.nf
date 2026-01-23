@@ -18,7 +18,8 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    tuple val(meta), path("${prefix}.vcf.gz.tbi")  , emit: vcf_tbi
    tuple val(meta), path("${prefix}.g.vcf.gz")    , emit: gvcf
    tuple val(meta), path("${prefix}.g.vcf.gz.tbi"), emit: gvcf_tbi
-   path "versions.yml"                            , emit: versions
+   tuple val("${task.process}"), val("sentieon-cli"), val("1.4.0-f9c8811"), emit: versions_sentieon_cli, topic: versions
+   tuple val("${task.process}"), val("sentieon"), eval("sentieon driver --version 2>&1) | sed -e 's/sentieon-genomics-//g'"), emit: versions_sentieon, topic: versions
 
    script:
    prefix = task.ext.prefix ?: "${meta.id}"
@@ -40,33 +41,18 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
         --skip_svs \\
     ${prefix}.vcf.gz
 
-   cat <<-END_VERSIONS > versions.yml
-   "${task.process}":
-       sentieon-cli: 1.4.0-f9c8811
-       sentieon: \$(echo \$(sentieon driver --version 2>&1) | sed -e "s/sentieon-genomics-//g")
-       bedtools: \$(bedtools --version | sed -e "s/bedtools v//g")
-       samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
-       bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
-   END_VERSIONS
+    # bedtools: \$(bedtools --version | sed -e "s/bedtools v//g")
+    # samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
+    # bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
    """
 
    stub:
    prefix = task.ext.prefix ?: "${meta.id}"
-
    """
    echo "" | bgzip > ${prefix}.vcf.gz
    touch ${prefix}.vcf.gz.tbi
    echo "" | bgzip > ${prefix}.g.vcf.gz
    touch ${prefix}.g.vcf.gz.tbi
-
-   cat <<-END_VERSIONS > versions.yml
-   "${task.process}":
-       sentieon-cli: 1.4.0-f9c8811
-       sentieon: \$(echo \$(sentieon driver --version 2>&1) | sed -e "s/sentieon-genomics-//g")
-       bedtools: \$(bedtools --version | sed -e "s/bedtools v//g")
-       samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
-       bcftools: \$(bcftools --version 2>&1 | head -n1 | sed 's/^.*bcftools //; s/ .*\$//')
-   END_VERSIONS
    """
 
 }
