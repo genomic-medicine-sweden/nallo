@@ -179,8 +179,8 @@ This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 By default the pipeline uses [DeepVariant](https://github.com/google/deepvariant) for long-read SNV calling. To enable [Sentieon DNAscope Long Read](https://github.com/Sentieon/sentieon-cli/blob/main/docs/dnascope-longread.md), set `--snv_caller sentieon`. Make the Sentieon license available by adding a base64-encoded license string to the Nextflow secrets store (`nextflow secrets set SENTIEON_LICENSE_BASE64 ...`) or by exporting the same variable before running the pipeline.
 
-| Parameter     | Description                                                                                                                                             |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter     | Description                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)). Used by DeepVariant. |
 
 Additional inputs are required for Sentieon DNAscope:
