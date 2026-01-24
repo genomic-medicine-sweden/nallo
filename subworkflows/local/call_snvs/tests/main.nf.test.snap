@@ -704,7 +704,6 @@
                 ],
                 "4": [
                     "versions.yml:md5,3379481985598f377e094f93ddf95cf7",
-                    "versions.yml:md5,78cade8b539000fe4a1e0e68b4195210",
                     "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
                 ],
                 "gvcf": [
@@ -757,7 +756,6 @@
                 ],
                 "versions": [
                     "versions.yml:md5,3379481985598f377e094f93ddf95cf7",
-                    "versions.yml:md5,78cade8b539000fe4a1e0e68b4195210",
                     "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
                 ]
             }
@@ -766,7 +764,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-23T15:51:21.261607028"
+        "timestamp": "2026-01-23T21:11:34.195142134"
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
