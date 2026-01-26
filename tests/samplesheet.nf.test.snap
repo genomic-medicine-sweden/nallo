@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            183,
+            191,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -62,6 +62,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
@@ -158,6 +161,9 @@
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -281,6 +287,12 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_Revio",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -555,6 +567,10 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
+                "HG002_Revio.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
+                "HG002_Revio.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400",
+                "HG002_Revio.cov.bed.gz:md5,dd6fc455c22e102c1c138011c4e28f69",
+                "HG002_Revio.cov.bed.gz.tbi:md5,d1cec31c23b82996cbc97913496e3ae0",
                 "HG002_Revio_pbcpgtools.combined.bed.gz:md5,0a1ff6f11f3f0101671beff686e72b94",
                 "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,e644f22a1dffe1108bef1ae49e3c2714",
                 "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,e2036076dd6333f0c88d4a8f695ebec7",
@@ -593,8 +609,8 @@
                 "HG002_Revio.mosdepth.global.dist.txt:md5,3c7c62c7460d2e1e69622776f36b343c",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,42ed9c66cd4a8fdeaf334583ccf1c887",
                 "HG002_Revio.mosdepth.summary.txt:md5,df1a1b683edec908d1fe38c02b02eacf",
-                "HG002_Revio.regions.bed.gz:md5,bf110d79b8cc8b18cf864633d111d9aa",
-                "HG002_Revio.regions.bed.gz.csi:md5,2eb89f3ecd281aba81990ec42fbf60fe",
+                "HG002_Revio.regions.bed.gz:md5,e096e542e4dba9ca92fe026ee3ccbd6c",
+                "HG002_Revio.regions.bed.gz.csi:md5,c66a6fedd18bad0a4b48195774b062fe",
                 "FAM.het_check.csv:md5,b6d2e382394507724fbfac5f16fedd29",
                 "FAM.het_check.png:md5,af43516f0ecdb236b95f27d28bf45944",
                 "FAM.html:md5,3fad9d116d51d9f4102c69bc2bc8b4f7",
@@ -609,12 +625,12 @@
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,da0533a8ee3319413270dd3c65d6ea7d",
                 "HG002_Revio_whatshap_stats.tsv:md5,07de1ed637d51e97a13b0bbfd1115c73",
                 "HG002_Revio_sambamba_depth.bed:md5,d6a27c9870da274f20c9de584551608c",
-                "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
-                "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
-                "HG002_Revio_hificnv.maf.bw:md5,184650f2af356862d9e860e48124174b",
-                "HG002_Revio_pbcpgtools.combined.bw:md5,bd4f1ff82f672cae21a3974ae2657a4a",
-                "HG002_Revio_pbcpgtools.hap1.bw:md5,dfe7a1be5405f2c42dc79c79430d0158",
-                "HG002_Revio_pbcpgtools.hap2.bw:md5,a15d2f5f744d27a5134a49dfdf7d8aa5"
+                "HG002_Revio_hificnv.copynum.bedgraph:md5,27d9bd3b6ceab7a26fba9e5b2e394c18",
+                "HG002_Revio_hificnv.depth.bw:md5,875c563bee14d10ff90a61586d0c99d6",
+                "HG002_Revio_hificnv.maf.bw:md5,40df62766632d5660f30fe7ff851d28f",
+                "HG002_Revio_pbcpgtools.combined.bw:md5,8f753a9eb81ac03b5c760a8ed2ee9eb5",
+                "HG002_Revio_pbcpgtools.hap1.bw:md5,ac66683bc78dd94b386e3a49e8fadce2",
+                "HG002_Revio_pbcpgtools.hap2.bw:md5,2367e3ab167d8d7cb9086345a6507171"
             ],
             [
                 [
@@ -679,6 +695,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T17:06:15.798703232"
+        "timestamp": "2026-01-26T18:07:27.956369584"
     }
 }
