@@ -1008,7 +1008,7 @@ workflow NALLO {
             .concat(ch_methods_description_bibliography)
             .flatten()
             .collectFile(
-            name: 'methods_description_mqc.yaml',
+                name: 'methods_description_mqc.yaml',
                 sort: false // preserve order for correct yaml structure
         )
     )
