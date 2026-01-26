@@ -34,7 +34,7 @@ workflow PREPARE_GENS_INPUTS {
         [],
         false
     )
-    TABIX_BGZIP(MOSDEPTH_GATK_HEADER.out.output)
+    // TABIX_BGZIP(MOSDEPTH_GATK_HEADER.out.output)
 
     // Prepare the body
     MOSDEPTH(
@@ -48,7 +48,7 @@ workflow PREPARE_GENS_INPUTS {
     )
 
     // Prepare GATK inputs
-    TABIX_BGZIP.out.output
+    MOSDEPTH_GATK_HEADER.out.output
         .join(MOSDEPTH_GATK_FORMAT.out.output)
         .map { meta, header, body -> tuple(meta, [header, body]) }
         .set { ch_cat_input }
