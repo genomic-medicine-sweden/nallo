@@ -434,8 +434,8 @@ workflow NALLO {
                 ch_gvcfs
             )
 
-            BCFTOOLS_CONCAT.out.vcf
-                .join(BCFTOOLS_CONCAT.out.tbi)
+            BCFTOOLS_CONCAT_GENS.out.vcf
+                .join(BCFTOOLS_CONCAT_GENS.out.tbi)
                 .set { ch_gvcf_tbi }
 
             PREPARE_GENS_INPUTS(
