@@ -538,7 +538,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
