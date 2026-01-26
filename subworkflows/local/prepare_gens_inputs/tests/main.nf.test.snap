@@ -32,6 +32,57 @@
         },
         "timestamp": "2025-12-03T11:57:00.001440914"
     },
+    "prepare_gens_inputs": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
+                        "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
+                    ]
+                ],
+                "baf_bed_tbi": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
+                        "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
+                    ]
+                ],
+                "cov_bed_tbi": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-01-26T09:04:26.086526234"
+    },
     "Generate Gens input using PON": {
         "content": [
             {
@@ -64,5 +115,56 @@
             "nextflow": "25.10.0"
         },
         "timestamp": "2025-12-03T11:56:47.447129004"
+    },
+    "prepare_gens_inputs - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                        "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.baf.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                        "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "baf_bed_tbi": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.baf.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                        "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cov_bed_tbi": [
+                    [
+                        {
+                            "id": "HG002",
+                            "single_end": false
+                        },
+                        "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                        "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-01-23T13:41:12.632230202"
     }
 }
