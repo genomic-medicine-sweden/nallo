@@ -58,7 +58,6 @@ workflow PREPARE_GENS_INPUTS {
         .map { meta, header, body -> tuple(meta, [header, body]) }
         .set { ch_cat_input }
     CAT_CAT(ch_cat_input)
-    ch_versions.mix(CAT_CAT.out.versions)
     CAT_CAT.out.file_out
         .map { meta, _tsv -> [ meta, panel_of_normals ] }
         .set { ch_pon }
