@@ -120,6 +120,9 @@ tool:
   peddy:
     citation: "Peddy (Pedersen & Quinlan 2017)"
     bibliography: Pedersen BS, Quinlan AR. Who’s Who? Detecting and Resolving Sample Anomalies in Human DNA Sequencing Studies with Peddy. The American Journal of Human Genetics, Volume 100, Issue 3,  March 2017, Pages 406-413, http://dx.doi.org/10.1016/j.ajhg.2017.01.017
+  pigz:
+    citation: "pigz"
+    bibliography: ""
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""
