@@ -97,7 +97,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
