@@ -1,4 +1,3 @@
-// FIXME: Use the pipelines_testdata_base_path paths for all data
 nextflow_workflow {
 
     name "Test Workflow PREPARE_GENS_INPUTS"
