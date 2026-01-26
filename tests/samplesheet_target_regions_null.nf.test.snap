@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            186,
+            187,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -264,12 +264,10 @@
                     "untar": 1.34
                 },
                 "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -507,9 +505,9 @@
                 "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -610,8 +608,9 @@
                 "FAM.sex_check.csv:md5,763950d0eff48b64da29a6a883d6b11c",
                 "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_Revio_stats.blocks.gtf.gz:md5,6c11b4b4968798b723404260fc4bd416",
-                "HG002_Revio_stats.blocks.gtf.gz.tbi:md5,8fa5c992ac19848ceb499f871cf5e692",
+                "HG002_Revio_whatshap_stats.gtf.gz:md5,6c11b4b4968798b723404260fc4bd416",
+                "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,8fa5c992ac19848ceb499f871cf5e692",
+                "HG002_Revio_whatshap_stats.tsv:md5,e9be9d38146ddb1de96aa19d54af29c9",
                 "HG002_Revio_sambamba_depth.bed:md5,d6a27c9870da274f20c9de584551608c",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,4aed0f42b580c2612036e25f62022dca",
                 "HG002_Revio_hificnv.depth.bw:md5,82ae48c3cab1be1039026fcc9eed1406",
@@ -681,8 +680,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-30T15:29:48.832883557"
+        "timestamp": "2026-01-26T17:26:04.711631048"
     }
 }
