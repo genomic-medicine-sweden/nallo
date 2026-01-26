@@ -16,12 +16,12 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('/trannel/dev/jakob/src/nallo-test-datasets/testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file('/trannel/dev/jakob/src/nallo-test-datasets/testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("/trannel/dev/jakob/src/nallo-test-datasets/testdata/gnomad_0.05_subset.txt")
-                input[3] = file("/trannel/dev/jakob/src/util/nallo/pon.hdf5")
-                input[4] = file("/trannel/dev/jakob/src/util/nallo/hg002_intervals.bed")
+                input[2] = file(params.pipelines_testdata_base_path + "testdata/gnomad_0.05_subset.txt")
+                input[3] = file(params.pipelines_testdata_base_path + "testdata/pon.hdf5")
+                input[4] = file(params.pipelines_testdata_base_path + "testdata/pon_intervals.bed")
                 """
             }
         }
@@ -51,12 +51,12 @@ nextflow_workflow {
                 ])
                 input[1] = Channel.of([
                     [ id: 'HG002', single_end: false ],
-                    file('/trannel/dev/jakob/src/nallo-test-datasets/testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file('/trannel/dev/jakob/src/nallo-test-datasets/testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file("/trannel/dev/jakob/src/nallo-test-datasets/testdata/gnomad_0.05_subset.txt")
-                input[3] = file("/trannel/dev/jakob/src/util/nallo/pon.hdf5")
-                input[4] = file("/trannel/dev/jakob/src/util/nallo/hg002_intervals.bed")
+                input[2] = file(params.pipelines_testdata_base_path + "testdata/gnomad_0.05_subset.txt")
+                input[3] = file(params.pipelines_testdata_base_path + "testdata/pon.hdf5")
+                input[4] = file(params.pipelines_testdata_base_path + "testdata/pon_intervals.bed")
                 """
             }
         }
