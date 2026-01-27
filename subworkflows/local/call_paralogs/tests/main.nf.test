@@ -34,7 +34,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -79,7 +79,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -124,7 +124,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -189,7 +189,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -237,7 +237,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
