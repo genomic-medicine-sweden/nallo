@@ -133,9 +133,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-10T16:18:30.547043552"
+        "timestamp": "2026-01-27T16:58:38.028056598"
     },
     "1 sample - unphased": {
         "content": [
@@ -146,7 +146,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
                     ]
                 ],
                 "1": [
@@ -158,7 +158,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "3": [
@@ -180,7 +180,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -195,7 +195,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
                     ]
                 ],
                 "versions": [
@@ -247,9 +247,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-27T10:37:07.150769557"
+        "timestamp": "2026-01-27T16:58:50.548288656"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -403,9 +403,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-10T16:18:52.203756304"
+        "timestamp": "2026-01-27T16:59:03.549419985"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -662,9 +662,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-10T16:19:04.722466959"
+        "timestamp": "2026-01-27T16:59:16.591807715"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -796,7 +796,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
                     ]
                 ],
                 "1": [
@@ -814,7 +814,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "3": [
@@ -842,7 +842,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -857,7 +857,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
                     ]
                 ],
                 "versions": [
@@ -909,8 +909,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-27T10:38:04.180723284"
+        "timestamp": "2026-01-27T16:59:29.188671056"
     }
 }

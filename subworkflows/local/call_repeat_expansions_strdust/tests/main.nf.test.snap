@@ -1,8 +1,8 @@
 {
     "[bam, bai], fasta, fai, bed": {
         "content": [
-            "a59f83247e0319154e21261a4a393f23",
-            "4f41a9613f8c9be04dbc9e475e2f35f2",
+            "151bbd2a4bb282ab01720db94a26d1a4",
+            "44506efffb44127b424bb983c2fe1628",
             [
                 "versions.yml:md5,3f121f951f5b25077dbdcc97a9b2d113",
                 "versions.yml:md5,b890e67dd2f1caca38c41d41bf4336c3"
@@ -10,9 +10,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-27T10:44:21.896031879"
+        "timestamp": "2026-01-27T17:03:10.169186493"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
