@@ -146,7 +146,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
                     ]
                 ],
                 "1": [
@@ -158,7 +158,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
+                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
                     ]
                 ],
                 "3": [
@@ -180,7 +180,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
+                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -195,7 +195,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
                     ]
                 ],
                 "versions": [
@@ -247,9 +247,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-11T09:43:09.989709643"
+        "timestamp": "2026-01-26T20:50:23.732720402"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -796,7 +796,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
                     ]
                 ],
                 "1": [
@@ -814,7 +814,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
+                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
                     ]
                 ],
                 "3": [
@@ -842,7 +842,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,e69a9a4f3f60ae60f4dd99046f2e2837"
+                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -857,7 +857,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,eee3107040c273032c983bf866b427d9"
+                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
                     ]
                 ],
                 "versions": [
@@ -909,8 +909,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-11T09:43:45.027095847"
+        "timestamp": "2026-01-26T20:51:20.854530899"
     }
 }
