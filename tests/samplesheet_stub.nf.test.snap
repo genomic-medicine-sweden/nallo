@@ -170,6 +170,9 @@
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_VIEW_SV": {
+                    "bcftools": 1.22
+                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -345,9 +348,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-22T14:36:34.328146243"
+        "timestamp": "2026-01-27T07:53:48.468931911"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -701,6 +704,9 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
                 },
@@ -732,6 +738,12 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -1152,9 +1164,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-22T14:37:27.323694718"
+        "timestamp": "2026-01-27T07:54:36.957103113"
     },
     "Test alignment without genome assembly": {
         "content": [
