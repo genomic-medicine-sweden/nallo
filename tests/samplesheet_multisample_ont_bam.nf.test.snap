@@ -228,9 +228,7 @@
                     "whatshap": 2.8
                 },
                 "WHATSHAP_PHASE": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
