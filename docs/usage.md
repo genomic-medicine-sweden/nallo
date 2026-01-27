@@ -234,7 +234,7 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-If methbat is used, it requires the following file:
+If MethBat is used, it requires the following file:
 
 | Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
