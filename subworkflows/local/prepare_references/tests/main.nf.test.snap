@@ -7,7 +7,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
                     ]
                 ],
                 "1": [
@@ -15,7 +15,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
                     ]
                 ],
                 "2": [
@@ -23,7 +23,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa:md5,a90ab1e088326745c2ae622afc6f197c"
+                        "hg38.test.fa:md5,63d396ff7faac93f0e1333eadf13925e"
                     ]
                 ],
                 "3": [
@@ -66,7 +66,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
                     ]
                 ],
                 "fasta": [
@@ -74,7 +74,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa:md5,a90ab1e088326745c2ae622afc6f197c"
+                        "hg38.test.fa:md5,63d396ff7faac93f0e1333eadf13925e"
                     ]
                 ],
                 "mmi": [
@@ -82,7 +82,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
                     ]
                 ],
                 "vep_resources": [
@@ -123,10 +123,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-22T11:08:34.546062334"
+        "timestamp": "2026-01-27T11:19:01.694420081"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -247,7 +247,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -278,7 +278,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -307,10 +307,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-08T17:47:34.401069967"
+        "timestamp": "2026-01-27T11:19:57.972610247"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -320,7 +320,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
                     ]
                 ],
                 "1": [
@@ -328,7 +328,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
                     ]
                 ],
                 "2": [
@@ -336,7 +336,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -378,7 +378,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,fcb4c442b23f0477b270a8f2c7c2a353"
+                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
                     ]
                 ],
                 "fasta": [
@@ -386,7 +386,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5aa5c6c825c29acb83ec22da69fff8b5190103a3/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -394,7 +394,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,066634e80999105a03a3739b9b9133ca"
+                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
                     ]
                 ],
                 "vep_resources": [
@@ -434,9 +434,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-08T17:47:05.133264202"
+        "timestamp": "2026-01-27T11:19:24.211551045"
     }
 }
