@@ -237,7 +237,7 @@
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=25, phased=false, phasedAutodetect=false]",
-                    "5eb23eeda00a13ef15c84d3cea559cbd"
+                    "ae76963ced16ebed18f3522c8ef850cb"
                 ]
             ],
             [
@@ -248,7 +248,7 @@
                     },
                     "family_svdb_merge_by_family.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=191, phased=false, phasedAutodetect=false]",
-                    "13278e493465d6a277c2c4afb15058b8"
+                    "dcb6235b232544f0de52ab19f297d707"
                 ]
             ],
             [
@@ -299,7 +299,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-28T11:38:29.950036236"
+        "timestamp": "2026-01-28T13:49:02.12736524"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
