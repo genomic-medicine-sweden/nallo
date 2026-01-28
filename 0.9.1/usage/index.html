@@ -1727,6 +1727,22 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <p>Turned off with <code>--skip_phasing</code>.</p>
 <h4 id="methylation-calling">Methylation calling</h4>
 <p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when <code>--preset ONT_R10</code> is active, while methbat is run when <code>--preset revio</code> is active.</p>
+<p>If MethBat is used, it requires the following file:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>methbat_regions</code></td>
+<td>A tsv file with only regions of interest (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv">example</a>), or with both regions and background cohort values (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv">example</a>), made with methbat build</td>
+</tr>
+</tbody>
+</table>
+<p>If modkit is used, the following optional parameter can be provided:</p>
 <table>
 <thead>
 <tr>
@@ -1738,10 +1754,6 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tr>
 <td><code>bigwig_modcodes</code></td>
 <td>A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to <code>h,m</code>, i.e. 5hmC and 5mC. See <a href="https://samtools.github.io/hts-specs/SAMtags.pdf">the SAM specification</a> for a complete list</td>
-</tr>
-<tr>
-<td><code>methbat_regions</code></td>
-<td>A tsv file with only regions of interest (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv">example</a>), or with both regions and background cohort values (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv">example</a>), made with methbat build</td>
 </tr>
 </tbody>
 </table>
