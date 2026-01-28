@@ -85,10 +85,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:27.495466896"
+        "timestamp": "2026-01-27T17:24:33.522027206"
     },
     "1 sample, 1 variant type": {
         "content": [
@@ -122,10 +122,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:12:48.716940209"
+        "timestamp": "2026-01-27T17:24:10.7919831"
     },
     "1 sample, 2 variant types": {
         "content": [
@@ -177,10 +177,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:01.165167642"
+        "timestamp": "2026-01-27T17:24:17.895920543"
     },
     "2 samples, 1 variant type, family ID = sample ID": {
         "content": [
@@ -232,10 +232,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:40.036331656"
+        "timestamp": "2026-01-27T17:24:41.023507307"
     },
     "2 samples, 1 variant type": {
         "content": [
@@ -287,9 +287,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:13.348522718"
+        "timestamp": "2026-01-27T17:24:25.686285115"
     }
 }

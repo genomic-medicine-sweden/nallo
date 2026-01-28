@@ -66,9 +66,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-14T09:58:10.778943332"
+        "timestamp": "2026-01-27T17:26:35.96630077"
     },
     "2 samples": {
         "content": [
@@ -157,9 +157,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-14T09:58:23.355823129"
+        "timestamp": "2026-01-27T17:26:48.229831651"
     },
     "2 samples - family ID equal to sample ID": {
         "content": [
@@ -248,8 +248,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-14T15:49:31.46692782"
+        "timestamp": "2026-01-27T17:27:01.300413582"
     }
 }

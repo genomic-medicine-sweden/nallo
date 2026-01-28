@@ -282,9 +282,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-23T13:34:30.437197193"
+        "timestamp": "2026-01-27T17:21:45.817314268"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -415,9 +415,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-23T13:34:13.848133954"
+        "timestamp": "2026-01-27T17:21:25.898743645"
     },
     "2 samples - SNVs only - stub": {
         "content": [

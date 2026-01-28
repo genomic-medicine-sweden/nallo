@@ -55,10 +55,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T17:32:45.269651797"
+        "timestamp": "2026-01-27T17:13:47.545146377"
     },
     "convert BAM to FASTQ": {
         "content": [
@@ -116,10 +116,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T13:48:54.429330666"
+        "timestamp": "2026-01-27T17:13:38.110844196"
     },
     "convert BAM to FASTQ and FASTQ to BAM": {
         "content": [
@@ -191,10 +191,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T13:49:09.698911204"
+        "timestamp": "2026-01-27T17:13:57.326871125"
     },
     "convert neither BAM to FASTQ nor FASTQ to BAM": {
         "content": [
@@ -240,10 +240,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T17:33:15.256733166"
+        "timestamp": "2026-01-27T17:14:05.681413502"
     },
     "convert BAM to FASTQ and FASTQ to BAM -stub": {
         "content": [
@@ -315,9 +315,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T17:33:30.491414448"
+        "timestamp": "2026-01-27T17:14:14.944269891"
     }
 }

@@ -325,10 +325,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T13:47:21.375155913"
+        "timestamp": "2026-01-27T17:11:59.384403221"
     },
     "plot all -stub": {
         "content": [
@@ -711,10 +711,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T13:47:33.493414041"
+        "timestamp": "2026-01-27T17:12:12.927577405"
     },
     "plot autozygosity": {
         "content": [

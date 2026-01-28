@@ -109,10 +109,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-12T10:56:13.758710554"
+        "timestamp": "2026-01-27T17:11:05.683866333"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -152,10 +152,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.7"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T13:42:52.544054152"
+        "timestamp": "2026-01-27T17:06:55.659966354"
     },
     "1 sample, 1 family - sawfish": {
         "content": [
@@ -191,10 +191,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-10-24T09:34:42.897639963"
+        "timestamp": "2026-01-27T17:07:39.46576094"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -296,10 +296,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-10-24T09:36:08.614381641"
+        "timestamp": "2026-01-28T13:49:02.12736524"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -619,10 +619,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-10-24T09:36:59.191328733"
+        "timestamp": "2026-01-27T17:10:11.114202683"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -658,10 +658,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-10-24T09:35:20.816128983"
+        "timestamp": "2026-01-27T17:08:21.641978346"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [
