@@ -96,6 +96,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = false
+                input[7] = true
                 """
             }
         }
@@ -217,6 +218,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = true
+                input[7] = true
                 """
             }
         }
@@ -292,6 +294,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = false
+                input[7] = true
                 """
             }
         }
@@ -401,6 +404,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = true
+                input[7] = true
                 """
             }
         }
