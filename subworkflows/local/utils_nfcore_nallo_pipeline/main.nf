@@ -643,7 +643,7 @@ def validateWorkflowCompatibility() {
     // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
     // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424
     // for more details.
-    if (params.phaser == 'whatshap' && params.snv_variant_caller == 'sentieon') {
+    if (params.phaser == 'whatshap' && params.snv_caller == 'sentieon') {
           error "ERROR: Sentieon short-variant calls are mixed-ploidy and cannot be phased with WhatsHap. Choose another phaser (e.g. longphase/hiphase) or a different SNV caller."
     }
 
