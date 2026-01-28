@@ -16,7 +16,8 @@ workflow QC_PHASING {
 
     main:
     ch_versions = channel.empty()
-    ch_phasing_stats = channel.empty()
+    ch_whatshap_stats_tsv = channel.empty()
+    ch_whatshap_stats_gtf = channel.empty()
 
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
     if (phase_with_svs) {
@@ -57,11 +58,12 @@ workflow QC_PHASING {
             false,
         )
 
-        ch_phasing_stats = WHATSHAP_STATS.out.tsv
+        ch_whatshap_stats_tsv = WHATSHAP_STATS.out.tsv
+        ch_whatshap_stats_gtf = WHATSHAP_STATS.out.gtf
 
     }
 
-    TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
+    TABIX_BGZIPTABIX(ch_whatshap_stats_gtf)
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     TABIX_BGZIPTABIX.out.gz_tbi
