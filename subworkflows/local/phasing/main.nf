@@ -86,8 +86,8 @@ workflow PHASING {
 
 
     // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
-    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424 for more
-    // details.
+    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424
+    // for more details.
     run_whatshap_stats = !snv_variant_caller.equals("sentieon")
 
     QC_PHASING (
