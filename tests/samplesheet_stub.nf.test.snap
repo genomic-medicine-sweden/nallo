@@ -138,9 +138,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:25:52.923891122"
+        "timestamp": "2026-01-28T15:12:25.213070904"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -344,7 +344,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-29T11:22:22.255821863"
+        "timestamp": "2026-01-28T15:16:30.534438979"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -442,9 +442,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:26:33.76139062"
+        "timestamp": "2026-01-28T15:14:08.784191713"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -504,9 +504,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:26:54.033695759"
+        "timestamp": "2026-01-28T15:14:58.816961429"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -671,13 +671,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:25:22.136261558"
+        "timestamp": "2026-01-28T15:10:52.862807227"
     },
     "Test family id same as sample id": {
         "content": [
-            180,
+            178,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -935,9 +935,6 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
-                "WHATSHAP_STATS": {
-                    "whatshap": 2.8
-                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
@@ -1091,11 +1088,6 @@
                 "qc/peddy/HG002_Revio/HG002_Revio.sex_check.csv",
                 "qc/peddy/HG002_Revio/HG002_Revio.sex_check.png",
                 "qc/peddy/HG002_Revio/HG002_Revio.vs.html",
-                "qc/phasing_stats",
-                "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -1148,7 +1140,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-29T11:23:13.96710061"
+        "timestamp": "2026-01-28T15:18:10.622478732"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1214,8 +1206,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:26:12.623478058"
+        "timestamp": "2026-01-28T15:13:15.3159432"
     }
 }

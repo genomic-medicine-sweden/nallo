@@ -123,10 +123,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-10-22T11:08:34.546062334"
+        "timestamp": "2026-01-28T14:42:19.220248133"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -218,10 +218,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-10-22T11:08:55.109509232"
+        "timestamp": "2026-01-28T14:43:14.947070766"
     },
     "don't unzip fasta, don't untar vep cache -stub": {
         "content": [
@@ -434,9 +434,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-08T17:47:05.133264202"
+        "timestamp": "2026-01-28T14:42:47.988979464"
     }
 }
