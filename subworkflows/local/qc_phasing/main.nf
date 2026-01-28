@@ -77,7 +77,7 @@ workflow QC_PHASING {
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phasing_stats        = ch_phasing_stats       // channel: [ val(meta), path(stats) ]
+    phasing_stats        = ch_whatshap_stats_tsv  // channel: [ val(meta), path(stats) ]
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
     phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(gtf_index) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]
