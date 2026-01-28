@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.2 - [2026-01-27]
+
+### `Fixed`
+
+- [#865](https://github.com/genomic-medicine-sweden/nallo/pull/865) - Added check that `methbat_regions` parameter is set when running methbat
+
 ## 0.9.1 - [2026-01-05]
 
 ### `Changed`
