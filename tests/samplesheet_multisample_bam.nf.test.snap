@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            333,
+            357,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -59,6 +59,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
                 },
                 "CAT_FASTQ": {
                     "cat": 9.5
@@ -152,6 +155,9 @@
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -302,6 +308,22 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002",
+                "gens/HG002/HG002.baf.bed.gz",
+                "gens/HG002/HG002.baf.bed.gz.tbi",
+                "gens/HG002/HG002.cov.bed.gz",
+                "gens/HG002/HG002.cov.bed.gz.tbi",
+                "gens/HG003",
+                "gens/HG003/HG003.baf.bed.gz",
+                "gens/HG003/HG003.baf.bed.gz.tbi",
+                "gens/HG003/HG003.cov.bed.gz",
+                "gens/HG003/HG003.cov.bed.gz.tbi",
+                "gens/HG004",
+                "gens/HG004/HG004.baf.bed.gz",
+                "gens/HG004/HG004.baf.bed.gz.tbi",
+                "gens/HG004/HG004.cov.bed.gz",
+                "gens/HG004/HG004.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -810,6 +832,18 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
+                "HG002.baf.bed.gz:md5,da9d473c112ef9214bfe37515079ce83",
+                "HG002.baf.bed.gz.tbi:md5,71c623aa1a8d8312a3e76d06101ff405",
+                "HG002.cov.bed.gz:md5,c1840d28c2b5ada453fcde65ac0e5f98",
+                "HG002.cov.bed.gz.tbi:md5,96476a5dcb6e966f3315cac2421fdea7",
+                "HG003.baf.bed.gz:md5,e2f4663b68517e997ceee2cb064b0e40",
+                "HG003.baf.bed.gz.tbi:md5,1ea77b695ff7ac4390810a873226b435",
+                "HG003.cov.bed.gz:md5,2ebd43de1d299fb6e8a4ec66873e8b09",
+                "HG003.cov.bed.gz.tbi:md5,8e11cf77176789f69201a15ae08aacb2",
+                "HG004.baf.bed.gz:md5,8a238f4904e0215886bacf08c76efcdf",
+                "HG004.baf.bed.gz.tbi:md5,4dd9eb8bfb02de7736151e23d78b9d07",
+                "HG004.cov.bed.gz:md5,6748a91e67cec8199149eacb45a24bf5",
+                "HG004.cov.bed.gz.tbi:md5,5bb9af90b44b23ab2737ad38a0f6df23",
                 "HG003_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1139,6 +1173,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-27T11:39:23.017369591"
+        "timestamp": "2026-01-29T12:53:13.261503739"
     }
 }
