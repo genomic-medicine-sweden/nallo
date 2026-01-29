@@ -164,7 +164,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T13:54:27.652255828"
+        "timestamp": "2026-01-28T19:54:25.65077629"
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -422,7 +422,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T13:54:51.024379224"
+        "timestamp": "2026-01-28T19:54:50.043759874"
     },
     "1 sample - bed phased": {
         "content": [
@@ -527,7 +527,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T13:55:16.113953854"
+        "timestamp": "2026-01-28T19:55:15.399936174"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -663,6 +663,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T13:55:39.743531469"
+        "timestamp": "2026-01-28T19:55:39.719817323"
     }
 }

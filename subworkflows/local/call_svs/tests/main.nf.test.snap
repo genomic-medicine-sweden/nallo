@@ -112,7 +112,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T14:22:06.151683822"
+        "timestamp": "2026-01-28T20:21:30.654457113"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -194,7 +194,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T14:14:05.07358109"
+        "timestamp": "2026-01-28T20:13:24.487893458"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -299,7 +299,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T14:18:03.864613282"
+        "timestamp": "2026-01-28T20:17:27.785750077"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -622,7 +622,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T14:20:05.313579364"
+        "timestamp": "2026-01-28T20:19:30.412559324"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -661,7 +661,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T14:16:01.238258467"
+        "timestamp": "2026-01-28T20:15:22.725755613"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [

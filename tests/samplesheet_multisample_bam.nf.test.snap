@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            327,
+            333,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -260,6 +260,9 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.8
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 },
@@ -472,6 +475,8 @@
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/multiqc_data/multiqc_somalier.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
                 "multiqc/multiqc_data/peddy_het_check_plot.txt",
                 "multiqc/multiqc_data/peddy_relatedness_plot.txt",
                 "multiqc/multiqc_data/peddy_sex_check_plot.txt",
@@ -480,6 +485,7 @@
                 "multiqc/multiqc_data/somalier_relatedness_plot.txt",
                 "multiqc/multiqc_data/somalier_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_stats.txt",
+                "multiqc/multiqc_data/whatshap-stats-table.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
                 "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-cnt.pdf",
@@ -506,6 +512,7 @@
                 "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-log.pdf",
                 "multiqc/multiqc_plots/pdf/mosdepth-cumcoverage-dist-id.pdf",
+                "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_relatedness_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_sex_check_plot.pdf",
@@ -514,6 +521,7 @@
                 "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_stats.pdf",
+                "multiqc/multiqc_plots/pdf/whatshap-stats-table.pdf",
                 "multiqc/multiqc_plots/png",
                 "multiqc/multiqc_plots/png/bcftools-stats-subtypes-cnt.png",
                 "multiqc/multiqc_plots/png/bcftools-stats-subtypes-pct.png",
@@ -539,6 +547,7 @@
                 "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-cnt.png",
                 "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-log.png",
                 "multiqc/multiqc_plots/png/mosdepth-cumcoverage-dist-id.png",
+                "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
                 "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
                 "multiqc/multiqc_plots/png/peddy_relatedness_plot.png",
                 "multiqc/multiqc_plots/png/peddy_sex_check_plot.png",
@@ -547,6 +556,7 @@
                 "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
                 "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_stats.png",
+                "multiqc/multiqc_plots/png/whatshap-stats-table.png",
                 "multiqc/multiqc_plots/svg",
                 "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-cnt.svg",
                 "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-pct.svg",
@@ -572,6 +582,7 @@
                 "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-cnt.svg",
                 "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-log.svg",
                 "multiqc/multiqc_plots/svg/mosdepth-cumcoverage-dist-id.svg",
+                "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_relatedness_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_sex_check_plot.svg",
@@ -580,6 +591,7 @@
                 "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_stats.svg",
+                "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
                 "multiqc/multiqc_report.html",
                 "paraphase",
                 "paraphase/family",
@@ -697,6 +709,19 @@
                 "qc/peddy/FAM/FAM.sex_check.csv",
                 "qc/peddy/FAM/FAM.sex_check.png",
                 "qc/peddy/FAM/FAM.vs.html",
+                "qc/phasing_stats",
+                "qc/phasing_stats/HG002",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
+                "qc/phasing_stats/HG003",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
+                "qc/phasing_stats/HG004",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002",
                 "qc/sambamba_depth/HG002/HG002_sambamba_depth.bed",
@@ -925,11 +950,13 @@
                 "mosdepth_cumcov_dist.txt:md5,6255c64e367fd16ce9a7af1412a48afc",
                 "mosdepth_perchrom.txt:md5,ac1c99ba478b474c94aa3a4ffbd77ded",
                 "multiqc_bcftools_stats.txt:md5,93f18535a07855bf4d0da097603845dd",
-                "multiqc_citations.txt:md5,f79543b6f59de6b4e3bdd94d349f91fd",
+                "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,1e6ac77b00af0b9c6864c8b589860137",
-                "multiqc_general_stats.txt:md5,df3764eb61af55ece8e0ec11255dfef5",
+                "multiqc_general_stats.txt:md5,5f6892f7fc90ddc9ddf537e486b00662",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,cc666ebe9ef079dd8141117a08dc8f99",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,dae75ddc6021785e0e0cd0c351905ca3",
+                "whatshap-stats-table.txt:md5,9630abc4dc9862c801dbb34387eff479",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,b3e59ca8727f2ccac898b08cdc8f1022",
                 "HG003_cramino_aligned_phased.arrow:md5,0d592c579116e4095e741ba522dbb916",
@@ -962,6 +989,15 @@
                 "FAM.sex_check.csv:md5,71ae6b68418d47304a18d72c571d3a7a",
                 "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
+                "HG002_whatshap_stats.gtf.gz:md5,9a0fb275eeb8ed73091366b00942b1f1",
+                "HG002_whatshap_stats.gtf.gz.tbi:md5,f0ea816f0b7327d559d0706816943cf8",
+                "HG002_whatshap_stats.tsv:md5,958e3f38fb04543f3ec9aed2feacbf5a",
+                "HG003_whatshap_stats.gtf.gz:md5,3abd6413706e4867978bf86ba258ced9",
+                "HG003_whatshap_stats.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
+                "HG003_whatshap_stats.tsv:md5,de75cb0003d5ee292547fcd47ff12208",
+                "HG004_whatshap_stats.gtf.gz:md5,3f5d5fc2c490979623a4ec85ace70cf4",
+                "HG004_whatshap_stats.gtf.gz.tbi:md5,06669aaa7f1ef3342d74a1acb31d81d4",
+                "HG004_whatshap_stats.tsv:md5,72a0794ee540a0342f72c0be505cbca6",
                 "HG002_sambamba_depth.bed:md5,d51c953d6f90c54eff946b058caf46c9",
                 "HG003_sambamba_depth.bed:md5,7c93de77f515eab7c14188547b9c2bad",
                 "HG004_sambamba_depth.bed:md5,847e789fad6341c4be4f56dcbb68dfdc",
@@ -1103,6 +1139,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T15:05:14.039959601"
+        "timestamp": "2026-01-28T17:04:07.510618709"
     }
 }

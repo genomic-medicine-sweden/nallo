@@ -677,7 +677,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            178,
+            180,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -935,6 +935,9 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.8
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
@@ -1088,6 +1091,11 @@
                 "qc/peddy/HG002_Revio/HG002_Revio.sex_check.csv",
                 "qc/peddy/HG002_Revio/HG002_Revio.sex_check.png",
                 "qc/peddy/HG002_Revio/HG002_Revio.vs.html",
+                "qc/phasing_stats",
+                "qc/phasing_stats/HG002_Revio",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -1140,7 +1148,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T15:18:10.622478732"
+        "timestamp": "2026-01-28T17:17:14.816851632"
     },
     "Test alignment without genome assembly": {
         "content": [
