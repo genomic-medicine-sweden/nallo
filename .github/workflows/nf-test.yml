@@ -98,11 +98,11 @@ jobs:
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
         with:
           android: true
-          dotnet: false
-          haskell: false
-          large-packages: false
+          dotnet: true
+          haskell: true
+          large-packages: true
           docker-images: true
-          swap-storage: false
+          swap-storage: true
 
       - name: Run nf-test
         if: matrix.profile != ''
