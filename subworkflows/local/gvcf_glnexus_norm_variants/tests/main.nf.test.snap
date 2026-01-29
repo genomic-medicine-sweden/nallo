@@ -101,9 +101,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:44:13.148874515"
+        "timestamp": "2026-01-29T10:02:22.295378053"
     },
     "2 gVCFs, without bed": {
         "content": [
@@ -154,9 +154,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:44:27.735839042"
+        "timestamp": "2026-01-29T10:02:30.669934078"
     },
     "2 gVCFs, without bed -stub": {
         "content": [
@@ -313,8 +313,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:44:42.691997425"
+        "timestamp": "2026-01-29T10:02:39.265052733"
     }
 }

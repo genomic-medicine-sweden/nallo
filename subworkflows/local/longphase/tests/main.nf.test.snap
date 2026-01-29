@@ -43,9 +43,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:49:12.607200131"
+        "timestamp": "2026-01-29T10:05:11.596406752"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -370,9 +370,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:49:45.575732144"
+        "timestamp": "2026-01-29T10:05:29.238917686"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -487,9 +487,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:48:42.20192446"
+        "timestamp": "2026-01-29T10:04:55.243490901"
     },
     "1 sample - SNVs only - stub": {
         "content": [
@@ -669,9 +669,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:48:23.44923988"
+        "timestamp": "2026-01-29T10:04:43.709284905"
     },
     "2 samples - SNVs only - stub": {
         "content": [

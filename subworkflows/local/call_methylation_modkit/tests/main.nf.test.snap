@@ -162,9 +162,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:09:14.770866853"
+        "timestamp": "2026-01-29T09:46:57.578939352"
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -420,9 +420,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:09:35.907386534"
+        "timestamp": "2026-01-29T09:47:09.716738576"
     },
     "1 sample - bed phased": {
         "content": [
@@ -525,9 +525,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:09:57.891440505"
+        "timestamp": "2026-01-29T09:47:22.341294471"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -661,8 +661,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T20:53:17.857252303"
+        "timestamp": "2026-01-29T09:47:34.810167315"
     }
 }

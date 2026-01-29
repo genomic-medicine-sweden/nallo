@@ -124,9 +124,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:33:34.812830792"
+        "timestamp": "2026-01-29T10:06:22.686819018"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -247,7 +247,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -278,7 +278,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -308,9 +308,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:52:53.961359407"
+        "timestamp": "2026-01-27T17:20:33.484376714"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -336,7 +336,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -386,7 +386,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -435,8 +435,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:52:24.21010116"
+        "timestamp": "2026-01-29T10:06:36.077892503"
     }
 }

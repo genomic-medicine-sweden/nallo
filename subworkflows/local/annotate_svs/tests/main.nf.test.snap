@@ -11,9 +11,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T20:49:25.157949409"
+        "timestamp": "2026-01-29T09:45:05.985822732"
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [

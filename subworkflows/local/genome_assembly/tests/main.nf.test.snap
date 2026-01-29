@@ -335,9 +335,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:24:43.304163583"
+        "timestamp": "2026-01-29T10:01:39.674148427"
     },
     "child with one parent, trio-binning mode -stub": {
         "content": [
@@ -687,9 +687,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:24:17.182393391"
+        "timestamp": "2026-01-29T10:01:19.181159838"
     },
     "one sample, hifi-only mode -stub": {
         "content": [
@@ -809,9 +809,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:42:10.481441689"
+        "timestamp": "2026-01-29T10:01:00.594240691"
     },
     "child with two parents, trio-binning mode -stub": {
         "content": [

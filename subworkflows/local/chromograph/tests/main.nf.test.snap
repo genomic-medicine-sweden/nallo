@@ -326,9 +326,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:19:28.521517119"
+        "timestamp": "2026-01-29T09:58:34.586546307"
     },
     "plot all -stub": {
         "content": [
@@ -712,9 +712,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:19:52.903918869"
+        "timestamp": "2026-01-29T09:58:48.038371469"
     },
     "plot autozygosity": {
         "content": [

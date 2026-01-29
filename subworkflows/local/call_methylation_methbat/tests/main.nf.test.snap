@@ -133,9 +133,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:06:42.977455533"
+        "timestamp": "2026-01-29T09:45:30.175138286"
     },
     "1 sample - unphased": {
         "content": [
@@ -247,9 +247,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T20:50:23.732720402"
+        "timestamp": "2026-01-29T09:45:42.743907961"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -403,9 +403,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:07:26.271031933"
+        "timestamp": "2026-01-29T09:45:55.566440058"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -662,9 +662,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T08:07:49.443260287"
+        "timestamp": "2026-01-29T09:46:08.927006498"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -909,8 +909,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T20:51:20.854530899"
+        "timestamp": "2026-01-29T09:46:21.203584937"
     }
 }

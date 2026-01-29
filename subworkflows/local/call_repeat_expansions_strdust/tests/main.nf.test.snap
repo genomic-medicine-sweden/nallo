@@ -10,9 +10,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T20:37:34.608793332"
+        "timestamp": "2026-01-29T09:49:56.92698379"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [

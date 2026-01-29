@@ -74,9 +74,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-29T09:03:28.670906693"
+        "timestamp": "2026-01-29T10:12:31.226547763"
     },
     "two samples -stub": {
         "content": [

@@ -110,9 +110,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:17:26.417368442"
+        "timestamp": "2026-01-29T09:57:41.536176895"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -153,9 +153,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:07:39.806239402"
+        "timestamp": "2026-01-29T09:53:39.226142226"
     },
     "1 sample, 1 family - sawfish": {
         "content": [
@@ -192,9 +192,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:09:37.435074044"
+        "timestamp": "2026-01-29T09:54:21.924203286"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -297,9 +297,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:13:31.594362885"
+        "timestamp": "2026-01-29T09:55:54.556779759"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -620,9 +620,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:15:29.074542964"
+        "timestamp": "2026-01-29T09:56:48.768683396"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -659,9 +659,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-26T21:11:32.722589373"
+        "timestamp": "2026-01-29T09:55:02.675341499"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [
