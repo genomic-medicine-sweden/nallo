@@ -13,14 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
 - [#853](https://github.com/genomic-medicine-sweden/nallo/pull/853) - Changed local whatshap/phase module to the nf-core module
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
+- [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
 
 ### `Removed`
 
 - [#858](https://github.com/genomic-medicine-sweden/nallo/pull/858) - Removed validation for empty samplesheet, because it obfuscates other errors
 
 ### `Fixed`
-
-- [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
 
 ### Parameters
 
