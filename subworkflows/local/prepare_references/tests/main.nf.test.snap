@@ -247,7 +247,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -278,7 +278,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -308,9 +308,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-27T17:20:33.484376714"
+        "timestamp": "2026-01-29T12:33:32.023054717"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -336,7 +336,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -386,7 +386,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -435,8 +435,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-29T10:06:36.077892503"
+        "timestamp": "2026-01-29T12:33:01.141470238"
     }
 }

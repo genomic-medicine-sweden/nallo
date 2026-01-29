@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            187,
+            195,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -62,6 +62,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
@@ -158,6 +161,9 @@
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -284,6 +290,12 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_Revio",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -558,6 +570,10 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
+                "HG002_Revio.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
+                "HG002_Revio.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400",
+                "HG002_Revio.cov.bed.gz:md5,dd6fc455c22e102c1c138011c4e28f69",
+                "HG002_Revio.cov.bed.gz.tbi:md5,d1cec31c23b82996cbc97913496e3ae0",
                 "HG002_Revio_pbcpgtools.combined.bed.gz:md5,0a1ff6f11f3f0101671beff686e72b94",
                 "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,e644f22a1dffe1108bef1ae49e3c2714",
                 "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,381c86983d948c320e0ce258783ca4f3",
@@ -680,8 +696,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T12:09:09.93348126"
+        "timestamp": "2026-01-29T13:08:35.783491516"
     }
 }
