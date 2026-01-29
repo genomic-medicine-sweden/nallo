@@ -70,6 +70,7 @@ jobs:
             runCleanup: true
           - tag: "samplesheet_stub"
             runCleanup: true
+            cleanupDockerImages: true
           - tag: "samplesheet_target_regions_null"
             runCleanup: true
           - tag: "call_svs"
@@ -101,7 +102,7 @@ jobs:
           dotnet: false
           haskell: false
           large-packages: false
-          docker-images: false
+          docker-images: ${{ matrix.cleanupDockerImages || false }}
           swap-storage: false
 
       - name: Run nf-test
