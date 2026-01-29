@@ -7,7 +7,13 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,ae09951583439e589007672169ad9e41"
                     ]
                 ],
                 "1": [
@@ -15,18 +21,24 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "2": [
-                    
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f"
                 ],
                 "bam": [
                     [
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,ae09951583439e589007672169ad9e41"
                     ]
                 ],
                 "fastq": [
@@ -34,11 +46,11 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f"
                 ]
             }
         ],
@@ -46,7 +58,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T21:22:48.292217914"
+        "timestamp": "2026-01-29T08:40:56.059917454"
     },
     "convert BAM to FASTQ": {
         "content": [
@@ -56,7 +68,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ]
                 ],
                 "1": [
@@ -70,7 +82,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "2": [
@@ -81,7 +93,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ]
                 ],
                 "fastq": [
@@ -95,7 +107,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "versions": [
@@ -107,7 +119,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T21:22:33.531044882"
+        "timestamp": "2026-01-29T08:40:39.859297376"
     },
     "convert BAM to FASTQ and FASTQ to BAM": {
         "content": [
@@ -117,38 +129,64 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,ae09951583439e589007672169ad9e41"
                     ]
                 ],
                 "1": [
                     [
                         {
+                            "id": "test_bam"
+                        },
+                        "test_bam_other.fastq.gz:md5,9bcc0ed61c03266551016023ce17ecae"
+                    ],
+                    [
+                        {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "2": [
-                    
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ],
                 "bam": [
                     [
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "test_fastq"
+                        },
+                        "test_fastq.bam:md5,ae09951583439e589007672169ad9e41"
                     ]
                 ],
                 "fastq": [
                     [
                         {
+                            "id": "test_bam"
+                        },
+                        "test_bam_other.fastq.gz:md5,9bcc0ed61c03266551016023ce17ecae"
+                    ],
+                    [
+                        {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,554dd844e0c22e8a803f41b0b893a49f",
+                    "versions.yml:md5,acef923390f1b5290089096ef6f1d991"
                 ]
             }
         ],
@@ -156,7 +194,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T21:23:02.714342757"
+        "timestamp": "2026-01-29T08:41:13.42622215"
     },
     "convert neither BAM to FASTQ nor FASTQ to BAM": {
         "content": [
@@ -166,7 +204,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ]
                 ],
                 "1": [
@@ -174,7 +212,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "2": [
@@ -185,7 +223,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ]
                 ],
                 "fastq": [
@@ -193,7 +231,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "versions": [
@@ -205,7 +243,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T21:23:14.893704853"
+        "timestamp": "2026-01-29T08:41:28.230849"
     },
     "convert BAM to FASTQ and FASTQ to BAM -stub": {
         "content": [
@@ -215,7 +253,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ],
                     [
                         {
@@ -235,7 +273,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "2": [
@@ -247,7 +285,7 @@
                         {
                             "id": "test_bam"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_PacBio_Revio.bam"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_PacBio_Revio.bam"
                     ],
                     [
                         {
@@ -267,7 +305,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "/genomic-medicine-sweden/test-datasets/be8d8d80c228dc3639ecca596788a5f5942f6987/testdata/HG002_ONT.fastq.gz"
+                        "/genomic-medicine-sweden/test-datasets/9beee364abf96d44861ed6901cb67591e9bfdeb7/testdata/HG002_ONT.fastq.gz"
                     ]
                 ],
                 "versions": [
@@ -280,6 +318,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T21:23:29.417517806"
+        "timestamp": "2026-01-29T08:41:45.018323888"
     }
 }
