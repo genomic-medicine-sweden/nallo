@@ -1,4 +1,3 @@
-include { BCFTOOLS_CONCAT }               from '../../../modules/nf-core/bcftools/concat/main'
 include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
 include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK as MOSDEPTH_GATK_HEADER }  from '../../../modules/nf-core/gawk/main'
