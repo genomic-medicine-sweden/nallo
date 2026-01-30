@@ -158,6 +158,59 @@
         },
         "timestamp": "2026-01-28T14:34:47.976593787"
     },
+    "2 gVCFs, without bed, sentieon -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,12e244b8bfd2d036b5a433b521fd4ca7",
+                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
+                    "versions.yml:md5,fef01d57d7aab64c1458c63ffe18d1a3"
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,12e244b8bfd2d036b5a433b521fd4ca7",
+                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
+                    "versions.yml:md5,fef01d57d7aab64c1458c63ffe18d1a3"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-30T06:55:47.7210153"
+    },
     "2 gVCFs, without bed -stub": {
         "content": [
             {
@@ -210,6 +263,59 @@
             "nextflow": "25.10.2"
         },
         "timestamp": "2026-01-28T14:35:36.02294919"
+    },
+    "1 gVCF, without bed, sentieon -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,12e244b8bfd2d036b5a433b521fd4ca7",
+                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
+                    "versions.yml:md5,fef01d57d7aab64c1458c63ffe18d1a3"
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,12e244b8bfd2d036b5a433b521fd4ca7",
+                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
+                    "versions.yml:md5,fef01d57d7aab64c1458c63ffe18d1a3"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-30T06:55:30.13906982"
     },
     "1 gVCF, without bed -stub": {
         "content": [
