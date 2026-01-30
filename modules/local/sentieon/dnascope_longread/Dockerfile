@@ -74,8 +74,8 @@ RUN set -eux; \
     micromamba create -y -n sentieon-cli -c conda-forge -c bioconda \
     python=3.10 \
     pip=24.0 \
-    samtools=1.20 \
-    bcftools=1.20 \
+    samtools=1.23 \
+    bcftools=1.23 \
     htslib=1.20 \
     pysam=0.22.0 \
     click=8.1.7 \
@@ -83,7 +83,7 @@ RUN set -eux; \
     pandas=2.2.2 \
     requests=2.32.3 \
     bedtools=2.31.1 \
-    mosdepth=0.3.5 \
+    mosdepth=0.3.12 \
     hificnv=1.0.1 \
     packaging=24.0 \
     colorlog=6.8.2 \
