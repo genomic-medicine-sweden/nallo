@@ -28,17 +28,13 @@ nextflow_process {
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
                 ]
                 input[2] = [
-                    [ id:'fasta' ],
-                        file('tests/data/genome.fa.fai', checkIfExists: true)
-                ]
-                input[3] = [
                     [ id:'fai'],
                         file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
-                input[4] = Channel.of('test model bundle')
+                input[3] = Channel.of('test model bundle')
                     .collectFile(name: 'dnascope_model.bundle')
                     .map { file -> [ [ id: 'sentieon_ml_model_bundle' ], file ] }
-                input[5] = "HiFi"
+                input[4] = "HiFi"
                 """
             }
         }
