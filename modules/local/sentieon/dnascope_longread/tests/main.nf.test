@@ -40,8 +40,8 @@ nextflow_process {
 
         then {
             assertAll(
-                { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert process.success },
+                { assert snapshot(process.out).match() }
             )
         }
     }
