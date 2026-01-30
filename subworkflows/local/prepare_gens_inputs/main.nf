@@ -20,9 +20,7 @@ workflow PREPARE_GENS_INPUTS {
 
     ch_bam
         .combine(ch_mosdepth_bins)
-        .map { bam_tuple, bins_tuple ->
-            def (meta, bam, bai) = bam_tuple
-            def (_bins_meta, bins) = bins_tuple
+        .map { meta, bam, bai, _bins_meta, bins ->
             [meta, bam, bai, bins]
         }
         .set { ch_mosdepth_in }
