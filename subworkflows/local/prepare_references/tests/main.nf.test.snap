@@ -247,7 +247,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -278,7 +278,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -310,7 +310,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-29T12:33:32.023054717"
+        "timestamp": "2026-01-30T11:25:02.384461568"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -336,7 +336,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/hg38.test.fa"
                     ]
                 ],
                 "3": [
@@ -386,7 +386,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/418c19b7e79b5fdea1946c431697744bbfac74b7b7/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/hg38.test.fa"
                     ]
                 ],
                 "mmi": [
@@ -437,6 +437,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-29T12:33:01.141470238"
+        "timestamp": "2026-01-30T11:24:32.791001112"
     }
 }

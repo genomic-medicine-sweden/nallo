@@ -156,9 +156,6 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
-                "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
-                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -308,22 +305,13 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
-                "gens",
-                "gens/HG002",
-                "gens/HG002/HG002.baf.bed.gz",
-                "gens/HG002/HG002.baf.bed.gz.tbi",
-                "gens/HG002/HG002.cov.bed.gz",
-                "gens/HG002/HG002.cov.bed.gz.tbi",
-                "gens/HG003",
-                "gens/HG003/HG003.baf.bed.gz",
-                "gens/HG003/HG003.baf.bed.gz.tbi",
-                "gens/HG003/HG003.cov.bed.gz",
-                "gens/HG003/HG003.cov.bed.gz.tbi",
-                "gens/HG004",
-                "gens/HG004/HG004.baf.bed.gz",
-                "gens/HG004/HG004.baf.bed.gz.tbi",
-                "gens/HG004/HG004.cov.bed.gz",
-                "gens/HG004/HG004.cov.bed.gz.tbi",
+                "bcftools",
+                "bcftools/HG002.vcf",
+                "bcftools/HG002.vcf.gz",
+                "bcftools/HG003.vcf",
+                "bcftools/HG003.vcf.gz",
+                "bcftools/HG004.vcf",
+                "bcftools/HG004.vcf.gz",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -832,18 +820,12 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "HG002.baf.bed.gz:md5,da9d473c112ef9214bfe37515079ce83",
-                "HG002.baf.bed.gz.tbi:md5,71c623aa1a8d8312a3e76d06101ff405",
-                "HG002.cov.bed.gz:md5,c1840d28c2b5ada453fcde65ac0e5f98",
-                "HG002.cov.bed.gz.tbi:md5,96476a5dcb6e966f3315cac2421fdea7",
-                "HG003.baf.bed.gz:md5,e2f4663b68517e997ceee2cb064b0e40",
-                "HG003.baf.bed.gz.tbi:md5,1ea77b695ff7ac4390810a873226b435",
-                "HG003.cov.bed.gz:md5,2ebd43de1d299fb6e8a4ec66873e8b09",
-                "HG003.cov.bed.gz.tbi:md5,8e11cf77176789f69201a15ae08aacb2",
-                "HG004.baf.bed.gz:md5,8a238f4904e0215886bacf08c76efcdf",
-                "HG004.baf.bed.gz.tbi:md5,4dd9eb8bfb02de7736151e23d78b9d07",
-                "HG004.cov.bed.gz:md5,6748a91e67cec8199149eacb45a24bf5",
-                "HG004.cov.bed.gz.tbi:md5,5bb9af90b44b23ab2737ad38a0f6df23",
+                "HG002.vcf:md5,3ae0ab4fa998f5eaca82c935a254b180",
+                "HG002.vcf.gz:md5,bc068c3637f59ec5b1026ae5e49e4f95",
+                "HG003.vcf:md5,bc12eb9718cfeeacfed29fbe8479b088",
+                "HG003.vcf.gz:md5,cc896972daa7dcdb7b3b106ffc55cf80",
+                "HG004.vcf:md5,07f2ee332ac0b603477b162769a8ee33",
+                "HG004.vcf.gz:md5,2058a80db78524e17675b03b21c0ab22",
                 "HG003_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1097,6 +1079,18 @@
             ],
             [
                 [
+                    "HG002.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=378, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG003.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=1950, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG004.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=4294, phased=false, phasedAutodetect=false]"
+                ],
+                [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]"
                 ],
@@ -1166,13 +1160,24 @@
                 ]
             ],
             [
-                
+                [
+                    "HG002.vcf.gz",
+                    "3e81e9c681fe015966da2e133524cc71"
+                ],
+                [
+                    "HG003.vcf.gz",
+                    "1df7d6131d7afa4ce77e2e2b25c1bcf3"
+                ],
+                [
+                    "HG004.vcf.gz",
+                    "2267ca7b7e3b700d472edf0c4ab811d9"
+                ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-29T12:53:13.261503739"
+        "timestamp": "2026-01-30T11:39:38.308579377"
     }
 }
