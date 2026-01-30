@@ -65,9 +65,7 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT.out.file_out
         .combine(ch_panel_of_normals)
-        .map { tsv_tuple, pon_tuple ->
-            def (meta, _tsv) = tsv_tuple
-            def (_pon_meta, pon) = pon_tuple
+        .map { meta, _tsv, _pon_meta, pon ->
             [ meta, pon ]
         }
         .set { ch_pon }
