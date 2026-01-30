@@ -475,7 +475,7 @@ workflow NALLO {
         CONCAT_SORT_GENS(
             ch_gvcfs
         )
-        ch_versions.mix(CONCAT_SORT_GENS.out.versions)
+        ch_versions = ch_versions.mix(CONCAT_SORT_GENS.out.versions)
 
         CONCAT_SORT_GENS.out.vcf
             .join(CONCAT_SORT_GENS.out.index)
@@ -488,7 +488,7 @@ workflow NALLO {
             ch_gens_panel_of_normals,
             ch_gens_coverage_bins,
         )
-        ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+        ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
     }
 
     //
