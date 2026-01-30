@@ -1,29 +1,28 @@
-FROM debian:stable-20250520-slim AS downloader
+FROM debian:stable-20260112-slim AS downloader
 
-ARG SENTIEON_VERSION=202308.01
+ARG SENTIEON_VERSION=202503.02
 RUN test -n "$SENTIEON_VERSION"
 
-LABEL container.base.image="debian:stable-20250520-slim" \
-      software.version="${SENTIEON_VERSION}" \
-      software.website="https://www.sentieon.com/"
+LABEL container.base.image="debian:stable-20260112-slim" \
+    software.version="${SENTIEON_VERSION}" \
+    software.website="https://www.sentieon.com/"
 
 # Download the software from the permalink
-RUN apt-get update && apt-get install -y curl && \
-    mkdir -p /opt/sentieon/ && \
-    curl -L "https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-${SENTIEON_VERSION}.tar.gz" | \
-      tar -zxf - -C /opt/sentieon/
+RUN apt-get update && apt-get install -y curl
+RUN mkdir -p /opt/sentieon/
+RUN curl -L "https://s3.amazonaws.com/sentieon-release/software/sentieon-genomics-${SENTIEON_VERSION}.tar.gz" | tar -zxf - -C /opt/sentieon/
 
 # Build gnuplot
 RUN apt-get update && apt-get install -y curl make gcc gzip libgd-dev libcairo2-dev libpango1.0-dev && \
-  curl -L "https://downloads.sourceforge.net/project/gnuplot/gnuplot/6.0.2/gnuplot-6.0.2.tar.gz" | \
-  tar -zxf - && \
-  cd gnuplot-6.0.2 && \
-  ./configure && \
-  make install
+    curl -L "https://downloads.sourceforge.net/project/gnuplot/gnuplot/6.0.2/gnuplot-6.0.2.tar.gz" | \
+    tar -zxf - && \
+    cd gnuplot-6.0.2 && \
+    ./configure && \
+    make install
 
 # Build the container
 FROM debian:stable-20250520-slim
-ARG SENTIEON_VERSION=202308.01
+ARG SENTIEON_VERSION=202503.02
 ENV SENTIEON_VERSION=$SENTIEON_VERSION
 
 COPY --from=downloader /opt/sentieon/sentieon-genomics-${SENTIEON_VERSION} /opt/sentieon/sentieon-genomics-${SENTIEON_VERSION}
@@ -45,10 +44,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     bzip2 \
-  && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
-  && dpkg-reconfigure --frontend=noninteractive locales \
-  && echo "LANG=en_US.UTF-8" | tee /etc/default/locale \
-  && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
+    && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && echo "LANG=en_US.UTF-8" | tee /etc/default/locale \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 ENV LC_ALL=en_US.UTF-8
 ENV SENTIEON_INSTALL_DIR=/opt/sentieon/sentieon-genomics-$SENTIEON_VERSION
@@ -67,26 +66,28 @@ RUN set -eux; \
 
 ARG SENTIEON_CLI_REPO=https://github.com/Sentieon/sentieon-cli.git
 ARG SENTIEON_CLI_REF=main
-ARG SENTIEON_CLI_BRANCH=
+
+# 1.5.1 release:
+ARG SENTIEON_CLI_BRANCH=8bd23b6b6610eb983e8c1f69895c89135609f45f
 
 RUN set -eux; \
     micromamba create -y -n sentieon-cli -c conda-forge -c bioconda \
-      python=3.10 \
-      pip=24.0 \
-      samtools=1.20 \
-      bcftools=1.20 \
-      htslib=1.20 \
-      pysam=0.22.0 \
-      click=8.1.7 \
-      pyyaml=6.0.1 \
-      pandas=2.2.2 \
-      requests=2.32.3 \
-      bedtools=2.31.1 \
-      mosdepth=0.3.5 \
-      hificnv=1.0.1 \
-      packaging=24.0 \
-      colorlog=6.8.2 \
-      importlib_resources=6.4.5; \
+    python=3.10 \
+    pip=24.0 \
+    samtools=1.20 \
+    bcftools=1.20 \
+    htslib=1.20 \
+    pysam=0.22.0 \
+    click=8.1.7 \
+    pyyaml=6.0.1 \
+    pandas=2.2.2 \
+    requests=2.32.3 \
+    bedtools=2.31.1 \
+    mosdepth=0.3.5 \
+    hificnv=1.0.1 \
+    packaging=24.0 \
+    colorlog=6.8.2 \
+    importlib_resources=6.4.5; \
     micromamba clean --all --yes
 
 RUN set -eux; \
