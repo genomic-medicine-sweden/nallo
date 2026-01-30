@@ -3,7 +3,7 @@
 This container was built with the following instructions:
 
 ```sh
-docker build --build-arg SENTIEON_VERSION=202503.02 --build-arg SENTIEON_CLI_BRANCH=8bd23b6 -t clinicalgenomicslund/dnascope-longread:1.4.0-lrRPA-f9c8811 .
+docker build --build-arg SENTIEON_VERSION=202503.02 --build-arg SENTIEON_CLI_BRANCH=8bd23b6 -t clinicalgenomicslund/dnascope-longread:1.5.1 .
 ```
 
 Where `SENTIEON_VERSION` is the version of the sentieon binary, and `SENTIEON_CLI_BRANCH` is the branch/release commit of the sentieon-cli.
