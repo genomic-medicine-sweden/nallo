@@ -44,6 +44,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     bzip2 \
+    igzip \
     && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && echo "LANG=en_US.UTF-8" | tee /etc/default/locale \
