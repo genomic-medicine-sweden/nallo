@@ -455,7 +455,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
     }
     // Extra case for checking if methbat regions are provided when needed.
     // The above error would suggest the opposite of the fix
-    if (!params.skip_methylation_calling && (params.run_methbat && !params.methbat_regions)) {
+    if (!params.skip_methylation_calling && params.run_methbat && !params.methbat_regions) {
         error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
