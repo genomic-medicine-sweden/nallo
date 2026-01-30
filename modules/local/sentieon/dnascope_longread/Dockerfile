@@ -72,12 +72,12 @@ ARG SENTIEON_CLI_BRANCH=8bd23b6b6610eb983e8c1f69895c89135609f45f
 
 RUN set -eux; \
     micromamba create -y -n sentieon-cli -c conda-forge -c bioconda \
-    python=3.13 \
+    python=3.11 \
     pip=24.0 \
-    samtools=1.23 \
-    bcftools=1.23 \
-    htslib=1.20 \
-    pysam=0.22.0 \
+    samtools=1.22 \
+    bcftools=1.22 \
+    htslib=1.22 \
+    pysam=0.23.0 \
     click=8.1.7 \
     pyyaml=6.0.1 \
     pandas=2.2.2 \
