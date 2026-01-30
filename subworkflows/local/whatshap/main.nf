@@ -19,22 +19,27 @@ workflow WHATSHAP {
         .groupTuple()
         .set { ch_bam_bai_grouped }
 
-    // Join
+    // Join VCFS, then join with BAMs to ensure input channel order
+    // The joined VCFs and BAMs are then separated so we can pass them into WhatsHap
     ch_snv_vcf
         .map { meta, vcf -> [[id: meta.id], vcf] }
         .join(ch_snv_index, failOnMismatch: true, failOnDuplicate: true)
-        .set { ch_snv_vcf_tbi }
+        .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
+        .multiMap { meta, snv, tbi, bam, bai ->
+            vcf: [meta, snv, tbi]
+            bam: [meta, bam, bai]
+        }
+        .set { ch_whatshap_phase_in }
 
     fasta
-        .map { meta, fasta_path -> [meta, fasta_path] }
         .join(fai, failOnMismatch: true, failOnDuplicate: true)
-        .collect()
+        .first()
         .set { ch_fasta_fai }
 
     WHATSHAP_PHASE(
-        ch_snv_vcf_tbi,
-        ch_bam_bai_grouped,
-        ch_fasta_fai,
+        ch_whatshap_phase_in.vcf,
+        ch_whatshap_phase_in.bam,
+        ch_fasta_fai
     )
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.

@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#853](https://github.com/genomic-medicine-sweden/nallo/pull/853) - Changed local whatshap/phase module to the nf-core module
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 - [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
+- [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
 
 ### `Removed`
 
