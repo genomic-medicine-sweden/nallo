@@ -1,37 +1,4 @@
 {
-    "Generate Gens input without using PON": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    "versions.yml:md5,420608f8412dcfec786a76a00de40c48",
-                    "versions.yml:md5,52d8b1e5431a06c433ea086bf4fd4bf9",
-                    "versions.yml:md5,9cbd0d325be3c7f1154eaf2aa93cc748"
-                ],
-                "baf_bed_tbi": [
-                    
-                ],
-                "cov_bed_tbi": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,420608f8412dcfec786a76a00de40c48",
-                    "versions.yml:md5,52d8b1e5431a06c433ea086bf4fd4bf9",
-                    "versions.yml:md5,9cbd0d325be3c7f1154eaf2aa93cc748"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-12-03T11:57:00.001440914"
-    },
     "prepare_gens_inputs": {
         "content": [
             {
@@ -56,7 +23,11 @@
                     ]
                 ],
                 "2": [
-                    
+                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
+                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
+                    "versions.yml:md5,cc6c94ada1344b3ae1e0f4584f510616",
+                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f",
+                    "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ],
                 "baf_bed_tbi": [
                     [
@@ -79,7 +50,11 @@
                     ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
+                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
+                    "versions.yml:md5,cc6c94ada1344b3ae1e0f4584f510616",
+                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f",
+                    "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ]
             }
         ],
@@ -87,40 +62,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T13:53:09.970706176"
-    },
-    "Generate Gens input using PON": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    "versions.yml:md5,07924b82b1d2710a4db692524a79d436",
-                    "versions.yml:md5,468c12dffaab22033caeae26665601f6",
-                    "versions.yml:md5,afacfef5b21a5bf856533de94d437f0c"
-                ],
-                "baf_bed_tbi": [
-                    
-                ],
-                "cov_bed_tbi": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,07924b82b1d2710a4db692524a79d436",
-                    "versions.yml:md5,468c12dffaab22033caeae26665601f6",
-                    "versions.yml:md5,afacfef5b21a5bf856533de94d437f0c"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-12-03T11:56:47.447129004"
+        "timestamp": "2026-01-30T11:10:10.586498411"
     },
     "prepare_gens_inputs - stub": {
         "content": [
@@ -146,7 +88,11 @@
                     ]
                 ],
                 "2": [
-                    
+                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
+                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
+                    "versions.yml:md5,cc6c94ada1344b3ae1e0f4584f510616",
+                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f",
+                    "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ],
                 "baf_bed_tbi": [
                     [
@@ -169,7 +115,11 @@
                     ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
+                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
+                    "versions.yml:md5,cc6c94ada1344b3ae1e0f4584f510616",
+                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f",
+                    "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ]
             }
         ],
@@ -177,6 +127,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T13:53:30.468267466"
+        "timestamp": "2026-01-30T11:10:31.618062528"
     }
 }
