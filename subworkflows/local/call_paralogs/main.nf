@@ -1,10 +1,16 @@
 include { BCFTOOLS_MERGE                 } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_VIEW                  } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GAWK } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_ANNOTATE              } from '../../../modules/nf-core/bcftools/annotate/main'
 include { BCFTOOLS_QUERY                 } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftools/reheader/main'
 include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_samples_haplotypes_file/main'
 include { MERGE_JSON                     } from '../../../modules/local/merge_json/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
+include { GAWK                           } from '../../../modules/nf-core/gawk/main'
+include { GAWK as RENAME_SAMPLES         } from '../../../modules/nf-core/gawk/main'
+include { BCFTOOLS_CONCAT } from '../../../modules/nf-core/bcftools/concat/main.nf'
 
 workflow CALL_PARALOGS {
 
@@ -23,6 +29,7 @@ workflow CALL_PARALOGS {
         [[],[]]
     )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
+
     PARAPHASE.out.json
         .map { meta, json -> [ [ 'id': meta.family_id ], json ] }
         .groupTuple()
@@ -43,12 +50,53 @@ workflow CALL_PARALOGS {
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
+    // TODO: Probably do this after annotation
     PARAPHASE.out.vcf
         .transpose()
         .map { meta, vcf ->
-            [ [ 'id' : vcf.simpleName, 'family_id': meta.family_id ], vcf, [] ]
+            [ [ 'id' : vcf.simpleName, 'family_id': meta.family_id, 'sample': vcf.simpleName.split('_')[0] ], vcf, [] ]
         }
         .set { paraphase_vcf_tbis }
+
+
+    // Exclude all psuedogenes with params.exclude_paraphase_haplotypes, TODO: Probably do this after annotation
+    BCFTOOLS_VIEW (
+        paraphase_vcf_tbis,
+        [],
+        [],
+        []
+    )
+
+    // Collapse haplotypes, TODO: Probably do this after annotation
+    GAWK (
+        BCFTOOLS_VIEW.out.vcf,
+        file('assets/collapse_haplotypes.awk'),
+        []
+    )
+
+
+    BCFTOOLS_VIEW_GAWK(
+        GAWK.out.output
+            .map { meta, vcf -> [ meta, vcf, [] ] },
+        [],
+        [],
+        []
+    )
+
+    BCFTOOLS_CONCAT (
+        BCFTOOLS_VIEW_GAWK.out.vcf
+            .map { meta, vcf -> [ ['id': meta.sample, 'family_id': meta.family_id ], vcf ] }
+            .groupTuple()
+            .map { meta, vcfs -> [ meta, vcfs, [] ] },
+    )
+
+    RENAME_SAMPLES(
+        BCFTOOLS_CONCAT.out.vcf.map { meta, _vcf -> [ meta, [] ] },
+        [],
+        []
+    )
+
+    RENAME_SAMPLES.out.output.view()
 
     // Get the "sample" name (which is actually the paraphase region, e.g. hba_hba2_hap1) from the VCF
     BCFTOOLS_QUERY (
