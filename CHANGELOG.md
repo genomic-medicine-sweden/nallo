@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- []() Fixed MethBat region validation running even when methylation calling is skipped
+
 ### Parameters
 
 | Old parameter | New parameter |
