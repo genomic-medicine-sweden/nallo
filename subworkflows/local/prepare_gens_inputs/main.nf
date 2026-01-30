@@ -12,14 +12,19 @@ workflow PREPARE_GENS_INPUTS {
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
     baf_positions       // value:   [mandatory] [ path(gz) ]
-    panel_of_normals    // value:   [mandatory] [ path(hd5) ]
-    mosdepth_bins       // value:   [mandatory] [ path(bed) ]
+    ch_panel_of_normals // channel: [mandatory] [ val(meta), path(hd5) ]
+    ch_mosdepth_bins    // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
     ch_versions = channel.empty()
 
     ch_bam
-        .map { meta, bam, bai -> tuple(meta, bam, bai, mosdepth_bins) }
+        .combine(ch_mosdepth_bins)
+        .map { bam_tuple, bins_tuple ->
+            def (meta, bam, bai) = bam_tuple
+            def (_bins_meta, bins) = bins_tuple
+            [meta, bam, bai, bins]
+        }
         .set { ch_mosdepth_in }
 
     // Prepare the header
@@ -61,7 +66,12 @@ workflow PREPARE_GENS_INPUTS {
     CAT_CAT(ch_cat_input)
 
     CAT_CAT.out.file_out
-        .map { meta, _tsv -> [ meta, panel_of_normals ] }
+        .combine(ch_panel_of_normals)
+        .map { tsv_tuple, pon_tuple ->
+            def (meta, _tsv) = tsv_tuple
+            def (_pon_meta, pon) = pon_tuple
+            [ meta, pon ]
+        }
         .set { ch_pon }
 
     // Calculate coverage

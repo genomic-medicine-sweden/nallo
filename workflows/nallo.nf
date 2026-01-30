@@ -115,6 +115,8 @@ workflow NALLO {
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
+    ch_gens_panel_of_normals     = createReferenceChannelFromPath(params.gens_panel_of_normals)
+    ch_gens_coverage_bins        = createReferenceChannelFromPath(params.gens_coverage_bins)
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -483,8 +485,8 @@ workflow NALLO {
             ch_bam_bai,
             ch_gvcf_tbi,
             params.gens_baf_positions,
-            params.gens_panel_of_normals,
-            params.gens_coverage_bins,
+            ch_gens_panel_of_normals,
+            ch_gens_coverage_bins,
         )
         ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
     }
