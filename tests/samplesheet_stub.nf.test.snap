@@ -777,6 +777,9 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
                 },
@@ -825,6 +828,12 @@
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -962,10 +971,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/HG002_Revio.vcf",
-                "bcftools/HG002_Revio.vcf.gz",
-                "bcftools/HG002_Revio.vcf.gz.tbi",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -1164,7 +1169,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T12:28:05.792835986"
+        "timestamp": "2026-01-30T15:01:49.582940215"
     },
     "Test alignment without genome assembly": {
         "content": [

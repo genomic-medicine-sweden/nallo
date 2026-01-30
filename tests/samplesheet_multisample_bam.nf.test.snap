@@ -101,6 +101,9 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
                 },
@@ -144,6 +147,12 @@
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -308,16 +317,6 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/HG002.vcf",
-                "bcftools/HG002.vcf.gz",
-                "bcftools/HG002.vcf.gz.tbi",
-                "bcftools/HG003.vcf",
-                "bcftools/HG003.vcf.gz",
-                "bcftools/HG003.vcf.gz.tbi",
-                "bcftools/HG004.vcf",
-                "bcftools/HG004.vcf.gz",
-                "bcftools/HG004.vcf.gz.tbi",
                 "gens",
                 "gens/HG002",
                 "gens/HG002/HG002.baf.bed.gz",
@@ -842,15 +841,6 @@
                 "HG003_haplotype_2.assembly_summary:md5,4fed48546fe40ab5a642af87a447bbd8",
                 "HG004_haplotype_1.assembly_summary:md5,150993d279b6eb8cecf6ae49bc19f21c",
                 "HG004_haplotype_2.assembly_summary:md5,afe262202d85dceb93375b7ce51365b7",
-                "HG002.vcf:md5,fb29af3e3f8b11cb4cb30cb7c6a3befb",
-                "HG002.vcf.gz:md5,040b34a1440a1e894bc47f4847ed2c3f",
-                "HG002.vcf.gz.tbi:md5,d11648e94aa6ed833ba8e9e6b442c53c",
-                "HG003.vcf:md5,6580190ad6aa74dcb70ae5939656efce",
-                "HG003.vcf.gz:md5,369a2fb693171f566500a16ae59bc1c9",
-                "HG003.vcf.gz.tbi:md5,32477d057242e2a92bf120dced2ec1f9",
-                "HG004.vcf:md5,e09072bb5f2f2524a4ae6e0644196a9b",
-                "HG004.vcf.gz:md5,66d4e556bad10d05a4978eb5f5c4e3b3",
-                "HG004.vcf.gz.tbi:md5,f4ce5fe3f44083cc61524d7f918e0865",
                 "HG002.baf.bed.gz:md5,da9d473c112ef9214bfe37515079ce83",
                 "HG002.baf.bed.gz.tbi:md5,71c623aa1a8d8312a3e76d06101ff405",
                 "HG002.cov.bed.gz:md5,c1840d28c2b5ada453fcde65ac0e5f98",
@@ -1116,18 +1106,6 @@
             ],
             [
                 [
-                    "HG002.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=378, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG003.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=1950, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG004.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=4294, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]"
                 ],
@@ -1197,24 +1175,13 @@
                 ]
             ],
             [
-                [
-                    "HG002.vcf.gz",
-                    "3e81e9c681fe015966da2e133524cc71"
-                ],
-                [
-                    "HG003.vcf.gz",
-                    "1df7d6131d7afa4ce77e2e2b25c1bcf3"
-                ],
-                [
-                    "HG004.vcf.gz",
-                    "2267ca7b7e3b700d472edf0c4ab811d9"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T14:19:44.318204191"
+        "timestamp": "2026-01-30T14:49:36.681279072"
     }
 }

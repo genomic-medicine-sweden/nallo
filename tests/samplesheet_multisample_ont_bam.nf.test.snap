@@ -92,6 +92,9 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
                 },
@@ -134,6 +137,12 @@
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -265,16 +274,6 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/HG002_ONT_A.vcf",
-                "bcftools/HG002_ONT_A.vcf.gz",
-                "bcftools/HG002_ONT_A.vcf.gz.tbi",
-                "bcftools/HG002_ONT_B.vcf",
-                "bcftools/HG002_ONT_B.vcf.gz",
-                "bcftools/HG002_ONT_B.vcf.gz.tbi",
-                "bcftools/HG002_ONT_C.vcf",
-                "bcftools/HG002_ONT_C.vcf.gz",
-                "bcftools/HG002_ONT_C.vcf.gz.tbi",
                 "gens",
                 "gens/HG002_ONT_A",
                 "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz",
@@ -781,15 +780,6 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,d2fa9b12bc053967ad9717fd95ec9566",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,70c46e9a12938cc7ff2e1a56de0e57d9",
-                "HG002_ONT_A.vcf:md5,f87725031fb13280c55092e24ca649e3",
-                "HG002_ONT_A.vcf.gz:md5,f87725031fb13280c55092e24ca649e3",
-                "HG002_ONT_A.vcf.gz.tbi:md5,66925d2e5839f40c0c4ed5b03a6c8ee3",
-                "HG002_ONT_B.vcf:md5,d20209792308a43204a22de96654dff1",
-                "HG002_ONT_B.vcf.gz:md5,d20209792308a43204a22de96654dff1",
-                "HG002_ONT_B.vcf.gz.tbi:md5,1c434f4730b37471a4ff3ab8a8fdacdc",
-                "HG002_ONT_C.vcf:md5,4dc41931e1d09a433621f35084152b8f",
-                "HG002_ONT_C.vcf.gz:md5,4dc41931e1d09a433621f35084152b8f",
-                "HG002_ONT_C.vcf.gz.tbi:md5,66925d2e5839f40c0c4ed5b03a6c8ee3",
                 "HG002_ONT_A.baf.bed.gz:md5,bd4480c494cc4bfcba1dd71563123938",
                 "HG002_ONT_A.baf.bed.gz.tbi:md5,285e944e10b52a28e48ca0bc7f12d33b",
                 "HG002_ONT_A.cov.bed.gz:md5,baed648bb2733917b5b2b4a242d8ecab",
@@ -1051,18 +1041,6 @@
             ],
             [
                 [
-                    "HG002_ONT_A.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=4311, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_B.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=2234, phased=false, phasedAutodetect=false]"
-                ],
-                [
-                    "HG002_ONT_C.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=4311, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_repeat_expansions.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
@@ -1136,24 +1114,13 @@
                 ]
             ],
             [
-                [
-                    "HG002_ONT_A.vcf.gz",
-                    "9445c66584cef3205df9899917f5f2a1"
-                ],
-                [
-                    "HG002_ONT_B.vcf.gz",
-                    "1a46da7d3f1941fa5c16cf6fc015952a"
-                ],
-                [
-                    "HG002_ONT_C.vcf.gz",
-                    "9445c66584cef3205df9899917f5f2a1"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T14:23:47.803983372"
+        "timestamp": "2026-01-30T14:53:44.295624318"
     }
 }
