@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## TBD
+## 0.10.0dev - [XXXX-XX-XX]
 
 ### `Added`
 
@@ -20,15 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                  | Old version | New version |
-| --------------------- | ----------- | ----------- |
-| gatk4                 |             | 4.6.2.0     |
-| gens/preparecovandbaf |             | 1.4.0       |
-| cat/cat               |             | 2.8         |
-
-## 0.10.0dev - [XXXX-XX-XX]
-
-### `Added`
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
 
 ### `Changed`
 

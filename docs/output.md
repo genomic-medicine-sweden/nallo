@@ -259,7 +259,7 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
-When `--prepare_gens_input` is enabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.
+When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.
 
 | Path                                    | Description                                                                           |
 | --------------------------------------- | ------------------------------------------------------------------------------------- |

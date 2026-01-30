@@ -26,9 +26,6 @@ nextflow_workflow {
         }
 
         then {
-            def cov = workflow.out.cov_bed_tbi
-            def baf = workflow.out.baf_bed_tbi
-
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() }
@@ -61,9 +58,6 @@ nextflow_workflow {
         }
 
         then {
-            def cov = workflow.out.cov_bed_tbi
-            def baf = workflow.out.baf_bed_tbi
-
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() }

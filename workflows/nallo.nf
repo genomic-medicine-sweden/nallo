@@ -41,6 +41,7 @@ include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subw
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -54,7 +55,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_GENS           } from '../modules/nf-core/bcftools/concat/main'
+// include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_GENS           } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
@@ -418,36 +419,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
-        if (!params.skip_prepare_gens_input) {
-
-            CALL_SNVS.out.gvcf
-                .join(CALL_SNVS.out.gvcf_index)
-                .map { meta, gvcf, gvcf_index ->
-                    def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
-                    [sample_meta, gvcf, gvcf_index]
-                }
-                .groupTuple()
-                .set { ch_gvcfs }
-
-            BCFTOOLS_CONCAT_GENS(
-                ch_gvcfs
-            )
-            ch_versions.mix(BCFTOOLS_CONCAT_GENS.out.versions)
-
-            BCFTOOLS_CONCAT_GENS.out.vcf
-                .join(BCFTOOLS_CONCAT_GENS.out.tbi)
-                .set { ch_gvcf_tbi }
-
-            PREPARE_GENS_INPUTS(
-                ch_bam_bai,
-                ch_gvcf_tbi,
-                params.gens_baf_positions,
-                params.gens_panel_of_normals,
-                params.gens_coverage_bins,
-            )
-            ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
-        }
-
         CALL_SNVS.out.vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region')
@@ -489,6 +460,35 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+    if (!params.skip_prepare_gens_input) {
+
+        CALL_SNVS.out.gvcf
+            .join(CALL_SNVS.out.gvcf_index)
+            .map { meta, gvcf, gvcf_index ->
+                def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                [sample_meta, gvcf, gvcf_index]
+            }
+            .groupTuple()
+            .set { ch_gvcfs }
+
+        CONCAT_SORT_GENS(
+            ch_gvcfs
+        )
+        ch_versions.mix(CONCAT_SORT_GENS.out.versions)
+
+        CONCAT_SORT_GENS.out.vcf
+            .join(CONCAT_SORT_GENS.out.index)
+            .set { ch_gvcf_tbi }
+
+        PREPARE_GENS_INPUTS(
+            ch_bam_bai,
+            ch_gvcf_tbi,
+            params.gens_baf_positions,
+            params.gens_panel_of_normals,
+            params.gens_coverage_bins,
+        )
+        ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+    }
 
     //
     // Call SVs
@@ -1009,7 +1009,7 @@ workflow NALLO {
             .collectFile(
                 name: 'methods_description_mqc.yaml',
                 sort: false // preserve order for correct yaml structure
-        )
+            )
     )
 
     MULTIQC (

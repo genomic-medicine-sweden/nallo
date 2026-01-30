@@ -1,11 +1,11 @@
-include { CAT_CAT }                       from '../../../modules/nf-core/cat/cat/main'
-include { GATK4_DENOISEREADCOUNTS }       from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-include { GAWK as MOSDEPTH_GATK_HEADER }  from '../../../modules/nf-core/gawk/main'
-include { GAWK as MOSDEPTH_GATK_FORMAT }  from '../../../modules/nf-core/gawk/main'
-include { MOSDEPTH }                      from '../../../modules/nf-core/mosdepth/main'
-include { PREPARECOVANDBAF }              from '../../../modules/nf-core/gens/preparecovandbaf/main'
-include { SAMTOOLS_VIEW }                 from '../../../modules/nf-core/samtools/view/main'
-include { TABIX_BGZIP }                   from '../../../modules/nf-core/tabix/bgzip/main'
+include { CAT_CAT                      } from '../../../modules/nf-core/cat/cat/main'
+include { GATK4_DENOISEREADCOUNTS      } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+include { GAWK as MOSDEPTH_GATK_HEADER } from '../../../modules/nf-core/gawk/main'
+include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/main'
+include { MOSDEPTH                     } from '../../../modules/nf-core/mosdepth/main'
+include { PREPARECOVANDBAF             } from '../../../modules/nf-core/gens/preparecovandbaf/main'
+include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools/view/main'
+include { TABIX_BGZIP                  } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -44,6 +44,7 @@ workflow PREPARE_GENS_INPUTS {
         [[],[]]
     )
     ch_versions.mix(MOSDEPTH.out.versions)
+
     MOSDEPTH_GATK_FORMAT(
         MOSDEPTH.out.regions_bed,
         [],
@@ -54,9 +55,11 @@ workflow PREPARE_GENS_INPUTS {
     // Prepare GATK inputs
     MOSDEPTH_GATK_HEADER.out.output
         .join(MOSDEPTH_GATK_FORMAT.out.output)
-        .map { meta, header, body -> tuple(meta, [header, body]) }
+        .map { meta, header, body -> [meta, [header, body]] }
         .set { ch_cat_input }
+
     CAT_CAT(ch_cat_input)
+
     CAT_CAT.out.file_out
         .map { meta, _tsv -> [ meta, panel_of_normals ] }
         .set { ch_pon }
@@ -67,9 +70,8 @@ workflow PREPARE_GENS_INPUTS {
         ch_pon
     )
     ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
+
     GATK4_DENOISEREADCOUNTS.out.standardized
-        .set { ch_cov }
-    ch_cov
         .join(ch_gvcf)
         .set { ch_gens_input }
 
