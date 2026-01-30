@@ -837,9 +837,6 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
-                "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
-                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -962,12 +959,9 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "gens",
-                "gens/HG002_Revio",
-                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
-                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
-                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
-                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
+                "bcftools",
+                "bcftools/HG002_Revio.vcf",
+                "bcftools/HG002_Revio.vcf.gz",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -1160,7 +1154,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-26T20:33:47.206914332"
+        "timestamp": "2026-01-30T11:51:55.527049574"
     },
     "Test alignment without genome assembly": {
         "content": [
