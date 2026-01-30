@@ -305,10 +305,10 @@ nextflow_pipeline {
                 snv_caller                   = "sentieon"
 
                 // Mock resources
-                sentieon_model_bundle        = params.pipelines_testdata_base_path + 'reference/test_data.bed' 
+                sentieon_model_bundle        = params.pipelines_testdata_base_path + 'reference/test_data.bed'
                 sentieon_female_diploid_bed  = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed'
                 sentieon_male_diploid_bed    = params.pipelines_testdata_base_path + 'reference/empty.bed'
-                sentieon_male_haploid_bed    = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed'          
+                sentieon_male_haploid_bed    = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed'
                 // Skip irrelevant steps
                 skip_chromograph             = true
                 skip_genome_assembly         = true
