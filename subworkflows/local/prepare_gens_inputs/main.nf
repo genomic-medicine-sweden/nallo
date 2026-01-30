@@ -34,28 +34,28 @@ workflow PREPARE_GENS_INPUTS {
         [],
         false
     )
-    ch_versions.mix(SAMTOOLS_VIEW.out.versions)
+    ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions)
 
     MOSDEPTH_GATK_HEADER(
         SAMTOOLS_VIEW.out.sam,
         [],
         false
     )
-    ch_versions.mix(MOSDEPTH_GATK_HEADER.out.versions)
+    ch_versions = ch_versions.mix(MOSDEPTH_GATK_HEADER.out.versions)
 
     // Prepare the body
     MOSDEPTH(
         ch_mosdepth_in,
         [[],[]]
     )
-    ch_versions.mix(MOSDEPTH.out.versions)
+    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     MOSDEPTH_GATK_FORMAT(
         MOSDEPTH.out.regions_bed,
         [],
         false
     )
-    ch_versions.mix(MOSDEPTH_GATK_FORMAT.out.versions)
+    ch_versions = ch_versions.mix(MOSDEPTH_GATK_FORMAT.out.versions)
 
     // Prepare GATK inputs
     MOSDEPTH_GATK_HEADER.out.output
@@ -79,7 +79,7 @@ workflow PREPARE_GENS_INPUTS {
         CAT_CAT.out.file_out,
         ch_pon
     )
-    ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
+    ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
     GATK4_DENOISEREADCOUNTS.out.standardized
         .join(ch_gvcf)
