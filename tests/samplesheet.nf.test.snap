@@ -571,9 +571,9 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
-                "HG002_Revio.vcf:md5,232546a61e379db4f43ff151cbf5185c",
-                "HG002_Revio.vcf.gz:md5,489ea8ae0b07e8243574f304ae6547ac",
-                "HG002_Revio.vcf.gz.tbi:md5,cf0778652a57363c9522de567a54514f",
+                "HG002_Revio.vcf:md5,74d4fb008b0152b2e4cb277a020ff5d3",
+                "HG002_Revio.vcf.gz:md5,b07abd118555450270c5ce5c11d1e4fa",
+                "HG002_Revio.vcf.gz.tbi:md5,dc11e21a4060641865102efed353af9d",
                 "HG002_Revio.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
                 "HG002_Revio.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400",
                 "HG002_Revio.cov.bed.gz:md5,dd6fc455c22e102c1c138011c4e28f69",
@@ -709,6 +709,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T12:11:33.588271271"
+        "timestamp": "2026-01-30T14:15:19.601356733"
     }
 }
