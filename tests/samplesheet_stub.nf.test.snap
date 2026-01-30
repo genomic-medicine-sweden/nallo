@@ -677,7 +677,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            188,
+            189,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -837,6 +837,9 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
+                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -962,6 +965,13 @@
                 "bcftools",
                 "bcftools/HG002_Revio.vcf",
                 "bcftools/HG002_Revio.vcf.gz",
+                "bcftools/HG002_Revio.vcf.gz.tbi",
+                "gens",
+                "gens/HG002_Revio",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -1154,7 +1164,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T11:51:55.527049574"
+        "timestamp": "2026-01-30T12:28:05.792835986"
     },
     "Test alignment without genome assembly": {
         "content": [
