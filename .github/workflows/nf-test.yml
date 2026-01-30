@@ -101,7 +101,7 @@ jobs:
           dotnet: false
           haskell: false
           large-packages: false
-          docker-images: false
+          docker-images: true
           swap-storage: true
 
       - name: Run nf-test
