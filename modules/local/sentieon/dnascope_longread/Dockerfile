@@ -72,7 +72,7 @@ ARG SENTIEON_CLI_BRANCH=8bd23b6b6610eb983e8c1f69895c89135609f45f
 
 RUN set -eux; \
     micromamba create -y -n sentieon-cli -c conda-forge -c bioconda \
-    python=3.10 \
+    python=3.13 \
     pip=24.0 \
     samtools=1.23 \
     bcftools=1.23 \
@@ -86,7 +86,7 @@ RUN set -eux; \
     mosdepth=0.3.12 \
     hificnv=1.0.1 \
     packaging=24.0 \
-    colorlog=6.8.2 \
+    colorlog=6.9.0 \
     importlib_resources=6.4.5; \
     micromamba clean --all --yes
 
