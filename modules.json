@@ -300,7 +300,7 @@
                     },
                     "sentieon/gvcftyper": {
                         "branch": "master",
-                        "git_sha": "256557155b2439c5d551f1a668bf6a7ff6b10f93",
+                        "git_sha": "d9c84ed4564744313bb586928885ebf05f40ad98",
                         "installed_by": ["modules"]
                     },
                     "severus": {
