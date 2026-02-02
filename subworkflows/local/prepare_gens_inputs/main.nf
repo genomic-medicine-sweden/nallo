@@ -11,7 +11,7 @@ workflow PREPARE_GENS_INPUTS {
     take:
     ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
-    baf_positions       // value:   [mandatory] [ path(gz) ]
+    ch_baf_positions    // value:   [mandatory] [ val(meta), path(gz) ]
     ch_panel_of_normals // channel: [mandatory] [ val(meta), path(hd5) ]
     ch_mosdepth_bins    // channel: [mandatory] [ val(meta), path(bed) ]
 
@@ -63,17 +63,10 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT(ch_cat_input)
 
-    CAT_CAT.out.file_out
-        .combine(ch_panel_of_normals)
-        .map { meta, _tsv, _pon_meta, pon ->
-            [ meta, pon ]
-        }
-        .set { ch_pon }
-
     // Calculate coverage
     GATK4_DENOISEREADCOUNTS(
         CAT_CAT.out.file_out,
-        ch_pon
+        ch_panel_of_normals
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
@@ -82,6 +75,16 @@ workflow PREPARE_GENS_INPUTS {
         .set { ch_gens_input }
 
     // Generate final outputs
+    ch_baf_positions
+        .map { _meta, pos -> pos }
+        .unique()
+        .collect()
+        .map { files ->
+            assert files.size() == 1 : "Expected exactly one baf_positions file, found: ${files}"
+            files[0]
+        }
+        .set { baf_positions }
+
     PREPARECOVANDBAF(
         ch_gens_input,
         baf_positions
