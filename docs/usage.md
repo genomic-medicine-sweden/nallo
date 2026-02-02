@@ -254,7 +254,7 @@ Turned off with `--skip_methylation_calling`.
 
 #### Gens input preparation
 
-This subworkflow prepares coverage and B-allele frequency (BAF) files for downstream use in Gens. It relies on the alignment and SNV calling subworkflows and requires the following additional files:
+This subworkflow prepares coverage and B-allele frequency (BAF) files for downstream use in [Gens](https://github.com/SMD-Bioinformatics-Lund/gens). It relies on the alignment and SNV calling subworkflows and requires the following additional files:
 
 | Parameter                                                                                                                                                                                                      | Description                                                                                                                                                                                                                                                      |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
