@@ -96,7 +96,7 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -262,7 +262,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -342,9 +342,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:27:27.554309067"
+        "timestamp": "2025-12-29T11:22:22.255821863"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -388,7 +388,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -481,7 +481,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -629,7 +629,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -677,7 +677,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            179,
+            180,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -936,12 +936,10 @@
                     "untar": 1.34
                 },
                 "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [
@@ -1095,9 +1093,9 @@
                 "qc/peddy/HG002_Revio/HG002_Revio.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_stats.stats.tsv",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
@@ -1148,9 +1146,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-30T15:28:15.250263288"
+        "timestamp": "2025-12-29T11:23:13.96710061"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1191,7 +1189,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
                 }
             },
             [

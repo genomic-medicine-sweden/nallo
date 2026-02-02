@@ -207,7 +207,6 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-        .tap { ch_unprocessed_samplesheet }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
@@ -232,8 +231,6 @@ workflow PIPELINE_INITIALISATION {
         }
         .transpose()
         .set { ch_samplesheet }
-
-        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -458,7 +455,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
     }
     // Extra case for checking if methbat regions are provided when needed.
     // The above error would suggest the opposite of the fix
-    if (params.run_methbat && !params.methbat_regions) {
+    if (!params.skip_methylation_calling && params.run_methbat && !params.methbat_regions) {
         error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
@@ -609,12 +606,6 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
             }
         }
-}
-
-def validateNonEmptySamplesheet(ch_samplesheet) {
-    ch_samplesheet
-        .ifEmpty { error("ERROR: No samples found in samplesheet.") }
-        .filter { it -> it != null }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {
