@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 - [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
 - [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`\_
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 
 ### `Removed`
 
@@ -26,8 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -36,8 +44,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.01   |
+| sentieon/dnascope-longread |             | 1.5.1       |
 
 ## 0.9.2 - [2026-01-27]
 
@@ -74,9 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#819](https://github.com/genomic-medicine-sweden/nallo/pull/819) - Added new `CALL_METHYLATION_METHBAT` subworkflow for methylation analysis of pacbio data
 - [#824](https://github.com/genomic-medicine-sweden/nallo/pull/824) - Added parameters for genmod compound penalty and threshold values
 - [#831](https://github.com/genomic-medicine-sweden/nallo/pull/831) - Added strdrop in a new `ANNOTATE_REPEAT_EXPANSIONS` subworkflow
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`\_
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 
 ### `Changed`
 
@@ -146,11 +153,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                              | `--extra_methbat_profile_options`           |
 |                              | `--methbat_regions`                         |
 |                              | `--strdrop_training_set_json`               |
-|                              | `--sentieon_model_bundle`                   |
-|                              | `--sentieon_tech`                           |
-|                              | `--sentieon_male_haploid_bed`               |
-|                              | `--sentieon_male_diploid_bed`               |
-|                              | `--sentieon_female_diploid_bed`             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -159,20 +161,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                             | Old version | New version     |
-| -------------------------------- | ----------- | --------------- |
-| chromograph                      |             | 1.3.1           |
-| bcftools/concat                  | 1.22        | 1.21            |
-| bcftools/roh                     |             | 1.22            |
-| rhocall/viz                      |             | 0.5.1           |
-| tiddit                           |             | 3.9.3           |
-| methbat/profile                  |             | 0.16.1          |
-| pbcpgtools/alignedbamtocpgscores |             | 3.0.0           |
-| strdrop                          |             | 0.3.1           |
-| stranger                         | 0.9.5       | 0.10.0          |
-| trgt                             | 4.0.0       | 5.0.0           |
-| sentieon/gvcftyper               |             | 202503.01       |
-| sentieon/dnascope-longread       |             | 1.4.0-lrRPA-fix |
+| Tool                             | Old version | New version |
+| -------------------------------- | ----------- | ----------- |
+| chromograph                      |             | 1.3.1       |
+| bcftools/concat                  | 1.22        | 1.21        |
+| bcftools/roh                     |             | 1.22        |
+| rhocall/viz                      |             | 0.5.1       |
+| tiddit                           |             | 3.9.3       |
+| methbat/profile                  |             | 0.16.1      |
+| pbcpgtools/alignedbamtocpgscores |             | 3.0.0       |
+| strdrop                          |             | 0.3.1       |
+| stranger                         | 0.9.5       | 0.10.0      |
+| trgt                             | 4.0.0       | 5.0.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
