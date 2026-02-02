@@ -101,6 +101,9 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
                 },
@@ -150,6 +153,12 @@
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -290,10 +299,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "bcftools",
-                "bcftools/HG002_Revio.vcf",
-                "bcftools/HG002_Revio.vcf.gz",
-                "bcftools/HG002_Revio.vcf.gz.tbi",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -574,9 +579,6 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,330fb1775cc8910cca686c4707f4e5bd",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,7850a0cd3a73630ce614ed04daa6f620",
-                "HG002_Revio.vcf:md5,23fd7fa3683030879320655f5a607056",
-                "HG002_Revio.vcf.gz:md5,0dbbbb4322427a5be09e54f1ebaf5a7a",
-                "HG002_Revio.vcf.gz.tbi:md5,cf0778652a57363c9522de567a54514f",
                 "HG002_Revio.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
                 "HG002_Revio.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400",
                 "HG002_Revio.cov.bed.gz:md5,dd6fc455c22e102c1c138011c4e28f69",
@@ -661,10 +663,6 @@
             ],
             [
                 [
-                    "HG002_Revio.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=1844, phased=false, phasedAutodetect=false]"
-                ],
-                [
                     "FAM_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=289, phased=true, phasedAutodetect=false]"
                 ],
@@ -702,16 +700,13 @@
                 ]
             ],
             [
-                [
-                    "HG002_Revio.vcf.gz",
-                    "8a0360cdfcf3d6b5fcbfbedefb4d997f"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-30T12:31:22.947996208"
+        "timestamp": "2026-01-30T15:05:07.425053766"
     }
 }
