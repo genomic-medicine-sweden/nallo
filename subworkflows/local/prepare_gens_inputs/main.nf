@@ -77,12 +77,6 @@ workflow PREPARE_GENS_INPUTS {
     // Generate final outputs
     ch_baf_positions
         .map { _meta, pos -> pos }
-        .unique()
-        .collect()
-        .map { files ->
-            assert files.size() == 1 : "Expected exactly one baf_positions file, found: ${files}"
-            files[0]
-        }
         .set { baf_positions }
 
     PREPARECOVANDBAF(
