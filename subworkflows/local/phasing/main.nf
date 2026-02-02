@@ -18,7 +18,7 @@ workflow PHASING {
     phaser               // string:  Phasing tool to use
     phase_with_svs       // bool:    Whether to include SVs in phasing (true) or not (false)
     cram_output          // bool:    Publish alignments as CRAM (true) or BAM (false)
-    snv_variant_caller   // string:  Which snv variant caller was used e.g. "deepvariant"
+    run_whatshap_stats   // bool:    Whether to run WHATSHAP_STATS (true) or not (false)
 
     main:
     ch_versions            = channel.empty()
@@ -83,12 +83,6 @@ workflow PHASING {
         ch_phased_family_svs_tbi  = HIPHASE.out.phased_svs_tbi
         ch_bam_bai_haplotagged    = HIPHASE.out.haplotagged_bam_bai
     }
-
-
-    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
-    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424
-    // for more details.
-    run_whatshap_stats = !snv_variant_caller.equals("sentieon")
 
     QC_PHASING (
         ch_phased_family_snvs,
