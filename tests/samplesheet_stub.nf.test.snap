@@ -510,7 +510,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            59,
+            58,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -553,9 +553,6 @@
                 },
                 "CREATE_HAPLOID_REGIONS_BED": {
                     "bedtools": "2.31.1"
-                },
-                "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": 1.22,
@@ -636,9 +633,6 @@
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002_Revio",
                 "qc/bcftools_stats/HG002_Revio/HG002_Revio.bcftools_stats.txt",
-                "qc/deepvariant_vcfstatsreport",
-                "qc/deepvariant_vcfstatsreport/HG002_Revio",
-                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
                 "qc/somalier",
                 "qc/somalier/relate",
                 "qc/somalier/relate/test",
@@ -662,7 +656,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-01-30T15:01:35.926115179"
+        "timestamp": "2026-02-02T16:25:25.593551034"
     },
     "Test CADD with mock resources": {
         "content": [
