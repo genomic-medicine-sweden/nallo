@@ -18,7 +18,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                input[2] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                ])
                 input[3] = Channel.of([
                     [ id: 'pon' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
@@ -56,7 +59,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
-                input[2] = file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                input[2] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                ])
                 input[3] = Channel.of([
                     [ id: 'pon' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
