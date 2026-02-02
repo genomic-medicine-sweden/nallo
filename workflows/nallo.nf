@@ -465,6 +465,7 @@ workflow NALLO {
             VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf, // Can we use the normalized VCF here, for DV vcfstatsreport?
             sample_snv_vcf,
             sample_snv_index,
+            params.snv_caller.equals("deepvariant"),
         )
 
         ch_versions = ch_versions.mix(QC_SNVS.out.versions)
