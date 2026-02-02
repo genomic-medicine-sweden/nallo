@@ -103,5 +103,5 @@ nextflow_workflow {
             )
         }
     }
-    
+
 }

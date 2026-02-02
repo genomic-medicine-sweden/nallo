@@ -16,11 +16,11 @@ workflow QC_SNVS {
     ch_vcfstatsreport = channel.empty()
 
     if(run_deepvariant_vcfstatsreport) {
-        DEEPVARIANT_VCFSTATSREPORT(ch_vcf) 
+        DEEPVARIANT_VCFSTATSREPORT(ch_vcf)
         ch_vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report
         ch_versions = ch_versions.mix(DEEPVARIANT_VCFSTATSREPORT.out.versions)
     }
-    
+
 
     BCFTOOLS_STATS(
         ch_normalized_vcf.join(
