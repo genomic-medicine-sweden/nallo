@@ -100,5 +100,44 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-10-22T11:09:52.29171863"
+    },
+    "DeepVariant vcfstatsreport disabled -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcfstatsreport": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2026-02-02T15:58:04.856308714"
     }
 }
