@@ -656,7 +656,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-02-02T18:47:43.819505652"
+        "timestamp": "2026-02-03T11:28:34.091266647"
     },
     "Test CADD with mock resources": {
         "content": [
