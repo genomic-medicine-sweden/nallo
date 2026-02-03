@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            282,
+            309,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -60,6 +60,9 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -88,6 +91,9 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -132,8 +138,17 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
                 },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
+                },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -259,6 +274,22 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_ONT_A",
+                "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz",
+                "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz.tbi",
+                "gens/HG002_ONT_A/HG002_ONT_A.cov.bed.gz",
+                "gens/HG002_ONT_A/HG002_ONT_A.cov.bed.gz.tbi",
+                "gens/HG002_ONT_B",
+                "gens/HG002_ONT_B/HG002_ONT_B.baf.bed.gz",
+                "gens/HG002_ONT_B/HG002_ONT_B.baf.bed.gz.tbi",
+                "gens/HG002_ONT_B/HG002_ONT_B.cov.bed.gz",
+                "gens/HG002_ONT_B/HG002_ONT_B.cov.bed.gz.tbi",
+                "gens/HG002_ONT_C",
+                "gens/HG002_ONT_C/HG002_ONT_C.baf.bed.gz",
+                "gens/HG002_ONT_C/HG002_ONT_C.baf.bed.gz.tbi",
+                "gens/HG002_ONT_C/HG002_ONT_C.cov.bed.gz",
+                "gens/HG002_ONT_C/HG002_ONT_C.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -749,6 +780,18 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,d2fa9b12bc053967ad9717fd95ec9566",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,70c46e9a12938cc7ff2e1a56de0e57d9",
+                "HG002_ONT_A.baf.bed.gz:md5,bd4480c494cc4bfcba1dd71563123938",
+                "HG002_ONT_A.baf.bed.gz.tbi:md5,285e944e10b52a28e48ca0bc7f12d33b",
+                "HG002_ONT_A.cov.bed.gz:md5,baed648bb2733917b5b2b4a242d8ecab",
+                "HG002_ONT_A.cov.bed.gz.tbi:md5,f692b62d6a9c5c7b53389dfa0091bea3",
+                "HG002_ONT_B.baf.bed.gz:md5,0056fe605fd81c503ece040ebf16bbd8",
+                "HG002_ONT_B.baf.bed.gz.tbi:md5,e89d80903e0c9a247111c3f091c4aaf4",
+                "HG002_ONT_B.cov.bed.gz:md5,e3fbb140dbeb734e83ea52d665eb93d8",
+                "HG002_ONT_B.cov.bed.gz.tbi:md5,9b189a0958dbf186dc4db90aad91e030",
+                "HG002_ONT_C.baf.bed.gz:md5,bd4480c494cc4bfcba1dd71563123938",
+                "HG002_ONT_C.baf.bed.gz.tbi:md5,285e944e10b52a28e48ca0bc7f12d33b",
+                "HG002_ONT_C.cov.bed.gz:md5,baed648bb2733917b5b2b4a242d8ecab",
+                "HG002_ONT_C.cov.bed.gz.tbi:md5,f692b62d6a9c5c7b53389dfa0091bea3",
                 "HG002_ONT_A_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -994,7 +1037,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1071,13 +1114,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.12.0"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-02T19:37:27.80062629"
+        "timestamp": "2026-01-30T14:53:44.295624318"
     }
 }

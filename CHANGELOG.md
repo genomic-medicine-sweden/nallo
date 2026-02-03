@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data (coverage and B-allele frequencies, BAF) to Gens.
+
 ### `Changed`
 
 - [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
@@ -27,9 +29,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter             |
-| ------------- | ------------------------- |
-|               | `--extra_sawfish_options` |
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--extra_sawfish_options`   |
+|               | `--skip_prepare_gens_input` |
+|               | `--gens_baf_positions`      |
+|               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
+
+### Module updates
+
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

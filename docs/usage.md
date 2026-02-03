@@ -252,6 +252,19 @@ Turned off with `--skip_methylation_calling`.
 
     By default, samples are compared to the background cohort with the same sex as found in the sample metadata. If the background cohort tsv file does not contain MALE and FEMALE labels, this can be changed with `--methbat_male_label` and `--methbat_female_label`. Additional labels can be added with --profile-label through the `--extra_methbat_profile_options` parameter.
 
+#### Gens input preparation
+
+This subworkflow prepares coverage and B-allele frequency (BAF) files for downstream use in [Gens](https://github.com/SMD-Bioinformatics-Lund/gens). It relies on the alignment and SNV calling subworkflows and requires the following additional files:
+
+| Parameter                                                                                                                                                                                                      | Description                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gens_baf_positions`                                                                                                                                                                                           | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.                                                                                                                                                                |
+| `gens_panel_of_normals`                                                                                                                                                                                        | Panel of normals (HDF5) used to standardize coverage for Gens inputs. See the GATK guide for [creating a read count panel of normals](https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using |
+| https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command. |
+| `gens_coverage_bins`                                                                                                                                                                                           | BED file with bins for which to calculate coverage. Typically 100bp bins across the genome are used in Gens. The bins should match those used to prepare the panel of normals.                                                                                   |
+
+Turned off with `--skip_prepare_gens_input`.
+
 #### Repeat calling
 
 This subworkflow requires haplotagged BAM files, and such relies on aligment, SNV calling and phasing subworkflows. It requires the following additional files:

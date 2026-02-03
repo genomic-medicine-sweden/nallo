@@ -19,7 +19,7 @@ nextflow_workflow {
         }
 
         run("SEVERUS") {
-            script "../../../../modules/nf-core/severus/main"
+            script "../../../../modules/nf-core/severus/main.nf"
             process {
                 """
                 input[0] = [

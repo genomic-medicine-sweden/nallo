@@ -101,8 +101,8 @@ jobs:
           dotnet: false
           haskell: false
           large-packages: false
-          docker-images: false
-          swap-storage: false
+          docker-images: true
+          swap-storage: true
 
       - name: Run nf-test
         if: matrix.profile != ''
