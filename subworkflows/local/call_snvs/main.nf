@@ -65,7 +65,7 @@ workflow CALL_SNVS {
         ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed.male, "diploid")
         ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed.female, "diploid")
         ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed.male, "haploid")
-        
+
         ch_male_diploid_intersect_in
             .mix(ch_female_diploid_intersect_in)
             .mix(ch_male_haploid_intersect_in)
@@ -84,7 +84,7 @@ workflow CALL_SNVS {
                 haploid: meta.ploidy == "haploid"
             }
             .set { ch_intersected_calling_intervals }
-        
+
         ch_intersected_calling_intervals.haploid
             .map {
                 meta, bed ->
@@ -103,7 +103,7 @@ workflow CALL_SNVS {
         ch_intersected_calling_intervals.diploid
             .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
             .set { ch_diploid_regions_out }
-        
+
         ch_bam_bai
             .join(ch_diploid_regions_out)
             .join(ch_haploid_regions_out)
@@ -139,7 +139,7 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         .combine(ch_bed)                                          // align with sample-specific call regions
         .map { sentieonRegions, meta, callRegions ->
             [ meta + [ ploidy: ploidy_label ], callRegions, sentieonRegions ]
-        } 
+        }
 }
 
 def removePloidyTag(meta) {
