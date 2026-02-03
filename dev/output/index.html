@@ -2002,6 +2002,33 @@
 <p class="admonition-title">Tip</p>
 <p>Filtered variants are output alongside unfiltered variants as additional files.</p>
 </div>
+<p>When <code>--skip_prepare_gens_input</code> is disabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gens/{sample}/{sample}.cov.bed.gz</code></td>
+<td>Coverage data normalized either against a panel of normal or the samples median value</td>
+</tr>
+<tr>
+<td><code>gens/{sample}/{sample}.cov.bed.gz.tbi</code></td>
+<td>Index of the coverage BED file</td>
+</tr>
+<tr>
+<td><code>gens/{sample}/{sample}.baf.bed.gz</code></td>
+<td>B-allele frequency estimates at the provided positions</td>
+</tr>
+<tr>
+<td><code>gens/{sample}/{sample}.baf.bed.gz.tbi</code></td>
+<td>Index of the BAF BED file</td>
+</tr>
+</tbody>
+</table>
 <h3 id="svs-and-cnvs">SVs (and CNVs)</h3>
 <p><a href="https://github.com/KolmogorovLab/Severus">Severus</a> or <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a> are used to call structural variants, while <a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF <a href="#visualization-tracks">visualization tracks</a>. <a href="https://github.com/PacificBiosciences/sawfish">Sawfish</a> calls both SVs and CNVs by default.</p>
 <div class="admonition tip">
