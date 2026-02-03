@@ -125,7 +125,6 @@ workflow CALL_SNVS {
         ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }
 
-
     emit:
     vcf        = ch_vcf        // channel: [ val(meta), path(vcf) ]
     index      = ch_index      // channel: [ val(meta), path(tbi) ]
