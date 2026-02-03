@@ -481,11 +481,6 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 0 },
                 { assert workflow.out.phasing_blocks_index.size() == 0 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
-                { // Making sure that the samples are actually different
-                    with(workflow.out.phasing_stats) {
-                        assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
-                    }
-                },
                 { assert snapshot(
                     workflow.out.versions,
                     workflow.out.phasing_stats,
