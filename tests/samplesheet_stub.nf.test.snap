@@ -539,6 +539,9 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
+                "BEDTOOLS_INTERSECT": {
+                    "bedtools": "2.31.1"
+                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -546,12 +549,6 @@
                     "bedtools": "2.31.1"
                 },
                 "BEDTOOLS_SPLIT": {
-                    "bedtools": "2.31.1"
-                },
-                "CREATE_DIPLOID_REGIONS_BED": {
-                    "bedtools": "2.31.1"
-                },
-                "CREATE_HAPLOID_REGIONS_BED": {
                     "bedtools": "2.31.1"
                 },
                 "DNASCOPE_LONGREAD": {
@@ -656,7 +653,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-02-03T12:08:13.429864062"
+        "timestamp": "2026-02-03T21:54:36.613443795"
     },
     "Test CADD with mock resources": {
         "content": [
