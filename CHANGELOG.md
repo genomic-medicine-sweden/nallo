@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.10.0dev - [XXXX-XX-XX]
+## 0.10.0 - [2026-02-03]
 
 ### `Added`
 
@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 - [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
 - [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
+- [#876](https://github.com/genomic-medicine-sweden/nallo/pull/876) - Prep for release 0.10.0
 
 ### `Removed`
 
@@ -35,6 +36,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--gens_panel_of_normals`   |
 |               | `--gens_coverage_bins`      |
 
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
 ### Module updates
 
 | Tool                    | Old version | New version |
@@ -44,14 +50,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | cat/cat                 |             | 2.8         |
 
 > [!NOTE]
-> Parameter has been updated if both old and new parameter information is present.
-> Parameter has been added if just the new parameter information is present.
-> Parameter has been removed if new parameter information isn't present.
-
-### Module updates
-
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
 
 ## 0.9.2 - [2026-01-27]
 
