@@ -484,7 +484,7 @@ nextflow_workflow {
             )
         }
     }
-    
+
     test("WhatsHap stats disabled - stub") {
 
         options "-stub"
