@@ -311,7 +311,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
                 ],
                 "gvcf": [
                     [
@@ -362,15 +362,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2026-01-29T13:14:39.772197553"
+        "timestamp": "2026-02-03T16:36:33.092536301"
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant -stub": {
         "content": [
@@ -816,8 +816,8 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,3379481985598f377e094f93ddf95cf7",
-                    "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f",
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
                 ],
                 "gvcf": [
                     [
@@ -868,16 +868,16 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3379481985598f377e094f93ddf95cf7",
-                    "versions.yml:md5,8fa21c93d8378b8759b67419756a5da3"
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f",
+                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2026-01-23T21:11:34.195142134"
+        "timestamp": "2026-02-03T16:34:51.529383832"
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
