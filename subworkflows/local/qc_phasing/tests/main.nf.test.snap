@@ -506,14 +506,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_cramino_aligned_phased.txt:md5,ccd8362b2002f1aa03c8ec69335697b6"
+                        "HG002_cramino_aligned_phased.txt:md5,210a4b935b004065b1d8429ca4783cd7"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_cramino_aligned_phased.txt:md5,14365e0c3f64f809b3416e168f95f253"
+                        "HG003_cramino_aligned_phased.txt:md5,ae72126b5cc074939a074a5e95ad23e4"
                     ]
                 ],
                 "4": [
@@ -526,14 +526,14 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_cramino_aligned_phased.txt:md5,ccd8362b2002f1aa03c8ec69335697b6"
+                        "HG002_cramino_aligned_phased.txt:md5,210a4b935b004065b1d8429ca4783cd7"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_cramino_aligned_phased.txt:md5,14365e0c3f64f809b3416e168f95f253"
+                        "HG003_cramino_aligned_phased.txt:md5,ae72126b5cc074939a074a5e95ad23e4"
                     ]
                 ],
                 "phasing_blocks": [
@@ -555,7 +555,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2026-02-03T11:00:40.355578611"
+        "timestamp": "2026-02-03T11:31:01.150374624"
     },
     "2 samples - SNVs only - stub": {
         "content": [
