@@ -2,8 +2,7 @@
 // Workflow to call SNVs
 //
 
-include { BEDTOOLS_INTERSECT as CREATE_HAPLOID_REGIONS_BED  } from '../../../modules/nf-core/bedtools/intersect/main'
-include { BEDTOOLS_INTERSECT as CREATE_DIPLOID_REGIONS_BED  } from '../../../modules/nf-core/bedtools/intersect/main'
+include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
 
@@ -58,47 +57,35 @@ workflow CALL_SNVS {
             }
             .branch {
                 meta, _bed ->
-                male: meta.sex == 1
+                male:   meta.sex == 1
                 female: meta.sex == 2
             }
             .set { ch_bed }
 
-        ch_sentieon_male_diploid_bed
-            .map { _meta, male_diploid_call_regions ->  male_diploid_call_regions }
-            .combine(ch_bed.male)
-            .map { male_diploid_call_regions, meta, call_regions -> [ meta, call_regions, male_diploid_call_regions ] }
-            .set { ch_male_diploid_intersect_in }
-
-        ch_sentieon_female_diploid_bed
-            .map { _meta, female_diploid_call_regions -> female_diploid_call_regions }
-            .combine(ch_bed.female)
-            .map { female_diploid_call_regions, meta, call_regions -> [ meta, call_regions, female_diploid_call_regions ] }
-            .set { ch_female_diploid_intersect_in }
-
+        ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed.male, "diploid")
+        ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed.female, "diploid")
+        ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed.male, "haploid")
+        
         ch_male_diploid_intersect_in
             .mix(ch_female_diploid_intersect_in)
-            .set { ch_diploid_intersect_in }
+            .mix(ch_male_haploid_intersect_in)
+            .set { ch_bedtools_intersect_in }
 
-        CREATE_DIPLOID_REGIONS_BED(
-            ch_diploid_intersect_in,
+        BEDTOOLS_INTERSECT(
+            ch_bedtools_intersect_in,
             [[], []],
         )
-        ch_versions = ch_versions.mix(CREATE_DIPLOID_REGIONS_BED.out.versions)
+        ch_versions = ch_versions.mix(BEDTOOLS_INTERSECT.out.versions)
 
-
-        ch_sentieon_male_haploid_bed
-            .map { _meta, male_haploid_call_regions ->  male_haploid_call_regions }
-            .combine(ch_bed.male)
-            .map { male_diploid_call_regions, meta, call_regions -> [meta, call_regions, male_diploid_call_regions] }
-            .set { ch_haploid_intersect_in }
-
-        CREATE_HAPLOID_REGIONS_BED(
-            ch_haploid_intersect_in,
-            [[], []],
-        )
-        ch_versions = ch_versions.mix(CREATE_HAPLOID_REGIONS_BED.out.versions)
-
-        CREATE_HAPLOID_REGIONS_BED.out.intersect
+        BEDTOOLS_INTERSECT.out.intersect
+            .branch {
+                meta, _intersected_bed ->
+                diploid: meta.ploidy == "diploid"
+                haploid: meta.ploidy == "haploid"
+            }
+            .set { ch_intersected_calling_intervals }
+        
+        ch_intersected_calling_intervals.haploid
             .map {
                 meta, bed ->
                 if(bed && bed.size() > 0) {
@@ -110,10 +97,15 @@ workflow CALL_SNVS {
             .mix(
                 ch_bed.female.map{ meta, _bed -> [meta, []] }
             )
+            .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
             .set { ch_haploid_regions_out }
 
+        ch_intersected_calling_intervals.diploid
+            .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
+            .set { ch_diploid_regions_out }
+        
         ch_bam_bai
-            .join(CREATE_DIPLOID_REGIONS_BED.out.intersect)
+            .join(ch_diploid_regions_out)
             .join(ch_haploid_regions_out)
             .set {
                 ch_dnascope_in
@@ -140,4 +132,17 @@ workflow CALL_SNVS {
     gvcf       = ch_gvcf       // channel: [ val(meta), path(gvcf) ]
     gvcf_index = ch_gvcf_index // channel: [ val(meta), path(tbi) ]
     versions   = ch_versions   // channel: [ path(versions.yml) ]
+}
+
+def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
+    ch_sentieon_bed
+        .map { _meta, sentieonRegions -> sentieonRegions }          // drop Sentieon meta wrapper
+        .combine(ch_bed)                                          // align with sample-specific call regions
+        .map { sentieonRegions, meta, callRegions ->
+            [ meta + [ ploidy: ploidy_label ], callRegions, sentieonRegions ]
+        } 
+}
+
+def removePloidyTag(meta) {
+    meta.containsKey('ploidy') ? meta.findAll { k, _v -> k != 'ploidy' } : meta
 }
