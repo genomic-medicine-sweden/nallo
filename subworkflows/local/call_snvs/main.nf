@@ -95,7 +95,7 @@ workflow CALL_SNVS {
                 }
             }
             .mix(
-                ch_bed.female.map { meta, _bed -> [meta, []] }
+                ch_bed.female.map { meta, _bed -> [ meta, [] ] }
             )
             .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
             .set { ch_haploid_regions_out }
