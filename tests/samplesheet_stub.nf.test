@@ -11,7 +11,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for CADD
@@ -30,6 +30,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_prepare_gens_input      = true
             }
         }
 
@@ -54,7 +55,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for VEP
@@ -72,6 +73,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_prepare_gens_input      = true
             }
         }
 
@@ -97,7 +99,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
@@ -116,6 +118,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_prepare_gens_input      = true
             }
         }
 
@@ -141,7 +144,7 @@ nextflow_pipeline {
         options "-stub"
         when {
             params {
-                pipelines_testdata_base_path  = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path  = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                         = "$projectDir/assets/samplesheet.csv"
                 outdir                        = "$outputDir"
                 skip_genome_assembly          = true
@@ -160,6 +163,7 @@ nextflow_pipeline {
                 skip_repeat_calling           = true
                 skip_repeat_annotation        = true
                 skip_methylation_calling      = true
+                skip_prepare_gens_input       = true
             }
         }
 
@@ -186,7 +190,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_alignment               = true
@@ -204,6 +208,7 @@ nextflow_pipeline {
                 skip_repeat_annotation       = true
                 skip_sambamba_depth          = true
                 skip_methylation_calling     = true
+                skip_prepare_gens_input      = true
             }
         }
 
@@ -230,7 +235,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                                   = "$projectDir/assets/samplesheet.csv"
                 outdir                                  = "$outputDir"
                 skip_call_paralogs                      = true
@@ -247,6 +252,7 @@ nextflow_pipeline {
                 sv_callers_to_merge                     = "sawfish"
                 sv_callers_merge_priority               = "sawfish"
                 force_sawfish_joint_call_single_samples = true
+                skip_prepare_gens_input                 = true
             }
         }
 
@@ -273,7 +279,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                        = "$projectDir/assets/samplesheet_same_sample_and_family_id.csv"
                 outdir                       = "$outputDir"
             }

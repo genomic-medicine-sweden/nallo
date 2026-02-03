@@ -29,6 +29,7 @@ include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subw
 include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
 include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
 include { PHASING                                                } from '../subworkflows/local/phasing'
+include { PREPARE_GENS_INPUTS                                    } from '../subworkflows/local/prepare_gens_inputs'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
@@ -40,6 +41,7 @@ include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subw
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -113,6 +115,9 @@ workflow NALLO {
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
     ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
+    ch_gens_baf_positions        = createReferenceChannelFromPath(params.gens_baf_positions)
+    ch_gens_panel_of_normals     = createReferenceChannelFromPath(params.gens_panel_of_normals)
+    ch_gens_coverage_bins        = createReferenceChannelFromPath(params.gens_coverage_bins)
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -457,6 +462,35 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+    if (!params.skip_prepare_gens_input) {
+
+        CALL_SNVS.out.gvcf
+            .join(CALL_SNVS.out.gvcf_index)
+            .map { meta, gvcf, gvcf_index ->
+                def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                [sample_meta, gvcf, gvcf_index]
+            }
+            .groupTuple()
+            .set { ch_gvcfs }
+
+        CONCAT_SORT_GENS(
+            ch_gvcfs
+        )
+        ch_versions = ch_versions.mix(CONCAT_SORT_GENS.out.versions)
+
+        CONCAT_SORT_GENS.out.vcf
+            .join(CONCAT_SORT_GENS.out.index)
+            .set { ch_gvcf_tbi }
+
+        PREPARE_GENS_INPUTS(
+            ch_bam_bai,
+            ch_gvcf_tbi,
+            ch_gens_baf_positions,
+            ch_gens_panel_of_normals,
+            ch_gens_coverage_bins,
+        )
+        ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+    }
 
     //
     // Call SVs
