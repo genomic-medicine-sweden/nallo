@@ -96,7 +96,7 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -262,7 +262,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -388,7 +388,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -481,7 +481,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -779,7 +779,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -1104,7 +1104,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -1360,7 +1360,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
