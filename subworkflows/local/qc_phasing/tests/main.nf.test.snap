@@ -488,6 +488,75 @@
         },
         "timestamp": "2026-01-28T14:45:22.954230051"
     },
+    "WhatsHap stats disabled": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.txt:md5,ccd8362b2002f1aa03c8ec69335697b6"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.txt:md5,14365e0c3f64f809b3416e168f95f253"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.txt:md5,ccd8362b2002f1aa03c8ec69335697b6"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.txt:md5,14365e0c3f64f809b3416e168f95f253"
+                    ]
+                ],
+                "phasing_blocks": [
+                    
+                ],
+                "phasing_blocks_index": [
+                    
+                ],
+                "phasing_stats": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
+                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2026-02-03T11:00:40.355578611"
+    },
     "2 samples - SNVs only - stub": {
         "content": [
             {
