@@ -328,6 +328,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_gens                    = true
             }
         }
 
