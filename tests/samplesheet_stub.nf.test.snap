@@ -138,9 +138,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:12:25.213070904"
+        "timestamp": "2026-01-26T20:28:24.863121989"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -342,9 +342,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:16:30.534438979"
+        "timestamp": "2026-01-26T20:32:08.163630076"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -442,9 +442,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:14:08.784191713"
+        "timestamp": "2026-01-26T20:29:56.071390605"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -504,9 +504,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:14:58.816961429"
+        "timestamp": "2026-01-26T20:30:39.136057664"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -821,13 +821,13 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:10:52.862807227"
+        "timestamp": "2026-01-26T20:26:59.456482171"
     },
     "Test family id same as sample id": {
         "content": [
-            180,
+            189,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -889,6 +889,9 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -923,6 +926,9 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -973,6 +979,12 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
                 },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
+                },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
@@ -983,6 +995,9 @@
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1106,6 +1121,12 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_Revio",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -1296,9 +1317,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T17:17:14.816851632"
+        "timestamp": "2026-01-30T15:01:49.582940215"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1364,8 +1385,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-28T15:13:15.3159432"
+        "timestamp": "2026-01-26T20:29:09.114037624"
     }
 }

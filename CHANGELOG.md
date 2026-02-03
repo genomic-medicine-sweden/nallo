@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data (coverage and B-allele frequencies, BAF) to Gens.
+
 ### `Changed`
 
 - [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
@@ -29,25 +31,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                   |
-| ------------- | ------------------------------- |
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--skip_prepare_gens_input` |
+|               | `--gens_baf_positions`      |
+|               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
 |               | `--sentieon_model_bundle`       |
 |               | `--sentieon_tech`               |
 |               | `--sentieon_male_haploid_bed`   |
 |               | `--sentieon_male_diploid_bed`   |
 |               | `--sentieon_female_diploid_bed` |
 
+### Module updates
+
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.1       |
+
+
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
 
-### Module updates
-
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.1       |
 
 ## 0.9.2 - [2026-01-27]
 

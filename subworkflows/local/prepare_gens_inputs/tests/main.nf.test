@@ -1,0 +1,85 @@
+nextflow_workflow {
+
+    name "Test Workflow PREPARE_GENS_INPUTS"
+    script "../main.nf"
+    workflow "PREPARE_GENS_INPUTS"
+
+    test("prepare_gens_inputs") {
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                ])
+                input[2] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                ])
+                input[3] = Channel.of([
+                    [ id: 'pon' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
+                ])
+                input[4] = Channel.of([
+                    [ id: 'mosdepth_bins' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("prepare_gens_inputs - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                ])
+                input[2] = Channel.of([
+                    [ id: 'HG002', single_end: false ],
+                    file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
+                ])
+                input[3] = Channel.of([
+                    [ id: 'pon' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
+                ])
+                input[4] = Channel.of([
+                    [ id: 'mosdepth_bins' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

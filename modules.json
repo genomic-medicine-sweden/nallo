@@ -86,6 +86,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "cat/cat": {
+                        "branch": "master",
+                        "git_sha": "69614d4579a6bd9b8a2ecffb35959809d9c36559",
+                        "installed_by": ["modules"]
+                    },
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -128,6 +133,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "gatk4/denoisereadcounts": {
+                        "branch": "master",
+                        "git_sha": "ae8cd884f895585c6799ab4eb6a2c9f44df03336",
+                        "installed_by": ["modules"]
+                    },
                     "gawk": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -151,6 +161,11 @@
                     "genmod/score": {
                         "branch": "master",
                         "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "installed_by": ["modules"]
+                    },
+                    "gens/preparecovandbaf": {
+                        "branch": "master",
+                        "git_sha": "8d801223814a5a728dc2d8e506df17b84bc5e88b",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {

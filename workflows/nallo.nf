@@ -29,6 +29,7 @@ include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subw
 include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
 include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
 include { PHASING                                                } from '../subworkflows/local/phasing'
+include { PREPARE_GENS_INPUTS                                    } from '../subworkflows/local/prepare_gens_inputs'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
@@ -40,6 +41,7 @@ include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subw
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -87,32 +89,35 @@ workflow NALLO {
 
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
-    ch_cadd_header                 = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
-    ch_cadd_resources              = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored_indels       = createReferenceChannelFromPath(params.cadd_prescored_indels)
-    ch_fasta                       = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats              = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[],[]]))
-    ch_par                         = createReferenceChannelFromPath(params.par_regions)
-    ch_str_bed                     = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions            = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
-    ch_sv_call_regions             = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_modkit_call_regions         = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[],[]]))
-    ch_stranger_repeat_catalog     = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs   = createReferenceChannelFromPath(params.variant_consequences_snvs)
-    ch_variant_consequences_svs    = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed       = createReferenceChannelFromPath(params.vep_cache, channel.value([[],[]]))
-    ch_expected_xy_bed             = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
-    ch_expected_xx_bed             = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
-    ch_exclude_bed                 = createReferenceChannelFromPath(params.cnv_excluded_regions)
-    ch_genmod_reduced_penetrance   = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
-    ch_genmod_score_config_snvs    = createReferenceChannelFromPath(params.genmod_score_config_snvs)
-    ch_genmod_score_config_svs     = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_peddy_sites                 = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
-    ch_methbat_regions             = createReferenceChannelFromPath(params.methbat_regions)
-    ch_mosdepth_regions            = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
-    ch_sambamba_regions            = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
-    ch_somalier_sites              = createReferenceChannelFromPath(params.somalier_sites)
-    ch_strdrop_training_set_json   = createReferenceChannelFromPath(params.strdrop_training_set_json)
+    ch_cadd_header               = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
+    ch_cadd_resources            = createReferenceChannelFromPath(params.cadd_resources)
+    ch_cadd_prescored_indels     = createReferenceChannelFromPath(params.cadd_prescored_indels)
+    ch_fasta                     = createReferenceChannelFromPath(params.fasta)
+    ch_tandem_repeats            = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[],[]]))
+    ch_par                       = createReferenceChannelFromPath(params.par_regions)
+    ch_str_bed                   = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions          = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
+    ch_sv_call_regions           = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_modkit_call_regions       = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[],[]]))
+    ch_stranger_repeat_catalog   = createReferenceChannelFromPath(params.stranger_repeat_catalog)
+    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
+    ch_variant_consequences_svs  = createReferenceChannelFromPath(params.variant_consequences_svs)
+    ch_vep_cache_unprocessed     = createReferenceChannelFromPath(params.vep_cache, channel.value([[],[]]))
+    ch_expected_xy_bed           = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
+    ch_expected_xx_bed           = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
+    ch_exclude_bed               = createReferenceChannelFromPath(params.cnv_excluded_regions)
+    ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
+    ch_genmod_score_config_snvs  = createReferenceChannelFromPath(params.genmod_score_config_snvs)
+    ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
+    ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
+    ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
+    ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
+    ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
+    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
+    ch_gens_baf_positions        = createReferenceChannelFromPath(params.gens_baf_positions)
+    ch_gens_panel_of_normals     = createReferenceChannelFromPath(params.gens_panel_of_normals)
+    ch_gens_coverage_bins        = createReferenceChannelFromPath(params.gens_coverage_bins)
     ch_sentieon_model_bundle       = createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []]))
     ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_diploid_bed   = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
@@ -476,6 +481,35 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
 
+    if (!params.skip_prepare_gens_input) {
+
+        CALL_SNVS.out.gvcf
+            .join(CALL_SNVS.out.gvcf_index)
+            .map { meta, gvcf, gvcf_index ->
+                def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                [sample_meta, gvcf, gvcf_index]
+            }
+            .groupTuple()
+            .set { ch_gvcfs }
+
+        CONCAT_SORT_GENS(
+            ch_gvcfs
+        )
+        ch_versions = ch_versions.mix(CONCAT_SORT_GENS.out.versions)
+
+        CONCAT_SORT_GENS.out.vcf
+            .join(CONCAT_SORT_GENS.out.index)
+            .set { ch_gvcf_tbi }
+
+        PREPARE_GENS_INPUTS(
+            ch_bam_bai,
+            ch_gvcf_tbi,
+            ch_gens_baf_positions,
+            ch_gens_panel_of_normals,
+            ch_gens_coverage_bins,
+        )
+        ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
+    }
 
     //
     // Call SVs
