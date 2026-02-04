@@ -9,11 +9,12 @@ include { TABIX_BGZIP                  } from '../../../modules/nf-core/tabix/bg
 
 workflow PREPARE_GENS_INPUTS {
     take:
-    ch_bam              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf             // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
-    ch_baf_positions    // channel: [mandatory] [ val(meta), path(gz) ]
-    ch_panel_of_normals // channel: [mandatory] [ val(meta), path(hd5) ]
-    ch_mosdepth_bins    // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_bam                     // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_gvcf                    // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
+    ch_baf_positions           // channel: [mandatory] [ val(meta), path(gz) ]
+    ch_panel_of_normals_female // channel: [mandatory] [ val(meta), path(hd5) ]
+    ch_panel_of_normals_male   // channel: [mandatory] [ val(meta), path(hd5) ]
+    ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
     ch_versions = channel.empty()
@@ -63,10 +64,27 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT(ch_cat_input)
 
+    CAT_CAT.out.file_out
+        .branch { meta, _file ->
+            male: meta.sex = 1
+            female: meta.sex = 2
+        }
+        .set { ch_branched }
+
+    ch_branched.male
+        .combine(ch_panel_of_normals_male)
+        .mix(ch_branched.female.combine(ch_panel_of_normals_female))
+        .multiMap { meta, counts, _pon_meta, pon ->
+            counts: [meta, counts]
+            pon:    [meta, pon]
+        }
+        .set { ch_readcounts_input }
+
+
     // Calculate coverage
     GATK4_DENOISEREADCOUNTS(
-        CAT_CAT.out.file_out,
-        ch_panel_of_normals
+        ch_readcounts_input.counts.view(),
+        ch_readcounts_input.pon.view()
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
