@@ -131,10 +131,9 @@ workflow CALL_SNVS {
 
 def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
     ch_sentieon_bed
-        .map { _meta, sentieon_regions -> sentieon_regions }        
-        .combine(ch_bed)                                    
+        .map { _meta, sentieon_regions -> sentieon_regions }
+        .combine(ch_bed)
         .map { sentieon_regions, meta, sample_call_regions ->
             [ meta + [ ploidy: ploidy_label ], sample_call_regions, sentieon_regions ]
         }
 }
-
