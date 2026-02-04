@@ -173,7 +173,7 @@ workflow PIPELINE_INITIALISATION {
             skip_alignment          : params.skip_alignment,
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
-            skip_gens               : params.skip_prepare_gens_input,
+            skip_prepare_gens_input : params.skip_prepare_gens_input,
         ],
         files: [
             par_regions              : params.par_regions,
