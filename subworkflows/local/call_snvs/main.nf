@@ -75,12 +75,11 @@ workflow CALL_SNVS {
 
         BEDTOOLS_INTERSECT.out.intersect
             .branch {
-                meta, _intersected_bed ->
+                meta, intersected_bed ->
                 diploid: meta.ploidy == "diploid"
+                    [ meta - meta.subMap('ploidy'), intersected_bed  ]
                 haploid: meta.ploidy == "haploid"
-            }
-            .map { meta, intersected_calling_intervals ->
-                [ meta - meta.subMap('ploidy'), intersected_calling_intervals ]
+                    [ meta - meta.subMap('ploidy'), intersected_bed  ]
             }
             .set { ch_intersected_calling_intervals }
 
