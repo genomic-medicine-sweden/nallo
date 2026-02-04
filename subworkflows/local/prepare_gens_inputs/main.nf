@@ -88,7 +88,7 @@ workflow PREPARE_GENS_INPUTS {
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
-    GATK4_DENOISEREADCOUNTS.out.standardized
+    GATK4_DENOISEREADCOUNTS.out.standardized.view()
         .join(ch_gvcf)
         .set { ch_gens_input }
 

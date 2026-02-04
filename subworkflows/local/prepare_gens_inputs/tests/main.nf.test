@@ -9,31 +9,31 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'HG002', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'HG002', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'baf_positions' ],
                     file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
-                ])
+                ]).collect()
                 input[3] = Channel.of([
                     [ id: 'pon_female' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ])
+                ]).collect()
                 input[4] = Channel.of([
                     [ id: 'pon_male' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ])
+                ]).collect()
                 input[5] = Channel.of([
                     [ id: 'mosdepth_bins' ],
                     file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
-                ])
+                ]).collect()
                 """
             }
         }
@@ -54,31 +54,31 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'HG002', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
                 input[1] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'HG002', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = Channel.of([
-                    [ id: 'HG002', single_end: false ],
+                    [ id: 'baf_positions' ],
                     file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
-                ])
+                ]).collect()
                 input[3] = Channel.of([
                     [ id: 'pon_female' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ])
+                ]).collect()
                 input[4] = Channel.of([
                     [ id: 'pon_male' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ])
+                ]).collect()
                 input[5] = Channel.of([
                     [ id: 'mosdepth_bins' ],
                     file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
-                ])
+                ]).collect()
                 """
             }
         }

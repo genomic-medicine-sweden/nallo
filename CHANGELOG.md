@@ -5,9 +5,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.10.1 - [2026-02-05]
 
-### `Fixed`
+### `Changed`
 
-- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) Fixed gens panel of normals for both female and male samples
+- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) Changed to separate inputs for female and male gens panel of normals
 
 ### Parameters
 
