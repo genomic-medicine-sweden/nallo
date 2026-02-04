@@ -116,8 +116,8 @@ workflow NALLO {
     ch_somalier_sites               = createReferenceChannelFromPath(params.somalier_sites)
     ch_strdrop_training_set_json    = createReferenceChannelFromPath(params.strdrop_training_set_json)
     ch_gens_baf_positions           = createReferenceChannelFromPath(params.gens_baf_positions)
-    ch_gens_panel_of_normals_female = createReferenceChannelFromPath(params.gens_panel_of_normals_female)
-    ch_gens_panel_of_normals_male   = createReferenceChannelFromPath(params.gens_panel_of_normals_male)
+    ch_gens_panel_of_normals_female = createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon')
+    ch_gens_panel_of_normals_male   = createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon')
     ch_gens_coverage_bins           = createReferenceChannelFromPath(params.gens_coverage_bins)
 
     // Channels from (optional) input samplesheets validated by schema

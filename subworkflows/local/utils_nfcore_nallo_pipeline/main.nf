@@ -561,9 +561,9 @@ def findKeysForValue(def valueToFind, Map map) {
 }
 
 // Utility function to create channels from references
-def createReferenceChannelFromPath(param, defaultValue = '') {
+def createReferenceChannelFromPath(param, defaultValue = '', id = null) {
     return param ? channel.fromPath(param, checkIfExists: true)
-        .map { file_path -> [ [ id: file_path.simpleName ], file_path ] }
+        .map { file_path -> [ [ id: id ?: file_path.simpleName ], file_path ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets

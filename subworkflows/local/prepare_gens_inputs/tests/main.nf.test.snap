@@ -3,24 +3,10 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
-                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
-                        "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
-                    ]
+                    
                 ],
                 "2": [
                     "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
@@ -30,24 +16,10 @@
                     "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ],
                 "baf_bed_tbi": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.baf.bed.gz:md5,2ada5db346f2dffa5d015d818babceab",
-                        "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
-                    ]
+                    
                 ],
                 "cov_bed_tbi": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
-                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
@@ -60,32 +32,18 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.12.0"
         },
-        "timestamp": "2026-01-30T11:10:10.586498411"
+        "timestamp": "2026-02-04T18:30:35.109373171"
     },
     "prepare_gens_inputs - stub": {
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                        "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.baf.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                        "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "2": [
                     "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
@@ -95,24 +53,10 @@
                     "versions.yml:md5,f128c023cf8b8ace98ec686f2769d906"
                 ],
                 "baf_bed_tbi": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.baf.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                        "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "cov_bed_tbi": [
-                    [
-                        {
-                            "id": "HG002",
-                            "single_end": false
-                        },
-                        "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                        "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
@@ -125,8 +69,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.12.0"
         },
-        "timestamp": "2026-01-30T11:10:31.618062528"
+        "timestamp": "2026-02-04T18:30:46.315815983"
     }
 }

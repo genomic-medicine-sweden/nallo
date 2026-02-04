@@ -23,10 +23,14 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
                 ])
                 input[3] = Channel.of([
-                    [ id: 'pon' ],
+                    [ id: 'pon_female' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
                 ])
                 input[4] = Channel.of([
+                    [ id: 'pon_male' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
+                ])
+                input[5] = Channel.of([
                     [ id: 'mosdepth_bins' ],
                     file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
                 ])
@@ -64,10 +68,14 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
                 ])
                 input[3] = Channel.of([
-                    [ id: 'pon' ],
+                    [ id: 'pon_female' ],
                     file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
                 ])
                 input[4] = Channel.of([
+                    [ id: 'pon_male' ],
+                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
+                ])
+                input[5] = Channel.of([
                     [ id: 'mosdepth_bins' ],
                     file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
                 ])

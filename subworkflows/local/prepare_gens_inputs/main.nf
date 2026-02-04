@@ -66,8 +66,8 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT.out.file_out
         .branch { meta, _file ->
-            male: meta.sex = 1
-            female: meta.sex = 2
+            male: meta.sex == 1
+            female: meta.sex == 2
         }
         .set { ch_branched }
 
@@ -83,8 +83,8 @@ workflow PREPARE_GENS_INPUTS {
 
     // Calculate coverage
     GATK4_DENOISEREADCOUNTS(
-        ch_readcounts_input.counts.view(),
-        ch_readcounts_input.pon.view()
+        ch_readcounts_input.counts,
+        ch_readcounts_input.pon,
     )
     ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
