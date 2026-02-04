@@ -99,6 +99,11 @@
                     "type": "boolean",
                     "description": "Skip ranking of short variants",
                     "default": false
+                },
+                "skip_prepare_gens_input": {
+                    "type": "boolean",
+                    "description": "Skip preparing input data for Gens",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -323,6 +328,26 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "gens_baf_positions": {
+                    "type": "string",
+                    "description": "Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "gens_panel_of_normals": {
+                    "type": "string",
+                    "description": "Panel of normals (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(hd5|hdf5)$",
+                    "exists": true
+                },
+                "gens_coverage_bins": {
+                    "type": "string",
+                    "description": "Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(bed)$",
+                    "exists": true
+                },
                 "strdrop_training_set_json": {
                     "type": "string",
                     "pattern": "^\\S+\\.json$",
@@ -513,7 +538,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/",
                     "hidden": true
                 },
                 "trace_report_suffix": {

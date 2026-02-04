@@ -63,6 +63,9 @@ tool:
   fastqc:
     citation: "FastQC (Andrews 2010)"
     bibliography: "Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
+  gatk4:
+    citation: "GATK (Van der Auwera & O'Connor 2020)"
+    bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."
   gawk:
     citation: "gawk"
     bibliography: ""
@@ -114,6 +117,12 @@ tool:
   peddy:
     citation: "Peddy (Pedersen & Quinlan 2017)"
     bibliography: Pedersen BS, Quinlan AR. Who’s Who? Detecting and Resolving Sample Anomalies in Human DNA Sequencing Studies with Peddy. The American Journal of Human Genetics, Volume 100, Issue 3,  March 2017, Pages 406-413, http://dx.doi.org/10.1016/j.ajhg.2017.01.017
+  pigz:
+    citation: "pigz"
+    bibliography: ""
+  preparecovandbaf:
+    citation: "preparecovandbaf"
+    bibliography: ""
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""

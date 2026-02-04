@@ -113,6 +113,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
+        gens             : "skip_prepare_gens_input",
     ]
 
     //
@@ -132,7 +133,8 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        methylation      : ["mapping", "snv_calling"]
+        methylation      : ["mapping", "snv_calling"],
+        gens             : ["mapping", "snv_calling"],
     ]
 
 
@@ -150,6 +152,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
+        gens             : ["gens_baf_positions", "gens_panel_of_normals", "gens_coverage_bins"],
     ]
 
     def parameterStatus = [
@@ -170,6 +173,7 @@ workflow PIPELINE_INITIALISATION {
             skip_alignment          : params.skip_alignment,
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
+            skip_prepare_gens_input : params.skip_prepare_gens_input,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -190,6 +194,9 @@ workflow PIPELINE_INITIALISATION {
             variant_consequences_snvs: params.variant_consequences_snvs,
             variant_consequences_svs : params.variant_consequences_svs,
             vep_plugin_files         : params.vep_plugin_files,
+            gens_baf_positions       : params.gens_baf_positions,
+            gens_panel_of_normals    : params.gens_panel_of_normals,
+            gens_coverage_bins       : params.gens_coverage_bins,
         ]
     ]
 
@@ -207,7 +214,6 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
         )
-        .tap { ch_unprocessed_samplesheet }
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
         }
@@ -232,8 +238,6 @@ workflow PIPELINE_INITIALISATION {
         }
         .transpose()
         .set { ch_samplesheet }
-
-        validateNonEmptySamplesheet(ch_unprocessed_samplesheet)
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
@@ -458,7 +462,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
     }
     // Extra case for checking if methbat regions are provided when needed.
     // The above error would suggest the opposite of the fix
-    if (params.run_methbat && !params.methbat_regions) {
+    if (!params.skip_methylation_calling && params.run_methbat && !params.methbat_regions) {
         error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
@@ -609,12 +613,6 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
             }
         }
-}
-
-def validateNonEmptySamplesheet(ch_samplesheet) {
-    ch_samplesheet
-        .ifEmpty { error("ERROR: No samples found in samplesheet.") }
-        .filter { it -> it != null }
 }
 
 def validateSingleProjectPerRun(ch_samplesheet) {

@@ -81,6 +81,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "cat/cat": {
+                        "branch": "master",
+                        "git_sha": "69614d4579a6bd9b8a2ecffb35959809d9c36559",
+                        "installed_by": ["modules"]
+                    },
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -123,6 +128,11 @@
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
+                    "gatk4/denoisereadcounts": {
+                        "branch": "master",
+                        "git_sha": "ae8cd884f895585c6799ab4eb6a2c9f44df03336",
+                        "installed_by": ["modules"]
+                    },
                     "gawk": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -146,6 +156,11 @@
                     "genmod/score": {
                         "branch": "master",
                         "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "installed_by": ["modules"]
+                    },
+                    "gens/preparecovandbaf": {
+                        "branch": "master",
+                        "git_sha": "8d801223814a5a728dc2d8e506df17b84bc5e88b",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
@@ -387,6 +402,16 @@
                         "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
+                    },
+                    "whatshap/phase": {
+                        "branch": "master",
+                        "git_sha": "235626655327b9624300a99cc1751b118a4fd027",
+                        "installed_by": ["modules"]
+                    },
+                    "whatshap/stats": {
+                        "branch": "master",
+                        "git_sha": "bfab71f4d68c1aaff09335a3433e7b2836918b2a",
+                        "installed_by": ["modules"]
                     },
                     "yak/count": {
                         "branch": "master",

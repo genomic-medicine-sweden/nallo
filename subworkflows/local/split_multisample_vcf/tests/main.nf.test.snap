@@ -8,7 +8,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -16,7 +16,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.sv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "sv"
                     ],
                     [
@@ -24,7 +24,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ],
                     [
@@ -32,7 +32,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.sv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.sv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "sv"
                     ]
                 ],
@@ -48,7 +48,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -56,7 +56,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.sv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "sv"
                     ],
                     [
@@ -64,7 +64,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ],
                     [
@@ -72,7 +72,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.sv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.sv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "sv"
                     ]
                 ],
@@ -85,10 +85,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:27.495466896"
+        "timestamp": "2026-01-29T10:10:47.440258924"
     },
     "1 sample, 1 variant type": {
         "content": [
@@ -99,7 +99,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ]
                 ],
@@ -112,7 +112,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ]
                 ],
@@ -122,10 +122,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:12:48.716940209"
+        "timestamp": "2026-01-29T10:10:24.98670161"
     },
     "1 sample, 2 variant types": {
         "content": [
@@ -136,7 +136,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ],
                     [
@@ -144,7 +144,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.sv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "sv"
                     ]
                 ],
@@ -158,7 +158,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ],
                     [
@@ -166,7 +166,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.sv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "sv"
                     ]
                 ],
@@ -177,10 +177,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:01.165167642"
+        "timestamp": "2026-01-29T10:10:32.29114237"
     },
     "2 samples, 1 variant type, family ID = sample ID": {
         "content": [
@@ -191,7 +191,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -199,7 +199,7 @@
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -213,7 +213,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -221,7 +221,7 @@
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -232,10 +232,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:40.036331656"
+        "timestamp": "2026-01-29T10:10:54.984376112"
     },
     "2 samples, 1 variant type": {
         "content": [
@@ -246,7 +246,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -254,7 +254,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -268,7 +268,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -276,7 +276,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -287,9 +287,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2025-12-08T11:13:13.348522718"
+        "timestamp": "2026-01-29T10:10:39.775782298"
     }
 }

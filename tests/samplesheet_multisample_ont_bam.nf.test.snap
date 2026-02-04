@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            279,
+            309,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -60,6 +60,9 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -88,6 +91,9 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -132,8 +138,17 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.10"
                 },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.0"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.0"
+                },
                 "PEDDY": {
                     "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.4"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -218,17 +233,13 @@
                     "whatshap": 2.8
                 },
                 "WHATSHAP_PHASE": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "WHATSHAP_STATS": {
-                    "whatshap": 2.8,
-                    "bgzip": 1.22,
-                    "tabix": 1.22
+                    "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.9.1"
+                    "genomic-medicine-sweden/nallo": "v0.10.0"
                 }
             },
             [
@@ -263,6 +274,22 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_ONT_A",
+                "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz",
+                "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz.tbi",
+                "gens/HG002_ONT_A/HG002_ONT_A.cov.bed.gz",
+                "gens/HG002_ONT_A/HG002_ONT_A.cov.bed.gz.tbi",
+                "gens/HG002_ONT_B",
+                "gens/HG002_ONT_B/HG002_ONT_B.baf.bed.gz",
+                "gens/HG002_ONT_B/HG002_ONT_B.baf.bed.gz.tbi",
+                "gens/HG002_ONT_B/HG002_ONT_B.cov.bed.gz",
+                "gens/HG002_ONT_B/HG002_ONT_B.cov.bed.gz.tbi",
+                "gens/HG002_ONT_C",
+                "gens/HG002_ONT_C/HG002_ONT_C.baf.bed.gz",
+                "gens/HG002_ONT_C/HG002_ONT_C.baf.bed.gz.tbi",
+                "gens/HG002_ONT_C/HG002_ONT_C.cov.bed.gz",
+                "gens/HG002_ONT_C/HG002_ONT_C.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -643,17 +670,17 @@
                 "qc/peddy/FAM2/FAM2.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002_ONT_A",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_stats.stats.tsv",
+                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_ONT_A/HG002_ONT_A_whatshap_stats.tsv",
                 "qc/phasing_stats/HG002_ONT_B",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_stats.stats.tsv",
+                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_ONT_B/HG002_ONT_B_whatshap_stats.tsv",
                 "qc/phasing_stats/HG002_ONT_C",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.blocks.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_stats.stats.tsv",
+                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002_ONT_C/HG002_ONT_C_whatshap_stats.tsv",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_ONT_A",
                 "qc/sambamba_depth/HG002_ONT_A/HG002_ONT_A_sambamba_depth.bed",
@@ -753,6 +780,18 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,d2fa9b12bc053967ad9717fd95ec9566",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,cbf02b84ec28d7924bc8b7db221306e1",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,70c46e9a12938cc7ff2e1a56de0e57d9",
+                "HG002_ONT_A.baf.bed.gz:md5,bd4480c494cc4bfcba1dd71563123938",
+                "HG002_ONT_A.baf.bed.gz.tbi:md5,285e944e10b52a28e48ca0bc7f12d33b",
+                "HG002_ONT_A.cov.bed.gz:md5,baed648bb2733917b5b2b4a242d8ecab",
+                "HG002_ONT_A.cov.bed.gz.tbi:md5,f692b62d6a9c5c7b53389dfa0091bea3",
+                "HG002_ONT_B.baf.bed.gz:md5,0056fe605fd81c503ece040ebf16bbd8",
+                "HG002_ONT_B.baf.bed.gz.tbi:md5,e89d80903e0c9a247111c3f091c4aaf4",
+                "HG002_ONT_B.cov.bed.gz:md5,e3fbb140dbeb734e83ea52d665eb93d8",
+                "HG002_ONT_B.cov.bed.gz.tbi:md5,9b189a0958dbf186dc4db90aad91e030",
+                "HG002_ONT_C.baf.bed.gz:md5,bd4480c494cc4bfcba1dd71563123938",
+                "HG002_ONT_C.baf.bed.gz.tbi:md5,285e944e10b52a28e48ca0bc7f12d33b",
+                "HG002_ONT_C.cov.bed.gz:md5,baed648bb2733917b5b2b4a242d8ecab",
+                "HG002_ONT_C.cov.bed.gz.tbi:md5,f692b62d6a9c5c7b53389dfa0091bea3",
                 "HG002_ONT_A_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -800,7 +839,7 @@
                 "HG002_ONT_A_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_A_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_A_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_ONT_A_chromograph_coverage_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_A_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_A_chromograph_coverage_chrX.png:md5,118b77cddee56315a11013e6ac2c6682",
                 "HG002_ONT_A_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_C_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -850,7 +889,7 @@
                 "HG002_ONT_C_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_C_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_C_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_ONT_C_chromograph_coverage_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_C_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_C_chromograph_coverage_chrX.png:md5,118b77cddee56315a11013e6ac2c6682",
                 "HG002_ONT_C_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_ONT_A_modkit_pileup_1.bed.gz:md5,508d0e7519d89b56afa767d2a7f9765f",
@@ -908,18 +947,18 @@
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,14bcc32136e2146095ad21e40b2bc6a1",
                 "HG002_ONT_A.mosdepth.region.dist.txt:md5,33af27722b03c06c4b5fc898d44b7034",
                 "HG002_ONT_A.mosdepth.summary.txt:md5,8d6056c8c5adef2a635231cb803a0285",
-                "HG002_ONT_A.regions.bed.gz:md5,d18b379af40c47f1c0fc5daaf32fddae",
-                "HG002_ONT_A.regions.bed.gz.csi:md5,b9d96565ebb4f93effb63658dd80f4e2",
+                "HG002_ONT_A.regions.bed.gz:md5,cbae02aac775f0ed5889212233317e2b",
+                "HG002_ONT_A.regions.bed.gz.csi:md5,c2f49ff05347c6a69d892022d8ba9cc2",
                 "HG002_ONT_B.mosdepth.global.dist.txt:md5,6b109ee9544ff8406ad1527d2f1a36ea",
                 "HG002_ONT_B.mosdepth.region.dist.txt:md5,f3d53e9846322d85e066cd7e25cb9c1b",
                 "HG002_ONT_B.mosdepth.summary.txt:md5,c566e84ff1f9684cd2acffb0d96881db",
-                "HG002_ONT_B.regions.bed.gz:md5,0d119f35a59aa6086cf5db122d871b72",
-                "HG002_ONT_B.regions.bed.gz.csi:md5,8f972dae17349629bddf2cdeb0b17ea8",
+                "HG002_ONT_B.regions.bed.gz:md5,d7b637c2d88b85040c0f1cd01d64f8b6",
+                "HG002_ONT_B.regions.bed.gz.csi:md5,af54c1f051b4429f2d63f731e462ea62",
                 "HG002_ONT_C.mosdepth.global.dist.txt:md5,14bcc32136e2146095ad21e40b2bc6a1",
                 "HG002_ONT_C.mosdepth.region.dist.txt:md5,33af27722b03c06c4b5fc898d44b7034",
                 "HG002_ONT_C.mosdepth.summary.txt:md5,8d6056c8c5adef2a635231cb803a0285",
-                "HG002_ONT_C.regions.bed.gz:md5,d18b379af40c47f1c0fc5daaf32fddae",
-                "HG002_ONT_C.regions.bed.gz.csi:md5,b9d96565ebb4f93effb63658dd80f4e2",
+                "HG002_ONT_C.regions.bed.gz:md5,cbae02aac775f0ed5889212233317e2b",
+                "HG002_ONT_C.regions.bed.gz.csi:md5,c2f49ff05347c6a69d892022d8ba9cc2",
                 "FAM.het_check.csv:md5,2f163743b21f66533a48ad66c70b5ef0",
                 "FAM.het_check.png:md5,be72cdf4ff919a5d7a26cdbd2cf8028e",
                 "FAM.html:md5,44ffbdc8c8804e11796ad7baa5a0f5c8",
@@ -940,30 +979,33 @@
                 "FAM2.sex_check.csv:md5,79b718a56051d3c47009f1c8fe7e8448",
                 "FAM2.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
                 "FAM2.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_ONT_A_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
-                "HG002_ONT_A_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
-                "HG002_ONT_B_stats.blocks.gtf.gz:md5,fee9bd82efc166d52c559c73437a94cd",
-                "HG002_ONT_B_stats.blocks.gtf.gz.tbi:md5,00bb69da27ff283832694efbb69ff1c2",
-                "HG002_ONT_C_stats.blocks.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
-                "HG002_ONT_C_stats.blocks.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "HG002_ONT_A_whatshap_stats.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
+                "HG002_ONT_A_whatshap_stats.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "HG002_ONT_A_whatshap_stats.tsv:md5,49db9eb5190b6f973afa5cf54e5bb973",
+                "HG002_ONT_B_whatshap_stats.gtf.gz:md5,fee9bd82efc166d52c559c73437a94cd",
+                "HG002_ONT_B_whatshap_stats.gtf.gz.tbi:md5,00bb69da27ff283832694efbb69ff1c2",
+                "HG002_ONT_B_whatshap_stats.tsv:md5,0dab638a9e7c5d711d47a41d19724033",
+                "HG002_ONT_C_whatshap_stats.gtf.gz:md5,5c7b4b125d3b228c6b7dda4fb25b0e95",
+                "HG002_ONT_C_whatshap_stats.gtf.gz.tbi:md5,d35b8357fe42708af2aac2f236357dbc",
+                "HG002_ONT_C_whatshap_stats.tsv:md5,9051d38e22918d6516bbdf71cd785c5c",
                 "HG002_ONT_A_sambamba_depth.bed:md5,44e7c66549c2a9f5f3826136dce8cf0a",
                 "HG002_ONT_B_sambamba_depth.bed:md5,10ee1428503d20627944cbcd7cc233b4",
                 "HG002_ONT_C_sambamba_depth.bed:md5,789586b61f1b89840f11f6302f772936",
-                "HG002_ONT_A_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
-                "HG002_ONT_A_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
-                "HG002_ONT_A_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
+                "HG002_ONT_A_hificnv.copynum.bedgraph:md5,8524c0b993a75bd21d2d2cbb8ab17b14",
+                "HG002_ONT_A_hificnv.depth.bw:md5,7d2c7de6a92fd6ae5dc8d447742bf325",
+                "HG002_ONT_A_hificnv.maf.bw:md5,092b7dd08c88bde1821540423fde7789",
                 "HG002_ONT_A_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
                 "HG002_ONT_A_modkit_pileup_2.bw:md5,a170155fef4ea3c786c600733bac76e9",
                 "HG002_ONT_A_modkit_pileup_ungrouped.bw:md5,765acc78b12b93291a5450af565f89c3",
-                "HG002_ONT_B_hificnv.copynum.bedgraph:md5,040f5a41c1169d4b9dff2e9c3e9cd2b3",
-                "HG002_ONT_B_hificnv.depth.bw:md5,9b459913585ea2c3070f1c0d377caa91",
-                "HG002_ONT_B_hificnv.maf.bw:md5,aca3b7e15e02c0bf4004f7d4e21e15eb",
+                "HG002_ONT_B_hificnv.copynum.bedgraph:md5,cd5a2c89a4508b8fe360b4bf6abf2db2",
+                "HG002_ONT_B_hificnv.depth.bw:md5,39db6c516853230d6d85014eff8eeead",
+                "HG002_ONT_B_hificnv.maf.bw:md5,3b60233b4d12bf7aaf648004242a21c1",
                 "HG002_ONT_B_modkit_pileup_1.bw:md5,df142665d3f6080c666aca4746e40bbd",
                 "HG002_ONT_B_modkit_pileup_2.bw:md5,bd7bf0e8c1f3fb94af9022a1d42b41fa",
                 "HG002_ONT_B_modkit_pileup_ungrouped.bw:md5,2dbfcd99ec09386141e56f8a2fcff689",
-                "HG002_ONT_C_hificnv.copynum.bedgraph:md5,fb0dcc9acc36631f736425b5a8fbac8a",
-                "HG002_ONT_C_hificnv.depth.bw:md5,4fe85650e9718e36df2b7825dbfb4419",
-                "HG002_ONT_C_hificnv.maf.bw:md5,3f60c0d4217f630639bb6526617241f5",
+                "HG002_ONT_C_hificnv.copynum.bedgraph:md5,8524c0b993a75bd21d2d2cbb8ab17b14",
+                "HG002_ONT_C_hificnv.depth.bw:md5,7d2c7de6a92fd6ae5dc8d447742bf325",
+                "HG002_ONT_C_hificnv.maf.bw:md5,092b7dd08c88bde1821540423fde7789",
                 "HG002_ONT_C_modkit_pileup_1.bw:md5,3a8c48caa77c2498943f445aca4dcc74",
                 "HG002_ONT_C_modkit_pileup_2.bw:md5,a170155fef4ea3c786c600733bac76e9",
                 "HG002_ONT_C_modkit_pileup_ungrouped.bw:md5,765acc78b12b93291a5450af565f89c3"
@@ -1077,8 +1119,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-12-30T15:24:46.761608098"
+        "timestamp": "2026-01-30T14:53:44.295624318"
     }
 }

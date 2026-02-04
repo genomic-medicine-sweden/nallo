@@ -3,6 +3,57 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.10.0 - [2026-02-04]
+
+### `Added`
+
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data (coverage and B-allele frequencies, BAF) to Gens.
+
+### `Changed`
+
+- [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
+- [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
+- [#853](https://github.com/genomic-medicine-sweden/nallo/pull/853) - Changed local whatshap/phase module to the nf-core module
+- [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
+- [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
+- [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
+- [#876](https://github.com/genomic-medicine-sweden/nallo/pull/876) - Prep for release 0.10.0
+
+### `Removed`
+
+- [#858](https://github.com/genomic-medicine-sweden/nallo/pull/858) - Removed validation for empty samplesheet, because it obfuscates other errors
+
+### `Fixed`
+
+- [#871](https://github.com/genomic-medicine-sweden/nallo/pull/871) Fixed MethBat region validation running even when methylation calling is skipped
+
+### Parameters
+
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--skip_prepare_gens_input` |
+|               | `--gens_baf_positions`      |
+|               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.9.2 - [2026-01-27]
 
 ### `Fixed`

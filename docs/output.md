@@ -87,9 +87,9 @@ This document describes the pipeline output files and the tools used to generate
 | ----------------------------------------------------------------- | ---------------------------- |
 | `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags |
 | `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file   |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz`                       | Phase block file             |
-| `qc/phasing_stats/{sample}/*.blocks.gtf.gz.tbi`                   | Index of block file          |
-| `qc/phasing_stats/{sample}/*.stats.tsv`                           | Phasing statistics file      |
+| `qc/phasing_stats/{sample}/{sample}_whatshap_stats.gtf.gz`        | Phase block file             |
+| `qc/phasing_stats/{sample}/{sample}_whatshap_stats.gtf.gz.tbi`    | Index of block file          |
+| `qc/phasing_stats/{sample}/{sample}_whatshap_stats.tsv`           | Phasing statistics file      |
 
 ## QC
 
@@ -258,6 +258,15 @@ In general, annotated variant calls are output per family while unannotated call
 !!!tip
 
     Filtered variants are output alongside unfiltered variants as additional files.
+
+When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.
+
+| Path                                    | Description                                                                           |
+| --------------------------------------- | ------------------------------------------------------------------------------------- |
+| `gens/{sample}/{sample}.cov.bed.gz`     | Coverage data normalized either against a panel of normal or the samples median value |
+| `gens/{sample}/{sample}.cov.bed.gz.tbi` | Index of the coverage BED file                                                        |
+| `gens/{sample}/{sample}.baf.bed.gz`     | B-allele frequency estimates at the provided positions                                |
+| `gens/{sample}/{sample}.baf.bed.gz.tbi` | Index of the BAF BED file                                                             |
 
 ### SVs (and CNVs)
 
