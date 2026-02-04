@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+
 ### `Changed`
 
 ### `Removed`
@@ -15,8 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -25,8 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -47,9 +58,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 - [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
 - [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
-- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 - [#876](https://github.com/genomic-medicine-sweden/nallo/pull/876) - Prep for release 0.10.0
 
 ### `Removed`
@@ -62,17 +70,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                   |
-| ------------- | ------------------------------- |
-|               | `--skip_prepare_gens_input`     |
-|               | `--gens_baf_positions`          |
-|               | `--gens_panel_of_normals`       |
-|               | `--gens_coverage_bins`          |
-|               | `--sentieon_model_bundle`       |
-|               | `--sentieon_tech`               |
-|               | `--sentieon_male_haploid_bed`   |
-|               | `--sentieon_male_diploid_bed`   |
-|               | `--sentieon_female_diploid_bed` |
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--skip_prepare_gens_input` |
+|               | `--gens_baf_positions`      |
+|               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -81,13 +84,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| gatk4/denoisereadcounts    |             | 4.6.2.0     |
-| gens/preparecovandbaf      |             | 1.4.0       |
-| cat/cat                    |             | 2.8         |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.1       |
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
