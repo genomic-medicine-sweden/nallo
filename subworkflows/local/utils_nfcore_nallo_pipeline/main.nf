@@ -113,7 +113,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
-        gens             : "skip_gens",
+        gens             : "skip_prepare_gens_input",
     ]
 
     //
