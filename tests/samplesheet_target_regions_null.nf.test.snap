@@ -282,7 +282,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0"
+                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
                 }
             },
             [
@@ -645,7 +645,7 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,dc7f09108940ce9b2359fc3715411e77"
             ],
             [
-                
+
             ],
             [
                 [
@@ -700,7 +700,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "meta": {
