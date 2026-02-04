@@ -16,7 +16,7 @@ workflow CALL_SNVS {
     ch_sentieon_female_diploid_bed  // channel: [mandatory] [ val(meta), path(female_diploid_bed) ]
     ch_sentieon_male_diploid_bed    // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
     ch_sentieon_male_haploid_bed    // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
-    variant_caller                  // string: which variant caller to use, i.e. "deepvariant"
+    variant_caller                  // string: which variant caller to use, e.g. "deepvariant"
     sentieon_tech                   // string: which sequencing tech produced the reads (sentieon)
 
 
