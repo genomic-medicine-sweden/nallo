@@ -83,6 +83,9 @@ workflow CALL_SNVS {
                 diploid: meta.ploidy == "diploid"
                 haploid: meta.ploidy == "haploid"
             }
+            .map { meta, intersected_calling_intervals ->
+                [ meta - meta.subMap('ploidy'), intersected_calling_intervals ]
+            }
             .set { ch_intersected_calling_intervals }
 
         ch_intersected_calling_intervals.haploid
@@ -97,11 +100,9 @@ workflow CALL_SNVS {
             .mix(
                 ch_bed.female.map { meta, _bed -> [ meta, [] ] }
             )
-            .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
             .set { ch_haploid_regions_out }
 
         ch_intersected_calling_intervals.diploid
-            .map { meta, intersected_calling_intervals -> [ removePloidyTag(meta), intersected_calling_intervals ] }
             .set { ch_diploid_regions_out }
 
         ch_bam_bai
@@ -142,6 +143,3 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         }
 }
 
-def removePloidyTag(meta) {
-    meta.containsKey('ploidy') ? meta.findAll { k, _v -> k != 'ploidy' } : meta
-}
