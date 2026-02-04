@@ -22,10 +22,6 @@ workflow CALL_SNVS {
 
     main:
     ch_versions   = channel.empty()
-    ch_vcf        = channel.empty()
-    ch_index      = channel.empty()
-    ch_gvcf       = channel.empty()
-    ch_gvcf_index = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
 
