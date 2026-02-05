@@ -1378,9 +1378,49 @@ https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True 
 </tr>
 <tr>
 <td><code>snv_caller</code></td>
-<td>Which short variant software to use (<code>deepvariant</code>) (accepted: <code>deepvariant</code>)</td>
+<td>Which short variant software to use (<code>deepvariant</code> or <code>sentieon</code>). Set to <code>sentieon</code> to run Sentieon DNAscope long-read calling. (accepted: <code>deepvariant</code>|<code>sentieon</code>)</td>
 <td><code>string</code></td>
 <td>deepvariant</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_model_bundle</code></td>
+<td>The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Only used when <code>--snv_caller sentieon</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_tech</code></td>
+<td>Sequencing technology used with Sentieon DNAscope (<code>HiFi</code> or <code>ONT</code>). Defaults to <code>HiFi</code> unless overwritten or the ONT preset is used. (accepted: <code>HiFi</code>|<code>ONT</code>)</td>
+<td><code>string</code></td>
+<td>HiFi</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_male_haploid_bed</code></td>
+<td>BED file restricting haploid regions for male samples when using Sentieon DNAscope.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_male_diploid_bed</code></td>
+<td>BED file restricting diploid regions for male samples when using Sentieon DNAscope.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_female_diploid_bed</code></td>
+<td>BED file restricting diploid regions for female samples when using Sentieon DNAscope.</td>
+<td><code>string</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
