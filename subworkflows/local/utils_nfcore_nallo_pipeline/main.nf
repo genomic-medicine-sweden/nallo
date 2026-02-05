@@ -113,7 +113,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
-        gens             : "skip_gens",
+        gens             : "skip_prepare_gens_input",
     ]
 
     //
@@ -173,7 +173,7 @@ workflow PIPELINE_INITIALISATION {
             skip_alignment          : params.skip_alignment,
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
-            skip_gens               : params.skip_prepare_gens_input,
+            skip_prepare_gens_input : params.skip_prepare_gens_input,
         ],
         files: [
             par_regions              : params.par_regions,
@@ -651,6 +651,14 @@ def validateWorkflowCompatibility() {
     if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
         error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
     }
+
+    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
+    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424
+    // for more details.
+    if (params.phaser == 'whatshap' && params.snv_caller == 'sentieon') {
+          error "ERROR: Sentieon short-variant calls are mixed-ploidy and cannot be phased with WhatsHap. Choose another phaser (e.g. longphase/hiphase) or a different SNV caller."
+    }
+
 }
 
 def validateSVCallingParameters() {

@@ -118,12 +118,16 @@ workflow NALLO {
     ch_gens_baf_positions        = createReferenceChannelFromPath(params.gens_baf_positions)
     ch_gens_panel_of_normals     = createReferenceChannelFromPath(params.gens_panel_of_normals)
     ch_gens_coverage_bins        = createReferenceChannelFromPath(params.gens_coverage_bins)
+    ch_sentieon_model_bundle       = createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []]))
+    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
+    ch_sentieon_male_diploid_bed   = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
+    ch_sentieon_male_haploid_bed   = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
 
     // Channels from (optional) input samplesheets validated by schema
-    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
-    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
-    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
-    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
+    ch_databases                   = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
+    ch_svdb_sv_databases           = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
+    ch_vep_plugin_files            = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
+    ch_hgnc_ids                    = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
         .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [ [ id: 'hgnc_ids' ], file ] }
@@ -401,7 +405,12 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_par,
-            "deepvariant",
+            ch_sentieon_model_bundle,
+            ch_sentieon_female_diploid_bed,
+            ch_sentieon_male_diploid_bed,
+            ch_sentieon_male_haploid_bed,
+            params.snv_caller,
+            params.sentieon_tech,
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
@@ -412,12 +421,21 @@ workflow NALLO {
             .groupTuple()
             .set { variants_to_merge_per_family }
 
+        CALL_SNVS.out.gvcf_index
+            .map { meta, tbi ->
+                [[id: meta.region.name, family_id: meta.family_id], tbi]
+            }
+            .groupTuple()
+            .set { gvcf_tbis_per_family }
+
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         GVCF_GLNEXUS_NORM_VARIANTS(
             variants_to_merge_per_family,
+            gvcf_tbis_per_family,
             SCATTER_GENOME.out.bed, // This contains all regions, but we could probably pass the region BED that actually matches the variants instead...
             ch_fasta,
-            "deepvariant",
+            ch_fai,
+            params.snv_caller,
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
@@ -436,7 +454,7 @@ workflow NALLO {
         VCF_CONCAT_NORM_VARIANTS(
             variants_to_concat_per_sample,
             ch_fasta,
-            "deepvariant",
+            params.snv_caller,
         )
         ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
@@ -452,6 +470,7 @@ workflow NALLO {
             VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf, // Can we use the normalized VCF here, for DV vcfstatsreport?
             sample_snv_vcf,
             sample_snv_index,
+            params.snv_caller.equals("deepvariant"),
         )
 
         ch_versions = ch_versions.mix(QC_SNVS.out.versions)
@@ -558,7 +577,8 @@ workflow NALLO {
             ch_fai,
             params.phaser,
             !params.skip_sv_calling,
-            cram_output
+            cram_output,
+            !params.snv_caller.equals("sentieon")
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 

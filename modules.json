@@ -61,6 +61,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules", "vcf_filter_bcftools_ensemblvep"]
                     },
+                    "bedtools/intersect": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "bedtools/merge": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
@@ -306,6 +311,11 @@
                     "sawfish/jointcall": {
                         "branch": "master",
                         "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
+                        "installed_by": ["modules"]
+                    },
+                    "sentieon/gvcftyper": {
+                        "branch": "master",
+                        "git_sha": "d9c84ed4564744313bb586928885ebf05f40ad98",
                         "installed_by": ["modules"]
                     },
                     "severus": {

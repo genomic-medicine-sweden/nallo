@@ -3,7 +3,51 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.10.0dev - [XXXX-XX-XX]
+## 0.11.0dev - [XXXX-XX-XX]
+
+### `Added`
+
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+
+### `Changed`
+
+- [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
+
+### `Removed`
+
+### `Fixed`
+
+### Parameters
+
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--extra_sawfish_options`       |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.1       |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.10.0 - [2026-02-04]
 
 ### `Added`
 
@@ -17,7 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
 - [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
 - [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
-- [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
+- [#876](https://github.com/genomic-medicine-sweden/nallo/pull/876) - Prep for release 0.10.0
 
 ### `Removed`
 
@@ -31,11 +75,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Old parameter | New parameter               |
 | ------------- | --------------------------- |
-|               | `--extra_sawfish_options`   |
 |               | `--skip_prepare_gens_input` |
 |               | `--gens_baf_positions`      |
 |               | `--gens_panel_of_normals`   |
 |               | `--gens_coverage_bins`      |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
 
 ### Module updates
 
@@ -46,14 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | cat/cat                 |             | 2.8         |
 
 > [!NOTE]
-> Parameter has been updated if both old and new parameter information is present.
-> Parameter has been added if just the new parameter information is present.
-> Parameter has been removed if new parameter information isn't present.
-
-### Module updates
-
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
 
 ## 0.9.2 - [2026-01-27]
 

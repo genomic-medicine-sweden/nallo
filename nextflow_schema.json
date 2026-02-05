@@ -609,7 +609,7 @@
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
-                    "enum": ["deepvariant"]
+                    "enum": ["deepvariant", "sentieon"]
                 },
                 "str_caller": {
                     "type": "string",
@@ -832,6 +832,39 @@
                     "type": "integer",
                     "default": 500,
                     "description": "Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow."
+                },
+                "sentieon_model_bundle": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository."
+                },
+                "sentieon_tech": {
+                    "type": "string",
+                    "default": "HiFi",
+                    "enum": ["HiFi", "ONT"],
+                    "description": "Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi."
+                },
+                "sentieon_male_haploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict haploid variant calling for males, in BED file format."
+                },
+                "sentieon_male_diploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict diploid variant calling for males, in BED file format."
+                },
+                "sentieon_female_diploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict diploid variant calling for females, in BED file format."
                 }
             },
             "required": ["preset"]

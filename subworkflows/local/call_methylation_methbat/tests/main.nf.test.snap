@@ -514,7 +514,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:19:33.371971824"
+        "timestamp": "2026-01-28T13:53:38.629915769"
     },
     "1 sample - bed phased": {
         "content": [
@@ -785,7 +785,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-10T16:19:45.333826658"
+        "timestamp": "2026-01-28T13:53:59.766293143"
     },
     "1 sample - bed unphased": {
         "content": [
