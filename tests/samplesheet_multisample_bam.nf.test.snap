@@ -279,7 +279,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.10.0"
+                    "genomic-medicine-sweden/nallo": "v0.10.1"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r56"
@@ -1180,8 +1180,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.12.0"
         },
-        "timestamp": "2026-01-30T14:49:36.681279072"
+        "timestamp": "2026-02-04T19:02:11.662787419"
     }
 }

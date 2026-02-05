@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.10.1 - [2026-02-05]
+
+### `Changed`
+
+- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) Changed to separate inputs for female and male gens panel of normals
+
+### Parameters
+
+| Old parameter             | New parameter                    |
+| ------------------------- | -------------------------------- |
+| `--gens_panel_of_normals` | `--gens_panel_of_normals_female` |
+| `--gens_panel_of_normals` | `--gens_panel_of_normals_male`   |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
 ## 0.10.0 - [2026-02-04]
 
 ### `Added`

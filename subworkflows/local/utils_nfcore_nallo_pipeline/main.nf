@@ -152,7 +152,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
-        gens             : ["gens_baf_positions", "gens_panel_of_normals", "gens_coverage_bins"],
+        gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
     ]
 
     def parameterStatus = [
@@ -176,27 +176,28 @@ workflow PIPELINE_INITIALISATION {
             skip_prepare_gens_input : params.skip_prepare_gens_input,
         ],
         files: [
-            par_regions              : params.par_regions,
-            echtvar_snv_databases    : params.echtvar_snv_databases,
-            sambamba_regions         : params.sambamba_regions,
-            svdb_sv_databases        : params.svdb_sv_databases,
-            somalier_sites           : params.somalier_sites,
-            vep_cache                : params.vep_cache,
-            cnv_expected_xy_cn       : params.cnv_expected_xy_cn,
-            cnv_expected_xx_cn       : params.cnv_expected_xx_cn,
-            cnv_excluded_regions     : params.cnv_excluded_regions,
-            fasta                    : params.fasta,
-            str_bed                  : params.str_bed,
-            stranger_repeat_catalog  : params.stranger_repeat_catalog,
-            genmod_reduced_penetrance: params.genmod_reduced_penetrance,
-            genmod_score_config_snvs : params.genmod_score_config_snvs,
-            genmod_score_config_svs  : params.genmod_score_config_svs,
-            variant_consequences_snvs: params.variant_consequences_snvs,
-            variant_consequences_svs : params.variant_consequences_svs,
-            vep_plugin_files         : params.vep_plugin_files,
-            gens_baf_positions       : params.gens_baf_positions,
-            gens_panel_of_normals    : params.gens_panel_of_normals,
-            gens_coverage_bins       : params.gens_coverage_bins,
+            par_regions                 : params.par_regions,
+            echtvar_snv_databases       : params.echtvar_snv_databases,
+            sambamba_regions            : params.sambamba_regions,
+            svdb_sv_databases           : params.svdb_sv_databases,
+            somalier_sites              : params.somalier_sites,
+            vep_cache                   : params.vep_cache,
+            cnv_expected_xy_cn          : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn          : params.cnv_expected_xx_cn,
+            cnv_excluded_regions        : params.cnv_excluded_regions,
+            fasta                       : params.fasta,
+            str_bed                     : params.str_bed,
+            stranger_repeat_catalog     : params.stranger_repeat_catalog,
+            genmod_reduced_penetrance   : params.genmod_reduced_penetrance,
+            genmod_score_config_snvs    : params.genmod_score_config_snvs,
+            genmod_score_config_svs     : params.genmod_score_config_svs,
+            variant_consequences_snvs   : params.variant_consequences_snvs,
+            variant_consequences_svs    : params.variant_consequences_svs,
+            vep_plugin_files            : params.vep_plugin_files,
+            gens_baf_positions          : params.gens_baf_positions,
+            gens_panel_of_normals_female: params.gens_panel_of_normals_female,
+            gens_panel_of_normals_male  : params.gens_panel_of_normals_male,
+            gens_coverage_bins          : params.gens_coverage_bins,
         ]
     ]
 
@@ -560,9 +561,9 @@ def findKeysForValue(def valueToFind, Map map) {
 }
 
 // Utility function to create channels from references
-def createReferenceChannelFromPath(param, defaultValue = '') {
+def createReferenceChannelFromPath(param, defaultValue = '', id = null) {
     return param ? channel.fromPath(param, checkIfExists: true)
-        .map { file_path -> [ [ id: file_path.simpleName ], file_path ] }
+        .map { file_path -> [ [ id: id ?: file_path.simpleName ], file_path ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
