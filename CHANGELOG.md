@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+
 ### `Changed`
 
 ### `Removed`
@@ -15,8 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -25,8 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

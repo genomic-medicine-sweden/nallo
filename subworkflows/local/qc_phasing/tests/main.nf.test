@@ -96,6 +96,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = false
+                input[7] = true
                 """
             }
         }
@@ -217,6 +218,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = true
+                input[7] = true
                 """
             }
         }
@@ -292,6 +294,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = false
+                input[7] = true
                 """
             }
         }
@@ -401,6 +404,7 @@ nextflow_workflow {
                     ['HG002', 'HG003']
                 ])
                 input[6] = true
+                input[7] = true
                 """
             }
         }
@@ -418,4 +422,137 @@ nextflow_workflow {
         }
 
     }
+
+    test("WhatsHap stats disabled") {
+
+        setup {
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = channel.empty()
+                    input[2] = channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = channel.of([
+                    [ id: 'FAM' ],
+                    ['HG002', 'HG003']
+                ])
+                input[6] = false
+                input[7] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // Making sure that we process all samples
+                { assert workflow.out.phasing_stats.size() == 0 },
+                { assert workflow.out.phasing_blocks.size() == 0 },
+                { assert workflow.out.phasing_blocks_index.size() == 0 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert snapshot(
+                    workflow.out.versions,
+                    workflow.out.phasing_stats,
+                    workflow.out.phasing_blocks,
+                    workflow.out.phasing_blocks_index,
+                    workflow.out.haplotagging_stats.collect { meta, file -> path(file).readLines()[0..-2]} // Last line contains timestamp
+                ).match() }
+            )
+        }
+    }
+
+    test("WhatsHap stats disabled - stub") {
+
+        options "-stub"
+        setup {
+            run("LONGPHASE") {
+                script "../../../../subworkflows/local/longphase/main.nf"
+                process {
+                    """
+                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[1] = channel.empty()
+                    input[2] = channel.of(
+                        [
+                            [ id : 'HG002', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ],
+                        [
+                            [ id : 'HG003', family_id: 'FAM' ],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                        ]
+                    )
+                    input[3] = channel.of([
+                        [ id: 'FAM' ],
+                        ['HG002', 'HG003']
+                    ])
+                    input[4] = GUNZIP.out.gunzip
+                    input[5] = SAMTOOLS_FAIDX.out.fai
+                    input[6] = false
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = LONGPHASE.out.phased_family_snvs
+                input[1] = LONGPHASE.out.phased_family_snvs_tbi
+                input[2] = LONGPHASE.out.phased_family_svs
+                input[3] = LONGPHASE.out.phased_family_svs_tbi
+                input[4] = LONGPHASE.out.haplotagged_bam_bai
+                input[5] = channel.of([
+                    [ id: 'FAM' ],
+                    ['HG002', 'HG003']
+                ])
+                input[6] = false
+                input[7] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.phasing_stats.size() == 0 },
+                { assert workflow.out.phasing_blocks.size() == 0 },
+                { assert workflow.out.phasing_blocks_index.size() == 0 },
+                { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
 }
