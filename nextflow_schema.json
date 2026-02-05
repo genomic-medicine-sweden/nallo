@@ -713,6 +713,11 @@
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
                 },
+                "extra_hifiasm_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to hifiasm, used for test profile."
+                },
                 "extra_methbat_profile_options": {
                     "type": "string",
                     "hidden": true,
@@ -723,20 +728,20 @@
                     "hidden": true,
                     "description": "Extra options to modkit, used for test profile."
                 },
-                "extra_vep_options": {
-                    "type": "string",
-                    "hidden": true,
-                    "description": "Extra options to VEP, used for test profile."
-                },
                 "extra_paraphase_options": {
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to Paraphase, used for test profile."
                 },
-                "extra_hifiasm_options": {
+                "extra_sawfish_options": {
                     "type": "string",
                     "hidden": true,
-                    "description": "Extra options to hifiasm, used for test profile."
+                    "description": "Extra options to Sawfish, used for test profile."
+                },
+                "extra_vep_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to VEP, used for test profile."
                 },
                 "extra_yak_options": {
                     "type": "string",

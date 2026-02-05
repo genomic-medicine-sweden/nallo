@@ -16,7 +16,7 @@ nextflow_pipeline {
                 sv_callers                   = "sawfish"
                 sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
                 filter_snvs_expression       = "-i 'AQ>20'"
-                filter_svs_expression        = "-i \'SVTYPE=\"INS\"\'"
+                filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
             }
         }
 

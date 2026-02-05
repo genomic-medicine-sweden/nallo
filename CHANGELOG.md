@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Changed`
 
+- [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
+
 ### `Removed`
 
 ### `Fixed`
@@ -21,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Old parameter | New parameter                   |
 | ------------- | ------------------------------- |
+|               | `--extra_sawfish_options`       |
 |               | `--sentieon_model_bundle`       |
 |               | `--sentieon_tech`               |
 |               | `--sentieon_male_haploid_bed`   |
