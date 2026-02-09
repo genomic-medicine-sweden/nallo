@@ -99,7 +99,7 @@ jobs:
         with:
           android: true
           dotnet: false
-          haskell: false
+          haskell: true
           large-packages: false
           docker-images: true
           swap-storage: true
