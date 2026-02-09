@@ -3,11 +3,21 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.10.2 - [2026-02-09]
+
+### `Changed`
+
+- [#885](https://github.com/genomic-medicine-sweden/nallo/pull/885) - Increased default memory requirements for `PREPARE_GENS_INPUTS:GATK4_DENOISEREADCOUNTS`
+
+### `Fixed`
+
+- [#885](https://github.com/genomic-medicine-sweden/nallo/pull/885) - Fixed non-contiguous chromosome blocks error in `CONCAT_SORT_GENS:BCFTOOLS_CONCAT`
+
 ## 0.10.1 - [2026-02-05]
 
 ### `Changed`
 
-- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) Changed to separate inputs for female and male gens panel of normals
+- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) - Changed to separate inputs for female and male gens panel of normals
 
 ### Parameters
 
