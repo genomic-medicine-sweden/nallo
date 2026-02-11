@@ -381,7 +381,7 @@
                     "description": "Output format for alignment files. Either `bam` or `cram`",
                     "default": "bam"
                 },
-                "create_maf_tack": {
+                "create_maf_track": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true`"
