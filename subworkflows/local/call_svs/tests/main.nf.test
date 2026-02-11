@@ -90,6 +90,7 @@ nextflow_workflow {
                 input[10] = [[],[]]
                 input[11] = false
                 input[12] = false
+                input[13] = true
                 """
             }
         }
@@ -148,6 +149,7 @@ nextflow_workflow {
                     }.collect()
                 input[11] = false
                 input[12] = false
+                input[13] = true
                 """
             }
         }
@@ -207,6 +209,7 @@ nextflow_workflow {
                     }.collect()
                 input[11] = false
                 input[12] = true
+                input[13] = true
                 """
             }
         }
@@ -260,6 +263,61 @@ nextflow_workflow {
                 input[10] = [[],[]]
                 input[11] = false
                 input[12] = false
+                input[13] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['hificnv', 'sawfish']
+                input[8] = ['hificnv', 'sawfish']
+                input[9] = ['hificnv', 'sawfish']
+                input[10] = [[],[]]
+                input[11] = false
+                input[12] = false
+                input[13] = false
                 """
             }
         }
@@ -317,6 +375,7 @@ nextflow_workflow {
                     }.collect()
                 input[11] = true
                 input[12] = false
+                input[13] = true
                 """
             }
         }
@@ -373,6 +432,7 @@ nextflow_workflow {
                     }.collect()
                 input[11] = true
                 input[12] = true
+                input[13] = true
                 """
             }
         }
@@ -427,6 +487,7 @@ nextflow_workflow {
                 input[10] = [[],[]]
                 input[11] = false
                 input[12] = false
+                input[13] = true
                 """
             }
         }
@@ -478,6 +539,7 @@ nextflow_workflow {
                     }.collect()
                 input[11] = false
                 input[12] = false
+                input[13] = true
                 """
             }
         }
