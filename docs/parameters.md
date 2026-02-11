@@ -71,7 +71,7 @@ Define where the pipeline should find input data and save output data.
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
-| `create_maf_track` | Whether to create a MAF track from SNVs when calling SVs using Sawfish or HifiCNV. Deactivating may speed up pipeline | `boolean` | True |  |  |
+| `create_maf_track` | Whether to create a MAF track from SNVs when calling SVs using Sawfish or HiFiCNV. Deactivating may speed up pipeline | `boolean` | True |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
 
 ## Reference genome options

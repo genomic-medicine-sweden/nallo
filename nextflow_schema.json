@@ -384,7 +384,7 @@
                 "create_maf_tack": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Whether to create a MAF track from SNV calls when calling SVs with HifiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true`"
+                    "description": "Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true`"
                 },
                 "modules_testdata_base_path": {
                     "type": "string",
