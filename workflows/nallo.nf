@@ -59,6 +59,7 @@ include { BCFTOOLS_SORT                                     } from '../modules/n
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
+include { CSVTK_JOIN                                        } from '../modules/nf-core/csvtk/join/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
@@ -111,6 +112,7 @@ workflow NALLO {
     ch_genmod_score_config_svs   = createReferenceChannelFromPath(params.genmod_score_config_svs)
     ch_peddy_sites               = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
     ch_methbat_regions           = createReferenceChannelFromPath(params.methbat_regions)
+    ch_methbat_map               = createReferenceChannelFromPath(params.methbat_map)
     ch_mosdepth_regions          = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
     ch_sambamba_regions          = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
     ch_somalier_sites            = createReferenceChannelFromPath(params.somalier_sites)
@@ -899,6 +901,18 @@ workflow NALLO {
             ch_methbat_regions
         )
         ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
+    }
+
+    //
+    // Annotate methbat output with hgnc IDs and filter for regions present in map
+    //
+    if (!params.skip_methbat_annotation) {
+        CSVTK_JOIN(
+            CALL_METHYLATION_METHBAT.out.region_profile
+                    .combine(ch_methbat_map)
+                    .map { meta1, tsv1, _meta2, tsv2 -> [ meta1, [tsv1, tsv2] ] }
+        )
+        ch_versions = ch_versions.mix(CSVTK_JOIN.out.versions)
     }
 
     //

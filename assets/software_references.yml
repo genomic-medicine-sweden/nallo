@@ -41,7 +41,6 @@ tool:
   chromograph:
     citation: "chromograph (Laaksonen et al. 2019)"
     bibliography: ""
-
   clean_sniffles:
     citation: "clean_sniffles (Eisfeldt 2024)"
     bibliography: ""
@@ -50,6 +49,9 @@ tool:
     bibliography: "Wouter De Coster, Rosa Rademakers, NanoPack2: population-scale evaluation of long-read sequencing data, Bioinformatics, Volume 39, Issue 5, May 2023, btad311, https://doi.org/10.1093/bioinformatics/btad311"
   create_pedigree_file:
     citation: "create_pedigree_file"
+    bibliography: ""
+  csvtk:
+    citation: "csvtk"
     bibliography: ""
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
