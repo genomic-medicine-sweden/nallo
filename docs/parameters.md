@@ -163,7 +163,7 @@ True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |  
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |          
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` |                  
-https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/ |  | True |      
+https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/6d0a81260c1e8d560eb48f405f405aa0d54c3488/ |  | True |      
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format                   
 yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |                                                                                     
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |                                                          
