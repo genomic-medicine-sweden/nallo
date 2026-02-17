@@ -194,7 +194,6 @@ workflow CALL_SVS {
             [[],[]]
 
         )
-        ch_versions = ch_versions.mix(SAWFISH_JOINTCALL.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
