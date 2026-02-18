@@ -1,8 +1,9 @@
-include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
-include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
-include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { BEDTOOLS_SPLIT           } from '../../../modules/nf-core/bedtools/split/main'
-
+include { BEDTOOLS_MERGE                       } from '../../../modules/nf-core/bedtools/merge/main'
+include { BEDTOOLS_SORT                        } from '../../../modules/nf-core/bedtools/sort/main'
+include { BUILD_INTERVALS                      } from '../../../modules/local/build_intervals/main'
+include { BEDTOOLS_SPLIT                       } from '../../../modules/nf-core/bedtools/split/main'
+include { GAWK as GAWK_EXTRACT_MT_REGIONS      } from '../../../modules/nf-core/gawk/main'
+include { GAWK as GAWK_EXTRACT_NUCLEAR_REGIONS } from '../../../modules/nf-core/gawk/main'
 workflow SCATTER_GENOME {
 
     take:
@@ -53,8 +54,26 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
+        // Extract the mitochondrial region from BED before spliting into 40 regions
+        GAWK_EXTRACT_MT_REGIONS (
+            BEDTOOLS_MERGE.out.bed,
+            [],
+            false,
+        )
+        ch_versions = ch_versions.mix(GAWK_EXTRACT_MT_REGIONS.out.versions)
+        GAWK_EXTRACT_MT_REGIONS.out.output.view()
+
+        // Extract the nuclear genome regions from BED before spliting into 40 regions
+        GAWK_EXTRACT_NUCLEAR_REGIONS (
+            BEDTOOLS_MERGE.out.bed,
+            [],
+            false,
+        )
+        ch_versions = ch_versions.mix(GAWK_EXTRACT_NUCLEAR_REGIONS.out.versions)
+        GAWK_EXTRACT_NUCLEAR_REGIONS.out.output.view()
+
         BEDTOOLS_SPLIT(
-            BEDTOOLS_MERGE.out.bed.map { meta, bed ->
+            GAWK_EXTRACT_NUCLEAR_REGIONS.out.output.map { meta, bed ->
                 [ meta, bed, split_n ]
             }
         )
@@ -71,7 +90,7 @@ workflow SCATTER_GENOME {
         // Since we don't check beforehand how many intervals it's possible to split the bed file into,
         // it could be that the number of intervals is less than the requested split_n.
         // This can happen if the bed file has too few regions.
-        // We check this here, so it doens't fail later in the pipeline.
+        // We check this here, so it doesn't fail later in the pipeline.
         ch_bed_intervals
             .count()
             .map { count ->
@@ -84,7 +103,8 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed           = ch_bed            // channel: [ val(meta), path(bed) ]
-    bed_intervals = ch_bed_intervals  // channel: [ path(bed), val(num_intervals) ]
-    versions      = ch_versions       // channel: [ versions.yml ]
+    bed           = ch_bed                              // channel: [ val(meta), path(bed) ]
+    bed_intervals = ch_bed_intervals                    // channel: [ path(bed), val(num_intervals) ]
+    bed_mt        = GAWK_EXTRACT_MT_REGIONS.out.output  // channel: [ val(meta), path(bed) ]
+    versions      = ch_versions                         // channel: [ versions.yml ]
 }
