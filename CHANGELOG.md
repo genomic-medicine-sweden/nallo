@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
-- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameter `--create_maf_track`
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameter `--create_maf_tracki`
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
 
 ### `Changed`
 
