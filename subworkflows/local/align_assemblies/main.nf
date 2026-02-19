@@ -22,7 +22,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions)
 
     MINIMAP2_ALIGN (
-        ch_assembly,
+        ch_assembly.collect().map { meta1, bam1, _meta2, bam2 -> [meta1 - meta1.subMap('haplotype'), [ bam1, bam2] ] },
         MINIMAP2_INDEX.out.index.collect(),
         true,
         'bai',
@@ -30,7 +30,7 @@ workflow ALIGN_ASSEMBLIES {
         false
     )
     ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
-
+    /*
     SAMTOOLS_VIEW (
         MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true),
         [[],[]],
@@ -45,6 +45,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_versions = ch_versions.mix(TAGBAM.out.versions)
 
     TAGBAM.out.bam
+    SAMTOOLS_VIEW.out.bam
         .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
         .groupTuple(size: 2)
         .set { ch_assemblies_per_sample }
@@ -56,7 +57,7 @@ workflow ALIGN_ASSEMBLIES {
         [[],[]],
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
-
+    */
     // Publish alignment as CRAM if requested
     if (cram_output) {
         SAMTOOLS_CONVERT(
@@ -68,7 +69,7 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    bam      = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
-    bai      = SAMTOOLS_MERGE.out.bai // channel: [ val(meta), path(bai) ]
+    bam      = MINIMAP2_ALIGN.out.bam // channel: [ val(meta), path(bam) ]
+    bai      = MINIMAP2_ALIGN.out.index // channel: [ val(meta), path(bai) ]
     versions = ch_versions            // channel: [ versions.yml ]
 }

@@ -245,6 +245,11 @@
                         "git_sha": "e67cda6276a94d7eafa2d38acefd001562ad2c2b",
                         "installed_by": ["modules"]
                     },
+                    "pbmm2/align": {
+                        "branch": "master",
+                        "git_sha": "f84336b7fa91a65aa61d215b8c109fbb8e4b4ac6",
+                        "installed_by": ["modules"]
+                    },
                     "peddy": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",

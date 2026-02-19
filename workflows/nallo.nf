@@ -52,14 +52,16 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
-
+include { PORTELLO } from '../modules/local/portello/main'
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
+include { CAT_CAT                                           } from '../modules/nf-core/cat/cat/main'
 include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
+include { PBMM2_ALIGN as ALIGN_READS_TO_ASSEMBLY            } from '../modules/nf-core/pbmm2/align/main'
 include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
@@ -71,6 +73,7 @@ include { paramsSummaryMultiqc                              } from '../subworkfl
 include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { CAT_FASTQ } from '../modules/nf-core/cat/fastq/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -343,6 +346,31 @@ workflow NALLO {
         ch_bam_bai = BAM_INFER_SEX.out.bam_bai
 
     }
+    GENOME_ASSEMBLY.out.assembled_haplotypes
+        .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
+        .groupTuple(size: 2)
+        .set { ch_assemblies_to_concatenate }
+
+    CAT_CAT (
+        ch_assemblies_to_concatenate.view()
+    )
+
+    // pbmm2
+    ALIGN_READS_TO_ASSEMBLY(
+        ch_bam,
+        CAT_CAT.out.file_out,
+        true,
+    )
+    PORTELLO (
+        ALIGN_ASSEMBLIES.out.bam
+            .join(ALIGN_ASSEMBLIES.out.bai)
+            .join(ALIGN_READS_TO_ASSEMBLY.out.bam)
+            .join(ALIGN_READS_TO_ASSEMBLY.out.index),
+        ch_fasta,
+    )
+
+    ch_bam = PORTELLO.out.bam.view()
+    ch_bam_bai = PORTELLO.out.bam.join(PORTELLO.out.index, failOnMismatch:true, failOnDuplicate:true).view()
 
     //
     // Run read QC with FastQC, mosdepth and cramino
