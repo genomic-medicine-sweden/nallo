@@ -215,7 +215,7 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:
+If HiFiCNV or Sawfish are used, the following files are required:
 
 | Parameter              | Description                                                                                                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -223,7 +223,7 @@ If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow 
 | `cnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `cnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
-By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This requires SNV calling to finish first so it can introduce significant wait time and slow down execution.
+By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This depends on the results of the SNV calling subworkflow, so it may introduce significant wait time and slow down execution.
 You can disable this behavior by setting `--create_maf_track` to `false`.
 
 !!!tip "Family-level VCFs per caller"
