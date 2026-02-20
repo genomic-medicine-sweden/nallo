@@ -91,6 +91,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -150,6 +151,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -210,6 +212,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = true
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -264,6 +267,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -318,6 +322,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = false
+                input[14] = false
                 """
             }
         }
@@ -376,6 +381,7 @@ nextflow_workflow {
                 input[11] = true
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -433,6 +439,7 @@ nextflow_workflow {
                 input[11] = true
                 input[12] = true
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -488,6 +495,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }
@@ -540,6 +548,7 @@ nextflow_workflow {
                 input[11] = false
                 input[12] = false
                 input[13] = true
+                input[14] = true
                 """
             }
         }

@@ -72,6 +72,8 @@ Define where the pipeline should find input data and save output data.
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `create_maf_track` | Whether to create a MAF track from SNVs when calling SVs using Sawfish or HiFiCNV. Deactivating may speed up pipeline | `boolean` | True |  |  |
+| `create_hificnv_maf_track` | Whether to create a MAF track from SNVs when calling SVs using HiFiCNV. Deactivating may speed up pipeline. Defaults to `create_maf_track` | `boolean` |  |  | True |
+| `create_sawfish_maf_track` | Whether to create a MAF track from SNVs when calling SVs using Sawfish. Deactivating may speed up pipeline. Defaults to `create_maf_track` | `boolean` |  |  | True |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
 
 ## Reference genome options

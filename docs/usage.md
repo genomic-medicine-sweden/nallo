@@ -224,7 +224,7 @@ If HiFiCNV or Sawfish are used, the following files are required:
 | `cnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
 
 By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This depends on the results of the SNV calling subworkflow, so it may introduce significant wait time and slow down execution.
-You can disable this behavior by setting `--create_maf_track` to `false`.
+You can disable this behavior for both callers by setting `--create_maf_track` to `false` or control it for each caller separately using `--create_hificnv_maf_track` and `--create_sawfish_maf_track`.
 
 !!!tip "Family-level VCFs per caller"
 

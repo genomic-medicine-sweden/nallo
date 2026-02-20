@@ -31,7 +31,8 @@ workflow CALL_SVS {
     ch_sv_call_regions                      // channel: [ val(meta), path(bed) ]
     filter_calls_on_regions                 //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
-    create_maf_track                        //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_hificnv_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
 
     main:
     ch_versions = channel.empty()
@@ -96,7 +97,7 @@ workflow CALL_SVS {
 
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
-        if (create_maf_track) {
+        if (create_hificnv_maf_track) {
             ch_bam_bai
                 .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
                 .map { meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.sex ] }
@@ -137,7 +138,7 @@ workflow CALL_SVS {
 
     // Join SNV VCFs into input channels only if we want MAF track
     // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
-        if (create_maf_track) {
+        if (create_sawfish_maf_track) {
             ch_bam_bai
                 .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
                 .set { ch_bam_vcf_for_sawfish_discover }

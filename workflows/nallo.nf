@@ -532,7 +532,8 @@ workflow NALLO {
             ch_sv_call_regions,
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
-            params.create_maf_track
+            params.create_hificnv_maf_track,
+            params.create_sawfish_maf_track
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
