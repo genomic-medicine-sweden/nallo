@@ -74,6 +74,7 @@ include { softwareVersionsToYAML                            } from '../subworkfl
 include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { CAT_FASTQ } from '../modules/nf-core/cat/fastq/main.nf'
+include { SAMTOOLS_INDEX } from '../modules/nf-core/samtools/index/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -361,11 +362,13 @@ workflow NALLO {
         CAT_CAT.out.file_out,
         true,
     )
+    SAMTOOLS_INDEX(ALIGN_READS_TO_ASSEMBLY.out.bam)
+
     PORTELLO (
         ALIGN_ASSEMBLIES.out.bam
             .join(ALIGN_ASSEMBLIES.out.bai)
             .join(ALIGN_READS_TO_ASSEMBLY.out.bam)
-            .join(ALIGN_READS_TO_ASSEMBLY.out.index),
+            .join(SAMTOOLS_INDEX.out.bai.mix(SAMTOOLS_INDEX.out.csi)),
         ch_fasta,
     )
 

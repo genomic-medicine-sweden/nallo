@@ -35,8 +35,6 @@ process PBMM2_ALIGN {
         ${prefix}.bam \\
         --num-threads ${task.cpus}
 
-    samtools index ${prefix}.bam
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         pbmm2: \$(pbmm2 --version |& sed '1!d ; s/pbmm2 //')
