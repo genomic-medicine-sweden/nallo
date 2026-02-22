@@ -26,10 +26,11 @@ process PBMM2_ALIGN {
     def args2 = task.ext.args2 ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     """
+    gunzip $fasta -c > ref.fa
     pbmm2 \\
         align \\
         $args \\
-        $fasta \\
+        ref.fa \\
         $bam \\
         ${prefix}.bam \\
         --num-threads ${task.cpus}
