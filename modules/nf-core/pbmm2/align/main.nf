@@ -27,11 +27,12 @@ process PBMM2_ALIGN {
     prefix = task.ext.prefix ?: "${meta.id}"
     """
     gunzip $fasta -c > ref.fa
+    samtools reset -@ ${task.cpus} $bam -O BAM > reset.bam
     pbmm2 \\
         align \\
         $args \\
         ref.fa \\
-        $bam \\
+        reset.bam \\
         ${prefix}.bam \\
         --num-threads ${task.cpus}
 
