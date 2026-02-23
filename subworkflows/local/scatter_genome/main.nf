@@ -81,7 +81,6 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
-        BEDTOOLS_SPLIT.out.beds.view()
         // Create a channel with the bed file and the total number of intervals (for groupKey)
         BEDTOOLS_SPLIT.out.beds
             .map { _meta, beds -> beds }
@@ -89,8 +88,6 @@ workflow SCATTER_GENOME {
             .map{ it -> [ it, it.size() ] }
             .transpose()
             .set { ch_bed_intervals }
-
-        ch_bed_intervals.view()
 
         // Since we don't check beforehand how many intervals it's possible to split the bed file into,
         // it could be that the number of intervals is less than the requested split_n.
