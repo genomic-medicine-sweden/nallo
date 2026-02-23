@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
+- [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
 
 ### `Changed`
 
