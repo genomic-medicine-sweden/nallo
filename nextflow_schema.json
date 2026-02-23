@@ -576,7 +576,7 @@
             "properties": {
                 "bcftools_roh_af_tag": {
                     "type": "string",
-                    "description": "AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag` ."
+                    "description": "AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`."
                 },
                 "chromograph_af_tag": {
                     "type": "string",
