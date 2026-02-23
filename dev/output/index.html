@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -2137,7 +2137,7 @@
 </div>
 <h2 id="visualization">Visualization</h2>
 <h3 id="visualization-tracks">Visualization tracks</h3>
-<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a> is used to call CNVs, while <a href="https://github.com/nanoporetech/modkit">Modkit</a> or <a href="https://github.com/PacificBiosciences/pb-CpG-tools">pb-CpG-tools</a> are used for methylation analysis, but these also produce tracks that can be visualized in for example IGV.</p>
+<p><a href="https://github.com/PacificBiosciences/HiFiCNV">HiFiCNV</a>, <a href="https://github.com/PacificBiosciences/sawfish">Sawfish</a>, <a href="https://github.com/nanoporetech/modkit">Modkit</a> and <a href="https://github.com/PacificBiosciences/pb-CpG-tools">pb-CpG-tools</a> generate visualization tracks along with their main output.</p>
 <table>
 <thead>
 <tr>
@@ -2181,6 +2181,22 @@
 <tr>
 <td><code>visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw</code></td>
 <td>BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_copynum_sawfish.bedgraph</code></td>
+<td>bedGraph file copy-number segmentation track from Sawfish</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_depth_sawfish.bedgraph</code></td>
+<td>BigWig file with binned sequencing depth from Sawfish</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_gc_bias_corrected_depth_sawfish.bedgraph</code></td>
+<td>bedGraph file with GC bias-corrected binned sequencing depth from Sawfish</td>
+</tr>
+<tr>
+<td><code>visualization_tracks/{sample}/{sample}_maf_sawfish.bedgraph</code></td>
+<td>bigWig file with minor allele frequencies from Sawfish</td>
 </tr>
 </tbody>
 </table>
