@@ -5,7 +5,7 @@ process PBMM2_ALIGN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pbmm2:1.14.99--h9ee0642_0':
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/4b/4b753fe18151c603551fb74c541421bf1ceb4249ea86de9f2ede6120ccf6d8f7/data':
         'community.wave.seqera.io/library/pbmm2_samtools:c5ded0d11146cfcc' }"
 
     input:
