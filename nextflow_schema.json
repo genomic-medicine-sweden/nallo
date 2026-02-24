@@ -398,6 +398,11 @@
                     "description": "Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track`",
                     "hidden": true
                 },
+                "include_tsv_output": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to include TSV output file containing list of assignments of read names to haplotypes from haplotagging with Whatshap."
+                },
                 "modules_testdata_base_path": {
                     "type": "string",
                     "fa_icon": "far fa-check-circle",

@@ -87,6 +87,7 @@ This document describes the pipeline output files and the tools used to generate
 | ----------------------------------------------------------------- | ---------------------------- |
 | `aligned_reads/{sample}/{sample}_haplotagged.{bam,cram}`          | BAM/CRAM file with haplotags |
 | `aligned_reads/{sample}/{sample}_haplotagged.{bam.bai,cram.crai}` | Index of the BAM/CRAM file   |
+| `aligned_reads/{sample}/{sample}_haplotagged.{tsv,tsv.gz}`          | TSV file with  assignments of read names to haplotypes (optional output) |
 | `qc/phasing_stats/{sample}/{sample}_whatshap_stats.gtf.gz`        | Phase block file             |
 | `qc/phasing_stats/{sample}/{sample}_whatshap_stats.gtf.gz.tbi`    | Index of block file          |
 | `qc/phasing_stats/{sample}/{sample}_whatshap_stats.tsv`           | Phasing statistics file      |
