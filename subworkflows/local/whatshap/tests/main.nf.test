@@ -71,7 +71,6 @@ nextflow_workflow {
                 ])
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
-                input[5] = false
                 """
             }
         }
@@ -104,7 +103,6 @@ nextflow_workflow {
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
-                input[5] = false
                 """
             }
         }
@@ -137,7 +135,6 @@ nextflow_workflow {
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
-                input[5] = false
                 """
             }
         }
