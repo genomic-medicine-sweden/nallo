@@ -74,7 +74,6 @@ Define where the pipeline should find input data and save output data.
 | `create_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true` | `boolean` | True |  |  |
 | `create_hificnv_maf_track` | Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
 | `create_sawfish_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
-| `include_tsv_output` | Whether to include TSV output file containing list of assignments of read names to haplotypes from haplotagging with Whatshap. | `boolean` | False |  |  |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
 
 ## Reference genome options

@@ -9,7 +9,6 @@ workflow WHATSHAP {
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
-    include_tsv_output // value:   [ true | false ]
 
     main:
     ch_versions = channel.empty()
@@ -59,7 +58,7 @@ workflow WHATSHAP {
         ch_whatshap_haplotag_in,
         fasta,
         fai,
-        include_tsv_output
+        false
     )
 
     SAMTOOLS_INDEX(
