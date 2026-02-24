@@ -19,6 +19,7 @@ workflow PHASING {
     phase_with_svs       // bool:    Whether to include SVs in phasing (true) or not (false)
     cram_output          // bool:    Publish alignments as CRAM (true) or BAM (false)
     run_whatshap_stats   // bool:    Whether to run WHATSHAP_STATS (true) or not (false)
+    include_tsv_output   // bool:    Whether to include the tsv output for WHATSHAP_HAPLOTAG (true) or not (false)
 
     main:
     ch_versions            = channel.empty()
@@ -51,7 +52,8 @@ workflow PHASING {
             ch_snv_vcf_index,
             ch_bam_bai,
             fasta,
-            fai
+            fai,
+            include_tsv_output
         )
         ch_versions = ch_versions.mix(WHATSHAP.out.versions)
 

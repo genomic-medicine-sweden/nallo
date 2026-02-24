@@ -247,12 +247,15 @@
                 "aligned_reads/HG002_ONT_A",
                 "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam",
                 "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.bam.bai",
+                "aligned_reads/HG002_ONT_A/HG002_ONT_A_haplotagged.tsv.gz",
                 "aligned_reads/HG002_ONT_B",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam",
                 "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.bam.bai",
+                "aligned_reads/HG002_ONT_B/HG002_ONT_B_haplotagged.tsv.gz",
                 "aligned_reads/HG002_ONT_C",
                 "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam",
                 "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.bam.bai",
+                "aligned_reads/HG002_ONT_C/HG002_ONT_C_haplotagged.tsv.gz",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_ONT_A",
@@ -824,6 +827,9 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bw"
             ],
             [
+                "HG002_ONT_A_haplotagged.tsv.gz:md5,5b09761b383a1733a81d5d637b6eb0ac",
+                "HG002_ONT_B_haplotagged.tsv.gz:md5,48d2e397f51ce95c947653ab44fe9759",
+                "HG002_ONT_C_haplotagged.tsv.gz:md5,5b09761b383a1733a81d5d637b6eb0ac",
                 "HG002_ONT_A_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
                 "HG002_ONT_A_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
                 "HG002_ONT_B_haplotype_1.assembly_summary:md5,d1c0980101c83f2b9f826a280d8dcd82",
@@ -1217,10 +1223,10 @@
                 
             ]
         ],
-        "timestamp": "2026-02-09T17:41:58.464951874",
+        "timestamp": "2026-02-24T09:45:38.722881467",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.12.0"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         }
     }
 }
