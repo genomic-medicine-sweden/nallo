@@ -711,7 +711,7 @@ workflow NALLO {
         ANNOTATE_SNVS.out.vcf
             .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
             .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
+            .groupTuple(size: params.snv_calling_processes + 1)
             .set { ch_concat_sort_annotated_snvs_input }
 
         CONCAT_SORT_ANNOTATED_SNVS (
@@ -798,10 +798,9 @@ workflow NALLO {
     // Concatenate and sort ranked SNVs, sort and publish
     //
     if(!params.skip_snv_calling) {
-
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
+            .groupTuple(size: params.snv_calling_processes + 1)
             .set { ch_concat_sort_input }
 
         CONCAT_SORT_RANKED_SNVS (
