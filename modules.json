@@ -315,7 +315,7 @@
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
+                        "git_sha": "3e26c34b86d963c8b083d69db81c13f1136f5dd4",
                         "installed_by": ["modules"]
                     },
                     "sentieon/gvcftyper": {
