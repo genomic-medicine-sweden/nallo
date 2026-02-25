@@ -51,7 +51,7 @@ workflow PHASING {
             ch_snv_vcf_index,
             ch_bam_bai,
             fasta,
-            fai
+            fai,
         )
         ch_versions = ch_versions.mix(WHATSHAP.out.versions)
 
