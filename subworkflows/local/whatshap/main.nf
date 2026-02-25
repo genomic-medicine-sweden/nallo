@@ -1,5 +1,5 @@
 include { SAMTOOLS_INDEX    } from '../../../modules/nf-core/samtools/index/main'
-include { WHATSHAP_HAPLOTAG } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_HAPLOTAG } from '../../../modules/nf-core/whatshap/haplotag/main'
 include { WHATSHAP_PHASE    } from '../../../modules/nf-core/whatshap/phase/main'
 
 workflow WHATSHAP {
@@ -58,12 +58,13 @@ workflow WHATSHAP {
         ch_whatshap_haplotag_in,
         fasta,
         fai,
+        false
     )
-    ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions)
 
     SAMTOOLS_INDEX(
         WHATSHAP_HAPLOTAG.out.bam
     )
+
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     WHATSHAP_HAPLOTAG.out.bam
