@@ -41,6 +41,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--create_hificnv_maf_track`    |
 |               | `--create_sawfish_maf_track`    |
 
+### Module updates
+
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.2       |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.10.2 - [2026-02-09]
 
 ### `Changed`
@@ -68,18 +80,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
-
-### Module updates
-
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.1       |
-
-> [!NOTE]
-> Version has been updated if both old and new version information is present.
-> Version has been added if just the new version information is present.
-> Version has been removed if new version information isn't present.
 
 ## 0.10.0 - [2026-02-04]
 
