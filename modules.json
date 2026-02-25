@@ -413,6 +413,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
                     },
+                    "whatshap/haplotag": {
+                        "branch": "master",
+                        "git_sha": "338fb5f53d9901c150e9b561b3be59324c05798f",
+                        "installed_by": ["modules"]
+                    },
                     "whatshap/phase": {
                         "branch": "master",
                         "git_sha": "235626655327b9624300a99cc1751b118a4fd027",
