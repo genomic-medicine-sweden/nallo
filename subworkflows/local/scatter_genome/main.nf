@@ -54,9 +54,9 @@ workflow SCATTER_GENOME {
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
         // Extract the mitochondrial region from BED before spliting into 40 regions
-        BEDTOOLS_MERGE.out.bed.flatMap { _meta, bed ->
-           [ [ [ genome: "nuclear" ], bed ],
-             [ [ genome: "mt" ], bed ]
+        BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
+           [ [ meta + [ genome: "nuclear" ], bed ],
+             [ meta + [ genome: "mt" ], bed ]
         ]
         }.set{ ch_bed }
 
@@ -87,6 +87,7 @@ workflow SCATTER_GENOME {
             .map{ meta, beds -> [ meta, beds, beds.size() ] }
             .transpose()
             .set { ch_bed_intervals }
+
         // Since we don't check beforehand how many intervals it's possible to split the bed file into,
         // it could be that the number of intervals is less than the requested split_n.
         // This can happen if the bed file has too few regions.
