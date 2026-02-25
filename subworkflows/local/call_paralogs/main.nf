@@ -5,7 +5,7 @@ include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_s
 include { MERGE_JSON                     } from '../../../modules/local/merge_json/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
-
+include { PARAPHRASE                     } from '../../../modules/local/paraphrase/main'
 workflow CALL_PARALOGS {
 
     take:
@@ -23,15 +23,15 @@ workflow CALL_PARALOGS {
         [[],[]]
     )
     ch_versions = ch_versions.mix(PARAPHASE.out.versions)
-    PARAPHASE.out.json
-        .map { meta, json -> [ [ 'id': meta.family_id ], json ] }
-        .groupTuple()
-        .set { ch_merge_json_input }
 
-    MERGE_JSON (
-        ch_merge_json_input
+    PARAPHRASE (
+        PARAPHASE.out.json
+            .map { meta, json -> [ [ 'id': meta.family_id ], json, meta.id ] }
+            .groupTuple()
+            .view(),
+        [[],[]],
+        'json'
     )
-    ch_versions = ch_versions.mix(MERGE_JSON.out.versions)
 
     // Publish bam output as CRAM if requested
     if (cram_output) {
@@ -92,7 +92,7 @@ workflow CALL_PARALOGS {
     bai      = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai) ]
     cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-    json     = MERGE_JSON.out.json                                       // channel: [ val(meta), path(json) ]
+    json     = PARAPHRASE.out.json                                       // channel: [ val(meta), path(json) ]
     vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
     tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
     versions = ch_versions                                               // channel: [ versions.yml ]
