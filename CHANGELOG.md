@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
 - [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated all pipeline testdata paths to same commit hash
 - [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated nf-test to trigger all tests on changes to samplesheet files that include pipeline testdata paths
-- [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 24.10.0 in order to run with strict syntax
+- [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
 
 ### `Removed`
 
