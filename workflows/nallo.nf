@@ -233,28 +233,32 @@ workflow NALLO {
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
-    //
-    // Map reads to reference
-    //
+    /*
+     * Map reads to reference
+     */
     if (!params.skip_alignment) {
 
-        // Tag each BAM with its filename to uniquely identify files from a sample,
-        // enabling correct grouping and downstream merging.
+        /*
+         * Ensure each BAM has a unique identify,
+         * enabling correct grouping and downstream merging.
+         */
         (params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam)
             .map { meta, bam -> [ meta + [ file: bam.name ], bam ] }
             .set { reads_for_alignment }
 
-        // Create a grouping key per sample that records the number of split files,
-        // allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+        /*
+         * Create a grouping key per sample that records the number of split files,
+         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+         */
         reads_for_alignment
             .map { meta, bam -> [ meta - meta.subMap('file'), bam ] }
             .groupTuple()
             .map { meta, files -> [ meta + [ n_files: files.size() ] ] }
             .set { reads_grouping_key }
 
-        //
-        // Align reads (could be a split-align-merge subworkflow)
-        //
+        /*
+         * Align reads independently per split (could be a split-align-merge subworkflow)
+         */
         MINIMAP2_ALIGN (
             reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
@@ -265,8 +269,9 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
-        // Attach the read_grouping_key to each BAM so files can be merged per group as soon as all alignments for one sample are ready,
-        // rather than waiting for alignments from all samples to complete.
+        /*
+         * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
+         */
         MINIMAP2_ALIGN.out.bam
             .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
             .combine(reads_grouping_key)
@@ -282,9 +287,11 @@ workflow NALLO {
             .groupTuple()
             .set { bam_to_merge }
 
-        // Always merge here because alignment runs without knowledge of group completeness (n_files).
-        // This stage is the first point with full group context, allowing correct output naming
-        // without forcing alignment and downstream steps to wait for all samples.
+        /*
+         * Always merge here even if there's only one file,
+         * because alignment runs without knowledge of group completeness (n_files),
+         * and we can't therefore output from the alignment step with correct naming.
+         */
         SAMTOOLS_MERGE (
             bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
             [[],[]],
