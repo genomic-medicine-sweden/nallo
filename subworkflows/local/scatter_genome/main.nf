@@ -54,9 +54,9 @@ workflow SCATTER_GENOME {
         ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
         // Extract the mitochondrial region from BED before spliting into 40 regions
-        BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
-           [ [ meta + [ genome: "nuclear" ], bed ],
-             [ meta + [ genome: "mt" ], bed ]
+        BEDTOOLS_MERGE.out.bed.flatMap { _meta, bed ->
+           [ [ [ genome: "nuclear" ], bed ],
+             [ [ genome: "mt" ], bed ]
         ]
         }.set{ ch_bed }
 
@@ -67,10 +67,9 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
 
-        GAWK_EXTRACT_REGIONS.out.output.view()
-        GAWK_EXTRACT_REGIONS.out.output.branch {meta, bed ->
-            mt: meta.genome == "mt"
-            nuclear: meta.genome == "nuclear"
+        GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
+              mt: meta.genome == "mt"
+              nuclear: meta.genome == "nuclear"
         }.set{ ch_bed_genomes }
 
         // Split the nuclear bed file into n regions for SNV calling
@@ -83,12 +82,11 @@ workflow SCATTER_GENOME {
 
         // Create a channel with the bed file and the total number of intervals (for groupKey)
         BEDTOOLS_SPLIT.out.beds
-            .map { _meta, beds -> beds }
+            .map { meta, beds -> [meta.subMap('genome'), beds ] }
             .collect()
-            .map{ it -> [ it, it.size() ] }
+            .map{ meta, beds -> [ meta, beds, beds.size() ] }
             .transpose()
             .set { ch_bed_intervals }
-
         // Since we don't check beforehand how many intervals it's possible to split the bed file into,
         // it could be that the number of intervals is less than the requested split_n.
         // This can happen if the bed file has too few regions.
@@ -105,7 +103,7 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed           = ch_bed                              // channel: [ val(meta), path(bed) ]
+    bed           = BEDTOOLS_MERGE.out.bed                              // channel: [ val(meta), path(bed) ]
     bed_intervals = ch_bed_intervals                    // channel: [ path(bed), val(num_intervals) ]
     bed_mt        = ch_bed_genomes.mt                   // channel: [ val(meta), path(bed) ]
     versions      = ch_versions                         // channel: [ versions.yml ]

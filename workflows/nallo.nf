@@ -392,12 +392,37 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
+        // Mix the nuclear and mt genomes bed files back together to feed to CALL_SNVS
+        // if Deepvariant is used as mitochondrial caller
+        if (params.mt_caller == "deepvariant") {
+            // Collect the number of nuclear intervals
+            SCATTER_GENOME.out.bed_intervals
+                .map { _meta, _bed, intervals -> intervals }
+                .collect()
+                .map { it -> it ? it[0] : 0 } // get the first (should be the same for all), or 0 if empty
+                .map { n_intervals -> n_intervals + 1 }
+                .set { ch_total_intervals }
+
+            // Add total intervals to both nuclear and mt
+            ch_bed_nuclear = SCATTER_GENOME.out.bed_intervals
+                .combine(ch_total_intervals)
+                .map { meta, bed, _intervals, total_intervals -> [meta, bed, total_intervals] }
+
+            ch_bed_mt = SCATTER_GENOME.out.bed_mt
+                .combine(ch_total_intervals)
+                .map { meta, bed, total_intervals -> [meta, bed, total_intervals] }
+
+            // Mix both channels
+            ch_bed_intervals = ch_bed_nuclear.mix(ch_bed_mt)
+        } else {
+            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
+        }
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
         ch_bam_bai
-            .combine(SCATTER_GENOME.out.bed_intervals)
-            .map { meta, bam, bai, bed, intervals ->
-                [ meta + [ num_intervals: intervals, region: bed ], bam, bai, bed ]
+            .combine(ch_bed_intervals)
+            .map { meta, bam, bai, bed_meta, bed, intervals ->
+                [ meta + [ genome: bed_meta.genome, num_intervals: intervals, region: bed ], bam, bai, bed ]
             }
             .set { call_snvs_input }
 
@@ -442,7 +467,7 @@ workflow NALLO {
 
         CALL_SNVS.out.vcf
             .map { meta, vcf ->
-                def new_meta = meta - meta.subMap('region')
+                def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
             }
             .groupTuple()
@@ -480,14 +505,13 @@ workflow NALLO {
         family_snv_vcf
             .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
             .set { ch_vcf_tbi_per_region }
+
     }
-
     if (!params.skip_prepare_gens_input) {
-
         CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index)
             .map { meta, gvcf, gvcf_index ->
-                def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                def sample_meta = meta - meta.subMap(['region', 'num_intervals', 'genome'])
                 [sample_meta, gvcf, gvcf_index]
             }
             .groupTuple()
@@ -589,9 +613,9 @@ workflow NALLO {
         // Scatter whole-genome phased SNV VCFs back into regions for annotation
         PHASING.out.phased_family_snvs
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
-            .combine(SCATTER_GENOME.out.bed_intervals)
-            .multiMap { meta, vcf, tbi, bed, _num_intervals ->
-                vcf: [ meta + [ id : bed.name, family_id: meta.id ], vcf, tbi ]
+            .combine(ch_bed_intervals)
+            .multiMap { vcf_meta, vcf, tbi, bed_meta, bed, _num_intervals ->
+                vcf: [ vcf_meta + [ id : bed.name, family_id: vcf_meta.id, genome: bed_meta.genome ], vcf, tbi ]
                 bed : bed
             }
             .set { ch_phased_scatter_in }
