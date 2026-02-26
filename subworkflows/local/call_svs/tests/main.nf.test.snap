@@ -1,0 +1,717 @@
+{
+    "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter, force sawfish single sample joint-call": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
+                    "f3ac33edd4bd99c388aafb62544e3798"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
+                    "d2113f5975bf6f31523bf6daa31f923d"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "severus"
+                    },
+                    "severus_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "614cca94757871a3e1af9cb9735390d4"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sniffles"
+                    },
+                    "sniffles_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "5dbae080101487104ec8ea6928141565"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
+                    "f100834d865b903904e5bbb2660346f7"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:27:46.421150338",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "1 sample, 1 family - sniffles": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sniffles"
+                    },
+                    "sniffles_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=19, phased=false, phasedAutodetect=false]",
+                    "bb3776d3b06546280653984c5b088c92"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=19, phased=false, phasedAutodetect=false]",
+                    "e6807254390d6c6497f8614af9817b0b"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:23:23.285911022",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "1 sample, 1 family - sawfish": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
+                    "9aaa8bb26ba7cbee6966123d04ee869e"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
+                    "2d87079d4ae7fa5020db2a9a6fe3c458"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:24:04.003893293",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=51, phased=false, phasedAutodetect=false]",
+                    "5450864fea70e190592d0718a51cf5a"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=61, phased=false, phasedAutodetect=false]",
+                    "1756605a450615649880254c81a47d0b"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=86, phased=false, phasedAutodetect=false]",
+                    "baef7b9ae0dddd2db77d698955df2e43"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:26:07.908933056",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=51, phased=false, phasedAutodetect=false]",
+                    "5450864fea70e190592d0718a51cf5a"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=61, phased=false, phasedAutodetect=false]",
+                    "1756605a450615649880254c81a47d0b"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "severus"
+                    },
+                    "severus_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=49, phased=false, phasedAutodetect=false]",
+                    "1fe29a70bd00705441d7e0172d881653"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sniffles"
+                    },
+                    "sniffles_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=20, phased=false, phasedAutodetect=false]",
+                    "95ab42a7a956b758e446b53049430502"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=144, phased=false, phasedAutodetect=false]",
+                    "31a35abb45cc98ef3609b30b9f60792c"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:25:28.99635741",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "hificnv"
+                        },
+                        "hificnv_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "hificnv"
+                        },
+                        "hificnv_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                ],
+                "family_caller_tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "hificnv"
+                        },
+                        "hificnv_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_caller_vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "hificnv"
+                        },
+                        "hificnv_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "severus"
+                        },
+                        "severus_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sniffles"
+                        },
+                        "sniffles_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "family_tbi": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_vcf": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                    "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                ]
+            }
+        ],
+        "timestamp": "2026-02-26T10:28:07.464196582",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
+                    "f3ac33edd4bd99c388aafb62544e3798"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
+                    "65e2985709c57645aa107ef062a810b6"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "severus"
+                    },
+                    "severus_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "614cca94757871a3e1af9cb9735390d4"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sniffles"
+                    },
+                    "sniffles_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "5dbae080101487104ec8ea6928141565"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
+                    "903e58a9fe9c728dcc5044da19275707"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,1246f7f75c83543448d5b780339da4b4",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,ad7a1d3e0b9738f34f6f4cf8c7a5a7ff",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
+                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:26:57.930205866",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
+                    "cac4584c4e4b18fc11596d4c703f127b"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
+                    "f89d09a2ad82d817fb991494c9469e46"
+                ]
+            ],
+            [
+                "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
+            ]
+        ],
+        "timestamp": "2026-02-26T10:24:42.937414495",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sawfish"
+                        },
+                        "sawfish_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sawfish"
+                        },
+                        "sawfish_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
+                ],
+                "family_caller_tbi": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sawfish"
+                        },
+                        "sawfish_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_caller_vcf": [
+                    [
+                        {
+                            "id": "family",
+                            "sv_caller": "sawfish"
+                        },
+                        "sawfish_svdb_merge_by_caller.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "family_tbi": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_vcf": [
+                    [
+                        {
+                            "id": "family"
+                        },
+                        "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,03294bd8e66367ffe561f69386e1996c",
+                    "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
+                    "versions.yml:md5,92b83ee9b1b757bef65d259964822988",
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
+                ]
+            }
+        ],
+        "timestamp": "2026-02-26T10:28:22.633101615",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    }
+}
