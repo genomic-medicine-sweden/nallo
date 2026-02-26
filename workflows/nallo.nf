@@ -353,7 +353,7 @@ workflow NALLO {
         .set { ch_assemblies_to_concatenate }
 
     CAT_CAT (
-        ch_assemblies_to_concatenate.view()
+        ch_assemblies_to_concatenate
     )
 
     // pbmm2
@@ -370,9 +370,10 @@ workflow NALLO {
             .join(ALIGN_READS_TO_ASSEMBLY.out.bam)
             .join(SAMTOOLS_INDEX.out.bai.mix(SAMTOOLS_INDEX.out.csi)),
         ch_fasta,
+        'bai'
     )
 
-    ch_bam = PORTELLO.out.bam.view()
+    ch_bam = PORTELLO.out.bam
     ch_bam_bai = PORTELLO.out.bam.join(PORTELLO.out.index, failOnMismatch:true, failOnDuplicate:true).view()
 
     //

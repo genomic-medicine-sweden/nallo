@@ -6,10 +6,11 @@ process PORTELLO {
     input:
     tuple val(meta), path(asm_to_ref_bam), path(asm_to_ref_bai), path(read_to_asm_bam), path(read_to_asm_bai)
     tuple val(meta2), path(fasta)
+    val bam_index_extension
 
     output:
-    tuple val(meta), path("remapped.sort.bam"), emit: bam
-    tuple val(meta), path("remapped.sort.bam.*i"), emit: index
+    tuple val(meta), path("*_remapped.bam"), emit: bam
+    tuple val(meta), path("*_remapped.bam.${bam_index_extension}"), emit: index
 
     when:
     task.ext.when == null || task.ext.when
@@ -27,8 +28,10 @@ process PORTELLO {
         --input-assembly-mode partially-phased \
         --remapped-read-output - \
         --unassembled-read-output unassembled.bam |\
-        samtools sort -@${task.cpus} - --write-index -o remapped.sort.bam
-    samtools index remapped.sort.bam
+        samtools sort -@${task.cpus} - --write-index -o ${prefix}_remapped_no_rg.bam##idx##${prefix}_remapped_no_rg.bam.${bam_index_extension}
+
+    samtools addreplacerg -@ ${task.cpus} -o ${prefix}_remapped.bam ${prefix}_remapped_no_rg.bam -r @RG\\\\tID:${meta.id}\\\\tSM:${meta.id}
+    samtools index -@ ${task.cpus} ${prefix}_remapped.bam
     """
 
     stub:
