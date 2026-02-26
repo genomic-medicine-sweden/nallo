@@ -398,25 +398,13 @@ workflow NALLO {
         // Mix the nuclear and mt genomes bed files back together to feed to CALL_SNVS
         // if Deepvariant is used as mitochondrial caller
         if (params.mt_caller == "deepvariant") {
-            // Collect the number of nuclear intervals
-            SCATTER_GENOME.out.bed_intervals
-                .map { _meta, _bed, intervals -> intervals }
-                .collect()
-                .map { it -> it ? it[0] : 0 } // get the first (should be the same for all), or 0 if empty
-                .map { n_intervals -> n_intervals + 1 }
-                .set { ch_total_intervals }
 
-            // Add total intervals to both nuclear and mt
-            ch_bed_nuclear = SCATTER_GENOME.out.bed_intervals
-                .combine(ch_total_intervals)
-                .map { meta, bed, _intervals, total_intervals -> [meta, bed, total_intervals] }
+            ch_total_intervals = channel.value(expected_snv_vcfs) // Value channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS input
 
-            ch_bed_mt = SCATTER_GENOME.out.bed_mt
-                .combine(ch_total_intervals)
-                .map { meta, bed, total_intervals -> [meta, bed, total_intervals] }
-
-            // Mix both channels
-            ch_bed_intervals = ch_bed_nuclear.mix(ch_bed_mt)
+            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals.map { meta, bed, _intervals -> [ meta, bed ] }
+                                    .mix(SCATTER_GENOME.out.bed_mt.map { meta, bed -> [meta.subMap('genome'), bed ] })
+                                    .combine(ch_total_intervals)
+                                    .map { meta, bed, total_intervals -> [meta, bed, total_intervals]}
         } else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
         }
