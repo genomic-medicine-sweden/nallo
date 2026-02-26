@@ -41,6 +41,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--create_maf_track`            |
 |               | `--create_hificnv_maf_track`    |
 |               | `--create_sawfish_maf_track`    |
+|               | `--strdrop_fraction`            |
+|               | `--strdrop_alpha`               |
+|               | `--strdrop_edit`                |
 
 ## 0.10.2 - [2026-02-09]
 
