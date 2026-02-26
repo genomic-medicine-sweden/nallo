@@ -113,6 +113,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph      : "skip_chromograph",
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
+        gens             : "skip_prepare_gens_input",
     ]
 
     //
@@ -132,7 +133,8 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        methylation      : ["mapping", "snv_calling"]
+        methylation      : ["mapping", "snv_calling"],
+        gens             : ["mapping", "snv_calling"],
     ]
 
 
@@ -150,6 +152,7 @@ workflow PIPELINE_INITIALISATION {
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
+        gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
     ]
 
     def parameterStatus = [
@@ -170,26 +173,31 @@ workflow PIPELINE_INITIALISATION {
             skip_alignment          : params.skip_alignment,
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
+            skip_prepare_gens_input : params.skip_prepare_gens_input,
         ],
         files: [
-            par_regions              : params.par_regions,
-            echtvar_snv_databases    : params.echtvar_snv_databases,
-            sambamba_regions         : params.sambamba_regions,
-            svdb_sv_databases        : params.svdb_sv_databases,
-            somalier_sites           : params.somalier_sites,
-            vep_cache                : params.vep_cache,
-            cnv_expected_xy_cn       : params.cnv_expected_xy_cn,
-            cnv_expected_xx_cn       : params.cnv_expected_xx_cn,
-            cnv_excluded_regions     : params.cnv_excluded_regions,
-            fasta                    : params.fasta,
-            str_bed                  : params.str_bed,
-            stranger_repeat_catalog  : params.stranger_repeat_catalog,
-            genmod_reduced_penetrance: params.genmod_reduced_penetrance,
-            genmod_score_config_snvs : params.genmod_score_config_snvs,
-            genmod_score_config_svs  : params.genmod_score_config_svs,
-            variant_consequences_snvs: params.variant_consequences_snvs,
-            variant_consequences_svs : params.variant_consequences_svs,
-            vep_plugin_files         : params.vep_plugin_files,
+            par_regions                 : params.par_regions,
+            echtvar_snv_databases       : params.echtvar_snv_databases,
+            sambamba_regions            : params.sambamba_regions,
+            svdb_sv_databases           : params.svdb_sv_databases,
+            somalier_sites              : params.somalier_sites,
+            vep_cache                   : params.vep_cache,
+            cnv_expected_xy_cn          : params.cnv_expected_xy_cn,
+            cnv_expected_xx_cn          : params.cnv_expected_xx_cn,
+            cnv_excluded_regions        : params.cnv_excluded_regions,
+            fasta                       : params.fasta,
+            str_bed                     : params.str_bed,
+            stranger_repeat_catalog     : params.stranger_repeat_catalog,
+            genmod_reduced_penetrance   : params.genmod_reduced_penetrance,
+            genmod_score_config_snvs    : params.genmod_score_config_snvs,
+            genmod_score_config_svs     : params.genmod_score_config_svs,
+            variant_consequences_snvs   : params.variant_consequences_snvs,
+            variant_consequences_svs    : params.variant_consequences_svs,
+            vep_plugin_files            : params.vep_plugin_files,
+            gens_baf_positions          : params.gens_baf_positions,
+            gens_panel_of_normals_female: params.gens_panel_of_normals_female,
+            gens_panel_of_normals_male  : params.gens_panel_of_normals_male,
+            gens_coverage_bins          : params.gens_coverage_bins,
         ]
     ]
 
@@ -453,6 +461,11 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
+    // Extra case for checking if methbat regions are provided when needed.
+    // The above error would suggest the opposite of the fix
+    if (!params.skip_methylation_calling && params.run_methbat && !params.methbat_regions) {
+        error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
+    }
 }
 
 //
@@ -548,9 +561,9 @@ def findKeysForValue(def valueToFind, Map map) {
 }
 
 // Utility function to create channels from references
-def createReferenceChannelFromPath(param, defaultValue = '') {
+def createReferenceChannelFromPath(param, defaultValue = '', id = null) {
     return param ? channel.fromPath(param, checkIfExists: true)
-        .map { file_path -> [ [ id: file_path.simpleName ], file_path ] }
+        .map { file_path -> [ [ id: id ?: file_path.simpleName ], file_path ] }
         .collect() : defaultValue
 }
 // Utility function to create channels from samplesheets
@@ -639,6 +652,14 @@ def validateWorkflowCompatibility() {
     if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
         error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
     }
+
+    // Sentieon currently produces mixed-ploidy VCF, which invariably leads to a crash in
+    // Whatshap due to a PloidyError. See https://github.com/whatshap/whatshap/issues/424
+    // for more details.
+    if (params.phaser == 'whatshap' && params.snv_caller == 'sentieon') {
+          error "ERROR: Sentieon short-variant calls are mixed-ploidy and cannot be phased with WhatsHap. Choose another phaser (e.g. longphase/hiphase) or a different SNV caller."
+    }
+
 }
 
 def validateSVCallingParameters() {

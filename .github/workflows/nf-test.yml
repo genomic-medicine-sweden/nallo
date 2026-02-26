@@ -59,7 +59,7 @@ jobs:
           - isMain: false
             tag: "samplesheet_target_regions_null"
         NXF_VER:
-          - "25.04.0"
+          - "25.10.0"
           - "latest-everything"
         include:
           - tag: "samplesheet"
@@ -99,10 +99,10 @@ jobs:
         with:
           android: true
           dotnet: false
-          haskell: false
+          haskell: true
           large-packages: false
-          docker-images: false
-          swap-storage: false
+          docker-images: true
+          swap-storage: true
 
       - name: Run nf-test
         if: matrix.profile != ''

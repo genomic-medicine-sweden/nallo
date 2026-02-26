@@ -46,6 +46,7 @@ nextflow_workflow {
                 input[8] = 'longphase'
                 input[9] = false
                 input[10] = false
+                input[11] = 'deepvariant'
                 """
             }
         }

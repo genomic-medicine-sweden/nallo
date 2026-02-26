@@ -99,6 +99,11 @@
                     "type": "boolean",
                     "description": "Skip ranking of short variants",
                     "default": false
+                },
+                "skip_prepare_gens_input": {
+                    "type": "boolean",
+                    "description": "Skip preparing input data for Gens",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -323,6 +328,33 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "gens_baf_positions": {
+                    "type": "string",
+                    "description": "Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs.",
+                    "format": "file-path",
+                    "exists": true
+                },
+                "gens_panel_of_normals_female": {
+                    "type": "string",
+                    "description": "Panel of normals of female samples (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(hd5|hdf5)$",
+                    "exists": true
+                },
+                "gens_panel_of_normals_male": {
+                    "type": "string",
+                    "description": "Panel of normals of male samples (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(hd5|hdf5)$",
+                    "exists": true
+                },
+                "gens_coverage_bins": {
+                    "type": "string",
+                    "description": "Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals.",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.(bed)$",
+                    "exists": true
+                },
                 "strdrop_training_set_json": {
                     "type": "string",
                     "pattern": "^\\S+\\.json$",
@@ -348,6 +380,23 @@
                     "enum": ["bam", "cram"],
                     "description": "Output format for alignment files. Either `bam` or `cram`",
                     "default": "bam"
+                },
+                "create_maf_track": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true`"
+                },
+                "create_hificnv_maf_track": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track`",
+                    "hidden": true
+                },
+                "create_sawfish_maf_track": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track`",
+                    "hidden": true
                 },
                 "modules_testdata_base_path": {
                     "type": "string",
@@ -513,7 +562,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/00b81530023d27539e06b9600f29c647ed1f9bc8a/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -584,7 +633,7 @@
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which short variant software to use (`deepvariant`)",
-                    "enum": ["deepvariant"]
+                    "enum": ["deepvariant", "sentieon"]
                 },
                 "str_caller": {
                     "type": "string",
@@ -693,6 +742,11 @@
                     "enum": ["map-hifi", "map-ont", "lr:hq", "lr:hqae"],
                     "default": "map-hifi"
                 },
+                "extra_hifiasm_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to hifiasm, used for test profile."
+                },
                 "extra_methbat_profile_options": {
                     "type": "string",
                     "hidden": true,
@@ -703,20 +757,20 @@
                     "hidden": true,
                     "description": "Extra options to modkit, used for test profile."
                 },
-                "extra_vep_options": {
-                    "type": "string",
-                    "hidden": true,
-                    "description": "Extra options to VEP, used for test profile."
-                },
                 "extra_paraphase_options": {
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to Paraphase, used for test profile."
                 },
-                "extra_hifiasm_options": {
+                "extra_sawfish_options": {
                     "type": "string",
                     "hidden": true,
-                    "description": "Extra options to hifiasm, used for test profile."
+                    "description": "Extra options to Sawfish, used for test profile."
+                },
+                "extra_vep_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to VEP, used for test profile."
                 },
                 "extra_yak_options": {
                     "type": "string",
@@ -807,6 +861,39 @@
                     "type": "integer",
                     "default": 500,
                     "description": "Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow."
+                },
+                "sentieon_model_bundle": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository."
+                },
+                "sentieon_tech": {
+                    "type": "string",
+                    "default": "HiFi",
+                    "enum": ["HiFi", "ONT"],
+                    "description": "Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi."
+                },
+                "sentieon_male_haploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict haploid variant calling for males, in BED file format."
+                },
+                "sentieon_male_diploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict diploid variant calling for males, in BED file format."
+                },
+                "sentieon_female_diploid_bed": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "^\\S+\\.bed$",
+                    "exists": true,
+                    "description": "Interval in the reference to restrict diploid variant calling for females, in BED file format."
                 }
             },
             "required": ["preset"]

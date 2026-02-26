@@ -54,6 +54,12 @@ tool:
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
     bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
+  sentieon:
+    citation: "Sentieon Genomics Tools (Freed et al. 2017)"
+    bibliography: "Freed D, Aldana R, Weber JA, Edwards JS. The Sentieon Genomics Tools - A fast and accurate solution to variant calling from next-generation sequence data. bioRxiv. 2017. doi:10.1101/115717."
+  sentieon-cli:
+    citation: "Sentieon DNAscope LongRead (Freed et al. 2022)"
+    bibliography: "Donald Freed, William J. Rowell, Aaron M. Wenger, Zhipan Li.  Sentieon DNAscope LongRead – A highly Accurate, Fast, and Efficient Pipeline for Germline Variant Calling from PacBio HiFi reads. bioRxiv 2022.06.01.494452. https://doi.org/10.1101/2022.06.01.494452"
   echtvar:
     citation: "Echtvar (Pedersen & de Ridder 2023)"
     bibliography: "Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931"
@@ -63,6 +69,9 @@ tool:
   fastqc:
     citation: "FastQC (Andrews 2010)"
     bibliography: "Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
+  gatk4:
+    citation: "GATK (Van der Auwera & O'Connor 2020)"
+    bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."
   gawk:
     citation: "gawk"
     bibliography: ""
@@ -114,6 +123,12 @@ tool:
   peddy:
     citation: "Peddy (Pedersen & Quinlan 2017)"
     bibliography: Pedersen BS, Quinlan AR. Who’s Who? Detecting and Resolving Sample Anomalies in Human DNA Sequencing Studies with Peddy. The American Journal of Human Genetics, Volume 100, Issue 3,  March 2017, Pages 406-413, http://dx.doi.org/10.1016/j.ajhg.2017.01.017
+  pigz:
+    citation: "pigz"
+    bibliography: ""
+  preparecovandbaf:
+    citation: "preparecovandbaf"
+    bibliography: ""
   python:
     citation: "Python (Van Rossum & Drake Jr 2009)"
     bibliography: ""

@@ -1,5 +1,5 @@
 include { SAMTOOLS_INDEX    } from '../../../modules/nf-core/samtools/index/main'
-include { WHATSHAP_HAPLOTAG } from '../../../modules/local/whatshap/haplotag/main'
+include { WHATSHAP_HAPLOTAG } from '../../../modules/nf-core/whatshap/haplotag/main'
 include { WHATSHAP_PHASE    } from '../../../modules/nf-core/whatshap/phase/main'
 
 workflow WHATSHAP {
@@ -19,22 +19,27 @@ workflow WHATSHAP {
         .groupTuple()
         .set { ch_bam_bai_grouped }
 
-    // Join
+    // Join VCFS, then join with BAMs to ensure input channel order
+    // The joined VCFs and BAMs are then separated so we can pass them into WhatsHap
     ch_snv_vcf
         .map { meta, vcf -> [[id: meta.id], vcf] }
         .join(ch_snv_index, failOnMismatch: true, failOnDuplicate: true)
-        .set { ch_snv_vcf_tbi }
+        .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
+        .multiMap { meta, snv, tbi, bam, bai ->
+            vcf: [meta, snv, tbi]
+            bam: [meta, bam, bai]
+        }
+        .set { ch_whatshap_phase_in }
 
     fasta
-        .map { meta, fasta_path -> [meta, fasta_path] }
         .join(fai, failOnMismatch: true, failOnDuplicate: true)
-        .collect()
+        .first()
         .set { ch_fasta_fai }
 
     WHATSHAP_PHASE(
-        ch_snv_vcf_tbi,
-        ch_bam_bai_grouped,
-        ch_fasta_fai,
+        ch_whatshap_phase_in.vcf,
+        ch_whatshap_phase_in.bam,
+        ch_fasta_fai
     )
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.
@@ -53,12 +58,13 @@ workflow WHATSHAP {
         ch_whatshap_haplotag_in,
         fasta,
         fai,
+        false
     )
-    ch_versions = ch_versions.mix(WHATSHAP_HAPLOTAG.out.versions)
 
     SAMTOOLS_INDEX(
         WHATSHAP_HAPLOTAG.out.bam
     )
+
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     WHATSHAP_HAPLOTAG.out.bam

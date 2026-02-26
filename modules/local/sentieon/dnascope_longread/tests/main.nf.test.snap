@@ -1,0 +1,147 @@
+{
+    "dnascope_longread_call_snvs -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "sentieon-cli",
+                        "1.5.1"
+                    ]
+                ],
+                "5": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "sentieon",
+                        "202503.02"
+                    ]
+                ],
+                "6": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "bedtools",
+                        "2.31.1"
+                    ]
+                ],
+                "7": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ],
+                "8": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "bcftools",
+                        "1.22"
+                    ]
+                ],
+                "gvcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "gvcf_tbi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "vcf_tbi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_bcftools": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "bcftools",
+                        "1.22"
+                    ]
+                ],
+                "versions_bedtools": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "bedtools",
+                        "2.31.1"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ],
+                "versions_sentieon": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "sentieon",
+                        "202503.02"
+                    ]
+                ],
+                "versions_sentieon_cli": [
+                    [
+                        "DNASCOPE_LONGREAD_CALL_SNVS",
+                        "sentieon-cli",
+                        "1.5.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-30T13:23:49.771817792"
+    }
+}

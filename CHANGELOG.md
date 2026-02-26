@@ -3,29 +3,67 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.10.0dev - [XXXX-XX-XX]
+## 0.11.0dev - [XXXX-XX-XX]
 
 ### `Added`
 
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
+- [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
+
 ### `Changed`
 
-- [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
-- [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
-- [#853](https://github.com/genomic-medicine-sweden/nallo/pull/853) - Changed local whatshap/phase module to the nf-core module
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
-- [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-schema to 2.6.1
-- [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
+- [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
+- [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated all pipeline testdata paths to same commit hash
+- [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated nf-test to trigger all tests on changes to samplesheet files that include pipeline testdata paths
+- [#892](https://github.com/genomic-medicine-sweden/nallo/pull/892) - Replaced local whatshap/haplotag module with nf-core module
+- [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
+- [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
 
 ### `Removed`
-
-- [#858](https://github.com/genomic-medicine-sweden/nallo/pull/858) - Removed validation for empty samplesheet, because it obfuscates other errors
 
 ### `Fixed`
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--extra_sawfish_options`       |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
+|               | `--create_maf_track`            |
+|               | `--create_hificnv_maf_track`    |
+|               | `--create_sawfish_maf_track`    |
+
+## 0.10.2 - [2026-02-09]
+
+### `Changed`
+
+- [#885](https://github.com/genomic-medicine-sweden/nallo/pull/885) - Increased default memory requirements for `PREPARE_GENS_INPUTS:GATK4_DENOISEREADCOUNTS`
+
+### `Fixed`
+
+- [#885](https://github.com/genomic-medicine-sweden/nallo/pull/885) - Fixed non-contiguous chromosome blocks error in `CONCAT_SORT_GENS:BCFTOOLS_CONCAT`
+
+## 0.10.1 - [2026-02-05]
+
+### `Changed`
+
+- [#881](https://github.com/genomic-medicine-sweden/nallo/pull/881) - Changed to separate inputs for female and male gens panel of normals
+
+### Parameters
+
+| Old parameter             | New parameter                    |
+| ------------------------- | -------------------------------- |
+| `--gens_panel_of_normals` | `--gens_panel_of_normals_female` |
+| `--gens_panel_of_normals` | `--gens_panel_of_normals_male`   |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -34,8 +72,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.1       |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.10.0 - [2026-02-04]
+
+### `Added`
+
+- [#807](https://github.com/genomic-medicine-sweden/nallo/pull/807) - Added new workflow for generating input data (coverage and B-allele frequencies, BAF) to Gens.
+
+### `Changed`
+
+- [#840](https://github.com/genomic-medicine-sweden/nallo/pull/840) - Updated version to 0.10.0dev
+- [#847](https://github.com/genomic-medicine-sweden/nallo/pull/847) - Changed local whatshap/stats module to the nf-core module
+- [#853](https://github.com/genomic-medicine-sweden/nallo/pull/853) - Changed local whatshap/phase module to the nf-core module
+- [#857](https://github.com/genomic-medicine-sweden/nallo/pull/857) - Set `SOMALIER_PED_FAMILY` `publishDir` mode to match the rest of the pipeline processes
+- [#866](https://github.com/genomic-medicine-sweden/nallo/pull/866) - Updated test data and test snapshots
+- [#870](https://github.com/genomic-medicine-sweden/nallo/pull/870) - Fixed order of BAM files for whatshap phasing
+- [#876](https://github.com/genomic-medicine-sweden/nallo/pull/876) - Prep for release 0.10.0
+
+### `Removed`
+
+- [#858](https://github.com/genomic-medicine-sweden/nallo/pull/858) - Removed validation for empty samplesheet, because it obfuscates other errors
+
+### `Fixed`
+
+- [#871](https://github.com/genomic-medicine-sweden/nallo/pull/871) Fixed MethBat region validation running even when methylation calling is skipped
+
+### Parameters
+
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--skip_prepare_gens_input` |
+|               | `--gens_baf_positions`      |
+|               | `--gens_panel_of_normals`   |
+|               | `--gens_coverage_bins`      |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool                    | Old version | New version |
+| ----------------------- | ----------- | ----------- |
+| gatk4/denoisereadcounts |             | 4.6.2.0     |
+| gens/preparecovandbaf   |             | 1.4.0       |
+| cat/cat                 |             | 2.8         |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.9.2 - [2026-01-27]
+
+### `Fixed`
+
+- [#865](https://github.com/genomic-medicine-sweden/nallo/pull/865) - Added check that `methbat_regions` parameter is set when running methbat
 
 ## 0.9.1 - [2026-01-05]
 

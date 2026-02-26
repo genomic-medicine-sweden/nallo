@@ -259,6 +259,15 @@ In general, annotated variant calls are output per family while unannotated call
 
     Filtered variants are output alongside unfiltered variants as additional files.
 
+When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and B-allele frequency files that can be loaded by downstream Gens workflows.
+
+| Path                                    | Description                                                                           |
+| --------------------------------------- | ------------------------------------------------------------------------------------- |
+| `gens/{sample}/{sample}.cov.bed.gz`     | Coverage data normalized either against a panel of normal or the samples median value |
+| `gens/{sample}/{sample}.cov.bed.gz.tbi` | Index of the coverage BED file                                                        |
+| `gens/{sample}/{sample}.baf.bed.gz`     | B-allele frequency estimates at the provided positions                                |
+| `gens/{sample}/{sample}.baf.bed.gz.tbi` | Index of the BAF BED file                                                             |
+
 ### SVs (and CNVs)
 
 [Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
@@ -309,19 +318,23 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Visualization tracks
 
-[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs, while [Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) are used for methylation analysis, but these also produce tracks that can be visualized in for example IGV.
+[HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV), [Sawfish](https://github.com/PacificBiosciences/sawfish), [Modkit](https://github.com/nanoporetech/modkit) and [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) generate visualization tracks along with their main output.
 
-| Path                                                               | Description                                                                         |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| `visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph`  | Copy number in bedgraph format                                                      |
-| `visualization_tracks/{sample}/{sample}_hificnv.depth.bw`          | Depth track in BigWig format                                                        |
-| `visualization_tracks/{sample}/{sample}_hificnv.maf.bw`            | Minor allele frequencies in BigWig format                                           |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_combined.bw` | BigWig file with summary counts for combined reads from modkit                      |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp1.bw`      | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp2.bw`      | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
-| `visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw`    | BigWig file with summary counts for ungrouped reads from pbcpgtools                 |
-| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw`        | BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools |
-| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw`        | BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools |
+| Path                                                                              | Description                                                                         |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph`                 | Copy number in bedgraph format                                                      |
+| `visualization_tracks/{sample}/{sample}_hificnv.depth.bw`                         | Depth track in BigWig format                                                        |
+| `visualization_tracks/{sample}/{sample}_hificnv.maf.bw`                           | Minor allele frequencies in BigWig format                                           |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_combined.bw`                | BigWig file with summary counts for ungrouped reads from modkit                     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp1.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp2.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw`                   | BigWig file with summary counts for ungrouped reads from pbcpgtools                 |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools |
+| `visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools |
+| `visualization_tracks/{sample}/{sample}_copynum_sawfish.bedgraph`                 | bedGraph file copy-number segmentation track from Sawfish                           |
+| `visualization_tracks/{sample}/{sample}_depth_sawfish.bedgraph`                   | BigWig file with binned sequencing depth from Sawfish                               |
+| `visualization_tracks/{sample}/{sample}_gc_bias_corrected_depth_sawfish.bedgraph` | bedGraph file with GC bias-corrected binned sequencing depth from Sawfish           |
+| `visualization_tracks/{sample}/{sample}_maf_sawfish.bedgraph`                     | bigWig file with minor allele frequencies from Sawfish                              |
 
 ### Images
 

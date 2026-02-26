@@ -8,7 +8,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -16,7 +16,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.sv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "sv"
                     ],
                     [
@@ -24,7 +24,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ],
                     [
@@ -32,7 +32,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.sv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.sv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "sv"
                     ]
                 ],
@@ -42,7 +42,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -50,7 +50,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.sv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "sv"
                     ],
                     [
@@ -58,7 +58,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ],
                     [
@@ -66,17 +66,17 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.sv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.sv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "sv"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:31:56.359547345",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:39:43.065315044"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "1 sample, 1 variant type": {
         "content": [
@@ -87,7 +87,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ]
                 ],
@@ -97,17 +97,17 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:31:34.795523615",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:39:20.654031631"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "1 sample, 2 variant types": {
         "content": [
@@ -118,7 +118,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ],
                     [
@@ -126,7 +126,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.sv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "sv"
                     ]
                 ],
@@ -136,7 +136,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.snv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "snv"
                     ],
                     [
@@ -144,17 +144,17 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.sv.vcf.gz:md5,d8f2e4f999c2c0c8a27edb006ab0f5ac",
+                        "HG002.sv.vcf.gz:md5,9e489300799467b3389313b713e75bff",
                         "sv"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:31:41.787311858",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:39:27.695291652"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "2 samples, 1 variant type, family ID = sample ID": {
         "content": [
@@ -165,7 +165,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -173,7 +173,7 @@
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -183,7 +183,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -191,17 +191,17 @@
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:03.280291129",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:39:50.893579389"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "2 samples, 1 variant type": {
         "content": [
@@ -212,7 +212,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -220,7 +220,7 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ],
@@ -230,7 +230,7 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002.snv.vcf.gz:md5,282b1fba704fce5aaab6e96b4f2121f6",
+                        "HG002.snv.vcf.gz:md5,34d327e36eca166be8fb073ffb52e59a",
                         "snv"
                     ],
                     [
@@ -238,16 +238,16 @@
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003.snv.vcf.gz:md5,150ed83e964c0078d7cc8eca512eb641",
+                        "HG003.snv.vcf.gz:md5,e7f4d7efcc8313e16ac03d433106f693",
                         "snv"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:31:48.720432538",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:39:35.324072452"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

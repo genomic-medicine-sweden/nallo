@@ -7,13 +7,13 @@
                         {
                             "id": "test_1"
                         },
-                        "test_1_sorted.vcf.gz:md5,1b73defba4121ae2e70c49db5de5172f"
+                        "test_1_sorted.vcf.gz:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ],
                     [
                         {
                             "id": "test_2"
                         },
-                        "test_2_sorted.vcf.gz:md5,73a35707c53a492463423895b254d87f"
+                        "test_2_sorted.vcf.gz:md5,48ce94245301610a8b1e48772d2099bd"
                     ]
                 ],
                 "1": [
@@ -21,13 +21,13 @@
                         {
                             "id": "test_1"
                         },
-                        "test_1_sorted.vcf.gz.tbi:md5,92ec6c3ccd4c83daa2919a2e7b9eb989"
+                        "test_1_sorted.vcf.gz.tbi:md5,c9b5f0aae527c4bd28ffd4d763e2d7c5"
                     ],
                     [
                         {
                             "id": "test_2"
                         },
-                        "test_2_sorted.vcf.gz.tbi:md5,cea352f5778fd6f4e76584786dad0ac5"
+                        "test_2_sorted.vcf.gz.tbi:md5,158d44d504ae74c78300755f7e066c95"
                     ]
                 ],
                 "index": [
@@ -35,13 +35,13 @@
                         {
                             "id": "test_1"
                         },
-                        "test_1_sorted.vcf.gz.tbi:md5,92ec6c3ccd4c83daa2919a2e7b9eb989"
+                        "test_1_sorted.vcf.gz.tbi:md5,c9b5f0aae527c4bd28ffd4d763e2d7c5"
                     ],
                     [
                         {
                             "id": "test_2"
                         },
-                        "test_2_sorted.vcf.gz.tbi:md5,cea352f5778fd6f4e76584786dad0ac5"
+                        "test_2_sorted.vcf.gz.tbi:md5,158d44d504ae74c78300755f7e066c95"
                     ]
                 ],
                 "vcf": [
@@ -49,22 +49,22 @@
                         {
                             "id": "test_1"
                         },
-                        "test_1_sorted.vcf.gz:md5,1b73defba4121ae2e70c49db5de5172f"
+                        "test_1_sorted.vcf.gz:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ],
                     [
                         {
                             "id": "test_2"
                         },
-                        "test_2_sorted.vcf.gz:md5,73a35707c53a492463423895b254d87f"
+                        "test_2_sorted.vcf.gz:md5,48ce94245301610a8b1e48772d2099bd"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:41.765854638",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:41:28.138389019"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "two samples -stub": {
         "content": [
@@ -127,10 +127,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:49.065211853",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-27T07:41:35.750789025"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }
