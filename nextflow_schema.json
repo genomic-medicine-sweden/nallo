@@ -889,6 +889,20 @@
                     "pattern": "^\\S+\\.bed$",
                     "exists": true,
                     "description": "Interval in the reference to restrict diploid variant calling for females, in BED file format."
+                },
+                "strdrop_fraction": {
+                    "type": "number",
+                    "default": 0.66,
+                    "description": "Case average adjusted sequencing depth ratio cutoff in strdrop."
+                },
+                "strdrop_alpha": {
+                    "type": "number",
+                    "default": 0.18,
+                    "description": "Unadjusted probability confidence level for coverage test in strdrop."
+                },
+                "strdrop_edit": {
+                    "type": "number",
+                    "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
                 }
             },
             "required": ["preset"]
