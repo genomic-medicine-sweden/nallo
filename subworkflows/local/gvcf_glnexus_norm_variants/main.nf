@@ -3,11 +3,7 @@
 // adds FOUND_IN tag, normalizes and decomposes variants.
 //
 include { ADD_FOUND_IN_TAG                           } from '../../../modules/local/add_found_in_tag/main'
-<<<<<<< Updated upstream
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/local/bcftools/pluginfixploidy/main'
-=======
-include { BCFTOOLS_PLUGINFIXPLOIDY                   } from  '../modules/nf-core/bcftools/pluginfixploidy/main'
->>>>>>> Stashed changes
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
