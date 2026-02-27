@@ -18,7 +18,6 @@ workflow PHASING {
     phaser               // string:  Phasing tool to use
     phase_with_svs       // bool:    Whether to include SVs in phasing (true) or not (false)
     cram_output          // bool:    Publish alignments as CRAM (true) or BAM (false)
-    run_whatshap_stats   // bool:    Whether to run WHATSHAP_STATS (true) or not (false)
 
     main:
     ch_versions            = channel.empty()
@@ -92,7 +91,6 @@ workflow PHASING {
         ch_bam_bai_haplotagged,
         ch_family_to_samples,
         phase_with_svs && !phaser.equals("whatshap"),
-        run_whatshap_stats
     )
     ch_versions = ch_versions.mix(QC_PHASING.out.versions)
 
