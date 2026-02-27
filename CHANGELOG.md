@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#892](https://github.com/genomic-medicine-sweden/nallo/pull/892) - Replaced local whatshap/haplotag module with nf-core module
 - [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
 - [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
+- [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 
 ### `Removed`
@@ -47,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool                       | Old version | New version |
 | -------------------------- | ----------- | ----------- |
+| gens/preparecovandbaf      | 1.1.4       | 1.1.5       |
 | sentieon/gvcftyper         |             | 202503.02   |
 | sentieon/dnascope-longread |             | 1.5.2       |
 
