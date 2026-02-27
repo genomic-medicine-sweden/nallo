@@ -385,8 +385,8 @@ workflow NALLO {
     if(!params.skip_annotate_paralogs) {
         ANNOTATE_PARALOGS (
             CALL_PARALOGS.out.json,
+            params.paraphrase_output_format,
             ch_paraphrase_rules,
-            params.paraphrase_output_format
         )
     }
 
