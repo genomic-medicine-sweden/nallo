@@ -293,6 +293,16 @@ This subworkflow requires haplotagged BAM files, and such relies on aligment, SN
 
 Turned off with `--skip_repeat_calling`.
 
+#### Paralogs annotation
+
+This subworkflow depends on the the mapping and paralogs calling (Paraphase) subworkflows. No additional files are required, but a rule-file for _Paraphrase_ is recommended if you want to be able to flag values. For more information and example files, see https://github.com/Clinical-Genomics/paraphrase.
+
+!!!warning
+
+    Only GRCh38 is supported.
+
+Turned off with `--skip_annotate_paralogs`.
+
 #### Repeat annotation
 
 This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:

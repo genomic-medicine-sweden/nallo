@@ -13,7 +13,7 @@ Allows skipping certain parts of the pipeline
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
-| `skip_paralogs_annotation` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
+| `skip_annotate_paralogs` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |

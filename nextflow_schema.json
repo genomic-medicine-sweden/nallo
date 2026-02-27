@@ -41,7 +41,7 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
-                "skip_paralogs_annotation": {
+                "skip_annotate_paralogs": {
                     "type": "boolean",
                     "description": "Skip paralogs (Paraphase) annotation",
                     "fa_icon": "fas fa-fast-forward",
