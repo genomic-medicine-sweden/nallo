@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
 - [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added local module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
 
 ### `Changed`
 
@@ -22,9 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#892](https://github.com/genomic-medicine-sweden/nallo/pull/892) - Replaced local whatshap/haplotag module with nf-core module
 - [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
 - [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
-- []() - Updated
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 
 ### `Removed`
+
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Removed restrictions on running whatshap when using sentieon SNV calls
 
 ### `Fixed`
 
