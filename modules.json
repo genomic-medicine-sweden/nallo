@@ -240,6 +240,11 @@
                         "git_sha": "9e18969a158f93bd689de80a9dfe05c9d67d023a",
                         "installed_by": ["modules"]
                     },
+                    "paraphrase": {
+                        "branch": "master",
+                        "git_sha": "f3e0289a6da209a595fece244144ef06a08e05a8",
+                        "installed_by": ["modules"]
+                    },
                     "pbcpgtools/alignedbamtocpgscores": {
                         "branch": "master",
                         "git_sha": "e67cda6276a94d7eafa2d38acefd001562ad2c2b",

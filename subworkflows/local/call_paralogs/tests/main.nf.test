@@ -18,13 +18,17 @@ nextflow_workflow {
             }
 
         }
-        run("SAMTOOLS_FAIDX") {
-            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+        run("PARAPHRASE") {
+            script "../../../../modules/local/paraphrase/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = channel.of([
+                    [ id: 'HG002', family_id: 'NIST' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = [[],[]]
                 """
             }
         }
