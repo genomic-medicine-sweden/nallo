@@ -47,6 +47,10 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
             [[], []],
         )
 
+        // Re-encoding haploid GTs to diploid  needs to occur _after_ GVCFtyper
+        // in the gvcf joint-calling path, as the altereted ploidy of haploid
+        // to diploid GT no longer matches the sample PL field, which leads to a
+        // crash in GVCFTyper
         BCFTOOLS_PLUGINFIXPLOIDY(
             SENTIEON_GVCFTYPER.out.vcf_gz.join(SENTIEON_GVCFTYPER.out.vcf_gz_tbi),
             [],
