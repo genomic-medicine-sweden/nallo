@@ -41,6 +41,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_paralogs_annotation": {
+                    "type": "boolean",
+                    "description": "Skip paralogs (Paraphase) annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "skip_repeat_calling": {
                     "type": "boolean",
                     "description": "Skip tandem repeat calling",
@@ -362,10 +368,24 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "paraphrase_output_format": {
+                    "type": "string",
+                    "enum": ["tsv", "json"],
+                    "description": "Output format for paralog annotation from Paraphrase. Either `tsv` or `json`.",
+                    "default": "tsv"
+                },
+                "paraphrase_rules": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.json$",
+                    "format": "file-path",
+                    "description": "A file path to a YAML with rules for paraphrase to use when annotating paralogs.",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data.",
+                    "exists": true
                 },
                 "sambamba_regions": {
                     "type": "string",

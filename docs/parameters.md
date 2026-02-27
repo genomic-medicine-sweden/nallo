@@ -13,6 +13,7 @@ Allows skipping certain parts of the pipeline
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
+| `skip_paralogs_annotation` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
@@ -68,6 +69,8 @@ Define where the pipeline should find input data and save output data.
 | `gens_panel_of_normals_male` | Panel of normals of male samples (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command. | `string` |  |  |  |
 | `gens_coverage_bins` | Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals. | `string` |  |  |  |
 | `strdrop_training_set_json` | A JSON file containing the training set for strdrop | `string` |  |  |  |
+| `paraphrase_output_format` | Output format for paralog annotation from Paraphrase. Either `tsv` or `json`. (accepted: `tsv`\|`json`) | `string` | tsv |  |  |
+| `paraphrase_rules` | A file path to a YAML with rules for paraphrase to use when annotating paralogs. | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |

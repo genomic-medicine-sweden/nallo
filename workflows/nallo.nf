@@ -12,6 +12,7 @@ include {
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_PARALOGS                                      } from '../subworkflows/local/annotate_paralogs'
 include { ANNOTATE_REPEAT_EXPANSIONS                             } from '../subworkflows/local/annotate_repeat_expansions'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
 include { ANNOTATE_SVS                                           } from '../subworkflows/local/annotate_svs'
@@ -109,6 +110,7 @@ workflow NALLO {
     ch_genmod_reduced_penetrance    = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
     ch_genmod_score_config_snvs     = createReferenceChannelFromPath(params.genmod_score_config_snvs)
     ch_genmod_score_config_svs      = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_paraphrase_rules             = createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[],[]]))
     ch_peddy_sites                  = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
     ch_methbat_regions              = createReferenceChannelFromPath(params.methbat_regions)
     ch_mosdepth_regions             = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
@@ -364,9 +366,9 @@ workflow NALLO {
 
     }
 
-    //
-    // Call paralogous genes with paraphase
-    //
+    /*
+     * Call paralogous genes with paraphase
+     */
     if(!params.skip_call_paralogs) {
         CALL_PARALOGS (
             ch_bam_bai,
@@ -377,9 +379,20 @@ workflow NALLO {
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
 
-    //
-    // Call SNVs
-    //
+    /*
+     * Annotate paralogous genes with paraphrase
+     */
+    if(!params.skip_annotate_paralogs) {
+        ANNOTATE_PARALOGS (
+            CALL_PARALOGS.out.json,
+            ch_paraphrase_rules,
+            params.paraphrase_output_format
+        )
+    }
+
+    /*
+     * Call SNVs
+     */
     if(!params.skip_snv_calling) {
 
         // Make BED intervals, can be used for parallel SNV calling
