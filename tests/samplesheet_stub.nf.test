@@ -18,6 +18,7 @@ nextflow_pipeline {
                 cadd_resources               = "$projectDir/assets"
                 cadd_prescored_indels        = "$projectDir/docs"
                 // Skip irrelevant steps
+                skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
                 skip_call_paralogs           = true
@@ -61,6 +62,7 @@ nextflow_pipeline {
                 // Mock inputs for VEP
                 vep_cache                    = "$projectDir/assets"
                 // Skip irrelevant steps
+                skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
                 skip_call_paralogs           = true
@@ -104,6 +106,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
                 // Skip irrelevant steps
+                skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
                 skip_snv_calling             = true
@@ -151,6 +154,7 @@ nextflow_pipeline {
                 alignment_processes           = 1
                 plot_chromograph_autozygosity = false
                 // Skip irrelevant steps
+                skip_annotate_paralogs        = true
                 skip_call_paralogs            = true
                 skip_snv_calling              = true
                 skip_qc                       = true
@@ -194,6 +198,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_alignment               = true
+                skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
                 skip_snv_calling             = true
@@ -238,6 +243,7 @@ nextflow_pipeline {
                 pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/'
                 input                                   = "$projectDir/assets/samplesheet.csv"
                 outdir                                  = "$outputDir"
+                skip_annotate_paralogs                  = true
                 skip_call_paralogs                      = true
                 skip_chromograph                        = true
                 skip_methylation_calling                = true
@@ -316,6 +322,7 @@ nextflow_pipeline {
                 sentieon_male_diploid_bed    = params.pipelines_testdata_base_path + 'reference/empty.bed'
                 sentieon_male_haploid_bed    = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed'
                 // Skip irrelevant steps
+                skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
                 skip_call_paralogs           = true
