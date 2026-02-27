@@ -8,12 +8,12 @@ Allows skipping certain parts of the pipeline
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
+| `skip_annotate_paralogs` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
 | `skip_qc` | Skip QC of reads | `boolean` | False |  |  |
 | `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
-| `skip_annotate_paralogs` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
@@ -139,6 +139,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sv_callers_to_merge` | Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) (accepted: `deepvariant`\|`sentieon`) | `string` | deepvariant |  |  |
 | `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: `trgt`\|`strdust`) | `string` | trgt |  |  |
+| `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase is used. | `string` |  |  |  |
+| `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |

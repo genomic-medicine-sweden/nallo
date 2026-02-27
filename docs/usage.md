@@ -297,9 +297,9 @@ Turned off with `--skip_repeat_calling`.
 
 This subworkflow depends on the the mapping and paralogs calling (Paraphase) subworkflows. No additional files are required, but a rule-file for _Paraphrase_ is recommended if you want to be able to flag values. For more information and example files, see https://github.com/Clinical-Genomics/paraphrase.
 
-!!!warning
-
-    Only GRCh38 is supported.
+| Parameter          | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `paraphrase_rules` | A file path to a YAML with rules for paraphrase to use when annotating paralogs. |
 
 Turned off with `--skip_annotate_paralogs`.
 
