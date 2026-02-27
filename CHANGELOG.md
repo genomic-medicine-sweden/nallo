@@ -27,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Removed`
 
-- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Removed restrictions on running whatshap when using sentieon SNV calls
 
 ### `Fixed`
 
