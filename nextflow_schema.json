@@ -902,6 +902,7 @@
                 },
                 "strdrop_edit": {
                     "type": "number",
+                    "default": 0.9,
                     "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
                 }
             },
