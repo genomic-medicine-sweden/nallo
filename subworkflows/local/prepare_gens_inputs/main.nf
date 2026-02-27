@@ -102,8 +102,6 @@ workflow PREPARE_GENS_INPUTS {
         baf_positions
     )
 
-    ch_versions = ch_versions.mix(PREPARECOVANDBAF.out.versions)
-
     ch_cov_gz_tbi = PREPARECOVANDBAF.out.cov_gz
         .join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz
