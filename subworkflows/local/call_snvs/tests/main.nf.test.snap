@@ -776,7 +776,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_ploidyfix.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -788,7 +788,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_ploidyfix.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -800,7 +800,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -812,7 +812,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
@@ -828,7 +828,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "gvcf_index": [
@@ -840,7 +840,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "index": [
@@ -852,7 +852,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_ploidyfix.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -864,7 +864,7 @@
                             "num_intervals": 1,
                             "sex": 1
                         },
-                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_ploidyfix.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
@@ -875,9 +875,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-03T16:34:51.529383832"
+        "timestamp": "2026-02-27T06:25:07.970459919"
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
