@@ -660,6 +660,11 @@
                     "description": "Label used for female samples in methbat profile.",
                     "default": "FEMALE"
                 },
+                "mt_caller": {
+                    "type": "string",
+                    "default": "deepvariant",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
