@@ -516,7 +516,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            58,
+            62,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -537,6 +537,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_PLUGINFIXPLOIDY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -561,7 +564,7 @@
                     "bcftools": 1.22,
                     "bedtools": "2.31.1",
                     "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.1",
+                    "sentieon-cli": "1.5.2",
                     "sentieon": 202503.02
                 },
                 "ECHTVAR_ANNO": {
@@ -657,9 +660,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-03T21:54:36.613443795"
+        "timestamp": "2026-02-27T08:39:49.983329019"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1320,9 +1323,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-27T11:00:24.751126548"
+        "timestamp": "2026-01-30T15:01:49.582940215"
     },
     "Test alignment without genome assembly": {
         "content": [

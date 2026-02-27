@@ -31,6 +31,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/pluginfixploidy": {
+                        "branch": "master",
+                        "git_sha": "62011b929647d15dac1f53f3164a152b64223619",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/query": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",

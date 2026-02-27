@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
 - [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
 - [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added nf-core module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
 
 ### `Changed`
 
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
 - [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
 - [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 
 ### `Removed`
 
@@ -44,9 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                  | Old version | New version |
-| --------------------- | ----------- | ----------- |
-| gens/preparecovandbaf | 1.1.4       | 1.1.5       |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| gens/preparecovandbaf      | 1.1.4       | 1.1.5       |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.2       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -80,18 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
-
-### Module updates
-
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.1       |
-
-> [!NOTE]
-> Version has been updated if both old and new version information is present.
-> Version has been added if just the new version information is present.
-> Version has been removed if new version information isn't present.
 
 ## 0.10.0 - [2026-02-04]
 
