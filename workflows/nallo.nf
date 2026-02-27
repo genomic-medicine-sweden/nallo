@@ -399,13 +399,16 @@ workflow NALLO {
         // if Deepvariant is used as mitochondrial caller
         if (params.mt_caller == "deepvariant") {
 
-            ch_num_intervals = channel.value(expected_snv_vcfs) // Value channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
+            // Value channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
+            ch_num_intervals = channel.value(expected_snv_vcfs)
 
-            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals.map { meta, bed, _intervals -> [ meta, bed ] }
-                                    .mix(SCATTER_GENOME.out.bed_mt.map { meta, bed -> [meta.subMap('genome'), bed ] })
-                                    .combine(ch_num_intervals)
-                                    .map { meta, bed, num_intervals -> [meta, bed, num_intervals]}
-        } else {
+            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
+                .map { meta, bed, _intervals -> [meta, bed] }
+                .mix(SCATTER_GENOME.out.bed_mt.map { meta, bed -> [meta.subMap('genome'), bed] })
+                .combine(ch_num_intervals)
+                .map { meta, bed, num_intervals -> [meta, bed, num_intervals] }
+        }
+        else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
         }
 
