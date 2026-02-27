@@ -60,6 +60,7 @@ workflow SCATTER_GENOME {
         ]
         }.set{ ch_bed }
 
+        // Exctract according to meta.genome, logic is in the config file
         GAWK_EXTRACT_REGIONS (
             ch_bed,
             [],
@@ -80,7 +81,7 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
-        // Create a channel with the bed file and the total number of intervals (for groupKey)
+        // Create a channel with the bed file and the total number of intervals (for groupKey in nallo.nf)
         BEDTOOLS_SPLIT.out.beds
             .map { meta, beds -> [meta.subMap('genome'), beds ] }
             .collect()

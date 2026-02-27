@@ -408,6 +408,7 @@ workflow NALLO {
         } else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
         }
+
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
         ch_bam_bai
@@ -548,7 +549,6 @@ workflow NALLO {
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
         )
-
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
     }
