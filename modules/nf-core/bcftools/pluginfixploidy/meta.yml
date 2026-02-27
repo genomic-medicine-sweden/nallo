@@ -1,6 +1,7 @@
-name: "bcftools_fixploidy"
-description: Sets genotypes according to the specified criteria and filtering expressions.
-  For example, missing genotypes can be set to ref, but much more than that.
+name: "bcftools_pluginfixploidy"
+description: "The fixploidy plugin fixes ploidy in genotype fields according to specified
+  ploidy rules, sample sex assignments, or a forced ploidy value. For example, haploid
+  genotypes can be converted to diploid genotypes."
 keywords:
   - fixploidy
   - bcftools
@@ -18,23 +19,24 @@ tools:
       documentation: "https://samtools.github.io/bcftools/bcftools.html"
       tool_dev_url: "https://github.com/samtools/bcftools"
       doi: "10.1093/bioinformatics/btp352"
-      licence: ["MIT"]
+      licence:
+        - "MIT"
       args_id: "$args"
       identifier: biotools:bcftools
-  - "bcftools plugin setGT":
+  - "bcftools plugin fixploidy":
       description: "Bcftools plugins are tools that can be used with bcftools to manipulate
-        variant calls in Variant Call Format (VCF) and BCF.
-        The fixploidy plugin fixes ploidy in genotype fields according to specified ploidy rules,
-        sample sex assignments, or a forced ploidy value. For example, haploid genotypes can
-        be converted to diploid genotypes."
+        variant calls in Variant Call Format (VCF) and BCF. The fixploidy plugin fixes
+        ploidy in genotype fields according to specified ploidy rules, sample sex assignments,
+        or a forced ploidy value. For example, haploid genotypes can be converted to
+        diploid genotypes."
       homepage: "https://samtools.github.io/bcftools/howtos/plugins.html"
       documentation: "https://samtools.github.io/bcftools/howtos/plugin.setGT.html"
       tool_dev_url: "https://github.com/samtools/bcftools"
       doi: "10.1093/bioinformatics/btp352"
-      licence: ["MIT"]
+      licence:
+        - "MIT"
       args_id: "$args2"
       identifier: biotools:bcftools
-
 input:
   - - meta:
         type: map
@@ -53,24 +55,6 @@ input:
           Index file for the input VCF/BCF (e.g. .tbi or .csi).
           e.g. 'sample.vcf.gz.tbi'
         ontologies: []
-
-  - regions:
-      type: file
-      description: |
-        Optionally restrict the operation to regions listed in this file
-        (indexed input required; passed as a bcftools regions file argument).
-        e.g. 'regions.bed'
-      ontologies: []
-
-  - targets:
-      type: file
-      description: |
-        Optionally restrict the operation to targets listed in this file
-        (does not rely on index jumps in the same way as regions; passed as a
-        bcftools targets file argument).
-        e.g. 'targets.bed'
-      ontologies: []
-
   - ploidy:
       type: file
       description: |
@@ -78,7 +62,6 @@ input:
         space/tab-delimited columns: CHROM, FROM, TO, SEX, PLOIDY.
         e.g. 'ploidy.txt'
       ontologies: []
-
   - sex:
       type: file
       description: |
@@ -87,7 +70,21 @@ input:
         Samples not listed are treated as female by the plugin.
         e.g. 'samples_sex.txt'
       ontologies: []
-
+  - regions:
+      type: file
+      description: |
+        Optionally restrict the operation to regions listed in this file
+        (indexed input required; passed as a bcftools regions file argument).
+        e.g. 'regions.bed'
+      ontologies: []
+  - targets:
+      type: file
+      description: |
+        Optionally restrict the operation to targets listed in this file
+        (does not rely on index jumps in the same way as regions; passed as a
+        bcftools targets file argument).
+        e.g. 'targets.bed'
+      ontologies: []
 output:
   vcf:
     - - meta:
@@ -97,7 +94,7 @@ output:
             e.g. [ id:'test', single_end:false ]
       - "*.{vcf,vcf.gz,bcf,bcf.gz}":
           type: file
-          description: VCF output file containing set genotypes
+          description: VCF output file containing GT fields with modified ploidy
           pattern: "*.{vcf,vcf.gz,bcf,bcf.gz}"
           ontologies: []
   tbi:
@@ -130,7 +127,7 @@ output:
           type: string
           description: The tool name
       - "bcftools --version | sed '1!d; s/^.*bcftools //'":
-          type: string
+          type: eval
           description: The command used to generate the version of the tool
 topics:
   versions:
@@ -141,7 +138,7 @@ topics:
           type: string
           description: The tool name
       - "bcftools --version | sed '1!d; s/^.*bcftools //'":
-          type: string
+          type: eval
           description: The command used to generate the version of the tool
 authors:
   - "@alkc"
