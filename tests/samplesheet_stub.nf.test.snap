@@ -136,11 +136,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-01-26T20:28:24.863121989",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-26T20:28:24.863121989"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -346,11 +346,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-02-19T14:40:14.848738307",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-02-19T14:40:14.848738307"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -446,11 +446,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-01-26T20:29:56.071390605",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-26T20:29:56.071390605"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -508,15 +508,15 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-01-26T20:30:39.136057664",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-26T20:30:39.136057664"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            58,
+            62,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -537,6 +537,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_PLUGINFIXPLOIDY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -561,7 +564,7 @@
                     "bcftools": 1.22,
                     "bedtools": "2.31.1",
                     "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.1",
+                    "sentieon-cli": "1.5.2",
                     "sentieon": 202503.02
                 },
                 "ECHTVAR_ANNO": {
@@ -655,11 +658,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-02-03T21:54:36.613443795",
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
-        }
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-02-27T08:39:49.983329019"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -822,11 +825,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-01-26T20:26:59.456482171",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-26T20:26:59.456482171"
     },
     "Test family id same as sample id": {
         "content": [
@@ -1000,7 +1003,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1318,11 +1321,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-01-30T15:01:49.582940215",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-30T15:01:49.582940215"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1386,10 +1389,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-01-26T20:29:09.114037624",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        }
+        },
+        "timestamp": "2026-01-26T20:29:09.114037624"
     }
 }

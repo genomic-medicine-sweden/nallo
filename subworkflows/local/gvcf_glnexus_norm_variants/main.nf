@@ -3,6 +3,7 @@
 // adds FOUND_IN tag, normalizes and decomposes variants.
 //
 include { ADD_FOUND_IN_TAG                           } from '../../../modules/local/add_found_in_tag/main'
+include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
@@ -46,7 +47,19 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
             [[], []],
         )
 
-        ch_merged_family_gvcf = SENTIEON_GVCFTYPER.out.vcf_gz
+        // Re-encoding haploid GTs to diploid  needs to occur _after_ GVCFtyper
+        // in the gvcf joint-calling path, as the altered ploidy of haploid
+        // to diploid GT no longer matches the sample PL field, which leads to a
+        // crash in GVCFTyper
+        BCFTOOLS_PLUGINFIXPLOIDY(
+            SENTIEON_GVCFTYPER.out.vcf_gz.join(SENTIEON_GVCFTYPER.out.vcf_gz_tbi),
+            [],
+            [],
+            [],
+            []
+        )
+
+        ch_merged_family_gvcf = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
 
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?

@@ -4,7 +4,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    label 'process_high'
    label 'sentieon'
 
-   container "docker.io/clinicalgenomicslund/dnascope-longread:1.5.1"
+   container "docker.io/clinicalgenomicslund/dnascope-longread:1.5.2"
 
    input:
    tuple val(meta),  path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)

@@ -31,6 +31,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/pluginfixploidy": {
+                        "branch": "master",
+                        "git_sha": "62011b929647d15dac1f53f3164a152b64223619",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/query": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
@@ -165,7 +170,7 @@
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
-                        "git_sha": "8d801223814a5a728dc2d8e506df17b84bc5e88b",
+                        "git_sha": "8220217c9ccad60dc5b395bd76de4d1ddfb7cd80",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
