@@ -34,24 +34,24 @@ workflow SCATTER_GENOME {
             .set{ ch_bed }
     }
 
+    // Sort and merge overlapping regions
+    BEDTOOLS_SORT (
+        ch_bed,
+        []
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
+
+    BEDTOOLS_MERGE (
+        BEDTOOLS_SORT.out.sorted
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
+
     //
     // Merge overlapping and then split BED regions for SNV calling
     //
     if( make_bed_intervals ) {
 
         if( split_n < 1 ) { error "Can't split bed file into less than one file" }
-
-        // Sort and merge overlapping regions
-        BEDTOOLS_SORT (
-            ch_bed,
-            []
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
-
-        BEDTOOLS_MERGE (
-            BEDTOOLS_SORT.out.sorted
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
         BEDTOOLS_SPLIT(
             BEDTOOLS_MERGE.out.bed.map { meta, bed ->
