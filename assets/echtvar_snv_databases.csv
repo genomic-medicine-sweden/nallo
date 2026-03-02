@@ -1,3 +1,3 @@
 sample,file
-cadd,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/cadd.v1.6.hg38.test_data.zip
-gnomad,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/reference/gnomad_af.zip
+cadd,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ad0d40db06e466c1100b54f36b4afde4a700325c/reference/cadd.v1.6.hg38.test_data.zip
+gnomad,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/ad0d40db06e466c1100b54f36b4afde4a700325c/reference/gnomad_af.zip

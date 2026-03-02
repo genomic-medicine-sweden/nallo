@@ -626,6 +626,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/FAM",
+                "paraphase/family/FAM/FAM_paraphase_annotated.tsv",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1010,6 +1011,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
                 "whatshap-stats-table.txt:md5,2f472d2f800709ab934000ede813834b",
+                "FAM_paraphase_annotated.tsv:md5,055af2d1b10ba80ffe611bdbecf88c97",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,5e904df1ea10c02ae70169e46b45f16c",
                 "HG003_cramino_aligned_phased.arrow:md5,e6859e9adeed604cf6b0c0fb659ef19d",
@@ -1124,7 +1126,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1197,13 +1199,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
+        "timestamp": "2026-03-02T08:06:29.319976657",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T10:46:25.096731422"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

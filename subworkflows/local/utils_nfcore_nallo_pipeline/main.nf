@@ -134,7 +134,7 @@ workflow PIPELINE_INITIALISATION {
         phasing          : ["mapping", "snv_calling"],
         rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
-        repeat_annotatio : ["mapping", "snv_calling", "phasing", "repeat_calling"],
+        repeat_annotatiom: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation      : ["mapping", "snv_calling"],
         gens             : ["mapping", "snv_calling"],
     ]
