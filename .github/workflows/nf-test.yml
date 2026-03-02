@@ -59,8 +59,8 @@ jobs:
           - isMain: false
             tag: "samplesheet_target_regions_null"
         NXF_VER:
-          - "25.10.0"
-          - "latest-everything"
+          - "26.01.1-edge"
+          - "latest-edge"
         include:
           - tag: "samplesheet"
             runCleanup: true
