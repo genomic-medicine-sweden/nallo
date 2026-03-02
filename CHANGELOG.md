@@ -10,12 +10,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
 - [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
+- [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added nf-core module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
 
 ### `Changed`
 
 - [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
 - [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated all pipeline testdata paths to same commit hash
 - [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated nf-test to trigger all tests on changes to samplesheet files that include pipeline testdata paths
+- [#892](https://github.com/genomic-medicine-sweden/nallo/pull/892) - Replaced local whatshap/haplotag module with nf-core module
+- [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
+- [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
+- [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 
 ### `Removed`
 
@@ -31,6 +40,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sentieon_male_haploid_bed`   |
 |               | `--sentieon_male_diploid_bed`   |
 |               | `--sentieon_female_diploid_bed` |
+|               | `--create_maf_track`            |
+|               | `--create_hificnv_maf_track`    |
+|               | `--create_sawfish_maf_track`    |
+
+### Module updates
+
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| gens/preparecovandbaf      | 1.1.4       | 1.1.5       |
+| sentieon/gvcftyper         |             | 202503.02   |
+| sentieon/dnascope-longread |             | 1.5.2       |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
 
 ## 0.10.2 - [2026-02-09]
 
@@ -59,18 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
-
-### Module updates
-
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.1       |
-
-> [!NOTE]
-> Version has been updated if both old and new version information is present.
-> Version has been added if just the new version information is present.
-> Version has been removed if new version information isn't present.
 
 ## 0.10.0 - [2026-02-04]
 

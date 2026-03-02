@@ -236,24 +236,32 @@ workflow NALLO {
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
-    //
-    // Map reads to reference
-    //
+    /*
+     * Map reads to reference
+     */
     if (!params.skip_alignment) {
 
+        /*
+         * Ensure each BAM has a unique identify,
+         * enabling correct grouping and downstream merging.
+         */
         (params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam)
+            .map { meta, bam -> [ meta + [ file: bam.name ], bam ] }
             .set { reads_for_alignment }
 
-        // If we are splitting input files, this needs to wait for all files to be split. But while we do that, the reads can still start to be aligned.
-        // Later, this allows us to combine this meta with the aligned BAMs for merging, without having to wait for all alignment processes to finish.
+        /*
+         * Create a grouping key per sample that records the number of split files,
+         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+         */
         reads_for_alignment
+            .map { meta, bam -> [ meta - meta.subMap('file'), bam ] }
             .groupTuple()
             .map { meta, files -> [ meta + [ n_files: files.size() ] ] }
             .set { reads_grouping_key }
 
-        //
-        // Align reads (could be a split-align-merge subworkflow)
-        //
+        /*
+         * Align reads independently per split (could be a split-align-merge subworkflow)
+         */
         MINIMAP2_ALIGN (
             reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
@@ -264,18 +272,17 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
-        // Split channel into cases where we have multiple files or single files
+        /*
+         * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
+         */
         MINIMAP2_ALIGN.out.bam
-            // If there are multiple files per sample, each file has the same meta so failOnDuplicate fails here.
-            // The end result is fine, but it might be worth to e.g. give each file a non-identical meta,
-            // then join, strip identifier, join again, to be able to run the pipeline in strict mode.
-            .join(MINIMAP2_ALIGN.out.index, failOnMismatch:true)
+            .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
             .combine(reads_grouping_key)
-            .filter { aligned_meta, _bam, _bai, grouping_key_meta ->
-                aligned_meta.id == grouping_key_meta.id
+            .filter { bam_meta, _bam, _bai, grouping_key_meta ->
+                bam_meta.id == grouping_key_meta.id
             }
-            .map { aligned_meta, bam, bai, grouping_key_meta ->
-                [ aligned_meta + [ n_files: grouping_key_meta.n_files ], bam, bai ]
+            .map { bam_meta, bam, bai, grouping_key_meta ->
+                [ bam_meta - bam_meta.subMap('file') + [ n_files: grouping_key_meta.n_files ], bam, bai ]
             }
             .map { meta, bam, bai ->
                 [ groupKey(meta, meta.n_files), bam, bai ]
@@ -283,11 +290,11 @@ workflow NALLO {
             .groupTuple()
             .set { bam_to_merge }
 
-        // Merge files - even if we only have one file per sample.
-        // This is because sometimes we need to output unphased BAM files. We can no longer output single files
-        // from the alignment process, because they would need to be renamed, based on n_files, which is no longer
-        // available to the alignment process. Because that would mean having to wait for all samples to be alinged
-        // before moving on to subsequent steps.
+        /*
+         * Always merge here even if there's only one file,
+         * because alignment runs without knowledge of group completeness (n_files),
+         * and we can't therefore output from the alignment step with correct naming.
+         */
         SAMTOOLS_MERGE (
             bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
             [[],[]],
@@ -551,6 +558,8 @@ workflow NALLO {
             ch_sv_call_regions,
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
+            params.create_hificnv_maf_track,
+            params.create_sawfish_maf_track
         )
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
 
@@ -597,8 +606,7 @@ workflow NALLO {
             ch_fai,
             params.phaser,
             !params.skip_sv_calling,
-            cram_output,
-            !params.snv_caller.equals("sentieon")
+            cram_output
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 

@@ -337,14 +337,20 @@
                 "svs/family",
                 "svs/family/FAM",
                 "svs/family/FAM/FAM_svs.vcf.gz",
-                "svs/family/FAM/FAM_svs.vcf.gz.tbi"
+                "svs/family/FAM/FAM_svs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/test",
+                "visualization_tracks/test/test_copynum_sawfish.bedgraph",
+                "visualization_tracks/test/test_depth_sawfish.bw",
+                "visualization_tracks/test/test_gc_bias_corrected_depth_sawfish.bw",
+                "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-26T20:32:08.163630076"
+        "timestamp": "2026-02-19T14:40:14.848738307"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -510,7 +516,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            58,
+            62,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -531,6 +537,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_PLUGINFIXPLOIDY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -555,7 +564,7 @@
                     "bcftools": 1.22,
                     "bedtools": "2.31.1",
                     "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.1",
+                    "sentieon-cli": "1.5.2",
                     "sentieon": 202503.02
                 },
                 "ECHTVAR_ANNO": {
@@ -651,9 +660,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-03T21:54:36.613443795"
+        "timestamp": "2026-02-27T08:39:49.983329019"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -994,7 +1003,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"

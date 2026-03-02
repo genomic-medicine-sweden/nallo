@@ -172,7 +172,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -702,8 +702,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.12.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-09T17:12:22.670646907"
+        "timestamp": "2026-02-27T10:34:32.027657363"
     }
 }
