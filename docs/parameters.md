@@ -184,3 +184,6 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sentieon_male_haploid_bed` | Interval in the reference to restrict haploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_male_diploid_bed` | Interval in the reference to restrict diploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_female_diploid_bed` | Interval in the reference to restrict diploid variant calling for females, in BED file format. | `string` |  |  |  |
+| `strdrop_fraction` | Case average adjusted sequencing depth ratio cutoff in strdrop. | `number` | 0.66 |  |  |
+| `strdrop_alpha` | Unadjusted probability confidence level for coverage test in strdrop. | `number` | 0.18 |  |  |
+| `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
