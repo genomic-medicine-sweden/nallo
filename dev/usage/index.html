@@ -1886,8 +1886,32 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 </tbody>
 </table>
 <p>Additionally, <code>--strdrop_training_set_json</code> must be supplied when <a href="https://github.com/dnil/strdrop">strdrop</a> is used to annotate drops in coverage at STR loci in TRGT vcf files:</p>
-<p>| Parameter | Description |
-| <code>strdrop_training_set_json</code> | A JSON file containing the training set for strdrop |</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>strdrop_training_set_json</code></td>
+<td>A JSON file containing the training set for strdrop</td>
+</tr>
+<tr>
+<td><code>strdrop_fraction</code></td>
+<td>Case average adjusted sequencing depth ratio cutoff</td>
+</tr>
+<tr>
+<td><code>strdrop_alpha</code></td>
+<td>Unadjusted probability confidence level for coverage test</td>
+</tr>
+<tr>
+<td><code>strdrop_edit</code></td>
+<td>Allele similarity Levenshtein edit distance ratio cutoff</td>
+</tr>
+</tbody>
+</table>
 <p>Turned off with <code>--skip_repeat_annotation</code>.</p>
 <h4 id="snv-annotation">SNV annotation</h4>
 <p>This subworkflow relies on the alignment and SNV calling. If phasing is enabled, phased SNVs will be annotated.</p>
