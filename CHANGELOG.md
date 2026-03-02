@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon/gvcftyper                  |             | 202503.02   |
 | sentieon/dnascope-longread          |             | 1.5.2       |
 | merge_json_sample_files_into_family | 1.0         |             |
+| paraphrase                          |             | 0.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
