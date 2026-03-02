@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
 - [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
+- [#906](https://github.com/genomic-medicine-sweden/nallo/pull/906) - Changed to nf-test 0.9.4 and strict syntax parsing in GitHub CI
 
 ### `Removed`
 
