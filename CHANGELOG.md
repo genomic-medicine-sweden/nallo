@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added nf-core module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
 - [#902](https://github.com/genomic-medicine-sweden/nallo/pull/902) - Added parameters for `--edit`, `--fraction` and `--alpha` options in `STRDROP_CALL`
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Added subworkflow `ANNOTATE_PARALOGS` with Paraphrase JSON annotation by Paraphrase
 
 ### `Changed`
 
@@ -29,6 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 
 ### `Removed`
+
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed local module `merge_json`
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
 
 ### `Fixed`
 
@@ -53,11 +57,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| gens/preparecovandbaf      | 1.1.4       | 1.1.5       |
-| sentieon/gvcftyper         |             | 202503.02   |
-| sentieon/dnascope-longread |             | 1.5.2       |
+| Tool                                | Old version | New version |
+| ----------------------------------- | ----------- | ----------- |
+| gens/preparecovandbaf               | 1.1.4       | 1.1.5       |
+| sentieon/gvcftyper                  |             | 202503.02   |
+| sentieon/dnascope-longread          |             | 1.5.2       |
+| merge_json_sample_files_into_family | 1.0         |             |
+| paraphrase                          |             | 0.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
