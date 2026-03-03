@@ -637,6 +637,14 @@
 </thead>
 <tbody>
 <tr>
+<td><code>skip_annotate_paralogs</code></td>
+<td>Skip paralogs (Paraphase) annotation</td>
+<td><code>boolean</code></td>
+<td>False</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>skip_qc</code></td>
 <td>Skip QC of reads</td>
 <td><code>boolean</code></td>
@@ -1077,6 +1085,22 @@
 <td></td>
 </tr>
 <tr>
+<td><code>paraphrase_output_format</code></td>
+<td>Output format for paralog annotation from Paraphrase. Either <code>tsv</code> or <code>json</code>. (accepted: <code>tsv</code>|<code>json</code>)</td>
+<td><code>string</code></td>
+<td>tsv</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>paraphrase_rules</code></td>
+<td>A file path to a YAML file with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>peddy_sites</code></td>
 <td>A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data.</td>
 <td><code>string</code></td>
@@ -1336,7 +1360,7 @@
 <td><code>pipelines_testdata_base_path</code></td>
 <td>Base URL or local path to location of pipeline test dataset files</td>
 <td><code>string</code></td>
-<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/</td>
+<td>https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/</td>
 <td></td>
 <td>True</td>
 </tr>
@@ -1457,6 +1481,22 @@
 <td>Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: <code>trgt</code>|<code>strdust</code>)</td>
 <td><code>string</code></td>
 <td>trgt</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>paraphrase_genes</code></td>
+<td>An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase is used.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>paraphrase_skip_keys</code></td>
+<td>An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase.</td>
+<td><code>string</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>

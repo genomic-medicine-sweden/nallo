@@ -1748,7 +1748,7 @@
 <h2 id="variants">Variants</h2>
 <p>In general, annotated variant calls are output per family while unannotated calls are output per sample.</p>
 <h3 id="paralogous-genes">Paralogous genes</h3>
-<p><a href="https://github.com/PacificBiosciences/paraphase">Paraphase</a> is used to call paralogous genes.</p>
+<p><a href="https://github.com/PacificBiosciences/paraphase">Paraphase</a> is used to call paralogous genes, and <a href="https://github.com/Clinical-Genomics/paraphrase"><em>Paraphrase</em></a> is used to merge, annotate and filter the Paraphrase JSON files.</p>
 <table>
 <thead>
 <tr>
@@ -1786,8 +1786,8 @@
 <td>Index of the VCF file merged by family</td>
 </tr>
 <tr>
-<td><code>paraphase/family/{family_id}/{family_id}_merged.json</code></td>
-<td>Summary of haplotypes and variant calls, merged by family</td>
+<td><code>paraphase/family/{family_id}/{family_id}_paraphase_annotated.{tsv,json}</code></td>
+<td>Merged and annotated JSON files in TSV or JSON format</td>
 </tr>
 </tbody>
 </table>
