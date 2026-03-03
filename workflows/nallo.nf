@@ -618,7 +618,7 @@ workflow NALLO {
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf.dump(tag: "1. sv_vcf_for_phasing"),
+            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
             ch_family_to_samples,
@@ -648,7 +648,7 @@ workflow NALLO {
             [],
             [],
         )
-        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf.dump(tag: "2. ch_snv_vcf_for_annotation")
+        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
         ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
         ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
@@ -656,7 +656,7 @@ workflow NALLO {
     else {
         // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
         if (!params.skip_snv_calling) {
-            ch_snv_vcf_for_annotation = family_snv_vcf.dump(tag: "2.1. ch_snv_vcf_for_annotation")
+            ch_snv_vcf_for_annotation = family_snv_vcf
             ch_snv_index_for_annotation = family_snv_index
         }
         if (!params.skip_sv_calling) {
@@ -671,7 +671,7 @@ workflow NALLO {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            ch_snv_vcf_for_annotation.dump(tag: "2.2. input to annotate ch_snv_vcf_for_annotation"),
+            ch_snv_vcf_for_annotation,
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -693,7 +693,7 @@ workflow NALLO {
                 research: [meta + [set: "research"], vcf]
             }
             .set { ch_clin_research_snvs_vcf }
-        ch_clin_research_snvs_vcf.clinical.dump(tag: "3. clin_research_snvs_vcf")
+        ch_clin_research_snvs_vcf.clinical
 
         ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
 
@@ -742,7 +742,7 @@ workflow NALLO {
             ch_concat_sort_annotated_snvs_input
         )
         ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
-        CONCAT_SORT_ANNOTATED_SNVS.out.vcf.dump(tag: "4. concat_sort_annotated_snvs")
+        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
 
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_input
