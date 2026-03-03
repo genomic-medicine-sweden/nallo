@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "annotate_paralogs"
+## TODO nf-core: Add a description of the subworkflow and list keywords
+description: Filter and annotate Paraphase JSONs with user-defined rules.
+keywords:
+  - annotate
+  - paraphase
+  - paraphrase
+components:
+  - paraphrase
+input:
+  - ch_json:
+      type: file
+      description: |
+        The input channel containing the JSON files from Paraphase
+        Structure: [ val(meta), path(json) ]
+      pattern: "*.json"
+  - paraphrase_output_format:
+      type: string
+      description: Output format for paraphrase (json or tsv)
+  - ch_paraphrase_rules_yaml:
+      type: file
+      description: |
+        The input channel containing the YAML file with the Paraphase annotation rules
+        Structure: [ val(meta), path(yaml) ]
+      pattern: "*.yaml"
+output:
+  - json:
+      type: file
+      description: |
+        Channel containing annotated output from Paraphrase in JSON format
+        Structure: [ val(meta), path(json) ]
+      pattern: "*.json"
+  - tsv:
+      type: file
+      description: |
+        Channel containing annotated output from Paraphrase in TSV format
+        Structure: [ val(meta), path(tsv) ]
+      pattern: "*.tsv"
+authors:
+  - "@fellen31"
+maintainers:
+  - "@fellen31"
