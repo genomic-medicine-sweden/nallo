@@ -1,5 +1,8 @@
 include { PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES } from '../../../modules/nf-core/pbcpgtools/alignedbamtocpgscores/main'
 include { METHBAT_PROFILE                  } from '../../../modules/nf-core/methbat/profile/main'
+include { CSVTK_MUTATE2                    } from '../../../modules/nf-core/csvtk/mutate2/main'
+include { CSVTK_CONCAT                     } from '../../../modules/nf-core/csvtk/concat/main'
+include { CSVTK_SORT                       } from '../../../modules/nf-core/csvtk/sort/main'
 
 workflow CALL_METHYLATION_METHBAT {
     take:
@@ -30,6 +33,38 @@ workflow CALL_METHYLATION_METHBAT {
         ch_regions
     )
     ch_versions = ch_versions.mix(METHBAT_PROFILE.out.versions)
+
+    /*
+     * The region_profile files do not contain a sample identifier.
+     * Therefore, we add it so we can concatenate files from multiple samples together in the next steps.
+     */
+    // TODO: Make this a separate workflow
+    CSVTK_MUTATE2(
+        METHBAT_PROFILE.out.region_profile,
+        'tsv',
+        'tsv'
+    )
+
+    CSVTK_MUTATE2.out.output
+        .map { meta, region_profile_with_sample_id ->
+            [ [ id: meta.family_id ], region_profile_with_sample_id ]
+        }
+        .groupTuple()
+        .set { region_profiles_with_sample_id_per_family }
+
+    // TODO: Add ext.prefix
+    CSVTK_CONCAT(
+        region_profiles_with_sample_id_per_family,
+        'tsv',
+        'tsv',
+    )
+
+    // TODO: Add ext.prefix
+    CSVTK_SORT(
+        CSVTK_CONCAT.out.csv,
+        'tsv',
+        'tsv',
+    )
 
     emit:
     region_profile        = METHBAT_PROFILE.out.region_profile                   // channel: [ val(meta), path(tsv) ]
