@@ -34,44 +34,39 @@ workflow SCATTER_GENOME {
             .set{ ch_bed }
     }
 
-    //
-    // Merge overlapping and then split BED regions for SNV calling
-    //
+    // Sort and merge overlapping regions
+    BEDTOOLS_SORT (
+        ch_bed,
+        []
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
+
+    BEDTOOLS_MERGE (
+        BEDTOOLS_SORT.out.sorted
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
+
+    // Extract the mitochondrial region from BED before spliting into 40 regions
+    BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
+        [ [ meta + [ genome: "nuclear" ], bed ],
+            [ meta + [ genome: "mt" ], bed ]
+    ]
+    }.set{ ch_input_gawk }
+
+    // Exctract according to meta.genome, logic is in the config file
+    GAWK_EXTRACT_REGIONS (
+        ch_input_gawk,
+        [],
+        false,
+    )
+    ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
+
+    GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
+            mt: meta.genome == "mt"
+            nuclear: meta.genome == "nuclear"
+    }.set{ ch_bed_genomes }
+
     if( make_bed_intervals ) {
-
-        if( split_n < 1 ) { error "Can't split bed file into less than one file" }
-
-        // Sort and merge overlapping regions
-        BEDTOOLS_SORT (
-            ch_bed,
-            []
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
-
-        BEDTOOLS_MERGE (
-            BEDTOOLS_SORT.out.sorted
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
-
-        // Extract the mitochondrial region from BED before spliting into 40 regions
-        BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
-           [ [ meta + [ genome: "nuclear" ], bed ],
-             [ meta + [ genome: "mt" ], bed ]
-        ]
-        }.set{ ch_bed }
-
-        // Exctract according to meta.genome, logic is in the config file
-        GAWK_EXTRACT_REGIONS (
-            ch_bed,
-            [],
-            false,
-        )
-        ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
-
-        GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
-              mt: meta.genome == "mt"
-              nuclear: meta.genome == "nuclear"
-        }.set{ ch_bed_genomes }
 
         // Split the nuclear bed file into n regions for SNV calling
         BEDTOOLS_SPLIT(
@@ -102,6 +97,10 @@ workflow SCATTER_GENOME {
                           "Please check the input files or set `--snv_calling_processes` to ${count}."
                 }
             }
+    } else {
+
+        if( split_n < 1 ) { error "Can't split bed file into less than one file" }
+
     }
 
     emit:
