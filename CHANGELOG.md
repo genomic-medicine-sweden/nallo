@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
 - [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
+- [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 
 ### `Removed`
 
@@ -34,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
 
 ### `Fixed`
+
+- [#908](https://github.com/genomic-medicine-sweden/nallo/pull/908) - Unpublished VEP index that should not have been published
 
 ### Parameters
 
