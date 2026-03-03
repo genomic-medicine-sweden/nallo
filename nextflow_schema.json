@@ -11,6 +11,12 @@
             "description": "Allows skipping certain parts of the pipeline",
             "default": "",
             "properties": {
+                "skip_annotate_paralogs": {
+                    "type": "boolean",
+                    "description": "Skip paralogs (Paraphase) annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "skip_qc": {
                     "type": "boolean",
                     "fa_icon": "fas fa-fast-forward",
@@ -362,10 +368,24 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "paraphrase_output_format": {
+                    "type": "string",
+                    "enum": ["tsv", "json"],
+                    "description": "Output format for paralog annotation from Paraphrase. Either `tsv` or `json`.",
+                    "default": "tsv"
+                },
+                "paraphrase_rules": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.(yml|yaml)$",
+                    "format": "file-path",
+                    "description": "A file path to a YAML file with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml.",
+                    "exists": true
+                },
                 "peddy_sites": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data."
+                    "description": "A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data.",
+                    "exists": true
                 },
                 "sambamba_regions": {
                     "type": "string",
@@ -562,7 +582,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -640,6 +660,14 @@
                     "default": "trgt",
                     "description": "Which caller to use for short tandem repeat expansions (TRGT or STRdust).",
                     "enum": ["trgt", "strdust"]
+                },
+                "paraphrase_genes": {
+                    "type": "string",
+                    "description": "An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase is used."
+                },
+                "paraphrase_skip_keys": {
+                    "type": "string",
+                    "description": "An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase."
                 },
                 "phaser": {
                     "type": "string",
@@ -889,6 +917,21 @@
                     "pattern": "^\\S+\\.bed$",
                     "exists": true,
                     "description": "Interval in the reference to restrict diploid variant calling for females, in BED file format."
+                },
+                "strdrop_fraction": {
+                    "type": "number",
+                    "default": 0.66,
+                    "description": "Case average adjusted sequencing depth ratio cutoff in strdrop."
+                },
+                "strdrop_alpha": {
+                    "type": "number",
+                    "default": 0.18,
+                    "description": "Unadjusted probability confidence level for coverage test in strdrop."
+                },
+                "strdrop_edit": {
+                    "type": "number",
+                    "default": 0.9,
+                    "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
                 }
             },
             "required": ["preset"]

@@ -136,11 +136,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-02T08:58:40.220997123",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-26T20:28:24.863121989"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -346,11 +346,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
+        "timestamp": "2026-03-02T09:00:41.332267989",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-19T14:40:14.848738307"
+            "nextflow": "26.01.1"
+        }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -446,11 +446,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-26T20:29:56.071390605"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -508,11 +508,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-26T20:30:39.136057664"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -658,11 +658,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-02T09:02:21.008081801",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T08:39:49.983329019"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test CADD with mock resources": {
         "content": [
@@ -825,11 +825,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-02T08:56:56.330327397",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-26T20:26:59.456482171"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test family id same as sample id": {
         "content": [
@@ -969,10 +969,6 @@
                 "LONGPHASE_PHASE": {
                     "longphase": 2.0
                 },
-                "MERGE_JSON": {
-                    "merge_json_sample_files_into_family": 1.0,
-                    "python": "3.8.3"
-                },
                 "METHBAT_PROFILE": {
                     "methbat": "0.16.1-8a0a24c"
                 },
@@ -995,6 +991,9 @@
                     "minimap2": "2.30-r1287",
                     "paraphase": "3.3.4",
                     "samtools": "1.22.1"
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1206,7 +1205,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/HG002_Revio",
-                "paraphase/family/HG002_Revio/HG002_Revio_merged.json",
+                "paraphase/family/HG002_Revio/HG002_Revio_paraphase_annotated.tsv",
                 "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz",
                 "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1321,11 +1320,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-03-02T09:01:43.938162543",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-30T15:01:49.582940215"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1389,10 +1388,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-26T20:29:09.114037624"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

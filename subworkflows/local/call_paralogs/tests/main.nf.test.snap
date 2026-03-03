@@ -71,15 +71,31 @@
                 "4": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "5": [
@@ -128,9 +144,7 @@
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
                 ],
                 "bai": [
                     [
@@ -201,15 +215,31 @@
                 "json": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "tbi": [
@@ -258,17 +288,15 @@
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
                 ]
             }
         ],
+        "timestamp": "2026-03-02T07:24:46.067527185",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:00:29.611199308"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "one sample, one family - bam output": {
         "content": [
@@ -302,9 +330,10 @@
             [
                 [
                     {
-                        "id": "NIST"
+                        "id": "HG002",
+                        "family_id": "NIST"
                     },
-                    "NIST_merged.json"
+                    "HG002.paraphase.json"
                 ]
             ],
             [
@@ -333,15 +362,14 @@
                 "versions.yml:md5,7d3ccf4da73b29c1f2ddc41b3d09538d",
                 "versions.yml:md5,bb721c727be2f288df510f969b3b492c",
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
+        "timestamp": "2026-03-02T07:22:06.461966026",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T13:58:01.14664681"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "four sample, two families - bam output": {
         "content": [
@@ -444,15 +472,31 @@
             [
                 [
                     {
-                        "id": "NIST"
+                        "id": "HG002",
+                        "family_id": "NIST"
                     },
-                    "NIST_merged.json"
+                    "HG002.paraphase.json"
                 ],
                 [
                     {
-                        "id": "second_family"
+                        "id": "HG003",
+                        "family_id": "NIST"
                     },
-                    "second_family_merged.json"
+                    "HG003.paraphase.json"
+                ],
+                [
+                    {
+                        "id": "HG004",
+                        "family_id": "NIST"
+                    },
+                    "HG004.paraphase.json"
+                ],
+                [
+                    {
+                        "id": "second_sample",
+                        "family_id": "second_family"
+                    },
+                    "second_sample.paraphase.json"
                 ]
             ],
             [
@@ -517,16 +561,14 @@
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
-                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
+        "timestamp": "2026-03-02T07:24:32.76958885",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:00:07.126933187"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -654,15 +696,31 @@
                 "4": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "5": [
@@ -715,9 +773,7 @@
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
                 ],
                 "bai": [
                     [
@@ -842,15 +898,31 @@
                 "json": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_merged.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "tbi": [
@@ -903,17 +975,15 @@
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
                     "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9",
-                    "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                    "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
                 ]
             }
         ],
+        "timestamp": "2026-03-02T07:24:59.47974713",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:00:53.527760565"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "one sample, one family - cram output": {
         "content": [
@@ -974,9 +1044,10 @@
             [
                 [
                     {
-                        "id": "NIST"
+                        "id": "HG002",
+                        "family_id": "NIST"
                     },
-                    "NIST_merged.json"
+                    "HG002.paraphase.json"
                 ]
             ],
             [
@@ -1006,14 +1077,13 @@
                 "versions.yml:md5,7d3ccf4da73b29c1f2ddc41b3d09538d",
                 "versions.yml:md5,bb721c727be2f288df510f969b3b492c",
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1",
-                "versions.yml:md5,fd2cbc2a079ee3fd49da65bb40d511a9"
+                "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
+        "timestamp": "2026-03-02T07:24:09.099117322",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T13:58:55.94534216"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

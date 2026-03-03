@@ -293,6 +293,16 @@ This subworkflow requires haplotagged BAM files, and such relies on aligment, SN
 
 Turned off with `--skip_repeat_calling`.
 
+#### Paralogs annotation
+
+This subworkflow depends on the the mapping and paralogs calling (Paraphase) subworkflows. No additional files are required, but a rule-file for _Paraphrase_ is recommended if you want to be able to flag values. For more information and example files, see https://github.com/Clinical-Genomics/paraphrase.
+
+| Parameter          | Description                                                                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `paraphrase_rules` | A file path to a YAML with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml. |
+
+Turned off with `--skip_annotate_paralogs`.
+
 #### Repeat annotation
 
 This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:
@@ -303,8 +313,12 @@ This subworkflow relies on the alignment, SNV calling, phasing and repeat callin
 
 Additionally, `--strdrop_training_set_json` must be supplied when [strdrop](https://github.com/dnil/strdrop) is used to annotate drops in coverage at STR loci in TRGT vcf files:
 
-| Parameter | Description |
-| `strdrop_training_set_json` | A JSON file containing the training set for strdrop |
+| Parameter                   | Description                                               |
+| --------------------------- | --------------------------------------------------------- |
+| `strdrop_training_set_json` | A JSON file containing the training set for strdrop       |
+| `strdrop_fraction`          | Case average adjusted sequencing depth ratio cutoff       |
+| `strdrop_alpha`             | Unadjusted probability confidence level for coverage test |
+| `strdrop_edit`              | Allele similarity Levenshtein edit distance ratio cutoff  |
 
 Turned off with `--skip_repeat_annotation`.
 
