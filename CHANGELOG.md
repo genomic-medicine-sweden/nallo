@@ -58,6 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | gens/preparecovandbaf      | 1.1.4       | 1.1.5       |
 | sentieon/gvcftyper         |             | 202503.02   |
 | sentieon/dnascope-longread |             | 1.5.2       |
+| svdb/merge                 | 2.8.3       | 2.8.4       |
+| svdb/query                 | 2.8.3       | 2.8.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
