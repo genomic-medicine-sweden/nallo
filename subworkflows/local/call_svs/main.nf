@@ -294,7 +294,6 @@ workflow CALL_SVS {
         [],
         true
     )
-    ch_versions = ch_versions.mix(SVDB_MERGE_BY_CALLER.out.versions)
 
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
@@ -321,7 +320,6 @@ workflow CALL_SVS {
         caller_priority,
         true
     )
-    ch_versions = ch_versions.mix(SVDB_MERGE_BY_FAMILY.out.versions)
 
     emit:
     family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
