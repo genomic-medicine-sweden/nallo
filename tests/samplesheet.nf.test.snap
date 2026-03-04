@@ -158,8 +158,8 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
                 },
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
@@ -611,7 +611,7 @@
                 "multiqc_whatshap_phased_bp_plot.txt:md5,4c0d1ffaac851169f36ea4eac3d072b3",
                 "somalier_stats.txt:md5,2c0b21c0d27b7794a22c876a8c7f4635",
                 "whatshap-stats-table.txt:md5,ae86d727b4bcd2d1471c87867e5ea7af",
-                "FAM_paraphase_annotated.tsv:md5,6ca2502ccfbc278e0518cf2ad194eef3",
+                "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,3c2a977f040a376a27d41377c3c29e96",
                 "HG002_Revio_cramino_aligned.arrow:md5,3c2a977f040a376a27d41377c3c29e96",
@@ -661,7 +661,7 @@
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=288, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=289, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_OR1D5.vcf.gz",
@@ -669,7 +669,7 @@
                 ],
                 [
                     "HG002_Revio_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_trgt.vcf.gz",
@@ -700,7 +700,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-03T14:05:18.464352441",
+        "timestamp": "2026-03-04T13:19:30.533296887",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

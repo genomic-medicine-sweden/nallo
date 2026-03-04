@@ -152,8 +152,8 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
                 },
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
@@ -1138,7 +1138,7 @@
                 ],
                 [
                     "HG002_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_OR1D5.vcf.gz",
@@ -1201,10 +1201,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-02T18:04:14.601907366",
+        "timestamp": "2026-03-04T13:22:50.399740891",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nextflow": "26.02.0"
         }
     }
 }
