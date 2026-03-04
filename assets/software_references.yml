@@ -54,6 +54,12 @@ tool:
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
     bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
+  sentieon:
+    citation: "Sentieon Genomics Tools (Freed et al. 2017)"
+    bibliography: "Freed D, Aldana R, Weber JA, Edwards JS. The Sentieon Genomics Tools - A fast and accurate solution to variant calling from next-generation sequence data. bioRxiv. 2017. doi:10.1101/115717."
+  sentieon-cli:
+    citation: "Sentieon DNAscope LongRead (Freed et al. 2022)"
+    bibliography: "Donald Freed, William J. Rowell, Aaron M. Wenger, Zhipan Li.  Sentieon DNAscope LongRead – A highly Accurate, Fast, and Efficient Pipeline for Germline Variant Calling from PacBio HiFi reads. bioRxiv 2022.06.01.494452. https://doi.org/10.1101/2022.06.01.494452"
   echtvar:
     citation: "Echtvar (Pedersen & de Ridder 2023)"
     bibliography: "Brent S Pedersen, Jeroen de Ridder, Echtvar: compressed variant representation for rapid annotation and filtering of SNPs and indels, Nucleic Acids Research, Volume 51, Issue 1, 11 January 2023, Page e3, https://doi.org/10.1093/nar/gkac931"
@@ -93,9 +99,6 @@ tool:
   longphase:
     citation: "LongPhase (Lin et al. 2024)"
     bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
-  merge_json_sample_files_into_family:
-    citation: "Renevey (2025)"
-    bibliography: ""
   methbat:
     citation: "methbat"
     bibliography: ""
@@ -111,6 +114,9 @@ tool:
   paraphase:
     citation: "Paraphase (Chen et al. 2023)"
     bibliography: "Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294"
+  paraphrase:
+    citation: "paraphrase"
+    bibliography: ""
   pbcpgtools:
     citation: "pbcpgtools"
     bibliography: ""

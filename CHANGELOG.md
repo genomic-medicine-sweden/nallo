@@ -3,6 +3,77 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.11.0 - [2026-03-04]
+
+### `Added`
+
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Sentieon DNAscope long-read SNV calling with joint calling via Sentieon GVCFTyper
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added Dockerfile and build instructions for local module `DNASCOPE_LONGREAD`
+- [#801](https://github.com/genomic-medicine-sweden/nallo/pull/801) - Added configuration options for Sentieon model bundle paths, sequencing technology, and sex-specific BED intervals
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added parameters `--create_maf_track`, `--create_hificnv_maf_track` and `--create_sawfish_maf_track`
+- [#888](https://github.com/genomic-medicine-sweden/nallo/pull/888) - Added output of Sawfish visualization tracks
+- [#890](https://github.com/genomic-medicine-sweden/nallo/pull/890) - Added pre-commit hook to automatically generate parameters documentation
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added nf-core module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
+- [#902](https://github.com/genomic-medicine-sweden/nallo/pull/902) - Added parameters for `--edit`, `--fraction` and `--alpha` options in `STRDROP_CALL`
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Added subworkflow `ANNOTATE_PARALOGS` with Paraphrase JSON annotation by Paraphrase
+
+### `Changed`
+
+- [#875](https://github.com/genomic-medicine-sweden/nallo/pull/875) - Run Sawfish with `--fast-cnv-mode` in CI tests
+- [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated all pipeline testdata paths to same commit hash
+- [#887](https://github.com/genomic-medicine-sweden/nallo/pull/887) - Updated nf-test to trigger all tests on changes to samplesheet files that include pipeline testdata paths
+- [#892](https://github.com/genomic-medicine-sweden/nallo/pull/892) - Replaced local whatshap/haplotag module with nf-core module
+- [#893](https://github.com/genomic-medicine-sweden/nallo/pull/893) - Updated join to remove duplicate emissions for strict syntax
+- [#894](https://github.com/genomic-medicine-sweden/nallo/pull/894) - Updated nf-schema to 2.6.1 and minimum Nextflow version to 25.10.0 in order to run with strict syntax
+- [#904](https://github.com/genomic-medicine-sweden/nallo/pull/904) - Updated gens/preparecovandbaf to 1.1.5
+- [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
+- [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
+- [#913](https://github.com/genomic-medicine-sweden/nallo/pull/913) - Prep release 0.11.0
+- [#917](https://github.com/genomic-medicine-sweden/nallo/pull/917) - Updated paraphase to 3.5.0
+
+### `Removed`
+
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed local module `merge_json`
+- [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
+
+### `Fixed`
+
+- [#908](https://github.com/genomic-medicine-sweden/nallo/pull/908) - Unpublished VEP index that should not have been published
+
+### Parameters
+
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--extra_sawfish_options`       |
+|               | `--sentieon_model_bundle`       |
+|               | `--sentieon_tech`               |
+|               | `--sentieon_male_haploid_bed`   |
+|               | `--sentieon_male_diploid_bed`   |
+|               | `--sentieon_female_diploid_bed` |
+|               | `--create_maf_track`            |
+|               | `--create_hificnv_maf_track`    |
+|               | `--create_sawfish_maf_track`    |
+|               | `--strdrop_fraction`            |
+|               | `--strdrop_alpha`               |
+|               | `--strdrop_edit`                |
+
+### Module updates
+
+| Tool                                | Old version | New version |
+| ----------------------------------- | ----------- | ----------- |
+| gens/preparecovandbaf               | 1.1.4       | 1.1.5       |
+| sentieon/gvcftyper                  |             | 202503.02   |
+| sentieon/dnascope-longread          |             | 1.5.2       |
+| merge_json_sample_files_into_family | 1.0         |             |
+| paraphrase                          |             | 0.2.0       |
+| paraphase                           | 3.3.4       | 3.5.0       |
+| samtools (paraphase)                | 1.22.1      | 1.23        |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.10.2 - [2026-02-09]
 
 ### `Changed`

@@ -51,7 +51,7 @@ workflow QC_PHASING {
         true,
         true,
         false,
-    )
+        )
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)

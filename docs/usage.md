@@ -177,9 +177,23 @@ Turned off with `--skip_call_paralogs`.
 
 This subworkflow depends on the alignment subworkflow, and requires PARs.
 
-| Parameter     | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)) |
+By default the pipeline uses [DeepVariant](https://github.com/google/deepvariant) for long-read SNV calling. To enable [Sentieon DNAscope Long Read](https://github.com/Sentieon/sentieon-cli/blob/main/docs/dnascope-longread.md), set `--snv_caller sentieon`. Make the Sentieon license available by adding a base64-encoded license string to the Nextflow secrets store (`nextflow secrets set SENTIEON_LICENSE_BASE64 ...`) or by exporting the same variable before running the pipeline.
+
+| Parameter     | Description                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `par_regions` | A BED file with PAR regions (e.g. [GRCh38_PAR.bed](https://storage.googleapis.com/deepvariant/case-study-testdata/GRCh38_PAR.bed)). Used by DeepVariant. |
+
+Additional inputs are required for Sentieon DNAscope:
+
+| Parameter                     | Description                                                                                                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sentieon_model_bundle`       | Path to the DNAscope model bundle to load. Sentieon provides pre-trained bundles in the [sentieon-models](https://github.com/Sentieon/sentieon-models) repository. |
+| `sentieon_tech`               | Sequencing technology used by Sentieon DNAscope (`HiFi` or `ONT`). Defaults to `HiFi`, but is automatically set to `ONT` when running with the ONT presets.        |
+| `sentieon_male_haploid_bed`   | BED file that restricts haploid variant calling for male samples (typically the Y chromosome non-PAR region).                                                      |
+| `sentieon_male_diploid_bed`   | BED file that restricts diploid variant calling for male samples (typically autosomes + chrX PAR).                                                                 |
+| `sentieon_female_diploid_bed` | BED file that restricts diploid variant calling for female samples (typically autosomes + chrX).                                                                   |
+
+All three Sentieon BED files and the model bundle must be provided when using Sentieon.
 
 Turned off with `--skip_snv_calling`.
 
@@ -201,13 +215,16 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
-If HiFiCNV or Sawfish is used, they also depends on the SNV calling subworkflow and requires the following files:
+If HiFiCNV or Sawfish are used, the following files are required:
 
 | Parameter              | Description                                                                                                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cnv_expected_xy_cn`   | Expected XY copy number regions for your reference genome (e.g. [expected_cn.hg38.XY.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XY.bed))     |
 | `cnv_expected_xx_cn`   | Expected XX copy number regions for your reference genome (e.g. [expected_cn.hg38.XX.bed](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/expected_cn/expected_cn.hg38.XX.bed))     |
 | `cnv_excluded_regions` | BED file specifying regions to exclude (e.g. [cnv.excluded_regions.hg38.bed.gz](https://github.com/PacificBiosciences/HiFiCNV/raw/main/data/excluded_regions/cnv.excluded_regions.hg38.bed.gz)) |
+
+By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This depends on the results of the SNV calling subworkflow, so it may introduce significant wait time and slow down execution.
+You can disable this behavior for both callers by setting `--create_maf_track` to `false` or control it for each caller separately using `--create_hificnv_maf_track` and `--create_sawfish_maf_track`.
 
 !!!tip "Family-level VCFs per caller"
 
@@ -276,6 +293,16 @@ This subworkflow requires haplotagged BAM files, and such relies on aligment, SN
 
 Turned off with `--skip_repeat_calling`.
 
+#### Paralogs annotation
+
+This subworkflow depends on the the mapping and paralogs calling (Paraphase) subworkflows. No additional files are required, but a rule-file for _Paraphrase_ is recommended if you want to be able to flag values. For more information and example files, see https://github.com/Clinical-Genomics/paraphrase.
+
+| Parameter          | Description                                                                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `paraphrase_rules` | A file path to a YAML with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml. |
+
+Turned off with `--skip_annotate_paralogs`.
+
 #### Repeat annotation
 
 This subworkflow relies on the alignment, SNV calling, phasing and repeat calling subworkflows. It requires the following additional files:
@@ -286,8 +313,12 @@ This subworkflow relies on the alignment, SNV calling, phasing and repeat callin
 
 Additionally, `--strdrop_training_set_json` must be supplied when [strdrop](https://github.com/dnil/strdrop) is used to annotate drops in coverage at STR loci in TRGT vcf files:
 
-| Parameter | Description |
-| `strdrop_training_set_json` | A JSON file containing the training set for strdrop |
+| Parameter                   | Description                                               |
+| --------------------------- | --------------------------------------------------------- |
+| `strdrop_training_set_json` | A JSON file containing the training set for strdrop       |
+| `strdrop_fraction`          | Case average adjusted sequencing depth ratio cutoff       |
+| `strdrop_alpha`             | Unadjusted probability confidence level for coverage test |
+| `strdrop_edit`              | Allele similarity Levenshtein edit distance ratio cutoff  |
 
 Turned off with `--skip_repeat_annotation`.
 

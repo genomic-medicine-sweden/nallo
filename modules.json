@@ -31,6 +31,11 @@
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules"]
                     },
+                    "bcftools/pluginfixploidy": {
+                        "branch": "master",
+                        "git_sha": "62011b929647d15dac1f53f3164a152b64223619",
+                        "installed_by": ["modules"]
+                    },
                     "bcftools/query": {
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
@@ -60,6 +65,11 @@
                         "branch": "master",
                         "git_sha": "f17049e03697726ace7499d2fe342f892594f6f3",
                         "installed_by": ["modules", "vcf_filter_bcftools_ensemblvep"]
+                    },
+                    "bedtools/intersect": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
                     },
                     "bedtools/merge": {
                         "branch": "master",
@@ -160,7 +170,7 @@
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
-                        "git_sha": "8d801223814a5a728dc2d8e506df17b84bc5e88b",
+                        "git_sha": "8220217c9ccad60dc5b395bd76de4d1ddfb7cd80",
                         "installed_by": ["modules"]
                     },
                     "gfastats": {
@@ -232,7 +242,12 @@
                     },
                     "paraphase": {
                         "branch": "master",
-                        "git_sha": "9e18969a158f93bd689de80a9dfe05c9d67d023a",
+                        "git_sha": "73c15ba8f13108f2dadbb103ce0889467600bec4",
+                        "installed_by": ["modules"]
+                    },
+                    "paraphrase": {
+                        "branch": "master",
+                        "git_sha": "f3e0289a6da209a595fece244144ef06a08e05a8",
                         "installed_by": ["modules"]
                     },
                     "pbcpgtools/alignedbamtocpgscores": {
@@ -305,7 +320,12 @@
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "08d6e3ca8d5b42c9580eb4855c4b295c4f54789b",
+                        "git_sha": "3e26c34b86d963c8b083d69db81c13f1136f5dd4",
+                        "installed_by": ["modules"]
+                    },
+                    "sentieon/gvcftyper": {
+                        "branch": "master",
+                        "git_sha": "d9c84ed4564744313bb586928885ebf05f40ad98",
                         "installed_by": ["modules"]
                     },
                     "severus": {
@@ -402,6 +422,11 @@
                         "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
+                    },
+                    "whatshap/haplotag": {
+                        "branch": "master",
+                        "git_sha": "338fb5f53d9901c150e9b561b3be59324c05798f",
+                        "installed_by": ["modules"]
                     },
                     "whatshap/phase": {
                         "branch": "master",

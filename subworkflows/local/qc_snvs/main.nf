@@ -6,17 +6,21 @@ include { BCFTOOLS_STATS             } from '../../../modules/nf-core/bcftools/s
 
 workflow QC_SNVS {
     take:
-    ch_vcf              // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_normalized_vcf   // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_normalized_index // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_vcf                         // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_normalized_vcf              // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_normalized_index            // channel: [mandatory] [ val(meta), path(vcf) ]
+    run_deepvariant_vcfstatsreport // value: bool
 
     main:
     ch_versions = channel.empty()
+    ch_vcfstatsreport = channel.empty()
 
-    DEEPVARIANT_VCFSTATSREPORT(
-        ch_vcf
-    )
-    ch_versions = ch_versions.mix(DEEPVARIANT_VCFSTATSREPORT.out.versions)
+    if(run_deepvariant_vcfstatsreport) {
+        DEEPVARIANT_VCFSTATSREPORT(ch_vcf)
+        ch_vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report
+        ch_versions = ch_versions.mix(DEEPVARIANT_VCFSTATSREPORT.out.versions)
+    }
+
 
     BCFTOOLS_STATS(
         ch_normalized_vcf.join(
@@ -33,7 +37,7 @@ workflow QC_SNVS {
     ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
 
     emit:
-    vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report // channel: [ val(meta), path(html) ]
-    stats          = BCFTOOLS_STATS.out.stats              // channel: [ val(meta), path(txt) ]
-    versions       = ch_versions                           // channel: [ path(versions.yml) ]
+    vcfstatsreport = ch_vcfstatsreport        // channel: [ val(meta), path(html) ]
+    stats          = BCFTOOLS_STATS.out.stats // channel: [ val(meta), path(txt) ]
+    versions       = ch_versions              // channel: [ path(versions.yml) ]
 }
