@@ -663,7 +663,7 @@
                 },
                 "paraphrase_genes": {
                     "type": "string",
-                    "description": "An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase is used."
+                    "description": "An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used."
                 },
                 "paraphrase_skip_keys": {
                     "type": "string",
