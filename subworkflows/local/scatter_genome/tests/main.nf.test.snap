@@ -38,11 +38,11 @@
                 
             ]
         ],
+        "timestamp": "2025-07-31T10:59:57.96913689",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-07-31T10:59:57.96913689"
+        }
     },
     "[], bed, false, true, 2": {
         "content": [
@@ -108,11 +108,202 @@
                 ]
             ]
         ],
+        "timestamp": "2025-07-29T17:05:21.265822903",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-07-29T17:05:21.265822903"
+        }
+    },
+    "[], bed, false, true, 2 - without chrM in bed file": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22_merged.bed:md5,29309c2d7e370d817ed616f7ba7f1c4c"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "mt"
+                        },
+                        "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34"
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22_merged.bed:md5,29309c2d7e370d817ed616f7ba7f1c4c"
+                    ]
+                ],
+                "bed_intervals": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "bed_mt": [
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "mt"
+                        },
+                        "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34"
+                ]
+            },
+            [
+                "chr22\t0\t1500",
+                "chr22\t2000\t3000"
+            ]
+        ],
+        "timestamp": "2026-03-04T11:37:07.8281514",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
+    },
+    "[], bed, false, true, 2 - with chrM in bed file": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22_merged.bed:md5,c4f4fb094582b255e0f51e7163bdbf3c"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "mt"
+                        },
+                        "chr22_mt.bed:md5,079a4d535599ed9127c528283e9e5611"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34"
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "chr22"
+                        },
+                        "chr22_merged.bed:md5,c4f4fb094582b255e0f51e7163bdbf3c"
+                    ]
+                ],
+                "bed_intervals": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "bed_mt": [
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "mt"
+                        },
+                        "chr22_mt.bed:md5,079a4d535599ed9127c528283e9e5611"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,87b7f086f6e7850ba0c46712bcbe17a1",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34"
+                ]
+            },
+            [
+                "chr22\t0\t1500",
+                "chr22\t2000\t3000",
+                "chrM\t0\t1000"
+            ]
+        ],
+        "timestamp": "2026-03-04T11:36:59.75606378",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "fai, [], true, true, 1": {
         "content": [
@@ -167,11 +358,11 @@
                 ]
             ]
         ],
+        "timestamp": "2025-07-29T17:03:53.894804647",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-07-29T17:03:53.894804647"
+        }
     },
     "[], bed, false, false, 2": {
         "content": [
@@ -214,11 +405,11 @@
                 
             ]
         ],
+        "timestamp": "2025-07-29T17:05:15.966007408",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-07-29T17:05:15.966007408"
+        }
     },
     "fai, [], true, false, []": {
         "content": [
@@ -228,13 +419,26 @@
                         {
                             "id": "test"
                         },
-                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "test_merged.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
                 "1": [
                     
                 ],
                 "2": [
+                    [
+                        {
+                            "id": "test",
+                            "genome": "mt"
+                        },
+                        "test_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
                     "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
                 ],
                 "bed": [
@@ -242,13 +446,26 @@
                         {
                             "id": "test"
                         },
-                        "genome.fasta.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "test_merged.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
                 "bed_intervals": [
                     
                 ],
+                "bed_mt": [
+                    [
+                        {
+                            "id": "test",
+                            "genome": "mt"
+                        },
+                        "test_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "versions": [
+                    "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
+                    "versions.yml:md5,beb3374eccd225096e2f7c8ecd3a28be",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
+                    "versions.yml:md5,dafb20083ba7226eaa339b5dafc30f34",
                     "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
                 ]
             },
@@ -259,10 +476,10 @@
                 
             ]
         ],
+        "timestamp": "2026-03-04T11:20:49.093061344",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.6"
-        },
-        "timestamp": "2025-07-29T17:03:06.463011306"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     }
 }
