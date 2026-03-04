@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.11.0 - [2026-03-04]
+## 0.11.0 - [2026-03-05]
 
 ### `Added`
 
@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 - [#913](https://github.com/genomic-medicine-sweden/nallo/pull/913) - Prep release 0.11.0
 - [#917](https://github.com/genomic-medicine-sweden/nallo/pull/917) - Updated paraphase to 3.5.0
+- [#919](https://github.com/genomic-medicine-sweden/nallo/pull/919) - Updated `ANNOTATE_PARALOGS` snapshot
 
 ### `Removed`
 
