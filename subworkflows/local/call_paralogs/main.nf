@@ -19,7 +19,6 @@ workflow CALL_PARALOGS {
         fasta,
         [[], []],
     )
-    ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
     PARAPHASE.out.vcf
         .transpose()

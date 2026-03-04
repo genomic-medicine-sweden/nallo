@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.11.0 - [2026-03-02]
+## 0.11.0 - [2026-03-04]
 
 ### `Added`
 
@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 - [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 - [#913](https://github.com/genomic-medicine-sweden/nallo/pull/913) - Prep release 0.11.0
+- [#917](https://github.com/genomic-medicine-sweden/nallo/pull/917) - Updated paraphase to 3.5.0
 
 ### `Removed`
 
@@ -65,6 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon/dnascope-longread          |             | 1.5.2       |
 | merge_json_sample_files_into_family | 1.0         |             |
 | paraphrase                          |             | 0.2.0       |
+| paraphase                           | 3.3.4       | 3.5.0       |
+| samtools (paraphase)                | 1.22.1      | 1.23        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
