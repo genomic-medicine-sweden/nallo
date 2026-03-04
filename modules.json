@@ -242,7 +242,7 @@
                     },
                     "paraphase": {
                         "branch": "master",
-                        "git_sha": "9e18969a158f93bd689de80a9dfe05c9d67d023a",
+                        "git_sha": "73c15ba8f13108f2dadbb103ce0889467600bec4",
                         "installed_by": ["modules"]
                     },
                     "paraphrase": {
