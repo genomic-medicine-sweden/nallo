@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 - [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 - [#913](https://github.com/genomic-medicine-sweden/nallo/pull/913) - Prep release 0.11.0
+- [#917](https://github.com/genomic-medicine-sweden/nallo/pull/917) - Updated paraphase to 3.5.0
 
 ### `Removed`
 
