@@ -17,11 +17,6 @@ workflow SCATTER_GENOME {
     ch_bed = channel.empty()
     ch_bed_intervals = channel.empty()
 
-    // Check for inconsistent input
-    if ( !make_bed_intervals && split_n > 1 ) {
-        error "Inconsistent input: split_n is ${split_n}, but make_bed_intervals is false, set split_n to 1 or set make_bed_intervals to true."
-    }
-
     //
     // If no BED-file is provided then build intervals from reference
     //
@@ -73,11 +68,6 @@ workflow SCATTER_GENOME {
 
     if( make_bed_intervals ) {
 
-        // Make sure split_n is greater than 1, otherwise it doesn't make sense to split the bed file into intervals
-        if ( split_n == 1 ) {
-            error "Inconsistent input: split_n is 1, but should be greater than 1 if make_bed_intervals is true"
-        }
-
         // Split the nuclear bed file into n regions for SNV calling
         BEDTOOLS_SPLIT(
             ch_bed_genomes.nuclear.map { meta, bed ->
@@ -107,6 +97,10 @@ workflow SCATTER_GENOME {
                           "Please check the input files or set `--snv_calling_processes` to ${count}."
                 }
             }
+    } else {
+        if ( split_n < 1 ) {
+            error "Cannot split bed into ${split_n} regions, split_n should be minimum 1."
+        }
     }
 
     emit:
