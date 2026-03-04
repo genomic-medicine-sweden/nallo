@@ -99,9 +99,6 @@ tool:
   longphase:
     citation: "LongPhase (Lin et al. 2024)"
     bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
-  merge_json_sample_files_into_family:
-    citation: "Renevey (2025)"
-    bibliography: ""
   methbat:
     citation: "methbat"
     bibliography: ""
@@ -117,6 +114,9 @@ tool:
   paraphase:
     citation: "Paraphase (Chen et al. 2023)"
     bibliography: "Genome-wide profiling of highly similar paralogous genes using HiFi sequencing. Xiao Chen, Daniel Baker, Egor Dolzhenko, Joseph M Devaney, Jessica Noya, April S Berlyoung, Rhonda Brandon, Kathleen S Hruska, Lucas Lochovsky, Paul Kruszka, Scott Newman, Emily Farrow, Isabelle Thiffault, Tomi Pastinen, Dalia Kasperaviciute, Christian Gilissen, Lisenka Vissers, Alexander Hoischen, Seth Berger, Eric Vilain, Emmanuèle Délot, UCI Genomics Research to Elucidate the Genetics of Rare Diseases (UCI GREGoR) Consortium, Michael A Eberle. bioRxiv 2024.04.19.590294; doi: https://doi.org/10.1101/2024.04.19.590294"
+  paraphrase:
+    citation: "paraphrase"
+    bibliography: ""
   pbcpgtools:
     citation: "pbcpgtools"
     bibliography: ""

@@ -34,7 +34,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b771c6ad109cec9b86d37496d93ec34f51ba70df/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -55,11 +55,6 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
-                // Check that json contains the expected samples
-                { assert workflow.out.json.any { meta, file ->
-                    def content = new File(file).text
-                    meta.id == 'NIST' && content.contains('HG002')
-                } },
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
@@ -79,7 +74,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b771c6ad109cec9b86d37496d93ec34f51ba70df/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -100,11 +95,6 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
-                // Check that json contains the expected samples
-                { assert workflow.out.json.any { meta, file ->
-                    def content = new File(file).text
-                    meta.id == 'NIST' && content.contains('HG002')
-                } },
                 { assert snapshot(
                     workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
@@ -124,7 +114,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b771c6ad109cec9b86d37496d93ec34f51ba70df/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -162,13 +152,6 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
-                // Check that json contains the expected samples
-                { assert workflow.out.json.every { meta, file ->
-                    def content = new File(file).text
-                    def nist_samples = ['HG002', 'HG003', 'HG004']
-                    (meta.id == 'NIST' && nist_samples.every { content.contains(it) }) ||
-                    (meta.id == 'second_family' && content.contains('second_sample'))
-                } },
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
@@ -189,7 +172,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b771c6ad109cec9b86d37496d93ec34f51ba70df/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -237,7 +220,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/b771c6ad109cec9b86d37496d93ec34f51ba70df/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
