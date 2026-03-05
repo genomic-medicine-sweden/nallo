@@ -4,6 +4,7 @@ include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftoo
 include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_samples_haplotypes_file/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
+include { findKeysForValue } from '../utils_nfcore_nallo_pipeline/main.nf'
 workflow CALL_PARALOGS {
     take:
     bam_bai     // channel: [ val(meta), bam, bai ]
@@ -53,15 +54,14 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_REHEADER.out.vcf
         .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, tbi -> [['id': meta.family_id], vcf, tbi] }
+        .map { meta, vcf, tbi -> [meta.family_id, vcf, tbi] }
         .groupTuple()
+        .map { family_id, vcfs, tbis -> [['id': family_id], vcfs, tbis, []] }
         .set { ch_reheadered_vcf_tbis_per_family }
 
     BCFTOOLS_MERGE(
         ch_reheadered_vcf_tbis_per_family,
-        fasta,
-        [[], []],
-        [[], []],
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true),
     )
 
     if (cram_output) {
