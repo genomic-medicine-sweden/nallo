@@ -193,4 +193,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_fraction` | Case average adjusted sequencing depth ratio cutoff in strdrop. | `number` | 0.66 |  |  |
 | `strdrop_alpha` | Unadjusted probability confidence level for coverage test in strdrop. | `number` | 0.18 |  |  |
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
-| `genmod_phased` | Whether the data used as input for genmod is phased. (flag for `genmod models`) | `boolean` | False |  |  |
+| `genmod_phased` | Whether the data used as input for genmod is phased (flag for `genmod models`). | `boolean` | False |  |  |

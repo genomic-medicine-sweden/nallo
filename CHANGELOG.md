@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#921](https://github.com/genomic-medicine-sweden/nallo/pull/921) - Added parameter `genmod_phased` for GENMOD models
+
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
@@ -18,8 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter     |
+| ------------- | ----------------- |
+|               | `--genmod_phased` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
