@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#921](https://github.com/genomic-medicine-sweden/nallo/pull/921) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
