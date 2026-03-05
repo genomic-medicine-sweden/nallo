@@ -193,3 +193,5 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_fraction` | Case average adjusted sequencing depth ratio cutoff in strdrop. | `number` | 0.66 |  |  |
 | `strdrop_alpha` | Unadjusted probability confidence level for coverage test in strdrop. | `number` | 0.18 |  |  |
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
+| `min_support` | Minimum number of reads that support a SV. | `number` | 3 |  |  |
+| `min_seq_size` | Discard read if non of its segment is larger then this. | `number` | 500 |  |  |
