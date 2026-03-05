@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 
 ### Removed
@@ -27,8 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                     | Old version | New version |
+| ------------------------ | ----------- | ----------- |
+| modkit/bedmethyltobigwig | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup            | 0.3.0       | 0.6.1       |
+| mosdepth                 | 0.3.10      | 0.3.11      |
+| multiqc                  | 1.31        | 1.33        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -312,6 +317,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
+| modkit/bedmethyltobigwig         | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup                    | 0.3.0       | 0.6.1       |
+| mosdepth                         | 0.3.10      | 0.3.11      |
+| multiqc                          | 1.31        | 1.33        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

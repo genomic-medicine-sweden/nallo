@@ -27,7 +27,6 @@ workflow QC_PHASING {
             .set { ch_bcftools_concat_in }
 
         BCFTOOLS_CONCAT(ch_bcftools_concat_in).vcf.set { ch_phased_vcf }
-        ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
     }
     else {
         ch_phased_family_snvs.set { ch_phased_vcf }
@@ -56,10 +55,10 @@ workflow QC_PHASING {
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
-    TABIX_BGZIPTABIX.out.gz_tbi
-        .multiMap { meta, gtf_gz, gtf_tbi ->
-            gz: [meta, gtf_gz]
-            tbi: [meta, gtf_tbi]
+    TABIX_BGZIPTABIX.out.gz_index
+        .multiMap { meta, gtf, index ->
+            gz: [meta, gtf]
+            tbi: [meta, index]
         }
         .set { ch_phasing_gtf }
 
@@ -69,7 +68,7 @@ workflow QC_PHASING {
     emit:
     phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
-    phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(gtf_index) ]
+    phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]
     versions             = ch_versions            // channel: [ path(versions.yml) ]
 }

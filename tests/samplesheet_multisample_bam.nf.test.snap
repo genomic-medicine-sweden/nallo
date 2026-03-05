@@ -18,6 +18,9 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
                 },
@@ -46,6 +49,12 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -142,7 +151,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.0"
@@ -245,6 +254,7 @@
                     "svdb": "2.8.2"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -254,9 +264,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1022,17 +1029,17 @@
                 "HG002.mosdepth.region.dist.txt:md5,f47bcb079021bf652722bcf973918393",
                 "HG002.mosdepth.summary.txt:md5,d7d24f343964544006eabe60ebaf4384",
                 "HG002.regions.bed.gz:md5,72ea5659abc98edd8fcc51e725902590",
-                "HG002.regions.bed.gz.csi:md5,4a76616ead5effaaad86c381a9dd85a5",
+                "HG002.regions.bed.gz.csi:md5,903e1974621e0163e18c6ac7773e3a94",
                 "HG003.mosdepth.global.dist.txt:md5,3dd90f0fe9aa0c756bcb8b2313b58338",
                 "HG003.mosdepth.region.dist.txt:md5,d4cbdb5d6e6f18e53299ff59626e9984",
                 "HG003.mosdepth.summary.txt:md5,16cc82f5699b40d51a5ba06583156c44",
                 "HG003.regions.bed.gz:md5,398a91a39cd34f4527d889c7ee3129c5",
-                "HG003.regions.bed.gz.csi:md5,71b552449531a81220dd9910c718dcf9",
+                "HG003.regions.bed.gz.csi:md5,a17540857520857db024092fb1473d8f",
                 "HG004.mosdepth.global.dist.txt:md5,a8ffdd67c117dfd5a0130f1ad30df7f2",
                 "HG004.mosdepth.region.dist.txt:md5,05707cb6e01fca034a5f4c124b2e92e9",
                 "HG004.mosdepth.summary.txt:md5,c0dfb2ead42c590579eb2a97d6b022ca",
                 "HG004.regions.bed.gz:md5,932f27e11b00ef3e5020efb66141218f",
-                "HG004.regions.bed.gz.csi:md5,9c35e824528f600ac9fab163f815be19",
+                "HG004.regions.bed.gz.csi:md5,012071b1e7113555aff953ea787d798c",
                 "FAM.het_check.csv:md5,969d36ffaf399883c17202c93c5d201e",
                 "FAM.het_check.png:md5,c336874bc6ba9392cc93d2bd91ca833d",
                 "FAM.html:md5,e0672a007de0f53693af36e194d8fb2b",
@@ -1125,7 +1132,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1198,7 +1205,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-03-04T13:22:50.399740891",

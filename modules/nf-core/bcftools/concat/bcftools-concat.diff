@@ -1,37 +1,27 @@
 Changes in component 'nf-core/bcftools/concat'
+'modules/nf-core/bcftools/concat/environment.yml' is unchanged
 Changes in 'bcftools/concat/main.nf':
 --- modules/nf-core/bcftools/concat/main.nf
 +++ modules/nf-core/bcftools/concat/main.nf
-@@ -4,8 +4,8 @@
+@@ -3,9 +3,10 @@
+     label 'process_medium'
  
      conda "${moduleDir}/environment.yml"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/47/474a5ea8dc03366b04df884d89aeacc4f8e6d1ad92266888e7a8e7958d07cde8/data':
--        'community.wave.seqera.io/library/bcftools_htslib:0a3fa2654b52006f' }"
-+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/5a/5acacb55c52bec97c61fd34ffa8721fce82ce823005793592e2a80bf71632cd0/data':
-+        'community.wave.seqera.io/library/bcftools:1.21--4335bec1d7b44d11' }"
++    // Newer versions automatically "upgrades" all VCFs to partially phased version 4.5, which breaks some tools in the phasing subworkflow
+     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/47/474a5ea8dc03366b04df884d89aeacc4f8e6d1ad92266888e7a8e7958d07cde8/data'
+-        : 'community.wave.seqera.io/library/bcftools_htslib:0a3fa2654b52006f'}"
++        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/5a/5acacb55c52bec97c61fd34ffa8721fce82ce823005793592e2a80bf71632cd0/data'
++        : 'community.wave.seqera.io/library/bcftools:1.21--4335bec1d7b44d11' }"
  
      input:
      tuple val(meta), path(vcfs), path(tbi)
 
-Changes in 'bcftools/concat/environment.yml':
---- modules/nf-core/bcftools/concat/environment.yml
-+++ modules/nf-core/bcftools/concat/environment.yml
-@@ -5,6 +5,6 @@
-   - bioconda
- dependencies:
-   # renovate: datasource=conda depName=bioconda/htslib
--  - bioconda::htslib=1.22.1
-+  - bioconda::htslib=1.21
-   # renovate: datasource=conda depName=bioconda/bcftools
--  - bioconda::bcftools=1.22
-+  - bioconda::bcftools=1.21
-
 'modules/nf-core/bcftools/concat/meta.yml' is unchanged
-'modules/nf-core/bcftools/concat/tests/main.nf.test.snap' is unchanged
-'modules/nf-core/bcftools/concat/tests/main.nf.test' is unchanged
-'modules/nf-core/bcftools/concat/tests/vcf_gz_index_csi.config' is unchanged
-'modules/nf-core/bcftools/concat/tests/nextflow.config' is unchanged
-'modules/nf-core/bcftools/concat/tests/vcf_gz_index_tbi.config' is unchanged
 'modules/nf-core/bcftools/concat/tests/vcf_gz_index.config' is unchanged
+'modules/nf-core/bcftools/concat/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/bcftools/concat/tests/nextflow.config' is unchanged
+'modules/nf-core/bcftools/concat/tests/vcf_gz_index_csi.config' is unchanged
+'modules/nf-core/bcftools/concat/tests/main.nf.test' is unchanged
+'modules/nf-core/bcftools/concat/tests/vcf_gz_index_tbi.config' is unchanged
 ************************************************************

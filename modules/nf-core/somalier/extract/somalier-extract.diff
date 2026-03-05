@@ -1,14 +1,5 @@
 Changes in component 'nf-core/somalier/extract'
-Changes in 'somalier/extract/environment.yml':
---- modules/nf-core/somalier/extract/environment.yml
-+++ modules/nf-core/somalier/extract/environment.yml
-@@ -4,4 +4,4 @@
-   - conda-forge
-   - bioconda
- dependencies:
--  - bioconda::somalier=0.2.19
-+  - bioconda::somalier=0.2.18
-
+'modules/nf-core/somalier/extract/environment.yml' is unchanged
 Changes in 'somalier/extract/main.nf':
 --- modules/nf-core/somalier/extract/main.nf
 +++ modules/nf-core/somalier/extract/main.nf

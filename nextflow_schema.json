@@ -265,7 +265,7 @@
                     "type": "string",
                     "pattern": "^[mhfcCgebTUaAoGnN](,[mhfcCgebTUaAoGnN])*$",
                     "description": "Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list.",
-                    "default": "h,m"
+                    "default": "m"
                 },
                 "snv_call_regions": {
                     "type": "string",
@@ -704,6 +704,11 @@
                     "type": "string",
                     "description": "Label used for female samples in methbat profile.",
                     "default": "FEMALE"
+                },
+                "modkit_modified_bases": {
+                    "type": "string",
+                    "description": "Modkit modified bases, separated by space. E.g. '5mC 5hmC'",
+                    "default": "5mC"
                 },
                 "alignment_processes": {
                     "type": "integer",
