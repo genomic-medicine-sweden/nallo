@@ -12,12 +12,9 @@ workflow QC_PHASING {
     ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples      // channel: [ val(family_id), val(list_of_sample_ids) ]
     phase_with_svs            //    bool: Whether SVs were included in phasing (true) or not (false)
-    run_whatshap_stats        //    bool: Whether to run WHATSHAP_STATS (true) or not (false)
 
     main:
     ch_versions = channel.empty()
-    ch_whatshap_stats_tsv = channel.empty()
-    ch_whatshap_stats_gtf = channel.empty()
 
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
     if (phase_with_svs) {
@@ -48,21 +45,14 @@ workflow QC_PHASING {
         }
         .set { ch_phased_vcf }
 
-    if(run_whatshap_stats) {
-
-        WHATSHAP_STATS(
-            ch_phased_vcf,
-            true,
-            true,
-            false,
+    WHATSHAP_STATS(
+        ch_phased_vcf,
+        true,
+        true,
+        false,
         )
 
-        ch_whatshap_stats_tsv = WHATSHAP_STATS.out.tsv
-        ch_whatshap_stats_gtf = WHATSHAP_STATS.out.gtf
-
-    }
-
-    TABIX_BGZIPTABIX(ch_whatshap_stats_gtf)
+    TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
     ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     TABIX_BGZIPTABIX.out.gz_index
@@ -76,7 +66,7 @@ workflow QC_PHASING {
     ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
-    phasing_stats        = ch_whatshap_stats_tsv  // channel: [ val(meta), path(stats) ]
+    phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
     phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]

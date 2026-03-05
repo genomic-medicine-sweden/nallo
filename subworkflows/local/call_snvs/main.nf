@@ -2,6 +2,7 @@
 // Workflow to call SNVs
 //
 
+include { BCFTOOLS_PLUGINFIXPLOIDY                          } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
@@ -115,8 +116,20 @@ workflow CALL_SNVS {
             sentieon_tech,
         )
 
-        ch_vcf        = DNASCOPE_LONGREAD.out.vcf
-        ch_index      = DNASCOPE_LONGREAD.out.vcf_tbi
+        // Sentieon produces mixed ploidy GTs, which crashes downstream tools
+        // that expect diploid GTs across the whole genome. The following
+        // process re-encodes haploid GTs as diploid for the VCF.
+        // The GVCF is similarily recoded in the GVCF joint-calling workflow.
+        BCFTOOLS_PLUGINFIXPLOIDY(
+            DNASCOPE_LONGREAD.out.vcf.join(DNASCOPE_LONGREAD.out.vcf_tbi),
+            [],
+            [],
+            [],
+            []
+        )
+
+        ch_vcf        = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
+        ch_index      = BCFTOOLS_PLUGINFIXPLOIDY.out.tbi
         ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
         ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }

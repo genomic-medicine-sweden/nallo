@@ -140,10 +140,6 @@
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
-                "MERGE_JSON": {
-                    "merge_json_sample_files_into_family": 1.0,
-                    "python": "3.8.3"
-                },
                 "METHBAT_PROFILE": {
                     "methbat": "0.16.1-8a0a24c"
                 },
@@ -165,8 +161,11 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -175,7 +174,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -286,7 +285,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r56"
@@ -634,7 +633,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/FAM",
-                "paraphase/family/FAM/FAM_merged.json",
+                "paraphase/family/FAM/FAM_paraphase_annotated.json",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1133,7 +1132,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1146,7 +1145,7 @@
                 ],
                 [
                     "HG002_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_OR1D5.vcf.gz",
@@ -1206,13 +1205,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-02-26T10:13:59.753275784",
+        "timestamp": "2026-03-04T13:22:50.399740891",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

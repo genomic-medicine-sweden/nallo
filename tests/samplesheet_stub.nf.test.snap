@@ -97,7 +97,7 @@
                     "tabix": 1.21
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -138,7 +138,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-02-26T08:34:50.784792042",
+        "timestamp": "2026-03-02T08:58:40.220997123",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -267,7 +267,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -352,7 +352,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-02-26T10:20:23.566840197",
+        "timestamp": "2026-03-02T09:00:41.332267989",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -400,7 +400,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -453,7 +453,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-02-26T08:35:32.991367167",
+        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -494,7 +494,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -516,7 +516,7 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-02-26T08:35:52.887247734",
+        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -524,7 +524,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            58,
+            62,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -545,6 +545,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_PLUGINFIXPLOIDY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -569,7 +572,7 @@
                     "bcftools": 1.22,
                     "bedtools": "2.31.1",
                     "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.1",
+                    "sentieon-cli": "1.5.2",
                     "sentieon": 202503.02
                 },
                 "ECHTVAR_ANNO": {
@@ -627,7 +630,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -665,7 +668,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-02-26T08:37:09.470510424",
+        "timestamp": "2026-03-02T09:02:21.008081801",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -793,7 +796,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -834,7 +837,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-02-26T08:34:18.917449895",
+        "timestamp": "2026-03-02T08:56:56.330327397",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -987,10 +990,6 @@
                 "LONGPHASE_PHASE": {
                     "longphase": 2.0
                 },
-                "MERGE_JSON": {
-                    "merge_json_sample_files_into_family": 1.0,
-                    "python": "3.8.3"
-                },
                 "METHBAT_PROFILE": {
                     "methbat": "0.16.1-8a0a24c"
                 },
@@ -1011,8 +1010,11 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1021,7 +1023,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1126,7 +1128,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -1223,7 +1225,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/HG002_Revio",
-                "paraphase/family/HG002_Revio/HG002_Revio_merged.json",
+                "paraphase/family/HG002_Revio/HG002_Revio_paraphase_annotated.tsv",
                 "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz",
                 "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1338,10 +1340,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-02-26T10:21:19.30752374",
+        "timestamp": "2026-03-04T13:29:59.275580296",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test alignment without genome assembly": {
@@ -1383,7 +1385,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -1407,7 +1409,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-02-26T08:35:11.183828274",
+        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"

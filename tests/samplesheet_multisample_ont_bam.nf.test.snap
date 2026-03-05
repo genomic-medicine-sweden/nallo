@@ -157,7 +157,7 @@
                     "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.4"
+                    "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -249,7 +249,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -1147,7 +1147,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1224,13 +1224,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-02-26T10:17:12.468617586",
+        "timestamp": "2026-03-04T13:52:37.181474915",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }
