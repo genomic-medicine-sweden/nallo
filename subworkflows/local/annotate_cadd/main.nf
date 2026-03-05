@@ -38,14 +38,12 @@ workflow ANNOTATE_CADD {
 
     ch_vcf
         .join(ch_index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, tbi -> [meta, vcf, tbi, [], []] }
+        .map { meta, vcf, tbi -> [meta, vcf, tbi, [], [], [], []] }
+        .combine(REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt })
         .set { rename_chrnames_in }
 
     RENAME_CHRNAMES(
         rename_chrnames_in,
-        [],
-        [],
-        REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
 
     BCFTOOLS_VIEW(
@@ -63,14 +61,13 @@ workflow ANNOTATE_CADD {
     RENAME_CHRNAMES.out.vcf
         .join(CADD.out.tsv, failOnMismatch: true, failOnDuplicate: true)
         .join(TABIX_CADD.out.index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, annotations, annotations_index -> [meta, vcf, [], annotations, annotations_index] }
+        .map { meta, vcf, annotations, annotations_index -> [meta, vcf, [], annotations, annotations_index, []] }
+        .combine(ch_header.map { _meta, header -> header })
+        .combine(CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt })
         .set { ch_annotate_indels_in }
 
     ANNOTATE_INDELS(
         ch_annotate_indels_in,
-        [],
-        ch_header.map { _meta, header -> header },
-        CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt },
     )
 
     emit:
