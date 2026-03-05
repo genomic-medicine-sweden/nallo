@@ -937,11 +937,6 @@
                     "type": "number",
                     "default": 0.9,
                     "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
-                },
-                "genmod_phased": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Whether the data used as input for genmod is phased (flag for `genmod models`)."
                 }
             },
             "required": ["preset"]
