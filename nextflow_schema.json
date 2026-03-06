@@ -937,6 +937,16 @@
                     "type": "number",
                     "default": 0.9,
                     "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
+                },
+                "min_support": {
+                    "type": "number",
+                    "default": 3,
+                    "description": "Minimum number of reads that support a SV."
+                },
+                "min_seq_size": {
+                    "type": "number",
+                    "default": 500,
+                    "description": "Discard read if non of its segment is larger then this."
                 }
             },
             "required": ["preset"]

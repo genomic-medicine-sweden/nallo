@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added `--min_support` and `--min_seq_size` parameters for Sniffles
+
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
@@ -18,8 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter    |
+| ------------- | ---------------- |
+|               | `--min_support`  |
+|               | `--min_seq_size` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
