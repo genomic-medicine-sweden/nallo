@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | modkit/pileup            | 0.3.0       | 0.6.1       |
 | mosdepth                 | 0.3.10      | 0.3.11      |
 | multiqc                  | 1.31        | 1.33        |
+| svdb/merge               | 2.8.3       | 2.8.4       |
+| svdb/query               | 2.8.3       | 2.8.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

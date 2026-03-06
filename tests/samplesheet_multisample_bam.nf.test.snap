@@ -243,15 +243,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1094,46 +1094,17 @@
                 "HG004_pbcpgtools.hap2.bw:md5,5bb21ee57fd6ca78082cdf28e0d7ef8e"
             ],
             [
-                [
-                    "HG002_haplotagged.bam",
-                    "283bff2efc0677af66ec41f0403dcfe2"
-                ],
-                [
-                    "HG003_haplotagged.bam",
-                    "282dc837094a83d9eba5975007bc2ad2"
-                ],
-                [
-                    "HG004_haplotagged.bam",
-                    "91daed5826da972291bedaffecac2d38"
-                ],
-                [
-                    "HG002_aligned_assembly.bam",
-                    "e0fe9ec6470c26a13384e1421424810e"
-                ],
-                [
-                    "HG003_aligned_assembly.bam",
-                    "e5f5b7d3a689c00000d1ea1d4e9c3af1"
-                ],
-                [
-                    "HG004_aligned_assembly.bam",
-                    "e5148a4ff928f1c783c2855ffd143c88"
-                ],
-                [
-                    "HG002_spanning_trgt.bam",
-                    "eaaaa372cae26f1e039a46899ff4e142"
-                ],
-                [
-                    "HG003_spanning_trgt.bam",
-                    "bc2fd60ca1a340543dd66e5775644f97"
-                ],
-                [
-                    "HG004_spanning_trgt.bam",
-                    "e61b76ee67a5cab41a4f8cccedf92a9e"
-                ]
+                ["HG002_haplotagged.bam", "283bff2efc0677af66ec41f0403dcfe2"],
+                ["HG003_haplotagged.bam", "282dc837094a83d9eba5975007bc2ad2"],
+                ["HG004_haplotagged.bam", "91daed5826da972291bedaffecac2d38"],
+                ["HG002_aligned_assembly.bam", "e0fe9ec6470c26a13384e1421424810e"],
+                ["HG003_aligned_assembly.bam", "e5f5b7d3a689c00000d1ea1d4e9c3af1"],
+                ["HG004_aligned_assembly.bam", "e5148a4ff928f1c783c2855ffd143c88"],
+                ["HG002_spanning_trgt.bam", "eaaaa372cae26f1e039a46899ff4e142"],
+                ["HG003_spanning_trgt.bam", "bc2fd60ca1a340543dd66e5775644f97"],
+                ["HG004_spanning_trgt.bam", "e61b76ee67a5cab41a4f8cccedf92a9e"]
             ],
-            [
-
-            ],
+            [],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1204,9 +1175,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=31, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-
-            ]
+            []
         ],
         "timestamp": "2026-03-04T13:22:50.399740891",
         "meta": {

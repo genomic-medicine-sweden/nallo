@@ -1,30 +1,24 @@
 {
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
-            [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
-            ],
+            ["versions.yml:md5,0cde4a76d982f80f519722588edebbe2", "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050"],
             "29a9273ae029754399eb92fe6c2b7c52",
             "test_vep.vcf.gz.tbi"
         ],
-        "timestamp": "2026-02-26T08:20:35.444783497",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-03T14:43:25.32570264"
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
-            [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
-            ]
+            ["versions.yml:md5,0cde4a76d982f80f519722588edebbe2", "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050"]
         ],
-        "timestamp": "2026-02-26T08:20:45.409281589",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-03T14:55:16.487905328"
     }
 }

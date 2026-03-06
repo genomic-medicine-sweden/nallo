@@ -204,15 +204,15 @@
                     "python": "3.8.3"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1121,34 +1121,14 @@
                 "HG002_ONT_C_modkit_pileup_hp2.bw:md5,b66ee20547e4be3b112b123dae3d54d9"
             ],
             [
-                [
-                    "HG002_ONT_A_haplotagged.bam",
-                    "c1cdb8f9c9bb4dcfa0a64e9883896084"
-                ],
-                [
-                    "HG002_ONT_B_haplotagged.bam",
-                    "b6aa70b37996c4bd09c4d64f47ad8e33"
-                ],
-                [
-                    "HG002_ONT_C_haplotagged.bam",
-                    "c1cdb8f9c9bb4dcfa0a64e9883896084"
-                ],
-                [
-                    "HG002_ONT_A_aligned_assembly.bam",
-                    "a8150005fca1626ded64f2c259c561a9"
-                ],
-                [
-                    "HG002_ONT_B_aligned_assembly.bam",
-                    "c7772b2a5de55ce533601277a2d5c68b"
-                ],
-                [
-                    "HG002_ONT_C_aligned_assembly.bam",
-                    "a8150005fca1626ded64f2c259c561a9"
-                ]
+                ["HG002_ONT_A_haplotagged.bam", "c1cdb8f9c9bb4dcfa0a64e9883896084"],
+                ["HG002_ONT_B_haplotagged.bam", "b6aa70b37996c4bd09c4d64f47ad8e33"],
+                ["HG002_ONT_C_haplotagged.bam", "c1cdb8f9c9bb4dcfa0a64e9883896084"],
+                ["HG002_ONT_A_aligned_assembly.bam", "a8150005fca1626ded64f2c259c561a9"],
+                ["HG002_ONT_B_aligned_assembly.bam", "c7772b2a5de55ce533601277a2d5c68b"],
+                ["HG002_ONT_C_aligned_assembly.bam", "a8150005fca1626ded64f2c259c561a9"]
             ],
-            [
-
-            ],
+            [],
             [
                 [
                     "FAM_repeat_expansions.vcf.gz",
@@ -1223,14 +1203,12 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=14, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-
-            ]
+            []
         ],
         "timestamp": "2026-03-04T13:52:37.181474915",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         }
     }
 }
