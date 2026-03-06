@@ -99,7 +99,6 @@ workflow CHROMOGRAPH {
         [[], []],
         [[], []],
     )
-    ch_versions = ch_versions.mix(RUN_CHROMOGRAPH.out.versions)
 
     emit:
     chromograph_plots = RUN_CHROMOGRAPH.out.plots // channel: [ val(meta), path(plot) ]

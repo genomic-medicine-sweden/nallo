@@ -21,7 +21,6 @@ workflow ANNOTATE_CSQ_PLI {
     ch_versions = ch_versions.mix(ADD_MOST_SEVERE_PLI.out.versions)
 
     TABIX_BGZIPTABIX (ADD_MOST_SEVERE_PLI.out.vcf)
-    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     emit:
     vcf      = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, _index -> [ meta, vcf ] }   // channel: [ val(meta), path(vcf) ]

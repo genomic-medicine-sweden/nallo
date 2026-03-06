@@ -103,7 +103,7 @@
                     },
                     "chromograph": {
                         "branch": "master",
-                        "git_sha": "60f6e8c8a8b18612a5f74a097c856659af31a97c",
+                        "git_sha": "f2b138ee1d91f67d31c187317d7e83e429bf0309",
                         "installed_by": ["modules"]
                     },
                     "cramino": {
@@ -123,7 +123,7 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "f50d3c606dbc7e5af367cce070d824b796872ed2",
+                        "git_sha": "2e751c119b5e6e9c7ecda7a682e157aabb57a812",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "ensemblvep/vep": {
@@ -387,7 +387,7 @@
                     },
                     "tabix/bgziptabix": {
                         "branch": "master",
-                        "git_sha": "61846a0d757ff9c0682ba3e28ab0441afd95ad7e",
+                        "git_sha": "91a902fb32d6717da38a9694eb4ad3fade53a8db",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "tabix/tabix": {
@@ -463,7 +463,7 @@
                     },
                     "vcf_filter_bcftools_ensemblvep": {
                         "branch": "master",
-                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
+                        "git_sha": "95518d261ec0561b3dffb332944bebc5ef85efcf",
                         "installed_by": ["subworkflows"]
                     }
                 }

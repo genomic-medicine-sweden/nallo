@@ -53,7 +53,6 @@ workflow QC_PHASING {
         )
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
-    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
     TABIX_BGZIPTABIX.out.gz_index
         .multiMap { meta, gtf, index ->
