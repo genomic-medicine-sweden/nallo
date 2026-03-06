@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Make mitochondrial annotation separate from the nuclear one
 
 ### Removed
 
