@@ -195,15 +195,15 @@
                     "python": "3.8.3"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "tabix": 1.21
@@ -1221,6 +1221,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-27T10:50:59.311011661"
+        "timestamp": "2026-03-04T10:07:40.003298163"
     }
 }
