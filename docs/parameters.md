@@ -118,7 +118,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c19a5d7e928348a81c235668cd025d6f3775bc29/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
