@@ -93,7 +93,7 @@
                     },
                     "cat/cat": {
                         "branch": "master",
-                        "git_sha": "69614d4579a6bd9b8a2ecffb35959809d9c36559",
+                        "git_sha": "7ed72ef972290b93d0bdd7c60ff00a693250f77a",
                         "installed_by": ["modules"]
                     },
                     "cat/fastq": {
