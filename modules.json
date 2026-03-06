@@ -98,7 +98,7 @@
                     },
                     "cat/fastq": {
                         "branch": "master",
-                        "git_sha": "f4743b089085121497b7c1c81a28810ce2740dde",
+                        "git_sha": "5d28ea7cfaebcfae6f74d1067ea766d8ff19dff3",
                         "installed_by": ["modules"]
                     },
                     "chromograph": {
