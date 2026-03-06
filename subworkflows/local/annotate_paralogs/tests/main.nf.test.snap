@@ -1,0 +1,137 @@
+{
+    "two familes, multiple sampels - json format - no rules": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.json:md5,ba08a6603e7d2de88b4d74260c446a1c"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.json:md5,ba08a6603e7d2de88b4d74260c446a1c"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
+                    ]
+                ],
+                "tsv": [
+                    
+                ]
+            }
+        ],
+        "timestamp": "2026-03-04T13:12:07.032959747",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
+    },
+    "two familes, multiple sampels - tsv format - rules": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.tsv:md5,383f482a58eb57d982e9633bd9cef3c6"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
+                    ]
+                ],
+                "json": [
+                    
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.tsv:md5,383f482a58eb57d982e9633bd9cef3c6"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-04T13:12:27.271070702",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
+    },
+    "two familes, multiple sampels - tsv format - rules - stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "json": [
+                    
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "NIST2"
+                        },
+                        "NIST2.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-02-27T10:09:16.555346998",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    }
+}

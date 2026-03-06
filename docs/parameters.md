@@ -8,6 +8,7 @@ Allows skipping certain parts of the pipeline
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
+| `skip_annotate_paralogs` | Skip paralogs (Paraphase) annotation | `boolean` | False |  |  |
 | `skip_qc` | Skip QC of reads | `boolean` | False |  |  |
 | `skip_snv_calling` | Skip short variant calling | `boolean` | False |  |  |
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
@@ -52,7 +53,7 @@ Define where the pipeline should find input data and save output data.
 | `modkit_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
-| `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | h,m |  |  |
+| `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | m |  |  |
 | `snv_call_regions` | A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `sv_call_regions` | A BED file containging regions to filter SV calls. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `qc_regions` | A BED file with regions of interest used in QC. By default this is the same as `target_regions`. | `string` |  |  |  |
@@ -68,6 +69,8 @@ Define where the pipeline should find input data and save output data.
 | `gens_panel_of_normals_male` | Panel of normals of male samples (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command. | `string` |  |  |  |
 | `gens_coverage_bins` | Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals. | `string` |  |  |  |
 | `strdrop_training_set_json` | A JSON file containing the training set for strdrop | `string` |  |  |  |
+| `paraphrase_output_format` | Output format for paralog annotation from Paraphrase. Either `tsv` or `json`. (accepted: `tsv`\|`json`) | `string` | tsv |  |  |
+| `paraphrase_rules` | A file path to a YAML file with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml. | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
@@ -115,7 +118,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5880345753543268996107b0e0fedc86cdaa75c7/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -136,6 +139,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sv_callers_to_merge` | Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
 | `snv_caller` | Which short variant software to use (`deepvariant`) (accepted: `deepvariant`\|`sentieon`) | `string` | deepvariant |  |  |
 | `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: `trgt`\|`strdust`) | `string` | trgt |  |  |
+| `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used. | `string` |  |  |  |
+| `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
@@ -143,6 +148,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
+| `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |

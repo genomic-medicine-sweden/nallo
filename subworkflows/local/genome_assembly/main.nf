@@ -37,7 +37,6 @@ workflow GENOME_ASSEMBLY {
         CAT_FASTQ (
             ch_paired_parents_for_yak.cat
         )
-        ch_versions = ch_versions.mix(CAT_FASTQ.out.versions)
 
         YAK_COUNT (
             CAT_FASTQ.out.reads.concat(ch_paired_parents_for_yak.no_cat)

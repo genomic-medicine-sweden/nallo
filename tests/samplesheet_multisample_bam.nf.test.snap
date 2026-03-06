@@ -18,6 +18,9 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
                 },
@@ -46,6 +49,12 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -131,10 +140,6 @@
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
-                "MERGE_JSON": {
-                    "merge_json_sample_files_into_family": 1.0,
-                    "python": "3.8.3"
-                },
                 "METHBAT_PROFILE": {
                     "methbat": "0.16.1-8a0a24c"
                 },
@@ -146,7 +151,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.0"
@@ -156,8 +161,11 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -246,6 +254,7 @@
                     "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -255,9 +264,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -279,7 +285,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r56"
@@ -627,7 +633,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/FAM",
-                "paraphase/family/FAM/FAM_merged.json",
+                "paraphase/family/FAM/FAM_paraphase_annotated.json",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1023,17 +1029,17 @@
                 "HG002.mosdepth.region.dist.txt:md5,f47bcb079021bf652722bcf973918393",
                 "HG002.mosdepth.summary.txt:md5,d7d24f343964544006eabe60ebaf4384",
                 "HG002.regions.bed.gz:md5,72ea5659abc98edd8fcc51e725902590",
-                "HG002.regions.bed.gz.csi:md5,4a76616ead5effaaad86c381a9dd85a5",
+                "HG002.regions.bed.gz.csi:md5,903e1974621e0163e18c6ac7773e3a94",
                 "HG003.mosdepth.global.dist.txt:md5,3dd90f0fe9aa0c756bcb8b2313b58338",
                 "HG003.mosdepth.region.dist.txt:md5,d4cbdb5d6e6f18e53299ff59626e9984",
                 "HG003.mosdepth.summary.txt:md5,16cc82f5699b40d51a5ba06583156c44",
                 "HG003.regions.bed.gz:md5,398a91a39cd34f4527d889c7ee3129c5",
-                "HG003.regions.bed.gz.csi:md5,71b552449531a81220dd9910c718dcf9",
+                "HG003.regions.bed.gz.csi:md5,a17540857520857db024092fb1473d8f",
                 "HG004.mosdepth.global.dist.txt:md5,a8ffdd67c117dfd5a0130f1ad30df7f2",
                 "HG004.mosdepth.region.dist.txt:md5,05707cb6e01fca034a5f4c124b2e92e9",
                 "HG004.mosdepth.summary.txt:md5,c0dfb2ead42c590579eb2a97d6b022ca",
                 "HG004.regions.bed.gz:md5,932f27e11b00ef3e5020efb66141218f",
-                "HG004.regions.bed.gz.csi:md5,9c35e824528f600ac9fab163f815be19",
+                "HG004.regions.bed.gz.csi:md5,012071b1e7113555aff953ea787d798c",
                 "FAM.het_check.csv:md5,969d36ffaf399883c17202c93c5d201e",
                 "FAM.het_check.png:md5,c336874bc6ba9392cc93d2bd91ca833d",
                 "FAM.html:md5,e0672a007de0f53693af36e194d8fb2b",
@@ -1088,46 +1094,17 @@
                 "HG004_pbcpgtools.hap2.bw:md5,5bb21ee57fd6ca78082cdf28e0d7ef8e"
             ],
             [
-                [
-                    "HG002_haplotagged.bam",
-                    "283bff2efc0677af66ec41f0403dcfe2"
-                ],
-                [
-                    "HG003_haplotagged.bam",
-                    "282dc837094a83d9eba5975007bc2ad2"
-                ],
-                [
-                    "HG004_haplotagged.bam",
-                    "91daed5826da972291bedaffecac2d38"
-                ],
-                [
-                    "HG002_aligned_assembly.bam",
-                    "e0fe9ec6470c26a13384e1421424810e"
-                ],
-                [
-                    "HG003_aligned_assembly.bam",
-                    "e5f5b7d3a689c00000d1ea1d4e9c3af1"
-                ],
-                [
-                    "HG004_aligned_assembly.bam",
-                    "e5148a4ff928f1c783c2855ffd143c88"
-                ],
-                [
-                    "HG002_spanning_trgt.bam",
-                    "eaaaa372cae26f1e039a46899ff4e142"
-                ],
-                [
-                    "HG003_spanning_trgt.bam",
-                    "bc2fd60ca1a340543dd66e5775644f97"
-                ],
-                [
-                    "HG004_spanning_trgt.bam",
-                    "e61b76ee67a5cab41a4f8cccedf92a9e"
-                ]
+                ["HG002_haplotagged.bam", "283bff2efc0677af66ec41f0403dcfe2"],
+                ["HG003_haplotagged.bam", "282dc837094a83d9eba5975007bc2ad2"],
+                ["HG004_haplotagged.bam", "91daed5826da972291bedaffecac2d38"],
+                ["HG002_aligned_assembly.bam", "e0fe9ec6470c26a13384e1421424810e"],
+                ["HG003_aligned_assembly.bam", "e5f5b7d3a689c00000d1ea1d4e9c3af1"],
+                ["HG004_aligned_assembly.bam", "e5148a4ff928f1c783c2855ffd143c88"],
+                ["HG002_spanning_trgt.bam", "eaaaa372cae26f1e039a46899ff4e142"],
+                ["HG003_spanning_trgt.bam", "bc2fd60ca1a340543dd66e5775644f97"],
+                ["HG004_spanning_trgt.bam", "e61b76ee67a5cab41a4f8cccedf92a9e"]
             ],
-            [
-                
-            ],
+            [],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1139,7 +1116,7 @@
                 ],
                 [
                     "HG002_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_OR1D5.vcf.gz",
@@ -1198,14 +1175,12 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=31, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-                
-            ]
+            []
         ],
+        "timestamp": "2026-03-04T13:22:50.399740891",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-04T09:28:29.064965159"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     }
 }

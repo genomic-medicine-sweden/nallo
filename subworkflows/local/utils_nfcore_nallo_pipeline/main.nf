@@ -97,6 +97,7 @@ workflow PIPELINE_INITIALISATION {
     // Define subworkflows and their associated "--skip"
     //
     def workflowSkips = [
+        annotate_paralogs: "skip_annotate_paralogs",
         assembly         : "skip_genome_assembly",
         sambamba_depth   : "skip_sambamba_depth",
         mapping          : "skip_alignment",
@@ -126,6 +127,7 @@ workflow PIPELINE_INITIALISATION {
         qc               : ["mapping"],
         sambamba_depth   : ["mapping"],
         sv_calling       : ["mapping"],
+        annotate_paralogs: ["mapping", "call_paralogs"],
         sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
         snv_annotation   : ["mapping", "snv_calling"],
@@ -157,6 +159,7 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
+            skip_annotate_paralogs  : params.skip_annotate_paralogs,
             skip_snv_calling        : params.skip_snv_calling,
             skip_peddy              : params.skip_peddy,
             skip_phasing            : params.skip_phasing,

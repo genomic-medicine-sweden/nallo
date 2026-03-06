@@ -50,10 +50,9 @@ workflow ANNOTATE_SVS {
     TABIX_ENSEMBLVEP_SV (
         ENSEMBLVEP_SV.out.vcf
     )
-    ch_versions = ch_versions.mix(TABIX_ENSEMBLVEP_SV.out.versions)
 
     emit:
-    vcf      = ENSEMBLVEP_SV.out.vcf       // channel: [ val(meta), path(vcf) ]
-    tbi      = TABIX_ENSEMBLVEP_SV.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions                 // channel: [ path(versions.yml) ]
+    vcf      = ENSEMBLVEP_SV.out.vcf         // channel: [ val(meta), path(vcf) ]
+    tbi      = TABIX_ENSEMBLVEP_SV.out.index // channel: [ val(meta), path(tbi) ]
+    versions = ch_versions                   // channel: [ path(versions.yml) ]
 }

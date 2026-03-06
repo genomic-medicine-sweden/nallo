@@ -37,16 +37,16 @@ This document describes the pipeline output files and the tools used to generate
 
 [Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bed files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files or BigWig [visualization tracks](#visualization-tracks), for example in IGV.
 
-| Path                                                                  | Description                                                                       | Alignment          | Alignment & phasing |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from modkit     |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from modkit     |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_ungrouped.bed.gz` | Bed file for ungrouped reads from modkit                                          |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz`           | Bed file with summary counts from all reads from modkit                           | :white_check_mark: |                     |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz`     | Bed file with summary counts from all reads from pbcpgtools                       | :white_check_mark: | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
+| Path                                                                 | Description                                                                       | Alignment          | Alignment & phasing |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_hp1.bed.gz`      | Bed file with summary counts from haplotagged reads (haplotype 1) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_hp2.bed.gz`      | Bed file with summary counts from haplotagged reads (haplotype 2) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_combined.bed.gz` | Bed file for combined reads from modkit                                           |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz`          | Bed file with summary counts from all reads from modkit                           | :white_check_mark: |                     |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz`    | Bed file with summary counts from all reads from pbcpgtools                       | :white_check_mark: | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`        | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`        | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.bed.gz.tbi`                           | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
 
 ### Methylation profile
 
@@ -186,18 +186,18 @@ In general, annotated variant calls are output per family while unannotated call
 
 ### Paralogous genes
 
-[Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes.
+[Paraphase](https://github.com/PacificBiosciences/paraphase) is used to call paralogous genes, and [_Paraphrase_](https://github.com/Clinical-Genomics/paraphrase) is used to merge, annotate and filter the Paraphrase JSON files.
 
-| Path                                                                   | Description                                               |
-| ---------------------------------------------------------------------- | --------------------------------------------------------- |
-| `paraphase/sample/{sample}/{sample}.paraphase.{bam,cram}`              | BAM/CRAM file with reads from analyzed regions            |
-| `paraphase/sample/{sample}/{sample}.paraphase.{bam.bai,cram.crai}`     | Index of the BAM/CRAM file                                |
-| `paraphase/sample/{sample}/{sample}.paraphase.json`                    | Summary of haplotypes and variant calls                   |
-| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`      | VCF file per gene                                         |
-| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi`  | Index of the VCF file                                     |
-| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz`     | VCF file from paraphase, merged by family                 |
-| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz.tbi` | Index of the VCF file merged by family                    |
-| `paraphase/family/{family_id}/{family_id}_merged.json`                 | Summary of haplotypes and variant calls, merged by family |
+| Path                                                                      | Description                                           |
+| ------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `paraphase/sample/{sample}/{sample}.paraphase.{bam,cram}`                 | BAM/CRAM file with reads from analyzed regions        |
+| `paraphase/sample/{sample}/{sample}.paraphase.{bam.bai,cram.crai}`        | Index of the BAM/CRAM file                            |
+| `paraphase/sample/{sample}/{sample}.paraphase.json`                       | Summary of haplotypes and variant calls               |
+| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz`         | VCF file per gene                                     |
+| `paraphase/sample/{sample}_paraphase_vcfs/{sample}_{gene}_vcf.gz.tbi`     | Index of the VCF file                                 |
+| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz`        | VCF file from paraphase, merged by family             |
+| `paraphase/family/{family_id}/{family_id}_paraphase_merged.vcf.gz.tbi`    | Index of the VCF file merged by family                |
+| `paraphase/family/{family_id}/{family_id}_paraphase_annotated.{tsv,json}` | Merged and annotated JSON files in TSV or JSON format |
 
 ### Repeats
 
@@ -325,9 +325,9 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 | `visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph`                 | Copy number in bedgraph format                                                      |
 | `visualization_tracks/{sample}/{sample}_hificnv.depth.bw`                         | Depth track in BigWig format                                                        |
 | `visualization_tracks/{sample}/{sample}_hificnv.maf.bw`                           | Minor allele frequencies in BigWig format                                           |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_ungrouped.bw`               | BigWig file with summary counts for ungrouped reads from modkit                     |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_1.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_2.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_combined.bw`                | BigWig file with summary counts for ungrouped reads from modkit                     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp1.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp2.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw`                   | BigWig file with summary counts for ungrouped reads from pbcpgtools                 |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools |

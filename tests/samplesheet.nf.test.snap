@@ -18,6 +18,9 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
                 },
@@ -49,6 +52,12 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -137,10 +146,6 @@
                 "LONGPHASE_PHASE": {
                     "longphase": 2.0
                 },
-                "MERGE_JSON": {
-                    "merge_json_sample_files_into_family": 1.0,
-                    "python": "3.8.3"
-                },
                 "METHBAT_PROFILE": {
                     "methbat": "0.16.1-8a0a24c"
                 },
@@ -152,7 +157,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.0"
@@ -162,8 +167,11 @@
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
-                    "paraphase": "3.3.4",
-                    "samtools": "1.22.1"
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -246,6 +254,7 @@
                     "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -255,9 +264,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -279,7 +285,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -464,7 +470,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/FAM",
-                "paraphase/family/FAM/FAM_merged.json",
+                "paraphase/family/FAM/FAM_paraphase_annotated.tsv",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -612,6 +618,7 @@
                 "multiqc_whatshap_phased_bp_plot.txt:md5,4c0d1ffaac851169f36ea4eac3d072b3",
                 "somalier_stats.txt:md5,2c0b21c0d27b7794a22c876a8c7f4635",
                 "whatshap-stats-table.txt:md5,ae86d727b4bcd2d1471c87867e5ea7af",
+                "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,3c2a977f040a376a27d41377c3c29e96",
                 "HG002_Revio_cramino_aligned.arrow:md5,3c2a977f040a376a27d41377c3c29e96",
@@ -619,7 +626,7 @@
                 "HG002_Revio.mosdepth.region.dist.txt:md5,72032d937081394e03025a8a6f389008",
                 "HG002_Revio.mosdepth.summary.txt:md5,28799fbe421fe501a56f233cdb218d1c",
                 "HG002_Revio.regions.bed.gz:md5,486ad8da68f9d79eb634b3f322e1655a",
-                "HG002_Revio.regions.bed.gz.csi:md5,a574b4a8311b5e52f2aaf9cc9fd113a5",
+                "HG002_Revio.regions.bed.gz.csi:md5,0f7f51b53f861c7ebccc6aae21351978",
                 "FAM.het_check.csv:md5,ee8bee8a1ba8fc08870c7722ba5c19a9",
                 "FAM.het_check.png:md5,bc0da9a8dcc1399a8bb9adf65e37e3ee",
                 "FAM.html:md5,8b94b2c76f0b11bf2487996ae6aef6df",
@@ -656,12 +663,12 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=288, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=289, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_OR1D5.vcf.gz",
@@ -669,7 +676,7 @@
                 ],
                 [
                     "HG002_Revio_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=276, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_trgt.vcf.gz",
@@ -697,13 +704,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
+        "timestamp": "2026-03-04T12:22:11.01952766"
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-04T12:22:11.01952766"
+        }
     }
 }
