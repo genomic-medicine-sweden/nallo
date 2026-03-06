@@ -72,7 +72,6 @@ workflow CALL_SNVS {
             ch_bedtools_intersect_in,
             [[], []],
         )
-        ch_versions = ch_versions.mix(BEDTOOLS_INTERSECT.out.versions)
 
         BEDTOOLS_INTERSECT.out.intersect
             .branch {
