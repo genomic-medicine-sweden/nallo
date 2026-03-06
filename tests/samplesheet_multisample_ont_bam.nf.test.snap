@@ -18,6 +18,9 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
                 },
@@ -46,6 +49,12 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -130,13 +139,13 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.5.1"
+                    "modkit": "0.6.1"
                 },
                 "MODKIT_PILEUP": {
-                    "modkit": "0.3.0"
+                    "modkit": "0.6.1"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.10"
+                    "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.0"
@@ -206,6 +215,7 @@
                     "svdb": "2.8.2"
                 },
                 "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
@@ -217,7 +227,7 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
-                "TABIX_SEVERUS": {
+                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -239,7 +249,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.11.0"
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
             },
             [
@@ -449,26 +459,26 @@
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002_ONT_A",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz",
-                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_combined.bed.gz",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_combined.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp1.bed.gz",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp1.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp2.bed.gz",
+                "methylation/pileup/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp2.bed.gz.tbi",
                 "methylation/pileup/HG002_ONT_B",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz",
-                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_combined.bed.gz",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_combined.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp1.bed.gz",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp1.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp2.bed.gz",
+                "methylation/pileup/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp2.bed.gz.tbi",
                 "methylation/pileup/HG002_ONT_C",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bed.gz",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bed.gz",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bed.gz.tbi",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bed.gz",
-                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_combined.bed.gz",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_combined.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp1.bed.gz",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp1.bed.gz.tbi",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bed.gz",
+                "methylation/pileup/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -805,23 +815,23 @@
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.depth.bw",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.maf.bw",
-                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_1.bw",
-                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_2.bw",
-                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_ungrouped.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_A/HG002_ONT_A_modkit_pileup_hp2.bw",
                 "visualization_tracks/HG002_ONT_B",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.depth.bw",
                 "visualization_tracks/HG002_ONT_B/HG002_ONT_B_hificnv.maf.bw",
-                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_1.bw",
-                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_2.bw",
-                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_ungrouped.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_B/HG002_ONT_B_modkit_pileup_hp2.bw",
                 "visualization_tracks/HG002_ONT_C",
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.depth.bw",
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw",
-                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_1.bw",
-                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_2.bw",
-                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_ungrouped.bw"
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_combined.bw",
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp1.bw",
+                "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bw"
             ],
             [
                 "HG002_ONT_A_haplotype_1.assembly_summary:md5,d651a15c360f5cd9561601835cc39463",
@@ -1137,7 +1147,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1214,12 +1224,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-03-06T09:27:41.540882055",
         "meta": {
             "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     }

@@ -33,7 +33,6 @@ workflow PREPARE_GENS_INPUTS {
         [],
         false
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions)
 
     MOSDEPTH_GATK_HEADER(
         SAMTOOLS_VIEW.out.sam,

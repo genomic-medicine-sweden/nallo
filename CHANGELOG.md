@@ -3,7 +3,46 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.11.0 - [2026-03-02]
+## 0.12.0dev - [XXXX-XX-XX]
+
+### Added
+
+- [#921](https://github.com/genomic-medicine-sweden/nallo/pull/921) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+
+### Changed
+
+- [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
+- [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
+
+### Removed
+
+### Fixed
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool                     | Old version | New version |
+| ------------------------ | ----------- | ----------- |
+| modkit/bedmethyltobigwig | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup            | 0.3.0       | 0.6.1       |
+| mosdepth                 | 0.3.10      | 0.3.11      |
+| multiqc                  | 1.31        | 1.33        |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.11.0 - [2026-03-04]
 
 ### `Added`
 
@@ -29,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Force diploid GTs for sentieon SNV calls
 - [#909](https://github.com/genomic-medicine-sweden/nallo/pull/909) - Changed Sawfish `publishDir` directive to strict syntax
 - [#913](https://github.com/genomic-medicine-sweden/nallo/pull/913) - Prep release 0.11.0
+- [#917](https://github.com/genomic-medicine-sweden/nallo/pull/917) - Updated paraphase to 3.5.0
 
 ### `Removed`
 
@@ -56,6 +96,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--strdrop_alpha`               |
 |               | `--strdrop_edit`                |
 
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
 ### Module updates
 
 | Tool                                | Old version | New version |
@@ -65,6 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon/dnascope-longread          |             | 1.5.2       |
 | merge_json_sample_files_into_family | 1.0         |             |
 | paraphrase                          |             | 0.2.0       |
+| paraphase                           | 3.3.4       | 3.5.0       |
+| samtools (paraphase)                | 1.22.1      | 1.23        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -272,6 +319,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
+| modkit/bedmethyltobigwig         | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup                    | 0.3.0       | 0.6.1       |
+| mosdepth                         | 0.3.10      | 0.3.11      |
+| multiqc                          | 1.31        | 1.33        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

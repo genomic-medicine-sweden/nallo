@@ -53,7 +53,7 @@ Define where the pipeline should find input data and save output data.
 | `modkit_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
-| `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | h,m |  |  |
+| `bigwig_modcodes` | Comma-separated list of modification codes to include in the bigWig methylation visualization file. Defaults to 5hmC and 5mC. See https://samtools.github.io/hts-specs/SAMtags.pdf for a complete list. | `string` | m |  |  |
 | `snv_call_regions` | A BED file containing regions to limit SNV calling. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `sv_call_regions` | A BED file containging regions to filter SV calls. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `qc_regions` | A BED file with regions of interest used in QC. By default this is the same as `target_regions`. | `string` |  |  |  |
@@ -148,6 +148,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
+| `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |

@@ -19,7 +19,6 @@ workflow CALL_PARALOGS {
         fasta,
         [[], []],
     )
-    ch_versions = ch_versions.mix(PARAPHASE.out.versions)
 
     PARAPHASE.out.vcf
         .transpose()
@@ -35,7 +34,6 @@ workflow CALL_PARALOGS {
         [],
         [],
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     /*
      * Create a bcftools reheader mapping file to make Paraphase VCF sample names globally unique.
@@ -52,7 +50,6 @@ workflow CALL_PARALOGS {
         .set { ch_bcftools_reheader_in }
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])
-    ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     BCFTOOLS_REHEADER.out.vcf
         .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
@@ -66,7 +63,6 @@ workflow CALL_PARALOGS {
         [[], []],
         [[], []],
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     if (cram_output) {
         SAMTOOLS_CONVERT(

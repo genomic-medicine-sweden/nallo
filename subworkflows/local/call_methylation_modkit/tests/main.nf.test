@@ -55,6 +55,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -78,6 +79,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -105,6 +107,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -130,6 +133,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -160,6 +164,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -184,6 +189,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -210,6 +216,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -238,6 +245,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """

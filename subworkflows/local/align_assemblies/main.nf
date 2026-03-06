@@ -37,7 +37,6 @@ workflow ALIGN_ASSEMBLIES {
         [],
         false
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions)
 
     TAGBAM (
         SAMTOOLS_VIEW.out.bam

@@ -551,7 +551,6 @@ workflow NALLO {
         CONCAT_SORT_GENS(
             ch_gvcfs
         )
-        ch_versions = ch_versions.mix(CONCAT_SORT_GENS.out.versions)
 
         CONCAT_SORT_GENS.out.vcf
             .join(CONCAT_SORT_GENS.out.index)
@@ -753,8 +752,6 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
         )
-        ch_versions = ch_versions.mix(CONCAT_SORT_ANNOTATED_SNVS.out.versions)
-        CONCAT_SORT_ANNOTATED_SNVS.out.vcf
 
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_input
@@ -777,7 +774,6 @@ workflow NALLO {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_CHROMOGRAPH.out.versions)
     }
 
     if (!params.skip_chromograph) {
@@ -821,7 +817,6 @@ workflow NALLO {
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs,
         )
-        ch_versions = ch_versions.mix(RANK_VARIANTS_SNV.out.versions)
 
         RANK_VARIANTS_SNV.out.vcf
             .join(RANK_VARIANTS_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -843,7 +838,7 @@ workflow NALLO {
         CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
         )
-        ch_versions = ch_versions.mix(CONCAT_SORT_RANKED_SNVS.out.versions)
+
     }
 
     //
@@ -937,7 +932,6 @@ workflow NALLO {
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs,
         )
-        ch_versions = ch_versions.mix(RANK_VARIANTS_SVS.out.versions)
     }
 
     //
@@ -970,7 +964,6 @@ workflow NALLO {
             ch_modkit_call_regions,
             params.bigwig_modcodes,
         )
-        ch_versions = ch_versions.mix(CALL_METHYLATION_MODKIT.out.versions)
     }
 
     if (!params.skip_methylation_calling && params.run_methbat) {
