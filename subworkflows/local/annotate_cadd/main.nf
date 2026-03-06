@@ -54,7 +54,6 @@ workflow ANNOTATE_CADD {
     )
 
     CADD(BCFTOOLS_VIEW.out.vcf, ch_cadd_resources, ch_cadd_prescored_indels)
-    ch_versions = ch_versions.mix(CADD.out.versions)
 
     TABIX_CADD(CADD.out.tsv)
 
