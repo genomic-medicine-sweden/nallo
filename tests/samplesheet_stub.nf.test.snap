@@ -1359,7 +1359,6 @@
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-            "nextflow": "26.02.0"
         }
     },
     "Test alignment without genome assembly": {
