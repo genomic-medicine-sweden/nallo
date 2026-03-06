@@ -46,13 +46,12 @@ workflow SCATTER_GENOME {
     )
     ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
-    // Extract the mitochondrial region from BED before spliting into 40 regions
+    // Add meta.genome before extracting the mitochondrial region from BED and spliting into 40 regions
     BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
         [ [ meta + [ genome: "nuclear" ], bed ],
             [ meta + [ genome: "mt" ], bed ]
     ]
     }.set{ ch_input_gawk }
-    ch_input_gawk.view()
 
     // Exctract according to meta.genome, logic is in the config file
     GAWK_EXTRACT_REGIONS (
