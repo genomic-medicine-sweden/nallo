@@ -419,7 +419,6 @@ workflow NALLO {
                 .set { ch_bed_mt_to_mix }
 
             // Value channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
-            // ch_num_intervals = channel.value(expected_snv_vcfs + 1)
 
             SCATTER_GENOME.out.bed_intervals
                 .map { _meta, bed, _intervals -> bed }

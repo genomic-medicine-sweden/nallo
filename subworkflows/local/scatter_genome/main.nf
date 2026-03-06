@@ -52,6 +52,7 @@ workflow SCATTER_GENOME {
             [ meta + [ genome: "mt" ], bed ]
     ]
     }.set{ ch_input_gawk }
+    ch_input_gawk.view()
 
     // Exctract according to meta.genome, logic is in the config file
     GAWK_EXTRACT_REGIONS (
@@ -65,6 +66,7 @@ workflow SCATTER_GENOME {
             mt: meta.genome == "mt"
             nuclear: meta.genome == "nuclear"
     }.set{ ch_bed_genomes }
+
 
     if( make_bed_intervals ) {
 
@@ -97,11 +99,14 @@ workflow SCATTER_GENOME {
                           "Please check the input files or set `--snv_calling_processes` to ${count}."
                 }
             }
-    } else {
-        if ( split_n < 1 ) {
+    } else if ( split_n < 1 ) {
             error "Cannot split bed into ${split_n} regions, split_n should be minimum 1."
         }
-    }
+    else if ( split_n == 1 ) {
+        ch_bed_genomes.nuclear
+            .map { meta, bed -> [meta.subMap('genome'), bed, 1] }
+            .set{ ch_bed_intervals }
+        }
 
     emit:
     bed           = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
