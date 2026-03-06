@@ -529,7 +529,6 @@ workflow NALLO {
             ch_gens_panel_of_normals_male,
             ch_gens_coverage_bins,
         )
-        ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
     }
 
     //

@@ -59,7 +59,6 @@ workflow ANNOTATE_SNVS {
             ch_cadd_resources,
             ch_cadd_prescored_indels,
         )
-        ch_versions = ch_versions.mix(ANNOTATE_CADD.out.versions)
     }
 
     (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
@@ -76,7 +75,6 @@ workflow ANNOTATE_SNVS {
         ch_fasta,
         ch_vep_extra_files,
     )
-    ch_versions = ch_versions.mix(ENSEMBLVEP_SNV.out.versions)
 
     TABIX_ENSEMBLVEP_SNV(
         ENSEMBLVEP_SNV.out.vcf

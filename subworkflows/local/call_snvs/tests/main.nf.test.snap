@@ -90,11 +90,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T20:03:23.428864107",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:03:23.428864107"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -253,11 +253,11 @@
                 ]
             }
         ],
+        "timestamp": "2025-08-13T13:58:57.510046479",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:58:57.510046479"
+        }
     },
     "1 sample female - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -311,7 +311,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
+                    
                 ],
                 "gvcf": [
                     [
@@ -362,15 +362,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-06T09:00:07.544422825",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T08:49:40.526293509"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant -stub": {
         "content": [
@@ -661,11 +661,11 @@
                 ]
             }
         ],
+        "timestamp": "2025-08-13T13:59:18.243370738",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:59:18.243370738"
+        }
     },
     "1 sample - 1 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -758,11 +758,11 @@
                 ]
             }
         ],
+        "timestamp": "2025-08-13T13:56:31.758994204",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:56:31.758994204"
+        }
     },
     "1 sample male - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -816,8 +816,7 @@
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f",
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
+                    
                 ],
                 "gvcf": [
                     [
@@ -868,16 +867,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f",
-                    "versions.yml:md5,5e297f7d6555d30c03d9fdbc972c709f"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-06T08:59:59.010041976",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T06:25:07.970459919"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
@@ -1036,11 +1034,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T20:04:53.500947225",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:04:53.500947225"
+        }
     },
     "1 sample - no bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1133,11 +1131,11 @@
                 ]
             }
         ],
+        "timestamp": "2025-08-13T13:56:24.817599253",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:56:24.817599253"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant": {
         "content": [
@@ -1428,11 +1426,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T20:06:31.814952825",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:06:31.814952825"
+        }
     },
     "2 samples - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1723,10 +1721,10 @@
                 ]
             }
         ],
+        "timestamp": "2025-08-13T13:59:08.045442686",
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:59:08.045442686"
+        }
     }
 }

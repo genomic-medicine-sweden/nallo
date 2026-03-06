@@ -632,17 +632,17 @@
                 "5": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "second_family"
                         },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "6": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "second_family"
                         },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "7": [
@@ -808,17 +808,17 @@
                 "tbi": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "second_family"
                         },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "second_family"
                         },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
@@ -833,7 +833,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-05T08:49:28.525715818",
+        "timestamp": "2026-03-06T08:56:27.150785905",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

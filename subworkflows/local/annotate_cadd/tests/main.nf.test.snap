@@ -22,10 +22,6 @@
                         "rename_chrnames_ann.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,8bd330c3d52c6227c294d82b35e39bdc",
-                    "versions.yml:md5,b869f1605e2f022a8d364d081fdc348e"
-                ],
                 "tbi": [
                     [
                         {
@@ -45,14 +41,10 @@
                         },
                         "rename_chrnames_ann.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,8bd330c3d52c6227c294d82b35e39bdc",
-                    "versions.yml:md5,b869f1605e2f022a8d364d081fdc348e"
                 ]
             }
         ],
-        "timestamp": "2026-03-06T08:26:14.641235134",
+        "timestamp": "2026-03-06T08:48:09.172090563",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

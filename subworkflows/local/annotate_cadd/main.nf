@@ -20,21 +20,17 @@ workflow ANNOTATE_CADD {
     ch_cadd_prescored_indels // channel: [mandatory] [ val(meta), path(dir) ]
 
     main:
-    ch_versions = channel.empty()
-
     REFERENCE_TO_CADD_CHRNAMES(
         ch_fai,
         [],
         false,
     )
-    ch_versions = ch_versions.mix(REFERENCE_TO_CADD_CHRNAMES.out.versions)
 
     CADD_TO_REFERENCE_CHRNAMES(
         ch_fai,
         [],
         false,
     )
-    ch_versions = ch_versions.mix(CADD_TO_REFERENCE_CHRNAMES.out.versions)
 
     ch_vcf
         .join(ch_index, failOnMismatch: true, failOnDuplicate: true)
@@ -72,5 +68,4 @@ workflow ANNOTATE_CADD {
     emit:
     vcf      = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
     tbi      = ANNOTATE_INDELS.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions // channel: [ path(versions.yml) ]
 }
