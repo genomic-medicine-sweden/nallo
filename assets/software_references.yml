@@ -189,3 +189,18 @@ tool:
   whatshap:
     citation: "WhatsHap (Martin et al. 2016)"
     bibliography: "Marcel Martin, Murray Patterson, Shilpa Garg, Sarah O Fischer, Nadia Pisanti, Gunnar W Klau, Alexander Schöenhuth, Tobias Marschall. bioRxiv 085050; doi: https://doi.org/10.1101/085050"
+  Usage:
+    citation: "TODO: DELETE ME!"
+    bibliography: ""
+  "":
+    citation: "TODO: DELETE ME TOO!"
+    bibliography: ""
+  "Indexing":
+    citation: "TODO: DELETE ME THREE!"
+    bibliography: ""
+  "Querying":
+    citation: "TODO: DELETE ME THREE!"
+    bibliography: ""
+  "perl-math-cdf":
+    citation: "perl-math-cdf"
+    bibliography: ""

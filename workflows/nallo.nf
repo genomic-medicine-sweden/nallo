@@ -678,7 +678,6 @@ workflow NALLO {
                 params.filter_snvs_expression,
                 params.filter_variants_hgnc_ids,
             )
-            ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
@@ -865,7 +864,6 @@ workflow NALLO {
                 params.filter_svs_expression,
                 params.filter_variants_hgnc_ids,
             )
-            ch_versions = ch_versions.mix(FILTER_VARIANTS_SVS.out.versions)
 
             ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
 

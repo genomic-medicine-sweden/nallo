@@ -35,26 +35,26 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased_snv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased_snv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     [
@@ -101,26 +101,26 @@
                     ]
                 ],
                 "phased_family_snvs": [
-                    
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased_snv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "phased_family_snvs_tbi": [
-                    
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_phased_snv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "phased_family_svs": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "phased_family_svs_tbi": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
@@ -132,7 +132,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-05T16:07:54.831545245",
+        "timestamp": "2026-03-06T14:23:14.747452881",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -232,7 +232,6 @@
                 
             ],
             "d2a8feadf0c710ac492ddbae3956c8e3",
-            "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
                     {
@@ -260,7 +259,7 @@
                 "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-03-05T09:06:40.879971059",
+        "timestamp": "2026-03-06T14:38:08.786526366",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

@@ -18,6 +18,7 @@ workflow LONGPHASE {
     main:
     ch_versions = channel.empty()
 
+
     ch_snv_vcf
         .map { meta, vcf -> [meta, vcf, "snv"] }
         .set { ch_snv_with_type }
@@ -98,6 +99,7 @@ workflow LONGPHASE {
 
 
     BCFTOOLS_MERGE.out.index
+        .view()
         .branch { meta, tbi ->
             snv: meta.variant_type == 'snv'
             [meta - meta.subMap('variant_type'), tbi]
