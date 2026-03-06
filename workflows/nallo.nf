@@ -418,8 +418,7 @@ workflow NALLO {
                 .map { meta, bed -> [meta, bed] }
                 .set { ch_bed_mt_to_mix }
 
-            // Value channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
-
+            // Channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
             SCATTER_GENOME.out.bed_intervals
                 .map { _meta, bed, _intervals -> bed }
                 .mix(ch_bed_mt_to_mix.map { _meta, bed -> bed })
@@ -437,6 +436,7 @@ workflow NALLO {
                 .combine(num_bed_files_for_snv_calling)
                 .set { ch_bed_mt }
 
+            // Mix the mitochondrial and nuclear channels
             ch_bed_intervals
                 .mix(ch_bed_mt)
                 .set { ch_bed_intervals }
