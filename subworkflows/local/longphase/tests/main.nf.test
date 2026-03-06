@@ -189,7 +189,7 @@ nextflow_workflow {
     }
 
     test ("2 samples - SNVs + SVs") {
-        tag "hej"
+
         setup {
             run("SAWFISH_DISCOVER") {
                 script "../../../../modules/nf-core/sawfish/discover/main.nf"

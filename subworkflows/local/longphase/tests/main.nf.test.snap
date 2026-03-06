@@ -226,12 +226,22 @@
     "2 samples - SNVs + SVs": {
         "content": [
             [
-                
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_phased_snv.vcf.gz:md5,6d4826c1962e0207820b57fb1abb15b9"
+                ]
             ],
             [
-                
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_phased_snv.vcf.gz.tbi:md5,a5b32e65aee87ce98d28fab420c9a1bc"
+                ]
             ],
-            "d2a8feadf0c710ac492ddbae3956c8e3",
+            "FAM_phased_sv.vcf.gz",
             [
                 [
                     {
@@ -259,7 +269,7 @@
                 "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-03-06T14:38:08.786526366",
+        "timestamp": "2026-03-06T15:46:39.438652383",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

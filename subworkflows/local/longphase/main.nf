@@ -86,7 +86,10 @@ workflow LONGPHASE {
         .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
         .set { ch_phased_vcf }
 
-    BCFTOOLS_MERGE(ch_phased_vcf, fasta.join(fai, failOnMismatch: true, failOnDuplicate: true))
+    BCFTOOLS_MERGE(
+        ch_phased_vcf,
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
+    )
 
     BCFTOOLS_MERGE.out.vcf
         .branch { meta, vcf ->
