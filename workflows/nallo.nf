@@ -1,6 +1,6 @@
-include { samplesheetToList } from 'plugin/nf-schema'
+include { samplesheetToList                                      } from 'plugin/nf-schema'
 include {
-    createReferenceChannelFromPath
+    createReferenceChannelFromPath ;
     createReferenceChannelFromSamplesheet
 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 /*
@@ -55,23 +55,23 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modu
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING        } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT                                     } from '../modules/nf-core/bcftools/sort/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH        } from '../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                 } from '../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING            } from '../modules/nf-core/bcftools/view/main'
-include { MINIMAP2_ALIGN                                    } from '../modules/nf-core/minimap2/align/main'
-include { SAMTOOLS_MERGE                                    } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_CONVERT                                  } from '../modules/nf-core/samtools/convert/main'
-include { MULTIQC                                           } from '../modules/nf-core/multiqc/main'
-include { PEDDY                                             } from '../modules/nf-core/peddy/main'
-include { SPLITUBAM                                         } from '../modules/nf-core/splitubam/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                 } from '../modules/nf-core/svdb/merge/main'
-include { paramsSummaryMap                                  } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
-include { citationBibliographyText                          } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT                                          } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
+include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
+include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
+include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
+include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
+include { paramsSummaryMap                                       } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -80,7 +80,6 @@ include { citationBibliographyText                          } from '../subworkfl
 */
 
 workflow NALLO {
-
     take:
     ch_input
 
@@ -133,7 +132,7 @@ workflow NALLO {
     ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
         .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
-        .map { file -> [ [ id: 'hgnc_ids' ], file ] }
+        .map { file -> [[id: 'hgnc_ids'], file] }
         .collect()
 
     def cram_output = params.alignment_output_format == 'cram'
@@ -141,16 +140,16 @@ workflow NALLO {
     //
     // Prepare references
     //
-    if(!params.skip_alignment || !params.skip_genome_assembly) {
+    if (!params.skip_alignment || !params.skip_genome_assembly) {
 
         // The genome assembly alignment needs a fai for cram output,
         // but we shouldn't need to prepare the vep cache here.
         // Perhaps PREPARE_REFERENCES could be modified to handle this case?
-        PREPARE_REFERENCES (
+        PREPARE_REFERENCES(
             ch_fasta,
             ch_vep_cache_unprocessed,
-            params.fasta.endsWith('.gz'),                           // should we unzip fasta
-            params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
+            params.fasta.endsWith('.gz'),
+            params.vep_cache && params.vep_cache.endsWith("tar.gz"),
         )
         ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
 
@@ -162,12 +161,12 @@ workflow NALLO {
     // Convert FASTQ to BAM only if alignment or should be done.
     // Since we assume that the majority of pipeline runs will use BAM files as input,
     // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if(!params.skip_alignment) {
+    if (!params.skip_alignment) {
 
-        CONVERT_INPUT_FASTQS (
+        CONVERT_INPUT_FASTQS(
             ch_input,
             false,
-            true
+            true,
         )
         ch_versions = ch_versions.mix(CONVERT_INPUT_FASTQS.out.versions)
     }
@@ -180,19 +179,18 @@ workflow NALLO {
     // If we start running more trios we also need to consider that the parents at the moment needs to be merged
     // before YAK. So, we could consider adding some logic to handle that case,
     // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if(!params.skip_alignment && params.alignment_processes > 1) {
+    if (!params.skip_alignment && params.alignment_processes > 1) {
 
-        SPLITUBAM (
-            CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
+        SPLITUBAM(
+            CONVERT_INPUT_FASTQS.out.bam
         )
         ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
-
     }
 
     //
     // Hifiasm assembly and alignment to reference genome
     //
-    if(!params.skip_genome_assembly) {
+    if (!params.skip_genome_assembly) {
 
         // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
         // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
@@ -207,10 +205,10 @@ workflow NALLO {
         //
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
-        CONVERT_INPUT_BAMS (
+        CONVERT_INPUT_BAMS(
             !params.skip_alignment && params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_input,
             true,
-            false
+            false,
         )
         ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
 
@@ -222,15 +220,15 @@ workflow NALLO {
         // Hifiasm assembly
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
-            params.hifiasm_mode == "trio-binning" // Should we use trio binning mode?
+            params.hifiasm_mode == "trio-binning",
         )
         ch_versions = ch_versions.mix(GENOME_ASSEMBLY.out.versions)
 
-        ALIGN_ASSEMBLIES (
+        ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
             ch_fasta,
             ch_fai,
-            cram_output
+            cram_output,
         )
         ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
@@ -244,8 +242,9 @@ workflow NALLO {
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        (params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : CONVERT_INPUT_FASTQS.out.bam)
-            .map { meta, bam -> [ meta + [ file: bam.name ], bam ] }
+        (params.alignment_processes > 1 ? SPLITUBAM.out.bam
+            .transpose() : CONVERT_INPUT_FASTQS.out.bam)
+            .map { meta, bam -> [meta + [file: bam.name], bam] }
             .set { reads_for_alignment }
 
         /*
@@ -253,21 +252,21 @@ workflow NALLO {
          * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
          */
         reads_for_alignment
-            .map { meta, bam -> [ meta - meta.subMap('file'), bam ] }
+            .map { meta, bam -> [meta - meta.subMap('file'), bam] }
             .groupTuple()
-            .map { meta, files -> [ meta + [ n_files: files.size() ] ] }
+            .map { meta, files -> [meta + [n_files: files.size()]] }
             .set { reads_grouping_key }
 
         /*
          * Align reads independently per split (could be a split-align-merge subworkflow)
          */
-        MINIMAP2_ALIGN (
+        MINIMAP2_ALIGN(
             reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
             false,
-            false
+            false,
         )
         ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
@@ -281,10 +280,10 @@ workflow NALLO {
                 bam_meta.id == grouping_key_meta.id
             }
             .map { bam_meta, bam, bai, grouping_key_meta ->
-                [ bam_meta - bam_meta.subMap('file') + [ n_files: grouping_key_meta.n_files ], bam, bai ]
+                [bam_meta - bam_meta.subMap('file') + [n_files: grouping_key_meta.n_files], bam, bai]
             }
             .map { meta, bam, bai ->
-                [ groupKey(meta, meta.n_files), bam, bai ]
+                [groupKey(meta, meta.n_files), bam, bai]
             }
             .groupTuple()
             .set { bam_to_merge }
@@ -294,26 +293,26 @@ workflow NALLO {
          * because alignment runs without knowledge of group completeness (n_files),
          * and we can't therefore output from the alignment step with correct naming.
          */
-        SAMTOOLS_MERGE (
-            bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
-            [[],[]],
-            [[],[]],
-            [[],[]],
+        SAMTOOLS_MERGE(
+            bam_to_merge.map { meta, bam, _bai -> [meta, bam] },
+            [[], []],
+            [[], []],
+            [[], []],
         )
         ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
-            .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
+            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
             .set { ch_aligned_bam }
 
         // Publish alignments as CRAM if requested
         if (cram_output && params.skip_phasing) {
-            SAMTOOLS_CONVERT (
+            SAMTOOLS_CONVERT(
                 ch_aligned_bam,
                 ch_fasta,
-                ch_fai
+                ch_fai,
             )
             ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
         }
@@ -322,11 +321,11 @@ workflow NALLO {
         // Create PED from samplesheet
         //
         ch_input
-            .map { meta, _files -> [ [ id: meta.project ], meta ] }
+            .map { meta, _files -> [[id: meta.project], meta] }
             .groupTuple()
             .set { ch_samplesheet_ped_in }
 
-        SAMPLESHEET_PED ( ch_samplesheet_ped_in )
+        SAMPLESHEET_PED(ch_samplesheet_ped_in)
         ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
 
         SAMPLESHEET_PED.out.ped
@@ -336,21 +335,20 @@ workflow NALLO {
         //
         // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
         //
-        BAM_INFER_SEX (
+        BAM_INFER_SEX(
             ch_aligned_bam,
             ch_fasta,
             ch_fai,
             ch_somalier_sites,
-            ch_samplesheet_pedfile
+            ch_samplesheet_pedfile,
         )
         ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
 
         // Set files with updated meta for subsequent processes
         ch_bam     = BAM_INFER_SEX.out.bam
         ch_bam_bai = BAM_INFER_SEX.out.bam_bai
-
     }
 
     //
@@ -358,7 +356,7 @@ workflow NALLO {
     //
     if (!params.skip_qc) {
 
-        QC_ALIGNED_READS (
+        QC_ALIGNED_READS(
             ch_bam_bai,
             ch_fasta,
             ch_mosdepth_regions,
@@ -366,22 +364,21 @@ workflow NALLO {
             !params.skip_sambamba_depth,
         )
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]) )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics } )
-        ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]) )
-
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
     }
 
     /*
      * Call paralogous genes with paraphase
      */
-    if(!params.skip_call_paralogs) {
-        CALL_PARALOGS (
+    if (!params.skip_call_paralogs) {
+        CALL_PARALOGS(
             ch_bam_bai,
             ch_fasta,
             ch_fai,
-            cram_output
+            cram_output,
         )
         ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
@@ -403,21 +400,57 @@ workflow NALLO {
     if(!params.skip_snv_calling) {
 
         // Make BED intervals, can be used for parallel SNV calling
-        SCATTER_GENOME (
+        SCATTER_GENOME(
             ch_fai,
-            ch_snv_call_regions,      // BED file to scatter
-            !params.snv_call_regions, // Make bed from fai
-            !params.skip_snv_calling,
-            params.snv_calling_processes
+            ch_snv_call_regions,
+            !params.snv_call_regions,
+            params.snv_calling_processes > 1,
+            params.snv_calling_processes,
         )
         ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
+
+        // Mix the nuclear and mt genomes bed files back together to feed to CALL_SNVS
+        // if Deepvariant is used as mitochondrial caller
+        if (params.mt_caller == "deepvariant") {
+
+            SCATTER_GENOME.out.bed_mt
+                .filter { _meta, bed -> bed.size() > 0 }
+                .map { meta, bed -> [meta, bed] }
+                .set { ch_bed_mt_to_mix }
+
+            // Channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
+            SCATTER_GENOME.out.bed_intervals
+                .map { _meta, bed, _intervals -> bed }
+                .mix(ch_bed_mt_to_mix.map { _meta, bed -> bed })
+                .collect()
+                .map { beds -> beds.size() }
+                .set { num_bed_files_for_snv_calling }
+
+            SCATTER_GENOME.out.bed_intervals
+                .map { meta, bed, _intervals -> [meta, bed] }
+                .combine(num_bed_files_for_snv_calling)
+                .set { ch_bed_intervals }
+
+            ch_bed_mt_to_mix
+                .map { meta, bed -> [meta.subMap('genome'), bed] }
+                .combine(num_bed_files_for_snv_calling)
+                .set { ch_bed_mt }
+
+            // Mix the mitochondrial and nuclear channels
+            ch_bed_intervals
+                .mix(ch_bed_mt)
+                .set { ch_bed_intervals }
+        }
+        else {
+            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
+        }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
         ch_bam_bai
-            .combine(SCATTER_GENOME.out.bed_intervals)
-            .map { meta, bam, bai, bed, intervals ->
-                [ meta + [ num_intervals: intervals, region: bed ], bam, bai, bed ]
+            .combine(ch_bed_intervals)
+            .map { meta, bam, bai, bed_meta, bed, num_intervals ->
+                [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
             }
             .set { call_snvs_input }
 
@@ -435,34 +468,37 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
+        // Group GVCFs per region and family (one region with all samples)
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf]
             }
             .groupTuple()
             .set { variants_to_merge_per_family }
 
         CALL_SNVS.out.gvcf_index
             .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], tbi]
             }
             .groupTuple()
             .set { gvcf_tbis_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
+        // SCATTER_GENOME.out.bed contains all regions, but we could probably pass the region BED that actually matches the variants instead...
         GVCF_GLNEXUS_NORM_VARIANTS(
             variants_to_merge_per_family,
             gvcf_tbis_per_family,
-            SCATTER_GENOME.out.bed, // This contains all regions, but we could probably pass the region BED that actually matches the variants instead...
+            SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
             params.snv_caller,
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
+        // Grouping VCF, containing one sample with all regions
         CALL_SNVS.out.vcf
             .map { meta, vcf ->
-                def new_meta = meta - meta.subMap('region')
+                def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
             }
             .groupTuple()
@@ -480,34 +516,33 @@ workflow NALLO {
         ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
         // These contains RefCalls
-        sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf
+        sample_snv_vcf = VCF_CONCAT_NORM_VARIANTS.out.vcf
         sample_snv_index = VCF_CONCAT_NORM_VARIANTS.out.index
 
-        family_snv_vcf   = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
+        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
         family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
 
         // SNV QC
-        QC_SNVS (
-            VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf, // Can we use the normalized VCF here, for DV vcfstatsreport?
+        // Can we use the normalized VCF here, for DV vcfstatsreport?
+        QC_SNVS(
+            VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf,
             sample_snv_vcf,
             sample_snv_index,
             params.snv_caller.equals("deepvariant"),
         )
 
         ch_versions = ch_versions.mix(QC_SNVS.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{ _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf
-            .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_vcf_tbi_per_region }
     }
-
     if (!params.skip_prepare_gens_input) {
-
         CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index)
             .map { meta, gvcf, gvcf_index ->
-                def sample_meta = meta - meta.subMap(['region', 'num_intervals'])
+                def sample_meta = meta - meta.subMap(['region', 'num_intervals', 'genome'])
                 [sample_meta, gvcf, gvcf_index]
             }
             .groupTuple()
@@ -535,9 +570,9 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if(!params.skip_sv_calling) {
+    if (!params.skip_sv_calling) {
 
-        CALL_SVS (
+        CALL_SVS(
             ch_bam_bai,
             ch_tandem_repeats,
             sample_snv_vcf,
@@ -552,44 +587,46 @@ workflow NALLO {
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
             params.create_hificnv_maf_track,
-            params.create_sawfish_maf_track
+            params.create_sawfish_maf_track,
         )
-
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
     }
 
     //
     // Phase SNVs and INDELs
     //
-    if(!params.skip_phasing) {
+    if (!params.skip_phasing) {
 
         ch_input
-            .map { meta, _files -> [ meta.family_id, meta.id ] }
+            .map { meta, _files -> [meta.family_id, meta.id] }
             .groupTuple()
             .map { family_id, sample_ids ->
-                [ [ id : family_id ], sample_ids.unique() ]
+                [[id: family_id], sample_ids.unique()]
             }
             .set { ch_family_to_samples }
 
         // Grouping SNV VCFs per family to concatenate before phasing.
         // Right now they are split by calling regions but we need whole-genome VCFs for phasing.
         family_snv_vcf
-            .join(family_snv_index, failOnMismatch:true, failOnDuplicate:true)
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
-                [ groupKey([ id: meta.family_id ], params.snv_calling_processes), vcf, tbi ]
+                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
+                [groupKey(new_meta, meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
             .map { key, vcfs, tbis ->
-                [ key.getGroupTarget(), vcfs, tbis ]
+                [key.getGroupTarget(), vcfs, tbis]
+            }
+            .map { meta, vcfs, tbis ->
+                [meta - meta.subMap('num_intervals'), vcfs, tbis]
             }
             .set { ch_bcftools_concat_phasing_in }
 
-        BCFTOOLS_CONCAT_PHASING (
+        BCFTOOLS_CONCAT_PHASING(
             ch_bcftools_concat_phasing_in
         )
 
-        PHASING (
+        PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
@@ -600,34 +637,34 @@ workflow NALLO {
             ch_fai,
             params.phaser,
             !params.skip_sv_calling,
-            cram_output
+            cram_output,
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
-        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{_meta, txt -> txt}.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
 
         // Scatter whole-genome phased SNV VCFs back into regions for annotation
         PHASING.out.phased_family_snvs
-            .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch:true, failOnDuplicate:true)
-            .combine(SCATTER_GENOME.out.bed_intervals)
-            .multiMap { meta, vcf, tbi, bed, _num_intervals ->
-                vcf: [ meta + [ id : bed.name, family_id: meta.id ], vcf, tbi ]
-                bed : bed
+            .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
+            .combine(ch_bed_intervals)
+            .multiMap { vcf_meta, vcf, tbi, bed_meta, bed, num_intervals ->
+                vcf: [vcf_meta + [id: bed.name, family_id: vcf_meta.id, genome: bed_meta.genome, num_intervals: num_intervals], vcf, tbi]
+                bed: bed
             }
             .set { ch_phased_scatter_in }
 
-        BCFTOOLS_VIEW_PHASING (
+        BCFTOOLS_VIEW_PHASING(
             ch_phased_scatter_in.vcf,
             ch_phased_scatter_in.bed,
             [],
-            []
+            [],
         )
         ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
         ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
         ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
-
-    } else {
+    }
+    else {
         // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
         if (!params.skip_snv_calling) {
             ch_snv_vcf_for_annotation = family_snv_vcf
@@ -641,7 +678,7 @@ workflow NALLO {
 
     //
     // Annotate SNVs
-    if(!params.skip_snv_annotation) {
+    if (!params.skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
@@ -657,23 +694,23 @@ workflow NALLO {
             ch_cadd_header,
             ch_cadd_resources,
             ch_cadd_prescored_indels,
-            params.pre_vep_snv_filter_expression != ''
+            params.pre_vep_snv_filter_expression != '',
         )
         ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
         ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
-                clinical: [ meta + [ set: "clinical" ], vcf ]
-                research: [ meta + [ set: "research" ], vcf ]
+                clinical: [meta + [set: "clinical"], vcf]
+                research: [meta + [set: "research"], vcf]
             }
             .set { ch_clin_research_snvs_vcf }
+        ch_clin_research_snvs_vcf.clinical
 
-        ch_clin_research_snvs_vcf.research
-            .set { ch_ann_csq_pli_snv_in }
+        ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
 
-        if(params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+        if (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
 
-            FILTER_VARIANTS_SNVS (
+            FILTER_VARIANTS_SNVS(
                 ch_clin_research_snvs_vcf.clinical,
                 ch_hgnc_ids,
                 params.filter_snvs_expression,
@@ -685,16 +722,15 @@ workflow NALLO {
         }
 
         // This is really only required for ranking, could consider moving it there?
-        ANN_CSQ_PLI_SNV (
+        ANN_CSQ_PLI_SNV(
             ch_ann_csq_pli_snv_in,
-            ch_variant_consequences_snvs
+            ch_variant_consequences_snvs,
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
-            .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_vcf_tbi_per_region }
-
     }
 
     //
@@ -702,15 +738,18 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !params.skip_chromograph && params.plot_chromograph_autozygosity && !params.skip_snv_annotation
 
-    if(split_family_vcf_for_chromograph) {
+    if (split_family_vcf_for_chromograph) {
 
         ANNOTATE_SNVS.out.vcf
-            .join ( ANNOTATE_SNVS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
+            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, vcf, tbi ->
+                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
+                [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
+            }
+            .groupTuple()
             .set { ch_concat_sort_annotated_snvs_input }
 
-        CONCAT_SORT_ANNOTATED_SNVS (
+        CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
         )
 
@@ -719,8 +758,7 @@ workflow NALLO {
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
             .unique()
             .combine(
-                CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-                    .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                CONCAT_SORT_ANNOTATED_SNVS.out.vcf.join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
             )
             .filter { sample_info, vcf_meta, _vcf, _tbi ->
                 sample_info.family_id == vcf_meta.id
@@ -738,11 +776,11 @@ workflow NALLO {
         )
     }
 
-    if(!params.skip_chromograph) {
+    if (!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[],[]],
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[], []],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[], []],
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
@@ -754,13 +792,11 @@ workflow NALLO {
     // Ranks family VCFs per variant call region
     // Can only run if samplesheet has affected samples
     //
-    if(!params.skip_rank_variants) {
+    if (!params.skip_rank_variants) {
 
         // Create PED with updated sex - per family
-        SOMALIER_PED_FAMILY (
-            ch_bam
-                .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
-                .groupTuple()
+        SOMALIER_PED_FAMILY(
+            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
         )
         ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
@@ -768,36 +804,38 @@ workflow NALLO {
         // Since we don't always have matching number of ped files and call regions
         // we need to combine and filter instead of join
         ANN_CSQ_PLI_SNV.out.vcf
-            .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
-            .combine ( SOMALIER_PED_FAMILY.out.ped )
+            .map { meta, _vcf -> [[id: meta.family_id], meta] }
+            .combine(SOMALIER_PED_FAMILY.out.ped)
             .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
-            .map { _family_id_snv, meta, _family_id_ped, ped -> [ meta, ped ] }
+            .map { _family_id_snv, meta, _family_id_ped, ped -> [meta, ped] }
             .set { ch_snv_ranking_ped_file }
 
         // Only run if we have affected individuals
-        RANK_VARIANTS_SNV (
+        RANK_VARIANTS_SNV(
             addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
             addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
             ch_genmod_reduced_penetrance,
-            ch_genmod_score_config_snvs
+            ch_genmod_score_config_snvs,
         )
 
         RANK_VARIANTS_SNV.out.vcf
-            .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .join(RANK_VARIANTS_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_vcf_tbi_per_region }
     }
 
     //
     // Concatenate and sort ranked SNVs, sort and publish
     //
-    if(!params.skip_snv_calling) {
-
+    if (!params.skip_snv_calling) {
         ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
+            .map { meta, vcf, tbi ->
+                def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
+                [groupKey(new_meta, meta.num_intervals), vcf, tbi]
+            }
+            .groupTuple()
             .set { ch_concat_sort_input }
 
-        CONCAT_SORT_RANKED_SNVS (
+        CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
         )
 
@@ -809,25 +847,24 @@ workflow NALLO {
     if (!params.skip_snv_calling && !params.skip_peddy) {
 
         CONCAT_SORT_RANKED_SNVS.out.vcf
-            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
+            .join(CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
             .filter { meta, _vcf, _tbi -> meta.set == "research" }
             .set { ch_peddy_in }
 
-        PEDDY (
+        PEDDY(
             ch_peddy_in,
             ch_samplesheet_pedfile,
-            ch_peddy_sites
+            ch_peddy_sites,
         )
         ch_versions = ch_versions.mix(PEDDY.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
     }
 
     //
@@ -835,32 +872,31 @@ workflow NALLO {
     //
     if (!params.skip_sv_annotation) {
 
-        ANNOTATE_SVS (
+        ANNOTATE_SVS(
             ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
             PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
             params.vep_cache_version,
-            ch_vep_plugin_files.collect()
+            ch_vep_plugin_files.collect(),
         )
         ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
         ANNOTATE_SVS.out.vcf
             .multiMap { meta, vcf ->
-                clinical: [ meta + [ set: "clinical" ], vcf ]
-                research: [ meta + [ set: "research" ], vcf ]
+                clinical: [meta + [set: "clinical"], vcf]
+                research: [meta + [set: "research"], vcf]
             }
             .set { ch_clin_research_svs_vcf }
 
-        ch_clin_research_svs_vcf.research
-            .set { ch_ann_csq_svs_in }
+        ch_clin_research_svs_vcf.research.set { ch_ann_csq_svs_in }
 
         //
         // Filter SVs
         //
-        if(params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+        if (params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
 
-            FILTER_VARIANTS_SVS (
+            FILTER_VARIANTS_SVS(
                 ch_clin_research_svs_vcf.clinical,
                 ch_hgnc_ids,
                 params.filter_svs_expression,
@@ -869,12 +905,11 @@ workflow NALLO {
             ch_versions = ch_versions.mix(FILTER_VARIANTS_SVS.out.versions)
 
             ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
-
         }
 
-        ANN_CSQ_PLI_SVS (
+        ANN_CSQ_PLI_SVS(
             ch_ann_csq_svs_in,
-            ch_variant_consequences_svs
+            ch_variant_consequences_svs,
         )
         ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
     }
@@ -886,53 +921,55 @@ workflow NALLO {
 
         // Give PED file SVs meta so they can be joined later in the subworkflow.
         ANN_CSQ_PLI_SVS.out.vcf
-            .combine ( SOMALIER_PED_FAMILY.out.ped )
+            .combine(SOMALIER_PED_FAMILY.out.ped)
             .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
-            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
+            .map { vcf_meta, _vcf, _ped_meta, ped -> [vcf_meta, ped] }
             .set { ch_sv_ranking_ped_file }
 
-        RANK_VARIANTS_SVS (
+        RANK_VARIANTS_SVS(
             addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
             addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
             ch_genmod_reduced_penetrance,
-            ch_genmod_score_config_svs
+            ch_genmod_score_config_svs,
         )
     }
 
     //
     // Collect and publish SVs
     //
-    if(!params.skip_sv_calling) {
+    if (!params.skip_sv_calling) {
 
-        ch_collect_svs = params.skip_sv_annotation ? ch_sv_vcf_for_annotation :
-            params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
-            RANK_VARIANTS_SVS.out.vcf
+        ch_collect_svs = params.skip_sv_annotation
+            ? ch_sv_vcf_for_annotation
+            : params.skip_rank_variants
+                ? ANN_CSQ_PLI_SVS.out.vcf
+                : RANK_VARIANTS_SVS.out.vcf
 
-        BCFTOOLS_VIEW_SV (
-            ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
+        BCFTOOLS_VIEW_SV(
+            ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
             [],
             [],
-            []
+            [],
         )
     }
 
     //
     // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if(!params.skip_methylation_calling && params.run_modkit) {
+    if (!params.skip_methylation_calling && params.run_modkit) {
         CALL_METHYLATION_MODKIT(
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_fai,
             ch_modkit_call_regions,
-            params.bigwig_modcodes
+            params.bigwig_modcodes,
         )
     }
 
     if (!params.skip_methylation_calling && params.run_methbat) {
         CALL_METHYLATION_METHBAT(
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
-            ch_methbat_regions
+            ch_methbat_regions,
         )
         ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
@@ -940,23 +977,24 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    if(!params.skip_repeat_calling) {
+    if (!params.skip_repeat_calling) {
         if (params.str_caller == "trgt") {
-            CALL_REPEAT_EXPANSIONS_TRGT (
+            CALL_REPEAT_EXPANSIONS_TRGT(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
                 ch_fai,
                 ch_str_bed,
-                cram_output
+                cram_output,
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
-        } else if (params.str_caller == "strdust"){
-            CALL_REPEAT_EXPANSIONS_STRDUST (
+        }
+        else if (params.str_caller == "strdust") {
+            CALL_REPEAT_EXPANSIONS_STRDUST(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
                 ch_fai,
-                ch_str_bed
+                ch_str_bed,
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
@@ -965,13 +1003,13 @@ workflow NALLO {
     //
     // Annotate repeat expansions with Stranger
     //
-    if(!params.skip_repeat_annotation) {
+    if (!params.skip_repeat_annotation) {
         ANNOTATE_REPEAT_EXPANSIONS(
             ch_repeat_expansions,
             ch_strdrop_training_set_json,
             [[], []],
             ch_stranger_repeat_catalog,
-            params.strdrop_training_set_json
+            params.strdrop_training_set_json,
         )
     }
 
@@ -987,9 +1025,9 @@ workflow NALLO {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
@@ -999,64 +1037,69 @@ workflow NALLO {
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name:  'nallo_software_'  + 'mqc_'  + 'versions.yml',
+            name: 'nallo_software_' + 'mqc_' + 'versions.yml',
             sort: true,
-            newLine: true
-        ).set { ch_collated_versions }
+            newLine: true,
+        )
+        .set { ch_collated_versions }
 
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config        = channel.fromPath(
-        "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config = params.multiqc_config ?
-        channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        channel.empty()
-    ch_multiqc_logo          = params.multiqc_logo ?
-        channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        channel.empty()
+    ch_multiqc_config = channel.fromPath(
+        "${projectDir}/assets/multiqc_config.yml",
+        checkIfExists: true
+    )
+    ch_multiqc_custom_config = params.multiqc_config
+        ? channel.fromPath(params.multiqc_config, checkIfExists: true)
+        : channel.empty()
+    ch_multiqc_logo = params.multiqc_logo
+        ? channel.fromPath(params.multiqc_logo, checkIfExists: true)
+        : channel.empty()
 
-    summary_params      = paramsSummaryMap(
-        workflow, parameters_schema: "nextflow_schema.json")
+    summary_params = paramsSummaryMap(
+        workflow,
+        parameters_schema: "nextflow_schema.json"
+    )
     ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
     ch_multiqc_files = ch_multiqc_files.mix(
-        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
+    )
 
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
-        file(params.multiqc_methods_description, checkIfExists: true) :
-        file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = channel.value(
+    ch_multiqc_custom_methods_description = params.multiqc_methods_description
+        ? file(params.multiqc_methods_description, checkIfExists: true)
+        : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+    ch_methods_description = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
-    ch_methods_description_citation       = citationBibliographyText(
-        ch_versions, topic_versions_string,
-        file("$projectDir/assets/software_references.yml"),
-        'citation'
+    ch_methods_description_citation = citationBibliographyText(
+        ch_versions,
+        topic_versions_string,
+        file("${projectDir}/assets/software_references.yml"),
+        'citation',
     )
-    ch_methods_description_bibliography   = citationBibliographyText(
-        ch_versions, topic_versions_string,
-        file("$projectDir/assets/software_references.yml"),
-        'bibliography'
+    ch_methods_description_bibliography = citationBibliographyText(
+        ch_versions,
+        topic_versions_string,
+        file("${projectDir}/assets/software_references.yml"),
+        'bibliography',
     )
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
+    // sort: false // preserve order for correct yaml structure
     ch_multiqc_files = ch_multiqc_files.mix(
-        ch_methods_description
-            .concat(ch_methods_description_citation)
-            .concat(ch_methods_description_bibliography)
-            .flatten()
-            .collectFile(
-                name: 'methods_description_mqc.yaml',
-                sort: false // preserve order for correct yaml structure
-            )
+        ch_methods_description.concat(ch_methods_description_citation).concat(ch_methods_description_bibliography).flatten().collectFile(
+            name: 'methods_description_mqc.yaml',
+            sort: false,
+        )
     )
 
-    MULTIQC (
+    MULTIQC(
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
         ch_multiqc_custom_config.toList(),
         ch_multiqc_logo.toList(),
         [],
-        []
+        [],
     )
 
     emit:
@@ -1084,9 +1127,3 @@ def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
             [new_meta, file]
         }
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/

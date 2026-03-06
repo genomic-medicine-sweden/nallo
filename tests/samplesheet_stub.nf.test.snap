@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            54,
+            56,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -54,6 +54,9 @@
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.0"
                 },
                 "GLNEXUS": {
                     "glnexus": "1.4.3-0-gcecf42e"
@@ -138,15 +141,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T08:58:40.220997123",
+        "timestamp": "2026-03-06T09:30:22.819301289",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            55,
+            57,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -193,6 +196,9 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.0"
                 },
                 "GFASTATS": {
                     "gfastats": "1.3.10"
@@ -352,10 +358,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-02T09:00:41.332267989",
+        "timestamp": "2026-03-06T09:32:20.511534367",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
@@ -524,7 +530,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            62,
+            64,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -584,6 +590,9 @@
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.0"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -668,15 +677,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T09:02:21.008081801",
+        "timestamp": "2026-03-06T09:33:50.675471968",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test CADD with mock resources": {
         "content": [
-            67,
+            69,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -741,6 +750,9 @@
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.0"
                 },
                 "GLNEXUS": {
                     "glnexus": "1.4.3-0-gcecf42e"
@@ -837,510 +849,21 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T08:56:56.330327397",
+        "timestamp": "2026-03-06T09:29:33.5419407",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test family id same as sample id": {
         "content": [
-            189,
-            {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
-                "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
-                },
-                "BCFTOOLS_CONCAT_PHASING": {
-                    "bcftools": 1.21
-                },
-                "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_QUERY": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_ROH": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_CHROMOGRAPH": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_SV": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_UNCOMPRESS": {
-                    "bcftools": 1.22
-                },
-                "BEDTOOLS_MERGE": {
-                    "bedtools": "2.31.1"
-                },
-                "BEDTOOLS_SORT": {
-                    "bedtools": "2.31.1"
-                },
-                "BEDTOOLS_SPLIT": {
-                    "bedtools": "2.31.1"
-                },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
-                },
-                "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "CREATE_SAMPLES_FILE": {
-                    "gawk": "5.1.0"
-                },
-                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
-                    "gawk": "5.1.0"
-                },
-                "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
-                },
-                "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
-                },
-                "ECHTVAR_ANNO": {
-                    "echtvar": "0.2.2"
-                },
-                "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2
-                },
-                "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
-                },
-                "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
-                },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "GATK4_DENOISEREADCOUNTS": {
-                    "gatk4": "4.6.2.0"
-                },
-                "GENMOD_ANNOTATE": {
-                    "genmod": "3.10.2"
-                },
-                "GENMOD_COMPOUND": {
-                    "genmod": "3.10.2"
-                },
-                "GENMOD_MODELS": {
-                    "genmod": "3.10.2"
-                },
-                "GENMOD_SCORE": {
-                    "genmod": "3.10.2"
-                },
-                "GFASTATS": {
-                    "gfastats": "1.3.10"
-                },
-                "GLNEXUS": {
-                    "glnexus": "1.4.3-0-gcecf42e"
-                },
-                "GUNZIP_FASTA": {
-                    "gunzip": 1.13
-                },
-                "HIFIASM": {
-                    "hifiasm": "0.25.0-r726"
-                },
-                "HIFICNV": {
-                    "hificnv": "1.0.0-36e6461"
-                },
-                "LONGPHASE_HAPLOTAG": {
-                    "longphase": 2.0
-                },
-                "LONGPHASE_PHASE": {
-                    "longphase": 2.0
-                },
-                "METHBAT_PROFILE": {
-                    "methbat": "0.16.1-8a0a24c"
-                },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
-                },
-                "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
-                },
-                "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
-                },
-                "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
-                },
-                "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
-                },
-                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                    "pbcpgtools": "3.0.0"
-                },
-                "PEDDY": {
-                    "peddy": "0.4.8"
-                },
-                "PREPARECOVANDBAF": {
-                    "preparecovandbaf": "1.1.5"
-                },
-                "RELATE_RELATE": {
-                    "somalier": "0.2.18"
-                },
-                "RHOCALL_VIZ": {
-                    "rhocall": "0.5.1"
-                },
-                "RUN_CHROMOGRAPH": {
-                    "chromograph": "1.3.1"
-                },
-                "SAMBAMBA_DEPTH": {
-                    "sambamba": "1.0.1"
-                },
-                "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_FASTQ": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_IMPORT": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_SORT": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_VIEW": {
-                    "samtools": "1.22.1"
-                },
-                "SEVERUS": {
-                    "severus": 1.6
-                },
-                "SNIFFLES": {
-                    "sniffles": "1.0.12"
-                },
-                "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
-                },
-                "SOMALIER_PED_FAMILY": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
-                "SPLITUBAM": {
-                    "splitubam": "0.1.1"
-                },
-                "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": "1.22.1"
-                },
-                "STRDROP_CALL": {
-                    "strdrop": "0.3.1"
-                },
-                "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
-                },
-                "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
-                },
-                "SVDB_QUERY": {
-                    "svdb": "2.8.2"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
-                "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
-                "TIDDIT_COV": {
-                    "tiddit": "3.9.3"
-                },
-                "TRGT_GENOTYPE": {
-                    "trgt": "5.0.0-e9acee0"
-                },
-                "TRGT_MERGE": {
-                    "trgt": "5.0.0-e9acee0"
-                },
-                "UNTAR_VEP_CACHE": {
-                    "untar": 1.34
-                },
-                "WHATSHAP_STATS": {
-                    "whatshap": 2.8
-                },
-                "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
-                }
-            },
+            0,
+            null,
             [
-                "aligned_reads",
-                "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam",
-                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam.bai",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
-                "assembly/stats",
-                "assembly/stats/HG002_Revio",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "gens",
-                "gens/HG002_Revio",
-                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
-                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
-                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
-                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
-                "images",
-                "images/chromograph",
-                "images/chromograph/sample",
-                "images/chromograph/sample/HG002_Revio",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr1.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr10.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr11.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr12.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr13.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr14.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr15.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr16.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr17.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr18.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr19.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr2.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr20.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr21.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr22.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr3.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr4.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr5.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr6.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr7.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr8.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chr9.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrM.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrX.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_autozyg.bed_chrY.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr1.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr10.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr11.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr12.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr13.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr14.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr15.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr16.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr17.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr18.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr19.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr2.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr20.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr21.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr22.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr3.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr4.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr5.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr6.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr7.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr8.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chr9.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrM.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
-                "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
-                "methylation",
-                "methylation/pileup",
-                "methylation/pileup/HG002_Revio",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz.tbi",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz.tbi",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
-                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
-                "methylation/profile",
-                "methylation/profile/HG002_Revio",
-                "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_data/.stub",
-                "multiqc/multiqc_plots",
-                "multiqc/multiqc_report.html",
-                "paraphase",
-                "paraphase/family",
-                "paraphase/family/HG002_Revio",
-                "paraphase/family/HG002_Revio/HG002_Revio_paraphase_annotated.tsv",
-                "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz",
-                "paraphase/family/HG002_Revio/HG002_Revio_paraphase_merged.vcf.gz.tbi",
-                "paraphase/sample",
-                "paraphase/sample/HG002_Revio",
-                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam",
-                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam.bai",
-                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.json",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz.tbi",
-                "pedigree",
-                "pedigree/family",
-                "pedigree/family/HG002_Revio.ped",
-                "pipeline_info",
-                "pipeline_info/nallo_software_mqc_versions.yml",
-                "qc",
-                "qc/bcftools_stats",
-                "qc/bcftools_stats/HG002_Revio",
-                "qc/bcftools_stats/HG002_Revio/HG002_Revio.bcftools_stats.txt",
-                "qc/cramino",
-                "qc/cramino/phased",
-                "qc/cramino/phased/HG002_Revio",
-                "qc/cramino/phased/HG002_Revio/HG002_Revio_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG002_Revio/HG002_Revio_cramino_aligned_phased.txt",
-                "qc/cramino/unphased",
-                "qc/cramino/unphased/HG002_Revio",
-                "qc/cramino/unphased/HG002_Revio/HG002_Revio_cramino_aligned.arrow",
-                "qc/cramino/unphased/HG002_Revio/HG002_Revio_cramino_aligned.txt",
-                "qc/deepvariant_vcfstatsreport",
-                "qc/deepvariant_vcfstatsreport/HG002_Revio",
-                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
-                "qc/fastqc",
-                "qc/fastqc/HG002_Revio",
-                "qc/fastqc/HG002_Revio/HG002_Revio.html",
-                "qc/fastqc/HG002_Revio/HG002_Revio.zip",
-                "qc/mosdepth",
-                "qc/mosdepth/HG002_Revio",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.global.dist.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz.csi",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.d4",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.quantized.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.quantized.bed.gz.csi",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.region.dist.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.summary.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz.csi",
-                "qc/peddy",
-                "qc/peddy/HG002_Revio",
-                "qc/peddy/HG002_Revio/HG002_Revio.het_check.csv",
-                "qc/peddy/HG002_Revio/HG002_Revio.het_check.png",
-                "qc/peddy/HG002_Revio/HG002_Revio.html",
-                "qc/peddy/HG002_Revio/HG002_Revio.ped_check.csv",
-                "qc/peddy/HG002_Revio/HG002_Revio.ped_check.png",
-                "qc/peddy/HG002_Revio/HG002_Revio.ped_check.rel-difference.csv",
-                "qc/peddy/HG002_Revio/HG002_Revio.peddy.ped",
-                "qc/peddy/HG002_Revio/HG002_Revio.sex_check.csv",
-                "qc/peddy/HG002_Revio/HG002_Revio.sex_check.png",
-                "qc/peddy/HG002_Revio/HG002_Revio.vs.html",
-                "qc/phasing_stats",
-                "qc/phasing_stats/HG002_Revio",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.gtf.gz.tbi",
-                "qc/phasing_stats/HG002_Revio/HG002_Revio_whatshap_stats.tsv",
-                "qc/sambamba_depth",
-                "qc/sambamba_depth/HG002_Revio",
-                "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed",
-                "qc/somalier",
-                "qc/somalier/relate",
-                "qc/somalier/relate/test",
-                "qc/somalier/relate/test/test.html",
-                "qc/somalier/relate/test/test.pairs.tsv",
-                "qc/somalier/relate/test/test.samples.tsv",
-                "repeats",
-                "repeats/family",
-                "repeats/family/HG002_Revio",
-                "repeats/family/HG002_Revio/HG002_Revio_repeats_annotated.vcf.gz",
-                "repeats/family/HG002_Revio/HG002_Revio_repeats_annotated.vcf.gz.tbi",
-                "repeats/sample",
-                "repeats/sample/HG002_Revio",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam.bai",
-                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz",
-                "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz.tbi",
-                "snvs",
-                "snvs/family",
-                "snvs/family/HG002_Revio",
-                "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_clinical.vcf.gz",
-                "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_clinical.vcf.gz.tbi",
-                "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_research.vcf.gz",
-                "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_research.vcf.gz.tbi",
-                "snvs/sample",
-                "snvs/sample/HG002_Revio",
-                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
-                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
-                "svs",
-                "svs/family",
-                "svs/family/HG002_Revio",
-                "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_clinical.vcf.gz",
-                "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_clinical.vcf.gz.tbi",
-                "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz",
-                "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz.tbi",
-                "visualization_tracks",
-                "visualization_tracks/HG002_Revio",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bw",
-                "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
+                "pipeline_info"
             ]
         ],
-        "timestamp": "2026-03-04T13:29:59.275580296",
+        "timestamp": "2026-03-06T14:44:32.054576625",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

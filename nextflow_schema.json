@@ -582,7 +582,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c19a5d7e928348a81c235668cd025d6f3775bc29/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -709,6 +709,11 @@
                     "type": "string",
                     "description": "Modkit modified bases, separated by space. E.g. '5mC 5hmC'",
                     "default": "5mC"
+                },
+                "mt_caller": {
+                    "type": "string",
+                    "default": "deepvariant",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
                 },
                 "alignment_processes": {
                     "type": "integer",
