@@ -31,7 +31,6 @@ workflow QC_ALIGNED_READS {
         mosdepth_in,
         ch_fasta,
     )
-    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     if (run_sambamba_depth) {
         SAMBAMBA_DEPTH(

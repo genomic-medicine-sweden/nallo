@@ -2,20 +2,10 @@
     "1 sample - SNVs + SVs": {
         "content": [
             [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_snv.vcf.gz:md5,af704b598b85437ba46bafc40e8bc11f"
-                ]
+                
             ],
             [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,83c91627df1864244e9a7b8adecee09d"
-                ]
+                
             ],
             "05b524033cd7be66e56de1fe7a3e2659",
             "FAM_phased_sv.vcf.gz.tbi",
@@ -35,10 +25,10 @@
                 "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-02-26T08:28:05.326074787",
+        "timestamp": "2026-03-05T16:06:23.796391001",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 samples - SNVs + SVs - stub": {
@@ -61,20 +51,10 @@
                     ]
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     [
@@ -137,20 +117,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "phased_family_svs_tbi": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
@@ -162,10 +132,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:29:05.537477954",
+        "timestamp": "2026-03-06T14:23:14.747452881",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 sample - SNVs + SVs - stub": {
@@ -188,20 +158,10 @@
                     ]
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     [
@@ -245,20 +205,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "phased_family_svs_tbi": [
-                    [
-                        {
-                            "id": "FAM"
-                        },
-                        "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
@@ -267,32 +217,21 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:28:53.721709239",
+        "timestamp": "2026-03-05T15:59:33.733853072",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 samples - SNVs + SVs": {
         "content": [
             [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_snv.vcf.gz:md5,6d4826c1962e0207820b57fb1abb15b9"
-                ]
+                
             ],
             [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,a5b32e65aee87ce98d28fab420c9a1bc"
-                ]
+                
             ],
             "d2a8feadf0c710ac492ddbae3956c8e3",
-            "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
                     {
@@ -320,10 +259,10 @@
                 "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-02-26T08:28:23.2088616",
+        "timestamp": "2026-03-06T14:38:08.786526366",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 samples - SNVs only": {

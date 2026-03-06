@@ -46,7 +46,6 @@ workflow ANNOTATE_SVS {
         ch_fasta,
         ch_vep_extra_files
     )
-    ch_versions = ch_versions.mix(ENSEMBLVEP_SV.out.versions)
 
     TABIX_ENSEMBLVEP_SV (
         ENSEMBLVEP_SV.out.vcf

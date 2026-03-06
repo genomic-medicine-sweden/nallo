@@ -6,27 +6,23 @@
                     
                 ],
                 "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    
                 ],
                 "chromograph_plots": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    
                 ]
             },
             [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
+                
             ]
         ],
-        "timestamp": "2026-02-26T08:25:37.852585805",
+        "timestamp": "2026-03-06T08:30:07.581514652",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot coverage -stub": {
@@ -67,7 +63,6 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
@@ -105,16 +100,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
             [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
                 {
                     "CHROMOGRAPH:TIDDIT_COV": {
                         "tiddit": "3.9.3"
@@ -122,10 +111,10 @@
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:26:01.401815013",
+        "timestamp": "2026-03-06T08:30:32.577494799",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot nothing -stub": {
@@ -135,27 +124,23 @@
                     
                 ],
                 "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    
                 ],
                 "chromograph_plots": [
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    
                 ]
             },
             [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
+                
             ]
         ],
-        "timestamp": "2026-02-26T08:26:24.170681091",
+        "timestamp": "2026-03-06T08:30:56.063216058",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot all": {
@@ -223,7 +208,6 @@
                 ],
                 "1": [
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
@@ -288,7 +272,6 @@
                 ],
                 "versions": [
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
@@ -299,21 +282,16 @@
                     }
                 },
                 {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
                     "CHROMOGRAPH:TIDDIT_COV": {
                         "tiddit": "3.9.3"
                     }
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:24:58.733912045",
+        "timestamp": "2026-03-06T08:29:20.784690967",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot all -stub": {
@@ -381,7 +359,6 @@
                 ],
                 "1": [
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
@@ -446,7 +423,6 @@
                 ],
                 "versions": [
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
@@ -457,21 +433,16 @@
                     }
                 },
                 {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
                     "CHROMOGRAPH:TIDDIT_COV": {
                         "tiddit": "3.9.3"
                     }
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:25:50.689937401",
+        "timestamp": "2026-03-06T08:30:21.406615088",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot autozygosity -stub": {
@@ -513,8 +484,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ],
                 "chromograph_plots": [
                     [
@@ -552,8 +522,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ]
             },
             [
@@ -561,18 +530,13 @@
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
                     }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:26:14.336093154",
+        "timestamp": "2026-03-06T08:30:46.031819702",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot coverage": {
@@ -613,7 +577,6 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
@@ -651,16 +614,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
             [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
                 {
                     "CHROMOGRAPH:TIDDIT_COV": {
                         "tiddit": "3.9.3"
@@ -668,10 +625,10 @@
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:25:11.398602043",
+        "timestamp": "2026-03-06T08:29:35.839188601",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "plot autozygosity": {
@@ -713,8 +670,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ],
                 "chromograph_plots": [
                     [
@@ -752,8 +708,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ]
             },
             [
@@ -761,18 +716,13 @@
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
                     }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
                 }
             ]
         ],
-        "timestamp": "2026-02-26T08:25:26.853140588",
+        "timestamp": "2026-03-06T08:29:55.335097985",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }
