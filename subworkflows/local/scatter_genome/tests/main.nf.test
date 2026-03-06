@@ -72,6 +72,32 @@ nextflow_workflow {
         }
 
     }
+
+    test("[], bed, false, true, 2 - with chrM in bed file - stub") {
+
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t1000''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = true
+                input[4] = 2
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
+            )
+        }
+
+    }
     test("[], bed, false, true, 2 - without chrM in bed file") {
 
         when {
