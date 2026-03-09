@@ -10,9 +10,6 @@ report_section_order:
 
 export_plots: true
 
-fn_ignore_files:
-  - "*sex_check.csv"
-
 run_modules:
   - fastqc
   - mosdepth
