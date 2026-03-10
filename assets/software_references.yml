@@ -51,6 +51,9 @@ tool:
   create_pedigree_file:
     citation: "create_pedigree_file"
     bibliography: ""
+  csvtk:
+    citation: "csvtk"
+    bibliography: ""
   deepvariant:
     citation: "DeepVariant (Poplin et al. 2018)"
     bibliography: "Poplin R, Chang PC, Alexander D, et al. A universal SNP and small-indel variant caller using deep neural networks. Nat Biotechnol. 2018;36(10):983-987. doi:10.1038/nbt.4235"
