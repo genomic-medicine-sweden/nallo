@@ -104,12 +104,6 @@
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "second_family"
-                        },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "6": [
@@ -118,12 +112,6 @@
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "second_family"
-                        },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "7": [
@@ -234,12 +222,6 @@
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "second_family"
-                        },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -248,12 +230,6 @@
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "second_family"
-                        },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
@@ -264,7 +240,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-05T07:37:42.363067256",
+        "timestamp": "2026-03-05T08:49:14.440761158",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -331,7 +307,7 @@
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
-        "timestamp": "2026-03-05T07:36:40.84286808",
+        "timestamp": "2026-03-05T08:48:02.139607509",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -473,14 +449,6 @@
                     "NIST_paraphase_merged.vcf.gz",
                     "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]",
                     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tHG002_OR1D5_OR1D5_hap1\tHG002_OR1D5_OR1D5_hap2\tHG002_hba_hba_hba2hap1\tHG002_hba_hba_hba2hap2\tHG002_hba_hba_hba1hap1\tHG002_hba_hba_hba1hap1_cp2\tHG002_hba_hba_homologyhap1\tHG003_OR1D5_OR1D5_hap1\tHG003_OR1D5_OR1D5_hap2\tHG003_hba_hba_hba2hap1\tHG003_hba_hba_hba2hap2\tHG003_hba_hba_hba1hap1\tHG003_hba_hba_hba1hap1_cp2\tHG003_hba_hba_homologyhap1\tHG004_OR1D5_OR1D5_hap1\tHG004_OR1D5_OR1D5_hap2\tHG004_hba_hba_hba2hap1\tHG004_hba_hba_hba2hap1_cp2\tHG004_hba_hba_hba1hap1\tHG004_hba_hba_hba1hap1_cp2\tHG004_hba_hba_homologyhap1"
-                ],
-                [
-                    {
-                        "id": "second_family"
-                    },
-                    "second_family_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=7, variantCount=289, phased=true, phasedAutodetect=false]",
-                    "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsecond_sample_OR1D5_OR1D5_hap1\tsecond_sample_OR1D5_OR1D5_hap2\tsecond_sample_hba_hba_hba2hap1\tsecond_sample_hba_hba_hba2hap2\tsecond_sample_hba_hba_hba1hap1\tsecond_sample_hba_hba_hba1hap1_cp2\tsecond_sample_hba_hba_homologyhap1"
                 ]
             ],
             [
@@ -489,12 +457,6 @@
                         "id": "NIST"
                     },
                     "NIST_paraphase_merged.vcf.gz.tbi"
-                ],
-                [
-                    {
-                        "id": "second_family"
-                    },
-                    "second_family_paraphase_merged.vcf.gz.tbi"
                 ]
             ],
             [
@@ -508,7 +470,7 @@
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
-        "timestamp": "2026-03-05T07:37:29.406706317",
+        "timestamp": "2026-03-05T08:49:00.510164334",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -670,24 +632,12 @@
                 "5": [
                     [
                         {
-                            "id": "NIST"
-                        },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
                             "id": "second_family"
                         },
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "6": [
-                    [
-                        {
-                            "id": "NIST"
-                        },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
                     [
                         {
                             "id": "second_family"
@@ -858,24 +808,12 @@
                 "tbi": [
                     [
                         {
-                            "id": "NIST"
-                        },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
                             "id": "second_family"
                         },
                         "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
-                    [
-                        {
-                            "id": "NIST"
-                        },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
                     [
                         {
                             "id": "second_family"
@@ -895,7 +833,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-05T07:37:55.465505475",
+        "timestamp": "2026-03-06T08:56:27.150785905",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -990,7 +928,7 @@
                 "versions.yml:md5,e821ec6f6cb06cd042a8788c5f2124b1"
             ]
         ],
-        "timestamp": "2026-03-05T07:37:02.835245456",
+        "timestamp": "2026-03-05T08:48:32.851040057",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

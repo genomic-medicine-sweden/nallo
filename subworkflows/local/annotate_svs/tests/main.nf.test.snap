@@ -2,29 +2,27 @@
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
             [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
                 "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
             ],
             "29a9273ae029754399eb92fe6c2b7c52",
             "test_vep.vcf.gz.tbi"
         ],
-        "timestamp": "2026-02-26T08:20:35.444783497",
+        "timestamp": "2026-03-06T08:44:09.288688057",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
             [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
                 "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
             ]
         ],
-        "timestamp": "2026-02-26T08:20:45.409281589",
+        "timestamp": "2026-03-06T08:44:22.829005285",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

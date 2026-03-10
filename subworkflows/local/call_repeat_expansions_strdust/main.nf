@@ -31,13 +31,12 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
+        .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
         .set { ch_bcftools_merge_in }
 
     BCFTOOLS_MERGE (
         ch_bcftools_merge_in,
-        [ [], [] ],
-        [ [], [] ],
-        [ [], [] ]
+        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true)
     )
 
     emit:

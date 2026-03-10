@@ -22,12 +22,6 @@
                         "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16",
-                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f"
-                ],
                 "baf_bed_tbi": [
                     [
                         {
@@ -47,19 +41,13 @@
                         "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
                         "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16",
-                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:28:38.563196117",
+        "timestamp": "2026-03-06T09:14:17.515334722",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "prepare_gens_inputs - stub": {
@@ -85,12 +73,6 @@
                         "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16",
-                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f"
-                ],
                 "baf_bed_tbi": [
                     [
                         {
@@ -110,19 +92,13 @@
                         "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
                         "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,491557288e91045d4a063d7ced3123cc",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16",
-                    "versions.yml:md5,e3b25c9dbdca249cf9e8933cda40165f"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:28:50.435612042",
+        "timestamp": "2026-03-06T09:14:28.699026199",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }
