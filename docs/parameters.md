@@ -193,5 +193,6 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_fraction` | Case average adjusted sequencing depth ratio cutoff in strdrop. | `number` | 0.66 |  |  |
 | `strdrop_alpha` | Unadjusted probability confidence level for coverage test in strdrop. | `number` | 0.18 |  |  |
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
-| `min_support` | Minimum number of reads that support a SV. | `number` | 3 |  |  |
-| `min_seq_size` | Discard read if non of its segment is larger then this. | `number` | 500 |  |  |
+| `sniffles_min_support_reads` | Minimum number of reads to support a SV in Sniffles. | `number` | 3 |  |  |
+| `sniffles_min_segment_length` | Discard a read if non of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
+| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles (0-1). | `number` | 0 |  |  |
