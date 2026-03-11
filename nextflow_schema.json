@@ -937,6 +937,21 @@
                     "type": "number",
                     "default": 0.9,
                     "description": "Allele similarity Levenshtein edit distance ratio cutoff in strdrop."
+                },
+                "sniffles_min_support_reads": {
+                    "type": "number",
+                    "default": 3,
+                    "description": "Minimum number of reads to support a SV in Sniffles."
+                },
+                "sniffles_min_segment_length": {
+                    "type": "number",
+                    "default": 500,
+                    "description": "Discard a read if non of its segment is larger than this in Sniffles."
+                },
+                "sniffles_min_heterozygous_allele_frequency": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Threshold on heterozygous allele frequency in Sniffles (0-1)."
                 }
             },
             "required": ["preset"]
