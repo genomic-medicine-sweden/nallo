@@ -54,11 +54,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T14:33:53.955462022",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:53.955462022"
+        }
     },
     "two children with two parents, trio-binning mode": {
         "content": [
@@ -76,7 +76,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "HG002_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "HG002_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -90,7 +90,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "HG002_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "HG002_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ],
                     [
                         {
@@ -105,7 +105,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG003_haplotype_1.fasta.gz:md5,838b0f15de9595b448d9aad7972c3e79"
+                        "HG003_haplotype_1.fasta.gz:md5,d8419c252eb6ce0730d9d957ec655dfb"
                     ],
                     [
                         {
@@ -120,7 +120,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG003_haplotype_2.fasta.gz:md5,cab27e6e6ff0f3c7aa7df091bdf11471"
+                        "HG003_haplotype_2.fasta.gz:md5,a1b7666b2ef4f8cfc771b69cb1b86457"
                     ],
                     [
                         {
@@ -135,7 +135,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG004_haplotype_1.fasta.gz:md5,2c2d75380d2b52b87a98a309f1bb195f"
+                        "HG004_haplotype_1.fasta.gz:md5,450890f48985df738268e0f6945e86cb"
                     ],
                     [
                         {
@@ -150,7 +150,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
+                        "HG004_haplotype_2.fasta.gz:md5,33a6ae4fc337b5b91b954cdf5d694cc5"
                     ],
                     [
                         {
@@ -164,7 +164,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "second_child_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "second_child_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -178,7 +178,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "second_child_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "second_child_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ]
                 ],
                 "1": [
@@ -210,7 +210,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "HG002_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "HG002_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -224,7 +224,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "HG002_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "HG002_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ],
                     [
                         {
@@ -239,7 +239,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG003_haplotype_1.fasta.gz:md5,838b0f15de9595b448d9aad7972c3e79"
+                        "HG003_haplotype_1.fasta.gz:md5,d8419c252eb6ce0730d9d957ec655dfb"
                     ],
                     [
                         {
@@ -254,7 +254,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG003_haplotype_2.fasta.gz:md5,cab27e6e6ff0f3c7aa7df091bdf11471"
+                        "HG003_haplotype_2.fasta.gz:md5,a1b7666b2ef4f8cfc771b69cb1b86457"
                     ],
                     [
                         {
@@ -269,7 +269,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG004_haplotype_1.fasta.gz:md5,2c2d75380d2b52b87a98a309f1bb195f"
+                        "HG004_haplotype_1.fasta.gz:md5,450890f48985df738268e0f6945e86cb"
                     ],
                     [
                         {
@@ -284,7 +284,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
+                        "HG004_haplotype_2.fasta.gz:md5,33a6ae4fc337b5b91b954cdf5d694cc5"
                     ],
                     [
                         {
@@ -298,7 +298,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "second_child_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "second_child_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -312,7 +312,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "second_child_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "second_child_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ]
                 ],
                 "versions": [
@@ -333,11 +333,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-11T12:10:25.927386924",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:01.400609091"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "child with one parent, trio-binning mode -stub": {
         "content": [
@@ -476,11 +476,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T14:33:19.923628779",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:19.923628779"
+        }
     },
     "child with two parents, trio-binning mode": {
         "content": [
@@ -498,7 +498,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "HG002_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "HG002_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -512,7 +512,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "HG002_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "HG002_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ],
                     [
                         {
@@ -526,7 +526,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG003_haplotype_1.fasta.gz:md5,838b0f15de9595b448d9aad7972c3e79"
+                        "HG003_haplotype_1.fasta.gz:md5,d8419c252eb6ce0730d9d957ec655dfb"
                     ],
                     [
                         {
@@ -540,7 +540,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG003_haplotype_2.fasta.gz:md5,cab27e6e6ff0f3c7aa7df091bdf11471"
+                        "HG003_haplotype_2.fasta.gz:md5,a1b7666b2ef4f8cfc771b69cb1b86457"
                     ],
                     [
                         {
@@ -554,7 +554,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG004_haplotype_1.fasta.gz:md5,2c2d75380d2b52b87a98a309f1bb195f"
+                        "HG004_haplotype_1.fasta.gz:md5,450890f48985df738268e0f6945e86cb"
                     ],
                     [
                         {
@@ -568,7 +568,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
+                        "HG004_haplotype_2.fasta.gz:md5,33a6ae4fc337b5b91b954cdf5d694cc5"
                     ]
                 ],
                 "1": [
@@ -597,7 +597,7 @@
                             "two_parents": true,
                             "haplotype": 1
                         },
-                        "HG002_haplotype_1.fasta.gz:md5,0f02bcdf77358219936b1cbf774f4654"
+                        "HG002_haplotype_1.fasta.gz:md5,706ac296642be89e394e8d3780f742a3"
                     ],
                     [
                         {
@@ -611,7 +611,7 @@
                             "two_parents": true,
                             "haplotype": 2
                         },
-                        "HG002_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
+                        "HG002_haplotype_2.fasta.gz:md5,9a7708f468e514b71d23c429ba897bfc"
                     ],
                     [
                         {
@@ -625,7 +625,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG003_haplotype_1.fasta.gz:md5,838b0f15de9595b448d9aad7972c3e79"
+                        "HG003_haplotype_1.fasta.gz:md5,d8419c252eb6ce0730d9d957ec655dfb"
                     ],
                     [
                         {
@@ -639,7 +639,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG003_haplotype_2.fasta.gz:md5,cab27e6e6ff0f3c7aa7df091bdf11471"
+                        "HG003_haplotype_2.fasta.gz:md5,a1b7666b2ef4f8cfc771b69cb1b86457"
                     ],
                     [
                         {
@@ -653,7 +653,7 @@
                             "has_other_parent": true,
                             "haplotype": 1
                         },
-                        "HG004_haplotype_1.fasta.gz:md5,2c2d75380d2b52b87a98a309f1bb195f"
+                        "HG004_haplotype_1.fasta.gz:md5,450890f48985df738268e0f6945e86cb"
                     ],
                     [
                         {
@@ -667,7 +667,7 @@
                             "has_other_parent": true,
                             "haplotype": 2
                         },
-                        "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
+                        "HG004_haplotype_2.fasta.gz:md5,33a6ae4fc337b5b91b954cdf5d694cc5"
                     ]
                 ],
                 "versions": [
@@ -685,11 +685,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-11T12:09:53.181634305",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:32:31.100211516"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "one sample, hifi-only mode -stub": {
         "content": [
@@ -746,11 +746,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T14:33:36.767094011",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:36.767094011"
+        }
     },
     "one sample, hifi-only mode": {
         "content": [
@@ -763,7 +763,7 @@
                             "relationship": "unknown",
                             "haplotype": 1
                         },
-                        "test_fastq_haplotype_1.fasta.gz:md5,cc8b4e3617d269cbcd7d7efa7d1b662e"
+                        "test_fastq_haplotype_1.fasta.gz:md5,8ffe49aa37fe0d639309f753d69497e2"
                     ],
                     [
                         {
@@ -772,7 +772,7 @@
                             "relationship": "unknown",
                             "haplotype": 2
                         },
-                        "test_fastq_haplotype_2.fasta.gz:md5,a0d041b743171ea1fde0f79d35c2b98b"
+                        "test_fastq_haplotype_2.fasta.gz:md5,b2e486705e0e41f3a3331c3cf97f6397"
                     ]
                 ],
                 "1": [
@@ -788,7 +788,7 @@
                             "relationship": "unknown",
                             "haplotype": 1
                         },
-                        "test_fastq_haplotype_1.fasta.gz:md5,cc8b4e3617d269cbcd7d7efa7d1b662e"
+                        "test_fastq_haplotype_1.fasta.gz:md5,8ffe49aa37fe0d639309f753d69497e2"
                     ],
                     [
                         {
@@ -797,7 +797,7 @@
                             "relationship": "unknown",
                             "haplotype": 2
                         },
-                        "test_fastq_haplotype_2.fasta.gz:md5,a0d041b743171ea1fde0f79d35c2b98b"
+                        "test_fastq_haplotype_2.fasta.gz:md5,b2e486705e0e41f3a3331c3cf97f6397"
                     ]
                 ],
                 "versions": [
@@ -807,11 +807,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-11T12:09:26.813198903",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:31:58.410357811"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "child with two parents, trio-binning mode -stub": {
         "content": [
@@ -1016,10 +1016,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T14:34:12.715512254",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:34:12.715512254"
+        }
     }
 }

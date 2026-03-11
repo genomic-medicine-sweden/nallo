@@ -7,28 +7,30 @@
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.summary.txt:md5,d92d1680c5a2fbcbf8a69fef73a02f69"
+                    "test.mosdepth.summary.txt:md5,215fa328da69972c7f6e2ae864299f47"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
-                "chr16\t1343020\t7950330\t5.92\t0\t22",
-                "chr16_region\t16298\t292975\t17.98\t2\t22",
-                "chr17\t3073138\t825229\t0.27\t0\t36",
-                "chr17_region\t20000\t604892\t30.24\t2\t36",
-                "chr20\t2653100\t237373\t0.09\t0\t22",
-                "chr20_region\t700\t14945\t21.35\t9\t22",
-                "chrX\t16691504\t8292566\t0.50\t0\t20",
-                "chrX_region\t70\t972\t13.89\t7\t20",
-                "total\t23760762\t17305498\t0.73\t0\t36",
-                "total_region\t37068\t913784\t24.65\t2\t36"
+                "chr16\t1343020\t5377008\t4.00\t0\t18",
+                "chr16_region\t16298\t130288\t7.99\t1\t18",
+                "chr17\t3073138\t544666\t0.18\t0\t24",
+                "chr17_region\t20000\t409866\t20.49\t1\t24",
+                "chr20\t2653100\t190376\t0.07\t0\t18",
+                "chr20_region\t700\t12171\t17.39\t6\t18",
+                "chrX\t16691504\t5683596\t0.34\t0\t16",
+                "chrX_region\t70\t670\t9.57\t5\t16",
+                "chrM\t16569\t3500490\t211.27\t2\t237",
+                "chrM_region\t16568\t3500329\t211.27\t2\t237",
+                "total\t23777331\t15296136\t0.64\t0\t237",
+                "total_region\t53636\t4053324\t75.57\t1\t237"
             ],
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.global.dist.txt:md5,bcbd3b31e9cda8ab35394a34c8b569b3"
+                    "test.mosdepth.global.dist.txt:md5,5715c7a9f9824814fd061457548c097b"
                 ]
             ],
             [
@@ -36,7 +38,7 @@
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.region.dist.txt:md5,f7f8e42619aabd36a34bfd8db78c7a73"
+                    "test.mosdepth.region.dist.txt:md5,f8b45b4a0f62f322542c4b4bea5f61e7"
                 ]
             ],
             [
@@ -45,10 +47,10 @@
                 "versions.yml:md5,eeeee284891166b5d410dfee8531a261"
             ]
         ],
-        "timestamp": "2026-02-26T08:29:24.230042506",
+        "timestamp": "2026-03-11T12:16:27.967777715",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "bam, no bed -stub": {
@@ -249,23 +251,24 @@
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.summary.txt:md5,fcb1dec73212cfea66bc04031241fb4d"
+                    "test.mosdepth.summary.txt:md5,a20e2e2e1d6f444011e510722c69bf0b"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
-                "chr16\t1343020\t7950330\t5.92\t0\t22",
-                "chr17\t3073138\t825229\t0.27\t0\t36",
-                "chr20\t2653100\t237373\t0.09\t0\t22",
-                "chrX\t16691504\t8292566\t0.50\t0\t20",
-                "total\t23760762\t17305498\t0.73\t0\t36"
+                "chr16\t1343020\t5377008\t4.00\t0\t18",
+                "chr17\t3073138\t544666\t0.18\t0\t24",
+                "chr20\t2653100\t190376\t0.07\t0\t18",
+                "chrX\t16691504\t5683596\t0.34\t0\t16",
+                "chrM\t16569\t3500490\t211.27\t2\t237",
+                "total\t23777331\t15296136\t0.64\t0\t237"
             ],
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.global.dist.txt:md5,bcbd3b31e9cda8ab35394a34c8b569b3"
+                    "test.mosdepth.global.dist.txt:md5,5715c7a9f9824814fd061457548c097b"
                 ]
             ],
             [
@@ -276,10 +279,10 @@
                 "versions.yml:md5,a0ba36db149b364050c2d2b2e2229219"
             ]
         ],
-        "timestamp": "2026-02-26T08:29:14.955878095",
+        "timestamp": "2026-03-11T12:16:17.419295289",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

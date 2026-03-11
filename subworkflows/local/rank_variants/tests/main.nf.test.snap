@@ -1,12 +1,12 @@
 {
     "1 sample": {
         "content": [
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
+            "VcfFile [chromosomes=[chrX, chr16], sampleCount=3, variantCount=146, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-02-26T08:31:13.329929556",
+        "timestamp": "2026-03-11T12:18:30.070981516",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 sample - stub": {

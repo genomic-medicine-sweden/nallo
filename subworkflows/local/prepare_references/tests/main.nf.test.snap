@@ -7,7 +7,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
+                        "hg38.test.mmi:md5,4fd89aff09273edd429dcb9a70184497"
                     ]
                 ],
                 "1": [
@@ -15,7 +15,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
+                        "hg38.test.fa.fai:md5,e67a3c5f2fccf51c1d3723762557eee3"
                     ]
                 ],
                 "2": [
@@ -23,7 +23,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa:md5,63d396ff7faac93f0e1333eadf13925e"
+                        "hg38.test.fa:md5,cb9b796e25558a1fd4858f7c19dc982a"
                     ]
                 ],
                 "3": [
@@ -31,28 +31,7 @@
                         {
                             "id": "vep_cache"
                         },
-                        [
-                            [
-                                [
-                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
-                                    [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
-                                    ],
-                                    [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
-                                    ],
-                                    [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
-                                    ],
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
-                                ]
-                            ]
-                        ]
+                        "/home/eliott/nallo/.nf-test/tests/1fe697072ef1f5f3f6f28a70bdd43230/work/cd/8f230a4c607554522a2be4b2ec282c/vep_cache"
                     ]
                 ],
                 "4": [
@@ -66,7 +45,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
+                        "hg38.test.fa.fai:md5,e67a3c5f2fccf51c1d3723762557eee3"
                     ]
                 ],
                 "fasta": [
@@ -74,7 +53,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa:md5,63d396ff7faac93f0e1333eadf13925e"
+                        "hg38.test.fa:md5,cb9b796e25558a1fd4858f7c19dc982a"
                     ]
                 ],
                 "mmi": [
@@ -82,7 +61,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
+                        "hg38.test.mmi:md5,4fd89aff09273edd429dcb9a70184497"
                     ]
                 ],
                 "vep_resources": [
@@ -90,28 +69,7 @@
                         {
                             "id": "vep_cache"
                         },
-                        [
-                            [
-                                [
-                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
-                                    [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
-                                    ],
-                                    [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
-                                    ],
-                                    [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
-                                    ],
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
-                                ]
-                            ]
-                        ]
+                        "/home/eliott/nallo/.nf-test/tests/1fe697072ef1f5f3f6f28a70bdd43230/work/cd/8f230a4c607554522a2be4b2ec282c/vep_cache"
                     ]
                 ],
                 "versions": [
@@ -122,11 +80,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-11T12:15:41.081781113",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:42:19.220248133"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -162,7 +120,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -204,7 +162,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -217,11 +175,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-28T14:43:14.947070766",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:43:14.947070766"
+        }
     },
     "don't unzip fasta, don't untar vep cache -stub": {
         "content": [
@@ -306,11 +264,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-01-30T11:25:02.384461568",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-30T11:25:02.384461568"
+        }
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -320,7 +278,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
+                        "hg38.test.mmi:md5,4fd89aff09273edd429dcb9a70184497"
                     ]
                 ],
                 "1": [
@@ -328,7 +286,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
+                        "hg38.test.fa.fai:md5,e67a3c5f2fccf51c1d3723762557eee3"
                     ]
                 ],
                 "2": [
@@ -344,28 +302,7 @@
                         {
                             "id": "vep_cache"
                         },
-                        [
-                            [
-                                [
-                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
-                                    [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
-                                    ],
-                                    [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
-                                    ],
-                                    [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
-                                    ],
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
-                                ]
-                            ]
-                        ]
+                        "/home/eliott/nallo/.nf-test/tests/24705274d9a16db857061646a7125e73/work/a7/b80e7587a206049a0c69d34ab97def/vep_cache"
                     ]
                 ],
                 "4": [
@@ -378,7 +315,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.fa.fai:md5,c0b07227d050b3bf7a33a98339d2d0c3"
+                        "hg38.test.fa.fai:md5,e67a3c5f2fccf51c1d3723762557eee3"
                     ]
                 ],
                 "fasta": [
@@ -394,7 +331,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.test.mmi:md5,3cbe6de69643a4ddea3b9de5f18884d4"
+                        "hg38.test.mmi:md5,4fd89aff09273edd429dcb9a70184497"
                     ]
                 ],
                 "vep_resources": [
@@ -402,28 +339,7 @@
                         {
                             "id": "vep_cache"
                         },
-                        [
-                            [
-                                [
-                                    "._info.txt:md5,3443c3a4577896a52f0105597567d263",
-                                    [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
-                                    ],
-                                    [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
-                                    ],
-                                    [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
-                                    ],
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
-                                ]
-                            ]
-                        ]
+                        "/home/eliott/nallo/.nf-test/tests/24705274d9a16db857061646a7125e73/work/a7/b80e7587a206049a0c69d34ab97def/vep_cache"
                     ]
                 ],
                 "versions": [
@@ -433,10 +349,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-11T12:15:50.352660627",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-01-30T11:24:32.791001112"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     }
 }
