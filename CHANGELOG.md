@@ -7,13 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [#921](https://github.com/genomic-medicine-sweden/nallo/pull/921) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+- [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 - [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Make mitochondrial annotation separate from the nuclear one
+- [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
 
 ### Removed
 
@@ -21,8 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                                  |
+| ------------- | ---------------------------------------------- |
+|               | `--sniffles_min_support_reads`                 |
+|               | `--sniffles_min_segment_length`                |
+|               | `--sniffles_min_heterozygous_allele_frequency` |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
