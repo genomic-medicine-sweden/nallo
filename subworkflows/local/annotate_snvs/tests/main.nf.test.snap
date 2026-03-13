@@ -38,10 +38,10 @@
             "79b414333f42bec2310aecf617bcfe9a",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-02-26T08:19:32.098797449",
+        "timestamp": "2026-03-13T10:16:21.879795381",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "bcf, db, vep_cache, '110', -stub": {
@@ -113,10 +113,10 @@
             "e469aa4912440eb7820188c58a7070a2",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-02-26T08:19:51.603527057",
+        "timestamp": "2026-03-13T10:16:45.882305757",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

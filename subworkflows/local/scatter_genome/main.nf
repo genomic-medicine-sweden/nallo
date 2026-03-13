@@ -1,8 +1,8 @@
-include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
-include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
-include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { BEDTOOLS_SPLIT           } from '../../../modules/nf-core/bedtools/split/main'
-
+include { BEDTOOLS_MERGE                       } from '../../../modules/nf-core/bedtools/merge/main'
+include { BEDTOOLS_SORT                        } from '../../../modules/nf-core/bedtools/sort/main'
+include { BUILD_INTERVALS                      } from '../../../modules/local/build_intervals/main'
+include { BEDTOOLS_SPLIT                       } from '../../../modules/nf-core/bedtools/split/main'
+include { GAWK as GAWK_EXTRACT_REGIONS      } from '../../../modules/nf-core/gawk/main'
 workflow SCATTER_GENOME {
 
     take:
@@ -34,44 +34,61 @@ workflow SCATTER_GENOME {
             .set{ ch_bed }
     }
 
-    //
-    // Merge overlapping and then split BED regions for SNV calling
-    //
+    // Sort and merge overlapping regions
+    BEDTOOLS_SORT (
+        ch_bed,
+        []
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
+
+    BEDTOOLS_MERGE (
+        BEDTOOLS_SORT.out.sorted
+    )
+    ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
+
+    // Add meta.genome before extracting the mitochondrial region from BED and spliting into 40 regions
+    BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
+        [ [ meta + [ genome: "nuclear" ], bed ],
+            [ meta + [ genome: "mt" ], bed ]
+    ]
+    }.set{ ch_input_gawk }
+
+    // Exctract according to meta.genome, logic is in the config file
+    GAWK_EXTRACT_REGIONS (
+        ch_input_gawk,
+        [],
+        false,
+    )
+    ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
+
+    GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
+            mt: meta.genome == "mt"
+            nuclear: meta.genome == "nuclear"
+    }.set{ ch_bed_genomes }
+
+
     if( make_bed_intervals ) {
 
-        if( split_n < 1 ) { error "Can't split bed file into less than one file" }
-
-        // Sort and merge overlapping regions
-        BEDTOOLS_SORT (
-            ch_bed,
-            []
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_SORT.out.versions)
-
-        BEDTOOLS_MERGE (
-            BEDTOOLS_SORT.out.sorted
-        )
-        ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
-
+        // Split the nuclear bed file into n regions for SNV calling
         BEDTOOLS_SPLIT(
-            BEDTOOLS_MERGE.out.bed.map { meta, bed ->
+            ch_bed_genomes.nuclear.map { meta, bed ->
                 [ meta, bed, split_n ]
             }
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
-        // Create a channel with the bed file and the total number of intervals (for groupKey)
+        // Create a channel with the bed file and the total number of intervals (for groupKey in nallo.nf)
         BEDTOOLS_SPLIT.out.beds
-            .map { _meta, beds -> beds }
+            .map { meta, beds -> [meta.subMap('genome'), beds ] }
             .collect()
-            .map{ it -> [ it, it.size() ] }
+            .map{ meta, beds -> [ meta, beds, beds.size() ] }
             .transpose()
             .set { ch_bed_intervals }
 
         // Since we don't check beforehand how many intervals it's possible to split the bed file into,
         // it could be that the number of intervals is less than the requested split_n.
         // This can happen if the bed file has too few regions.
-        // We check this here, so it doens't fail later in the pipeline.
+        // We check this here, so it doesn't fail later in the pipeline.
         ch_bed_intervals
             .count()
             .map { count ->
@@ -81,10 +98,18 @@ workflow SCATTER_GENOME {
                           "Please check the input files or set `--snv_calling_processes` to ${count}."
                 }
             }
-    }
+    } else if ( split_n < 1 ) {
+            error "Cannot split bed into ${split_n} regions, split_n should be minimum 1."
+        }
+    else if ( split_n == 1 ) {
+        ch_bed_genomes.nuclear
+            .map { meta, bed -> [meta.subMap('genome'), bed, 1] }
+            .set{ ch_bed_intervals }
+        }
 
     emit:
-    bed           = ch_bed            // channel: [ val(meta), path(bed) ]
-    bed_intervals = ch_bed_intervals  // channel: [ path(bed), val(num_intervals) ]
-    versions      = ch_versions       // channel: [ versions.yml ]
+    bed           = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
+    bed_intervals = ch_bed_intervals       // channel: [ path(bed), val(num_intervals) ]
+    bed_mt        = ch_bed_genomes.mt      // channel: [ val(meta), path(bed) ]
+    versions      = ch_versions            // channel: [ versions.yml ]
 }

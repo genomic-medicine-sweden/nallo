@@ -8,8 +8,8 @@
                             "id": "HG002",
                             "sex": 1
                         },
-                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
-                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                        "HG002.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
+                        "HG002.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5"
                     ]
                 ],
                 "1": [
@@ -44,8 +44,8 @@
                             "id": "HG002",
                             "sex": 1
                         },
-                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
-                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                        "HG002.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
+                        "HG002.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5"
                     ]
                 ],
                 "versions": [
@@ -56,10 +56,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:28:38.563196117",
+        "timestamp": "2026-03-11T12:15:20.073185188",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "prepare_gens_inputs - stub": {

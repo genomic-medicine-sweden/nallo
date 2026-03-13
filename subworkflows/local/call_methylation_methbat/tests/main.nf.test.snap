@@ -8,7 +8,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,9bd179545c026b11c7b7d4347ccd6987"
                     ]
                 ],
                 "1": [
@@ -20,7 +20,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "3": [
@@ -29,7 +29,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "4": [
@@ -38,7 +38,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "5": [
@@ -54,7 +54,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -63,7 +63,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -72,7 +72,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "region_profile": [
@@ -81,7 +81,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,9bd179545c026b11c7b7d4347ccd6987"
                     ]
                 ],
                 "versions": [
@@ -131,11 +131,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-11T11:53:27.101706101",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:45:30.175138286"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - unphased": {
         "content": [
@@ -146,7 +146,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,b8386a0e3e0446b8c79f1306a04fc2d4"
                     ]
                 ],
                 "1": [
@@ -158,7 +158,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                     ]
                 ],
                 "3": [
@@ -180,7 +180,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -195,7 +195,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,b8386a0e3e0446b8c79f1306a04fc2d4"
                     ]
                 ],
                 "versions": [
@@ -245,11 +245,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-11T11:53:39.03696475",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:45:42.743907961"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -260,7 +260,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4114d8412b0fb8a4eb223d0363add13e"
+                        "HG002_methbat_profile.tsv:md5,0ca3b79fa6a7bf9e76c0de2deb8200d2"
                     ]
                 ],
                 "1": [
@@ -272,7 +272,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "3": [
@@ -281,7 +281,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "4": [
@@ -290,7 +290,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "5": [
@@ -306,7 +306,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -315,7 +315,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -324,7 +324,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "region_profile": [
@@ -333,7 +333,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4114d8412b0fb8a4eb223d0363add13e"
+                        "HG002_methbat_profile.tsv:md5,0ca3b79fa6a7bf9e76c0de2deb8200d2"
                     ]
                 ],
                 "versions": [
@@ -401,11 +401,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-11T11:53:51.775606561",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:45:55.566440058"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - phased - stub": {
         "content": [
@@ -510,11 +510,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-01-28T13:53:38.629915769",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T13:53:38.629915769"
+        }
     },
     "1 sample - bed phased": {
         "content": [
@@ -525,7 +525,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,9bd179545c026b11c7b7d4347ccd6987"
                     ]
                 ],
                 "1": [
@@ -534,7 +534,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,2ef2b918a550f373a73ec0924b298ae9"
+                        "test.bed:md5,aaef0de22e3ffcfd3a99f0b254e2c809"
                     ]
                 ],
                 "2": [
@@ -543,7 +543,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "3": [
@@ -552,7 +552,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "4": [
@@ -561,7 +561,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "5": [
@@ -574,7 +574,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,2ef2b918a550f373a73ec0924b298ae9"
+                        "test.bed:md5,aaef0de22e3ffcfd3a99f0b254e2c809"
                     ]
                 ],
                 "pbcpg_biwgig_combined": [
@@ -583,7 +583,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                        "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -592,7 +592,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                        "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                     ]
                 ],
                 "pbcpg_biwgig_hap2": [
@@ -601,7 +601,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                        "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                     ]
                 ],
                 "region_profile": [
@@ -610,7 +610,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,9bd179545c026b11c7b7d4347ccd6987"
                     ]
                 ],
                 "versions": [
@@ -660,11 +660,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-11T11:54:04.345190864",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:46:08.927006498"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -781,11 +781,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-01-28T13:53:59.766293143",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T13:53:59.766293143"
+        }
     },
     "1 sample - bed unphased": {
         "content": [
@@ -796,7 +796,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,b8386a0e3e0446b8c79f1306a04fc2d4"
                     ]
                 ],
                 "1": [
@@ -814,7 +814,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                     ]
                 ],
                 "3": [
@@ -842,7 +842,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                        "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                     ]
                 ],
                 "pbcpg_biwgig_hap1": [
@@ -857,7 +857,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,b8386a0e3e0446b8c79f1306a04fc2d4"
                     ]
                 ],
                 "versions": [
@@ -907,10 +907,10 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-11T11:54:15.895366253",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:46:21.203584937"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     }
 }
