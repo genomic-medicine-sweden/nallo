@@ -930,7 +930,7 @@
                 "HG002_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                "HG002_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr17.png:md5,1acffcdafa5c7d35ecb0db6c6e4b8343",
                 "HG002_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1278,7 +1278,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=3, variantCount=180, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=236, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_deepvariant_snvs.vcf.gz",
@@ -1298,14 +1298,14 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=3, variantCount=27, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=29, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-03-11T11:21:21.098211735",
+        "timestamp": "2026-03-13T09:57:47.719724081",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

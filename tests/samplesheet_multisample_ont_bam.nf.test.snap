@@ -860,7 +860,7 @@
                 "HG002_ONT_A_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                "HG002_ONT_A_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_A_chromograph_autozyg_chr17.png:md5,1acffcdafa5c7d35ecb0db6c6e4b8343",
                 "HG002_ONT_A_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -910,7 +910,7 @@
                 "HG002_ONT_B_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                "HG002_ONT_B_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_B_chromograph_autozyg_chr17.png:md5,1acffcdafa5c7d35ecb0db6c6e4b8343",
                 "HG002_ONT_B_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -960,7 +960,7 @@
                 "HG002_ONT_C_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                "HG002_ONT_C_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_C_chromograph_autozyg_chr17.png:md5,1acffcdafa5c7d35ecb0db6c6e4b8343",
                 "HG002_ONT_C_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1172,11 +1172,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=2, variantCount=113, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=124, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=1, variantCount=113, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=124, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -1204,7 +1204,7 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=2, variantCount=16, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=18, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_hificnv_svs.vcf.gz",
@@ -1220,14 +1220,14 @@
                 ],
                 [
                     "FAM2_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=1, variantCount=16, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=18, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-03-06T14:37:35.612132286",
+        "timestamp": "2026-03-13T10:01:34.627020109",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

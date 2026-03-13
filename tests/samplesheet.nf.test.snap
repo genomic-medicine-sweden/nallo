@@ -647,7 +647,7 @@
                 "HG002_Revio_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
-                "HG002_Revio_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_Revio_chromograph_autozyg_chr17.png:md5,1acffcdafa5c7d35ecb0db6c6e4b8343",
                 "HG002_Revio_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -791,7 +791,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=1, variantCount=128, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=140, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -803,14 +803,14 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chrM], sampleCount=1, variantCount=12, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=13, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-03-06T13:29:54.202698635",
+        "timestamp": "2026-03-13T09:47:46.06426791",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
