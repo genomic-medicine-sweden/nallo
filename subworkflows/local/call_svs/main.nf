@@ -1,4 +1,5 @@
-include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
+include { ADD_FOUND_IN_TAG                          } from '../add_found_in_tag/main'
+//include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
 include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
@@ -221,6 +222,7 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
+/*
     ch_sv_calls_filtered
         .multiMap { meta, vcf, tbi ->
             vcf: [ meta, vcf, tbi ]
@@ -234,6 +236,22 @@ workflow CALL_SVS {
         ch_add_found_in_tag_input.sv_caller
     )
     ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
+
+*/
+
+    ch_sv_calls_filtered
+        .multiMap { meta, vcf, tbi ->
+            vcf: [ meta, vcf, tbi ]
+            sv_caller: meta.sv_caller
+        }
+        .set { ch_vcfexpress_input }
+
+    ADD_FOUND_IN_TAG (
+        ch_vcfexpress_input.vcf,
+        ch_vcfexpress_input.sv_caller,
+        "header:add_info({ID=\"FOUND_IN\",Number=\"1\",Type=\"String\",Description=\"Program that called the variant\"})" //prelude_content
+    )
+
 
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
