@@ -35,10 +35,10 @@
                 "versions.yml:md5,81c3ff9e5e59ed617d4e1f20ffb3f72a"
             ],
             "test.vcf.gz.tbi",
-            "b6e329c02050527754ec7dcd615ad3c4",
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=3, variantCount=146, phased=false, phasedAutodetect=false]"
+            "79b414333f42bec2310aecf617bcfe9a",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-11T11:52:04.856686054",
+        "timestamp": "2026-03-13T10:16:21.879795381",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -110,10 +110,10 @@
                 "versions.yml:md5,81c3ff9e5e59ed617d4e1f20ffb3f72a"
             ],
             "test.vcf.gz.tbi",
-            "36f14adbd340d2dfec518385c43e67bb",
-            "VcfFile [chromosomes=[chrX, chr16], sampleCount=3, variantCount=146, phased=false, phasedAutodetect=false]"
+            "e469aa4912440eb7820188c58a7070a2",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-11T11:52:24.571105736",
+        "timestamp": "2026-03-13T10:16:45.882305757",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
