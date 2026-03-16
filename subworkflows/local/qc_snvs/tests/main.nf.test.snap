@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                        "test.visual_report.html:md5,92a278109987011b40f8b6cdcd96f65c"
                     ]
                 ],
                 "1": [
@@ -17,9 +17,6 @@
                         },
                         "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
                     ]
-                ],
-                "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ],
                 "stats": [
                     [
@@ -34,18 +31,15 @@
                         {
                             "id": "test"
                         },
-                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                        "test.visual_report.html:md5,92a278109987011b40f8b6cdcd96f65c"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:02.309581046",
+        "timestamp": "2026-03-06T16:08:47.025843655",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "DeepVariant VCF, Normalized VCF and index -stub": {
@@ -67,9 +61,6 @@
                         "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
-                ],
                 "stats": [
                     [
                         {
@@ -85,16 +76,13 @@
                         },
                         "test.visual_report.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:15.426309334",
+        "timestamp": "2026-03-06T16:08:55.790735063",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "DeepVariant vcfstatsreport disabled": {
@@ -111,9 +99,6 @@
                         "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
                     ]
                 ],
-                "2": [
-                    
-                ],
                 "stats": [
                     [
                         {
@@ -124,16 +109,13 @@
                 ],
                 "vcfstatsreport": [
                     
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:23.267198475",
+        "timestamp": "2026-03-06T16:09:02.144924518",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "DeepVariant vcfstatsreport disabled -stub": {
@@ -150,9 +132,6 @@
                         "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    
-                ],
                 "stats": [
                     [
                         {
@@ -163,16 +142,13 @@
                 ],
                 "vcfstatsreport": [
                     
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:30.39905581",
+        "timestamp": "2026-03-06T16:09:08.575130411",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

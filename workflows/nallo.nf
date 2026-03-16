@@ -433,7 +433,6 @@ workflow NALLO {
             params.snv_caller,
             params.sentieon_tech,
         )
-        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
@@ -493,8 +492,6 @@ workflow NALLO {
             sample_snv_index,
             params.snv_caller.equals("deepvariant"),
         )
-
-        ch_versions = ch_versions.mix(QC_SNVS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect{ _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf

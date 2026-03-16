@@ -12,13 +12,11 @@ workflow QC_SNVS {
     run_deepvariant_vcfstatsreport // value: bool
 
     main:
-    ch_versions = channel.empty()
     ch_vcfstatsreport = channel.empty()
 
     if(run_deepvariant_vcfstatsreport) {
         DEEPVARIANT_VCFSTATSREPORT(ch_vcf)
         ch_vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report
-        ch_versions = ch_versions.mix(DEEPVARIANT_VCFSTATSREPORT.out.versions)
     }
 
 
@@ -38,5 +36,4 @@ workflow QC_SNVS {
     emit:
     vcfstatsreport = ch_vcfstatsreport        // channel: [ val(meta), path(html) ]
     stats          = BCFTOOLS_STATS.out.stats // channel: [ val(meta), path(txt) ]
-    versions       = ch_versions              // channel: [ path(versions.yml) ]
 }
