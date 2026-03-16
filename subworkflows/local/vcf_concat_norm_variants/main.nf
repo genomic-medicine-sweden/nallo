@@ -17,7 +17,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     BCFTOOLS_CONCAT(
         ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] },
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_CONCAT.out.versions)
 
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     ADD_FOUND_IN_TAG(
@@ -30,7 +29,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         ch_fasta,
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.versions)
 
     emit:
     vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]

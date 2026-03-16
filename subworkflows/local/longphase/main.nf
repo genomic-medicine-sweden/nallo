@@ -36,7 +36,6 @@ workflow LONGPHASE {
         ch_split_in,
         ch_family_to_samples,
     )
-    ch_versions = ch_versions.mix(SPLIT_MULTISAMPLE_VCF.out.versions)
 
     SPLIT_MULTISAMPLE_VCF.out.split_vcf
         .branch { meta, vcf, variant_type ->
@@ -78,7 +77,6 @@ workflow LONGPHASE {
 
     // Index all phased VCFs, ignoring variant types.
     BCFTOOLS_INDEX(ch_bcftools_index_in)
-    ch_versions = ch_versions.mix(BCFTOOLS_INDEX.out.versions)
 
     ch_bcftools_index_in
         .join(BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -87,7 +85,6 @@ workflow LONGPHASE {
         .set { ch_phased_vcf }
 
     BCFTOOLS_MERGE(ch_phased_vcf, fasta, fai, [[], []])
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     BCFTOOLS_MERGE.out.vcf
         .branch { meta, vcf ->

@@ -23,41 +23,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:25:37.852585805",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:28:36.191476806"
-    },
-    "plot nothing -stub": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ],
-                "chromograph_plots": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:30:15.083501841"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot coverage -stub": {
         "content": [
@@ -152,11 +122,41 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:26:01.401815013",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T18:32:29.086171767"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "plot nothing -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ],
+                "chromograph_plots": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
+                ]
+            },
+            [
+                {
+                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
+                        "chromograph": "1.3.1"
+                    }
+                }
+            ]
+        ],
+        "timestamp": "2026-02-26T08:26:24.170681091",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot all": {
         "content": [
@@ -222,9 +222,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
@@ -289,27 +287,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
             [
                 {
-                    "CHROMOGRAPH:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
                     }
                 },
                 {
@@ -324,11 +310,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:24:58.733912045",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:27:11.321918781"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot all -stub": {
         "content": [
@@ -394,9 +380,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
@@ -461,27 +445,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
                     "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
             },
             [
                 {
-                    "CHROMOGRAPH:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
                     }
                 },
                 {
@@ -496,11 +468,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:25:50.689937401",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:29:04.384910779"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot autozygosity -stub": {
         "content": [
@@ -541,9 +513,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ],
                 "chromograph_plots": [
@@ -582,26 +552,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
             },
             [
                 {
-                    "CHROMOGRAPH:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
                     }
                 },
                 {
@@ -611,11 +569,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:26:14.336093154",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:29:55.044671105"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot coverage": {
         "content": [
@@ -710,11 +668,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:25:11.398602043",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:27:37.414905869"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "plot autozygosity": {
         "content": [
@@ -755,9 +713,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ],
                 "chromograph_plots": [
@@ -796,26 +752,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,1f93d88c5d5a6d9f445293aba1dba5f7",
                     "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,7e423f82513cd7dbcace481465829631",
                     "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
             },
             [
                 {
-                    "CHROMOGRAPH:BCFTOOLS_ROH": {
-                        "bcftools": 1.22
-                    }
-                },
-                {
                     "CHROMOGRAPH:RHOCALL_VIZ": {
                         "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:BCFTOOLS_VIEW_UNCOMPRESS": {
-                        "bcftools": 1.22
                     }
                 },
                 {
@@ -825,10 +769,10 @@
                 }
             ]
         ],
+        "timestamp": "2026-02-26T08:25:26.853140588",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:28:12.425885494"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

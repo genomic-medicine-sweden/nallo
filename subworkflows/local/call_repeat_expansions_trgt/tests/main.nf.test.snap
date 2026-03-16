@@ -6,16 +6,14 @@
             "30ba267e3b89ce97d0df96640b22d265",
             [
                 "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
             ]
         ],
+        "timestamp": "2026-02-26T08:24:31.717492692",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-01-29T09:50:16.261453545"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
@@ -88,9 +86,7 @@
                 ],
                 "6": [
                     "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
                 ],
                 "family_tbi": [
                     [
@@ -160,16 +156,14 @@
                 ],
                 "versions": [
                     "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
+                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:24:41.007272177",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:02:13.902678854"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

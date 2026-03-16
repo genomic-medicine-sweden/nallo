@@ -34,7 +34,6 @@ workflow QC_SNVS {
         [[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_STATS.out.versions)
 
     emit:
     vcfstatsreport = ch_vcfstatsreport        // channel: [ val(meta), path(html) ]

@@ -39,7 +39,6 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         [ [], [] ],
         [ [], [] ]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     emit:
     sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]

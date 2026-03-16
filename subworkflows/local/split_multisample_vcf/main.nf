@@ -7,8 +7,6 @@ workflow SPLIT_MULTISAMPLE_VCF {
     ch_family_to_samples // channel: [ val(meta), val(list_of_sample_ids) ]
 
     main:
-    ch_versions = channel.empty()
-
     ch_vcf_vartype
         .combine(ch_family_to_samples, by: 0)
         .transpose()
@@ -23,7 +21,6 @@ workflow SPLIT_MULTISAMPLE_VCF {
         [],
         [],
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
     BCFTOOLS_VIEW.out.vcf
         .map { meta, vcf ->
@@ -33,5 +30,4 @@ workflow SPLIT_MULTISAMPLE_VCF {
 
     emit:
     split_vcf = ch_split_vcf // channel: [ val(meta), path(vcf), val(variant_type) ]
-    versions = ch_versions   // channel: [ path(versions.yml) ]
 }

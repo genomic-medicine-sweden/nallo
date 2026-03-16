@@ -52,11 +52,10 @@ workflow CALL_SVS {
         TABIX_SEVERUS (
             SEVERUS.out.all_vcf
         )
-        ch_versions = ch_versions.mix(TABIX_SEVERUS.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                TABIX_SEVERUS.out.gz_tbi,
+                TABIX_SEVERUS.out.gz_index,
                 'severus'
             )
         )
@@ -80,7 +79,6 @@ workflow CALL_SVS {
         BCFTOOLS_SORT (
             CLEAN_SNIFFLES.out.vcf
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
@@ -121,11 +119,10 @@ workflow CALL_SVS {
         TABIX_HIFICNV (
             HIFICNV.out.vcf
         )
-        ch_versions = ch_versions.mix(TABIX_HIFICNV.out.versions)
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.tbi, failOnMismatch:true, failOnDuplicate:true),
+                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.index, failOnMismatch:true, failOnDuplicate:true),
                 'hificnv'
             )
         )
@@ -216,7 +213,6 @@ workflow CALL_SVS {
             [],
             []
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW.out.versions)
 
         ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
             .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)
@@ -259,7 +255,6 @@ workflow CALL_SVS {
         [],
         []
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
@@ -275,7 +270,6 @@ workflow CALL_SVS {
         ch_bcftools_reheader_input,
         [[],[]]
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     // Merge the reheadered SV calls with the ones that didn't need reheadering
     BCFTOOLS_REHEADER.out.vcf

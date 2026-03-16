@@ -19,8 +19,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab",
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ],
                 "stats": [
                     [
@@ -39,16 +38,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab",
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T10:29:02.309581046",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-10-22T11:09:45.43211778"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "DeepVariant VCF, Normalized VCF and index -stub": {
         "content": [
@@ -70,8 +68,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab",
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ],
                 "stats": [
                     [
@@ -90,55 +87,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab",
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T10:29:15.426309334",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-10-22T11:09:52.29171863"
-    },
-    "DeepVariant vcfstatsreport disabled -stub": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
-                ],
-                "stats": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "vcfstatsreport": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
-        },
-        "timestamp": "2026-02-02T15:58:04.856308714"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "DeepVariant vcfstatsreport disabled": {
         "content": [
@@ -155,7 +112,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    
                 ],
                 "stats": [
                     [
@@ -169,14 +126,53 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,e81049e4d6445b1aa9bb4c5759c4f72c"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-02-26T10:29:23.267198475",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.04.2"
-        },
-        "timestamp": "2026-02-03T11:01:43.819483365"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
+    },
+    "DeepVariant vcfstatsreport disabled -stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bcftools_stats.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcfstatsreport": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "timestamp": "2026-02-26T10:29:30.39905581",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }

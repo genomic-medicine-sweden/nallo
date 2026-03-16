@@ -27,9 +27,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ],
                 "bcftools_concat_vcf": [
                     [
@@ -56,17 +54,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:34.225171614",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:54:53.087571498"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "2 VCFs": {
         "content": [
@@ -96,9 +92,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ],
                 "bcftools_concat_vcf": [
                     [
@@ -125,17 +119,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:19.16259219",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:54:20.629537636"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "1 VCF": {
         "content": [
@@ -165,9 +157,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ],
                 "bcftools_concat_vcf": [
                     [
@@ -194,17 +184,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:11.434614332",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:54:05.000632658"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     },
     "1 VCF -stub": {
         "content": [
@@ -234,9 +222,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ],
                 "bcftools_concat_vcf": [
                     [
@@ -263,16 +249,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,148c64386afda3a5755775867ec4f945",
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d",
-                    "versions.yml:md5,7f07c70c14670d90338aaa59cdbf780c"
+                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
+        "timestamp": "2026-02-26T08:32:26.733199896",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:54:36.613168417"
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        }
     }
 }
