@@ -7,15 +7,17 @@ include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
+include { VCFEXPRESS                                  } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs       // channel: [mandatory] [ val(meta), path(gvcfs)     ]
-    ch_tbis        // channel: [mandatory] [ val(meta), path(tbis)      ]
-    ch_bed         // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta)     ]
-    ch_fai         // channel: [mandatory] [ val(meta), path(fai)       ]
-    variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_gvcfs                // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_tbis                 // channel: [mandatory] [ val(meta), path(tbis)      ]
+    ch_bed                  // channel: [optional]  [ val(meta), path(input_bed) ]
+    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
+    variant_caller          // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
 
     main:
     ch_versions           = channel.empty()
@@ -63,15 +65,23 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
 
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
-    ADD_FOUND_IN_TAG(
-        ch_merged_family_gvcf.map { meta, vcf -> [meta, vcf, []] },
-        variant_caller,
+    ch_merged_family_gvcf
+        .multiMap { meta, vcf ->
+            vcf: [ meta, vcf ]
+            sv_caller: meta.variant_caller
+        }
+        .set { ch_vcfexpress_input }
+
+    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
+
+    VCFEXPRESS (
+        ch_vcfexpress_input.vcf,
+        ch_lua_file
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
-        ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
+        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         ch_fasta,
     )
 
