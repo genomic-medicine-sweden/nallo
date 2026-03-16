@@ -1121,12 +1121,33 @@
                 "HG002_ONT_C_modkit_pileup_hp2.bw:md5,b66ee20547e4be3b112b123dae3d54d9"
             ],
             [
-                ["HG002_ONT_A_haplotagged.bam", "c1cdb8f9c9bb4dcfa0a64e9883896084"],
-                ["HG002_ONT_B_haplotagged.bam", "b6aa70b37996c4bd09c4d64f47ad8e33"],
-                ["HG002_ONT_C_haplotagged.bam", "c1cdb8f9c9bb4dcfa0a64e9883896084"],
-                ["HG002_ONT_A_aligned_assembly.bam", "a8150005fca1626ded64f2c259c561a9"],
-                ["HG002_ONT_B_aligned_assembly.bam", "c7772b2a5de55ce533601277a2d5c68b"],
-                ["HG002_ONT_C_aligned_assembly.bam", "a8150005fca1626ded64f2c259c561a9"]
+                [
+                    "HG002_ONT_A_haplotagged.bam",
+                    "c1cdb8f9c9bb4dcfa0a64e9883896084"
+                ],
+                [
+                    "HG002_ONT_B_haplotagged.bam",
+                    "b6aa70b37996c4bd09c4d64f47ad8e33"
+                ],
+                [
+                    "HG002_ONT_C_haplotagged.bam",
+                    "c1cdb8f9c9bb4dcfa0a64e9883896084"
+                ],
+                [
+                    "HG002_ONT_A_aligned_assembly.bam",
+                    "a8150005fca1626ded64f2c259c561a9"
+                ],
+                [
+                    "HG002_ONT_B_aligned_assembly.bam",
+                    "c7772b2a5de55ce533601277a2d5c68b"
+                ],
+                [
+                    "HG002_ONT_C_aligned_assembly.bam",
+                    "a8150005fca1626ded64f2c259c561a9"
+                ]
+            ],
+            [
+                
             ],
             [],
             [
@@ -1203,7 +1224,9 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=14, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            []
+            [
+                
+            ]
         ],
         "timestamp": "2026-03-04T13:52:37.181474915",
         "meta": {
