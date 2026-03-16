@@ -3,10 +3,6 @@
         "content": [
             195,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
@@ -713,7 +709,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T14:24:13.72115228",
+        "timestamp": "2026-03-16T15:35:46.024764338",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

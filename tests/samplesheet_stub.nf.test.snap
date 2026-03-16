@@ -3,10 +3,6 @@
         "content": [
             54,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
@@ -96,6 +92,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
@@ -138,20 +137,16 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T08:58:40.220997123",
+        "timestamp": "2026-03-16T15:44:52.061715175",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            55,
+            56,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -260,11 +255,17 @@
                     "svdb": "2.8.2",
                     "bcftools": 1.21
                 },
+                "TABIX_VCFEXPRESS": {
+                    "tabix": 1.21
+                },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
@@ -352,10 +353,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-02T09:00:41.332267989",
+        "timestamp": "2026-03-16T15:48:34.145070928",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
@@ -526,10 +527,6 @@
         "content": [
             62,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
@@ -629,6 +626,9 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
@@ -668,20 +668,16 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T09:02:21.008081801",
+        "timestamp": "2026-03-16T15:50:01.350416785",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test CADD with mock resources": {
         "content": [
             67,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
@@ -795,6 +791,9 @@
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
@@ -837,20 +836,16 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-02T08:56:56.330327397",
+        "timestamp": "2026-03-16T15:44:08.326106627",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test family id same as sample id": {
         "content": [
-            189,
+            192,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
                     "python": "3.8.3"
@@ -1109,6 +1104,9 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
+                "TABIX_VCFEXPRESS": {
+                    "tabix": 1.21
+                },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
@@ -1123,6 +1121,9 @@
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
@@ -1340,7 +1341,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-04T13:29:59.275580296",
+        "timestamp": "2026-03-16T15:49:28.826902665",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
