@@ -520,7 +520,6 @@
                 "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
                 "multiqc/multiqc_data/peddy_het_check_plot.txt",
                 "multiqc/multiqc_data/peddy_relatedness_plot.txt",
-                "multiqc/multiqc_data/peddy_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_het_check_plot.txt",
                 "multiqc/multiqc_data/somalier_relatedness_heatmap_plot.txt",
                 "multiqc/multiqc_data/somalier_relatedness_plot.txt",
@@ -556,7 +555,6 @@
                 "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_relatedness_plot.pdf",
-                "multiqc/multiqc_plots/pdf/peddy_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_relatedness_heatmap_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
@@ -591,7 +589,6 @@
                 "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
                 "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
                 "multiqc/multiqc_plots/png/peddy_relatedness_plot.png",
-                "multiqc/multiqc_plots/png/peddy_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_relatedness_heatmap_plot.png",
                 "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
@@ -626,7 +623,6 @@
                 "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_relatedness_plot.svg",
-                "multiqc/multiqc_plots/svg/peddy_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_relatedness_heatmap_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
@@ -1040,9 +1036,9 @@
                 "mosdepth_perchrom.txt:md5,3058d5d2eebff6d22ec098f1505e9d31",
                 "multiqc_bcftools_stats.txt:md5,78458a85dc2c0b00fd708a8b9e8ddf76",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,21238eb72dc8b2334fb1642109f8a802",
-                "multiqc_general_stats.txt:md5,b9cf77942d37632d8a341b227d25478f",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,7d68e58bcdc469be6213ffade757a8cf",
+                "multiqc_fastqc.txt:md5,dce4d2cd3fb8592ada2d0f05fc644b03",
+                "multiqc_general_stats.txt:md5,b345fe7a8d054760f5a554295f9891f5",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,de569e355fbdd01197a4fbe4f69ee245",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,8d4660a09e1919be266625331672c945",
                 "whatshap-stats-table.txt:md5,7de53f0a525bd22ecd0fd8daaa32c801",
@@ -1147,7 +1143,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1224,13 +1220,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-03-13T10:01:34.627020109",
+        "timestamp": "2026-03-16T12:53:36.318133228",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "25.10.0"
         }
     }
 }

@@ -569,7 +569,6 @@
                 "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
                 "multiqc/multiqc_data/peddy_het_check_plot.txt",
                 "multiqc/multiqc_data/peddy_relatedness_plot.txt",
-                "multiqc/multiqc_data/peddy_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_het_check_plot.txt",
                 "multiqc/multiqc_data/somalier_relatedness_heatmap_plot.txt",
                 "multiqc/multiqc_data/somalier_relatedness_plot.txt",
@@ -605,7 +604,6 @@
                 "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_relatedness_plot.pdf",
-                "multiqc/multiqc_plots/pdf/peddy_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_relatedness_heatmap_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
@@ -640,7 +638,6 @@
                 "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
                 "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
                 "multiqc/multiqc_plots/png/peddy_relatedness_plot.png",
-                "multiqc/multiqc_plots/png/peddy_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_relatedness_heatmap_plot.png",
                 "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
@@ -675,7 +672,6 @@
                 "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_relatedness_plot.svg",
-                "multiqc/multiqc_plots/svg/peddy_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_relatedness_heatmap_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
@@ -1115,12 +1111,12 @@
                 "mosdepth_perchrom.txt:md5,10d677cb5b55731c856d4b04f4bbdc94",
                 "multiqc_bcftools_stats.txt:md5,0863b59d59ee81e3c051e18db5fcdaec",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,6c00dc25ea9364ec7c8d38efdbe12bfb",
-                "multiqc_general_stats.txt:md5,4530692865f87735c2af17d4c2218149",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,cef6d2713f033aae3c7b075916a70acf",
-                "peddy_relatedness_plot.txt:md5,8e502dba751846fb15dd8e43fff7f42e",
-                "somalier_stats.txt:md5,0bc0c54ec11dfcb3cefe97577a19aa84",
-                "whatshap-stats-table.txt:md5,74a99d4a8c9b56eb29712de870d30215",
+                "multiqc_fastqc.txt:md5,cded57a1a32e92f2ad42d0dbe3d3826b",
+                "multiqc_general_stats.txt:md5,35d58e066d6c2e8a8ec4bbdda729406b",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,b498ee6f222d1586efc2b689703db9c1",
+                "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
+                "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
+                "whatshap-stats-table.txt:md5,2f472d2f800709ab934000ede813834b",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,7c19d2f4da52fe34122670ad8c946735",
                 "HG003_cramino_aligned_phased.arrow:md5,b74108e154e1a445e9e8a7bead685465",
@@ -1235,7 +1231,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1308,13 +1304,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-03-16T15:35:53.30738915",
+        "timestamp": "2026-03-16T12:37:25.546747054",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "25.10.0"
         }
     }
 }

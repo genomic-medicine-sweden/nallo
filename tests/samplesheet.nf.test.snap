@@ -417,7 +417,6 @@
                 "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
                 "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
                 "multiqc/multiqc_data/peddy_het_check_plot.txt",
-                "multiqc/multiqc_data/peddy_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_het_check_plot.txt",
                 "multiqc/multiqc_data/somalier_sex_check_plot.txt",
                 "multiqc/multiqc_data/somalier_stats.txt",
@@ -450,7 +449,6 @@
                 "multiqc/multiqc_plots/pdf/mosdepth-cumcoverage-dist-id.pdf",
                 "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
-                "multiqc/multiqc_plots/pdf/peddy_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/somalier_stats.pdf",
@@ -482,7 +480,6 @@
                 "multiqc/multiqc_plots/png/mosdepth-cumcoverage-dist-id.png",
                 "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
                 "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
-                "multiqc/multiqc_plots/png/peddy_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
                 "multiqc/multiqc_plots/png/somalier_stats.png",
@@ -514,7 +511,6 @@
                 "multiqc/multiqc_plots/svg/mosdepth-cumcoverage-dist-id.svg",
                 "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
-                "multiqc/multiqc_plots/svg/peddy_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
                 "multiqc/multiqc_plots/svg/somalier_stats.svg",
@@ -716,12 +712,12 @@
                 "mosdepth_perchrom.txt:md5,a6a5d16c7cf5964e795feb3d33e4a2a3",
                 "multiqc_bcftools_stats.txt:md5,645a4a33b076a9aff957d5aa4375c582",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,6a480bdcfc7a42e03b005593f373cab8",
-                "multiqc_general_stats.txt:md5,df61718f574ba617ec21910cbf9c204e",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,3760347a6c138457bd8aae870b9bd476",
-                "somalier_stats.txt:md5,2383c81547983b1f113036f69119873b",
-                "whatshap-stats-table.txt:md5,7d71009e680eeea16f02bb02dbc50f9d",
-                "FAM_paraphase_annotated.tsv:md5,e0237a5581743972016902fd3441244a",
+                "multiqc_fastqc.txt:md5,0088a19c52d1d060db0b060938994583",
+                "multiqc_general_stats.txt:md5,8dad02be7fc7de5737952427d222c89f",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,4c0d1ffaac851169f36ea4eac3d072b3",
+                "somalier_stats.txt:md5,2c0b21c0d27b7794a22c876a8c7f4635",
+                "whatshap-stats-table.txt:md5,ae86d727b4bcd2d1471c87867e5ea7af",
+                "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,98827680dde263c956a62437cfdba100",
                 "HG002_Revio_cramino_aligned.arrow:md5,98827680dde263c956a62437cfdba100",
@@ -766,7 +762,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -807,13 +803,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-03-13T09:47:46.06426791",
+        "timestamp": "2026-03-16T14:44:25.725684193",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "25.10.0"
         }
     }
 }
