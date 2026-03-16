@@ -1,5 +1,3 @@
-include { ADD_FOUND_IN_TAG                          } from '../add_found_in_tag/main'
-//include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
 include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
@@ -14,7 +12,9 @@ include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-
 include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_VCFEXPRESS              } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { VCFEXPRESS                                } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_SVS {
 
@@ -34,6 +34,7 @@ workflow CALL_SVS {
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
     create_hificnv_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
     create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    ch_vcfexpress_prelude                   // channel: [ val(meta), path(lua) ]
 
     main:
     ch_versions = channel.empty()
@@ -222,23 +223,6 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
-/*
-    ch_sv_calls_filtered
-        .multiMap { meta, vcf, tbi ->
-            vcf: [ meta, vcf, tbi ]
-            sv_caller: meta.sv_caller
-        }
-        .set { ch_add_found_in_tag_input }
-
-    // Annotate with FOUND_IN tag
-    ADD_FOUND_IN_TAG (
-        ch_add_found_in_tag_input.vcf,
-        ch_add_found_in_tag_input.sv_caller
-    )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
-
-*/
-
     ch_sv_calls_filtered
         .multiMap { meta, vcf, tbi ->
             vcf: [ meta, vcf, tbi ]
@@ -246,20 +230,25 @@ workflow CALL_SVS {
         }
         .set { ch_vcfexpress_input }
 
-    ADD_FOUND_IN_TAG (
-        ch_vcfexpress_input.vcf,
-        ch_vcfexpress_input.sv_caller,
-        "header:add_info({ID=\"FOUND_IN\",Number=\"1\",Type=\"String\",Description=\"Program that called the variant\"})" //prelude_content
+    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
+    ch_vcfexpress_input = ch_vcfexpress_input.vcf.map { meta, vcf, tbi -> [ meta, vcf ] }
+
+    VCFEXPRESS (
+        ch_vcfexpress_input,
+        ch_lua_file
     )
 
+    TABIX_VCFEXPRESS (
+        VCFEXPRESS.out.vcf
+    )
 
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    ADD_FOUND_IN_TAG.out.vcf
-        .join(ADD_FOUND_IN_TAG.out.tbi, failOnMismatch:true, failOnDuplicate:true)
+    VCFEXPRESS.out.vcf
+        .join(TABIX_VCFEXPRESS.out.index, failOnMismatch:true, failOnDuplicate:true)
         .branch { meta, _vcf, _tbi ->
             def callers_needing_reheader = [ 'severus', 'sniffles' ]
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)

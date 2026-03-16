@@ -183,6 +183,9 @@ tool:
   untar:
     citation: "untar"
     bibliography: ""
+  vcfexpress:
+    citation: "vcfexpress"
+    bibliography: ""
   yak:
     citation: "yak"
     bibliography: ""

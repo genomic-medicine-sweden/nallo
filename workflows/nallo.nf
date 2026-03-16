@@ -125,6 +125,7 @@ workflow NALLO {
     ch_sentieon_female_diploid_bed  = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_diploid_bed    = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_haploid_bed    = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
+    ch_vcfexpress_prelude           = createReferenceChannelFromPath("$projectDir/assets/vcfexpress_prelude.lua")
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -476,6 +477,7 @@ workflow NALLO {
             variants_to_concat_per_sample,
             ch_fasta,
             params.snv_caller,
+            //ch_vcfexpress_prelude
         )
         ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
@@ -552,7 +554,8 @@ workflow NALLO {
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
             params.create_hificnv_maf_track,
-            params.create_sawfish_maf_track
+            params.create_sawfish_maf_track,
+            ch_vcfexpress_prelude
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
