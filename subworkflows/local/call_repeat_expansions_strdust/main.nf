@@ -1,14 +1,16 @@
-include { STRDUST          } from '../../../modules/nf-core/strdust/'
-include { ADD_FOUND_IN_TAG } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
+include { STRDUST          } from '../../../modules/nf-core/strdust/'
+include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
+include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
 
     take:
-    ch_bam_bai  // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai      // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_bam_bai              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
 
     main:
     ch_versions = channel.empty()
@@ -21,14 +23,28 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     )
     ch_versions.mix(STRDUST.out.versions)
 
-    ADD_FOUND_IN_TAG (
-        STRDUST.out.vcf.join(STRDUST.out.tbi),
-        "STRdust"
-    )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
+    _variant_caller = "STRdust"
 
-    ADD_FOUND_IN_TAG.out.vcf
-        .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
+    STRDUST.out.vcf
+        .multiMap { meta, vcf ->
+            vcf: [ meta, vcf ]
+            sv_caller: meta.variant_caller
+        }
+        .set { ch_vcfexpress_input }
+
+    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
+
+    VCFEXPRESS (
+        ch_vcfexpress_input.vcf,
+        ch_lua_file
+    )
+
+    TABIX_TABIX (
+        VCFEXPRESS.out.vcf
+    )
+
+    VCFEXPRESS.out.vcf
+        .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { ch_bcftools_merge_in }
