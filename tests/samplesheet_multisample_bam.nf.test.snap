@@ -983,12 +983,12 @@
                 "HG003_pbcpgtools.hap1.bed.gz.tbi:md5,aea259c8f366f1e9a761074570636927",
                 "HG003_pbcpgtools.hap2.bed.gz:md5,d111a03e558de89fc97b59bb680716a5",
                 "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,979335e1c28147f5490865cfd562402a",
-                "HG004_pbcpgtools.combined.bed.gz:md5,452a221a99ecc63abc0b6b414ff6c12c",
-                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,752dc1d0170223cdd5498bb2b9fa0653",
-                "HG004_pbcpgtools.hap1.bed.gz:md5,3a3b14a54c0a8b52acf0e332f986c798",
-                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,79530866697029401fdefb02e19e92ff",
-                "HG004_pbcpgtools.hap2.bed.gz:md5,4ad119e561481f2389c96e27d4637831",
-                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,28290f4417c723f33c4ee3b076f0d711",
+                "HG004_pbcpgtools.combined.bed.gz:md5,df117555e83aed9f34b18ae99b6fbf81",
+                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,85434f41293825d2511852b893d689a5",
+                "HG004_pbcpgtools.hap1.bed.gz:md5,8ce10ca114ccec5d3605ee84e82780c3",
+                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,304eed998bb193cd1728d4208c9a73eb",
+                "HG004_pbcpgtools.hap2.bed.gz:md5,c24c72eb6e3451c27f55985a7ea247ff",
+                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,b1c140fb70e45d022fb672cd5a8e6709",
                 "HG002_methbat_profile.tsv:md5,bb11605e6bb4b7834d982257fbbe9440",
                 "HG003_methbat_profile.tsv:md5,374ff70208b06874671d942b8676c86c",
                 "HG004_methbat_profile.tsv:md5,df0e661efc190d3f90ce28cfd9c7a48f",
@@ -1013,11 +1013,11 @@
                 "multiqc_bcftools_stats.txt:md5,5013a886c015ebb1bcf6e8c0ccb7330d",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,cded57a1a32e92f2ad42d0dbe3d3826b",
-                "multiqc_general_stats.txt:md5,cbbdfe9e962c3ae9a9dbea319516fc95",
+                "multiqc_general_stats.txt:md5,829cd8a8b0fc3ddfb3186d9d3adf9a00",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,b498ee6f222d1586efc2b689703db9c1",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
-                "whatshap-stats-table.txt:md5,2f472d2f800709ab934000ede813834b",
+                "whatshap-stats-table.txt:md5,b567dd567a12e70205d273b4c111cb76",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,5e904df1ea10c02ae70169e46b45f16c",
                 "HG003_cramino_aligned_phased.arrow:md5,e6859e9adeed604cf6b0c0fb659ef19d",
@@ -1052,13 +1052,13 @@
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
                 "HG002_whatshap_stats.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_whatshap_stats.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
-                "HG002_whatshap_stats.tsv:md5,68833d5be80ec95adebb83b365239476",
+                "HG002_whatshap_stats.tsv:md5,7b7c200aeda24e8c87e27e47fddf961e",
                 "HG003_whatshap_stats.gtf.gz:md5,6743c2315bf868ecffefa44f80418e40",
                 "HG003_whatshap_stats.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
-                "HG003_whatshap_stats.tsv:md5,29856e469efb6195b0b219cad3233b6d",
+                "HG003_whatshap_stats.tsv:md5,06b79fb70122b43d1d728bd68d1cb42f",
                 "HG004_whatshap_stats.gtf.gz:md5,83f5ec728c73eefb9a4353c89f047c5f",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,fe49f28242433a40be9d9c91fd76405a",
-                "HG004_whatshap_stats.tsv:md5,6bc0d6ba072da95991546b4398dd2548",
+                "HG004_whatshap_stats.tsv:md5,139436c548dec062db6061ffef664240",
                 "HG002_sambamba_depth.bed:md5,a155719809cd54de8f493bdc06f5ee17",
                 "HG003_sambamba_depth.bed:md5,fa838b4f18918cff1a086cf326e24eb1",
                 "HG004_sambamba_depth.bed:md5,9ea7a024c90d0e0939a010155969476c",
@@ -1089,9 +1089,9 @@
                 "HG004_hificnv.depth.bw:md5,7a14d76774a36885796a2f8cdc4c8a64",
                 "HG004_hificnv.maf.bw:md5,ebfa988a914e54c62a35d31f01a4197a",
                 "HG004_maf_sawfish.bw:md5,ebfa988a914e54c62a35d31f01a4197a",
-                "HG004_pbcpgtools.combined.bw:md5,e5d97e63b2f2c9bf52b375b2c37ae6d2",
-                "HG004_pbcpgtools.hap1.bw:md5,9821afc171ec31375d9a894bcfbeb2f3",
-                "HG004_pbcpgtools.hap2.bw:md5,5bb21ee57fd6ca78082cdf28e0d7ef8e"
+                "HG004_pbcpgtools.combined.bw:md5,19d5baded6b02040892a59e4e4b8b4c4",
+                "HG004_pbcpgtools.hap1.bw:md5,facdf58e4710cac9832e987a4148c229",
+                "HG004_pbcpgtools.hap2.bw:md5,63c6216b96a8a07f8e1c570681f1256d"
             ],
             [
                 [
@@ -1134,7 +1134,6 @@
             [
                 
             ],
-            [],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1198,21 +1197,21 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=31, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=36, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-03-04T13:22:50.399740891",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-16T11:48:10.124679817"
     }
 }
