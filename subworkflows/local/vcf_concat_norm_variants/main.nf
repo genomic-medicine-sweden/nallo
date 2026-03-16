@@ -1,32 +1,39 @@
-include { ADD_FOUND_IN_TAG                           } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
+include { VCFEXPRESS                                  } from '../../../modules/nf-core/vcfexpress/main'
 
 //
 // Workflow to concatenate and normalize variants
 //
 workflow VCF_CONCAT_NORM_VARIANTS {
     take:
-    ch_vcfs        // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta) ]
-    variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_vcfs                 // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
+    variant_caller          // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
 
     main:
-    ch_versions = channel.empty()
 
     BCFTOOLS_CONCAT(
         ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] },
     )
 
-    // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
-    ADD_FOUND_IN_TAG(
-        BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [meta, vcf, []] },
-        variant_caller,
+    BCFTOOLS_CONCAT.out.vcf
+        .multiMap { meta, vcf ->
+            vcf: [ meta, vcf ]
+            sv_caller: meta.variant_caller
+        }
+        .set { ch_vcfexpress_input }
+
+    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
+
+    VCFEXPRESS (
+        ch_vcfexpress_input.vcf,
+        ch_lua_file
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     BCFTOOLS_NORM_SINGLESAMPLE(
-        ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
+        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         ch_fasta,
     )
 
@@ -34,5 +41,4 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
     index               = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
     bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf                                                    // channel: [ val(meta), path(vcf) ]
-    versions            = ch_versions                                                                // channel: [ path(versions.yml) ]
 }
