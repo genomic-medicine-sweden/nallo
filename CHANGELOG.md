@@ -16,7 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#899](https://github.com/genomic-medicine-sweden/nallo/pull/899) - Added nf-core module bcftools/fixploidy for forcing diploid GTs in sentieon SNV calling
 - [#902](https://github.com/genomic-medicine-sweden/nallo/pull/902) - Added parameters for `--edit`, `--fraction` and `--alpha` options in `STRDROP_CALL`
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Added subworkflow `ANNOTATE_PARALOGS` with Paraphrase JSON annotation by Paraphrase
-- [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Added Peddy sex check files to MultiQC ignore list
 
 ### `Changed`
 
@@ -35,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed local module `merge_json`
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
+- [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Removed Peddy sex check files from MultiQC input
 
 ### `Fixed`
 
