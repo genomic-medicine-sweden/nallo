@@ -81,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed local module `merge_json`
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
+- [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Removed Peddy sex check files from MultiQC because outputs are incorrect when female samples are input to the pipeline as male
 
 ### `Fixed`
 
