@@ -1111,12 +1111,12 @@
                 "mosdepth_perchrom.txt:md5,10d677cb5b55731c856d4b04f4bbdc94",
                 "multiqc_bcftools_stats.txt:md5,0863b59d59ee81e3c051e18db5fcdaec",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,cded57a1a32e92f2ad42d0dbe3d3826b",
-                "multiqc_general_stats.txt:md5,35d58e066d6c2e8a8ec4bbdda729406b",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,b498ee6f222d1586efc2b689703db9c1",
-                "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
-                "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
-                "whatshap-stats-table.txt:md5,2f472d2f800709ab934000ede813834b",
+                "multiqc_fastqc.txt:md5,6c00dc25ea9364ec7c8d38efdbe12bfb",
+                "multiqc_general_stats.txt:md5,3068a08606d9affcea233d3be6faa4cb",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,cef6d2713f033aae3c7b075916a70acf",
+                "peddy_relatedness_plot.txt:md5,8e502dba751846fb15dd8e43fff7f42e",
+                "somalier_stats.txt:md5,0bc0c54ec11dfcb3cefe97577a19aa84",
+                "whatshap-stats-table.txt:md5,d605cc291e5f92d28f482f9b2793e261",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,7c19d2f4da52fe34122670ad8c946735",
                 "HG003_cramino_aligned_phased.arrow:md5,b74108e154e1a445e9e8a7bead685465",
@@ -1151,13 +1151,13 @@
                 "FAM.vs.html:md5,de40bea9c88a751a5c6710cbf851cc4a",
                 "HG002_whatshap_stats.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_whatshap_stats.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
-                "HG002_whatshap_stats.tsv:md5,0883680c88ed98dcdaacc035529da70f",
+                "HG002_whatshap_stats.tsv:md5,a32de3213de02b21f62e34fb8f2c3e29",
                 "HG003_whatshap_stats.gtf.gz:md5,81263ffed5f00341fa922f0652bf8044",
                 "HG003_whatshap_stats.gtf.gz.tbi:md5,667aa870e798256a841722f6941e8cc5",
-                "HG003_whatshap_stats.tsv:md5,142f28f47c16c22a7269daf444ea4b99",
+                "HG003_whatshap_stats.tsv:md5,a1151afdb922b17a4267aa6b33d160b4",
                 "HG004_whatshap_stats.gtf.gz:md5,92e2004b99067f9a64c8875d2e5cc644",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,1f71378977ae07db29ff9db251cdcd64",
-                "HG004_whatshap_stats.tsv:md5,51847a51fd35df1beedf7bd59dec8f60",
+                "HG004_whatshap_stats.tsv:md5,909dba1820059aa6b4416141b5a3b0bd",
                 "HG002_sambamba_depth.bed:md5,6bb082e2467e6986710063686044c105",
                 "HG003_sambamba_depth.bed:md5,3b1878bcd362f72be3b2136910cec80c",
                 "HG004_sambamba_depth.bed:md5,26cbadd77560c403448d55226b731f09",
@@ -1231,7 +1231,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1296,21 +1296,21 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=3, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=8, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=28, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=33, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-16T12:37:25.546747054",
+        "timestamp": "2026-03-16T16:09:16.299376636",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
+            "nextflow": "26.02.0"
         }
     }
 }
