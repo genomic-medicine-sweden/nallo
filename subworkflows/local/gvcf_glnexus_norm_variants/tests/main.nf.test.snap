@@ -5,7 +5,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -13,19 +14,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -33,21 +35,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:12.511405531",
+        "timestamp": "2026-03-17T15:21:40.954557894",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 gVCF, without bed": {
@@ -56,7 +58,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,8a55e77ab918d7e128e2f61b419e7043"
                     ]
@@ -64,19 +67,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,0fc9d0e1ee2d3622e78fa61aeb63fde8"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,0fc9d0e1ee2d3622e78fa61aeb63fde8"
                     ]
@@ -84,21 +88,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,8a55e77ab918d7e128e2f61b419e7043"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:26:32.07434537",
+        "timestamp": "2026-03-17T15:21:04.708223576",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 gVCFs, without bed": {
@@ -107,7 +111,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -115,19 +120,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -135,21 +141,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:26:41.336764963",
+        "timestamp": "2026-03-17T15:21:12.159249807",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 gVCFs, without bed, sentieon -stub": {
@@ -158,7 +164,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -166,18 +173,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53"
+                    
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -185,20 +194,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53"
+                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:28.199789374",
+        "timestamp": "2026-03-17T15:21:57.187244032",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 gVCFs, without bed -stub": {
@@ -207,7 +217,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -215,19 +226,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -235,21 +247,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:04.824211162",
+        "timestamp": "2026-03-17T15:21:33.706736658",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 gVCF, without bed, sentieon -stub": {
@@ -258,7 +270,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -266,18 +279,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53"
+                    
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -285,20 +300,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "sentieon"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53"
+                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:20.4269706",
+        "timestamp": "2026-03-17T15:21:49.105260725",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 gVCF, without bed -stub": {
@@ -307,7 +323,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -315,19 +332,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -335,21 +353,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:26:57.220645137",
+        "timestamp": "2026-03-17T15:21:26.585826559",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 gVCFs, with bed": {
@@ -358,7 +376,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -366,19 +385,20 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ],
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -386,21 +406,21 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,38ea33a2f4cd8fe61103a16e2de83f53",
                     "versions.yml:md5,dc4507e3e62d79861d1527dd21f3a980"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:26:49.52111757",
+        "timestamp": "2026-03-17T15:21:19.532500767",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

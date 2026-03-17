@@ -65,23 +65,28 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
 
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
+    // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
     ch_merged_family_gvcf
-        .multiMap { meta, vcf ->
-            vcf: [ meta, vcf ]
-            sv_caller: meta.variant_caller
+        .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
         }
         .set { ch_vcfexpress_input }
 
     ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
 
     VCFEXPRESS (
-        ch_vcfexpress_input.vcf,
+        ch_vcfexpress_input,
         ch_lua_file
     )
 
+    // Remove added caller information in meta
+    VCFEXPRESS.out.vcf
+        .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
+        }
+        .set { ch_bcftools_norm_input }
+
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
-        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, []] },
+        ch_bcftools_norm_input,
         ch_fasta,
     )
 
