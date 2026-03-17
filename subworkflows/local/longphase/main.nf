@@ -102,7 +102,6 @@ workflow LONGPHASE {
 
 
     BCFTOOLS_MERGE.out.index
-        .view()
         .branch { meta, tbi ->
             snv: meta.variant_type == 'snv'
             [meta - meta.subMap('variant_type'), tbi]
