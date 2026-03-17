@@ -59,7 +59,15 @@ input:
         type: file
         description: Reference genome index
         pattern: "*.fai"
-
+  - - meta4:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - pedigree:
+        type: file
+        description: Pedigree file for sample/family
+        pattern: "*.ped"
 output:
   vcf:
     - - meta:

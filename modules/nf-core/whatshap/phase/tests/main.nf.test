@@ -46,6 +46,11 @@ nextflow_process {
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome3.fasta', checkIfExists: true)
                 ]).join(SAMTOOLS_FAIDX.out.fai)
+
+                input[3] = [
+                    [ id:'test' ], // meta map
+                    []
+                ]
                 """
             }
         }
@@ -87,6 +92,11 @@ nextflow_process {
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome3.fasta', checkIfExists: true)
                 ]).join(SAMTOOLS_FAIDX.out.fai)
+
+                input[3] = [
+                    [ id:'test' ], // meta map
+                    []
+                ]
                 """
             }
         }

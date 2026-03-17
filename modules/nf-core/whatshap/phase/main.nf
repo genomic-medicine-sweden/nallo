@@ -11,6 +11,7 @@ process WHATSHAP_PHASE {
     tuple val(meta), path(vcf), path(tbi)
     tuple val(meta2), path(bam), path(bai)
     tuple val(meta3), path(fasta), path(fai)
+    tuple val(meta4), path(pedigree)
 
     output:
     tuple val(meta), path("*.vcf.gz"),     emit: vcf
@@ -23,6 +24,7 @@ process WHATSHAP_PHASE {
     script:
     def args   = task.ext.args   ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def input_ped = pedigree ? "--ped ${pedigree}" : ""
 
     if ("${vcf}" == "${prefix}.vcf" || "${vcf}" == "${prefix}.vcf.gz") {
         error("Input and output names are the same, set prefix in module configuration to disambiguate!")
@@ -33,6 +35,7 @@ process WHATSHAP_PHASE {
         --output ${prefix}.vcf \\
         --reference ${fasta} \\
         ${args} \\
+        ${input_ped} \\
         ${vcf} \\
         ${bam}
 
