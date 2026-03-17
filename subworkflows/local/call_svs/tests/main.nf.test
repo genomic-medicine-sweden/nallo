@@ -92,6 +92,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -152,6 +156,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -213,6 +221,10 @@ nextflow_workflow {
                 input[12] = true
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -268,6 +280,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -323,6 +339,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = false
                 input[14] = false
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -382,6 +402,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -440,6 +464,10 @@ nextflow_workflow {
                 input[12] = true
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -496,6 +524,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -549,6 +581,10 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
