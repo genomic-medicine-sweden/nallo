@@ -762,11 +762,11 @@
                 "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_ONT_A",
-                "repeats/sample/HG002_ONT_A/HG002_ONT_A_null_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_A/HG002_ONT_A_STRdust_found_in.vcf.gz",
                 "repeats/sample/HG002_ONT_B",
-                "repeats/sample/HG002_ONT_B/HG002_ONT_B_null_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_B/HG002_ONT_B_STRdust_found_in.vcf.gz",
                 "repeats/sample/HG002_ONT_C",
-                "repeats/sample/HG002_ONT_C/HG002_ONT_C_null_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_C/HG002_ONT_C_STRdust_found_in.vcf.gz",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -1154,15 +1154,15 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_A_null_found_in.vcf.gz",
+                    "HG002_ONT_A_STRdust_found_in.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_B_null_found_in.vcf.gz",
+                    "HG002_ONT_B_STRdust_found_in.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_C_null_found_in.vcf.gz",
+                    "HG002_ONT_C_STRdust_found_in.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
@@ -1222,10 +1222,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T16:01:38.389192472",
+        "timestamp": "2026-03-17T16:55:51.014699593",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
+            "nextflow": "26.02.0"
         }
     }
 }
