@@ -31,6 +31,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = 'deepvariant'
+                input[3] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -60,6 +64,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = 'deepvariant'
+                input[3] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -86,6 +94,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = 'deepvariant'
+                input[3] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }
@@ -115,6 +127,10 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = 'deepvariant'
+                input[3] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file('../../../assets/vcfexpress_prelude.lua')
+                ])
                 """
             }
         }

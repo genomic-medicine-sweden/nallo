@@ -5,7 +5,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
@@ -13,7 +14,8 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -26,9 +28,6 @@
                         "test.vcf:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ]
                 ],
-                "3": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -40,7 +39,8 @@
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -48,20 +48,18 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:32:34.225171614",
+        "timestamp": "2026-03-17T15:28:32.746866157",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "2 VCFs": {
@@ -70,7 +68,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
@@ -78,7 +77,8 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -91,9 +91,6 @@
                         "test.vcf:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ]
                 ],
-                "3": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -105,7 +102,8 @@
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -113,20 +111,18 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:32:19.16259219",
+        "timestamp": "2026-03-17T15:28:13.81027989",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 VCF": {
@@ -135,7 +131,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
@@ -143,7 +140,8 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -156,9 +154,6 @@
                         "test.vcf:md5,7549b7b51d2d47146853822de1a29f13"
                     ]
                 ],
-                "3": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -170,7 +165,8 @@
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -178,20 +174,18 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:32:11.434614332",
+        "timestamp": "2026-03-17T15:28:04.75190635",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "1 VCF -stub": {
@@ -200,7 +194,8 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
@@ -208,7 +203,8 @@
                 "1": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -221,9 +217,6 @@
                         "test.vcf:md5,7549b7b51d2d47146853822de1a29f13"
                     ]
                 ],
-                "3": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -235,7 +228,8 @@
                 "index": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -243,20 +237,18 @@
                 "vcf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "sv_caller": "deepvariant"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2678b6183e1782cb60da7a21e359f38d"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:32:26.733199896",
+        "timestamp": "2026-03-17T15:28:23.859269571",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     }
 }

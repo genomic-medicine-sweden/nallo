@@ -15,25 +15,30 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     main:
 
     BCFTOOLS_CONCAT(
-        ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] },
+        ch_vcfs.map { meta, vcfs -> [ meta, vcfs, [] ] },
     )
 
+    // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
     BCFTOOLS_CONCAT.out.vcf
-        .multiMap { meta, vcf ->
-            vcf: [ meta, vcf ]
-            sv_caller: meta.variant_caller
+        .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
         }
         .set { ch_vcfexpress_input }
 
     ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
 
     VCFEXPRESS (
-        ch_vcfexpress_input.vcf,
+        ch_vcfexpress_input,
         ch_lua_file
     )
 
+    // Remove added caller information in meta
+    VCFEXPRESS.out.vcf
+        .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
+        }
+        .set { ch_bcftools_norm_input }
+
     BCFTOOLS_NORM_SINGLESAMPLE(
-        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, []] },
+        ch_bcftools_norm_input,
         ch_fasta,
     )
 
