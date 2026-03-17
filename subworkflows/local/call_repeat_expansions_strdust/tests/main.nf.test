@@ -33,10 +33,6 @@ nextflow_workflow {
     }
 
     test("[bam, bai], fasta, fai, bed") {
-
-                // Create dummy lua prelude file
-                //def lua_file = file("${workDir}/prelude_test.lua")
-                //lua_file.text = 'header:add_filter({ID="LowQual", Description="Qual less than 1000"})'
         when {
             workflow {
                 """
@@ -53,8 +49,7 @@ nextflow_workflow {
                 ])
                 input[4] = channel.of([
                     [ id: 'prelude_file' ],
-                    //file(lua_file)
-                    file(../../../assets/vcfexpress_prelude.lua)
+                    file('../../../assets/vcfexpress_prelude.lua')
                 ])
                 """
             }
@@ -79,10 +74,6 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                // Create dummy lua prelude file
-                def lua_file = file("${workDir}/prelude_test.lua")
-                lua_file.text = 'header:add_filter({ID="LowQual", Description="Qual less than 1000"})'
-
                 input[0] = channel.of([
                     [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
@@ -96,7 +87,7 @@ nextflow_workflow {
                 ])
                 input[4] = channel.of([
                     [ id: 'prelude_file' ],
-                    file(../../../assets/vcfexpress_prelude.lua)
+                    file('../../../assets/vcfexpress_prelude.lua')
                 ])
                 """
             }

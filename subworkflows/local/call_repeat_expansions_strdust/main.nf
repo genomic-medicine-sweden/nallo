@@ -23,19 +23,10 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     )
     ch_versions.mix(STRDUST.out.versions)
 
-    _variant_caller = "STRdust"
-
-    STRDUST.out.vcf
-        .multiMap { meta, vcf ->
-            vcf: [ meta, vcf ]
-            sv_caller: meta.variant_caller
-        }
-        .set { ch_vcfexpress_input }
-
     ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
 
     VCFEXPRESS (
-        ch_vcfexpress_input.vcf,
+        STRDUST.out.vcf,
         ch_lua_file
     )
 
