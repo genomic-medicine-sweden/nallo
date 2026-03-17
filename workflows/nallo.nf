@@ -645,7 +645,7 @@ workflow NALLO {
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
-            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources,
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
             params.cadd_resources && params.cadd_prescored_indels,
@@ -834,7 +834,7 @@ workflow NALLO {
             ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
-            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources,
             params.vep_cache_version,
             ch_vep_plugin_files.collect()
         )

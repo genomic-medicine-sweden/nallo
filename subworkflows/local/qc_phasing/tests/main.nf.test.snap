@@ -66,10 +66,6 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -133,14 +129,10 @@
                         },
                         "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
                 ]
             }
         ],
-        "timestamp": "2026-03-06T11:18:07.673206697",
+        "timestamp": "2026-03-17T10:44:59.184192196",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -148,24 +140,21 @@
     },
     "2 samples - SNVs + SVs": {
         "content": [
-            [
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-            ],
+            null,
             [
                 [
                     {
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.tsv:md5,65a840349749d82690660259ba9dee0c"
+                    "HG002_stats.tsv:md5,a3d150f7023123dddb229e2293ed22fe"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,6e74c92cd599f8545c6aaa1c3ec1aefd"
+                    "HG003_stats.tsv:md5,4b34c0d474fde91e9815a28da3d60c83"
                 ]
             ],
             [
@@ -174,14 +163,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz:md5,39bbbd665426bfdf4daa0679f7f5a07f"
+                    "HG002_stats.gtf.gz:md5,595c4020cfb952b0c8e4b6c8685220ab"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,5be54db8e26513378ebbe330007df443"
+                    "HG003_stats.gtf.gz:md5,6a77ee63383acffe72b0bd2e3a2a81b9"
                 ]
             ],
             [
@@ -190,14 +179,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz.tbi:md5,852c72b43d08f0d502c3fc0f0daa490a"
+                    "HG002_stats.gtf.gz.tbi:md5,20daa809d5ddbcb59a03735feb6f0762"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz.tbi:md5,fdef339983dd0a6d500d4ed6a9f14f3c"
+                    "HG003_stats.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
                 ]
             ],
             [
@@ -271,87 +260,15 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-06T11:19:03.246357041",
+        "timestamp": "2026-03-17T10:44:34.379588365",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
         }
     },
-    "WhatsHap stats disabled - stub": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "FAM"
-                        },
-                        "HG002_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "HG003",
-                            "family_id": "FAM"
-                        },
-                        "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "4": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-                ],
-                "haplotagging_stats": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "FAM"
-                        },
-                        "HG002_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "HG003",
-                            "family_id": "FAM"
-                        },
-                        "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "phasing_blocks": [
-                    
-                ],
-                "phasing_blocks_index": [
-                    
-                ],
-                "phasing_stats": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-                ]
-            }
-        ],
-        "timestamp": "2026-02-26T08:30:54.001068223",
-        "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
-    },
     "2 samples - SNVs only": {
         "content": [
-            [
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-            ],
+            null,
             [
                 [
                     {
@@ -471,102 +388,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-06T11:17:04.324405482",
+        "timestamp": "2026-03-17T10:44:15.474463567",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
-    },
-    "WhatsHap stats disabled": {
-        "content": [
-            [
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                [
-                    "File name\tHG002_haplotagged.bam",
-                    "Number of alignments\t1068",
-                    "% from total alignments\t98.31",
-                    "Number of reads\t1050",
-                    "Yield [Gb]\t0.02",
-                    "Mean coverage\t0.73",
-                    "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t18011",
-                    "N75\t14818",
-                    "Median length\t16199.50",
-                    "Mean length\t16316.50",
-                    "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.47",
-                    "Modal identity\t99.9",
-                    "",
-                    "Fraction reads phased\t0.05",
-                    "Number of phaseblocks\t2",
-                    "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t31399.00",
-                    "N50 phaseblock length\t39847",
-                    "",
-                    "",
-                    "",
-                    "# Normalized read count per chromosome",
-                    "",
-                    "chr16\t11.96",
-                    "chr17\t0.73",
-                    "chr20\t0.28",
-                    "chrX\t1.00",
-                    "",
-                    "Path\tHG002_haplotagged.bam"
-                ],
-                [
-                    "File name\tHG003_haplotagged.bam",
-                    "Number of alignments\t695",
-                    "% from total alignments\t99.14",
-                    "Number of reads\t689",
-                    "Yield [Gb]\t0.01",
-                    "Mean coverage\t0.43",
-                    "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t16761",
-                    "N75\t13542",
-                    "Median length\t14912.00",
-                    "Mean length\t14846.74",
-                    "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.55",
-                    "Modal identity\t99.9",
-                    "",
-                    "Fraction reads phased\t0.14",
-                    "Number of phaseblocks\t4",
-                    "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t37178.50",
-                    "N50 phaseblock length\t43394",
-                    "",
-                    "",
-                    "",
-                    "# Normalized read count per chromosome",
-                    "",
-                    "chr16\t12.31",
-                    "chr17\t0.73",
-                    "chr20\t0.38",
-                    "chrX\t1.00",
-                    "",
-                    "Path\tHG003_haplotagged.bam"
-                ]
-            ]
-        ],
-        "timestamp": "2026-02-26T08:30:43.728599226",
-        "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
         }
     },
     "2 samples - SNVs only - stub": {
@@ -636,10 +461,6 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
-                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -703,14 +524,10 @@
                         },
                         "HG003_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
-                    "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
                 ]
             }
         ],
-        "timestamp": "2026-03-06T11:17:45.856414358",
+        "timestamp": "2026-03-17T10:44:45.851558409",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
