@@ -53,20 +53,11 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
-    _variant_caller = "TRGT"
-
-    TRGT_GENOTYPE.out.vcf
-        .multiMap { meta, vcf ->
-            vcf: [ meta, vcf ]
-            sv_caller: meta.variant_caller
-        }
-        .set { ch_vcfexpress_input }
-
     ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
 
     // Add FOUND_IN=TRGT tag
     VCFEXPRESS (
-        ch_vcfexpress_input.vcf,
+        TRGT_GENOTYPE.out.vcf,
         ch_lua_file
     )
 
