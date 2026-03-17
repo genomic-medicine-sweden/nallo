@@ -598,6 +598,7 @@ workflow NALLO {
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
+            tuple([:], []),
             params.phaser,
             !params.skip_sv_calling,
             cram_output

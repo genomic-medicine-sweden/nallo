@@ -9,6 +9,7 @@ workflow WHATSHAP {
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
+    ch_pedigree      // channel: [ val(meta), path(pedigree) ]
 
     main:
     ch_versions = channel.empty()
@@ -36,10 +37,13 @@ workflow WHATSHAP {
         .first()
         .set { ch_fasta_fai }
 
+    ch_bam_bai_grouped.view()
+    ch_whatshap_phase_in.bam.view()
     WHATSHAP_PHASE(
         ch_whatshap_phase_in.vcf,
         ch_whatshap_phase_in.bam,
-        ch_fasta_fai
+        ch_fasta_fai,
+        ch_pedigree
     )
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.
