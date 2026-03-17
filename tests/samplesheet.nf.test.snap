@@ -239,15 +239,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,

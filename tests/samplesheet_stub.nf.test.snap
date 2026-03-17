@@ -137,11 +137,19 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+<<<<<<< replace_ADD_FOUND_IN_TAG
         "timestamp": "2026-03-16T15:44:52.061715175",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
         }
+=======
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-02T08:58:40.220997123"
+>>>>>>> dev
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -248,12 +256,12 @@
                     "splitubam": "0.1.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "TABIX_VCFEXPRESS": {
                     "tabix": 1.21
@@ -353,11 +361,19 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
+<<<<<<< replace_ADD_FOUND_IN_TAG
         "timestamp": "2026-03-16T15:48:34.145070928",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
         }
+=======
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-04T11:30:50.917284249"
+>>>>>>> dev
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -454,11 +470,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T08:59:37.115321855"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -517,11 +533,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T09:00:05.013305995"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -668,11 +684,19 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
+<<<<<<< replace_ADD_FOUND_IN_TAG
         "timestamp": "2026-03-16T15:50:01.350416785",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
         }
+=======
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-02T09:02:21.008081801"
+>>>>>>> dev
     },
     "Test CADD with mock resources": {
         "content": [
@@ -836,11 +860,19 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+<<<<<<< replace_ADD_FOUND_IN_TAG
         "timestamp": "2026-03-16T15:44:08.326106627",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
         }
+=======
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-02T08:56:56.330327397"
+>>>>>>> dev
     },
     "Test family id same as sample id": {
         "content": [
@@ -1081,15 +1113,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1341,11 +1373,15 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
+<<<<<<< replace_ADD_FOUND_IN_TAG
         "timestamp": "2026-03-16T15:49:28.826902665",
+=======
+>>>>>>> dev
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-16T12:02:32.951877541"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1410,10 +1446,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T08:59:06.387875024"
     }
 }
