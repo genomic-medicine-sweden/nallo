@@ -37,6 +37,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
+                // Create dummy lua prelude file
+                def lua_file = file("${workDir}/prelude_test.lua")
+                lua_file.text = 'header:add_info({ID="FOUND_IN",Number="1",Type="String",Description="\"Program that called the variant\""})'
+
                 input[0] = channel.of([
                     [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
@@ -47,6 +51,10 @@ nextflow_workflow {
                 input[3] = channel.of([
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
+                ])
+                input[4] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file(lua_file)
                 ])
                 """
             }
@@ -71,6 +79,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
+                // Create dummy lua prelude file
+                def lua_file = file("${workDir}/prelude_test.lua")
+                lua_file.text = 'header:add_info({ID="FOUND_IN",Number="1",Type="String",Description="\"Program that called the variant\""})'
+
                 input[0] = channel.of([
                     [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
@@ -81,6 +93,10 @@ nextflow_workflow {
                 input[3] = channel.of([
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
+                ])
+                input[4] = channel.of([
+                    [ id: 'prelude_file' ],
+                    file(lua_file)
                 ])
                 """
             }
