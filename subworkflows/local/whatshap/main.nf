@@ -37,8 +37,6 @@ workflow WHATSHAP {
         .first()
         .set { ch_fasta_fai }
 
-    ch_bam_bai_grouped.view()
-    ch_whatshap_phase_in.bam.view()
     WHATSHAP_PHASE(
         ch_whatshap_phase_in.vcf,
         ch_whatshap_phase_in.bam,
