@@ -5,7 +5,6 @@ include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/mai
 include { MOSDEPTH                     } from '../../../modules/nf-core/mosdepth/main'
 include { PREPARECOVANDBAF             } from '../../../modules/nf-core/gens/preparecovandbaf/main'
 include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools/view/main'
-include { TABIX_BGZIP                  } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:

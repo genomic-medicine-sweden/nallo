@@ -41,7 +41,6 @@ workflow PREPARE_REFERENCES {
         UNTAR_VEP_CACHE (
             ch_vep_cache
         )
-        ch_versions = ch_versions.mix(UNTAR_VEP_CACHE.out.versions)
     }
 
     emit:
