@@ -5,21 +5,12 @@
                 "0": [
                     
                 ],
-                "1": [
-                    
-                ],
                 "chromograph_plots": [
                     
-                ],
-                "versions": [
-                    
                 ]
-            },
-            [
-                
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:30:07.581514652",
+        "timestamp": "2026-03-17T11:09:10.844983229",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -62,9 +53,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         [
@@ -98,20 +86,10 @@
                             "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:30:32.577494799",
+        "timestamp": "2026-03-17T11:11:33.460210267",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -123,21 +101,12 @@
                 "0": [
                     
                 ],
-                "1": [
-                    
-                ],
                 "chromograph_plots": [
                     
-                ],
-                "versions": [
-                    
                 ]
-            },
-            [
-                
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:30:56.063216058",
+        "timestamp": "2026-03-17T11:11:47.955787472",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -206,10 +175,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -269,26 +234,10 @@
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:29:20.784690967",
+        "timestamp": "2026-03-17T11:10:28.838583808",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -357,10 +306,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -420,26 +365,10 @@
                             "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:30:21.406615088",
+        "timestamp": "2026-03-17T11:11:22.460098872",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -483,9 +412,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -520,20 +446,10 @@
                             "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:30:46.031819702",
+        "timestamp": "2026-03-17T11:13:46.996671891",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -576,9 +492,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         [
@@ -612,20 +525,10 @@
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:29:35.839188601",
+        "timestamp": "2026-03-17T11:10:42.310397562",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -669,9 +572,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -706,20 +606,10 @@
                             "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-03-06T08:29:55.335097985",
+        "timestamp": "2026-03-17T11:10:57.944996767",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

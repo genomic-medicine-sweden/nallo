@@ -17,7 +17,6 @@ workflow CHROMOGRAPH {
     plot_autozygosity // boolean
 
     main:
-    ch_versions = channel.empty()
     ch_autozyg  = channel.of([[], []])
     ch_coverage = channel.of([[], []])
 
@@ -27,7 +26,6 @@ workflow CHROMOGRAPH {
             ch_bam_bai,
             [[], []],
         )
-        ch_versions = ch_versions.mix(TIDDIT_COV.out.versions)
 
         TIDDIT_COV.out.wig
             .map { meta, wig ->
@@ -71,7 +69,6 @@ workflow CHROMOGRAPH {
             ch_rhocall_viz_input.vcf,
             ch_rhocall_viz_input.roh,
         )
-        ch_versions = ch_versions.mix(RHOCALL_VIZ.out.versions)
 
         RHOCALL_VIZ.out.bed.set { ch_autozyg }
     }
@@ -102,5 +99,4 @@ workflow CHROMOGRAPH {
 
     emit:
     chromograph_plots = RUN_CHROMOGRAPH.out.plots // channel: [ val(meta), path(plot) ]
-    versions          = ch_versions               // channel: [ path(versions.yml) ]
 }

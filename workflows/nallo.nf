@@ -341,7 +341,6 @@ workflow NALLO {
             ch_somalier_sites,
             ch_samplesheet_pedfile
         )
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
@@ -739,7 +738,6 @@ workflow NALLO {
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
-        ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
 
 
@@ -811,7 +809,6 @@ workflow NALLO {
             ch_samplesheet_pedfile,
             ch_peddy_sites
         )
-        ch_versions = ch_versions.mix(PEDDY.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
