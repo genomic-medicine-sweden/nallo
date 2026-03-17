@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
+- [#935] (https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
 
 ### Removed
 
@@ -43,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | modkit/pileup            | 0.3.0       | 0.6.1       |
 | mosdepth                 | 0.3.10      | 0.3.11      |
 | multiqc                  | 1.31        | 1.33        |
+| vcfexpress               |             | 0.3.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
