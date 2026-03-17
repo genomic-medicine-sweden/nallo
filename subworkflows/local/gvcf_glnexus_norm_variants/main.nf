@@ -2,7 +2,7 @@
 // Takes a channel of grouped gVCFs, merged them with GLNexus,
 // adds FOUND_IN tag, normalizes and decomposes variants.
 //
-include { ADD_FOUND_IN_TAG                           } from '../../../modules/local/add_found_in_tag/main'
+
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
