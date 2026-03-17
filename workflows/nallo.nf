@@ -224,7 +224,6 @@ workflow NALLO {
             ch_genome_assembly_input,
             params.hifiasm_mode == "trio-binning" // Should we use trio binning mode?
         )
-        ch_versions = ch_versions.mix(GENOME_ASSEMBLY.out.versions)
 
         ALIGN_ASSEMBLIES (
             GENOME_ASSEMBLY.out.assembled_haplotypes,
@@ -269,7 +268,6 @@ workflow NALLO {
             false,
             false
         )
-        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
         /*
          * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready

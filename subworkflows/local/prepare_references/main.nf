@@ -21,7 +21,6 @@ workflow PREPARE_REFERENCES {
             .gunzip
             .collect()
             .set { ch_fasta }
-        ch_versions = ch_versions.mix(GUNZIP_FASTA.out.versions)
     } else {
         fasta_in
             .set { ch_fasta }
@@ -37,7 +36,6 @@ workflow PREPARE_REFERENCES {
     MINIMAP2_INDEX (
         ch_fasta
     )
-    ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions)
 
     if (untar_vep_cache) {
         UNTAR_VEP_CACHE (

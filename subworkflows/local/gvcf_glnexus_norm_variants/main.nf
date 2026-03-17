@@ -28,7 +28,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         )
 
         ch_merged_family_gvcf = GLNEXUS.out.bcf
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
 
     } else if (variant_caller.equals("sentieon")) {
 

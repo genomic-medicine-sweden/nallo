@@ -22,11 +22,6 @@
                         "test_fastq_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -46,19 +41,14 @@
                         },
                         "test_fastq_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:56:37.233128256",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:53.955462022"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "two children with two parents, trio-binning mode": {
         "content": [
@@ -181,22 +171,6 @@
                         "second_child_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -314,30 +288,14 @@
                         },
                         "second_child_haplotype_2.fasta.gz:md5,3a9e0456ad7138cf46f5b23c6af45d20"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:56:01.813749593",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:01.400609091"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "child with one parent, trio-binning mode -stub": {
         "content": [
@@ -400,14 +358,6 @@
                         "HG003_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -465,22 +415,14 @@
                         },
                         "HG003_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:56:15.173257755",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:19.923628779"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "child with two parents, trio-binning mode": {
         "content": [
@@ -571,19 +513,6 @@
                         "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -669,27 +598,14 @@
                         },
                         "HG004_haplotype_2.fasta.gz:md5,37f9e3fcef3502bd96049d9727cfad62"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:54:04.118404653",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:32:31.100211516"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "one sample, hifi-only mode -stub": {
         "content": [
@@ -714,11 +630,6 @@
                         "test_fastq_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -738,19 +649,14 @@
                         },
                         "test_fastq_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:56:27.626339983",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:33:36.767094011"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "one sample, hifi-only mode": {
         "content": [
@@ -775,11 +681,6 @@
                         "test_fastq_haplotype_2.fasta.gz:md5,a0d041b743171ea1fde0f79d35c2b98b"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -799,19 +700,14 @@
                         },
                         "test_fastq_haplotype_2.fasta.gz:md5,a0d041b743171ea1fde0f79d35c2b98b"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:53:41.94112576",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:31:58.410357811"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "child with two parents, trio-binning mode -stub": {
         "content": [
@@ -902,19 +798,6 @@
                         "HG004_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
-                ],
                 "assembled_haplotypes": [
                     [
                         {
@@ -1000,26 +883,13 @@
                         },
                         "HG004_haplotype_2.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,2c13b2225c94411809dff121aa467164",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,34637a8dde7b25a7df56d1ab50a8a659",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e",
-                    "versions.yml:md5,f7a9ef5f86ecf68fab47c66d96fee88e"
                 ]
             }
         ],
+        "timestamp": "2026-03-17T10:56:47.885105658",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T14:34:12.715512254"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     }
 }

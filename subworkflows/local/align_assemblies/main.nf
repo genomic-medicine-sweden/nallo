@@ -19,7 +19,6 @@ workflow ALIGN_ASSEMBLIES {
     MINIMAP2_INDEX (
         ch_fasta
     )
-    ch_versions = ch_versions.mix(MINIMAP2_INDEX.out.versions)
 
     MINIMAP2_ALIGN (
         ch_assembly,
@@ -29,7 +28,6 @@ workflow ALIGN_ASSEMBLIES {
         false,
         false
     )
-    ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
     SAMTOOLS_VIEW (
         MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true),
