@@ -33,23 +33,20 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     // Sort and index bam
     SAMTOOLS_SORT(
         TRGT_GENOTYPE.out.bam,
-        [[], []],
+        [[], [],[]],
         '',
     )
 
     SAMTOOLS_INDEX(
         SAMTOOLS_SORT.out.bam
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     // Publish spanning reads as CRAM if requested
     if (cram_output) {
         SAMTOOLS_CONVERT(
-            SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.bai, failOnDuplicate: true, failOnMismatch: true),
-            ch_fasta,
-            ch_fai,
+            SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
+            ch_fasta.join(ch_fai).collect(),
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
     // Add FOUND_IN=TRGT tag
@@ -86,11 +83,11 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     emit:
-    sample_vcf = BCFTOOLS_SORT.out.vcf  // channel: [ val(meta), path(vcf) ]
-    sample_tbi = BCFTOOLS_SORT.out.tbi  // channel: [ val(meta), path(tbi) ]
-    family_vcf = TRGT_MERGE.out.vcf     // channel: [ val(meta), path(vcf) ]
-    family_tbi = TRGT_MERGE.out.index   // channel: [ val(meta), path(tbi) ]
-    sample_bam = SAMTOOLS_SORT.out.bam  // channel: [ val(meta), path(bam) ]
-    sample_bai = SAMTOOLS_INDEX.out.bai // channel: [ val(meta), path(bai) ]
-    versions   = ch_versions            // channel: [ versions.yml ]
+    sample_vcf = BCFTOOLS_SORT.out.vcf    // channel: [ val(meta), path(vcf) ]
+    sample_tbi = BCFTOOLS_SORT.out.tbi    // channel: [ val(meta), path(tbi) ]
+    family_vcf = TRGT_MERGE.out.vcf       // channel: [ val(meta), path(vcf) ]
+    family_tbi = TRGT_MERGE.out.index     // channel: [ val(meta), path(tbi) ]
+    sample_bam = SAMTOOLS_SORT.out.bam    // channel: [ val(meta), path(bam) ]
+    sample_bai = SAMTOOLS_INDEX.out.index // channel: [ val(meta), path(bai) ]
+    versions   = ch_versions              // channel: [ versions.yml ]
 }

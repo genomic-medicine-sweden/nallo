@@ -169,7 +169,6 @@ workflow NALLO {
             false,
             true
         )
-        ch_versions = ch_versions.mix(CONVERT_INPUT_FASTQS.out.versions)
     }
 
     // To speed up the alignement, we can split the BAM files into smaller chunks.
@@ -294,15 +293,12 @@ workflow NALLO {
          */
         SAMTOOLS_MERGE (
             bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
-            [[],[]],
-            [[],[]],
-            [[],[]],
+            [[],[],[],[]],
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch:true, failOnDuplicate:true)
+            .join(SAMTOOLS_MERGE.out.index, failOnMismatch:true, failOnDuplicate:true)
             .map { meta, bam, bai -> [ meta - meta.subMap('n_files'), bam, bai ] }
             .set { ch_aligned_bam }
 
@@ -310,10 +306,8 @@ workflow NALLO {
         if (cram_output && params.skip_phasing) {
             SAMTOOLS_CONVERT (
                 ch_aligned_bam,
-                ch_fasta,
-                ch_fai
+                ch_fasta.join(ch_fai).collect(),
             )
-            ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
         }
 
         //
@@ -1040,12 +1034,12 @@ workflow NALLO {
     )
 
     MULTIQC (
-        ch_multiqc_files.collect(),
-        ch_multiqc_config.toList(),
-        ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList(),
-        [],
-        []
+        channel.of([id: "multiqc"])
+            .combine(ch_multiqc_files.collect())
+            .combine(ch_multiqc_config.toList())
+            .combine(ch_multiqc_logo.toList())
+            .combine([])
+            .combine([])
     )
 
     emit:

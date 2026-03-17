@@ -1,53 +1,44 @@
 process SAMTOOLS_MERGE {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_low'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.22.1--h96c455f_0' :
-        'biocontainers/samtools:1.22.1--h96c455f_0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/e5/e5598451c6d348cce36191bafe1911ad71e440137d7a329da946f2b0dbb0e7f3/data'
+        : 'community.wave.seqera.io/library/htslib_samtools:1.23--cde2c40a51d6f752'}"
 
     input:
-    tuple val(meta), path(input_files)
-    tuple val(meta2), path(fasta)
-    tuple val(meta3), path(fai)
-    tuple val(meta4), path(gzi)
+    tuple val(meta), path(input_files, stageAs: "?/*"), path(index_files, stageAs: "?/*")
+    tuple val(meta2), path(fasta), path(fai), path(gzi)
 
     output:
-    tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
-    tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
-    tuple val(meta), path("*.csi")         , optional:true, emit: csi
-    tuple val(meta), path("*.bai")         , optional:true, emit: bai
-    tuple val(meta), path("*.crai")        , optional:true, emit: crai
-    path  "versions.yml"                                  , emit: versions
+    tuple val(meta), path("${prefix}.bam"), optional: true, emit: bam
+    tuple val(meta), path("${prefix}.cram"), optional: true, emit: cram
+    tuple val(meta), path("*.{bai,crai,csi}"), optional: true, emit: index
+    tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'"), topic: versions, emit: versions_samtools
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args   ?: ''
-    prefix   = task.ext.prefix ?: "${meta.id}"
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
-    def input = (input_files.collect().size() > 1) ? input_files.sort { it.name } : input_files
+    def input = (input_files.collect().size() > 1) ? input_files.sort { file -> file.name } : input_files
     def reference = fasta ? "--reference ${fasta}" : ""
     """
     # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
     samtools \\
         merge \\
-        --threads ${task.cpus-1} \\
-        $args \\
+        --threads ${task.cpus - 1} \\
+        ${args} \\
         ${reference} \\
         ${prefix}.${file_type}##idx##${prefix}.${file_type}.bai \\
         $input
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
-    END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args   ?: ''
+    def args = task.ext.args ?: ''
     prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
     def index_type = "bai"
@@ -55,10 +46,5 @@ process SAMTOOLS_MERGE {
     """
     touch ${prefix}.${file_type}
     ${index}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        samtools: \$(echo \$(samtools --version 2>&1) | sed 's/^.*samtools //; s/Using.*\$//')
-    END_VERSIONS
     """
 }

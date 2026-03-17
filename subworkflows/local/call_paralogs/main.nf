@@ -67,8 +67,7 @@ workflow CALL_PARALOGS {
     if (cram_output) {
         SAMTOOLS_CONVERT(
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
-            fasta,
-            fai,
+            fasta.join(fai, failOnDuplicate: true, failOnMismatch: true).collect(),
         )
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }

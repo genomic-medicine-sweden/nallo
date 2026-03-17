@@ -96,10 +96,8 @@ workflow PHASING {
     if (cram_output) {
         SAMTOOLS_CONVERT (
             ch_bam_bai_haplotagged,
-            fasta,
-            fai
+            fasta.join(fai).collect(),
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
 

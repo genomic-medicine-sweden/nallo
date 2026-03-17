@@ -26,7 +26,7 @@ workflow PREPARE_GENS_INPUTS {
     // Prepare the header
     SAMTOOLS_VIEW(
         ch_bam,
-        [[],[]],
+        [[],[],[]],
         [],
         false
     )

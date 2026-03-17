@@ -148,10 +148,9 @@ workflow LONGPHASE {
     SAMTOOLS_INDEX(
         LONGPHASE_HAPLOTAG.out.bam
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     LONGPHASE_HAPLOTAG.out.bam
-        .join(SAMTOOLS_INDEX.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        .join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bam_bai_haplotagged }
 
     emit:
