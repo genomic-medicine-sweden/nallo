@@ -1,7 +1,0 @@
-name: add_found_in_tag
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
-dependencies:
-  - bioconda::bcftools=1.20
