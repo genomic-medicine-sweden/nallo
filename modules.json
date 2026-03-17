@@ -108,7 +108,7 @@
                     },
                     "cramino": {
                         "branch": "master",
-                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
+                        "git_sha": "a8c26e293e72d224e367cc7af8cce589ce008480",
                         "installed_by": ["modules"]
                     },
                     "deepvariant/rundeepvariant": {
@@ -123,7 +123,7 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "2e751c119b5e6e9c7ecda7a682e157aabb57a812",
+                        "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "ensemblvep/vep": {

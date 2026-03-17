@@ -14,8 +14,6 @@ workflow QC_PHASING {
     phase_with_svs            //    bool: Whether SVs were included in phasing (true) or not (false)
 
     main:
-    ch_versions = channel.empty()
-
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
     if (phase_with_svs) {
         ch_phased_family_snvs
@@ -62,12 +60,10 @@ workflow QC_PHASING {
         .set { ch_phasing_gtf }
 
     CRAMINO(ch_bam_bai_haplotagged)
-    ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     emit:
     phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
     phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]
-    versions             = ch_versions            // channel: [ path(versions.yml) ]
 }
