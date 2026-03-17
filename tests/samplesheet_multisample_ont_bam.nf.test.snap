@@ -148,10 +148,10 @@
                     "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -1223,10 +1223,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T12:53:36.318133228",
+        "timestamp": "2026-03-17T12:25:22.697329851",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
+            "nextflow": "26.02.0"
         }
     }
 }

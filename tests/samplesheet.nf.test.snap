@@ -84,9 +84,6 @@
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.1.0"
                 },
-                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
-                    "gawk": "5.1.0"
-                },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
                 },
@@ -112,6 +109,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -160,10 +160,10 @@
                     "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -703,10 +703,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T14:44:25.725684193",
+        "timestamp": "2026-03-17T12:18:34.054405592",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
+            "nextflow": "26.02.0"
         }
     }
 }
