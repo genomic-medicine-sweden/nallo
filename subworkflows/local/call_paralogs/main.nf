@@ -45,7 +45,6 @@ workflow CALL_PARALOGS {
         [],
         false,
     )
-    ch_versions = ch_versions.mix(GAWK.out.versions)
 
     paraphase_vcf_tbis
         .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
