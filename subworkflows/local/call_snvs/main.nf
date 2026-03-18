@@ -159,32 +159,13 @@ workflow CALL_SNVS {
             [],
         )
 
-        BCFTOOLS_VIEW.out.vcf
-            .branch {
-                meta, vcf ->
-             vcf: meta.vcf_type == "vcf"
-                    [ meta - meta.subMap('vcf_type'), vcf ]
-             gvcf: meta.ploidy == "gvcf"
-                    [ meta - meta.subMap('vcf_type'), vcf ]
-
-            }
-            .set { ch_vcf_out }
-
-        BCFTOOLS_VIEW.out.tbi
-            .branch {
-                meta, vcf ->
-             vcf_tbi: meta.vcf_type == "vcf"
-                    [ meta - meta.subMap('vcf_type'), vcf ]
-             gvcf_tbi: meta.ploidy == "gvcf"
-                    [ meta - meta.subMap('vcf_type'), vcf ]
-
-            }
-            .set { ch_tbi_out }
+        ch_vcf_out = branchChannelOnVcfType(BCFTOOLS_VIEW.out.vcf)
+        ch_tbi_out = branchChannelOnVcfType(BCFTOOLS_VIEW.out.tbi)
 
         ch_vcf        = ch_vcf_out.vcf
-        ch_index      = ch_tbi_out.vcf_tbi
+        ch_index      = ch_tbi_out.vcf
         ch_gvcf       = ch_vcf_out.gvcf
-        ch_gvcf_index = ch_tbi_out.gvcf_tbi
+        ch_gvcf_index = ch_tbi_out.gvcf
     }
 
     emit:
@@ -213,5 +194,16 @@ def makeRestrictedCallChannel(ch_vcf, ch_tbi, ch_original_call_regions, vcf_type
         .map {
             meta, vcf, tbi, bed ->
             [ meta +  [ vcf_type: vcf_type ], vcf, tbi, bed ]
+        }
+}
+
+def branchChannelOnVcfType(ch_input_channel) {
+    ch_input_channel
+        .branch {
+            meta, remainder ->
+            vcf: meta.vcf_type == "vcf"
+            [ meta - meta.subMap('vcf_type'), remainder ]
+            gvcf: meta.ploidy == "gvcf"
+            [ meta - meta.subMap('vcf_type'), remainder ]
         }
 }
