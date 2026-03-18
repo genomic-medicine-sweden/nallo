@@ -60,7 +60,7 @@ workflow CALL_SNVS {
 
         BEDTOOLS_SLOP(
             ch_bed,
-            ch_sentieon_contig_sizes
+            ch_sentieon_contig_sizes.map { _meta, sizes -> sizes }
         )
 
         BEDTOOLS_SLOP.out.bed
