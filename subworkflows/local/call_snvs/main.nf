@@ -3,8 +3,7 @@
 //
 
 include { BCFTOOLS_PLUGINFIXPLOIDY                          } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
-include { BCFTOOLS_VIEW as RESTRICT_VCF_CALLS               } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as RESTRICT_GVCF_CALLS              } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW                                     } from '../../../modules/nf-core/bcftools/view/main'
 include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
 include { BEDTOOLS_SLOP                                     } from '../../../modules/nf-core/bedtools/slop/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
@@ -141,48 +140,51 @@ workflow CALL_SNVS {
             []
         )
 
+        makeRestrictedCallChannel(BCFTOOLS_PLUGINFIXPLOIDY.out.vcf, BCFTOOLS_PLUGINFIXPLOIDY.out.tbi, ch_bed, "vcf")
+            .mix(makeRestrictedCallChannel(DNASCOPE_LONGREAD.out.gvcf, DNASCOPE_LONGREAD.out.gvcf_tbi, ch_bed, "gvcf"))
+            .set { ch_calls_bed }
 
-        // TODO: process these two in a function or smth and simplify into one view call
-        //       probably need to add gvcf/vcf tag in meta and resplit after view
-        BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-            .join(BCFTOOLS_PLUGINFIXPLOIDY.out.tbi)
-            .join(ch_bed)
+        ch_calls_bed
             .multiMap { meta, vcf, tbi, scatter_call_regions_bed ->
-                vcf: [ meta, vcf, tbi ]
+                vcf_tbi: [ meta, vcf, tbi ]
                 regions: [ scatter_call_regions_bed ]
             }
-            .set { ch_restrict_vcf_calls_in }
-
-
-        DNASCOPE_LONGREAD.out.gvcf
-            .join(DNASCOPE_LONGREAD.out.gvcf_tbi)
-            .join(ch_bed)
-            .multiMap { meta, gvcf, tbi, scatter_call_regions_bed ->
-                gvcf: [ meta, gvcf, tbi ]
-                regions: [ scatter_call_regions_bed ]
-            }
-            .set { ch_restrict_gvcf_calls_in }
-
+            .set { ch_bcftools_view_in }
 
         // TODO: simplify into one call
-        RESTRICT_VCF_CALLS(
-            ch_restrict_vcf_calls_in.vcf,
-            ch_restrict_vcf_calls_in.regions,
+        BCFTOOLS_VIEW(
+            ch_bcftools_view_in.vcf_tbi,
+            ch_bcftools_view_in.regions,
             [],
             [],
         )
 
-        RESTRICT_GVCF_CALLS(
-            ch_restrict_gvcf_calls_in.gvcf,
-            ch_restrict_gvcf_calls_in.regions,
-            [],
-            [],
-        )
+        BCFTOOLS_VIEW.out.vcf
+            .branch {
+                meta, vcf ->
+             vcf: meta.vcf_type == "vcf"
+                    [ meta - meta.subMap('vcf_type'), vcf ]
+             gvcf: meta.ploidy == "gvcf"
+                    [ meta - meta.subMap('vcf_type'), vcf ]
 
-        ch_vcf        = RESTRICT_VCF_CALLS.out.vcf
-        ch_index      = RESTRICT_VCF_CALLS.out.tbi
-        ch_gvcf       = RESTRICT_GVCF_CALLS.out.vcf
-        ch_gvcf_index = RESTRICT_GVCF_CALLS.out.tbi
+            }
+            .set { ch_vcf_out }
+
+        BCFTOOLS_VIEW.out.tbi
+            .branch {
+                meta, vcf ->
+             vcf_tbi: meta.vcf_type == "vcf"
+                    [ meta - meta.subMap('vcf_type'), vcf ]
+             gvcf_tbi: meta.ploidy == "gvcf"
+                    [ meta - meta.subMap('vcf_type'), vcf ]
+
+            }
+            .set { ch_tbi_out }
+
+        ch_vcf        = ch_vcf_out.vcf
+        ch_index      = ch_tbi_out.vcf_tbi
+        ch_gvcf       = ch_vcf_out.gvcf
+        ch_gvcf_index = ch_tbi_out.gvcf_tbi
     }
 
     emit:
@@ -199,5 +201,17 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         .combine(ch_bed)
         .map { sentieon_regions, meta, sample_call_regions ->
             [ meta + [ ploidy: ploidy_label ], sample_call_regions, sentieon_regions ]
+        }
+}
+
+
+
+def makeRestrictedCallChannel(ch_vcf, ch_tbi, ch_original_call_regions, vcf_type) {
+    ch_vcf
+        .join(ch_tbi)
+        .join(ch_original_call_regions)
+        .map {
+            meta, vcf, tbi, bed ->
+            [ meta +  [ vcf_type: vcf_type ], vcf, tbi, bed ]
         }
 }
