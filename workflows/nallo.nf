@@ -51,7 +51,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modules/local/create_pedigree_file/main'
+include { CREATE_PEDIGREE_FILE as FAMILY_PED                     } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
@@ -589,6 +589,17 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
 
+        // Generate each family.ped
+        FAMILY_PED (
+            ch_input
+                .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
+                .groupTuple()
+        )
+        // If 'childWithTwoParents==false', set family_ped=empty
+        addChildWithTwoParentsToMeta(FAMILY_PED.out.ped, ch_input, 'id')
+            .map { meta, file -> [ meta, meta.child_with_two_parents_in_family ? file : [] ] }
+            .set{ ch_ped_family }
+
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
@@ -598,7 +609,7 @@ workflow NALLO {
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
-            tuple([:], []),
+            ch_ped_family,
             params.phaser,
             !params.skip_sv_calling,
             cram_output
