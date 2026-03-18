@@ -70,11 +70,11 @@ workflow CALL_SNVS {
                 male:   meta.sex == 1
                 female: meta.sex == 2
             }
-            .set { ch_bed }
+            .set { ch_bed_branched_on_ploidy }
 
-        ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed.male, "diploid")
-        ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed.female, "diploid")
-        ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed.male, "haploid")
+        ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed_branched_on_ploidy.male, "diploid")
+        ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed_branched_on_ploidy.female, "diploid")
+        ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed_branched_on_ploidy.male, "haploid")
 
         ch_male_diploid_intersect_in
             .mix(ch_female_diploid_intersect_in)
@@ -107,7 +107,7 @@ workflow CALL_SNVS {
                 }
             }
             .mix(
-                ch_bed.female.map { meta, _bed -> [ meta, [] ] }
+                ch_bed_branched_on_ploidy.female.map { meta, _bed -> [ meta, [] ] }
             )
             .set { ch_haploid_regions_out }
 
