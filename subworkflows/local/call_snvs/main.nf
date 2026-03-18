@@ -203,7 +203,7 @@ def branchChannelOnVcfType(ch_input_channel) {
             meta, remainder ->
             vcf: meta.vcf_type == "vcf"
             [ meta - meta.subMap('vcf_type'), remainder ]
-            gvcf: meta.ploidy == "gvcf"
+            gvcf: meta.vcf_type == "gvcf"
             [ meta - meta.subMap('vcf_type'), remainder ]
         }
 }
