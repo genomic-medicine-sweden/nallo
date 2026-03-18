@@ -57,7 +57,11 @@ workflow CALL_SNVS {
             }
             .set { ch_bed }
 
-
+        // Sentieon will call indels outside of the passed call regions if indel is located at
+        // a call region/scatter boundary (e.g. around centromeres). Padding the call regions
+        // ensures the duplicated variant ends up with an identical call in both affected regions.
+        // The duplicate will be removed later in the workflow by re-intersecting the scatter VCFs
+        // with the unpadded call regions.
         BEDTOOLS_SLOP(
             ch_bed,
             ch_sentieon_contig_sizes.map { _meta, sizes -> sizes }
