@@ -466,7 +466,7 @@ nextflow_workflow {
                 ])
                 input[8] = channel.of([
                     [ id:'sentieon_contig_sizes' ],
-                    file(params.modules_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[9] = "sentieon"
                 input[10] = "HiFi"
@@ -526,7 +526,7 @@ nextflow_workflow {
                 ])
                 input[8] = channel.of([
                     [ id:'sentieon_contig_sizes' ],
-                    file(params.modules_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[9] = "sentieon"
                 input[10] = "HiFi"
