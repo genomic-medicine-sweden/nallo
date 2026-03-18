@@ -524,7 +524,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            62,
+            68,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -556,10 +556,16 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
                 "BEDTOOLS_INTERSECT": {
                     "bedtools": "2.31.1"
                 },
                 "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SLOP": {
                     "bedtools": "2.31.1"
                 },
                 "BEDTOOLS_SORT": {
@@ -669,10 +675,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T09:02:21.008081801"
+        "timestamp": "2026-03-18T22:03:13.300945966"
     },
     "Test CADD with mock resources": {
         "content": [
