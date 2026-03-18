@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
 - [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
 - [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
+- [#943](https://github.com/genomic-medicine-sweden/nallo/pull/943) - Updated DeepVariant to 1.10.0
 - [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
 - [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
 - [#949](https://github.com/genomic-medicine-sweden/nallo/pull/949) - Replaced local HiFiCNV module with nf-core version to lessen maintenance burden of local modules
@@ -51,15 +52,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                     | Old version | New version |
-| ------------------------ | ----------- | ----------- |
-| modkit/bedmethyltobigwig | 0.5.1-rc1   | 0.6.1       |
-| modkit/pileup            | 0.3.0       | 0.6.1       |
-| mosdepth                 | 0.3.10      | 0.3.11      |
-| multiqc                  | 1.31        | 1.33        |
-| svdb/merge               | 2.8.2       | 2.8.4       |
-| svdb/query               | 2.8.2       | 2.8.4       |
-| gawk                     | 5.3.0       | 5.3.1       |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| modkit/bedmethyltobigwig   | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup              | 0.3.0       | 0.6.1       |
+| mosdepth                   | 0.3.10      | 0.3.11      |
+| multiqc                    | 1.31        | 1.33        |
+| svdb/merge                 | 2.8.2       | 2.8.4       |
+| svdb/query                 | 2.8.2       | 2.8.4       |
+| gawk                       | 5.3.0       | 5.3.1       |
+| deepvariant/rundeepvariant | 1.9.0       | 1.10.0      |
+| deepvariant/vcfstatsreport | 1.9.0       | 1.10.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
