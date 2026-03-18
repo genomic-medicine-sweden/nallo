@@ -259,12 +259,12 @@
                     "splitubam": "0.1.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
@@ -459,11 +459,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T08:59:37.115321855"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -522,11 +522,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T09:00:05.013305995"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -1101,15 +1101,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "svdb": "2.8.2",
-                    "bcftools": 1.21
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.2"
+                    "svdb": "2.8.4"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1357,9 +1357,10 @@
         ],
         "timestamp": "2026-03-10T09:32:38.479377487",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-16T12:02:32.951877541"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1424,10 +1425,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-03-02T08:59:06.387875024"
     }
 }

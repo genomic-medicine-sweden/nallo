@@ -2,8 +2,7 @@
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
             [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
+                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050"
             ],
             "23151982ab1f33d2cad18fa4cc158ec8",
             "test_vep.vcf.gz.tbi"
@@ -17,14 +16,13 @@
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
             [
-                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050",
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
+                "versions.yml:md5,cf626198dc03b9ae6b87ca9cc4117050"
             ]
         ],
-        "timestamp": "2026-02-26T08:20:45.409281589",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-16T11:00:31.247627616"
     }
 }
