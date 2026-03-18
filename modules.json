@@ -113,12 +113,12 @@
                     },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",
-                        "git_sha": "bb9a29235b995f82bf0621825e45024802ddfdb6",
+                        "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
                         "installed_by": ["modules"]
                     },
                     "deepvariant/vcfstatsreport": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/filtervep": {
