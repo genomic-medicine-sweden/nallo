@@ -3,7 +3,10 @@
 //
 
 include { BCFTOOLS_PLUGINFIXPLOIDY                          } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
+include { BCFTOOLS_VIEW as RESTRICT_VCF_CALLS               } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as RESTRICT_GVCF_CALLS              } from '../../../modules/nf-core/bcftools/view/main'
 include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
+include { BEDTOOLS_SLOP                                     } from '../../../modules/nf-core/bedtools/slop/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
 
@@ -17,6 +20,7 @@ workflow CALL_SNVS {
     ch_sentieon_female_diploid_bed  // channel: [mandatory] [ val(meta), path(female_diploid_bed) ]
     ch_sentieon_male_diploid_bed    // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
     ch_sentieon_male_haploid_bed    // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
+    ch_sentieon_chromosome_sizes    // channel: [mandatory] [ val(meta), path(chromosome_sizes) ]
     variant_caller                  // string: which variant caller to use, e.g. "deepvariant"
     sentieon_tech                   // string: which sequencing tech produced the reads (sentieon)
 
@@ -52,6 +56,15 @@ workflow CALL_SNVS {
             .map { meta, _bam, _bai, bed ->
                 [ meta, bed ]
             }
+            .set { ch_bed }
+
+
+        BEDTOOLS_SLOP(
+            ch_bed,
+            ch_sentieon_chromosome_sizes
+        )
+
+        BEDTOOLS_SLOP.out.bed
             .branch {
                 meta, _bed ->
                 male:   meta.sex == 1
@@ -128,10 +141,48 @@ workflow CALL_SNVS {
             []
         )
 
-        ch_vcf        = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-        ch_index      = BCFTOOLS_PLUGINFIXPLOIDY.out.tbi
-        ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
-        ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
+
+        // TODO: process these two in a function or smth and simplify into one view call
+        //       probably need to add gvcf/vcf tag in meta and resplit after view
+        BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
+            .join(BCFTOOLS_PLUGINFIXPLOIDY.out.tbi)
+            .join(ch_bed)
+            .multiMap { meta, vcf, tbi, scatter_call_regions_bed ->
+                vcf: [ meta, vcf, tbi ]
+                regions: [ scatter_call_regions_bed ]
+            }
+            .set { ch_restrict_vcf_calls_in }
+
+
+        DNASCOPE_LONGREAD.out.gvcf
+            .join(DNASCOPE_LONGREAD.out.gvcf_tbi)
+            .join(ch_bed)
+            .multiMap { meta, gvcf, tbi, scatter_call_regions_bed ->
+                gvcf: [ meta, gvcf, tbi ]
+                regions: [ scatter_call_regions_bed ]
+            }
+            .set { ch_restrict_gvcf_calls_in }
+
+
+        // TODO: simplify into one call
+        RESTRICT_VCF_CALLS(
+            ch_restrict_vcf_calls_in.vcf,
+            ch_restrict_vcf_calls_in.regions,
+            [],
+            [],
+        )
+
+        RESTRICT_GVCF_CALLS(
+            ch_restrict_gvcf_calls_in.gvcf,
+            ch_restrict_gvcf_calls_in.regions,
+            [],
+            [],
+        )
+
+        ch_vcf        = RESTRICT_VCF_CALLS.out.vcf
+        ch_index      = RESTRICT_VCF_CALLS.out.tbi
+        ch_gvcf       = RESTRICT_GVCF_CALLS.out.gvcf
+        ch_gvcf_index = RESTRICT_GVCF_CALLS.out.gvcf_tbi
     }
 
     emit:
