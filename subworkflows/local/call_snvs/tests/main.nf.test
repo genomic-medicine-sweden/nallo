@@ -29,8 +29,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -76,8 +77,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -139,8 +141,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -180,8 +183,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -222,8 +226,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -272,8 +277,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -334,8 +340,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -399,8 +406,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = "deepvariant"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -456,8 +464,12 @@ nextflow_workflow {
                     [ id:'male_haploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ])
-                input[8] = "sentieon"
-                input[9] = "HiFi"
+                input[8] = channel.of([
+                    [ id:'sentieon_contig_sizes' ],
+                    file(params.modules_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[9] = "sentieon"
+                input[10] = "HiFi"
                 """
             }
         }
@@ -512,8 +524,12 @@ nextflow_workflow {
                     [ id:'male_haploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ])
-                input[8] = "sentieon"
-                input[9] = "HiFi"
+                input[8] = channel.of([
+                    [ id:'sentieon_contig_sizes' ],
+                    file(params.modules_testdata_base_path + '/reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[9] = "sentieon"
+                input[10] = "HiFi"
                 """
             }
         }
