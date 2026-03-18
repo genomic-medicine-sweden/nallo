@@ -155,7 +155,8 @@ workflow CALL_SNVS {
             }
             .set { ch_bcftools_view_in }
 
-        // TODO: simplify into one call
+        // Re-intersect VCFs called using padded scatter regions with unpadded call
+        // regions to remove any duplicates located at intra-chromosome region boundaries
         BCFTOOLS_VIEW(
             ch_bcftools_view_in.vcf_tbi,
             ch_bcftools_view_in.regions,
