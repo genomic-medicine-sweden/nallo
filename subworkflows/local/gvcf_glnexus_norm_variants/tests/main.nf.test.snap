@@ -5,8 +5,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -14,8 +13,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -26,8 +24,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -35,8 +32,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -46,7 +42,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:40.954557894",
+        "timestamp": "2026-03-18T08:57:12.656918252",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -58,8 +54,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,8a55e77ab918d7e128e2f61b419e7043"
                     ]
@@ -67,8 +62,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,0fc9d0e1ee2d3622e78fa61aeb63fde8"
                     ]
@@ -79,8 +73,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,0fc9d0e1ee2d3622e78fa61aeb63fde8"
                     ]
@@ -88,8 +81,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,8a55e77ab918d7e128e2f61b419e7043"
                     ]
@@ -99,7 +91,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:04.708223576",
+        "timestamp": "2026-03-18T08:53:14.458293256",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -111,8 +103,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -120,8 +111,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -132,8 +122,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -141,8 +130,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -152,7 +140,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:12.159249807",
+        "timestamp": "2026-03-18T08:53:21.943408077",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -164,8 +152,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -173,8 +160,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -185,8 +171,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -194,8 +179,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -205,7 +189,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:57.187244032",
+        "timestamp": "2026-03-18T08:57:33.515343228",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -217,8 +201,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -226,8 +209,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -238,8 +220,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -247,8 +228,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -258,7 +238,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:33.706736658",
+        "timestamp": "2026-03-18T08:57:01.348445671",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -270,8 +250,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -279,8 +258,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -291,8 +269,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -300,8 +277,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "sentieon"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -311,7 +287,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:49.105260725",
+        "timestamp": "2026-03-18T08:57:22.883541912",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -323,8 +299,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -332,8 +307,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -344,8 +318,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -353,8 +326,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
@@ -364,7 +336,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:26.585826559",
+        "timestamp": "2026-03-18T08:53:36.484597307",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -376,8 +348,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -385,8 +356,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -397,8 +367,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz.tbi:md5,7fc3fbdba1a03cc0466dd25d5c12ac52"
                     ]
@@ -406,8 +375,7 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test.vcf.gz:md5,65b145abb04a23f7376b4ed8c819cbf7"
                     ]
@@ -417,7 +385,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:21:19.532500767",
+        "timestamp": "2026-03-18T08:53:29.538038941",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
