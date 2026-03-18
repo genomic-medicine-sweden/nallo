@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
-- [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
+- [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
+- [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
 
 ### Removed
 
