@@ -181,8 +181,8 @@ workflow CALL_SNVS {
 
         ch_vcf        = RESTRICT_VCF_CALLS.out.vcf
         ch_index      = RESTRICT_VCF_CALLS.out.tbi
-        ch_gvcf       = RESTRICT_GVCF_CALLS.out.gvcf
-        ch_gvcf_index = RESTRICT_GVCF_CALLS.out.gvcf_tbi
+        ch_gvcf       = RESTRICT_GVCF_CALLS.out.vcf
+        ch_gvcf_index = RESTRICT_GVCF_CALLS.out.tbi
     }
 
     emit:
