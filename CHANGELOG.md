@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
+
 ### Parameters
 
 | Old parameter | New parameter                                  |
@@ -44,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | modkit/pileup            | 0.3.0       | 0.6.1       |
 | mosdepth                 | 0.3.10      | 0.3.11      |
 | multiqc                  | 1.31        | 1.33        |
+| svdb/merge               | 2.8.2       | 2.8.4       |
+| svdb/query               | 2.8.2       | 2.8.4       |
 | gawk                     | 5.3.0       | 5.3.1       |
 
 > [!NOTE]
