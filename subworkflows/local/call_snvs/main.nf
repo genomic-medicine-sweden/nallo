@@ -189,8 +189,6 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         }
 }
 
-
-
 def makeRestrictedCallChannel(ch_vcf, ch_tbi, ch_original_call_regions, vcf_type) {
     ch_vcf
         .join(ch_tbi)
