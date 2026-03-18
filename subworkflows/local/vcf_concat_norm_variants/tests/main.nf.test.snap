@@ -5,8 +5,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
@@ -14,8 +13,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -39,8 +37,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -48,15 +45,14 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:28:32.746866157",
+        "timestamp": "2026-03-18T08:50:12.319152904",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -68,8 +64,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
@@ -77,8 +72,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -102,8 +96,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,eb86b8d274c6b1973b0f49752a2d8431"
                     ]
@@ -111,15 +104,14 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:28:13.81027989",
+        "timestamp": "2026-03-18T08:49:49.928758883",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -131,8 +123,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
@@ -140,8 +131,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -165,8 +155,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -174,15 +163,14 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:28:04.75190635",
+        "timestamp": "2026-03-18T08:49:39.159350774",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -194,8 +182,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
@@ -203,8 +190,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -228,8 +214,7 @@
                 "index": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz.tbi:md5,2f23773e53c6368d9f4323b5ca7f9d9b"
                     ]
@@ -237,15 +222,14 @@
                 "vcf": [
                     [
                         {
-                            "id": "test",
-                            "sv_caller": "deepvariant"
+                            "id": "test"
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T15:28:23.859269571",
+        "timestamp": "2026-03-18T08:50:00.595562926",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
