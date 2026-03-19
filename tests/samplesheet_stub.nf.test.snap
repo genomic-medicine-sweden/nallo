@@ -7,14 +7,6 @@
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
                 },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -38,6 +30,14 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": 1.1,
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": 1.1,
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -96,6 +96,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
@@ -139,10 +142,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T08:58:40.220997123"
+        "timestamp": "2026-03-19T09:37:14.88326116"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -530,14 +533,6 @@
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
                 },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -567,6 +562,14 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": 1.1,
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": 1.1,
+                    "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": 1.22,
@@ -626,6 +629,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -669,10 +675,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T09:02:21.008081801"
+        "timestamp": "2026-03-19T09:40:56.694026922"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -681,14 +687,6 @@
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
-                },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
                 },
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -725,6 +723,14 @@
                 },
                 "CADD_TO_REFERENCE_CHRNAMES": {
                     "gawk": "5.3.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": 1.1,
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": 1.1,
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -792,6 +798,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -837,11 +846,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-17T12:26:02.566880003",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-19T09:36:37.090865652"
     },
     "Test family id same as sample id": {
         "content": [
@@ -850,14 +859,6 @@
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
-                },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
                 },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -927,6 +928,14 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.1.0"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": 1.1,
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": 1.1,
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -1107,6 +1116,9 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
+                    "tabix": 1.21
+                },
+                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1340,12 +1352,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-17T12:29:25.655523067",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-16T12:02:32.951877541"
+        "timestamp": "2026-03-19T09:40:20.861611281"
     },
     "Test alignment without genome assembly": {
         "content": [
