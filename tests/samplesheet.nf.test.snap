@@ -82,7 +82,7 @@
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
-                    "gawk": "5.1.0"
+                    "gawk": "5.3.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -703,10 +703,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-17T12:18:34.054405592",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-19T08:19:51.82697593"
     }
 }
