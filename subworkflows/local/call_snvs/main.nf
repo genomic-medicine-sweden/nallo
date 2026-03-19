@@ -8,6 +8,7 @@ include { BEDTOOLS_INTERSECT                                } from '../../../mod
 include { BEDTOOLS_SLOP                                     } from '../../../modules/nf-core/bedtools/slop/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
+include { GAWK as CREATE_CONTIG_SIZES                       } from '../../../modules/nf-core/gawk/main'
 
 workflow CALL_SNVS {
     take:
@@ -57,6 +58,12 @@ workflow CALL_SNVS {
             }
             .set { ch_bed }
 
+        CREATE_CONTIG_SIZES(
+            ch_fai,
+            [],
+            []
+        )
+
         // Sentieon will call indels outside of the passed call regions if indel is located at
         // a call region/scatter boundary (e.g. around centromeres). Padding the call regions
         // ensures the duplicated variant ends up with an identical call in both affected regions.
@@ -64,7 +71,7 @@ workflow CALL_SNVS {
         // with the unpadded call regions.
         BEDTOOLS_SLOP(
             ch_bed,
-            ch_sentieon_contig_sizes.map { _meta, sizes -> sizes }
+            CREATE_CONTIG_SIZES.out.output.map { _meta, sizes -> sizes }
         )
 
         BEDTOOLS_SLOP.out.bed
