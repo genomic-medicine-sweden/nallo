@@ -1332,7 +1332,7 @@
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",
@@ -1344,7 +1344,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T08:31:24.55997029"
+        "timestamp": "2026-03-19T16:18:23.891126149"
     },
     "Test alignment without genome assembly": {
         "content": [
