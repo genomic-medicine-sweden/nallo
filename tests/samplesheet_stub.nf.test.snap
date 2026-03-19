@@ -927,7 +927,7 @@
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
-                    "gawk": "5.1.0"
+                    "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": 1.1,
