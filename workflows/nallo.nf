@@ -125,7 +125,7 @@ workflow NALLO {
     ch_sentieon_female_diploid_bed  = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_diploid_bed    = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_haploid_bed    = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
-    ch_vcfexpress_prelude           = file("$projectDir/assets/vcfexpress_prelude.lua")
+    ch_vcfexpress_prelude           = file("$projectDir/assets/vcf_express_found_in_prelude.lua")
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
