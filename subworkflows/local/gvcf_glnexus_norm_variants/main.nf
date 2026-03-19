@@ -17,7 +17,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_bed                  // channel: [optional]  [ val(meta), path(input_bed) ]
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
-    variant_caller          // string: variant caller to tag the variants with, e.g. "deepvariant"
+    variant_caller          // string: variant caller to use
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
