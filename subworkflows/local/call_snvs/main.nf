@@ -60,7 +60,7 @@ workflow CALL_SNVS {
         CREATE_CONTIG_SIZES(
             ch_fai,
             [],
-            []
+            false
         )
         ch_versions = ch_versions.mix(CREATE_CONTIG_SIZES.out.versions)
 
