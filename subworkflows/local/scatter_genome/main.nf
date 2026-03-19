@@ -2,7 +2,8 @@ include { BEDTOOLS_MERGE                       } from '../../../modules/nf-core/
 include { BEDTOOLS_SORT                        } from '../../../modules/nf-core/bedtools/sort/main'
 include { BUILD_INTERVALS                      } from '../../../modules/local/build_intervals/main'
 include { BEDTOOLS_SPLIT                       } from '../../../modules/nf-core/bedtools/split/main'
-include { GAWK as GAWK_EXTRACT_REGIONS      } from '../../../modules/nf-core/gawk/main'
+include { GAWK as GAWK_EXTRACT_REGIONS         } from '../../../modules/nf-core/gawk/main'
+
 workflow SCATTER_GENOME {
 
     take:
@@ -46,7 +47,7 @@ workflow SCATTER_GENOME {
     )
     ch_versions = ch_versions.mix(BEDTOOLS_MERGE.out.versions)
 
-    // Add meta.genome before extracting the mitochondrial region from BED and spliting into 40 regions
+    // Add meta.genome so we can extract the mitochondrial region from the BED file
     BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
         [ [ meta + [ genome: "nuclear" ], bed ],
             [ meta + [ genome: "mt" ], bed ]
