@@ -47,10 +47,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
-                input[4] = channel.of([
-                    [ id: 'prelude_file' ],
-                    file('../../../assets/vcfexpress_prelude.lua')
-                ])
+                input[4] = file('../../../assets/vcfexpress_prelude.lua')
                 """
             }
         }
@@ -85,10 +82,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
-                input[4] = channel.of([
-                    [ id: 'prelude_file' ],
-                    file('../../../assets/vcfexpress_prelude.lua')
-                ])
+                input[4] = file('../../../assets/vcfexpress_prelude.lua')
                 """
             }
         }
