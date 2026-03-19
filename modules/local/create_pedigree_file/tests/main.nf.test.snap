@@ -20,7 +20,7 @@
                 "2": [
                     [
                         "CREATE_PEDIGREE_FILE",
-                        "create_pedigree_file",
+                        "python",
                         "3.8.3"
                     ]
                 ],
@@ -42,7 +42,7 @@
                 "versions_python": [
                     [
                         "CREATE_PEDIGREE_FILE",
-                        "create_pedigree_file",
+                        "python",
                         "3.8.3"
                     ]
                 ]
@@ -52,7 +52,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T16:53:02.763019947"
+        "timestamp": "2026-03-19T17:17:47.510828921"
     },
     "create_pedigree_file - one sample": {
         "content": [
@@ -71,7 +71,7 @@
                 "versions_python": [
                     [
                         "CREATE_PEDIGREE_FILE",
-                        "create_pedigree_file",
+                        "python",
                         "3.8.3"
                     ]
                 ]
@@ -81,7 +81,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T16:52:47.747441813"
+        "timestamp": "2026-03-19T17:17:32.568980984"
     },
     "create_pedigree_file - multiple samples": {
         "content": [
@@ -103,7 +103,7 @@
                 "versions_python": [
                     [
                         "CREATE_PEDIGREE_FILE",
-                        "create_pedigree_file",
+                        "python",
                         "3.8.3"
                     ]
                 ]
@@ -113,6 +113,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T16:52:55.278677101"
+        "timestamp": "2026-03-19T17:17:40.202656949"
     }
 }
