@@ -30,7 +30,7 @@ workflow PREPARE_REFERENCES {
     SAMTOOLS_FAIDX (
         ch_fasta,
         [[],[]],
-        false
+        true
     )
     ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
 
@@ -51,5 +51,6 @@ workflow PREPARE_REFERENCES {
     fai           = SAMTOOLS_FAIDX.out.fai.collect()                                     // channel: [ val(meta), path(fai) ]
     fasta         = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
     vep_resources = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]
+    contig_sizes  = SAMTOOLS_FAIDX.out.sizes.collect()                                   // channel: [ val(meta), path(sizes) ]
     versions      = ch_versions                                                          // channel: [ versions.yml ]
 }

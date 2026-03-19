@@ -430,6 +430,7 @@ workflow NALLO {
             ch_sentieon_female_diploid_bed,
             ch_sentieon_male_diploid_bed,
             ch_sentieon_male_haploid_bed,
+            PREPARE_REFERENCES.out.contig_sizes,
             params.snv_caller,
             params.sentieon_tech,
         )
