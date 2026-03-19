@@ -21,7 +21,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_versions           = channel.empty()
+    ch_versions = channel.empty()
     ch_merged_family_gvcf = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
@@ -32,8 +32,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
 
         ch_merged_family_gvcf = GLNEXUS.out.bcf
         ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-
-    } else if (variant_caller.equals("sentieon")) {
+    }
+    else if (variant_caller.equals("sentieon")) {
 
         ch_gvcfs
             .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
@@ -59,22 +59,22 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
             [],
             [],
             [],
-            []
+            [],
         )
 
         ch_merged_family_gvcf = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
     ch_merged_family_gvcf
-        .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
+        .map { meta, vcf ->
+            [meta + [sv_caller: variant_caller], vcf]
         }
         .set { ch_vcfexpress_input }
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         ch_vcfexpress_input,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
     )
 
     TABIX_BGZIP {
@@ -85,7 +85,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
 
     // Remove added caller information in meta
     TABIX_BGZIP.out.output
-        .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
+        .map { meta, vcf ->
+            [meta - meta.subMap('sv_caller'), vcf, []]
         }
         .set { ch_bcftools_norm_input }
 
@@ -97,7 +98,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     emit:
-    vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
+    vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     index    = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    versions = ch_versions                                                              // channel: [ path(versions.yml) ]
+    versions = ch_versions // channel: [ path(versions.yml) ]
 }
