@@ -923,13 +923,6 @@
                     "exists": true,
                     "description": "Interval in the reference to restrict diploid variant calling for females, in BED file format."
                 },
-                "sentieon_contig_sizes": {
-                    "type": "string",
-                    "format": "file-path",
-                    "pattern": "^\\S+\\.tsv$",
-                    "exists": true,
-                    "description": "A file defining the length of each chromosome or contig, in TSV format."
-                },
                 "strdrop_fraction": {
                     "type": "number",
                     "default": 0.66,
