@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            321,
+            326,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -210,6 +210,9 @@
                 "SVDB_QUERY": {
                     "svdb": "2.8.4"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -227,6 +230,7 @@
                     "tabix": 1.21
                 },
                 "TABIX_VCFEXPRESS": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -762,11 +766,14 @@
                 "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_ONT_A",
-                "repeats/sample/HG002_ONT_A/HG002_ONT_A_STRdust_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz",
+                "repeats/sample/HG002_ONT_A/HG002_ONT_A_strdust.vcf.gz.tbi",
                 "repeats/sample/HG002_ONT_B",
-                "repeats/sample/HG002_ONT_B/HG002_ONT_B_STRdust_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz",
+                "repeats/sample/HG002_ONT_B/HG002_ONT_B_strdust.vcf.gz.tbi",
                 "repeats/sample/HG002_ONT_C",
-                "repeats/sample/HG002_ONT_C/HG002_ONT_C_STRdust_found_in.vcf.gz",
+                "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz",
+                "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/FAM",
@@ -1142,7 +1149,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1154,15 +1161,15 @@
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_A_STRdust_found_in.vcf.gz",
+                    "HG002_ONT_A_strdust.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_B_STRdust_found_in.vcf.gz",
+                    "HG002_ONT_B_strdust.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
-                    "HG002_ONT_C_STRdust_found_in.vcf.gz",
+                    "HG002_ONT_C_strdust.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
                 [
@@ -1219,13 +1226,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
+        "timestamp": "2026-03-19T14:01:32.550337808",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-19T08:26:49.794122772"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     }
 }
