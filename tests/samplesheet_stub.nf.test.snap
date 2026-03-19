@@ -524,7 +524,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            69,
+            68,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -573,9 +573,6 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
-                },
-                "CREATE_CONTIG_SIZES": {
-                    "gawk": "5.3.1"
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": 1.22,
@@ -681,7 +678,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T11:47:59.950515067"
+        "timestamp": "2026-03-19T15:56:29.780987868"
     },
     "Test CADD with mock resources": {
         "content": [
