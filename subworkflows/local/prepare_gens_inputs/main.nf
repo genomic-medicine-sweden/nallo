@@ -39,7 +39,6 @@ workflow PREPARE_GENS_INPUTS {
         [],
         false
     )
-    ch_versions = ch_versions.mix(MOSDEPTH_GATK_HEADER.out.versions)
 
     // Prepare the body
     MOSDEPTH(
@@ -53,7 +52,6 @@ workflow PREPARE_GENS_INPUTS {
         [],
         false
     )
-    ch_versions = ch_versions.mix(MOSDEPTH_GATK_FORMAT.out.versions)
 
     // Prepare GATK inputs
     MOSDEPTH_GATK_HEADER.out.output
