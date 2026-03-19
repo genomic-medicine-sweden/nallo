@@ -1,6 +1,6 @@
 include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
 include { STRDUST          } from '../../../modules/nf-core/strdust/'
-include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
@@ -10,7 +10,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
+    ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
     ch_versions = channel.empty()
@@ -23,19 +23,23 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     )
     ch_versions.mix(STRDUST.out.versions)
 
-    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
-
     VCFEXPRESS (
         STRDUST.out.vcf,
-        ch_lua_file
+        ch_vcfexpress_prelude
     )
 
-    TABIX_TABIX (
+    TABIX_BGZIPTABIX (
         VCFEXPRESS.out.vcf
     )
 
-    VCFEXPRESS.out.vcf
-        .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
+    ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
+
+    ch_tabix_output_vcf = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, tbi -> [ meta, vcf ] }
+    ch_tabix_output_index = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, tbi -> [ meta, tbi ] }
+
+
+    ch_tabix_output_vcf
+        .join(ch_tabix_output_index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { ch_bcftools_merge_in }

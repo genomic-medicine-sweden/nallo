@@ -5,6 +5,7 @@ include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/mai
 include { BCFTOOLS_SORT    } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE       } from '../../../modules/nf-core/trgt/merge/main'
 include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
+include { TABIX_BGZIP      } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow CALL_REPEAT_EXPANSIONS_TRGT {
     take:
@@ -13,7 +14,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
     cram_output             // bool: Publish alignments as CRAM (true) or BAM (false)
-    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
+    ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
 
@@ -53,18 +54,24 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
-    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
-
     // Add FOUND_IN=TRGT tag
     VCFEXPRESS (
         TRGT_GENOTYPE.out.vcf,
-        ch_lua_file
+        ch_vcfexpress_prelude
     )
+
+    TABIX_BGZIP {
+        VCFEXPRESS.out.vcf
+    }
+
+    ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
 
     // Sort and index bcf
     BCFTOOLS_SORT(
-        VCFEXPRESS.out.vcf
+        TABIX_BGZIP.out.output
     )
+
+    //BCFTOOLS_SORT.out.vcf.view()
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
     BCFTOOLS_SORT.out.vcf
@@ -80,6 +87,8 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
             [meta + [xy_samples: xy_ids], vcf, tbi]
         }
         .set { ch_trgt_merge_in }
+
+    //ch_trgt_merge_in.view()
 
     TRGT_MERGE(
         ch_trgt_merge_in,

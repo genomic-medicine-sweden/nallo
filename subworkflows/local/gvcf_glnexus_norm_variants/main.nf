@@ -7,7 +7,8 @@ include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
-include { VCFEXPRESS                                  } from '../../../modules/nf-core/vcfexpress/main'
+include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'
+include { TABIX_BGZIP                                } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
@@ -17,7 +18,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
     variant_caller          // string: variant caller to tag the variants with, e.g. "deepvariant"
-    ch_vcfexpress_prelude   // channel: [mandatory] [ val(meta), path(lua) ]
+    ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
     ch_versions           = channel.empty()
@@ -71,18 +72,23 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         }
         .set { ch_vcfexpress_input }
 
-    ch_lua_file = ch_vcfexpress_prelude.map { meta, lua -> lua }
-
     VCFEXPRESS (
         ch_vcfexpress_input,
-        ch_lua_file
+        ch_vcfexpress_prelude
     )
 
+    TABIX_BGZIP {
+        VCFEXPRESS.out.vcf
+    }
+
+    ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
+
     // Remove added caller information in meta
-    VCFEXPRESS.out.vcf
+    TABIX_BGZIP.out.output
         .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
         }
         .set { ch_bcftools_norm_input }
+
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
