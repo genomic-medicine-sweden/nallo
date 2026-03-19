@@ -224,15 +224,13 @@ workflow CALL_SVS {
 
     ch_sv_calls_filtered
         .multiMap { meta, vcf, tbi ->
-            vcf: [ meta, vcf, tbi ]
+            vcf: [ meta, vcf ]
             sv_caller: meta.sv_caller
         }
         .set { ch_vcfexpress_input }
 
-    ch_vcfexpress_input = ch_vcfexpress_input.vcf.map { meta, vcf, tbi -> [ meta, vcf ] }
-
     VCFEXPRESS (
-        ch_vcfexpress_input,
+        ch_vcfexpress_input.vcf,
         ch_vcfexpress_prelude
     )
 
