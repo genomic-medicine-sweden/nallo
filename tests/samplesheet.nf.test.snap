@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            195,
+            199,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -249,6 +249,9 @@
                 "SVDB_QUERY": {
                     "svdb": "2.8.4"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -263,6 +266,7 @@
                     "tabix": 1.21
                 },
                 "TABIX_VCFEXPRESS": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -661,7 +665,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -702,10 +706,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-17T12:18:34.054405592",
+        "timestamp": "2026-03-19T09:44:03.600721563",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

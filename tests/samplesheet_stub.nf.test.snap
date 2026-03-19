@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            54,
+            57,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -85,6 +85,9 @@
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -137,7 +140,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-16T15:44:52.061715175",
+        "timestamp": "2026-03-19T09:49:17.390530996",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -145,7 +148,7 @@
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            56,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -255,7 +258,11 @@
                     "bcftools": 1.23,
                     "svdb": "2.8.4"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_VCFEXPRESS": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -353,7 +360,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-16T15:48:34.145070928",
+        "timestamp": "2026-03-19T09:50:56.86642693",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -454,11 +461,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        },
-        "timestamp": "2026-03-02T08:59:37.115321855"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -517,15 +524,15 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        },
-        "timestamp": "2026-03-02T09:00:05.013305995"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            62,
+            65,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -616,6 +623,9 @@
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -668,7 +678,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-16T15:50:01.350416785",
+        "timestamp": "2026-03-19T09:52:24.460183019",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -676,7 +686,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            67,
+            70,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -778,6 +788,9 @@
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -836,7 +849,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-17T12:26:02.566880003",
+        "timestamp": "2026-03-19T09:48:39.867583192",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -844,7 +857,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            192,
+            196,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -1091,6 +1104,9 @@
                 "SVDB_QUERY": {
                     "svdb": "2.8.4"
                 },
+                "TABIX_BGZIP": {
+                    "tabix": 1.21
+                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -1105,6 +1121,7 @@
                     "tabix": 1.21
                 },
                 "TABIX_VCFEXPRESS": {
+                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1341,12 +1358,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-17T12:29:25.655523067",
+        "timestamp": "2026-03-19T09:51:50.984301037",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-16T12:02:32.951877541"
+            "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
+        }
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1411,10 +1427,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        },
-        "timestamp": "2026-03-02T08:59:06.387875024"
+        }
     }
 }
