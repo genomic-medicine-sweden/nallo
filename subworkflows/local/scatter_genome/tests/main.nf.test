@@ -99,7 +99,7 @@ nextflow_workflow {
 
     }
     test("[], bed, false, true, 2 - without chrM in bed file") {
-
+        tag "without_chrM"
         when {
             workflow {
                 """
@@ -118,6 +118,7 @@ nextflow_workflow {
             // Should we assert that the mt bed is empty?
             assertAll (
                 { assert workflow.success },
+                { assert path(workflow.out.bed_mt.get(0).get(1)).size() == 0 },
                 { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }
