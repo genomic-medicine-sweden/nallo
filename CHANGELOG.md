@@ -103,7 +103,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sentieon_male_haploid_bed`   |
 |               | `--sentieon_male_diploid_bed`   |
 |               | `--sentieon_female_diploid_bed` |
-|               | `--sentieon_contig_sizes`       |
 |               | `--create_maf_track`            |
 |               | `--create_hificnv_maf_track`    |
 |               | `--create_sawfish_maf_track`    |
