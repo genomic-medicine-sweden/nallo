@@ -192,8 +192,8 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
 
 def makeRestrictedCallChannel(ch_vcf, ch_tbi, ch_original_call_regions, vcf_type) {
     ch_vcf
-        .join(ch_tbi)
-        .join(ch_original_call_regions)
+        .join(ch_tbi, failOnDuplicate: true, failOnMismatch: true)
+        .join(ch_original_call_regions, failOnDuplicate: true, failOnMismatch: true)
         .map {
             meta, vcf, tbi, bed ->
             [ meta +  [ vcf_type: vcf_type ], vcf, tbi, bed ]
