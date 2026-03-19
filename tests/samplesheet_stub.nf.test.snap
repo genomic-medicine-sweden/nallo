@@ -575,7 +575,7 @@
                     "bedtools": "2.31.1"
                 },
                 "CREATE_CONTIG_SIZES": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": 1.22,
@@ -681,7 +681,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T09:49:47.521948539"
+        "timestamp": "2026-03-19T11:47:59.950515067"
     },
     "Test CADD with mock resources": {
         "content": [
