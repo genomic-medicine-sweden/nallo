@@ -41,7 +41,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                    workflow.out.bed_nuclear_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
                 ).match() }
             )
         }

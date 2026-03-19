@@ -419,14 +419,14 @@ workflow NALLO {
                 .set { ch_bed_mt_to_mix }
 
             // Channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
-            SCATTER_GENOME.out.bed_intervals
+            SCATTER_GENOME.out.bed_nuclear_intervals
                 .map { _meta, bed, _intervals -> bed }
                 .mix(ch_bed_mt_to_mix.map { _meta, bed -> bed })
                 .collect()
                 .map { beds -> beds.size() }
                 .set { num_bed_files_for_snv_calling }
 
-            SCATTER_GENOME.out.bed_intervals
+            SCATTER_GENOME.out.bed_nuclear_intervals
                 .map { meta, bed, _intervals -> [meta, bed] }
                 .combine(num_bed_files_for_snv_calling)
                 .set { ch_bed_intervals }
@@ -442,7 +442,7 @@ workflow NALLO {
                 .set { ch_bed_intervals }
         }
         else {
-            ch_bed_intervals = SCATTER_GENOME.out.bed_intervals
+            ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
         }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
