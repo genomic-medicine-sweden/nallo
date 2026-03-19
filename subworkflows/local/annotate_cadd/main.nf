@@ -27,14 +27,12 @@ workflow ANNOTATE_CADD {
         [],
         false,
     )
-    ch_versions = ch_versions.mix(REFERENCE_TO_CADD_CHRNAMES.out.versions)
 
     CADD_TO_REFERENCE_CHRNAMES(
         ch_fai,
         [],
         false,
     )
-    ch_versions = ch_versions.mix(CADD_TO_REFERENCE_CHRNAMES.out.versions)
 
     ch_vcf
         .join(ch_index, failOnMismatch: true, failOnDuplicate: true)
