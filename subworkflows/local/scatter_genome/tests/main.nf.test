@@ -99,7 +99,7 @@ nextflow_workflow {
 
     }
     test("[], bed, false, true, 2 - without chrM in bed file") {
-        tag "without_chrM"
+
         when {
             workflow {
                 """
