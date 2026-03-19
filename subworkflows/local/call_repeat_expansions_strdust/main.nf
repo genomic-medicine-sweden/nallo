@@ -31,15 +31,9 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     TABIX_BGZIPTABIX (
         VCFEXPRESS.out.vcf
     )
-
     ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
-    ch_tabix_output_vcf = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, tbi -> [ meta, vcf ] }
-    ch_tabix_output_index = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, tbi -> [ meta, tbi ] }
-
-
-    ch_tabix_output_vcf
-        .join(ch_tabix_output_index, failOnDuplicate: true, failOnMismatch: true)
+    TABIX_BGZIPTABIX.out.gz_index
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { ch_bcftools_merge_in }

@@ -71,8 +71,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         TABIX_BGZIP.out.output
     )
 
-    //BCFTOOLS_SORT.out.vcf.view()
-
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
     BCFTOOLS_SORT.out.vcf
         .join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -87,8 +85,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
             [meta + [xy_samples: xy_ids], vcf, tbi]
         }
         .set { ch_trgt_merge_in }
-
-    //ch_trgt_merge_in.view()
 
     TRGT_MERGE(
         ch_trgt_merge_in,

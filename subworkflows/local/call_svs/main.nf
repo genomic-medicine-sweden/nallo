@@ -240,8 +240,6 @@ workflow CALL_SVS {
         VCFEXPRESS.out.vcf
     )
 
-    ch_tabix_output_vcf = TABIX_VCFEXPRESS.out.gz_index.map { meta, vcf, tbi -> [ meta, vcf ] }
-    ch_tabix_output_index = TABIX_VCFEXPRESS.out.gz_index.map { meta, vcf, tbi -> [ meta, tbi ] }
     ch_versions = ch_versions.mix(TABIX_VCFEXPRESS.out.versions)
 
     // If Severus or Sniffles was used, we need to reheader the VCF
@@ -249,8 +247,7 @@ workflow CALL_SVS {
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    ch_tabix_output_vcf
-        .join(ch_tabix_output_index, failOnMismatch:true, failOnDuplicate:true)
+    TABIX_VCFEXPRESS.out.gz_index
         .branch { meta, _vcf, _tbi ->
             def callers_needing_reheader = [ 'severus', 'sniffles' ]
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)
