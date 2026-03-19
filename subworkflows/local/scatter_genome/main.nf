@@ -17,9 +17,10 @@ workflow SCATTER_GENOME {
     ch_bed = channel.empty()
     ch_bed_intervals = channel.empty()
 
-    //
-    // If no BED-file is provided then build intervals from reference
-    //
+   /*
+    * If no BED-file is provided then build intervals from reference
+    */
+
     if (make_bed_from_fai) {
 
         BUILD_INTERVALS(
@@ -85,10 +86,12 @@ workflow SCATTER_GENOME {
             .transpose()
             .set { ch_bed_intervals }
 
-        // Since we don't check beforehand how many intervals it's possible to split the bed file into,
-        // it could be that the number of intervals is less than the requested split_n.
-        // This can happen if the bed file has too few regions.
-        // We check this here, so it doesn't fail later in the pipeline.
+        /*
+         * Since we don't check beforehand how many intervals it's possible to split the bed file into,
+         * it could be that the number of intervals is less than the requested split_n.
+         * This can happen if the bed file has too few regions.
+         * We check this here, so it doesn't fail later in the pipeline.
+         */
         ch_bed_intervals
             .count()
             .map { count ->
