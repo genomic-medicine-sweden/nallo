@@ -720,7 +720,7 @@
                     "cadd": "1.6.post1"
                 },
                 "CADD_TO_REFERENCE_CHRNAMES": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -751,7 +751,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -836,7 +836,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-16T15:44:08.326106627",
+        "timestamp": "2026-03-17T12:26:02.566880003",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -923,9 +923,6 @@
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.1.0"
                 },
-                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
-                    "gawk": "5.1.0"
-                },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
                 },
@@ -951,6 +948,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -998,10 +998,10 @@
                     "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -1341,7 +1341,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-16T15:49:28.826902665",
+        "timestamp": "2026-03-17T12:29:25.655523067",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"

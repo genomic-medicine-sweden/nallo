@@ -11,32 +11,20 @@ process CLEAN_SNIFFLES {
 
     output:
     tuple val(meta), path("*.vcf"), emit: vcf
-    path "versions.yml" , emit: versions
+    tuple val("${task.process}"), val('clean_sniffles'), val('1.0'), topic: versions, emit: versions_clean_sniffles
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def VERSION = "1.0"
     """
     clean_sniffles.py ${vcf} > ${prefix}.vcf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        clean_sniffles: \$(echo "$VERSION" )
-    END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def VERSION = "1.0"
     """
     touch ${prefix}.vcf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        clean_sniffles: \$(echo "$VERSION" )
-    END_VERSIONS
     """
 }

@@ -76,7 +76,6 @@ workflow CALL_SVS {
         CLEAN_SNIFFLES (
             SNIFFLES.out.vcf
         )
-        ch_versions = ch_versions.mix(CLEAN_SNIFFLES.out.versions)
 
         BCFTOOLS_SORT (
             CLEAN_SNIFFLES.out.vcf
