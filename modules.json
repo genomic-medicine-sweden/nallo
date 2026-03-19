@@ -196,7 +196,8 @@
                     "hificnv": {
                         "branch": "master",
                         "git_sha": "68b6a65f0e96072f0d9ce55b82ca607dfb70c99c",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hificnv/hificnv.diff"
                     },
                     "longphase/haplotag": {
                         "branch": "master",

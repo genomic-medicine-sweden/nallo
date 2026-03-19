@@ -4,4 +4,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - "bioconda::hificnv=1.0.1"
+  - "bioconda::hificnv=1.0.0"
