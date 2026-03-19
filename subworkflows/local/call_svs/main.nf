@@ -5,7 +5,7 @@ include { BCFTOOLS_VIEW                             } from '../../../modules/nf-
 include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
-include { CREATE_SAMPLES_FILE                       } from '../../../modules/local/create_samples_file/main'
+include { GAWK as CREATE_SAMPLES_FILE               } from '../../../modules/nf-core/gawk/main'
 include { HIFICNV                                   } from '../../../modules/local/pacbio/hificnv'
 include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
@@ -266,11 +266,10 @@ workflow CALL_SVS {
     )
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
-    CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output )
-    ch_versions = ch_versions.mix(CREATE_SAMPLES_FILE.out.versions)
+    CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output, [], false )
 
     ch_found_in_tagged_vcf.to_reheader
-        .join( CREATE_SAMPLES_FILE.out.samples, failOnMismatch:true, failOnDuplicate:true )
+        .join( CREATE_SAMPLES_FILE.out.output, failOnMismatch:true, failOnDuplicate:true )
         .map { meta, vcf, _index, samples -> [ meta, vcf, [], samples ] }
         .set { ch_bcftools_reheader_input }
 

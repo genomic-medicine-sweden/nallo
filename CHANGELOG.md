@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
 - [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
 - [#935] (https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
+- [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
 
 ### Removed
 
