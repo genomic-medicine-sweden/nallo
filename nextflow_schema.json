@@ -732,6 +732,16 @@
                     "default": 110,
                     "description": "VEP cache version"
                 },
+                "vep_mitochondrial_genome_distance": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "The distance parameter used in vep snv for mitochondrial variants"
+                },
+                "vep_nuclear_genome_distance": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "The distance parameter used in vep snv for nuclear variants"
+                },
                 "vep_plugin_files": {
                     "type": "string",
                     "mimetype": "text/csv",
