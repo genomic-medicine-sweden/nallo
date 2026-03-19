@@ -733,7 +733,7 @@
                     "cadd": "1.6.post1"
                 },
                 "CADD_TO_REFERENCE_CHRNAMES": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -764,7 +764,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -848,9 +848,9 @@
         ],
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         },
-        "timestamp": "2026-03-02T08:56:56.330327397"
+        "timestamp": "2026-03-17T12:26:02.566880003"
     },
     "Test family id same as sample id": {
         "content": [
@@ -935,10 +935,7 @@
                     "cramino": "1.1.0"
                 },
                 "CREATE_SAMPLES_FILE": {
-                    "gawk": "5.1.0"
-                },
-                "CREATE_SAMPLES_HAPLOTYPES_FILE": {
-                    "gawk": "5.1.0"
+                    "gawk": "5.3.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.9.0"
@@ -965,6 +962,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -1012,10 +1012,10 @@
                     "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -1353,7 +1353,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-16T12:02:32.951877541"
+        "timestamp": "2026-03-19T08:31:24.55997029"
     },
     "Test alignment without genome assembly": {
         "content": [
