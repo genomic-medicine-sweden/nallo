@@ -184,8 +184,8 @@ tool:
     citation: "untar"
     bibliography: ""
   vcfexpress:
-    citation: "vcfexpress"
-    bibliography: ""
+    citation: "Vcfexpress (Pedersen & Quinlan 2020)"
+    bibliography: "Pedersen BS, Quinlan AR. Vcfexpress: a high-performance variant manipulation tool. Bioinformatics. 2020;36(1):259-260. doi:10.1093/bioinformatics/btz483"
   yak:
     citation: "yak"
     bibliography: ""
