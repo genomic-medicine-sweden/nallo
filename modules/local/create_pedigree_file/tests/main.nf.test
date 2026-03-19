@@ -28,7 +28,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     path(process.out.ped.get(0).get(1)).readLines(),
-                    process.out.versions
+                    process.out.findAll { key, val -> key.startsWith("versions")}
                 ).match() }
             )
         }
@@ -58,7 +58,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     path(process.out.ped.get(0).get(1)).readLines(),
-                    process.out.versions
+                    process.out.findAll { key, val -> key.startsWith("versions")}
                 ).match() }
             )
         }
