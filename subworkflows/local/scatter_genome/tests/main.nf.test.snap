@@ -11,7 +11,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
                     "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
@@ -25,7 +25,7 @@
                     ]
                 ],
                 "bed_intervals": [
-                    
+
                 ],
                 "versions": [
                     "versions.yml:md5,e70d387c0dd30530a3e7fe2846ddffe1"
@@ -35,7 +35,7 @@
                 "chr22\t0\t40001"
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2025-07-31T10:59:57.96913689",
@@ -75,7 +75,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -115,7 +115,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -129,7 +129,7 @@
                 ]
             },
             [
-                
+
             ]
         ],
         "timestamp": "2026-03-06T10:09:00.478174527",
@@ -239,7 +239,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -279,7 +279,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -334,7 +334,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,079a4d535599ed9127c528283e9e5611"
                     ]
@@ -374,7 +374,7 @@
                     [
                         {
                             "id": "chr22",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "chr22_mt.bed:md5,079a4d535599ed9127c528283e9e5611"
                     ]
@@ -470,10 +470,10 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "2": [
-                    
+
                 ],
                 "bed": [
                     [
@@ -484,10 +484,10 @@
                     ]
                 ],
                 "bed_intervals": [
-                    
+
                 ],
                 "versions": [
-                    
+
                 ]
             },
             [
@@ -496,7 +496,7 @@
                 "chr22\t2000\t3000"
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2025-07-29T17:05:15.966007408",
@@ -529,7 +529,7 @@
                     [
                         {
                             "id": "test",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "test_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -562,7 +562,7 @@
                     [
                         {
                             "id": "test",
-                            "genome": "mt"
+                            "genome": "mitochondrial"
                         },
                         "test_mt.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -579,7 +579,7 @@
                 "chr22\t0\t40001"
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-03-06T10:10:11.962969346",

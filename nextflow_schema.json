@@ -710,7 +710,7 @@
                     "description": "Modkit modified bases, separated by space. E.g. '5mC 5hmC'",
                     "default": "5mC"
                 },
-                "mt_caller": {
+                "mitochondrial_caller": {
                     "type": "string",
                     "default": "deepvariant",
                     "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"

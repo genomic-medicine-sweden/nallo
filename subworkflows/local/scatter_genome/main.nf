@@ -50,7 +50,7 @@ workflow SCATTER_GENOME {
     // Add meta.genome so we can extract the mitochondrial region from the BED file
     BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
         [ [ meta + [ genome: "nuclear" ], bed ],
-            [ meta + [ genome: "mt" ], bed ]
+            [ meta + [ genome: "mitochondrial" ], bed ]
     ]
     }.set{ ch_input_gawk }
 
@@ -63,7 +63,7 @@ workflow SCATTER_GENOME {
     ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
 
     GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
-            mt: meta.genome == "mt"
+            mt: meta.genome == "mitochondrial"
             nuclear: meta.genome == "nuclear"
     }.set{ ch_bed_genomes }
 
@@ -111,6 +111,6 @@ workflow SCATTER_GENOME {
     emit:
     bed           = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
     bed_intervals = ch_bed_intervals       // channel: [ path(bed), val(num_intervals) ]
-    bed_mt        = ch_bed_genomes.mt      // channel: [ val(meta), path(bed) ]
+    bed_mt        = ch_bed_genomes.mitochondrial      // channel: [ val(meta), path(bed) ]
     versions      = ch_versions            // channel: [ versions.yml ]
 }
