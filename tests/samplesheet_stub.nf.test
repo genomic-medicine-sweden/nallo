@@ -321,7 +321,6 @@ nextflow_pipeline {
                 sentieon_female_diploid_bed  = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed'
                 sentieon_male_diploid_bed    = params.pipelines_testdata_base_path + 'reference/empty.bed'
                 sentieon_male_haploid_bed    = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed'
-                sentieon_contig_sizes        = params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv'
                 // Skip irrelevant steps
                 skip_annotate_paralogs       = true
                 skip_chromograph             = true
