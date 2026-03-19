@@ -181,6 +181,7 @@ workflow NALLO {
     // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
     if (!params.skip_alignment && params.alignment_processes > 1) {
 
+        // contains all BAM files, including those not converted.
         SPLITUBAM(
             CONVERT_INPUT_FASTQS.out.bam
         )
