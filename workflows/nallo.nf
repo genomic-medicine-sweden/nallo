@@ -597,7 +597,7 @@ workflow NALLO {
         )
         // If 'childWithTwoParents==false', set family_ped=empty
         addChildWithTwoParentsToMeta(FAMILY_PED.out.ped, ch_input, 'id')
-            .map { meta, file -> [ meta, meta.child_with_two_parents_in_family ? file : [] ] }
+            .map { meta, file -> [ [id: meta.id], meta.child_with_two_parents_in_family ? file : [] ] }
             .set{ ch_ped_family }
 
         PHASING (
