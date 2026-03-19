@@ -345,6 +345,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
+                { assert versions.containsKey('CREATE_CONTIG_SIZES') },
                 { assert versions.containsKey('BEDTOOLS_INTERSECT') },
                 { assert versions.containsKey('BEDTOOLS_SLOP') },
                 { assert versions.containsKey('DNASCOPE_LONGREAD') },
