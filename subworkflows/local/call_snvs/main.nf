@@ -62,6 +62,7 @@ workflow CALL_SNVS {
             [],
             []
         )
+        ch_versions = ch_versions.mix(CREATE_CONTIG_SIZES.out.versions)
 
         // Sentieon will call indels outside of the passed call regions if indel is located at
         // a call region/scatter boundary (e.g. around centromeres). Padding the call regions
