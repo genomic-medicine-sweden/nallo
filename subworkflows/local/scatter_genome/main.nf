@@ -63,7 +63,7 @@ workflow SCATTER_GENOME {
     ch_versions = ch_versions.mix(GAWK_EXTRACT_REGIONS.out.versions)
 
     GAWK_EXTRACT_REGIONS.out.output.branch {meta, _bed ->
-            mt: meta.genome == "mitochondrial"
+            mitochondrial: meta.genome == "mitochondrial"
             nuclear: meta.genome == "nuclear"
     }.set{ ch_bed_genomes }
 
