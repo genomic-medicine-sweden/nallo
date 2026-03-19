@@ -56,10 +56,26 @@
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,fe8819f8cc36aaf530c741bd505777e7"
+                    ]
+                ],
+                "5": [
                     "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
                     "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
                     "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
                     "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
+                ],
+                "contig_sizes": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,fe8819f8cc36aaf530c741bd505777e7"
+                    ]
                 ],
                 "fai": [
                     [
@@ -124,9 +140,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:42:19.220248133"
+        "timestamp": "2026-03-19T21:15:25.211753771"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -162,16 +178,32 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
                     "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
                     "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
                     "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
                     "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
+                ],
+                "contig_sizes": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "fai": [
                     [
@@ -204,7 +236,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -219,9 +251,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:43:14.947070766"
+        "timestamp": "2026-03-19T21:16:20.728156542"
     },
     "don't unzip fasta, don't untar vep cache -stub": {
         "content": [
@@ -262,8 +294,24 @@
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
                     "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
                     "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
+                ],
+                "contig_sizes": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "fai": [
                     [
@@ -308,9 +356,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-30T11:25:02.384461568"
+        "timestamp": "2026-03-19T21:16:47.732476544"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -369,9 +417,25 @@
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,fe8819f8cc36aaf530c741bd505777e7"
+                    ]
+                ],
+                "5": [
                     "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
                     "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
                     "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
+                ],
+                "contig_sizes": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.test.fa.sizes:md5,fe8819f8cc36aaf530c741bd505777e7"
+                    ]
                 ],
                 "fai": [
                     [
@@ -435,8 +499,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-30T11:24:32.791001112"
+        "timestamp": "2026-03-19T21:15:54.007898445"
     }
 }
