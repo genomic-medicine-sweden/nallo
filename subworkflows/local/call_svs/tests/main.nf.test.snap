@@ -60,12 +60,10 @@
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab"
             ]
         ],
-        "timestamp": "2026-03-20T09:28:35.476367189",
+        "timestamp": "2026-03-20T11:07:18.611279614",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -178,12 +176,10 @@
             ],
             [
                 "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab"
             ]
         ],
-        "timestamp": "2026-03-20T09:27:00.656558389",
+        "timestamp": "2026-03-20T11:05:42.704377165",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -250,12 +246,10 @@
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab"
             ]
         ],
-        "timestamp": "2026-03-20T09:26:22.446072709",
+        "timestamp": "2026-03-20T11:05:04.865606038",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -330,9 +324,7 @@
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
-                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47"
                 ],
                 "family_caller_tbi": [
                     [
@@ -400,13 +392,11 @@
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0736cf2ee751b8ef948bae27947436a6",
                     "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
-                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                    "versions.yml:md5,0f354889dbf9366e45eab89606edeb47"
                 ]
             }
         ],
-        "timestamp": "2026-03-20T09:28:54.336445645",
+        "timestamp": "2026-03-20T11:07:37.401910832",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -473,12 +463,10 @@
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,0f354889dbf9366e45eab89606edeb47",
                 "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab"
             ]
         ],
-        "timestamp": "2026-03-20T09:27:48.459810607",
+        "timestamp": "2026-03-20T11:06:30.636990813",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
