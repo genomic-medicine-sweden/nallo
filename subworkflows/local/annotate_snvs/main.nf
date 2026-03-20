@@ -29,7 +29,6 @@ workflow ANNOTATE_SNVS {
             ch_vcf,
             ch_databases,
         )
-        ch_versions = ch_versions.mix(ECHTVAR_ANNO.out.versions)
     }
 
     // Allows for filtering before annotating with VEP

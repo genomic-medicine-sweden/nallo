@@ -73,7 +73,7 @@
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
         "content": [
             [
-                
+
             ],
             "test.vcf.gz.tbi",
             "b1f695b5afcd85feefe5a564bfbffacf",
@@ -103,7 +103,7 @@
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
             [
-                
+
             ],
             "test.vcf.gz.tbi",
             "e469aa4912440eb7820188c58a7070a2",

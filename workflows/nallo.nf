@@ -51,7 +51,6 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
@@ -319,7 +318,6 @@ workflow NALLO {
             .set { ch_samplesheet_ped_in }
 
         SAMPLESHEET_PED ( ch_samplesheet_ped_in )
-        ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
 
         SAMPLESHEET_PED.out.ped
             .collect()
@@ -747,7 +745,6 @@ workflow NALLO {
                 .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
                 .groupTuple()
         )
-        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
         // Give PED file SNV meta so they can be joined later in the subworkflow.
         // Since we don't always have matching number of ped files and call regions
@@ -805,11 +802,9 @@ workflow NALLO {
         )
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.sex_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
     }

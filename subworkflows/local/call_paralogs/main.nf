@@ -1,7 +1,7 @@
 include { BCFTOOLS_MERGE                 } from '../../../modules/nf-core/bcftools/merge/main'
 include { BCFTOOLS_QUERY                 } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_samples_haplotypes_file/main'
+include { GAWK                           } from '../../../modules/nf-core/gawk/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
 include { findKeysForValue } from '../utils_nfcore_nallo_pipeline/main.nf'
@@ -41,13 +41,14 @@ workflow CALL_PARALOGS {
      *
      * We add the biological sample name as a prefix to the paraphase identifier (e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1), since bcftools merge requires all sample names across input VCFs to be unique.
      */
-    CREATE_SAMPLES_HAPLOTYPES_FILE(
-        BCFTOOLS_QUERY.out.output
+    GAWK(
+        BCFTOOLS_QUERY.out.output,
+        [],
+        false,
     )
-    ch_versions = ch_versions.mix(CREATE_SAMPLES_HAPLOTYPES_FILE.out.versions)
 
     paraphase_vcf_tbis
-        .join(CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples, failOnMismatch: true, failOnDuplicate: true)
+        .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bcftools_reheader_in }
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])
