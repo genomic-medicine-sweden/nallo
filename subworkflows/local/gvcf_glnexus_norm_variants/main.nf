@@ -20,7 +20,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_versions = channel.empty()
+    ch_versions           = channel.empty()
     ch_merged_family_gvcf = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
