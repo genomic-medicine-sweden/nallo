@@ -55,7 +55,6 @@ workflow HIPHASE {
         fai,
         true,
     )
-    ch_versions = ch_versions.mix(RUN_HIPHASE.out.versions)
 
     // Prepare haplotagged BAM output by matching with original metadata
     // The HiPhase output channels only contain family IDs
