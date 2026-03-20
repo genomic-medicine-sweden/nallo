@@ -145,7 +145,7 @@
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            56,
+            55,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -255,9 +255,6 @@
                     "bcftools": 1.23,
                     "svdb": "2.8.4"
                 },
-                "TABIX_VCFEXPRESS": {
-                    "tabix": 1.21
-                },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
@@ -353,7 +350,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-20T09:40:41.218877425",
+        "timestamp": "2026-03-20T17:32:41.375225521",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -844,7 +841,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            192,
+            189,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -1104,9 +1101,6 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
-                "TABIX_VCFEXPRESS": {
-                    "tabix": 1.21
-                },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
                 },
@@ -1341,7 +1335,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-20T09:41:34.663033468",
+        "timestamp": "2026-03-20T17:33:39.57350565",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
