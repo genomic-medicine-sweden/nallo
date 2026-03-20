@@ -32,11 +32,11 @@
                     "bedtools": "2.31.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.2.0,
+                    "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.2.0,
+                    "addmostseverepli": "1.2.0",
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -145,7 +145,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T09:37:14.88326116"
+        "timestamp": "2026-03-20T14:38:39.429225382"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -359,7 +359,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-04T11:30:50.917284249"
+        "timestamp": "2026-03-20T14:41:44.320425798"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -457,10 +457,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T08:59:37.115321855"
+        "timestamp": "2026-03-20T14:40:03.712675704"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -520,10 +520,10 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T09:00:05.013305995"
+        "timestamp": "2026-03-20T14:40:41.47969353"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -564,11 +564,11 @@
                     "bedtools": "2.31.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.2.0,
+                    "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.2.0,
+                    "addmostseverepli": "1.2.0",
                     "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
@@ -678,7 +678,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T09:40:56.694026922"
+        "timestamp": "2026-03-20T14:44:07.195568475"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -725,11 +725,11 @@
                     "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.2.0,
+                    "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.2.0,
+                    "addmostseverepli": "1.2.0",
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -850,7 +850,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T09:36:37.090865652"
+        "timestamp": "2026-03-20T14:37:39.478753007"
     },
     "Test family id same as sample id": {
         "content": [
@@ -930,11 +930,11 @@
                     "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.2.0,
+                    "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.2.0,
+                    "addmostseverepli": "1.2.0",
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -1356,7 +1356,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T09:40:20.861611281"
+        "timestamp": "2026-03-20T14:43:17.16825568"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1422,9 +1422,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-02T08:59:06.387875024"
+        "timestamp": "2026-03-20T14:39:25.553468898"
     }
 }
