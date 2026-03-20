@@ -114,12 +114,14 @@
                     "custom/addmostsevereconsequence": {
                         "branch": "master",
                         "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/custom/addmostsevereconsequence/custom-addmostsevereconsequence.diff"
                     },
                     "custom/addmostseverepli": {
                         "branch": "master",
                         "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/custom/addmostseverepli/custom-addmostseverepli.diff"
                     },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",

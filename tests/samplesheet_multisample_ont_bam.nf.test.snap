@@ -74,11 +74,11 @@
                     "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.2.0,
+                    "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.2.0,
+                    "addmostseverepli": "1.2.0",
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
