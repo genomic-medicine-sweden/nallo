@@ -1,0 +1,31 @@
+Changes in component 'nf-core/hificnv'
+Changes in 'hificnv/environment.yml':
+--- modules/nf-core/hificnv/environment.yml
++++ modules/nf-core/hificnv/environment.yml
+@@ -4,4 +4,4 @@
+   - conda-forge
+   - bioconda
+ dependencies:
+-  - "bioconda::hificnv=1.0.1"
++  - "bioconda::hificnv=1.0.0"
+
+Changes in 'hificnv/main.nf':
+--- modules/nf-core/hificnv/main.nf
++++ modules/nf-core/hificnv/main.nf
+@@ -4,8 +4,8 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/b5/b52ca8757ee3bc9f475e50fa148133ba5600fe1523c1f698347ee63adcb5bba7/data':
+-        'community.wave.seqera.io/library/hificnv:1.0.1--b7e433ac6789e2d2' }"
++        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/05/05c750eb4076838e89b8659c261116e1920b4d197aa54944b3ffebc026c39849/data':
++        'community.wave.seqera.io/library/hificnv:1.0.0--21c126b0ae9a5242' }"
+ 
+     input:
+     tuple val(meta) , path(bam), path(bai), path(maf)
+
+'modules/nf-core/hificnv/meta.yml' is unchanged
+'modules/nf-core/hificnv/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/hificnv/tests/nextflow.config' is unchanged
+'modules/nf-core/hificnv/tests/main.nf.test' is unchanged
+************************************************************

@@ -1,38 +1,37 @@
-include { ADD_FOUND_IN_TAG                          } from '../../../modules/local/add_found_in_tag/main'
-include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                             } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
-include { GAWK as CREATE_SAMPLES_FILE               } from '../../../modules/nf-core/gawk/main'
-include { HIFICNV                                   } from '../../../modules/local/pacbio/hificnv'
-include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { ADD_FOUND_IN_TAG                   } from '../../../modules/local/add_found_in_tag/main'
+include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
+include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
+include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
+include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow CALL_SVS {
-
     take:
-    ch_bam_bai                              // channel: [ val(meta), path(bam), path(bai) ]
-    ch_tandem_repeats                       // channel: [ val(meta), path(bed) ]
-    ch_snvs                                 // channel: [ val(meta), path(vcf) ]
-    ch_fasta                                // channel: [ val(meta), path(fasta) ]
-    ch_expected_xy_bed                      // channel: [ val(meta), path(bed) ]
-    ch_expected_xx_bed                      // channel: [ val(meta), path(bed) ]
-    ch_exclude_bed                          // channel: [ val(meta), path(bed) ]
-    sv_callers_to_run                       //    List: [ 'caller1', 'caller2', 'caller3' ]
-    sv_callers_to_merge                     //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority                         //    List: [ 'caller3', 'caller1', 'caller2' ]
-    ch_sv_call_regions                      // channel: [ val(meta), path(bed) ]
-    filter_calls_on_regions                 //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
+    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
+    ch_tandem_repeats // channel: [ val(meta), path(bed) ]
+    ch_snvs // channel: [ val(meta), path(vcf) ]
+    ch_fasta // channel: [ val(meta), path(fasta) ]
+    ch_expected_xy_bed // channel: [ val(meta), path(bed) ]
+    ch_expected_xx_bed // channel: [ val(meta), path(bed) ]
+    ch_exclude_bed // channel: [ val(meta), path(bed) ]
+    sv_callers_to_run //    List: [ 'caller1', 'caller2', 'caller3' ]
+    sv_callers_to_merge //    List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority //    List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_sv_call_regions // channel: [ val(meta), path(bed) ]
+    filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
-    create_hificnv_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_hificnv_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_sawfish_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
 
     main:
     ch_versions = channel.empty()
@@ -41,22 +40,22 @@ workflow CALL_SVS {
     //
     // Call SVs with Severus
     //
-    if(sv_callers_to_run.contains('severus')) {
+    if (sv_callers_to_run.contains('severus')) {
 
-        SEVERUS (
-            ch_bam_bai.map { meta, bam, bai -> [ meta, bam, bai, [], [], [] ] },
-            ch_tandem_repeats
+        SEVERUS(
+            ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], []] },
+            ch_tandem_repeats,
         )
         ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
-        TABIX_SEVERUS (
+        TABIX_SEVERUS(
             SEVERUS.out.all_vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
                 TABIX_SEVERUS.out.gz_index,
-                'severus'
+                'severus',
             )
         )
     }
@@ -64,25 +63,25 @@ workflow CALL_SVS {
     //
     // Call SVs with Sniffles
     //
-    if(sv_callers_to_run.contains('sniffles')) {
+    if (sv_callers_to_run.contains('sniffles')) {
 
-        SNIFFLES (
+        SNIFFLES(
             ch_bam_bai
         )
         ch_versions = ch_versions.mix(SNIFFLES.out.versions)
 
-        CLEAN_SNIFFLES (
+        CLEAN_SNIFFLES(
             SNIFFLES.out.vcf
         )
 
-        BCFTOOLS_SORT (
+        BCFTOOLS_SORT(
             CLEAN_SNIFFLES.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch:true, failOnDuplicate:true),
-                'sniffles'
+                BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true),
+                'sniffles',
             )
         )
     }
@@ -90,39 +89,48 @@ workflow CALL_SVS {
     //
     // Call CNVs with HiFiCNV
     //
-    if(sv_callers_to_run.contains('hificnv')) {
+    if (sv_callers_to_run.contains('hificnv')) {
 
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_hificnv_maf_track) {
             ch_bam_bai
-                .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
-                .map { meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.sex ] }
-                .set { ch_hificnv_input }
-        } else {
+                .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
+                .set { ch_for_hificnv }
+        }
+        else {
             ch_bam_bai
-                .map { meta, bam, bai -> [ meta, bam, bai, [], meta.sex ] }
-                .set { ch_hificnv_input }
+                .map { meta, bam, bai -> [meta, bam, bai, []] }
+                .set { ch_for_hificnv }
         }
 
+        // Select expected copynumber BED based on sex before passing it to the module
+        ch_for_hificnv
+            .combine(ch_expected_xy_bed)
+            .combine(ch_expected_xx_bed)
+            .multiMap { meta, bam, bai, maf, xy_meta, xy_bed, xx_meta, xx_bed ->
+                def expected_cn_meta = meta.sex == 1 ? xy_meta : xx_meta
+                def expected_cn_bed = meta.sex == 1 ? xy_bed : xx_bed
+                bam_bai_maf: [meta, bam, bai, maf]
+                expected_cn: [expected_cn_meta, expected_cn_bed]
+            }
+            .set { ch_hificnv_input }
 
-        HIFICNV (
-            ch_hificnv_input,
+        HIFICNV(
+            ch_hificnv_input.bam_bai_maf,
             ch_fasta,
-            ch_expected_xy_bed,
-            ch_expected_xx_bed,
-            ch_exclude_bed
+            ch_exclude_bed,
+            ch_hificnv_input.expected_cn,
         )
-        ch_versions = ch_versions.mix(HIFICNV.out.versions)
 
-        TABIX_HIFICNV (
+        TABIX_HIFICNV(
             HIFICNV.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.index, failOnMismatch:true, failOnDuplicate:true),
-                'hificnv'
+                HIFICNV.out.vcf.join(TABIX_HIFICNV.out.index, failOnMismatch: true, failOnDuplicate: true),
+                'hificnv',
             )
         )
     }
@@ -130,17 +138,18 @@ workflow CALL_SVS {
     //
     // Call SVs with Sawfish
     //
-    if(sv_callers_to_run.contains('sawfish')) {
+    if (sv_callers_to_run.contains('sawfish')) {
 
-    // Join SNV VCFs into input channels only if we want MAF track
-    // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
+        // Join SNV VCFs into input channels only if we want MAF track
+        // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_sawfish_maf_track) {
             ch_bam_bai
-                .join(ch_snvs, failOnMismatch:true, failOnDuplicate:true)
+                .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
                 .set { ch_bam_vcf_for_sawfish_discover }
-        } else {
+        }
+        else {
             ch_bam_bai
-                .map { meta, bam, bai -> [ meta, bam, bai, [] ] }
+                .map { meta, bam, bai -> [meta, bam, bai, []] }
                 .set { ch_bam_vcf_for_sawfish_discover }
         }
 
@@ -148,20 +157,20 @@ workflow CALL_SVS {
             .combine(ch_expected_xx_bed)
             .combine(ch_expected_xy_bed)
             .multiMap { meta, bam, bai, vcf, xx_meta, xx_bed, xy_meta, xy_bed ->
-                bam_bai: [ meta, bam, bai ]
-                vcf: [ meta, vcf ] // Implicitly empty if we didn't join SNV VCFs
+                bam_bai: [meta, bam, bai]
+                vcf: [meta, vcf]
                 expected_copynumber_bed: meta.sex == 1
-                    ? [ xy_meta, xy_bed ]
-                    : [ xx_meta, xx_bed ]
+                    ? [xy_meta, xy_bed]
+                    : [xx_meta, xx_bed]
             }
             .set { ch_sawfish_discover_input }
 
-        SAWFISH_DISCOVER (
+        SAWFISH_DISCOVER(
             ch_sawfish_discover_input.bam_bai,
             ch_fasta,
             ch_sawfish_discover_input.expected_copynumber_bed,
             ch_sawfish_discover_input.vcf,
-            ch_exclude_bed
+            ch_exclude_bed,
         )
         ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
@@ -169,34 +178,32 @@ workflow CALL_SVS {
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
         // here directly, and skip doing it later with SVDB merging.
         SAWFISH_DISCOVER.out.discover_dir
-            .join(ch_sawfish_discover_input.bam_bai, failOnMismatch:true, failOnDuplicate:true)
+            .join(ch_sawfish_discover_input.bam_bai, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, discover_dir, bam, bai ->
                 def new_meta = force_sawfish_joint_call_single_samples
                     ? meta
-                    : [ id: meta.family_id, family_id: meta.family_id ]
+                    : [id: meta.family_id, family_id: meta.family_id]
 
-                [ new_meta, discover_dir, bam, bai ]
+                [new_meta, discover_dir, bam, bai]
             }
             .groupTuple()
             .multiMap { meta, discover_dirs, bams, bais ->
-                dir: [ meta, discover_dirs ]
-                bam_bai: [ meta, bams, bais ]
+                dir: [meta, discover_dirs]
+                bam_bai: [meta, bams, bais]
             }
             .set { ch_sawfish_jointcall_input }
 
-        SAWFISH_JOINTCALL (
+        SAWFISH_JOINTCALL(
             ch_sawfish_jointcall_input.dir,
             ch_fasta,
             ch_sawfish_jointcall_input.bam_bai,
-            [[],[]]
-
+            [[], []],
         )
 
         ch_sv_calls = ch_sv_calls.mix(
             addCallerToMeta(
-                SAWFISH_JOINTCALL.out.vcf
-                    .join(SAWFISH_JOINTCALL.out.tbi, failOnMismatch:true, failOnDuplicate:true),
-                'sawfish'
+                SAWFISH_JOINTCALL.out.vcf.join(SAWFISH_JOINTCALL.out.tbi, failOnMismatch: true, failOnDuplicate: true),
+                'sawfish',
             )
         )
     }
@@ -204,33 +211,32 @@ workflow CALL_SVS {
     //
     // Post-process SV calls
     //
-    if ( filter_calls_on_regions ) {
+    if (filter_calls_on_regions) {
 
-        BCFTOOLS_VIEW (
+        BCFTOOLS_VIEW(
             ch_sv_calls,
             ch_sv_call_regions.map { _meta, bed -> bed },
             [],
-            []
+            [],
         )
 
-        ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf
-            .join(BCFTOOLS_VIEW.out.tbi, failOnMismatch:true, failOnDuplicate:true)
-
-    } else {
+        ch_sv_calls_filtered = BCFTOOLS_VIEW.out.vcf.join(BCFTOOLS_VIEW.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+    }
+    else {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
     ch_sv_calls_filtered
         .multiMap { meta, vcf, tbi ->
-            vcf: [ meta, vcf, tbi ]
+            vcf: [meta, vcf, tbi]
             sv_caller: meta.sv_caller
         }
         .set { ch_add_found_in_tag_input }
 
     // Annotate with FOUND_IN tag
-    ADD_FOUND_IN_TAG (
+    ADD_FOUND_IN_TAG(
         ch_add_found_in_tag_input.vcf,
-        ch_add_found_in_tag_input.sv_caller
+        ch_add_found_in_tag_input.sv_caller,
     )
     ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
@@ -240,40 +246,40 @@ workflow CALL_SVS {
 
     // Starting with getting the sample name from the VCF
     ADD_FOUND_IN_TAG.out.vcf
-        .join(ADD_FOUND_IN_TAG.out.tbi, failOnMismatch:true, failOnDuplicate:true)
+        .join(ADD_FOUND_IN_TAG.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .branch { meta, _vcf, _tbi ->
-            def callers_needing_reheader = [ 'severus', 'sniffles' ]
+            def callers_needing_reheader = ['severus', 'sniffles']
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)
             no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
         }
         .set { ch_found_in_tagged_vcf }
 
-    BCFTOOLS_QUERY (
+    BCFTOOLS_QUERY(
         ch_found_in_tagged_vcf.to_reheader,
         [],
         [],
-        []
+        [],
     )
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
-    CREATE_SAMPLES_FILE ( BCFTOOLS_QUERY.out.output, [], false )
+    CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
     ch_found_in_tagged_vcf.to_reheader
-        .join( CREATE_SAMPLES_FILE.out.output, failOnMismatch:true, failOnDuplicate:true )
-        .map { meta, vcf, _index, samples -> [ meta, vcf, [], samples ] }
+        .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, vcf, _index, samples -> [meta, vcf, [], samples] }
         .set { ch_bcftools_reheader_input }
 
     // Finally, reheader the VCF with meta.id as the sample name
-    BCFTOOLS_REHEADER (
+    BCFTOOLS_REHEADER(
         ch_bcftools_reheader_input,
-        [[],[]]
+        [[], []],
     )
 
     // Merge the reheadered SV calls with the ones that didn't need reheadering
     BCFTOOLS_REHEADER.out.vcf
-        .join ( BCFTOOLS_REHEADER.out.index, failOnMismatch:true, failOnDuplicate:true )
-        .concat ( ch_found_in_tagged_vcf.no_reheader )
-        .map { meta, vcf, _tbi -> [ [ 'id': meta.family_id, 'sv_caller': meta.sv_caller ], vcf ] }
+        .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
+        .concat(ch_found_in_tagged_vcf.no_reheader)
+        .map { meta, vcf, _tbi -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
         .groupTuple()
         .set { ch_svdb_merge_by_caller_input }
 
@@ -281,10 +287,10 @@ workflow CALL_SVS {
     // HiFiCNV has a different BND distance from the other callers,
     // Sawfish is not really merged (run with --no_intra), unless we are force joint-calling single samples and using SVDB for merging.
     // These options are set in the config-
-    SVDB_MERGE_BY_CALLER (
+    SVDB_MERGE_BY_CALLER(
         ch_svdb_merge_by_caller_input,
         [],
-        true
+        true,
     )
 
     // Then merge the family VCFs for each caller into a single family VCF.
@@ -295,22 +301,23 @@ workflow CALL_SVS {
             sv_callers_to_merge.contains(meta.sv_caller)
         }
         .map { meta, vcf ->
-            [ meta - meta.subMap('sv_caller'), [ meta.sv_caller, vcf ] ]
+            [meta - meta.subMap('sv_caller'), [meta.sv_caller, vcf]]
         }
         .groupTuple(
             sort: { a, b ->
-                caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0]) }
+                caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0])
+            }
         )
         .map { meta, callers_vcfs ->
             def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
-            [ meta, vcf_paths ]
+            [meta, vcf_paths]
         }
         .set { ch_svdb_merge_by_family_input }
 
-    SVDB_MERGE_BY_FAMILY (
+    SVDB_MERGE_BY_FAMILY(
         ch_svdb_merge_by_family_input,
         caller_priority,
-        true
+        true,
     )
 
     emit:
@@ -318,12 +325,11 @@ workflow CALL_SVS {
     family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
     family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions          = ch_versions                  // channel: [ path(versions.yml) ]
-
+    versions          = ch_versions // channel: [ path(versions.yml) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
     ch_caller_calls.map { meta, vcf, tbi ->
-        [ meta + [ sv_caller: sv_caller ], vcf, tbi ]
+        [meta + [sv_caller: sv_caller], vcf, tbi]
     }
 }
