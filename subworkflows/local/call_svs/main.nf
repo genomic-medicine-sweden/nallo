@@ -229,7 +229,7 @@ workflow CALL_SVS {
     }
 
     ch_sv_calls_filtered
-        .multiMap { meta, vcf, tbi ->
+        .multiMap { meta, vcf, _tbi ->
             vcf: [ meta, vcf ]
             sv_caller: meta.sv_caller
         }
