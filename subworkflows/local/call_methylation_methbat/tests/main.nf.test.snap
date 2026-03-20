@@ -8,7 +8,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,22166fd0b12b20db7f9a3e0460794742"
                     ]
                 ],
                 "1": [
@@ -40,10 +40,6 @@
                         },
                         "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
                     ]
-                ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ],
                 "asm_bed": [
                     
@@ -81,61 +77,22 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,22166fd0b12b20db7f9a3e0460794742"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ],
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
+                "#command=methbat profile --input-prefix HG002_pbcpgtools --input-regions methbat_regions.tsv --output-region-profile HG002_methbat_profile.tsv",
+                "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:45:30.175138286"
+        "timestamp": "2026-03-20T16:17:46.681997459"
     },
     "1 sample - unphased": {
         "content": [
@@ -146,7 +103,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,baecc00bb6a89d4a322b5d5fc08e28d4"
                     ]
                 ],
                 "1": [
@@ -166,10 +123,6 @@
                 ],
                 "4": [
                     
-                ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ],
                 "asm_bed": [
                     
@@ -195,61 +148,22 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,baecc00bb6a89d4a322b5d5fc08e28d4"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ],
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
+                "#command=methbat profile --input-prefix HG002_pbcpgtools --input-regions methbat_regions.tsv --output-region-profile HG002_methbat_profile.tsv",
+                "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.003196415987113662\t-0.14415084201288636\t-10.546461703829017\t0\t0\t86\t22\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:45:42.743907961"
+        "timestamp": "2026-03-20T16:17:59.655704665"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -260,7 +174,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4114d8412b0fb8a4eb223d0363add13e"
+                        "HG002_methbat_profile.tsv:md5,be93046bf77eb5d3b7711bd27c759ab7"
                     ]
                 ],
                 "1": [
@@ -292,10 +206,6 @@
                         },
                         "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
                     ]
-                ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ],
                 "asm_bed": [
                     
@@ -333,79 +243,22 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,4114d8412b0fb8a4eb223d0363add13e"
+                        "HG002_methbat_profile.tsv:md5,be93046bf77eb5d3b7711bd27c759ab7"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ],
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "FEMALE"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "MALE"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "FEMALE"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "MALE"
-                ]
+                "#command=methbat profile --input-prefix HG002_pbcpgtools --input-regions methbat_regions.tsv --output-region-profile HG002_methbat_profile.tsv --profile-label MALE --profile-label FEMALE",
+                "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tFEMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.2524077972827565\t0.11794871794871793\t-0.821941753051282\t-30.60943963146014\t65\t0\t0\t18\t8\t9",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.7208090014090252\t0.11794871794871793\t-0.8155868340512821\t-29.104470464990392\t65\t0\t0\t18\t8\t9"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:45:55.566440058"
+        "timestamp": "2026-03-20T16:18:13.730633314"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -505,7 +358,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,e846846f92741a38019856e013065eba"
                     ]
                 ],
                 "1": [
@@ -514,7 +367,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,2ef2b918a550f373a73ec0924b298ae9"
+                        "test.bed:md5,43777b67ae1a088fd036e74057e2af6f"
                     ]
                 ],
                 "2": [
@@ -544,17 +397,13 @@
                         "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
-                ],
                 "asm_bed": [
                     [
                         {
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,2ef2b918a550f373a73ec0924b298ae9"
+                        "test.bed:md5,43777b67ae1a088fd036e74057e2af6f"
                     ]
                 ],
                 "pbcpg_biwgig_combined": [
@@ -590,61 +439,22 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,373a6f7e6f7d4462188247f1c6aeee2e"
+                        "HG002_methbat_profile.tsv:md5,e846846f92741a38019856e013065eba"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ],
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
+                "#command=methbat profile --input-prefix HG002_pbcpgtools --input-regions methbat_regions.tsv --output-region-profile HG002_methbat_profile.tsv --output-asm-bed test.bed",
+                "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:46:08.927006498"
+        "timestamp": "2026-03-20T16:18:27.522011624"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -739,16 +549,13 @@
                         "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
-            },
-            [
-                
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T13:51:26.366029351"
+        "timestamp": "2026-03-20T16:09:54.456285728"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -759,7 +566,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,dc976a26a2b8cb4c0354f66c2e88a5b0"
                     ]
                 ],
                 "1": [
@@ -768,7 +575,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.bed:md5,8f20542f5e005c56a8035f27d1a2887d"
                     ]
                 ],
                 "2": [
@@ -786,17 +593,13 @@
                 "4": [
                     
                 ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
-                ],
                 "asm_bed": [
                     [
                         {
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.bed:md5,8f20542f5e005c56a8035f27d1a2887d"
                     ]
                 ],
                 "pbcpg_biwgig_combined": [
@@ -820,60 +623,21 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_methbat_profile.tsv:md5,9dfd28522c899f1893f11c1c94db647d"
+                        "HG002_methbat_profile.tsv:md5,dc976a26a2b8cb4c0354f66c2e88a5b0"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ],
-            [
-                [
-                    "chrom",
-                    "start",
-                    "end",
-                    "cpg_label",
-                    "summary_label",
-                    "compare_label",
-                    "background_category"
-                ],
-                [
-                    "chr16",
-                    "172876",
-                    "173710",
-                    "",
-                    "Unmethylated",
-                    "HypoMethylated",
-                    "ALL"
-                ],
-                [
-                    "chr20",
-                    "2652400",
-                    "2653100",
-                    "",
-                    "Unmethylated",
-                    "Uncategorized",
-                    "ALL"
-                ]
+                "#command=methbat profile --input-prefix HG002_pbcpgtools --input-regions methbat_regions.tsv --output-region-profile HG002_methbat_profile.tsv --output-asm-bed test.bed",
+                "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.003196415987113662\t-0.14415084201288636\t-10.546461703829017\t0\t0\t86\t22\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:46:21.203584937"
+        "timestamp": "2026-03-20T16:18:43.82868728"
     }
 }

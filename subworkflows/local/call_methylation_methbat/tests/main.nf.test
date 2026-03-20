@@ -72,8 +72,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[2..4] }
+                        .readLines()[2..5]
                 ).match() }
             )
         }
@@ -104,8 +103,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[2..4] }
+                        .readLines()[2..5]
                 ).match() }
             )
         }
@@ -132,8 +130,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[2..4] }
+                        .readLines()[2..5]
                 ).match() }
             )
         }
@@ -160,8 +157,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[2..4] }
+                        .readLines()[2..5]
                 ).match() }
             )
         }
@@ -192,8 +188,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()
-                        .collect { line -> line.split('\t')[2..4] }
+                        .readLines()[2..5]
                 ).match() }
             )
         }

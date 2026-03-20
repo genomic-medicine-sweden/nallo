@@ -106,7 +106,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -166,7 +166,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -227,7 +227,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -282,7 +282,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -337,7 +337,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -396,7 +396,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }
@@ -454,7 +454,7 @@ nextflow_workflow {
                     workflow.out.family_vcf
                         .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
                     },
-                    workflow.out.versions,
+
                 ).match() }
             )
         }

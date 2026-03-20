@@ -181,7 +181,7 @@ nextflow_workflow {
                     path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(3).join('\n').md5(), // VCF4.4 is unsupported by nft-vcf and header is unstable because of timestamp in third line
                     file(workflow.out.phased_family_svs_tbi.get(0).get(1)).name,
                     workflow.out.haplotagged_bam_bai,
-                    workflow.out.versions
+
                 ).match() }
             )
         }
@@ -272,7 +272,7 @@ nextflow_workflow {
                     file(workflow.out.phased_family_svs.get(0).get(1)).name,
                     //file(workflow.out.phased_family_svs_tbi.get(0).get(1)).name,
                     workflow.out.haplotagged_bam_bai,
-                    workflow.out.versions
+
                 ).match() }
             )
         }

@@ -73,7 +73,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -116,7 +115,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -157,7 +155,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -198,7 +195,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -245,7 +241,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     workflow.out.tbi,
                     workflow.out.vcf
                 ).match() }
@@ -300,7 +295,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     workflow.out.tbi,
                     workflow.out.vcf
                 ).match() }

@@ -2,9 +2,6 @@
     "bcf, db, vep_cache, '110', -stub with CADD": {
         "content": [
             [
-                "versions.yml:md5,6bdd1355c6de060367f50ffb5680d786"
-            ],
-            [
                 [
                     {
                         "id": "test"
@@ -21,32 +18,26 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-06T08:43:51.440861305",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:12:15.307696151"
     },
     "bcf, db, vep_cache, '110'": {
         "content": [
-            [
-                "versions.yml:md5,6bdd1355c6de060367f50ffb5680d786"
-            ],
             "test.vcf.gz.tbi",
             "79b414333f42bec2310aecf617bcfe9a",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-06T08:40:14.243499241",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:11:20.508502727"
     },
     "bcf, db, vep_cache, '110', -stub": {
         "content": [
-            [
-                "versions.yml:md5,6bdd1355c6de060367f50ffb5680d786"
-            ],
             [
                 [
                     {
@@ -64,55 +55,46 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-06T08:41:21.044630171",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:12:04.379854857"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
         "content": [
-            [
-
-            ],
             "test.vcf.gz.tbi",
             "b1f695b5afcd85feefe5a564bfbffacf",
             "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-06T08:41:06.6819735",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:11:53.798749249"
     },
     "bcf, db, vep_cache, '110', filter before vep": {
         "content": [
-            [
-                "versions.yml:md5,6bdd1355c6de060367f50ffb5680d786"
-            ],
             "test.vcf.gz.tbi",
             "c8a17d7a333d5fecc7da2dc3f2888cfa",
             "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-06T08:40:31.665897389",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:11:32.497240209"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
-            [
-
-            ],
             "test.vcf.gz.tbi",
             "e469aa4912440eb7820188c58a7070a2",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-03-06T08:40:50.17793606",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:11:43.339682883"
     }
 }

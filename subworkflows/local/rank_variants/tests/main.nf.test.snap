@@ -13,16 +13,36 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "tbi": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "vcf": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ]
             }
         ],
@@ -30,6 +50,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:59:49.264395756"
+        "timestamp": "2026-03-20T16:04:50.627839902"
     }
 }

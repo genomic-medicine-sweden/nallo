@@ -53,14 +53,13 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
                     "486e97b71984395e345a6348edc28eae"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:43:45.841532145"
+        "timestamp": "2026-03-20T16:34:48.095274599"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -86,14 +85,13 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=19, phased=false, phasedAutodetect=false]",
                     "e6807254390d6c6497f8614af9817b0b"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:36:23.095737969"
+        "timestamp": "2026-03-20T16:29:32.440068736"
     },
     "1 sample, 1 family - sawfish": {
         "content": [
@@ -119,14 +117,13 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
                     "2d87079d4ae7fa5020db2a9a6fe3c458"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:37:31.789282446"
+        "timestamp": "2026-03-20T16:30:17.588276162"
     },
     "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
         "content": [
@@ -162,14 +159,13 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=86, phased=false, phasedAutodetect=false]",
                     "baef7b9ae0dddd2db77d698955df2e43"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:40:54.382662665"
+        "timestamp": "2026-03-20T16:32:59.595825384"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -225,14 +221,13 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=143, phased=false, phasedAutodetect=false]",
                     "e0ab1f2fc63f59df0e2ab4d8b56414e"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:39:55.955340916"
+        "timestamp": "2026-03-20T16:32:15.372105474"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -423,14 +418,13 @@
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
                     "a52e1cdc808aeda14587d34e4d24fabc"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:42:16.096795354"
+        "timestamp": "2026-03-20T16:33:54.20708663"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -456,14 +450,13 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
                     "f89d09a2ad82d817fb991494c9469e46"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:38:42.415155988"
+        "timestamp": "2026-03-20T16:31:15.976016245"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [

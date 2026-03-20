@@ -28,14 +28,13 @@
                     "HG002_PacBio_Revio_haplotagged.bam:md5,b8d3b10371654d7310a3bf9bf6f77583",
                     "HG002_PacBio_Revio_haplotagged.bam.bai:md5,7659d32c5be819917f8d9aa13c38c48c"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:52:26.785088521"
+        "timestamp": "2026-03-20T16:42:27.981672941"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -236,14 +235,13 @@
                     "HG003_PacBio_Revio_haplotagged.bam:md5,c1e36992605d588cfb79245579bcb1a7",
                     "HG003_PacBio_Revio_haplotagged.bam.bai:md5,3ec21ed66acec7860764d8846c4ff430"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:52:51.078745147"
+        "timestamp": "2026-03-20T16:42:49.468594441"
     },
     "2 samples - SNVs only": {
         "content": [

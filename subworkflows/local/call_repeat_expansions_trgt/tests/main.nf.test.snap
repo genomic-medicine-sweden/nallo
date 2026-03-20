@@ -3,14 +3,13 @@
         "content": [
             "5c3fc288ebd04e65c9b1e88a712b4d46",
             "c72f00b749b4ef8192165571815e5f3a",
-            "30ba267e3b89ce97d0df96640b22d265",
-            null
+            "30ba267e3b89ce97d0df96640b22d265"
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T13:56:58.23131483"
+        "timestamp": "2026-03-20T16:24:37.991666378"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [

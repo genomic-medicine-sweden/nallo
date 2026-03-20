@@ -8,7 +8,7 @@ process SAMTOOLS_MERGE {
         : 'community.wave.seqera.io/library/htslib_samtools:1.23.1--5b6bb4ede7e612e5'}"
 
     input:
-    tuple val(meta), path(input_files, stageAs: "?/*"), path(index_files, stageAs: "?/*")
+    tuple val(meta), path(input_files), path(index_files)
     tuple val(meta2), path(fasta), path(fai), path(gzi)
 
     output:

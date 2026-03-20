@@ -28,14 +28,13 @@
                     "HG002_haplotagged.bam:md5,3ce8e6897093063695a8f5d0df304215",
                     "HG002_haplotagged.bam.bai:md5,c90c2460b58ee4c9fdfca676ec635734"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:54:44.243673048"
+        "timestamp": "2026-03-20T16:46:38.537624223"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -279,14 +278,13 @@
                     "HG003_haplotagged.bam:md5,c04b2be0cb680741e254dd8bc1f9b429",
                     "HG003_haplotagged.bam.bai:md5,2bf94ca0aaf8a40306f6857879c848bb"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:55:03.478940344"
+        "timestamp": "2026-03-20T16:47:04.007899636"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -527,7 +525,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:54:06.480026919"
+        "timestamp": "2026-03-20T17:14:29.845892307"
     },
     "2 samples - SNVs only - stub": {
         "content": [

@@ -140,7 +140,6 @@
     },
     "2 samples - SNVs + SVs": {
         "content": [
-            null,
             [
                 [
                     {
@@ -264,11 +263,10 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:58:14.581837656"
+        "timestamp": "2026-03-20T16:51:08.139135371"
     },
     "2 samples - SNVs only": {
         "content": [
-            null,
             [
                 [
                     {
@@ -392,7 +390,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:57:52.343361035"
+        "timestamp": "2026-03-20T16:50:40.433092561"
     },
     "2 samples - SNVs only - stub": {
         "content": [

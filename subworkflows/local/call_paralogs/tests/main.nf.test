@@ -63,7 +63,7 @@ nextflow_workflow {
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.versions
+
                 ).match() }
             )
         }
@@ -103,7 +103,7 @@ nextflow_workflow {
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.versions
+
                 ).match() }
             )
         }
@@ -160,7 +160,7 @@ nextflow_workflow {
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
                     workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.versions
+
                 ).match() }
             )
         }

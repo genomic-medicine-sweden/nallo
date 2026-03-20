@@ -112,7 +112,7 @@ nextflow_workflow {
                     }
                 },
                 { assert snapshot(
-                    workflow.out.versions,
+
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,
@@ -233,7 +233,7 @@ nextflow_workflow {
                     }
                 },
                 { assert snapshot(
-                    workflow.out.versions,
+
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,

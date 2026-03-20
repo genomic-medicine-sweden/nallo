@@ -60,7 +60,7 @@ nextflow_workflow {
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     bam(workflow.out.sample_bam.get(0).get(1), stringency: 'silent').getReadsMD5(),
-                    workflow.out.versions,
+
                 ).match() }
             )
         }

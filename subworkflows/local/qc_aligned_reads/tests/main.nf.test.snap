@@ -38,14 +38,13 @@
                     },
                     "test.mosdepth.region.dist.txt:md5,f7f8e42619aabd36a34bfd8db78c7a73"
                 ]
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:57:23.126926243"
+        "timestamp": "2026-03-20T16:50:02.932061218"
     },
     "bam, no bed -stub": {
         "content": [
@@ -248,13 +247,12 @@
             ],
             [
                 
-            ],
-            null
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T14:57:13.051328205"
+        "timestamp": "2026-03-20T16:49:48.439277479"
     }
 }
