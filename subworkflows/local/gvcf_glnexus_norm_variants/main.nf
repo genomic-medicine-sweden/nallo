@@ -8,7 +8,6 @@ include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
 include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'
-include { TABIX_BGZIP                                } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
@@ -77,14 +76,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_vcfexpress_prelude,
     )
 
-    TABIX_BGZIP {
-        VCFEXPRESS.out.vcf
-    }
-
-    ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
-
     // Remove added caller information in meta
-    TABIX_BGZIP.out.output
+    VCFEXPRESS.out.vcf
         .map { meta, vcf ->
             [meta - meta.subMap('sv_caller'), vcf, []]
         }

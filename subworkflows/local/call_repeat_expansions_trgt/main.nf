@@ -5,7 +5,6 @@ include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/mai
 include { BCFTOOLS_SORT    } from '../../../modules/nf-core/bcftools/sort/main'
 include { TRGT_MERGE       } from '../../../modules/nf-core/trgt/merge/main'
 include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
-include { TABIX_BGZIP      } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow CALL_REPEAT_EXPANSIONS_TRGT {
     take:
@@ -60,15 +59,9 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         ch_vcfexpress_prelude
     )
 
-    TABIX_BGZIP {
-        VCFEXPRESS.out.vcf
-    }
-
-    ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
-
     // Sort and index bcf
     BCFTOOLS_SORT(
-        TABIX_BGZIP.out.output
+        VCFEXPRESS.out.vcf
     )
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop

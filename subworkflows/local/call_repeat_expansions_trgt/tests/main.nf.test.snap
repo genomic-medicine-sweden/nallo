@@ -5,14 +5,13 @@
             "c72f00b749b4ef8192165571815e5f3a",
             "30ba267e3b89ce97d0df96640b22d265",
             [
-                "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                "versions.yml:md5,abbbfcc5b19373ac01461ec76c011bb3"
+                "versions.yml:md5,257faea8ddb340789b58647c9b96408c"
             ]
         ],
-        "timestamp": "2026-03-19T13:12:37.384017994",
+        "timestamp": "2026-03-19T17:04:42.699037928",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.0"
         }
     },
     "[bam, bai], fasta, fai, bed - stub": {
@@ -85,8 +84,7 @@
                     ]
                 ],
                 "6": [
-                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,abbbfcc5b19373ac01461ec76c011bb3"
+                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c"
                 ],
                 "family_tbi": [
                     [
@@ -155,15 +153,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,abbbfcc5b19373ac01461ec76c011bb3"
+                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c"
                 ]
             }
         ],
-        "timestamp": "2026-03-19T13:11:13.467345534",
+        "timestamp": "2026-03-19T17:03:58.769638766",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.0"
         }
     }
 }

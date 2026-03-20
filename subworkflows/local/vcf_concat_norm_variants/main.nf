@@ -1,7 +1,6 @@
 include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_SINGLESAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { VCFEXPRESS                                  } from '../../../modules/nf-core/vcfexpress/main'
-include { TABIX_BGZIP                                } from '../../../modules/nf-core/tabix/bgzip/main'
 
 //
 // Workflow to concatenate and normalize variants
@@ -32,14 +31,8 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         ch_vcfexpress_prelude
     )
 
-    TABIX_BGZIP {
-        VCFEXPRESS.out.vcf
-    }
-
-    ch_versions = ch_versions.mix(TABIX_BGZIP.out.versions)
-
     // Remove added caller information in meta
-    TABIX_BGZIP.out.output
+    VCFEXPRESS.out.vcf
         .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
         }
         .set { ch_bcftools_norm_input }

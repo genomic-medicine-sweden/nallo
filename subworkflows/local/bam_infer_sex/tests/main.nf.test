@@ -1,0 +1,133 @@
+nextflow_workflow {
+
+    name "Test Subworkflow BAM_INFER_SEX"
+    script "../main.nf"
+    workflow "BAM_INFER_SEX"
+    config "./nextflow.config"
+
+    setup {
+            run("GUNZIP") {
+                script "../../../../modules/nf-core/gunzip/main.nf"
+                process {
+                    """
+                    input[0] = [
+                        [ id:'test' ],
+                        file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                    ]
+                    """
+                }
+            }
+
+            run("SAMTOOLS_FAIDX") {
+                script "../../../../modules/nf-core/samtools/faidx/main.nf"
+                process {
+                    """
+                    input[0] = GUNZIP.out.gunzip
+                    input[1] = [[],[]]
+                    input[2] = false
+                    """
+                }
+
+            }
+/*
+            run("SAMPLESHEET_PED") {
+
+            }
+
+            run("MINIMAP2_ALIGN") {
+                script "../../../../modules/nf-core/minimap2/align/main.nf"
+                process {
+                        tuple val(meta), path(reads)
+                        tuple val(meta2), path(reference)
+                        val bam_format
+                        val bam_index_extension
+                        val cigar_paf_format
+                        val cigar_bam
+                    """
+                    input[0] = [
+                        [ id:'test' ],
+                        file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                    ]
+                    """
+                }
+
+            }
+    }
+
+    ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
+    ch_fasta          // channel: [ val(meta), path(fasta) ]
+    ch_fai            // channel: [ val(meta), path(fai) ]
+    ch_somalier_sites // channel: [ val(meta), path(somalier_sites_vcf) ]
+    ch_ped            // channel: [ val(meta), path(ped) ]
+*/
+    }
+
+    test("[bam, bai], fasta, fai, somalier_sites, ped") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = channel.of([
+                    [ id: 'somalier_sites' ],
+                    file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
+                ])
+                input[4] = channel.of([
+                    [ id:'ped_file' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/vcf/FAM.ped', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
+                    workflow.out.versions,
+                ).match() }
+            )
+        }
+    }
+
+    test("[bam, bai], fasta, fai, somalier_sites, ped - stub") {
+
+        options '-stub'
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = channel.of([
+                    [ id: 'somalier_sites' ],
+                    file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
+                ])
+                input[4] = channel.of([
+                    [ id:'ped_file' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/vcf/FAM.ped', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

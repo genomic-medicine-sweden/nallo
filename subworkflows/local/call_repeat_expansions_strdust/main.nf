@@ -1,6 +1,6 @@
 include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
 include { STRDUST          } from '../../../modules/nf-core/strdust/'
-include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
 include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
@@ -28,12 +28,12 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         ch_vcfexpress_prelude
     )
 
-    TABIX_BGZIPTABIX (
+    TABIX_TABIX (
         VCFEXPRESS.out.vcf
     )
-    ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
 
-    TABIX_BGZIPTABIX.out.gz_index
+    VCFEXPRESS.out.vcf
+        .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .set { ch_bcftools_merge_in }

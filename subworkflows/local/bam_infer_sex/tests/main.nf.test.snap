@@ -1,0 +1,99 @@
+{
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam",
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam.bai"
+                    ]
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam",
+                        "/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/testdata/HG002_ONT.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    
+                ],
+                "somalier_samples": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-19T15:53:22.465726461",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    }
+}

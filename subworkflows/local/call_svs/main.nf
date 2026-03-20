@@ -12,7 +12,7 @@ include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-
 include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_VCFEXPRESS      } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { TABIX_TABIX as TABIX_VCFEXPRESS           } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VCFEXPRESS                                } from '../../../modules/nf-core/vcfexpress/main'
 
@@ -238,14 +238,13 @@ workflow CALL_SVS {
         VCFEXPRESS.out.vcf
     )
 
-    ch_versions = ch_versions.mix(TABIX_VCFEXPRESS.out.versions)
-
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    TABIX_VCFEXPRESS.out.gz_index
+    VCFEXPRESS.out.vcf
+        .join(TABIX_VCFEXPRESS.out.index, failOnMismatch:true, failOnDuplicate:true)
         .branch { meta, _vcf, _tbi ->
             def callers_needing_reheader = [ 'severus', 'sniffles' ]
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)
