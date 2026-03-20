@@ -12,8 +12,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 
     main:
-    ch_versions = channel.empty()
-
     BCFTOOLS_CONCAT(
         ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] },
     )
@@ -23,7 +21,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         BCFTOOLS_CONCAT.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         variant_caller,
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     BCFTOOLS_NORM_SINGLESAMPLE(
         ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
@@ -34,5 +31,4 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
     index               = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
     bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf                                                    // channel: [ val(meta), path(vcf) ]
-    versions            = ch_versions                                                                // channel: [ path(versions.yml) ]
 }

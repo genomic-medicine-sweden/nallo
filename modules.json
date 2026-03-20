@@ -391,7 +391,7 @@
                     },
                     "tagbam": {
                         "branch": "master",
-                        "git_sha": "d7accc83ceb8eee42e69bcd68e207a41e2ee9824",
+                        "git_sha": "5cfad39c15fa7be888bf9a7f1bcc97d9dc69e62a",
                         "installed_by": ["modules"]
                     },
                     "tiddit/cov": {

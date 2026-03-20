@@ -151,7 +151,6 @@ workflow NALLO {
             params.fasta.endsWith('.gz'),                           // should we unzip fasta
             params.vep_cache && params.vep_cache.endsWith("tar.gz") // should we untar vep cache
         )
-        ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
 
         // Gather indices
         ch_fasta = PREPARE_REFERENCES.out.fasta
@@ -210,7 +209,6 @@ workflow NALLO {
             true,
             false
         )
-        ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
 
         // contains all FASTQ files, including those not converted
         CONVERT_INPUT_BAMS.out.fastq
@@ -229,7 +227,6 @@ workflow NALLO {
             ch_fai,
             cram_output
         )
-        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
     /*
@@ -354,7 +351,6 @@ workflow NALLO {
             ch_sambamba_regions,
             !params.skip_sambamba_depth,
         )
-        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]) )
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics } )
         ch_multiqc_files = ch_multiqc_files.mix( QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics } )
@@ -372,7 +368,6 @@ workflow NALLO {
             ch_fai,
             cram_output
         )
-        ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
 
     /*
@@ -399,7 +394,6 @@ workflow NALLO {
             !params.skip_snv_calling,
             params.snv_calling_processes
         )
-        ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
@@ -446,7 +440,6 @@ workflow NALLO {
             ch_fai,
             params.snv_caller,
         )
-        ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
         CALL_SNVS.out.vcf
             .map { meta, vcf ->
@@ -465,7 +458,6 @@ workflow NALLO {
             ch_fasta,
             params.snv_caller,
         )
-        ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
         // These contains RefCalls
         sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf

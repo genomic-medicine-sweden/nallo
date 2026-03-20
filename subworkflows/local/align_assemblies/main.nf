@@ -14,8 +14,6 @@ workflow ALIGN_ASSEMBLIES {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions = channel.empty()
-
     MINIMAP2_INDEX (
         ch_fasta
     )
@@ -39,7 +37,6 @@ workflow ALIGN_ASSEMBLIES {
     TAGBAM (
         SAMTOOLS_VIEW.out.bam
     )
-    ch_versions = ch_versions.mix(TAGBAM.out.versions)
 
     TAGBAM.out.bam
         .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
@@ -62,5 +59,4 @@ workflow ALIGN_ASSEMBLIES {
     emit:
     bam      = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
     bai      = SAMTOOLS_MERGE.out.bai // channel: [ val(meta), path(bai) ]
-    versions = ch_versions            // channel: [ versions.yml ]
 }

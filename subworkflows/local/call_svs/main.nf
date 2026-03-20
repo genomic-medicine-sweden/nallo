@@ -35,7 +35,6 @@ workflow CALL_SVS {
     create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
 
     main:
-    ch_versions = channel.empty()
     ch_sv_calls = channel.empty()
 
     //
@@ -47,7 +46,6 @@ workflow CALL_SVS {
             ch_bam_bai.map { meta, bam, bai -> [ meta, bam, bai, [], [], [] ] },
             ch_tandem_repeats
         )
-        ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
         TABIX_SEVERUS (
             SEVERUS.out.all_vcf
@@ -69,7 +67,6 @@ workflow CALL_SVS {
         SNIFFLES (
             ch_bam_bai
         )
-        ch_versions = ch_versions.mix(SNIFFLES.out.versions)
 
         CLEAN_SNIFFLES (
             SNIFFLES.out.vcf

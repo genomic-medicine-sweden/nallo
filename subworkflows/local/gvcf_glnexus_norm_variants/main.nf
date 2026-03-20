@@ -18,7 +18,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
 
     main:
-    ch_versions           = channel.empty()
     ch_merged_family_gvcf = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
@@ -66,7 +65,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_merged_family_gvcf.map { meta, vcf -> [meta, vcf, []] },
         variant_caller,
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
@@ -77,5 +75,4 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     emit:
     vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
     index    = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    versions = ch_versions                                                              // channel: [ path(versions.yml) ]
 }

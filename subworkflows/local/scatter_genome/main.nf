@@ -13,7 +13,6 @@ workflow SCATTER_GENOME {
     split_n            // integer: split bed into n regions
 
     main:
-    ch_versions = channel.empty()
     ch_bed = channel.empty()
     ch_bed_intervals = channel.empty()
 
@@ -84,5 +83,4 @@ workflow SCATTER_GENOME {
     emit:
     bed           = ch_bed            // channel: [ val(meta), path(bed) ]
     bed_intervals = ch_bed_intervals  // channel: [ path(bed), val(num_intervals) ]
-    versions      = ch_versions       // channel: [ versions.yml ]
 }
