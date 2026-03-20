@@ -1344,7 +1344,7 @@
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
-                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.bedgraph",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw",
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.combined.bw",

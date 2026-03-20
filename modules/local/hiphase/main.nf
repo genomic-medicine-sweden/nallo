@@ -29,7 +29,7 @@ process HIPHASE {
     tuple val(meta), path("*.bam")                  , emit: bams         , optional: true
     tuple val(meta), path("*.bam.bai")              , emit: bais         , optional: true
     tuple val(meta), path("*.bam.csi")              , emit: read_csis    , optional: true
-    path "versions.yml"                             , emit: versions
+    tuple val("${task.process}"), val('hiphase'), eval("hiphase --version | sed 's/.* //g'"), emit: versions_hiphase, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -95,11 +95,6 @@ process HIPHASE {
         ${bam_args} \\
         ${snv_args} \\
         ${sv_args}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        hiphase: \$( hiphase -V | sed 's/hiphase //g')
-    END_VERSIONS
     """
 
     stub:
@@ -115,11 +110,5 @@ process HIPHASE {
 
     ${sv_command}
     ${sv_tbi_command}
-
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        hiphase: \$( hiphase -V | sed 's/hiphase //g')
-    END_VERSIONS
     """
 }

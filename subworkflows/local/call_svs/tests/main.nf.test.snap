@@ -68,16 +68,14 @@
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T08:15:09.114809225"
+        "timestamp": "2026-03-19T12:43:30.036666184"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -191,16 +189,14 @@
                 "versions.yml:md5,724dca85aa4c092f5634625403a4e7ab",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-04T05:09:34.334147549"
+        "timestamp": "2026-03-19T12:41:48.917249456"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -270,16 +266,14 @@
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T08:11:57.002634366"
+        "timestamp": "2026-03-19T12:41:09.700753305"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -356,9 +350,7 @@
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
                 ],
                 "family_caller_tbi": [
                     [
@@ -432,9 +424,7 @@
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                     "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                    "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                    "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
                 ]
             }
         ],
@@ -442,7 +432,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T08:06:01.513185322"
+        "timestamp": "2026-03-19T13:00:17.208335733"
     },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
         "content": [
@@ -512,16 +502,14 @@
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
                 "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9",
-                "versions.yml:md5,f2096d78729c293d0b952cf4070e62e9"
+                "versions.yml:md5,cff333ea42eb748bf5dcc2c2a7d59c5f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-19T08:14:02.562046745"
+        "timestamp": "2026-03-19T12:42:37.678070875"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [

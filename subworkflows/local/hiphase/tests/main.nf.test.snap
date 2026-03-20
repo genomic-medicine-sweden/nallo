@@ -30,14 +30,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T10:03:39.270275787"
+        "timestamp": "2026-03-19T17:08:18.303408863"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -78,7 +78,7 @@
                     
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     
@@ -116,15 +116,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:38:45.811211088"
+        "timestamp": "2026-03-19T17:09:23.334654581"
     },
     "1 sample - SNVs + SVs - stub": {
         "content": [
@@ -165,7 +165,7 @@
                     
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     
@@ -203,15 +203,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:38:26.611558369"
+        "timestamp": "2026-03-19T17:09:08.973812506"
     },
     "2 samples - SNVs + SVs": {
         "content": [
@@ -252,14 +252,14 @@
                 ]
             ],
             [
-                "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T10:03:55.419785314"
+        "timestamp": "2026-03-19T17:08:36.111172402"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -305,7 +305,7 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -348,15 +348,15 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:36:32.822492927"
+        "timestamp": "2026-03-19T17:07:58.617387997"
     },
     "1 sample - SNVs only - stub": {
         "content": [
@@ -387,7 +387,7 @@
                     
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     
@@ -415,15 +415,15 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:37:50.393351658"
+        "timestamp": "2026-03-19T17:08:46.069584251"
     },
     "1 sample - SNVs only": {
         "content": [
@@ -461,7 +461,7 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -496,15 +496,15 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:36:11.582415837"
+        "timestamp": "2026-03-19T17:07:46.417035546"
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -535,7 +535,7 @@
                     
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ],
                 "haplotagged_bam_bai": [
                     
@@ -563,14 +563,14 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+                    
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:38:07.350686834"
+        "timestamp": "2026-03-19T17:08:56.234910558"
     }
 }
