@@ -413,33 +413,23 @@ workflow NALLO {
         // Mix the nuclear and mitochondrial genome bed files back together to feed to CALL_SNVS
         if (params.mitochondrial_caller == "deepvariant") {
 
-            SCATTER_GENOME.out.bed_mt
-                .filter { _meta, bed -> bed.size() > 0 }
-                .map { meta, bed -> [meta, bed] }
-                .set { ch_bed_mt_to_mix }
+            SCATTER_GENOME.out.bed_mitochondrial
+                .filter { _meta, bed, _num_intervals -> bed.size() > 0 }
+                .set { ch_bed_mitochondrial_to_mix }
 
-            // Channel to add the total number of intervals to ch_bed_intervals, for groupKey in CALL_SNVS
             SCATTER_GENOME.out.bed_nuclear_intervals
-                .map { _meta, bed, _intervals -> bed }
-                .mix(ch_bed_mt_to_mix.map { _meta, bed -> bed })
+                .mix(SCATTER_GENOME.out.bed_mitochondrial)
+                .map { _meta, bed, _num_intervals -> bed }
                 .collect()
                 .map { beds -> beds.size() }
                 .set { num_bed_files_for_snv_calling }
 
             SCATTER_GENOME.out.bed_nuclear_intervals
-                .map { meta, bed, _intervals -> [meta, bed] }
+                .mix(ch_bed_mitochondrial_to_mix)
+                .map { meta, bed, _num_intervals -> [meta, bed] }
                 .combine(num_bed_files_for_snv_calling)
                 .set { ch_bed_intervals }
 
-            ch_bed_mt_to_mix
-                .map { meta, bed -> [meta.subMap('genome'), bed] }
-                .combine(num_bed_files_for_snv_calling)
-                .set { ch_bed_mt }
-
-            // Mix the mitochondrial and nuclear channels
-            ch_bed_intervals
-                .mix(ch_bed_mt)
-                .set { ch_bed_intervals }
         }
         else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
