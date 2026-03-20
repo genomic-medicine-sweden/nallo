@@ -6,7 +6,7 @@ include { BCFTOOLS_QUERY                            } from '../../../modules/nf-
 include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
 include { GAWK as CREATE_SAMPLES_FILE               } from '../../../modules/nf-core/gawk/main'
-include { HIFICNV                                   } from '../../../modules/local/pacbio/hificnv'
+include { HIFICNV                                   } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
 include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
