@@ -3,7 +3,9 @@
 //
 
 include { BCFTOOLS_PLUGINFIXPLOIDY                          } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
+include { BCFTOOLS_VIEW                                     } from '../../../modules/nf-core/bcftools/view/main'
 include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
+include { BEDTOOLS_SLOP                                     } from '../../../modules/nf-core/bedtools/slop/main'
 include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
 
@@ -17,6 +19,7 @@ workflow CALL_SNVS {
     ch_sentieon_female_diploid_bed  // channel: [mandatory] [ val(meta), path(female_diploid_bed) ]
     ch_sentieon_male_diploid_bed    // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
     ch_sentieon_male_haploid_bed    // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
+    ch_sentieon_contig_sizes        // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
     variant_caller                  // string: which variant caller to use, e.g. "deepvariant"
     sentieon_tech                   // string: which sequencing tech produced the reads (sentieon)
 
@@ -52,16 +55,29 @@ workflow CALL_SNVS {
             .map { meta, _bam, _bai, bed ->
                 [ meta, bed ]
             }
+            .set { ch_bed }
+
+        // Sentieon will call indels outside of the passed call regions if indel is located at
+        // a call region/scatter boundary (e.g. around centromeres). Padding the call regions
+        // ensures the duplicated variant ends up with an identical call in both affected regions.
+        // The duplicate will be removed later in the workflow by re-intersecting the scatter VCFs
+        // with the unpadded call regions.
+        BEDTOOLS_SLOP(
+            ch_bed,
+            ch_sentieon_contig_sizes.map { _meta, sizes -> sizes }
+        )
+
+        BEDTOOLS_SLOP.out.bed
             .branch {
                 meta, _bed ->
                 male:   meta.sex == 1
                 female: meta.sex == 2
             }
-            .set { ch_bed }
+            .set { ch_bed_branched_on_ploidy }
 
-        ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed.male, "diploid")
-        ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed.female, "diploid")
-        ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed.male, "haploid")
+        ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed_branched_on_ploidy.male, "diploid")
+        ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed_branched_on_ploidy.female, "diploid")
+        ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed_branched_on_ploidy.male, "haploid")
 
         ch_male_diploid_intersect_in
             .mix(ch_female_diploid_intersect_in)
@@ -94,7 +110,7 @@ workflow CALL_SNVS {
                 }
             }
             .mix(
-                ch_bed.female.map { meta, _bed -> [ meta, [] ] }
+                ch_bed_branched_on_ploidy.female.map { meta, _bed -> [ meta, [] ] }
             )
             .set { ch_haploid_regions_out }
 
@@ -128,10 +144,33 @@ workflow CALL_SNVS {
             []
         )
 
-        ch_vcf        = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-        ch_index      = BCFTOOLS_PLUGINFIXPLOIDY.out.tbi
-        ch_gvcf       = DNASCOPE_LONGREAD.out.gvcf
-        ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
+        makeRestrictedCallChannel(BCFTOOLS_PLUGINFIXPLOIDY.out.vcf, BCFTOOLS_PLUGINFIXPLOIDY.out.tbi, ch_bed, "vcf")
+            .mix(makeRestrictedCallChannel(DNASCOPE_LONGREAD.out.gvcf, DNASCOPE_LONGREAD.out.gvcf_tbi, ch_bed, "gvcf"))
+            .set { ch_calls_bed }
+
+        ch_calls_bed
+            .multiMap { meta, vcf, tbi, scatter_call_regions_bed ->
+                vcf_tbi: [ meta, vcf, tbi ]
+                regions: [ scatter_call_regions_bed ]
+            }
+            .set { ch_bcftools_view_in }
+
+        // Re-intersect VCFs called using padded scatter regions with unpadded call
+        // regions to remove any duplicates located at intra-chromosome region boundaries
+        BCFTOOLS_VIEW(
+            ch_bcftools_view_in.vcf_tbi,
+            ch_bcftools_view_in.regions,
+            [],
+            [],
+        )
+
+        ch_vcf_out = branchChannelOnVcfType(BCFTOOLS_VIEW.out.vcf)
+        ch_tbi_out = branchChannelOnVcfType(BCFTOOLS_VIEW.out.tbi)
+
+        ch_vcf        = ch_vcf_out.vcf
+        ch_index      = ch_tbi_out.vcf
+        ch_gvcf       = ch_vcf_out.gvcf
+        ch_gvcf_index = ch_tbi_out.gvcf
     }
 
     emit:
@@ -148,5 +187,26 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         .combine(ch_bed)
         .map { sentieon_regions, meta, sample_call_regions ->
             [ meta + [ ploidy: ploidy_label ], sample_call_regions, sentieon_regions ]
+        }
+}
+
+def makeRestrictedCallChannel(ch_vcf, ch_tbi, ch_original_call_regions, vcf_type) {
+    ch_vcf
+        .join(ch_tbi, failOnDuplicate: true, failOnMismatch: true)
+        .join(ch_original_call_regions, failOnDuplicate: true, failOnMismatch: true)
+        .map {
+            meta, vcf, tbi, bed ->
+            [ meta +  [ vcf_type: vcf_type ], vcf, tbi, bed ]
+        }
+}
+
+def branchChannelOnVcfType(ch_input_channel) {
+    ch_input_channel
+        .branch {
+            meta, remainder ->
+            vcf: meta.vcf_type == "vcf"
+            [ meta - meta.subMap('vcf_type'), remainder ]
+            gvcf: meta.vcf_type == "gvcf"
+            [ meta - meta.subMap('vcf_type'), remainder ]
         }
 }

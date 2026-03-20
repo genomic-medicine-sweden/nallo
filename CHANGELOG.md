@@ -103,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#908](https://github.com/genomic-medicine-sweden/nallo/pull/908) - Unpublished VEP index that should not have been published
+- [#941](https://github.com/genomic-medicine-sweden/nallo/pull/941) - Fix duplicated sentieon snv calls at scatter region boundaries
 
 ### Parameters
 
@@ -137,6 +138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | paraphrase                          |             | 0.2.0       |
 | paraphase                           | 3.3.4       | 3.5.0       |
 | samtools (paraphase)                | 1.22.1      | 1.23        |
+| bedtools/slop                       |             | 2.31.1      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
