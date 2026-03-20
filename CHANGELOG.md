@@ -123,6 +123,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--strdrop_fraction`            |
 |               | `--strdrop_alpha`               |
 |               | `--strdrop_edit`                |
+|               | `--paraphrase_rules`            |
+|               | `--paraphrase_output_format`    |
+|               | `--paraphrase_skip_keys`        |
+|               | `--paraphrase_genes`            |
+|               | `--skip_annotate_paralogs`      |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
