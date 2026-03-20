@@ -240,18 +240,13 @@ workflow CALL_SVS {
         ch_vcfexpress_prelude
     )
 
-    TABIX_VCFEXPRESS (
-        VCFEXPRESS.out.vcf
-    )
-
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
     VCFEXPRESS.out.vcf
-        .join(TABIX_VCFEXPRESS.out.index, failOnMismatch:true, failOnDuplicate:true)
-        .branch { meta, _vcf, _tbi ->
+        .branch { meta, _vcf ->
             def callers_needing_reheader = ['severus', 'sniffles']
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)
             no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
@@ -259,18 +254,21 @@ workflow CALL_SVS {
         .set { ch_found_in_tagged_vcf }
 
     BCFTOOLS_QUERY(
-        ch_found_in_tagged_vcf.to_reheader,
+        ch_found_in_tagged_vcf.to_reheader
+            .map { meta, vcf -> [meta, vcf, []] },
         [],
         [],
         [],
     )
+
+    BCFTOOLS_QUERY.out.output.view()
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
     ch_found_in_tagged_vcf.to_reheader
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, _index, samples -> [meta, vcf, [], samples] }
+        .map { meta, vcf, samples -> [meta, vcf, [], samples] }
         .set { ch_bcftools_reheader_input }
 
     // Finally, reheader the VCF with meta.id as the sample name
@@ -281,9 +279,8 @@ workflow CALL_SVS {
 
     // Merge the reheadered SV calls with the ones that didn't need reheadering
     BCFTOOLS_REHEADER.out.vcf
-        .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
         .concat(ch_found_in_tagged_vcf.no_reheader)
-        .map { meta, vcf, _tbi -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
+        .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
         .groupTuple()
         .set { ch_svdb_merge_by_caller_input }
 
