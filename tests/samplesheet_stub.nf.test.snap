@@ -40,10 +40,10 @@
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -141,6 +141,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-20T08:32:47.113766495",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
@@ -189,10 +190,10 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -355,8 +356,9 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
+        "timestamp": "2026-03-20T08:35:38.985884615",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         },
         "timestamp": "2026-03-20T14:41:44.320425798"
@@ -456,6 +458,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
@@ -519,6 +522,7 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
@@ -674,6 +678,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-02T09:02:21.008081801",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
@@ -733,10 +738,10 @@
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -846,6 +851,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-20T08:31:27.654578736",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
@@ -938,10 +944,10 @@
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -1352,8 +1358,9 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-03-20T08:37:28.195573611",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         },
         "timestamp": "2026-03-20T14:43:17.16825568"
@@ -1421,6 +1428,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"

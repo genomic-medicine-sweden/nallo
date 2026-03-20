@@ -33,12 +33,11 @@ workflow CALL_SNVS {
             [[], []],
             ch_par_bed,
         )
-        ch_versions = ch_versions.mix(DEEPVARIANT_RUNDEEPVARIANT.out.versions)
 
         ch_vcf        = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-        ch_index      = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index
+        ch_index      = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
         ch_gvcf       = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
-        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_index
+        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_tbi
 
     } else if (variant_caller.equals("sentieon")) {
 
