@@ -12,18 +12,13 @@ workflow ANNOTATE_CSQ_PLI {
     ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
-    ch_versions = channel.empty()
-
     ADD_MOST_SEVERE_CSQ (ch_vcf, ch_variant_consequences)
-    ch_versions = ch_versions.mix(ADD_MOST_SEVERE_CSQ.out.versions)
 
     ADD_MOST_SEVERE_PLI (ADD_MOST_SEVERE_CSQ.out.vcf)
-    ch_versions = ch_versions.mix(ADD_MOST_SEVERE_PLI.out.versions)
 
     TABIX_BGZIPTABIX (ADD_MOST_SEVERE_PLI.out.vcf)
 
     emit:
     vcf      = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, _index -> [ meta, vcf ] }   // channel: [ val(meta), path(vcf) ]
     tbi      = TABIX_BGZIPTABIX.out.gz_index.map { meta, _vcf, index -> [ meta, index ] } // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions                                                                // channel: [ path(versions.yml) ]
 }

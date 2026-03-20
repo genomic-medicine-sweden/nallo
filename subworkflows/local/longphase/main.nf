@@ -16,9 +16,6 @@ workflow LONGPHASE {
     phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
-    ch_versions = channel.empty()
-
-
     ch_snv_vcf
         .map { meta, vcf -> [meta, vcf, "snv"] }
         .set { ch_snv_with_type }
@@ -69,7 +66,6 @@ workflow LONGPHASE {
         fasta,
         fai,
     )
-    ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
     LONGPHASE_PHASE.out.snv_vcf
         .map { meta, vcf -> [meta + [variant_type: 'snv'], vcf] }
@@ -143,7 +139,6 @@ workflow LONGPHASE {
         fasta,
         fai,
     )
-    ch_versions = ch_versions.mix(LONGPHASE_HAPLOTAG.out.versions)
 
     SAMTOOLS_INDEX(
         LONGPHASE_HAPLOTAG.out.bam
@@ -159,5 +154,4 @@ workflow LONGPHASE {
     phased_family_svs = ch_phased_family_svs           // channel: [ val(meta), path(vcf) ]
     phased_family_svs_tbi = ch_phased_family_svs_tbi   // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai = ch_bam_bai_haplotagged       // channel: [ val(meta), path(bam), path(bai) ]
-    versions = ch_versions                             // channel: [ path(versions.yml) ]
 }

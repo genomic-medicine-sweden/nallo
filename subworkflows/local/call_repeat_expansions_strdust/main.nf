@@ -11,21 +11,17 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     ch_bed      // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-    ch_versions = channel.empty()
-
     STRDUST (
         ch_bam_bai,
         ch_fasta,
         ch_fai,
         ch_bed
     )
-    ch_versions.mix(STRDUST.out.versions)
 
     ADD_FOUND_IN_TAG (
         STRDUST.out.vcf.join(STRDUST.out.tbi),
         "STRdust"
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     ADD_FOUND_IN_TAG.out.vcf
         .join(ADD_FOUND_IN_TAG.out.tbi, failOnDuplicate: true, failOnMismatch: true)
@@ -44,6 +40,5 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
     family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
     family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
-    versions    = ch_versions              // channel: [ versions.yml ]
 
 }

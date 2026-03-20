@@ -20,8 +20,6 @@ workflow PHASING {
     cram_output          // bool:    Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions            = channel.empty()
-
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
@@ -34,7 +32,6 @@ workflow PHASING {
             fai,
             phase_with_svs
         )
-        ch_versions = ch_versions.mix(LONGPHASE.out.versions)
 
         ch_phased_family_snvs     = LONGPHASE.out.phased_family_snvs
         ch_phased_family_snvs_tbi = LONGPHASE.out.phased_family_snvs_tbi
@@ -52,7 +49,6 @@ workflow PHASING {
             fasta,
             fai,
         )
-        ch_versions = ch_versions.mix(WHATSHAP.out.versions)
 
         ch_phased_family_snvs     = WHATSHAP.out.phased_family_snvs
         ch_phased_family_snvs_tbi = WHATSHAP.out.phased_family_snvs_tbi
@@ -110,5 +106,4 @@ workflow PHASING {
     blocks                 = QC_PHASING.out.phasing_blocks       // channel: [ val(meta), path("*.blocks.gtf.gz") ]
     blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats     = QC_PHASING.out.haplotagging_stats   // channel: [ val(meta), path("*.stats.tsv") ]
-    versions               = ch_versions                         // channel: [ path(versions.yml) ]
 }

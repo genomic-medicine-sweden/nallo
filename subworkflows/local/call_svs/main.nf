@@ -169,7 +169,6 @@ workflow CALL_SVS {
             ch_sawfish_discover_input.vcf,
             ch_exclude_bed,
         )
-        ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
@@ -235,7 +234,6 @@ workflow CALL_SVS {
         ch_add_found_in_tag_input.vcf,
         ch_add_found_in_tag_input.sv_caller,
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
@@ -322,7 +320,6 @@ workflow CALL_SVS {
     family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
     family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions          = ch_versions // channel: [ path(versions.yml) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {

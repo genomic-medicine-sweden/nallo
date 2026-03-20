@@ -15,9 +15,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-
-    ch_versions = channel.empty()
-
     ch_bam_bai
         .map { meta, bam, bai -> [meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX'] }
         .set { ch_trgt_input }
@@ -54,7 +51,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
         TRGT_GENOTYPE.out.vcf.map { meta, vcf -> [meta, vcf, []] },
         "TRGT",
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
 
     // Sort and index bcf
     BCFTOOLS_SORT(
@@ -89,5 +85,4 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     family_tbi = TRGT_MERGE.out.index     // channel: [ val(meta), path(tbi) ]
     sample_bam = SAMTOOLS_SORT.out.bam    // channel: [ val(meta), path(bam) ]
     sample_bai = SAMTOOLS_INDEX.out.index // channel: [ val(meta), path(bai) ]
-    versions   = ch_versions              // channel: [ versions.yml ]
 }

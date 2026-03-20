@@ -21,8 +21,6 @@ workflow ANNOTATE_SNVS {
     pre_vep_filter           //    bool: [mandatory] should filtering be done before annotating with CADD and VEP
 
     main:
-    ch_versions = channel.empty()
-
     // Annotate with chosen databases
     if (annotate_echtvar) {
         ECHTVAR_ANNO(
@@ -82,5 +80,4 @@ workflow ANNOTATE_SNVS {
     emit:
     vcf      = ENSEMBLVEP_SNV.out.vcf
     tbi      = TABIX_ENSEMBLVEP_SNV.out.index
-    versions = ch_versions
 }

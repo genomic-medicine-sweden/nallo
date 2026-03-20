@@ -84,7 +84,6 @@ workflow NALLO {
     ch_input
 
     main:
-    ch_versions      = channel.empty()
     ch_multiqc_files = channel.empty()
 
     // Channels from (optional) input files
@@ -182,7 +181,6 @@ workflow NALLO {
         SPLITUBAM (
             CONVERT_INPUT_FASTQS.out.bam // contains all BAM files, including those not converted.
         )
-        ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
 
     }
 
@@ -532,8 +530,6 @@ workflow NALLO {
             params.create_sawfish_maf_track
         )
 
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
-
     }
 
     //
@@ -579,7 +575,6 @@ workflow NALLO {
             !params.skip_sv_calling,
             cram_output
         )
-        ch_versions = ch_versions.mix(PHASING.out.versions)
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{_meta, txt -> txt}.ifEmpty([]))
 
@@ -636,7 +631,6 @@ workflow NALLO {
             ch_cadd_prescored_indels,
             params.pre_vep_snv_filter_expression != ''
         )
-        ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
         ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
@@ -665,7 +659,6 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -814,7 +807,6 @@ workflow NALLO {
             params.vep_cache_version,
             ch_vep_plugin_files.collect()
         )
-        ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
         ANNOTATE_SVS.out.vcf
             .multiMap { meta, vcf ->
@@ -846,7 +838,6 @@ workflow NALLO {
             ch_ann_csq_svs_in,
             ch_variant_consequences_svs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
     }
 
     //
@@ -904,7 +895,6 @@ workflow NALLO {
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions
         )
-        ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
 
     //
@@ -919,8 +909,9 @@ workflow NALLO {
                 ch_str_bed,
                 cram_output
             )
-            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
+
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+
         } else if (params.str_caller == "strdust"){
             CALL_REPEAT_EXPANSIONS_STRDUST (
                 PHASING.out.haplotagged_bam_bai,
@@ -928,7 +919,6 @@ workflow NALLO {
                 ch_fai,
                 ch_str_bed
             )
-            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
     }
 
@@ -965,7 +955,7 @@ workflow NALLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    softwareVersionsToYAML(topic_versions.versions_file)
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
@@ -979,7 +969,7 @@ workflow NALLO {
     //
     ch_multiqc_config        = channel.fromPath(
         "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config = params.multiqc_config ?
+    _ch_multiqc_custom_config = params.multiqc_config ?
         channel.fromPath(params.multiqc_config, checkIfExists: true) :
         channel.empty()
     ch_multiqc_logo          = params.multiqc_logo ?
@@ -999,12 +989,12 @@ workflow NALLO {
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
     ch_methods_description_citation       = citationBibliographyText(
-        ch_versions, topic_versions_string,
+        topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'citation'
     )
     ch_methods_description_bibliography   = citationBibliographyText(
-        ch_versions, topic_versions_string,
+        topic_versions_string,
         file("$projectDir/assets/software_references.yml"),
         'bibliography'
     )
@@ -1031,7 +1021,6 @@ workflow NALLO {
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
