@@ -21,7 +21,7 @@ nextflow_workflow {
         }
     }
 
-    test("fai, [], true, false, []") {
+    test("fai, [], true, []") {
 
         when {
             workflow {
@@ -29,8 +29,7 @@ nextflow_workflow {
                 input[0] = SAMTOOLS_FAIDX.out.fai
                 input[1] = [[],[]]
                 input[2] = true
-                input[3] = false
-                input[4] = 1
+                input[3] = 1
                 """
             }
         }
@@ -48,7 +47,7 @@ nextflow_workflow {
 
     }
 
-    test("[], bed, false, true, 2 - with chrM in bed file") {
+    test("[], bed, false, 2 - with chrM in bed file") {
 
         when {
             workflow {
@@ -58,8 +57,7 @@ nextflow_workflow {
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
-                input[3] = true
-                input[4] = 2
+                input[3] = 2
                 """
             }
         }
@@ -73,7 +71,7 @@ nextflow_workflow {
 
     }
 
-    test("[], bed, false, true, 2 - with chrM in bed file - stub") {
+    test("[], bed, false, 2 - with chrM in bed file - stub") {
 
         options "-stub"
         when {
@@ -84,8 +82,7 @@ nextflow_workflow {
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
-                input[3] = true
-                input[4] = 2
+                input[3] = 2
                 """
             }
         }
@@ -98,7 +95,7 @@ nextflow_workflow {
         }
 
     }
-    test("[], bed, false, true, 2 - without chrM in bed file") {
+    test("[], bed, false, 2 - without chrM in bed file") {
 
         when {
             workflow {
@@ -108,8 +105,7 @@ nextflow_workflow {
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
-                input[3] = true
-                input[4] = 2
+                input[3] = 2
                 """
             }
         }
@@ -118,15 +114,15 @@ nextflow_workflow {
             // Should we assert that the mt bed is empty?
             assertAll (
                 { assert workflow.success },
-                { assert path(workflow.out.bed_mt.get(0).get(1)).size() == 0 },
+                { assert path(workflow.out.bed_mitochondrial.get(0).get(1)).size() == 0 },
                 { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }
 
     }
 
-    test("[], bed, false, true, 5 - should fail due to too few intervals in bed file") {
-
+    test("[], bed, false, 5 - should fail due to too few intervals in bed file") {
+        tag "test_to_test"
         when {
             workflow {
                 """
@@ -135,8 +131,7 @@ nextflow_workflow {
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
-                input[3] = true
-                input[4] = 5
+                input[3] = 5
                 """
             }
         }
@@ -144,6 +139,7 @@ nextflow_workflow {
         then {
             assertAll (
                 { assert workflow.failed },
+                { assert workflow.errorMessage.contains("Expected 5, but got 2 files from splitting the BED file. This can happen if the input BED file (or fasta file if not using BED) has too few regions to split into 5 parts. Please check the input files or set `--snv_calling_processes` to 2.") },
             )
         }
 

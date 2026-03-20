@@ -405,7 +405,6 @@ workflow NALLO {
             ch_fai,
             ch_snv_call_regions,
             !params.snv_call_regions,
-            params.snv_calling_processes > 1,
             params.snv_calling_processes,
         )
         ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)

@@ -9,7 +9,6 @@ workflow SCATTER_GENOME {
     ch_fai             // channel: [optional] [ val(meta), path(fai) ]
     ch_input_bed       // channel: [optional] [ val(meta), path(bed) ]
     make_bed_from_fai  //    bool: Should we build a bed file from the fai?
-    make_bed_intervals //    bool: Should we create intervals from the bed file?
     split_n            // integer: split bed into n regions
 
     main:
@@ -69,7 +68,8 @@ workflow SCATTER_GENOME {
 
         ch_bed_genomes.mitochondrial.map { meta, bed -> [meta.subMap('genome'), bed, 1] }.set { ch_bed_genomes_mitochondrial }
 
-    if (make_bed_intervals) {
+    // Make bed interval if split_n > 1, otherwise just pass the bed file through
+    if (split_n > 1) {
 
         // Split the nuclear bed file into n regions for SNV calling
         BEDTOOLS_SPLIT(
