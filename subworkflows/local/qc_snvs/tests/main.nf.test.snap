@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                        "test.visual_report.html:md5,92a278109987011b40f8b6cdcd96f65c"
                     ]
                 ],
                 "1": [
@@ -19,7 +19,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
+                    
                 ],
                 "stats": [
                     [
@@ -34,18 +34,18 @@
                         {
                             "id": "test"
                         },
-                        "test.visual_report.html:md5,8821e36a7d1b30efe65751dbacb28170"
+                        "test.visual_report.html:md5,92a278109987011b40f8b6cdcd96f65c"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
+                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:02.309581046",
+        "timestamp": "2026-03-20T09:58:59.632518159",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "25.10.4"
         }
     },
     "DeepVariant VCF, Normalized VCF and index -stub": {
@@ -68,7 +68,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
+                    
                 ],
                 "stats": [
                     [
@@ -87,14 +87,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,55c62b669824d245bb9d6b9ff8a139ab"
+                    
                 ]
             }
         ],
-        "timestamp": "2026-02-26T10:29:15.426309334",
+        "timestamp": "2026-03-20T09:59:34.405814717",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "25.10.4"
         }
     },
     "DeepVariant vcfstatsreport disabled": {
