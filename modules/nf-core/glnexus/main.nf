@@ -11,7 +11,7 @@ process GLNEXUS {
 
     output:
     tuple val(meta), path("*.bcf"), emit: bcf
-    tuple val("${task.process}"), val('glnexus'), eval("glnexus_cli 2>&1 | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'"), topic: versions, emit: versions_glnexus
+    tuple val("${task.process}"), val('glnexus'), eval("glnexus_cli 2>&1 | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+' | head -n 1"), topic: versions, emit: versions_glnexus
 
     when:
     task.ext.when == null || task.ext.when

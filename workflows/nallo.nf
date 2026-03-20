@@ -286,7 +286,7 @@ workflow NALLO {
          * and we can't therefore output from the alignment step with correct naming.
          */
         SAMTOOLS_MERGE (
-            bam_to_merge.map { meta, bam, _bai -> [ meta, bam ] },
+            bam_to_merge,
             [[],[],[],[]],
         )
 
