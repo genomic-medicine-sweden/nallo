@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            326,
+            321,
             {
                 "ADD_MOST_SEVERE_CSQ": {
                     "add_most_severe_consequence": 1.1,
@@ -210,9 +210,6 @@
                 "SVDB_QUERY": {
                     "svdb": "2.8.4"
                 },
-                "TABIX_BGZIP": {
-                    "tabix": 1.21
-                },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
                     "tabix": 1.21
@@ -230,7 +227,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_VCFEXPRESS": {
-                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1229,7 +1225,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-19T14:01:32.550337808",
+        "timestamp": "2026-03-20T09:49:22.794880368",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
