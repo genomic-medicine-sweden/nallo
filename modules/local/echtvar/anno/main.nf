@@ -10,7 +10,7 @@ process ECHTVAR_ANNO {
 
     output:
     tuple val(meta), path("*.bcf.gz"), emit: bcf
-    path "versions.yml"              , emit: versions
+    tuple val("${task.process}"), val('echtvar'), eval("echtvar --version | sed 's/.* //g'"), emit: versions_echtvar, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -26,11 +26,6 @@ process ECHTVAR_ANNO {
         ${input} \\
         ${vcf} \\
         ${prefix}.bcf.gz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        echtvar: \$(echo \$(echtvar -V) | sed 's/echtvar //' )
-    END_VERSIONS
     """
 
     stub:
@@ -38,10 +33,5 @@ process ECHTVAR_ANNO {
 
     """
     touch ${prefix}.bcf.gz
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        echtvar: \$(echo \$(echtvar -V) | sed 's/echtvar //' )
-    END_VERSIONS
     """
 }
