@@ -142,11 +142,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:21:04.414479789",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:21:04.414479789"
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -195,11 +195,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:22:36.341054136",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:22:36.341054136"
     },
     "1 sample - [] unphased - stub": {
         "content": [
@@ -248,11 +248,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:22:24.846397445",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:22:24.846397445"
     },
     "1 sample - [] phased - stub": {
         "content": [
@@ -301,11 +301,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:21:56.218656994",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:21:56.218656994"
     },
     "1 sample - [] unphased": {
         "content": [
@@ -366,11 +366,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:21:17.627820332",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:21:17.627820332"
     },
     "1 sample - bed phased": {
         "content": [
@@ -487,11 +487,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:21:31.295979206",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:16:52.903333434"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -540,11 +540,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:22:11.67974627",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:22:11.67974627"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -605,10 +605,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:21:44.07618913",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
-        }
+        },
+        "timestamp": "2026-02-26T08:21:44.07618913"
     }
 }

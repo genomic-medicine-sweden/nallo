@@ -49,6 +49,6 @@ workflow ANNOTATE_SVS {
     )
 
     emit:
-    vcf      = ENSEMBLVEP_SV.out.vcf         // channel: [ val(meta), path(vcf) ]
-    tbi      = TABIX_ENSEMBLVEP_SV.out.index // channel: [ val(meta), path(tbi) ]
+    vcf = ENSEMBLVEP_SV.out.vcf         // channel: [ val(meta), path(vcf) ]
+    tbi  = TABIX_ENSEMBLVEP_SV.out.index // channel: [ val(meta), path(tbi) ]
 }

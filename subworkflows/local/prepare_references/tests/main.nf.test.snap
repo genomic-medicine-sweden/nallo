@@ -110,11 +110,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:36:42.59240314",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:36:42.59240314"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -149,7 +149,9 @@
                             "id": "vep_cache"
                         },
                         [
-                            
+                            [
+                                
+                            ]
                         ]
                     ]
                 ],
@@ -183,17 +185,19 @@
                             "id": "vep_cache"
                         },
                         [
-                            
+                            [
+                                
+                            ]
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:37:07.613797626",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:56:55.344085671"
     },
     "don't unzip fasta, don't untar vep cache -stub": {
         "content": [
@@ -270,11 +274,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:37:19.781067255",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:37:19.781067255"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -387,10 +391,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:36:54.908068808",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:36:54.908068808"
     }
 }

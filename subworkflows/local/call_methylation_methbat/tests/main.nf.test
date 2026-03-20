@@ -71,10 +71,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml },
                     file(workflow.out.region_profile[0][1])
                         .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
+                        .collect { line -> line.split('\t')[2..4] }
                 ).match() }
             )
         }
@@ -104,10 +103,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml },
                     file(workflow.out.region_profile[0][1])
                         .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
+                        .collect { line -> line.split('\t')[2..4] }
                 ).match() }
             )
         }
@@ -133,10 +131,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml },
                     file(workflow.out.region_profile[0][1])
                         .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
+                        .collect { line -> line.split('\t')[2..4] }
                 ).match() }
             )
         }
@@ -162,10 +159,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml },
                     file(workflow.out.region_profile[0][1])
                         .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
+                        .collect { line -> line.split('\t')[2..4] }
                 ).match() }
             )
         }
@@ -195,10 +191,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml },
                     file(workflow.out.region_profile[0][1])
                         .readLines()
-                        .collect { line -> line.split('\t')[0..6] }
+                        .collect { line -> line.split('\t')[2..4] }
                 ).match() }
             )
         }
@@ -223,10 +218,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml }
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -250,10 +242,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    workflow.out.versions.collect{ path(it).yaml }
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }

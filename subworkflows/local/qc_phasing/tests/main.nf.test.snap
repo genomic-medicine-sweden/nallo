@@ -132,11 +132,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T10:44:59.184192196",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T10:44:59.184192196"
     },
     "2 samples - SNVs + SVs": {
         "content": [
@@ -227,7 +227,7 @@
                 [
                     "File name\tHG003_haplotagged.bam",
                     "Number of alignments\t695",
-                    "% from total alignments\t99.14",
+                    "% from total alignments\t98.99",
                     "Number of reads\t689",
                     "Yield [Gb]\t0.01",
                     "Mean coverage\t0.43",
@@ -260,11 +260,11 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-17T10:44:34.379588365",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:58:14.581837656"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -355,7 +355,7 @@
                 [
                     "File name\tHG003_haplotagged.bam",
                     "Number of alignments\t695",
-                    "% from total alignments\t99.14",
+                    "% from total alignments\t98.99",
                     "Number of reads\t689",
                     "Yield [Gb]\t0.01",
                     "Mean coverage\t0.43",
@@ -388,11 +388,11 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-17T10:44:15.474463567",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:57:52.343361035"
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -527,10 +527,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T10:44:45.851558409",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T10:44:45.851558409"
     }
 }

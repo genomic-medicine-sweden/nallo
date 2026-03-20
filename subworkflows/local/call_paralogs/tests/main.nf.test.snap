@@ -63,10 +63,10 @@
                     ]
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
                     [
@@ -113,9 +113,6 @@
                         },
                         "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "7": [
-
                 ],
                 "bai": [
                     [
@@ -178,10 +175,10 @@
                     ]
                 ],
                 "crai": [
-
+                    
                 ],
                 "cram": [
-
+                    
                 ],
                 "json": [
                     [
@@ -228,17 +225,14 @@
                         },
                         "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-
                 ]
             }
         ],
-        "timestamp": "2026-03-05T08:49:14.440761158",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:19:23.27755542"
     },
     "one sample, one family - bam output": {
         "content": [
@@ -296,15 +290,13 @@
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
             ],
-            [
-
-            ]
+            null
         ],
-        "timestamp": "2026-03-05T08:48:02.139607509",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:18:19.512850006"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -452,15 +444,13 @@
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
             ],
-            [
-
-            ]
+            null
         ],
-        "timestamp": "2026-03-05T08:49:00.510164334",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:19:09.794230628"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -618,24 +608,18 @@
                 "5": [
                     [
                         {
-                            "id": "second_family"
+                            "id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "6": [
                     [
                         {
-                            "id": "second_family"
+                            "id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "7": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
                 ],
                 "bai": [
                     [
@@ -790,32 +774,26 @@
                 "tbi": [
                     [
                         {
-                            "id": "second_family"
+                            "id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
                     [
                         {
-                            "id": "second_family"
+                            "id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
                 ]
             }
         ],
-        "timestamp": "2026-03-06T08:56:27.150785905",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:29:08.840321684"
     },
     "one sample, one family - cram output": {
         "content": [
@@ -900,14 +878,12 @@
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
             ],
-            [
-                "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
-            ]
+            null
         ],
-        "timestamp": "2026-03-05T08:48:32.851040057",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:18:42.263022029"
     }
 }

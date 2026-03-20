@@ -22,9 +22,8 @@ nextflow_workflow {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
                 """
             }
         }
@@ -55,7 +54,7 @@ nextflow_workflow {
                 """
                 input[0] = SAMTOOLS_FAIDX.out.fai
                 input[1] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
                 input[3] = channel.of([
                     [ id: 'test' ],
                     file("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt", checkIfExists: true)

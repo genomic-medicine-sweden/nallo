@@ -39,15 +39,13 @@
                     "test.mosdepth.region.dist.txt:md5,f7f8e42619aabd36a34bfd8db78c7a73"
                 ]
             ],
-            [
-                "versions.yml:md5,eeeee284891166b5d410dfee8531a261"
-            ]
+            null
         ],
-        "timestamp": "2026-03-17T10:42:49.275101504",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:57:23.126926243"
     },
     "bam, no bed -stub": {
         "content": [
@@ -87,9 +85,6 @@
                 "4": [
                     
                 ],
-                "5": [
-                    
-                ],
                 "fastqc_zip": [
                     [
                         {
@@ -124,17 +119,14 @@
                 ],
                 "sambamba_depth_bed": [
                     
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-17T10:42:56.306339645",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:57:30.720196336"
     },
     "bam, bed -stub": {
         "content": [
@@ -179,9 +171,6 @@
                         "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,eeeee284891166b5d410dfee8531a261"
-                ],
                 "fastqc_zip": [
                     [
                         {
@@ -221,17 +210,14 @@
                         },
                         "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,eeeee284891166b5d410dfee8531a261"
                 ]
             }
         ],
-        "timestamp": "2026-03-17T10:43:03.30865126",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:57:38.704339673"
     },
     "bam, no bed": {
         "content": [
@@ -263,14 +249,12 @@
             [
                 
             ],
-            [
-                
-            ]
+            null
         ],
-        "timestamp": "2026-03-17T10:41:49.481279925",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:57:13.051328205"
     }
 }

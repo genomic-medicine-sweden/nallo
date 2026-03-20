@@ -449,10 +449,6 @@
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
-                ],
                 "asm_bed": [
                     
                 ],
@@ -491,30 +487,14 @@
                         },
                         "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
-            },
-            [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
-            ]
+            }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T13:53:38.629915769"
+        "timestamp": "2026-03-20T15:13:07.697503961"
     },
     "1 sample - bed phased": {
         "content": [
@@ -714,10 +694,6 @@
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
-                ],
                 "asm_bed": [
                     [
                         {
@@ -762,30 +738,17 @@
                         },
                         "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,67b1e7716f21340235291d19f475f185",
-                    "versions.yml:md5,8b7cff443cec6e84e21889ac307177db"
                 ]
             },
             [
-                {
-                    "CALL_METHYLATION_METHBAT:METHBAT_PROFILE": {
-                        "methbat": "0.16.1-8a0a24c"
-                    }
-                },
-                {
-                    "CALL_METHYLATION_METHBAT:PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
-                        "pbcpgtools": "3.0.0"
-                    }
-                }
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T13:53:59.766293143"
+        "timestamp": "2026-03-20T13:51:26.366029351"
     },
     "1 sample - bed unphased": {
         "content": [

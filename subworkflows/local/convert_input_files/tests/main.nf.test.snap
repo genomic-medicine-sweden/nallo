@@ -13,7 +13,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,c924592e0fb425619828ee52e7bcd978"
+                        "test_fastq.bam:md5,9d783301d5d473a910d5d969b700cbe9"
                     ]
                 ],
                 "1": [
@@ -35,7 +35,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,c924592e0fb425619828ee52e7bcd978"
+                        "test_fastq.bam:md5,9d783301d5d473a910d5d969b700cbe9"
                     ]
                 ],
                 "fastq": [
@@ -48,11 +48,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:38:22.596880948",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:06:11.400632951"
     },
     "convert BAM to FASTQ": {
         "content": [
@@ -103,11 +103,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:37:54.818901245",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:37:54.818901245"
     },
     "convert BAM to FASTQ and FASTQ to BAM": {
         "content": [
@@ -123,7 +123,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,c924592e0fb425619828ee52e7bcd978"
+                        "test_fastq.bam:md5,9d783301d5d473a910d5d969b700cbe9"
                     ]
                 ],
                 "1": [
@@ -151,7 +151,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,c924592e0fb425619828ee52e7bcd978"
+                        "test_fastq.bam:md5,9d783301d5d473a910d5d969b700cbe9"
                     ]
                 ],
                 "fastq": [
@@ -170,11 +170,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:38:31.362117119",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T14:06:21.119951958"
     },
     "convert neither BAM to FASTQ nor FASTQ to BAM": {
         "content": [
@@ -213,11 +213,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:38:38.052031795",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:38:38.052031795"
     },
     "convert BAM to FASTQ and FASTQ to BAM -stub": {
         "content": [
@@ -280,10 +280,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:38:46.367231949",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
-        }
+        },
+        "timestamp": "2026-03-17T11:38:46.367231949"
     }
 }

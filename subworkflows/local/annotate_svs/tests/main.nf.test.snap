@@ -1,28 +1,64 @@
 {
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
-            [
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
-            ],
-            "29a9273ae029754399eb92fe6c2b7c52",
+            "b856167f7acc56c0e2dd4032d191fafc",
             "test_vep.vcf.gz.tbi"
         ],
-        "timestamp": "2026-03-06T08:44:09.288688057",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T15:46:20.439074005"
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
         "content": [
-            [
-                "versions.yml:md5,d2a9a640a711b2d559e13f9bca9d7a3b"
-            ]
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "project": "project"
+                        },
+                        "test_vep.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "project": "project"
+                        },
+                        "test_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "project": "project"
+                        },
+                        "test_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "project": "project"
+                        },
+                        "test_vep.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-03-06T08:44:22.829005285",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T15:44:11.153782189"
     }
 }

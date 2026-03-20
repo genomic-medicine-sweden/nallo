@@ -22,9 +22,8 @@ nextflow_workflow {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
                 """
             }
         }
