@@ -32,11 +32,11 @@
                     "bedtools": "2.31.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.1,
+                    "addmostsevereconsequence": 1.2.0,
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.1,
+                    "addmostseverepli": 1.2.0,
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -564,11 +564,11 @@
                     "bedtools": "2.31.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.1,
+                    "addmostsevereconsequence": 1.2.0,
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.1,
+                    "addmostseverepli": 1.2.0,
                     "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
@@ -725,11 +725,11 @@
                     "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.1,
+                    "addmostsevereconsequence": 1.2.0,
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.1,
+                    "addmostseverepli": 1.2.0,
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
@@ -930,11 +930,11 @@
                     "gawk": "5.3.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": 1.1,
+                    "addmostsevereconsequence": 1.2.0,
                     "bgzip": 1.21
                 },
                 "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": 1.1,
+                    "addmostseverepli": 1.2.0,
                     "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
