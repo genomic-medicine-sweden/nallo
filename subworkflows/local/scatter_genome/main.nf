@@ -67,6 +67,7 @@ workflow SCATTER_GENOME {
         }
         .set { ch_bed_genomes }
 
+        ch_bed_genomes.mitochondrial.map { meta, bed -> [meta.subMap('genome'), bed, 1] }.set { ch_bed_genomes_mitochondrial }
 
     if (make_bed_intervals) {
 
@@ -112,8 +113,8 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed           = BEDTOOLS_MERGE.out.bed       // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals = ch_bed_intervals     // channel: [ val(meta), path(bed), val(num_intervals) ]
-    bed_mt        = ch_bed_genomes.mitochondrial // channel: [ val(meta), path(bed) ]
-    versions      = ch_versions                  // channel: [ versions.yml ]
+    bed                   = BEDTOOLS_MERGE.out.bed       // channel: [ val(meta), path(bed) ]
+    bed_nuclear_intervals = ch_bed_intervals             // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed_mitochondrial     = ch_bed_genomes_mitochondrial // channel: [ val(meta), path(bed), val(num_intervals) ]
+    versions              = ch_versions                  // channel: [ versions.yml ]
 }
