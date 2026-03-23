@@ -34,6 +34,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -66,6 +67,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -101,6 +103,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -132,6 +135,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -166,6 +170,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -203,6 +208,7 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = [[],[]]
                 input[5] = 'deepvariant'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -244,6 +250,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[5] = 'sentieon'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -290,6 +297,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[5] = 'sentieon'
+                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
