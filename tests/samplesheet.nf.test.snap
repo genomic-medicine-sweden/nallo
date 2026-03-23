@@ -694,7 +694,7 @@
                 "HG002_Revio_pbcpgtools.hap1.bed.gz.tbi:md5,e751c790ccf4db3863e7a2c3079d37b1",
                 "HG002_Revio_pbcpgtools.hap2.bed.gz:md5,38dfc5797d9d4d2d70a4192f147f92a2",
                 "HG002_Revio_pbcpgtools.hap2.bed.gz.tbi:md5,96f704a5af585e5e45f9b3a366243005",
-                "HG002_Revio_methbat_profile.tsv:md5,cb84343b3126244fd5f42152437177bb",
+                "HG002_Revio_methbat_profile.tsv:md5,7023ce4cb51d8363d1c841f05dcd9073",
                 "bcftools-stats-subtypes.txt:md5,3b484f760ba5b4dc48a5df427f58728f",
                 "bcftools_stats_indel-lengths.txt:md5,1c7e85651d83586b77e81dc66db0bc46",
                 "fastqc-status-check-heatmap.txt:md5,f98c3e5395cfd3061b3228a97ba86043",
@@ -813,6 +813,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:21:52.320927712"
+        "timestamp": "2026-03-23T16:26:15.766948937"
     }
 }

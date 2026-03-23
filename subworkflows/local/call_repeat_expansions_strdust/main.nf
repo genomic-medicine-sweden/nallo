@@ -13,6 +13,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
+
     STRDUST (
         ch_bam_bai,
         ch_fasta,
@@ -38,13 +39,13 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
 
     BCFTOOLS_MERGE (
         ch_bcftools_merge_in,
-        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true)
+        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect()
     )
 
     emit:
     sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]
     sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
-    family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
+    family_vcf  = BCFTOOLS_MERGE.out.vcf.view()   // channel: [ val(meta), path(vcf) ]
     family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
 
 }

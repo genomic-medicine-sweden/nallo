@@ -151,6 +151,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools (paraphase)                | 1.22.1      | 1.23        |
 | custom/addmostsevereconsequence     | 1.1         | 1.2.0       |
 | custom/addmostseverepli             | 1.1         | 1.2.0       |
+| gfastats                            | 1.3.10      |  1.3.11     |
+| longphase                           | 2.0         |  2.0.1      |
+| methbat/profile                     | 0.16.1      |  0.17.0     |
+| samtools/faidx                      | 1.22.1      |  1.23.1     |
+| samtools/fastq                      | 1.22.1      |  1.23.1     |
+| samtools/import                     | 1.22.1      |  1.23.1     |
+| samtools/index                      | 1.22.1      |  1.23.1     |
+| samtools/merge                      | 1.22.1      |  1.23.1     |
+| samtools/sort                       | 1.22.1      |  1.23.1     |
+| samtools/view                       | 1.22.1      |  1.23.1     |
+| severus                             | 1.6         |  1.7        |
+| strdrust                            | 0.11.4      |  0.16.0     |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

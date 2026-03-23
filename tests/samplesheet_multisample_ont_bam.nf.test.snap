@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            311,
+            312,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -758,6 +758,9 @@
                 "qc/somalier/relate/test/test.samples.tsv",
                 "repeats",
                 "repeats/family",
+                "repeats/family/FAM",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz.tbi",
                 "repeats/family/FAM2",
                 "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz",
                 "repeats/family/FAM2/FAM2_repeat_expansions.vcf.gz.tbi",
@@ -1150,6 +1153,10 @@
             ],
             [
                 [
+                    "FAM_repeat_expansions.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=2, variantCount=1, phased=true, phasedAutodetect=true]"
+                ],
+                [
                     "FAM2_repeat_expansions.vcf.gz",
                     "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=true]"
                 ],
@@ -1226,6 +1233,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:30:53.849750182"
+        "timestamp": "2026-03-23T16:33:30.002792912"
     }
 }
