@@ -92,6 +92,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
@@ -137,7 +140,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-20T09:38:56.891086387",
+        "timestamp": "2026-03-23T11:55:06.846760735",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
@@ -451,12 +454,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:37.115321855",
+        "timestamp": "2026-03-20T14:40:03.712675704",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T14:40:03.712675704"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -515,12 +517,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-02T09:00:05.013305995",
+        "timestamp": "2026-03-20T14:40:41.47969353",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T14:40:41.47969353"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -1415,11 +1416,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-02T08:59:06.387875024",
+        "timestamp": "2026-03-20T14:39:25.553468898",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T14:39:25.553468898"
+        }
     }
 }
