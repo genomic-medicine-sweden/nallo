@@ -967,15 +967,6 @@ workflow NALLO {
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config        = channel.fromPath(
-        "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    _ch_multiqc_custom_config = params.multiqc_config ?
-        channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        channel.empty()
-    ch_multiqc_logo          = params.multiqc_logo ?
-        channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        channel.empty()
-
     summary_params      = paramsSummaryMap(
         workflow, parameters_schema: "nextflow_schema.json")
     ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
@@ -1010,14 +1001,20 @@ workflow NALLO {
             )
     )
 
-    MULTIQC (
-        channel.of([id: "multiqc"])
-            .combine(ch_multiqc_files.collect())
-            .combine(ch_multiqc_config.toList())
-            .combine(ch_multiqc_logo.toList())
-            .combine([])
-            .combine([])
-    )
+    MULTIQC(
+            ch_multiqc_files.flatten().collect().map { files ->
+                [
+                    [id: ''],
+                    files,
+                    params.multiqc_config
+                    ? file(params.multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                    params.multiqc_logo ? file(params.multiqc_logo, checkIfExists: true) : [],
+                    [],
+                    [],
+                ]
+            }
+        )
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
