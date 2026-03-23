@@ -1,86 +1,36 @@
 {
     "1 sample - phased": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,3401c0381e7a65cddd9c29ffddd8075b"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "asm_bed": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,3401c0381e7a65cddd9c29ffddd8075b"
-                    ]
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
                 ]
-            },
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                ]
+            ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
@@ -91,66 +41,28 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:41:34.773529886"
+        "timestamp": "2026-03-23T17:36:50.731208847"
     },
     "1 sample - unphased": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,524ac7173e6279449286f770aa67a1e0"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
-                    ]
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "asm_bed": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    
-                ],
-                "pbcpg_biwgig_hap2": [
-                    
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,524ac7173e6279449286f770aa67a1e0"
-                    ]
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
                 ]
-            },
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
@@ -161,90 +73,40 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:41:49.180034603"
+        "timestamp": "2026-03-23T17:37:03.726116506"
     },
     "1 sample - phased - withlabels": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,b6b9821c6fafcf778170ed4b272d8a35"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "asm_bed": [
-                    
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,b6b9821c6fafcf778170ed4b272d8a35"
-                    ]
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
                 ]
-            },
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                ]
+            ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tFEMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.2524077972827565\t0.11794871794871793\t-0.821941753051282\t-30.60943963146014\t65\t0\t0\t18\t8\t9",
@@ -255,7 +117,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:42:03.480050831"
+        "timestamp": "2026-03-23T17:37:17.640633233"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -348,98 +210,42 @@
     },
     "1 sample - bed phased": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,f43fdc5200d03dc5ee2153bcf97b86a5"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,8a310b40c3fb0f07aa0348c45e5f52e6"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "asm_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,8a310b40c3fb0f07aa0348c45e5f52e6"
-                    ]
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
-                    ]
-                ],
-                "pbcpg_biwgig_hap2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
-                    ]
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,f43fdc5200d03dc5ee2153bcf97b86a5"
-                    ]
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "test.bed:md5,cf101bf9d172c9f7b1ea99960b90f70b"
                 ]
-            },
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                ]
+            ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
@@ -450,7 +256,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:42:17.788931879"
+        "timestamp": "2026-03-23T17:37:31.579442441"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -555,74 +361,30 @@
     },
     "1 sample - bed unphased": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,ea583c9e00295af35c5efd9df3b065be"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,8255472d8926295c9ee6fe10c716ecca"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
-                    ]
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "asm_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,8255472d8926295c9ee6fe10c716ecca"
-                    ]
-                ],
-                "pbcpg_biwgig_combined": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
-                    ]
-                ],
-                "pbcpg_biwgig_hap1": [
-                    
-                ],
-                "pbcpg_biwgig_hap2": [
-                    
-                ],
-                "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,ea583c9e00295af35c5efd9df3b065be"
-                    ]
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "test.bed:md5,9018a68325b22a7569aad13098f9d04f"
                 ]
-            },
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
@@ -633,6 +395,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:42:31.179288971"
+        "timestamp": "2026-03-23T17:37:44.752037037"
     }
 }

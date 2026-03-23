@@ -70,7 +70,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.asm_bed,
+                    workflow.out.pbcpg_biwgig_combined,
+                    workflow.out.pbcpg_biwgig_hap1,
+                    workflow.out.pbcpg_biwgig_hap2,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -101,7 +104,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.asm_bed,
+                    workflow.out.pbcpg_biwgig_combined,
+                    workflow.out.pbcpg_biwgig_hap1,
+                    workflow.out.pbcpg_biwgig_hap2,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -128,7 +134,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.asm_bed,
+                    workflow.out.pbcpg_biwgig_combined,
+                    workflow.out.pbcpg_biwgig_hap1,
+                    workflow.out.pbcpg_biwgig_hap2,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -155,7 +164,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.asm_bed,
+                    workflow.out.pbcpg_biwgig_combined,
+                    workflow.out.pbcpg_biwgig_hap1,
+                    workflow.out.pbcpg_biwgig_hap2,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -186,7 +198,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out,
+                    workflow.out.asm_bed,
+                    workflow.out.pbcpg_biwgig_combined,
+                    workflow.out.pbcpg_biwgig_hap1,
+                    workflow.out.pbcpg_biwgig_hap2,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }

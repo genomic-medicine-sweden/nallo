@@ -1088,9 +1088,6 @@
                 "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,79530866697029401fdefb02e19e92ff",
                 "HG004_pbcpgtools.hap2.bed.gz:md5,4ad119e561481f2389c96e27d4637831",
                 "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,28290f4417c723f33c4ee3b076f0d711",
-                "HG002_methbat_profile.tsv:md5,339a59d3382d7ff107347b7f91f612b7",
-                "HG003_methbat_profile.tsv:md5,5efa3155d9cf8932fe11112eab6dc35f",
-                "HG004_methbat_profile.tsv:md5,e4d3648d2b19b5e5f11f6e44c2784d61",
                 "bcftools-stats-subtypes.txt:md5,8a28c79faa19a4a5e0cf91a3f91b9956",
                 "bcftools_stats_indel-lengths.txt:md5,7c273f3c5b40f6155e69ffcaeb114e22",
                 "fastqc-status-check-heatmap.txt:md5,f67860347368dd43ec3be3a53e1085dc",
@@ -1311,6 +1308,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T16:29:56.729280335"
+        "timestamp": "2026-03-23T17:43:26.318236603"
     }
 }
