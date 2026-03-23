@@ -7,14 +7,6 @@
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
                 },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -83,6 +75,14 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -264,6 +264,9 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
+                    "tabix": 1.21
+                },
+                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -759,7 +762,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -800,13 +803,14 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-03-20T09:03:20.573056331",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
-        }
+        },
+        "timestamp": "2026-03-19T09:29:11.36937533"
     }
 }

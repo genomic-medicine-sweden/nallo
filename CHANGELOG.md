@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#943](https://github.com/genomic-medicine-sweden/nallo/pull/943) - Updated DeepVariant to 1.10.0
 - [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
 - [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
+- [#948](https://github.com/genomic-medicine-sweden/nallo/pull/948) - Replaced local modules `add_most_severe_consequence` and `add_most_severe_pli` with nf-core versions to lessen maintenance burden of local modules
 - [#949](https://github.com/genomic-medicine-sweden/nallo/pull/949) - Replaced local HiFiCNV module with nf-core version to lessen maintenance burden of local modules
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Changed to topic versions in `CREATE_PEDIGREE_FILE`
 - [#953](https://github.com/genomic-medicine-sweden/nallo/pull/953) - Changed to topic versions for local module `ECHTVAR_ANNO`
@@ -145,6 +146,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | paraphrase                          |             | 0.2.0       |
 | paraphase                           | 3.3.4       | 3.5.0       |
 | samtools (paraphase)                | 1.22.1      | 1.23        |
+| custom/addmostsevereconsequence     | 1.1         | 1.2.0       |
+| custom/addmostseverepli             | 1.1         | 1.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

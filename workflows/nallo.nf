@@ -687,7 +687,6 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -871,7 +870,6 @@ workflow NALLO {
             ch_ann_csq_svs_in,
             ch_variant_consequences_svs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
     }
 
     //
