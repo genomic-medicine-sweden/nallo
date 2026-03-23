@@ -72,7 +72,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()[2..5]
+                        .readLines()[3..5]
                 ).match() }
             )
         }
@@ -103,7 +103,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()[2..5]
+                        .readLines()[3..5]
                 ).match() }
             )
         }
@@ -130,7 +130,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()[2..5]
+                        .readLines()[3..5]
                 ).match() }
             )
         }
@@ -157,7 +157,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()[2..5]
+                        .readLines()[3..5]
                 ).match() }
             )
         }
@@ -188,7 +188,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     file(workflow.out.region_profile[0][1])
-                        .readLines()[2..5]
+                        .readLines()[3..5]
                 ).match() }
             )
         }
