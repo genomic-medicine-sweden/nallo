@@ -24,6 +24,7 @@
                 ],
                 "2": [
                     "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a"
+                    "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a"
                 ],
                 "tbi": [
                     [
@@ -47,12 +48,14 @@
                 ],
                 "versions": [
                     "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a"
+                    "versions.yml:md5,2fafab6b15acf7fcae148e0dea83d28a"
                 ]
             }
         ],
         "timestamp": "2026-03-23T11:46:57.542850829",
         "meta": {
             "nf-test": "0.9.4",
+            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     }

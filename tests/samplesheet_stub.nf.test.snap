@@ -7,14 +7,6 @@
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
                 },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
                 },
@@ -27,8 +19,16 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
+                },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -84,6 +84,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 }
@@ -132,7 +135,7 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "GFASTATS": {
                     "gfastats": "1.3.10"
@@ -312,6 +315,7 @@
             ]
         ],
         "timestamp": "2026-03-02T08:59:37.115321855",
+        "timestamp": "2026-03-02T08:59:37.115321855",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -375,6 +379,7 @@
             ]
         ],
         "timestamp": "2026-03-02T09:00:05.013305995",
+        "timestamp": "2026-03-02T09:00:05.013305995",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.01.1"
@@ -413,6 +418,14 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": 1.22,
@@ -475,6 +488,9 @@
                 "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -517,14 +533,6 @@
                     "bcftools": 1.2,
                     "busybox_awk": "1.36.1"
                 },
-                "ADD_MOST_SEVERE_CSQ": {
-                    "add_most_severe_consequence": 1.1,
-                    "python": "3.8.3"
-                },
-                "ADD_MOST_SEVERE_PLI": {
-                    "add_most_severe_pli": 1.1,
-                    "python": "3.8.3"
-                },
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
                 },
@@ -550,7 +558,7 @@
                     "gawk": "5.3.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.9.0"
+                    "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -578,6 +586,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
+                    "gawk": "5.3.1"
                     "gawk": "5.3.1"
                 },
                 "RELATE_RELATE": {
@@ -613,6 +622,9 @@
                     "tabix": 1.21
                 },
                 "TABIX_ENSEMBLVEP_SNV": {
+                    "tabix": 1.21
+                },
+                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "UNTAR_VEP_CACHE": {
@@ -787,6 +799,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-02T08:59:06.387875024",
         "timestamp": "2026-03-02T08:59:06.387875024",
         "meta": {
             "nf-test": "0.9.4",

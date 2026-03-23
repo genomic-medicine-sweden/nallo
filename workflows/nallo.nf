@@ -51,7 +51,6 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
-include { CREATE_PEDIGREE_FILE as SOMALIER_PED                   } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
 
 // nf-core
@@ -326,8 +325,7 @@ workflow NALLO {
             .groupTuple()
             .set { ch_samplesheet_ped_in }
 
-        SAMPLESHEET_PED(ch_samplesheet_ped_in)
-        ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
+        SAMPLESHEET_PED ( ch_samplesheet_ped_in )
 
         SAMPLESHEET_PED.out.ped
             .collect()
@@ -715,7 +713,6 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs,
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -787,7 +784,6 @@ workflow NALLO {
         SOMALIER_PED_FAMILY(
             ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
         )
-        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
         // Give PED file SNV meta so they can be joined later in the subworkflow.
         // Since we don't always have matching number of ped files and call regions
@@ -899,7 +895,6 @@ workflow NALLO {
             ch_ann_csq_svs_in,
             ch_variant_consequences_svs,
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
     }
 
     //

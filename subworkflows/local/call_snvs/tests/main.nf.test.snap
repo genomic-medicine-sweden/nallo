@@ -9,7 +9,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ]
                 ],
                 "1": [
@@ -19,7 +19,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ]
                 ],
                 "2": [
@@ -29,7 +29,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ]
                 ],
                 "3": [
@@ -39,11 +39,11 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -52,7 +52,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ]
                 ],
                 "gvcf_index": [
@@ -62,7 +62,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ]
                 ],
                 "index": [
@@ -72,7 +72,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ]
                 ],
                 "vcf": [
@@ -82,19 +82,19 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:50:56.890452897",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:03:23.428864107"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -106,7 +106,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -114,7 +114,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -124,7 +124,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -132,7 +132,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "2": [
@@ -142,7 +142,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -150,7 +150,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "3": [
@@ -160,7 +160,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -168,12 +168,11 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -182,7 +181,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -190,7 +189,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "gvcf_index": [
@@ -200,7 +199,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -208,7 +207,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "index": [
@@ -218,7 +217,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -226,7 +225,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "vcf": [
@@ -236,7 +235,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -244,20 +243,19 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:55:34.991289439",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:58:57.510046479"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "1 sample female - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -366,11 +364,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-02-27T08:49:40.526293509",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T08:49:40.526293509"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant -stub": {
         "content": [
@@ -382,7 +380,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -390,7 +388,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -398,7 +396,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -406,7 +404,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -416,7 +414,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -424,7 +422,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -432,7 +430,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -440,7 +438,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "2": [
@@ -450,7 +448,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -458,7 +456,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -466,7 +464,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -474,7 +472,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "3": [
@@ -484,7 +482,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -492,7 +490,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -500,7 +498,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -508,14 +506,11 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -524,7 +519,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -532,7 +527,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -540,7 +535,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -548,7 +543,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "gvcf_index": [
@@ -558,7 +553,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -566,7 +561,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -574,7 +569,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -582,7 +577,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "index": [
@@ -592,7 +587,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -600,7 +595,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -608,7 +603,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -616,7 +611,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "vcf": [
@@ -626,7 +621,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -634,7 +629,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -642,7 +637,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -650,22 +645,19 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:56:49.258963129",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:59:18.243370738"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "1 sample - 1 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -677,7 +669,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -687,7 +679,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "2": [
@@ -697,7 +689,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "3": [
@@ -707,11 +699,11 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -720,7 +712,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "gvcf_index": [
@@ -730,7 +722,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "index": [
@@ -740,7 +732,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "vcf": [
@@ -750,19 +742,19 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:54:59.277155967",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:56:31.758994204"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "1 sample male - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -873,11 +865,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-02-27T06:25:07.970459919",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-02-27T06:25:07.970459919"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
@@ -889,7 +881,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -897,7 +889,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ]
                 ],
                 "1": [
@@ -907,7 +899,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -915,7 +907,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ]
                 ],
                 "2": [
@@ -925,7 +917,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ],
                     [
                         {
@@ -933,7 +925,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,39be28a47650293e933324d0ee564780"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,6f9d7ac977950d643272de2db89da88c"
                     ]
                 ],
                 "3": [
@@ -943,7 +935,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ],
                     [
                         {
@@ -951,12 +943,11 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,411d4e1888c7790f760eec85bfc80d8c"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,9b0275713aab7c60a6c5725bab6f97f0"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -965,7 +956,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ],
                     [
                         {
@@ -973,7 +964,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,39be28a47650293e933324d0ee564780"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,6f9d7ac977950d643272de2db89da88c"
                     ]
                 ],
                 "gvcf_index": [
@@ -983,7 +974,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ],
                     [
                         {
@@ -991,7 +982,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,411d4e1888c7790f760eec85bfc80d8c"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,9b0275713aab7c60a6c5725bab6f97f0"
                     ]
                 ],
                 "index": [
@@ -1001,7 +992,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -1009,7 +1000,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ]
                 ],
                 "vcf": [
@@ -1019,7 +1010,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -1027,20 +1018,19 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:52:22.27904487",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:04:53.500947225"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "1 sample - no bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1052,7 +1042,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -1062,7 +1052,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "2": [
@@ -1072,7 +1062,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "3": [
@@ -1082,11 +1072,11 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -1095,7 +1085,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "gvcf_index": [
@@ -1105,7 +1095,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "index": [
@@ -1115,7 +1105,7 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "vcf": [
@@ -1125,19 +1115,19 @@
                             "single_end": false,
                             "num_intervals": 1
                         },
-                        "test_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:54:25.798088149",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:56:24.817599253"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant": {
         "content": [
@@ -1149,7 +1139,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -1157,7 +1147,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -1165,7 +1155,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,35c3af1124cefb7ad924d629e3e42d18"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,93ca1dbde11f4ffe357409b559041aab"
                     ],
                     [
                         {
@@ -1173,7 +1163,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,35c3af1124cefb7ad924d629e3e42d18"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,93ca1dbde11f4ffe357409b559041aab"
                     ]
                 ],
                 "1": [
@@ -1183,7 +1173,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -1191,7 +1181,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -1199,7 +1189,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,248648ca03f5fda904ebbef8821e0e37"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,efb861c33cf51739a4ae13a2e81126b6"
                     ],
                     [
                         {
@@ -1207,7 +1197,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,248648ca03f5fda904ebbef8821e0e37"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,efb861c33cf51739a4ae13a2e81126b6"
                     ]
                 ],
                 "2": [
@@ -1217,7 +1207,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ],
                     [
                         {
@@ -1225,7 +1215,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,39be28a47650293e933324d0ee564780"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,6f9d7ac977950d643272de2db89da88c"
                     ],
                     [
                         {
@@ -1233,7 +1223,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,52bda0666863fbf13180f0d2e7c59d5f"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,027fe1c7c1ac4a573e58615b052d4cf6"
                     ],
                     [
                         {
@@ -1241,7 +1231,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,2b8baaf749374dbb9ba66ffed6aaeea0"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,20f0b8c07122470237f6c314ca29c2ee"
                     ]
                 ],
                 "3": [
@@ -1251,7 +1241,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ],
                     [
                         {
@@ -1259,7 +1249,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,411d4e1888c7790f760eec85bfc80d8c"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,9b0275713aab7c60a6c5725bab6f97f0"
                     ],
                     [
                         {
@@ -1267,7 +1257,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,5efd5a25bbedb280f0faa9ba2b3082af"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,7a0dae7f0b14f5f62b00d5edf0f5d4f7"
                     ],
                     [
                         {
@@ -1275,14 +1265,11 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,b650d693a5059e6f2b31ca07e3b58349"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,a98b9a16016c20c892d3af87714aed38"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -1291,7 +1278,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f8a637ec8f7a7556296a1480f173c9b9"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,8f000fc22ba06e5540a0cb46bd04e98b"
                     ],
                     [
                         {
@@ -1299,7 +1286,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,39be28a47650293e933324d0ee564780"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,6f9d7ac977950d643272de2db89da88c"
                     ],
                     [
                         {
@@ -1307,7 +1294,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,52bda0666863fbf13180f0d2e7c59d5f"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,027fe1c7c1ac4a573e58615b052d4cf6"
                     ],
                     [
                         {
@@ -1315,7 +1302,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,2b8baaf749374dbb9ba66ffed6aaeea0"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,20f0b8c07122470237f6c314ca29c2ee"
                     ]
                 ],
                 "gvcf_index": [
@@ -1325,7 +1312,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,8b0dc33b2a0cb6d3c954a1e32b303422"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,af9f62c8b025e5b4b6e547a786441aec"
                     ],
                     [
                         {
@@ -1333,7 +1320,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,411d4e1888c7790f760eec85bfc80d8c"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,9b0275713aab7c60a6c5725bab6f97f0"
                     ],
                     [
                         {
@@ -1341,7 +1328,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,5efd5a25bbedb280f0faa9ba2b3082af"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,7a0dae7f0b14f5f62b00d5edf0f5d4f7"
                     ],
                     [
                         {
@@ -1349,7 +1336,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,b650d693a5059e6f2b31ca07e3b58349"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,a98b9a16016c20c892d3af87714aed38"
                     ]
                 ],
                 "index": [
@@ -1359,7 +1346,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -1367,7 +1354,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,fe2236d3054b7a4ad963e61fa32f7b8c"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,596bf07400cd7bf706ac84ad5e2523eb"
                     ],
                     [
                         {
@@ -1375,7 +1362,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,248648ca03f5fda904ebbef8821e0e37"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,efb861c33cf51739a4ae13a2e81126b6"
                     ],
                     [
                         {
@@ -1383,7 +1370,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,248648ca03f5fda904ebbef8821e0e37"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,efb861c33cf51739a4ae13a2e81126b6"
                     ]
                 ],
                 "vcf": [
@@ -1393,7 +1380,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -1401,7 +1388,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,5970c62d0656905883275c228265e1bc"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,085bc3ce0856798cc7bfe77013479efc"
                     ],
                     [
                         {
@@ -1409,7 +1396,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,35c3af1124cefb7ad924d629e3e42d18"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,93ca1dbde11f4ffe357409b559041aab"
                     ],
                     [
                         {
@@ -1417,22 +1404,19 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,35c3af1124cefb7ad924d629e3e42d18"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,93ca1dbde11f4ffe357409b559041aab"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:53:51.055485723",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2026-01-28T20:06:31.814952825"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     },
     "2 samples - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1444,7 +1428,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1452,7 +1436,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1460,7 +1444,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1468,7 +1452,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -1478,7 +1462,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1486,7 +1470,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1494,7 +1478,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1502,7 +1486,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "2": [
@@ -1512,7 +1496,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1520,7 +1504,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1528,7 +1512,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1536,7 +1520,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "3": [
@@ -1546,7 +1530,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1554,7 +1538,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1562,7 +1546,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1570,14 +1554,11 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "4": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ],
                 "gvcf": [
                     [
@@ -1586,7 +1567,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1594,7 +1575,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1602,7 +1583,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1610,7 +1591,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "gvcf_index": [
@@ -1620,7 +1601,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1628,7 +1609,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1636,7 +1617,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1644,7 +1625,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.g.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "index": [
@@ -1654,7 +1635,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1662,7 +1643,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1670,7 +1651,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ],
                     [
                         {
@@ -1678,7 +1659,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz.tbi:md5,1f7f65ca1a1b41bec29194966ca37228"
                     ]
                 ],
                 "vcf": [
@@ -1688,7 +1669,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1696,7 +1677,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1704,7 +1685,7 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ],
                     [
                         {
@@ -1712,21 +1693,18 @@
                             "single_end": false,
                             "num_intervals": 2
                         },
-                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test2_genome.multi_intervals.bed_deepvariant.vcf.gz:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348",
-                    "versions.yml:md5,25dd934fccabb2b990ac1d8905603348"
+                    
                 ]
             }
         ],
+        "timestamp": "2026-03-20T09:56:10.946308994",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-13T13:59:08.045442686"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
     }
 }

@@ -30,7 +30,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
             ]
         ],
         "timestamp": "2026-03-11T12:12:36.533976113",
@@ -75,13 +75,13 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -116,7 +116,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
@@ -162,13 +162,13 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -203,7 +203,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
@@ -252,7 +252,7 @@
                 ]
             ],
             [
-                "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
             ]
         ],
         "timestamp": "2026-03-11T12:12:52.130318431",
@@ -281,10 +281,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -305,7 +305,7 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -342,13 +342,13 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
@@ -378,19 +378,19 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -409,13 +409,13 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
@@ -445,10 +445,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -461,7 +461,7 @@
                     ]
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -490,13 +490,13 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
@@ -526,19 +526,19 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
-                    
+
                 ],
                 "5": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -557,13 +557,13 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ],
                 "versions": [
-                    "versions.yml:md5,63e0b28ba82c7d13c76f35ae706098e9"
+
                 ]
             }
         ],
