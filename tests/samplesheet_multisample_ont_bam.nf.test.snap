@@ -1,12 +1,8 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            343,
+            312,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -240,6 +236,9 @@
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
                 },
                 "WHATSHAP_HAPLOTAG": {
                     "whatshap": 2.8
@@ -1225,10 +1224,10 @@
 
             ]
         ],
-        "timestamp": "2026-03-23T09:25:53.721298292",
+        "timestamp": "2026-03-20T17:26:50.050518319",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.0"
         }
     }
 }

@@ -3,10 +3,6 @@
         "content": [
             220,
             {
-                "ADD_FOUND_IN_TAG": {
-                    "bcftools": 1.2,
-                    "busybox_awk": "1.36.1"
-                },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
@@ -288,6 +284,9 @@
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
@@ -861,10 +860,10 @@
 
             ]
         ],
-        "timestamp": "2026-03-23T09:18:04.120449932",
+        "timestamp": "2026-03-20T17:19:06.377176344",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.0"
         }
     }
 }
