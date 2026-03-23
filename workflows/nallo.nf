@@ -38,6 +38,7 @@ include { VCF_CONCAT_NORM_VARIANTS                               } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -773,12 +774,20 @@ workflow NALLO {
     //
     if (!params.skip_snv_calling && !params.skip_peddy) {
 
-        if ()
-
-        CONCAT_SORT_RANKED_SNVS.out.vcf
-            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
-            .filter { meta, _vcf, _tbi -> meta.set == "research" }
-            .set { ch_peddy_in }
+        if (!params.skip_snv_annotation) {
+            // Use already concatenated VCFs
+            CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        } else {
+            // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
+             CONCAT_SORT_PEDDY (
+                family_snv_vcf
+            )
+            CONCAT_SORT_PEDDY.out.vcf
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        }
 
         PEDDY (
             ch_peddy_in,
