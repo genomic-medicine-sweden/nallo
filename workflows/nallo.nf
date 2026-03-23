@@ -318,21 +318,21 @@ workflow NALLO {
             ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
         }
 
+        //
+        // Create PED from samplesheet
+        //
+        ch_input
+            .map { meta, _files -> [ [ id: meta.project ], meta ] }
+            .groupTuple()
+            .set { ch_samplesheet_ped_in }
+
+        SAMPLESHEET_PED ( ch_samplesheet_ped_in )
+
+        SAMPLESHEET_PED.out.ped
+            .collect()
+            .set { ch_samplesheet_pedfile }
+
         if (!params.skip_sex_check) {
-            //
-            // Create PED from samplesheet
-            //
-            ch_input
-                .map { meta, _files -> [ [ id: meta.project ], meta ] }
-                .groupTuple()
-                .set { ch_samplesheet_ped_in }
-
-            SAMPLESHEET_PED ( ch_samplesheet_ped_in )
-
-            SAMPLESHEET_PED.out.ped
-                .collect()
-                .set { ch_samplesheet_pedfile }
-
             //
             // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
             //
@@ -354,7 +354,7 @@ workflow NALLO {
 
         else {
             ch_bam     = ch_aligned_bam.map { meta, bam, _bai -> [ meta, bam ] }
-            ch_bam_bai = ch_aligned_bam.map { meta, _bam, bai -> [ meta, bai ] }
+            ch_bam_bai = ch_aligned_bam
         }
 
     }
@@ -755,7 +755,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
-
 
     //
     // Ranks family VCFs per variant call region

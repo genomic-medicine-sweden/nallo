@@ -121,6 +121,8 @@ workflow PIPELINE_INITIALISATION {
     //
     //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
     //
+
+    /*
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
         chromograph      : ["mapping"],
@@ -134,6 +136,26 @@ workflow PIPELINE_INITIALISATION {
         snv_annotation   : ["mapping", "snv_calling"],
         phasing          : ["mapping", "snv_calling"],
         rank_variants    : ["mapping", "sex_check", "snv_calling", "snv_annotation", "sv_annotation"],
+        repeat_calling   : ["mapping", "snv_calling", "phasing"],
+        repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+        methylation      : ["mapping", "snv_calling"],
+        gens             : ["mapping", "snv_calling"],
+    ]
+    */
+
+    def workflowDependencies = [
+        call_paralogs    : ["mapping"],
+        chromograph      : ["mapping"],
+        snv_calling      : ["mapping"],
+        qc               : ["mapping"],
+        sambamba_depth   : ["mapping"],
+        sv_calling       : ["mapping"],
+        annotate_paralogs: ["mapping", "call_paralogs"],
+        sv_annotation    : ["mapping", "sv_calling"],
+        peddy            : ["mapping", "snv_calling"],
+        snv_annotation   : ["mapping", "snv_calling"],
+        phasing          : ["mapping", "snv_calling"],
+        rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation      : ["mapping", "snv_calling"],
@@ -248,6 +270,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
+
+        // Check that sex check is not skipped if there are samples with unknown sex
+        validateRequiresSexCheck(ch_samplesheet, params)
 
         // Check that there's no more than one project
         validateSingleProjectPerRun(ch_samplesheet)
@@ -618,6 +643,28 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
         .subscribe { familyList ->
             if (familyList) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
+            }
+        }
+}
+
+// SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expasions with TRGT require known sex.
+// This is a convenience function to fail early if there are samples without known sex.
+def validateRequiresSexCheck(ch_samplesheet, params) {
+
+    if (!params.skip_sex_check) {
+        return
+    }
+
+    def samplesWithUnknownSex = ch_samplesheet
+        .map { meta, _reads -> [ meta.id, meta.sex ] }
+        .filter { _id, sex -> sex == 0 }
+
+    samplesWithUnknownSex
+        .map { sample, _sex -> sample }
+        .collect()
+        .subscribe { sampleList ->
+            if (sampleList && ( !params.skip_snv_calling || ( !params.skip_methylation_calling && params.run_methbat == true ) || !params.skip_peddy || !params.skip_prepare_gens_input || ( !params.skip_repeat_calling && params.str_caller == 'trgt' ))) {
+                error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
 }
