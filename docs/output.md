@@ -138,7 +138,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Somalier
 
-[somalier](https://github.com/brentp/somalier) checks relatedness and sex.
+When `--skip_sex_check` is disabled, [somalier](https://github.com/brentp/somalier) checks relatedness and sex.
 
 | Path                                                 | Description                                            |
 | ---------------------------------------------------- | ------------------------------------------------------ |
