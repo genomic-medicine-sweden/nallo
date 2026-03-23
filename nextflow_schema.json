@@ -110,6 +110,11 @@
                     "type": "boolean",
                     "description": "Skip preparing input data for Gens",
                     "default": false
+                },
+                "skip_sex_check": {
+                    "type": "boolean",
+                    "description": "Skip sex check",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"

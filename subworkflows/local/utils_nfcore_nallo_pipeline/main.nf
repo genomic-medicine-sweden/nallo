@@ -115,6 +115,7 @@ workflow PIPELINE_INITIALISATION {
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
         gens             : "skip_prepare_gens_input",
+        sex_check        : "skip_sex_check",
     ]
 
     //
@@ -123,16 +124,16 @@ workflow PIPELINE_INITIALISATION {
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
         chromograph      : ["mapping"],
-        snv_calling      : ["mapping"],
-        qc               : ["mapping"],
+        snv_calling      : ["mapping", "sex_check"],
+        qc               : ["mapping", "sex_check"],
         sambamba_depth   : ["mapping"],
-        sv_calling       : ["mapping"],
+        sv_calling       : ["mapping", "sex_check"],
         annotate_paralogs: ["mapping", "call_paralogs"],
         sv_annotation    : ["mapping", "sv_calling"],
         peddy            : ["mapping", "snv_calling"],
         snv_annotation   : ["mapping", "snv_calling"],
         phasing          : ["mapping", "snv_calling"],
-        rank_variants    : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
+        rank_variants    : ["mapping", "sex_check", "snv_calling", "snv_annotation", "sv_annotation"],
         repeat_calling   : ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation      : ["mapping", "snv_calling"],
@@ -144,7 +145,7 @@ workflow PIPELINE_INITIALISATION {
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
-        mapping          : ["fasta", "somalier_sites"],
+        mapping          : ["fasta"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
         sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
@@ -155,6 +156,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
         gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
+        sex_check        : ["somalier_sites"],
     ]
 
     def parameterStatus = [
@@ -177,6 +179,7 @@ workflow PIPELINE_INITIALISATION {
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
             skip_prepare_gens_input : params.skip_prepare_gens_input,
+            skip_sex_check          : params.skip_sex_check,
         ],
         files: [
             par_regions                 : params.par_regions,
