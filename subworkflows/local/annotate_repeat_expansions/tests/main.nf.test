@@ -58,6 +58,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ]).collect()
                 input[4] = false
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }

@@ -2,23 +2,22 @@
 // A subworkflow to add most severe consequence and pli to a vep annotated vcf
 //
 
-include { ADD_MOST_SEVERE_CSQ } from '../../../modules/local/add_most_severe_consequence/main'
-include { ADD_MOST_SEVERE_PLI } from '../../../modules/local/add_most_severe_pli/main'
-include { TABIX_BGZIPTABIX    } from '../../../modules/nf-core/tabix/bgziptabix/main'
-
+include { CUSTOM_ADDMOSTSEVERECONSEQUENCE } from '../../../modules/nf-core/custom/addmostsevereconsequence/main'
+include { CUSTOM_ADDMOSTSEVEREPLI         } from '../../../modules/nf-core/custom/addmostseverepli/main'
+include { TABIX_TABIX                     } from '../../../modules/nf-core/tabix/tabix/main'
 workflow ANNOTATE_CSQ_PLI {
     take:
     ch_vcf                  // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
-    ADD_MOST_SEVERE_CSQ (ch_vcf, ch_variant_consequences)
+    CUSTOM_ADDMOSTSEVERECONSEQUENCE (ch_vcf, ch_variant_consequences)
 
-    ADD_MOST_SEVERE_PLI (ADD_MOST_SEVERE_CSQ.out.vcf)
+    CUSTOM_ADDMOSTSEVEREPLI (CUSTOM_ADDMOSTSEVERECONSEQUENCE.out.vcf)
 
-    TABIX_BGZIPTABIX (ADD_MOST_SEVERE_PLI.out.vcf)
+    TABIX_TABIX (CUSTOM_ADDMOSTSEVEREPLI.out.vcf)
 
     emit:
-    vcf      = TABIX_BGZIPTABIX.out.gz_index.map { meta, vcf, _index -> [ meta, vcf ] }   // channel: [ val(meta), path(vcf) ]
-    tbi      = TABIX_BGZIPTABIX.out.gz_index.map { meta, _vcf, index -> [ meta, index ] } // channel: [ val(meta), path(tbi) ]
+    vcf = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
 }

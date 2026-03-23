@@ -111,6 +111,18 @@
                         "git_sha": "a8c26e293e72d224e367cc7af8cce589ce008480",
                         "installed_by": ["modules"]
                     },
+                    "custom/addmostsevereconsequence": {
+                        "branch": "master",
+                        "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/custom/addmostsevereconsequence/custom-addmostsevereconsequence.diff"
+                    },
+                    "custom/addmostseverepli": {
+                        "branch": "master",
+                        "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/custom/addmostseverepli/custom-addmostseverepli.diff"
+                    },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",
                         "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
@@ -420,6 +432,11 @@
                         "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
+                    },
+                    "vcfexpress": {
+                        "branch": "master",
+                        "git_sha": "25e9c8a35e761e5f067bb615cd1080fb2942e71e",
+                        "installed_by": ["modules"]
                     },
                     "whatshap/haplotag": {
                         "branch": "master",

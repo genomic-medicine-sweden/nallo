@@ -91,6 +91,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -151,6 +152,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -212,6 +214,7 @@ nextflow_workflow {
                 input[12] = true
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -267,6 +270,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -322,6 +326,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = false
                 input[14] = false
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -381,6 +386,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -439,6 +445,7 @@ nextflow_workflow {
                 input[12] = true
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -495,6 +502,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -548,6 +556,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = true
+                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }

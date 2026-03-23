@@ -32,7 +32,6 @@ nextflow_workflow {
     }
 
     test("[bam, bai], fasta, fai, bed") {
-
         when {
             workflow {
                 """
@@ -47,6 +46,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -80,6 +80,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
