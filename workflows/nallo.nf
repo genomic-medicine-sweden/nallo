@@ -609,10 +609,10 @@ workflow NALLO {
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
-            ch_ped_family,
             params.phaser,
             !params.skip_sv_calling,
-            cram_output
+            cram_output,
+            ch_ped_family
         )
         ch_versions = ch_versions.mix(PHASING.out.versions)
 
