@@ -261,8 +261,6 @@ workflow CALL_SVS {
         [],
     )
 
-    BCFTOOLS_QUERY.out.output.view()
-
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
