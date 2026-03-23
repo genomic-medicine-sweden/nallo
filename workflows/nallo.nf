@@ -728,7 +728,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if (split_family_vcf_for_chromograph) {
+    if(split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -742,7 +742,9 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
         )
+    }
 
+    if (split_family_vcf_for_chromograph) {
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
@@ -766,6 +768,33 @@ workflow NALLO {
         )
     }
 
+    //
+    // Run Peddy
+    //
+    if (!params.skip_snv_calling && !params.skip_peddy) {
+
+        if ()
+
+        CONCAT_SORT_RANKED_SNVS.out.vcf
+            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
+            .filter { meta, _vcf, _tbi -> meta.set == "research" }
+            .set { ch_peddy_in }
+
+        PEDDY (
+            ch_peddy_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_versions = ch_versions.mix(PEDDY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+
+    }
+
     if (!val_skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
@@ -773,6 +802,59 @@ workflow NALLO {
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : channel.empty(),
             val_plot_chromograph_coverage,
             val_plot_chromograph_autozygosity,
+        )
+        ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
+    }
+
+
+    //
+    // Ranks family VCFs per variant call region
+    // Can only run if samplesheet has affected samples
+    //
+    if(!params.skip_rank_variants) {
+
+        // Create PED with updated sex - per family
+        SOMALIER_PED_FAMILY (
+            ch_bam
+                .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
+                .groupTuple()
+        )
+
+        // Give PED file SNV meta so they can be joined later in the subworkflow.
+        // Since we don't always have matching number of ped files and call regions
+        // we need to combine and filter instead of join
+        ANN_CSQ_PLI_SNV.out.vcf
+            .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
+            .combine ( SOMALIER_PED_FAMILY.out.ped )
+            .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
+            .map { _family_id_snv, meta, _family_id_ped, ped -> [ meta, ped ] }
+            .set { ch_snv_ranking_ped_file }
+
+        // Only run if we have affected individuals
+        RANK_VARIANTS_SNV (
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
+            ch_genmod_reduced_penetrance,
+            ch_genmod_score_config_snvs
+        )
+
+        RANK_VARIANTS_SNV.out.vcf
+            .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .set { ch_vcf_tbi_per_region }
+    }
+
+    //
+    // Concatenate and sort ranked SNVs, sort and publish
+    //
+    if(!params.skip_snv_calling) {
+
+        ch_vcf_tbi_per_region
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_concat_sort_input }
+
+        CONCAT_SORT_RANKED_SNVS (
+            ch_concat_sort_input
         )
     }
 
