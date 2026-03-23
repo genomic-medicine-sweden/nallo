@@ -114,7 +114,7 @@
                     "gatk4": "4.6.2.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.10.2"
@@ -157,10 +157,10 @@
                     "mosdepth": "0.3.11"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "MOSDEPTH_GATK_HEADER": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.30-r1287",
@@ -1307,7 +1307,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-18T10:13:36.839983084",
+        "timestamp": "2026-03-23T09:22:00.534899936",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
