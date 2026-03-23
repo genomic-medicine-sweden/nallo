@@ -439,6 +439,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/untar/untar.diff"
                     },
+                    "vcfexpress": {
+                        "branch": "master",
+                        "git_sha": "25e9c8a35e761e5f067bb615cd1080fb2942e71e",
+                        "installed_by": ["modules"]
+                    },
                     "whatshap/haplotag": {
                         "branch": "master",
                         "git_sha": "338fb5f53d9901c150e9b561b3be59324c05798f",

@@ -124,6 +124,7 @@ workflow NALLO {
     ch_sentieon_female_diploid_bed  = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_diploid_bed    = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_haploid_bed    = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
+    ch_vcfexpress_prelude           = file("$projectDir/assets/vcf_express_found_in_prelude.lua")
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -455,6 +456,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             params.snv_caller,
+            ch_vcfexpress_prelude
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
@@ -474,8 +476,8 @@ workflow NALLO {
             variants_to_concat_per_sample,
             ch_fasta,
             params.snv_caller,
+            ch_vcfexpress_prelude
         )
-        ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
         // These contains RefCalls
         sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf
@@ -550,7 +552,8 @@ workflow NALLO {
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
             params.create_hificnv_maf_track,
-            params.create_sawfish_maf_track
+            params.create_sawfish_maf_track,
+            ch_vcfexpress_prelude
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
@@ -940,7 +943,8 @@ workflow NALLO {
                 ch_fasta,
                 ch_fai,
                 ch_str_bed,
-                cram_output
+                cram_output,
+                ch_vcfexpress_prelude
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
@@ -949,7 +953,8 @@ workflow NALLO {
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
                 ch_fai,
-                ch_str_bed
+                ch_str_bed,
+                ch_vcfexpress_prelude
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
