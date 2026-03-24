@@ -768,8 +768,8 @@ workflow NALLO {
     if (!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[], []],
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[], []],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : channel.empty(),
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )

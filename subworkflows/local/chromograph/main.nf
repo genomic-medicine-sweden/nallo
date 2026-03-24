@@ -18,8 +18,8 @@ workflow CHROMOGRAPH {
 
     main:
     ch_versions = channel.empty()
-    ch_autozyg  = channel.of([[], []])
-    ch_coverage = channel.of([[], []])
+    ch_autozyg  = channel.empty()
+    ch_coverage = channel.empty()
 
 
     if (plot_coverage) {
@@ -77,8 +77,8 @@ workflow CHROMOGRAPH {
     }
 
     // Combine and filter only if there's data
-    ch_autozyg
-        .combine(ch_coverage)
+    ch_autozyg.ifEmpty([[],[]])
+        .combine(ch_coverage.ifEmpty([[],[]]))
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
             if(!autozyg_meta || !coverage_meta)
                 return true
