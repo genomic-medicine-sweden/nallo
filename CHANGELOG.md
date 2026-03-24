@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
+- [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping ranking variants
 
 ### Parameters
 
