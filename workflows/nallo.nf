@@ -416,7 +416,7 @@ workflow NALLO {
                 .set { ch_bed_mitochondrial_to_mix }
 
             SCATTER_GENOME.out.bed_nuclear_intervals
-                .mix(SCATTER_GENOME.out.bed_mitochondrial)
+                .mix(ch_bed_mitochondrial_to_mix)
                 .map { _meta, bed, _num_intervals -> bed }
                 .collect()
                 .map { beds -> beds.size() }
