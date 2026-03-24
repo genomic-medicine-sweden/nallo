@@ -415,7 +415,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
     def softwareReferences = yaml.load(references_yaml.text).tool
 
     def unwantedReferences = ['genomic-medicine-sweden/nallo', 'Nextflow']
-    // These are not collected in ch_versions but should be referenced
+    // These are not collected in versions topic but should be referenced
     def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     extractSoftwareFromTopics(ch_topic_versions_string)
