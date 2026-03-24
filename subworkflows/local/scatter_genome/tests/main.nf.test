@@ -122,7 +122,7 @@ nextflow_workflow {
     }
 
     test("[], bed, false, 5 - should fail due to too few intervals in bed file") {
-        tag "test_to_test"
+
         when {
             workflow {
                 """
