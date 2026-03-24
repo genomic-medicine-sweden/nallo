@@ -682,7 +682,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:36:54.464947369"
+        "timestamp": "2026-03-24T17:16:08.369574603"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1366,7 +1366,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:36:11.008406222"
+        "timestamp": "2026-03-24T17:15:28.430001047"
     },
     "Test alignment without genome assembly": {
         "content": [

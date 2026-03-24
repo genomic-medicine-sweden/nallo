@@ -455,7 +455,7 @@
                     },
                     "yak/count": {
                         "branch": "master",
-                        "git_sha": "4b8ac76f87484f4342a30e8c95d357a8fb8f2aba",
+                        "git_sha": "5e46c67ac374e975e9528ba86fd8f7a35a99182c",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/yak/count/yak-count.diff"
                     }

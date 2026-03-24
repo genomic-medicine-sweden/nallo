@@ -292,6 +292,9 @@
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                },
+                "YAK_COUNT": {
+                    "yak": "0.1-r69-dirty"
                 }
             },
             [
@@ -1308,6 +1311,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T17:43:26.318236603"
+        "timestamp": "2026-03-24T16:35:27.68420414"
     }
 }
