@@ -146,7 +146,7 @@ Turned off with `--skip_alignment`.
 
 #### Sex check
 
-Some subworkflows are sex-dependent and need a sex-inference step if the metadata is 'unknown'. This step requires `--somalier_sites`.
+Some subworkflows are sex-dependent and need a sex-inference step if samples are input with unknown sex. This step requires `--somalier_sites`.
 
 | Parameter        | Description                                                                                                                                                                    |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
