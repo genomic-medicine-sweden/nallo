@@ -18,6 +18,7 @@ nextflow_pipeline {
                 filter_snvs_expression       = "-i 'AQ>20'"
                 filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
                 paraphrase_output_format     = 'json'
+                skip_sex_check               = true
             }
         }
 

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            360,
+            356,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -172,9 +172,6 @@
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
                 },
-                "RELATE_RELATE": {
-                    "somalier": "0.2.18"
-                },
                 "RHOCALL_VIZ": {
                     "rhocall": "0.5.1"
                 },
@@ -220,9 +217,6 @@
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
-                },
-                "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -562,17 +556,11 @@
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/multiqc_data/multiqc_peddy.txt",
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_somalier.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
                 "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
                 "multiqc/multiqc_data/peddy_het_check_plot.txt",
                 "multiqc/multiqc_data/peddy_relatedness_plot.txt",
-                "multiqc/multiqc_data/somalier_het_check_plot.txt",
-                "multiqc/multiqc_data/somalier_relatedness_heatmap_plot.txt",
-                "multiqc/multiqc_data/somalier_relatedness_plot.txt",
-                "multiqc/multiqc_data/somalier_sex_check_plot.txt",
-                "multiqc/multiqc_data/somalier_stats.txt",
                 "multiqc/multiqc_data/whatshap-stats-table.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
@@ -603,11 +591,6 @@
                 "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
                 "multiqc/multiqc_plots/pdf/peddy_relatedness_plot.pdf",
-                "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
-                "multiqc/multiqc_plots/pdf/somalier_relatedness_heatmap_plot.pdf",
-                "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
-                "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
-                "multiqc/multiqc_plots/pdf/somalier_stats.pdf",
                 "multiqc/multiqc_plots/pdf/whatshap-stats-table.pdf",
                 "multiqc/multiqc_plots/png",
                 "multiqc/multiqc_plots/png/bcftools-stats-subtypes-cnt.png",
@@ -637,11 +620,6 @@
                 "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
                 "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
                 "multiqc/multiqc_plots/png/peddy_relatedness_plot.png",
-                "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
-                "multiqc/multiqc_plots/png/somalier_relatedness_heatmap_plot.png",
-                "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
-                "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
-                "multiqc/multiqc_plots/png/somalier_stats.png",
                 "multiqc/multiqc_plots/png/whatshap-stats-table.png",
                 "multiqc/multiqc_plots/svg",
                 "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-cnt.svg",
@@ -671,11 +649,6 @@
                 "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
                 "multiqc/multiqc_plots/svg/peddy_relatedness_plot.svg",
-                "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
-                "multiqc/multiqc_plots/svg/somalier_relatedness_heatmap_plot.svg",
-                "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
-                "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
-                "multiqc/multiqc_plots/svg/somalier_stats.svg",
                 "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
                 "multiqc/multiqc_report.html",
                 "paraphase",
@@ -814,12 +787,6 @@
                 "qc/sambamba_depth/HG003/HG003_sambamba_depth.bed",
                 "qc/sambamba_depth/HG004",
                 "qc/sambamba_depth/HG004/HG004_sambamba_depth.bed",
-                "qc/somalier",
-                "qc/somalier/relate",
-                "qc/somalier/relate/test",
-                "qc/somalier/relate/test/test.html",
-                "qc/somalier/relate/test/test.pairs.tsv",
-                "qc/somalier/relate/test/test.samples.tsv",
                 "repeats",
                 "repeats/family",
                 "repeats/family/FAM",
@@ -1109,12 +1076,11 @@
                 "mosdepth_cumcov_dist.txt:md5,039b6746601f73e198fd4b7f55f84fcd",
                 "mosdepth_perchrom.txt:md5,b8464a5ff5937572d404c0caba1ae4d0",
                 "multiqc_bcftools_stats.txt:md5,d39dbd786824e64ab59bf161aaf13bde",
-                "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
+                "multiqc_citations.txt:md5,fd94ebcbd9e5bbdf8757b8873e5bf3e0",
                 "multiqc_fastqc.txt:md5,cded57a1a32e92f2ad42d0dbe3d3826b",
                 "multiqc_general_stats.txt:md5,d8021476724ee7b2f4f74f3606433b36",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,6a31b62f39d5b58daa8529ef8cb9e0aa",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
-                "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
                 "whatshap-stats-table.txt:md5,005d86ac3cac9ea33e2ad2c9226dbf82",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,5e904df1ea10c02ae70169e46b45f16c",
@@ -1230,7 +1196,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1303,10 +1269,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-20T17:22:28.981882932",
+        "timestamp": "2026-03-24T16:37:31.949581813",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
