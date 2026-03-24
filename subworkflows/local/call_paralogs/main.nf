@@ -60,7 +60,7 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_MERGE(
         ch_reheadered_vcf_tbis_per_family,
-        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true),
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
     if (cram_output) {
