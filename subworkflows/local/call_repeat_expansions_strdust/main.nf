@@ -45,7 +45,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     emit:
     sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]
     sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
-    family_vcf  = BCFTOOLS_MERGE.out.vcf.view()   // channel: [ val(meta), path(vcf) ]
+    family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
     family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
 
 }
