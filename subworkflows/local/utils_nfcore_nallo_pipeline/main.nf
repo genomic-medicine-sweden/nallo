@@ -121,28 +121,6 @@ workflow PIPELINE_INITIALISATION {
     //
     //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
     //
-
-    /*
-    def workflowDependencies = [
-        call_paralogs    : ["mapping"],
-        chromograph      : ["mapping"],
-        snv_calling      : ["mapping", "sex_check"],
-        qc               : ["mapping", "sex_check"],
-        sambamba_depth   : ["mapping"],
-        sv_calling       : ["mapping", "sex_check"],
-        annotate_paralogs: ["mapping", "call_paralogs"],
-        sv_annotation    : ["mapping", "sv_calling"],
-        peddy            : ["mapping", "snv_calling"],
-        snv_annotation   : ["mapping", "snv_calling"],
-        phasing          : ["mapping", "snv_calling"],
-        rank_variants    : ["mapping", "sex_check", "snv_calling", "snv_annotation", "sv_annotation"],
-        repeat_calling   : ["mapping", "snv_calling", "phasing"],
-        repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        methylation      : ["mapping", "snv_calling"],
-        gens             : ["mapping", "snv_calling"],
-    ]
-    */
-
     def workflowDependencies = [
         call_paralogs    : ["mapping"],
         chromograph      : ["mapping"],
