@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
-- [#957] (https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter
+- [#957] (https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
 
 ### Changed
 
@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Changed to topic versions in `CREATE_PEDIGREE_FILE`
 - [#953](https://github.com/genomic-medicine-sweden/nallo/pull/953) - Changed to topic versions for local module `ECHTVAR_ANNO`
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 
 ### Removed
 

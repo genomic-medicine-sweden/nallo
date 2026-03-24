@@ -625,7 +625,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
         }
 }
 
-// SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expasions with TRGT require known sex.
+// SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
 // This is a convenience function to fail early if there are samples without known sex.
 def validateRequiresSexCheck(ch_samplesheet, params) {
 
