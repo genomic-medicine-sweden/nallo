@@ -4,7 +4,7 @@ include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftoo
 include { GAWK                           } from '../../../modules/nf-core/gawk/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
-include { findKeysForValue } from '../utils_nfcore_nallo_pipeline/main.nf'
+
 workflow CALL_PARALOGS {
     take:
     bam_bai     // channel: [ val(meta), bam, bai ]
