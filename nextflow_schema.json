@@ -735,12 +735,12 @@
                 "vep_mitochondrial_genome_distance": {
                     "type": "integer",
                     "default": 0,
-                    "description": "The distance parameter used in vep snv for mitochondrial variants"
+                    "description": "The distance parameter used in VEP for mitochondrial SNVs"
                 },
                 "vep_nuclear_genome_distance": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "The distance parameter used in vep snv for nuclear variants"
+                    "description": "The distance parameter used in VEP for nuclear SNVs"
                 },
                 "vep_plugin_files": {
                     "type": "string",
