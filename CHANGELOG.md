@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
-- [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
+- [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
 
 ### Changed
@@ -21,13 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
 - [#943](https://github.com/genomic-medicine-sweden/nallo/pull/943) - Updated DeepVariant to 1.10.0
 - [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
-- [#935] (https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
+- [#935](https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
 - [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
 - [#948](https://github.com/genomic-medicine-sweden/nallo/pull/948) - Replaced local modules `add_most_severe_consequence` and `add_most_severe_pli` with nf-core versions to lessen maintenance burden of local modules
 - [#949](https://github.com/genomic-medicine-sweden/nallo/pull/949) - Replaced local HiFiCNV module with nf-core version to lessen maintenance burden of local modules
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Changed to topic versions in `CREATE_PEDIGREE_FILE`
 - [#953](https://github.com/genomic-medicine-sweden/nallo/pull/953) - Changed to topic versions for local module `ECHTVAR_ANNO`
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 
 ### Removed
 
@@ -48,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_heterozygous_allele_frequency` |
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
+|               | `--skip_sex_check`                             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
