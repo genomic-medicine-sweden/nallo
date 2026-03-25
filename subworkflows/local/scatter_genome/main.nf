@@ -67,7 +67,9 @@ workflow SCATTER_GENOME {
         }
         .set { ch_bed_genomes }
 
-        ch_bed_genomes.mitochondrial.map { meta, bed -> [meta.subMap('genome'), bed, 1] }.set { ch_bed_genomes_mitochondrial }
+        ch_bed_genomes.mitochondrial
+            .map { meta, bed -> [meta, bed, 1] }
+            .set { ch_bed_genomes_mitochondrial }
 
     // Make bed interval if split_n > 1, otherwise just pass the bed file through
     if (split_n > 1) {
@@ -80,13 +82,22 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
-        // Create a channel with the bed file and the total number of intervals (for groupKey in nallo.nf)
-        BEDTOOLS_SPLIT.out.beds
-            .map { meta, beds -> [meta.subMap('genome'), beds] }
-            .collect()
-            .map { meta, beds -> [meta, beds, beds.size()] }
+        // Add the bed count to the channel, so we can check later if the number of intervals is correct
+        add_bed_count(BEDTOOLS_SPLIT.out.beds.map { meta, beds -> [meta, beds, split_n] })
             .transpose()
             .set { ch_bed_intervals }
+
+        // Make sure that the mitochondrial bed file is not empty
+        ch_bed_genomes_mitochondrial
+            .filter { _meta, bed, _num_intervals -> bed.size() > 0 }
+            .set { ch_bed_mitochondrial_to_mix }
+
+        // Add the bed count and mix the nuclear and mitochondrial channels
+        add_bed_count(ch_bed_intervals
+            .mix(ch_bed_mitochondrial_to_mix))
+            .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
+            .dump(tag: "ch_bed_nuclear_mitochondrial")
+            .set { ch_bed_nuclear_mitochondrial }
 
         /*
          * Since we don't check beforehand how many intervals it's possible to split the bed file into,
@@ -114,8 +125,19 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed                   = BEDTOOLS_MERGE.out.bed       // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals = ch_bed_intervals             // channel: [ val(meta), path(bed), val(num_intervals) ]
-    bed_mitochondrial     = ch_bed_genomes_mitochondrial // channel: [ val(meta), path(bed), val(num_intervals) ]
-    versions              = ch_versions                  // channel: [ versions.yml ]
+    bed                       = BEDTOOLS_MERGE.out.bed       // channel: [ val(meta), path(bed) ]
+    bed_nuclear_intervals     = ch_bed_intervals             // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed_nuclear_mitochondrial = ch_bed_nuclear_mitochondrial // channel: [ val(meta), path(bed), val(num_intervals) ]
+    versions                  = ch_versions                  // channel: [ versions.yml ]
+}
+// Function to add the bed count to a channel
+def add_bed_count(channel_with_beds) {
+    def bed_count = channel_with_beds
+        .map { _meta, bed, _num_intervals -> bed }
+        .collect()
+        .map { beds -> beds.size() }
+
+    channel_with_beds
+        .map { meta, bed, _num_intervals -> [meta, bed] }
+        .combine(bed_count)
 }

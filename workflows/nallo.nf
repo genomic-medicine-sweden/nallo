@@ -411,23 +411,8 @@ workflow NALLO {
         // Mix the nuclear and mitochondrial genome bed files back together to feed to CALL_SNVS
         if (params.mitochondrial_caller == "deepvariant") {
 
-            SCATTER_GENOME.out.bed_mitochondrial
-                .filter { _meta, bed, _num_intervals -> bed.size() > 0 }
-                .set { ch_bed_mitochondrial_to_mix }
-
-            SCATTER_GENOME.out.bed_nuclear_intervals
-                .mix(ch_bed_mitochondrial_to_mix)
-                .map { _meta, bed, _num_intervals -> bed }
-                .collect()
-                .map { beds -> beds.size() }
-                .set { num_bed_files_for_snv_calling }
-
-            SCATTER_GENOME.out.bed_nuclear_intervals
-                .mix(ch_bed_mitochondrial_to_mix)
-                .map { meta, bed, _num_intervals -> [meta, bed] }
-                .combine(num_bed_files_for_snv_calling)
+            SCATTER_GENOME.out.bed_nuclear_mitochondrial
                 .set { ch_bed_intervals }
-
         }
         else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
