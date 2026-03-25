@@ -15,6 +15,7 @@ workflow SCATTER_GENOME {
     ch_versions = channel.empty()
     ch_bed = channel.empty()
     ch_bed_intervals = channel.empty()
+    ch_bed_nuclear_mitochondrial = channel.empty()
 
    /*
     * If no BED-file is provided then build intervals from reference
@@ -67,9 +68,9 @@ workflow SCATTER_GENOME {
         }
         .set { ch_bed_genomes }
 
-        ch_bed_genomes.mitochondrial
-            .map { meta, bed -> [meta, bed, 1] }
-            .set { ch_bed_genomes_mitochondrial }
+        ch_bed_genomes.nuclear
+            .map { meta, bed -> [meta.subMap('genome'), bed, 1] }
+            .set { ch_bed_intervals }
 
     // Make bed interval if split_n > 1, otherwise just pass the bed file through
     if (split_n > 1) {
@@ -83,20 +84,19 @@ workflow SCATTER_GENOME {
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
         // Add the bed count to the channel, so we can check later if the number of intervals is correct
-        add_bed_count(BEDTOOLS_SPLIT.out.beds.map { meta, beds -> [meta, beds, split_n] })
+        BEDTOOLS_SPLIT.out.beds
             .transpose()
             .set { ch_bed_intervals }
 
         // Make sure that the mitochondrial bed file is not empty
-        ch_bed_genomes_mitochondrial
-            .filter { _meta, bed, _num_intervals -> bed.size() > 0 }
+        ch_bed_genomes.mitochondrial
+            .filter { _meta, bed -> bed.size() > 0 }
             .set { ch_bed_mitochondrial_to_mix }
 
         // Add the bed count and mix the nuclear and mitochondrial channels
         add_bed_count(ch_bed_intervals
             .mix(ch_bed_mitochondrial_to_mix))
             .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
-            .dump(tag: "ch_bed_nuclear_mitochondrial")
             .set { ch_bed_nuclear_mitochondrial }
 
         /*
@@ -133,11 +133,10 @@ workflow SCATTER_GENOME {
 // Function to add the bed count to a channel
 def add_bed_count(channel_with_beds) {
     def bed_count = channel_with_beds
-        .map { _meta, bed, _num_intervals -> bed }
+        .map { _meta, bed -> bed }
         .collect()
         .map { beds -> beds.size() }
 
     channel_with_beds
-        .map { meta, bed, _num_intervals -> [meta, bed] }
         .combine(bed_count)
 }

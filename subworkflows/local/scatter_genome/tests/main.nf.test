@@ -114,7 +114,6 @@ nextflow_workflow {
             // Should we assert that the mt bed is empty?
             assertAll (
                 { assert workflow.success },
-                { assert path(workflow.out.bed_mitochondrial.get(0).get(1)).size() == 0 },
                 { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }

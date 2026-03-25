@@ -13,17 +13,17 @@
                 "1": [
                     [
                         {
+                            "id": "chr22",
                             "genome": "nuclear"
                         },
-                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
-                        2
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3"
                     ],
                     [
                         {
+                            "id": "chr22",
                             "genome": "nuclear"
                         },
-                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
-                        2
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604"
                     ]
                 ],
                 "2": [
@@ -32,7 +32,21 @@
                             "genome": "mitochondrial"
                         },
                         "chr22_mitochondrial.bed:md5,079a4d535599ed9127c528283e9e5611",
-                        1
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        3
                     ]
                 ],
                 "3": [
@@ -48,29 +62,43 @@
                         "chr22_merged.bed:md5,c4f4fb094582b255e0f51e7163bdbf3c"
                     ]
                 ],
-                "bed_mitochondrial": [
+                "bed_nuclear_intervals": [
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3"
+                    ],
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604"
+                    ]
+                ],
+                "bed_nuclear_mitochondrial": [
                     [
                         {
                             "genome": "mitochondrial"
                         },
                         "chr22_mitochondrial.bed:md5,079a4d535599ed9127c528283e9e5611",
-                        1
-                    ]
-                ],
-                "bed_nuclear_intervals": [
+                        3
+                    ],
                     [
                         {
                             "genome": "nuclear"
                         },
                         "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
-                        2
+                        3
                     ],
                     [
                         {
                             "genome": "nuclear"
                         },
                         "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
-                        2
+                        3
                     ]
                 ],
                 "versions": [
@@ -85,7 +113,7 @@
                 "chrM\t0\t1000"
             ]
         ],
-        "timestamp": "2026-03-20T15:47:45.731390288",
+        "timestamp": "2026-03-25T17:17:34.33432591",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -105,6 +133,22 @@
                 "1": [
                     [
                         {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
                             "genome": "nuclear"
                         },
                         "chr22_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -116,15 +160,6 @@
                         },
                         "chr22_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
                         2
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "genome": "mitochondrial"
-                        },
-                        "chr22_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
                     ]
                 ],
                 "3": [
@@ -140,16 +175,23 @@
                         "chr22_merged.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "bed_mitochondrial": [
+                "bed_nuclear_intervals": [
                     [
                         {
-                            "genome": "mitochondrial"
+                            "id": "chr22",
+                            "genome": "nuclear"
                         },
-                        "chr22_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
+                        "chr22_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "bed_nuclear_intervals": [
+                "bed_nuclear_mitochondrial": [
                     [
                         {
                             "genome": "nuclear"
@@ -175,7 +217,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-20T15:47:56.676055199",
+        "timestamp": "2026-03-25T17:17:42.461225302",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -195,6 +237,22 @@
                 "1": [
                     [
                         {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3"
+                    ],
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
                             "genome": "nuclear"
                         },
                         "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
@@ -206,15 +264,6 @@
                         },
                         "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
                         2
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "genome": "mitochondrial"
-                        },
-                        "chr22_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
                     ]
                 ],
                 "3": [
@@ -230,16 +279,23 @@
                         "chr22_merged.bed:md5,29309c2d7e370d817ed616f7ba7f1c4c"
                     ]
                 ],
-                "bed_mitochondrial": [
+                "bed_nuclear_intervals": [
                     [
                         {
-                            "genome": "mitochondrial"
+                            "id": "chr22",
+                            "genome": "nuclear"
                         },
-                        "chr22_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3"
+                    ],
+                    [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604"
                     ]
                 ],
-                "bed_nuclear_intervals": [
+                "bed_nuclear_mitochondrial": [
                     [
                         {
                             "genome": "nuclear"
@@ -266,7 +322,7 @@
                 "chr22\t2000\t3000"
             ]
         ],
-        "timestamp": "2026-03-20T15:48:08.986540151",
+        "timestamp": "2026-03-25T17:17:50.587702429",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -293,13 +349,7 @@
                     ]
                 ],
                 "2": [
-                    [
-                        {
-                            "genome": "mitochondrial"
-                        },
-                        "test_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
-                    ]
+                    
                 ],
                 "3": [
                     "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
@@ -313,15 +363,6 @@
                         "test_merged.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
-                "bed_mitochondrial": [
-                    [
-                        {
-                            "genome": "mitochondrial"
-                        },
-                        "test_mitochondrial.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        1
-                    ]
-                ],
                 "bed_nuclear_intervals": [
                     [
                         {
@@ -330,6 +371,9 @@
                         "test_nuclear.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
                         1
                     ]
+                ],
+                "bed_nuclear_mitochondrial": [
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,8174fa0cc1f95ed4b353a948a2cbd4e9",
@@ -343,7 +387,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-24T09:01:54.136294607",
+        "timestamp": "2026-03-25T16:34:43.3117496",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
