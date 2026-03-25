@@ -5,7 +5,7 @@ nextflow_pipeline {
     tag "PIPELINE"
     tag "pipeline_stub"
     tag "samplesheet_stub"
-    config "./tests/bam_infer_sex.config"
+    config "./conf/bam_infer_sex.config"
 
     test("Test CADD with mock resources") {
         options "-stub"
@@ -409,6 +409,7 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 sv_callers                   = "severus,hificnv"
                 sv_callers_to_run            = "severus,hificnv,sniffles"
+                // Skip irrelevant steps
                 skip_chromograph               = true
                 skip_methylation_calling       = true
                 skip_peddy                     = true
@@ -427,41 +428,23 @@ nextflow_pipeline {
 
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-            // bam_files: Stable bam files
-            def bam_files        = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.bam'])
-            // Reference (needed for CRAM inspection)
-            def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
-            // cram_files: Stable cram files
-            def cram_files       = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.cram'])
-            // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
-            def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
-            // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
-            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
+                { assert !versions.containsKey('BAM_INFER_SEX') }, // Sex check should be skipped
+                { assert !versions.containsKey('CALL_SNVS') },
+                { assert !versions.containsKey('CALL_METHYLATION_METHBAT') },
+                { assert !versions.containsKey('PEDDY') },
+                { assert !versions.containsKey('PREPARE_GENS_INPUTS') },
+                { assert !versions.containsKey('CALL_REPEAT_EXPANSIONS_TRGT') },
+                { assert stable_name.contains('aligned_reads') },
                 { assert snapshot(
-                    // Number of successful tasks
                     workflow.trace.succeeded().size(),
-                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml"),
-                    // All stable path name, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path,
-                    // All bam files
-                    bam_files.collect{ file -> [ file.getName(), bam(file.toString(), stringency: 'silent').getReadsMD5() ] },
-                    // All cram files
-                    cram_files.collect{ file -> [ file.getName(), cram(file.toString(), fasta, stringency: 'silent').getReadsMD5() ] },
-                    // All vcf files
-                    all_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.summary ] },
-                    // Stable vcf files
-                    stable_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.variantsMD5 ] }
+                    versions,
+                    stable_name
                 ).match() }
             )
         }
     }
 }
-
