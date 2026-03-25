@@ -810,6 +810,11 @@
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
                 },
+                "extra_somalier_relate_infer_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to somalier relate infer, used for test profile."
+                },
                 "genmod_compound_snv_penalty": {
                     "type": "integer",
                     "default": 6,

@@ -167,6 +167,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_sawfish_options` | Extra options to Sawfish, used for test profile. | `string` |  |  | True |
 | `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
+| `extra_somalier_relate_infer_options` | Extra options to somalier relate infer, used for test profile. | `string` |  |  | True |
 | `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs. | `integer` | 6 |  |  |
 | `genmod_compound_snv_threshold` | Genmod compound threshold for SNVs. | `integer` | 9 |  |  |
 | `genmod_compound_sv_penalty` | Genmod compound penalty for SVs. | `integer` | 6 |  |  |
