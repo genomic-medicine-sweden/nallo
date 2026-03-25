@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
     tag "samplesheet"
-    config "./conf/bam_infer_sex.config"
+    config "./nextflow.config"
 
     test("test profile") {
         when {
