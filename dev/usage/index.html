@@ -472,6 +472,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sex-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sex check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#qc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1096,6 +1107,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sex-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sex check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#qc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1640,7 +1662,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </span></code></pre></div>
 <p>Because almost all other subworkflows relies on the mapping subworkflow.</p>
 <h4 id="alignment">Alignment</h4>
-<p>The majority of subworkflows depend on the alignment subworkflow which requires <code>--fasta</code> and <code>--somalier_sites</code>.</p>
+<p>The majority of subworkflows depend on the alignment subworkflow which requires <code>--fasta</code>.</p>
 <table>
 <thead>
 <tr>
@@ -1653,13 +1675,26 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <td><code>fasta</code></td>
 <td>Reference genome, either gzipped or uncompressed (e.g. <a href="https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use">GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</a>)</td>
 </tr>
+</tbody>
+</table>
+<p>Turned off with <code>--skip_alignment</code>.</p>
+<h4 id="sex-check">Sex check</h4>
+<p>Some subworkflows are sex-dependent and need a sex-inference step if samples are input with unknown sex. This step requires <code>--somalier_sites</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><code>somalier_sites</code></td>
 <td>A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. <a href="https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz">sites.hg38.vcg.gz</a>)</td>
 </tr>
 </tbody>
 </table>
-<p>Turned off with <code>--skip_alignment</code>.</p>
+<p>Turned off with <code>--skip_sex_check</code>.</p>
 <h4 id="qc">QC</h4>
 <p>This subworkflow depends on the alignment subworkflow, but requires no additional files by default. Analysis regions for mosdepth and sambamba depth can be set by providing a BED file to <code>--qc_regions</code>, or <code>--mosdepth_regions</code> and <code>--sambamba_regions</code> separately.</p>
 <p>Turned off with <code>--skip_qc</code>.</p>
