@@ -461,6 +461,17 @@ nextflow_pipeline {
                 sv_callers                   = "severus,hificnv"
                 sv_callers_to_run            = "severus,hificnv,sniffles"
                 // Skip irrelevant steps
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_genome_assembly         = true
+                skip_qc                      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
                 skip_sex_check               = true
             }
         }
