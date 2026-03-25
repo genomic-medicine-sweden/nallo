@@ -1,0 +1,688 @@
+{
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-25T15:48:18.043705731",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,deae82097ff653aeee570d43e55c9580"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,6f61e2f66826d759e7283ae8c16f6b8c"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,deae82097ff653aeee570d43e55c9580",
+                        "HG002.bam.bai:md5,6f61e2f66826d759e7283ae8c16f6b8c"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,7b7d7357032002d7ad7f41a8396705c5"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "5": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,58124195474f0f2e67ca30089db93628",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,6f61e2f66826d759e7283ae8c16f6b8c"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,deae82097ff653aeee570d43e55c9580"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,deae82097ff653aeee570d43e55c9580",
+                        "HG002.bam.bai:md5,6f61e2f66826d759e7283ae8c16f6b8c"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,7b7d7357032002d7ad7f41a8396705c5"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,58124195474f0f2e67ca30089db93628",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-25T15:47:53.151228037",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub unknown sex": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,58124195474f0f2e67ca30089db93628",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG002.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,58124195474f0f2e67ca30089db93628",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-25T15:48:27.072868645",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam:md5,92776ff3bf8caf510d2c3f9e37fabb01"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam:md5,cb3ac099315381b49095f222bc8f02d4"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam.bai:md5,eae4ca4f0f19f2b62ebbfb968233dbc2"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam.bai:md5,5a82cf4dde4a30bc5e8e11764625b63c"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam:md5,92776ff3bf8caf510d2c3f9e37fabb01",
+                        "HG003.bam.bai:md5,eae4ca4f0f19f2b62ebbfb968233dbc2"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam:md5,cb3ac099315381b49095f222bc8f02d4",
+                        "HG004.bam.bai:md5,5a82cf4dde4a30bc5e8e11764625b63c"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,84de3328e4f8fd529784fc449abb1d56"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "5": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam.bai:md5,eae4ca4f0f19f2b62ebbfb968233dbc2"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam.bai:md5,5a82cf4dde4a30bc5e8e11764625b63c"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam:md5,92776ff3bf8caf510d2c3f9e37fabb01"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam:md5,cb3ac099315381b49095f222bc8f02d4"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG003.bam:md5,92776ff3bf8caf510d2c3f9e37fabb01",
+                        "HG003.bam.bai:md5,eae4ca4f0f19f2b62ebbfb968233dbc2"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "HG004.bam:md5,cb3ac099315381b49095f222bc8f02d4",
+                        "HG004.bam.bai:md5,5a82cf4dde4a30bc5e8e11764625b63c"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,84de3328e4f8fd529784fc449abb1d56"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1aa1d4c1c3af3eb0104054e28f11b942",
+                    "versions.yml:md5,bc74075d79571b6faac2e5ceb3b95d26"
+                ]
+            }
+        ],
+        "timestamp": "2026-03-25T15:48:08.866252422",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    }
+}
