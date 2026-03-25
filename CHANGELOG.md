@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
+- [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
 
 ### Fixed
 
