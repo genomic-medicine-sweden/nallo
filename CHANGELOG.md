@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Added GitHub workflow to add the PR checklist as a comment
+- [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
 
 ### Changed
 
@@ -38,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
+- [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping annotating variants
 
 ### Parameters
 
