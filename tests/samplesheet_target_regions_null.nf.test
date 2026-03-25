@@ -3,7 +3,6 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE_MASTER"
-    config "./conf/bam_infer_sex.config"
 
     test("test profile | --target_regions null --alignment_output_format cram") {
         tag "samplesheet_target_regions_null"
