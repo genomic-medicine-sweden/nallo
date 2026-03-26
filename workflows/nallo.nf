@@ -804,12 +804,13 @@ workflow NALLO {
     }
 
     /*
-     * Ranks family VCFs per variant call region
-     * Can only run if samplesheet has affected samples
+     * Ranks family VCFs per variant call region for SNVs,
+     * and per family for SVs, based on provided ranking config.
+     * Can only run if samplesheet has affected samples.
      */
     if (!params.skip_rank_variants) {
 
-        // Create PED with updated sex - per family
+        // Create PED files with updated (infered sex) per family
         SOMALIER_PED_FAMILY (
             ch_bam
                 .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
