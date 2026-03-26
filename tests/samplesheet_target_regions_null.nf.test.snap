@@ -715,13 +715,8 @@
                 "multiqc_bcftools_stats.txt:md5,f8f254c8471497f024fc70a593a226f2",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,0088a19c52d1d060db0b060938994583",
-<<<<<<< HEAD
-                "multiqc_general_stats.txt:md5,3638f131e48d5046dca7ec872a17ec54",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,4c0d1ffaac851169f36ea4eac3d072b3",
-=======
                 "multiqc_general_stats.txt:md5,cb93ccf922991b65eeee8edc0b0301ac",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,b983debaadc2eff7c0287d9290cbfb78",
->>>>>>> dev
                 "somalier_stats.txt:md5,2c0b21c0d27b7794a22c876a8c7f4635",
                 "whatshap-stats-table.txt:md5,f3981ea72c47049e61d1a478b7397017",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
@@ -813,18 +808,10 @@
                 
             ]
         ],
-<<<<<<< HEAD
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T11:51:25.069227221"
-=======
         "timestamp": "2026-03-20T09:03:24.011213176",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
->>>>>>> dev
     }
 }
