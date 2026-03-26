@@ -125,6 +125,7 @@ workflow NALLO {
     ch_sentieon_female_diploid_bed  = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_diploid_bed    = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
     ch_sentieon_male_haploid_bed    = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
+    ch_vcfexpress_prelude           = file("$projectDir/assets/vcf_express_found_in_prelude.lua")
 
     // Channels from (optional) input samplesheets validated by schema
     ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
@@ -327,29 +328,35 @@ workflow NALLO {
             .set { ch_samplesheet_ped_in }
 
         SAMPLESHEET_PED ( ch_samplesheet_ped_in )
-        ch_versions = ch_versions.mix(SAMPLESHEET_PED.out.versions)
 
         SAMPLESHEET_PED.out.ped
             .collect()
             .set { ch_samplesheet_pedfile }
 
-        //
-        // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
-        //
-        BAM_INFER_SEX (
-            ch_aligned_bam,
-            ch_fasta,
-            ch_fai,
-            ch_somalier_sites,
-            ch_samplesheet_pedfile
-        )
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        if (!params.skip_sex_check) {
+            //
+            // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
+            //
+            BAM_INFER_SEX (
+                ch_aligned_bam,
+                ch_fasta,
+                ch_fai,
+                ch_somalier_sites,
+                ch_samplesheet_pedfile
+            )
+            ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
-        // Set files with updated meta for subsequent processes
-        ch_bam     = BAM_INFER_SEX.out.bam
-        ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+            // Set files with updated meta for subsequent processes
+            ch_bam     = BAM_INFER_SEX.out.bam
+            ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+        }
+
+        else {
+            ch_bam     = ch_aligned_bam.map { meta, bam, _bai -> [ meta, bam ] }
+            ch_bam_bai = ch_aligned_bam
+        }
 
     }
 
@@ -457,6 +464,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             params.snv_caller,
+            ch_vcfexpress_prelude
         )
         ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
@@ -476,8 +484,8 @@ workflow NALLO {
             variants_to_concat_per_sample,
             ch_fasta,
             params.snv_caller,
+            ch_vcfexpress_prelude
         )
-        ch_versions = ch_versions.mix(VCF_CONCAT_NORM_VARIANTS.out.versions)
 
         // These contains RefCalls
         sample_snv_vcf   = VCF_CONCAT_NORM_VARIANTS.out.vcf
@@ -552,7 +560,8 @@ workflow NALLO {
             params.sv_call_regions,
             params.force_sawfish_joint_call_single_samples,
             params.create_hificnv_maf_track,
-            params.create_sawfish_maf_track
+            params.create_sawfish_maf_track,
+            ch_vcfexpress_prelude
         )
 
         ch_versions = ch_versions.mix(CALL_SVS.out.versions)
@@ -701,7 +710,6 @@ workflow NALLO {
             ch_ann_csq_pli_snv_in,
             ch_variant_consequences_snvs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SNV.out.versions)
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join( ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
@@ -753,14 +761,13 @@ workflow NALLO {
     if(!params.skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : [[],[]],
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : [[],[]],
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : channel.empty(),
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
         ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
-
 
     //
     // Ranks family VCFs per variant call region
@@ -774,7 +781,6 @@ workflow NALLO {
                 .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
                 .groupTuple()
         )
-        ch_versions = ch_versions.mix(SOMALIER_PED_FAMILY.out.versions)
 
         // Give PED file SNV meta so they can be joined later in the subworkflow.
         // Since we don't always have matching number of ped files and call regions
@@ -886,7 +892,6 @@ workflow NALLO {
             ch_ann_csq_svs_in,
             ch_variant_consequences_svs
         )
-        ch_versions = ch_versions.mix(ANN_CSQ_PLI_SVS.out.versions)
     }
 
     //
@@ -957,7 +962,8 @@ workflow NALLO {
                 ch_fasta,
                 ch_fai,
                 ch_str_bed,
-                cram_output
+                cram_output,
+                ch_vcfexpress_prelude
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
@@ -966,7 +972,8 @@ workflow NALLO {
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
                 ch_fai,
-                ch_str_bed
+                ch_str_bed,
+                ch_vcfexpress_prelude
             )
             ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }

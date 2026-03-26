@@ -1,7 +1,7 @@
-include { BEDTOOLS_MERGE           } from '../../../modules/nf-core/bedtools/merge/main'
-include { BEDTOOLS_SORT            } from '../../../modules/nf-core/bedtools/sort/main'
-include { BUILD_INTERVALS          } from '../../../modules/local/build_intervals/main'
-include { BEDTOOLS_SPLIT           } from '../../../modules/nf-core/bedtools/split/main'
+include { BEDTOOLS_MERGE               } from '../../../modules/nf-core/bedtools/merge/main'
+include { BEDTOOLS_SORT                } from '../../../modules/nf-core/bedtools/sort/main'
+include { GAWK as GAWK_BUILD_INTERVALS } from '../../../modules/nf-core/gawk/main'
+include { BEDTOOLS_SPLIT               } from '../../../modules/nf-core/bedtools/split/main'
 
 workflow SCATTER_GENOME {
 
@@ -22,12 +22,13 @@ workflow SCATTER_GENOME {
     //
     if( make_bed_from_fai ) {
 
-        BUILD_INTERVALS (
-            ch_fai
+        GAWK_BUILD_INTERVALS (
+            ch_fai,
+            [],
+            false
         )
-        ch_versions = ch_versions.mix(BUILD_INTERVALS.out.versions)
 
-        BUILD_INTERVALS.out.bed
+        GAWK_BUILD_INTERVALS.out.output
             .set{ ch_bed }
     } else {
         ch_input_bed

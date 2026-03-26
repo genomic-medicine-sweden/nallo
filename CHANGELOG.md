@@ -9,16 +9,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
+- [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
+- [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Added GitHub workflow to add the PR checklist as a comment
+- [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
 
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
+- [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
+- [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
+- [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
+- [#943](https://github.com/genomic-medicine-sweden/nallo/pull/943) - Updated DeepVariant to 1.10.0
+- [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
+- [#935](https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
+- [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
+- [#948](https://github.com/genomic-medicine-sweden/nallo/pull/948) - Replaced local modules `add_most_severe_consequence` and `add_most_severe_pli` with nf-core versions to lessen maintenance burden of local modules
+- [#949](https://github.com/genomic-medicine-sweden/nallo/pull/949) - Replaced local HiFiCNV module with nf-core version to lessen maintenance burden of local modules
+- [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Changed to topic versions in `CREATE_PEDIGREE_FILE`
+- [#953](https://github.com/genomic-medicine-sweden/nallo/pull/953) - Changed to topic versions for local module `ECHTVAR_ANNO`
+- [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
+- [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
 
 ### Removed
 
+- [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
+- [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
+
 ### Fixed
+
+- [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
+- [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping annotating variants
 
 ### Parameters
 
@@ -29,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_heterozygous_allele_frequency` |
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
+|               | `--skip_sex_check`                             |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -37,14 +63,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                     | Old version | New version |
-| ------------------------ | ----------- | ----------- |
-| modkit/bedmethyltobigwig | 0.5.1-rc1   | 0.6.1       |
-| modkit/pileup            | 0.3.0       | 0.6.1       |
-| mosdepth                 | 0.3.10      | 0.3.11      |
-| multiqc                  | 1.31        | 1.33        |
-| svdb/merge               | 2.8.2       | 2.8.4       |
-| svdb/query               | 2.8.2       | 2.8.4       |
+| Tool                       | Old version | New version |
+| -------------------------- | ----------- | ----------- |
+| modkit/bedmethyltobigwig   | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup              | 0.3.0       | 0.6.1       |
+| mosdepth                   | 0.3.10      | 0.3.11      |
+| multiqc                    | 1.31        | 1.33        |
+| svdb/merge                 | 2.8.2       | 2.8.4       |
+| svdb/query                 | 2.8.2       | 2.8.4       |
+| gawk                       | 5.3.0       | 5.3.1       |
+| vcfexpress                 |             | 0.3.4       |
+| deepvariant/rundeepvariant | 1.9.0       | 1.10.0      |
+| deepvariant/vcfstatsreport | 1.9.0       | 1.10.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -105,6 +135,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--strdrop_fraction`            |
 |               | `--strdrop_alpha`               |
 |               | `--strdrop_edit`                |
+|               | `--paraphrase_rules`            |
+|               | `--paraphrase_output_format`    |
+|               | `--paraphrase_skip_keys`        |
+|               | `--paraphrase_genes`            |
+|               | `--skip_annotate_paralogs`      |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -122,6 +157,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | paraphrase                          |             | 0.2.0       |
 | paraphase                           | 3.3.4       | 3.5.0       |
 | samtools (paraphase)                | 1.22.1      | 1.23        |
+| custom/addmostsevereconsequence     | 1.1         | 1.2.0       |
+| custom/addmostseverepli             | 1.1         | 1.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

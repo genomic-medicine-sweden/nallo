@@ -76,7 +76,6 @@ workflow PHASING {
             fai,
             phase_with_svs
         )
-        ch_versions = ch_versions.mix(HIPHASE.out.versions)
 
         ch_phased_family_snvs     = HIPHASE.out.phased_snvs
         ch_phased_family_snvs_tbi = HIPHASE.out.phased_snvs_tbi

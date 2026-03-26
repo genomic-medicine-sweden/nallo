@@ -24,6 +24,7 @@ lint:
     - docs/images/nf-core-nallo_logo_dark.png
     - .github/ISSUE_TEMPLATE/bug_report.yml
     - .github/CONTRIBUTING.md
+    - .github/PULL_REQUEST_TEMPLATE.md
     - .github/workflows/linting.yml
     - .prettierignore
   modules_config: false
