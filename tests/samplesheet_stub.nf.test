@@ -316,6 +316,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 snv_caller                   = "sentieon"
+                snv_calling_processes        = 1
 
                 // Mock resources
                 sentieon_model_bundle        = params.pipelines_testdata_base_path + 'reference/test_data.bed'
