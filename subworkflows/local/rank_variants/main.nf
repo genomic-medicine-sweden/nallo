@@ -31,11 +31,11 @@ workflow RANK_VARIANTS {
 
     GENMOD_MODELS.out.vcf
         .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
+        .join(ch_score_config, failOnMismatch: true, failOnDuplicate: true)
         .set { genmod_score_in }
 
     GENMOD_SCORE(
         genmod_score_in,
-        ch_score_config.map { _meta, file -> file },
     )
 
     GENMOD_COMPOUND(

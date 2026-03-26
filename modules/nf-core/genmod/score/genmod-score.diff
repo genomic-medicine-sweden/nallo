@@ -1,0 +1,20 @@
+Changes in component 'nf-core/genmod/score'
+'modules/nf-core/genmod/score/environment.yml' is unchanged
+Changes in 'genmod/score/main.nf':
+--- modules/nf-core/genmod/score/main.nf
++++ modules/nf-core/genmod/score/main.nf
+@@ -8,8 +8,7 @@
+         'community.wave.seqera.io/library/genmod_python:31b2fba4d3b7ba6f' }"
+ 
+     input:
+-    tuple val(meta), path(input_vcf), path (fam)
+-    path (score_config)
++    tuple val(meta), path(input_vcf), path (fam), path(score_config)
+ 
+     output:
+     tuple val(meta), path("*_score.vcf"), emit: vcf
+
+'modules/nf-core/genmod/score/meta.yml' is unchanged
+'modules/nf-core/genmod/score/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/genmod/score/tests/main.nf.test' is unchanged
+************************************************************

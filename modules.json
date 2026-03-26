@@ -177,7 +177,8 @@
                     "genmod/score": {
                         "branch": "master",
                         "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/genmod/score/genmod-score.diff"
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
