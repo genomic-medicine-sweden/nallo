@@ -181,9 +181,6 @@
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
                 },
-                "RELATE_INFER": {
-                    "somalier": "0.2.18"
-                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -767,8 +764,7 @@
                 ]
             ],
             [
-
-
+                
             ],
             [
                 [
@@ -809,11 +805,10 @@
                 ]
             ],
             [
-
-
+                
             ]
         ],
-        "timestamp": "2026-03-25T18:27:53.567517766",
+        "timestamp": "2026-03-26T10:56:11.808857047",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
