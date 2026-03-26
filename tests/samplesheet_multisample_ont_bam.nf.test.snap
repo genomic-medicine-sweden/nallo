@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            309,
+            311,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -284,6 +284,9 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
+                "family",
+                "family/FAM.ped",
+                "family/FAM2.ped",
                 "gens",
                 "gens/HG002_ONT_A",
                 "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz",
@@ -836,6 +839,8 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,3186b5bfa60b9f031a68dba1747d8cb1",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
+                "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
+                "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
                 "HG002_ONT_A.baf.bed.gz:md5,e43fc9f728cb1679ae801b1877d600e9",
                 "HG002_ONT_A.baf.bed.gz.tbi:md5,b5eee8af756236785dfa107497f5a03d",
                 "HG002_ONT_A.cov.bed.gz:md5,462719717050daaa601ef75c1ae3de34",
@@ -1223,10 +1228,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T12:53:36.318133228",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T11:32:06.96299548"
     }
 }

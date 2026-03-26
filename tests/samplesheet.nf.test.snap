@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            192,
+            193,
             {
                 "ADD_FOUND_IN_TAG": {
                     "bcftools": 1.2,
@@ -302,6 +302,8 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "family",
+                "family/FAM.ped",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -578,6 +580,7 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,a89ba62559ea15f5768d0481b6c8cbb8",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,2c84c9c6641506713ac1855031001c45",
+                "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio.baf.bed.gz:md5,f94e430c879742fba31fb1c5b1137988",
                 "HG002_Revio.baf.bed.gz.tbi:md5,9e793444e48a4d54807800c6c580591c",
                 "HG002_Revio.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
@@ -703,10 +706,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-16T14:44:25.725684193",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T11:22:31.535534588"
     }
 }
