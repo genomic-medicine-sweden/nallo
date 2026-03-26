@@ -1094,8 +1094,14 @@ def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
 def buildRankVariantsInputChannel(ch_vcf, ch_ped, join_key, variant_type, ch_score_config, ch_samplesheet) {
     addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet, join_key)
         .map { meta, vcf -> [ meta + [ variant_type: variant_type ], vcf ] }
-        .combine(ch_ped.map { _meta, ped -> ped })
-        .combine(ch_score_config.map { _meta, score_config -> score_config })
+        // If we have multiple families, we need to ensure that we only combine VCFs and PEDs from the same family.
+        // We use combine and filter instead of join because we can have multiple VCF files per PED file.
+        .combine(ch_ped)
+        .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
+        .combine(ch_score_config)
+        .map { vcf_meta, vcf, _ped_meta, ped, _score_config, score_config ->
+            [ vcf_meta, vcf, ped, score_config ]
+        }
 }
 
 /*
