@@ -1687,6 +1687,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <h4 id="snv-calling">SNV calling</h4>
 <p>This subworkflow depends on the alignment subworkflow, and requires PARs.</p>
 <p>By default the pipeline uses <a href="https://github.com/google/deepvariant">DeepVariant</a> for long-read SNV calling. To enable <a href="https://github.com/Sentieon/sentieon-cli/blob/main/docs/dnascope-longread.md">Sentieon DNAscope Long Read</a>, set <code>--snv_caller sentieon</code>. Make the Sentieon license available by adding a base64-encoded license string to the Nextflow secrets store (<code>nextflow secrets set SENTIEON_LICENSE_BASE64 ...</code>) or by exporting the same variable before running the pipeline.</p>
+<p>When using Sentieon, <code>--snv_calling_processes</code> must be set to <code>1</code>.</p>
 <table>
 <thead>
 <tr>
