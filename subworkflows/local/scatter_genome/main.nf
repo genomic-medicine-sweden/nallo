@@ -17,15 +17,15 @@ workflow SCATTER_GENOME {
     ch_bed_intervals = channel.empty()
     ch_bed_nuclear_mitochondrial_intervals = channel.empty()
 
-   /*
+    /*
     * If make_bed_from_fai is true then build intervals from reference
     */
     if (make_bed_from_fai) {
 
-        GAWK_BUILD_INTERVALS (
+        GAWK_BUILD_INTERVALS(
             ch_fai,
             [],
-            false
+            false,
         )
 
         GAWK_BUILD_INTERVALS.out.output.set { ch_bed }
@@ -131,6 +131,5 @@ def add_bed_count(channel_with_beds) {
         .collect()
         .map { beds -> beds.size() }
 
-    channel_with_beds
-        .combine(bed_count)
+    channel_with_beds.combine(bed_count)
 }
