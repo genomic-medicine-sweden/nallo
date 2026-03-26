@@ -858,6 +858,9 @@ workflow NALLO {
                 sv: meta.variant_type == "sv"
             }
             .set { ch_ranked_variants }
+
+        ch_ranked_variants.snvs
+            .set { ch_vcf_tbi_per_region }
     }
 
     //
@@ -865,7 +868,7 @@ workflow NALLO {
     //
     if(!params.skip_snv_calling) {
 
-        ch_ranked_variants.snvs
+        ch_vcf_tbi_per_region
             .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
             .groupTuple(size: params.snv_calling_processes)
             .set { ch_concat_sort_input }
