@@ -109,7 +109,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match()}
+                { assert file(workflow.out.somalier_samples.get(0).get(1)).readLines().size() == 4 },
+                { assert file(workflow.out.somalier_pairs.get(0).get(1)).readLines().size() == 4 },
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.somalier_samples.get(0).get(1)).name,
+                    file(workflow.out.somalier_pairs.get(0).get(1)).name,
+                    file(workflow.out.bam_bai.get(0).get(1)).name
+                ).match() }
             )
         }
     }
