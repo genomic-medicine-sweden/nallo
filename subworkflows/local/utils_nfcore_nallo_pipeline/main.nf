@@ -115,6 +115,7 @@ workflow PIPELINE_INITIALISATION {
         methylation      : "skip_methylation_calling",
         qc               : "skip_qc",
         gens             : "skip_prepare_gens_input",
+        sex_check        : "skip_sex_check",
     ]
 
     //
@@ -144,7 +145,7 @@ workflow PIPELINE_INITIALISATION {
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
-        mapping          : ["fasta", "somalier_sites"],
+        mapping          : ["fasta"],
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
         sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
@@ -155,6 +156,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
         gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
+        sex_check        : ["somalier_sites"],
     ]
 
     def parameterStatus = [
@@ -177,6 +179,7 @@ workflow PIPELINE_INITIALISATION {
             skip_qc                 : params.skip_qc,
             skip_genome_assembly    : params.skip_genome_assembly,
             skip_prepare_gens_input : params.skip_prepare_gens_input,
+            skip_sex_check          : params.skip_sex_check,
         ],
         files: [
             par_regions                 : params.par_regions,
@@ -245,6 +248,9 @@ workflow PIPELINE_INITIALISATION {
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
+
+        // Check that sex check is not skipped if there are samples with unknown sex
+        validateRequiresSexCheck(ch_samplesheet, params)
 
         // Check that there's no more than one project
         validateSingleProjectPerRun(ch_samplesheet)
@@ -615,6 +621,28 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
         .subscribe { familyList ->
             if (familyList) {
                 error("ERROR: No samples in families: ${familyList.join(", ")} have affected phenotype (=2); --skip_rank_variants has to be active.")
+            }
+        }
+}
+
+// SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
+// This is a convenience function to fail early if there are samples without known sex.
+def validateRequiresSexCheck(ch_samplesheet, params) {
+
+    if (!params.skip_sex_check) {
+        return
+    }
+
+    def samplesWithUnknownSex = ch_samplesheet
+        .map { meta, _reads -> [ meta.id, meta.sex ] }
+        .filter { _id, sex -> sex == 0 }
+
+    samplesWithUnknownSex
+        .map { sample, _sex -> sample }
+        .collect()
+        .subscribe { sampleList ->
+            if (sampleList && ( !params.skip_snv_calling || ( !params.skip_methylation_calling && params.run_methbat == true ) || !params.skip_peddy || !params.skip_prepare_gens_input || ( !params.skip_repeat_calling && params.str_caller == 'trgt' ))) {
+                error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
 }
