@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow BAM_INFER_SEX"
     script "../main.nf"
     workflow "BAM_INFER_SEX"
+    config "./nextflow.config"
 
     setup {
         run("PREPARE_REFERENCES") {
@@ -23,32 +24,16 @@ nextflow_workflow {
             }
         }
 
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
-            process {
-                """
-                input[0] = [
-                    [ id:'HG002', family_id:'family', paternal_id:0, maternal_id:0, phenotype:2, project:'project', n_files:1, single_end:true ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
-                ]
-                input[1] = PREPARE_REFERENCES.out.mmi
-                input[2] = true
-                input[3] = 'bai'
-                input[4] = false
-                input[5] = false
-                """
-            }
-        }
-
-
         run("CREATE_PEDIGREE_FILE") {
             script "../../../../modules/local/create_pedigree_file/main.nf"
             process {
                 """
                 input[0] = channel.of(
-                    [ [ id: 'project' ],
+                    [ [ id: 'test' ],
                     [
-                        [id:'HG002', family_id:'family', paternal_id:0, maternal_id:0, sex:0, phenotype:2, project:'project', n_files:1, single_end:true]
+                        [id:'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1, phenotype:1, project:'test', single_end:true, relationship:'father', two_parents:false, children:['HG002', 'HG002'], has_other_parent:true],
+                        [id:'HG002', family_id:'FAM', paternal_id:'HG003', maternal_id:'HG004', sex:0, phenotype:2, project:'test', single_end:true, relationship:'child', two_parents:true, children:[], has_other_parent:false],
+                        [id:'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2, phenotype:1, project:'test', single_end:true, relationship:'mother', two_parents:false, children:['HG002', 'HG002'], has_other_parent:true]
                     ]
                 ])
                 """
@@ -57,15 +42,18 @@ nextflow_workflow {
     }
 
 
-    test("[bam, bai], fasta, fai, somalier_sites, ped - 1 sample") {
-        config "./nextflow.config"
+    test("[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex") {
 
         when {
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index).map { meta, bam, bai ->
-                    [ meta + [sex:1], bam, bai ]
-                }
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:0, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = channel.of([
@@ -85,22 +73,35 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, bai], fasta, fai, somalier_sites, ped - unknown sex") {
-        config "./unknown_sex.config"
+    test("[bam, bai], fasta, fai, somalier_sites, ped - multiple samples") {
 
         when {
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index).map { meta, bam, bai ->
-                    [ meta + [sex:0], bam, bai ]
-                }
-                input[1] = PREPARE_REFERENCES.out.fasta
-                input[2] = PREPARE_REFERENCES.out.fai
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:0, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                )
+                input[1] = PREPARE_REFERENCES.out.fasta.collect()
+                input[2] = PREPARE_REFERENCES.out.fai.collect()
                 input[3] = channel.of([
                     [ 'id': 'somalier_sites' ],
                     file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
-                ])
-                input[4] = CREATE_PEDIGREE_FILE.out.ped
+                ]).collect()
+                input[4] = CREATE_PEDIGREE_FILE.out.ped.collect()
                 """
             }
         }
@@ -120,9 +121,13 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index).map { meta, bam, bai ->
-                    [ meta + [sex:1], bam, bai ]
-                }
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = channel.of([
@@ -148,9 +153,13 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index).map { meta, bam, bai ->
-                    [ meta + [sex:0], bam, bai ]
-                }
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:0, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
                 input[3] = channel.of([
@@ -165,6 +174,91 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+        test("[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples") {
+
+        options '-stub'
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:1, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                )
+                input[1] = PREPARE_REFERENCES.out.fasta.collect()
+                input[2] = PREPARE_REFERENCES.out.fai.collect()
+                input[3] = channel.of([
+                    [ 'id': 'somalier_sites' ],
+                    file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
+                ]).collect()
+                input[4] = CREATE_PEDIGREE_FILE.out.ped.collect()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples, all unknown sex") {
+        options '-stub'
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:0, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:0, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:0, phenotype:1, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                )
+                input[1] = PREPARE_REFERENCES.out.fasta.collect()
+                input[2] = PREPARE_REFERENCES.out.fai.collect()
+                input[3] = channel.of([
+                    [ 'id': 'somalier_sites' ],
+                    file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
+                ]).collect()
+                input[4] = CREATE_PEDIGREE_FILE.out.ped.collect()
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()}
             )
         }
     }
