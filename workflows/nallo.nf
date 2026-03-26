@@ -34,8 +34,7 @@ include { PREPARE_GENS_INPUTS                                    } from '../subw
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV                     } from '../subworkflows/local/rank_variants'
-include { RANK_VARIANTS as RANK_VARIANTS_SVS                     } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
@@ -749,84 +748,6 @@ workflow NALLO {
         ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
 
-
-    //
-    // Ranks family VCFs per variant call region
-    // Can only run if samplesheet has affected samples
-    //
-    if(!params.skip_rank_variants) {
-
-        // Create PED with updated sex - per family
-        SOMALIER_PED_FAMILY (
-            ch_bam
-                .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
-                .groupTuple()
-        )
-
-        // Give PED file SNV meta so they can be joined later in the subworkflow.
-        // Since we don't always have matching number of ped files and call regions
-        // we need to combine and filter instead of join
-        ANN_CSQ_PLI_SNV.out.vcf
-            .map { meta, _vcf -> [ [ id:meta.family_id ], meta ] }
-            .combine ( SOMALIER_PED_FAMILY.out.ped )
-            .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
-            .map { _family_id_snv, meta, _family_id_ped, ped -> [ meta, ped ] }
-            .set { ch_snv_ranking_ped_file }
-
-        // Only run if we have affected individuals
-        RANK_VARIANTS_SNV (
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
-            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
-            ch_genmod_reduced_penetrance,
-            ch_genmod_score_config_snvs
-        )
-
-        RANK_VARIANTS_SNV.out.vcf
-            .join( RANK_VARIANTS_SNV.out.tbi, failOnMismatch:true, failOnDuplicate:true )
-            .set { ch_vcf_tbi_per_region }
-    }
-
-    //
-    // Concatenate and sort ranked SNVs, sort and publish
-    //
-    if(!params.skip_snv_calling) {
-
-        ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
-            .groupTuple(size: params.snv_calling_processes)
-            .set { ch_concat_sort_input }
-
-        CONCAT_SORT_RANKED_SNVS (
-            ch_concat_sort_input
-        )
-
-    }
-
-    //
-    // Run Peddy
-    //
-    if (!params.skip_snv_calling && !params.skip_peddy) {
-
-        CONCAT_SORT_RANKED_SNVS.out.vcf
-            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
-            .filter { meta, _vcf, _tbi -> meta.set == "research" }
-            .set { ch_peddy_in }
-
-        PEDDY (
-            ch_peddy_in,
-            ch_samplesheet_pedfile,
-            ch_peddy_sites
-        )
-        ch_versions = ch_versions.mix(PEDDY.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-
-    }
-
     //
     // Annotate SVs
     //
@@ -875,24 +796,101 @@ workflow NALLO {
         )
     }
 
-    //
-    // Rank SVs
-    //
+    /*
+     * Ranks family VCFs per variant call region
+     * Can only run if samplesheet has affected samples
+     */
     if (!params.skip_rank_variants) {
 
-        // Give PED file SVs meta so they can be joined later in the subworkflow.
-        ANN_CSQ_PLI_SVS.out.vcf
-            .combine ( SOMALIER_PED_FAMILY.out.ped )
-            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
-            .map { vcf_meta, _vcf, _ped_meta, ped -> [ vcf_meta, ped ] }
-            .set { ch_sv_ranking_ped_file }
-
-        RANK_VARIANTS_SVS (
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
-            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
-            ch_genmod_reduced_penetrance,
-            ch_genmod_score_config_svs
+        // Create PED with updated sex - per family
+        SOMALIER_PED_FAMILY (
+            ch_bam
+                .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
+                .groupTuple()
         )
+
+        ch_snvs_to_rank = buildRankVariantsInputChannel(
+            ANN_CSQ_PLI_SNV.out.vcf,
+            SOMALIER_PED_FAMILY.out.ped,
+            'family_id',
+            'snv',
+            ch_genmod_score_config_snvs,
+            ch_input
+        )
+
+        ch_svs_to_rank = buildRankVariantsInputChannel(
+            ANN_CSQ_PLI_SVS.out.vcf,
+            SOMALIER_PED_FAMILY.out.ped,
+            'id',
+            'sv',
+            ch_genmod_score_config_svs,
+            ch_input
+        )
+
+        ch_snvs_to_rank
+            .mix(ch_svs_to_rank)
+            .multiMap { meta, vcf, ped, score_config ->
+                vcf: [ meta, vcf ]
+                ped: [ meta, ped ]
+                score_config: [ meta, score_config ]
+            }
+            .set { ch_rank_variants_input }
+
+        RANK_VARIANTS (
+            ch_rank_variants_input.vcf,
+            ch_rank_variants_input.ped,
+            ch_genmod_reduced_penetrance,
+            ch_rank_variants_input.score_config,
+        )
+
+        RANK_VARIANTS.out.vcf
+            .join( RANK_VARIANTS.out.tbi, failOnMismatch:true, failOnDuplicate:true )
+            .branch { meta, _vcf, _tbi ->
+                snvs: meta.variant_type == "snv"
+                sv: meta.variant_type == "sv"
+            }
+            .set { ch_ranked_variants }
+    }
+
+    //
+    // Concatenate and sort ranked SNVs, sort and publish
+    //
+    if(!params.skip_snv_calling) {
+
+        ch_ranked_variants.snvs
+            .map { meta, vcf, tbi -> [ [ id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids ], vcf, tbi ] }
+            .groupTuple(size: params.snv_calling_processes)
+            .set { ch_concat_sort_input }
+
+        CONCAT_SORT_RANKED_SNVS (
+            ch_concat_sort_input
+        )
+
+    }
+
+    //
+    // Run Peddy
+    //
+    if (!params.skip_snv_calling && !params.skip_peddy) {
+
+        CONCAT_SORT_RANKED_SNVS.out.vcf
+            .join( CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true )
+            .filter { meta, _vcf, _tbi -> meta.set == "research" }
+            .set { ch_peddy_in }
+
+        PEDDY (
+            ch_peddy_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_versions = ch_versions.mix(PEDDY.out.versions)
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+
     }
 
     //
@@ -902,7 +900,7 @@ workflow NALLO {
 
         ch_collect_svs = params.skip_sv_annotation ? ch_sv_vcf_for_annotation :
             params.skip_rank_variants ? ANN_CSQ_PLI_SVS.out.vcf :
-            RANK_VARIANTS_SVS.out.vcf
+            ch_ranked_variants.sv.map { meta, vcf, _tbi -> [ meta, vcf] }
 
         BCFTOOLS_VIEW_SV (
             ch_collect_svs.map { meta, vcf -> [ meta, vcf, [] ] },
@@ -1081,6 +1079,15 @@ def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
             def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
             [new_meta, file]
         }
+}
+
+// Build the input channel for ranking variants by combining the VCF with the PED and score configs
+// We also add meta information about whether the family has a child with two parents, which is used in genmod for determining ranking thresholds and penalties for compound heterozygous variants.
+def buildRankVariantsInputChannel(ch_vcf, ch_ped, join_key, variant_type, ch_score_config, ch_samplesheet) {
+    addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet, join_key)
+        .map { meta, vcf -> [ meta + [ variant_type: variant_type ], vcf ] }
+        .combine(ch_ped.map { _meta, ped -> ped })
+        .combine(ch_score_config.map { _meta, score_config -> score_config })
 }
 
 /*
