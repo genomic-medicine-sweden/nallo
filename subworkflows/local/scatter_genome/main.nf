@@ -71,8 +71,13 @@ workflow SCATTER_GENOME {
         .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
         .set { ch_bed_intervals }
 
+    // Make sure that the bed is not empty before mixing
+    ch_bed_genomes.mitochondrial
+        .filter { _meta, bed -> bed.size() > 0 }
+        .set {ch_bed_mitochondrial_to_mix}
+
     add_bed_count(ch_bed_genomes.nuclear
-        .mix(ch_bed_genomes.mitochondrial))
+        .mix(ch_bed_mitochondrial_to_mix))
         .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
         .set { ch_bed_nuclear_mitochondrial_intervals }
 
@@ -94,7 +99,7 @@ workflow SCATTER_GENOME {
 
         // Add the bed count and mix the nuclear intervals and mitochondrial channels
         add_bed_count(ch_bed_intervals
-            .mix(ch_bed_genomes.mitochondrial))
+            .mix(ch_bed_mitochondrial_to_mix))
             .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
             .set { ch_bed_nuclear_mitochondrial_intervals }
 

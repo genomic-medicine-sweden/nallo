@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            71,
+            56,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -143,7 +143,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T10:58:05.78364906",
+        "timestamp": "2026-03-26T16:47:50.656940117",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -304,7 +304,7 @@
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            61,
+            57,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -512,7 +512,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-26T11:00:06.752260926",
+        "timestamp": "2026-03-26T16:50:12.417483601",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -684,7 +684,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            83,
+            64,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -833,7 +833,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T11:03:57.287689167",
+        "timestamp": "2026-03-26T16:52:13.218158954",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -841,7 +841,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            89,
+            69,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -1007,7 +1007,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T10:57:27.240992768",
+        "timestamp": "2026-03-26T16:47:07.065263711",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -1015,7 +1015,7 @@
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
-            88,
+            84,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1267,7 +1267,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-03-26T11:04:40.292755619",
+        "timestamp": "2026-03-26T16:53:05.812098588",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -1275,7 +1275,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            217,
+            191,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1775,7 +1775,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-26T11:03:21.652562249",
+        "timestamp": "2026-03-26T16:51:23.385128496",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -1852,7 +1852,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            139,
+            132,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -2146,7 +2146,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-26T11:06:23.815957793",
+        "timestamp": "2026-03-26T16:54:49.62259494",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
