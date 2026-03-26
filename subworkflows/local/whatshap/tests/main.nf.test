@@ -71,6 +71,10 @@ nextflow_workflow {
                 ])
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = channel.of([
+                    [ id:'FAM' ], // meta map
+                    []
+                ])
                 """
             }
         }
@@ -103,6 +107,10 @@ nextflow_workflow {
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = channel.of([
+                    [ id:'FAM' ], // meta map
+                    []
+                ])
                 """
             }
         }
@@ -135,6 +143,10 @@ nextflow_workflow {
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = channel.of([
+                    [ id:'HG002' ], // meta map
+                    []
+                ])
                 """
             }
         }
