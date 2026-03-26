@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
+- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 
 ### Removed
 
@@ -45,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping annotating variants
+- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Fix sentieon spanning deletion calls crashing most_severe_consequence script due to missing CSQ
 
 ### Parameters
 
