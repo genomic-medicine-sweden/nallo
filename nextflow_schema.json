@@ -110,6 +110,11 @@
                     "type": "boolean",
                     "description": "Skip preparing input data for Gens",
                     "default": false
+                },
+                "skip_sex_check": {
+                    "type": "boolean",
+                    "description": "Skip sex check",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -819,6 +824,11 @@
                     "type": "string",
                     "hidden": true,
                     "description": "Extra options to yak, used for test profile."
+                },
+                "extra_somalier_relate_infer_options": {
+                    "type": "string",
+                    "hidden": true,
+                    "description": "Extra options to somalier relate infer, used for test profile."
                 },
                 "genmod_compound_snv_penalty": {
                     "type": "integer",

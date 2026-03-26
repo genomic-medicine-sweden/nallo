@@ -332,23 +332,31 @@ workflow NALLO {
             .collect()
             .set { ch_samplesheet_pedfile }
 
-        //
-        // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
-        //
-        BAM_INFER_SEX(
-            ch_aligned_bam,
-            ch_fasta,
-            ch_fai,
-            ch_somalier_sites,
-            ch_samplesheet_pedfile,
-        )
-        ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        if (!params.skip_sex_check) {
+            //
+            // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
+            //
+            BAM_INFER_SEX (
+                ch_aligned_bam,
+                ch_fasta,
+                ch_fai,
+                ch_somalier_sites,
+                ch_samplesheet_pedfile
+            )
+            ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
 
-        // Set files with updated meta for subsequent processes
-        ch_bam     = BAM_INFER_SEX.out.bam
-        ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+            // Set files with updated meta for subsequent processes
+            ch_bam     = BAM_INFER_SEX.out.bam
+            ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+        }
+
+        else {
+            ch_bam     = ch_aligned_bam.map { meta, bam, _bai -> [ meta, bam ] }
+            ch_bam_bai = ch_aligned_bam
+        }
+
     }
 
     //
@@ -760,7 +768,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
-
 
     //
     // Ranks family VCFs per variant call region

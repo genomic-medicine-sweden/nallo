@@ -66,6 +66,9 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -219,6 +222,9 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
                 },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -367,7 +373,7 @@
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
-            13,
+            14,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -377,6 +383,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -460,10 +469,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-20T14:40:03.712675704",
+        "timestamp": "2026-03-25T12:41:47.267174041",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
         }
     },
     "Test genome assembly without alignment": {
@@ -523,10 +532,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-20T14:40:41.47969353",
+        "timestamp": "2026-03-25T12:42:09.842189425",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -599,6 +608,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -767,6 +779,9 @@
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
                     "gawk": "5.3.1"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -950,6 +965,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1630,7 +1648,7 @@
     },
     "Test alignment without genome assembly": {
         "content": [
-            13,
+            14,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -1640,6 +1658,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1691,10 +1712,309 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-20T14:39:25.553468898",
+        "timestamp": "2026-03-25T12:41:23.173278319",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
+    },
+    "Test skip sex check - multisample": {
+        "content": [
+            130,
+            {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_INDEX": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
+                "CRAMINO": {
+                    "cramino": "1.1.0"
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3-0-gcecf42e"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "LONGPHASE_HAPLOTAG": {
+                    "longphase": 2.0
+                },
+                "LONGPHASE_PHASE": {
+                    "longphase": 2.0
+                },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.16.1-8a0a24c"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MOSDEPTH": {
+                    "mosdepth": "0.3.11"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.1"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.1"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.5"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_VIEW": {
+                    "samtools": "1.22.1"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
+                "TRGT_GENOTYPE": {
+                    "trgt": "5.0.0-e9acee0"
+                },
+                "TRGT_MERGE": {
+                    "trgt": "5.0.0-e9acee0"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.8
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002",
+                "aligned_reads/HG002/HG002_haplotagged.bam",
+                "aligned_reads/HG002/HG002_haplotagged.bam.bai",
+                "aligned_reads/HG003",
+                "aligned_reads/HG003/HG003_haplotagged.bam",
+                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
+                "aligned_reads/HG004",
+                "aligned_reads/HG004/HG004_haplotagged.bam",
+                "aligned_reads/HG004/HG004_haplotagged.bam.bai",
+                "gens",
+                "gens/HG002",
+                "gens/HG002/HG002.baf.bed.gz",
+                "gens/HG002/HG002.baf.bed.gz.tbi",
+                "gens/HG002/HG002.cov.bed.gz",
+                "gens/HG002/HG002.cov.bed.gz.tbi",
+                "gens/HG003",
+                "gens/HG003/HG003.baf.bed.gz",
+                "gens/HG003/HG003.baf.bed.gz.tbi",
+                "gens/HG003/HG003.cov.bed.gz",
+                "gens/HG003/HG003.cov.bed.gz.tbi",
+                "gens/HG004",
+                "gens/HG004/HG004.baf.bed.gz",
+                "gens/HG004/HG004.baf.bed.gz.tbi",
+                "gens/HG004/HG004.cov.bed.gz",
+                "gens/HG004/HG004.cov.bed.gz.tbi",
+                "methylation",
+                "methylation/pileup",
+                "methylation/pileup/HG002",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG003",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG004",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/HG002",
+                "methylation/profile/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/HG003",
+                "methylation/profile/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/HG004",
+                "methylation/profile/HG004/HG004_methbat_profile.tsv",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/bcftools_stats",
+                "qc/bcftools_stats/HG002",
+                "qc/bcftools_stats/HG002/HG002.bcftools_stats.txt",
+                "qc/bcftools_stats/HG003",
+                "qc/bcftools_stats/HG003/HG003.bcftools_stats.txt",
+                "qc/bcftools_stats/HG004",
+                "qc/bcftools_stats/HG004/HG004.bcftools_stats.txt",
+                "qc/cramino",
+                "qc/cramino/phased",
+                "qc/cramino/phased/HG002",
+                "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.txt",
+                "qc/cramino/phased/HG003",
+                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.txt",
+                "qc/cramino/phased/HG004",
+                "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002",
+                "qc/deepvariant_vcfstatsreport/HG002/HG002.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG003",
+                "qc/deepvariant_vcfstatsreport/HG003/HG003.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG004",
+                "qc/deepvariant_vcfstatsreport/HG004/HG004.visual_report.html",
+                "qc/phasing_stats",
+                "qc/phasing_stats/HG002",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
+                "qc/phasing_stats/HG003",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
+                "qc/phasing_stats/HG004",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.tsv",
+                "repeats",
+                "repeats/family",
+                "repeats/family/FAM",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz",
+                "repeats/family/FAM/FAM_repeat_expansions.vcf.gz.tbi",
+                "repeats/sample",
+                "repeats/sample/HG002",
+                "repeats/sample/HG002/HG002_spanning_trgt.bam",
+                "repeats/sample/HG002/HG002_spanning_trgt.bam.bai",
+                "repeats/sample/HG002/HG002_trgt.vcf.gz",
+                "repeats/sample/HG002/HG002_trgt.vcf.gz.tbi",
+                "repeats/sample/HG003",
+                "repeats/sample/HG003/HG003_spanning_trgt.bam",
+                "repeats/sample/HG003/HG003_spanning_trgt.bam.bai",
+                "repeats/sample/HG003/HG003_trgt.vcf.gz",
+                "repeats/sample/HG003/HG003_trgt.vcf.gz.tbi",
+                "repeats/sample/HG004",
+                "repeats/sample/HG004/HG004_spanning_trgt.bam",
+                "repeats/sample/HG004/HG004_spanning_trgt.bam.bai",
+                "repeats/sample/HG004/HG004_trgt.vcf.gz",
+                "repeats/sample/HG004/HG004_trgt.vcf.gz.tbi",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs.vcf.gz",
+                "snvs/family/FAM/FAM_snvs.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002",
+                "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz.tbi",
+                "snvs/sample/HG003",
+                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz.tbi",
+                "snvs/sample/HG004",
+                "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002",
+                "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
+                "visualization_tracks/HG003",
+                "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
+                "visualization_tracks/HG004",
+                "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
+            ]
+        ],
+        "timestamp": "2026-03-25T16:37:18.934885804",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
         }
     }
 }
