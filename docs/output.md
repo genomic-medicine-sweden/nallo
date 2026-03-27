@@ -138,7 +138,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Somalier
 
-[somalier](https://github.com/brentp/somalier) checks relatedness and sex.
+When `--skip_sex_check` is disabled, [somalier](https://github.com/brentp/somalier) checks relatedness and sex. SNV calling, methylation calling with MethBat, Peddy, prepare_gens_inputs and repeat expansions calling with TRGT require known sex.
 
 | Path                                                 | Description                                            |
 | ---------------------------------------------------- | ------------------------------------------------------ |
