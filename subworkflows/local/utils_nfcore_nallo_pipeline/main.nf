@@ -664,6 +664,10 @@ def validateWorkflowCompatibility() {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
 
+    if (params.snv_caller == 'sentieon' && params.snv_calling_processes != 1) {
+        error "ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used."
+    }
+
     if (
         !params.skip_sv_calling && params.sv_callers_to_run
             .split(',')
