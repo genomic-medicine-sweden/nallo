@@ -62,6 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
 |               | `--skip_sex_check`                             |
+|               | `--vep_mitochondrial_genome_distance`          |
+|               | `--vep_nuclear_genome_distance`                |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
