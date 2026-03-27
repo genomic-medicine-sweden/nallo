@@ -45,6 +45,10 @@ nextflow_workflow {
     test("[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex") {
 
         when {
+            params {
+                min_depth = " --min-depth 10"
+                min_ab    = " --min-ab 0.4"
+            }
             workflow {
                 """
                 input[0] = channel.of(
@@ -73,9 +77,43 @@ nextflow_workflow {
         }
     }
 
+        test("[bam, bai], fasta, fai, somalier_sites, ped - no update for sample with unknown sex") {
+
+        //expectFatal = true
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002', family_id:'FAM', paternal_id:'HG004', sex:0, maternal_id:'HG003', phenotype:2, project:'test', n_files:1, single_end:true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = channel.of([
+                    [ 'id': 'somalier_sites' ],
+                    file(params.pipelines_testdata_base_path + 'reference/somalier_sites.vcf.gz', checkIfExists: true)
+                ])
+                input[4] = CREATE_PEDIGREE_FILE.out.ped
+                """
+            }
+        }
+
+        then {
+            assert !workflow.success
+        }
+    }
+
     test("[bam, bai], fasta, fai, somalier_sites, ped - multiple samples") {
 
         when {
+            params {
+                min_depth = " --min-depth 10"
+                min_ab    = " --min-ab 0.4"
+            }
             workflow {
                 """
                 input[0] = channel.of(
@@ -109,8 +147,9 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert file(workflow.out.somalier_samples.get(0).get(1)).readLines().size() == 4 },
-                { assert file(workflow.out.somalier_pairs.get(0).get(1)).readLines().size() == 4 },
+                // Make sure all samples are processed and in the somalier output
+                { assert file(workflow.out.somalier_samples.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
+                { assert file(workflow.out.somalier_pairs.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
                 { assert snapshot(
                     workflow.out.versions,
                     file(workflow.out.somalier_samples.get(0).get(1)).name,
@@ -158,6 +197,10 @@ nextflow_workflow {
         options '-stub'
 
         when {
+            params {
+                min_depth = " --min-depth 10"
+                min_ab    = " --min-ab 0.4"
+            }
             workflow {
                 """
                 input[0] = channel.of(
@@ -232,6 +275,10 @@ nextflow_workflow {
         options '-stub'
 
         when {
+            params {
+                min_depth = " --min-depth 10"
+                min_ab    = " --min-ab 0.4"
+            }
             workflow {
                 """
                 input[0] = channel.of(

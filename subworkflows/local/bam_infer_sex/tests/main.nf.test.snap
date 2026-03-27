@@ -142,10 +142,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-26T13:23:14.145791848",
+        "timestamp": "2026-03-27T11:07:35.166189012",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples, all unknown sex": {
@@ -473,10 +473,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-26T13:23:39.216697082",
+        "timestamp": "2026-03-27T11:08:01.84127882",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex": {
@@ -624,10 +624,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-26T13:22:56.570344286",
+        "timestamp": "2026-03-27T11:07:09.0179795",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples": {
@@ -949,10 +949,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-26T13:23:30.488854267",
+        "timestamp": "2026-03-27T11:07:53.104107719",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub unknown sex": {
@@ -1100,10 +1100,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-26T13:23:21.987025837",
+        "timestamp": "2026-03-27T11:07:43.295590993",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
@@ -1119,10 +1119,10 @@
             "test.pairs.tsv",
             "HG002_PacBio_Revio.bam"
         ],
-        "timestamp": "2026-03-26T14:25:13.818734766",
+        "timestamp": "2026-03-27T11:07:26.835967344",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }
