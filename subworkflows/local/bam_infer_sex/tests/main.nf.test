@@ -43,7 +43,7 @@ nextflow_workflow {
 
         when {
             params {
-                relete_infer_args = " --min-depth 10 --min-ab 0.4"
+                relete_infer_args = "--infer --min-depth 10 --min-ab 0.4"
             }
             workflow {
                 """
@@ -105,7 +105,7 @@ nextflow_workflow {
 
         when {
             params {
-                relete_infer_args = " --min-depth 10 --min-ab 0.4"
+                relete_infer_args = "--infer --min-depth 10 --min-ab 0.4"
             }
             workflow {
                 """
@@ -191,7 +191,7 @@ nextflow_workflow {
 
         when {
             params {
-                relete_infer_args = " --min-depth 10 --min-ab 0.4"
+                relete_infer_args = "--infer --min-depth 10 --min-ab 0.4"
             }
             workflow {
                 """
@@ -268,7 +268,7 @@ nextflow_workflow {
 
         when {
             params {
-                relete_infer_args = " --min-depth 10 --min-ab 0.4"
+                relete_infer_args = "--infer --min-depth 10 --min-ab 0.4"
             }
             workflow {
                 """
