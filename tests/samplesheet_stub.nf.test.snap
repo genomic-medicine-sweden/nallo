@@ -676,15 +676,15 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-03-25T12:42:09.842189425",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        },
-        "timestamp": "2026-03-25T12:42:09.842189425"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            64,
+            44,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -711,9 +711,6 @@
                     "bedtools": "2.31.1"
                 },
                 "BEDTOOLS_SORT": {
-                    "bedtools": "2.31.1"
-                },
-                "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
@@ -833,7 +830,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T16:52:13.218158954",
+        "timestamp": "2026-03-27T08:56:24.087539704",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
