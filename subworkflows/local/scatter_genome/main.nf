@@ -14,7 +14,7 @@ workflow SCATTER_GENOME {
     main:
     ch_versions = channel.empty()
     ch_bed = channel.empty()
-    ch_bed_intervals = channel.empty()
+    ch_bed_nuclear_intervals = channel.empty()
     ch_bed_nuclear_mitochondrial_intervals = channel.empty()
 
     /*
@@ -69,7 +69,7 @@ workflow SCATTER_GENOME {
 
     add_bed_count(ch_bed_genomes.nuclear)
         .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
-        .set { ch_bed_intervals }
+        .set { ch_bed_nuclear_intervals }
 
     // Make sure that the bed is not empty before mixing
     ch_bed_genomes.mitochondrial
@@ -92,13 +92,16 @@ workflow SCATTER_GENOME {
         )
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
-        // Transpose the output so that we have [ val(meta), path(bed), val(num_intervals) ] for each interval file (chunk)
+        /*
+         * Add the bed count in order to output the number of intervals in ch_bed_nuclear_intervals for downstream processes.
+         * Transpose the output so that we have [ val(meta), path(bed), val(num_intervals) ] for each interval file (chunk).
+         */
         add_bed_count(BEDTOOLS_SPLIT.out.beds)
             .transpose()
-            .set { ch_bed_intervals }
+            .set { ch_bed_nuclear_intervals }
 
-        // Add the bed count and mix the nuclear intervals and mitochondrial channels
-        add_bed_count(ch_bed_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
+        // Remove num_intervals for add_bed_count function. Then recalculate the total bed count (nuclear + mitochondrial) and mix the two channels
+        add_bed_count(ch_bed_nuclear_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
             .mix(ch_bed_mitochondrial_to_mix))
             .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
             .set { ch_bed_nuclear_mitochondrial_intervals }
@@ -109,7 +112,7 @@ workflow SCATTER_GENOME {
          * This can happen if the bed file has too few regions.
          * We check this here, so it doesn't fail later in the pipeline.
          */
-        ch_bed_intervals
+        ch_bed_nuclear_intervals
             .count()
             .map { count ->
                 if (count != split_n) {
@@ -125,7 +128,7 @@ workflow SCATTER_GENOME {
 
     emit:
     bed                                 = BEDTOOLS_MERGE.out.bed                 // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals               = ch_bed_intervals                       // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed_nuclear_intervals               = ch_bed_nuclear_intervals                       // channel: [ val(meta), path(bed), val(num_intervals) ]
     bed_nuclear_mitochondrial_intervals = ch_bed_nuclear_mitochondrial_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
     versions                            = ch_versions                            // channel: [ versions.yml ]
 }
