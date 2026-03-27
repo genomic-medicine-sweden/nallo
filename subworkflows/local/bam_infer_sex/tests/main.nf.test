@@ -76,8 +76,6 @@ nextflow_workflow {
 
         test("[bam, bai], fasta, fai, somalier_sites, ped - no update for sample with unknown sex") {
 
-        //expectFatal = true
-
         when {
             workflow {
                 """
@@ -144,7 +142,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                // Make sure all samples are processed and in the somalier output
+                // Make sure all samples are processed and in the somalier output (unstable md5sum due to header line order, so just check number of lines here)
                 { assert file(workflow.out.somalier_samples.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
                 { assert file(workflow.out.somalier_pairs.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
                 { assert snapshot(
