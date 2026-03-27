@@ -143,11 +143,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:01.246920982",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:41:01.246920982"
     },
     "Test skip sex check - unknown sex": {
         "content": [
@@ -296,11 +296,11 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-03-25T13:15:31.571430415",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T13:15:31.571430415"
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -512,11 +512,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-25T12:42:45.806237725",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:42:45.806237725"
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -616,11 +616,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:47.267174041",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:41:47.267174041"
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -679,15 +679,15 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-25T12:42:09.842189425",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:42:09.842189425"
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            61,
+            43,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -836,11 +836,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-25T13:14:21.341108794",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-26T14:25:58.93555011"
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1010,11 +1010,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-25T12:40:27.70996643",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:40:27.70996643"
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
@@ -1270,11 +1270,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-03-25T13:15:05.344540464",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T13:15:05.344540464"
     },
     "Test family id same as sample id": {
         "content": [
@@ -1775,11 +1775,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-25T12:43:37.56839312",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:43:37.56839312"
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1847,11 +1847,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:23.173278319",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T12:41:23.173278319"
     },
     "Test skip sex check - multisample": {
         "content": [
@@ -2146,10 +2146,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-25T16:37:18.934885804",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
-        }
+        },
+        "timestamp": "2026-03-25T16:37:18.934885804"
     }
 }

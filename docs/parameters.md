@@ -151,7 +151,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
-| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
+| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
