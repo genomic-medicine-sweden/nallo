@@ -9,36 +9,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
+- [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
+- [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Added GitHub workflow to add the PR checklist as a comment
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
 - [#963](https://github.com/genomic-medicine-sweden/nallo/pull/963) - Added tests for `BAM_INFER_SEX` subworkflow
+- [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
 
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Make the annotation of mitochondrial variants use distance 0 for ENSEMBLVEP_SNV
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - The logic of SCATTER_GENOME subworkflow was changed, now we split the bed into regions only if `snv_calling_processes` is greater than one.
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Format nallo workflow and scatter_genome subworkflow with harshil alignment
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Change pipelines_testdata_base_path to point to resource with chrM in the input and in the vep_cache
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Update module gawk
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
 - [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
 - [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
 - [#942](https://github.com/genomic-medicine-sweden/nallo/pull/942) - Replaced local module `BUILD_INTERVALS` with nf-core gawk module to lessen maintenance burden of local modules
 - [#943](https://github.com/genomic-medicine-sweden/nallo/pull/943) - Updated DeepVariant to 1.10.0
 - [#944](https://github.com/genomic-medicine-sweden/nallo/pull/944) - Changed to topic versions for `CLEAN_SNIFFLES` and moved script from `/bin` to module directory
-- [#935] (https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
+- [#935](https://github.com/genomic-medicine-sweden/nallo/pull/935) - Replaced local module `ADD_FOUND_IN_TAG` with vcfexpress nf-core module
 - [#945](https://github.com/genomic-medicine-sweden/nallo/pull/945) - Replaced local module `CREATE_SAMPLES_FILE` with nf-core gawk module to lessen maintenance burden of local modules
 - [#948](https://github.com/genomic-medicine-sweden/nallo/pull/948) - Replaced local modules `add_most_severe_consequence` and `add_most_severe_pli` with nf-core versions to lessen maintenance burden of local modules
 - [#949](https://github.com/genomic-medicine-sweden/nallo/pull/949) - Replaced local HiFiCNV module with nf-core version to lessen maintenance burden of local modules
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Changed to topic versions in `CREATE_PEDIGREE_FILE`
 - [#953](https://github.com/genomic-medicine-sweden/nallo/pull/953) - Changed to topic versions for local module `ECHTVAR_ANNO`
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
+- [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
+- [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
+- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 
 ### Removed
 
 - [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
+- [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
 
 ### Fixed
 
 - [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping annotating variants
+- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Fix sentieon spanning deletion calls crashing most_severe_consequence script due to missing CSQ
 
 ### Parameters
 
@@ -49,6 +64,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_heterozygous_allele_frequency` |
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
+|               | `--skip_sex_check`                             |
+|               | `--vep_mitochondrial_genome_distance`          |
+|               | `--vep_nuclear_genome_distance`                |
+|               | `--mitochondrial_caller`                       |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

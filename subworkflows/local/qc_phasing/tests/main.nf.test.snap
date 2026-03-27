@@ -164,14 +164,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.tsv:md5,a3d150f7023123dddb229e2293ed22fe"
+                    "HG002_stats.tsv:md5,f339ba3c7e75b20cb6f4de409d3343f5"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,4b34c0d474fde91e9815a28da3d60c83"
+                    "HG003_stats.tsv:md5,da30102ed9877a3e9f02631bf8a9cda2"
                 ]
             ],
             [
@@ -180,14 +180,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz:md5,595c4020cfb952b0c8e4b6c8685220ab"
+                    "HG002_stats.gtf.gz:md5,ecfe3e86b48c4c659dd201afba057a14"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,6a77ee63383acffe72b0bd2e3a2a81b9"
+                    "HG003_stats.gtf.gz:md5,309b18b168aa79256d67b41785fa5f76"
                 ]
             ],
             [
@@ -196,104 +196,106 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz.tbi:md5,20daa809d5ddbcb59a03735feb6f0762"
+                    "HG002_stats.gtf.gz.tbi:md5,33b328f4fed2d6db9d40a8e9dcd60ecf"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
+                    "HG003_stats.gtf.gz.tbi:md5,ee18b7a9dd35541b05b3c541fbf033fb"
                 ]
             ],
             [
                 [
                     "File name\tHG002_haplotagged.bam",
-                    "Number of alignments\t1068",
-                    "% from total alignments\t98.31",
-                    "Number of reads\t1050",
-                    "Yield [Gb]\t0.02",
-                    "Mean coverage\t0.73",
+                    "Number of alignments\t904",
+                    "% from total alignments\t89.60",
+                    "Number of reads\t810",
+                    "Yield [Gb]\t0.01",
+                    "Mean coverage\t0.54",
                     "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t18011",
-                    "N75\t14818",
-                    "Median length\t16199.50",
-                    "Mean length\t16316.50",
+                    "N50\t17298",
+                    "N75\t14165",
+                    "Median length\t14998.50",
+                    "Mean length\t14312.31",
                     "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.47",
-                    "Modal identity\t99.9",
+                    "Median identity\t99.75",
+                    "Mean identity\t99.49",
+                    "Modal identity\t99.8",
                     "",
-                    "Fraction reads phased\t0.26",
-                    "Number of phaseblocks\t12",
+                    "Fraction reads phased\t0.24",
+                    "Number of phaseblocks\t13",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t153962.00",
-                    "N50 phaseblock length\t258152",
+                    "Median phaseblock length\t49772.00",
+                    "N50 phaseblock length\t222597",
                     "",
                     "",
                     "",
                     "# Normalized read count per chromosome",
                     "",
                     "chr16\t11.96",
-                    "chr17\t0.73",
-                    "chr20\t0.28",
+                    "chr17\t0.76",
+                    "chr20\t0.33",
+                    "chrM\t470.12",
                     "chrX\t1.00",
                     "",
                     "Path\tHG002_haplotagged.bam"
                 ],
                 [
                     "File name\tHG003_haplotagged.bam",
-                    "Number of alignments\t695",
-                    "% from total alignments\t99.14",
-                    "Number of reads\t689",
+                    "Number of alignments\t534",
+                    "% from total alignments\t83.52",
+                    "Number of reads\t446",
                     "Yield [Gb]\t0.01",
-                    "Mean coverage\t0.43",
+                    "Mean coverage\t0.27",
                     "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t16761",
-                    "N75\t13542",
-                    "Median length\t14912.00",
-                    "Mean length\t14846.74",
+                    "N50\t16145",
+                    "N75\t12060",
+                    "Median length\t12523.00",
+                    "Mean length\t12107.30",
                     "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.55",
-                    "Modal identity\t99.9",
+                    "Median identity\t99.70",
+                    "Mean identity\t99.54",
+                    "Modal identity\t99.7",
                     "",
-                    "Fraction reads phased\t0.22",
-                    "Number of phaseblocks\t6",
+                    "Fraction reads phased\t0.12",
+                    "Number of phaseblocks\t5",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t330390.50",
-                    "N50 phaseblock length\t432148",
+                    "Median phaseblock length\t47005.00",
+                    "N50 phaseblock length\t47005",
                     "",
                     "",
                     "",
                     "# Normalized read count per chromosome",
                     "",
-                    "chr16\t12.31",
-                    "chr17\t0.73",
-                    "chr20\t0.38",
+                    "chr16\t11.20",
+                    "chr17\t0.84",
+                    "chr20\t0.39",
+                    "chrM\t1187.73",
                     "chrX\t1.00",
                     "",
                     "Path\tHG003_haplotagged.bam"
                 ]
             ]
         ],
-        "timestamp": "2026-02-26T08:30:08.469735868",
+        "timestamp": "2026-03-11T12:17:12.798039686",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "WhatsHap stats disabled - stub": {
         "content": [
             {
                 "0": [
-
+                    
                 ],
                 "1": [
-
+                    
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
                     [
@@ -332,13 +334,13 @@
                     ]
                 ],
                 "phasing_blocks": [
-
+                    
                 ],
                 "phasing_blocks_index": [
-
+                    
                 ],
                 "phasing_stats": [
-
+                    
                 ],
                 "versions": [
                     "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f",
@@ -366,14 +368,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.tsv:md5,6792060ed9a0620ade38498cd4e4ccec"
+                    "HG002_stats.tsv:md5,c27a14200ab7e22e86d25cbce20c6a97"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,96e7f98846c5d87dcfe834f8477cfc20"
+                    "HG003_stats.tsv:md5,439359e746b6b2f7e67512be917c6dd6"
                 ]
             ],
             [
@@ -382,14 +384,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5"
+                    "HG002_stats.gtf.gz:md5,4435395a86920129c78b91e8b31e1b00"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,9b8a10621547261c2df2829292810768"
+                    "HG003_stats.gtf.gz:md5,f07d4822d4ca52ef004f021276a9821b"
                 ]
             ],
             [
@@ -405,84 +407,86 @@
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz.tbi:md5,53b95c424365d917749c385648b58279"
+                    "HG003_stats.gtf.gz.tbi:md5,c98e6c8a42c2ed1c2ce1126efafe5bd2"
                 ]
             ],
             [
                 [
                     "File name\tHG002_haplotagged.bam",
-                    "Number of alignments\t1068",
-                    "% from total alignments\t98.31",
-                    "Number of reads\t1050",
-                    "Yield [Gb]\t0.02",
-                    "Mean coverage\t0.73",
+                    "Number of alignments\t904",
+                    "% from total alignments\t89.60",
+                    "Number of reads\t810",
+                    "Yield [Gb]\t0.01",
+                    "Mean coverage\t0.54",
                     "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t18011",
-                    "N75\t14818",
-                    "Median length\t16199.50",
-                    "Mean length\t16316.50",
+                    "N50\t17298",
+                    "N75\t14165",
+                    "Median length\t14998.50",
+                    "Mean length\t14312.31",
                     "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.47",
-                    "Modal identity\t99.9",
+                    "Median identity\t99.75",
+                    "Mean identity\t99.49",
+                    "Modal identity\t99.8",
                     "",
-                    "Fraction reads phased\t0.05",
+                    "Fraction reads phased\t0.04",
                     "Number of phaseblocks\t2",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t31399.00",
-                    "N50 phaseblock length\t39847",
+                    "Median phaseblock length\t28375.50",
+                    "N50 phaseblock length\t33800",
                     "",
                     "",
                     "",
                     "# Normalized read count per chromosome",
                     "",
                     "chr16\t11.96",
-                    "chr17\t0.73",
-                    "chr20\t0.28",
+                    "chr17\t0.76",
+                    "chr20\t0.33",
+                    "chrM\t470.12",
                     "chrX\t1.00",
                     "",
                     "Path\tHG002_haplotagged.bam"
                 ],
                 [
                     "File name\tHG003_haplotagged.bam",
-                    "Number of alignments\t695",
-                    "% from total alignments\t99.14",
-                    "Number of reads\t689",
+                    "Number of alignments\t534",
+                    "% from total alignments\t83.52",
+                    "Number of reads\t446",
                     "Yield [Gb]\t0.01",
-                    "Mean coverage\t0.43",
+                    "Mean coverage\t0.27",
                     "Yield [Gb] (>25kb)\t0.00",
-                    "N50\t16761",
-                    "N75\t13542",
-                    "Median length\t14912.00",
-                    "Mean length\t14846.74",
+                    "N50\t16145",
+                    "N75\t12060",
+                    "Median length\t12523.00",
+                    "Mean length\t12107.30",
                     "",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.55",
-                    "Modal identity\t99.9",
+                    "Median identity\t99.70",
+                    "Mean identity\t99.54",
+                    "Modal identity\t99.7",
                     "",
-                    "Fraction reads phased\t0.14",
+                    "Fraction reads phased\t0.09",
                     "Number of phaseblocks\t4",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t37178.50",
-                    "N50 phaseblock length\t43394",
+                    "Median phaseblock length\t24872.50",
+                    "N50 phaseblock length\t30963",
                     "",
                     "",
                     "",
                     "# Normalized read count per chromosome",
                     "",
-                    "chr16\t12.31",
-                    "chr17\t0.73",
-                    "chr20\t0.38",
+                    "chr16\t11.20",
+                    "chr17\t0.84",
+                    "chr20\t0.39",
+                    "chrM\t1187.73",
                     "chrX\t1.00",
                     "",
                     "Path\tHG003_haplotagged.bam"
                 ]
             ]
         ],
-        "timestamp": "2026-02-26T08:29:50.166733456",
+        "timestamp": "2026-03-11T12:16:54.494202974",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nextflow": "26.02.0"
         }
     },
     "WhatsHap stats disabled": {
@@ -492,13 +496,13 @@
                 "versions.yml:md5,c0507f0603b3bfd10800a84c5591402f"
             ],
             [
-
+                
             ],
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
