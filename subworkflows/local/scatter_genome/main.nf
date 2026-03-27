@@ -93,12 +93,12 @@ workflow SCATTER_GENOME {
         ch_versions = ch_versions.mix(BEDTOOLS_SPLIT.out.versions)
 
         // Transpose the output so that we have [ val(meta), path(bed), val(num_intervals) ] for each interval file (chunk)
-        BEDTOOLS_SPLIT.out.beds
+        add_bed_count(BEDTOOLS_SPLIT.out.beds)
             .transpose()
             .set { ch_bed_intervals }
 
         // Add the bed count and mix the nuclear intervals and mitochondrial channels
-        add_bed_count(ch_bed_intervals
+        add_bed_count(ch_bed_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
             .mix(ch_bed_mitochondrial_to_mix))
             .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
             .set { ch_bed_nuclear_mitochondrial_intervals }
