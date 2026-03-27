@@ -136,14 +136,23 @@ Because almost all other subworkflows relies on the mapping subworkflow.
 
 #### Alignment
 
-The majority of subworkflows depend on the alignment subworkflow which requires `--fasta` and `--somalier_sites`.
+The majority of subworkflows depend on the alignment subworkflow which requires `--fasta`.
 
-| Parameter        | Description                                                                                                                                                                        |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fasta`          | Reference genome, either gzipped or uncompressed (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
-| `somalier_sites` | A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz))     |
+| Parameter | Description                                                                                                                                                                        |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fasta`   | Reference genome, either gzipped or uncompressed (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
 
 Turned off with `--skip_alignment`.
+
+#### Sex check
+
+Some subworkflows are sex-dependent and need a sex-inference step if samples are input with unknown sex. This step requires `--somalier_sites`.
+
+| Parameter        | Description                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `somalier_sites` | A VCF with known polymorphic sites from which sex will be inferred, if possible (e.g. [sites.hg38.vcg.gz](https://github.com/brentp/somalier/files/3412456/sites.hg38.vcf.gz)) |
+
+Turned off with `--skip_sex_check`.
 
 #### QC
 
@@ -178,6 +187,8 @@ Turned off with `--skip_call_paralogs`.
 This subworkflow depends on the alignment subworkflow, and requires PARs.
 
 By default the pipeline uses [DeepVariant](https://github.com/google/deepvariant) for long-read SNV calling. To enable [Sentieon DNAscope Long Read](https://github.com/Sentieon/sentieon-cli/blob/main/docs/dnascope-longread.md), set `--snv_caller sentieon`. Make the Sentieon license available by adding a base64-encoded license string to the Nextflow secrets store (`nextflow secrets set SENTIEON_LICENSE_BASE64 ...`) or by exporting the same variable before running the pipeline.
+
+When using Sentieon, `--snv_calling_processes` must be set to `1`.
 
 | Parameter     | Description                                                                                                                                              |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |

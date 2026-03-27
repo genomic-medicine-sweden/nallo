@@ -7,7 +7,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                 ]
             ],
             [
@@ -16,7 +16,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                 ]
             ],
             [
@@ -25,20 +25,20 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                 ]
             ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
-                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t65\t0\t8\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T17:54:04.394691649"
+        "timestamp": "2026-03-27T16:43:31.826356621"
     },
     "1 sample - unphased": {
         "content": [
@@ -48,7 +48,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                    "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                 ]
             ],
             [
@@ -59,15 +59,15 @@
             ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
-                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.003196415987113662\t-0.14415084201288636\t-10.546461703829017\t0\t0\t86\t22\t0\t0"
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t0\t65\t8\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T17:54:17.489538655"
+        "timestamp": "2026-03-27T16:43:44.46917063"
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -77,7 +77,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                 ]
             ],
             [
@@ -86,7 +86,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                 ]
             ],
             [
@@ -95,20 +95,20 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                 ]
             ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tFEMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.2524077972827565\t0.11794871794871793\t-0.821941753051282\t-30.60943963146014\t65\t0\t0\t18\t8\t9",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.7208090014090252\t0.11794871794871793\t-0.8155868340512821\t-29.104470464990392\t65\t0\t0\t18\t8\t9"
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tFEMALE\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7456597017692308\t-27.768665531575458\t0\t65\t0\t8\t0\t0",
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7393047827692308\t-26.382321681004818\t0\t65\t0\t8\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T17:54:31.571170508"
+        "timestamp": "2026-03-27T16:43:57.62551052"
     },
     "1 sample - phased - stub": {
         "content": [
@@ -197,24 +197,24 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T15:13:07.697503961"
+        "timestamp": "2026-03-27T16:44:35.35249946"
     },
     "1 sample - bed phased": {
         "content": [
             [
                 "chrom\tstart\tend\th1_unmeth\th1_meth\th2_unmeth\th2_meth\tpvalue",
-                "chr16\t153272\t153273\t6\t0\t1\t5\t0.01515151515151521",
-                "chr16\t153589\t153590\t0\t6\t5\t1\t0.01515151515151521",
-                "chr16\t153664\t153665\t0\t6\t5\t1\t0.01515151515151521",
-                "chr16\t153936\t153937\t6\t0\t1\t5\t0.01515151515151521",
-                "chr16\t153947\t153948\t6\t0\t1\t5\t0.01515151515151521",
-                "chr16\t153954\t153955\t6\t0\t0\t6\t0.0021645021645021684",
-                "chr16\t153956\t153957\t6\t0\t0\t6\t0.0021645021645021684",
-                "chr16\t154017\t154018\t1\t5\t6\t0\t0.01515151515151521",
-                "chr16\t154303\t154304\t6\t0\t0\t7\t0.0005827505827505852",
-                "chr16\t154305\t154306\t6\t0\t0\t7\t0.0005827505827505852",
-                "chr16\t154307\t154308\t6\t0\t1\t6\t0.00466200466200469",
-                "chr16\t155181\t155182\t1\t5\t7\t0\t0.004662004662004675"
+                "chr16\t161822\t161823\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t161844\t161845\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t161905\t161906\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t162543\t162544\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t163105\t163106\t0\t4\t4\t0\t0.028571428571428484",
+                "chr16\t163228\t163229\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t163290\t163291\t4\t0\t0\t4\t0.028571428571428484",
+                "chr16\t163305\t163306\t0\t4\t4\t0\t0.028571428571428484",
+                "chr16\t163487\t163488\t0\t4\t4\t0\t0.028571428571428484",
+                "chr16\t163515\t163516\t0\t4\t4\t0\t0.028571428571428484",
+                "chr16\t163543\t163544\t0\t4\t4\t0\t0.028571428571428484",
+                "chr16\t163862\t163863\t4\t0\t0\t4\t0.028571428571428484"
             ],
             [
                 [
@@ -222,7 +222,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.combined.bw:md5,cdbefc3e13c28a67e811ade46acf579a"
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
                 ]
             ],
             [
@@ -231,7 +231,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap1.bw:md5,6120a6f8c28304adc4ac9d17d99496a1"
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
                 ]
             ],
             [
@@ -240,20 +240,20 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.hap2.bw:md5,717fe858572682a45856764d323cfe39"
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
                 ]
             ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.420082195962956\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t65\t0\t0\t18\t8\t9",
-                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t65\t0\t8\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T18:10:06.668175554"
+        "timestamp": "2026-03-27T16:44:10.775476506"
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -354,7 +354,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:09:54.456285728"
+        "timestamp": "2026-03-27T16:44:47.781823273"
     },
     "1 sample - bed unphased": {
         "content": [
@@ -365,7 +365,7 @@
                         "id": "HG002",
                         "family_id": "HG002"
                     },
-                    "HG002_pbcpgtools.combined.bw:md5,1a1462fc919834ffe87c9534a18b7a26"
+                    "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
                 ]
             ],
             [
@@ -376,14 +376,14 @@
             ],
             [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
-                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.11794871794871793\t-0.819399786051282\t-29.99424589311467\t0\t0\t65\t18\t0\t0",
-                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.003196415987113662\t-0.14415084201288636\t-10.546461703829017\t0\t0\t86\t22\t0\t0"
+                "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t0\t65\t8\t0\t0",
+                "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T18:10:20.49959952"
+        "timestamp": "2026-03-27T16:44:23.29070496"
     }
 }

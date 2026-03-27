@@ -1,33 +1,206 @@
 {
-    "make bed from fai, don't make intervals, even though we say we want to split it in 2": {
+    "[], bed, false, 2 - with chrM in bed file": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "chr22_chrM"
                         },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "chr22_chrM_merged.bed:md5,c4f4fb094582b255e0f51e7163bdbf3c"
                     ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "genome": "mitochondrial"
+                        },
+                        "chr22_chrM_mitochondrial.bed:md5,079a4d535599ed9127c528283e9e5611",
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        3
+                    ]
                 ],
                 "bed": [
                     [
                         {
-                            "id": "test"
+                            "id": "chr22_chrM"
                         },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "chr22_chrM_merged.bed:md5,c4f4fb094582b255e0f51e7163bdbf3c"
                     ]
                 ],
-                "bed_intervals": [
-                    
+                "bed_nuclear_intervals": [
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "bed_nuclear_mitochondrial_intervals": [
+                    [
+                        {
+                            "genome": "mitochondrial"
+                        },
+                        "chr22_chrM_mitochondrial.bed:md5,079a4d535599ed9127c528283e9e5611",
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        3
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        3
+                    ]
                 ]
             },
             [
-                "chr22\t0\t40001"
-            ],
+                "chr22\t0\t1500",
+                "chr22\t2000\t3000",
+                "chrM\t0\t1000"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:05:30.851100387"
+    },
+    "[], bed, false, 2 - with chrM in bed file - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22_chrM"
+                        },
+                        "chr22_chrM_merged.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ],
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ]
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "chr22_chrM"
+                        },
+                        "chr22_chrM_merged.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bed_nuclear_intervals": [
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ],
+                    [
+                        {
+                            "id": "chr22_chrM",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ]
+                ],
+                "bed_nuclear_mitochondrial_intervals": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0001.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chrM_chunk.0002.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        2
+                    ]
+                ]
+            },
             [
                 
             ]
@@ -36,9 +209,9 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:02:20.478634874"
+        "timestamp": "2026-03-27T17:05:40.131166491"
     },
-    "[], bed, false, true, 2": {
+    "[], bed, false, 2 - without chrM in bed file": {
         "content": [
             {
                 "0": [
@@ -46,15 +219,39 @@
                         {
                             "id": "chr22"
                         },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
+                        "chr22_merged.bed:md5,29309c2d7e370d817ed616f7ba7f1c4c"
                     ]
                 ],
                 "1": [
                     [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
                         "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
                         2
                     ],
                     [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
                         "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
                         2
                     ]
@@ -64,41 +261,56 @@
                         {
                             "id": "chr22"
                         },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
+                        "chr22_merged.bed:md5,29309c2d7e370d817ed616f7ba7f1c4c"
                     ]
                 ],
-                "bed_intervals": [
+                "bed_nuclear_intervals": [
                     [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
                         "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
                         2
                     ],
                     [
+                        {
+                            "id": "chr22",
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
+                        2
+                    ]
+                ],
+                "bed_nuclear_mitochondrial_intervals": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "chr22_chunk.00001.bed:md5,37978db9b095a29ebbd64f65dd8f13b3",
+                        2
+                    ],
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
                         "chr22_chunk.00002.bed:md5,0da4774e61b9c9005122e46f24522604",
                         2
                     ]
                 ]
             },
             [
-                "chr22\t0\t1000",
-                "chr22\t500\t1500",
+                "chr22\t0\t1500",
                 "chr22\t2000\t3000"
-            ],
-            [
-                [
-                    "chr22\t0\t1500"
-                ],
-                [
-                    "chr22\t2000\t3000"
-                ]
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:02:35.844522536"
+        "timestamp": "2026-03-27T17:05:48.873064559"
     },
-    "fai, [], true, true, 1": {
+    "fai, [], true, []": {
         "content": [
             {
                 "0": [
@@ -106,12 +318,24 @@
                         {
                             "id": "test"
                         },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "test_merged.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
                 "1": [
                     [
-                        "test_chunk.00001.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        {
+                            "genome": "nuclear"
+                        },
+                        "test_nuclear.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        1
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "genome": "nuclear"
+                        },
+                        "test_nuclear.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
                         1
                     ]
                 ],
@@ -120,96 +344,26 @@
                         {
                             "id": "test"
                         },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                        "test_merged.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
                     ]
                 ],
-                "bed_intervals": [
+                "bed_nuclear_intervals": [
                     [
-                        "test_chunk.00001.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        {
+                            "genome": "nuclear"
+                        },
+                        "test_nuclear.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
                         1
                     ]
-                ]
-            },
-            [
-                "chr22\t0\t40001"
-            ],
-            [
-                [
-                    "chr22\t0\t40001"
-                ]
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T16:02:12.555795951"
-    },
-    "[], bed, false, false, 2": {
-        "content": [
-            {
-                "0": [
+                ],
+                "bed_nuclear_mitochondrial_intervals": [
                     [
                         {
-                            "id": "chr22"
+                            "genome": "nuclear"
                         },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
+                        "test_nuclear.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                        1
                     ]
-                ],
-                "1": [
-                    
-                ],
-                "bed": [
-                    [
-                        {
-                            "id": "chr22"
-                        },
-                        "chr22.bed:md5,88ebd3fd77139b3d33af226231eff0df"
-                    ]
-                ],
-                "bed_intervals": [
-                    
-                ]
-            },
-            [
-                "chr22\t0\t1000",
-                "chr22\t500\t1500",
-                "chr22\t2000\t3000"
-            ],
-            [
-                
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T16:02:27.957846572"
-    },
-    "fai, [], true, false, []": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "bed": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
-                    ]
-                ],
-                "bed_intervals": [
-                    
                 ]
             },
             [
@@ -223,6 +377,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:02:03.356694144"
+        "timestamp": "2026-03-27T17:05:22.330129282"
     }
 }

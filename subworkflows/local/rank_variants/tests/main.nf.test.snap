@@ -4,10 +4,10 @@
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-02-26T08:31:13.329929556"
+        "timestamp": "2026-03-27T17:04:59.264850386"
     },
     "1 sample - stub": {
         "content": [
@@ -50,6 +50,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:04:50.627839902"
+        "timestamp": "2026-03-27T17:05:13.257587261"
     }
 }

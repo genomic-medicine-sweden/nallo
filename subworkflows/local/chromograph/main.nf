@@ -17,7 +17,6 @@ workflow CHROMOGRAPH {
     plot_autozygosity // boolean
 
     main:
-    ch_versions = channel.empty()
     ch_autozyg  = channel.empty()
     ch_coverage = channel.empty()
 

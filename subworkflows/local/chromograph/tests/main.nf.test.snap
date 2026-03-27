@@ -10,11 +10,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:09:10.844983229",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:52.939186031"
     },
     "plot coverage -stub": {
         "content": [
@@ -89,11 +89,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:11:33.460210267",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:19.631950502"
     },
     "plot nothing -stub": {
         "content": [
@@ -106,11 +106,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:11:47.955787472",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:45.040740805"
     },
     "plot all": {
         "content": [
@@ -154,12 +154,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -169,8 +169,8 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
@@ -214,12 +214,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -229,19 +229,19 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:10:28.838583808",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:09.762099358"
     },
     "plot all -stub": {
         "content": [
@@ -368,11 +368,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:11:22.460098872",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:07.684265465"
     },
     "plot autozygosity -stub": {
         "content": [
@@ -449,11 +449,11 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:13:46.996671891",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:33.722175984"
     },
     "plot coverage": {
         "content": [
@@ -471,12 +471,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -486,8 +486,8 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
@@ -505,12 +505,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -520,19 +520,19 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:10:42.310397562",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:23.93536108"
     },
     "plot autozygosity": {
         "content": [
@@ -609,10 +609,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-17T11:10:57.944996767",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:40.428751555"
     }
 }

@@ -10,7 +10,7 @@
                     },
                     "hificnv_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
-                    "ad6c54415de0f02b4be3f3411ddfc3eb"
+                    "b432e038c095e7f8d71f8abaf175bda5"
                 ],
                 [
                     "family_caller_vcf:",
@@ -20,7 +20,7 @@
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
-                    "1c8c018633073987f1979a23ea4dc0d8"
+                    "facd6d404046bf537e555d423399d902"
                 ],
                 [
                     "family_caller_vcf:",
@@ -30,7 +30,7 @@
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "560303cb06b735bcbc7ff75d2fc12c7a"
+                    "3cc68f1619cefdb641105a99f34bdc36"
                 ],
                 [
                     "family_caller_vcf:",
@@ -39,8 +39,8 @@
                         "sv_caller": "sniffles"
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "5dbae080101487104ec8ea6928141565"
+                    "VcfFile [chromosomes=[], sampleCount=2, variantCount=0, phased=true, phasedAutodetect=true]",
+                    "d41d8cd98f00b204e9800998ecf8427e"
                 ]
             ],
             [
@@ -50,8 +50,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
-                    "22c7068a2098b9fe154d67318e141f2a"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]",
+                    "b969c0f8cc5a198a7f641b7f82475116"
                 ]
             ]
         ],
@@ -59,7 +59,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:17:12.888944201"
+        "timestamp": "2026-03-27T16:53:11.76971036"
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -71,8 +71,8 @@
                         "sv_caller": "sniffles"
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=19, phased=false, phasedAutodetect=false]",
-                    "bb3776d3b06546280653984c5b088c92"
+                    "VcfFile [chromosomes=[chr16, chr17, chrM, chr20], sampleCount=1, variantCount=4, phased=false, phasedAutodetect=false]",
+                    "e21a577073e659bef1a828dfbd6586dc"
                 ]
             ],
             [
@@ -82,8 +82,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=19, phased=false, phasedAutodetect=false]",
-                    "e6807254390d6c6497f8614af9817b0b"
+                    "VcfFile [chromosomes=[chr16, chr17, chrM, chr20], sampleCount=1, variantCount=4, phased=false, phasedAutodetect=false]",
+                    "4ea5506270033858da2a08eeba3e92cf"
                 ]
             ]
         ],
@@ -91,7 +91,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:12:12.99390315"
+        "timestamp": "2026-03-27T16:47:56.075780509"
     },
     "1 sample, 1 family - sawfish": {
         "content": [
@@ -103,8 +103,8 @@
                         "sv_caller": "sawfish"
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
-                    "29af25825b89181b8231b7e3d394e79f"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=26, phased=false, phasedAutodetect=false]",
+                    "a851843eb65aa4752064d7b7410196e"
                 ]
             ],
             [
@@ -114,8 +114,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
-                    "e8d0aa32a53db09094ce705305f6c274"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=26, phased=false, phasedAutodetect=false]",
+                    "d016a897644c7522f77a25c5cacb3e49"
                 ]
             ]
         ],
@@ -123,7 +123,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:12:57.325851978"
+        "timestamp": "2026-03-27T16:49:05.430709013"
     },
     "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
         "content": [
@@ -135,8 +135,8 @@
                         "sv_caller": "hificnv"
                     },
                     "hificnv_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=51, phased=false, phasedAutodetect=false]",
-                    "baec849d09d3c1749ccb3903e2ccb0d7"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=33, phased=false, phasedAutodetect=false]",
+                    "8cba2afbd1c9bd61e33f939bf11da809"
                 ],
                 [
                     "family_caller_vcf:",
@@ -145,8 +145,8 @@
                         "sv_caller": "sawfish"
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=61, phased=false, phasedAutodetect=false]",
-                    "2fa666aba08dec2bf1b45d43a009dd33"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=37, phased=false, phasedAutodetect=false]",
+                    "aa0e88814394eae15c3c589fde22ca15"
                 ]
             ],
             [
@@ -156,8 +156,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=86, phased=false, phasedAutodetect=false]",
-                    "33dcae0cb2b8b2f57686bb3e32b0ef53"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=53, phased=false, phasedAutodetect=false]",
+                    "ce56a8d09141125a6b09a44b3c7f857d"
                 ]
             ]
         ],
@@ -165,7 +165,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:15:16.98496629"
+        "timestamp": "2026-03-27T16:51:24.515369045"
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -177,8 +177,8 @@
                         "sv_caller": "hificnv"
                     },
                     "hificnv_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=51, phased=false, phasedAutodetect=false]",
-                    "baec849d09d3c1749ccb3903e2ccb0d7"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=33, phased=false, phasedAutodetect=false]",
+                    "8cba2afbd1c9bd61e33f939bf11da809"
                 ],
                 [
                     "family_caller_vcf:",
@@ -187,8 +187,8 @@
                         "sv_caller": "sawfish"
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=61, phased=false, phasedAutodetect=false]",
-                    "2fa666aba08dec2bf1b45d43a009dd33"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=37, phased=false, phasedAutodetect=false]",
+                    "aa0e88814394eae15c3c589fde22ca15"
                 ],
                 [
                     "family_caller_vcf:",
@@ -197,8 +197,8 @@
                         "sv_caller": "severus"
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
-                    "80331d36e708417b22f03e035742f9f6"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=36, phased=false, phasedAutodetect=false]",
+                    "9451a7b531260f848c8b723157c4b624"
                 ],
                 [
                     "family_caller_vcf:",
@@ -207,8 +207,8 @@
                         "sv_caller": "sniffles"
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=20, phased=false, phasedAutodetect=false]",
-                    "95ab42a7a956b758e446b53049430502"
+                    "VcfFile [chromosomes=[chr16, chr17, chrM, chr20], sampleCount=2, variantCount=4, phased=false, phasedAutodetect=false]",
+                    "a0081a6f4cb386d0190de0955d53fd97"
                 ]
             ],
             [
@@ -218,8 +218,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=143, phased=false, phasedAutodetect=false]",
-                    "a1c93c96da3593b8dd2f17d16b71285"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=91, phased=false, phasedAutodetect=false]",
+                    "1d76d5511ddce77d09871a0abd107bd7"
                 ]
             ]
         ],
@@ -227,7 +227,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:14:33.108378199"
+        "timestamp": "2026-03-27T16:50:40.610293082"
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -362,7 +362,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:17:37.53897969"
+        "timestamp": "2026-03-27T16:53:33.284355744"
     },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
         "content": [
@@ -375,7 +375,7 @@
                     },
                     "hificnv_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
-                    "ad6c54415de0f02b4be3f3411ddfc3eb"
+                    "b432e038c095e7f8d71f8abaf175bda5"
                 ],
                 [
                     "family_caller_vcf:",
@@ -385,7 +385,7 @@
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=2, phased=false, phasedAutodetect=false]",
-                    "52036d7f6fc695fa297ef404ea9d6b5f"
+                    "eafac579764bd83ccb64bc2fc31880c1"
                 ],
                 [
                     "family_caller_vcf:",
@@ -395,7 +395,7 @@
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "560303cb06b735bcbc7ff75d2fc12c7a"
+                    "3cc68f1619cefdb641105a99f34bdc36"
                 ],
                 [
                     "family_caller_vcf:",
@@ -404,8 +404,8 @@
                         "sv_caller": "sniffles"
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "5dbae080101487104ec8ea6928141565"
+                    "VcfFile [chromosomes=[], sampleCount=2, variantCount=0, phased=true, phasedAutodetect=true]",
+                    "d41d8cd98f00b204e9800998ecf8427e"
                 ]
             ],
             [
@@ -415,8 +415,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]",
-                    "81c9dfa5097154ece5ed7a6f778c7ce2"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=5, phased=false, phasedAutodetect=false]",
+                    "5e9db919185e4f6364b036cf7a6660f2"
                 ]
             ]
         ],
@@ -424,7 +424,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:16:11.256771651"
+        "timestamp": "2026-03-27T16:52:17.663306204"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -436,8 +436,8 @@
                         "sv_caller": "sawfish"
                     },
                     "sawfish_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
-                    "bd69e9a2f874345547a4f69dbc820ea"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=26, phased=false, phasedAutodetect=false]",
+                    "1650f3896f162a3ee838e50e37280f9"
                 ]
             ],
             [
@@ -447,8 +447,8 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=40, phased=false, phasedAutodetect=false]",
-                    "fd49418379e60474c04f4f5bbaa71a02"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=26, phased=false, phasedAutodetect=false]",
+                    "2461736d2896e6063873ce08fed582dc"
                 ]
             ]
         ],
@@ -456,7 +456,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:13:40.26414007"
+        "timestamp": "2026-03-27T16:49:50.741069794"
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [
@@ -535,6 +535,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-23T15:17:59.147244849"
+        "timestamp": "2026-03-27T16:53:49.846987023"
     }
 }

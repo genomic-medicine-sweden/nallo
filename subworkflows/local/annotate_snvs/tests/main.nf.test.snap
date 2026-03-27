@@ -22,7 +22,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:12:15.307696151"
+        "timestamp": "2026-03-27T16:42:54.827988194"
     },
     "bcf, db, vep_cache, '110'": {
         "content": [
@@ -34,7 +34,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:11:20.508502727"
+        "timestamp": "2026-03-27T16:42:02.674654451"
     },
     "bcf, db, vep_cache, '110', -stub": {
         "content": [
@@ -59,7 +59,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:12:04.379854857"
+        "timestamp": "2026-03-27T16:42:44.610452313"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
         "content": [
@@ -71,7 +71,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:11:53.798749249"
+        "timestamp": "2026-03-27T16:42:34.057347924"
     },
     "bcf, db, vep_cache, '110', filter before vep": {
         "content": [
@@ -83,7 +83,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:11:32.497240209"
+        "timestamp": "2026-03-27T16:42:13.195310319"
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
@@ -95,6 +95,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-20T16:11:43.339682883"
+        "timestamp": "2026-03-27T16:42:23.594621415"
     }
 }
