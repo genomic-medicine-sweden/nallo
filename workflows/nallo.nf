@@ -416,7 +416,6 @@ workflow NALLO {
         )
         ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
-        // Mix the nuclear and mitochondrial genome bed files back together to feed to CALL_SNVS
         if (params.mitochondrial_caller == "deepvariant") {
 
             SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals
