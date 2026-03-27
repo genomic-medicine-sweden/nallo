@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            193,
+            194,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -99,6 +99,10 @@
                 "ENSEMBLVEP_SV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
+                },
+                "FAMILY_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -635,6 +639,7 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,a89ba62559ea15f5768d0481b6c8cbb8",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,2c84c9c6641506713ac1855031001c45",
+                "FAM.ped:md5,90c92b1d96b684beb673ae1da8a9e973",
                 "HG002_Revio.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
                 "HG002_Revio.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
                 "HG002_Revio.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
@@ -810,7 +815,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-24T16:56:20.764185682",
+        "timestamp": "2026-03-26T17:44:25.841755262",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"

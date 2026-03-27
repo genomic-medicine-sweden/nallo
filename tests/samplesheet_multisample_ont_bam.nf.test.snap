@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            312,
+            314,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -93,6 +93,10 @@
                 "ENSEMBLVEP_SV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
+                },
+                "FAMILY_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -838,6 +842,8 @@
                 "HG002_ONT_B_haplotype_2.assembly_summary:md5,3186b5bfa60b9f031a68dba1747d8cb1",
                 "HG002_ONT_C_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
                 "HG002_ONT_C_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
+                "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
+                "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
                 "HG002_ONT_A.baf.bed.gz:md5,0a2911d99a911e3a05e8e842a0fcb6cb",
                 "HG002_ONT_A.baf.bed.gz.tbi:md5,e43fbcefcb87c40e7df7484ff6faa563",
                 "HG002_ONT_A.cov.bed.gz:md5,462719717050daaa601ef75c1ae3de34",
@@ -1145,7 +1151,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1222,10 +1228,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-20T17:26:50.050518319",
+        "timestamp": "2026-03-26T18:04:43.210288621",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"

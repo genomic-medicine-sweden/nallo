@@ -100,6 +100,10 @@
                     "ensemblvep": 110.0,
                     "tabix": 1.17
                 },
+                "FAMILY_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -909,6 +913,7 @@
                 "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
                 "HG004_haplotype_1.assembly_summary:md5,3656512d5d8fafb2bade323487498f79",
                 "HG004_haplotype_2.assembly_summary:md5,575f13cb3d7a2d4de558134410800e09",
+                "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
                 "HG002.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
                 "HG002.cov.bed.gz:md5,790833cbf731de96a1b500d187cf3a26",
@@ -1308,7 +1313,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-25T14:02:02.684468935",
+        "timestamp": "2026-03-26T17:57:22.458704303",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"
