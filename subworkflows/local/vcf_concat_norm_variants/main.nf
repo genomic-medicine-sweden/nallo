@@ -13,9 +13,6 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-
-    ch_versions = channel.empty()
-
     BCFTOOLS_CONCAT(
         ch_vcfs.map { meta, vcfs -> [ meta, vcfs, [] ] },
     )
@@ -46,5 +43,4 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
     index               = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
     bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf                                                    // channel: [ val(meta), path(vcf) ]
-    versions            = ch_versions                                                              // channel: [ path(versions.yml) ]
 }

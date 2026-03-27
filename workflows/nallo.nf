@@ -83,54 +83,53 @@ workflow NALLO {
     ch_input
 
     main:
-    ch_versions      = channel.empty()
     ch_multiqc_files = channel.empty()
 
     // Channels from (optional) input files
     // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
-    ch_cadd_header                  = createReferenceChannelFromPath("$projectDir/assets/cadd_to_vcf_header_-1.0-.txt")
-    ch_cadd_resources               = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored_indels        = createReferenceChannelFromPath(params.cadd_prescored_indels)
-    ch_fasta                        = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats               = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[],[]]))
-    ch_par                          = createReferenceChannelFromPath(params.par_regions)
-    ch_str_bed                      = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions             = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[],[]]))
-    ch_sv_call_regions              = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_modkit_call_regions          = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[],[]]))
-    ch_stranger_repeat_catalog      = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs    = createReferenceChannelFromPath(params.variant_consequences_snvs)
-    ch_variant_consequences_svs     = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed        = createReferenceChannelFromPath(params.vep_cache, channel.value([[],[]]))
-    ch_expected_xy_bed              = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
-    ch_expected_xx_bed              = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
-    ch_exclude_bed                  = createReferenceChannelFromPath(params.cnv_excluded_regions)
-    ch_genmod_reduced_penetrance    = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
-    ch_genmod_score_config_snvs     = createReferenceChannelFromPath(params.genmod_score_config_snvs)
-    ch_genmod_score_config_svs      = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_paraphrase_rules             = createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[],[]]))
-    ch_peddy_sites                  = createReferenceChannelFromPath(params.peddy_sites, channel.value([[],[]]))
-    ch_methbat_regions              = createReferenceChannelFromPath(params.methbat_regions)
-    ch_mosdepth_regions             = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[],[]]))
-    ch_sambamba_regions             = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[],[]]))
-    ch_somalier_sites               = createReferenceChannelFromPath(params.somalier_sites)
-    ch_strdrop_training_set_json    = createReferenceChannelFromPath(params.strdrop_training_set_json)
-    ch_gens_baf_positions           = createReferenceChannelFromPath(params.gens_baf_positions)
+    ch_cadd_header = createReferenceChannelFromPath("${projectDir}/assets/cadd_to_vcf_header_-1.0-.txt")
+    ch_cadd_resources = createReferenceChannelFromPath(params.cadd_resources)
+    ch_cadd_prescored_indels = createReferenceChannelFromPath(params.cadd_prescored_indels)
+    ch_fasta = createReferenceChannelFromPath(params.fasta)
+    ch_tandem_repeats = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []]))
+    ch_par = createReferenceChannelFromPath(params.par_regions)
+    ch_str_bed = createReferenceChannelFromPath(params.str_bed)
+    ch_snv_call_regions = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []]))
+    ch_sv_call_regions = createReferenceChannelFromPath(params.sv_call_regions)
+    ch_modkit_call_regions = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []]))
+    ch_stranger_repeat_catalog = createReferenceChannelFromPath(params.stranger_repeat_catalog)
+    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
+    ch_variant_consequences_svs = createReferenceChannelFromPath(params.variant_consequences_svs)
+    ch_vep_cache_unprocessed = createReferenceChannelFromPath(params.vep_cache, channel.value([[], []]))
+    ch_expected_xy_bed = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
+    ch_expected_xx_bed = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
+    ch_exclude_bed = createReferenceChannelFromPath(params.cnv_excluded_regions)
+    ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
+    ch_genmod_score_config_snvs = createReferenceChannelFromPath(params.genmod_score_config_snvs)
+    ch_genmod_score_config_svs = createReferenceChannelFromPath(params.genmod_score_config_svs)
+    ch_paraphrase_rules = createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []]))
+    ch_peddy_sites = createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []]))
+    ch_methbat_regions = createReferenceChannelFromPath(params.methbat_regions)
+    ch_mosdepth_regions = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []]))
+    ch_sambamba_regions = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []]))
+    ch_somalier_sites = createReferenceChannelFromPath(params.somalier_sites)
+    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
+    ch_gens_baf_positions = createReferenceChannelFromPath(params.gens_baf_positions)
     ch_gens_panel_of_normals_female = createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon')
-    ch_gens_panel_of_normals_male   = createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon')
-    ch_gens_coverage_bins           = createReferenceChannelFromPath(params.gens_coverage_bins)
-    ch_sentieon_model_bundle        = createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []]))
-    ch_sentieon_female_diploid_bed  = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
-    ch_sentieon_male_diploid_bed    = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
-    ch_sentieon_male_haploid_bed    = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
-    ch_vcfexpress_prelude           = file("$projectDir/assets/vcf_express_found_in_prelude.lua")
+    ch_gens_panel_of_normals_male = createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon')
+    ch_gens_coverage_bins = createReferenceChannelFromPath(params.gens_coverage_bins)
+    ch_sentieon_model_bundle = createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []]))
+    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
+    ch_sentieon_male_diploid_bed = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
+    ch_sentieon_male_haploid_bed = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
+    ch_vcfexpress_prelude = file("${projectDir}/assets/vcf_express_found_in_prelude.lua")
 
     // Channels from (optional) input samplesheets validated by schema
-    ch_databases                 = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[],[]]))
-    ch_svdb_sv_databases         = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
-    ch_vep_plugin_files          = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
-    ch_hgnc_ids                  = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
-        .map { hgnc_id_list -> hgnc_id_list[0].toString() } // only one element per row
+    ch_databases = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[], []]))
+    ch_svdb_sv_databases = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
+    ch_vep_plugin_files = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
+    ch_hgnc_ids = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
+        .map { hgnc_id_list -> hgnc_id_list[0].toString() }
         .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
         .map { file -> [[id: 'hgnc_ids'], file] }
         .collect()
@@ -151,11 +150,10 @@ workflow NALLO {
             params.fasta.endsWith('.gz'),
             params.vep_cache && params.vep_cache.endsWith("tar.gz"),
         )
-        ch_versions = ch_versions.mix(PREPARE_REFERENCES.out.versions)
 
         // Gather indices
         ch_fasta = PREPARE_REFERENCES.out.fasta
-        ch_fai   = PREPARE_REFERENCES.out.fai
+        ch_fai = PREPARE_REFERENCES.out.fai
     }
 
     // Convert FASTQ to BAM only if alignment or should be done.
@@ -168,7 +166,6 @@ workflow NALLO {
             false,
             true,
         )
-        ch_versions = ch_versions.mix(CONVERT_INPUT_FASTQS.out.versions)
     }
 
     // To speed up the alignement, we can split the BAM files into smaller chunks.
@@ -185,7 +182,6 @@ workflow NALLO {
         SPLITUBAM(
             CONVERT_INPUT_FASTQS.out.bam
         )
-        ch_versions = ch_versions.mix(SPLITUBAM.out.versions)
     }
 
     //
@@ -211,7 +207,6 @@ workflow NALLO {
             true,
             false,
         )
-        ch_versions = ch_versions.mix(CONVERT_INPUT_BAMS.out.versions)
 
         // contains all FASTQ files, including those not converted
         CONVERT_INPUT_BAMS.out.fastq
@@ -223,7 +218,6 @@ workflow NALLO {
             ch_genome_assembly_input,
             params.hifiasm_mode == "trio-binning",
         )
-        ch_versions = ch_versions.mix(GENOME_ASSEMBLY.out.versions)
 
         ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
@@ -231,7 +225,6 @@ workflow NALLO {
             ch_fai,
             cram_output,
         )
-        ch_versions = ch_versions.mix(ALIGN_ASSEMBLIES.out.versions)
     }
 
     /*
@@ -243,10 +236,9 @@ workflow NALLO {
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        (params.alignment_processes > 1 ? SPLITUBAM.out.bam
-            .transpose() : CONVERT_INPUT_FASTQS.out.bam)
-            .map { meta, bam -> [meta + [file: bam.name], bam] }
-            .set { reads_for_alignment }
+        (params.alignment_processes > 1
+            ? SPLITUBAM.out.bam.transpose()
+            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }.set { reads_for_alignment }
 
         /*
          * Create a grouping key per sample that records the number of split files,
@@ -269,7 +261,6 @@ workflow NALLO {
             false,
             false,
         )
-        ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions)
 
         /*
          * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
@@ -295,16 +286,13 @@ workflow NALLO {
          * and we can't therefore output from the alignment step with correct naming.
          */
         SAMTOOLS_MERGE(
-            bam_to_merge.map { meta, bam, _bai -> [meta, bam] },
-            [[], []],
-            [[], []],
-            [[], []],
+            bam_to_merge,
+            [[], [], [], []],
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
 
         // Combine merged with unmerged bam files
         SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.bai, failOnMismatch: true, failOnDuplicate: true)
+            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
             .set { ch_aligned_bam }
 
@@ -312,10 +300,8 @@ workflow NALLO {
         if (cram_output && params.skip_phasing) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
-                ch_fasta,
-                ch_fai,
+                ch_fasta.join(ch_fai).collect(),
             )
-            ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
         }
 
         //
@@ -326,7 +312,7 @@ workflow NALLO {
             .groupTuple()
             .set { ch_samplesheet_ped_in }
 
-        SAMPLESHEET_PED ( ch_samplesheet_ped_in )
+        SAMPLESHEET_PED(ch_samplesheet_ped_in)
 
         SAMPLESHEET_PED.out.ped
             .collect()
@@ -336,27 +322,24 @@ workflow NALLO {
             //
             // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
             //
-            BAM_INFER_SEX (
+            BAM_INFER_SEX(
                 ch_aligned_bam,
                 ch_fasta,
                 ch_fai,
                 ch_somalier_sites,
-                ch_samplesheet_pedfile
+                ch_samplesheet_pedfile,
             )
-            ch_versions = ch_versions.mix(BAM_INFER_SEX.out.versions)
-            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_samples.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+            ch_multiqc_files = ch_multiqc_files.mix(BAM_INFER_SEX.out.somalier_pairs.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
 
             // Set files with updated meta for subsequent processes
-            ch_bam     = BAM_INFER_SEX.out.bam
+            ch_bam = BAM_INFER_SEX.out.bam
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
         }
-
         else {
-            ch_bam     = ch_aligned_bam.map { meta, bam, _bai -> [ meta, bam ] }
+            ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
-
     }
 
     //
@@ -371,7 +354,6 @@ workflow NALLO {
             ch_sambamba_regions,
             !params.skip_sambamba_depth,
         )
-        ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
@@ -388,14 +370,13 @@ workflow NALLO {
             ch_fai,
             cram_output,
         )
-        ch_versions = ch_versions.mix(CALL_PARALOGS.out.versions)
     }
 
     /*
      * Annotate paralogous genes with paraphrase
      */
-    if(!params.skip_annotate_paralogs) {
-        ANNOTATE_PARALOGS (
+    if (!params.skip_annotate_paralogs) {
+        ANNOTATE_PARALOGS(
             CALL_PARALOGS.out.json,
             params.paraphrase_output_format,
             ch_paraphrase_rules,
@@ -405,7 +386,7 @@ workflow NALLO {
     /*
      * Call SNVs
      */
-    if(!params.skip_snv_calling) {
+    if (!params.skip_snv_calling) {
 
         // Make BED intervals, can be used for parallel SNV calling
         SCATTER_GENOME(
@@ -414,12 +395,10 @@ workflow NALLO {
             !params.snv_call_regions,
             params.snv_calling_processes,
         )
-        ch_versions = ch_versions.mix(SCATTER_GENOME.out.versions)
 
         if (params.mitochondrial_caller == "deepvariant") {
 
-            SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals
-                .set { ch_bed_intervals }
+            SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals.set { ch_bed_intervals }
         }
         else {
             ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
@@ -446,7 +425,6 @@ workflow NALLO {
             params.snv_caller,
             params.sentieon_tech,
         )
-        ch_versions = ch_versions.mix(CALL_SNVS.out.versions)
 
         // Group GVCFs per region and family (one region with all samples)
         CALL_SNVS.out.gvcf
@@ -472,9 +450,8 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             params.snv_caller,
-            ch_vcfexpress_prelude
+            ch_vcfexpress_prelude,
         )
-        ch_versions = ch_versions.mix(GVCF_GLNEXUS_NORM_VARIANTS.out.versions)
 
         // Grouping VCF, containing one sample with all regions
         CALL_SNVS.out.vcf
@@ -493,7 +470,7 @@ workflow NALLO {
             variants_to_concat_per_sample,
             ch_fasta,
             params.snv_caller,
-            ch_vcfexpress_prelude
+            ch_vcfexpress_prelude,
         )
 
         // These contains RefCalls
@@ -511,8 +488,6 @@ workflow NALLO {
             sample_snv_index,
             params.snv_caller.equals("deepvariant"),
         )
-
-        ch_versions = ch_versions.mix(QC_SNVS.out.versions)
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf
@@ -545,7 +520,6 @@ workflow NALLO {
             ch_gens_panel_of_normals_male,
             ch_gens_coverage_bins,
         )
-        ch_versions = ch_versions.mix(PREPARE_GENS_INPUTS.out.versions)
     }
 
     //
@@ -569,9 +543,8 @@ workflow NALLO {
             params.force_sawfish_joint_call_single_samples,
             params.create_hificnv_maf_track,
             params.create_sawfish_maf_track,
-            ch_vcfexpress_prelude
+            ch_vcfexpress_prelude,
         )
-        ch_versions = ch_versions.mix(CALL_SVS.out.versions)
     }
 
     //
@@ -621,7 +594,6 @@ workflow NALLO {
             !params.skip_sv_calling,
             cram_output,
         )
-        ch_versions = ch_versions.mix(PHASING.out.versions)
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
 
@@ -668,7 +640,7 @@ workflow NALLO {
             ch_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
-            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources,
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
             params.cadd_resources && params.cadd_prescored_indels,
@@ -678,7 +650,6 @@ workflow NALLO {
             ch_cadd_prescored_indels,
             params.pre_vep_snv_filter_expression != '',
         )
-        ch_versions = ch_versions.mix(ANNOTATE_SNVS.out.versions)
 
         ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
@@ -698,7 +669,6 @@ workflow NALLO {
                 params.filter_snvs_expression,
                 params.filter_variants_hgnc_ids,
             )
-            ch_versions = ch_versions.mix(FILTER_VARIANTS_SNVS.out.versions)
 
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
@@ -765,7 +735,6 @@ workflow NALLO {
             params.plot_chromograph_coverage,
             params.plot_chromograph_autozygosity,
         )
-        ch_versions = ch_versions.mix(CHROMOGRAPH.out.versions)
     }
 
     //
@@ -817,7 +786,6 @@ workflow NALLO {
         CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
         )
-
     }
 
     //
@@ -835,14 +803,12 @@ workflow NALLO {
             ch_samplesheet_pedfile,
             ch_peddy_sites,
         )
-        ch_versions = ch_versions.mix(PEDDY.out.versions)
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
     }
 
     //
@@ -854,11 +820,10 @@ workflow NALLO {
             ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
-            PREPARE_REFERENCES.out.vep_resources.map { _meta, cache -> cache },
+            PREPARE_REFERENCES.out.vep_resources,
             params.vep_cache_version,
             ch_vep_plugin_files.collect(),
         )
-        ch_versions = ch_versions.mix(ANNOTATE_SVS.out.versions)
 
         ANNOTATE_SVS.out.vcf
             .multiMap { meta, vcf ->
@@ -880,7 +845,6 @@ workflow NALLO {
                 params.filter_svs_expression,
                 params.filter_variants_hgnc_ids,
             )
-            ch_versions = ch_versions.mix(FILTER_VARIANTS_SVS.out.versions)
 
             ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
         }
@@ -948,7 +912,6 @@ workflow NALLO {
             !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions,
         )
-        ch_versions = ch_versions.mix(CALL_METHYLATION_METHBAT.out.versions)
     }
 
     //
@@ -962,9 +925,9 @@ workflow NALLO {
                 ch_fai,
                 ch_str_bed,
                 cram_output,
-                ch_vcfexpress_prelude
+                ch_vcfexpress_prelude,
             )
-            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_TRGT.out.versions)
+
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
         }
         else if (params.str_caller == "strdust") {
@@ -973,9 +936,8 @@ workflow NALLO {
                 ch_fasta,
                 ch_fai,
                 ch_str_bed,
-                ch_vcfexpress_prelude
+                ch_vcfexpress_prelude,
             )
-            ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS_STRDUST.out.versions)
         }
     }
 
@@ -1012,7 +974,7 @@ workflow NALLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    softwareVersionsToYAML(topic_versions.versions_file)
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
@@ -1025,17 +987,6 @@ workflow NALLO {
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config = channel.fromPath(
-        "${projectDir}/assets/multiqc_config.yml",
-        checkIfExists: true
-    )
-    ch_multiqc_custom_config = params.multiqc_config
-        ? channel.fromPath(params.multiqc_config, checkIfExists: true)
-        : channel.empty()
-    ch_multiqc_logo = params.multiqc_logo
-        ? channel.fromPath(params.multiqc_logo, checkIfExists: true)
-        : channel.empty()
-
     summary_params = paramsSummaryMap(
         workflow,
         parameters_schema: "nextflow_schema.json"
@@ -1052,13 +1003,11 @@ workflow NALLO {
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
     ch_methods_description_citation = citationBibliographyText(
-        ch_versions,
         topic_versions_string,
         file("${projectDir}/assets/software_references.yml"),
         'citation',
     )
     ch_methods_description_bibliography = citationBibliographyText(
-        ch_versions,
         topic_versions_string,
         file("${projectDir}/assets/software_references.yml"),
         'bibliography',
@@ -1073,18 +1022,22 @@ workflow NALLO {
     )
 
     MULTIQC(
-        ch_multiqc_files.collect(),
-        ch_multiqc_config.toList(),
-        ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList(),
-        [],
-        [],
+        ch_multiqc_files.flatten().collect().map { files ->
+            [
+                [id: ''],
+                files,
+                params.multiqc_config
+                    ? file(params.multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                params.multiqc_logo ? file(params.multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
     )
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
 }
 
 // Check if a family has a child with two parents,

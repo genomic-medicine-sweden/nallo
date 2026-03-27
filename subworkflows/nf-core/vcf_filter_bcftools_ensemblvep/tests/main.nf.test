@@ -34,7 +34,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
+                    .collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,
@@ -65,7 +65,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
+                    .collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,
@@ -96,7 +96,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
+                    .collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,

@@ -18,6 +18,6 @@ workflow ANNOTATE_CSQ_PLI {
     TABIX_TABIX (CUSTOM_ADDMOSTSEVEREPLI.out.vcf)
 
     emit:
-    vcf      = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi      = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
+    vcf = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
 }

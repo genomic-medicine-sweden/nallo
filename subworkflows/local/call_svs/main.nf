@@ -36,7 +36,6 @@ workflow CALL_SVS {
     ch_vcfexpress_prelude                   // path: lua file
 
     main:
-    ch_versions = channel.empty()
     ch_sv_calls = channel.empty()
 
     //
@@ -48,7 +47,6 @@ workflow CALL_SVS {
             ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], []] },
             ch_tandem_repeats,
         )
-        ch_versions = ch_versions.mix(SEVERUS.out.versions)
 
         TABIX_SEVERUS(
             SEVERUS.out.all_vcf
@@ -70,7 +68,6 @@ workflow CALL_SVS {
         SNIFFLES(
             ch_bam_bai
         )
-        ch_versions = ch_versions.mix(SNIFFLES.out.versions)
 
         CLEAN_SNIFFLES(
             SNIFFLES.out.vcf
@@ -174,7 +171,6 @@ workflow CALL_SVS {
             ch_sawfish_discover_input.vcf,
             ch_exclude_bed,
         )
-        ch_versions = ch_versions.mix(SAWFISH_DISCOVER.out.versions)
 
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
@@ -324,7 +320,6 @@ workflow CALL_SVS {
     family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
     family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
     family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions          = ch_versions // channel: [ path(versions.yml) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {

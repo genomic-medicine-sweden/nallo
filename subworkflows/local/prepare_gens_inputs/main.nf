@@ -5,7 +5,6 @@ include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/mai
 include { MOSDEPTH                     } from '../../../modules/nf-core/mosdepth/main'
 include { PREPARECOVANDBAF             } from '../../../modules/nf-core/gens/preparecovandbaf/main'
 include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools/view/main'
-include { TABIX_BGZIP                  } from '../../../modules/nf-core/tabix/bgzip/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -17,8 +16,6 @@ workflow PREPARE_GENS_INPUTS {
     ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-    ch_versions = channel.empty()
-
     ch_bam
         .combine(ch_mosdepth_bins)
         .map { meta, bam, bai, _bins_meta, bins ->
@@ -29,7 +26,7 @@ workflow PREPARE_GENS_INPUTS {
     // Prepare the header
     SAMTOOLS_VIEW(
         ch_bam,
-        [[],[]],
+        [[],[],[]],
         [],
         false
     )
@@ -45,7 +42,6 @@ workflow PREPARE_GENS_INPUTS {
         ch_mosdepth_in,
         [[],[]]
     )
-    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     MOSDEPTH_GATK_FORMAT(
         MOSDEPTH.out.regions_bed,
@@ -83,7 +79,6 @@ workflow PREPARE_GENS_INPUTS {
         ch_readcounts_input.counts,
         ch_readcounts_input.pon,
     )
-    ch_versions = ch_versions.mix(GATK4_DENOISEREADCOUNTS.out.versions)
 
     GATK4_DENOISEREADCOUNTS.out.standardized
         .join(ch_gvcf)
@@ -107,5 +102,4 @@ workflow PREPARE_GENS_INPUTS {
     emit:
     cov_bed_tbi = ch_cov_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]
     baf_bed_tbi = ch_baf_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]
-    versions = ch_versions         // channel: [ path(versions.yml) ]
 }

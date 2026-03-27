@@ -90,7 +90,8 @@
                     "echtvar": "0.2.2"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2
+                    "ensemblvep": 115.2,
+                    "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0,
@@ -125,10 +126,10 @@
                     "genmod": "3.10.2"
                 },
                 "GFASTATS": {
-                    "gfastats": "1.3.10"
+                    "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3-0-gcecf42e"
+                    "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -140,11 +141,10 @@
                     "hificnv": "1.0.0-36e6461"
                 },
                 "METHBAT_PROFILE": {
-                    "methbat": "0.16.1-8a0a24c"
+                    "methbat": "0.17.0-7c5e249"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -195,22 +195,22 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAWFISH_DISCOVER": {
                     "sawfish": "2.2.0"
@@ -219,7 +219,7 @@
                     "sawfish": "2.2.0"
                 },
                 "SEVERUS": {
-                    "severus": 1.6
+                    "severus": 1.7
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
@@ -236,7 +236,7 @@
                 },
                 "STRANGER": {
                     "stranger": "0.10.0",
-                    "tabix": "1.22.1"
+                    "tabix": 1.23
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -265,6 +265,10 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
+                "TABIX_SEVERUS": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
@@ -272,7 +276,7 @@
                     "tagbam": "0.1.0"
                 },
                 "TIDDIT_COV": {
-                    "tiddit": "3.9.3"
+                    "tiddit": "3.9.4"
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "5.0.0-e9acee0"
@@ -293,7 +297,7 @@
                     "genomic-medicine-sweden/nallo": "v0.12.0dev"
                 },
                 "YAK_COUNT": {
-                    "yak": "0.1-r56"
+                    "yak": "0.1-r69-dirty"
                 }
             },
             [
@@ -1090,9 +1094,6 @@
                 "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,ea325e8764bcd867d9dded89cde16a3b",
                 "HG004_pbcpgtools.hap2.bed.gz:md5,fdfd3c907ed6192dee62e468d9cb4dc6",
                 "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,755bc6e05828a1e4d59996cb34bff6e1",
-                "HG002_methbat_profile.tsv:md5,80e14522fa93131e47c03356b44e4c6d",
-                "HG003_methbat_profile.tsv:md5,a332c529dfbecad313856c71782c6432",
-                "HG004_methbat_profile.tsv:md5,e636446511f35b7e562bbe15e4907953",
                 "bcftools-stats-subtypes.txt:md5,9cb1efd8966e6c0d0df472e0f954e900",
                 "bcftools_stats_indel-lengths.txt:md5,d9bf451550b8efa6d43e877619ac8876",
                 "fastqc-status-check-heatmap.txt:md5,bed93a3cb6b24cf37ebf4613e7c8c285",
@@ -1142,14 +1143,14 @@
                 "HG004.regions.bed.gz:md5,c4d6de274b5c79e2b2e7f8b42b4a79f6",
                 "HG004.regions.bed.gz.csi:md5,e19a65771744f6710817bb5af6048b76",
                 "FAM.het_check.csv:md5,f68889b98cde604e8ea245614dbc546d",
-                "FAM.het_check.png:md5,868e1683a37d8a9475b86215c0320e11",
-                "FAM.html:md5,248f3e55243eb95f74870dcd83e6fd23",
+                "FAM.het_check.png:md5,37f482ea894750d7410b65e2e325e01e",
+                "FAM.html:md5,f5ea475dda82fab72972cb6f32ee75c4",
                 "FAM.ped_check.csv:md5,e46c13b6e5638e2b96842b1759d00a54",
-                "FAM.ped_check.png:md5,42b80f8d0a2b4be3455ebfa88ed05832",
+                "FAM.ped_check.png:md5,bb13c64b6c109e796fa7501b349ef9c7",
                 "FAM.ped_check.rel-difference.csv:md5,b7f4daf0366fe93f4d8e9708b52a2436",
-                "FAM.peddy.ped:md5,250fc10e45aeb428e8eb0a5cf8e98e66",
+                "FAM.peddy.ped:md5,30046ff22ff1b848de95adc181b79080",
                 "FAM.sex_check.csv:md5,9f5d2e40791a12aa5ba1b6e2de240ab4",
-                "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
+                "FAM.sex_check.png:md5,b972b8629706cb367a5c1f72434434c6",
                 "FAM.vs.html:md5,de40bea9c88a751a5c6710cbf851cc4a",
                 "HG002_whatshap_stats.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_whatshap_stats.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
@@ -1233,8 +1234,7 @@
                 ]
             ],
             [
-
-
+                
             ],
             [
                 [
@@ -1307,14 +1307,13 @@
                 ]
             ],
             [
-
-
+                
             ]
         ],
-        "timestamp": "2026-03-25T18:32:21.109904198",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:12:55.749818812"
     }
 }

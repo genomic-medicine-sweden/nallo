@@ -10,7 +10,7 @@ workflow ANNOTATE_SNVS {
     ch_databases             // channel:  [optional] [ path(db) ]
     ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vep_cache             // channel: [mandatory] [ path(cache) ]
+    ch_vep_cache             // channel: [mandatory] [ val(meta), path(cache) ]
     val_vep_cache_version    //  string: [mandatory] default: 110
     ch_vep_extra_files       // channel: [mandatory] [ path(files) ]
     annotate_cadd            //    bool: [mandatory] should CADD be used to annotate indels
@@ -21,8 +21,6 @@ workflow ANNOTATE_SNVS {
     pre_vep_filter           //    bool: [mandatory] should filtering be done before annotating with CADD and VEP
 
     main:
-    ch_versions = channel.empty()
-
     // Annotate with chosen databases
     if (annotate_echtvar) {
         ECHTVAR_ANNO(
@@ -58,7 +56,6 @@ workflow ANNOTATE_SNVS {
             ch_cadd_resources,
             ch_cadd_prescored_indels,
         )
-        ch_versions = ch_versions.mix(ANNOTATE_CADD.out.versions)
     }
 
     (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
@@ -75,7 +72,6 @@ workflow ANNOTATE_SNVS {
         ch_fasta,
         ch_vep_extra_files,
     )
-    ch_versions = ch_versions.mix(ENSEMBLVEP_SNV.out.versions)
 
     TABIX_ENSEMBLVEP_SNV(
         ENSEMBLVEP_SNV.out.vcf
@@ -84,5 +80,4 @@ workflow ANNOTATE_SNVS {
     emit:
     vcf      = ENSEMBLVEP_SNV.out.vcf
     tbi      = TABIX_ENSEMBLVEP_SNV.out.index
-    versions = ch_versions
 }

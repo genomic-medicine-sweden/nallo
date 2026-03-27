@@ -28,16 +28,16 @@ nextflow_workflow {
             script "../../annotate_snvs/main.nf"
             process {
                 """
-                input[0] = [
+                input[0] = channel.of([
                     [ id: 'project', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.bcf', checkIfExists: true)
-                ]
-                input[1] = [
+                ])
+                input[1] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                ])
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
-                input[4] = PREPARE_REFERENCES.out.vep_resources.map { meta, cache -> cache }
+                input[4] = PREPARE_REFERENCES.out.vep_resources
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)

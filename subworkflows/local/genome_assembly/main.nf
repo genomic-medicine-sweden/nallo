@@ -12,8 +12,6 @@ workflow GENOME_ASSEMBLY {
     trio_binning //    bool: Should we use trio binning mode where possible?
 
     main:
-    ch_versions = channel.empty()
-
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship
         ch_reads
@@ -41,7 +39,6 @@ workflow GENOME_ASSEMBLY {
         YAK_COUNT (
             CAT_FASTQ.out.reads.concat(ch_paired_parents_for_yak.no_cat)
         )
-        ch_versions = ch_versions.mix(YAK_COUNT.out.versions)
 
         YAK_COUNT.out.yak
             // Because a parent can have multiple children, and meta.children is a list of all children,
@@ -96,7 +93,6 @@ workflow GENOME_ASSEMBLY {
         [[],[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
     HIFIASM.out.hap1_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
@@ -116,9 +112,7 @@ workflow GENOME_ASSEMBLY {
         [[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(GFASTATS.out.versions)
 
     emit:
     assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
-    versions = ch_versions                       // channel: [ versions.yml ]
 }
