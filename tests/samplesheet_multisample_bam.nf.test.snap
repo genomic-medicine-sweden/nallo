@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            360,
+            391,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -107,6 +107,9 @@
                     "gatk4": "4.6.2.0"
                 },
                 "GAWK": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -901,24 +904,24 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,d65f383b44433bc4057cca8dc3e81d27",
-                "HG002_haplotype_2.assembly_summary:md5,fe1289b8cb4a4948b0e53331479063f3",
-                "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
-                "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
-                "HG004_haplotype_1.assembly_summary:md5,3656512d5d8fafb2bade323487498f79",
-                "HG004_haplotype_2.assembly_summary:md5,575f13cb3d7a2d4de558134410800e09",
-                "HG002.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
-                "HG002.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
-                "HG002.cov.bed.gz:md5,790833cbf731de96a1b500d187cf3a26",
-                "HG002.cov.bed.gz.tbi:md5,4d025fc01f92fdf66329a93776411cc6",
-                "HG003.baf.bed.gz:md5,6a75cd454070deb5cde78e194a6c4c76",
-                "HG003.baf.bed.gz.tbi:md5,825fca58be4323609111fe55f3a12406",
-                "HG003.cov.bed.gz:md5,4133276a3fe084c44b6760285f726515",
-                "HG003.cov.bed.gz.tbi:md5,62a2f7393ba17a652141fe71ad284bd2",
-                "HG004.baf.bed.gz:md5,11026125edb81357c339711d063e9842",
-                "HG004.baf.bed.gz.tbi:md5,85cfd2f2dcb765ca7128a34e4beaab52",
-                "HG004.cov.bed.gz:md5,70e81e45eacbdf59b663a9dbce0a701c",
-                "HG004.cov.bed.gz.tbi:md5,f916b0ee6b8e029ddb1d0b1182d9a0c6",
+                "HG002_haplotype_1.assembly_summary:md5,0bb031f5dfdff60658df237f69a6fbab",
+                "HG002_haplotype_2.assembly_summary:md5,285d0332f14a46f3db79108dd8adc6f6",
+                "HG003_haplotype_1.assembly_summary:md5,1878d32300b57b3370ceee359820fa5c",
+                "HG003_haplotype_2.assembly_summary:md5,2560e10b5c1211abbc1eafb21edbaf2e",
+                "HG004_haplotype_1.assembly_summary:md5,b5d3af98494db176e38c8ff09d43860f",
+                "HG004_haplotype_2.assembly_summary:md5,b17609751f549f3f56a849e8ceef5609",
+                "HG002.baf.bed.gz:md5,ef09137b36083a8c87edb317f2442028",
+                "HG002.baf.bed.gz.tbi:md5,f0073fbecd34b49810ea60d468e04d38",
+                "HG002.cov.bed.gz:md5,9d9377284d26030e47bb4049aae762e2",
+                "HG002.cov.bed.gz.tbi:md5,365426d1bb222f5fdd167c969a0a1772",
+                "HG003.baf.bed.gz:md5,f75126bf156aadb28bbbafb2d85aa894",
+                "HG003.baf.bed.gz.tbi:md5,f4a6a212a0b92c1d385f7fddf9dc637f",
+                "HG003.cov.bed.gz:md5,c985513077bb3005c21004bf7c53a622",
+                "HG003.cov.bed.gz.tbi:md5,d2577d58fc177c428139c88d316ae9b3",
+                "HG004.baf.bed.gz:md5,1937122b69ad097fc7d1be95576a1ae3",
+                "HG004.baf.bed.gz.tbi:md5,6986d8d84bfbb4ba94da9039e825838e",
+                "HG004.cov.bed.gz:md5,edbf61ea51d404badfe39e505e01a5da",
+                "HG004.cov.bed.gz.tbi:md5,c91041afb772ab04402aeedac2db9906",
                 "HG002_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -941,7 +944,7 @@
                 "HG002_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG002_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -951,12 +954,12 @@
                 "HG002_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chr16.png:md5,d83a1fc9fa73f558504008288c5954cd",
-                "HG002_chromograph_coverage_chr17.png:md5,2027c800f88c7f43437cb2d6d676bd21",
+                "HG002_chromograph_coverage_chr16.png:md5,8972c39157eb7b4e84ece407c7ffdbdb",
+                "HG002_chromograph_coverage_chr17.png:md5,b8ba92e150eaa7d798022f8197bc4ba6",
                 "HG002_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chr20.png:md5,ceb4ba56531d509294c65b9688a308cb",
+                "HG002_chromograph_coverage_chr20.png:md5,bc3f721c4f4a22713f754551d6530209",
                 "HG002_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -966,8 +969,8 @@
                 "HG002_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chrX.png:md5,72f73b511c1f753e7a9792d9968f52db",
+                "HG002_chromograph_coverage_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                "HG002_chromograph_coverage_chrX.png:md5,48c3212de8f495d5a736fd8a1a7fc0df",
                 "HG002_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -976,7 +979,7 @@
                 "HG003_chromograph_autozyg_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG003_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                "HG003_chromograph_autozyg_chr16.png:md5,8810cd6dd9dbbde06c73057236429698",
                 "HG003_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -991,7 +994,7 @@
                 "HG003_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG003_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG003_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1001,12 +1004,12 @@
                 "HG003_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG003_chromograph_coverage_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                "HG003_chromograph_coverage_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                "HG003_chromograph_coverage_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                "HG003_chromograph_coverage_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                 "HG003_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG003_chromograph_coverage_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                "HG003_chromograph_coverage_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                 "HG003_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1016,8 +1019,8 @@
                 "HG003_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG003_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG003_chromograph_coverage_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                "HG003_chromograph_coverage_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                "HG003_chromograph_coverage_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                 "HG003_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1041,7 +1044,7 @@
                 "HG004_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG004_chromograph_autozyg_chrX.png:md5,4043f9dd0efed4d0dcc3fdc92678d2e8",
                 "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1051,12 +1054,12 @@
                 "HG004_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG004_chromograph_coverage_chr16.png:md5,04fd96150c600744c0d523ecb5eea4c9",
-                "HG004_chromograph_coverage_chr17.png:md5,ae9d6ef88995688d0ee77f9cdee7ec1c",
+                "HG004_chromograph_coverage_chr16.png:md5,05b9067fa3f9c6fcfad13ec581efaa00",
+                "HG004_chromograph_coverage_chr17.png:md5,17d4f5a7ea972744b662948e3a9e3d1f",
                 "HG004_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG004_chromograph_coverage_chr20.png:md5,470ece6ab99ab9e6d039768a2b2817fb",
+                "HG004_chromograph_coverage_chr20.png:md5,40c6395f22f2355751c795bd6edf507f",
                 "HG004_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1066,176 +1069,177 @@
                 "HG004_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG004_chromograph_coverage_chrX.png:md5,6617bf05de08d467e3bcd46f0c759c9d",
+                "HG004_chromograph_coverage_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                "HG004_chromograph_coverage_chrX.png:md5,ea90494922399015681aa5eba18c9691",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_pbcpgtools.combined.bed.gz:md5,e1e852a5e37e1dd6016f5292e3382fa5",
-                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,4721d841dd7b27137514eb83876c585b",
-                "HG002_pbcpgtools.hap1.bed.gz:md5,2b9dd9a13d77ca741f4ad3626c48c332",
-                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,6568a78112f90fddd27c9ea34a363144",
-                "HG002_pbcpgtools.hap2.bed.gz:md5,e55306edde267865abc0c9d356b1819d",
-                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d44f0e262b9351e25733d7896f8d9cc7",
-                "HG003_pbcpgtools.combined.bed.gz:md5,99b672766afb65268959774c04fcdb9b",
-                "HG003_pbcpgtools.combined.bed.gz.tbi:md5,b4bef4ad33f4a3669f1477f432d08715",
-                "HG003_pbcpgtools.hap1.bed.gz:md5,3ce3b6f8b8df1763c680d7ee38e16c0d",
-                "HG003_pbcpgtools.hap1.bed.gz.tbi:md5,aea259c8f366f1e9a761074570636927",
-                "HG003_pbcpgtools.hap2.bed.gz:md5,d111a03e558de89fc97b59bb680716a5",
-                "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,979335e1c28147f5490865cfd562402a",
-                "HG004_pbcpgtools.combined.bed.gz:md5,452a221a99ecc63abc0b6b414ff6c12c",
-                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,752dc1d0170223cdd5498bb2b9fa0653",
-                "HG004_pbcpgtools.hap1.bed.gz:md5,3a3b14a54c0a8b52acf0e332f986c798",
-                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,79530866697029401fdefb02e19e92ff",
-                "HG004_pbcpgtools.hap2.bed.gz:md5,4ad119e561481f2389c96e27d4637831",
-                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,28290f4417c723f33c4ee3b076f0d711",
-                "HG002_methbat_profile.tsv:md5,44f00ef2b3725bed42ee9f5131a252fb",
-                "HG003_methbat_profile.tsv:md5,374ff70208b06874671d942b8676c86c",
-                "HG004_methbat_profile.tsv:md5,df0e661efc190d3f90ce28cfd9c7a48f",
-                "bcftools-stats-subtypes.txt:md5,8a28c79faa19a4a5e0cf91a3f91b9956",
-                "bcftools_stats_indel-lengths.txt:md5,7c273f3c5b40f6155e69ffcaeb114e22",
-                "fastqc-status-check-heatmap.txt:md5,f67860347368dd43ec3be3a53e1085dc",
-                "fastqc_adapter_content_plot.txt:md5,0f1b1e524c32623f84b482a836384c3f",
-                "fastqc_overrepresented_sequences_plot.txt:md5,0d17b0886ff345bbdddbe804ac14078f",
-                "fastqc_per_base_n_content_plot.txt:md5,a1b9be680733df6b9dda4c1f43ce0460",
-                "fastqc_per_base_sequence_quality_plot.txt:md5,44f6547d66071ad126b776744d5dd4ee",
-                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,c67807511e7a764c9322caa8f074f181",
-                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,533b295c1b2cf2d7926f3f05a0ff58f5",
-                "fastqc_per_sequence_quality_scores_plot.txt:md5,2d793e142e348b40b76cc630fce4f499",
-                "fastqc_sequence_counts_plot.txt:md5,bff1866111221f8a178493c285fddb65",
-                "fastqc_sequence_duplication_levels_plot.txt:md5,95dee3b398937353dbd2cb1517510652",
-                "fastqc_sequence_length_distribution_plot.txt:md5,1363664dc175398c8ae44e93d42f2ce5",
-                "mosdepth-coverage-per-contig-multi.txt:md5,da46343d1e0a8aa0279887786b4a27e2",
-                "mosdepth-cumcoverage-dist-id.txt:md5,d4e5ab2ed96a829e2871c520d87e4870",
-                "mosdepth_cov_dist.txt:md5,039b6746601f73e198fd4b7f55f84fcd",
-                "mosdepth_cumcov_dist.txt:md5,039b6746601f73e198fd4b7f55f84fcd",
-                "mosdepth_perchrom.txt:md5,b8464a5ff5937572d404c0caba1ae4d0",
-                "multiqc_bcftools_stats.txt:md5,d39dbd786824e64ab59bf161aaf13bde",
+                "HG002_pbcpgtools.combined.bed.gz:md5,0f6e128e0f5561fcb9e606c49f56e90a",
+                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,4c1a70cf52aac7e6a6be732242892c16",
+                "HG002_pbcpgtools.hap1.bed.gz:md5,ddad603e8bb84bc42a72ff73ededc937",
+                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,9a5052a0dd1551a630612fef115b445a",
+                "HG002_pbcpgtools.hap2.bed.gz:md5,e2dd943affc97c6c4aa9cb011f0fa884",
+                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,e7c8a66f89b4be3b082e1e9afcd1c659",
+                "HG003_pbcpgtools.combined.bed.gz:md5,2b6724f1dc557e7b385955f1372f7139",
+                "HG003_pbcpgtools.combined.bed.gz.tbi:md5,44de36b59e2f40b53cf993a4173a378d",
+                "HG003_pbcpgtools.hap1.bed.gz:md5,668b2e6bf3beeec4beeb9349bfa7d89e",
+                "HG003_pbcpgtools.hap1.bed.gz.tbi:md5,1e4766bc0ff5ed22c2169b4780a2c438",
+                "HG003_pbcpgtools.hap2.bed.gz:md5,4e28fcf09ca2836b9504d3566143b88c",
+                "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,74058e0d49cd9081eb5c2a185dd67a9d",
+                "HG004_pbcpgtools.combined.bed.gz:md5,9bb81aa0548bfc0cab37e1d8e9990491",
+                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,4f1f502231c7d06f701c18c08db94c3e",
+                "HG004_pbcpgtools.hap1.bed.gz:md5,86f8a2eb1e0167fc4918acb17f5e9996",
+                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,ea325e8764bcd867d9dded89cde16a3b",
+                "HG004_pbcpgtools.hap2.bed.gz:md5,fdfd3c907ed6192dee62e468d9cb4dc6",
+                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,755bc6e05828a1e4d59996cb34bff6e1",
+                "HG002_methbat_profile.tsv:md5,80e14522fa93131e47c03356b44e4c6d",
+                "HG003_methbat_profile.tsv:md5,a332c529dfbecad313856c71782c6432",
+                "HG004_methbat_profile.tsv:md5,e636446511f35b7e562bbe15e4907953",
+                "bcftools-stats-subtypes.txt:md5,9cb1efd8966e6c0d0df472e0f954e900",
+                "bcftools_stats_indel-lengths.txt:md5,d9bf451550b8efa6d43e877619ac8876",
+                "fastqc-status-check-heatmap.txt:md5,bed93a3cb6b24cf37ebf4613e7c8c285",
+                "fastqc_adapter_content_plot.txt:md5,da53a142a49af7ecb22107793a160cb7",
+                "fastqc_overrepresented_sequences_plot.txt:md5,dd85d12381df9ab765f7c4ea5b1f19d8",
+                "fastqc_per_base_n_content_plot.txt:md5,e4dd013d0e5c10688d1ec46a884fe046",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,b52a6a559222046a129ccfb658717116",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,a129ee39cadb7b7182e94afacab1cf62",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,97a10d10827478a23bcacc2cfae894ad",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,2fb0586e8d6fad0d1a65938397d884e5",
+                "fastqc_sequence_counts_plot.txt:md5,f8d7c5ff15ee21e6b6371e472ffb39b4",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,b779bff338222df30e3a3b2edc6a5daf",
+                "fastqc_sequence_length_distribution_plot.txt:md5,e0c5b37bbd78082d445a035b0a34dc25",
+                "mosdepth-coverage-per-contig-multi.txt:md5,ea869e69a42423b6c9312e511a268d26",
+                "mosdepth-cumcoverage-dist-id.txt:md5,effc51eb7c15a23dff190ddb2242aef0",
+                "mosdepth_cov_dist.txt:md5,29f20ddea7fbc9a31dd213d323403b14",
+                "mosdepth_cumcov_dist.txt:md5,29f20ddea7fbc9a31dd213d323403b14",
+                "mosdepth_perchrom.txt:md5,10d677cb5b55731c856d4b04f4bbdc94",
+                "multiqc_bcftools_stats.txt:md5,fba68c883b2ad4b2e41f389923cb0946",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,cded57a1a32e92f2ad42d0dbe3d3826b",
-                "multiqc_general_stats.txt:md5,d8021476724ee7b2f4f74f3606433b36",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,6a31b62f39d5b58daa8529ef8cb9e0aa",
-                "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
-                "somalier_stats.txt:md5,4022e1fe02231d74a0d2832c5e4f81f8",
-                "whatshap-stats-table.txt:md5,005d86ac3cac9ea33e2ad2c9226dbf82",
+                "multiqc_fastqc.txt:md5,6c00dc25ea9364ec7c8d38efdbe12bfb",
+                "multiqc_general_stats.txt:md5,d92fa3255a039b49e80b5ce8ffdd3ff7",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,e3e62e3a499be70315c51d731e52a9f3",
+                "peddy_relatedness_plot.txt:md5,8e502dba751846fb15dd8e43fff7f42e",
+                "somalier_stats.txt:md5,0bc0c54ec11dfcb3cefe97577a19aa84",
+                "whatshap-stats-table.txt:md5,4514659168f696b4035db8566c0caaf5",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
-                "HG002_cramino_aligned_phased.arrow:md5,5e904df1ea10c02ae70169e46b45f16c",
-                "HG003_cramino_aligned_phased.arrow:md5,e6859e9adeed604cf6b0c0fb659ef19d",
-                "HG004_cramino_aligned_phased.arrow:md5,d38068c72e3275bfd567da861aa4b9f5",
-                "HG002_cramino_aligned.arrow:md5,5e904df1ea10c02ae70169e46b45f16c",
-                "HG003_cramino_aligned.arrow:md5,e6859e9adeed604cf6b0c0fb659ef19d",
-                "HG004_cramino_aligned.arrow:md5,d38068c72e3275bfd567da861aa4b9f5",
-                "HG002.mosdepth.global.dist.txt:md5,f1053cca531a65a98fb84bc2c37de24c",
-                "HG002.mosdepth.region.dist.txt:md5,f47bcb079021bf652722bcf973918393",
-                "HG002.mosdepth.summary.txt:md5,d7d24f343964544006eabe60ebaf4384",
-                "HG002.regions.bed.gz:md5,72ea5659abc98edd8fcc51e725902590",
-                "HG002.regions.bed.gz.csi:md5,903e1974621e0163e18c6ac7773e3a94",
-                "HG003.mosdepth.global.dist.txt:md5,3dd90f0fe9aa0c756bcb8b2313b58338",
-                "HG003.mosdepth.region.dist.txt:md5,d4cbdb5d6e6f18e53299ff59626e9984",
-                "HG003.mosdepth.summary.txt:md5,16cc82f5699b40d51a5ba06583156c44",
-                "HG003.regions.bed.gz:md5,398a91a39cd34f4527d889c7ee3129c5",
-                "HG003.regions.bed.gz.csi:md5,a17540857520857db024092fb1473d8f",
-                "HG004.mosdepth.global.dist.txt:md5,a8ffdd67c117dfd5a0130f1ad30df7f2",
-                "HG004.mosdepth.region.dist.txt:md5,05707cb6e01fca034a5f4c124b2e92e9",
-                "HG004.mosdepth.summary.txt:md5,c0dfb2ead42c590579eb2a97d6b022ca",
-                "HG004.regions.bed.gz:md5,932f27e11b00ef3e5020efb66141218f",
-                "HG004.regions.bed.gz.csi:md5,012071b1e7113555aff953ea787d798c",
-                "FAM.het_check.csv:md5,969d36ffaf399883c17202c93c5d201e",
-                "FAM.het_check.png:md5,c336874bc6ba9392cc93d2bd91ca833d",
-                "FAM.html:md5,e0672a007de0f53693af36e194d8fb2b",
-                "FAM.ped_check.csv:md5,3deddf644e39dc7d758d366d72a85b49",
-                "FAM.ped_check.png:md5,123f6ef3aaef95b3998f034c7d044e36",
+                "HG002_cramino_aligned_phased.arrow:md5,7c19d2f4da52fe34122670ad8c946735",
+                "HG003_cramino_aligned_phased.arrow:md5,b74108e154e1a445e9e8a7bead685465",
+                "HG004_cramino_aligned_phased.arrow:md5,c53f83eb3588f68bb00274224a0b1b37",
+                "HG002_cramino_aligned.arrow:md5,7c19d2f4da52fe34122670ad8c946735",
+                "HG003_cramino_aligned.arrow:md5,b74108e154e1a445e9e8a7bead685465",
+                "HG004_cramino_aligned.arrow:md5,c53f83eb3588f68bb00274224a0b1b37",
+                "HG002.mosdepth.global.dist.txt:md5,46bd65f08ce87e18887d2470d7940f4c",
+                "HG002.mosdepth.region.dist.txt:md5,3b170cb951d2d26c5685497b66738290",
+                "HG002.mosdepth.summary.txt:md5,57be289b2900a958e628ffe4087f771e",
+                "HG002.regions.bed.gz:md5,eb2a78aed4b8bb2f54806b3d0245e96a",
+                "HG002.regions.bed.gz.csi:md5,b1b10260e807b0d41b59816d1a0f4036",
+                "HG003.mosdepth.global.dist.txt:md5,8e58ae8ae4a27a2163d16194acfa7ded",
+                "HG003.mosdepth.region.dist.txt:md5,cbc1a4d11a4575a8a411bc9f3f7c1d23",
+                "HG003.mosdepth.summary.txt:md5,5267bd7141f232428d00657285ffb91f",
+                "HG003.regions.bed.gz:md5,f3921c35e6cc2285cffd13382bcde481",
+                "HG003.regions.bed.gz.csi:md5,fbdc568e8c6a0f8f9c4154508a6f2026",
+                "HG004.mosdepth.global.dist.txt:md5,8742a8da484701b399e5adcf38f189a5",
+                "HG004.mosdepth.region.dist.txt:md5,f18c5aa448325ee3ba129534685c0b2e",
+                "HG004.mosdepth.summary.txt:md5,82ecc4c993abe21bdb44e620e538d9be",
+                "HG004.regions.bed.gz:md5,c4d6de274b5c79e2b2e7f8b42b4a79f6",
+                "HG004.regions.bed.gz.csi:md5,e19a65771744f6710817bb5af6048b76",
+                "FAM.het_check.csv:md5,f68889b98cde604e8ea245614dbc546d",
+                "FAM.het_check.png:md5,868e1683a37d8a9475b86215c0320e11",
+                "FAM.html:md5,248f3e55243eb95f74870dcd83e6fd23",
+                "FAM.ped_check.csv:md5,e46c13b6e5638e2b96842b1759d00a54",
+                "FAM.ped_check.png:md5,42b80f8d0a2b4be3455ebfa88ed05832",
                 "FAM.ped_check.rel-difference.csv:md5,b7f4daf0366fe93f4d8e9708b52a2436",
-                "FAM.peddy.ped:md5,72c6ba5add814dccad28b66a0bf07d9a",
-                "FAM.sex_check.csv:md5,e82ac26951416b738db777730e0ced59",
+                "FAM.peddy.ped:md5,250fc10e45aeb428e8eb0a5cf8e98e66",
+                "FAM.sex_check.csv:md5,9f5d2e40791a12aa5ba1b6e2de240ab4",
                 "FAM.sex_check.png:md5,bbd8c26aa3e0da1a9988247ab139f6ce",
-                "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
-                "HG002_whatshap_stats.gtf.gz:md5,9a0fb275eeb8ed73091366b00942b1f1",
-                "HG002_whatshap_stats.gtf.gz.tbi:md5,f0ea816f0b7327d559d0706816943cf8",
-                "HG002_whatshap_stats.tsv:md5,c55f8e760fe01b2ed7a98f9c9401bebb",
-                "HG003_whatshap_stats.gtf.gz:md5,6743c2315bf868ecffefa44f80418e40",
-                "HG003_whatshap_stats.gtf.gz.tbi:md5,a45c2969378bfb4bbef7220da839025a",
-                "HG003_whatshap_stats.tsv:md5,d4e1c43fe9dea64f8c37e2f752d6ca1a",
-                "HG004_whatshap_stats.gtf.gz:md5,8c7fb91cccd8886f7ad8e5a641bb3a8a",
-                "HG004_whatshap_stats.gtf.gz.tbi:md5,fe49f28242433a40be9d9c91fd76405a",
-                "HG004_whatshap_stats.tsv:md5,3468a1412ceb735a62c82835cc02e3cb",
-                "HG002_sambamba_depth.bed:md5,a155719809cd54de8f493bdc06f5ee17",
-                "HG003_sambamba_depth.bed:md5,fa838b4f18918cff1a086cf326e24eb1",
-                "HG004_sambamba_depth.bed:md5,9ea7a024c90d0e0939a010155969476c",
-                "HG002_copynum_sawfish.bedgraph:md5,ec1a798b138e6a0a8bf50b538c576c72",
-                "HG002_depth_sawfish.bw:md5,161d2ec64270f8ea19558102f1fcab49",
-                "HG002_gc_bias_corrected_depth_sawfish.bw:md5,161d2ec64270f8ea19558102f1fcab49",
-                "HG002_hificnv.copynum.bedgraph:md5,91291a0e64927bdf042341f9312c4e40",
-                "HG002_hificnv.depth.bw:md5,084a52d7e4e931f77422347b69e75f88",
-                "HG002_hificnv.maf.bw:md5,cfdb9f0d88b636b5652e52e139a00939",
-                "HG002_maf_sawfish.bw:md5,cfdb9f0d88b636b5652e52e139a00939",
-                "HG002_pbcpgtools.combined.bw:md5,a63531baac47ed7bc8c400b95ae1d0a8",
-                "HG002_pbcpgtools.hap1.bw:md5,fb0297f6ae04de309bd24d7f96a1defb",
-                "HG002_pbcpgtools.hap2.bw:md5,8e2bf46e321594709d82712dd313305f",
-                "HG003_copynum_sawfish.bedgraph:md5,18b8d65452c2dce5f52f317702ef2455",
-                "HG003_depth_sawfish.bw:md5,63a718b1821e0677a00b81f42f93b9a8",
-                "HG003_gc_bias_corrected_depth_sawfish.bw:md5,63a718b1821e0677a00b81f42f93b9a8",
-                "HG003_hificnv.copynum.bedgraph:md5,f09e224b103e5d028a1cda76542c324f",
-                "HG003_hificnv.depth.bw:md5,ad1c0456cf491f697158e5fcf1a6d629",
-                "HG003_hificnv.maf.bw:md5,666478b8f7518fae9ebdf29df02e9d8f",
-                "HG003_maf_sawfish.bw:md5,666478b8f7518fae9ebdf29df02e9d8f",
-                "HG003_pbcpgtools.combined.bw:md5,8cb1a330466ae8f4feeb6aec65cfbd2c",
-                "HG003_pbcpgtools.hap1.bw:md5,777eb2da057ebde71becf660de297f56",
-                "HG003_pbcpgtools.hap2.bw:md5,6e48af4634bbdcbc2e3e774fcd375a97",
-                "HG004_copynum_sawfish.bedgraph:md5,9bc8255191520a270f25fc5fae8e1583",
-                "HG004_depth_sawfish.bw:md5,4cb90a268db01ba7837ddbc54b5f2937",
-                "HG004_gc_bias_corrected_depth_sawfish.bw:md5,4cb90a268db01ba7837ddbc54b5f2937",
-                "HG004_hificnv.copynum.bedgraph:md5,482a19699b1dce1196d8edbf3bbe6d27",
-                "HG004_hificnv.depth.bw:md5,7a14d76774a36885796a2f8cdc4c8a64",
-                "HG004_hificnv.maf.bw:md5,e61e9ea334620dd954cd2a3283875ddc",
-                "HG004_maf_sawfish.bw:md5,e61e9ea334620dd954cd2a3283875ddc",
-                "HG004_pbcpgtools.combined.bw:md5,e5d97e63b2f2c9bf52b375b2c37ae6d2",
-                "HG004_pbcpgtools.hap1.bw:md5,9821afc171ec31375d9a894bcfbeb2f3",
-                "HG004_pbcpgtools.hap2.bw:md5,5bb21ee57fd6ca78082cdf28e0d7ef8e"
+                "FAM.vs.html:md5,de40bea9c88a751a5c6710cbf851cc4a",
+                "HG002_whatshap_stats.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
+                "HG002_whatshap_stats.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
+                "HG002_whatshap_stats.tsv:md5,ac8444b25c9c64ad7d0214efe526b2e2",
+                "HG003_whatshap_stats.gtf.gz:md5,771a6d00360fe5bf21fe554a92f3bcaf",
+                "HG003_whatshap_stats.gtf.gz.tbi:md5,04831e8e27a61c1aff02e6df5e63cd33",
+                "HG003_whatshap_stats.tsv:md5,a5ded3a3808a62070d5bc5d5af0a0ad2",
+                "HG004_whatshap_stats.gtf.gz:md5,4ed6fffce3871a508b5ea196c4824a3e",
+                "HG004_whatshap_stats.gtf.gz.tbi:md5,1f71378977ae07db29ff9db251cdcd64",
+                "HG004_whatshap_stats.tsv:md5,af4828c484d02fb88bc04b6f249dff7d",
+                "HG002_sambamba_depth.bed:md5,6bb082e2467e6986710063686044c105",
+                "HG003_sambamba_depth.bed:md5,3b1878bcd362f72be3b2136910cec80c",
+                "HG004_sambamba_depth.bed:md5,26cbadd77560c403448d55226b731f09",
+                "HG002_copynum_sawfish.bedgraph:md5,8544044cde7d9af55d0ee01bc7b2f2c7",
+                "HG002_depth_sawfish.bw:md5,f08bd9ec8784aa0cfc12313bb12b0885",
+                "HG002_gc_bias_corrected_depth_sawfish.bw:md5,f08bd9ec8784aa0cfc12313bb12b0885",
+                "HG002_hificnv.copynum.bedgraph:md5,ef22bf2116b3b80e2a717efe3b38c39f",
+                "HG002_hificnv.depth.bw:md5,2981e86a3ec846789b131cef0bd79d7f",
+                "HG002_hificnv.maf.bw:md5,28cc6fc2fb36a7e0eda75af9b16e956f",
+                "HG002_maf_sawfish.bw:md5,28cc6fc2fb36a7e0eda75af9b16e956f",
+                "HG002_pbcpgtools.combined.bw:md5,7a525ce083d058523109915f68d21846",
+                "HG002_pbcpgtools.hap1.bw:md5,991cfdfbb7603853077fe5dbf352a263",
+                "HG002_pbcpgtools.hap2.bw:md5,06085f3f6db64cb089b52deccdba199f",
+                "HG003_copynum_sawfish.bedgraph:md5,cb93efd1971fc2bce74ccdb8e0cbef52",
+                "HG003_depth_sawfish.bw:md5,5196575d532964494081d4863556a856",
+                "HG003_gc_bias_corrected_depth_sawfish.bw:md5,5196575d532964494081d4863556a856",
+                "HG003_hificnv.copynum.bedgraph:md5,10f7f0b8fd5bc182c7b086ce6a4a571c",
+                "HG003_hificnv.depth.bw:md5,36945f838731519aadf0021fdb9b32ae",
+                "HG003_hificnv.maf.bw:md5,edfdcf435a1620a18b874e3c84a5a5f5",
+                "HG003_maf_sawfish.bw:md5,edfdcf435a1620a18b874e3c84a5a5f5",
+                "HG003_pbcpgtools.combined.bw:md5,20324f6d16611421ae0315fd11ac2351",
+                "HG003_pbcpgtools.hap1.bw:md5,29cb40ea5c86e6d1948a6116a21cae0b",
+                "HG003_pbcpgtools.hap2.bw:md5,2aeb9a057596146dea09d2c09c7898bf",
+                "HG004_copynum_sawfish.bedgraph:md5,7f9547b193a7b0357ce0cc701a12c3e3",
+                "HG004_depth_sawfish.bw:md5,f57db4f96ab1c9a02c8e1af16a2e1b24",
+                "HG004_gc_bias_corrected_depth_sawfish.bw:md5,f57db4f96ab1c9a02c8e1af16a2e1b24",
+                "HG004_hificnv.copynum.bedgraph:md5,94e7a54588d386c8947971037619ccff",
+                "HG004_hificnv.depth.bw:md5,f6b42d6809eb580cf272c556ecdf5d59",
+                "HG004_hificnv.maf.bw:md5,9bd36f2731c096d2fc1d44c35464084c",
+                "HG004_maf_sawfish.bw:md5,9bd36f2731c096d2fc1d44c35464084c",
+                "HG004_pbcpgtools.combined.bw:md5,5d3ac3a88cdfcdb0dfb3a16f174f2b8c",
+                "HG004_pbcpgtools.hap1.bw:md5,650544de3fbe6141b1b8afc50a62cf55",
+                "HG004_pbcpgtools.hap2.bw:md5,bb21973606c996f417cc0e8d931fcc56"
             ],
             [
                 [
                     "HG002_haplotagged.bam",
-                    "283bff2efc0677af66ec41f0403dcfe2"
+                    "ca14b3f47b42f7737c45ea55dc55de8"
                 ],
                 [
                     "HG003_haplotagged.bam",
-                    "282dc837094a83d9eba5975007bc2ad2"
+                    "6f480d7f381ec0236ed21dc40720dd61"
                 ],
                 [
                     "HG004_haplotagged.bam",
-                    "91daed5826da972291bedaffecac2d38"
+                    "345c1a890c682d0663303151ec2f7697"
                 ],
                 [
                     "HG002_aligned_assembly.bam",
-                    "e0fe9ec6470c26a13384e1421424810e"
+                    "894d436e614637c83258a37a0feb00aa"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
-                    "e5f5b7d3a689c00000d1ea1d4e9c3af1"
+                    "d18e7fce4b2e34760e1fad924dfee3f7"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
-                    "e5148a4ff928f1c783c2855ffd143c88"
+                    "870ada751bf9be7ec796c4b570374f26"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
-                    "eaaaa372cae26f1e039a46899ff4e142"
+                    "7664d0efd20571bcf79c07d2b918aafe"
                 ],
                 [
                     "HG003_spanning_trgt.bam",
-                    "bc2fd60ca1a340543dd66e5775644f97"
+                    "27d7a9fb9e6fba60a51942b80196c8c4"
                 ],
                 [
                     "HG004_spanning_trgt.bam",
-                    "e61b76ee67a5cab41a4f8cccedf92a9e"
+                    "977ccf1c4cab90b4581ac34da76502e4"
                 ]
             ],
             [
-                
+
+
             ],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=16, variantCount=301, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_OR1D5.vcf.gz",
@@ -1243,23 +1247,23 @@
                 ],
                 [
                     "HG002_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=248, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=15, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=11, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=278, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=4, variantCount=25, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG004_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=49, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=47, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG004_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=273, phased=true, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=13, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_trgt.vcf.gz",
@@ -1275,41 +1279,42 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=61, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=44, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=207, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=242, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_deepvariant_snvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=175, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=182, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG003_deepvariant_snvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=152, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=142, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG004_deepvariant_snvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=268, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=188, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=1, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=3, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=31, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=28, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
-                
+
+
             ]
         ],
-        "timestamp": "2026-03-25T14:02:02.684468935",
+        "timestamp": "2026-03-25T18:32:21.109904198",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nextflow": "26.02.0"
         }
     }
 }

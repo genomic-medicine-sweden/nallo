@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Make the annotation of mitochondrial variants use distance 0 for ENSEMBLVEP_SNV
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - The logic of SCATTER_GENOME subworkflow was changed, now we split the bed into regions only if `snv_calling_processes` is greater than one.
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Format nallo workflow and scatter_genome subworkflow with harshil alignment
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Change pipelines_testdata_base_path to point to resource with chrM in the input and in the vep_cache
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Update module gawk
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
 - [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
 - [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
@@ -58,6 +63,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
 |               | `--skip_sex_check`                             |
+|               | `--vep_mitochondrial_genome_distance`          |
+|               | `--vep_nuclear_genome_distance`                |
+|               | `--mitochondrial_caller`                       |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
