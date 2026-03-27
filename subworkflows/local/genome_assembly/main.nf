@@ -1,7 +1,8 @@
-include { CAT_FASTQ } from '../../../modules/nf-core/cat/fastq/main'
-include { HIFIASM   } from '../../../modules/nf-core/hifiasm'
-include { YAK_COUNT } from '../../../modules/nf-core/yak/count/main'
-include { GFASTATS  } from '../../../modules/nf-core/gfastats/main'
+include { CAT_FASTQ                   } from '../../../modules/nf-core/cat/fastq/main'
+include { HIFIASM as HIFIASM_BINS     } from '../../../modules/nf-core/hifiasm'
+include { HIFIASM as HIFIASM_ASSEMBLY } from '../../../modules/nf-core/hifiasm'
+include { YAK_COUNT                   } from '../../../modules/nf-core/yak/count/main'
+include { GFASTATS                    } from '../../../modules/nf-core/gfastats/main'
 
 // This subworkflow assembles and outputs haplotypes from a set of reads (grouped per sample), using hifiasm and gfastats.
 // It assumes that while each sample can have multiple files, each sample belongs to one family at most.
@@ -90,19 +91,26 @@ workflow GENOME_ASSEMBLY {
             .set { ch_hifiasm_in }
     }
 
-    HIFIASM (
+    HIFIASM_BINS (
         ch_hifiasm_in.reads,
         ch_hifiasm_in.yak,
         [[],[],[]],
         [[],[]]
     )
-    ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
-    HIFIASM.out.hap1_contigs
+    HIFIASM_ASSEMBLY (
+        ch_hifiasm_in.reads,
+        ch_hifiasm_in.yak,
+        [[],[],[]],
+        HIFIASM_BINS.out.bin_files
+    )
+    ch_versions = ch_versions.mix(HIFIASM_ASSEMBLY.out.versions)
+
+    HIFIASM_ASSEMBLY.out.hap1_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 1 ], fasta ] }
         .set { ch_gfastats_paternal_in }
 
-    HIFIASM.out.hap2_contigs
+    HIFIASM_ASSEMBLY.out.hap2_contigs
         .map { meta, fasta -> [ meta + [ 'haplotype': 2 ], fasta ] }
         .set { ch_gfastats_maternal_in }
 

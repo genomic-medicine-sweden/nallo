@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            360,
+            363,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -130,7 +130,7 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFIASM": {
+                "HIFIASM_ASSEMBLY": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -1306,10 +1306,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-25T14:02:02.684468935",
+        "timestamp": "2026-03-27T09:43:57.148054076",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nextflow": "26.03.1"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            312,
+            315,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -121,7 +121,7 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFIASM": {
+                "HIFIASM_ASSEMBLY": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -829,12 +829,12 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bw"
             ],
             [
-                "HG002_ONT_A_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
-                "HG002_ONT_A_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
-                "HG002_ONT_B_haplotype_1.assembly_summary:md5,d1c0980101c83f2b9f826a280d8dcd82",
-                "HG002_ONT_B_haplotype_2.assembly_summary:md5,3186b5bfa60b9f031a68dba1747d8cb1",
-                "HG002_ONT_C_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
-                "HG002_ONT_C_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
+                "HG002_ONT_A_haplotype_1.assembly_summary:md5,3fc7130162800ded980f6fed162281ee",
+                "HG002_ONT_A_haplotype_2.assembly_summary:md5,31a509a7d1717704af9a2f939c8f10b8",
+                "HG002_ONT_B_haplotype_1.assembly_summary:md5,9daf7d20ddd880efde0cab226f3f162c",
+                "HG002_ONT_B_haplotype_2.assembly_summary:md5,d2985812eecaa92914e3ef1f253d4302",
+                "HG002_ONT_C_haplotype_1.assembly_summary:md5,3fc7130162800ded980f6fed162281ee",
+                "HG002_ONT_C_haplotype_2.assembly_summary:md5,31a509a7d1717704af9a2f939c8f10b8",
                 "HG002_ONT_A.baf.bed.gz:md5,0a2911d99a911e3a05e8e842a0fcb6cb",
                 "HG002_ONT_A.baf.bed.gz.tbi:md5,e43fbcefcb87c40e7df7484ff6faa563",
                 "HG002_ONT_A.cov.bed.gz:md5,462719717050daaa601ef75c1ae3de34",
@@ -1130,19 +1130,19 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "a8150005fca1626ded64f2c259c561a9"
+                    "6e5e9268958b9a73b08c94fd310bed83"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "c7772b2a5de55ce533601277a2d5c68b"
+                    "60588477d90c81bd5e956ccf9e506e1a"
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "a8150005fca1626ded64f2c259c561a9"
+                    "6e5e9268958b9a73b08c94fd310bed83"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1219,10 +1219,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-20T17:26:50.050518319",
+        "timestamp": "2026-03-26T16:54:15.149393075",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.03.0"

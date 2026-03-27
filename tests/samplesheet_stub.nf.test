@@ -132,7 +132,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert !versions.containsKey('HIFIASM') },
+                { assert !versions.containsKey('HIFIASM_ASSEMBLY') },
                 { assert versions.containsKey('SPLITUBAM') },
                 { assert stable_name.contains('aligned_reads') },
                 { assert snapshot(
@@ -178,7 +178,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert !versions.containsKey('HIFIASM') },
+                { assert !versions.containsKey('HIFIASM_ASSEMBLY') },
                 { assert !versions.containsKey('SPLITUBAM') },
                 { assert stable_name.contains('aligned_reads') },
                 { assert snapshot(
@@ -224,7 +224,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert versions.containsKey('HIFIASM') },
+                { assert versions.containsKey('HIFIASM_ASSEMBLY') },
                 { assert !versions.containsKey('SPLITUBAM') },
                 { assert !stable_name.contains('aligned_reads') },
                 { assert snapshot(
