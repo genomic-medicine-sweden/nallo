@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            220,
+            221,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -180,6 +180,9 @@
                 },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -717,7 +720,7 @@
                 "multiqc_fastqc.txt:md5,6a480bdcfc7a42e03b005593f373cab8",
                 "multiqc_general_stats.txt:md5,3504c470b5a491dbf8b57261be4139ce",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,84bf9cd76618d3479fa988bf24c08ab5",
-                "somalier_stats.txt:md5,2383c81547983b1f113036f69119873b",
+                "somalier_stats.txt:md5,5c94e733027e803060f7a0e5e554b525",
                 "whatshap-stats-table.txt:md5,5b2d5449cffe6cbb3e701fc5afbeae7c",
                 "FAM_paraphase_annotated.tsv:md5,e0237a5581743972016902fd3441244a",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
@@ -730,13 +733,13 @@
                 "HG002_Revio.regions.bed.gz.csi:md5,48cef5f24807063dce29e4db22d0acf7",
                 "FAM.het_check.csv:md5,18695c1ae220bad3645625ca0bef222b",
                 "FAM.het_check.png:md5,768afc460904426efb1efa8279ff9a22",
-                "FAM.html:md5,105971230f008b962baf0fdba5ab1805",
+                "FAM.html:md5,76c9b8085e69f05614a0cdaae9f7cbcc",
                 "FAM.ped_check.csv:md5,21dded6c03dab39859d2936d4820c426",
                 "FAM.ped_check.png:md5,01205cbb85c20361bcf8489c304be4b7",
                 "FAM.ped_check.rel-difference.csv:md5,b59f50df00b5b3af6e71e774d8b99103",
-                "FAM.peddy.ped:md5,a26273a66398025e2e7425b8323415d7",
-                "FAM.sex_check.csv:md5,df14f6c15dde937708bd349dd3bff606",
-                "FAM.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
+                "FAM.peddy.ped:md5,aef15405a63c4bafc6e3ff640db77c43",
+                "FAM.sex_check.csv:md5,6d8e4cb04574a639ced6a054e350a0cf",
+                "FAM.sex_check.png:md5,a290b5ba768c63b9a4ab6a8e47a0db8a",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_whatshap_stats.gtf.gz:md5,7352f1ebae085e459beb3a9cf9f1664d",
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,b3c0ab91d29ac26cca25b05f03324351",
@@ -808,7 +811,7 @@
                 
             ]
         ],
-        "timestamp": "2026-03-26T10:56:11.808857047",
+        "timestamp": "2026-03-27T11:43:24.747977813",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"

@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            56,
+            57,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,6 +65,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -143,7 +146,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T16:47:50.656940117",
+        "timestamp": "2026-03-27T11:34:55.550067816",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -304,7 +307,7 @@
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            57,
+            58,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -371,6 +374,9 @@
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -512,7 +518,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-26T16:50:12.417483601",
+        "timestamp": "2026-03-27T11:36:40.151428567",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -520,7 +526,7 @@
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
-            13,
+            14,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -530,6 +536,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -613,7 +622,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-26T10:58:58.340923486",
+        "timestamp": "2026-03-27T11:35:43.579112547",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -750,6 +759,9 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
@@ -830,7 +842,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-27T08:56:24.087539704",
+        "timestamp": "2026-03-27T11:38:04.691203072",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -838,7 +850,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            69,
+            70,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -917,6 +929,9 @@
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
                     "gawk": "5.3.1"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1004,7 +1019,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T16:47:07.065263711",
+        "timestamp": "2026-03-27T11:34:21.635528079",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -1012,7 +1027,7 @@
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
-            84,
+            85,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1100,6 +1115,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1264,7 +1282,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-03-26T16:53:05.812098588",
+        "timestamp": "2026-03-27T11:38:49.514742766",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
@@ -1780,7 +1798,7 @@
     },
     "Test alignment without genome assembly": {
         "content": [
-            13,
+            14,
             {
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -1790,6 +1808,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
@@ -1841,7 +1862,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-26T10:58:33.217740589",
+        "timestamp": "2026-03-27T11:35:18.541456685",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "26.02.0"
