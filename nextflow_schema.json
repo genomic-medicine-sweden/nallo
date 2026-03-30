@@ -680,6 +680,11 @@
                     "description": "Which phasing software to use (`longphase`, `whatshap`, `hiphase`)",
                     "enum": ["longphase", "whatshap", "hiphase"]
                 },
+                "whatshap_pedigree_phasing": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable pedigree phasing with whatshap (default: enabled)"
+                },
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
