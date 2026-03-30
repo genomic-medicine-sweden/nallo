@@ -76,6 +76,9 @@ nextflow_workflow {
         test("[bam, bai], fasta, fai, somalier_sites, ped - no update for sample with unknown sex") {
 
         when {
+            params {
+                relate_infer_args = "--infer --min-depth 100 --min-ab 0.45"
+            }
             workflow {
                 """
                 input[0] = channel.of(
