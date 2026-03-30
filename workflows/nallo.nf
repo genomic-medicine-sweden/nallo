@@ -75,47 +75,47 @@ include { citationBibliographyText                               } from '../subw
 
 workflow NALLO {
     take:
-    ch_input
     ch_cadd_header
-    ch_cadd_resources
     ch_cadd_prescored_indels
-    ch_fasta
-    ch_tandem_repeats
-    ch_par
-    ch_str_bed
-    ch_snv_call_regions
-    ch_sv_call_regions
-    ch_modkit_call_regions
-    ch_stranger_repeat_catalog
-    ch_variant_consequences_snvs
-    ch_variant_consequences_svs
-    ch_vep_cache_unprocessed
-    ch_expected_xy_bed
-    ch_expected_xx_bed
+    ch_cadd_resources
+    ch_echtvar_databases
     ch_exclude_bed
+    ch_expected_xx_bed
+    ch_expected_xy_bed
+    ch_fasta
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
-    ch_paraphrase_rules
-    ch_peddy_sites
-    ch_methbat_regions
-    ch_mosdepth_regions
-    ch_sambamba_regions
-    ch_somalier_sites
-    ch_strdrop_training_set_json
     ch_gens_baf_positions
+    ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
-    ch_gens_coverage_bins
-    ch_sentieon_model_bundle
+    ch_hgnc_ids
+    ch_input
+    ch_methbat_regions
+    ch_modkit_call_regions
+    ch_mosdepth_regions
+    ch_paraphrase_rules
+    ch_par
+    ch_peddy_sites
+    ch_sambamba_regions
     ch_sentieon_female_diploid_bed
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
-    ch_vcfexpress_prelude
-    ch_echtvar_databases
+    ch_sentieon_model_bundle
+    ch_snv_call_regions
+    ch_somalier_sites
+    ch_stranger_repeat_catalog
+    ch_str_bed
+    ch_strdrop_training_set_json
+    ch_sv_call_regions
     ch_svdb_sv_databases
+    ch_tandem_repeats
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
+    ch_vcfexpress_prelude
+    ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    ch_hgnc_ids
     cram_output
     val_alignment_processes
     val_bigwig_modcodes
@@ -171,7 +171,6 @@ workflow NALLO {
     val_sv_call_regions
     val_vep_cache
     val_vep_cache_version
-
 
     main:
     ch_multiqc_files = channel.empty()

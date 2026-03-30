@@ -32,47 +32,47 @@ include {
 //
 workflow GENOMICMEDICINESWEDEN_NALLO {
     take:
-    ch_samplesheet
     ch_cadd_header
-    ch_cadd_resources
     ch_cadd_prescored_indels
-    ch_fasta
-    ch_tandem_repeats
-    ch_par
-    ch_str_bed
-    ch_snv_call_regions
-    ch_sv_call_regions
-    ch_modkit_call_regions
-    ch_stranger_repeat_catalog
-    ch_variant_consequences_snvs
-    ch_variant_consequences_svs
-    ch_vep_cache_unprocessed
-    ch_expected_xy_bed
-    ch_expected_xx_bed
+    ch_cadd_resources
+    ch_echtvar_databases
     ch_exclude_bed
+    ch_expected_xx_bed
+    ch_expected_xy_bed
+    ch_fasta
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
-    ch_paraphrase_rules
-    ch_peddy_sites
-    ch_methbat_regions
-    ch_mosdepth_regions
-    ch_sambamba_regions
-    ch_somalier_sites
-    ch_strdrop_training_set_json
     ch_gens_baf_positions
+    ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
-    ch_gens_coverage_bins
-    ch_sentieon_model_bundle
+    ch_hgnc_ids
+    ch_samplesheet
+    ch_methbat_regions
+    ch_modkit_call_regions
+    ch_mosdepth_regions
+    ch_paraphrase_rules
+    ch_par
+    ch_peddy_sites
+    ch_sambamba_regions
     ch_sentieon_female_diploid_bed
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
-    ch_vcfexpress_prelude
-    ch_echtvar_databases
+    ch_sentieon_model_bundle
+    ch_snv_call_regions
+    ch_somalier_sites
+    ch_stranger_repeat_catalog
+    ch_str_bed
+    ch_strdrop_training_set_json
+    ch_sv_call_regions
     ch_svdb_sv_databases
+    ch_tandem_repeats
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
+    ch_vcfexpress_prelude
+    ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    ch_hgnc_ids
     cram_output
     val_alignment_processes
     val_bigwig_modcodes
@@ -135,47 +135,47 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     // WORKFLOW: Run pipeline
     //
     NALLO(
-        ch_samplesheet,
         ch_cadd_header,
-        ch_cadd_resources,
         ch_cadd_prescored_indels,
-        ch_fasta,
-        ch_tandem_repeats,
-        ch_par,
-        ch_str_bed,
-        ch_snv_call_regions,
-        ch_sv_call_regions,
-        ch_modkit_call_regions,
-        ch_stranger_repeat_catalog,
-        ch_variant_consequences_snvs,
-        ch_variant_consequences_svs,
-        ch_vep_cache_unprocessed,
-        ch_expected_xy_bed,
-        ch_expected_xx_bed,
+        ch_cadd_resources,
+        ch_echtvar_databases,
         ch_exclude_bed,
+        ch_expected_xx_bed,
+        ch_expected_xy_bed,
+        ch_fasta,
         ch_genmod_reduced_penetrance,
         ch_genmod_score_config_snvs,
         ch_genmod_score_config_svs,
-        ch_paraphrase_rules,
-        ch_peddy_sites,
-        ch_methbat_regions,
-        ch_mosdepth_regions,
-        ch_sambamba_regions,
-        ch_somalier_sites,
-        ch_strdrop_training_set_json,
         ch_gens_baf_positions,
+        ch_gens_coverage_bins,
         ch_gens_panel_of_normals_female,
         ch_gens_panel_of_normals_male,
-        ch_gens_coverage_bins,
-        ch_sentieon_model_bundle,
+        ch_hgnc_ids,
+        ch_samplesheet,
+        ch_methbat_regions,
+        ch_modkit_call_regions,
+        ch_mosdepth_regions,
+        ch_paraphrase_rules,
+        ch_par,
+        ch_peddy_sites,
+        ch_sambamba_regions,
         ch_sentieon_female_diploid_bed,
         ch_sentieon_male_diploid_bed,
         ch_sentieon_male_haploid_bed,
-        ch_vcfexpress_prelude,
-        ch_echtvar_databases,
+        ch_sentieon_model_bundle,
+        ch_snv_call_regions,
+        ch_somalier_sites,
+        ch_stranger_repeat_catalog,
+        ch_str_bed,
+        ch_strdrop_training_set_json,
+        ch_sv_call_regions,
         ch_svdb_sv_databases,
+        ch_tandem_repeats,
+        ch_variant_consequences_snvs,
+        ch_variant_consequences_svs,
+        ch_vcfexpress_prelude,
+        ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
-        ch_hgnc_ids,
         cram_output,
         val_alignment_processes,
         val_bigwig_modcodes,
@@ -262,47 +262,46 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     GENOMICMEDICINESWEDEN_NALLO(
-        PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath("${projectDir}/assets/cadd_to_vcf_header_-1.0-.txt"),
-        createReferenceChannelFromPath(params.cadd_resources),
         createReferenceChannelFromPath(params.cadd_prescored_indels),
-        createReferenceChannelFromPath(params.fasta),
-        createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []])),
-        createReferenceChannelFromPath(params.par_regions),
-        createReferenceChannelFromPath(params.str_bed),
-        createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
-        createReferenceChannelFromPath(params.sv_call_regions),
-        createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
-        createReferenceChannelFromPath(params.stranger_repeat_catalog),
-        createReferenceChannelFromPath(params.variant_consequences_snvs),
-        createReferenceChannelFromPath(params.variant_consequences_svs),
-        createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
-        createReferenceChannelFromPath(params.cnv_expected_xy_cn),
-        createReferenceChannelFromPath(params.cnv_expected_xx_cn),
+        createReferenceChannelFromPath(params.cadd_resources),
+        createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[], []])),
         createReferenceChannelFromPath(params.cnv_excluded_regions),
+        createReferenceChannelFromPath(params.cnv_expected_xx_cn),
+        createReferenceChannelFromPath(params.cnv_expected_xy_cn),
+        createReferenceChannelFromPath(params.fasta),
         createReferenceChannelFromPath(params.genmod_reduced_penetrance),
         createReferenceChannelFromPath(params.genmod_score_config_snvs),
         createReferenceChannelFromPath(params.genmod_score_config_svs),
-        createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []])),
-        createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []])),
-        createReferenceChannelFromPath(params.methbat_regions),
-        createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
-        createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []])),
-        createReferenceChannelFromPath(params.somalier_sites),
-        createReferenceChannelFromPath(params.strdrop_training_set_json),
         createReferenceChannelFromPath(params.gens_baf_positions),
+        createReferenceChannelFromPath(params.gens_coverage_bins),
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
-        createReferenceChannelFromPath(params.gens_coverage_bins),
-        createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
+        createReferenceChannelFromPath(params.methbat_regions),
+        createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []])),
+        createReferenceChannelFromPath(params.par_regions),
+        createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []])),
-        file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
-        createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.somalier_sites),
+        createReferenceChannelFromPath(params.stranger_repeat_catalog),
+        createReferenceChannelFromPath(params.str_bed),
+        createReferenceChannelFromPath(params.strdrop_training_set_json),
+        createReferenceChannelFromPath(params.sv_call_regions),
         createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([])),
+        createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []])),
+        createReferenceChannelFromPath(params.variant_consequences_snvs),
+        createReferenceChannelFromPath(params.variant_consequences_svs),
+        file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
+        createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
-        createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
         params.alignment_output_format == 'cram',
         params.alignment_processes,
         params.bigwig_modcodes,
