@@ -34,7 +34,7 @@ nextflow_workflow {
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
                     workflow.out.mosdepth_region_dist,
-                    workflow.out.versions
+
                 ).match() }
             )
         }
@@ -77,7 +77,7 @@ nextflow_workflow {
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
                     workflow.out.mosdepth_region_dist,
-                    workflow.out.versions
+
                 ).match() }
             )
         }

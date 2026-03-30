@@ -10,10 +10,10 @@ nextflow_workflow {
             script "../../../../modules/nf-core/gunzip/main.nf"
             process {
                 """
-                input[0] = [
+                input[0] = channel.of([
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
-                ]
+                ])
                 """
             }
         }
@@ -22,14 +22,14 @@ nextflow_workflow {
             script "../../../../modules/nf-core/severus/main.nf"
             process {
                 """
-                input[0] = [
+                input[0] = channel.of([
                     [ id:'test', single_end:false, project: 'project' ], // meta map
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
                     [],
                     [],
                     []
-                ]
+                ])
                 input[1] = [[],[]]
                 """
             }
@@ -39,10 +39,10 @@ nextflow_workflow {
             script "../../../../modules/nf-core/untar/main.nf"
             process {
                 """
-                input[0] = [
+                input[0] = channel.of([
                     [ id: 'vep_cache' ],
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
-                ]
+                ])
                 """
             }
         }
@@ -63,7 +63,7 @@ nextflow_workflow {
                     'colorsdb_af',
                     'colorsdb_ac'
                 ])
-                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[3] = UNTAR.out.untar
                 input[4] = channel.value('110')
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -76,7 +76,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     file(workflow.out.tbi.get(0).get(1)).name
                 ).match() }
@@ -101,7 +100,7 @@ nextflow_workflow {
                     'colorsdb_af',
                     'colorsdb_ac'
                 ])
-                input[3] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[3] = UNTAR.out.untar
                 input[4] = channel.value('110')
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -113,7 +112,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.versions).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
 

@@ -19,11 +19,10 @@ nextflow_workflow {
                 [
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
-                ]
+                ],
+                []
             ])
-            input[1] = [[],[]]
-            input[2] = [[],[]]
-            input[3] = [[],[]]
+            input[1] = [[],[],[]]
             """
             }
         }

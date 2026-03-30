@@ -5,29 +5,16 @@
                 "0": [
                     
                 ],
-                "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ],
                 "chromograph_plots": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:25:37.852585805",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:52.939186031"
     },
     "plot coverage -stub": {
         "content": [
@@ -66,10 +53,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         [
@@ -103,30 +86,14 @@
                             "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:26:01.401815013",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:19.631950502"
     },
     "plot nothing -stub": {
         "content": [
@@ -134,29 +101,16 @@
                 "0": [
                     
                 ],
-                "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ],
                 "chromograph_plots": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:26:24.170681091",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:45.040740805"
     },
     "plot all": {
         "content": [
@@ -200,12 +154,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -215,16 +169,11 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
                     [
@@ -265,12 +214,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -280,41 +229,19 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:24:58.733912045",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:09.762099358"
     },
     "plot all -stub": {
         "content": [
@@ -379,11 +306,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -443,36 +365,14 @@
                             "HG003_tiddit_cov.wig_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:25:50.689937401",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:07.684265465"
     },
     "plot autozygosity -stub": {
         "content": [
@@ -512,10 +412,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -550,30 +446,14 @@
                             "HG003_rhocallviz.bed_chrY.png:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:26:14.336093154",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:55:33.722175984"
     },
     "plot coverage": {
         "content": [
@@ -591,12 +471,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -606,15 +486,11 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "1": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ],
                 "chromograph_plots": [
                     [
@@ -629,12 +505,12 @@
                             "HG003_tiddit_cov_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                            "HG003_tiddit_cov_chr16.png:md5,b77c29dcf0408216e313f93f801d0b17",
+                            "HG003_tiddit_cov_chr17.png:md5,500e1c47f5f45c7bf8088751e9dd5299",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                            "HG003_tiddit_cov_chr20.png:md5,50fbd85c52943ca78763c038d0ebefe8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr3.png:md5,954482b960865332f37d386da5c9fb75",
@@ -644,35 +520,19 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
+                            "HG003_tiddit_cov_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
+                            "HG003_tiddit_cov_chrX.png:md5,32a9a95b465ff6951039efd10a082441",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787",
-                    "versions.yml:md5,f5b38aba9b05e2d76c21fdd94d36f31f"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:TIDDIT_COV": {
-                        "tiddit": "3.9.3"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:25:11.398602043",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:23.93536108"
     },
     "plot autozygosity": {
         "content": [
@@ -712,10 +572,6 @@
                         ]
                     ]
                 ],
-                "1": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
-                ],
                 "chromograph_plots": [
                     [
                         {
@@ -750,29 +606,13 @@
                             "HG003_rhocallviz_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5d3ad9e2cb022ae8dfdd33c2b6a121d8",
-                    "versions.yml:md5,ab3a7a80385695e59375c0c7af6d1787"
                 ]
-            },
-            [
-                {
-                    "CHROMOGRAPH:RHOCALL_VIZ": {
-                        "rhocall": "0.5.1"
-                    }
-                },
-                {
-                    "CHROMOGRAPH:RUN_CHROMOGRAPH": {
-                        "chromograph": "1.3.1"
-                    }
-                }
-            ]
+            }
         ],
-        "timestamp": "2026-02-26T08:25:26.853140588",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T16:54:40.428751555"
     }
 }
