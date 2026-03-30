@@ -1,5 +1,5 @@
 process DEEPVARIANT_RUNDEEPVARIANT {
-    tag "$meta.id"
+    tag "${meta.id}_${meta.region.name}"
     label 'process_high'
 
     // FIXME Conda is not supported at the moment
