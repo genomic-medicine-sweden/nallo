@@ -36,6 +36,58 @@ workflow PIPELINE_INITIALISATION {
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
+    val_cnv_excluded_regions
+    val_cnv_expected_xx_cn
+    val_cnv_expected_xy_cn
+    val_echtvar_snv_databases
+    val_fasta
+    val_genmod_reduced_penetrance
+    val_genmod_score_config_snvs
+    val_genmod_score_config_svs
+    val_gens_baf_positions
+    val_gens_coverage_bins
+    val_gens_panel_of_normals_female
+    val_gens_panel_of_normals_male
+    val_input
+    val_methbat_regions
+    val_par_regions
+    val_phaser
+    val_run_methbat
+    val_sambamba_regions
+    val_skip_alignment
+    val_skip_annotate_paralogs
+    val_skip_call_paralogs
+    val_skip_chromograph
+    val_skip_genome_assembly
+    val_skip_methylation_calling
+    val_skip_peddy
+    val_skip_phasing
+    val_skip_prepare_gens_input
+    val_skip_qc
+    val_skip_rank_variants
+    val_skip_repeat_annotation
+    val_skip_repeat_calling
+    val_skip_sambamba_depth
+    val_skip_sex_check
+    val_skip_snv_annotation
+    val_skip_snv_calling
+    val_skip_sv_annotation
+    val_skip_sv_calling
+    val_snv_caller
+    val_snv_calling_processes
+    val_somalier_sites
+    val_stranger_repeat_catalog
+    val_str_bed
+    val_str_caller
+    val_sv_callers
+    val_sv_callers_merge_priority
+    val_sv_callers_to_merge
+    val_sv_callers_to_run
+    val_svdb_sv_databases
+    val_variant_consequences_snvs
+    val_variant_consequences_svs
+    val_vep_cache
+    val_vep_plugin_files
 
     main:
     //
@@ -158,65 +210,65 @@ workflow PIPELINE_INITIALISATION {
 
     def parameterStatus = [
         workflow: [
-            skip_annotate_paralogs  : params.skip_annotate_paralogs,
-            skip_snv_calling        : params.skip_snv_calling,
-            skip_peddy              : params.skip_peddy,
-            skip_phasing            : params.skip_phasing,
-            skip_methylation_calling: params.skip_methylation_calling,
-            skip_rank_variants      : params.skip_rank_variants,
-            skip_repeat_calling     : params.skip_repeat_calling,
-            skip_repeat_annotation  : params.skip_repeat_annotation,
-            skip_chromograph        : params.skip_chromograph,
-            skip_sambamba_depth     : params.skip_sambamba_depth,
-            skip_snv_annotation     : params.skip_snv_annotation,
-            skip_sv_calling         : params.skip_sv_calling,
-            skip_sv_annotation      : params.skip_sv_annotation,
-            skip_call_paralogs      : params.skip_call_paralogs,
-            skip_alignment          : params.skip_alignment,
-            skip_qc                 : params.skip_qc,
-            skip_genome_assembly    : params.skip_genome_assembly,
-            skip_prepare_gens_input : params.skip_prepare_gens_input,
-            skip_sex_check          : params.skip_sex_check,
+            skip_annotate_paralogs  : val_skip_annotate_paralogs,
+            skip_snv_calling        : val_skip_snv_calling,
+            skip_peddy              : val_skip_peddy,
+            skip_phasing            : val_skip_phasing,
+            skip_methylation_calling: val_skip_methylation_calling,
+            skip_rank_variants      : val_skip_rank_variants,
+            skip_repeat_calling     : val_skip_repeat_calling,
+            skip_repeat_annotation  : val_skip_repeat_annotation,
+            skip_chromograph        : val_skip_chromograph,
+            skip_sambamba_depth     : val_skip_sambamba_depth,
+            skip_snv_annotation     : val_skip_snv_annotation,
+            skip_sv_calling         : val_skip_sv_calling,
+            skip_sv_annotation      : val_skip_sv_annotation,
+            skip_call_paralogs      : val_skip_call_paralogs,
+            skip_alignment          : val_skip_alignment,
+            skip_qc                 : val_skip_qc,
+            skip_genome_assembly    : val_skip_genome_assembly,
+            skip_prepare_gens_input : val_skip_prepare_gens_input,
+            skip_sex_check          : val_skip_sex_check,
         ],
         files: [
-            par_regions                 : params.par_regions,
-            echtvar_snv_databases       : params.echtvar_snv_databases,
-            sambamba_regions            : params.sambamba_regions,
-            svdb_sv_databases           : params.svdb_sv_databases,
-            somalier_sites              : params.somalier_sites,
-            vep_cache                   : params.vep_cache,
-            cnv_expected_xy_cn          : params.cnv_expected_xy_cn,
-            cnv_expected_xx_cn          : params.cnv_expected_xx_cn,
-            cnv_excluded_regions        : params.cnv_excluded_regions,
-            fasta                       : params.fasta,
-            str_bed                     : params.str_bed,
-            stranger_repeat_catalog     : params.stranger_repeat_catalog,
-            genmod_reduced_penetrance   : params.genmod_reduced_penetrance,
-            genmod_score_config_snvs    : params.genmod_score_config_snvs,
-            genmod_score_config_svs     : params.genmod_score_config_svs,
-            variant_consequences_snvs   : params.variant_consequences_snvs,
-            variant_consequences_svs    : params.variant_consequences_svs,
-            vep_plugin_files            : params.vep_plugin_files,
-            gens_baf_positions          : params.gens_baf_positions,
-            gens_panel_of_normals_female: params.gens_panel_of_normals_female,
-            gens_panel_of_normals_male  : params.gens_panel_of_normals_male,
-            gens_coverage_bins          : params.gens_coverage_bins,
+            par_regions                 : val_par_regions,
+            echtvar_snv_databases       : val_echtvar_snv_databases,
+            sambamba_regions            : val_sambamba_regions,
+            svdb_sv_databases           : val_svdb_sv_databases,
+            somalier_sites              : val_somalier_sites,
+            vep_cache                   : val_vep_cache,
+            cnv_expected_xy_cn          : val_cnv_expected_xy_cn,
+            cnv_expected_xx_cn          : val_cnv_expected_xx_cn,
+            cnv_excluded_regions        : val_cnv_excluded_regions,
+            fasta                       : val_fasta,
+            str_bed                     : val_str_bed,
+            stranger_repeat_catalog     : val_stranger_repeat_catalog,
+            genmod_reduced_penetrance   : val_genmod_reduced_penetrance,
+            genmod_score_config_snvs    : val_genmod_score_config_snvs,
+            genmod_score_config_svs     : val_genmod_score_config_svs,
+            variant_consequences_snvs   : val_variant_consequences_snvs,
+            variant_consequences_svs    : val_variant_consequences_svs,
+            vep_plugin_files            : val_vep_plugin_files,
+            gens_baf_positions          : val_gens_baf_positions,
+            gens_panel_of_normals_female: val_gens_panel_of_normals_female,
+            gens_panel_of_normals_male  : val_gens_panel_of_normals_male,
+            gens_coverage_bins          : val_gens_coverage_bins,
         ]
     ]
 
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
-    validatePacBioLicense()
-    validateWorkflowCompatibility()
+    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
 
     //
-    // Create channel from input file provided through params.input
+    // Create channel from input file provided through val_input
     //
     channel
         .fromList(
-            samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")
+            samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
         .map { meta, reads ->
             [ meta.id, meta, reads ] // add sample as groupTuple key
@@ -244,16 +296,16 @@ workflow PIPELINE_INITIALISATION {
         .set { ch_samplesheet }
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
-        validateAllFamiliesHasAffectedSamples(ch_samplesheet, params)
+        validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
         // Check that sex check is not skipped if there are samples with unknown sex
-        validateRequiresSexCheck(ch_samplesheet, params)
+        validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
 
         // Check that there's no more than one project
         validateSingleProjectPerRun(ch_samplesheet)
 
         // Check that the SV calling parameters are valid
-        validateSVCallingParameters()
+        validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority)
 
         // Check that mothers are female, and fathers are male
         validateParentalSex(ch_samplesheet)
@@ -321,8 +373,8 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
-    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
 }
 //
 // Validate channels from input samplesheet
@@ -443,7 +495,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
 //
 // Validate  workflow skip combinations
 //
-def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
     // Array to store errors
     def errors = []
     // For each of the "workflow", "files"
@@ -466,7 +518,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
     }
     // Extra case for checking if methbat regions are provided when needed.
     // The above error would suggest the opposite of the fix
-    if (!params.skip_methylation_calling && params.run_methbat && !params.methbat_regions) {
+    if (!val_skip_methylation_calling && val_run_methbat && !val_methbat_regions) {
         error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
@@ -574,14 +626,14 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
-def validatePacBioLicense() {
+def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs) {
      def pacbioTools = [
-        (params.phaser)             : 'HiPhase',
-        (params.str_caller)         : 'TRGT',
-        (params.sv_callers)         : 'Sawfish',
-        (params.sv_callers_to_run)  : 'Sawfish',
-        (params.sv_callers_to_merge): 'Sawfish',
-        (!params.skip_call_paralogs): 'Paraphase',
+        (val_phaser)             : 'HiPhase',
+        (val_str_caller)         : 'TRGT',
+        (val_sv_callers)         : 'Sawfish',
+        (val_sv_callers_to_run)  : 'Sawfish',
+        (val_sv_callers_to_merge): 'Sawfish',
+        (!val_skip_call_paralogs): 'Paraphase',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
@@ -596,9 +648,9 @@ def validatePacBioLicense() {
 
 // Genmod within RANK_VARIANTS requires affected individuals in the samplesheet.
 // This is a convenience function to fail early if there are families without affected individuals.
-def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
+def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants) {
 
-    if (params.skip_rank_variants) {
+    if (val_skip_rank_variants) {
         return
     }
 
@@ -621,9 +673,9 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, params) {
 
 // SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
 // This is a convenience function to fail early if there are samples without known sex.
-def validateRequiresSexCheck(ch_samplesheet, params) {
+def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
 
-    if (!params.skip_sex_check) {
+    if (!val_skip_sex_check) {
         return
     }
 
@@ -635,7 +687,7 @@ def validateRequiresSexCheck(ch_samplesheet, params) {
         .map { sample, _sex -> sample }
         .collect()
         .subscribe { sampleList ->
-            if (sampleList && ( !params.skip_snv_calling || ( !params.skip_methylation_calling && params.run_methbat == true ) || !params.skip_peddy || !params.skip_prepare_gens_input || ( !params.skip_repeat_calling && params.str_caller == 'trgt' ))) {
+            if (sampleList && ( !val_skip_snv_calling || ( !val_skip_methylation_calling && val_run_methbat == true ) || !val_skip_peddy || !val_skip_prepare_gens_input || ( !val_skip_repeat_calling && val_str_caller == 'trgt' ))) {
                 error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
@@ -653,40 +705,40 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility() {
-    if (params.str_caller.matches('strdust') && !params.skip_repeat_annotation) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge) {
+    if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
     }
 
-    if (params.snv_caller == 'sentieon' && params.snv_calling_processes != 1) {
+    if (val_snv_caller == 'sentieon' && val_snv_calling_processes != 1) {
         error "ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used."
     }
 
     if (
-        !params.skip_sv_calling && params.sv_callers_to_run
+        !val_skip_sv_calling && val_sv_callers_to_run
             .split(',')
             .collect { caller -> caller.toLowerCase().trim() }
             .any { caller -> caller in ['hificnv', 'sawfish'] }
     ) {
         // We could probably change to not enforce this.
-        if (params.skip_snv_calling) {
+        if (val_skip_snv_calling) {
             error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
         }
         // We could probably change to not enforce this.
-        if (!params.cnv_expected_xy_cn || !params.cnv_expected_xx_cn || !params.cnv_excluded_regions) {
+        if (!val_cnv_expected_xy_cn || !val_cnv_expected_xx_cn || !val_cnv_excluded_regions) {
             error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
         }
     }
 
-    if ( !params.skip_phasing && !params.skip_sv_calling && params.phaser == 'hiphase' && params.sv_callers_to_merge != 'sawfish') {
+    if ( !val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
         error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
     }
 
 }
 
-def validateSVCallingParameters() {
-    def sv_callers = params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() }
-    def sv_caller_priority = params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() }
+def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority) {
+    def sv_callers = val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() }
+    def sv_caller_priority = val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() }
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
