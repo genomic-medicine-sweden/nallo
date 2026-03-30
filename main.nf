@@ -247,12 +247,10 @@ workflow {
     // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION(
-        params.version,
-        params.validate_params,
-        args,
-        params.outdir,
         params.input,
         params.help,
+        args,
+        params.outdir,
         params.help_full,
         params.show_hidden,
         params.cnv_excluded_regions,
@@ -266,6 +264,7 @@ workflow {
         params.gens_baf_positions,
         params.gens_coverage_bins,
         params.gens_panel_of_normals_female,
+        params.validate_params,
         params.gens_panel_of_normals_male,
         params.methbat_regions,
         params.par_regions,
@@ -297,15 +296,16 @@ workflow {
         params.stranger_repeat_catalog,
         params.str_bed,
         params.str_caller,
-        params.sv_callers,
         params.sv_callers_merge_priority,
+        params.sv_callers,
         params.sv_callers_to_merge,
         params.sv_callers_to_run,
         params.svdb_sv_databases,
         params.variant_consequences_snvs,
         params.variant_consequences_svs,
         params.vep_cache,
-        params.vep_plugin_files
+        params.vep_plugin_files,
+        params.version,
     )
 
     //

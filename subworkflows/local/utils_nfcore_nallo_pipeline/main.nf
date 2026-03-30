@@ -27,12 +27,10 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 workflow PIPELINE_INITIALISATION {
 
     take:
-    version // boolean: Display version and exit
-    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
-    nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir //  string: The output directory where the results will be saved
     help // boolean: Display help message and exit
     help_full // boolean: Show the full help message
+    nextflow_cli_args //   array: List of positional nextflow CLI args
+    outdir //  string: The output directory where the results will be saved
     show_hidden  // boolean: Show hidden parameters in the help message
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
@@ -46,6 +44,7 @@ workflow PIPELINE_INITIALISATION {
     val_gens_coverage_bins
     val_gens_panel_of_normals_female
     val_gens_panel_of_normals_male
+    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
     val_input
     val_methbat_regions
     val_par_regions
@@ -77,8 +76,8 @@ workflow PIPELINE_INITIALISATION {
     val_stranger_repeat_catalog
     val_str_bed
     val_str_caller
-    val_sv_callers
     val_sv_callers_merge_priority
+    val_sv_callers
     val_sv_callers_to_merge
     val_sv_callers_to_run
     val_svdb_sv_databases
@@ -86,6 +85,7 @@ workflow PIPELINE_INITIALISATION {
     val_variant_consequences_svs
     val_vep_cache
     val_vep_plugin_files
+    version // boolean: Display version and exit
 
     main:
     //
