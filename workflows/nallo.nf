@@ -91,7 +91,7 @@ workflow NALLO {
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
     ch_hgnc_ids
-    ch_input
+    ch_samplesheet
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -202,7 +202,7 @@ workflow NALLO {
     if (!val_skip_alignment) {
 
         CONVERT_INPUT_FASTQS(
-            ch_input,
+            ch_samplesheet,
             false,
             true,
         )
@@ -243,7 +243,7 @@ workflow NALLO {
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
         CONVERT_INPUT_BAMS(
-            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_input,
+            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_samplesheet,
             true,
             false,
         )
@@ -347,7 +347,7 @@ workflow NALLO {
         //
         // Create PED from samplesheet
         //
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [[id: meta.project], meta] }
             .groupTuple()
             .set { ch_samplesheet_ped_in }
@@ -592,7 +592,7 @@ workflow NALLO {
     //
     if (!val_skip_phasing) {
 
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [meta.family_id, meta.id] }
             .groupTuple()
             .map { family_id, sample_ids ->
@@ -745,7 +745,7 @@ workflow NALLO {
         )
 
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
             .unique()
             .combine(
@@ -800,8 +800,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
-            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_samplesheet, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_samplesheet, 'family_id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs,
         )
@@ -908,8 +908,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
-            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_samplesheet, 'id'),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_samplesheet, 'id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs,
         )
