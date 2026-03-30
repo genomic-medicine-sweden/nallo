@@ -1,0 +1,1063 @@
+{
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-30T09:16:43.306208536",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples, all unknown sex": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-30T09:17:08.939452195",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,4a0988fc3c0fe5cfd5dd205fe6755595"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-30T09:16:17.710345033",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 1,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 2,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "FAM",
+                            "paternal_id": 0,
+                            "maternal_id": 0,
+                            "sex": 1,
+                            "phenotype": 1,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-30T09:17:00.102043646",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - stub unknown sex": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam"
+                    ]
+                ],
+                "bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM",
+                            "paternal_id": "HG004",
+                            "sex": 2,
+                            "maternal_id": "HG003",
+                            "phenotype": 2,
+                            "project": "test",
+                            "n_files": 1,
+                            "single_end": true
+                        },
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam",
+                        "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
+                    ]
+                ],
+                "somalier_pairs": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.pairs.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "somalier_samples": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-30T09:16:51.331356403",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    },
+    "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
+        "content": [
+            "test.samples.tsv",
+            "test.pairs.tsv",
+            "HG002_PacBio_Revio.bam"
+        ],
+        "timestamp": "2026-03-30T14:02:57.852575879",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
+    }
+}
