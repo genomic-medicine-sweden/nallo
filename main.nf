@@ -13,9 +13,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NALLO  } from './workflows/nallo'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { NALLO                                 } from './workflows/nallo'
+include { PIPELINE_INITIALISATION               } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { PIPELINE_COMPLETION                   } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include {
+    createReferenceChannelFromPath ;
+    createReferenceChannelFromSamplesheet
+} from './subworkflows/local/utils_nfcore_nallo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,16 +32,207 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nall
 //
 workflow GENOMICMEDICINESWEDEN_NALLO {
     take:
-    samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet
+    ch_cadd_header
+    ch_cadd_resources
+    ch_cadd_prescored_indels
+    ch_fasta
+    ch_tandem_repeats
+    ch_par
+    ch_str_bed
+    ch_snv_call_regions
+    ch_sv_call_regions
+    ch_modkit_call_regions
+    ch_stranger_repeat_catalog
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
+    ch_vep_cache_unprocessed
+    ch_expected_xy_bed
+    ch_expected_xx_bed
+    ch_exclude_bed
+    ch_genmod_reduced_penetrance
+    ch_genmod_score_config_snvs
+    ch_genmod_score_config_svs
+    ch_paraphrase_rules
+    ch_peddy_sites
+    ch_methbat_regions
+    ch_mosdepth_regions
+    ch_sambamba_regions
+    ch_somalier_sites
+    ch_strdrop_training_set_json
+    ch_gens_baf_positions
+    ch_gens_panel_of_normals_female
+    ch_gens_panel_of_normals_male
+    ch_gens_coverage_bins
+    ch_sentieon_model_bundle
+    ch_sentieon_female_diploid_bed
+    ch_sentieon_male_diploid_bed
+    ch_sentieon_male_haploid_bed
+    ch_vcfexpress_prelude
+    ch_databases
+    ch_svdb_sv_databases
+    ch_vep_plugin_files
+    ch_hgnc_ids
+    cram_output
+    val_alignment_processes
+    val_bigwig_modcodes
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
+    val_echtvar_snv_databases
+    val_fasta
+    val_filter_snvs_expression
+    val_filter_svs_expression
+    val_filter_variants_hgnc_ids
+    val_force_sawfish_joint_call_single_samples
+    val_hifiasm_mode
+    val_mitochondrial_caller
+    val_multiqc_config
+    val_multiqc_logo
+    val_multiqc_methods_description
+    val_outdir
+    val_paraphrase_output_format
+    val_phaser
+    val_plot_chromograph_autozygosity
+    val_plot_chromograph_coverage
+    val_pre_vep_snv_filter_expression
+    val_run_methbat
+    val_run_modkit
+    val_sentieon_tech
+    val_skip_alignment
+    val_skip_annotate_paralogs
+    val_skip_call_paralogs
+    val_skip_chromograph
+    val_skip_genome_assembly
+    val_skip_methylation_calling
+    val_skip_peddy
+    val_skip_phasing
+    val_skip_prepare_gens_input
+    val_skip_qc
+    val_skip_rank_variants
+    val_skip_repeat_annotation
+    val_skip_repeat_calling
+    val_skip_sambamba_depth
+    val_skip_sex_check
+    val_skip_snv_annotation
+    val_skip_snv_calling
+    val_skip_sv_annotation
+    val_skip_sv_calling
+    val_snv_caller
+    val_snv_calling_processes
+    val_snv_call_regions
+    val_str_caller
+    val_strdrop_training_set_json
+    val_sv_callers_merge_priority
+    val_sv_callers_to_merge
+    val_sv_callers_to_run
+    val_sv_call_regions
+    val_vep_cache
+    val_vep_cache_version
 
     main:
 
     //
     // WORKFLOW: Run pipeline
     //
-    NALLO (
-        samplesheet
+    NALLO(
+        ch_samplesheet,
+        ch_cadd_header,
+        ch_cadd_resources,
+        ch_cadd_prescored_indels,
+        ch_fasta,
+        ch_tandem_repeats,
+        ch_par,
+        ch_str_bed,
+        ch_snv_call_regions,
+        ch_sv_call_regions,
+        ch_modkit_call_regions,
+        ch_stranger_repeat_catalog,
+        ch_variant_consequences_snvs,
+        ch_variant_consequences_svs,
+        ch_vep_cache_unprocessed,
+        ch_expected_xy_bed,
+        ch_expected_xx_bed,
+        ch_exclude_bed,
+        ch_genmod_reduced_penetrance,
+        ch_genmod_score_config_snvs,
+        ch_genmod_score_config_svs,
+        ch_paraphrase_rules,
+        ch_peddy_sites,
+        ch_methbat_regions,
+        ch_mosdepth_regions,
+        ch_sambamba_regions,
+        ch_somalier_sites,
+        ch_strdrop_training_set_json,
+        ch_gens_baf_positions,
+        ch_gens_panel_of_normals_female,
+        ch_gens_panel_of_normals_male,
+        ch_gens_coverage_bins,
+        ch_sentieon_model_bundle,
+        ch_sentieon_female_diploid_bed,
+        ch_sentieon_male_diploid_bed,
+        ch_sentieon_male_haploid_bed,
+        ch_vcfexpress_prelude,
+        ch_databases,
+        ch_svdb_sv_databases,
+        ch_vep_plugin_files,
+        ch_hgnc_ids,
+        cram_output,
+        val_alignment_processes,
+        val_bigwig_modcodes,
+        val_create_hificnv_maf_track,
+        val_create_sawfish_maf_track,
+        val_echtvar_snv_databases,
+        val_fasta,
+        val_filter_snvs_expression,
+        val_filter_svs_expression,
+        val_filter_variants_hgnc_ids,
+        val_force_sawfish_joint_call_single_samples,
+        val_hifiasm_mode,
+        val_mitochondrial_caller,
+        val_multiqc_config,
+        val_multiqc_logo,
+        val_multiqc_methods_description,
+        val_outdir,
+        val_paraphrase_output_format,
+        val_phaser,
+        val_plot_chromograph_autozygosity,
+        val_plot_chromograph_coverage,
+        val_pre_vep_snv_filter_expression,
+        val_run_methbat,
+        val_run_modkit,
+        val_sentieon_tech,
+        val_skip_alignment,
+        val_skip_annotate_paralogs,
+        val_skip_call_paralogs,
+        val_skip_chromograph,
+        val_skip_genome_assembly,
+        val_skip_methylation_calling,
+        val_skip_peddy,
+        val_skip_phasing,
+        val_skip_prepare_gens_input,
+        val_skip_qc,
+        val_skip_rank_variants,
+        val_skip_repeat_annotation,
+        val_skip_repeat_calling,
+        val_skip_sambamba_depth,
+        val_skip_sex_check,
+        val_skip_snv_annotation,
+        val_skip_snv_calling,
+        val_skip_sv_annotation,
+        val_skip_sv_calling,
+        val_snv_caller,
+        val_snv_calling_processes,
+        val_snv_call_regions,
+        val_str_caller,
+        val_strdrop_training_set_json,
+        val_sv_callers_merge_priority,
+        val_sv_callers_to_merge,
+        val_sv_callers_to_run,
+        val_sv_call_regions,
+        val_vep_cache,
+        val_vep_cache_version,
     )
+
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
@@ -48,12 +243,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 */
 
 workflow {
-
-    main:
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
-    PIPELINE_INITIALISATION (
+    PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         params.monochrome_logs,
@@ -62,31 +255,120 @@ workflow {
         params.input,
         params.help,
         params.help_full,
-        params.show_hidden
+        params.show_hidden,
     )
 
     //
     // WORKFLOW: Run main workflow
     //
-    GENOMICMEDICINESWEDEN_NALLO (
-        PIPELINE_INITIALISATION.out.samplesheet
+    GENOMICMEDICINESWEDEN_NALLO(
+        PIPELINE_INITIALISATION.out.samplesheet,
+        createReferenceChannelFromPath("${projectDir}/assets/cadd_to_vcf_header_-1.0-.txt"),
+        createReferenceChannelFromPath(params.cadd_resources),
+        createReferenceChannelFromPath(params.cadd_prescored_indels),
+        createReferenceChannelFromPath(params.fasta),
+        createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []])),
+        createReferenceChannelFromPath(params.par_regions),
+        createReferenceChannelFromPath(params.str_bed),
+        createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sv_call_regions),
+        createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.stranger_repeat_catalog),
+        createReferenceChannelFromPath(params.variant_consequences_snvs),
+        createReferenceChannelFromPath(params.variant_consequences_svs),
+        createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
+        createReferenceChannelFromPath(params.cnv_expected_xy_cn),
+        createReferenceChannelFromPath(params.cnv_expected_xx_cn),
+        createReferenceChannelFromPath(params.cnv_excluded_regions),
+        createReferenceChannelFromPath(params.genmod_reduced_penetrance),
+        createReferenceChannelFromPath(params.genmod_score_config_snvs),
+        createReferenceChannelFromPath(params.genmod_score_config_svs),
+        createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []])),
+        createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []])),
+        createReferenceChannelFromPath(params.methbat_regions),
+        createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.somalier_sites),
+        createReferenceChannelFromPath(params.strdrop_training_set_json),
+        createReferenceChannelFromPath(params.gens_baf_positions),
+        createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
+        createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
+        createReferenceChannelFromPath(params.gens_coverage_bins),
+        createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []])),
+        file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
+        createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[], []])),
+        createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([])),
+        createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
+        createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
+        params.alignment_output_format == 'cram',
+        params.alignment_processes,
+        params.bigwig_modcodes,
+        params.create_hificnv_maf_track,
+        params.create_sawfish_maf_track,
+        params.echtvar_snv_databases,
+        params.fasta,
+        params.filter_snvs_expression,
+        params.filter_svs_expression,
+        params.filter_variants_hgnc_ids,
+        params.force_sawfish_joint_call_single_samples,
+        params.hifiasm_mode,
+        params.mitochondrial_caller,
+        params.multiqc_config,
+        params.multiqc_logo,
+        params.multiqc_methods_description,
+        params.outdir,
+        params.paraphrase_output_format,
+        params.phaser,
+        params.plot_chromograph_autozygosity,
+        params.plot_chromograph_coverage,
+        params.pre_vep_snv_filter_expression,
+        params.run_methbat,
+        params.run_modkit,
+        params.sentieon_tech,
+        params.skip_alignment,
+        params.skip_annotate_paralogs,
+        params.skip_call_paralogs,
+        params.skip_chromograph,
+        params.skip_genome_assembly,
+        params.skip_methylation_calling,
+        params.skip_peddy,
+        params.skip_phasing,
+        params.skip_prepare_gens_input,
+        params.skip_qc,
+        params.skip_rank_variants,
+        params.skip_repeat_annotation,
+        params.skip_repeat_calling,
+        params.skip_sambamba_depth,
+        params.skip_sex_check,
+        params.skip_snv_annotation,
+        params.skip_snv_calling,
+        params.skip_sv_annotation,
+        params.skip_sv_calling,
+        params.snv_caller,
+        params.snv_calling_processes,
+        params.snv_call_regions,
+        params.str_caller,
+        params.strdrop_training_set_json,
+        params.sv_callers_merge_priority,
+        params.sv_callers_to_merge,
+        params.sv_callers_to_run,
+        params.sv_call_regions,
+        params.vep_cache,
+        params.vep_cache_version,
     )
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
+        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
