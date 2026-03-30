@@ -112,7 +112,7 @@ workflow NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_vcfexpress_prelude
-    ch_databases
+    ch_echtvar_databases
     ch_svdb_sv_databases
     ch_vep_plugin_files
     ch_hgnc_ids
@@ -678,7 +678,7 @@ workflow NALLO {
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
             ch_snv_vcf_for_annotation,
-            ch_databases.map { _meta, databases -> databases }.collect(),
+            ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
             PREPARE_REFERENCES.out.vep_resources,

@@ -69,7 +69,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_vcfexpress_prelude
-    ch_databases
+    ch_echtvar_databases
     ch_svdb_sv_databases
     ch_vep_plugin_files
     ch_hgnc_ids
@@ -172,7 +172,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_sentieon_male_diploid_bed,
         ch_sentieon_male_haploid_bed,
         ch_vcfexpress_prelude,
-        ch_databases,
+        ch_echtvar_databases,
         ch_svdb_sv_databases,
         ch_vep_plugin_files,
         ch_hgnc_ids,
