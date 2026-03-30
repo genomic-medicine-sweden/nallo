@@ -61,12 +61,6 @@
                         ]
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
-                ],
                 "fai": [
                     [
                         {
@@ -125,20 +119,14 @@
                             ]
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
                 ]
             }
         ],
-        "timestamp": "2026-03-16T15:09:57.192545707",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:02:19.82608879"
     },
     "unzip fasta, untar vep cache -stub": {
         "content": [
@@ -179,12 +167,6 @@
                         ]
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
-                ],
                 "fai": [
                     [
                         {
@@ -220,20 +202,14 @@
                             ]
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,53ba80d1edc3452084e1ff487d1232ee",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
                 ]
             }
         ],
-        "timestamp": "2026-01-28T14:43:14.947070766",
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        }
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:02:45.223081322"
     },
     "don't unzip fasta, don't untar vep cache -stub": {
         "content": [
@@ -273,10 +249,6 @@
                         ]
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
-                ],
                 "fai": [
                     [
                         {
@@ -311,18 +283,14 @@
                             "setup.sh:md5,b92e5662743198a705138dc677e61016"
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,b0006b19aa9222a1346e201d00ea8bdf"
                 ]
             }
         ],
-        "timestamp": "2026-01-30T11:25:02.384461568",
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
-        }
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:02:58.047078189"
     },
     "don't unzip fasta, untar vep cache": {
         "content": [
@@ -386,11 +354,6 @@
                         ]
                     ]
                 ],
-                "4": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
-                ],
                 "fai": [
                     [
                         {
@@ -449,18 +412,13 @@
                             ]
                         ]
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,154e23eb131667048a63be0f683d6a92",
-                    "versions.yml:md5,7479477c0c4b6eb043c58bc40ee41198",
-                    "versions.yml:md5,f031f406aa8c6f35dc43b4644924768b"
                 ]
             }
         ],
-        "timestamp": "2026-03-16T15:10:10.303329256",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:02:32.165222787"
     }
 }

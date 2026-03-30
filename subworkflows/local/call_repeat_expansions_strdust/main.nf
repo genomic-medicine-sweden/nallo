@@ -13,7 +13,6 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_versions = channel.empty()
 
     STRDUST (
         ch_bam_bai,
@@ -21,7 +20,6 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         ch_fai,
         ch_bed
     )
-    ch_versions.mix(STRDUST.out.versions)
 
     VCFEXPRESS (
         STRDUST.out.vcf,
@@ -36,13 +34,12 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
+        .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
         .set { ch_bcftools_merge_in }
 
     BCFTOOLS_MERGE (
         ch_bcftools_merge_in,
-        [ [], [] ],
-        [ [], [] ],
-        [ [], [] ]
+        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect()
     )
 
     emit:
@@ -50,6 +47,5 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
     family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
     family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
-    versions    = ch_versions              // channel: [ versions.yml ]
 
 }

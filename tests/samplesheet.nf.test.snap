@@ -90,7 +90,8 @@
                     "echtvar": "0.2.2"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2
+                    "ensemblvep": 115.2,
+                    "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
                     "ensemblvep": 110.0,
@@ -125,10 +126,10 @@
                     "genmod": "3.10.2"
                 },
                 "GFASTATS": {
-                    "gfastats": "1.3.10"
+                    "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3-0-gcecf42e"
+                    "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -140,17 +141,16 @@
                     "hificnv": "1.0.0-36e6461"
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": 2.0
+                    "longphase": "2.0.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": 2.0
+                    "longphase": "2.0.1"
                 },
                 "METHBAT_PROFILE": {
-                    "methbat": "0.16.1-8a0a24c"
+                    "methbat": "0.17.0-7c5e249"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -201,28 +201,28 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SEVERUS": {
-                    "severus": 1.6
+                    "severus": 1.7
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
@@ -239,7 +239,7 @@
                 },
                 "STRANGER": {
                     "stranger": "0.10.0",
-                    "tabix": "1.22.1"
+                    "tabix": 1.23
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -268,6 +268,10 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
+                "TABIX_SEVERUS": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
@@ -275,7 +279,7 @@
                     "tagbam": "0.1.0"
                 },
                 "TIDDIT_COV": {
-                    "tiddit": "3.9.3"
+                    "tiddit": "3.9.4"
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "5.0.0-e9acee0"
@@ -696,7 +700,6 @@
                 "HG002_Revio_pbcpgtools.hap1.bed.gz.tbi:md5,0be4ac05e7ca85d5185a5b68e7db1d9c",
                 "HG002_Revio_pbcpgtools.hap2.bed.gz:md5,7f6ce69e0236318d0644425e0b2fda57",
                 "HG002_Revio_pbcpgtools.hap2.bed.gz.tbi:md5,35ac2bed6e0bc8c2b1900d70082f3874",
-                "HG002_Revio_methbat_profile.tsv:md5,da47d014bc8499293fd2e4657dd047ea",
                 "bcftools-stats-subtypes.txt:md5,f48ddaf68a99e600f12a9219f454205b",
                 "bcftools_stats_indel-lengths.txt:md5,5f27446203ad5779a7e769aca9255604",
                 "fastqc-status-check-heatmap.txt:md5,6390176bf8f90f53283bdacf2186137d",
@@ -732,14 +735,14 @@
                 "HG002_Revio.regions.bed.gz:md5,94383e94c2aef6c25732b76dd411aae1",
                 "HG002_Revio.regions.bed.gz.csi:md5,48cef5f24807063dce29e4db22d0acf7",
                 "FAM.het_check.csv:md5,18695c1ae220bad3645625ca0bef222b",
-                "FAM.het_check.png:md5,768afc460904426efb1efa8279ff9a22",
-                "FAM.html:md5,76c9b8085e69f05614a0cdaae9f7cbcc",
+                "FAM.het_check.png:md5,0a0eb2d5d41156ad21dbd48fb9769eec",
+                "FAM.html:md5,3574b3c3b12429cd6d28b4aee61f6fce",
                 "FAM.ped_check.csv:md5,21dded6c03dab39859d2936d4820c426",
-                "FAM.ped_check.png:md5,01205cbb85c20361bcf8489c304be4b7",
+                "FAM.ped_check.png:md5,89622bcdba2c532f8c7d292810cce390",
                 "FAM.ped_check.rel-difference.csv:md5,b59f50df00b5b3af6e71e774d8b99103",
-                "FAM.peddy.ped:md5,aef15405a63c4bafc6e3ff640db77c43",
+                "FAM.peddy.ped:md5,1b1c23db324df8f960fe728540fcf06b",
                 "FAM.sex_check.csv:md5,6d8e4cb04574a639ced6a054e350a0cf",
-                "FAM.sex_check.png:md5,a290b5ba768c63b9a4ab6a8e47a0db8a",
+                "FAM.sex_check.png:md5,4e5326286496a795e87faf056c07ecb6",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_whatshap_stats.gtf.gz:md5,7352f1ebae085e459beb3a9cf9f1664d",
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,b3c0ab91d29ac26cca25b05f03324351",
@@ -811,10 +814,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-27T11:43:24.747977813",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:08:48.198108532"
     }
 }

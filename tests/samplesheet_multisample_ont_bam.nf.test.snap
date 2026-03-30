@@ -113,10 +113,10 @@
                     "genmod": "3.10.2"
                 },
                 "GFASTATS": {
-                    "gfastats": "1.3.10"
+                    "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3-0-gcecf42e"
+                    "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -128,8 +128,7 @@
                     "hificnv": "1.0.0-36e6461"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -172,22 +171,22 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SEVERUS": {
-                    "severus": 1.6
+                    "severus": 1.7
                 },
                 "SNIFFLES": {
                     "sniffles": "1.0.12"
@@ -198,6 +197,10 @@
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "STRDUST": {
+                    "bgzip": "1.23.1",
+                    "strdust": "0.16.0"
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.23,
@@ -223,6 +226,10 @@
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
+                "TABIX_SEVERUS": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
@@ -230,7 +237,7 @@
                     "tagbam": "0.1.0"
                 },
                 "TIDDIT_COV": {
-                    "tiddit": "3.9.3"
+                    "tiddit": "3.9.4"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -1065,24 +1072,24 @@
                 "HG002_ONT_C.regions.bed.gz:md5,3603310444c99853a4e8d5c39508e658",
                 "HG002_ONT_C.regions.bed.gz.csi:md5,84b9b2f648f0fec60fea2bb1cb7ec41f",
                 "FAM.het_check.csv:md5,a017ac54afbcaf81a859749ae68b2381",
-                "FAM.het_check.png:md5,fe8044ceea78b1cd96d94cdebab57549",
-                "FAM.html:md5,d72630345bd913942b9bb9d37864c5ca",
+                "FAM.het_check.png:md5,affe72b25308da70bbca7fcce9a56dbf",
+                "FAM.html:md5,1b7fd1003712ac7ffba5a2d66492a377",
                 "FAM.ped_check.csv:md5,6d27de13b60eb731950353ea7ba0d69f",
-                "FAM.ped_check.png:md5,a913cbf7bb527f6d571d4a95ff08eeb3",
+                "FAM.ped_check.png:md5,1d39a45acb67e02dad6ad2f0ca8e3972",
                 "FAM.ped_check.rel-difference.csv:md5,07f3ac195d434bb0771d7e439a6df3bb",
-                "FAM.peddy.ped:md5,6241f60cb236dcc0c317877cd6695070",
+                "FAM.peddy.ped:md5,d92d93f9a6c784adf00e79ec7a13e7b0",
                 "FAM.sex_check.csv:md5,25d93222380f29c2cd13d708f8d0cf7c",
-                "FAM.sex_check.png:md5,5c0d6e245262b7d0fb15f63e53223cb0",
+                "FAM.sex_check.png:md5,b72535700506e37c26242ec45f1e40eb",
                 "FAM.vs.html:md5,33031c05e249eb831e7a0a1a512a9a16",
                 "FAM2.het_check.csv:md5,fdd95858ce254e5003930cc255c98464",
-                "FAM2.het_check.png:md5,b08c255f20b43a3520bbe7e2d849ebcd",
-                "FAM2.html:md5,e559a8d7954c03eb99a9276e5654d116",
+                "FAM2.het_check.png:md5,b28e0dde1c5b6e8bf446ec9905df4854",
+                "FAM2.html:md5,f319f294e32a9df4a92f345984d7ce60",
                 "FAM2.ped_check.csv:md5,21dded6c03dab39859d2936d4820c426",
-                "FAM2.ped_check.png:md5,a74be2f748e31d65357bd16a6ec2c06e",
+                "FAM2.ped_check.png:md5,0348fb88b610f861f6e37c378d043e73",
                 "FAM2.ped_check.rel-difference.csv:md5,b59f50df00b5b3af6e71e774d8b99103",
-                "FAM2.peddy.ped:md5,24569bb7266564c3643a6c3a340b2b81",
+                "FAM2.peddy.ped:md5,0a392b1443236218fcd73c21144da9f6",
                 "FAM2.sex_check.csv:md5,c6fb8422f7570a3d2f36091c908d947d",
-                "FAM2.sex_check.png:md5,86efe705614b11bb32df6fce27a67a76",
+                "FAM2.sex_check.png:md5,b2ff9afe9f596dee5a22431ba920980c",
                 "FAM2.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_ONT_A_whatshap_stats.gtf.gz:md5,90ebb04a68ff1f3d2fbe0ab626bae5a7",
                 "HG002_ONT_A_whatshap_stats.gtf.gz.tbi:md5,055be74d470a5b948552a3f58bd87ac3",
@@ -1222,10 +1229,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-26T10:41:48.865511724",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:16:51.596903924"
     }
 }

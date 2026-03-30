@@ -16,8 +16,6 @@ workflow LONGPHASE {
     phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
-    ch_versions = channel.empty()
-
     ch_snv_vcf
         .map { meta, vcf -> [meta, vcf, "snv"] }
         .set { ch_snv_with_type }
@@ -68,7 +66,6 @@ workflow LONGPHASE {
         fasta,
         fai,
     )
-    ch_versions = ch_versions.mix(LONGPHASE_PHASE.out.versions)
 
     LONGPHASE_PHASE.out.snv_vcf
         .map { meta, vcf -> [meta + [variant_type: 'snv'], vcf] }
@@ -82,9 +79,13 @@ workflow LONGPHASE {
         .join(BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [meta + [id: meta.family_id] - meta.subMap('family_id'), vcf, tbi] }
         .groupTuple()
+        .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
         .set { ch_phased_vcf }
 
-    BCFTOOLS_MERGE(ch_phased_vcf, fasta, fai, [[], []])
+    BCFTOOLS_MERGE(
+        ch_phased_vcf,
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
+    )
 
     BCFTOOLS_MERGE.out.vcf
         .branch { meta, vcf ->
@@ -138,15 +139,13 @@ workflow LONGPHASE {
         fasta,
         fai,
     )
-    ch_versions = ch_versions.mix(LONGPHASE_HAPLOTAG.out.versions)
 
     SAMTOOLS_INDEX(
         LONGPHASE_HAPLOTAG.out.bam
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
 
     LONGPHASE_HAPLOTAG.out.bam
-        .join(SAMTOOLS_INDEX.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        .join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bam_bai_haplotagged }
 
     emit:
@@ -155,5 +154,4 @@ workflow LONGPHASE {
     phased_family_svs = ch_phased_family_svs           // channel: [ val(meta), path(vcf) ]
     phased_family_svs_tbi = ch_phased_family_svs_tbi   // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai = ch_bam_bai_haplotagged       // channel: [ val(meta), path(bam), path(bai) ]
-    versions = ch_versions                             // channel: [ path(versions.yml) ]
 }

@@ -8,13 +8,11 @@ workflow ANNOTATE_SVS {
     ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_sv_dbs             // channel: [mandatory] [ val(meta), path(csv) ]
-    ch_vep_cache          // channel: [mandatory] [ path(cache) ]
+    ch_vep_cache          // channel: [mandatory] [ val(meta), path(cache) ]
     val_vep_cache_version //  string: [mandatory] default: 110
     ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
 
     main:
-    ch_versions = channel.empty()
-
     ch_sv_dbs
         .multiMap { filename, in_freq_info_key, in_allele_count_info_key, out_freq_info_key, out_allele_count_info_key ->
             vcf_dbs:  filename
@@ -45,14 +43,12 @@ workflow ANNOTATE_SVS {
         ch_fasta,
         ch_vep_extra_files
     )
-    ch_versions = ch_versions.mix(ENSEMBLVEP_SV.out.versions)
 
     TABIX_ENSEMBLVEP_SV (
         ENSEMBLVEP_SV.out.vcf
     )
 
     emit:
-    vcf      = ENSEMBLVEP_SV.out.vcf         // channel: [ val(meta), path(vcf) ]
-    tbi      = TABIX_ENSEMBLVEP_SV.out.index // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions                   // channel: [ path(versions.yml) ]
+    vcf = ENSEMBLVEP_SV.out.vcf         // channel: [ val(meta), path(vcf) ]
+    tbi  = TABIX_ENSEMBLVEP_SV.out.index // channel: [ val(meta), path(tbi) ]
 }

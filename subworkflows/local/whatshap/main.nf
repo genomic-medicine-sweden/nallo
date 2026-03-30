@@ -11,8 +11,6 @@ workflow WHATSHAP {
     fai              // channel: [ val(meta), path(fai) ]
 
     main:
-    ch_versions = channel.empty()
-
     // Fix metadata to group by family
     ch_bam_bai
         .map { meta, bam, bai -> [[id: meta.family_id], bam, bai] }
@@ -65,15 +63,12 @@ workflow WHATSHAP {
         WHATSHAP_HAPLOTAG.out.bam
     )
 
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions)
-
     WHATSHAP_HAPLOTAG.out.bam
-        .join(SAMTOOLS_INDEX.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        .join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bam_bai_haplotagged }
 
     emit:
     phased_family_snvs     = WHATSHAP_PHASE.out.vcf // channel: [ val(meta), path(vcf) ]
     phased_family_snvs_tbi = WHATSHAP_PHASE.out.tbi // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai    = ch_bam_bai_haplotagged // channel: [ val(meta), path(bam), path(bai) ]
-    versions               = ch_versions            // channel: [ path(versions.yml) ]
 }

@@ -22,10 +22,6 @@
                         "HG002.baf.bed.gz.tbi:md5,c1651d6c42ae0d518383c909a7788400"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16"
-                ],
                 "baf_bed_tbi": [
                     [
                         {
@@ -45,18 +41,14 @@
                         "HG002.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
                         "HG002.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16"
                 ]
             }
         ],
-        "timestamp": "2026-03-23T12:19:18.502455802",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:01:58.81600199"
     },
     "prepare_gens_inputs - stub": {
         "content": [
@@ -81,10 +73,6 @@
                         "HG002.baf.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16"
-                ],
                 "baf_bed_tbi": [
                     [
                         {
@@ -104,17 +92,13 @@
                         "HG002.cov.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
                         "HG002.cov.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1e66fd09c94dd264db117ee1ff26e133",
-                    "versions.yml:md5,84b96344acb1b0d350d29abc2dc66c16"
                 ]
             }
         ],
-        "timestamp": "2026-03-23T12:19:34.070175813",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:02:11.022294736"
     }
 }

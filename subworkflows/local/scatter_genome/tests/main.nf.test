@@ -12,10 +12,10 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true),
+                    []
                 ]
-                input[1] = [[],[]]
-                input[2] = false
+                input[1] = false
                 """
             }
         }
