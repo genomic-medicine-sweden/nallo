@@ -1050,12 +1050,11 @@
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
         "content": [
-            null,
             "test.samples.tsv",
             "test.pairs.tsv",
             "HG002_PacBio_Revio.bam"
         ],
-        "timestamp": "2026-03-30T09:16:35.219769351",
+        "timestamp": "2026-03-30T14:02:57.852575879",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
