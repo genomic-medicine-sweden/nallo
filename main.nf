@@ -249,7 +249,6 @@ workflow {
     PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
-        params.monochrome_logs,
         args,
         params.outdir,
         params.input,
@@ -268,7 +267,6 @@ workflow {
         params.gens_coverage_bins,
         params.gens_panel_of_normals_female,
         params.gens_panel_of_normals_male,
-        params.input,
         params.methbat_regions,
         params.par_regions,
         params.phaser,
