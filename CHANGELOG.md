@@ -14,11 +14,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Added GitHub workflow to add the PR checklist as a comment
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
+- [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
 
 ### Changed
 
 - [#855](https://github.com/genomic-medicine-sweden/nallo/pull/855) - Updated nf-core modules
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Make the annotation of mitochondrial variants use distance 0 for ENSEMBLVEP_SNV
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - The logic of SCATTER_GENOME subworkflow was changed, now we split the bed into regions only if `snv_calling_processes` is greater than one.
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Format nallo workflow and scatter_genome subworkflow with harshil alignment
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Change pipelines_testdata_base_path to point to resource with chrM in the input and in the vep_cache
+- [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Update module gawk
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
+- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Updated remaining nf-core modules to topics
+- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - MethBat profile outputs now include ustable headers, added to `.nftignore`
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
 - [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
 - [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
@@ -38,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed the usage and support of `ch_versions` completely, in favour of topic versions
+- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed version snapshots from subworkflow tests
 - [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
 - [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
@@ -59,6 +69,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--sniffles_min_sv_size`                       |
 |               | `--sawfish_min_sv_size`                        |
 |               | `--skip_sex_check`                             |
+|               | `--vep_mitochondrial_genome_distance`          |
+|               | `--vep_nuclear_genome_distance`                |
+|               | `--mitochondrial_caller`                       |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -67,18 +80,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                       | Old version | New version |
-| -------------------------- | ----------- | ----------- |
-| modkit/bedmethyltobigwig   | 0.5.1-rc1   | 0.6.1       |
-| modkit/pileup              | 0.3.0       | 0.6.1       |
-| mosdepth                   | 0.3.10      | 0.3.11      |
-| multiqc                    | 1.31        | 1.33        |
-| svdb/merge                 | 2.8.2       | 2.8.4       |
-| svdb/query                 | 2.8.2       | 2.8.4       |
-| gawk                       | 5.3.0       | 5.3.1       |
-| vcfexpress                 |             | 0.3.4       |
-| deepvariant/rundeepvariant | 1.9.0       | 1.10.0      |
-| deepvariant/vcfstatsreport | 1.9.0       | 1.10.0      |
+| Tool                            | Old version | New version |
+| ------------------------------- | ----------- | ----------- |
+| modkit/bedmethyltobigwig        | 0.5.1-rc1   | 0.6.1       |
+| modkit/pileup                   | 0.3.0       | 0.6.1       |
+| mosdepth                        | 0.3.10      | 0.3.11      |
+| multiqc                         | 1.31        | 1.33        |
+| cadd                            | 1.6.1       | 1.7.3       |
+| svdb/merge                      | 2.8.2       | 2.8.4       |
+| svdb/query                      | 2.8.2       | 2.8.4       |
+| gawk                            | 5.3.0       | 5.3.1       |
+| vcfexpress                      |             | 0.3.4       |
+| deepvariant/rundeepvariant      | 1.9.0       | 1.10.0      |
+| deepvariant/vcfstatsreport      | 1.9.0       | 1.10.0      |
+| custom/addmostsevereconsequence | 1.1         | 1.2.0       |
+| custom/addmostseverepli         | 1.1         | 1.2.0       |
+| gfastats                        | 1.3.10      |  1.3.11     |
+| longphase                       | 2.0         |  2.0.1      |
+| methbat/profile                 | 0.16.1      |  0.17.0     |
+| samtools/faidx                  | 1.22.1      |  1.23.1     |
+| samtools/fastq                  | 1.22.1      |  1.23.1     |
+| samtools/import                 | 1.22.1      |  1.23.1     |
+| samtools/index                  | 1.22.1      |  1.23.1     |
+| samtools/merge                  | 1.22.1      |  1.23.1     |
+| samtools/sort                   | 1.22.1      |  1.23.1     |
+| samtools/view                   | 1.22.1      |  1.23.1     |
+| severus                         | 1.6         |  1.7        |
+| strdrust                        | 0.11.4      |  0.16.0     |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
@@ -161,8 +189,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | paraphrase                          |             | 0.2.0       |
 | paraphase                           | 3.3.4       | 3.5.0       |
 | samtools (paraphase)                | 1.22.1      | 1.23        |
-| custom/addmostsevereconsequence     | 1.1         | 1.2.0       |
-| custom/addmostseverepli             | 1.1         | 1.2.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

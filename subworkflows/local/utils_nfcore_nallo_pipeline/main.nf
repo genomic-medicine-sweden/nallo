@@ -38,9 +38,6 @@ workflow PIPELINE_INITIALISATION {
     show_hidden       // boolean: Show hidden parameters in the help message
 
     main:
-
-    ch_versions = channel.empty()
-
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
@@ -266,7 +263,6 @@ workflow PIPELINE_INITIALISATION {
 
     emit:
     samplesheet = ch_samplesheet
-    versions    = ch_versions
 }
 
 /*
@@ -420,17 +416,15 @@ def generateReferenceHTML(tool_list, description) {
     }
 }
 
-def citationBibliographyText(ch_versions, ch_topic_versions_string, references_yaml, description) {
+def citationBibliographyText(ch_topic_versions_string, references_yaml, description) {
     def yaml = new org.yaml.snakeyaml.Yaml()
     def softwareReferences = yaml.load(references_yaml.text).tool
 
     def unwantedReferences = ['genomic-medicine-sweden/nallo', 'Nextflow']
-    // These are not collected in ch_versions but should be referenced
+    // These are not collected in versions topic but should be referenced
     def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
-    ch_versions
-        .map { module_yaml -> extractSoftwareFromVersions(module_yaml) }
-        .concat(extractSoftwareFromTopics(ch_topic_versions_string))
+    extractSoftwareFromTopics(ch_topic_versions_string)
         .flatten() // split multi-tool modules
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }

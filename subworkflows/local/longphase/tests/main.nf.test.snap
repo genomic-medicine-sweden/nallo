@@ -6,7 +6,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,af704b598b85437ba46bafc40e8bc11f"
+                    "FAM_phased_snv.vcf.gz:md5,eafa74e27927dd04d274e9c612bbc90f"
                 ]
             ],
             [
@@ -14,10 +14,10 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,83c91627df1864244e9a7b8adecee09d"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,51c3247f2c7a11796b52960ab9c87186"
                 ]
             ],
-            "05b524033cd7be66e56de1fe7a3e2659",
+            "db57d3632c13aa4d3e826e4427a69cae",
             "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
@@ -25,21 +25,16 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,91b6a08bb929d68a771e59a4e22785f3",
-                    "HG002_haplotagged.bam.bai:md5,4447d30cdf02a99f0605632bf0fd82b2"
+                    "HG002_haplotagged.bam:md5,a67c6f45033eb62fba473600e2279608",
+                    "HG002_haplotagged.bam.bai:md5,1c1c70d2838e4d8c10a908792d3294bc"
                 ]
-            ],
-            [
-                "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-02-26T08:28:05.326074787",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:00:33.622641379"
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -94,14 +89,6 @@
                         "HG003_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
-                ],
                 "haplotagged_bam_bai": [
                     [
                         {
@@ -151,22 +138,14 @@
                         },
                         "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:29:05.537477954",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:01:41.123621568"
     },
     "1 sample - SNVs + SVs - stub": {
         "content": [
@@ -213,11 +192,6 @@
                         "HG002_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
-                ],
                 "haplotagged_bam_bai": [
                     [
                         {
@@ -259,19 +233,14 @@
                         },
                         "FAM_phased_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:28:53.721709239",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:01:27.914985693"
     },
     "2 samples - SNVs + SVs": {
         "content": [
@@ -280,7 +249,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,6d4826c1962e0207820b57fb1abb15b9"
+                    "FAM_phased_snv.vcf.gz:md5,12adac5864c5c70537f7090cadffea44"
                 ]
             ],
             [
@@ -288,43 +257,34 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,a5b32e65aee87ce98d28fab420c9a1bc"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,334b84bd7468ad77db50202191cc9720"
                 ]
             ],
-            "d2a8feadf0c710ac492ddbae3956c8e3",
-            "FAM_phased_sv.vcf.gz.tbi",
+            "FAM_phased_sv.vcf.gz",
             [
                 [
                     {
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,c99b419158b2cb7f369c11e1f86076e6",
-                    "HG002_haplotagged.bam.bai:md5,d11ce8be3a5c19aad2d1433080e399b2"
+                    "HG002_haplotagged.bam:md5,85bd3e5ea92691ad6cc5eeb92be1a99e",
+                    "HG002_haplotagged.bam.bai:md5,d96000fe9aa5479e486a6d52e6b1511a"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_haplotagged.bam:md5,9a2e313e809b0c1e37b552cd977332d0",
-                    "HG003_haplotagged.bam.bai:md5,130432a6acf51e6fd4ae43cc098e0650"
+                    "HG003_haplotagged.bam:md5,0e5b5bba4ede6465c42d60a69e9fd56a",
+                    "HG003_haplotagged.bam.bai:md5,7c4625b0031ee472e9efdc643ca60e33"
                 ]
-            ],
-            [
-                "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
             ]
         ],
-        "timestamp": "2026-02-26T08:28:23.2088616",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:00:51.441416435"
     },
     "2 samples - SNVs only": {
         "content": [
@@ -334,7 +294,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,8f447d838d22081f43fcee666ec12444"
+                        "FAM_phased_snv.vcf.gz:md5,45930d15305aaf5a131a082dc327a150"
                     ]
                 ],
                 "1": [
@@ -342,7 +302,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,6d5e68450581a3236ee23e3211947032"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,c59e3059a51b9a26cb0a4fd530f456d4"
                     ]
                 ],
                 "2": [
@@ -357,25 +317,17 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,9509ee34efab28ad1664ad23e425675d",
-                        "HG002_haplotagged.bam.bai:md5,f7aaf1cbb58469af22178fccd0ffddd3"
+                        "HG002_haplotagged.bam:md5,c35cca8b8bc36cb813f262750e89ef72",
+                        "HG002_haplotagged.bam.bai:md5,a19d32eefdea85dd56bfa02d50a11701"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,0b9296ce7b2fecb70c8777c4e69dca71",
-                        "HG003_haplotagged.bam.bai:md5,db9bf9076bbfbfe55022b74949967663"
+                        "HG003_haplotagged.bam:md5,0f0f83ee1de4a0201999164e79eb321a",
+                        "HG003_haplotagged.bam.bai:md5,3b4ed31cbb0b3b950e3487c10d0706a0"
                     ]
-                ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -383,16 +335,16 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,9509ee34efab28ad1664ad23e425675d",
-                        "HG002_haplotagged.bam.bai:md5,f7aaf1cbb58469af22178fccd0ffddd3"
+                        "HG002_haplotagged.bam:md5,c35cca8b8bc36cb813f262750e89ef72",
+                        "HG002_haplotagged.bam.bai:md5,a19d32eefdea85dd56bfa02d50a11701"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,0b9296ce7b2fecb70c8777c4e69dca71",
-                        "HG003_haplotagged.bam.bai:md5,db9bf9076bbfbfe55022b74949967663"
+                        "HG003_haplotagged.bam:md5,0f0f83ee1de4a0201999164e79eb321a",
+                        "HG003_haplotagged.bam.bai:md5,3b4ed31cbb0b3b950e3487c10d0706a0"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -400,7 +352,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,8f447d838d22081f43fcee666ec12444"
+                        "FAM_phased_snv.vcf.gz:md5,45930d15305aaf5a131a082dc327a150"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -408,7 +360,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,6d5e68450581a3236ee23e3211947032"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,c59e3059a51b9a26cb0a4fd530f456d4"
                     ]
                 ],
                 "phased_family_svs": [
@@ -416,22 +368,14 @@
                 ],
                 "phased_family_svs_tbi": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:49.750708305",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:00:17.534377202"
     },
     "1 sample - SNVs only - stub": {
         "content": [
@@ -468,11 +412,6 @@
                         "HG002_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
-                ],
                 "haplotagged_bam_bai": [
                     [
                         {
@@ -504,19 +443,14 @@
                 ],
                 "phased_family_svs_tbi": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:28:32.818939864",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:01:02.408493265"
     },
     "1 sample - SNVs only": {
         "content": [
@@ -526,7 +460,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,fab583d89c4eb70e89dd84e010dd3693"
+                        "FAM_phased_snv.vcf.gz:md5,a0b0f363267aa082fbfcae7f266164a4"
                     ]
                 ],
                 "1": [
@@ -534,7 +468,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,1674c37724f6b321a341824e8ed0700b"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,c32a55e13fd42192600e43c7d46356d5"
                     ]
                 ],
                 "2": [
@@ -549,14 +483,9 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,f028431db51e1df9c2531904406128f0",
-                        "HG002_haplotagged.bam.bai:md5,411f4453129008e9a6956a831dfaa573"
+                        "HG002_haplotagged.bam:md5,686ccb23845d62fabce22842481010a2",
+                        "HG002_haplotagged.bam.bai:md5,a237b177d1b2a2c0a70f58e77c91a481"
                     ]
-                ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ],
                 "haplotagged_bam_bai": [
                     [
@@ -564,8 +493,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,f028431db51e1df9c2531904406128f0",
-                        "HG002_haplotagged.bam.bai:md5,411f4453129008e9a6956a831dfaa573"
+                        "HG002_haplotagged.bam:md5,686ccb23845d62fabce22842481010a2",
+                        "HG002_haplotagged.bam.bai:md5,a237b177d1b2a2c0a70f58e77c91a481"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -573,7 +502,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,fab583d89c4eb70e89dd84e010dd3693"
+                        "FAM_phased_snv.vcf.gz:md5,a0b0f363267aa082fbfcae7f266164a4"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -581,7 +510,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,1674c37724f6b321a341824e8ed0700b"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,c32a55e13fd42192600e43c7d46356d5"
                     ]
                 ],
                 "phased_family_svs": [
@@ -589,19 +518,14 @@
                 ],
                 "phased_family_svs_tbi": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:27:38.761623276",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:00:05.488256206"
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -646,14 +570,6 @@
                         "HG003_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "5": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
-                ],
                 "haplotagged_bam_bai": [
                     [
                         {
@@ -693,21 +609,13 @@
                 ],
                 "phased_family_svs_tbi": [
                     
-                ],
-                "versions": [
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,3365b7d71c0b9c004fd1de209ace28ac",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,549c3295443e2a13ec0c53d1e34054bf",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0",
-                    "versions.yml:md5,77d54869b4a31cee1661f8074a7bb3e0"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:28:42.969665861",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-27T17:01:14.452452109"
     }
 }

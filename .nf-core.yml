@@ -43,5 +43,7 @@ template:
   name: nallo
   org: genomic-medicine-sweden
   outdir: .
-  skip_features: []
+  skip_features:
+    - igenomes
+    - fastqc
   version: 0.12.0dev

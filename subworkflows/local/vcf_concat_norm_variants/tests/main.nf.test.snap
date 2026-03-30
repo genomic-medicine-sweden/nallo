@@ -26,9 +26,6 @@
                         "test.vcf:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ]
                 ],
-                "3": [
-                    
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -52,17 +49,14 @@
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-19T17:00:38.139243458",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-23T16:43:35.225848962"
     },
     "2 VCFs": {
         "content": [
@@ -91,9 +85,6 @@
                         "test.vcf:md5,eb17a1bd1b2dc1c3686cf8d7a04a3409"
                     ]
                 ],
-                "3": [
-                    
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -117,17 +108,14 @@
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,8985def957a968b297f728b1978249bd"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-19T17:00:23.654440626",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-23T16:43:14.313271377"
     },
     "1 VCF": {
         "content": [
@@ -156,9 +144,6 @@
                         "test.vcf:md5,7549b7b51d2d47146853822de1a29f13"
                     ]
                 ],
-                "3": [
-                    
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -182,17 +167,14 @@
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-19T17:00:16.419221194",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-23T16:43:05.240630837"
     },
     "1 VCF -stub": {
         "content": [
@@ -221,9 +203,6 @@
                         "test.vcf:md5,7549b7b51d2d47146853822de1a29f13"
                     ]
                 ],
-                "3": [
-                    
-                ],
                 "bcftools_concat_vcf": [
                     [
                         {
@@ -247,16 +226,13 @@
                         },
                         "test_deepvariant_snvs.vcf.gz:md5,956c48698f1f55d9b57d5de1e4529716"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-19T17:00:30.982067792",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-23T16:43:23.88334893"
     }
 }

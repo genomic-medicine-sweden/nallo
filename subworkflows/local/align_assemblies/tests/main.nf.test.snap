@@ -18,14 +18,6 @@
                         "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "2": [
-                    "versions.yml:md5,1bd14a9c8adbf8813cab68f28ddb5182",
-                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                    "versions.yml:md5,d3b0d420212143279d3b4bb2da975929",
-                    "versions.yml:md5,f64fbe408a688e92d2510da3c37b1a86",
-                    "versions.yml:md5,f64fbe408a688e92d2510da3c37b1a86"
-                ],
                 "bai": [
                     [
                         {
@@ -41,40 +33,24 @@
                         },
                         "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1bd14a9c8adbf8813cab68f28ddb5182",
-                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                    "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                    "versions.yml:md5,d3b0d420212143279d3b4bb2da975929",
-                    "versions.yml:md5,f64fbe408a688e92d2510da3c37b1a86",
-                    "versions.yml:md5,f64fbe408a688e92d2510da3c37b1a86"
                 ]
             }
         ],
-        "timestamp": "2026-02-26T08:19:07.194110615",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T13:47:33.936028046"
     },
     "bam": {
         "content": [
-            [
-                "versions.yml:md5,1bd14a9c8adbf8813cab68f28ddb5182",
-                "versions.yml:md5,9d37d06291f6e9d7525d4dd5813a5ceb",
-                "versions.yml:md5,9d37d06291f6e9d7525d4dd5813a5ceb",
-                "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                "versions.yml:md5,b1e934cf9c14105eed4afe0744b1fcd0",
-                "versions.yml:md5,d3b0d420212143279d3b4bb2da975929"
-            ],
             "43bb6ef7e9eccece743204535a3abbd6",
             "hg38.bam.bai"
         ],
-        "timestamp": "2026-02-26T08:18:58.414437693",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.01.1"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-23T16:40:14.667118455"
     }
 }
