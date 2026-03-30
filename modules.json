@@ -146,7 +146,7 @@
                     },
                     "fastqc": {
                         "branch": "master",
-                        "git_sha": "f89e009050fa3ea88b81f08a4fc6fe2afbae778b",
+                        "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
                         "installed_by": ["modules"]
                     },
                     "gatk4/denoisereadcounts": {
