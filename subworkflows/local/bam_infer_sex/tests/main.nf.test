@@ -147,7 +147,6 @@ nextflow_workflow {
                 { assert file(workflow.out.somalier_samples.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
                 { assert file(workflow.out.somalier_pairs.get(0).get(1)).readLines().size() == 4 }, // 1 header + 3 samples
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.somalier_samples.get(0).get(1)).name,
                     file(workflow.out.somalier_pairs.get(0).get(1)).name,
                     file(workflow.out.bam_bai.get(0).get(1)).name
