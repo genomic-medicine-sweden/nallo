@@ -247,11 +247,10 @@ workflow {
     // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION(
-        params.input,
         params.help,
+        params.help_full,
         args,
         params.outdir,
-        params.help_full,
         params.show_hidden,
         params.cnv_excluded_regions,
         params.cnv_expected_xx_cn,
@@ -265,6 +264,7 @@ workflow {
         params.gens_coverage_bins,
         params.gens_panel_of_normals_female,
         params.validate_params,
+        params.input,
         params.gens_panel_of_normals_male,
         params.methbat_regions,
         params.par_regions,
