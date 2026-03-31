@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_input` to `ch_samplesheet` for clarity
+- [#981](https://github.com/genomic-medicine-sweden/nallo/pull/981) - Moved params from `PIPELINE_INITIALISATION` to main workflow and sorted inputs
 
 ### Removed
 
