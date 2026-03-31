@@ -1,8 +1,4 @@
 include { samplesheetToList                                      } from 'plugin/nf-schema'
-include {
-    createReferenceChannelFromPath ;
-    createReferenceChannelFromSamplesheet
-} from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL SUBWORKFLOWS
@@ -79,66 +75,111 @@ include { citationBibliographyText                               } from '../subw
 
 workflow NALLO {
     take:
-    ch_input
+    ch_cadd_header
+    ch_cadd_prescored_indels
+    ch_cadd_resources
+    ch_echtvar_databases
+    ch_exclude_bed
+    ch_expected_xx_bed
+    ch_expected_xy_bed
+    ch_fasta
+    ch_genmod_reduced_penetrance
+    ch_genmod_score_config_snvs
+    ch_genmod_score_config_svs
+    ch_gens_baf_positions
+    ch_gens_coverage_bins
+    ch_gens_panel_of_normals_female
+    ch_gens_panel_of_normals_male
+    ch_hgnc_ids
+    ch_samplesheet
+    ch_methbat_regions
+    ch_modkit_call_regions
+    ch_mosdepth_regions
+    ch_paraphrase_rules
+    ch_par
+    ch_peddy_sites
+    ch_sambamba_regions
+    ch_sentieon_female_diploid_bed
+    ch_sentieon_male_diploid_bed
+    ch_sentieon_male_haploid_bed
+    ch_sentieon_model_bundle
+    ch_snv_call_regions
+    ch_somalier_sites
+    ch_stranger_repeat_catalog
+    ch_str_bed
+    ch_strdrop_training_set_json
+    ch_sv_call_regions
+    ch_svdb_sv_databases
+    ch_tandem_repeats
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
+    ch_vcfexpress_prelude
+    ch_vep_cache_unprocessed
+    ch_vep_plugin_files
+    cram_output
+    val_alignment_processes
+    val_bigwig_modcodes
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
+    val_echtvar_snv_databases
+    val_fasta
+    val_filter_snvs_expression
+    val_filter_svs_expression
+    val_filter_variants_hgnc_ids
+    val_force_sawfish_joint_call_single_samples
+    val_hifiasm_mode
+    val_mitochondrial_caller
+    val_multiqc_config
+    val_multiqc_logo
+    val_multiqc_methods_description
+    val_outdir
+    val_paraphrase_output_format
+    val_phaser
+    val_plot_chromograph_autozygosity
+    val_plot_chromograph_coverage
+    val_pre_vep_snv_filter_expression
+    val_run_methbat
+    val_run_modkit
+    val_sentieon_tech
+    val_skip_alignment
+    val_skip_annotate_paralogs
+    val_skip_call_paralogs
+    val_skip_chromograph
+    val_skip_genome_assembly
+    val_skip_methylation_calling
+    val_skip_peddy
+    val_skip_phasing
+    val_skip_prepare_gens_input
+    val_skip_qc
+    val_skip_rank_variants
+    val_skip_repeat_annotation
+    val_skip_repeat_calling
+    val_skip_sambamba_depth
+    val_skip_sex_check
+    val_skip_snv_annotation
+    val_skip_snv_calling
+    val_skip_sv_annotation
+    val_skip_sv_calling
+    val_snv_caller
+    val_snv_calling_processes
+    val_snv_call_regions
+    val_str_caller
+    val_strdrop_training_set_json
+    val_sv_callers_merge_priority
+    val_sv_callers_to_merge
+    val_sv_callers_to_run
+    val_sv_call_regions
+    val_vep_cache
+    val_vep_cache_version
 
     main:
     ch_multiqc_files = channel.empty()
 
-    // Channels from (optional) input files
-    // If provided: [[id: 'reference'], [/path/to/reference_full_name.file]]
-    ch_cadd_header = createReferenceChannelFromPath("${projectDir}/assets/cadd_to_vcf_header_-1.0-.txt")
-    ch_cadd_resources = createReferenceChannelFromPath(params.cadd_resources)
-    ch_cadd_prescored_indels = createReferenceChannelFromPath(params.cadd_prescored_indels)
-    ch_fasta = createReferenceChannelFromPath(params.fasta)
-    ch_tandem_repeats = createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []]))
-    ch_par = createReferenceChannelFromPath(params.par_regions)
-    ch_str_bed = createReferenceChannelFromPath(params.str_bed)
-    ch_snv_call_regions = createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []]))
-    ch_sv_call_regions = createReferenceChannelFromPath(params.sv_call_regions)
-    ch_modkit_call_regions = createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []]))
-    ch_stranger_repeat_catalog = createReferenceChannelFromPath(params.stranger_repeat_catalog)
-    ch_variant_consequences_snvs = createReferenceChannelFromPath(params.variant_consequences_snvs)
-    ch_variant_consequences_svs = createReferenceChannelFromPath(params.variant_consequences_svs)
-    ch_vep_cache_unprocessed = createReferenceChannelFromPath(params.vep_cache, channel.value([[], []]))
-    ch_expected_xy_bed = createReferenceChannelFromPath(params.cnv_expected_xy_cn)
-    ch_expected_xx_bed = createReferenceChannelFromPath(params.cnv_expected_xx_cn)
-    ch_exclude_bed = createReferenceChannelFromPath(params.cnv_excluded_regions)
-    ch_genmod_reduced_penetrance = createReferenceChannelFromPath(params.genmod_reduced_penetrance)
-    ch_genmod_score_config_snvs = createReferenceChannelFromPath(params.genmod_score_config_snvs)
-    ch_genmod_score_config_svs = createReferenceChannelFromPath(params.genmod_score_config_svs)
-    ch_paraphrase_rules = createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []]))
-    ch_peddy_sites = createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []]))
-    ch_methbat_regions = createReferenceChannelFromPath(params.methbat_regions)
-    ch_mosdepth_regions = createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []]))
-    ch_sambamba_regions = createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []]))
-    ch_somalier_sites = createReferenceChannelFromPath(params.somalier_sites)
-    ch_strdrop_training_set_json = createReferenceChannelFromPath(params.strdrop_training_set_json)
-    ch_gens_baf_positions = createReferenceChannelFromPath(params.gens_baf_positions)
-    ch_gens_panel_of_normals_female = createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon')
-    ch_gens_panel_of_normals_male = createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon')
-    ch_gens_coverage_bins = createReferenceChannelFromPath(params.gens_coverage_bins)
-    ch_sentieon_model_bundle = createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []]))
-    ch_sentieon_female_diploid_bed = createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []]))
-    ch_sentieon_male_diploid_bed = createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []]))
-    ch_sentieon_male_haploid_bed = createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []]))
-    ch_vcfexpress_prelude = file("${projectDir}/assets/vcf_express_found_in_prelude.lua")
-
-    // Channels from (optional) input samplesheets validated by schema
-    ch_databases = createReferenceChannelFromSamplesheet(params.echtvar_snv_databases, 'assets/schema_snp_db.json', channel.value([[], []]))
-    ch_svdb_sv_databases = createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([]))
-    ch_vep_plugin_files = createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([]))
-    ch_hgnc_ids = createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([]))
-        .map { hgnc_id_list -> hgnc_id_list[0].toString() }
-        .collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true)
-        .map { file -> [[id: 'hgnc_ids'], file] }
-        .collect()
-
-    def cram_output = params.alignment_output_format == 'cram'
 
     //
     // Prepare references
     //
-    if (!params.skip_alignment || !params.skip_genome_assembly) {
+    if (!val_skip_alignment || !val_skip_genome_assembly) {
 
         // The genome assembly alignment needs a fai for cram output,
         // but we shouldn't need to prepare the vep cache here.
@@ -146,8 +187,8 @@ workflow NALLO {
         PREPARE_REFERENCES(
             ch_fasta,
             ch_vep_cache_unprocessed,
-            params.fasta.endsWith('.gz'),
-            params.vep_cache && params.vep_cache.endsWith("tar.gz"),
+            val_fasta.endsWith('.gz'),
+            val_vep_cache && val_vep_cache.endsWith("tar.gz"),
         )
 
         // Gather indices
@@ -158,10 +199,10 @@ workflow NALLO {
     // Convert FASTQ to BAM only if alignment or should be done.
     // Since we assume that the majority of pipeline runs will use BAM files as input,
     // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if (!params.skip_alignment) {
+    if (!val_skip_alignment) {
 
         CONVERT_INPUT_FASTQS(
-            ch_input,
+            ch_samplesheet,
             false,
             true,
         )
@@ -175,7 +216,7 @@ workflow NALLO {
     // If we start running more trios we also need to consider that the parents at the moment needs to be merged
     // before YAK. So, we could consider adding some logic to handle that case,
     // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if (!params.skip_alignment && params.alignment_processes > 1) {
+    if (!val_skip_alignment && val_alignment_processes > 1) {
 
         // contains all BAM files, including those not converted.
         SPLITUBAM(
@@ -186,7 +227,7 @@ workflow NALLO {
     //
     // Hifiasm assembly and alignment to reference genome
     //
-    if (!params.skip_genome_assembly) {
+    if (!val_skip_genome_assembly) {
 
         // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
         // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
@@ -202,7 +243,7 @@ workflow NALLO {
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
         CONVERT_INPUT_BAMS(
-            !params.skip_alignment && params.alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_input,
+            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_samplesheet,
             true,
             false,
         )
@@ -215,7 +256,7 @@ workflow NALLO {
         // Hifiasm assembly
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
-            params.hifiasm_mode == "trio-binning",
+            val_hifiasm_mode == "trio-binning",
         )
 
         ALIGN_ASSEMBLIES(
@@ -229,13 +270,13 @@ workflow NALLO {
     /*
      * Map reads to reference
      */
-    if (!params.skip_alignment) {
+    if (!val_skip_alignment) {
 
         /*
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        (params.alignment_processes > 1
+        (val_alignment_processes > 1
             ? SPLITUBAM.out.bam.transpose()
             : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }.set { reads_for_alignment }
 
@@ -296,7 +337,7 @@ workflow NALLO {
             .set { ch_aligned_bam }
 
         // Publish alignments as CRAM if requested
-        if (cram_output && params.skip_phasing) {
+        if (cram_output && val_skip_phasing) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
                 ch_fasta.join(ch_fai).collect(),
@@ -306,7 +347,7 @@ workflow NALLO {
         //
         // Create PED from samplesheet
         //
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [[id: meta.project], meta] }
             .groupTuple()
             .set { ch_samplesheet_ped_in }
@@ -317,7 +358,7 @@ workflow NALLO {
             .collect()
             .set { ch_samplesheet_pedfile }
 
-        if (!params.skip_sex_check) {
+        if (!val_skip_sex_check) {
             //
             // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
             //
@@ -344,14 +385,14 @@ workflow NALLO {
     //
     // Run read QC with FastQC, mosdepth and cramino
     //
-    if (!params.skip_qc) {
+    if (!val_skip_qc) {
 
         QC_ALIGNED_READS(
             ch_bam_bai,
             ch_fasta,
             ch_mosdepth_regions,
             ch_sambamba_regions,
-            !params.skip_sambamba_depth,
+            !val_skip_sambamba_depth,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
@@ -362,7 +403,7 @@ workflow NALLO {
     /*
      * Call paralogous genes with paraphase
      */
-    if (!params.skip_call_paralogs) {
+    if (!val_skip_call_paralogs) {
         CALL_PARALOGS(
             ch_bam_bai,
             ch_fasta,
@@ -374,10 +415,10 @@ workflow NALLO {
     /*
      * Annotate paralogous genes with paraphrase
      */
-    if (!params.skip_annotate_paralogs) {
+    if (!val_skip_annotate_paralogs) {
         ANNOTATE_PARALOGS(
             CALL_PARALOGS.out.json,
-            params.paraphrase_output_format,
+            val_paraphrase_output_format,
             ch_paraphrase_rules,
         )
     }
@@ -385,17 +426,17 @@ workflow NALLO {
     /*
      * Call SNVs
      */
-    if (!params.skip_snv_calling) {
+    if (!val_skip_snv_calling) {
 
         // Make BED intervals, can be used for parallel SNV calling
         SCATTER_GENOME(
             ch_fai,
             ch_snv_call_regions,
-            !params.snv_call_regions,
-            params.snv_calling_processes,
+            !val_snv_call_regions,
+            val_snv_calling_processes,
         )
 
-        if (params.mitochondrial_caller == "deepvariant") {
+        if (val_mitochondrial_caller == "deepvariant") {
 
             SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals.set { ch_bed_intervals }
         }
@@ -421,8 +462,8 @@ workflow NALLO {
             ch_sentieon_female_diploid_bed,
             ch_sentieon_male_diploid_bed,
             ch_sentieon_male_haploid_bed,
-            params.snv_caller,
-            params.sentieon_tech,
+            val_snv_caller,
+            val_sentieon_tech,
         )
 
         // Group GVCFs per region and family (one region with all samples)
@@ -448,7 +489,7 @@ workflow NALLO {
             SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
-            params.snv_caller,
+            val_snv_caller,
             ch_vcfexpress_prelude,
         )
 
@@ -468,7 +509,7 @@ workflow NALLO {
         VCF_CONCAT_NORM_VARIANTS(
             variants_to_concat_per_sample,
             ch_fasta,
-            params.snv_caller,
+            val_snv_caller,
             ch_vcfexpress_prelude,
         )
 
@@ -485,7 +526,7 @@ workflow NALLO {
             VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf,
             sample_snv_vcf,
             sample_snv_index,
-            params.snv_caller.equals("deepvariant"),
+            val_snv_caller.equals("deepvariant"),
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
@@ -493,7 +534,7 @@ workflow NALLO {
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_vcf_tbi_per_region }
     }
-    if (!params.skip_prepare_gens_input) {
+    if (!val_skip_prepare_gens_input) {
         CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index)
             .map { meta, gvcf, gvcf_index ->
@@ -524,7 +565,7 @@ workflow NALLO {
     //
     // Call SVs
     //
-    if (!params.skip_sv_calling) {
+    if (!val_skip_sv_calling) {
 
         CALL_SVS(
             ch_bam_bai,
@@ -534,14 +575,14 @@ workflow NALLO {
             ch_expected_xy_bed,
             ch_expected_xx_bed,
             ch_exclude_bed,
-            params.sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
-            params.sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
-            params.sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
+            val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
+            val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
+            val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_sv_call_regions,
-            params.sv_call_regions,
-            params.force_sawfish_joint_call_single_samples,
-            params.create_hificnv_maf_track,
-            params.create_sawfish_maf_track,
+            val_sv_call_regions,
+            val_force_sawfish_joint_call_single_samples,
+            val_create_hificnv_maf_track,
+            val_create_sawfish_maf_track,
             ch_vcfexpress_prelude,
         )
     }
@@ -549,9 +590,9 @@ workflow NALLO {
     //
     // Phase SNVs and INDELs
     //
-    if (!params.skip_phasing) {
+    if (!val_skip_phasing) {
 
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [meta.family_id, meta.id] }
             .groupTuple()
             .map { family_id, sample_ids ->
@@ -583,14 +624,14 @@ workflow NALLO {
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
-            params.skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
+            val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
+            val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
-            params.phaser,
-            !params.skip_sv_calling,
+            val_phaser,
+            !val_skip_sv_calling,
             cram_output,
         )
 
@@ -619,11 +660,11 @@ workflow NALLO {
     }
     else {
         // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
-        if (!params.skip_snv_calling) {
+        if (!val_skip_snv_calling) {
             ch_snv_vcf_for_annotation = family_snv_vcf
             ch_snv_index_for_annotation = family_snv_index
         }
-        if (!params.skip_sv_calling) {
+        if (!val_skip_sv_calling) {
             ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
             ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
         }
@@ -631,23 +672,23 @@ workflow NALLO {
 
     //
     // Annotate SNVs
-    if (!params.skip_snv_annotation) {
+    if (!val_skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
             ch_snv_vcf_for_annotation,
-            ch_databases.map { _meta, databases -> databases }.collect(),
+            ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
             PREPARE_REFERENCES.out.vep_resources,
-            params.vep_cache_version,
+            val_vep_cache_version,
             ch_vep_plugin_files.collect(),
-            params.cadd_resources && params.cadd_prescored_indels,
-            params.echtvar_snv_databases,
+            ch_cadd_resources && ch_cadd_prescored_indels,
+            val_echtvar_snv_databases,
             ch_cadd_header,
             ch_cadd_resources,
             ch_cadd_prescored_indels,
-            params.pre_vep_snv_filter_expression != '',
+            val_pre_vep_snv_filter_expression != '',
         )
 
         ANNOTATE_SNVS.out.vcf
@@ -660,13 +701,13 @@ workflow NALLO {
 
         ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
 
-        if (params.filter_variants_hgnc_ids || params.filter_snvs_expression != '') {
+        if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS(
                 ch_clin_research_snvs_vcf.clinical,
                 ch_hgnc_ids,
-                params.filter_snvs_expression,
-                params.filter_variants_hgnc_ids,
+                val_filter_snvs_expression,
+                val_filter_variants_hgnc_ids,
             )
 
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
@@ -686,7 +727,7 @@ workflow NALLO {
     //
     // Concatenate and sort annotated SNVs for chromograph - requires an AF-tag, e.g. gnomad_af
     //
-    def split_family_vcf_for_chromograph = !params.skip_chromograph && params.plot_chromograph_autozygosity && !params.skip_snv_annotation
+    def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
     if (split_family_vcf_for_chromograph) {
 
@@ -704,7 +745,7 @@ workflow NALLO {
         )
 
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
-        ch_input
+        ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
             .unique()
             .combine(
@@ -726,13 +767,13 @@ workflow NALLO {
         )
     }
 
-    if (!params.skip_chromograph) {
+    if (!val_skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : channel.empty(),
-            params.plot_chromograph_coverage,
-            params.plot_chromograph_autozygosity,
+            val_plot_chromograph_coverage,
+            val_plot_chromograph_autozygosity,
         )
     }
 
@@ -740,7 +781,7 @@ workflow NALLO {
     // Ranks family VCFs per variant call region
     // Can only run if samplesheet has affected samples
     //
-    if (!params.skip_rank_variants) {
+    if (!val_skip_rank_variants) {
 
         // Create PED with updated sex - per family
         SOMALIER_PED_FAMILY(
@@ -759,8 +800,8 @@ workflow NALLO {
 
         // Only run if we have affected individuals
         RANK_VARIANTS_SNV(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_input, 'family_id'),
-            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_input, 'family_id'),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_samplesheet, 'family_id'),
+            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_samplesheet, 'family_id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_snvs,
         )
@@ -773,7 +814,7 @@ workflow NALLO {
     //
     // Concatenate and sort ranked SNVs, sort and publish
     //
-    if (!params.skip_snv_calling) {
+    if (!val_skip_snv_calling) {
         ch_vcf_tbi_per_region
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
@@ -790,7 +831,7 @@ workflow NALLO {
     //
     // Run Peddy
     //
-    if (!params.skip_snv_calling && !params.skip_peddy) {
+    if (!val_skip_snv_calling && !val_skip_peddy) {
 
         CONCAT_SORT_RANKED_SNVS.out.vcf
             .join(CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
@@ -813,14 +854,14 @@ workflow NALLO {
     //
     // Annotate SVs
     //
-    if (!params.skip_sv_annotation) {
+    if (!val_skip_sv_annotation) {
 
         ANNOTATE_SVS(
             ch_sv_vcf_for_annotation,
             ch_fasta,
             ch_svdb_sv_databases,
             PREPARE_REFERENCES.out.vep_resources,
-            params.vep_cache_version,
+            val_vep_cache_version,
             ch_vep_plugin_files.collect(),
         )
 
@@ -836,13 +877,13 @@ workflow NALLO {
         //
         // Filter SVs
         //
-        if (params.filter_variants_hgnc_ids || params.filter_svs_expression != '') {
+        if (val_filter_variants_hgnc_ids || val_filter_svs_expression != '') {
 
             FILTER_VARIANTS_SVS(
                 ch_clin_research_svs_vcf.clinical,
                 ch_hgnc_ids,
-                params.filter_svs_expression,
-                params.filter_variants_hgnc_ids,
+                val_filter_svs_expression,
+                val_filter_variants_hgnc_ids,
             )
 
             ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
@@ -857,7 +898,7 @@ workflow NALLO {
     //
     // Rank SVs
     //
-    if (!params.skip_rank_variants) {
+    if (!val_skip_rank_variants) {
 
         // Give PED file SVs meta so they can be joined later in the subworkflow.
         ANN_CSQ_PLI_SVS.out.vcf
@@ -867,8 +908,8 @@ workflow NALLO {
             .set { ch_sv_ranking_ped_file }
 
         RANK_VARIANTS_SVS(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_input, 'id'),
-            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_input, 'id'),
+            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_samplesheet, 'id'),
+            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_samplesheet, 'id'),
             ch_genmod_reduced_penetrance,
             ch_genmod_score_config_svs,
         )
@@ -877,11 +918,11 @@ workflow NALLO {
     //
     // Collect and publish SVs
     //
-    if (!params.skip_sv_calling) {
+    if (!val_skip_sv_calling) {
 
-        ch_collect_svs = params.skip_sv_annotation
+        ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
-            : params.skip_rank_variants
+            : val_skip_rank_variants
                 ? ANN_CSQ_PLI_SVS.out.vcf
                 : RANK_VARIANTS_SVS.out.vcf
 
@@ -896,19 +937,19 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if (!params.skip_methylation_calling && params.run_modkit) {
+    if (!val_skip_methylation_calling && val_run_modkit) {
         CALL_METHYLATION_MODKIT(
-            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
             ch_fai,
             ch_modkit_call_regions,
-            params.bigwig_modcodes,
+            val_bigwig_modcodes,
         )
     }
 
-    if (!params.skip_methylation_calling && params.run_methbat) {
+    if (!val_skip_methylation_calling && val_run_methbat) {
         CALL_METHYLATION_METHBAT(
-            !params.skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions,
         )
     }
@@ -916,8 +957,8 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    if (!params.skip_repeat_calling) {
-        if (params.str_caller == "trgt") {
+    if (!val_skip_repeat_calling) {
+        if (val_str_caller == "trgt") {
             CALL_REPEAT_EXPANSIONS_TRGT(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
@@ -929,7 +970,7 @@ workflow NALLO {
 
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
         }
-        else if (params.str_caller == "strdust") {
+        else if (val_str_caller == "strdust") {
             CALL_REPEAT_EXPANSIONS_STRDUST(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
@@ -943,13 +984,13 @@ workflow NALLO {
     //
     // Annotate repeat expansions with Stranger
     //
-    if (!params.skip_repeat_annotation) {
+    if (!val_skip_repeat_annotation) {
         ANNOTATE_REPEAT_EXPANSIONS(
             ch_repeat_expansions,
             ch_strdrop_training_set_json,
             [[], []],
             ch_stranger_repeat_catalog,
-            params.strdrop_training_set_json,
+            val_strdrop_training_set_json,
         )
     }
 
@@ -976,7 +1017,7 @@ workflow NALLO {
     softwareVersionsToYAML(topic_versions.versions_file)
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${val_outdir}/pipeline_info",
             name: 'nallo_software_' + 'mqc_' + 'versions.yml',
             sort: true,
             newLine: true,
@@ -995,8 +1036,8 @@ workflow NALLO {
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
     )
 
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description
-        ? file(params.multiqc_methods_description, checkIfExists: true)
+    ch_multiqc_custom_methods_description = val_multiqc_methods_description
+        ? file(val_multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
     ch_methods_description = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
@@ -1025,10 +1066,10 @@ workflow NALLO {
             [
                 [id: ''],
                 files,
-                params.multiqc_config
-                    ? file(params.multiqc_config, checkIfExists: true)
+                val_multiqc_config
+                    ? file(val_multiqc_config, checkIfExists: true)
                     : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-                params.multiqc_logo ? file(params.multiqc_logo, checkIfExists: true) : [],
+                val_multiqc_logo ? file(val_multiqc_logo, checkIfExists: true) : [],
                 [],
                 [],
             ]
