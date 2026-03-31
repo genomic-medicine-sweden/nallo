@@ -1078,6 +1078,8 @@ workflow NALLO {
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    aligned_assemblies = cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+
 }
 
 // Check if a family has a child with two parents,

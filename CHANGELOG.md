@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_input` to `ch_samplesheet` for clarity
+- [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016 - Changed `align_assemblie` to workflow outputs
 
 ### Removed
 
@@ -490,7 +491,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Changed the default hifiasm strategy to trio-binning whenever parental reads are available
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
 - [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
-- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with emtpy (.) INFO field
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with empty (.) INFO field
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
