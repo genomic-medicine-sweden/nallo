@@ -14,7 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Added GitHub workflow to add the PR checklist as a comment
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
+- [#963](https://github.com/genomic-medicine-sweden/nallo/pull/963) - Added tests for `BAM_INFER_SEX` subworkflow
 - [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
+- [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
 
 ### Changed
 
@@ -44,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#966](https://github.com/genomic-medicine-sweden/nallo/pull/966) - Refactored the code related to variant ranking to reduce code duplication
+- [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Update FastQC nf-core module
 
 ### Removed
 
@@ -52,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
 - [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
+- [#970](https://github.com/genomic-medicine-sweden/nallo/pull/970) - Removed unused `BCFTOOLS_SORT` import and config
 
 ### Fixed
 
