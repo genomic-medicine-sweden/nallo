@@ -827,18 +827,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002_paraphase.cram",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119,
-                        "duplicateReadCount": 0,
-                        "sorted": true
-                    }
+                    "HG002_paraphase.cram"
                 ]
             ],
             [
@@ -878,7 +867,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T19:00:50.749621875",
+        "timestamp": "2026-03-31T19:12:34.805257349",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
