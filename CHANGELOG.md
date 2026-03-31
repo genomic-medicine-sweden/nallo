@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Update FastQC nf-core module
+- [#979](https://github.com/genomic-medicine-sweden/nallo/pull/979) - Changed tag of MultiQC process to multiqc
 
 ### Removed
 
