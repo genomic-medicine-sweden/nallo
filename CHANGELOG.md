@@ -49,6 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_input` to `ch_samplesheet` for clarity
+- [#979](https://github.com/genomic-medicine-sweden/nallo/pull/979) - Changed tag of MultiQC process to multiqc
+- [#978](https://github.com/genomic-medicine-sweden/nallo/pull/978) - Move the sawfish maf track file generation from `samplesheet_multisample_bam.nf.test` to `samplesheet.nf.test` to speed up tests. Added sawfish caller to `samplesheet.nf.test`
 - [#981](https://github.com/genomic-medicine-sweden/nallo/pull/981) - Moved params from `PIPELINE_INITIALISATION` to main workflow and sorted inputs
 
 ### Removed
@@ -59,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
 - [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
 - [#970](https://github.com/genomic-medicine-sweden/nallo/pull/970) - Removed unused `BCFTOOLS_SORT` import and config
+- [#980](https://github.com/genomic-medicine-sweden/nallo/pull/980) - Removed unused `CUSTOM_DUMPSOFTWAREVERSIONS` code in config
 
 ### Fixed
 
