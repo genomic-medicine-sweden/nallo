@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Update FastQC nf-core module
+- [#978](https://github.com/genomic-medicine-sweden/nallo/pull/978) - Move the sawfish maf track file generation from `samplesheet_multisample_bam.nf.test` to `samplesheet.nf.test` to speed up tests
 
 ### Removed
 
