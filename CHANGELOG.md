@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Added stub test for Chromograph with skipped annotation
 - [#963](https://github.com/genomic-medicine-sweden/nallo/pull/963) - Added tests for `BAM_INFER_SEX` subworkflow
 - [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
+- [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
 
 ### Changed
 
@@ -43,9 +44,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
-- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
+- [#964](https://github.com/genomic-medicine-sweden/nallo/pull/964) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#968](https://github.com/genomic-medicine-sweden/nallo/pull/968) - `whatshap` now use pedigree information to phase by default. Disable with `--whatshap_pedigree_phasing false`
-- [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Update FastQC nf-core module
+- [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Updated FastQC nf-core module
+- [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
+- [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
+- [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_input` to `ch_samplesheet` for clarity
 
 ### Removed
 
