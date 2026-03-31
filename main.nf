@@ -381,6 +381,6 @@ workflow {
 
 output {
     aligned_assemblies {
-        path { meta, _bam, _bai -> "aligned_assemblies/${meta.id}/" }
+        path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
     }
 }
