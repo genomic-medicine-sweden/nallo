@@ -1023,7 +1023,7 @@ workflow NALLO {
     MULTIQC(
         ch_multiqc_files.flatten().collect().map { files ->
             [
-                [id: ''],
+                [id: 'multiqc'],
                 files,
                 params.multiqc_config
                     ? file(params.multiqc_config, checkIfExists: true)
