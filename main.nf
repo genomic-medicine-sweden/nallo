@@ -328,6 +328,7 @@ workflow {
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
         createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
+        PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.methbat_regions),
         createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
