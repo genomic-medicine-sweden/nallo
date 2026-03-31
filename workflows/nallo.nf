@@ -605,11 +605,10 @@ workflow NALLO {
         )
 
         // Provide a PED file to let whatshap activate pedigree phasing
-        // Or pas 'empty_PED' if 'whatshap_pedigree_phasing==false'
-        addChildWithTwoParentsToMeta(SOMALIER_PED_FAMILY.out.ped, ch_input, 'id')
+        // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
+        SOMALIER_PED_FAMILY.out.ped
             .map { meta, ped -> [ [id: meta.id], (params.phaser.equals('whatshap') && params.whatshap_pedigree_phasing) ? ped : [] ] }
-            .set{ ch_ped_family }
-        ch_ped_family.view()
+            .set { ch_ped_family }
 
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
