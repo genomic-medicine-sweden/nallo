@@ -7,7 +7,7 @@ include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV } from '../../../modules/nf-core/t
 workflow ANNOTATE_SNVS {
     take:
     ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_databases             // channel:  [optional] [ path(db) ]
+    ch_echtvar_databases     // channel:  [optional] [ path(db) ]
     ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache             // channel: [mandatory] [ val(meta), path(cache) ]
@@ -25,7 +25,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_echtvar) {
         ECHTVAR_ANNO(
             ch_vcf,
-            ch_databases,
+            ch_echtvar_databases,
         )
     }
 
