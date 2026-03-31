@@ -266,27 +266,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119,
-                        "duplicateReadCount": 0,
-                        "sorted": true
-                    }
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "HG002",
-                        "family_id": "NIST"
-                    },
-                    "HG002.paraphase.bam.bai"
+                    "HG002.paraphase.bam"
                 ]
             ],
             [
@@ -317,7 +297,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T18:38:46.664296232",
+        "timestamp": "2026-03-31T19:00:30.884221885",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -331,72 +311,28 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119,
-                        "duplicateReadCount": 0,
-                        "sorted": false
-                    }
+                    "HG002.paraphase.bam"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "NIST"
                     },
-                    "HG003.paraphase.bam",
-                    {
-                        "maxReadLength": 25267,
-                        "minReadLength": 4581,
-                        "meanReadLength": 14976,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 79,
-                        "duplicateReadCount": 0,
-                        "sorted": true
-                    }
+                    "HG003.paraphase.bam"
                 ],
                 [
                     {
                         "id": "HG004",
                         "family_id": "NIST"
                     },
-                    "HG004.paraphase.bam",
-                    {
-                        "maxReadLength": 28209,
-                        "minReadLength": 1856,
-                        "meanReadLength": 15600,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 84,
-                        "duplicateReadCount": 0,
-                        "sorted": true
-                    }
+                    "HG004.paraphase.bam"
                 ],
                 [
                     {
                         "id": "second_sample",
                         "family_id": "second_family"
                     },
-                    "second_sample.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119,
-                        "duplicateReadCount": 0,
-                        "sorted": true
-                    }
+                    "second_sample.paraphase.bam"
                 ]
             ],
             [
@@ -492,7 +428,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T18:39:34.321850727",
+        "timestamp": "2026-03-31T19:01:15.27045506",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -873,18 +809,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119,
-                        "duplicateReadCount": 0,
-                        "sorted": false
-                    }
+                    "HG002.paraphase.bam"
                 ]
             ],
             [
@@ -912,7 +837,7 @@
                         "meanQuality": 60,
                         "readCount": 119,
                         "duplicateReadCount": 0,
-                        "sorted": false
+                        "sorted": true
                     }
                 ]
             ],
@@ -953,7 +878,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T18:39:07.905060172",
+        "timestamp": "2026-03-31T19:00:50.749621875",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
