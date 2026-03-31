@@ -236,6 +236,11 @@
                         "git_sha": "14980f759266eec42dac401fcafeb83d6c957b41",
                         "installed_by": ["modules"]
                     },
+                    "mitorsaw/haplotype": {
+                        "branch": "master",
+                        "git_sha": "ae0ea82513abe5818d3c0b1026e78ca15c3bbf4f",
+                        "installed_by": ["modules"]
+                    },
                     "modkit/bedmethyltobigwig": {
                         "branch": "master",
                         "git_sha": "3d81317a30d1016b533982d6b84df07713ae520a",
