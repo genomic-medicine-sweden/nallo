@@ -91,10 +91,6 @@
                     "ensemblvep": 110.0,
                     "tabix": 1.17
                 },
-                "FAMILY_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -294,9 +290,6 @@
                 "assembly/stats/HG002_ONT_C",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_ONT_C/HG002_ONT_C_haplotype_2.assembly_summary",
-                "family",
-                "family/FAM.ped",
-                "family/FAM2.ped",
                 "gens",
                 "gens/HG002_ONT_A",
                 "gens/HG002_ONT_A/HG002_ONT_A.baf.bed.gz",
@@ -843,26 +836,24 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_modkit_pileup_hp2.bw"
             ],
             [
-                "HG002_ONT_A_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
-                "HG002_ONT_A_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
-                "HG002_ONT_B_haplotype_1.assembly_summary:md5,d1c0980101c83f2b9f826a280d8dcd82",
-                "HG002_ONT_B_haplotype_2.assembly_summary:md5,3186b5bfa60b9f031a68dba1747d8cb1",
-                "HG002_ONT_C_haplotype_1.assembly_summary:md5,da24ef59002e4a113b865889e2dfba4c",
-                "HG002_ONT_C_haplotype_2.assembly_summary:md5,082575854208c721f282653be0314ff5",
-                "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
-                "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
-                "HG002_ONT_A.baf.bed.gz:md5,0a2911d99a911e3a05e8e842a0fcb6cb",
-                "HG002_ONT_A.baf.bed.gz.tbi:md5,e43fbcefcb87c40e7df7484ff6faa563",
-                "HG002_ONT_A.cov.bed.gz:md5,462719717050daaa601ef75c1ae3de34",
-                "HG002_ONT_A.cov.bed.gz.tbi:md5,451635e9cb09ef20f7decdded11f9765",
-                "HG002_ONT_B.baf.bed.gz:md5,bac932502168614fac74c1f9c836a604",
-                "HG002_ONT_B.baf.bed.gz.tbi:md5,83882d1537b0857b4cdd8ec889011b76",
-                "HG002_ONT_B.cov.bed.gz:md5,589708c5cc827b9d132642351ce36eb1",
-                "HG002_ONT_B.cov.bed.gz.tbi:md5,212462ffba706ec691953166377635de",
-                "HG002_ONT_C.baf.bed.gz:md5,0a2911d99a911e3a05e8e842a0fcb6cb",
-                "HG002_ONT_C.baf.bed.gz.tbi:md5,e43fbcefcb87c40e7df7484ff6faa563",
-                "HG002_ONT_C.cov.bed.gz:md5,462719717050daaa601ef75c1ae3de34",
-                "HG002_ONT_C.cov.bed.gz.tbi:md5,451635e9cb09ef20f7decdded11f9765",
+                "HG002_ONT_A_haplotype_1.assembly_summary:md5,d651a15c360f5cd9561601835cc39463",
+                "HG002_ONT_A_haplotype_2.assembly_summary:md5,773c30bc673ea512030c9a41952dd542",
+                "HG002_ONT_B_haplotype_1.assembly_summary:md5,7e5c7a580b81e9ccb95aa0df4d7d1d6d",
+                "HG002_ONT_B_haplotype_2.assembly_summary:md5,773c30bc673ea512030c9a41952dd542",
+                "HG002_ONT_C_haplotype_1.assembly_summary:md5,d651a15c360f5cd9561601835cc39463",
+                "HG002_ONT_C_haplotype_2.assembly_summary:md5,773c30bc673ea512030c9a41952dd542",
+                "HG002_ONT_A.baf.bed.gz:md5,5209d43578f3e79a563274243718abd3",
+                "HG002_ONT_A.baf.bed.gz.tbi:md5,b5981905ea87c3f9247abc5195c159b4",
+                "HG002_ONT_A.cov.bed.gz:md5,6d5c80917e6495b0f3ae018e21b99aee",
+                "HG002_ONT_A.cov.bed.gz.tbi:md5,d4481e3a962e32bc6b0c1da4aa21d2f1",
+                "HG002_ONT_B.baf.bed.gz:md5,5209d43578f3e79a563274243718abd3",
+                "HG002_ONT_B.baf.bed.gz.tbi:md5,b5981905ea87c3f9247abc5195c159b4",
+                "HG002_ONT_B.cov.bed.gz:md5,4fbb2d1afde268d2b206ae61157776dd",
+                "HG002_ONT_B.cov.bed.gz.tbi:md5,82d8586bbf8590fb323614c59fcf7fd3",
+                "HG002_ONT_C.baf.bed.gz:md5,5209d43578f3e79a563274243718abd3",
+                "HG002_ONT_C.baf.bed.gz.tbi:md5,b5981905ea87c3f9247abc5195c159b4",
+                "HG002_ONT_C.cov.bed.gz:md5,6d5c80917e6495b0f3ae018e21b99aee",
+                "HG002_ONT_C.cov.bed.gz.tbi:md5,d4481e3a962e32bc6b0c1da4aa21d2f1",
                 "HG002_ONT_A_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1238,10 +1229,10 @@
                 
             ]
         ],
+        "timestamp": "2026-03-31T03:12:53.679343578",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:16:51.596903924"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     }
 }

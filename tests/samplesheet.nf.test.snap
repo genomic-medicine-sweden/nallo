@@ -101,10 +101,6 @@
                     "ensemblvep": 110.0,
                     "tabix": 1.17
                 },
-                "FAMILY_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -318,8 +314,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "family",
-                "family/FAM.ped",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -644,13 +638,12 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_Revio_haplotype_1.assembly_summary:md5,a89ba62559ea15f5768d0481b6c8cbb8",
-                "HG002_Revio_haplotype_2.assembly_summary:md5,2c84c9c6641506713ac1855031001c45",
-                "FAM.ped:md5,90c92b1d96b684beb673ae1da8a9e973",
-                "HG002_Revio.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
-                "HG002_Revio.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
-                "HG002_Revio.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
-                "HG002_Revio.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b",
+                "HG002_Revio_haplotype_1.assembly_summary:md5,dec735934cd1b33b8f4f83c3b38fa445",
+                "HG002_Revio_haplotype_2.assembly_summary:md5,f2e1619a695c61ea5b007079255ae390",
+                "HG002_Revio.baf.bed.gz:md5,ef09137b36083a8c87edb317f2442028",
+                "HG002_Revio.baf.bed.gz.tbi:md5,f0073fbecd34b49810ea60d468e04d38",
+                "HG002_Revio.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
+                "HG002_Revio.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5",
                 "HG002_Revio_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -821,10 +814,10 @@
                 
             ]
         ],
+        "timestamp": "2026-03-31T02:40:56.873271047",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:08:48.198108532"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     }
 }

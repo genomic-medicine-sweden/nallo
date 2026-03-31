@@ -101,10 +101,6 @@
                     "ensemblvep": 110.0,
                     "tabix": 1.17
                 },
-                "FAMILY_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
@@ -336,8 +332,6 @@
                 "assembly/stats/HG004",
                 "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
                 "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
-                "family",
-                "family/FAM.ped",
                 "gens",
                 "gens/HG002",
                 "gens/HG002/HG002.baf.bed.gz",
@@ -914,25 +908,24 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,d65f383b44433bc4057cca8dc3e81d27",
-                "HG002_haplotype_2.assembly_summary:md5,fe1289b8cb4a4948b0e53331479063f3",
-                "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
-                "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
-                "HG004_haplotype_1.assembly_summary:md5,3656512d5d8fafb2bade323487498f79",
-                "HG004_haplotype_2.assembly_summary:md5,575f13cb3d7a2d4de558134410800e09",
-                "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
-                "HG002.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
-                "HG002.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
-                "HG002.cov.bed.gz:md5,790833cbf731de96a1b500d187cf3a26",
-                "HG002.cov.bed.gz.tbi:md5,4d025fc01f92fdf66329a93776411cc6",
-                "HG003.baf.bed.gz:md5,6a75cd454070deb5cde78e194a6c4c76",
-                "HG003.baf.bed.gz.tbi:md5,825fca58be4323609111fe55f3a12406",
-                "HG003.cov.bed.gz:md5,4133276a3fe084c44b6760285f726515",
-                "HG003.cov.bed.gz.tbi:md5,62a2f7393ba17a652141fe71ad284bd2",
-                "HG004.baf.bed.gz:md5,11026125edb81357c339711d063e9842",
-                "HG004.baf.bed.gz.tbi:md5,85cfd2f2dcb765ca7128a34e4beaab52",
-                "HG004.cov.bed.gz:md5,70e81e45eacbdf59b663a9dbce0a701c",
-                "HG004.cov.bed.gz.tbi:md5,f916b0ee6b8e029ddb1d0b1182d9a0c6",
+                "HG002_haplotype_1.assembly_summary:md5,0bb031f5dfdff60658df237f69a6fbab",
+                "HG002_haplotype_2.assembly_summary:md5,285d0332f14a46f3db79108dd8adc6f6",
+                "HG003_haplotype_1.assembly_summary:md5,1878d32300b57b3370ceee359820fa5c",
+                "HG003_haplotype_2.assembly_summary:md5,2560e10b5c1211abbc1eafb21edbaf2e",
+                "HG004_haplotype_1.assembly_summary:md5,b5d3af98494db176e38c8ff09d43860f",
+                "HG004_haplotype_2.assembly_summary:md5,b17609751f549f3f56a849e8ceef5609",
+                "HG002.baf.bed.gz:md5,ef09137b36083a8c87edb317f2442028",
+                "HG002.baf.bed.gz.tbi:md5,f0073fbecd34b49810ea60d468e04d38",
+                "HG002.cov.bed.gz:md5,9d9377284d26030e47bb4049aae762e2",
+                "HG002.cov.bed.gz.tbi:md5,365426d1bb222f5fdd167c969a0a1772",
+                "HG003.baf.bed.gz:md5,f75126bf156aadb28bbbafb2d85aa894",
+                "HG003.baf.bed.gz.tbi:md5,f4a6a212a0b92c1d385f7fddf9dc637f",
+                "HG003.cov.bed.gz:md5,c985513077bb3005c21004bf7c53a622",
+                "HG003.cov.bed.gz.tbi:md5,d2577d58fc177c428139c88d316ae9b3",
+                "HG004.baf.bed.gz:md5,1937122b69ad097fc7d1be95576a1ae3",
+                "HG004.baf.bed.gz.tbi:md5,6986d8d84bfbb4ba94da9039e825838e",
+                "HG004.cov.bed.gz:md5,edbf61ea51d404badfe39e505e01a5da",
+                "HG004.cov.bed.gz.tbi:md5,c91041afb772ab04402aeedac2db9906",
                 "HG002_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1317,10 +1310,10 @@
                 
             ]
         ],
+        "timestamp": "2026-03-31T02:59:39.314783691",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:12:55.749818812"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     }
 }
