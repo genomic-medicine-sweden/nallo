@@ -21,9 +21,8 @@ nextflow_workflow {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
                 """
             }
         }
@@ -55,7 +54,7 @@ nextflow_workflow {
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -74,7 +73,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -98,7 +96,7 @@ nextflow_workflow {
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -117,7 +115,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -139,7 +136,7 @@ nextflow_workflow {
                 input[1] = channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -158,7 +155,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -180,7 +176,7 @@ nextflow_workflow {
                 input[1] = channel.value([])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -199,7 +195,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     file(workflow.out.tbi.get(0).get(1)).name,
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vcf.get(0).get(1)).vcf.summary,
@@ -227,7 +222,7 @@ nextflow_workflow {
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -246,7 +241,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     workflow.out.tbi,
                     workflow.out.vcf
                 ).match() }
@@ -273,7 +267,7 @@ nextflow_workflow {
                 ]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
+                input[4] = UNTAR.out.untar
                 input[5] = channel.value('110')
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
@@ -301,7 +295,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     workflow.out.tbi,
                     workflow.out.vcf
                 ).match() }

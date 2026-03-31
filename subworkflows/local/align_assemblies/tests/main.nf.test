@@ -68,7 +68,6 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.versions,
                     bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
                     file(workflow.out.bai.get(0).get(1)).name
                 ).match() }
@@ -77,8 +76,9 @@ nextflow_workflow {
     }
 
     test("bam - stub") {
+
         options "-stub"
-        tag "as"
+
         when {
             workflow {
                 """

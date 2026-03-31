@@ -21,8 +21,6 @@ workflow PHASING {
     ch_pedigree          // channel: [ val(meta), path(pedigree) ]
 
     main:
-    ch_versions            = channel.empty()
-
     // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
@@ -35,7 +33,6 @@ workflow PHASING {
             fai,
             phase_with_svs
         )
-        ch_versions = ch_versions.mix(LONGPHASE.out.versions)
 
         ch_phased_family_snvs     = LONGPHASE.out.phased_family_snvs
         ch_phased_family_snvs_tbi = LONGPHASE.out.phased_family_snvs_tbi
@@ -54,7 +51,6 @@ workflow PHASING {
             fai,
             ch_pedigree,
         )
-        ch_versions = ch_versions.mix(WHATSHAP.out.versions)
 
         ch_phased_family_snvs     = WHATSHAP.out.phased_family_snvs
         ch_phased_family_snvs_tbi = WHATSHAP.out.phased_family_snvs_tbi
@@ -93,15 +89,12 @@ workflow PHASING {
         ch_family_to_samples,
         phase_with_svs && !phaser.equals("whatshap"),
     )
-    ch_versions = ch_versions.mix(QC_PHASING.out.versions)
 
     if (cram_output) {
         SAMTOOLS_CONVERT (
             ch_bam_bai_haplotagged,
-            fasta,
-            fai
+            fasta.join(fai).collect(),
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
 
@@ -115,5 +108,4 @@ workflow PHASING {
     blocks                 = QC_PHASING.out.phasing_blocks       // channel: [ val(meta), path("*.blocks.gtf.gz") ]
     blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats     = QC_PHASING.out.haplotagging_stats   // channel: [ val(meta), path("*.stats.tsv") ]
-    versions               = ch_versions                         // channel: [ path(versions.yml) ]
 }

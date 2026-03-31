@@ -126,9 +126,6 @@
                         "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "7": [
-                    
-                ],
                 "bai": [
                     [
                         {
@@ -252,17 +249,14 @@
                         },
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-17T12:11:31.336467681",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-24T17:49:23.868113333"
     },
     "one sample, one family - bam output": {
         "content": [
@@ -319,16 +313,13 @@
                     },
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                
             ]
         ],
-        "timestamp": "2026-03-17T12:13:01.916361002",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:22:11.379545344"
     },
     "four sample, two families - bam output": {
         "content": [
@@ -489,16 +480,13 @@
                     },
                     "second_family_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                
             ]
         ],
-        "timestamp": "2026-03-17T12:13:46.115439193",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-24T17:49:10.942815372"
     },
     "four sample, two families - cram output - stub": {
         "content": [
@@ -681,12 +669,6 @@
                         "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "7": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
-                ],
                 "bai": [
                     [
                         {
@@ -864,20 +846,14 @@
                         },
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
                 ]
             }
         ],
-        "timestamp": "2026-03-17T12:14:11.024938001",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-24T17:49:37.08118199"
     },
     "one sample, one family - cram output": {
         "content": [
@@ -961,15 +937,12 @@
                     },
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
             ]
         ],
-        "timestamp": "2026-03-17T12:13:21.738647616",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
-        }
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-20T16:22:43.532276409"
     }
 }

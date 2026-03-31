@@ -192,3 +192,6 @@ tool:
   whatshap:
     citation: "WhatsHap (Martin et al. 2016)"
     bibliography: "Marcel Martin, Murray Patterson, Shilpa Garg, Sarah O Fischer, Nadia Pisanti, Gunnar W Klau, Alexander Schöenhuth, Tobias Marschall. bioRxiv 085050; doi: https://doi.org/10.1101/085050"
+  perl-math-cdf:
+    citation: "perl-math-cdf"
+    bibliography: ""

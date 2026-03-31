@@ -13,8 +13,6 @@ workflow HIPHASE {
     phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
-    ch_versions = channel.empty()
-
     // Prepare SNV VCF with index
     ch_snv_vcf
         .join(ch_snv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
@@ -78,5 +76,4 @@ workflow HIPHASE {
     phased_svs = phase_with_svs ? RUN_HIPHASE.out.sv_vcfs : ch_sv_vcf               // channel: [ val(meta), path(vcf) ]
     phased_svs_tbi = phase_with_svs ? RUN_HIPHASE.out.sv_vcfs_tbi : ch_sv_vcf_index // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai = ch_haplotagged_bam_bai                                    // channel: [ val(meta), path(bam), path(bai) ]
-    versions = ch_versions                                                          // channel: [ path(versions.yml) ]
 }
