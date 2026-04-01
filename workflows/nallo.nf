@@ -794,16 +794,14 @@ workflow NALLO {
         ch_snvs_to_rank = buildRankVariantsInputChannel(
             ANN_CSQ_PLI_SNV.out.vcf,
             SOMALIER_PED_FAMILY.out.ped,
-            'family_id',
             'snv',
             ch_genmod_score_config_snvs,
             ch_input,
         )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
-            ANN_CSQ_PLI_SVS.out.vcf,
+            ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
-            'id',
             'sv',
             ch_genmod_score_config_svs,
             ch_input,
@@ -1041,35 +1039,52 @@ workflow NALLO {
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
 }
 
-// Check if a family has a child with two parents,
-// and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
-// This is used to determine compound ranking thresholds and penalties in genmod.
-def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
-    samplesheet
-        .map { meta, _files ->
-            [meta.family_id, meta]
-        }
+/**
+ * Adds `child_with_two_parents_in_family` to the meta of `ch_input`, based on whether the family has a child with two parents according to the samplesheet.
+ *
+ * @param ch_input       Channel of [meta, file] where meta contains `family_id`
+ * @param ch_samplesheet Channel of [meta, files] where meta contains `family_id` and `two_parents`
+ * @return               Channel of [meta, file] with updated meta
+ */
+def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
+
+    def ch_families = ch_samplesheet
+        .map { meta, _files -> [meta.family_id, meta.two_parents] }
         .groupTuple()
-        .map { family_id, metas ->
-            [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
-        }
-        .combine(input)
-        .filter { family_meta, vcf_meta, _file -> vcf_meta[family_id_key] == family_meta.id }
-        .map { family_meta, vcf_meta, file ->
-            def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
-            [new_meta, file]
+        .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
+
+    ch_families
+        .join(ch_input.map { meta, file -> [meta.family_id, meta, file] })
+        .map { _family_id, child_with_two_parents, meta, file ->
+            [meta + [child_with_two_parents_in_family: child_with_two_parents], file]
         }
 }
 
-// Build the input channel for ranking variants by combining the VCF with the PED and score configs
-// We also add meta information about whether the family has a child with two parents, which is used in genmod for determining ranking thresholds and penalties for compound heterozygous variants.
-def buildRankVariantsInputChannel(ch_vcf, ch_ped, vcf_join_key, variant_type, ch_score_config, ch_samplesheet) {
-    addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet, vcf_join_key)
-        .map { meta, vcf -> [meta + [variant_type: variant_type], vcf] }
-        .combine(ch_ped)
-        .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta[vcf_join_key] == ped_meta.id }
+/**
+ * Build input channel for ranking variants, by combining VCFs with PED files and ranking config, and adding variant type to the meta for downstream use.
+ *
+ * @param ch_vcf          Channel of [meta, vcf]
+ * @param ch_ped          Channel of [meta, ped] (one per family)
+ * @param variant_type    String (e.g. 'snv' or 'sv')
+ * @param ch_score_config Channel of [meta, score_config]
+ * @param ch_samplesheet  Channel used to derive family-level metadata
+ * @return                Channel of [meta, vcf, ped, score_config]
+ */
+def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
+    // This is used to determine compound ranking thresholds and penalties in genmod
+    def vcf_with_meta = addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
+        .map { meta, vcf ->
+            [meta.family_id, meta + [variant_type: variant_type], vcf]
+        }
+
+    // The meta.id of the PED channel is the family_id
+    def ped_keyed = ch_ped
+        .map { meta, ped -> [meta.id, ped] }
+
+    vcf_with_meta
+        .join(ped_keyed, failOnMismatch: true, failOnDuplicate: false)
         .combine(ch_score_config)
-        .map { vcf_meta, vcf, _ped_meta, ped, _score_config, score_config ->
+        .map { _family_id, vcf_meta, vcf, ped, _score_config_meta, score_config ->
             [vcf_meta, vcf, ped, score_config]
         }
 }
