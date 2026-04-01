@@ -381,6 +381,15 @@ workflow NALLO {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
+
+        if (!val_skip_rank_variants || !val_skip_phasing) {
+            // Create PED with updated sex - per family
+            SOMALIER_PED_FAMILY (
+                ch_bam
+                    .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
+                    .groupTuple()
+            )
+        }
     }
 
     //
@@ -587,13 +596,6 @@ workflow NALLO {
             ch_vcfexpress_prelude,
         )
     }
-
-    // Create PED with updated sex - per family
-    SOMALIER_PED_FAMILY (
-        ch_bam
-            .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
-            .groupTuple()
-    )
 
     //
     // Phase SNVs and INDELs
