@@ -880,7 +880,6 @@
                 "visualization_tracks/HG002/HG002_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG002/HG002_hificnv.depth.bw",
                 "visualization_tracks/HG002/HG002_hificnv.maf.bw",
-                "visualization_tracks/HG002/HG002_maf_sawfish.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
@@ -891,7 +890,6 @@
                 "visualization_tracks/HG003/HG003_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG003/HG003_hificnv.depth.bw",
                 "visualization_tracks/HG003/HG003_hificnv.maf.bw",
-                "visualization_tracks/HG003/HG003_maf_sawfish.bw",
                 "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
                 "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
@@ -902,7 +900,6 @@
                 "visualization_tracks/HG004/HG004_hificnv.copynum.bedgraph",
                 "visualization_tracks/HG004/HG004_hificnv.depth.bw",
                 "visualization_tracks/HG004/HG004_hificnv.maf.bw",
-                "visualization_tracks/HG004/HG004_maf_sawfish.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
@@ -1170,7 +1167,6 @@
                 "HG002_hificnv.copynum.bedgraph:md5,ef22bf2116b3b80e2a717efe3b38c39f",
                 "HG002_hificnv.depth.bw:md5,2981e86a3ec846789b131cef0bd79d7f",
                 "HG002_hificnv.maf.bw:md5,28cc6fc2fb36a7e0eda75af9b16e956f",
-                "HG002_maf_sawfish.bw:md5,28cc6fc2fb36a7e0eda75af9b16e956f",
                 "HG002_pbcpgtools.combined.bw:md5,7a525ce083d058523109915f68d21846",
                 "HG002_pbcpgtools.hap1.bw:md5,991cfdfbb7603853077fe5dbf352a263",
                 "HG002_pbcpgtools.hap2.bw:md5,06085f3f6db64cb089b52deccdba199f",
@@ -1180,7 +1176,6 @@
                 "HG003_hificnv.copynum.bedgraph:md5,10f7f0b8fd5bc182c7b086ce6a4a571c",
                 "HG003_hificnv.depth.bw:md5,36945f838731519aadf0021fdb9b32ae",
                 "HG003_hificnv.maf.bw:md5,edfdcf435a1620a18b874e3c84a5a5f5",
-                "HG003_maf_sawfish.bw:md5,edfdcf435a1620a18b874e3c84a5a5f5",
                 "HG003_pbcpgtools.combined.bw:md5,20324f6d16611421ae0315fd11ac2351",
                 "HG003_pbcpgtools.hap1.bw:md5,29cb40ea5c86e6d1948a6116a21cae0b",
                 "HG003_pbcpgtools.hap2.bw:md5,2aeb9a057596146dea09d2c09c7898bf",
@@ -1190,7 +1185,6 @@
                 "HG004_hificnv.copynum.bedgraph:md5,94e7a54588d386c8947971037619ccff",
                 "HG004_hificnv.depth.bw:md5,f6b42d6809eb580cf272c556ecdf5d59",
                 "HG004_hificnv.maf.bw:md5,9bd36f2731c096d2fc1d44c35464084c",
-                "HG004_maf_sawfish.bw:md5,9bd36f2731c096d2fc1d44c35464084c",
                 "HG004_pbcpgtools.combined.bw:md5,5d3ac3a88cdfcdb0dfb3a16f174f2b8c",
                 "HG004_pbcpgtools.hap1.bw:md5,650544de3fbe6141b1b8afc50a62cf55",
                 "HG004_pbcpgtools.hap2.bw:md5,bb21973606c996f417cc0e8d931fcc56"
@@ -1310,10 +1304,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-31T02:59:39.314783691",
+        "timestamp": "2026-03-31T09:34:04.924971149",
         "meta": {
             "nf-test": "0.9.4",
-            "nextflow": "26.03.0"
+            "nextflow": "26.02.0"
         }
     }
 }
