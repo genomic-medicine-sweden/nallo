@@ -92,6 +92,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_outdir
     val_paraphrase_output_format
     val_phaser
+    val_whatshap_pedigree_phasing
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
@@ -195,6 +196,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_outdir,
         val_paraphrase_output_format,
         val_phaser,
+        val_whatshap_pedigree_phasing,
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
@@ -322,6 +324,7 @@ workflow {
         params.outdir,
         params.paraphrase_output_format,
         params.phaser,
+        params.val_whatshap_pedigree_phasing,
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,

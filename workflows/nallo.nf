@@ -135,6 +135,7 @@ workflow NALLO {
     val_outdir
     val_paraphrase_output_format
     val_phaser
+    val_whatshap_pedigree_phasing
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
@@ -631,7 +632,7 @@ workflow NALLO {
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
         SOMALIER_PED_FAMILY.out.ped
-            .map { meta, ped -> [ [id: meta.id], (params.phaser.equals('whatshap') && params.whatshap_pedigree_phasing) ? ped : [] ] }
+            .map { meta, ped -> [ [id: meta.id], (val_phaser.equals('whatshap') && val_whatshap_pedigree_phasing) ? ped : [] ] }
             .set { ch_ped_family }
 
         PHASING (
