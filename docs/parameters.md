@@ -143,7 +143,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used. | `string` |  |  |  |
 | `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
-| `whatshap_pedigree_phasing` | Enable/disable pedigree phasing with whatshap (default: enabled) | `boolean` | True |  |  |
+| `whatshap_pedigree_phasing` | Enable/disable pedigree phasing when phasing with whatshap | `boolean` | True |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
 | `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |

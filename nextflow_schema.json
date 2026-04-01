@@ -683,7 +683,7 @@
                 "whatshap_pedigree_phasing": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable/disable pedigree phasing with whatshap (default: enabled)"
+                    "description": "Enable/disable pedigree phasing when phasing with whatshap"
                 },
                 "hifiasm_mode": {
                     "type": "string",
