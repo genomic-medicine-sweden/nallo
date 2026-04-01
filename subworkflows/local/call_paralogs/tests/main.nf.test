@@ -59,6 +59,7 @@ nextflow_workflow {
                 { assert snapshot(
                     // The order paraphase outputs reads in is unstable, so we can only snapshot the name
                     workflow.out.bam.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
                     workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},

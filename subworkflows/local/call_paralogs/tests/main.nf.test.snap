@@ -275,6 +275,15 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
+                    "HG002.paraphase.bam.bai"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "NIST"
+                    },
                     "HG002.paraphase.json"
                 ]
             ],
@@ -297,7 +306,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T19:00:30.884221885",
+        "timestamp": "2026-04-01T09:15:08.74827662",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
