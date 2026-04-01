@@ -1095,7 +1095,11 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 
     ch_families
-        .join(ch_input.map { meta, file -> [meta.family_id, meta, file] })
+        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
+        .combine(ch_input)
+        .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
+            samplesheet_family_id == file_meta.family_id
+        }
         .map { _family_id, child_with_two_parents, meta, file ->
             [meta + [child_with_two_parents_in_family: child_with_two_parents], file]
         }
@@ -1113,19 +1117,18 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
  */
 def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
     // This is used to determine compound ranking thresholds and penalties in genmod
-    def vcf_with_meta = addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
+    addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
         .map { meta, vcf ->
-            [meta.family_id, meta + [variant_type: variant_type], vcf]
+            [meta + [variant_type: variant_type], vcf]
         }
-
-    // The meta.id of the PED channel is the family_id
-    def ped_keyed = ch_ped
-        .map { meta, ped -> [meta.id, ped] }
-
-    vcf_with_meta
-        .join(ped_keyed, failOnMismatch: true, failOnDuplicate: false)
+        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
+        .combine(ch_ped)
+        // The meta.id of the PED channel is the family_id
+        .filter { vcf_meta, _vcf, ped_meta, _ped ->
+            vcf_meta.family_id == ped_meta.id
+        }
         .combine(ch_score_config)
-        .map { _family_id, vcf_meta, vcf, ped, _score_config_meta, score_config ->
+        .map { vcf_meta, vcf, _ped_meta, ped, _score_config_meta, score_config ->
             [vcf_meta, vcf, ped, score_config]
         }
 }
