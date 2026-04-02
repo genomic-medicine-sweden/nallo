@@ -32,6 +32,7 @@ workflow PIPELINE_INITIALISATION {
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir //  string: The output directory where the results will be saved
     show_hidden  // boolean: Show hidden parameters in the help message
+    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
     val_cnv_expected_xy_cn
@@ -44,7 +45,6 @@ workflow PIPELINE_INITIALISATION {
     val_gens_coverage_bins
     val_gens_panel_of_normals_female
     val_gens_panel_of_normals_male
-    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
     val_input
     val_methbat_regions
     val_par_regions
@@ -76,11 +76,11 @@ workflow PIPELINE_INITIALISATION {
     val_stranger_repeat_catalog
     val_str_bed
     val_str_caller
-    val_sv_callers_merge_priority
+    val_svdb_sv_databases
     val_sv_callers
+    val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
-    val_svdb_sv_databases
     val_variant_consequences_snvs
     val_variant_consequences_svs
     val_vep_cache
