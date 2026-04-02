@@ -181,8 +181,9 @@
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
-                        "installed_by": ["modules"]
+                        "git_sha": "fed68e7b4b193b36c1abc552586694d43a88f6fb",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/genmod/score/genmod-score.diff"
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
@@ -310,8 +311,7 @@
                     "samtools/convert": {
                         "branch": "master",
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/samtools/convert/samtools-convert.diff"
+                        "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
