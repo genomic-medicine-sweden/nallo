@@ -290,8 +290,7 @@
                     "samtools/convert": {
                         "branch": "master",
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/samtools/convert/samtools-convert.diff"
+                        "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
