@@ -5,6 +5,7 @@
 
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
+include { BCFTOOLS_MERGE                             } from '../../../modules/nf-core/bcftools/merge/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
 include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'
@@ -16,68 +17,100 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_bed                  // channel: [optional]  [ val(meta), path(input_bed) ]
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
-    variant_caller          // string: variant caller to use
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
     ch_merged_family_gvcf = channel.empty()
 
-    if (variant_caller.equals("deepvariant")) {
-        GLNEXUS(
-            ch_gvcfs.map { meta, gvcfs -> [meta, gvcfs, []] },
-            ch_bed,
-        )
+    // Branching gVCFs and TBI channels by caller, as they need to be processed differently in the next steps
+    ch_gvcfs
+        .branch { meta, _gvcfs ->
+            mitorsaw: meta.caller == "mitorsaw"
+            sentieon: meta.caller == "sentieon"
+            deepvariant: meta.caller == "deepvariant"
+        }
+        .set { branched_gvcfs }
 
-        ch_merged_family_gvcf = GLNEXUS.out.bcf
+    ch_tbis
+        .branch { meta, _tbi ->
+            mitorsaw: meta.caller == "mitorsaw"
+            sentieon: meta.caller == "sentieon"
+            deepvariant: meta.caller == "deepvariant"
+        }
+        .set { branched_tbis }
 
-    } else if (variant_caller.equals("sentieon")) {
+    // GLNEXUS processes deepvariant gVCFs
+    GLNEXUS(
+        branched_gvcfs.deepvariant.map { meta, gvcfs -> [meta, gvcfs, []] },
+        ch_bed,
+    )
 
-        ch_gvcfs
-            .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, gvcfs, tbis ->
-                [meta, gvcfs, tbis, []]
-            }
-            .set { ch_gvcftyper_in }
+    ch_merged_family_gvcf_glnexus = GLNEXUS.out.bcf
 
-        SENTIEON_GVCFTYPER(
-            ch_gvcftyper_in,
-            ch_fasta,
-            ch_fai,
-            [[], []],
-            [[], []],
-        )
+    // SENTIEON_GVCFTYPER processes sentieon gVCFs
+    branched_gvcfs.sentieon
+        .join(branched_tbis.sentieon, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, gvcfs, tbis ->
+            [meta, gvcfs, tbis, []]
+        }
+        .set { ch_gvcftyper_in }
 
-        // Re-encoding haploid GTs to diploid  needs to occur _after_ GVCFtyper
-        // in the gvcf joint-calling path, as the altered ploidy of haploid
-        // to diploid GT no longer matches the sample PL field, which leads to a
-        // crash in GVCFTyper
-        BCFTOOLS_PLUGINFIXPLOIDY(
-            SENTIEON_GVCFTYPER.out.vcf_gz.join(SENTIEON_GVCFTYPER.out.vcf_gz_tbi),
-            [],
-            [],
-            [],
-            [],
-        )
+    SENTIEON_GVCFTYPER(
+        ch_gvcftyper_in,
+        ch_fasta,
+        ch_fai,
+        [[], []],
+        [[], []],
+    )
 
-        ch_merged_family_gvcf = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-    }
+    // Re-encoding haploid GTs to diploid needs to occur _after_ GVCFtyper
+    // in the gvcf joint-calling path, as the altered ploidy of haploid
+    // to diploid GT no longer matches the sample PL field, which leads to a
+    // crash in GVCFTyper
+    BCFTOOLS_PLUGINFIXPLOIDY(
+        SENTIEON_GVCFTYPER.out.vcf_gz.join(SENTIEON_GVCFTYPER.out.vcf_gz_tbi),
+        [],
+        [],
+        [],
+        [],
+    )
+    ch_merged_family_gvcf_sentieon = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
+
+    // BCFTOOLS_MERGE is used for the mitochondrial specific caller
+    branched_gvcfs.mitorsaw.join(branched_tbis.mitorsaw, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, gvcfs, tbis ->
+            [meta, gvcfs, tbis, []]
+        }
+        .set { ch_bcftools_merge_in }
+
+    ch_fasta.join(ch_fai).set { ch_fasta_fai }
+
+    BCFTOOLS_MERGE(
+        ch_bcftools_merge_in,
+        ch_fasta_fai.collect(),
+    )
+    ch_merged_family_gvcf_bcftools = BCFTOOLS_MERGE.out.vcf
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_merged_family_gvcf
-        .map { meta, vcf ->
-            [meta + [sv_caller: variant_caller], vcf]
-        }
-        .set { ch_vcfexpress_input }
+    // ch_merged_family_gvcf
+    //     .map { meta, vcf ->
+    //         [meta + [sv_caller: meta.], vcf]
+    //     }
+    //     .set { ch_vcfexpress_input }
+    ch_merged_family_gvcf_glnexus
+        .mix(ch_merged_family_gvcf_sentieon)
+        .mix(ch_merged_family_gvcf_bcftools)
+        .set { ch_merged_family_gvcf }
 
     VCFEXPRESS(
-        ch_vcfexpress_input,
+        ch_merged_family_gvcf,
         ch_vcfexpress_prelude,
     )
 
     // Remove added caller information in meta
     VCFEXPRESS.out.vcf
         .map { meta, vcf ->
-            [meta - meta.subMap('sv_caller'), vcf, []]
+            [meta - meta.subMap('caller'), vcf, []]
         }
         .set { ch_bcftools_norm_input }
 
