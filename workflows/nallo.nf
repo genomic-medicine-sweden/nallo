@@ -262,28 +262,17 @@ workflow NALLO {
             .groupTuple()
             .set { ch_genome_assembly_input }
 
-        ch_genome_assembly_input.view()
-
         // Hifiasm assembly
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
         )
 
-        /*ALIGN_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output,
-        )*/
-
         MINIMAP2_INDEX(
             ch_fasta
         )
 
         MINIMAP2_ASSEMBLIES(
-            //GENOME_ASSEMBLY.out.assembled_haplotypes.collect()
-            //    .map { meta1, bam1, _meta2, bam2 -> [meta1 - meta1.subMap('haplotype'), [ bam1, bam2] ] },
             GENOME_ASSEMBLY.out.assembled_haplotypes
                 .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
                 .groupTuple(size: 2),
@@ -428,7 +417,7 @@ workflow NALLO {
     }
     else {
         // If we are skipping alignment, we assume the input BAMs are already aligned, and we just need to set the channels correctly to finish the assembly.
-        ch_bam = ch_input
+        ch_bam = ch_samplesheet
     }
 
     if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {

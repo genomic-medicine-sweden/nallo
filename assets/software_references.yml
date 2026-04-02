@@ -198,3 +198,9 @@ tool:
   portello:
     citation: "Portello (Saunders et al. 2025)"
     bibliography: "Saunders, C., Kronenberg, Z., Holt, J., Rowell, W., & Eberle, M. (2025). Portello: Making global assembly more effective for rare-disease WGS. CSHL Genome Informatics, CSHL. Zenodo."
+  coreutils:
+    citation: "GNU coreutils"
+    bibliography: ""
+  find:
+    citation: "find/concatenate"
+    bibliography: ""
