@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#979](https://github.com/genomic-medicine-sweden/nallo/pull/979) - Changed tag of MultiQC process to multiqc
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Updated nf-test to 0.6.1
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Output CRAM version 3.1 instead of 3.0
+- [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 
 ### Removed
 
@@ -71,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#939](https://github.com/genomic-medicine-sweden/nallo/pull/939) - Fixed nf-test not triggering on changes to `conf/`, which can affect pipeline outputs
 - [#960](https://github.com/genomic-medicine-sweden/nallo/pull/960) - Fixed crash when preparing for chromograph while skipping annotating variants
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Fix sentieon spanning deletion calls crashing most_severe_consequence script due to missing CSQ
+- [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Fixed the `--help` parameter not working
 
 ### Parameters
 
