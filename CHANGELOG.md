@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#979](https://github.com/genomic-medicine-sweden/nallo/pull/979) - Changed tag of MultiQC process to multiqc
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Updated nf-test to 0.6.1
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Output CRAM version 3.1 instead of 3.0
+- [#1019](https://github.com/genomic-medicine-sweden/nallo/pull/1019) - Update nf-schema to 2.7.0
 
 ### Removed
 
