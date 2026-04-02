@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/964) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
+- [#966](https://github.com/genomic-medicine-sweden/nallo/pull/966) - Refactored the code related to variant ranking to reduce code duplication
 - [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Updated FastQC nf-core module
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
