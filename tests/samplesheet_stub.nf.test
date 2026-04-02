@@ -525,7 +525,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().contains('CONCAT_SORT_PEDDY').size() > 1 }, // Check if we ran the correct concat/sort subworfklow
+                { assert workflow.trace.succeeded().find { it.name.contains('CONCAT_SORT_PEDDY') } != null }, // Check if we ran the correct concat/sort subworfklow
                 { assert versions.containsKey('PEDDY') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
