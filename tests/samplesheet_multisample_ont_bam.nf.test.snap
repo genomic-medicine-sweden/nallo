@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            346,
+            328,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -130,6 +130,9 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -232,9 +235,6 @@
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
-                },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
                 },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
@@ -1137,15 +1137,15 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "bdf27957ecd06af2af4a3022afffc636"
+                    "15cb54697e588f3de354833ce86dd56"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "69eefd69bc8298bae288c16d917e8089"
+                    "59c69607454d16eadccece86f2eb5e68"
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "bdf27957ecd06af2af4a3022afffc636"
+                    "15cb54697e588f3de354833ce86dd56"
                 ]
             ],
             [
@@ -1229,10 +1229,10 @@
                 
             ]
         ],
+        "timestamp": "2026-04-01T15:40:30.920281964",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:16:51.596903924"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     }
 }

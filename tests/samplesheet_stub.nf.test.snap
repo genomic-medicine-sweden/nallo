@@ -148,15 +148,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:18:14.353119926",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:14.353119926"
+        }
     },
     "Test skip sex check - unknown sex": {
         "content": [
-            34,
+            36,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -166,6 +166,9 @@
                 },
                 "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -188,6 +191,9 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -202,12 +208,21 @@
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
                 },
+                "PORTELLO": {
+                    "portello": "portello 0.7.0"
+                },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -218,17 +233,20 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_VIEW": {
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -245,8 +263,10 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -302,15 +322,15 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
+        "timestamp": "2026-04-01T16:43:42.049098386",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:23:14.104437713"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            58,
+            60,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -342,6 +362,9 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
                 "CRAMINO": {
                     "cramino": "1.1.0"
                 },
@@ -372,11 +395,17 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
+                },
+                "PORTELLO": {
+                    "portello": "portello 0.7.0"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -391,6 +420,12 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -400,10 +435,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_VIEW": {
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAWFISH_DISCOVER": {
@@ -426,9 +467,6 @@
                     "bcftools": 1.23,
                     "svdb": "2.8.4"
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -447,8 +485,10 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -522,11 +562,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
+        "timestamp": "2026-04-01T16:38:36.988405386",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:20:18.799744261"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -627,16 +667,19 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-27T17:19:12.900562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:12.900562897"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
-            16,
+            18,
             {
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
                 "GFASTATS": {
                     "gfastats": "1.3.11"
                 },
@@ -646,23 +689,32 @@
                 "HIFIASM": {
                     "hifiasm": "0.25.0-r726"
                 },
-                "MINIMAP2_ALIGN": {
+                "MINIMAP2_ASSEMBLIES": {
                     "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
+                "PORTELLO": {
+                    "portello": "portello 0.7.0"
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
+                "SAMTOOLS_INDEX_CALMD": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_VIEW": {
+                "SAMTOOLS_INDEX_PBMM2": {
                     "samtools": "1.23.1"
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
+                "SAMTOOLS_SORT_PORTELLO": {
+                    "samtools": "1.23.1"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -675,8 +727,10 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -691,11 +745,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-04-01T16:38:00.221894503",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:40.14872124"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -850,11 +904,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:21:50.911562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:50.911562897"
+        }
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1029,15 +1083,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:17:34.897713041",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:17:34.897713041"
+        }
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
-            85,
+            87,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1074,6 +1128,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
@@ -1124,8 +1181,14 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "PORTELLO": {
+                    "portello": "portello 0.7.0"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -1140,6 +1203,12 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -1149,10 +1218,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_VIEW": {
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SEVERUS": {
@@ -1195,9 +1270,6 @@
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
                 },
@@ -1219,8 +1291,10 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -1298,15 +1372,15 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
+        "timestamp": "2026-04-01T16:43:12.72181306",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:22:43.264644875"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test family id same as sample id": {
         "content": [
-            191,
+            193,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1457,6 +1531,9 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -1483,6 +1560,9 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
+                "PORTELLO": {
+                    "portello": "portello 0.7.0"
+                },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
                 },
@@ -1502,6 +1582,12 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -1514,10 +1600,19 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -1577,9 +1672,6 @@
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
                 },
@@ -1610,8 +1702,10 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -1812,11 +1906,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-04-01T16:41:44.731106412",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:15.838618761"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1885,11 +1979,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-27T17:18:42.518949999",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:42.518949999"
+        }
     },
     "Test skip sex check - multisample": {
         "content": [
@@ -2188,10 +2282,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-04-01T10:41:35.991824119",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:24:08.17613651"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     }
 }

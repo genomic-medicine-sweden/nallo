@@ -60,12 +60,22 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_ALIGN as MINIMAP2_ASSEMBLIES                  } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
+include { PBMM2_ALIGN                  } from '../modules/nf-core/pbmm2/align/main'
+include { FIND_CONCATENATE                      } from '../modules/nf-core/find/concatenate/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2 } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CALMD } from '../modules/nf-core/samtools/index/main'
+include { PORTELLO                     } from '../modules/nf-core/portello/main'
+include { SAMTOOLS_SORT as SAMTOOLS_SORT_PORTELLO } from '../modules/nf-core/samtools/sort/main'
+include { MINIMAP2_INDEX               } from '../modules/nf-core/minimap2/index/main'
+include { SAMTOOLS_ADDREPLACERG        } from '../modules/nf-core/samtools/addreplacerg/main'
+include { SAMTOOLS_CALMD               } from '../modules/nf-core/samtools/calmd/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -213,18 +223,41 @@ workflow NALLO {
             .groupTuple()
             .set { ch_genome_assembly_input }
 
+        ch_genome_assembly_input.view()
+
         // Hifiasm assembly
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             params.hifiasm_mode == "trio-binning",
         )
 
-        ALIGN_ASSEMBLIES(
+        /*ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
             ch_fasta,
             ch_fai,
             cram_output,
+        )*/
+
+        MINIMAP2_INDEX(
+            ch_fasta
         )
+
+        MINIMAP2_ASSEMBLIES(
+            //GENOME_ASSEMBLY.out.assembled_haplotypes.collect()
+            //    .map { meta1, bam1, _meta2, bam2 -> [meta1 - meta1.subMap('haplotype'), [ bam1, bam2] ] },
+            GENOME_ASSEMBLY.out.assembled_haplotypes
+                .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
+                .groupTuple(size: 2),
+            MINIMAP2_INDEX.out.index.collect(),
+            true,
+            'bai',
+            false,
+            false
+        )
+
+        ch_assembly_bam_bai_updated_meta = MINIMAP2_ASSEMBLIES.out.bam
+            .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
+
     }
 
     /*
@@ -335,12 +368,102 @@ workflow NALLO {
             // Set files with updated meta for subsequent processes
             ch_bam = BAM_INFER_SEX.out.bam
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
+
+            ch_bam
+            .map { meta, _bam -> [[id: meta.id], meta] }
+                .set { ch_updated_sample_meta }
+
+            if (!params.skip_genome_assembly) {
+                MINIMAP2_ASSEMBLIES.out.bam
+                    .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
+                    .map { meta, bam, bai -> [[id: meta.id], meta, bam, bai] }
+                    .join(ch_updated_sample_meta, failOnMismatch: true, failOnDuplicate: true)
+                    .map { _sample_key, _old_meta, bam, bai, updated_meta -> [updated_meta, bam, bai] }
+                    .set { ch_assembly_bam_bai_updated_meta }
+            }
         }
         else {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
     }
+    else {
+        // If we are skipping alignment, we assume the input BAMs are already aligned, and we just need to set the channels correctly to finish the assembly.
+        ch_bam = ch_input
+    }
+
+    if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {
+
+        GENOME_ASSEMBLY.out.assembled_haplotypes
+            .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
+            .groupTuple(size: 2)
+            .set { ch_assemblies_to_concatenate }
+
+        FIND_CONCATENATE (
+            ch_assemblies_to_concatenate
+        )
+
+        // Match BAM files and reference by sample ID for alignment with pbmm2
+        ch_bam
+            .map { meta, bam -> [[id: meta.id], meta, bam] }
+            .join(
+                FIND_CONCATENATE.out.file_out.map { meta, ref -> [[id: meta.id], ref] },
+                failOnMismatch: true,
+                failOnDuplicate: true
+            )
+            .multiMap { _key, meta, bam, ref ->
+                reads:     [meta, bam]
+                reference: [meta, ref]
+            }
+            .set { ch_pbmm2_input }
+
+        PBMM2_ALIGN(
+            ch_pbmm2_input.reads,
+            ch_pbmm2_input.reference,
+        )
+
+        SAMTOOLS_INDEX_PBMM2(PBMM2_ALIGN.out.bam)
+
+        PORTELLO (
+            ch_assembly_bam_bai_updated_meta
+                .join(PBMM2_ALIGN.out.bam)
+                .join(SAMTOOLS_INDEX_PBMM2.out.index),
+            ch_fasta,
+            'partially-phased',
+            false
+        )
+
+        SAMTOOLS_SORT_PORTELLO (
+            PORTELLO.out.bam,
+            ch_fasta.join(ch_fai).collect(),
+            "bai"
+        )
+
+        SAMTOOLS_ADDREPLACERG (
+            SAMTOOLS_SORT_PORTELLO.out.bam
+                .join(SAMTOOLS_SORT_PORTELLO.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .map { meta, bam, bai ->
+                    def read_group = "'@RG\\tID:${meta.id}_hifiasm\\tSM:${meta.id}'"
+                    [meta, bam, bai, read_group]
+                },
+            [[],[],[],[]]
+        )
+
+        // Add MD and NM tags for severus
+        SAMTOOLS_CALMD (
+            SAMTOOLS_ADDREPLACERG.out.bam,
+            ch_fasta.join(ch_fai).collect(),
+        )
+
+        SAMTOOLS_INDEX_CALMD(
+            SAMTOOLS_CALMD.out.bam
+        )
+
+        ch_bam = SAMTOOLS_CALMD.out.bam
+        ch_bam_bai = ch_bam.join(SAMTOOLS_INDEX_CALMD.out.index)
+    }
+
+
 
     //
     // Run read QC with FastQC, mosdepth and cramino
