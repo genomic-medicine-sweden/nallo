@@ -132,7 +132,6 @@ nextflow_workflow {
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
                 input[5] = CREATE_PEDIGREE_FILE.out.ped
-                //.map { meta, ped_file -> [ [family_id: meta.id], ped_file ] }
                 """
             }
         }
