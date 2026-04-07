@@ -631,6 +631,12 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
 
+        // Provide a PED file to let whatshap activate pedigree phasing
+        // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
+        SOMALIER_PED_FAMILY.out.ped
+            .map { meta, ped -> [ [id: meta.id], val_whatshap_pedigree_phasing ? ped : [] ] }
+            .set { ch_ped_family }
+
         PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
@@ -643,7 +649,7 @@ workflow NALLO {
             val_phaser,
             !val_skip_sv_calling,
             cram_output,
-            val_whatshap_pedigree_phasing ? SOMALIER_PED_FAMILY.out.ped : [[], []]
+            ch_ped_family
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
