@@ -382,11 +382,9 @@ workflow NALLO {
         }
 
         if (!val_skip_rank_variants || !val_skip_phasing) {
-            // Create PED with updated sex - per family
-            SOMALIER_PED_FAMILY (
-                ch_bam
-                    .map { meta, _files -> [ [ id: meta.family_id ], meta ] }
-                    .groupTuple()
+            // Create PED files with updated (infered sex) per family
+            SOMALIER_PED_FAMILY(
+                ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
             )
         }
     }
@@ -843,11 +841,6 @@ workflow NALLO {
      * Can only run if samplesheet has affected samples.
      */
     if (!val_skip_rank_variants) {
-
-        // Create PED files with updated (infered sex) per family
-        SOMALIER_PED_FAMILY(
-            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
-        )
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
             ANN_CSQ_PLI_SNV.out.vcf,
