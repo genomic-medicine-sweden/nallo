@@ -324,7 +324,7 @@ workflow {
         params.outdir,
         params.paraphrase_output_format,
         params.phaser,
-        params.val_whatshap_pedigree_phasing,
+        params.whatshap_pedigree_phasing,
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
