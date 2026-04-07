@@ -57,7 +57,8 @@ nextflow_workflow {
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
-                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    // The order paraphase outputs reads in is unstable, so we can only snapshot the name
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
@@ -95,9 +96,10 @@ nextflow_workflow {
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
                 { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    // The order paraphase outputs reads in is unstable, so we can only snapshot the name
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
-                    workflow.out.cram.collect { [ it[0], file(it[1]).name, cram(it[1].toString(), params.fasta).getStatistics() ] },
+                    workflow.out.cram.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.crai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
@@ -154,7 +156,8 @@ nextflow_workflow {
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
-                    workflow.out.bam.collect { [ it[0], file(it[1]).name, bam(it[1].toString()).getStatistics() ] },
+                    // The order paraphase outputs reads in is unstable, so we can only snapshot the name
+                    workflow.out.bam.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]

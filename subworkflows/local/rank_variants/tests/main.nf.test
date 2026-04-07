@@ -92,7 +92,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = channel.of([
-                    [ id: 'genmod_score_config_snvs' ],
+                    [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])
                 """
@@ -124,7 +124,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/reduced_penetrance.tsv', checkIfExists: true)
                 ])
                 input[3] = channel.of([
-                    [ id: 'genmod_score_config_snvs' ],
+                    [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/rank_model_snv.ini', checkIfExists: true)
                 ])
                 """
