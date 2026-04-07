@@ -148,11 +148,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:18:14.353119926",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:14.353119926"
+        }
     },
     "Test skip sex check - unknown sex": {
         "content": [
@@ -302,11 +302,11 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
+        "timestamp": "2026-03-27T17:23:14.104437713",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:23:14.104437713"
+        }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -522,11 +522,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
+        "timestamp": "2026-03-27T17:20:18.799744261",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:20:18.799744261"
+        }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -627,11 +627,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-27T17:19:12.900562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:12.900562897"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -691,11 +691,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
+        "timestamp": "2026-03-27T17:19:40.14872124",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:40.14872124"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -850,11 +850,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:21:50.911562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:50.911562897"
+        }
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1029,11 +1029,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
+        "timestamp": "2026-03-27T17:17:34.897713041",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:17:34.897713041"
+        }
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
@@ -1298,11 +1298,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
+        "timestamp": "2026-03-27T17:22:43.264644875",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:22:43.264644875"
+        }
     },
     "Test family id same as sample id": {
         "content": [
@@ -1405,10 +1405,6 @@
                 "ENSEMBLVEP_SV": {
                     "ensemblvep": 110.0,
                     "tabix": 1.17
-                },
-                "FAMILY_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1620,8 +1616,6 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
-                "family",
-                "family/HG002_Revio.ped",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -1818,11 +1812,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-04-07T12:34:58.901524423",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:15.838618761"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1891,15 +1885,15 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
+        "timestamp": "2026-03-27T17:18:42.518949999",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:42.518949999"
+        }
     },
     "Test skip sex check - multisample": {
         "content": [
-            132,
+            133,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1951,10 +1945,6 @@
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.10.0"
-                },
-                "FAMILY_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -2017,6 +2007,10 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
                 },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
@@ -2054,8 +2048,6 @@
                 "aligned_reads/HG004",
                 "aligned_reads/HG004/HG004_haplotagged.bam",
                 "aligned_reads/HG004/HG004_haplotagged.bam.bai",
-                "family",
-                "family/FAM.ped",
                 "gens",
                 "gens/HG002",
                 "gens/HG002/HG002.baf.bed.gz",
@@ -2108,6 +2100,9 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/.stub",
                 "multiqc/multiqc_report.html",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -2200,10 +2195,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
+        "timestamp": "2026-04-07T12:52:27.993828877",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:24:08.17613651"
+            "nf-test": "0.9.4",
+            "nextflow": "26.03.0"
+        }
     }
 }
