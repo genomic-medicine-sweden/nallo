@@ -104,7 +104,6 @@ nextflow_workflow {
     }
 
     test ("3 samples - With corresponding pedigree file") {
-        tag "TODO"
         when {
 
             workflow {
