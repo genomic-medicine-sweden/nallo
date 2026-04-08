@@ -148,12 +148,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:01.246920982",
+        "timestamp": "2026-03-27T17:18:14.353119926",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:14.353119926"
+        }
     },
     "Test skip sex check - unknown sex": {
         "content": [
@@ -184,6 +183,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
@@ -303,16 +305,15 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-03-27T09:52:58.684213572",
+        "timestamp": "2026-04-08T15:19:48.399960188",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:23:14.104437713"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            58,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -369,6 +370,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
@@ -524,12 +528,11 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-27T09:50:21.491211628",
+        "timestamp": "2026-04-08T15:17:13.113643139",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:20:18.799744261"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
         "content": [
@@ -630,12 +633,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:47.267174041",
+        "timestamp": "2026-03-27T17:19:12.900562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:12.900562897"
+        }
     },
     "Test genome assembly without alignment": {
         "content": [
@@ -648,6 +650,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
@@ -695,12 +700,11 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-27T09:49:45.911453045",
+        "timestamp": "2026-04-08T15:16:39.165513183",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:19:40.14872124"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
@@ -855,12 +859,11 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-26T14:25:58.93555011",
+        "timestamp": "2026-03-27T17:21:50.911562897",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:50.911562897"
+        }
     },
     "Test CADD with mock resources": {
         "content": [
@@ -1035,16 +1038,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-25T12:40:27.70996643",
+        "timestamp": "2026-03-27T17:17:34.897713041",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:17:34.897713041"
+        }
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
-            85,
+            86,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1123,6 +1125,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -1305,16 +1310,15 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-03-27T09:52:31.931446087",
+        "timestamp": "2026-04-08T15:19:22.954494653",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:22:43.264644875"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test family id same as sample id": {
         "content": [
-            191,
+            192,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1448,6 +1452,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -1820,12 +1827,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-27T09:51:13.062987578",
+        "timestamp": "2026-04-08T15:18:06.672045212",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:21:15.838618761"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
+        }
     },
     "Test alignment without genome assembly": {
         "content": [
@@ -1894,12 +1900,11 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-25T12:41:23.173278319",
+        "timestamp": "2026-03-27T17:18:42.518949999",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:18:42.518949999"
+        }
     },
     "Test skip sex check - multisample": {
         "content": [
@@ -2198,11 +2203,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-25T16:37:18.934885804",
+        "timestamp": "2026-03-27T17:24:08.17613651",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:24:08.17613651"
+        }
     }
 }

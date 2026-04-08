@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            226,
+            227,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -135,6 +135,9 @@
                     "gunzip": 1.13
                 },
                 "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -784,7 +787,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -825,13 +828,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-03-31T10:52:34.251991261",
+        "timestamp": "2026-04-08T15:06:21.502601043",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }
