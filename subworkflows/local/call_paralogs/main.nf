@@ -4,6 +4,7 @@ include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftoo
 include { GAWK                           } from '../../../modules/nf-core/gawk/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
+
 workflow CALL_PARALOGS {
     take:
     bam_bai     // channel: [ val(meta), bam, bai ]
@@ -12,8 +13,6 @@ workflow CALL_PARALOGS {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions = channel.empty()
-
     PARAPHASE(
         bam_bai,
         fasta,
@@ -54,24 +53,21 @@ workflow CALL_PARALOGS {
 
     BCFTOOLS_REHEADER.out.vcf
         .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, tbi -> [['id': meta.family_id], vcf, tbi] }
+        .map { meta, vcf, tbi -> [meta.family_id, vcf, tbi] }
         .groupTuple()
+        .map { family_id, vcfs, tbis -> [['id': family_id], vcfs, tbis, []] }
         .set { ch_reheadered_vcf_tbis_per_family }
 
     BCFTOOLS_MERGE(
         ch_reheadered_vcf_tbis_per_family,
-        fasta,
-        [[], []],
-        [[], []],
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
     if (cram_output) {
         SAMTOOLS_CONVERT(
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
-            fasta,
-            fai,
+            fasta.join(fai, failOnDuplicate: true, failOnMismatch: true).collect(),
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
     emit:
@@ -82,5 +78,4 @@ workflow CALL_PARALOGS {
     json     = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
     vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
     tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
-    versions = ch_versions                                               // channel: [ versions.yml ]
 }

@@ -12,8 +12,6 @@ workflow CONVERT_INPUT_FILES {
     convert_fastq //    bool: Should FASTQ files be converted to BAM
 
     main:
-    ch_versions = channel.empty()
-
     ch_input
         .branch { _meta, reads ->
             fastq: reads.extension == 'gz'
@@ -29,7 +27,6 @@ workflow CONVERT_INPUT_FILES {
             reads_to_convert.bam,
             false
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions)
 
         // Mix converted files back in
         ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
@@ -38,7 +35,6 @@ workflow CONVERT_INPUT_FILES {
         SAMTOOLS_IMPORT (
             reads_to_convert.fastq
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_IMPORT.out.versions)
 
         // Mix converted files back in
         ch_bam = ch_bam.mix(SAMTOOLS_IMPORT.out.bam)
@@ -47,5 +43,4 @@ workflow CONVERT_INPUT_FILES {
     emit:
     bam      = ch_bam      // channel: [ val(meta), bam ]
     fastq    = ch_fastq    // channel: [ val(meta), fastq ]
-    versions = ch_versions // channel: [ versions.yml ]
 }

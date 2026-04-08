@@ -126,9 +126,6 @@
                         "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "7": [
-                    
-                ],
                 "bai": [
                     [
                         {
@@ -252,16 +249,13 @@
                         },
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    
                 ]
             }
         ],
-        "timestamp": "2026-03-17T12:11:31.336467681",
+        "timestamp": "2026-03-24T17:49:23.868113333",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         }
     },
     "one sample, one family - bam output": {
@@ -272,16 +266,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119
-                    }
+                    "HG002.paraphase.bam"
                 ]
             ],
             [
@@ -319,15 +304,12 @@
                     },
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                
             ]
         ],
-        "timestamp": "2026-03-17T12:13:01.916361002",
+        "timestamp": "2026-04-01T09:15:08.74827662",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "four sample, two families - bam output": {
@@ -338,64 +320,28 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119
-                    }
+                    "HG002.paraphase.bam"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "NIST"
                     },
-                    "HG003.paraphase.bam",
-                    {
-                        "maxReadLength": 25267,
-                        "minReadLength": 4581,
-                        "meanReadLength": 14976,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 79
-                    }
+                    "HG003.paraphase.bam"
                 ],
                 [
                     {
                         "id": "HG004",
                         "family_id": "NIST"
                     },
-                    "HG004.paraphase.bam",
-                    {
-                        "maxReadLength": 28209,
-                        "minReadLength": 1856,
-                        "meanReadLength": 15600,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 84
-                    }
+                    "HG004.paraphase.bam"
                 ],
                 [
                     {
                         "id": "second_sample",
                         "family_id": "second_family"
                     },
-                    "second_sample.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119
-                    }
+                    "second_sample.paraphase.bam"
                 ]
             ],
             [
@@ -489,15 +435,12 @@
                     },
                     "second_family_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                
             ]
         ],
-        "timestamp": "2026-03-17T12:13:46.115439193",
+        "timestamp": "2026-03-31T19:01:15.27045506",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "four sample, two families - cram output - stub": {
@@ -681,12 +624,6 @@
                         "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "7": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
-                ],
                 "bai": [
                     [
                         {
@@ -864,19 +801,13 @@
                         },
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb",
-                    "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
                 ]
             }
         ],
-        "timestamp": "2026-03-17T12:14:11.024938001",
+        "timestamp": "2026-03-24T17:49:37.08118199",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         }
     },
     "one sample, one family - cram output": {
@@ -887,16 +818,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002.paraphase.bam",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119
-                    }
+                    "HG002.paraphase.bam"
                 ]
             ],
             [
@@ -914,16 +836,7 @@
                         "id": "HG002",
                         "family_id": "NIST"
                     },
-                    "HG002_paraphase.cram",
-                    {
-                        "maxReadLength": 32595,
-                        "minReadLength": 2640,
-                        "meanReadLength": 16593,
-                        "maxQuality": 60,
-                        "minQuality": 60,
-                        "meanQuality": 60,
-                        "readCount": 119
-                    }
+                    "HG002_paraphase.cram"
                 ]
             ],
             [
@@ -961,15 +874,12 @@
                     },
                     "NIST_paraphase_merged.vcf.gz.tbi"
                 ]
-            ],
-            [
-                "versions.yml:md5,5357c0e819cea546573566ff5d2835cb"
             ]
         ],
-        "timestamp": "2026-03-17T12:13:21.738647616",
+        "timestamp": "2026-03-31T19:12:34.805257349",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }

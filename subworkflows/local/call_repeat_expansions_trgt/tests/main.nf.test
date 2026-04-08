@@ -23,9 +23,8 @@ nextflow_workflow {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
                 """
             }
 
@@ -62,7 +61,7 @@ nextflow_workflow {
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
                     bam(workflow.out.sample_bam.get(0).get(1), stringency: 'silent').getReadsMD5(),
-                    workflow.out.versions,
+
                 ).match() }
             )
         }

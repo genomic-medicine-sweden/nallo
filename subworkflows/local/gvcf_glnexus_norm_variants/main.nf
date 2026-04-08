@@ -20,7 +20,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_versions           = channel.empty()
     ch_merged_family_gvcf = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
@@ -30,9 +29,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         )
 
         ch_merged_family_gvcf = GLNEXUS.out.bcf
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
-    }
-    else if (variant_caller.equals("sentieon")) {
+
+    } else if (variant_caller.equals("sentieon")) {
 
         ch_gvcfs
             .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
@@ -93,5 +91,4 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     emit:
     vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     index    = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    versions = ch_versions // channel: [ path(versions.yml) ]
 }

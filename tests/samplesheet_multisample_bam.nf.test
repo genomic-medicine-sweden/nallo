@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/'
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
@@ -18,6 +18,7 @@ nextflow_pipeline {
                 filter_snvs_expression       = "-i 'AQ>20'"
                 filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
                 paraphrase_output_format     = 'json'
+                create_sawfish_maf_track     = false
             }
         }
 
