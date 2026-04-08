@@ -414,7 +414,12 @@ workflow NALLO {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
+
+        // Preserve the original aligned read BAMs for phasing before any assembly remapping overwrites ch_bam_bai.
+        ch_bam_bai_for_phasing = ch_bam_bai
+
     }
+
     else {
         // If we are skipping alignment, we assume the input BAMs are already aligned, and we just need to set the channels correctly to finish the assembly.
         ch_bam = ch_samplesheet
@@ -455,10 +460,20 @@ workflow NALLO {
         PORTELLO (
             ch_assembly_bam_bai_updated_meta
                 .join(PBMM2_ALIGN.out.bam)
-                .join(SAMTOOLS_INDEX_PBMM2.out.index),
-            ch_fasta,
-            'partially-phased',
-            false
+                .join(SAMTOOLS_INDEX_PBMM2.out.index)
+                .combine(ch_fasta.map { _meta, fasta -> fasta })
+                .map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
+                    [
+                        meta,
+                        asm_to_ref_bam,
+                        asm_to_ref_bai,
+                        read_to_asm_bam,
+                        read_to_asm_bai,
+                        ref_fasta,
+                        'partially-phased',
+                        false
+                    ]
+                }
         )
 
         SAMTOOLS_SORT_PORTELLO (
@@ -737,7 +752,7 @@ workflow NALLO {
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
-            ch_bam_bai,
+            ch_bam_bai_for_phasing,
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
