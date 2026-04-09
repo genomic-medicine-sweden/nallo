@@ -287,6 +287,11 @@
                         "git_sha": "f6cba554dee5a4e180a40f5b1d5df651848d95b9",
                         "installed_by": ["modules"]
                     },
+                    "portello": {
+                        "branch": "master",
+                        "git_sha": "f059179e997579490f4749a05cf893fbc7b98539",
+                        "installed_by": ["modules"]
+                    },
                     "rhocall/viz": {
                         "branch": "master",
                         "git_sha": "f6cba554dee5a4e180a40f5b1d5df651848d95b9",
