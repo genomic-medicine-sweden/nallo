@@ -782,8 +782,9 @@ workflow NALLO {
         } else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
             ch_vcf_tbi_per_region
-                .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
-                .groupTuple(size: params.snv_calling_processes)
+                .map { meta, vcf, tbi -> [ groupKey([ id: meta.family_id ], meta.num_intervals), vcf, tbi ] }
+                .groupTuple()
+                .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
                 .set { ch_concat_sort_peddy_in }
 
              CONCAT_SORT_PEDDY (
