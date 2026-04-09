@@ -1029,7 +1029,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-02T14:14:35.221862576",
+        "timestamp": "2026-04-09T09:31:48.809555323",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -1282,7 +1282,7 @@
     },
     "Test Peddy without annotation": {
         "content": [
-            50,
+            37,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1317,17 +1317,11 @@
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
-                "GFASTATS": {
-                    "gfastats": "1.3.11"
-                },
                 "GLNEXUS": {
                     "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
-                },
-                "HIFIASM": {
-                    "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -1351,16 +1345,10 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
                 },
                 "SOMALIER_EXTRACT": {
@@ -1368,9 +1356,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -1387,15 +1372,6 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
-                "assembly/stats",
-                "assembly/stats/HG002_Revio",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/.stub",
@@ -1440,7 +1416,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-02T14:11:05.770307991",
+        "timestamp": "2026-04-09T09:43:56.411556429",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
