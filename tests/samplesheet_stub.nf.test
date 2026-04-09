@@ -516,6 +516,7 @@ nextflow_pipeline {
                 skip_sambamba_depth          = true
                 skip_methylation_calling     = true
                 skip_prepare_gens_input      = true
+                skip_genome_assembly         = true
             }
         }
 
