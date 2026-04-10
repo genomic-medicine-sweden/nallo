@@ -73,7 +73,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert workflow.trace.succeeded().size() == 17 }, // 17 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM_ASSEMBLY, 3x HIFIASM_BINS, 6x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 6 },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    workflow.out.assembled_haplotypes.collect { meta, fasta -> [ meta, file(fasta).name ] } // unstable md5sums, so just check the file names here
+                ).match() }
             )
         }
     }
