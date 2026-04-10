@@ -33,11 +33,6 @@ input:
         type: file
         description: VCF index file (optional but recommended)
         pattern: "*.{tbi,csi}"
-  - - meta2:
-        type: map
-        description: |
-          Groovy Map containing bam information
-          e.g. [ id:'test', single_end:false ]
     - bam:
         type: file
         description: BAM file with aligned reads
@@ -46,7 +41,7 @@ input:
         type: file
         description: BAM index file (optional but recommended)
         pattern: "*.bai"
-  - - meta3:
+  - - meta2:
         type: map
         description: |
           Groovy Map containing reference information
@@ -59,15 +54,7 @@ input:
         type: file
         description: Reference genome index
         pattern: "*.fai"
-  - - meta4:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - pedigree:
-        type: file
-        description: Pedigree file for sample/family
-        pattern: "*.ped"
+
 output:
   vcf:
     - - meta:

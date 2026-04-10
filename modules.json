@@ -445,7 +445,7 @@
                     },
                     "whatshap/phase": {
                         "branch": "master",
-                        "git_sha": "235626655327b9624300a99cc1751b118a4fd027",
+                        "git_sha": "e2c8bb026615c098e2fb864db823c24c78300fa1",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/whatshap/phase/whatshap-phase.diff"
                     },
