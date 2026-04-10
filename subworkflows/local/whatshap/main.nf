@@ -25,11 +25,6 @@ workflow WHATSHAP {
         .join(ch_snv_index, failOnMismatch: true, failOnDuplicate: true)
         .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
         .join(ch_pedigree, failOnMismatch: true, failOnDuplicate: true)
-        .multiMap { meta, snv, tbi, bam, bai, pedigree ->
-            vcf: [meta, snv, tbi]
-            bam: [meta, bam, bai]
-            ped: [meta, pedigree]
-        }
         .set { ch_whatshap_phase_in }
 
     fasta
@@ -38,10 +33,8 @@ workflow WHATSHAP {
         .set { ch_fasta_fai }
 
     WHATSHAP_PHASE(
-        ch_whatshap_phase_in.vcf,
-        ch_whatshap_phase_in.bam,
-        ch_fasta_fai,
-        ch_whatshap_phase_in.ped
+        ch_whatshap_phase_in,
+        ch_fasta_fai
     )
 
     // We cannot use the grouped BAM channel here because WhatsHap can haplotag only one BAM at a time.
