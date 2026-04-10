@@ -38,6 +38,7 @@ include { VCF_CONCAT_NORM_VARIANTS                               } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -728,7 +729,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if (split_family_vcf_for_chromograph) {
+    if(split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -742,7 +743,9 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
         )
+    }
 
+    if (split_family_vcf_for_chromograph) {
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
@@ -766,6 +769,47 @@ workflow NALLO {
         )
     }
 
+    //
+    // Run Peddy
+    //
+    if (!val_skip_snv_calling && !val_skip_peddy) {
+
+        if (!val_skip_snv_annotation) {
+            // Use already concatenated VCFs
+            CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        } else {
+            // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
+            ch_vcf_tbi_per_region
+                .map { meta, vcf, tbi -> [ groupKey([ id: meta.family_id ], meta.num_intervals), vcf, tbi ] }
+                .groupTuple()
+                .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
+                .set { ch_concat_sort_peddy_in }
+
+             CONCAT_SORT_PEDDY (
+                ch_concat_sort_peddy_in
+            )
+
+            CONCAT_SORT_PEDDY.out.vcf
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        }
+
+        PEDDY (
+            ch_peddy_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+
+    }
+
     if (!val_skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
@@ -775,6 +819,8 @@ workflow NALLO {
             val_plot_chromograph_autozygosity,
         )
     }
+
+
 
     //
     // Annotate SVs
@@ -892,28 +938,6 @@ workflow NALLO {
         )
     }
 
-    //
-    // Run Peddy
-    //
-    if (!val_skip_snv_calling && !val_skip_peddy) {
-
-        CONCAT_SORT_RANKED_SNVS.out.vcf
-            .join(CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .filter { meta, _vcf, _tbi -> meta.set == "research" }
-            .set { ch_peddy_in }
-
-        PEDDY(
-            ch_peddy_in,
-            ch_samplesheet_pedfile,
-            ch_peddy_sites,
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-    }
 
     //
     // Collect and publish SVs

@@ -150,7 +150,7 @@
         ],
         "timestamp": "2026-03-27T17:18:14.353119926",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
@@ -1040,7 +1040,7 @@
         ],
         "timestamp": "2026-03-27T17:17:34.897713041",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     },
@@ -1115,9 +1115,6 @@
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
-                "GFASTATS": {
-                    "gfastats": "1.3.11"
-                },
                 "GLNEXUS": {
                     "glnexus": "1.4.3"
                 },
@@ -1155,16 +1152,10 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
                 },
                 "SEVERUS": {
@@ -1207,9 +1198,6 @@
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
                 },
@@ -1228,15 +1216,6 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
-                "assembly/stats",
-                "assembly/stats/HG002_Revio",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -1310,10 +1289,152 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-04-08T15:19:22.954494653",
+        "timestamp": "2026-04-02T14:06:48.773434341",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Test Peddy without annotation": {
+        "content": [
+            37,
+            {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "PEDDY": {
+                    "peddy": "0.4.8"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_IMPORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002_Revio",
+                "aligned_reads/HG002_Revio/HG002_Revio.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/.stub",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/bcftools_stats",
+                "qc/bcftools_stats/HG002_Revio",
+                "qc/bcftools_stats/HG002_Revio/HG002_Revio.bcftools_stats.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
+                "qc/peddy",
+                "qc/peddy/FAM",
+                "qc/peddy/FAM/FAM.het_check.csv",
+                "qc/peddy/FAM/FAM.het_check.png",
+                "qc/peddy/FAM/FAM.html",
+                "qc/peddy/FAM/FAM.ped_check.csv",
+                "qc/peddy/FAM/FAM.ped_check.png",
+                "qc/peddy/FAM/FAM.ped_check.rel-difference.csv",
+                "qc/peddy/FAM/FAM.peddy.ped",
+                "qc/peddy/FAM/FAM.sex_check.csv",
+                "qc/peddy/FAM/FAM.sex_check.png",
+                "qc/peddy/FAM/FAM.vs.html",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs.vcf.gz",
+                "snvs/family/FAM/FAM_snvs.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002_Revio",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
+            ]
+        ],
+        "timestamp": "2026-04-09T09:43:56.411556429",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         }
     },
     "Test family id same as sample id": {
@@ -1908,7 +2029,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            132,
+            135,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1999,6 +2120,9 @@
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
+                },
+                "PEDDY": {
+                    "peddy": "0.4.8"
                 },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
@@ -2139,6 +2263,18 @@
                 "qc/deepvariant_vcfstatsreport/HG003/HG003.visual_report.html",
                 "qc/deepvariant_vcfstatsreport/HG004",
                 "qc/deepvariant_vcfstatsreport/HG004/HG004.visual_report.html",
+                "qc/peddy",
+                "qc/peddy/FAM",
+                "qc/peddy/FAM/FAM.het_check.csv",
+                "qc/peddy/FAM/FAM.het_check.png",
+                "qc/peddy/FAM/FAM.html",
+                "qc/peddy/FAM/FAM.ped_check.csv",
+                "qc/peddy/FAM/FAM.ped_check.png",
+                "qc/peddy/FAM/FAM.ped_check.rel-difference.csv",
+                "qc/peddy/FAM/FAM.peddy.ped",
+                "qc/peddy/FAM/FAM.sex_check.csv",
+                "qc/peddy/FAM/FAM.sex_check.png",
+                "qc/peddy/FAM/FAM.vs.html",
                 "qc/phasing_stats",
                 "qc/phasing_stats/HG002",
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
@@ -2205,7 +2341,7 @@
         ],
         "timestamp": "2026-03-27T17:24:08.17613651",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     }
