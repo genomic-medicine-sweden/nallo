@@ -148,10 +148,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-27T17:18:14.353119926",
+        "timestamp": "2026-04-10T11:02:01.308163626",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test skip sex check - unknown sex": {
@@ -305,7 +305,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-04-08T15:19:48.399960188",
+        "timestamp": "2026-04-10T11:06:15.116929482",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -528,7 +528,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-04-08T15:17:13.113643139",
+        "timestamp": "2026-04-10T11:03:44.925424818",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -633,10 +633,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-27T17:19:12.900562897",
+        "timestamp": "2026-04-10T11:02:48.417136378",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test genome assembly without alignment": {
@@ -700,7 +700,7 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-04-08T15:16:39.165513183",
+        "timestamp": "2026-04-10T11:03:11.069812239",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -859,10 +859,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-27T17:21:50.911562897",
+        "timestamp": "2026-04-10T11:05:07.164904359",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test CADD with mock resources": {
@@ -1038,15 +1038,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-03-27T17:17:34.897713041",
+        "timestamp": "2026-04-10T11:01:27.560128811",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test Chromograph works without SNV annotation": {
         "content": [
-            86,
+            72,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1120,12 +1120,6 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
-                },
-                "HIFIASM_ASSEMBLY": {
-                    "hifiasm": "0.25.0-r726"
-                },
-                "HIFIASM_BINS": {
-                    "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
@@ -1289,10 +1283,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-04-02T14:06:48.773434341",
+        "timestamp": "2026-04-10T11:05:48.396100192",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test Peddy without annotation": {
@@ -1431,10 +1425,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-09T09:43:56.411556429",
+        "timestamp": "2026-04-10T11:07:36.674984654",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test family id same as sample id": {
@@ -1948,7 +1942,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-08T15:18:06.672045212",
+        "timestamp": "2026-04-10T11:04:36.153042764",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -2021,10 +2015,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-03-27T17:18:42.518949999",
+        "timestamp": "2026-04-10T11:02:23.665187845",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     },
     "Test skip sex check - multisample": {
@@ -2339,10 +2333,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-27T17:24:08.17613651",
+        "timestamp": "2026-04-10T11:07:06.95171678",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }
