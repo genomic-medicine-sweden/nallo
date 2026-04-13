@@ -83,6 +83,7 @@ workflow NALLO {
     ch_expected_xx_bed
     ch_expected_xy_bed
     ch_fasta
+    ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
@@ -175,7 +176,6 @@ workflow NALLO {
     main:
     ch_multiqc_files = channel.empty()
 
-
     //
     // Prepare references
     //
@@ -186,6 +186,7 @@ workflow NALLO {
         // Perhaps PREPARE_REFERENCES could be modified to handle this case?
         PREPARE_REFERENCES(
             ch_fasta,
+            ch_fai,
             ch_vep_cache_unprocessed,
             val_fasta.endsWith('.gz'),
             val_vep_cache && val_vep_cache.endsWith("tar.gz"),

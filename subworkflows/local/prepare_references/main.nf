@@ -7,6 +7,7 @@ workflow PREPARE_REFERENCES {
 
     take:
     fasta_in                   // channel: [ val(meta), path(fasta) ]
+    fai_in                     // channel: [ val(meta), path(fai) ]
     ch_vep_cache               // channel: [ val(meta), path(cache) ]
     gunzip_fasta               // boolean: should we gunzip fasta
     untar_vep_cache            // boolean: should we untar vep cache
@@ -25,10 +26,19 @@ workflow PREPARE_REFERENCES {
             .set { ch_fasta }
     }
 
-    SAMTOOLS_FAIDX (
-        ch_fasta.map { meta, fasta -> [meta, fasta, []] },
-        false
-    )
+    if (!fai_in) {
+        SAMTOOLS_FAIDX (
+            ch_fasta.map { meta, fasta -> [meta, fasta, []] },
+            false
+        )
+
+        SAMTOOLS_FAIDX.out.fai
+            .collect()
+            .set { ch_fai }
+    } else {
+        fai_in
+            .set { ch_fai }
+    }
 
     MINIMAP2_INDEX (
         ch_fasta
@@ -42,7 +52,7 @@ workflow PREPARE_REFERENCES {
 
     emit:
     mmi           = MINIMAP2_INDEX.out.index.collect()                                   // channel: [ val(meta), path(mmi) ]
-    fai           = SAMTOOLS_FAIDX.out.fai.collect()                                     // channel: [ val(meta), path(fai) ]
+    fai           = ch_fai                                                               // channel: [ val(meta), path(fai) ]
     fasta         = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
     vep_resources = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]
 }
