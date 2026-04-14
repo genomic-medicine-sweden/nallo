@@ -167,14 +167,16 @@
                 "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
                 "CRAMINO": {
                     "cramino": "1.1.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -209,7 +211,7 @@
                     "paraphrase": "0.2.0"
                 },
                 "PORTELLO": {
-                    "portello": "portello 0.7.0"
+                    "portello": "0.7.0"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -322,10 +324,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-04-02T15:08:20.04740971",
+        "timestamp": "2026-04-14T11:04:39.84359702",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     },
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
@@ -362,9 +364,6 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
                 "CRAMINO": {
                     "cramino": "1.1.0"
                 },
@@ -376,6 +375,11 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -405,7 +409,7 @@
                     "mosdepth": "0.3.11"
                 },
                 "PORTELLO": {
-                    "portello": "portello 0.7.0"
+                    "portello": "0.7.0"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -562,10 +566,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-03-27T17:20:18.799744261",
+        "timestamp": "2026-04-14T11:02:05.758367043",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     },
     "Test alignment without genome assembly, --alignment_processes 1 and only plot chromograph coverage": {
@@ -677,7 +681,9 @@
         "content": [
             18,
             {
-                "CAT_CAT": {
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
                     "pigz": 2.8
                 },
                 "GFASTATS": {
@@ -696,7 +702,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "PORTELLO": {
-                    "portello": "portello 0.7.0"
+                    "portello": "0.7.0"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.23.1"
@@ -745,10 +751,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-03-27T17:19:40.14872124",
+        "timestamp": "2026-04-14T11:01:31.272833291",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -1129,9 +1135,6 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
                 },
@@ -1175,14 +1178,8 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
-                "MINIMAP2_ASSEMBLIES": {
-                    "minimap2": "2.29-r1283"
-                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "PORTELLO": {
-                    "portello": "portello 0.7.0"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -1197,22 +1194,10 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
-                "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_CALMD": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_INDEX_CALMD": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_INDEX_PBMM2": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
@@ -1349,10 +1334,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-04-02T14:06:48.773434341",
+        "timestamp": "2026-04-14T11:04:11.210724645",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     },
     "Test Peddy without annotation": {
@@ -1602,6 +1587,11 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
+                },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
                 },
@@ -1680,7 +1670,7 @@
                     "peddy": "0.4.8"
                 },
                 "PORTELLO": {
-                    "portello": "portello 0.7.0"
+                    "portello": "0.7.0"
                 },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
@@ -2025,10 +2015,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-03-27T17:21:15.838618761",
+        "timestamp": "2026-04-14T11:02:59.27063491",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     },
     "Test alignment without genome assembly": {
@@ -2106,7 +2096,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            135,
+            100,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -2254,9 +2244,6 @@
                 "aligned_reads/HG002",
                 "aligned_reads/HG002/HG002_haplotagged.bam",
                 "aligned_reads/HG002/HG002_haplotagged.bam.bai",
-                "aligned_reads/HG003",
-                "aligned_reads/HG003/HG003_haplotagged.bam",
-                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
                 "aligned_reads/HG004",
                 "aligned_reads/HG004/HG004_haplotagged.bam",
                 "aligned_reads/HG004/HG004_haplotagged.bam.bai",
@@ -2266,11 +2253,6 @@
                 "gens/HG002/HG002.baf.bed.gz.tbi",
                 "gens/HG002/HG002.cov.bed.gz",
                 "gens/HG002/HG002.cov.bed.gz.tbi",
-                "gens/HG003",
-                "gens/HG003/HG003.baf.bed.gz",
-                "gens/HG003/HG003.baf.bed.gz.tbi",
-                "gens/HG003/HG003.cov.bed.gz",
-                "gens/HG003/HG003.cov.bed.gz.tbi",
                 "gens/HG004",
                 "gens/HG004/HG004.baf.bed.gz",
                 "gens/HG004/HG004.baf.bed.gz.tbi",
@@ -2285,13 +2267,6 @@
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz.tbi",
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz.tbi",
-                "methylation/pileup/HG003",
-                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz.tbi",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz.tbi",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/pileup/HG004",
                 "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz",
                 "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz.tbi",
@@ -2302,8 +2277,6 @@
                 "methylation/profile",
                 "methylation/profile/HG002",
                 "methylation/profile/HG002/HG002_methbat_profile.tsv",
-                "methylation/profile/HG003",
-                "methylation/profile/HG003/HG003_methbat_profile.tsv",
                 "methylation/profile/HG004",
                 "methylation/profile/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
@@ -2318,8 +2291,6 @@
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002",
                 "qc/bcftools_stats/HG002/HG002.bcftools_stats.txt",
-                "qc/bcftools_stats/HG003",
-                "qc/bcftools_stats/HG003/HG003.bcftools_stats.txt",
                 "qc/bcftools_stats/HG004",
                 "qc/bcftools_stats/HG004/HG004.bcftools_stats.txt",
                 "qc/cramino",
@@ -2327,17 +2298,12 @@
                 "qc/cramino/phased/HG002",
                 "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.arrow",
                 "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.txt",
-                "qc/cramino/phased/HG003",
-                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.txt",
                 "qc/cramino/phased/HG004",
                 "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.arrow",
                 "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.txt",
                 "qc/deepvariant_vcfstatsreport",
                 "qc/deepvariant_vcfstatsreport/HG002",
                 "qc/deepvariant_vcfstatsreport/HG002/HG002.visual_report.html",
-                "qc/deepvariant_vcfstatsreport/HG003",
-                "qc/deepvariant_vcfstatsreport/HG003/HG003.visual_report.html",
                 "qc/deepvariant_vcfstatsreport/HG004",
                 "qc/deepvariant_vcfstatsreport/HG004/HG004.visual_report.html",
                 "qc/peddy",
@@ -2357,10 +2323,6 @@
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
-                "qc/phasing_stats/HG003",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
                 "qc/phasing_stats/HG004",
                 "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
                 "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
@@ -2376,11 +2338,6 @@
                 "repeats/sample/HG002/HG002_spanning_trgt.bam.bai",
                 "repeats/sample/HG002/HG002_trgt.vcf.gz",
                 "repeats/sample/HG002/HG002_trgt.vcf.gz.tbi",
-                "repeats/sample/HG003",
-                "repeats/sample/HG003/HG003_spanning_trgt.bam",
-                "repeats/sample/HG003/HG003_spanning_trgt.bam.bai",
-                "repeats/sample/HG003/HG003_trgt.vcf.gz",
-                "repeats/sample/HG003/HG003_trgt.vcf.gz.tbi",
                 "repeats/sample/HG004",
                 "repeats/sample/HG004/HG004_spanning_trgt.bam",
                 "repeats/sample/HG004/HG004_spanning_trgt.bam.bai",
@@ -2395,9 +2352,6 @@
                 "snvs/sample/HG002",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz.tbi",
-                "snvs/sample/HG003",
-                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz",
-                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz.tbi",
                 "snvs/sample/HG004",
                 "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz.tbi",
@@ -2406,20 +2360,16 @@
                 "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
-                "visualization_tracks/HG003",
-                "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
-                "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
-                "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
                 "visualization_tracks/HG004",
                 "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-02T14:09:21.641135839",
+        "timestamp": "2026-04-14T11:05:23.390263135",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
         }
     }
 }
