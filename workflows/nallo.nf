@@ -417,7 +417,7 @@ workflow NALLO {
         }
 
         // Preserve the original aligned read BAMs for phasing before any assembly remapping overwrites ch_bam_bai.
-        ch_bam_bai_for_phasing = ch_bam_bai
+        ch_bam_bai_unassembled = ch_bam_bai
 
     }
 
@@ -515,7 +515,7 @@ workflow NALLO {
     if (!val_skip_qc) {
 
         QC_ALIGNED_READS(
-            ch_bam_bai,
+            ch_bam_bai_unassembled,
             ch_fasta,
             ch_mosdepth_regions,
             ch_sambamba_regions,
@@ -753,7 +753,7 @@ workflow NALLO {
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
-            ch_bam_bai_for_phasing,
+            ch_bam_bai_unassembled,
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
