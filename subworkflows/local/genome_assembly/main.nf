@@ -96,16 +96,8 @@ workflow GENOME_ASSEMBLY {
     )
 
     // Explicitly key bins/reads by sample ID before assembly so each sample gets its own bins.
-    HIFIASM_BINS.out.bin_files
-        .map { meta, bin_files -> [[id: meta.id], meta, bin_files] }
-        .set { ch_hifiasm_bins_by_id }
-
     ch_hifiasm_in.reads
-        .map { meta, reads, ul_reads -> [[id: meta.id], meta, reads, ul_reads] }
-        .join(ch_hifiasm_bins_by_id, failOnMismatch: true, failOnDuplicate: true)
-        .map { _id, reads_meta, reads, ul_reads, _bins_meta, bin_files ->
-            [reads_meta, reads, ul_reads, bin_files]
-        }
+        .join(HIFIASM_BINS.out.bin_files, failOnMismatch: true, failOnDuplicate: true)
         .multiMap { meta, reads, ul_reads, bin_files ->
             reads: [meta, reads, ul_reads]
             bins: [meta, bin_files]
