@@ -289,6 +289,7 @@ workflow NALLO {
 
     }
 
+
     /*
      * Map reads to reference
      */
@@ -417,7 +418,7 @@ workflow NALLO {
         }
 
         // Preserve the original aligned read BAMs for phasing before any assembly remapping overwrites ch_bam_bai.
-        ch_bam_bai_unassembled = ch_bam_bai
+        //ch_bam_bai_unassembled = ch_bam_bai
 
     }
 
@@ -508,14 +509,14 @@ workflow NALLO {
     }
 
 
-
     //
     // Run read QC with FastQC, mosdepth and cramino
     //
     if (!val_skip_qc) {
 
         QC_ALIGNED_READS(
-            ch_bam_bai_unassembled,
+            //ch_bam_bai_unassembled,
+            BAM_INFER_SEX.out.bam_bai,
             ch_fasta,
             ch_mosdepth_regions,
             ch_sambamba_regions,
@@ -526,6 +527,7 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
     }
+
 
     /*
      * Call paralogous genes with paraphase
@@ -753,7 +755,8 @@ workflow NALLO {
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
-            ch_bam_bai_unassembled,
+            //ch_bam_bai_unassembled,
+            BAM_INFER_SEX.out.bam_bai,
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
