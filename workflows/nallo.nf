@@ -495,20 +495,22 @@ workflow NALLO {
         // Group GVCFs per region and family (one region with all samples)
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: 3, caller: val_snv_caller], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
             }
             .mix(ch_mitochondrial_vcf_with_intervals
-                .map { meta, vcf, num_intervals -> [[id: "mitochondrial", family_id: meta.family_id, num_intervals: num_intervals, caller: meta.caller], vcf]}
+                .map { meta, vcf ->
+                [[id: "mitochondrial", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], vcf]}
             )
             .groupTuple()
             .set { variants_to_merge_per_family }
 
         CALL_SNVS.out.gvcf_index
             .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: 3, caller: val_snv_caller], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
             }
             .mix(ch_mitochondrial_tbi_with_intervals
-                .map { meta, tbi, num_intervals -> [[id: "mitochondrial", family_id: meta.family_id, num_intervals: num_intervals, caller: meta.caller], tbi]}
+                .map { meta, tbi ->
+                [[id: "mitochondrial", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], tbi]}
             )
             .groupTuple()
             .set { gvcf_tbis_per_family }
@@ -564,7 +566,6 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         family_snv_vcf
-            .dump(tag: "family_snv_vcf_for_phasing")
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .set { ch_vcf_tbi_per_region }
     }
