@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#963](https://github.com/genomic-medicine-sweden/nallo/pull/963) - Added tests for `BAM_INFER_SEX` subworkflow
 - [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
 - [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added fai input to allow for pre-built index
 
 ### Changed
 

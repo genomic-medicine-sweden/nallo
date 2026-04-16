@@ -40,6 +40,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_expected_xx_bed
     ch_expected_xy_bed
     ch_fasta
+    ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
@@ -143,6 +144,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_expected_xx_bed,
         ch_expected_xy_bed,
         ch_fasta,
+        ch_fai,
         ch_genmod_reduced_penetrance,
         ch_genmod_score_config_snvs,
         ch_genmod_score_config_svs,
@@ -320,6 +322,7 @@ workflow {
         createReferenceChannelFromPath(params.cnv_expected_xx_cn),
         createReferenceChannelFromPath(params.cnv_expected_xy_cn),
         createReferenceChannelFromPath(params.fasta),
+        createReferenceChannelFromPath(params.fai),
         createReferenceChannelFromPath(params.genmod_reduced_penetrance),
         createReferenceChannelFromPath(params.genmod_score_config_snvs),
         createReferenceChannelFromPath(params.genmod_score_config_svs),
