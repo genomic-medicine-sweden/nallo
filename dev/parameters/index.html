@@ -1159,6 +1159,14 @@
 <td></td>
 <td></td>
 </tr>
+<tr>
+<td><code>fai</code></td>
+<td>Reference genome index file</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <h2 id="institutional-config-options">Institutional config options</h2>
@@ -1544,6 +1552,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>mitochondrial_caller</code></td>
+<td>Which mitochondrial caller to use for mitochondrial variant calling (<code>deepvariant</code>)</td>
+<td><code>string</code></td>
+<td>deepvariant</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>alignment_processes</code></td>
 <td>If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time.</td>
 <td><code>integer</code></td>
@@ -1553,7 +1569,7 @@
 </tr>
 <tr>
 <td><code>snv_calling_processes</code></td>
-<td>If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be <code>1</code> when <code>--snv_caller sentieon</code> is used.</td>
+<td>If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.</td>
 <td><code>integer</code></td>
 <td>13</td>
 <td></td>
@@ -1564,6 +1580,22 @@
 <td>VEP cache version</td>
 <td><code>integer</code></td>
 <td>110</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vep_mitochondrial_genome_distance</code></td>
+<td>The distance parameter used in VEP for mitochondrial SNVs</td>
+<td><code>integer</code></td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vep_nuclear_genome_distance</code></td>
+<td>The distance parameter used in VEP for nuclear SNVs</td>
+<td><code>integer</code></td>
+<td>5000</td>
 <td></td>
 <td></td>
 </tr>
