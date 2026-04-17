@@ -138,6 +138,7 @@ workflow NALLO {
     val_phaser
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
+    val_preset
     val_pre_vep_snv_filter_expression
     val_run_methbat
     val_run_modkit
@@ -437,18 +438,36 @@ workflow NALLO {
             val_snv_calling_processes,
         )
 
-        // Here problem if snv_caller is sentieon but the mitochondrial caller is default (deepvariant)
-        if (val_mitochondrial_caller == "deepvariant" && val_snv_caller == "deepvariant") {
+        // Prevents running Mitorsaw with ONT data, which is not supported.
+        if (val_mitochondrial_caller == "mitorsaw" && val_preset == "ONT_R10") {
+            error("Mitorsaw does not support ONT data. Please use a compatible mitochondrial caller (e.g. deepvariant) with ONT sequencing.")
+        }
 
-            SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals.map { meta, bed, num_intervals -> [ meta + [caller: val_snv_caller], bed, num_intervals]}.set { ch_bed_intervals }
+        if (val_snv_caller == "deepvariant" && val_mitochondrial_caller == "deepvariant") {
+            // Deepvariant handles nuclear and mitochondrial
+            SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals
+                .map { meta, bed, num_intervals -> [ meta + [caller: val_snv_caller], bed, num_intervals] }
+                .set { ch_bed_intervals }
             ch_mitochondrial_vcf = channel.empty()
             ch_mitochondrial_tbi = channel.empty()
-        }
-        else {
+        } else {
+            // SNV caller gets nuclear-only intervals
+            // Sentieon gets nuclear BED only; deepvariant + mito caller, Deepvariant also gets nuclear only)
+            SCATTER_GENOME.out.bed_nuclear_intervals
+                .map { meta, bed, num_intervals -> [ meta + [caller: val_snv_caller], bed, num_intervals] }
+                .set { ch_bed_intervals }
+
+            // Mitochondrial BED interval needed by deepvariant in CALL_MITOCHONDRIAL_VARIANTS
+            SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals
+                .filter { meta, _bed, _num_intervals -> meta.genome == "mitochondrial" }
+                .map { meta, bed, _num_intervals -> [meta, bed] }
+                .set { ch_mito_bed }
             CALL_MITOCHONDRIAL_VARIANTS(
                 ch_bam_bai,
                 ch_fasta,
                 ch_fai,
+                ch_par,
+                ch_mito_bed,
                 val_mitochondrial_caller,
             )
             CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_vcf
@@ -457,7 +476,6 @@ workflow NALLO {
             CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_tbi
                 .map { meta, tbi -> [meta + [caller: val_mitochondrial_caller], tbi] }
                 .set { ch_mitochondrial_tbi }
-            ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals.map { meta, bed, intervals -> [meta + [caller: val_snv_caller], bed, intervals]}
         }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
@@ -482,20 +500,21 @@ workflow NALLO {
             val_sentieon_tech,
         )
 
-        // Add the number of intervals to mitochondrial channels. Should be a function that counts
+        // Add nuclear interval count + 1 (mitochondrial) to get total num_intervals
         ch_mitochondrial_vcf
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals], vcf] }
+            .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals + 1], vcf] }
             .set { ch_mitochondrial_vcf_with_intervals }
         ch_mitochondrial_tbi
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals], tbi] }
+            .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals + 1], tbi] }
             .set { ch_mitochondrial_tbi_with_intervals }
+        ch_mitochondrial_tbi_with_intervals.dump(tag: "mitochondrial tbi with intervals")
 
         // Group GVCFs per region and family (one region with all samples)
         CALL_SNVS.out.gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf]
             }
             .mix(ch_mitochondrial_vcf_with_intervals
                 .map { meta, vcf ->
@@ -503,10 +522,11 @@ workflow NALLO {
             )
             .groupTuple()
             .set { variants_to_merge_per_family }
+        variants_to_merge_per_family.dump(tag: "variants to merge per family")
 
         CALL_SNVS.out.gvcf_index
             .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], tbi]
             }
             .mix(ch_mitochondrial_tbi_with_intervals
                 .map { meta, tbi ->
@@ -803,6 +823,7 @@ workflow NALLO {
     }
 
     if (!val_skip_chromograph) {
+        BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf.dump(tag: "chromograph input vcf")
         CHROMOGRAPH(
             ch_bam_bai,
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
@@ -851,12 +872,14 @@ workflow NALLO {
     //
     if (!val_skip_snv_calling) {
         ch_vcf_tbi_per_region
+            // .dump(tag: "ranked SNVs per region before concatenation")
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
-                [groupKey(new_meta, meta.num_intervals), vcf, tbi]
+                [groupKey(new_meta, 2), vcf, tbi]
             }
             .groupTuple()
             .set { ch_concat_sort_input }
+        ch_concat_sort_input.dump(tag: "concat sort input")
 
         CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
