@@ -94,6 +94,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_phaser
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
+    val_preset
     val_pre_vep_snv_filter_expression
     val_run_methbat
     val_run_modkit
@@ -197,6 +198,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_phaser,
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
+        val_preset,
         val_pre_vep_snv_filter_expression,
         val_run_methbat,
         val_run_modkit,
@@ -324,6 +326,7 @@ workflow {
         params.phaser,
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
+        params.preset,
         params.pre_vep_snv_filter_expression,
         params.run_methbat,
         params.run_modkit,
