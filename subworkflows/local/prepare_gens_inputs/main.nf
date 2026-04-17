@@ -1,10 +1,12 @@
-include { CAT_CAT                      } from '../../../modules/nf-core/cat/cat/main'
-include { GATK4_DENOISEREADCOUNTS      } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-include { GAWK as MOSDEPTH_GATK_HEADER } from '../../../modules/nf-core/gawk/main'
-include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/main'
-include { MOSDEPTH                     } from '../../../modules/nf-core/mosdepth/main'
-include { PREPARECOVANDBAF             } from '../../../modules/nf-core/gens/preparecovandbaf/main'
-include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools/view/main'
+include { CAT_CAT                       } from '../../../modules/nf-core/cat/cat/main'
+include { GATK4_DENOISEREADCOUNTS       } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+include { GAWK as MOSDEPTH_GATK_HEADER  } from '../../../modules/nf-core/gawk/main'
+include { GAWK as MOSDEPTH_GATK_FORMAT  } from '../../../modules/nf-core/gawk/main'
+include { MOSDEPTH                      } from '../../../modules/nf-core/mosdepth/main'
+include { PREPARECOVANDBAF              } from '../../../modules/nf-core/gens/preparecovandbaf/main'
+include { SAMTOOLS_VIEW                 } from '../../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_SORT                 } from '../../../modules/nf-core/samtools/sort/main'
+include { SAMTOOLS_AMPLICONCLIP         } from '../../../modules/nf-core/samtools/ampliconclip/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -17,15 +19,51 @@ workflow PREPARE_GENS_INPUTS {
 
     main:
     ch_bam
+        .map { meta, bam, _bai -> [meta, bam] }
+        .set { ch_bam_to_clip }
+
+    // remove out of bounds reads (i.e. those that start within the chromosome in the reference but end beyond it) to avoid mosdepth errors
+    SAMTOOLS_AMPLICONCLIP(
+        ch_bam_to_clip,
+        ch_mosdepth_bins
+            .map { _meta, bed -> [bed] },
+        false,
+        false
+    )
+
+    SAMTOOLS_AMPLICONCLIP.out.bam.view()
+
+    SAMTOOLS_SORT(
+        SAMTOOLS_AMPLICONCLIP.out.bam,
+        [[],[],[]],
+        'bai'
+    )
+
+    SAMTOOLS_SORT.out.bam
+        .join(SAMTOOLS_SORT.out.index)
+        .set { ch_bam_bai_clipped }
+
+    ch_bam_bai_clipped
         .combine(ch_mosdepth_bins)
         .map { meta, bam, bai, _bins_meta, bins ->
             [meta, bam, bai, bins]
         }
         .set { ch_mosdepth_in }
 
+    ch_mosdepth_in.view()
+
+/*
+    ch_bam
+        .combine(ch_mosdepth_bins)
+        .map { meta, bam, bai, _bins_meta, bins ->
+            [meta, bam, bai, bins]
+        }
+        .set { ch_mosdepth_in }
+*/
+
     // Prepare the header
     SAMTOOLS_VIEW(
-        ch_bam,
+        ch_bam_bai_clipped,
         [[],[],[]],
         [],
         false
@@ -98,6 +136,8 @@ workflow PREPARE_GENS_INPUTS {
         .join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz
         .join(PREPARECOVANDBAF.out.baf_tbi)
+
+    ch_cov_gz_tbi.view()
 
     emit:
     cov_bed_tbi = ch_cov_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]

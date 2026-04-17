@@ -308,6 +308,11 @@
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
+                    "samtools/ampliconclip": {
+                        "branch": "master",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/calmd": {
                         "branch": "master",
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
