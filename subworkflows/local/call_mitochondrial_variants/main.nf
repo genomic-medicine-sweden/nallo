@@ -33,13 +33,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
         // Broadcast the single mito BED to every sample
         ch_bam_bai
-            .dump(tag: "bam_bai in mitochondrial workflow")
             .combine(ch_mitochondrial_bed)
-            .dump(tag: "bam_bai input to call_snvs mitochondrial workflow")
             .map { bam_meta, bam, bai, mito_meta, bed ->
                 [bam_meta + [genome: mito_meta.genome, num_intervals: 1], bam, bai, bed, 1] }
             .set { call_snvs_input }
-        call_snvs_input.dump(tag: "input to call_snvs mitochondrial workflow")
 
         DEEPVARIANT_RUNDEEPVARIANT(
             call_snvs_input,

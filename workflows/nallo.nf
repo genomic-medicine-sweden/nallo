@@ -476,6 +476,16 @@ workflow NALLO {
             CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_tbi
                 .map { meta, tbi -> [meta + [caller: val_mitochondrial_caller], tbi] }
                 .set { ch_mitochondrial_tbi }
+
+            // Add nuclear interval count + 1 (mitochondrial) to get total num_intervals. ////// add for nuclear too
+            ch_mitochondrial_vcf
+                .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
+                .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals + 1], vcf] }
+                .set { ch_mitochondrial_vcf }
+            ch_mitochondrial_tbi
+                .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
+                .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals + 1], tbi] }
+                .set { ch_mitochondrial_tbi }
         }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
@@ -499,36 +509,34 @@ workflow NALLO {
             val_snv_caller,
             val_sentieon_tech,
         )
+        call_snvs_vcf = CALL_SNVS.out.vcf
+        call_snvs_index = CALL_SNVS.out.index
+        call_snvs_gvcf = CALL_SNVS.out.gvcf
+        call_snvs_gvcf_index = CALL_SNVS.out.gvcf_index
 
-        // Add nuclear interval count + 1 (mitochondrial) to get total num_intervals
-        ch_mitochondrial_vcf
-            .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals + 1], vcf] }
-            .set { ch_mitochondrial_vcf_with_intervals }
-        ch_mitochondrial_tbi
-            .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals + 1], tbi] }
-            .set { ch_mitochondrial_tbi_with_intervals }
-        ch_mitochondrial_tbi_with_intervals.dump(tag: "mitochondrial tbi with intervals")
-
+        // add 1 to the num intervals count for the mitochondrial region
+        if (val_snv_caller == "deepvariant" && val_mitochondrial_caller != "deepvariant") {
+            call_snvs_gvcf
+                .map {meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
+                .set { call_snvs_gvcf }
+        }
         // Group GVCFs per region and family (one region with all samples)
-        CALL_SNVS.out.gvcf
+        call_snvs_gvcf
             .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
             }
-            .mix(ch_mitochondrial_vcf_with_intervals
+            .mix(ch_mitochondrial_vcf
                 .map { meta, vcf ->
                 [[id: "mitochondrial", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], vcf]}
             )
             .groupTuple()
             .set { variants_to_merge_per_family }
-        variants_to_merge_per_family.dump(tag: "variants to merge per family")
 
-        CALL_SNVS.out.gvcf_index
+        call_snvs_index
             .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
             }
-            .mix(ch_mitochondrial_tbi_with_intervals
+            .mix(ch_mitochondrial_tbi
                 .map { meta, tbi ->
                 [[id: "mitochondrial", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], tbi]}
             )
@@ -548,7 +556,7 @@ workflow NALLO {
         GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
 
         // Grouping VCF, containing one sample with all regions
-        CALL_SNVS.out.vcf
+        call_snvs_vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
@@ -590,8 +598,8 @@ workflow NALLO {
             .set { ch_vcf_tbi_per_region }
     }
     if (!val_skip_prepare_gens_input) {
-        CALL_SNVS.out.gvcf
-            .join(CALL_SNVS.out.gvcf_index)
+        call_snvs_gvcf
+            .join(call_snvs_gvcf_index)
             .map { meta, gvcf, gvcf_index ->
                 def sample_meta = meta - meta.subMap(['region', 'num_intervals', 'genome'])
                 [sample_meta, gvcf, gvcf_index]
@@ -823,7 +831,6 @@ workflow NALLO {
     }
 
     if (!val_skip_chromograph) {
-        BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf.dump(tag: "chromograph input vcf")
         CHROMOGRAPH(
             ch_bam_bai,
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
@@ -872,14 +879,12 @@ workflow NALLO {
     //
     if (!val_skip_snv_calling) {
         ch_vcf_tbi_per_region
-            // .dump(tag: "ranked SNVs per region before concatenation")
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, 2), vcf, tbi]
             }
             .groupTuple()
             .set { ch_concat_sort_input }
-        ch_concat_sort_input.dump(tag: "concat sort input")
 
         CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
