@@ -1,0 +1,25 @@
+process CLIP_BAM {
+    tag "$meta.id"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/bamutil:1.0.15--h2e03b76_1'
+        : 'biocontainers/bamutil:1.0.15--h2e03b76_1'}"
+
+    input:
+    tuple val(meta), path(bam)
+
+    output:
+    tuple val(meta), path("${meta.id}_clipped.bam"), emit: bam
+
+    script:
+    """
+    bamUtil clipReads --in $bam --out ${meta.id}_clipped.bam --max
+    """
+    // samtools index clipped.bam
+
+/*
+// A TESTER
+    bedtools bamtobed -i ${bam} > ${prefix}.bed //bedtools/bamtobed
+    samtools ampliconclip -b ${prefix}.bed -o ${prefix}.clipallowed.bam ${bam}
+*/
+
+}

@@ -7,6 +7,7 @@ include { PREPARECOVANDBAF              } from '../../../modules/nf-core/gens/pr
 include { SAMTOOLS_VIEW                 } from '../../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_SORT                 } from '../../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_AMPLICONCLIP         } from '../../../modules/nf-core/samtools/ampliconclip/main'
+include { BAM_QC_FILTER                 } from '../../../modules/local/filter_bam/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -18,7 +19,7 @@ workflow PREPARE_GENS_INPUTS {
     ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-    ch_bam
+/*    ch_bam
         .map { meta, bam, _bai -> [meta, bam] }
         .set { ch_bam_to_clip }
 
@@ -42,13 +43,20 @@ workflow PREPARE_GENS_INPUTS {
     SAMTOOLS_SORT.out.bam
         .join(SAMTOOLS_SORT.out.index)
         .set { ch_bam_bai_clipped }
+*/
+    BAM_QC_FILTER(
+        ch_bam,
+    )
 
-    ch_bam_bai_clipped
+    BAM_QC_FILTER.out.bam_bai
         .combine(ch_mosdepth_bins)
         .map { meta, bam, bai, _bins_meta, bins ->
             [meta, bam, bai, bins]
         }
         .set { ch_mosdepth_in }
+
+    BAM_QC_FILTER.out.bam_bai
+        .set { ch_bam_bai_clipped }
 
     ch_mosdepth_in.view()
 
