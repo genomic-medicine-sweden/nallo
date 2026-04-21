@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Workflow PREPARE_GENS_INPUTS"
     script "../main.nf"
     workflow "PREPARE_GENS_INPUTS"
+    config "./nextflow.config"
 
     test("prepare_gens_inputs") {
         when {
