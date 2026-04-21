@@ -237,6 +237,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,6 +246,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 */
 
 workflow {
+
+    main:
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
@@ -424,4 +427,13 @@ workflow {
         params.hook_url,
         GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
+
+    publish:
+    aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+}
+
+output {
+    aligned_assemblies {
+        path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
 }

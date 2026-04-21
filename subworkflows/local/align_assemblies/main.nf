@@ -6,47 +6,46 @@ include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/mai
 include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
-
     take:
     ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fasta    // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai      // channel: [mandatory] [ val(meta), path(fai)   ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai // channel: [mandatory] [ val(meta), path(fai)   ]
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    MINIMAP2_INDEX (
+    MINIMAP2_INDEX(
         ch_fasta
     )
 
-    MINIMAP2_ALIGN (
+    MINIMAP2_ALIGN(
         ch_assembly,
         MINIMAP2_INDEX.out.index.collect(),
         true,
         'bai',
         false,
-        false
+        false,
     )
 
-    SAMTOOLS_VIEW (
-        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch:true, failOnDuplicate:true),
-        [[],[],[]],
+    SAMTOOLS_VIEW(
+        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true),
+        [[], [], []],
         [],
-        false
+        false,
     )
 
-    TAGBAM (
+    TAGBAM(
         SAMTOOLS_VIEW.out.bam
     )
 
     TAGBAM.out.bam
-        .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
+        .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
         .groupTuple(size: 2)
-        .map { meta, bams -> [ meta, bams, [] ] }
+        .map { meta, bams -> [meta, bams, []] }
         .set { ch_assemblies_per_sample }
 
-    SAMTOOLS_MERGE (
+    SAMTOOLS_MERGE(
         ch_assemblies_per_sample,
-        [[],[],[],[]],
+        [[], [], [], []],
     )
 
     // Publish alignment as CRAM if requested
@@ -58,6 +57,9 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    bam = SAMTOOLS_MERGE.out.bam   // channel: [ val(meta), path(bam) ]
-    bai = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
+    bam  = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
+    bai  = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
+    cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+
 }
