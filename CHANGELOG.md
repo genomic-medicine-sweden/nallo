@@ -57,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#981](https://github.com/genomic-medicine-sweden/nallo/pull/981) - Moved params from `PIPELINE_INITIALISATION` to main workflow and sorted inputs
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Updated nf-test to 0.6.1
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Output CRAM version 3.1 instead of 3.0
+- [#1019](https://github.com/genomic-medicine-sweden/nallo/pull/1019) - Update nf-schema to 2.7.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 
