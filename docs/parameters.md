@@ -87,6 +87,7 @@ Reference genome related files and options required for the workflow.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `fasta` | Reference genome | `string` |  |  |  |
+| `fai` | Reference genome index file | `string` |  |  |  |
 
 ## Institutional config options
 
@@ -152,7 +153,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`) | `string` | deepvariant |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
-| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
+| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
 | `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |

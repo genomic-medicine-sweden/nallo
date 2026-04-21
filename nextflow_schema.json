@@ -444,6 +444,13 @@
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
                     "format": "file-path",
                     "exists": true
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Reference genome index file",
+                    "pattern": "^.*\\.fai$",
+                    "format": "file-path",
+                    "exists": true
                 }
             }
         },
