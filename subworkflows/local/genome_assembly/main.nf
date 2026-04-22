@@ -10,7 +10,7 @@ workflow GENOME_ASSEMBLY {
 
     take:
     ch_reads     // channel: [ val(meta), fastqs ]
-    trio_binning //    bool: Should we use trio binning mode where possible?
+    trio_binning // bool: Should we use trio binning mode where possible?
 
     main:
     if (trio_binning) {
@@ -83,7 +83,7 @@ workflow GENOME_ASSEMBLY {
         ch_reads
             .multiMap { meta, reads ->
                 reads : [ meta, reads, [] ]
-                yak   : [ [], [], [] ]
+                yak   : [ meta, [], [] ]
             }
             .set { ch_hifiasm_in }
     }
@@ -95,18 +95,20 @@ workflow GENOME_ASSEMBLY {
         [[],[]]
     )
 
-    // Explicitly key bins/reads by sample ID before assembly so each sample gets its own bins.
+    // Explicitly key bins/reads/yak by sample ID before assembly so each sample gets its own bins and yaks.
     ch_hifiasm_in.reads
+        .join(ch_hifiasm_in.yak, failOnMismatch: true, failOnDuplicate: true)
         .join(HIFIASM_BINS.out.bin_files, failOnMismatch: true, failOnDuplicate: true)
-        .multiMap { meta, reads, ul_reads, bin_files ->
+        .multiMap { meta, reads, ul_reads, yak_paternal, yak_maternal, bin_files ->
             reads: [meta, reads, ul_reads]
             bins: [meta, bin_files]
+            yak: [ meta, yak_paternal, yak_maternal ]
         }
         .set { ch_hifiasm_assembly_in }
 
     HIFIASM_ASSEMBLY (
         ch_hifiasm_assembly_in.reads,
-        ch_hifiasm_in.yak,
+        ch_hifiasm_assembly_in.yak,
         [[],[],[]],
         ch_hifiasm_assembly_in.bins
     )
