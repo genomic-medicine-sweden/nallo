@@ -204,3 +204,6 @@ tool:
   find:
     citation: "find/concatenate"
     bibliography: ""
+  gatk:
+    citation: "GATK (Van der Auwera & O'Connor 2020)"
+    bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."

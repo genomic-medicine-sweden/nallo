@@ -48,6 +48,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subw
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
+include { GATK4_CLEANSAM               } from '../modules/local/gatk4/cleansam/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
@@ -65,7 +66,7 @@ include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modu
 include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
 include { FIND_CONCATENATE                                       } from '../modules/nf-core/find/concatenate/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CALMD                 } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CLEANSAM              } from '../modules/nf-core/samtools/index/main'
 include { PORTELLO                                               } from '../modules/nf-core/portello/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_PORTELLO                } from '../modules/nf-core/samtools/sort/main'
 include { MINIMAP2_INDEX                                         } from '../modules/nf-core/minimap2/index/main'
@@ -500,12 +501,17 @@ workflow NALLO {
             ch_fasta.join(ch_fai).collect(),
         )
 
-        SAMTOOLS_INDEX_CALMD(
-            SAMTOOLS_CALMD.out.bam
+        GATK4_CLEANSAM(
+            SAMTOOLS_CALMD.out.bam,
+            false
         )
 
-        ch_bam = SAMTOOLS_CALMD.out.bam
-        ch_bam_bai = ch_bam.join(SAMTOOLS_INDEX_CALMD.out.index)
+        SAMTOOLS_INDEX_CLEANSAM(
+            GATK4_CLEANSAM.out.bam
+        )
+
+        ch_bam = GATK4_CLEANSAM.out.bam
+        ch_bam_bai = GATK4_CLEANSAM.out.bam.join(SAMTOOLS_INDEX_CLEANSAM.out.index, failOnMismatch: true, failOnDuplicate: true)
     }
 
     //

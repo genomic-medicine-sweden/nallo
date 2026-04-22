@@ -20,12 +20,12 @@ workflow PREPARE_GENS_INPUTS {
     ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-    ch_bam
+/*    ch_bam
         .map { meta, bam, _bai -> [meta, bam] }
         .set { ch_bam_to_clip }
 
     // remove out of bounds reads (i.e. those that start within the chromosome in the reference but end beyond it) to avoid mosdepth errors
-/*    SAMTOOLS_AMPLICONCLIP(
+    SAMTOOLS_AMPLICONCLIP(
         ch_bam_to_clip,
         ch_mosdepth_bins
             .map { _meta, bed -> [bed] },
@@ -49,7 +49,7 @@ workflow PREPARE_GENS_INPUTS {
         ch_bam,
     )
 
-    BAM_QC_FILTER.out.bam_bai*/
+    BAM_QC_FILTER.out.bam_bai
 
     GATK4_CLEANSAM(
         ch_bam_to_clip,
@@ -67,19 +67,20 @@ workflow PREPARE_GENS_INPUTS {
         .set { ch_mosdepth_in }
 
     ch_mosdepth_in.view()
+*/
 
-/*
     ch_bam
         .combine(ch_mosdepth_bins)
         .map { meta, bam, bai, _bins_meta, bins ->
             [meta, bam, bai, bins]
         }
         .set { ch_mosdepth_in }
-*/
+
 
     // Prepare the header
     SAMTOOLS_VIEW(
-        ch_bam_bai_clipped,
+        //ch_bam_bai_clipped,
+        ch_bam,
         [[],[],[]],
         [],
         false
@@ -152,8 +153,6 @@ workflow PREPARE_GENS_INPUTS {
         .join(PREPARECOVANDBAF.out.cov_tbi)
     ch_baf_gz_tbi = PREPARECOVANDBAF.out.baf_gz
         .join(PREPARECOVANDBAF.out.baf_tbi)
-
-    ch_cov_gz_tbi.view()
 
     emit:
     cov_bed_tbi = ch_cov_gz_tbi    // channel: [ val(meta), path(bed_gz), path(tbi) ]

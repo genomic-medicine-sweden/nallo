@@ -12,8 +12,9 @@ process GATK4_CLEANSAM {
     val(create_index)
 
     output:
-    tuple val(meta), path("*.bam"), path("*.bai"), emit: bam_bai
-    tuple val("${task.process}"), val('gatk'), eval("gatk CleanSam --version 2>&1 | sed -n 's/.*Version://p'"), topic: versions, emit: versions_picard
+    tuple val(meta), path("*.bam"), emit: bam
+    tuple val(meta), path("*.bai"), emit: bai, optional: true
+    tuple val("${task.process}"), val('gatk'), eval("gatk CleanSam --version | grep GATK | sed 's/.*(GATK) v//'"), topic: versions, emit: versions_picard
 
     when:
     task.ext.when == null || task.ext.when
@@ -40,10 +41,12 @@ process GATK4_CLEANSAM {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def index = create_index? "touch ${prefix}.bam.bai" : ""
     if ("${bam}" == "${prefix}.bam") {
         error("Input and output names are the same, use \"task.ext.prefix\" to disambiguate!")
     }
     """
-    touch ${prefix}.bam ${prefix}.bam.bai
+    touch ${prefix}.bam
+    ${index}
     """
 }
