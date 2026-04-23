@@ -130,8 +130,6 @@ workflow GENOME_ASSEMBLY {
         [[], []],
     )
 
-    GFASTATS.out.assembly.view()
-
     emit:
     assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
 }
