@@ -111,6 +111,21 @@
                         "git_sha": "a8c26e293e72d224e367cc7af8cce589ce008480",
                         "installed_by": ["modules"]
                     },
+                    "csvtk/concat": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
+                    "csvtk/mutate2": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
+                    "csvtk/sort": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
                     "custom/addmostsevereconsequence": {
                         "branch": "master",
                         "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
