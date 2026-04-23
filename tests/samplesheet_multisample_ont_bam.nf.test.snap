@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            346,
+            349,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -121,7 +121,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFIASM": {
+                "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -1229,10 +1232,10 @@
                 
             ]
         ],
-        "timestamp": "2026-04-02T14:06:48.82914627",
+        "timestamp": "2026-04-08T15:14:16.98293374",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }

@@ -44,11 +44,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T16:58:10.652835085",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:58:10.652835085"
+        }
     },
     "two children with two parents, trio-binning mode": {
         "content": [
@@ -291,11 +291,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-22T12:07:24.83452037",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:57:45.252123092"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
+        }
     },
     "child with one parent, trio-binning mode -stub": {
         "content": [
@@ -418,11 +418,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T16:57:54.591328042",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:57:54.591328042"
+        }
     },
     "child with two parents, trio-binning mode": {
         "content": [
@@ -601,11 +601,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-22T12:03:31.707774681",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:57:11.460996721"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.2"
+        }
     },
     "one sample, hifi-only mode -stub": {
         "content": [
@@ -652,11 +652,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T16:58:02.560119499",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:58:02.560119499"
+        }
     },
     "one sample, hifi-only mode": {
         "content": [
@@ -703,11 +703,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T16:56:43.261998747",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:56:43.261998747"
+        }
     },
     "child with two parents, trio-binning mode -stub": {
         "content": [
@@ -886,10 +886,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T16:58:20.771161421",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:58:20.771161421"
+        }
     }
 }

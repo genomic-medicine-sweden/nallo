@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#962](https://github.com/genomic-medicine-sweden/nallo/pull/962) - Changed peddy inputs from ranked to annotated or unannotated variants, depending on availability
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/964) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#966](https://github.com/genomic-medicine-sweden/nallo/pull/966) - Refactored the code related to variant ranking to reduce code duplication
+- [#969](https://github.com/genomic-medicine-sweden/nallo/pull/969) - Split hifiasm process into two so they can have different resources: first only create bins then assembly with the bins already created
 - [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Updated FastQC nf-core module
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
