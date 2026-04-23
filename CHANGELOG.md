@@ -82,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Fixed`
 
+- PATCH
 - [#885](https://github.com/genomic-medicine-sweden/nallo/pull/885) - Fixed non-contiguous chromosome blocks error in `CONCAT_SORT_GENS:BCFTOOLS_CONCAT`
 
 ## 0.10.1 - [2026-02-05]
