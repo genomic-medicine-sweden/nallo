@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            394,
+            399,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,6 +71,15 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": "1.2.0",
@@ -531,12 +540,16 @@
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/profile",
-                "methylation/profile/HG002",
-                "methylation/profile/HG002/HG002_methbat_profile.tsv",
-                "methylation/profile/HG003",
-                "methylation/profile/HG003/HG003_methbat_profile.tsv",
-                "methylation/profile/HG004",
-                "methylation/profile/HG004/HG004_methbat_profile.tsv",
+                "methylation/profile/family",
+                "methylation/profile/family/FAM",
+                "methylation/profile/family/FAM/FAM_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/HG002",
+                "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/sample/HG003",
+                "methylation/profile/sample/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/sample/HG004",
+                "methylation/profile/sample/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -1307,10 +1320,10 @@
                 
             ]
         ],
-        "timestamp": "2026-04-08T15:10:24.155468815",
+        "timestamp": "2026-04-23T16:32:04.703840234",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.2"
         }
     }
 }

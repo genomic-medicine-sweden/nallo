@@ -1433,7 +1433,7 @@
     },
     "Test family id same as sample id": {
         "content": [
-            192,
+            195,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1503,6 +1503,15 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": "1.2.0",
@@ -1816,8 +1825,12 @@
                 "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/profile",
-                "methylation/profile/HG002_Revio",
-                "methylation/profile/HG002_Revio/HG002_Revio_methbat_profile.tsv",
+                "methylation/profile/family",
+                "methylation/profile/family/HG002_Revio",
+                "methylation/profile/family/HG002_Revio/HG002_Revio_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/HG002_Revio",
+                "methylation/profile/sample/HG002_Revio/HG002_Revio_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/.stub",
@@ -1942,10 +1955,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-10T11:04:36.153042764",
+        "timestamp": "2026-04-23T16:38:58.183825119",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.2"
         }
     },
     "Test alignment without genome assembly": {
@@ -2023,7 +2036,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            135,
+            140,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -2069,6 +2082,15 @@
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -2217,12 +2239,16 @@
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/profile",
-                "methylation/profile/HG002",
-                "methylation/profile/HG002/HG002_methbat_profile.tsv",
-                "methylation/profile/HG003",
-                "methylation/profile/HG003/HG003_methbat_profile.tsv",
-                "methylation/profile/HG004",
-                "methylation/profile/HG004/HG004_methbat_profile.tsv",
+                "methylation/profile/family",
+                "methylation/profile/family/FAM",
+                "methylation/profile/family/FAM/FAM_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/HG002",
+                "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/sample/HG003",
+                "methylation/profile/sample/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/sample/HG004",
+                "methylation/profile/sample/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/.stub",
@@ -2333,10 +2359,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-10T11:07:06.95171678",
+        "timestamp": "2026-04-23T16:41:07.298950976",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.2"
         }
     }
 }
