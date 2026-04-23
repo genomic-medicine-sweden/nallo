@@ -100,7 +100,7 @@ The `Fixed` section of the changelog should be reserved for bugs fixed from one 
 
 :warning: Only in the unlikely and regretful event of a release happening with a bug.
 
-- On the genomic-medicine-sweden/nallo repository, make a new branch `patch` based on `upstream/main` or `upstream/master`.
+- On your own fork, make a new branch `patch` based on `upstream/main` or `upstream/master`.
 - Fix the bug, and bump version (X.Y.Z+1).
 - Open a pull-request from `patch` to `main`/`master` with the changes.
 
