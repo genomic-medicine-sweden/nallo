@@ -444,6 +444,13 @@
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
                     "format": "file-path",
                     "exists": true
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Reference genome index file",
+                    "pattern": "^.*\\.fai$",
+                    "format": "file-path",
+                    "exists": true
                 }
             }
         },
@@ -729,7 +736,7 @@
                 "snv_calling_processes": {
                     "type": "integer",
                     "default": 13,
-                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
+                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used.",
                     "minimum": 1
                 },
                 "vep_cache_version": {

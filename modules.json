@@ -203,7 +203,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "b00cfb8947da7842e8f249cc0c5bb8544cfac18e",
+                        "git_sha": "a20dba808c5ce99afe6d40d7fc072c74ca317c8d",
                         "installed_by": ["modules"]
                     },
                     "hificnv": {

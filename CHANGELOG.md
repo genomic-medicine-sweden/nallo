@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [#922] (https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
-- [#934] (https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
+- [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
+- [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
 - [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#963](https://github.com/genomic-medicine-sweden/nallo/pull/963) - Added tests for `BAM_INFER_SEX` subworkflow
 - [#971](https://github.com/genomic-medicine-sweden/nallo/pull/971) - Added `igenomes` and `fastqc` to template skip features, making future template updates smoother
 - [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
+- [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Added cram and crai outputs to `align_assemblies`
+- [#1024](https://github.com/genomic-medicine-sweden/nallo/pull/1024) - Added fai input to allow for pre-built index
 
 ### Changed
 
@@ -44,8 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#954](https://github.com/genomic-medicine-sweden/nallo/pull/954) - Changed to topic versions in `HIPHASE`
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Moved requirement of `--somalier_sites` to `--skip_sex_check` instead of `--skip_alignment` since it is not needed for the alignment
 - [#959](https://github.com/genomic-medicine-sweden/nallo/pull/959) - Updated PR template
+- [#962](https://github.com/genomic-medicine-sweden/nallo/pull/962) - Changed peddy inputs from ranked to annotated or unannotated variants, depending on availability
 - [#964](https://github.com/genomic-medicine-sweden/nallo/pull/964) - Limit `--snv_calling_processes` to `1` for sentieon due to issues with duplicated variants (see #926)
 - [#966](https://github.com/genomic-medicine-sweden/nallo/pull/966) - Refactored the code related to variant ranking to reduce code duplication
+- [#969](https://github.com/genomic-medicine-sweden/nallo/pull/969) - Split hifiasm process into two so they can have different resources: first only create bins then assembly with the bins already created
 - [#974](https://github.com/genomic-medicine-sweden/nallo/pull/974) - Updated FastQC nf-core module
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Moved params from `nallo.nf` to main workflow
 - [#975](https://github.com/genomic-medicine-sweden/nallo/pull/975) - Renamed `ch_databases` to `ch_echtvar_databases` for clarity
@@ -53,9 +57,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#978](https://github.com/genomic-medicine-sweden/nallo/pull/978) - Move the sawfish maf track file generation from `samplesheet_multisample_bam.nf.test` to `samplesheet.nf.test` to speed up tests. Added sawfish caller to `samplesheet.nf.test`
 - [#979](https://github.com/genomic-medicine-sweden/nallo/pull/979) - Changed tag of MultiQC process to multiqc
 - [#981](https://github.com/genomic-medicine-sweden/nallo/pull/981) - Moved params from `PIPELINE_INITIALISATION` to main workflow and sorted inputs
+- [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Renamed `ch_input` to `ch_samplesheet` for clarity
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Updated nf-test to 0.6.1
 - [#1017](https://github.com/genomic-medicine-sweden/nallo/pull/1017) - Output CRAM version 3.1 instead of 3.0
+- [#1019](https://github.com/genomic-medicine-sweden/nallo/pull/1019) - Update nf-schema to 2.7.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
+- [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 
 ### Removed
@@ -501,7 +508,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#746](https://github.com/genomic-medicine-sweden/nallo/pull/746) - Changed the default hifiasm strategy to trio-binning whenever parental reads are available
 - [#748](https://github.com/genomic-medicine-sweden/nallo/pull/748) - Improved pipeline test assertations and removed irrelevant pipeline tests from stub tests
 - [#755](https://github.com/genomic-medicine-sweden/nallo/pull/755) - Updated nf-core template to v3.3.2
-- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with emtpy (.) INFO field
+- [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated `ADD_FOUND_IN_TAG` to work with empty (.) INFO field
 - [#758](https://github.com/genomic-medicine-sweden/nallo/pull/758) - Updated (internal) per sample DeepVariant calls to include FOUND_IN tag
 - [#760](https://github.com/genomic-medicine-sweden/nallo/pull/760) - Updated the assembly documentation
 - [#765](https://github.com/genomic-medicine-sweden/nallo/pull/765) - Updated paraphase to 3.3.4
