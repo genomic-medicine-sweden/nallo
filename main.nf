@@ -40,6 +40,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_expected_xx_bed
     ch_expected_xy_bed
     ch_fasta
+    ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
@@ -143,6 +144,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_expected_xx_bed,
         ch_expected_xy_bed,
         ch_fasta,
+        ch_fai,
         ch_genmod_reduced_penetrance,
         ch_genmod_score_config_snvs,
         ch_genmod_score_config_svs,
@@ -235,6 +237,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,6 +246,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 */
 
 workflow {
+
+    main:
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
@@ -320,6 +325,7 @@ workflow {
         createReferenceChannelFromPath(params.cnv_expected_xx_cn),
         createReferenceChannelFromPath(params.cnv_expected_xy_cn),
         createReferenceChannelFromPath(params.fasta),
+        createReferenceChannelFromPath(params.fai),
         createReferenceChannelFromPath(params.genmod_reduced_penetrance),
         createReferenceChannelFromPath(params.genmod_score_config_snvs),
         createReferenceChannelFromPath(params.genmod_score_config_svs),
@@ -421,4 +427,13 @@ workflow {
         params.hook_url,
         GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
+
+    publish:
+    aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+}
+
+output {
+    aligned_assemblies {
+        path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
 }
