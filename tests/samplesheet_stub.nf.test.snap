@@ -1373,7 +1373,7 @@
                     "vcfexpress": "0.3.4"
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0"
                 }
             },
             [
@@ -1425,7 +1425,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-10T11:07:36.674984654",
+        "timestamp": "2026-04-24T13:29:05.74870332",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -1670,8 +1670,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": 1.23
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -1942,7 +1942,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-10T11:04:36.153042764",
+        "timestamp": "2026-04-24T13:26:31.89523597",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
