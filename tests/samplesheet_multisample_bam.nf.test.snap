@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            391,
+            394,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -134,7 +134,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFIASM": {
+                "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -1304,10 +1307,10 @@
                 
             ]
         ],
-        "timestamp": "2026-03-31T09:34:04.924971149",
+        "timestamp": "2026-04-08T15:10:24.155468815",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "26.02.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }
