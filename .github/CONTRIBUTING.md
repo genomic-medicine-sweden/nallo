@@ -14,7 +14,6 @@ Contributions to the code are even more welcome ;)
 - [General](#general)
   - [Contribution workflow](#contribution-workflow)
     - [Pull Requests](#pull-requests)
-      - [PR title conventions](#pr-title-conventions)
       - [Review](#review)
   - [Software versioning, changelog and updates](#software-versioning-changelog-and-updates)
     - [Semantic versioning and changelog](#semantic-versioning-and-changelog)
@@ -58,23 +57,6 @@ If you're not used to this workflow with git, you can start with some [docs from
 #### Pull Requests
 
 When opening a pull request to suggest changes to the code, please make sure to follow the [Pipeline contribution conventions](#pipeline-contribution-conventions) for the code and to fill in the necessary information in the pull request template as well as address all points in the `PR checklist`.
-
-##### PR title conventions
-
-We have implemented a standardised PR title format to make it easier to understand the type of change being proposed at a glance.
-Addionally, there is an automated check for every PR that will only allow mergere if the title adheres to one of the following formats:
-
-- feat: A new feature
-- fix: A bug fix
-- docs: Documentation only changes
-- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- refactor: A code change that neither fixes a bug nor adds a feature
-- perf: A code change that improves performance
-- test: Adding missing tests or correcting existing tests
-- build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-- chore: Other changes that don't modify src or test files
-- revert: Reverts a previous commit
 
 ##### Review
 
