@@ -39,7 +39,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
-include { ANNOTATE_METHYLATION_METHBAT                                   } from '../subworkflows/local/annotate_methylation_methbat'
+include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -979,7 +979,7 @@ workflow NALLO {
             ch_methbat_regions,
         )
 
-         ANNOTATE_METHYLATION_METHBAT(
+         ANNOTATE_METHYLATION(
             CALL_METHYLATION_METHBAT.out.region_profile
         )
     }
