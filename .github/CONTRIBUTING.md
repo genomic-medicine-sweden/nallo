@@ -14,6 +14,7 @@ Contributions to the code are even more welcome ;)
 - [General](#general)
   - [Contribution workflow](#contribution-workflow)
     - [Pull Requests](#pull-requests)
+      - [PR title conventions](#pr-title-conventions)
       - [Review](#review)
   - [Software versioning, changelog and updates](#software-versioning-changelog-and-updates)
     - [Semantic versioning and changelog](#semantic-versioning-and-changelog)
@@ -26,11 +27,9 @@ Contributions to the code are even more welcome ;)
   - [Running tests](#running-tests)
     - [Lint tests](#lint-tests)
     - [Pipeline tests](#pipeline-tests)
-  - [Adding citations](#adding-citations)
-    - [1. `CITATIONS.md`](#1-citationsmd)
-    - [2. `subworkflows/local/utils_nfcore_nallo_pipeline/main.nf`](#2-subworkflowslocalutils_nfcore_nallo_pipelinemainnf)
-    - [3. `README.md`](#3-readmemd)
-  - [Images and figures](#images-and-figures)
+  - [Adding new tools](#adding-new-tools)
+    - [1. Update citations](#1-update-citations)
+    - [2. Update `README.md`](#2-update-readmemd)
 - [Coding conventions](#coding-conventions)
   - [Architecture & structure](#architecture--structure)
   - [Adding a new step](#adding-a-new-step)
@@ -60,6 +59,23 @@ If you're not used to this workflow with git, you can start with some [docs from
 
 When opening a pull request to suggest changes to the code, please make sure to follow the [Pipeline contribution conventions](#pipeline-contribution-conventions) for the code and to fill in the necessary information in the pull request template as well as address all points in the `PR checklist`.
 
+##### PR title conventions
+
+We have implemented a standardised PR title format to make it easier to understand the type of change being proposed at a glance.
+Addionally, there is an automated check for every PR that will only allow mergere if the title adheres to one of the following formats:
+
+- feat: A new feature
+- fix: A bug fix
+- docs: Documentation only changes
+- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- refactor: A code change that neither fixes a bug nor adds a feature
+- perf: A code change that improves performance
+- test: Adding missing tests or correcting existing tests
+- build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- chore: Other changes that don't modify src or test files
+- revert: Reverts a previous commit
+
 ##### Review
 
 When reviewing a PR, make sure to check that:
@@ -82,7 +98,7 @@ The `Fixed` section of the changelog should be reserved for bugs fixed from one 
 
 :warning: Only in the unlikely and regretful event of a release happening with a bug.
 
-- On your own fork, make a new branch `patch` based on `upstream/main` or `upstream/master`.
+- On the genomic-medicine-sweden/nallo repository, make a new branch `patch` based on `upstream/main` or `upstream/master`.
 - Fix the bug, and bump version (X.Y.Z+1).
 - Open a pull-request from `patch` to `main`/`master` with the changes.
 
@@ -224,7 +240,7 @@ We are currently migrating from using `publishDir` to workflow outputs.
 - Every subworkflow should have real tests and `-stub` tests at `subworkflows/local/<name>/tests/main.nf.test`.
 - Snapshot files (`*.nf.test.snap`) are committed alongside tests — update them when outputs change.
 - Pipeline-level tests live in `tests/`.
-- When modules in tests require different parameters, use `params { <module>_args = ... }` similar to https://nf-co.re/docs/specifications/components/modules/testing#configuration-of-extargs-in-tests instead of having mutliple configs.
+- When modules in tests require different parameters, use `params { <module>_args = ... }` similar to https://nf-co.re/docs/specifications/components/modules/testing#configuration-of-extargs-in-tests instead of having mutliple configs.
 
 ### Style
 
