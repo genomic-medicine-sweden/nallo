@@ -52,9 +52,10 @@ This document describes the pipeline output files and the tools used to generate
 
 [Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values.
 
-| Path                                                        | Description                                        |
-| ----------------------------------------------------------- | -------------------------------------------------- |
-| `methylation/profile/{sample}/{sample}_methbat_profile.tsv` | Tsv file with methylation profile of input regions |
+| Path                                                                  | Description                                                                                                                       |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `methylation/profile/{sample}/{sample}_methbat_profile.tsv`           | Tsv file with methylation profile of input regions                                                                                |
+| `methylation/profile/{family}/{family}_methbat_profile_annotated.tsv` | Tsv file with methylation profile of input regions concatenated per family and sorted on sample_id, chromosome and start position |
 
 ## MultiQC
 
