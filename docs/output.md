@@ -54,8 +54,8 @@ This document describes the pipeline output files and the tools used to generate
 
 | Path                                                                  | Description                                                                                                                       |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `methylation/profile/{sample}/{sample}_methbat_profile.tsv`           | Tsv file with methylation profile of input regions                                                                                |
-| `methylation/profile/{family}/{family}_methbat_profile_annotated.tsv` | Tsv file with methylation profile of input regions concatenated per family and sorted on sample_id, chromosome and start position |
+| `methylation/profile/{sample}/{sample}_methbat_profile.tsv`           | TSV file with methylation profile of input regions                                                                                |
+| `methylation/profile/{family}/{family}_methbat_profile_annotated.tsv` | TSV file with methylation profile of input regions concatenated per family and sorted on sample_id, chromosome and start position |
 
 ## MultiQC
 
