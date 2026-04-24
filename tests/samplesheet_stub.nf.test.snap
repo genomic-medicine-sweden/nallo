@@ -1679,8 +1679,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": 1.23
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -1827,7 +1827,7 @@
                 "methylation/profile",
                 "methylation/profile/family",
                 "methylation/profile/family/HG002_Revio",
-                "methylation/profile/family/HG002_Revio/HG002_Revio_annotated.tsv",
+                "methylation/profile/family/HG002_Revio/HG002_Revio_methbat_profile_annotated.tsv",
                 "methylation/profile/sample",
                 "methylation/profile/sample/HG002_Revio",
                 "methylation/profile/sample/HG002_Revio/HG002_Revio_methbat_profile.tsv",
@@ -1955,7 +1955,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-23T16:38:58.183825119",
+        "timestamp": "2026-04-24T10:03:38.048918023",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.2"
@@ -2241,7 +2241,7 @@
                 "methylation/profile",
                 "methylation/profile/family",
                 "methylation/profile/family/FAM",
-                "methylation/profile/family/FAM/FAM_annotated.tsv",
+                "methylation/profile/family/FAM/FAM_methbat_profile_annotated.tsv",
                 "methylation/profile/sample",
                 "methylation/profile/sample/HG002",
                 "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
@@ -2359,7 +2359,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-23T16:41:07.298950976",
+        "timestamp": "2026-04-24T10:05:41.721826797",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.2"

@@ -256,8 +256,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": 1.23
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -404,7 +404,7 @@
                 "methylation/profile",
                 "methylation/profile/family",
                 "methylation/profile/family/FAM",
-                "methylation/profile/family/FAM/FAM_annotated.tsv",
+                "methylation/profile/family/FAM/FAM_methbat_profile_annotated.tsv",
                 "methylation/profile/sample",
                 "methylation/profile/sample/HG002_Revio",
                 "methylation/profile/sample/HG002_Revio/HG002_Revio_methbat_profile.tsv",
@@ -844,7 +844,7 @@
                 
             ]
         ],
-        "timestamp": "2026-04-23T16:28:10.991928952",
+        "timestamp": "2026-04-24T09:52:57.814039568",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.2"
