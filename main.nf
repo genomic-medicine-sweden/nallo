@@ -105,6 +105,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_chromograph
     val_skip_genome_assembly
     val_skip_methylation_calling
+    val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
     val_skip_prepare_gens_input
@@ -209,6 +210,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_chromograph,
         val_skip_genome_assembly,
         val_skip_methylation_calling,
+        val_skip_methylation_annotation,
         val_skip_peddy,
         val_skip_phasing,
         val_skip_prepare_gens_input,
@@ -238,6 +240,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -282,6 +285,7 @@ workflow {
         params.skip_chromograph,
         params.skip_genome_assembly,
         params.skip_methylation_calling,
+        params.skip_methylation_annotation,
         params.skip_peddy,
         params.skip_phasing,
         params.skip_prepare_gens_input,
@@ -390,6 +394,7 @@ workflow {
         params.skip_chromograph,
         params.skip_genome_assembly,
         params.skip_methylation_calling,
+        params.skip_methylation_annotation,
         params.skip_peddy,
         params.skip_phasing,
         params.skip_prepare_gens_input,
@@ -430,10 +435,14 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 
 output {
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
+    methylation_annotation {
+        path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
     }
 }

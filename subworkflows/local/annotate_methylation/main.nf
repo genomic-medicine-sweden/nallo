@@ -33,5 +33,5 @@ workflow ANNOTATE_METHYLATION {
     )
 
     emit:
-    region_profile_annotated = CSVTK_SORT.out.sorted // channel: [ val(meta), path(tsv) ]
+    methylation_annotation = CSVTK_SORT.out.sorted // channel: [ val(meta), path(tsv) ]
 }

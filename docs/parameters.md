@@ -14,6 +14,7 @@ Allows skipping certain parts of the pipeline
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
+| `skip_methylation_annotation` | Skip methylation annotation | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
@@ -153,7 +154,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`) | `string` | deepvariant |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
-| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. | `integer` | 13 |  |  |
+| `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
 | `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |
