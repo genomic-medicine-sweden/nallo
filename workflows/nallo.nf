@@ -980,11 +980,14 @@ workflow NALLO {
             ch_methbat_regions,
         )
 
-        if (!val_skip_methylation_annotation) {
-            ANNOTATE_METHYLATION(
-                CALL_METHYLATION_METHBAT.out.region_profile
-            )
-        }
+        CALL_METHYLATION_METHBAT.out.region_profile
+            .set { ch_methylation_profiles }
+    }
+
+    if (!val_skip_methylation_annotation) {
+        ANNOTATE_METHYLATION(
+            ch_methylation_profiles,
+        )
     }
 
     //
