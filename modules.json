@@ -389,7 +389,7 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "f2b138ee1d91f67d31c187317d7e83e429bf0309",
+                        "git_sha": "90e0aedba7e6b6cd6a0a7edc612c3f54f0caa663",
                         "installed_by": ["modules"]
                     },
                     "strdrop/call": {

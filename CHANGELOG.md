@@ -64,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1019](https://github.com/genomic-medicine-sweden/nallo/pull/1019) - Update nf-schema to 2.7.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
+- [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
 
 ### Removed
 
@@ -134,6 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | csvtk/concat                    |             |  0.31.0     |
 | csvtk/mutate2                   |             |  0.31.0     |
 | csvtk/sort                      |             |  0.31.0     |
+| stranger                        | 0.10.0      |  0.10.2     |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
