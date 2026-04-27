@@ -3,12 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.12.0dev - [XXXX-XX-XX]
+## 0.12.0 - [2026-04-27]
 
 ### Added
 
-- [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
-- [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
 - [#922](https://github.com/genomic-medicine-sweden/nallo/pull/922) - Added parameters `--sniffles_min_support_reads`, `--sniffles_min_segment_length` and `--sniffles_min_heterozygous_allele_frequency` instead of hardcoding values in the config
 - [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) - Added parameters `--sniffles_min_sv_size` and `--sawfish_min_sv_size` instead of hardcoding values in the config
 - [#957](https://github.com/genomic-medicine-sweden/nallo/pull/957) - Added new `--skip_sex_check` parameter and validation for its usage in the pipeline
@@ -64,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
+- [#1038](https://github.com/genomic-medicine-sweden/nallo/pull/1038) - Updated version to 0.12.0
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
 
 ### Removed
@@ -422,10 +421,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
-| modkit/bedmethyltobigwig         | 0.5.1-rc1   | 0.6.1       |
-| modkit/pileup                    | 0.3.0       | 0.6.1       |
-| mosdepth                         | 0.3.10      | 0.3.11      |
-| multiqc                          | 1.31        | 1.33        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
