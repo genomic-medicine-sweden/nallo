@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Added cram and crai outputs to `align_assemblies`
 - [#1024](https://github.com/genomic-medicine-sweden/nallo/pull/1024) - Added fai input to allow for pre-built index
 - [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new subworkflow `ANNOTATE_METHYLATION`
-- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new `${family_id}_methbat_profile_annotated.tsv` output with concatenated and sorted samples methbat profiles by family. Sorting is done on new `sample_id` column in methbat profile sample file.
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new `${family_id}_methbat_profile_annotated.tsv` output with concatenated and sorted samples methbat profiles by family with added `sample_id` column.
 
 ### Changed
 
