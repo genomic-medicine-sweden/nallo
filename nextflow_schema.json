@@ -47,6 +47,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_methylation_annotation": {
+                    "type": "boolean",
+                    "description": "Skip methylation annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "skip_repeat_calling": {
                     "type": "boolean",
                     "description": "Skip tandem repeat calling",

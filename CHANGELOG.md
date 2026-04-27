@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
 - [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Added cram and crai outputs to `align_assemblies`
 - [#1024](https://github.com/genomic-medicine-sweden/nallo/pull/1024) - Added fai input to allow for pre-built index
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new subworkflow `ANNOTATE_METHYLATION`
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new `${family_id}_methbat_profile_annotated.tsv` output with concatenated and sorted samples methbat profiles by family with added `sample_id` column.
 
 ### Changed
 
@@ -62,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Moved output of `CALL_METHYLATION_METHBAT` to `methylation/profile/sample/${sample_id}/`
 - [#1038](https://github.com/genomic-medicine-sweden/nallo/pull/1038) - Updated version to 0.12.0
 
 ### Removed
@@ -95,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--vep_mitochondrial_genome_distance`          |
 |               | `--vep_nuclear_genome_distance`                |
 |               | `--mitochondrial_caller`                       |
+|               | `--skip_methylation_annotation`                |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -130,6 +134,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/view                   | 1.22.1      |  1.23.1     |
 | severus                         | 1.6         |  1.7        |
 | strdrust                        | 0.11.4      |  0.16.0     |
+| csvtk/concat                    |             |  0.31.0     |
+| csvtk/mutate2                   |             |  0.31.0     |
+| csvtk/sort                      |             |  0.31.0     |
 | stranger                        | 0.10.0      |  0.10.2     |
 
 > [!NOTE]
