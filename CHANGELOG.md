@@ -17,9 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
 - [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Added cram and crai outputs to `align_assemblies`
 - [#1024](https://github.com/genomic-medicine-sweden/nallo/pull/1024) - Added fai input to allow for pre-built index
-- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added `sample_id` column to methbat profile
-- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Concatenated and sorted samples methbat profiles by family in new `${family_id}_methbat_profile_annotated.tsv` output
-- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new `val_skip_methylation_annotation` parameter
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new subworkflow `ANNOTATE_METHYLATION`
+- [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Added new `${family_id}_methbat_profile_annotated.tsv` output with concatenated and sorted samples methbat profiles by family. Sorting is done on new `sample_id` column in methbat profile sample file.
 
 ### Changed
 
@@ -99,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--vep_mitochondrial_genome_distance`          |
 |               | `--vep_nuclear_genome_distance`                |
 |               | `--mitochondrial_caller`                       |
+|               | `--skip_methylation_annotation`                |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
