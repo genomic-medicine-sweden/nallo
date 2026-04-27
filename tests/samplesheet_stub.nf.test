@@ -32,6 +32,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
             }
         }
@@ -76,6 +77,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
             }
         }
@@ -121,6 +123,7 @@ nextflow_pipeline {
                 skip_rank_variants           = true
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
+                skip_methylation_annotation  = true
                 skip_methylation_calling     = true
                 skip_prepare_gens_input      = true
             }
@@ -168,6 +171,7 @@ nextflow_pipeline {
                 skip_repeat_calling           = true
                 skip_repeat_annotation        = true
                 skip_methylation_calling      = true
+                skip_methylation_annotation   = true
                 skip_prepare_gens_input       = true
             }
         }
@@ -215,6 +219,7 @@ nextflow_pipeline {
                 skip_repeat_annotation       = true
                 skip_sambamba_depth          = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
             }
         }
@@ -249,6 +254,7 @@ nextflow_pipeline {
                 skip_call_paralogs                      = true
                 skip_chromograph                        = true
                 skip_methylation_calling                = true
+                skip_methylation_annotation             = true
                 skip_peddy                              = true
                 skip_phasing                            = true
                 skip_rank_variants                      = true
@@ -338,6 +344,7 @@ nextflow_pipeline {
                 skip_repeat_calling          = true
                 skip_repeat_annotation       = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
             }
         }
@@ -382,6 +389,7 @@ nextflow_pipeline {
                 skip_repeat_annotation       = true
                 skip_sambamba_depth          = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
             }
         }
@@ -417,6 +425,7 @@ nextflow_pipeline {
                 // Skip irrelevant steps
                 skip_chromograph             = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_peddy                   = true
                 skip_prepare_gens_input      = true
                 skip_phasing                 = true
@@ -516,6 +525,7 @@ nextflow_pipeline {
                 skip_repeat_annotation       = true
                 skip_sambamba_depth          = true
                 skip_methylation_calling     = true
+                skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
                 skip_genome_assembly         = true
             }
