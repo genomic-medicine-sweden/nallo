@@ -300,7 +300,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0"
                 }
             },
             [
@@ -759,7 +759,7 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,52cd2aa1722314a581424ccde09a4d96"
             ],
             [
-                
+
             ],
             [
                 [
@@ -814,13 +814,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-04-02T14:06:05.980679635",
+        "timestamp": "2026-04-24T12:35:59.145655919",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.1"
         }
     }
 }
