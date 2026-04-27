@@ -1104,7 +1104,7 @@ workflow NALLO {
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    somalier_relate = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_html.combine(BAM_INFER_SEX.out.somalier_samples).combine(BAM_INFER_SEX.out.somalier_pairs) // channel: [ val(meta), path(html), path(samples), path(pairs) ]
+    somalier_relate = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_html.join(BAM_INFER_SEX.out.somalier_samples).join(BAM_INFER_SEX.out.somalier_pairs) // channel: [ val(meta), path(html), path(samples), path(pairs) ]
 }
 
 /**

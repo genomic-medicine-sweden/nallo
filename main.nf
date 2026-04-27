@@ -439,6 +439,6 @@ output {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
     }
     somalier_relate {
-        path { meta, _files -> "qc/somalier/relate/${meta.id}/" }
+        path { meta, _html, _samples, _pairs -> "qc/somalier/relate/${meta.id}/" }
     }
 }
