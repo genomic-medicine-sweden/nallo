@@ -315,7 +315,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.12.0"
                 }
             },
             [
@@ -844,7 +844,7 @@
                 
             ]
         ],
-        "timestamp": "2026-04-24T09:52:57.814039568",
+        "timestamp": "2026-04-24T13:15:21.371942263",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.2"

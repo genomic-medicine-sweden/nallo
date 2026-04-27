@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.12.0dev - [XXXX-XX-XX]
+## 0.12.0 - [2026-04-27]
 
 ### Added
 
@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
 - [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Moved output of `CALL_METHYLATION_METHBAT` to `methylation/profile/sample/${sample_id}/`
+- [#1038](https://github.com/genomic-medicine-sweden/nallo/pull/1038) - Updated version to 0.12.0
 
 ### Removed
 
@@ -426,10 +427,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | strdrop                          |             | 0.3.1       |
 | stranger                         | 0.9.5       | 0.10.0      |
 | trgt                             | 4.0.0       | 5.0.0       |
-| modkit/bedmethyltobigwig         | 0.5.1-rc1   | 0.6.1       |
-| modkit/pileup                    | 0.3.0       | 0.6.1       |
-| mosdepth                         | 0.3.10      | 0.3.11      |
-| multiqc                          | 1.31        | 1.33        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
