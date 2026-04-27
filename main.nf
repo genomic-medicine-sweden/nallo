@@ -238,6 +238,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -430,10 +431,14 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
 }
 
 output {
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
+    annotated_repeats {
+        path { meta, _vcf, _tbi -> "${params.outdir}/repeats/family/${meta.id}" }
     }
 }

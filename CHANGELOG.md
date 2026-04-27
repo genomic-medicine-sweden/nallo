@@ -64,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
+- [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
 
 ### Removed
 
