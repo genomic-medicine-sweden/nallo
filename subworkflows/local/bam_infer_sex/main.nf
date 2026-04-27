@@ -76,6 +76,7 @@ workflow BAM_INFER_SEX {
     bam              = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
     bai              = ch_updated_sex.map { meta, _bam, bai -> [ meta, bai ] } // channel: [ val(meta), path(bai) ]
     bam_bai          = ch_updated_sex                                          // channel: [ val(meta), path(bam), path(bai) ]
+    somalier_html    = RELATE_RELATE.out.html                                  // channel: [ val(meta), path(html) ]
     somalier_samples = RELATE_RELATE.out.samples_tsv                           // channel: [ val(meta), path(samples_tsv) ]
     somalier_pairs   = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
 }

@@ -238,6 +238,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    somalier_relate = NALLO.out.somalier_relate // channel: [ val(meta), path(bam/cram), path(html/tsv) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -430,10 +431,14 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    somalier_relate = GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate // channel: [ val(meta), path(bam/cram), path(html/tsv) ]
 }
 
 output {
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
+    somalier_relate {
+        path { meta, _files -> "qc/somalier/relate/${meta.id}/" }
     }
 }

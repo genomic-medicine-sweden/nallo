@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#977](https://github.com/genomic-medicine-sweden/nallo/pull/977) - Added region name of the bed to `DEEPVARIANT_RUNDEEPVARIANT` tag
 - [#1016](https://github.com/genomic-medicine-sweden/nallo/pull/1016) - Added cram and crai outputs to `align_assemblies`
 - [#1024](https://github.com/genomic-medicine-sweden/nallo/pull/1024) - Added fai input to allow for pre-built index
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Added `somalier_html` output to `bam_infer_sex`
 
 ### Changed
 
@@ -64,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Changed `bam_infer_sex` to workflow outputs
 
 ### Removed
 
