@@ -93,17 +93,20 @@ workflow PHASING {
             ch_bam_bai_haplotagged,
             fasta.join(fai).collect(),
         )
+
+        ch_haplotagged_cram_crai = SAMTOOLS_CONVERT.out.cram.join(SAMTOOLS_CONVERT.out.crai)
+
     }
 
-
     emit:
-    phased_family_snvs     = ch_phased_family_snvs               // channel: [ val(meta), path(vcf) ]
-    phased_family_snvs_tbi = ch_phased_family_snvs_tbi           // Channel: [ val(meta), path(tbi) ]
-    phased_family_svs      = ch_phased_family_svs                // channel: [ val(meta), path(vcf) ]
-    phased_family_svs_tbi  = ch_phased_family_svs_tbi            // Channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai    = ch_bam_bai_haplotagged              // channel: [ val(meta), path(bam), path(bai) ]
-    stats                  = QC_PHASING.out.phasing_stats        // channel: [ val(meta), path("*.stats.tsv") ]
-    blocks                 = QC_PHASING.out.phasing_blocks       // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
-    haplotagging_stats     = QC_PHASING.out.haplotagging_stats   // channel: [ val(meta), path("*.stats.tsv") ]
+    phased_family_snvs     = ch_phased_family_snvs                                      // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_phased_family_snvs_tbi                                  // Channel: [ val(meta), path(tbi) ]
+    phased_family_svs      = ch_phased_family_svs                                       // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi  = ch_phased_family_svs_tbi                                   // Channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged                                     // channel: [ val(meta), path(bam), path(bai) ]
+    haplotagged_cram_crai  = cram_output ? ch_haplotagged_cram_crai : channel.empty()   // channel: [ val(meta), path(cram), path(crai) ]
+    stats                  = QC_PHASING.out.phasing_stats                               // channel: [ val(meta), path("*.stats.tsv") ]
+    blocks                 = QC_PHASING.out.phasing_blocks                              // channel: [ val(meta), path("*.blocks.gtf.gz") ]
+    blocks_index           = QC_PHASING.out.phasing_blocks_index                        // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats     = QC_PHASING.out.haplotagging_stats                          // channel: [ val(meta), path("*.stats.tsv") ]
 }

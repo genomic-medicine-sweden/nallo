@@ -1116,7 +1116,7 @@ workflow NALLO {
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-
+    haplotagged_reads = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
 }
 
 /**

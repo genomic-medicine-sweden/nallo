@@ -315,14 +315,14 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002",
-                "aligned_reads/HG002/HG002_haplotagged.bam",
-                "aligned_reads/HG002/HG002_haplotagged.bam.bai",
+                "aligned_reads/HG002/HG002_aligned_haplotagged.bam",
+                "aligned_reads/HG002/HG002_aligned_haplotagged.bam.bai",
                 "aligned_reads/HG003",
-                "aligned_reads/HG003/HG003_haplotagged.bam",
-                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
+                "aligned_reads/HG003/HG003_aligned_haplotagged.bam",
+                "aligned_reads/HG003/HG003_aligned_haplotagged.bam.bai",
                 "aligned_reads/HG004",
-                "aligned_reads/HG004/HG004_haplotagged.bam",
-                "aligned_reads/HG004/HG004_haplotagged.bam.bai",
+                "aligned_reads/HG004/HG004_aligned_haplotagged.bam",
+                "aligned_reads/HG004/HG004_aligned_haplotagged.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002",
@@ -1207,15 +1207,15 @@
             ],
             [
                 [
-                    "HG002_haplotagged.bam",
+                    "HG002_aligned_haplotagged.bam",
                     "ca14b3f47b42f7737c45ea55dc55de8"
                 ],
                 [
-                    "HG003_haplotagged.bam",
+                    "HG003_aligned_haplotagged.bam",
                     "6f480d7f381ec0236ed21dc40720dd61"
                 ],
                 [
-                    "HG004_haplotagged.bam",
+                    "HG004_aligned_haplotagged.bam",
                     "345c1a890c682d0663303151ec2f7697"
                 ],
                 [
@@ -1320,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-04-24T13:19:17.654934787",
+        "timestamp": "2026-04-28T15:10:28.702536096",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.2"

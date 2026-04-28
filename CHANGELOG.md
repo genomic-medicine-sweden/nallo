@@ -3,6 +3,42 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.13.0dev - [XXXX-XX-XX]
+
+### Added
+
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
+
+### Changed
+
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed `phasing` to workflow outputs
+
+### Removed
+
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed publishDir from config for `whatshap`, `longphase` and `hiphase`
+
+### Fixed
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool | Old version | New version |
+| ---- | ----------- | ----------- |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
 ## 0.12.0 - [2026-04-27]
 
 ### Added
