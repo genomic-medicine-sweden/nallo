@@ -73,7 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Removed Peddy sex check files from MultiQC because outputs are incorrect when female samples are input to the pipeline as male
 - [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed the usage and support of `ch_versions` completely, in favour of topic versions
 - [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed version snapshots from subworkflow tests
-- [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
+- [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Removed stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
 - [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
 - [#970](https://github.com/genomic-medicine-sweden/nallo/pull/970) - Removed unused `BCFTOOLS_SORT` import and config
