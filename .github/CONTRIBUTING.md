@@ -74,7 +74,7 @@ Be positive and constructive in your review, and whenever possible offer suggest
 
 Release versioning tries to be maintained according to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and a changelog is maintained according to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format. Although, for a Nextflow pipeline it can be hard to decide what is a breaking/non-breaking API change.
 
-The `Fixed` section of the changelog should be reserved for bugs fixed from one release to another, but bug fixes that appeared and was solved in dev. These should go in the `Changed` section.
+Bugs fixed between releases belong in the `Fixed`  section of the changelog, whereas bug fixes that appeared and were solved in dev should go in the `Changed` section.
 
 ##### Patch
 
