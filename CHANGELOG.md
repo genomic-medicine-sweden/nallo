@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
+
 ### Changed
 
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
