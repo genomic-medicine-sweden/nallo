@@ -106,7 +106,7 @@ In order to run the pipeline, develop and test your changes locally, we recommen
 
 Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-Additionally, pre-commit hooks are set up to automatically check the code and generate parameters documentation when committing. To install the pre-commit hooks, run `pre-commit install` in the root of the repository. Note that, other than the default pre-commit hooks from the nf-core template, there is an additional hook - [`nf-core pipelines schema docs` pre-commit hook](https://github.com/genomic-medicine-sweden/nf-core-schema-docs) - set up in this codebase for automatically generating parameters documentation if there are any changes to parameters in your commit.
+Additionally, pre-commit hooks should be set up to automatically check the code and generate parameters documentation when committing. To install the pre-commit hooks, run `pre-commit install` in the root of the repository. Besides the default nf-core hooks, this repository includes the [nf-core pipelines schema docs](https://github.com/genomic-medicine-sweden/nf-core-schema-docs) hook. It automatically updates parameter documentation whenever your commit includes changes to `nextflow_schema.json`.
 
 #### GitHub Codespaces
 
