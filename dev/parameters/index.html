@@ -656,6 +656,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>skip_methylation_annotation</code></td>
+<td>Skip methylation annotation</td>
+<td><code>boolean</code></td>
+<td>False</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>skip_repeat_calling</code></td>
 <td>Skip tandem repeat calling</td>
 <td><code>boolean</code></td>
@@ -1569,7 +1577,7 @@
 </tr>
 <tr>
 <td><code>snv_calling_processes</code></td>
-<td>If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.</td>
+<td>If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be <code>1</code> when <code>--snv_caller sentieon</code> is used.</td>
 <td><code>integer</code></td>
 <td>13</td>
 <td></td>
@@ -1945,7 +1953,7 @@
 </tr>
 <tr>
 <td><code>sniffles_min_segment_length</code></td>
-<td>Discard a read if non of its segment is larger than this in Sniffles.</td>
+<td>Discard a read if none of its segment is larger than this in Sniffles.</td>
 <td><code>number</code></td>
 <td>500</td>
 <td></td>
