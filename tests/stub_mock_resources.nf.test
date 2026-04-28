@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for CADD, VEP uncompressed cache and Sentieon SNV calling with mock resources"
     script "../main.nf"
     tag "PIPELINE"
     tag "pipeline_stub"

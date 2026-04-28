@@ -1,10 +1,10 @@
 nextflow_pipeline {
 
-    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests skipping SNV annotation"
     script "../main.nf"
     tag "PIPELINE"
     tag "pipeline_stub"
-    tag "samplesheet_stub"
+    tag "stub_skip_snv_annotation"
     config "./nextflow.config"
 
     test("Test Chromograph works without SNV annotation") {

@@ -1,10 +1,10 @@
 nextflow_pipeline {
 
-    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for alignment and genome assembly"
     script "../main.nf"
     tag "PIPELINE"
     tag "pipeline_stub"
-    tag "stub_skips"
+    tag "stub_alignment_assembly"
     config "./nextflow.config"
 
     test("Test alignment without genome assembly") {
