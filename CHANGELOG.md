@@ -7,16 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
 
 ### Changed
 
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Changed `phasing` to workflow outputs
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Changed `phasing` to workflow outputs
 
 ### Removed
 
-- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed publishDir from config for `whatshap`, `longphase` and `hiphase`
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Removed publishDir from config for `whatshap`, `longphase` and `hiphase`
 
 ### Fixed
 
