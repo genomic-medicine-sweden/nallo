@@ -37,24 +37,25 @@ This document describes the pipeline output files and the tools used to generate
 
 [Modkit](https://github.com/nanoporetech/modkit) or [pb-CpG-tools](https://github.com/PacificBiosciences/pb-CpG-tools) (Revio only) is used to create methylation pileups, producing bed files for both haplotagged (when phasing is on) and ungrouped reads. Additionally, methylation information can be viewed in the BAM files or BigWig [visualization tracks](#visualization-tracks), for example in IGV.
 
-| Path                                                                  | Description                                                                       | Alignment          | Alignment & phasing |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from modkit     |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from modkit     |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup_ungrouped.bed.gz` | Bed file for ungrouped reads from modkit                                          |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz`           | Bed file with summary counts from all reads from modkit                           | :white_check_mark: |                     |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz`     | Bed file with summary counts from all reads from pbcpgtools                       | :white_check_mark: | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`         | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
-| `methylation/pileup/{sample}/*.bed.gz.tbi`                            | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
+| Path                                                                 | Description                                                                       | Alignment          | Alignment & phasing |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ | ------------------- |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_hp1.bed.gz`      | Bed file with summary counts from haplotagged reads (haplotype 1) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_hp2.bed.gz`      | Bed file with summary counts from haplotagged reads (haplotype 2) from modkit     |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup_combined.bed.gz` | Bed file for combined reads from modkit                                           |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}.modkit_pileup.bed.gz`          | Bed file with summary counts from all reads from modkit                           | :white_check_mark: |                     |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.combined.bed.gz`    | Bed file with summary counts from all reads from pbcpgtools                       | :white_check_mark: | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap1.bed.gz`        | Bed file with summary counts from haplotagged reads (haplotype 1) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/{sample}_pbcpgtools.hap2.bed.gz`        | Bed file with summary counts from haplotagged reads (haplotype 2) from pbcpgtools |                    | :white_check_mark:  |
+| `methylation/pileup/{sample}/*.bed.gz.tbi`                           | Index of the corresponding bed files                                              | :white_check_mark: | :white_check_mark:  |
 
 ### Methylation profile
 
 [Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values.
 
-| Path                                                        | Description                                        |
-| ----------------------------------------------------------- | -------------------------------------------------- |
-| `methylation/profile/{sample}/{sample}_methbat_profile.tsv` | Tsv file with methylation profile of input regions |
+| Path                                                                  | Description                                                                                                                       |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `methylation/profile/{sample}/{sample}_methbat_profile.tsv`           | TSV file with methylation profile of input regions                                                                                |
+| `methylation/profile/{family}/{family}_methbat_profile_annotated.tsv` | TSV file with methylation profile of input regions concatenated per family and sorted on sample_id, chromosome and start position |
 
 ## MultiQC
 
@@ -138,7 +139,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Somalier
 
-[somalier](https://github.com/brentp/somalier) checks relatedness and sex.
+When `--skip_sex_check` is disabled, [somalier](https://github.com/brentp/somalier) checks relatedness and sex. SNV calling, methylation calling with MethBat, Peddy, prepare_gens_inputs and repeat expansions calling with TRGT require known sex.
 
 | Path                                                 | Description                                            |
 | ---------------------------------------------------- | ------------------------------------------------------ |
@@ -325,9 +326,9 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 | `visualization_tracks/{sample}/{sample}_hificnv.copynum.bedgraph`                 | Copy number in bedgraph format                                                      |
 | `visualization_tracks/{sample}/{sample}_hificnv.depth.bw`                         | Depth track in BigWig format                                                        |
 | `visualization_tracks/{sample}/{sample}_hificnv.maf.bw`                           | Minor allele frequencies in BigWig format                                           |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_ungrouped.bw`               | BigWig file with summary counts for ungrouped reads from modkit                     |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_1.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
-| `visualization_tracks/{sample}/{sample}_modkit_pileup_2.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_combined.bw`                | BigWig file with summary counts for ungrouped reads from modkit                     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp1.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 1) from modkit     |
+| `visualization_tracks/{sample}/{sample}_modkit_pileup_hp2.bw`                     | BigWig file with summary counts for haplotagged reads (haplotype 2) from modkit     |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.combined.bw`                   | BigWig file with summary counts for ungrouped reads from pbcpgtools                 |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.hap1.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 1) from pbcpgtools |
 | `visualization_tracks/{sample}/{sample}_pbcpgtools.hap2.bw`                       | BigWig file with summary counts for haplotagged reads (haplotype 2) from pbcpgtools |

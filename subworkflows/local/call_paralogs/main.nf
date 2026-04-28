@@ -1,9 +1,10 @@
 include { BCFTOOLS_MERGE                 } from '../../../modules/nf-core/bcftools/merge/main'
 include { BCFTOOLS_QUERY                 } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftools/reheader/main'
-include { CREATE_SAMPLES_HAPLOTYPES_FILE } from '../../../modules/local/create_samples_haplotypes_file/main'
+include { GAWK                           } from '../../../modules/nf-core/gawk/main'
 include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
 include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
+
 workflow CALL_PARALOGS {
     take:
     bam_bai     // channel: [ val(meta), bam, bai ]
@@ -12,8 +13,6 @@ workflow CALL_PARALOGS {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-    ch_versions = channel.empty()
-
     PARAPHASE(
         bam_bai,
         fasta,
@@ -34,46 +33,41 @@ workflow CALL_PARALOGS {
         [],
         [],
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_QUERY.out.versions)
 
     /*
      * Create a bcftools reheader mapping file to make Paraphase VCF sample names globally unique.
      *
      * We add the biological sample name as a prefix to the paraphase identifier (e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1), since bcftools merge requires all sample names across input VCFs to be unique.
      */
-    CREATE_SAMPLES_HAPLOTYPES_FILE(
-        BCFTOOLS_QUERY.out.output
+    GAWK(
+        BCFTOOLS_QUERY.out.output,
+        [],
+        false,
     )
-    ch_versions = ch_versions.mix(CREATE_SAMPLES_HAPLOTYPES_FILE.out.versions)
 
     paraphase_vcf_tbis
-        .join(CREATE_SAMPLES_HAPLOTYPES_FILE.out.samples, failOnMismatch: true, failOnDuplicate: true)
+        .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_bcftools_reheader_in }
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])
-    ch_versions = ch_versions.mix(BCFTOOLS_REHEADER.out.versions)
 
     BCFTOOLS_REHEADER.out.vcf
         .join(BCFTOOLS_REHEADER.out.index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, vcf, tbi -> [['id': meta.family_id], vcf, tbi] }
+        .map { meta, vcf, tbi -> [meta.family_id, vcf, tbi] }
         .groupTuple()
+        .map { family_id, vcfs, tbis -> [['id': family_id], vcfs, tbis, []] }
         .set { ch_reheadered_vcf_tbis_per_family }
 
     BCFTOOLS_MERGE(
         ch_reheadered_vcf_tbis_per_family,
-        fasta,
-        [[], []],
-        [[], []],
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_MERGE.out.versions)
 
     if (cram_output) {
         SAMTOOLS_CONVERT(
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
-            fasta,
-            fai,
+            fasta.join(fai, failOnDuplicate: true, failOnMismatch: true).collect(),
         )
-        ch_versions = ch_versions.mix(SAMTOOLS_CONVERT.out.versions)
     }
 
     emit:
@@ -84,5 +78,4 @@ workflow CALL_PARALOGS {
     json     = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
     vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
     tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
-    versions = ch_versions                                               // channel: [ versions.yml ]
 }

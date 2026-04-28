@@ -22,9 +22,8 @@ nextflow_workflow {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = [[],[]]
-                input[2] = false
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
                 """
             }
         }
@@ -42,11 +41,10 @@ nextflow_workflow {
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
-                    ]
+                    ],
+                    []
                 ]
-                input[1] = [[],[]]
-                input[2] = [[],[]]
-                input[3] = [[],[]]
+                input[1] = [[],[],[]]
                 """
             }
         }
@@ -114,7 +112,7 @@ nextflow_workflow {
                     }
                 },
                 { assert snapshot(
-                    workflow.out.versions,
+
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,
@@ -235,7 +233,7 @@ nextflow_workflow {
                     }
                 },
                 { assert snapshot(
-                    workflow.out.versions,
+
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,

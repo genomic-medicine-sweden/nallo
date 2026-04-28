@@ -22,8 +22,6 @@ workflow CALL_SNVS {
 
 
     main:
-    ch_versions   = channel.empty()
-
     if (variant_caller.equals("deepvariant")) {
 
         DEEPVARIANT_RUNDEEPVARIANT(
@@ -33,12 +31,11 @@ workflow CALL_SNVS {
             [[], []],
             ch_par_bed,
         )
-        ch_versions = ch_versions.mix(DEEPVARIANT_RUNDEEPVARIANT.out.versions)
 
         ch_vcf        = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-        ch_index      = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index
+        ch_index      = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
         ch_gvcf       = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
-        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_index
+        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_tbi
 
     } else if (variant_caller.equals("sentieon")) {
 
@@ -72,7 +69,6 @@ workflow CALL_SNVS {
             ch_bedtools_intersect_in,
             [[], []],
         )
-        ch_versions = ch_versions.mix(BEDTOOLS_INTERSECT.out.versions)
 
         BEDTOOLS_INTERSECT.out.intersect
             .branch {
@@ -139,7 +135,6 @@ workflow CALL_SNVS {
     index      = ch_index      // channel: [ val(meta), path(tbi) ]
     gvcf       = ch_gvcf       // channel: [ val(meta), path(gvcf) ]
     gvcf_index = ch_gvcf_index // channel: [ val(meta), path(tbi) ]
-    versions   = ch_versions   // channel: [ path(versions.yml) ]
 }
 
 def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {

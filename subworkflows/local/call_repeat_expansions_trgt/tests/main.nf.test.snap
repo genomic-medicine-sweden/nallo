@@ -1,21 +1,15 @@
 {
     "[bam, bai], fasta, fai, bed": {
         "content": [
-            "5c3fc288ebd04e65c9b1e88a712b4d46",
-            "c72f00b749b4ef8192165571815e5f3a",
-            "30ba267e3b89ce97d0df96640b22d265",
-            [
-                "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
-            ]
+            "a010c1d4ebcd1fb63c53ad7e559af66c",
+            "5773f7c3ca12e64a652d3609c0086199",
+            "f69e07c85d0f734408af24471f35792c"
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-29T09:50:16.261453545"
+        "timestamp": "2026-03-27T16:46:55.824084342"
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
@@ -86,12 +80,6 @@
                         "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "6": [
-                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
-                ],
                 "family_tbi": [
                     [
                         {
@@ -157,19 +145,13 @@
                         },
                         "test_sorted.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
-                ],
-                "versions": [
-                    "versions.yml:md5,257faea8ddb340789b58647c9b96408c",
-                    "versions.yml:md5,3685baedf9c2c7b43a4f080439cd6bc5",
-                    "versions.yml:md5,5551e1ee102d314479a1eda61a980546",
-                    "versions.yml:md5,cfdd156581dd5f8677f5c280fc15a875"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-28T14:02:13.902678854"
+        "timestamp": "2026-03-27T16:47:07.292070859"
     }
 }

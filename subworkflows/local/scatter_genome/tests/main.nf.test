@@ -12,16 +12,16 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true),
+                    []
                 ]
-                input[1] = [[],[]]
-                input[2] = false
+                input[1] = false
                 """
             }
         }
     }
 
-    test("fai, [], true, false, []") {
+    test("fai, [], true, []") {
 
         when {
             workflow {
@@ -29,8 +29,7 @@ nextflow_workflow {
                 input[0] = SAMTOOLS_FAIDX.out.fai
                 input[1] = [[],[]]
                 input[2] = true
-                input[3] = false
-                input[4] = []
+                input[3] = 1
                 """
             }
         }
@@ -41,78 +40,24 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out,
                     path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
+                    workflow.out.bed_nuclear_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
                 ).match() }
             )
         }
 
     }
 
-    test("fai, [], true, true, 1") {
-
-        when {
-            workflow {
-                """
-                input[0] = SAMTOOLS_FAIDX.out.fai
-                input[1] = [[],[]]
-                input[2] = true
-                input[3] = true
-                input[4] = 1
-                """
-            }
-        }
-
-        then {
-            assertAll (
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
-                ).match() }
-            )
-        }
-
-    }
-
-    test("make bed from fai, don't make intervals, even though we say we want to split it in 2") {
-
-        when {
-            workflow {
-                """
-                input[0] = SAMTOOLS_FAIDX.out.fai
-                input[1] = [[],[]]
-                input[2] = true
-                input[3] = false
-                input[4] = 2
-                """
-            }
-        }
-
-        then {
-            assertAll (
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals,
-                ).match() }
-            )
-        }
-
-    }
-
-    test("[], bed, false, false, 2") {
+    test("[], bed, false, 2 - with chrM in bed file") {
 
         when {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')                    .collectFile(name: 'chr22.bed', newLine: true)
-                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t1000''')
+                    .collectFile(name: 'chr22_chrM.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22_chrM' ], file ] }
                 input[2] = false
-                input[3] = false
-                input[4] = 2
+                input[3] = 2
                 """
             }
         }
@@ -120,17 +65,62 @@ nextflow_workflow {
         then {
             assertAll (
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
-                ).match() }
+                { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }
 
     }
 
-    test("[], bed, false, true, 2") {
+    test("[], bed, false, 2 - with chrM in bed file - stub") {
+
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t1000''')
+                    .collectFile(name: 'chr22_chrM.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22_chrM' ], file ] }
+                input[2] = false
+                input[3] = 2
+                """
+            }
+        }
+
+        then {
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
+            )
+        }
+
+    }
+    test("[], bed, false, 2 - without chrM in bed file") {
+
+        when {
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\n''')
+                    .collectFile(name: 'chr22.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22' ], file ] }
+                input[2] = false
+                input[3] = 2
+                """
+            }
+        }
+
+        then {
+            // Should we assert that the mt bed is empty?
+            assertAll (
+                { assert workflow.success },
+                { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
+            )
+        }
+
+    }
+
+    test("[], bed, false, 5 - should fail due to too few intervals in bed file") {
 
         when {
             workflow {
@@ -140,37 +130,7 @@ nextflow_workflow {
                     .collectFile(name: 'chr22.bed', newLine: true)
                     .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
-                input[3] = true
-                input[4] = 2
-                """
-            }
-        }
-
-        then {
-            assertAll (
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out,
-                    path(workflow.out.bed.get(0).get(1)).readLines(),
-                    workflow.out.bed_intervals.findAll { it[0] instanceof String }.collect { path(it[0]).readLines() },
-                ).match() }
-            )
-        }
-
-    }
-
-    test("[], bed, false, true, 0 - should fail because split_n < 1") {
-
-        when {
-            workflow {
-                """
-                input[0] = [[],[]]
-                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
-                    .collectFile(name: 'chr22.bed', newLine: true)
-                    .map { file -> [ [ id:'chr22' ], file ] }
-                input[2] = false
-                input[3] = true
-                input[4] = 0
+                input[3] = 5
                 """
             }
         }
@@ -178,50 +138,7 @@ nextflow_workflow {
         then {
             assertAll (
                 { assert workflow.failed },
-            )
-        }
-
-        when {
-            workflow {
-                """
-                input[0] = [[],[]]
-                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
-                    .collectFile(name: 'chr22.bed', newLine: true)
-                    .map { file -> [ [ id:'chr22' ], file ] }
-                input[2] = false
-                input[3] = true
-                input[4] = 0
-                """
-            }
-        }
-
-        then {
-            assertAll (
-                { assert workflow.failed },
-            )
-        }
-
-    }
-
-    test("[], bed, false, true, 5 - should fail due to too few intervals in bed file") {
-
-        when {
-            workflow {
-                """
-                input[0] = [[],[]]
-                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
-                    .collectFile(name: 'chr22.bed', newLine: true)
-                    .map { file -> [ [ id:'chr22' ], file ] }
-                input[2] = false
-                input[3] = true
-                input[4] = 5
-                """
-            }
-        }
-
-        then {
-            assertAll (
-                { assert workflow.failed },
+                { assert workflow.errorMessage.contains("Expected 5, but got 2 files from splitting the BED file. This can happen if the input BED file (or fasta file if not using BED) has too few regions to split into 5 parts. Please check the input files or set `--snv_calling_processes` to 2.") },
             )
         }
 

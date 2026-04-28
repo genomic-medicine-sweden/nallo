@@ -17,17 +17,14 @@ workflow CHROMOGRAPH {
     plot_autozygosity // boolean
 
     main:
-    ch_versions = channel.empty()
-    ch_autozyg  = channel.of([[], []])
-    ch_coverage = channel.of([[], []])
-
+    ch_autozyg  = channel.empty()
+    ch_coverage = channel.empty()
 
     if (plot_coverage) {
         TIDDIT_COV(
             ch_bam_bai,
             [[], []],
         )
-        ch_versions = ch_versions.mix(TIDDIT_COV.out.versions)
 
         TIDDIT_COV.out.wig
             .map { meta, wig ->
@@ -51,7 +48,6 @@ workflow CHROMOGRAPH {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_ROH.out.versions)
 
         BCFTOOLS_VIEW_UNCOMPRESS(
             ch_vcf_tbi,
@@ -59,7 +55,6 @@ workflow CHROMOGRAPH {
             [],
             [],
         )
-        ch_versions = ch_versions.mix(BCFTOOLS_VIEW_UNCOMPRESS.out.versions)
 
         BCFTOOLS_VIEW_UNCOMPRESS.out.vcf
             .join(BCFTOOLS_ROH.out.roh)
@@ -73,14 +68,13 @@ workflow CHROMOGRAPH {
             ch_rhocall_viz_input.vcf,
             ch_rhocall_viz_input.roh,
         )
-        ch_versions = ch_versions.mix(RHOCALL_VIZ.out.versions)
 
         RHOCALL_VIZ.out.bed.set { ch_autozyg }
     }
 
     // Combine and filter only if there's data
-    ch_autozyg
-        .combine(ch_coverage)
+    ch_autozyg.ifEmpty([[],[]])
+        .combine(ch_coverage.ifEmpty([[],[]]))
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
             if(!autozyg_meta || !coverage_meta)
                 return true
@@ -101,9 +95,7 @@ workflow CHROMOGRAPH {
         [[], []],
         [[], []],
     )
-    ch_versions = ch_versions.mix(RUN_CHROMOGRAPH.out.versions)
 
     emit:
     chromograph_plots = RUN_CHROMOGRAPH.out.plots // channel: [ val(meta), path(plot) ]
-    versions          = ch_versions               // channel: [ path(versions.yml) ]
 }

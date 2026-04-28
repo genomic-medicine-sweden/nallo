@@ -23,9 +23,8 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/samtools/faidx/main.nf"
                 process {
                     """
-                    input[0] = GUNZIP.out.gunzip
-                    input[1] = [[],[]]
-                    input[2] = false
+                    input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                    input[1] = false
                     """
                 }
 
@@ -33,7 +32,6 @@ nextflow_workflow {
     }
 
     test("[bam, bai], fasta, fai, bed") {
-
         when {
             workflow {
                 """
@@ -48,6 +46,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -58,7 +57,6 @@ nextflow_workflow {
                 { assert snapshot(
                     path(workflow.out.sample_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.family_vcf.get(0).get(1)).vcf.variantsMD5,
-                    workflow.out.versions,
                 ).match() }
             )
         }
@@ -82,6 +80,7 @@ nextflow_workflow {
                     [ id: 'pathogenic_repeats' ],
                     file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
                 ])
+                input[4] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }

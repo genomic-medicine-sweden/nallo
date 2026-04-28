@@ -2,23 +2,24 @@
 // Takes a channel of grouped gVCFs, merged them with GLNexus,
 // adds FOUND_IN tag, normalizes and decomposes variants.
 //
-include { ADD_FOUND_IN_TAG                           } from '../../../modules/local/add_found_in_tag/main'
+
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
+include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs       // channel: [mandatory] [ val(meta), path(gvcfs)     ]
-    ch_tbis        // channel: [mandatory] [ val(meta), path(tbis)      ]
-    ch_bed         // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta       // channel: [mandatory] [ val(meta), path(fasta)     ]
-    ch_fai         // channel: [mandatory] [ val(meta), path(fai)       ]
-    variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_gvcfs                // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_tbis                 // channel: [mandatory] [ val(meta), path(tbis)      ]
+    ch_bed                  // channel: [optional]  [ val(meta), path(input_bed) ]
+    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
+    variant_caller          // string: variant caller to use
+    ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_versions           = channel.empty()
     ch_merged_family_gvcf = channel.empty()
 
     if (variant_caller.equals("deepvariant")) {
@@ -28,7 +29,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         )
 
         ch_merged_family_gvcf = GLNEXUS.out.bcf
-        ch_versions = ch_versions.mix(GLNEXUS.out.versions)
 
     } else if (variant_caller.equals("sentieon")) {
 
@@ -56,28 +56,39 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
             [],
             [],
             [],
-            []
+            [],
         )
 
         ch_merged_family_gvcf = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
-    ADD_FOUND_IN_TAG(
-        ch_merged_family_gvcf.map { meta, vcf -> [meta, vcf, []] },
-        variant_caller,
+    // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
+    ch_merged_family_gvcf
+        .map { meta, vcf ->
+            [meta + [sv_caller: variant_caller], vcf]
+        }
+        .set { ch_vcfexpress_input }
+
+    VCFEXPRESS(
+        ch_vcfexpress_input,
+        ch_vcfexpress_prelude,
     )
-    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
+
+    // Remove added caller information in meta
+    VCFEXPRESS.out.vcf
+        .map { meta, vcf ->
+            [meta - meta.subMap('sv_caller'), vcf, []]
+        }
+        .set { ch_bcftools_norm_input }
+
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
-        ADD_FOUND_IN_TAG.out.vcf.map { meta, vcf -> [meta, vcf, []] },
+        ch_bcftools_norm_input,
         ch_fasta,
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
     emit:
-    vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
+    vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     index    = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    versions = ch_versions                                                              // channel: [ path(versions.yml) ]
 }

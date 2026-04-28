@@ -14,9 +14,10 @@ nextflow_workflow {
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = channel.empty()
-                input[2] = true
-                input[3] = false
+                input[1] = []
+                input[2] = []
+                input[3] = true
+                input[4] = false
                 """
             }
         }
@@ -55,6 +56,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -78,6 +80,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -105,6 +108,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -130,6 +134,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -160,6 +165,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -184,6 +190,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -210,6 +217,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """
@@ -238,6 +246,7 @@ nextflow_workflow {
         when {
             params {
                 skip_phasing = true
+                modkit_modified_bases = '5mC 5hmC'
             }
             workflow {
                 """

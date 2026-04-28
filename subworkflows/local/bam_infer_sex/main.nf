@@ -12,8 +12,6 @@ workflow BAM_INFER_SEX {
     ch_ped            // channel: [ val(meta), path(ped) ]
 
     main:
-    ch_versions = channel.empty()
-
     // Extract sites
     SOMALIER_EXTRACT (
         ch_bam_bai,
@@ -21,7 +19,6 @@ workflow BAM_INFER_SEX {
         ch_fai,
         ch_somalier_sites
     )
-    ch_versions = ch_versions.mix(SOMALIER_EXTRACT.out.versions)
 
     SOMALIER_EXTRACT.out.extract
         .combine( ch_ped.map { _meta, ped -> ped } )
@@ -30,7 +27,6 @@ workflow BAM_INFER_SEX {
 
     // 1. Run somalier relate on one sample at a time to infer sex
     RELATE_INFER ( ch_relate_infer_in, [] )
-    ch_versions = ch_versions.mix(RELATE_INFER.out.versions)
 
     RELATE_INFER.out.samples_tsv
         .map { _meta, tsv -> tsv }
@@ -75,7 +71,6 @@ workflow BAM_INFER_SEX {
         .set { ch_relate_relate_in }
 
     RELATE_RELATE ( ch_relate_relate_in, [] )
-    ch_versions = ch_versions.mix(RELATE_RELATE.out.versions)
 
     emit:
     bam              = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
@@ -83,5 +78,4 @@ workflow BAM_INFER_SEX {
     bam_bai          = ch_updated_sex                                          // channel: [ val(meta), path(bam), path(bai) ]
     somalier_samples = RELATE_RELATE.out.samples_tsv                           // channel: [ val(meta), path(samples_tsv) ]
     somalier_pairs   = RELATE_RELATE.out.pairs_tsv                             // channel: [ val(meta), path(pairs_tsv) ]
-    versions = ch_versions                                                     // channel: [ versions.yml ]
 }

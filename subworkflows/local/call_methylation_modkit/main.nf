@@ -1,42 +1,55 @@
 include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
-include { TABIX_BGZIPTABIX         } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
-
+include { TABIX_TABIX              }  from '../../../modules/nf-core/tabix/tabix/main'
 workflow CALL_METHYLATION_MODKIT {
 
     take:
-    ch_bam_bai             // channel: [ val(meta), bam, bai ]
-    ch_fasta               // channel: [ val(meta), fasta ]
-    ch_fai                 // channel: [ val(meta), fai ]
-    ch_bed                 // channel: [ val(meta), bed ]
-    modcodes               // String or List
+    ch_bam_bai // channel: [ val(meta), bam, bai ]
+    ch_fasta   // channel: [ val(meta), fasta ]
+    ch_fai     // channel: [ val(meta), fai ]
+    ch_bed     // channel: [ val(meta), bed ]
+    modcodes   // String or List
 
     main:
-    ch_versions = channel.empty()
+    ch_fasta
+        .combine(ch_fai.map { _meta, fai -> fai })
+        .collect()
+        .set{ ch_fasta_fai }
 
     // Performs pileups per haplotype if the phasing workflow is on, set in config
-    MODKIT_PILEUP (ch_bam_bai, ch_fasta, ch_bed)
-    ch_versions = ch_versions.mix(MODKIT_PILEUP.out.versions)
+    MODKIT_PILEUP(
+        ch_bam_bai,
+        ch_fasta_fai,
+        ch_bed,
+    )
 
-
-    MODKIT_PILEUP.out.bed
+    MODKIT_PILEUP.out.bedgz
         .transpose()
-        .set { ch_bedmethyl }
-
-    TABIX_BGZIPTABIX ( ch_bedmethyl )
-    ch_versions = ch_versions.mix(TABIX_BGZIPTABIX.out.versions)
-
-    // Only convert files with content
-    ch_bedmethyl
-        .filter { _meta, bed -> bed.size() > 0 }
+        .tap { ch_bedmethyl }
+        // Only convert files with content
+        .filter { _meta, bed -> gzNotEmptyBySize(bed) }
         .set { ch_bedmethyl_to_bigwig_in }
 
-    MODKIT_BEDMETHYLTOBIGWIG ( ch_bedmethyl_to_bigwig_in, ch_fai, modcodes)
-    ch_versions = ch_versions.mix(MODKIT_BEDMETHYLTOBIGWIG.out.versions)
+    TABIX_TABIX(
+        ch_bedmethyl,
+    )
+
+    MODKIT_BEDMETHYLTOBIGWIG(
+        ch_bedmethyl_to_bigwig_in,
+        ch_fai,
+        modcodes
+    )
 
     emit:
-    bed      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, bed, _tbi -> [ meta, bed ] } // channel: [ val(meta), path(bed) ]
-    tbi      = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _bed, tbi -> [ meta, tbi ] } // channel: [ val(meta), path(tbi) ]
-    bigwig   = MODKIT_BEDMETHYLTOBIGWIG.out.bw
-    versions = ch_versions // channel: [ versions.yml ]
+    bed      = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
+    tbi      = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
+    bigwig   = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
+}
+
+def gzNotEmptyBySize(file_path) {
+    File gzipFile = file_path.toFile()
+    // When modkit produces an emty file, its size seems to be 168 bytes
+    if (gzipFile.length() > 168) {
+        return true
+    }
 }

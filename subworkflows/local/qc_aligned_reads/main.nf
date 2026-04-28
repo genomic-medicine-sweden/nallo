@@ -12,17 +12,14 @@ workflow QC_ALIGNED_READS {
 
     main:
     ch_sambamba_depth_bed = channel.empty()
-    ch_versions           = channel.empty()
 
     FASTQC(
         ch_bam_bai.map { meta, bam, _bai -> [meta, bam] }
     )
-    ch_versions = ch_versions.mix(FASTQC.out.versions)
 
     CRAMINO(
         ch_bam_bai
     )
-    ch_versions = ch_versions.mix(CRAMINO.out.versions)
 
     ch_bam_bai
         .combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList()) // toList() enables passing [] if ch_bed is empty
@@ -32,7 +29,6 @@ workflow QC_ALIGNED_READS {
         mosdepth_in,
         ch_fasta,
     )
-    ch_versions = ch_versions.mix(MOSDEPTH.out.versions)
 
     if (run_sambamba_depth) {
         SAMBAMBA_DEPTH(
@@ -40,7 +36,6 @@ workflow QC_ALIGNED_READS {
             ch_sambamba_bed,
             'region',
         )
-        ch_versions = ch_versions.mix(SAMBAMBA_DEPTH.out.versions)
 
         SAMBAMBA_DEPTH.out.bed
             .set { ch_sambamba_depth_bed }
@@ -52,5 +47,4 @@ workflow QC_ALIGNED_READS {
     mosdepth_global_dist = MOSDEPTH.out.global_txt  // channel: [ val(meta), path(txt) ]
     mosdepth_region_dist = MOSDEPTH.out.regions_txt // channel: [ val(meta), path(txt) ]
     sambamba_depth_bed   = ch_sambamba_depth_bed    // channel: [ val(meta), path(bed) ]
-    versions             = ch_versions              // channel: [ versions.yml ]
 }

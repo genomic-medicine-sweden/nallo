@@ -16,8 +16,6 @@ workflow RANK_VARIANTS {
     ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
-    ch_versions = channel.empty()
-
     GENMOD_ANNOTATE(
         ch_vcf
     )
@@ -33,11 +31,11 @@ workflow RANK_VARIANTS {
 
     GENMOD_MODELS.out.vcf
         .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
+        .join(ch_score_config, failOnMismatch: true, failOnDuplicate: true)
         .set { genmod_score_in }
 
     GENMOD_SCORE(
         genmod_score_in,
-        ch_score_config.map { _meta, file -> file },
     )
 
     GENMOD_COMPOUND(
@@ -47,10 +45,8 @@ workflow RANK_VARIANTS {
     BCFTOOLS_SORT(
         GENMOD_COMPOUND.out.vcf
     )
-    ch_versions = ch_versions.mix(BCFTOOLS_SORT.out.versions)
 
     emit:
-    vcf      = BCFTOOLS_SORT.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi      = BCFTOOLS_SORT.out.tbi // channel: [ val(meta), path(tbi) ]
-    versions = ch_versions           // channel: [ path(versions.yml) ]
+    vcf = BCFTOOLS_SORT.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = BCFTOOLS_SORT.out.tbi // channel: [ val(meta), path(tbi) ]
 }
