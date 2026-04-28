@@ -1,0 +1,101 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "pipeline_stub"
+    tag "stub_sex_check"
+    config "./nextflow.config"
+
+    test("Test skip sex check - unknown sex") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                input                        = "$projectDir/assets/samplesheet.csv"
+                outdir                       = "$outputDir"
+                sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
+                // Skip irrelevant steps
+                skip_chromograph             = true
+                skip_methylation_calling     = true
+                skip_methylation_annotation  = true
+                skip_peddy                   = true
+                skip_prepare_gens_input      = true
+                skip_phasing                 = true
+                skip_rank_variants           = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_snv_calling             = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
+                skip_sex_check               = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert !versions.containsKey('BAM_INFER_SEX') }, // Sex check should be skipped
+                { assert !versions.containsKey('CALL_SNVS') },
+                { assert !versions.containsKey('CALL_METHYLATION_METHBAT') },
+                { assert !versions.containsKey('PEDDY') },
+                { assert !versions.containsKey('PREPARE_GENS_INPUTS') },
+                { assert !versions.containsKey('CALL_REPEAT_EXPANSIONS_TRGT') },
+                { assert stable_name.contains('aligned_reads') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test skip sex check - multisample") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                outdir                       = "$outputDir"
+                sv_callers                   = "severus,hificnv"
+                sv_callers_to_run            = "severus,hificnv,sniffles"
+                // Skip irrelevant steps
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_genome_assembly         = true
+                skip_qc                      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
+                skip_sex_check               = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert !versions.containsKey('BAM_INFER_SEX') }, // Sex check should be skipped
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+}
