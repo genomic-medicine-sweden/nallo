@@ -92,8 +92,8 @@ You may bump the minimum required version of nextflow in the pipeline with: `nf-
 
 Since this is not an nf-core pipeline, the nf-core template is not automatically updated in the `TEMPLATE` branch. Follow these step to update the template:
 
-1. Update the `TEMPLATE` branch by running `nf-core pipelines sync`. Fix any merge conflicts and open a PR to then merge the changes.
-1. Open a PR to merge the `TEMPLATE` branch into `dev` to update the template files in the main codebase.
+1. Update the `TEMPLATE` branch by running `nf-core pipelines sync`. Fix any merge conflicts.
+2. Open a PR to merge the `TEMPLATE` branch into `dev` to update the template files in the main codebase.
 
 ### Developer setup
 
