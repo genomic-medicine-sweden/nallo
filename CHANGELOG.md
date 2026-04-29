@@ -3,7 +3,39 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.12.0 - [2026-04-27]
+## 0.13.0dev - [XXXX-XX-XX]
+
+### Added
+
+### Changed
+
+- [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
+
+### Removed
+
+### Fixed
+
+### Parameters
+
+| Old parameter | New parameter |
+| ------------- | ------------- |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
+
+### Module updates
+
+| Tool | Old version | New version |
+| ---- | ----------- | ----------- |
+
+> [!NOTE]
+> Version has been updated if both old and new version information is present.
+> Version has been added if just the new version information is present.
+> Version has been removed if new version information isn't present.
+
+## 0.12.0 - [2026-04-28]
 
 ### Added
 
@@ -30,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#907](https://github.com/genomic-medicine-sweden/nallo/pull/907) - Update module gawk
 - [#920](https://github.com/genomic-medicine-sweden/nallo/pull/920) - Updated version to 0.12.0dev
 - [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Updated remaining nf-core modules to topics
-- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - MethBat profile outputs now include ustable headers, added to `.nftignore`
+- [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - MethBat profile outputs now include unstable headers, added to `.nftignore`
 - [#933](https://github.com/genomic-medicine-sweden/nallo/pull/933) - Changed tags of variant ranking processes to include analysis set
 - [#938](https://github.com/genomic-medicine-sweden/nallo/pull/938) - Replaced local module `CREATE_SAMPLES_HAPLOTYPES_FILE` with updated nf-core gawk module to lessen maintenance burden of local modules
 - [#940](https://github.com/genomic-medicine-sweden/nallo/pull/940) - Changed ext.args with parameters introduced in [#934](https://github.com/genomic-medicine-sweden/nallo/pull/934) to closures so parameters are evaluated at runtime
@@ -66,12 +98,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
 - [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Moved output of `CALL_METHYLATION_METHBAT` to `methylation/profile/sample/${sample_id}/`
 - [#1038](https://github.com/genomic-medicine-sweden/nallo/pull/1038) - Updated version to 0.12.0
+- [#1046](https://github.com/genomic-medicine-sweden/nallo/pull/1046) - Updated target_regions null snapshot
 
 ### Removed
 
+- [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Removed Peddy sex check files from MultiQC because outputs are incorrect when female samples are input to the pipeline as male
 - [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed the usage and support of `ch_versions` completely, in favour of topic versions
 - [#927](https://github.com/genomic-medicine-sweden/nallo/pull/927) - Removed version snapshots from subworkflow tests
-- [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Stray TODO statement
+- [#950](https://github.com/genomic-medicine-sweden/nallo/pull/950) - Removed stray TODO statement
 - [#951](https://github.com/genomic-medicine-sweden/nallo/pull/951) - Removed unused `SOMALIER_PED` import
 - [#961](https://github.com/genomic-medicine-sweden/nallo/pull/961) - Removed `docs/CITATIONS.md` since the information is available in the MultiQC report
 - [#970](https://github.com/genomic-medicine-sweden/nallo/pull/970) - Removed unused `BCFTOOLS_SORT` import and config
@@ -176,7 +210,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed local module `merge_json`
 - [#905](https://github.com/genomic-medicine-sweden/nallo/pull/905) - Removed unused script `bin/split_bed_chunks.py`
-- [#918](https://github.com/genomic-medicine-sweden/nallo/pull/918) - Removed Peddy sex check files from MultiQC because outputs are incorrect when female samples are input to the pipeline as male
 
 ### `Fixed`
 
