@@ -15,12 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Changed `phasing` to workflow outputs
+- [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
 
 ### Removed
 
 - [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Removed publishDir from config for `whatshap`, `longphase` and `hiphase`
 
 ### Fixed
+
+- [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 
 ### Parameters
 
