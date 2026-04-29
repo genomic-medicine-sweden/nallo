@@ -39,6 +39,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -148,6 +149,7 @@ workflow NALLO {
     val_skip_chromograph
     val_skip_genome_assembly
     val_skip_methylation_calling
+    val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
     val_skip_prepare_gens_input
@@ -977,6 +979,15 @@ workflow NALLO {
             !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions,
         )
+
+        CALL_METHYLATION_METHBAT.out.region_profile
+            .set { ch_methylation_profiles }
+    }
+
+    if (!val_skip_methylation_annotation) {
+        ANNOTATE_METHYLATION(
+            ch_methylation_profiles,
+        )
     }
 
     //
@@ -1105,6 +1116,7 @@ workflow NALLO {
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 
 }
 
