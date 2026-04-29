@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 
 ### Removed
@@ -95,7 +96,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1019](https://github.com/genomic-medicine-sweden/nallo/pull/1019) - Update nf-schema to 2.7.0
 - [#1020](https://github.com/genomic-medicine-sweden/nallo/pull/1020) - Updated `utils_nfschema_plugin`
 - [#1021](https://github.com/genomic-medicine-sweden/nallo/pull/1021) - Updated parameters documentation
-- [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1034](https://github.com/genomic-medicine-sweden/nallo/pull/1034) - Update stranger to 0.10.2
 - [#1035](https://github.com/genomic-medicine-sweden/nallo/pull/1035) - Moved output of `CALL_METHYLATION_METHBAT` to `methylation/profile/sample/${sample_id}/`
 - [#1038](https://github.com/genomic-medicine-sweden/nallo/pull/1038) - Updated version to 0.12.0
