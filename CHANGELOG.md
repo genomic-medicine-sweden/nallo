@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
 - [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
 
-
 ### Changed
 
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
