@@ -240,8 +240,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -436,18 +436,18 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 
 output {
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
     }
-    methylation_annotation {
-        path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
-    }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
+    }
+    methylation_annotation {
+        path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
     }
 }
