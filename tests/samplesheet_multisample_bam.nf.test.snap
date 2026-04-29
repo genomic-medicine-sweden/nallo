@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            394,
+            399,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,6 +71,15 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": "1.2.0",
@@ -238,8 +247,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": 1.23
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -297,7 +306,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r69-dirty"
@@ -531,12 +540,16 @@
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/profile",
-                "methylation/profile/HG002",
-                "methylation/profile/HG002/HG002_methbat_profile.tsv",
-                "methylation/profile/HG003",
-                "methylation/profile/HG003/HG003_methbat_profile.tsv",
-                "methylation/profile/HG004",
-                "methylation/profile/HG004/HG004_methbat_profile.tsv",
+                "methylation/profile/family",
+                "methylation/profile/family/FAM",
+                "methylation/profile/family/FAM/FAM_methbat_profile_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/HG002",
+                "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/sample/HG003",
+                "methylation/profile/sample/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/sample/HG004",
+                "methylation/profile/sample/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -1231,7 +1244,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1304,13 +1317,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-04-08T15:10:24.155468815",
+        "timestamp": "2026-04-24T13:19:17.654934787",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.2"
         }
     }
 }
