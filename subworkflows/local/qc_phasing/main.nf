@@ -66,4 +66,5 @@ workflow QC_PHASING {
     phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf) ]
     phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi) ]
     haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(stats) ]
+    haplotagging_arrow   = CRAMINO.out.arrow      // channel: [ val(meta), path(arrow) ]
 }
