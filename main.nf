@@ -244,6 +244,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_profiles = NALLO.out.methylation_profiles // channel: [ val(meta), path(region_profile) ]
+    pbcpg_biwgig_combined = NALLO.out.pbcpg_biwgig_combined // channel: [ val(meta), path(combined.bw) ]
+    pbcpg_biwgig_hap1 = NALLO.out.pbcpg_biwgig_hap1     // channel: [ val(meta), path(hap1.bw) ]
+    pbcpg_biwgig_hap2 = NALLO.out.pbcpg_biwgig_hap2     // channel: [ val(meta), path(hap2.bw)
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -442,6 +446,10 @@ workflow {
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_profiles = GENOMICMEDICINESWEDEN_NALLO.out.methylation_profiles // channel: [ val(meta), path(region_profile) ]
+    pbcpg_biwgig_combined = GENOMICMEDICINESWEDEN_NALLO.out.pbcpg_biwgig_combined // channel: [ val(meta), path(combined.bw) ]
+    pbcpg_biwgig_hap1 = GENOMICMEDICINESWEDEN_NALLO.out.pbcpg_biwgig_hap1     // channel: [ val(meta), path(hap1.bw) ]
+    pbcpg_biwgig_hap2 = GENOMICMEDICINESWEDEN_NALLO.out.pbcpg_biwgig_hap2     // channel: [ val(meta), path(hap2.bw) ]
 }
 
 output {
@@ -459,5 +467,17 @@ output {
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    methylation_profiles {
+        path { meta, _region_profile -> "methylation/profile/sample/${meta.id}/" }
+    }
+    pbcpg_biwgig_combined {
+        path { meta, _combined -> "visualization_tracks/${meta.id}/" }
+    }
+    pbcpg_biwgig_hap1 {
+        path { meta, _hap1 -> "visualization_tracks/${meta.id}/" }
+    }
+    pbcpg_biwgig_hap2 {
+        path { meta, _hap2 -> "visualization_tracks/${meta.id}/" }
     }
 }

@@ -1119,6 +1119,10 @@ workflow NALLO {
     annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_profiles = val_skip_methylation_calling ? channel.empty() : ch_methylation_profiles // channel: [ val(meta), path(region_profile) ]
+    pbcpg_biwgig_combined = val_skip_methylation_calling ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_biwgig_combined // channel: [ val(meta), path(combined.bw) ]
+    pbcpg_biwgig_hap1 = val_skip_methylation_calling ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_biwgig_hap1     // channel: [ val(meta), path(hap1.bw) ]
+    pbcpg_biwgig_hap2 = val_skip_methylation_calling ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_biwgig_hap2     // channel: [ val(meta), path(hap2.bw) ]
 }
 
 /**
