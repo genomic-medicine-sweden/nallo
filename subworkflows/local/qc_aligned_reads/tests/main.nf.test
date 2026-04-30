@@ -36,7 +36,7 @@ nextflow_workflow {
                     workflow.out.mosdepth_summary,
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
-                    workflow.out.mosdepth_region_dist,
+                    workflow.out.mosdepth_regions_dist,
                     workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
                     workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
 
@@ -84,7 +84,7 @@ nextflow_workflow {
                     workflow.out.mosdepth_summary,
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
-                    workflow.out.mosdepth_region_dist,
+                    workflow.out.mosdepth_regions_dist,
                     workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
                     workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
 

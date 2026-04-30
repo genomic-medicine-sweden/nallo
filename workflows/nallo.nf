@@ -400,7 +400,7 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         QC_ALIGNED_READS.out.cramino_stats
             .mix(QC_ALIGNED_READS.out.cramino_arrow)
@@ -410,7 +410,7 @@ workflow NALLO {
             .set { ch_qc_aligned_reads_fastqc }
         QC_ALIGNED_READS.out.mosdepth_summary
             .mix(QC_ALIGNED_READS.out.mosdepth_global_dist)
-            .mix(QC_ALIGNED_READS.out.mosdepth_region_dist)
+            .mix(QC_ALIGNED_READS.out.mosdepth_regions_dist)
             .mix(QC_ALIGNED_READS.out.mosdepth_per_base_d4)
             .mix(QC_ALIGNED_READS.out.mosdepth_regions_bed)
             .set { ch_qc_aligned_reads_mosdepth }
