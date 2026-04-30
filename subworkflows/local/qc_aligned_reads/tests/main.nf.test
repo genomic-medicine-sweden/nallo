@@ -29,11 +29,16 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
+                    workflow.out.cramino_stats.collect { meta, stats -> [meta, file(stats).name] },
+                    workflow.out.cramino_arrow.collect { meta, arrow -> [meta, file(arrow).name] },
+                    file(workflow.out.fastqc_html.get(0).get(1)).name,
                     file(workflow.out.fastqc_zip.get(0).get(1)).name,
                     workflow.out.mosdepth_summary,
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
                     workflow.out.mosdepth_region_dist,
+                    workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
+                    workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
 
                 ).match() }
             )
@@ -72,11 +77,16 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
+                    workflow.out.cramino_stats.collect { meta, stats -> [meta, file(stats).name] },
+                    workflow.out.cramino_arrow.collect { meta, arrow -> [meta, file(arrow).name] },
+                    file(workflow.out.fastqc_html.get(0).get(1)).name,
                     file(workflow.out.fastqc_zip.get(0).get(1)).name,
                     workflow.out.mosdepth_summary,
                     file(workflow.out.mosdepth_summary.get(0).get(1)).readLines(),
                     workflow.out.mosdepth_global_dist,
                     workflow.out.mosdepth_region_dist,
+                    workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
+                    workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
 
                 ).match() }
             )
