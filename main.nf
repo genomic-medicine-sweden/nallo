@@ -242,6 +242,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_cramino_unphased = NALLO.out.qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
+    qc_fastqc = NALLO.out.qc_fastqc // channel: [ val(meta), path(html/zip) ]
+    qc_mosdepth = NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz) ]
+    qc_sambamba_depth = NALLO.out.qc_sambamba_depth // channel: [ val(meta), path(bed) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -438,6 +442,10 @@ workflow {
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
+    qc_fastqc = GENOMICMEDICINESWEDEN_NALLO.out.qc_fastqc // channel: [ val(meta), path(html/zip) ]
+    qc_mosdepth = GENOMICMEDICINESWEDEN_NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz) ]
+    qc_sambamba_depth = GENOMICMEDICINESWEDEN_NALLO.out.qc_sambamba_depth // channel: [ val(meta), path(bed) ]
 }
 
 output {
@@ -449,5 +457,17 @@ output {
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    qc_cramino_unphased {
+        path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
+    }
+    qc_fastqc {
+        path { meta, _file -> "qc/fastqc/${meta.id}/" }
+    }
+    qc_mosdepth {
+        path { meta, _file -> "qc/mosdepth/${meta.id}/" }
+    }
+    qc_sambamba_depth {
+        path { meta, _file -> "qc/sambamba_depth/${meta.id}/" }
     }
 }
