@@ -63,9 +63,17 @@
                     },
                     "test.regions.bed.gz"
                 ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.regions.bed.gz.csi"
+                ]
             ]
         ],
-        "timestamp": "2026-04-30T08:21:35.521002893",
+        "timestamp": "2026-04-30T09:11:47.049086704",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -85,6 +93,9 @@
                 "1": [
                     
                 ],
+                "10": [
+                    
+                ],
                 "2": [
                     [
                         {
@@ -142,7 +153,12 @@
                     ]
                 ],
                 "9": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "cramino_arrow": [
                     
@@ -195,6 +211,14 @@
                         "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "mosdepth_regions_dist": [
                     [
                         {
@@ -216,7 +240,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-30T08:39:49.221152321",
+        "timestamp": "2026-04-30T09:12:00.898971201",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -236,6 +260,14 @@
                 "1": [
                     
                 ],
+                "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "2": [
                     [
                         {
@@ -297,7 +329,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "cramino_arrow": [
@@ -351,6 +383,14 @@
                         "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "mosdepth_regions_dist": [
                     [
                         {
@@ -377,7 +417,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-30T08:40:03.471814858",
+        "timestamp": "2026-04-30T09:12:15.116374097",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -431,9 +471,12 @@
             ],
             [
                 
+            ],
+            [
+                
             ]
         ],
-        "timestamp": "2026-04-30T08:21:14.907240207",
+        "timestamp": "2026-04-30T09:11:26.903772372",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
