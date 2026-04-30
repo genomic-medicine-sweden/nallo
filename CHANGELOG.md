@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
-- [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Migrated `QC_PHASING` published outputs to Nextflow workflow outputs
+- [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Changed `QC_PHASING` outputs to workflow outputs
 
 ### Removed
 
