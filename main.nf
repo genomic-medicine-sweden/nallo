@@ -244,7 +244,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = NALLO.out.qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = NALLO.out.qc_fastqc // channel: [ val(meta), path(html/zip) ]
-    qc_mosdepth = NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz) ]
+    qc_mosdepth = NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
     qc_sambamba_depth = NALLO.out.qc_sambamba_depth // channel: [ val(meta), path(bed) ]
 }
 /*
@@ -444,7 +444,7 @@ workflow {
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = GENOMICMEDICINESWEDEN_NALLO.out.qc_fastqc // channel: [ val(meta), path(html/zip) ]
-    qc_mosdepth = GENOMICMEDICINESWEDEN_NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz) ]
+    qc_mosdepth = GENOMICMEDICINESWEDEN_NALLO.out.qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
     qc_sambamba_depth = GENOMICMEDICINESWEDEN_NALLO.out.qc_sambamba_depth // channel: [ val(meta), path(bed) ]
 }
 

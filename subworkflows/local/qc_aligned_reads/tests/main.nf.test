@@ -39,6 +39,7 @@ nextflow_workflow {
                     workflow.out.mosdepth_regions_dist,
                     workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
                     workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
+                    workflow.out.mosdepth_regions_csi.collect { meta, csi -> [meta, file(csi).name] },
 
                 ).match() }
             )
@@ -87,6 +88,7 @@ nextflow_workflow {
                     workflow.out.mosdepth_regions_dist,
                     workflow.out.mosdepth_per_base_d4.collect { meta, d4 -> [meta, file(d4).name] },
                     workflow.out.mosdepth_regions_bed.collect { meta, bed -> [meta, file(bed).name] },
+                    workflow.out.mosdepth_regions_csi.collect { meta, csi -> [meta, file(csi).name] },
 
                 ).match() }
             )

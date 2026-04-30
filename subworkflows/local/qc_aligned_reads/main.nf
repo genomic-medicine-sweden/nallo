@@ -51,5 +51,6 @@ workflow QC_ALIGNED_READS {
     mosdepth_regions_dist = MOSDEPTH.out.regions_txt // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4 = MOSDEPTH.out.per_base_d4 // channel: [ val(meta), path(d4) ]
     mosdepth_regions_bed = MOSDEPTH.out.regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_csi = MOSDEPTH.out.regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
     sambamba_depth_bed   = ch_sambamba_depth_bed    // channel: [ val(meta), path(bed) ]
 }

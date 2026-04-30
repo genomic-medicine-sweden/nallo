@@ -413,6 +413,7 @@ workflow NALLO {
             .mix(QC_ALIGNED_READS.out.mosdepth_regions_dist)
             .mix(QC_ALIGNED_READS.out.mosdepth_per_base_d4)
             .mix(QC_ALIGNED_READS.out.mosdepth_regions_bed)
+            .mix(QC_ALIGNED_READS.out.mosdepth_regions_csi)
             .set { ch_qc_aligned_reads_mosdepth }
         QC_ALIGNED_READS.out.sambamba_depth_bed
             .set { ch_qc_aligned_reads_sambamba_depth }
@@ -1134,7 +1135,7 @@ workflow NALLO {
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_fastqc // channel: [ val(meta), path(html/zip) ]
-    qc_mosdepth = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz) ]
+    qc_mosdepth = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
     qc_sambamba_depth = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_sambamba_depth // channel: [ val(meta), path(bed) ]
 
 }
