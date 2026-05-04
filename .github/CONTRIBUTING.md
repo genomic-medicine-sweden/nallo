@@ -224,6 +224,14 @@ We are currently migrating from using `publishDir` to workflow outputs.
 
 ### Style
 
+- Sort `include` statements alphabetically by the name inside the braces. Right-pad each name with spaces so all closing `}` align to the same column (the longest name in the block sets the width):
+
+  ```groovy
+  include { BCFTOOLS_VIEW as FILTER_VCF } from '../../../modules/nf-core/bcftools/view/main'
+  include { TIDDIT_COV                  } from '../../../modules/nf-core/tiddit/cov/main'
+  include { VCF2CYTOSURE                } from '../../../modules/nf-core/vcf2cytosure/main'
+  ```
+
 - Both `take:` and `emit:` block entries require an inline type comment. Use `name // type: [mandatory|optional] description` for `take:` and `name = value // channel: [type description]` for `emit:`. Always include the comment — never leave an entry uncommented.
 
   ```groovy
