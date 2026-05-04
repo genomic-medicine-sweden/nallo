@@ -469,7 +469,7 @@ output {
         path { meta, _file -> "paraphase/family/${meta.id}/" }
     }
     annotated_repeats {
-        path { meta, _vcf, _tbi -> "${params.outdir}/repeats/family/${meta.id}/" }
+        path { meta, _vcf, _tbi -> "repeats/family/${meta.id}/" }
     }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
