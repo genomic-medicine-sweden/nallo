@@ -430,18 +430,6 @@ workflow {
     )
 
     //
-    // WORKFLOW OUTPUTS: Group files by publish directory
-    //
-    GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
-        .set { ch_qc_cramino_phased }
-
-    GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_index)
-        .set { ch_qc_phasing_stats }
-
-    //
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION(
@@ -453,6 +441,16 @@ workflow {
         params.hook_url,
         GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
+
+    //
+    // WORKFLOW OUTPUTS: Group files by publish directory
+    //
+    ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+
+    ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_index)
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
