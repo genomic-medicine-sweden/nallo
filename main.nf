@@ -244,8 +244,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    qc_cramino_phased = NALLO.out.qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
-    qc_phasing_stats = NALLO.out.qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
+    phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
+    phasing_blocks_index = NALLO.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -425,6 +428,16 @@ workflow {
         params.vep_cache,
         params.vep_cache_version,
     )
+
+    GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+        .set { ch_qc_cramino_phased }
+
+    GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_index)
+        .set { ch_qc_phasing_stats }
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -444,8 +457,8 @@ workflow {
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
-    qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
+    qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
+    qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
 }
 
 output {
