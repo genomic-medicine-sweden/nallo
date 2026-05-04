@@ -241,6 +241,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     cramino_unphased_stats = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
     cramino_unphased_arrow = NALLO.out.cramino_unphased_arrow // channel: [ val(meta), path(arrow) ]
@@ -463,6 +465,8 @@ workflow {
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
@@ -476,6 +480,12 @@ output {
     }
     annotated_paralogs {
         path { meta, _file -> "paraphase/family/${meta.id}/" }
+    }
+    annotated_repeats {
+        path { meta, _vcf, _tbi -> "repeats/family/${meta.id}/" }
+    }
+    assembly_summary {
+        path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
