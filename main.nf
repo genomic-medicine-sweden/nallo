@@ -429,6 +429,9 @@ workflow {
         params.vep_cache_version,
     )
 
+    //
+    // WORKFLOW OUTPUTS: Group files by publish directory
+    //
     GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
         .set { ch_qc_cramino_phased }
