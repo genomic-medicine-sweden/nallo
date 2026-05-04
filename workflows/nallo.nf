@@ -402,21 +402,6 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
-        QC_ALIGNED_READS.out.cramino_stats
-            .mix(QC_ALIGNED_READS.out.cramino_arrow)
-            .set { ch_qc_aligned_reads_cramino_unphased }
-        QC_ALIGNED_READS.out.fastqc_html
-            .mix(QC_ALIGNED_READS.out.fastqc_zip)
-            .set { ch_qc_aligned_reads_fastqc }
-        QC_ALIGNED_READS.out.mosdepth_summary
-            .mix(QC_ALIGNED_READS.out.mosdepth_global_dist)
-            .mix(QC_ALIGNED_READS.out.mosdepth_regions_dist)
-            .mix(QC_ALIGNED_READS.out.mosdepth_per_base_d4)
-            .mix(QC_ALIGNED_READS.out.mosdepth_regions_bed)
-            .mix(QC_ALIGNED_READS.out.mosdepth_regions_csi)
-            .set { ch_qc_aligned_reads_mosdepth }
-        QC_ALIGNED_READS.out.sambamba_depth_bed
-            .set { ch_qc_aligned_reads_sambamba_depth }
     }
 
     /*
@@ -1133,10 +1118,16 @@ workflow NALLO {
     aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    qc_cramino_unphased = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
-    qc_fastqc = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_fastqc // channel: [ val(meta), path(html/zip) ]
-    qc_mosdepth = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
-    qc_sambamba_depth = val_skip_qc ? channel.empty() : ch_qc_aligned_reads_sambamba_depth // channel: [ val(meta), path(bed) ]
+    cramino_unphased_stats = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
+    cramino_unphased_arrow = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
+    fastqc_html = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
+    fastqc_zip = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
+    mosdepth_summary = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
+    mosdepth_global_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_regions_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_per_base_d4 = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
+    mosdepth_regions = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
+    sambamba_depth_bed = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
 
 }
 
