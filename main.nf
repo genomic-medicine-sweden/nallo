@@ -245,8 +245,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
-    phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    phasing_blocks_index = NALLO.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
@@ -450,7 +449,6 @@ workflow {
 
     ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_index)
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
@@ -482,6 +480,6 @@ output {
         path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
     }
     qc_phasing_stats {
-        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
+        path { meta, _file, _index = null -> "qc/phasing_stats/${meta.id}/" }
     }
 }

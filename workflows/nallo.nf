@@ -1120,8 +1120,7 @@ workflow NALLO {
     assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
-    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    phasing_blocks_index = val_skip_phasing ? channel.empty() : PHASING.out.blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 
