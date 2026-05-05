@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
 - [#1067](https://github.com/genomic-medicine-sweden/nallo/pull/1067) - Changed `chromograph` to workflow outputs
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
+- [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
 
 ### Removed
 
