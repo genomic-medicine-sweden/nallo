@@ -400,7 +400,7 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
     }
 
     /*
@@ -810,7 +810,6 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-
     }
 
     if (!val_skip_chromograph) {
@@ -1118,18 +1117,30 @@ workflow NALLO {
     annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    chromograph_plots = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    cramino_unphased_stats = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
+    cramino_unphased_arrow = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
+    fastqc_html = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
+    fastqc_zip = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
     gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    mosdepth_summary = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
+    mosdepth_global_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_regions_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_per_base_d4 = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
+    mosdepth_regions = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
+    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
+    sambamba_depth_bed = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
+    sample_snvs = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf.join(VCF_CONCAT_NORM_VARIANTS.out.index) // channel: [ val(meta), path(vcf), path(tbi) ]
+    sawfish_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_depth_bw.mix(CALL_SVS.out.sawfish_copynum_bedgraph).mix(CALL_SVS.out.sawfish_gc_bias_corrected_depth_bw).mix(CALL_SVS.out.sawfish_maf_bw) // channel: [ val(meta), path(bw/bedgraph) ]
+    svs_per_family_and_caller = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf.join(CALL_SVS.out.family_caller_tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
     hificnv_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth.mix(CALL_SVS.out.hificnv_copynum).mix(CALL_SVS.out.hificnv_maf) // channel: [ val(meta), path(bw/bedgraph) ]
-    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
-    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
-    sawfish_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_depth_bw.mix(CALL_SVS.out.sawfish_copynum_bedgraph).mix(CALL_SVS.out.sawfish_gc_bias_corrected_depth_bw).mix(CALL_SVS.out.sawfish_maf_bw) // channel: [ val(meta), path(bw/bedgraph) ]
-    svs_per_family_and_caller = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf.join(CALL_SVS.out.family_caller_tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
-    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
-    qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
 }
 
 /**
