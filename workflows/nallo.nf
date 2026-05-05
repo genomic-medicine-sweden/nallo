@@ -1118,10 +1118,18 @@ workflow NALLO {
     annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    svs_per_family_and_caller = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf.join(CALL_SVS.out.family_caller_tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
     hificnv_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth.mix(CALL_SVS.out.hificnv_copynum).mix(CALL_SVS.out.hificnv_maf) // channel: [ val(meta), path(bw/bedgraph) ]
+    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     sawfish_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_depth_bw.mix(CALL_SVS.out.sawfish_copynum_bedgraph).mix(CALL_SVS.out.sawfish_gc_bias_corrected_depth_bw).mix(CALL_SVS.out.sawfish_maf_bw) // channel: [ val(meta), path(bw/bedgraph) ]
+    svs_per_family_and_caller = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf.join(CALL_SVS.out.family_caller_tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
 }
 
 /**

@@ -18,7 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
+- [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Changed `qc_phasing` to workflow outputs
 - [#1061](https://github.com/genomic-medicine-sweden/nallo/pull/1061) - Changed `annotated_repeats` workflow outputs to not include params.outdir, added by mistake in [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041)
+- [#1065](https://github.com/genomic-medicine-sweden/nallo/pull/1065) - Changed `qc_snvs` to workflow outputs
+- [#1062](https://github.com/genomic-medicine-sweden/nallo/pull/1062) - Updated contribution guidelines regarding `.set` which might soon be restricted
+- [#1063](https://github.com/genomic-medicine-sweden/nallo/pull/1063) - Updated contribution guidelines regarding sorting include statements alphabetically
+- [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
 
 ### Removed
 

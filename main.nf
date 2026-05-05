@@ -243,7 +243,15 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -423,6 +431,7 @@ workflow {
         params.vep_cache,
         params.vep_cache_version,
     )
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -436,15 +445,32 @@ workflow {
         GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
 
+    //
+    // WORKFLOW OUTPUTS: Group files by publish directory
+    //
+    ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+
+    ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
+    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
+
     publish:
     aligned_assemblies        = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies    // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs        = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs    // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats         = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats     // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary          = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary      // channel: [ val(meta), path(assembly_summary) ]
-    methylation_annotation    = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
+    gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     hificnv_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    methylation_annotation    = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
+    qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
     sawfish_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
 }
 
 output {
@@ -460,22 +486,37 @@ output {
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
     }
-    methylation_annotation {
-        path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
-    }
-    svs_per_family_and_caller {
-        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
-        enabled params.publish_unannotated_family_svs
+    gens {
+        path { meta, _bed, _tbi -> "gens/${meta.id}/" }
     }
     hificnv_visualization {
         path { meta, file ->
             file >> "visualization_tracks/${meta.id}/${file.name.replace(".${meta.id}.", ".")}"
         }
     }
+    methylation_annotation {
+        path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    qc_bcftools_stats {
+        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
+    }
+    qc_deepvariant_vcfstatsreport {
+        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    }
+    qc_cramino_phased {
+        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
+    }
+    qc_phasing_stats {
+        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
+    }
     sawfish_visualization {
         path { _meta, file ->
             def sample = file.parent.name.replaceFirst("/^.*?_/", "")
             file >> "visualization_tracks/${sample}/${sample}_${file.baseName}_sawfish.${file.extension}"
         }
+    }
+    svs_per_family_and_caller {
+        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
+        enabled params.publish_unannotated_family_svs
     }
 }
