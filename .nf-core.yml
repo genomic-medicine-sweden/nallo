@@ -24,6 +24,8 @@ lint:
     - docs/images/nf-core-nallo_logo_dark.png
     - .github/ISSUE_TEMPLATE/bug_report.yml
     - .github/CONTRIBUTING.md
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - .github/workflows/linting.yml
     - .prettierignore
   modules_config: false
   multiqc_config:
@@ -31,7 +33,7 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
-nf_core_version: 3.5.1
+nf_core_version: 4.0.2
 repository_type: pipeline
 template:
   author: Felix Lenner
@@ -41,5 +43,7 @@ template:
   name: nallo
   org: genomic-medicine-sweden
   outdir: .
-  skip_features: []
-  version: 0.9.0dev
+  skip_features:
+    - igenomes
+    - fastqc
+  version: 0.13.0dev
