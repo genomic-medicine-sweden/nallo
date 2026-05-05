@@ -97,7 +97,48 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert workflow.out.sample_vcf.get(0).get(1).endsWith(".vcf.gz") },
+                { assert workflow.out.sample_tbi.get(0).get(1).endsWith(".vcf.gz.tbi") },
+                { assert workflow.out.family_vcf.get(0).get(1).endsWith(".vcf.gz") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith(".vcf.gz.tbi") },
+                { assert workflow.out.sample_bam.get(0).get(1).endsWith(".bam") },
+                { assert workflow.out.sample_bai.get(0).get(1).endsWith(".bam.bai") },
+                { assert workflow.out.sample_cram.isEmpty() },
+                { assert workflow.out.sample_crai.isEmpty() }
+            )
+        }
+
+    }
+
+    test("[bam, bai], fasta, fai, bed - cram stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = channel.of([
+                    [ id: 'pathogenic_repeats' ],
+                    file(params.pipelines_testdata_base_path + 'reference/pathogenic_repeats.hg38.bed')
+                ])
+                input[4] = true
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.sample_cram.get(0).get(1).endsWith(".cram") },
+                { assert workflow.out.sample_crai.get(0).get(1).endsWith(".crai") }
             )
         }
 
