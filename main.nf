@@ -243,6 +243,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 /*
@@ -436,11 +438,18 @@ workflow {
         GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
 
+    //
+    // WORKFLOW OUTPUTS: Group files by publish directory
+    //
+    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
+
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 
@@ -456,6 +465,9 @@ output {
     }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
+    }
+    gens {
+        path { meta, _bed, _tbi -> "gens/${meta.id}/" }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
