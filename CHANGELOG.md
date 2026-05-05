@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
 - [#1061](https://github.com/genomic-medicine-sweden/nallo/pull/1061) - Changed `annotated_repeats` workflow outputs to not include params.outdir, added by mistake in [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041)
+- [#1066](https://github.com/genomic-medicine-sweden/nallo/pull/1066) - Limit SNV call regions to speed up DeepVariant in tests
 
 ### Removed
 
