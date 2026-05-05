@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- [#1072]((https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
+
 ### Fixed
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
@@ -48,8 +50,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                           | Old version | New version |
+| ------------------------------ | ----------- | ----------- |
+| sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
