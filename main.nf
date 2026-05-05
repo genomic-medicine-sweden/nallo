@@ -244,6 +244,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -442,6 +444,8 @@ workflow {
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
 }
 
 output {
@@ -459,5 +463,11 @@ output {
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    qc_bcftools_stats {
+        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
+    }
+    qc_deepvariant_vcfstatsreport {
+        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
     }
 }
