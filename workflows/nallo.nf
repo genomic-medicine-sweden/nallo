@@ -1130,6 +1130,12 @@ workflow NALLO {
     mosdepth_per_base_d4 = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
     mosdepth_regions = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
     sambamba_depth_bed = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
+    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
+    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 
 /**
