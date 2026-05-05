@@ -246,8 +246,7 @@ We are currently migrating from using `publishDir` to workflow outputs.
   publish = ch_publish  // channel: [ val(destination), val(value) ]
   ```
 
-- Avoid using `ch_* = <...>`, use the `.set {ch_*}` operator to create new channels whenever possible.
-
+- Use `ch_* = <...>` to declare a new channel, using `.set` will [soon be restricted](https://docs.seqera.io/nextflow/workflow-typed#restricted-syntax).
 - Use the nextflow code formatting (`nextflow lint -harshil-alignment -format file.nf`) after making changes, but beware that it currently removes some inline comments.
 - Use comment-blocks for multi-line comments, e.g.:
 
