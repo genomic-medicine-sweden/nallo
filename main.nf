@@ -463,7 +463,7 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_per_base_d4)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, bed, _csi -> [meta, bed] })
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, _bed, csi -> [meta, csi] })
-        
+
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
