@@ -477,7 +477,7 @@ workflow {
     ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
-        
+
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
@@ -528,11 +528,13 @@ output {
     }
     qc_sambamba_depth {
         path { meta, _file -> "qc/sambamba_depth/${meta.id}/" }
+    }
     qc_bcftools_stats {
         path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
     }
     qc_deepvariant_vcfstatsreport {
-        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+            path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    }
     qc_cramino_phased {
         path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
     }
