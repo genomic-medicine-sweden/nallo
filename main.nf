@@ -243,6 +243,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     cramino_unphased_stats = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
     cramino_unphased_arrow = NALLO.out.cramino_unphased_arrow // channel: [ val(meta), path(arrow) ]
@@ -461,12 +463,16 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_per_base_d4)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, bed, _csi -> [meta, bed] })
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, _bed, csi -> [meta, csi] })
+        
+    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
@@ -486,6 +492,9 @@ output {
     }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
+    }
+    gens {
+        path { meta, _bed, _tbi -> "gens/${meta.id}/" }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
