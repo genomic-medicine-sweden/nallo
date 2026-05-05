@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1062](https://github.com/genomic-medicine-sweden/nallo/pull/1062) - Updated contribution guidelines regarding `.set` which might soon be restricted
 - [#1063](https://github.com/genomic-medicine-sweden/nallo/pull/1063) - Updated contribution guidelines regarding sorting include statements alphabetically
 - [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
+- [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Changed `call_svs` to workflow outputs
 
 ### Removed
 
