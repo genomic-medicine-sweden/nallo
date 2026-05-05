@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
 - [#1061](https://github.com/genomic-medicine-sweden/nallo/pull/1061) - Changed `annotated_repeats` workflow outputs to not include params.outdir, added by mistake in [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041)
 - [#1065](https://github.com/genomic-medicine-sweden/nallo/pull/1065) - Changed `qc_snvs` to workflow outputs
+- [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
 
 ### Removed
 
