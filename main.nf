@@ -484,13 +484,13 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
     publish:
-    aligned_assemblies        = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies    // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_paralogs        = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs    // channel: [ val(meta), path(tsv/json) ]
-    annotated_repeats         = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats     // channel: [ val(meta), path(vcf), path(tbi) ]
-    assembly_summary          = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary      // channel: [ val(meta), path(assembly_summary) ]
+    aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies    // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs    // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats     // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary      // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
-    hificnv_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    hificnv_visualization = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_cramino_unphased = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
@@ -501,7 +501,7 @@ workflow {
     sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
-    sawfish_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    sawfish_visualization = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
     svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
 }
 
@@ -561,8 +561,7 @@ output {
     }
     sawfish_visualization {
         path { _meta, file ->
-            def sample = file.parent.name.replaceFirst("/^.*?_/", "")
-            file >> "visualization_tracks/${sample}/${sample}_${file.baseName}_sawfish.${file.extension}"
+            file >> "visualization_tracks/${file.parent.name.replaceFirst("/^.*?_/", "")}/${file.parent.name.replaceFirst("/^.*?_/", "")}_${file.baseName}_sawfish.${file.extension}"
         }
     }
     svs_per_family_and_caller {
