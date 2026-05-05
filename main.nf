@@ -248,6 +248,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -427,6 +431,7 @@ workflow {
         params.vep_cache,
         params.vep_cache_version,
     )
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
@@ -443,6 +448,12 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
+    ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+
+    ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
@@ -455,6 +466,8 @@ workflow {
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
+    qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
 }
 
 output {
@@ -481,5 +494,10 @@ output {
     }
     qc_deepvariant_vcfstatsreport {
         path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    qc_cramino_phased {
+        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
+    }
+    qc_phasing_stats {
+        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
 }
