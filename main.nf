@@ -258,6 +258,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     sambamba_depth_bed = NALLO.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
     qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    sample_snvs = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
     phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
@@ -494,6 +495,7 @@ workflow {
     qc_sambamba_depth = GENOMICMEDICINESWEDEN_NALLO.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
     qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
 }
@@ -534,6 +536,9 @@ output {
     }
     qc_deepvariant_vcfstatsreport {
             path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    }
+    sample_snvs {
+        path { meta, _vcf, _tbi -> "snvs/sample/${meta.id}/" }
     }
     qc_cramino_phased {
         path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
