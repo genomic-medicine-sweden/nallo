@@ -1119,6 +1119,9 @@ workflow NALLO {
     annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    svs_per_family_and_caller = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf.join(CALL_SVS.out.family_caller_tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    hificnv_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth.mix(CALL_SVS.out.hificnv_copynum).mix(CALL_SVS.out.hificnv_maf) // channel: [ val(meta), path(bw/bedgraph) ]
+    sawfish_visualization = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_depth_bw.mix(CALL_SVS.out.sawfish_copynum_bedgraph).mix(CALL_SVS.out.sawfish_gc_bias_corrected_depth_bw).mix(CALL_SVS.out.sawfish_maf_bw) // channel: [ val(meta), path(bw/bedgraph) ]
 }
 
 /**

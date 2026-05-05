@@ -316,10 +316,17 @@ workflow CALL_SVS {
     )
 
     emit:
-    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
-    family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_caller_vcf                    = SVDB_MERGE_BY_CALLER.out.vcf                                                                // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi                    = SVDB_MERGE_BY_CALLER.out.tbi                                                                // channel: [ val(meta), path(tbi) ]
+    family_vcf                           = SVDB_MERGE_BY_FAMILY.out.vcf                                                                // channel: [ val(meta), path(vcf) ]
+    family_tbi                           = SVDB_MERGE_BY_FAMILY.out.tbi                                                                // channel: [ val(meta), path(tbi) ]
+    hificnv_depth                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth    : channel.empty()              // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum  : channel.empty()              // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                          = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf      : channel.empty()              // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.depth_bw                    : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph             = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.copynum_bedgraph             : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw   = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw   : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                       = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.maf_bw                      : channel.empty() // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {

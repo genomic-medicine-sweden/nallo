@@ -437,11 +437,14 @@ workflow {
     )
 
     publish:
-    aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
-    annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
-    assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    aligned_assemblies        = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies    // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_paralogs        = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs    // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats         = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats     // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary          = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary      // channel: [ val(meta), path(assembly_summary) ]
+    methylation_annotation    = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
+    hificnv_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    sawfish_visualization     = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
 }
 
 output {
@@ -459,5 +462,20 @@ output {
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    svs_per_family_and_caller {
+        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
+        enabled params.publish_unannotated_family_svs
+    }
+    hificnv_visualization {
+        path { meta, file ->
+            file >> "visualization_tracks/${meta.id}/${file.name.replace(".${meta.id}.", ".")}"
+        }
+    }
+    sawfish_visualization {
+        path { _meta, file ->
+            def sample = file.parent.name.replaceFirst("/^.*?_/", "")
+            file >> "visualization_tracks/${sample}/${sample}_${file.baseName}_sawfish.${file.extension}"
+        }
     }
 }
