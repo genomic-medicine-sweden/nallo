@@ -97,6 +97,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
                 { assert workflow.out.sample_vcf.get(0).get(1).endsWith(".vcf.gz") },
                 { assert workflow.out.sample_tbi.get(0).get(1).endsWith(".vcf.gz.tbi") },
                 { assert workflow.out.family_vcf.get(0).get(1).endsWith(".vcf.gz") },
@@ -137,6 +138,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
                 { assert workflow.out.sample_cram.get(0).get(1).endsWith(".cram") },
                 { assert workflow.out.sample_crai.get(0).get(1).endsWith(".crai") }
             )
