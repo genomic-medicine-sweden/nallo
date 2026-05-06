@@ -1042,9 +1042,9 @@ workflow NALLO {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
         }
-        .groupTuple(by: 0)
+        .groupTuple(by:0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
@@ -1063,44 +1063,35 @@ workflow NALLO {
     //
     // MODULE: MultiQC
     //
-    summary_params = paramsSummaryMap(
-        workflow,
-        parameters_schema: "nextflow_schema.json"
-    )
-    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
+    def ch_summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    def ch_workflow_summary = channel.value(paramsSummaryMultiqc(ch_summary_params))
     ch_multiqc_files = ch_multiqc_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml')
     )
 
-    ch_multiqc_custom_methods_description = val_multiqc_methods_description
+    def ch_multiqc_custom_methods_description = val_multiqc_methods_description
         ? file(val_multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description = channel.value(
+    def ch_methods_description = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description)
     )
-    ch_methods_description_citation = citationBibliographyText(
+    def ch_methods_description_citation = citationBibliographyText(
         topic_versions_string,
         file("${projectDir}/assets/software_references.yml"),
         'citation',
     )
-    ch_methods_description_bibliography = citationBibliographyText(
+    def ch_methods_description_bibliography = citationBibliographyText(
         topic_versions_string,
         file("${projectDir}/assets/software_references.yml"),
         'bibliography',
     )
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
-    // sort: false // preserve order for correct yaml structure
-    ch_multiqc_files = ch_multiqc_files.mix(
-        ch_methods_description.concat(ch_methods_description_citation).concat(ch_methods_description_bibliography).flatten().collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: false,
-        )
-    )
+    ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
     MULTIQC(
         ch_multiqc_files.flatten().collect().map { files ->
             [
-                [id: 'multiqc'],
+                [id: 'nallo'],
                 files,
                 val_multiqc_config
                     ? file(val_multiqc_config, checkIfExists: true)

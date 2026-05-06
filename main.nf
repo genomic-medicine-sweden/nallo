@@ -13,9 +13,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NALLO                                 } from './workflows/nallo'
-include { PIPELINE_INITIALISATION               } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-include { PIPELINE_COMPLETION                   } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { NALLO                   } from './workflows/nallo'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 include {
     createReferenceChannelFromPath ;
     createReferenceChannelFromSamplesheet
@@ -262,6 +262,7 @@ workflow {
     PIPELINE_INITIALISATION(
         params.help,
         params.help_full,
+        params.monochrome_logs,
         args,
         params.outdir,
         params.show_hidden,
@@ -428,15 +429,15 @@ workflow {
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION(
+    PIPELINE_COMPLETION (
         params.email,
         params.email_on_fail,
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        params.hook_url,
-        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
+        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
     )
+
 
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
