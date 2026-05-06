@@ -20,7 +20,6 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
-                skip_sex_check               = true
                 skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_calling              = true
@@ -115,6 +114,7 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
+                skip_sex_check               = true
                 skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_calling              = true
