@@ -732,7 +732,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if(split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
+    if (split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -780,37 +780,37 @@ workflow NALLO {
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
             CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
                 .set { ch_peddy_in }
-        } else {
+        }
+        else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
             ch_vcf_tbi_per_region
-                .map { meta, vcf, tbi -> [ groupKey([ id: meta.family_id ], meta.num_intervals), vcf, tbi ] }
+                .map { meta, vcf, tbi -> [groupKey([id: meta.family_id], meta.num_intervals), vcf, tbi] }
                 .groupTuple()
                 .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
                 .set { ch_concat_sort_peddy_in }
 
-             CONCAT_SORT_PEDDY (
+            CONCAT_SORT_PEDDY(
                 ch_concat_sort_peddy_in
             )
 
             CONCAT_SORT_PEDDY.out.vcf
-                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
                 .set { ch_peddy_in }
         }
 
-        PEDDY (
+        PEDDY(
             ch_peddy_in,
             ch_samplesheet_pedfile,
-            ch_peddy_sites
+            ch_peddy_sites,
         )
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
     }
 
     if (!val_skip_chromograph) {
@@ -980,13 +980,12 @@ workflow NALLO {
             ch_methbat_regions,
         )
 
-        CALL_METHYLATION_METHBAT.out.region_profile
-            .set { ch_methylation_profiles }
+        CALL_METHYLATION_METHBAT.out.region_profile.set { ch_methylation_profiles }
     }
 
     if (!val_skip_methylation_annotation) {
         ANNOTATE_METHYLATION(
-            ch_methylation_profiles,
+            ch_methylation_profiles
         )
     }
 
@@ -1042,9 +1041,9 @@ workflow NALLO {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
@@ -1086,7 +1085,13 @@ workflow NALLO {
         'bibliography',
     )
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
-    ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+    // sort: false // preserve order for correct yaml structure
+    ch_multiqc_files = ch_multiqc_files.mix(
+        ch_methods_description.concat(ch_methods_description_citation).concat(ch_methods_description_bibliography).flatten().collectFile(
+            name: 'methods_description_mqc.yaml',
+            sort: false,
+        )
+    )
 
     MULTIQC(
         ch_multiqc_files.flatten().collect().map { files ->
@@ -1104,13 +1109,13 @@ workflow NALLO {
     )
 
     emit:
-    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
-    annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
-    assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
-    gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    multiqc_report         = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    aligned_assemblies     = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_paralogs     = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats      = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary       = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    gens_baf               = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov               = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
 }
 
@@ -1129,7 +1134,6 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 
     ch_families
-        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
         .combine(ch_input)
         .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
             samplesheet_family_id == file_meta.family_id
@@ -1155,9 +1159,7 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config,
         .map { meta, vcf ->
             [meta + [variant_type: variant_type], vcf]
         }
-        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
         .combine(ch_ped)
-        // The meta.id of the PED channel is the family_id
         .filter { vcf_meta, _vcf, ped_meta, _ped ->
             vcf_meta.family_id == ped_meta.id
         }
