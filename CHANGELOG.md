@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
 - [#1075](https://github.com/genomic-medicine-sweden/nallo/pull/1075) - Template update for nf-core tools 4.0.2
+- [#1075](https://github.com/genomic-medicine-sweden/nallo/pull/1075) - Changed minimum nextflow version to 25.10.4
 
 ### Removed
 
