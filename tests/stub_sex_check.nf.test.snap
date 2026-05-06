@@ -134,26 +134,20 @@
                 "qc/mosdepth",
                 "qc/mosdepth/HG002_Revio",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.global.dist.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.bed.gz.csi",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.per-base.d4",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.quantized.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.quantized.bed.gz.csi",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.region.dist.txt",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.summary.txt",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz",
-                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz.csi",
                 "qc/sambamba_depth",
                 "qc/sambamba_depth/HG002_Revio",
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-04-28T15:45:24.979127336",
+        "timestamp": "2026-05-06T08:35:05.684565419",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.04.0"
         }
     },
     "Test skip sex check - multisample": {
