@@ -66,6 +66,38 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -132,11 +164,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-30T11:36:53.645861431",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:04:39.756694665"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples - SNVs + SVs": {
         "content": [
@@ -186,6 +218,22 @@
                         "family_id": "FAM"
                     },
                     "HG003_stats.gtf.gz.tbi:md5,ee18b7a9dd35541b05b3c541fbf033fb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino_aligned_phased.arrow"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino_aligned_phased.arrow"
                 ]
             ],
             [
@@ -261,11 +309,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-04-30T11:36:09.171133821",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:04:13.469554034"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples - SNVs only": {
         "content": [
@@ -315,6 +363,22 @@
                         "family_id": "FAM"
                     },
                     "HG003_stats.gtf.gz.tbi:md5,c98e6c8a42c2ed1c2ce1126efafe5bd2"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino_aligned_phased.arrow"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino_aligned_phased.arrow"
                 ]
             ],
             [
@@ -390,11 +454,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-04-30T11:35:36.334715604",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:54.318378336"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -463,6 +527,38 @@
                         "HG003_cramino_aligned_phased.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino_aligned_phased.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "haplotagging_stats": [
                     [
                         {
@@ -529,10 +625,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-30T11:36:29.718139109",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:04:25.574574257"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     }
 }

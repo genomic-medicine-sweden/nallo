@@ -176,6 +176,7 @@ workflow PIPELINE_INITIALISATION {
         snv_calling           : ["mapping"],
         qc                    : ["mapping"],
         sambamba_depth        : ["mapping"],
+        sex_check             : ["mapping"],
         sv_calling            : ["mapping"],
         annotate_paralogs     : ["mapping", "call_paralogs"],
         sv_annotation         : ["mapping", "sv_calling"],
