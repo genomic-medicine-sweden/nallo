@@ -565,7 +565,7 @@ output {
     }
     repeats_sample_trgt_cram {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
-        enabled params.cram_output
+        enabled params.alignment_format == 'cram'
     }
     repeats_family_trgt {
         path { meta, _file -> "repeats/family/${meta.id}/" }
