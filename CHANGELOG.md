@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
+- [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Added HiFiCNV and Sawfish visualization track outputs to `call_svs`
 
 ### Changed
 

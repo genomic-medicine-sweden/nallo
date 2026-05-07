@@ -532,6 +532,7 @@ output {
     }
     hificnv_visualization {
         path { meta, file ->
+            // HiFiCNV always outputs `.SAMPLEID.` after the prefix
             file >> "visualization_tracks/${meta.id}/${file.name.replace(".${meta.id}.", ".")}"
         }
     }
@@ -573,6 +574,7 @@ output {
     }
     sawfish_visualization {
         path { _meta, file ->
+            //
             file >> "visualization_tracks/${file.parent.name.replaceFirst("/^.*?_/", "")}/${file.parent.name.replaceFirst("/^.*?_/", "")}_${file.baseName}_sawfish.${file.extension}"
         }
     }
