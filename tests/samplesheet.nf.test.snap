@@ -562,11 +562,10 @@
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.cram.crai",
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.json",
                 "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_OR1D5.vcf.gz",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_OR1D5.vcf.gz.tbi",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz.tbi",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_OR1D5.vcf.gz",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_OR1D5.vcf.gz.tbi",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_hba.vcf.gz.tbi",
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/FAM.ped",
@@ -848,7 +847,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-07T09:27:40.314536353",
+        "timestamp": "2026-05-07T13:30:51.279072385",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
