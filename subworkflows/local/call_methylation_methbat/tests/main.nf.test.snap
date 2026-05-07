@@ -29,16 +29,70 @@
                 ]
             ],
             [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz:md5,ae6a45bb8763a2f7f7c3008485835c8e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz.tbi:md5,33250eb2f3d07594b55c063fe393daee"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz:md5,bb4a308db0cc425ead1a5fcdf440e1d0"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,1e5ab184fd2cf1007b0d5b691ce53ebb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz:md5,668b894891e89849939d93b9c819b32c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,ccf2b3f248d5bfb7a6370bbf34e7ef6d"
+                ]
+            ],
+            [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t65\t0\t8\t0\t0",
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
+        "timestamp": "2026-05-07T13:40:16.320118377",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:43:31.826356621"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - unphased": {
         "content": [
@@ -58,16 +112,46 @@
                 
             ],
             [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz:md5,3a57325060676c523e577ee27d73104f"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz.tbi:md5,cae92bbf7c0daaeeee864dc0c118f3d3"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t0\t65\t8\t0\t0",
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
+        "timestamp": "2026-05-07T13:40:26.500452396",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:43:44.46917063"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - phased - withlabels": {
         "content": [
@@ -99,16 +183,70 @@
                 ]
             ],
             [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz:md5,ae6a45bb8763a2f7f7c3008485835c8e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz.tbi:md5,33250eb2f3d07594b55c063fe393daee"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz:md5,bb4a308db0cc425ead1a5fcdf440e1d0"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,1e5ab184fd2cf1007b0d5b691ce53ebb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz:md5,668b894891e89849939d93b9c819b32c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,ccf2b3f248d5bfb7a6370bbf34e7ef6d"
+                ]
+            ],
+            [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tFEMALE\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7456597017692308\t-27.768665531575458\t0\t65\t0\t8\t0\t0",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7393047827692308\t-26.382321681004818\t0\t65\t0\t8\t0\t0"
             ]
         ],
+        "timestamp": "2026-05-07T13:40:37.422958171",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:43:57.62551052"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - phased - stub": {
         "content": [
@@ -124,6 +262,15 @@
                 ],
                 "1": [
                     
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
                     [
@@ -150,6 +297,51 @@
                             "family_id": "HG002"
                         },
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "asm_bed": [
@@ -182,6 +374,60 @@
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "pbcpg_combined_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_combined_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pbcpg_hap1_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_hap1_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pbcpg_hap2_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_hap2_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "region_profile": [
                     [
                         {
@@ -193,11 +439,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-07T13:41:08.209093665",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:44:35.35249946"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - bed phased": {
         "content": [
@@ -244,16 +490,70 @@
                 ]
             ],
             [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz:md5,ae6a45bb8763a2f7f7c3008485835c8e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz.tbi:md5,33250eb2f3d07594b55c063fe393daee"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz:md5,bb4a308db0cc425ead1a5fcdf440e1d0"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,1e5ab184fd2cf1007b0d5b691ce53ebb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz:md5,668b894891e89849939d93b9c819b32c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,ccf2b3f248d5bfb7a6370bbf34e7ef6d"
+                ]
+            ],
+            [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t65\t0\t8\t0\t0",
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
+        "timestamp": "2026-05-07T13:40:48.352862413",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:44:10.775476506"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -274,6 +574,15 @@
                             "family_id": "HG002"
                         },
                         "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -301,6 +610,51 @@
                             "family_id": "HG002"
                         },
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "asm_bed": [
@@ -339,6 +693,60 @@
                         "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "pbcpg_combined_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_combined_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pbcpg_hap1_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_hap1_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pbcpg_hap2_bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "pbcpg_hap2_bed_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "HG002"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "region_profile": [
                     [
                         {
@@ -350,11 +758,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-07T13:41:17.923352727",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:44:47.781823273"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 sample - bed unphased": {
         "content": [
@@ -375,15 +783,45 @@
                 
             ],
             [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz:md5,3a57325060676c523e577ee27d73104f"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bed.gz.tbi:md5,cae92bbf7c0daaeeee864dc0c118f3d3"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
                 "chrom\tstart\tend\tcpg_label\tsummary_label\tcompare_label\tbackground_category\tcategory_pop_count\tcategory_pop_freq\tasm_fishers_pvalue\tmean_hap1_methyl\tmean_hap2_methyl\tmean_meth_delta\tmean_abs_meth_delta_zscore\tmean_combined_methyl\tmean_combined_methyl_delta\tmean_combined_methyl_zscore\tnum_phased_cpgs\tnum_partial_cpgs\tnum_unphased_cpgs\tmedian_total_coverage\tmedian_hap1_coverage\tmedian_hap2_coverage",
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tALL\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7431177347692308\t-27.201930539444525\t0\t0\t65\t8\t0\t0",
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
+        "timestamp": "2026-05-07T13:40:58.477337325",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:44:23.29070496"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     }
 }

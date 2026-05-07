@@ -75,6 +75,12 @@ nextflow_workflow {
                     workflow.out.pbcpg_biwgig_combined,
                     workflow.out.pbcpg_biwgig_hap1,
                     workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -108,6 +114,12 @@ nextflow_workflow {
                     workflow.out.pbcpg_biwgig_combined,
                     workflow.out.pbcpg_biwgig_hap1,
                     workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -137,6 +149,12 @@ nextflow_workflow {
                     workflow.out.pbcpg_biwgig_combined,
                     workflow.out.pbcpg_biwgig_hap1,
                     workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -168,6 +186,12 @@ nextflow_workflow {
                     workflow.out.pbcpg_biwgig_combined,
                     workflow.out.pbcpg_biwgig_hap1,
                     workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -202,6 +226,12 @@ nextflow_workflow {
                     workflow.out.pbcpg_biwgig_combined,
                     workflow.out.pbcpg_biwgig_hap1,
                     workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
