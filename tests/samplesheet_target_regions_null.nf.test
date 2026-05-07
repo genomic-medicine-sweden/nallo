@@ -14,7 +14,6 @@ nextflow_pipeline {
                 outdir                       = "$outputDir"
                 target_regions               = null
                 sv_callers_to_run            = "severus,hificnv,sniffles"
-                alignment_output_format      = 'cram'
             }
         }
 
