@@ -247,6 +247,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_modkit_bed = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_tbi = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_modkit_bigwig = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
     cramino_unphased_stats = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
     cramino_unphased_arrow = NALLO.out.cramino_unphased_arrow // channel: [ val(meta), path(arrow) ]
     fastqc_html = NALLO.out.fastqc_html // channel: [ val(meta), path(html) ]
@@ -483,6 +486,9 @@ workflow {
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
+    ch_methylation_modkit_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_tbi)
+
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies    // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs    // channel: [ val(meta), path(tsv/json) ]
@@ -492,6 +498,8 @@ workflow {
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     hificnv_visualization = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
+    visualization_tracks_modkit = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
     qc_cramino_unphased = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
     qc_mosdepth = ch_qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
@@ -531,6 +539,12 @@ output {
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
+    }
+    methylation_modkit_pileup {
+        path { meta, _file -> "methylation/pileup/${meta.id}/" }
+    }
+    visualization_tracks_modkit {
+        path { meta, _bw -> "visualization_tracks/${meta.id}/" }
     }
     qc_cramino_unphased {
         path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
