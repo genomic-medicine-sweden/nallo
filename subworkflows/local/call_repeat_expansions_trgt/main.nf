@@ -86,4 +86,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     family_tbi = TRGT_MERGE.out.index     // channel: [ val(meta), path(tbi) ]
     sample_bam = SAMTOOLS_SORT.out.bam    // channel: [ val(meta), path(bam) ]
     sample_bai = SAMTOOLS_INDEX.out.index // channel: [ val(meta), path(bai) ]
+    sample_cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    sample_crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }
