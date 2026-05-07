@@ -1,20 +1,20 @@
-include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                             } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
-include { GAWK as CREATE_SAMPLES_FILE               } from '../../../modules/nf-core/gawk/main'
-include { HIFICNV                                   } from '../../../modules/nf-core/hificnv/main'
-include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCFEXPRESS           } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { VCFEXPRESS                                } from '../../../modules/nf-core/vcfexpress/main'
+include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
+include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
+include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
+include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_VCFEXPRESS    } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { VCFEXPRESS                         } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_SVS {
     take:
@@ -31,9 +31,9 @@ workflow CALL_SVS {
     ch_sv_call_regions // channel: [ val(meta), path(bed) ]
     filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
-    create_hificnv_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    ch_vcfexpress_prelude                   // path: lua file
+    create_hificnv_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_sawfish_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    ch_vcfexpress_prelude // path: lua file
 
     main:
     ch_sv_calls = channel.empty()
@@ -226,14 +226,14 @@ workflow CALL_SVS {
 
     ch_sv_calls_filtered
         .multiMap { meta, vcf, _tbi ->
-            vcf: [ meta, vcf ]
+            vcf: [meta, vcf]
             sv_caller: meta.sv_caller
         }
         .set { ch_vcfexpress_input }
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         ch_vcfexpress_input.vcf,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
     )
 
     // If Severus or Sniffles was used, we need to reheader the VCF
@@ -250,8 +250,7 @@ workflow CALL_SVS {
         .set { ch_found_in_tagged_vcf }
 
     BCFTOOLS_QUERY(
-        ch_found_in_tagged_vcf.to_reheader
-            .map { meta, vcf -> [meta, vcf, []] },
+        ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },
         [],
         [],
         [],
@@ -316,17 +315,17 @@ workflow CALL_SVS {
     )
 
     emit:
-    family_caller_vcf                    = SVDB_MERGE_BY_CALLER.out.vcf                                                                // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi                    = SVDB_MERGE_BY_CALLER.out.tbi                                                                // channel: [ val(meta), path(tbi) ]
-    family_vcf                           = SVDB_MERGE_BY_FAMILY.out.vcf                                                                // channel: [ val(meta), path(vcf) ]
-    family_tbi                           = SVDB_MERGE_BY_FAMILY.out.tbi                                                                // channel: [ val(meta), path(tbi) ]
-    hificnv_depth                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth    : channel.empty()              // channel: [ val(meta), path(bw) ]
-    hificnv_copynum                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum  : channel.empty()              // channel: [ val(meta), path(bedgraph) ]
-    hificnv_maf                          = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf      : channel.empty()              // channel: [ val(meta), path(bw) ]
-    sawfish_depth_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.depth_bw                    : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_copynum_bedgraph             = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.copynum_bedgraph             : channel.empty() // channel: [ val(meta), path(bedgraph) ]
-    sawfish_gc_bias_corrected_depth_bw   = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw   : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                       = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.maf_bw                      : channel.empty() // channel: [ val(meta), path(bw) ]
+    family_caller_vcf                  = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi                  = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_vcf                         = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_tbi                         = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
+    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.copynum_bedgraph : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.maf_bw : channel.empty() // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
